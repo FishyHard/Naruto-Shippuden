@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "naruto_shippuden:blocks/katana1",
+    "up": "naruto_shippuden:blocks/katana1",
+    "north": "naruto_shippuden:blocks/katana1",
+    "east": "naruto_shippuden:blocks/katana1",
+    "south": "naruto_shippuden:blocks/katana1",
+    "west": "naruto_shippuden:blocks/katana1",
+    "particle": "naruto_shippuden:blocks/katana1"
+  }
+}

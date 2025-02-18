@@ -1,0 +1,7 @@
+{
+  "parent": "naruto_shippuden:custom/ryo_banknote",
+  "textures": {
+    "0": "naruto_shippuden:blocks/ryo",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

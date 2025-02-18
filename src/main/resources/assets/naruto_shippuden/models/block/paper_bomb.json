@@ -1,0 +1,9 @@
+{
+  "parent": "naruto_shippuden:custom/paper_bomb",
+  "textures": {
+    "all": "naruto_shippuden:blocks/paperbomb",
+    "particle": "naruto_shippuden:blocks/shibuki4",
+    "0": "naruto_shippuden:blocks/paperbomb",
+    "missing": "naruto_shippuden:blocks/paperbomb"
+  }
+}

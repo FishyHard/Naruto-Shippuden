@@ -1,0 +1,12 @@
+{
+  "parent": "naruto_shippuden:custom/samehada",
+  "textures": {
+    "0": "naruto_shippuden:blocks/new_bandage",
+    "1": "naruto_shippuden:blocks/samehadanew",
+    "2": "naruto_shippuden:blocks/samehadamouth",
+    "3": "naruto_shippuden:blocks/samehadahandlenew",
+    "4": "naruto_shippuden:blocks/samehada_skull1",
+    "5": "naruto_shippuden:blocks/samehada_skull2",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

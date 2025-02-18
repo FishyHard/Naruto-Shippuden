@@ -1,0 +1,10 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "1": "fuhma_shuriken_ranged"
+      },
+      "name": "default"
+    }
+  }
+}

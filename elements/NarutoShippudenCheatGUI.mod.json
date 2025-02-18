@@ -1,0 +1,329 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "button",
+        "data": {
+          "text": "+100JP",
+          "onClick": {
+            "name": "JPADD100"
+          },
+          "width": 34,
+          "height": 20,
+          "name": "+100JP",
+          "x": 144,
+          "y": 91
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+10JP",
+          "onClick": {
+            "name": "JPADD10"
+          },
+          "width": 34,
+          "height": 20,
+          "name": "+10JP",
+          "x": 144,
+          "y": 111
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+100SP",
+          "onClick": {
+            "name": "SPADD100"
+          },
+          "width": 34,
+          "height": 20,
+          "name": "+100SP",
+          "x": 178,
+          "y": 91
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+10SP",
+          "onClick": {
+            "name": "SPADD10"
+          },
+          "width": 34,
+          "height": 20,
+          "name": "+10SP",
+          "x": 178,
+          "y": 111
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-100JP",
+          "onClick": {
+            "name": "JPMINUS100"
+          },
+          "width": 34,
+          "height": 20,
+          "name": "-100JP",
+          "x": 212,
+          "y": 91
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Add Max Chakra",
+          "onClick": {
+            "name": "ADDMAXCHAKRA"
+          },
+          "width": 136,
+          "height": 20,
+          "name": "Add Max Chakra",
+          "x": 144,
+          "y": 131
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-10JP",
+          "onClick": {
+            "name": "JPMINUS10"
+          },
+          "width": 34,
+          "height": 20,
+          "name": "-10JP",
+          "x": 212,
+          "y": 111
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-100SP",
+          "onClick": {
+            "name": "SPMINUS100"
+          },
+          "width": 34,
+          "height": 20,
+          "name": "-100SP",
+          "x": 246,
+          "y": 91
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "-10SP",
+          "onClick": {
+            "name": "SPMINUS10"
+          },
+          "width": 34,
+          "height": 20,
+          "name": "-10SP",
+          "x": 246,
+          "y": 111
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Rank Set:",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "Rank Set:",
+          "x": 144,
+          "y": 156
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Genin",
+          "onClick": {
+            "name": "RankSetGenin"
+          },
+          "width": 34,
+          "height": 20,
+          "name": "Genin",
+          "x": 144,
+          "y": 171
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Academy Student",
+          "onClick": {
+            "name": "RankSetAcademyStudent"
+          },
+          "width": 89,
+          "height": 20,
+          "name": "Academy Student",
+          "x": 192,
+          "y": 151
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Chunin",
+          "onClick": {
+            "name": "RankSetChunin"
+          },
+          "width": 34,
+          "height": 20,
+          "name": "Chunin",
+          "x": 178,
+          "y": 171
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Jonin",
+          "onClick": {
+            "name": "RankSetJonin"
+          },
+          "width": 34,
+          "height": 20,
+          "name": "Jonin",
+          "x": 212,
+          "y": 171
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Kage",
+          "onClick": {
+            "name": "RankSetKage"
+          },
+          "width": 34,
+          "height": 20,
+          "name": "Kage",
+          "x": 246,
+          "y": 171
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Dojutsu",
+          "onClick": {
+            "name": "CheatDojutsuButton"
+          },
+          "width": 70,
+          "height": 20,
+          "name": "Dojutsu",
+          "x": 302,
+          "y": 91
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Kekkei Genkai",
+          "onClick": {
+            "name": "CheatKekkeiGenkaiButton"
+          },
+          "width": 70,
+          "height": 20,
+          "name": "Kekkei Genkai",
+          "x": 302,
+          "y": 111
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Reset Upgrading Stats",
+          "onClick": {
+            "name": "ResetUpgradeStats"
+          },
+          "width": 136,
+          "height": 20,
+          "name": "Reset Upgrading Stats",
+          "x": 144,
+          "y": 191
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Reset Info Stats",
+          "onClick": {
+            "name": "ResetInfoStats"
+          },
+          "width": 136,
+          "height": 20,
+          "name": "Reset Info Stats",
+          "x": 144,
+          "y": 211
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Select Menu",
+          "onClick": {
+            "name": "SelectMenu"
+          },
+          "width": 136,
+          "height": 20,
+          "name": "Select Menu",
+          "x": 144,
+          "y": 231
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Reset LEVEL & JP & SP",
+          "onClick": {
+            "name": "ResetLevelJPandSP"
+          },
+          "width": 136,
+          "height": 20,
+          "name": "Reset LEVEL & JP & SP",
+          "x": 144,
+          "y": 71
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+100 LvL XP",
+          "onClick": {
+            "name": "LevelXPAdd100"
+          },
+          "width": 136,
+          "height": 20,
+          "name": "+100 LvL XP",
+          "x": 144,
+          "y": 51
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

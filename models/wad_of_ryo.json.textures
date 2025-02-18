@@ -1,0 +1,11 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "ryo",
+        "2": "wad_of_ryo1"
+      },
+      "name": "default"
+    }
+  }
+}

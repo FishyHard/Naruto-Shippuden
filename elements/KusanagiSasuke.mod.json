@@ -1,0 +1,39 @@
+{
+  "_fv": 33,
+  "_type": "tool",
+  "definition": {
+    "renderType": 1,
+    "texture": "none",
+    "customModelName": "kusanagi:default",
+    "name": "Sasuke Kusanagi",
+    "specialInfo": [
+      "§2Channel Lightning Chakra: §bChakra cost: 20/sec",
+      "§8Kenjutsu Required: 25"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:Weapons"
+    },
+    "toolType": "Sword",
+    "harvestLevel": 0,
+    "efficiency": 0.0,
+    "attackSpeed": 1.5,
+    "enchantability": 30,
+    "damageVsEntity": 14.0,
+    "usageCount": 10000,
+    "blocksAffected": [],
+    "hasGlow": false,
+    "repairItems": [],
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "onRightClickedInAir": {
+      "name": "KusanagiSasukeRightclicked"
+    },
+    "onEntityHitWith": {
+      "name": "KusanagiSasukeLivingEntityIsHitWithTool"
+    },
+    "onItemInUseTick": {
+      "name": "KusanagiSasukeToolInHandTick"
+    }
+  }
+}

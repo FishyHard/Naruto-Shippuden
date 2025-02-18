@@ -1,0 +1,10 @@
+{
+  "parent": "naruto_shippuden:custom/tanto",
+  "textures": {
+    "0": "naruto_shippuden:blocks/tanto1",
+    "1": "naruto_shippuden:blocks/tanto2",
+    "2": "naruto_shippuden:blocks/tanto3",
+    "3": "naruto_shippuden:blocks/tanto4",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

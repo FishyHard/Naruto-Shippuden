@@ -1,0 +1,12 @@
+{
+  "_fv": 33,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "I",
+    "keyBindingName": "Info Card",
+    "keyBindingCategoryKey": "misc",
+    "onKeyPressed": {
+      "name": "InfoCardOpenOnKeyPressed"
+    }
+  }
+}

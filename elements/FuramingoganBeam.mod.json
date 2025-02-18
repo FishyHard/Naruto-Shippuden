@@ -1,0 +1,43 @@
+{
+  "_fv": 33,
+  "_type": "rangeditem",
+  "definition": {
+    "renderType": 0,
+    "texture": "none",
+    "customModelName": "Normal",
+    "name": "Furamingogan Beam",
+    "specialInfo": [],
+    "creativeTab": {
+      "value": "No creative tab entry"
+    },
+    "stackSize": 0,
+    "ammoItem": {
+      "value": ""
+    },
+    "shootConstantly": false,
+    "usageCount": 0,
+    "actionSound": {
+      "value": ""
+    },
+    "hasGlow": false,
+    "animation": "none",
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "bulletPower": 4.0,
+    "bulletDamage": 1.0,
+    "bulletKnockback": 0,
+    "bulletParticles": false,
+    "bulletIgnitesFire": false,
+    "bulletItemTexture": {
+      "value": ""
+    },
+    "bulletModel": "Modelphoenix_flower_jutsu",
+    "customBulletModelTexture": "none.png",
+    "onBulletHitsEntity": {
+      "name": "FuramingoganBeamProjectileHitsLivingEntity"
+    },
+    "onBulletFlyingTick": {
+      "name": "GreatFireballWhileProjectileFlyingTick"
+    }
+  }
+}

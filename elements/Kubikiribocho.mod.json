@@ -1,0 +1,33 @@
+{
+  "_fv": 33,
+  "_type": "tool",
+  "definition": {
+    "renderType": 1,
+    "texture": "none",
+    "customModelName": "kubikiribocho_naruto:default",
+    "name": "Kubikiribocho",
+    "specialInfo": [
+      "§2The sword regeneration: +15 Durability to sword after Mob/Player kill",
+      "§8Kenjutsu Required: 45"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:Weapons"
+    },
+    "toolType": "Sword",
+    "harvestLevel": 0,
+    "efficiency": 0.0,
+    "attackSpeed": 0.7,
+    "enchantability": 30,
+    "damageVsEntity": 18.0,
+    "usageCount": 3000,
+    "blocksAffected": [],
+    "hasGlow": false,
+    "repairItems": [],
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "onItemInUseTick": {
+      "name": "KubikiribochoToolInHandTick"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "new_bandage",
+        "1": "samehadanew",
+        "2": "samehadamouth",
+        "3": "samehadahandlenew",
+        "4": "samehada_skull1",
+        "5": "samehada_skull2"
+      },
+      "name": "default"
+    }
+  }
+}

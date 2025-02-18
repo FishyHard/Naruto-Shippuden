@@ -1,0 +1,12 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "2": "white_light_chakra_sword1",
+        "4": "white_light_chakra_sword3",
+        "5": "white_light_chakra_sword4"
+      },
+      "name": "default"
+    }
+  }
+}

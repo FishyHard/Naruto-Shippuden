@@ -1,0 +1,51 @@
+{
+  "_fv": 33,
+  "_type": "item",
+  "definition": {
+    "renderType": 0,
+    "texture": "furamingogan_release",
+    "customModelName": "Normal",
+    "name": "Furamingogan Technique",
+    "rarity": "COMMON",
+    "creativeTab": {
+      "value": "No creative tab entry"
+    },
+    "stackSize": 1,
+    "enchantability": 0,
+    "useDuration": 0,
+    "toolType": 1.0,
+    "damageCount": 0,
+    "recipeRemainder": {
+      "value": ""
+    },
+    "destroyAnyBlock": false,
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "specialInfo": [
+      "Right-Click to use technique",
+      "Sneak and Right-Click to select or change technique",
+      "§2Furamingogan Secret Ritual: §bChakra cost: 150 §3Ninjutsu required: 15",
+      "§2Furamingogan Beam: §bChakra cost: 350 §3Ninjutsu required: 20",
+      "§2Furamingogan Jump: §bChakra cost: 500 §3Ninjutsu required: 25"
+    ],
+    "hasGlow": false,
+    "guiBoundTo": "<NONE>",
+    "inventorySize": 9,
+    "inventoryStackSize": 64,
+    "onRightClickedInAir": {
+      "name": "FuramingoganTechniqueRightclicked"
+    },
+    "isFood": false,
+    "nutritionalValue": 0,
+    "saturation": 0.30000001192092896,
+    "eatResultItem": {
+      "value": ""
+    },
+    "isMeat": false,
+    "isAlwaysEdible": false,
+    "animation": "eat"
+  }
+}

@@ -1,0 +1,640 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "ClanReleaseMinus"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 181,
+          "y": 37
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "ClanReleasePlus"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 237,
+          "y": 37
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Clan",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "Clan",
+          "x": 203,
+          "y": 61
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Village",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "Village",
+          "x": 196,
+          "y": 103
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "VillageSelectMinus"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 181,
+          "y": 77
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "VIllageSelectPlus"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 237,
+          "y": 77
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Nature",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "Nature",
+          "x": 198,
+          "y": 146
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Release",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "Release",
+          "x": 196,
+          "y": 155
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Select",
+          "onClick": {
+            "name": "ButtonSelectPress"
+          },
+          "width": 56,
+          "height": 20,
+          "name": "Select",
+          "x": 185,
+          "y": 177
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "NatureReleaseMinus"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 181,
+          "y": 121
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "NatureReleasePlus"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 237,
+          "y": 121
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "fire_release.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayFireSelect"
+          },
+          "name": "fire_release.png",
+          "x": 198,
+          "y": 115
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "earth_release.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayEarthSelect"
+          },
+          "name": "earth_release.png",
+          "x": 198,
+          "y": 115
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "lightning_release.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayLightningSelect"
+          },
+          "name": "lightning_release.png",
+          "x": 198,
+          "y": 115
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "water_release.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayWaterSelect"
+          },
+          "name": "water_release.png",
+          "x": 198,
+          "y": 115
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "wind_release.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayWindSelect"
+          },
+          "name": "wind_release.png",
+          "x": 198,
+          "y": 115
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "uchiha.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayUchihaSelect"
+          },
+          "name": "uchiha.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "uzumaki.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayUzumakiSelect"
+          },
+          "name": "uzumaki.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "hyuga.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayHyugaSelect"
+          },
+          "name": "hyuga.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "hatake.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayHatakeSelect"
+          },
+          "name": "hatake.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "iburi.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayIburiSelect"
+          },
+          "name": "iburi.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "aburame.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayAburameSelect"
+          },
+          "name": "aburame.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "akimichi.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayAkimichiSelect"
+          },
+          "name": "akimichi.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "chinoike.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayChinoikeSelect"
+          },
+          "name": "chinoike.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "inuzuka.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayInuzukaSelect"
+          },
+          "name": "inuzuka.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "kazekage.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKazekageSelect"
+          },
+          "name": "kazekage.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "lee.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayLeeSelect"
+          },
+          "name": "lee.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "namikaze.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayNamikazeSelect"
+          },
+          "name": "namikaze.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "nara.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayNaraSelect"
+          },
+          "name": "nara.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "otsutsuki.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayOtsutsukiSelect"
+          },
+          "name": "otsutsuki.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "senju.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplaySenjuSelect"
+          },
+          "name": "senju.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "tenro.png",
+          "use1Xscale": false,
+          "displayCondition": {
+            "name": "DisplayTenroSelect"
+          },
+          "name": "tenro.png",
+          "x": 183,
+          "y": 17
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "tsuchigumo.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayTsuchigumoSelect"
+          },
+          "name": "tsuchigumo.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "yuki.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayYukiSelect"
+          },
+          "name": "yuki.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "shimura.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayShimuraSelect"
+          },
+          "name": "shimura.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "konohagakure.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKonohaSelect"
+          },
+          "name": "konohagakure.png",
+          "x": 198,
+          "y": 71
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "kirigakure.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayMistSelect"
+          },
+          "name": "kirigakure.png",
+          "x": 198,
+          "y": 71
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "iwagakure.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayStoneSelect"
+          },
+          "name": "iwagakure.png",
+          "x": 198,
+          "y": 71
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "kumogakure.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayCloudSelect"
+          },
+          "name": "kumogakure.png",
+          "x": 198,
+          "y": 71
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "sunagakure.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplaySandSelect"
+          },
+          "name": "sunagakure.png",
+          "x": 198,
+          "y": 71
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "kurama_clan.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKuramaSelect"
+          },
+          "name": "kurama_clan.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "sarutobi.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DiplaySarutobiSelect"
+          },
+          "name": "sarutobi.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "fuuma.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DiplayFumaSelect"
+          },
+          "name": "fuuma.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "hoshigaki.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DiplayHoshigakiSelect"
+          },
+          "name": "hoshigaki.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "hozuki.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DiplayHozukiSelect"
+          },
+          "name": "hozuki.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "kaguya.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DiplayKaguyaSelect"
+          },
+          "name": "kaguya.png",
+          "x": 198,
+          "y": 29
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "izuno.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DiplayIzunoSelect"
+          },
+          "name": "izuno.png",
+          "x": 198,
+          "y": 29
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

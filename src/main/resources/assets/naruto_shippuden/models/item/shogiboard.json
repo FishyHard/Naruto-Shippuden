@@ -1,0 +1,9 @@
+{
+  "parent": "naruto_shippuden:custom/shogiboard",
+  "textures": {
+    "0": "naruto_shippuden:blocks/shogi1",
+    "1": "naruto_shippuden:blocks/shogi2",
+    "2": "naruto_shippuden:blocks/shogi_board",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

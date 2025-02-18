@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "tag": "naruto_shippuden:dna"
+    },
+    {
+      "tag": "naruto_shippuden:dna"
+    }
+  ],
+  "result": {
+    "item": "naruto_shippuden:undefined_dna",
+    "count": 1
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "naruto_shippuden:block/dust_block_view"
+    },
+    "facing=east": {
+      "model": "naruto_shippuden:block/dust_block_view",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "naruto_shippuden:block/dust_block_view",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "naruto_shippuden:block/dust_block_view",
+      "y": 270
+    }
+  }
+}

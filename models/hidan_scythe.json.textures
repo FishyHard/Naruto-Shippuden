@@ -1,0 +1,13 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "hidan_scythe1",
+        "1": "hidan_scythe2",
+        "2": "hidan_scythe3",
+        "missing": "hidan_scythe3"
+      },
+      "name": "default"
+    }
+  }
+}

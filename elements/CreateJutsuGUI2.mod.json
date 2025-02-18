@@ -1,0 +1,366 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "info_card_mini_game_texture.png",
+          "use1Xscale": true,
+          "name": "info_card_mini_game_texture.png",
+          "x": 132,
+          "y": 58
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Back",
+          "onClick": {
+            "name": "JutsuCreateGUIOpen"
+          },
+          "width": 56,
+          "height": 20,
+          "name": "Back",
+          "x": 132,
+          "y": 36
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Name:",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Name:",
+          "x": 141,
+          "y": 68
+        }
+      },
+      {
+        "type": "textfield",
+        "data": {
+          "placeholder": "",
+          "width": 65,
+          "height": 20,
+          "name": "Jutsu_Name",
+          "x": 168,
+          "y": 62
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Owner:",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Owner:",
+          "x": 141,
+          "y": 89
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Type:",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Type:",
+          "x": 141,
+          "y": 111
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Speed:",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Speed:",
+          "x": 141,
+          "y": 134
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Release:",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Release:",
+          "x": 141,
+          "y": 159
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Chakra:",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Chakra:",
+          "x": 234,
+          "y": 135
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:player_name>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:player_name>",
+          "x": 174,
+          "y": 89
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "CustomJutsuButtonMinusFire"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 116,
+          "y": 153
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "CustomJutsuButtonPlusFire"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 125,
+          "y": 153
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "CustomJutsuButtonMinusSpeed"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 116,
+          "y": 128
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "CustomJutsuButtonPlusSpeed"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 125,
+          "y": 128
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "CustomJutsuButtonMinusType"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 116,
+          "y": 105
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "CustomJutsuButtonPlusType"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 125,
+          "y": 105
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "CustomJutsuButtonMinusChakra"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 216,
+          "y": 129
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "CustomJutsuButtonPlusChakra"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 225,
+          "y": 129
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:customjutsutype>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:customjutsutype>",
+          "x": 168,
+          "y": 111
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:customjutsuspeed>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:customjutsuspeed>",
+          "x": 174,
+          "y": 134
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:customjutsurelease>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:customjutsurelease>",
+          "x": 184,
+          "y": 159
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:customjutsuchakra>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:customjutsuchakra>",
+          "x": 272,
+          "y": 135
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Price",
+          "onClick": {
+            "name": "CheckCustomJutsuJPPrice"
+          },
+          "width": 51,
+          "height": 20,
+          "name": "Price",
+          "x": 301,
+          "y": 73
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Check JP Price:",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "Check JP Price:",
+          "x": 301,
+          "y": 61
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:customjutsujpcost>",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:customjutsujpcost>",
+          "x": 381,
+          "y": 61
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Learn",
+          "onClick": {
+            "name": "LearnCustomJutsu1"
+          },
+          "width": 51,
+          "height": 20,
+          "name": "Learn",
+          "x": 301,
+          "y": 93
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

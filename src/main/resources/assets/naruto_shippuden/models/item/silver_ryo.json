@@ -1,0 +1,7 @@
+{
+  "parent": "naruto_shippuden:custom/silver_ryo",
+  "textures": {
+    "2": "naruto_shippuden:blocks/silver_ryo",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

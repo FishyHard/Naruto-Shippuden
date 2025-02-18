@@ -1,0 +1,14 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "shibuki1",
+        "1": "shibuki2",
+        "2": "shibuki3",
+        "3": "shibuki4",
+        "missing": "shibuki1"
+      },
+      "name": "default"
+    }
+  }
+}

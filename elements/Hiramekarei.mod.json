@@ -1,0 +1,44 @@
+{
+  "_fv": 33,
+  "_type": "tool",
+  "definition": {
+    "renderType": 1,
+    "texture": "none",
+    "customModelName": "hiramekarei:default",
+    "name": "Hiramekarei",
+    "specialInfo": [
+      "Right-Click to use technique",
+      "Sneak and Right-Click to select or change technique",
+      "§2Chakra Storing: §bChakra cost: 20/sec",
+      "§2Long-sword Form: §bChakra cost: 20/sec from Sword",
+      "§2Twinsword Form: §bChakra cost: 20/sec from Sword",
+      "§2Hammer Form: §bChakra cost: 300 from Sword",
+      "§8Kenjutsu Required: 45"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:Weapons"
+    },
+    "toolType": "Sword",
+    "harvestLevel": 0,
+    "efficiency": 0.0,
+    "attackSpeed": 0.8,
+    "enchantability": 30,
+    "damageVsEntity": 20.0,
+    "usageCount": 10000,
+    "blocksAffected": [],
+    "hasGlow": false,
+    "repairItems": [],
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "onRightClickedInAir": {
+      "name": "HiramekareiRightclicked"
+    },
+    "onItemInUseTick": {
+      "name": "HiramekareiToolInHandTick"
+    },
+    "onEntitySwing": {
+      "name": "HiramekareiEntitySwingsItem"
+    }
+  }
+}

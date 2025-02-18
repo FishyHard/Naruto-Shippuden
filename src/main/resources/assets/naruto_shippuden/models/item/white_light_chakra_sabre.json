@@ -1,0 +1,9 @@
+{
+  "parent": "naruto_shippuden:custom/white_light_chakra_sword",
+  "textures": {
+    "2": "naruto_shippuden:blocks/white_light_chakra_sword1",
+    "4": "naruto_shippuden:blocks/white_light_chakra_sword3",
+    "5": "naruto_shippuden:blocks/white_light_chakra_sword4",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "asuma_chakra_blade1",
+        "1": "asuma_chakra_blade2",
+        "missing": "asuma_chakra_blade2"
+      },
+      "name": "default"
+    }
+  }
+}

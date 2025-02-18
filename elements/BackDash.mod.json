@@ -1,0 +1,12 @@
+{
+  "_fv": 33,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "S",
+    "keyBindingName": "Backward Dash",
+    "keyBindingCategoryKey": "misc",
+    "onKeyPressed": {
+      "name": "BackDashOnKeyPressed"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "_fv": 33,
+  "_type": "tag",
+  "definition": {
+    "type": "Items",
+    "items": [
+      {
+        "value": "CUSTOM:FireDNARelease"
+      },
+      {
+        "value": "CUSTOM:LightningDNA"
+      },
+      {
+        "value": "CUSTOM:WindDNA"
+      },
+      {
+        "value": "CUSTOM:EarthDNA"
+      },
+      {
+        "value": "CUSTOM:WaterDNARelease"
+      }
+    ],
+    "blocks": [],
+    "functions": [],
+    "entities": [],
+    "name": "dna",
+    "namespace": "mod"
+  }
+}

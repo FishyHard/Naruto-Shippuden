@@ -1,0 +1,8 @@
+{
+  "parent": "naruto_shippuden:custom/amaterasu",
+  "textures": {
+    "all": "naruto_shippuden:blocks/amaterasufire",
+    "particle": "naruto_shippuden:blocks/amaterasufire",
+    "0": "naruto_shippuden:blocks/amaterasufire"
+  }
+}

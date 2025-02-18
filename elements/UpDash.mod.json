@@ -1,0 +1,15 @@
+{
+  "_fv": 33,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "SPACE",
+    "keyBindingName": "Up Dash",
+    "keyBindingCategoryKey": "misc",
+    "onKeyPressed": {
+      "name": "UpDashOnKeyPressed"
+    },
+    "onKeyReleased": {
+      "name": "UpDashOnKeyReleased"
+    }
+  }
+}

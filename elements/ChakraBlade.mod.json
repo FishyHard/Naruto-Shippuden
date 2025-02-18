@@ -1,0 +1,36 @@
+{
+  "_fv": 33,
+  "_type": "tool",
+  "definition": {
+    "renderType": 1,
+    "texture": "none",
+    "customModelName": "asuma_chakra_blade:default",
+    "name": "Asuma Chakra Blade",
+    "specialInfo": [
+      "§2Flying Swallow: §bChakra cost: 20/sec",
+      "§8Kenjutsu Required: 20"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:Weapons"
+    },
+    "toolType": "Sword",
+    "harvestLevel": 0,
+    "efficiency": 0.0,
+    "attackSpeed": 1.6,
+    "enchantability": 30,
+    "damageVsEntity": 14.0,
+    "usageCount": 10000,
+    "blocksAffected": [],
+    "hasGlow": false,
+    "repairItems": [],
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "onRightClickedInAir": {
+      "name": "ChakraBladeRightclicked"
+    },
+    "onItemInUseTick": {
+      "name": "AsumaChakraBladeToolInHandTick"
+    }
+  }
+}

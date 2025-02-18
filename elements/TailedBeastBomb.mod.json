@@ -1,0 +1,43 @@
+{
+  "_fv": 33,
+  "_type": "rangeditem",
+  "definition": {
+    "renderType": 0,
+    "texture": "none",
+    "customModelName": "Normal",
+    "name": "Tailed Beast Bomb",
+    "specialInfo": [],
+    "creativeTab": {
+      "value": "No creative tab entry"
+    },
+    "stackSize": 0,
+    "ammoItem": {
+      "value": ""
+    },
+    "shootConstantly": false,
+    "usageCount": 0,
+    "actionSound": {
+      "value": "CUSTOM:dust_release_and_tailed_beast_bomb"
+    },
+    "hasGlow": false,
+    "animation": "none",
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "bulletPower": 3.0,
+    "bulletDamage": 90.0,
+    "bulletKnockback": 1,
+    "bulletParticles": false,
+    "bulletIgnitesFire": false,
+    "bulletItemTexture": {
+      "value": ""
+    },
+    "bulletModel": "Modeltailed_beast_bomb",
+    "customBulletModelTexture": "tailed_beast_bomb.png",
+    "onBulletHitsBlock": {
+      "name": "TailedBeastBombProjectileHitsBlock"
+    },
+    "onBulletFlyingTick": {
+      "name": "TailedBeastBombWhileProjectileFlyingTick"
+    }
+  }
+}

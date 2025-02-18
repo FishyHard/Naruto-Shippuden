@@ -1,0 +1,106 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "button",
+        "data": {
+          "text": "Sasuke",
+          "onClick": {
+            "name": "SasukeMSCheat"
+          },
+          "width": 90,
+          "height": 20,
+          "name": "Sasuke",
+          "x": 6,
+          "y": 8
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Madara",
+          "onClick": {
+            "name": "MadaraMSCheat"
+          },
+          "width": 90,
+          "height": 20,
+          "name": "Madara",
+          "x": 6,
+          "y": 48
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Itachi",
+          "onClick": {
+            "name": "ItachiMSCheat"
+          },
+          "width": 90,
+          "height": 20,
+          "name": "Itachi",
+          "x": 6,
+          "y": 28
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Obito",
+          "onClick": {
+            "name": "ObitoMSCheat"
+          },
+          "width": 90,
+          "height": 20,
+          "name": "Obito",
+          "x": 6,
+          "y": 68
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Shisui",
+          "onClick": {
+            "name": "ShisuiMSCheat"
+          },
+          "width": 90,
+          "height": 20,
+          "name": "Shisui",
+          "x": 6,
+          "y": 88
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Kakashi",
+          "onClick": {
+            "name": "KakashiMSCheat"
+          },
+          "width": 90,
+          "height": 20,
+          "name": "Kakashi",
+          "x": 6,
+          "y": 108
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

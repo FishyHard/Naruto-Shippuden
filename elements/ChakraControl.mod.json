@@ -1,0 +1,15 @@
+{
+  "_fv": 33,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "G",
+    "keyBindingName": "Chakra Control",
+    "keyBindingCategoryKey": "misc",
+    "onKeyPressed": {
+      "name": "ChakraControlOnKeyPressed"
+    },
+    "onKeyReleased": {
+      "name": "ChakraControlOnKeyReleased"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "dust_release_block"
+      },
+      "name": "default"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "_fv": 33,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "Z",
+    "keyBindingName": "Rinnegan Activate/Deactivate",
+    "keyBindingCategoryKey": "misc",
+    "onKeyPressed": {
+      "name": "RinneganOnKeyPressed"
+    }
+  }
+}

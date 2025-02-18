@@ -1,0 +1,51 @@
+{
+  "_fv": 33,
+  "_type": "item",
+  "definition": {
+    "renderType": 0,
+    "texture": "voltic_mode",
+    "customModelName": "Normal",
+    "name": "Voltic Mode Technique",
+    "rarity": "COMMON",
+    "creativeTab": {
+      "value": "No creative tab entry"
+    },
+    "stackSize": 1,
+    "enchantability": 0,
+    "useDuration": 0,
+    "toolType": 1.0,
+    "damageCount": 0,
+    "recipeRemainder": {
+      "value": ""
+    },
+    "destroyAnyBlock": false,
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "specialInfo": [
+      "Right-Click to use technique",
+      "Sneak and Right-Click to select or change technique",
+      "§2Voltic Hammer: §bChakra cost: 100 §3Ninjutsu required: 15",
+      "§2Voltic Execution: §bChakra cost: 450 §3Ninjutsu required: 20",
+      "§2Voltic Thomas Cannon: §bChakra cost: 500 §3Ninjutsu required: 25"
+    ],
+    "hasGlow": false,
+    "guiBoundTo": "<NONE>",
+    "inventorySize": 9,
+    "inventoryStackSize": 64,
+    "onRightClickedInAir": {
+      "name": "VolticModeTechniqueRightclicked"
+    },
+    "isFood": false,
+    "nutritionalValue": 0,
+    "saturation": 0.30000001192092896,
+    "eatResultItem": {
+      "value": ""
+    },
+    "isMeat": false,
+    "isAlwaysEdible": false,
+    "animation": "eat"
+  }
+}

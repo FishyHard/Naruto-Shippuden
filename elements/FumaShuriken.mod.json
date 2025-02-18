@@ -1,0 +1,50 @@
+{
+  "_fv": 33,
+  "_type": "item",
+  "definition": {
+    "renderType": 1,
+    "texture": "none",
+    "customModelName": "fuma_shuriken:default",
+    "name": "Fuma Shuriken",
+    "rarity": "COMMON",
+    "creativeTab": {
+      "value": "CUSTOM:Weapons"
+    },
+    "stackSize": 16,
+    "enchantability": 0,
+    "useDuration": 0,
+    "toolType": 1.0,
+    "damageCount": 0,
+    "recipeRemainder": {
+      "value": ""
+    },
+    "destroyAnyBlock": false,
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "enableMeleeDamage": true,
+    "damageVsEntity": 2.0,
+    "specialInfo": [
+      "§7Shurikenjutsu Required: 20"
+    ],
+    "hasGlow": false,
+    "guiBoundTo": "<NONE>",
+    "inventorySize": 9,
+    "inventoryStackSize": 64,
+    "onRightClickedInAir": {
+      "name": "FumaShurikenRightclicked"
+    },
+    "onEntitySwing": {
+      "name": "ToolsDamage"
+    },
+    "isFood": false,
+    "nutritionalValue": 4,
+    "saturation": 0.3,
+    "eatResultItem": {
+      "value": ""
+    },
+    "isMeat": false,
+    "isAlwaysEdible": false,
+    "animation": "eat"
+  }
+}

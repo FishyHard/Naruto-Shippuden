@@ -1,0 +1,11 @@
+{
+  "parent": "naruto_shippuden:custom/katana_one",
+  "textures": {
+    "0": "naruto_shippuden:blocks/katana_1_1",
+    "1": "naruto_shippuden:blocks/katana_1_2",
+    "2": "naruto_shippuden:blocks/katana_1_3",
+    "3": "naruto_shippuden:blocks/katana_1_4",
+    "4": "naruto_shippuden:blocks/katana_1_5",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

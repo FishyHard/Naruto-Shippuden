@@ -1,0 +1,14 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "ryo_case1",
+        "1": "ryo_case2",
+        "2": "ryo_case3",
+        "3": "ryo_case4",
+        "4": "ryo"
+      },
+      "name": "default"
+    }
+  }
+}

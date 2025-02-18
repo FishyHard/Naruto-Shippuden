@@ -1,0 +1,11 @@
+{
+  "_fv": 33,
+  "_type": "tab",
+  "definition": {
+    "name": "Techniques",
+    "icon": {
+      "value": "CUSTOM:TechniquesTab"
+    },
+    "showSearch": false
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "_fv": 33,
+  "_type": "item",
+  "definition": {
+    "renderType": 0,
+    "texture": "akimichi",
+    "customModelName": "Normal",
+    "name": "Akimichi Release Technique",
+    "rarity": "COMMON",
+    "creativeTab": {
+      "value": "CUSTOM:Techniques"
+    },
+    "stackSize": 1,
+    "enchantability": 0,
+    "useDuration": 0,
+    "toolType": 1.0,
+    "damageCount": 0,
+    "recipeRemainder": {
+      "value": ""
+    },
+    "destroyAnyBlock": false,
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "specialInfo": [
+      "Right-Click to use technique",
+      "Sneak and Right-Click to select or change technique",
+      "Sneak and Left-Click to change Calorie Control size",
+      "§2Calorie Control: §bChakra cost: 300 §3Ninjutsu required: 20",
+      "§2Human Bullet Tank: §bChakra cost: 40/sec §3Ninjutsu required: 25",
+      "§2Spiked Human Bullet Tank: §bChakra cost: 60/sec §3Ninjutsu required: 30",
+      "§2Butterfly Mode: §bChakra cost: 80/sec §3Ninjutsu required: 35"
+    ],
+    "hasGlow": false,
+    "guiBoundTo": "<NONE>",
+    "inventorySize": 9,
+    "inventoryStackSize": 64,
+    "onRightClickedInAir": {
+      "name": "AkimichiReleaseTechniqueRightclicked"
+    },
+    "onEntitySwing": {
+      "name": "AkimichiReleaseTechniqueEntitySwingsItem"
+    },
+    "isFood": false,
+    "nutritionalValue": 0,
+    "saturation": 0.30000001192092896,
+    "eatResultItem": {
+      "value": ""
+    },
+    "isMeat": false,
+    "isAlwaysEdible": false,
+    "animation": "eat"
+  }
+}

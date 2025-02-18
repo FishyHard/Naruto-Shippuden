@@ -1,0 +1,51 @@
+{
+  "_fv": 33,
+  "_type": "item",
+  "definition": {
+    "renderType": 0,
+    "texture": "mangekyou_sharingan_shisui",
+    "customModelName": "Normal",
+    "name": "Shisui Mangekyou Sharingan Release",
+    "rarity": "EPIC",
+    "creativeTab": {
+      "value": "CUSTOM:Dojutsu"
+    },
+    "stackSize": 1,
+    "enchantability": 0,
+    "useDuration": 0,
+    "toolType": 1.0,
+    "damageCount": 0,
+    "recipeRemainder": {
+      "value": ""
+    },
+    "destroyAnyBlock": false,
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "specialInfo": [
+      "§2Susano:",
+      "§6Learn Susano Release: Ribcage §4Cost: 10 JP",
+      "§6Learn Susano Release: Skeletal Susano §4Cost: 20 JP",
+      "§6Learn Susano Release: Humanoid Susano §4Cost: 30 JP",
+      "§6Learn Susano Release: Armored Susano §4Cost: 40 JP"
+    ],
+    "hasGlow": false,
+    "guiBoundTo": "<NONE>",
+    "inventorySize": 9,
+    "inventoryStackSize": 64,
+    "onRightClickedInAir": {
+      "name": "MangekyouSharinganShisuiReleaseRightclicked"
+    },
+    "isFood": false,
+    "nutritionalValue": 0,
+    "saturation": 0.30000001192092896,
+    "eatResultItem": {
+      "value": ""
+    },
+    "isMeat": false,
+    "isAlwaysEdible": false,
+    "animation": "eat"
+  }
+}

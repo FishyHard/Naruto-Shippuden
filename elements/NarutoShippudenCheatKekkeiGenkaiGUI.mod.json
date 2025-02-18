@@ -1,0 +1,234 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "button",
+        "data": {
+          "text": "Wood Release",
+          "onClick": {
+            "name": "CheatKekkeiGenkaiButtonWoodRelease"
+          },
+          "width": 68,
+          "height": 20,
+          "name": "Wood Release",
+          "x": 125,
+          "y": 91
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Lava Release",
+          "width": 68,
+          "height": 20,
+          "name": "Lava Release",
+          "x": 125,
+          "y": 111
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Smoke Release",
+          "onClick": {
+            "name": "CheatKekkeiGenkaiButtonSmokeRelease"
+          },
+          "width": 68,
+          "height": 20,
+          "name": "Smoke Release",
+          "x": 233,
+          "y": 111
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Back",
+          "onClick": {
+            "name": "CheatDojutsuButtonBack"
+          },
+          "width": 61,
+          "height": 20,
+          "name": "Back",
+          "x": 302,
+          "y": 91
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Ice Release",
+          "onClick": {
+            "name": "CheatKekkeiGenkaiButtonIceRelease"
+          },
+          "width": 68,
+          "height": 20,
+          "name": "Ice Release",
+          "x": 233,
+          "y": 91
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Storm Release",
+          "onClick": {
+            "name": "CheatKekkeiGenkaiButtonStormRelease"
+          },
+          "width": 68,
+          "height": 20,
+          "name": "Storm Release",
+          "x": 125,
+          "y": 131
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Boil Release",
+          "onClick": {
+            "name": "CheatKekkeiGenkaiButtonBoilRelease"
+          },
+          "width": 68,
+          "height": 20,
+          "name": "Boil Release",
+          "x": 233,
+          "y": 131
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Dust Release",
+          "onClick": {
+            "name": "CheatKekkeiGenkaiButtonDustRelease"
+          },
+          "width": 68,
+          "height": 20,
+          "name": "Dust Release",
+          "x": 125,
+          "y": 151
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Steel Release",
+          "onClick": {
+            "name": "CheatKekkeiGenkaiButtonSteelRelease"
+          },
+          "width": 68,
+          "height": 20,
+          "name": "Steel Release",
+          "x": 233,
+          "y": 151
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Swift Release",
+          "onClick": {
+            "name": "CheatKekkeiGenkaiButtonSwiftRelease"
+          },
+          "width": 68,
+          "height": 20,
+          "name": "Swift Release",
+          "x": 125,
+          "y": 171
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Paper Release",
+          "width": 68,
+          "height": 20,
+          "name": "Paper Release",
+          "x": 233,
+          "y": 171
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Inferno Release",
+          "width": 87,
+          "height": 20,
+          "name": "Inferno Release",
+          "x": 17,
+          "y": 91
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Explosion Release",
+          "width": 87,
+          "height": 20,
+          "name": "Explosion Release",
+          "x": 17,
+          "y": 111
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Typhoon Release",
+          "onClick": {
+            "name": "CheatKekkeiGenkaiButtonTyphoonRelease"
+          },
+          "width": 87,
+          "height": 20,
+          "name": "Typhoon Release",
+          "x": 17,
+          "y": 131
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Manget Release",
+          "onClick": {
+            "name": "CheatKekkeiGenkaiButtonMagnetRelease"
+          },
+          "width": 87,
+          "height": 20,
+          "name": "Manget Release",
+          "x": 17,
+          "y": 151
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Bone Release",
+          "onClick": {
+            "name": "CheatKekkeiGenkaiButtonBoneRelease"
+          },
+          "width": 87,
+          "height": 20,
+          "name": "Bone Release",
+          "x": 17,
+          "y": 171
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

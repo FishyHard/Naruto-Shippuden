@@ -1,0 +1,137 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "info_card__missions_texture.png",
+          "use1Xscale": true,
+          "name": "info_card__missions_texture.png",
+          "x": -1,
+          "y": -2
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Back",
+          "onClick": {
+            "name": "InfoCardOpenOnKeyPressed"
+          },
+          "width": 56,
+          "height": 20,
+          "name": "Back",
+          "x": 112,
+          "y": 17
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:D_Mission>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:D_Mission>",
+          "x": 35,
+          "y": 123
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:C_Mission>",
+          "color": {
+            "value": -16776961,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:C_Mission>",
+          "x": 35,
+          "y": 142
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:B_Mission>",
+          "color": {
+            "value": -16711885,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:B_Mission>",
+          "x": 35,
+          "y": 160
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:A_Mission>",
+          "color": {
+            "value": -65536,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:A_Mission>",
+          "x": 35,
+          "y": 180
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:S_Mission>",
+          "color": {
+            "value": -26368,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:S_Mission>",
+          "x": 35,
+          "y": 201
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:SS_Mission>",
+          "color": {
+            "value": -256,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:SS_Mission>",
+          "x": 40,
+          "y": 221
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:Shinobi_Murder_Count>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:Shinobi_Murder_Count>",
+          "x": 301,
+          "y": 25
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

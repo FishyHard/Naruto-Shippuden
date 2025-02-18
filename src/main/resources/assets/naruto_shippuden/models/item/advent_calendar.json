@@ -1,0 +1,7 @@
+{
+  "parent": "naruto_shippuden:custom/calendar",
+  "textures": {
+    "0": "naruto_shippuden:blocks/calendar",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

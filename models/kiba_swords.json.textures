@@ -1,0 +1,14 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "kiba1",
+        "1": "kiba2",
+        "2": "kiba3",
+        "3": "kiba4",
+        "missing": "kiba4"
+      },
+      "name": "default"
+    }
+  }
+}

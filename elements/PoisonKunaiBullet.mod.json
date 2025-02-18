@@ -1,0 +1,43 @@
+{
+  "_fv": 33,
+  "_type": "rangeditem",
+  "definition": {
+    "renderType": 0,
+    "texture": "poison_kunai",
+    "customModelName": "Normal",
+    "name": "Poison Kunai",
+    "specialInfo": [],
+    "creativeTab": {
+      "value": "No creative tab entry"
+    },
+    "stackSize": 0,
+    "ammoItem": {
+      "value": ""
+    },
+    "shootConstantly": false,
+    "usageCount": 0,
+    "actionSound": {
+      "value": ""
+    },
+    "hasGlow": false,
+    "animation": "none",
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "bulletPower": 2.0,
+    "bulletDamage": 0.0,
+    "bulletKnockback": 0,
+    "bulletParticles": false,
+    "bulletIgnitesFire": false,
+    "bulletItemTexture": {
+      "value": ""
+    },
+    "bulletModel": "Modelkunai_projectile",
+    "customBulletModelTexture": "poison_kunai.png",
+    "onBulletHitsBlock": {
+      "name": "PoisonKunaiBulletProjectileHitsBlock"
+    },
+    "onBulletHitsEntity": {
+      "name": "PoisonKunaiBulletProjectileHitsLivingEntity"
+    }
+  }
+}

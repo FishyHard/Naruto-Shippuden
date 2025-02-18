@@ -1,0 +1,7 @@
+{
+  "_fv": 33,
+  "_type": "procedure",
+  "definition": {
+    "procedurexml": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?><xml xmlns=\"https://developers.google.com/blockly/xml\"><block deletable=\"false\" type=\"event_trigger\" x=\"-5\" y=\"-50\"><field name=\"trigger\">no_ext_trigger</field><next><block type=\"call_procedure\"><field name=\"procedure\">CheckCustomJutsuJPPriceFire</field><next><block type=\"call_procedure\"><field name=\"procedure\">CheckCustomJutsuJPPriceWind</field><next><block type=\"call_procedure\"><field name=\"procedure\">CheckCustomJutsuJPPriceLightning</field><next><block type=\"call_procedure\"><field name=\"procedure\">CheckCustomJutsuJPPriceWater</field><next><block type=\"call_procedure\"><field name=\"procedure\">CheckCustomJutsuJPPriceEarth</field><next><block type=\"variables_set_logic\"><mutation xmlns=\"http://www.w3.org/1999/xhtml\" has_entity=\"true\" is_player_var=\"true\"/><field name=\"VAR\">global:customjutsucheckpricelogic</field><value name=\"VAL\"><block type=\"logic_boolean\"><field name=\"BOOL\">TRUE</field></block></value><value name=\"entity\"><block type=\"entity_from_deps\"/></value></block></next></block></next></block></next></block></next></block></next></block></next></block></xml>"
+  }
+}

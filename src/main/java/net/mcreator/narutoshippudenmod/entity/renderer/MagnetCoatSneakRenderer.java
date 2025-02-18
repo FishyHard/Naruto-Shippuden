@@ -1,0 +1,340 @@
+
+package net.mcreator.narutoshippudenmod.entity.renderer;
+
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
+
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.MobRenderer;
+
+import net.mcreator.narutoshippudenmod.entity.MagnetCoatSneakEntity;
+
+import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.matrix.MatrixStack;
+
+@OnlyIn(Dist.CLIENT)
+public class MagnetCoatSneakRenderer {
+	public static class ModelRegisterHandler {
+		@SubscribeEvent
+		@OnlyIn(Dist.CLIENT)
+		public void registerModels(ModelRegistryEvent event) {
+			RenderingRegistry.registerEntityRenderingHandler(MagnetCoatSneakEntity.entity, renderManager -> {
+				return new MobRenderer(renderManager, new ModelBlack_Iron_Sand_Coat_Sneak(), 0f) {
+
+					@Override
+					public ResourceLocation getEntityTexture(Entity entity) {
+						return new ResourceLocation("naruto_shippuden:textures/entities/none.png");
+					}
+				};
+			});
+		}
+	}
+
+	// Made with Blockbench 4.7.4
+	// Exported for Minecraft version 1.15 - 1.16 with MCP mappings
+	// Paste this class into your mod and generate all required imports
+	public static class ModelBlack_Iron_Sand_Coat_Sneak extends EntityModel<Entity> {
+		private final ModelRenderer Body;
+		private final ModelRenderer Body2;
+		private final ModelRenderer cape;
+		private final ModelRenderer Body_r2;
+		private final ModelRenderer Body_r3;
+		private final ModelRenderer Body_r4;
+		private final ModelRenderer Body_r5;
+		private final ModelRenderer vorot;
+		private final ModelRenderer Body_r6;
+		private final ModelRenderer Body_r7;
+		private final ModelRenderer Body_r8;
+		private final ModelRenderer Body_r9;
+		private final ModelRenderer Body_r10;
+		private final ModelRenderer Body_r11;
+		private final ModelRenderer Body_r12;
+		private final ModelRenderer Body_r13;
+		private final ModelRenderer Body_r14;
+		private final ModelRenderer Body_r15;
+		private final ModelRenderer Body_r16;
+		private final ModelRenderer Body_r17;
+		private final ModelRenderer Body_r18;
+		private final ModelRenderer Body_r19;
+		private final ModelRenderer Body_r20;
+		private final ModelRenderer Body_r21;
+		private final ModelRenderer Body_r22;
+		private final ModelRenderer Body_r23;
+		private final ModelRenderer Body_r24;
+		private final ModelRenderer Body_r25;
+		private final ModelRenderer Body_r26;
+		private final ModelRenderer Body_r27;
+		private final ModelRenderer Body_r28;
+		private final ModelRenderer Body_r29;
+		private final ModelRenderer leftwing;
+		private final ModelRenderer rightwing;
+		private final ModelRenderer RightArm;
+		private final ModelRenderer RightArm_r1;
+		private final ModelRenderer LeftArm;
+		private final ModelRenderer LeftArm_r1;
+
+		public ModelBlack_Iron_Sand_Coat_Sneak() {
+			textureWidth = 64;
+			textureHeight = 64;
+			Body = new ModelRenderer(this);
+			Body.setRotationPoint(0.0F, 0.0F, 0.0F);
+			Body2 = new ModelRenderer(this);
+			Body2.setRotationPoint(0.0F, 3.0F, 0.0F);
+			Body.addChild(Body2);
+			setRotationAngle(Body2, 0.3665F, 0.0F, 0.0F);
+			cape = new ModelRenderer(this);
+			cape.setRotationPoint(0.0F, 24.8323F, 3.5786F);
+			Body2.addChild(cape);
+			setRotationAngle(cape, 0.0524F, 0.0F, 0.0F);
+			cape.setTextureOffset(6, 82).addBox(-4.0F, -22.7323F, -4.4786F, 8.0F, 12.0F, 4.0F, 0.5F, false);
+			Body_r2 = new ModelRenderer(this);
+			Body_r2.setRotationPoint(0.0F, 0.0F, 0.0F);
+			cape.addChild(Body_r2);
+			setRotationAngle(Body_r2, 0.2182F, 0.0F, 0.0F);
+			Body_r2.setTextureOffset(6, 82).addBox(-4.0F, -10.9237F, 1.7835F, 8.0F, 9.0F, 0.0F, 0.5F, false);
+			Body_r2.setTextureOffset(19, 89).addBox(4.4F, -6.9237F, 1.3835F, 0.0F, 5.0F, 0.0F, 0.5F, false);
+			Body_r2.setTextureOffset(19, 89).addBox(4.6F, -4.9237F, 1.0835F, 0.0F, 3.0F, 0.0F, 0.5F, false);
+			Body_r2.setTextureOffset(19, 89).addBox(4.2F, -8.9237F, 1.5835F, 0.0F, 7.0F, 0.0F, 0.5F, false);
+			Body_r2.setTextureOffset(19, 89).addBox(-4.2F, -8.9237F, 1.5835F, 0.0F, 7.0F, 0.0F, 0.5F, true);
+			Body_r2.setTextureOffset(19, 89).addBox(-4.4F, -6.9237F, 1.3835F, 0.0F, 5.0F, 0.0F, 0.5F, true);
+			Body_r2.setTextureOffset(19, 89).addBox(-4.6F, -4.9237F, 1.0835F, 0.0F, 3.0F, 0.0F, 0.5F, true);
+			Body_r2.setTextureOffset(19, 89).addBox(4.0F, -0.7237F, 1.7835F, 0.0F, 0.0F, 0.0F, 0.5F, true);
+			Body_r2.setTextureOffset(1, 82).addBox(3.0F, -1.3237F, 1.7835F, 1.0F, 0.0F, 0.0F, 0.5F, true);
+			Body_r2.setTextureOffset(19, 89).addBox(2.5F, -1.8237F, 1.7835F, 0.0F, 1.0F, 0.0F, 0.5F, true);
+			Body_r2.setTextureOffset(19, 89).addBox(1.0F, -2.1237F, 1.7835F, 0.0F, 1.0F, 0.0F, 0.5F, true);
+			Body_r2.setTextureOffset(1, 82).addBox(1.6F, -1.5237F, 1.7835F, 1.0F, 0.0F, 0.0F, 0.5F, true);
+			Body_r2.setTextureOffset(1, 82).addBox(-0.6F, -1.3237F, 1.7835F, 1.0F, 0.0F, 0.0F, 0.5F, true);
+			Body_r2.setTextureOffset(19, 89).addBox(-1.2F, -1.8237F, 1.7835F, 0.0F, 1.0F, 0.0F, 0.5F, true);
+			Body_r2.setTextureOffset(1, 82).addBox(-2.1F, -1.5237F, 1.7835F, 1.0F, 0.0F, 0.0F, 0.5F, true);
+			Body_r2.setTextureOffset(19, 89).addBox(-2.7F, -2.1237F, 1.7835F, 0.0F, 1.0F, 0.0F, 0.5F, true);
+			Body_r2.setTextureOffset(19, 89).addBox(-4.0F, -1.3237F, 1.7835F, 0.0F, 1.0F, 0.0F, 0.5F, true);
+			Body_r3 = new ModelRenderer(this);
+			Body_r3.setRotationPoint(2.5261F, 0.4329F, -2.4786F);
+			cape.addChild(Body_r3);
+			setRotationAngle(Body_r3, 0.0F, 0.0F, -0.2182F);
+			Body_r3.setTextureOffset(19, 89).addBox(2.8835F, -4.9237F, 2.8F, 0.0F, 3.0F, 0.0F, 0.5F, false);
+			Body_r3.setTextureOffset(19, 89).addBox(3.2835F, -6.9237F, 2.5F, 0.0F, 5.0F, 0.0F, 0.5F, false);
+			Body_r3.setTextureOffset(19, 89).addBox(3.5835F, -8.9237F, 2.2F, 0.0F, 7.0F, 0.0F, 0.5F, false);
+			Body_r3.setTextureOffset(19, 89).addBox(3.7835F, -1.3237F, 1.0F, 0.0F, 0.0F, 0.0F, 0.5F, false);
+			Body_r3.setTextureOffset(19, 89).addBox(3.7835F, -1.3237F, -1.0F, 0.0F, 1.0F, 0.0F, 0.5F, false);
+			Body_r3.setTextureOffset(1, 82).addBox(3.7835F, -1.3237F, -2.0F, 0.0F, 0.0F, 1.0F, 0.5F, false);
+			Body_r3.setTextureOffset(19, 89).addBox(2.8835F, -4.9237F, -2.8F, 0.0F, 3.0F, 0.0F, 0.5F, false);
+			Body_r3.setTextureOffset(19, 89).addBox(3.2835F, -6.9237F, -2.5F, 0.0F, 5.0F, 0.0F, 0.5F, false);
+			Body_r3.setTextureOffset(19, 89).addBox(3.5835F, -8.9237F, -2.2F, 0.0F, 7.0F, 0.0F, 0.5F, false);
+			Body_r3.setTextureOffset(6, 82).addBox(3.7835F, -10.9237F, -2.0F, 0.0F, 9.0F, 4.0F, 0.5F, false);
+			Body_r4 = new ModelRenderer(this);
+			Body_r4.setRotationPoint(-2.5261F, 0.4329F, -2.4786F);
+			cape.addChild(Body_r4);
+			setRotationAngle(Body_r4, 0.0F, 0.0F, 0.2182F);
+			Body_r4.setTextureOffset(19, 89).addBox(-2.8835F, -4.9237F, 2.8F, 0.0F, 3.0F, 0.0F, 0.5F, true);
+			Body_r4.setTextureOffset(19, 89).addBox(-3.2835F, -6.9237F, 2.5F, 0.0F, 5.0F, 0.0F, 0.5F, true);
+			Body_r4.setTextureOffset(19, 89).addBox(-3.5835F, -8.9237F, 2.2F, 0.0F, 7.0F, 0.0F, 0.5F, true);
+			Body_r4.setTextureOffset(19, 89).addBox(-2.8835F, -4.9237F, -2.8F, 0.0F, 3.0F, 0.0F, 0.5F, true);
+			Body_r4.setTextureOffset(19, 89).addBox(-3.2835F, -6.9237F, -2.5F, 0.0F, 5.0F, 0.0F, 0.5F, true);
+			Body_r4.setTextureOffset(19, 89).addBox(-3.5835F, -8.9237F, -2.2F, 0.0F, 7.0F, 0.0F, 0.5F, true);
+			Body_r4.setTextureOffset(1, 82).addBox(-3.7835F, -1.3237F, 1.0F, 0.0F, 0.0F, 1.0F, 0.5F, true);
+			Body_r4.setTextureOffset(19, 89).addBox(-3.7835F, -1.3237F, -1.0F, 0.0F, 0.0F, 0.0F, 0.5F, true);
+			Body_r4.setTextureOffset(19, 89).addBox(-3.7835F, -1.3237F, 1.0F, 0.0F, 1.0F, 0.0F, 0.5F, true);
+			Body_r4.setTextureOffset(6, 82).addBox(-3.7835F, -10.9237F, -2.0F, 0.0F, 9.0F, 4.0F, 0.5F, true);
+			Body_r5 = new ModelRenderer(this);
+			Body_r5.setRotationPoint(0.0F, 0.0F, -4.9573F);
+			cape.addChild(Body_r5);
+			setRotationAngle(Body_r5, -0.2182F, 0.0F, 0.0F);
+			Body_r5.setTextureOffset(19, 89).addBox(-4.2F, -8.9237F, -1.5835F, 0.0F, 7.0F, 0.0F, 0.5F, true);
+			Body_r5.setTextureOffset(19, 89).addBox(-4.4F, -6.9237F, -1.3835F, 0.0F, 5.0F, 0.0F, 0.5F, true);
+			Body_r5.setTextureOffset(19, 89).addBox(-4.6F, -4.9237F, -1.0835F, 0.0F, 3.0F, 0.0F, 0.5F, true);
+			Body_r5.setTextureOffset(19, 89).addBox(4.6F, -4.9237F, -1.0835F, 0.0F, 3.0F, 0.0F, 0.5F, false);
+			Body_r5.setTextureOffset(19, 89).addBox(4.4F, -6.9237F, -1.3835F, 0.0F, 5.0F, 0.0F, 0.5F, false);
+			Body_r5.setTextureOffset(19, 89).addBox(4.2F, -8.9237F, -1.5835F, 0.0F, 7.0F, 0.0F, 0.5F, false);
+			Body_r5.setTextureOffset(19, 89).addBox(-1.0F, -2.1237F, -1.7835F, 0.0F, 1.0F, 0.0F, 0.5F, false);
+			Body_r5.setTextureOffset(1, 82).addBox(-2.6F, -1.5237F, -1.7835F, 1.0F, 0.0F, 0.0F, 0.5F, false);
+			Body_r5.setTextureOffset(19, 89).addBox(-2.5F, -1.8237F, -1.7835F, 0.0F, 1.0F, 0.0F, 0.5F, false);
+			Body_r5.setTextureOffset(19, 89).addBox(-4.0F, -0.7237F, -1.7835F, 0.0F, 0.0F, 0.0F, 0.5F, false);
+			Body_r5.setTextureOffset(1, 82).addBox(-4.0F, -1.3237F, -1.7835F, 1.0F, 0.0F, 0.0F, 0.5F, false);
+			Body_r5.setTextureOffset(1, 82).addBox(1.1F, -1.5237F, -1.7835F, 1.0F, 0.0F, 0.0F, 0.5F, false);
+			Body_r5.setTextureOffset(19, 89).addBox(2.7F, -2.1237F, -1.7835F, 0.0F, 1.0F, 0.0F, 0.5F, false);
+			Body_r5.setTextureOffset(19, 89).addBox(1.2F, -1.8237F, -1.7835F, 0.0F, 1.0F, 0.0F, 0.5F, false);
+			Body_r5.setTextureOffset(1, 82).addBox(-0.4F, -1.3237F, -1.7835F, 1.0F, 0.0F, 0.0F, 0.5F, false);
+			Body_r5.setTextureOffset(19, 89).addBox(4.0F, -1.3237F, -1.7835F, 0.0F, 1.0F, 0.0F, 0.5F, false);
+			Body_r5.setTextureOffset(6, 82).addBox(-4.0F, -10.9237F, -1.7835F, 8.0F, 9.0F, 0.0F, 0.5F, false);
+			vorot = new ModelRenderer(this);
+			vorot.setRotationPoint(-0.0486F, 24.408F, -8.1F);
+			Body2.addChild(vorot);
+			setRotationAngle(vorot, -0.3665F, 0.0F, 0.0F);
+			vorot.setTextureOffset(6, 82).addBox(-3.9514F, -23.308F, 0.6F, 8.0F, 0.0F, 2.0F, 0.5F, false);
+			Body_r6 = new ModelRenderer(this);
+			Body_r6.setRotationPoint(0.0F, 0.0F, 0.0F);
+			vorot.addChild(Body_r6);
+			setRotationAngle(Body_r6, 0.0F, 0.0F, -0.9599F);
+			Body_r6.setTextureOffset(1, 82).addBox(22.2809F, -9.9264F, 2.9F, 1.0F, 0.0F, 0.0F, 0.3F, true);
+			Body_r7 = new ModelRenderer(this);
+			Body_r7.setRotationPoint(0.6358F, 2.5594F, 0.2F);
+			vorot.addChild(Body_r7);
+			setRotationAngle(Body_r7, 0.0F, 0.0F, -1.3963F);
+			Body_r7.setTextureOffset(6, 82).addBox(28.1152F, -0.3264F, 2.9F, 2.0F, 0.0F, 0.0F, 0.3F, true);
+			Body_r8 = new ModelRenderer(this);
+			Body_r8.setRotationPoint(0.8358F, 2.5594F, 0.0F);
+			vorot.addChild(Body_r8);
+			setRotationAngle(Body_r8, 0.0F, 0.0F, -1.3963F);
+			Body_r8.setTextureOffset(6, 82).addBox(28.1152F, -0.3264F, 2.9F, 2.0F, 0.0F, 0.0F, 0.3F, true);
+			Body_r9 = new ModelRenderer(this);
+			Body_r9.setRotationPoint(0.4358F, 2.5594F, 0.4F);
+			vorot.addChild(Body_r9);
+			setRotationAngle(Body_r9, 0.0F, 0.0F, -1.3963F);
+			Body_r9.setTextureOffset(6, 82).addBox(28.1152F, -0.3264F, 2.9F, 2.0F, 0.0F, 0.0F, 0.3F, true);
+			Body_r10 = new ModelRenderer(this);
+			Body_r10.setRotationPoint(-0.2F, 0.0F, 0.2F);
+			vorot.addChild(Body_r10);
+			setRotationAngle(Body_r10, 0.0F, 0.0F, -0.9599F);
+			Body_r10.setTextureOffset(1, 82).addBox(22.2809F, -9.9264F, 2.9F, 1.0F, 0.0F, 0.0F, 0.3F, true);
+			Body_r11 = new ModelRenderer(this);
+			Body_r11.setRotationPoint(-0.4F, 0.0F, 0.4F);
+			vorot.addChild(Body_r11);
+			setRotationAngle(Body_r11, 0.0F, 0.0F, -0.9599F);
+			Body_r11.setTextureOffset(19, 89).addBox(23.2809F, -9.9264F, 2.9F, 0.0F, 0.0F, 0.0F, 0.3F, true);
+			Body_r12 = new ModelRenderer(this);
+			Body_r12.setRotationPoint(0.6486F, -2.2595F, 9.7438F);
+			vorot.addChild(Body_r12);
+			setRotationAngle(Body_r12, 0.9599F, 0.0F, 0.0F);
+			Body_r12.setTextureOffset(19, 89).addBox(4.0F, -18.1264F, 14.7809F, 0.0F, 0.0F, 0.0F, 0.3F, false);
+			Body_r12.setTextureOffset(19, 89).addBox(-5.2F, -18.1264F, 14.7809F, 0.0F, 0.0F, 0.0F, 0.3F, true);
+			Body_r13 = new ModelRenderer(this);
+			Body_r13.setRotationPoint(0.6486F, -3.3216F, 8.2491F);
+			vorot.addChild(Body_r13);
+			setRotationAngle(Body_r13, 1.3963F, 0.0F, 0.0F);
+			Body_r13.setTextureOffset(6, 82).addBox(4.0F, -8.4264F, 20.7152F, 0.0F, 0.0F, 2.0F, 0.3F, false);
+			Body_r13.setTextureOffset(6, 82).addBox(-5.2F, -8.4264F, 20.7152F, 0.0F, 0.0F, 2.0F, 0.3F, true);
+			Body_r14 = new ModelRenderer(this);
+			Body_r14.setRotationPoint(0.4486F, -3.3216F, 8.4491F);
+			vorot.addChild(Body_r14);
+			setRotationAngle(Body_r14, 1.3963F, 0.0F, 0.0F);
+			Body_r14.setTextureOffset(6, 82).addBox(4.0F, -8.4264F, 20.7152F, 0.0F, 0.0F, 2.0F, 0.3F, false);
+			Body_r14.setTextureOffset(6, 82).addBox(-4.8F, -8.4264F, 20.7152F, 0.0F, 0.0F, 2.0F, 0.3F, true);
+			Body_r15 = new ModelRenderer(this);
+			Body_r15.setRotationPoint(0.4486F, -2.2595F, 9.9438F);
+			vorot.addChild(Body_r15);
+			setRotationAngle(Body_r15, 0.9599F, 0.0F, 0.0F);
+			Body_r15.setTextureOffset(1, 82).addBox(4.0F, -18.1264F, 13.7809F, 0.0F, 0.0F, 1.0F, 0.3F, false);
+			Body_r15.setTextureOffset(1, 82).addBox(-4.8F, -18.1264F, 13.7809F, 0.0F, 0.0F, 1.0F, 0.3F, true);
+			Body_r16 = new ModelRenderer(this);
+			Body_r16.setRotationPoint(0.2486F, -3.3216F, 8.6491F);
+			vorot.addChild(Body_r16);
+			setRotationAngle(Body_r16, 1.3963F, 0.0F, 0.0F);
+			Body_r16.setTextureOffset(6, 82).addBox(4.0F, -8.4264F, 20.7152F, 0.0F, 0.0F, 2.0F, 0.3F, false);
+			Body_r16.setTextureOffset(6, 82).addBox(-4.4F, -8.4264F, 20.7152F, 0.0F, 0.0F, 2.0F, 0.3F, true);
+			Body_r17 = new ModelRenderer(this);
+			Body_r17.setRotationPoint(0.2486F, -2.2595F, 10.1438F);
+			vorot.addChild(Body_r17);
+			setRotationAngle(Body_r17, 0.9599F, 0.0F, 0.0F);
+			Body_r17.setTextureOffset(1, 82).addBox(4.0F, -18.1264F, 13.7809F, 0.0F, 0.0F, 1.0F, 0.3F, false);
+			Body_r17.setTextureOffset(1, 82).addBox(-4.4F, -18.1264F, 13.7809F, 0.0F, 0.0F, 1.0F, 0.3F, true);
+			Body_r18 = new ModelRenderer(this);
+			Body_r18.setRotationPoint(0.0486F, -2.2595F, 10.4438F);
+			vorot.addChild(Body_r18);
+			setRotationAngle(Body_r18, 0.9599F, 0.0F, 0.0F);
+			Body_r18.setTextureOffset(6, 82).addBox(-4.0F, -18.1264F, 12.7809F, 8.0F, 0.0F, 2.0F, 0.3F, false);
+			Body_r19 = new ModelRenderer(this);
+			Body_r19.setRotationPoint(0.0486F, -3.3216F, 8.9491F);
+			vorot.addChild(Body_r19);
+			setRotationAngle(Body_r19, 1.3963F, 0.0F, 0.0F);
+			Body_r19.setTextureOffset(6, 82).addBox(-4.0F, -8.4264F, 20.7152F, 8.0F, 0.0F, 2.0F, 0.3F, false);
+			Body_r20 = new ModelRenderer(this);
+			Body_r20.setRotationPoint(0.4972F, 0.0F, 0.4F);
+			vorot.addChild(Body_r20);
+			setRotationAngle(Body_r20, 0.0F, 0.0F, 0.9599F);
+			Body_r20.setTextureOffset(19, 89).addBox(-23.2809F, -9.9264F, 2.9F, 0.0F, 0.0F, 0.0F, 0.3F, false);
+			Body_r21 = new ModelRenderer(this);
+			Body_r21.setRotationPoint(-0.3386F, 2.5594F, 0.4F);
+			vorot.addChild(Body_r21);
+			setRotationAngle(Body_r21, 0.0F, 0.0F, 1.3963F);
+			Body_r21.setTextureOffset(6, 82).addBox(-30.1152F, -0.3264F, 2.9F, 2.0F, 0.0F, 0.0F, 0.3F, false);
+			Body_r22 = new ModelRenderer(this);
+			Body_r22.setRotationPoint(0.2972F, 0.0F, 0.2F);
+			vorot.addChild(Body_r22);
+			setRotationAngle(Body_r22, 0.0F, 0.0F, 0.9599F);
+			Body_r22.setTextureOffset(1, 82).addBox(-23.2809F, -9.9264F, 2.9F, 1.0F, 0.0F, 0.0F, 0.3F, false);
+			Body_r23 = new ModelRenderer(this);
+			Body_r23.setRotationPoint(-0.5386F, 2.5594F, 0.2F);
+			vorot.addChild(Body_r23);
+			setRotationAngle(Body_r23, 0.0F, 0.0F, 1.3963F);
+			Body_r23.setTextureOffset(6, 82).addBox(-30.1152F, -0.3264F, 2.9F, 2.0F, 0.0F, 0.0F, 0.3F, false);
+			Body_r24 = new ModelRenderer(this);
+			Body_r24.setRotationPoint(-0.7386F, 2.5594F, 0.0F);
+			vorot.addChild(Body_r24);
+			setRotationAngle(Body_r24, 0.0F, 0.0F, 1.3963F);
+			Body_r24.setTextureOffset(6, 82).addBox(-30.1152F, -0.3264F, 2.9F, 2.0F, 0.0F, 0.0F, 0.3F, false);
+			Body_r25 = new ModelRenderer(this);
+			Body_r25.setRotationPoint(0.0972F, 0.0F, 0.0F);
+			vorot.addChild(Body_r25);
+			setRotationAngle(Body_r25, 0.0F, 0.0F, 0.9599F);
+			Body_r25.setTextureOffset(1, 82).addBox(-23.2809F, -9.9264F, 2.9F, 1.0F, 0.0F, 0.0F, 0.3F, false);
+			Body_r26 = new ModelRenderer(this);
+			Body_r26.setRotationPoint(-0.9386F, 2.5594F, -0.2F);
+			vorot.addChild(Body_r26);
+			setRotationAngle(Body_r26, 0.0F, 0.0F, 1.3963F);
+			Body_r26.setTextureOffset(6, 82).addBox(-30.1152F, -0.3264F, -3.1F, 2.0F, 0.0F, 6.0F, 0.3F, false);
+			Body_r27 = new ModelRenderer(this);
+			Body_r27.setRotationPoint(-0.1028F, 0.0F, -0.2F);
+			vorot.addChild(Body_r27);
+			setRotationAngle(Body_r27, 0.0F, 0.0F, 0.9599F);
+			Body_r27.setTextureOffset(6, 82).addBox(-23.2809F, -9.9264F, -3.1F, 2.0F, 0.0F, 6.0F, 0.3F, false);
+			Body_r28 = new ModelRenderer(this);
+			Body_r28.setRotationPoint(0.2F, 0.0F, -0.2F);
+			vorot.addChild(Body_r28);
+			setRotationAngle(Body_r28, 0.0F, 0.0F, -0.9599F);
+			Body_r28.setTextureOffset(6, 82).addBox(21.2809F, -9.9264F, -3.1F, 2.0F, 0.0F, 6.0F, 0.3F, true);
+			Body_r29 = new ModelRenderer(this);
+			Body_r29.setRotationPoint(1.0358F, 2.5594F, -0.2F);
+			vorot.addChild(Body_r29);
+			setRotationAngle(Body_r29, 0.0F, 0.0F, -1.3963F);
+			Body_r29.setTextureOffset(6, 82).addBox(28.1152F, -0.3264F, -3.1F, 2.0F, 0.0F, 6.0F, 0.3F, true);
+			leftwing = new ModelRenderer(this);
+			leftwing.setRotationPoint(-21.4406F, 2.391F, 0.0F);
+			Body2.addChild(leftwing);
+			rightwing = new ModelRenderer(this);
+			rightwing.setRotationPoint(17.7495F, -5.41F, 0.0F);
+			Body2.addChild(rightwing);
+			RightArm = new ModelRenderer(this);
+			RightArm.setRotationPoint(-5.0F, 5.0F, 0.0F);
+			RightArm_r1 = new ModelRenderer(this);
+			RightArm_r1.setRotationPoint(5.0F, 21.5F, 9.3F);
+			RightArm.addChild(RightArm_r1);
+			setRotationAngle(RightArm_r1, 0.4102F, 0.0F, 0.0F);
+			RightArm_r1.setTextureOffset(40, 16).addBox(-7.8F, -24.2F, -2.3F, 4.0F, 11.0F, 4.0F, 0.2F, false);
+			LeftArm = new ModelRenderer(this);
+			LeftArm.setRotationPoint(5.0F, 5.0F, 0.0F);
+			LeftArm_r1 = new ModelRenderer(this);
+			LeftArm_r1.setRotationPoint(-5.0F, 21.5F, 9.3F);
+			LeftArm.addChild(LeftArm_r1);
+			setRotationAngle(LeftArm_r1, 0.4102F, 0.0F, 0.0F);
+			LeftArm_r1.setTextureOffset(32, 48).addBox(3.8F, -24.2F, -2.3F, 4.0F, 11.0F, 4.0F, 0.2F, false);
+		}
+
+		@Override
+		public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue,
+				float alpha) {
+			Body.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+			RightArm.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+			LeftArm.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+		}
+
+		public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+			modelRenderer.rotateAngleX = x;
+			modelRenderer.rotateAngleY = y;
+			modelRenderer.rotateAngleZ = z;
+		}
+
+		public void setRotationAngles(Entity e, float f, float f1, float f2, float f3, float f4) {
+			this.RightArm.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * f1;
+			this.LeftArm.rotateAngleX = MathHelper.cos(f * 0.6662F) * f1;
+		}
+	}
+
+}

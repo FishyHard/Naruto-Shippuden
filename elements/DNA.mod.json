@@ -1,0 +1,11 @@
+{
+  "_fv": 33,
+  "_type": "tab",
+  "definition": {
+    "name": "DNA",
+    "icon": {
+      "value": "CUSTOM:UndefinedDNA"
+    },
+    "showSearch": false
+  }
+}

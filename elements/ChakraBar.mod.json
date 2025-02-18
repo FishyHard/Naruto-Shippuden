@@ -1,0 +1,326 @@
+{
+  "_fv": 33,
+  "_type": "overlay",
+  "definition": {
+    "priority": "NORMAL",
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:ChakraAmount>",
+          "color": {
+            "value": -16737793,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "ChakraDisplayLength1"
+          },
+          "name": "<VAR:integer:ChakraAmount>",
+          "x": 440,
+          "y": 88
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:ChakraMax>",
+          "color": {
+            "value": -16737793,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "ChakraDisplayLength1"
+          },
+          "name": "<VAR:integer:ChakraMax>",
+          "x": 440,
+          "y": 114
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:ChakraAmount>",
+          "color": {
+            "value": -16737793,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "ChakraDisplayLength2"
+          },
+          "name": "<VAR:integer:ChakraAmount>",
+          "x": 434,
+          "y": 88
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:ChakraMax>",
+          "color": {
+            "value": -16737793,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "ChakraDisplayLength2"
+          },
+          "name": "<VAR:integer:ChakraMax>",
+          "x": 434,
+          "y": 114
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:ChakraAmount>",
+          "color": {
+            "value": -16737793,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "ChakraDisplayLength3"
+          },
+          "name": "<VAR:integer:ChakraAmount>",
+          "x": 428,
+          "y": 88
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:ChakraMax>",
+          "color": {
+            "value": -16737793,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "ChakraDisplayLength3"
+          },
+          "name": "<VAR:integer:ChakraMax>",
+          "x": 428,
+          "y": 114
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:ChakraAmount>",
+          "color": {
+            "value": -16737793,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "ChakraDisplayLength4"
+          },
+          "name": "<VAR:integer:ChakraAmount>",
+          "x": 422,
+          "y": 88
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:ChakraMax>",
+          "color": {
+            "value": -16737793,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "ChakraDisplayLength4"
+          },
+          "name": "<VAR:integer:ChakraMax>",
+          "x": 422,
+          "y": 114
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:ChakraAmount>",
+          "color": {
+            "value": -16737793,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "ChakraDisplayLength5"
+          },
+          "name": "<VAR:integer:ChakraAmount>",
+          "x": 416,
+          "y": 88
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:ChakraMax>",
+          "color": {
+            "value": -16737793,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "ChakraDisplayLength5"
+          },
+          "name": "<VAR:integer:ChakraMax>",
+          "x": 416,
+          "y": 114
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:ChakraAmount>",
+          "color": {
+            "value": -16737793,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "ChakraDisplayLength6"
+          },
+          "name": "<VAR:integer:ChakraAmount>",
+          "x": 410,
+          "y": 88
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:ChakraMax>",
+          "color": {
+            "value": -16737793,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "ChakraDisplayLength6"
+          },
+          "name": "<VAR:integer:ChakraMax>",
+          "x": 410,
+          "y": 114
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:ChakraAmount>",
+          "color": {
+            "value": -16737793,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "ChakraDisplayLength7"
+          },
+          "name": "<VAR:integer:ChakraAmount>",
+          "x": 404,
+          "y": 88
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:ChakraMax>",
+          "color": {
+            "value": -16737793,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "ChakraDisplayLength7"
+          },
+          "name": "<VAR:integer:ChakraMax>",
+          "x": 404,
+          "y": 114
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:Health>",
+          "color": {
+            "value": -3796205,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "HealthDisplayLength2"
+          },
+          "name": "<VAR:integer:Health>",
+          "x": 428,
+          "y": 179
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:Health>",
+          "color": {
+            "value": -3796205,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "HealthDisplayLength1"
+          },
+          "name": "<VAR:integer:Health>",
+          "x": 434,
+          "y": 179
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:HealthMax>",
+          "color": {
+            "value": -3796205,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "HealthDisplayLength2"
+          },
+          "name": "<VAR:integer:HealthMax>",
+          "x": 428,
+          "y": 205
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:HealthMax>",
+          "color": {
+            "value": -3796205,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "HealthDisplayLength1"
+          },
+          "name": "<VAR:integer:HealthMax>",
+          "x": 434,
+          "y": 205
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "chakrabar.png",
+          "use1Xscale": false,
+          "name": "chakrabar.png",
+          "x": 446,
+          "y": 67
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "healthbar.png",
+          "use1Xscale": false,
+          "name": "healthbar.png",
+          "x": 446,
+          "y": 160
+        }
+      }
+    ],
+    "baseTexture": "",
+    "overlayTarget": "Ingame",
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

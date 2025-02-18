@@ -1,0 +1,13 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "flying_thunder_god_kunai1",
+        "1": "flying_thunder_god_kunai2",
+        "2": "flying_thunder_god_kunai3",
+        "missing": "flying_thunder_god_kunai3"
+      },
+      "name": "default"
+    }
+  }
+}

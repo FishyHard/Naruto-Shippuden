@@ -1,0 +1,14 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "katana1",
+        "1": "katana2",
+        "2": "katana3",
+        "3": "katana4",
+        "4": "katana5"
+      },
+      "name": "default"
+    }
+  }
+}

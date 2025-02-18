@@ -1,0 +1,50 @@
+{
+  "_fv": 33,
+  "_type": "item",
+  "definition": {
+    "renderType": 0,
+    "texture": "akimichi",
+    "customModelName": "Normal",
+    "name": "Akimichi Release",
+    "rarity": "EPIC",
+    "creativeTab": {
+      "value": "CUSTOM:Clans"
+    },
+    "stackSize": 1,
+    "enchantability": 0,
+    "useDuration": 0,
+    "toolType": 1.0,
+    "damageCount": 0,
+    "recipeRemainder": {
+      "value": ""
+    },
+    "destroyAnyBlock": false,
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "specialInfo": [
+      "§6Learn Akimichi Release: Calorie Control §4Cost: 15 JP",
+      "§6Learn Akimichi Release: Human Bullet Tank §4Cost: 20 JP",
+      "§6Learn Akimichi Release: Spiked Human Bullet Tank §4Cost: 25 JP",
+      "§6Learn Akimichi Release: Butterfly Mode §4Cost: 30 JP"
+    ],
+    "hasGlow": false,
+    "guiBoundTo": "<NONE>",
+    "inventorySize": 9,
+    "inventoryStackSize": 64,
+    "onRightClickedInAir": {
+      "name": "AkimichiReleaseRightclick"
+    },
+    "isFood": false,
+    "nutritionalValue": 0,
+    "saturation": 0.30000001192092896,
+    "eatResultItem": {
+      "value": ""
+    },
+    "isMeat": false,
+    "isAlwaysEdible": false,
+    "animation": "eat"
+  }
+}

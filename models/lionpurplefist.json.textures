@@ -1,0 +1,13 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "lions1",
+        "1": "lionpurple2",
+        "2": "lionpurple3",
+        "3": "lionpurple4"
+      },
+      "name": "default"
+    }
+  }
+}

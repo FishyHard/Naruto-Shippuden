@@ -1,0 +1,13 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "tanto1",
+        "1": "tanto2",
+        "2": "tanto3",
+        "3": "tanto4"
+      },
+      "name": "default"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "seven_star_sword1",
+        "1": "seven_star_sword2",
+        "2": "seven_star_sword3",
+        "3": "seven_star_sword4"
+      },
+      "name": "default"
+    }
+  }
+}

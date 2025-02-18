@@ -1,0 +1,36 @@
+{
+  "_fv": 33,
+  "_type": "tool",
+  "definition": {
+    "renderType": 1,
+    "texture": "none",
+    "customModelName": "white_light_chakra_sword:default",
+    "name": "White Light Chakra Sabre",
+    "specialInfo": [
+      "§2White Light Chakra Sabre: §bChakra cost: 20/sec",
+      "§8Kenjutsu Required: 10"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:Weapons"
+    },
+    "toolType": "Sword",
+    "harvestLevel": 0,
+    "efficiency": 0.0,
+    "attackSpeed": 1.4,
+    "enchantability": 30,
+    "damageVsEntity": 8.0,
+    "usageCount": 10000,
+    "blocksAffected": [],
+    "hasGlow": false,
+    "repairItems": [],
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "onRightClickedInAir": {
+      "name": "WhiteLightChakraSabreRightclicked"
+    },
+    "onItemInUseTick": {
+      "name": "WhiteLightChakraSabreToolInHandTick"
+    }
+  }
+}

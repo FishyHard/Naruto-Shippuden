@@ -1,0 +1,11 @@
+{
+  "_fv": 33,
+  "_type": "tab",
+  "definition": {
+    "name": "Weapons",
+    "icon": {
+      "value": "CUSTOM:Gunbai"
+    },
+    "showSearch": false
+  }
+}

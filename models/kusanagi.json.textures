@@ -1,0 +1,11 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "1": "kusanagi_main",
+        "2": "kusanagi_handle"
+      },
+      "name": "default"
+    }
+  }
+}

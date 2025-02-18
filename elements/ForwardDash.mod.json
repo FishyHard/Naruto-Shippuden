@@ -1,0 +1,15 @@
+{
+  "_fv": 33,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "W",
+    "keyBindingName": "Forward Dash",
+    "keyBindingCategoryKey": "misc",
+    "onKeyPressed": {
+      "name": "ForwardDashOnKeyPressed"
+    },
+    "onKeyReleased": {
+      "name": "ForwardDashOnKeyReleased"
+    }
+  }
+}

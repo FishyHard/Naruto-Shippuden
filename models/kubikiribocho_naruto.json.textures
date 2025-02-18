@@ -1,0 +1,13 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "kubikiribocho_naruto1",
+        "1": "kubikiribocho_naruto2",
+        "2": "kubikiribocho_naruto3",
+        "3": "kubikiribocho_naruto4"
+      },
+      "name": "default"
+    }
+  }
+}

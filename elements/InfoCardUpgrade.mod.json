@@ -1,0 +1,451 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "info_card_upgrading_texture.png",
+          "use1Xscale": true,
+          "name": "info_card_upgrading_texture.png",
+          "x": -1,
+          "y": -2
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Previous Page",
+          "onClick": {
+            "name": "InfoCardOpenOnKeyPressed"
+          },
+          "width": 68,
+          "height": 20,
+          "name": "Previous Page",
+          "x": 20,
+          "y": 219
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "SP Use Count",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "SP Use Count",
+          "x": 20,
+          "y": 101
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "1",
+          "onClick": {
+            "name": "Spuse1"
+          },
+          "width": 22,
+          "height": 20,
+          "name": "1",
+          "x": 20,
+          "y": 123
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "5",
+          "onClick": {
+            "name": "Spuse5"
+          },
+          "width": 22,
+          "height": 20,
+          "name": "5",
+          "x": 42,
+          "y": 123
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "10",
+          "onClick": {
+            "name": "Spuse10"
+          },
+          "width": 22,
+          "height": 20,
+          "name": "10",
+          "x": 64,
+          "y": 123
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Selected:",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "Selected:",
+          "x": 20,
+          "y": 111
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:spusecount>",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:spusecount>",
+          "x": 70,
+          "y": 111
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "NinjutsuButton"
+          },
+          "width": 10,
+          "height": 20,
+          "name": "+",
+          "x": 202,
+          "y": 9
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "TaijutsuButton"
+          },
+          "width": 10,
+          "height": 20,
+          "name": "+",
+          "x": 202,
+          "y": 37
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "KenjutsuButton"
+          },
+          "width": 10,
+          "height": 20,
+          "name": "+",
+          "x": 202,
+          "y": 61
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "ShurikenjutsuButton"
+          },
+          "width": 10,
+          "height": 20,
+          "name": "+",
+          "x": 226,
+          "y": 85
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "SummoningButton"
+          },
+          "width": 10,
+          "height": 20,
+          "name": "+",
+          "x": 211,
+          "y": 108
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "KinjutsuButton"
+          },
+          "width": 10,
+          "height": 20,
+          "name": "+",
+          "x": 201,
+          "y": 133
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "SenjutsuButton"
+          },
+          "width": 10,
+          "height": 20,
+          "name": "+",
+          "x": 202,
+          "y": 157
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "MedicalButton"
+          },
+          "width": 10,
+          "height": 20,
+          "name": "+",
+          "x": 204,
+          "y": 181
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "Speed"
+          },
+          "width": 10,
+          "height": 20,
+          "name": "+",
+          "x": 188,
+          "y": 205
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:ninjutsu>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:ninjutsu>",
+          "x": 217,
+          "y": 15
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:taijutsu>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:taijutsu>",
+          "x": 217,
+          "y": 43
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:kenjutsu>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:kenjutsu>",
+          "x": 217,
+          "y": 67
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:shurikenjutsu>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:shurikenjutsu>",
+          "x": 241,
+          "y": 91
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:summoning>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:summoning>",
+          "x": 227,
+          "y": 114
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:kinjutsu>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:kinjutsu>",
+          "x": 214,
+          "y": 139
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:senjutsu>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:senjutsu>",
+          "x": 219,
+          "y": 163
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:medicine>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:medicine>",
+          "x": 222,
+          "y": 187
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:speed>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:speed>",
+          "x": 205,
+          "y": 211
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "JutsuPowerButton"
+          },
+          "width": 10,
+          "height": 20,
+          "name": "+",
+          "x": 313,
+          "y": 9
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:jutsupowerstat>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:jutsupowerstat>",
+          "x": 326,
+          "y": 16
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "GenjutsuButton"
+          },
+          "width": 10,
+          "height": 20,
+          "name": "+",
+          "x": 296,
+          "y": 36
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:genjutsu>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:genjutsu>",
+          "x": 314,
+          "y": 43
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "+",
+          "onClick": {
+            "name": "IQButton"
+          },
+          "width": 10,
+          "height": 20,
+          "name": "+",
+          "x": 265,
+          "y": 61
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:IQ>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:IQ>",
+          "x": 280,
+          "y": 68
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

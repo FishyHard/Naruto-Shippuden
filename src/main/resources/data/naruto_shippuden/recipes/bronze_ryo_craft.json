@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "0"
+  ],
+  "key": {
+    "0": {
+      "item": "naruto_shippuden:silver_ryo"
+    }
+  },
+  "result": {
+    "item": "naruto_shippuden:bronze_ryo",
+    "count": 9
+  }
+}

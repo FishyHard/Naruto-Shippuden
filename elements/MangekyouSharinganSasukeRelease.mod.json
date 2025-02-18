@@ -1,0 +1,58 @@
+{
+  "_fv": 33,
+  "_type": "item",
+  "definition": {
+    "renderType": 0,
+    "texture": "mangekyou_sharingan_sasuke",
+    "customModelName": "Normal",
+    "name": "Sasuke Mangekyou Sharingan Release",
+    "rarity": "EPIC",
+    "creativeTab": {
+      "value": "CUSTOM:Dojutsu"
+    },
+    "stackSize": 1,
+    "enchantability": 0,
+    "useDuration": 0,
+    "toolType": 1.0,
+    "damageCount": 0,
+    "recipeRemainder": {
+      "value": ""
+    },
+    "destroyAnyBlock": false,
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "specialInfo": [
+      "Right-Click to use release",
+      "Sneak and Right-Click to select or change release",
+      "§8Amaterasu:",
+      "§6Learn Amaterasu Release: Amaterasu §4Cost: 10 JP",
+      "§6Learn Amaterasu Release: Blaze Release: Kagutsuchi §4Cost: 15 JP",
+      "§6Learn Amaterasu Release: Flame Wrapping Fire §4Cost: 20 JP",
+      "§6Learn Amaterasu Release: Blaze Release: Honoikazuchi §4Cost: 25 JP",
+      "§5Susano:",
+      "§6Learn Susano Release: Ribcage §4Cost: 10 JP",
+      "§6Learn Susano Release: Skeletal Susano §4Cost: 20 JP",
+      "§6Learn Susano Release: Humanoid Susano §4Cost: 30 JP",
+      "§6Learn Susano Release: Armored Susano §4Cost: 40 JP"
+    ],
+    "hasGlow": false,
+    "guiBoundTo": "<NONE>",
+    "inventorySize": 9,
+    "inventoryStackSize": 64,
+    "onRightClickedInAir": {
+      "name": "MangekyouSharinganSasukeReleaseRightclicked"
+    },
+    "isFood": false,
+    "nutritionalValue": 0,
+    "saturation": 0.30000001192092896,
+    "eatResultItem": {
+      "value": ""
+    },
+    "isMeat": false,
+    "isAlwaysEdible": false,
+    "animation": "eat"
+  }
+}

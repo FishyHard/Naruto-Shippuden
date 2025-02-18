@@ -1,0 +1,8 @@
+{
+  "parent": "naruto_shippuden:custom/hiramekarei_splited",
+  "textures": {
+    "1": "naruto_shippuden:blocks/hiramekarei",
+    "2": "naruto_shippuden:blocks/hiramekarei1",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

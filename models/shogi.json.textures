@@ -1,0 +1,11 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "shogi1",
+        "1": "shogi2"
+      },
+      "name": "default"
+    }
+  }
+}

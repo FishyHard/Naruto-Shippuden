@@ -1,0 +1,49 @@
+{
+  "_fv": 33,
+  "_type": "item",
+  "definition": {
+    "renderType": 0,
+    "texture": "ice_release",
+    "customModelName": "Normal",
+    "name": "Ice Release Technique",
+    "rarity": "COMMON",
+    "creativeTab": {
+      "value": "CUSTOM:ReleaseTechnique"
+    },
+    "stackSize": 1,
+    "enchantability": 0,
+    "useDuration": 0,
+    "toolType": 1.0,
+    "damageCount": 0,
+    "recipeRemainder": {
+      "value": ""
+    },
+    "destroyAnyBlock": false,
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "specialInfo": [
+      "§2Certain-Kill Ice Spears: §bChakra cost: 300 §3Ninjutsu required: 20",
+      "§2Demonic Mirroring Ice Crystals: §bChakra cost: 500 §3Ninjutsu required: 30",
+      "§2Black Dragon Blizzard: §bChakra cost: 750 §3Ninjutsu required: 35"
+    ],
+    "hasGlow": false,
+    "guiBoundTo": "<NONE>",
+    "inventorySize": 9,
+    "inventoryStackSize": 64,
+    "onRightClickedInAir": {
+      "name": "IceReleaseTechniqueRightclicked"
+    },
+    "isFood": false,
+    "nutritionalValue": 0,
+    "saturation": 0.30000001192092896,
+    "eatResultItem": {
+      "value": ""
+    },
+    "isMeat": false,
+    "isAlwaysEdible": false,
+    "animation": "eat"
+  }
+}

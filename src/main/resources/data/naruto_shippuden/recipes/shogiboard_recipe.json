@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345"
+  ],
+  "key": {
+    "0": {
+      "item": "naruto_shippuden:shogi"
+    },
+    "1": {
+      "item": "naruto_shippuden:shogi"
+    },
+    "2": {
+      "item": "naruto_shippuden:shogi"
+    },
+    "3": {
+      "tag": "minecraft:planks"
+    },
+    "4": {
+      "tag": "minecraft:planks"
+    },
+    "5": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "naruto_shippuden:shogiboard",
+    "count": 1
+  }
+}

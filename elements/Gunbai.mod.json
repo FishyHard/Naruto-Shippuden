@@ -1,0 +1,39 @@
+{
+  "_fv": 33,
+  "_type": "tool",
+  "definition": {
+    "renderType": 1,
+    "texture": "none",
+    "customModelName": "gunbai:default",
+    "name": "Gunbai",
+    "specialInfo": [
+      "Right-Click to use technique",
+      "Sneak and Right-Click to select or change technique",
+      "§2Block: Blocks any Attack",
+      "§2Wind Push: Pushes Enemies away from you",
+      "§8Kenjutsu Required: 25"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:Weapons"
+    },
+    "toolType": "Sword",
+    "harvestLevel": 0,
+    "efficiency": 0.0,
+    "attackSpeed": 1.3,
+    "enchantability": 30,
+    "damageVsEntity": 22.0,
+    "usageCount": 10000,
+    "blocksAffected": [],
+    "hasGlow": false,
+    "repairItems": [],
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "onRightClickedInAir": {
+      "name": "GunbaiRightclicked"
+    },
+    "onItemInUseTick": {
+      "name": "GunbaiToolInHandTick"
+    }
+  }
+}

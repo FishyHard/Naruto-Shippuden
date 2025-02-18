@@ -1,0 +1,7 @@
+{
+  "parent": "block/door_bottom",
+  "textures": {
+    "bottom": "naruto_shippuden:blocks/kamui_stone",
+    "top": "naruto_shippuden:blocks/kamui_stone"
+  }
+}

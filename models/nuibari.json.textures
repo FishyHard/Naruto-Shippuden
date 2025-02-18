@@ -1,0 +1,11 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "nuibari_main",
+        "1": "nuibari_handle"
+      },
+      "name": "default"
+    }
+  }
+}

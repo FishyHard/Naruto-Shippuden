@@ -1,0 +1,15 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "gunbai1",
+        "1": "gunbai2",
+        "2": "gunbai3",
+        "3": "gunbai4",
+        "4": "gunbai5",
+        "missing": "gunbai5"
+      },
+      "name": "default"
+    }
+  }
+}

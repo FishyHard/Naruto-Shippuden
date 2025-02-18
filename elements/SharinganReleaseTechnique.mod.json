@@ -1,0 +1,52 @@
+{
+  "_fv": 33,
+  "_type": "item",
+  "definition": {
+    "renderType": 0,
+    "texture": "sharingan",
+    "customModelName": "Normal",
+    "name": "Sharingan Release Technique",
+    "rarity": "COMMON",
+    "creativeTab": {
+      "value": "CUSTOM:Techniques"
+    },
+    "stackSize": 1,
+    "enchantability": 0,
+    "useDuration": 0,
+    "toolType": 1.0,
+    "damageCount": 0,
+    "recipeRemainder": {
+      "value": ""
+    },
+    "destroyAnyBlock": false,
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "specialInfo": [
+      "Right-Click to use technique",
+      "Sneak and Right-Click to select or change technique",
+      "§2Coercion Sharingan: §bChakra cost: 200 §3Ninjutsu required: 10 §4Genjutsu required: 5",
+      "§2Demonic Illusion: Mirage Crow: §bChakra cost: 350 §3Ninjutsu required: 20 §4Genjutsu required: 10",
+      "§2Demonic Illusion: Shackling Stakes Technique: §bChakra cost: 500 §3Ninjutsu required: 30 §4Genjutsu required: 15",
+      "§2Izanagi: §bActivate Sharingan"
+    ],
+    "hasGlow": false,
+    "guiBoundTo": "<NONE>",
+    "inventorySize": 9,
+    "inventoryStackSize": 64,
+    "onRightClickedInAir": {
+      "name": "SharinganReleaseTechniqueRightclicked"
+    },
+    "isFood": false,
+    "nutritionalValue": 0,
+    "saturation": 0.30000001192092896,
+    "eatResultItem": {
+      "value": ""
+    },
+    "isMeat": false,
+    "isAlwaysEdible": false,
+    "animation": "eat"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "_fv": 33,
+  "_type": "item",
+  "definition": {
+    "renderType": 0,
+    "texture": "lee",
+    "customModelName": "Normal",
+    "name": "Lee Release",
+    "rarity": "EPIC",
+    "creativeTab": {
+      "value": "CUSTOM:Clans"
+    },
+    "stackSize": 1,
+    "enchantability": 0,
+    "useDuration": 0,
+    "toolType": 1.0,
+    "damageCount": 0,
+    "recipeRemainder": {
+      "value": ""
+    },
+    "destroyAnyBlock": false,
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "specialInfo": [
+      "§6Learn Lee Release: Drunken Fist §4Cost: 10 JP",
+      "§6Learn Lee Release: Gate of Opening §4Cost: 20 JP",
+      "§6Learn Lee Release: Gate of Healing §4Cost: 25 JP",
+      "§6Learn Lee Release: Gate of Life §4Cost: 30 JP",
+      "§6Learn Lee Release: Gate of Pain §4Cost: 35 JP",
+      "§6Learn Lee Release: Gate of Limit §4Cost: 40 JP",
+      "§6Learn Lee Release: Gate of View §4Cost: 45 JP",
+      "§6Learn Lee Release: Gate of Wonder §4Cost: 50 JP",
+      "§6Learn Lee Release: Gate of Death §4Cost: 55 JP"
+    ],
+    "hasGlow": false,
+    "guiBoundTo": "<NONE>",
+    "inventorySize": 9,
+    "inventoryStackSize": 64,
+    "onRightClickedInAir": {
+      "name": "LeeReleaseRightclicked"
+    },
+    "isFood": false,
+    "nutritionalValue": 0,
+    "saturation": 0.30000001192092896,
+    "eatResultItem": {
+      "value": ""
+    },
+    "isMeat": false,
+    "isAlwaysEdible": false,
+    "animation": "eat"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "naruto_shippuden:custom/kusanagi",
+  "textures": {
+    "1": "naruto_shippuden:blocks/kusanagi_main",
+    "2": "naruto_shippuden:blocks/kusanagi_handle",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

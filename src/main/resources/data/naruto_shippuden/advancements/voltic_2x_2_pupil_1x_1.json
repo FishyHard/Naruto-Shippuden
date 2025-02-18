@@ -1,0 +1,7 @@
+{
+  "criteria": {
+    "voltic_2x_2_pupil_1x_1": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

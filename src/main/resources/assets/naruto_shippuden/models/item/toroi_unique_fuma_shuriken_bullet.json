@@ -1,0 +1,7 @@
+{
+  "parent": "naruto_shippuden:custom/toroi_unique_fuma_shuriken",
+  "textures": {
+    "0": "naruto_shippuden:blocks/fuhma_shuriken_ranged",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

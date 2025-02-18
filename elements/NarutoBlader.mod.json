@@ -1,0 +1,33 @@
+{
+  "_fv": 33,
+  "_type": "villagertrade",
+  "definition": {
+    "tradeEntries": [
+      {
+        "villagerProfession": {
+          "value": "WEAPONSMITH"
+        },
+        "entries": [
+          {
+            "price1": {
+              "value": "CUSTOM:WadOfRyo"
+            },
+            "countPrice1": 1,
+            "price2": {
+              "value": "Items.IRON_INGOT"
+            },
+            "countPrice2": 20,
+            "offer": {
+              "value": "CUSTOM:ChakraBlade"
+            },
+            "countOffer": 1,
+            "level": 1,
+            "maxTrades": 1,
+            "xp": 7,
+            "priceMultiplier": 0.05
+          }
+        ]
+      }
+    ]
+  }
+}

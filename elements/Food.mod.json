@@ -1,0 +1,11 @@
+{
+  "_fv": 33,
+  "_type": "tab",
+  "definition": {
+    "name": "Food",
+    "icon": {
+      "value": "CUSTOM:IchirakuRamen"
+    },
+    "showSearch": false
+  }
+}

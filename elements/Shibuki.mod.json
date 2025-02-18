@@ -1,0 +1,46 @@
+{
+  "_fv": 33,
+  "_type": "tool",
+  "definition": {
+    "renderType": 1,
+    "texture": "none",
+    "customModelName": "shibuki:default",
+    "name": "Shibuki",
+    "specialInfo": [
+      "Right-Click to use technique",
+      "Sneak and Right-Click to select or change technique",
+      "§2Paper Bomb Trap: §bChakra cost: 350",
+      "§2Explosion: §bChakra cost: 20/sec",
+      "§2Explosions Trail: §bChakra cost: 100/sec",
+      "§8Kenjutsu Required: 45"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:Weapons"
+    },
+    "toolType": "Sword",
+    "harvestLevel": 0,
+    "efficiency": 0.0,
+    "attackSpeed": 0.8,
+    "enchantability": 30,
+    "damageVsEntity": 18.0,
+    "usageCount": 10000,
+    "blocksAffected": [],
+    "hasGlow": false,
+    "repairItems": [],
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "onRightClickedInAir": {
+      "name": "ShibukiRightclicked"
+    },
+    "onEntityHitWith": {
+      "name": "ShibukiLivingEntityIsHitWithTool"
+    },
+    "onItemInInventoryTick": {
+      "name": "ShibukiToolInInventoryTick"
+    },
+    "onItemInUseTick": {
+      "name": "ShibukiToolInHandTick"
+    }
+  }
+}

@@ -1,0 +1,947 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "text": "LvL XP Max:",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "LvL XP Max:",
+          "x": 247,
+          "y": 24
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:sp>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:sp>",
+          "x": 322,
+          "y": 14
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "SP:",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "SP:",
+          "x": 305,
+          "y": 14
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:jp>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:jp>",
+          "x": 264,
+          "y": 14
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "JP:",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "JP:",
+          "x": 247,
+          "y": 14
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "info_card_texture.png",
+          "use1Xscale": true,
+          "name": "info_card_texture.png",
+          "x": -1,
+          "y": -2
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Next Page",
+          "onClick": {
+            "name": "InfoCardNextPage"
+          },
+          "width": 68,
+          "height": 20,
+          "name": "Next Page",
+          "x": 20,
+          "y": 219
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:rank>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:rank>",
+          "x": 47,
+          "y": 155
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Level:",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Level:",
+          "x": 178,
+          "y": 14
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:LEVELSTAT>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:LEVELSTAT>",
+          "x": 211,
+          "y": 14
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "LvL XP:",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "LvL XP:",
+          "x": 178,
+          "y": 24
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:LEVEL>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:LEVEL>",
+          "x": 215,
+          "y": 24
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:LEVELMAX>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:LEVELMAX>",
+          "x": 306,
+          "y": 24
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:village>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:village>",
+          "x": 54,
+          "y": 124
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "aburame.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayAburameInfo"
+          },
+          "name": "aburame.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "akimichi.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayAkimichiInfo"
+          },
+          "name": "akimichi.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "chinoike.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayChinoikeInfo"
+          },
+          "name": "chinoike.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "hatake.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayHatakeInfo"
+          },
+          "name": "hatake.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "hyuga.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayHyugaInfo"
+          },
+          "name": "hyuga.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "iburi.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayIburiInfo"
+          },
+          "name": "iburi.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "inuzuka.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayInuzukaInfo"
+          },
+          "name": "inuzuka.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "kazekage.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKazekageInfo"
+          },
+          "name": "kazekage.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "lee.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayLeeInfo"
+          },
+          "name": "lee.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "namikaze.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayNamikazeInfo"
+          },
+          "name": "namikaze.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "nara.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayNaraInfo"
+          },
+          "name": "nara.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "otsutsuki.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayOtsutsukiInfo"
+          },
+          "name": "otsutsuki.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "senju.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplaySenjuInfo"
+          },
+          "name": "senju.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "shimura.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayShimuraInfo"
+          },
+          "name": "shimura.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "tenro.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayTenroInfo"
+          },
+          "name": "tenro.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "tsuchigumo.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayTsuchigumoInfo"
+          },
+          "name": "tsuchigumo.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "uchiha.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayUchihaInfo"
+          },
+          "name": "uchiha.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "uzumaki.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayUzumakiInfo"
+          },
+          "name": "uzumaki.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "yuki.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayYukiInfo"
+          },
+          "name": "yuki.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "fire_release_info.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayFireInfo"
+          },
+          "name": "fire_release_info.png",
+          "x": 183,
+          "y": 194
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "lightning_release_info.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayLightningInfo"
+          },
+          "name": "lightning_release_info.png",
+          "x": 202,
+          "y": 194
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "wind_release_info.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayWindInfo"
+          },
+          "name": "wind_release_info.png",
+          "x": 221,
+          "y": 194
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "water_release_info.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayWaterInfo"
+          },
+          "name": "water_release_info.png",
+          "x": 240,
+          "y": 194
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "earth_release_info.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayEarthInfo"
+          },
+          "name": "earth_release_info.png",
+          "x": 259,
+          "y": 194
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Quests",
+          "onClick": {
+            "name": "QuestGUIOpen"
+          },
+          "width": 56,
+          "height": 20,
+          "name": "Quests",
+          "x": 112,
+          "y": 17
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Mini Game",
+          "onClick": {
+            "name": "MiniGameGUIOpen"
+          },
+          "width": 56,
+          "height": 20,
+          "name": "Mini Game",
+          "x": 112,
+          "y": 42
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Dojutsu",
+          "onClick": {
+            "name": "OpenDojutsuInfoCard"
+          },
+          "width": 56,
+          "height": 20,
+          "name": "Dojutsu",
+          "x": 112,
+          "y": 67
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "fuuma.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayFumaInfo"
+          },
+          "name": "fuuma.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "hoshigaki.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayHoshigakiInfo"
+          },
+          "name": "hoshigaki.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "hozuki.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayHozukiInfo"
+          },
+          "name": "hozuki.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "izuno.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayIzunoInfo"
+          },
+          "name": "izuno.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "kaguya.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKaguyaInfo"
+          },
+          "name": "kaguya.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "kurama_clan.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKuramaInfo"
+          },
+          "name": "kurama_clan.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "sarutobi.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplaySarutobiInfo"
+          },
+          "name": "sarutobi.png",
+          "x": 45,
+          "y": 175
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Jutsu",
+          "onClick": {
+            "name": "JutsuCreateGUIOpen"
+          },
+          "width": 56,
+          "height": 20,
+          "name": "Jutsu",
+          "x": 112,
+          "y": 92
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "ice_release.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayIceInfo"
+          },
+          "name": "ice_release.png",
+          "x": 183,
+          "y": 50
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "wood_release.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayWoodInfo"
+          },
+          "name": "wood_release.png",
+          "x": 202,
+          "y": 50
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "magnet_release.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayMagnetInfo"
+          },
+          "name": "magnet_release.png",
+          "x": 221,
+          "y": 50
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "storm_release.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayStormInfo"
+          },
+          "name": "storm_release.png",
+          "x": 240,
+          "y": 50
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "smoke_release.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplaySmokeInfo"
+          },
+          "name": "smoke_release.png",
+          "x": 259,
+          "y": 50
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "steel_release.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplaySteelInfo"
+          },
+          "name": "steel_release.png",
+          "x": 278,
+          "y": 50
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "boil_release.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayBoilInfo"
+          },
+          "name": "boil_release.png",
+          "x": 297,
+          "y": 50
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "bone_release.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayBoneInfo"
+          },
+          "name": "bone_release.png",
+          "x": 316,
+          "y": 50
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "swift_release.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplaySwiftInfo"
+          },
+          "name": "swift_release.png",
+          "x": 183,
+          "y": 69
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "typhoon_release.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayTyphoonInfo"
+          },
+          "name": "typhoon_release.png",
+          "x": 202,
+          "y": 69
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "dust_release.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayDustInfo"
+          },
+          "name": "dust_release.png",
+          "x": 221,
+          "y": 69
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "sharingan.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplaySharinganInfo"
+          },
+          "name": "sharingan.png",
+          "x": 183,
+          "y": 146
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "byakugan.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayByakuganInfo"
+          },
+          "name": "byakugan.png",
+          "x": 202,
+          "y": 146
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "ketsuryugan.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKetsuryuganInfo"
+          },
+          "name": "ketsuryugan.png",
+          "x": 221,
+          "y": 146
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "mangekyou_sharingan_itachi.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayMSItachiInfo"
+          },
+          "name": "mangekyou_sharingan_itachi.png",
+          "x": 183,
+          "y": 127
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "mangekyou_sharingan_madara.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayMSMadaraInfo"
+          },
+          "name": "mangekyou_sharingan_madara.png",
+          "x": 183,
+          "y": 127
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "mangekyou_sharingan_obito.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayMSObitoInfo"
+          },
+          "name": "mangekyou_sharingan_obito.png",
+          "x": 183,
+          "y": 127
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "mangekyou_sharingan_sasuke.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayMSSasukeInfo"
+          },
+          "name": "mangekyou_sharingan_sasuke.png",
+          "x": 183,
+          "y": 127
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "mangekyou_sharingan_shisui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayMSShisuiInfo"
+          },
+          "name": "mangekyou_sharingan_shisui.png",
+          "x": 183,
+          "y": 127
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "tenseigan.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayTenseiganInfo"
+          },
+          "name": "tenseigan.png",
+          "x": 202,
+          "y": 127
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "rinnegan.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayRinneganInfo"
+          },
+          "name": "rinnegan.png",
+          "x": 183,
+          "y": 108
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "isshiki_dojutsu.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayIsshikiDojutsuInfo"
+          },
+          "name": "isshiki_dojutsu.png",
+          "x": 240,
+          "y": 146
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "_fv": 33,
+  "_type": "item",
+  "definition": {
+    "renderType": 0,
+    "texture": "mangekyou_sharingan_obito",
+    "customModelName": "Normal",
+    "name": "Obito Mangekyou Sharingan Release Technique",
+    "rarity": "COMMON",
+    "creativeTab": {
+      "value": "CUSTOM:Techniques"
+    },
+    "stackSize": 1,
+    "enchantability": 0,
+    "useDuration": 0,
+    "toolType": 1.0,
+    "damageCount": 0,
+    "recipeRemainder": {
+      "value": ""
+    },
+    "destroyAnyBlock": false,
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "specialInfo": [
+      "Right-Click to use technique",
+      "Sneak and Right-Click to select or change technique",
+      "§8Kamui",
+      "§2Kamui Self-Teleportation:  §bChakra cost: 350 §3Ninjutsu required: 20",
+      "§2Kamui Short-Range:  §bChakra cost: 350 §3Ninjutsu required: 20",
+      "§2Kamui Phantom Phasing:  §bChakra cost: 350 §3Ninjutsu required: 20"
+    ],
+    "hasGlow": false,
+    "guiBoundTo": "<NONE>",
+    "inventorySize": 9,
+    "inventoryStackSize": 64,
+    "onRightClickedInAir": {
+      "name": "MangekyouSharinganObitoReleaseRightclick"
+    },
+    "isFood": false,
+    "nutritionalValue": 0,
+    "saturation": 0.30000001192092896,
+    "eatResultItem": {
+      "value": ""
+    },
+    "isMeat": false,
+    "isAlwaysEdible": false,
+    "animation": "eat"
+  }
+}

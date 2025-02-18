@@ -1,0 +1,59 @@
+{
+  "_fv": 33,
+  "_type": "item",
+  "definition": {
+    "renderType": 0,
+    "texture": "mangekyou_sharingan_sasuke",
+    "customModelName": "Normal",
+    "name": "Sasuke Mangekyou Sharingan Release Technique",
+    "rarity": "COMMON",
+    "creativeTab": {
+      "value": "CUSTOM:Techniques"
+    },
+    "stackSize": 1,
+    "enchantability": 0,
+    "useDuration": 0,
+    "toolType": 1.0,
+    "damageCount": 0,
+    "recipeRemainder": {
+      "value": ""
+    },
+    "destroyAnyBlock": false,
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "specialInfo": [
+      "Right-Click to use technique",
+      "Sneak and Right-Click to select or change technique",
+      "§8Amaterasu",
+      "§2Amaterasu:  §bChakra cost: 350 §3Ninjutsu required: 20",
+      "§2Blaze Release: Kagutsuchi: §bChakra cost: 100/sec §3Ninjutsu required: 25",
+      "§2Blaze Release: Honoikazuchi: §bChakra cost: 500 §3Ninjutsu required: 30",
+      "§2Amaterasu: Flame Wrapping Fire: §bChakra cost: 20/sec §3Ninjutsu required: 35",
+      "§5Susano",
+      "§2Ribcage: §bChakra cost: 20/sec",
+      "§2Skeletal Susano: §bChakra cost: 60/sec",
+      "§2Humanoid Susano: §bChakra cost: 100/sec",
+      "§2Armored Susano: §bChakra cost: 140/sec",
+      "§2Perfect Susano: §bChakra cost: 180/sec"
+    ],
+    "hasGlow": false,
+    "guiBoundTo": "<NONE>",
+    "inventorySize": 9,
+    "inventoryStackSize": 64,
+    "onRightClickedInAir": {
+      "name": "MangekyouSharinganSasukeReleaseRightclick"
+    },
+    "isFood": false,
+    "nutritionalValue": 0,
+    "saturation": 0.30000001192092896,
+    "eatResultItem": {
+      "value": ""
+    },
+    "isMeat": false,
+    "isAlwaysEdible": false,
+    "animation": "eat"
+  }
+}

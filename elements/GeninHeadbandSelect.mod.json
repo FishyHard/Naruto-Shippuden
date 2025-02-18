@@ -1,0 +1,116 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "text": "Headband Color",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "Headband Color",
+          "x": 177,
+          "y": 102
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "HeadbandSelectBack"
+          },
+          "width": 8,
+          "height": 20,
+          "name": "<",
+          "x": 181,
+          "y": 77
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "HeadbandSelectNext"
+          },
+          "width": 8,
+          "height": 20,
+          "name": ">",
+          "x": 237,
+          "y": 77
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Select",
+          "onClick": {
+            "name": "HeadbandSelect"
+          },
+          "width": 56,
+          "height": 20,
+          "name": "Select",
+          "x": 186,
+          "y": 116
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "hidden_leaf_black_inventory_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "Headband2Display"
+          },
+          "name": "hidden_leaf_black_inventory_gui.png",
+          "x": 198,
+          "y": 71
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "hidden_leaf_blue_inventory_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "Headband1Display"
+          },
+          "name": "hidden_leaf_blue_inventory_gui.png",
+          "x": 198,
+          "y": 71
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "hidden_leaf_red_inventory_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "Headband3Display"
+          },
+          "name": "hidden_leaf_red_inventory_gui.png",
+          "x": 198,
+          "y": 71
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

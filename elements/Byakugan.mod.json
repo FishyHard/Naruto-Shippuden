@@ -1,0 +1,12 @@
+{
+  "_fv": 33,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "B",
+    "keyBindingName": "Byakugan Activate/Deactivate",
+    "keyBindingCategoryKey": "misc",
+    "onKeyPressed": {
+      "name": "ByakuganOnKeyPressed"
+    }
+  }
+}

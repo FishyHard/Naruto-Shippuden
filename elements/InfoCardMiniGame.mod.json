@@ -1,0 +1,946 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "label",
+        "data": {
+          "text": "LvL XP Max:",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "LvL XP Max:",
+          "x": 260,
+          "y": 46
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:LEVELMINIGAME>",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:LEVELMINIGAME>",
+          "x": 229,
+          "y": 46
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "info_card_mini_game_texture.png",
+          "use1Xscale": true,
+          "name": "info_card_mini_game_texture.png",
+          "x": 132,
+          "y": 58
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Back",
+          "onClick": {
+            "name": "InfoCardOpenOnKeyPressed"
+          },
+          "width": 56,
+          "height": 20,
+          "name": "Back",
+          "x": 132,
+          "y": 36
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "LvL XP:",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "LvL XP:",
+          "x": 190,
+          "y": 46
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:LEVELMAXMINIGAME>",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:LEVELMAXMINIGAME>",
+          "x": 321,
+          "y": 46
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Level:",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "Level:",
+          "x": 190,
+          "y": 33
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:LEVELSTATMINIGAME>",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:LEVELSTATMINIGAME>",
+          "x": 224,
+          "y": 33
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display2Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 153,
+          "y": 60
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display9Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 133,
+          "y": 80
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display17Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 133,
+          "y": 100
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display25Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 133,
+          "y": 120
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display33Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 133,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display41Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 133,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display1Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 133,
+          "y": 60
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display10Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 153,
+          "y": 80
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display18Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 153,
+          "y": 100
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display26Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 153,
+          "y": 120
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display34Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 153,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display42Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 153,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display3Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 173,
+          "y": 60
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display11Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 173,
+          "y": 80
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display19Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 173,
+          "y": 100
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display27Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 173,
+          "y": 120
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display35Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 173,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display5Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 213,
+          "y": 60
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display4Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 193,
+          "y": 60
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display12Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 193,
+          "y": 80
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display20Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 193,
+          "y": 100
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display28Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 193,
+          "y": 120
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display36Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 193,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display44Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 193,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display43Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 173,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display13Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 213,
+          "y": 80
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display21Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 213,
+          "y": 100
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display29Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 213,
+          "y": 120
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display37Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 213,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display45Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 213,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display6Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 233,
+          "y": 60
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display14Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 233,
+          "y": 80
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display22Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 233,
+          "y": 100
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display30Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 233,
+          "y": 120
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display38Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 233,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display46Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 233,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display7Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 253,
+          "y": 60
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display15Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 253,
+          "y": 80
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display23Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 253,
+          "y": 100
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display31Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 253,
+          "y": 120
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display39Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 253,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display47Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 253,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display48Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 273,
+          "y": 160
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display40Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 273,
+          "y": 140
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display32Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 273,
+          "y": 120
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display24Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 273,
+          "y": 100
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display16Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 273,
+          "y": 80
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": " ",
+          "onClick": {
+            "name": "PressButtonMini"
+          },
+          "displayCondition": {
+            "name": "Display8Mini"
+          },
+          "width": 20,
+          "height": 20,
+          "name": " ",
+          "x": 273,
+          "y": 60
+        }
+      }
+    ],
+    "onTick": {
+      "name": "InfoCardMiniGameWhileThisGUIIsOpenTick"
+    },
+    "onClosed": {
+      "name": "InfoCardMiniGameThisGUIIsClosed"
+    },
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

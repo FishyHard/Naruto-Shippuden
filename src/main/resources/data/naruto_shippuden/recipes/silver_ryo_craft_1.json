@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "naruto_shippuden:bronze_ryo"
+    },
+    "1": {
+      "item": "naruto_shippuden:bronze_ryo"
+    },
+    "2": {
+      "item": "naruto_shippuden:bronze_ryo"
+    },
+    "3": {
+      "item": "naruto_shippuden:bronze_ryo"
+    },
+    "4": {
+      "item": "naruto_shippuden:bronze_ryo"
+    },
+    "5": {
+      "item": "naruto_shippuden:bronze_ryo"
+    },
+    "6": {
+      "item": "naruto_shippuden:bronze_ryo"
+    },
+    "7": {
+      "item": "naruto_shippuden:bronze_ryo"
+    },
+    "8": {
+      "item": "naruto_shippuden:bronze_ryo"
+    }
+  },
+  "result": {
+    "item": "naruto_shippuden:silver_ryo",
+    "count": 1
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "_fv": 33,
+  "_type": "rangeditem",
+  "definition": {
+    "renderType": 0,
+    "texture": "explosive_kunai_texture",
+    "customModelName": "Normal",
+    "name": "Explosive Kunai",
+    "specialInfo": [],
+    "creativeTab": {
+      "value": "No creative tab entry"
+    },
+    "stackSize": 0,
+    "ammoItem": {
+      "value": ""
+    },
+    "shootConstantly": false,
+    "usageCount": 0,
+    "actionSound": {
+      "value": ""
+    },
+    "hasGlow": false,
+    "animation": "none",
+    "enableMeleeDamage": false,
+    "damageVsEntity": 0.0,
+    "bulletPower": 2.0,
+    "bulletDamage": 0.0,
+    "bulletKnockback": 0,
+    "bulletParticles": false,
+    "bulletIgnitesFire": false,
+    "bulletItemTexture": {
+      "value": ""
+    },
+    "bulletModel": "Modelexplosive_kunai_projectile",
+    "customBulletModelTexture": "explosive_kunai.png",
+    "onBulletHitsBlock": {
+      "name": "ExplosiveKunaiBulletProjectileHitsBlock"
+    },
+    "onBulletHitsEntity": {
+      "name": "ExplosiveKunaiBulletProjectileHitsBlock"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "_fv": 33,
+  "_type": "tool",
+  "definition": {
+    "renderType": 1,
+    "texture": "none",
+    "customModelName": "kiba_swords:default",
+    "name": "Kiba Sword",
+    "specialInfo": [
+      "Right-Click to use technique",
+      "Sneak and Right-Click to select or change technique",
+      "§2Lightning Ball: §bChakra cost: 100 §3Ninjutsu required: 5",
+      "§2Lightning: §bChakra cost: 150 §3Ninjutsu required: 10",
+      "§2Lightning Wave: §bChakra cost: 200 §3Ninjutsu required: 15",
+      "§8Kenjutsu Required: 45"
+    ],
+    "creativeTab": {
+      "value": "CUSTOM:Weapons"
+    },
+    "toolType": "Sword",
+    "harvestLevel": 0,
+    "efficiency": 0.0,
+    "attackSpeed": 1.5,
+    "enchantability": 30,
+    "damageVsEntity": 14.0,
+    "usageCount": 10000,
+    "blocksAffected": [],
+    "hasGlow": false,
+    "repairItems": [],
+    "immuneToFire": false,
+    "stayInGridWhenCrafting": false,
+    "damageOnCrafting": false,
+    "onRightClickedInAir": {
+      "name": "KibaSwordRightclicked"
+    },
+    "onItemInUseTick": {
+      "name": "KibaSwordToolInHandTick"
+    }
+  }
+}

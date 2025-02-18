@@ -1,0 +1,12 @@
+{
+  "_fv": 33,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "H",
+    "keyBindingName": "Isshiki Dojutsu Activate/Deactivate",
+    "keyBindingCategoryKey": "misc",
+    "onKeyPressed": {
+      "name": "IsshikiDojutsuOnKeyPressed"
+    }
+  }
+}

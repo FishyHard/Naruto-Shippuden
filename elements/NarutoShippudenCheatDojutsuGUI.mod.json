@@ -1,0 +1,300 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "button",
+        "data": {
+          "text": "Sharingan",
+          "onClick": {
+            "name": "CheatDojutsuButtonSharingan"
+          },
+          "width": 77,
+          "height": 20,
+          "name": "Sharingan",
+          "x": 6,
+          "y": 26
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Byakugan",
+          "onClick": {
+            "name": "CheatDojutsuButtonByakugan"
+          },
+          "width": 77,
+          "height": 20,
+          "name": "Byakugan",
+          "x": 6,
+          "y": 46
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Ketsuryugan",
+          "onClick": {
+            "name": "CheatDojutsuButtonKetsuryugan"
+          },
+          "width": 77,
+          "height": 20,
+          "name": "Ketsuryugan",
+          "x": 6,
+          "y": 66
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Back",
+          "onClick": {
+            "name": "CheatDojutsuButtonBack"
+          },
+          "width": 61,
+          "height": 20,
+          "name": "Back",
+          "x": 302,
+          "y": 91
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Give Instantly:",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "Give Instantly:",
+          "x": 6,
+          "y": 8
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Awake in 10 seconds:",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "name": "Awake in 10 seconds:",
+          "x": 165,
+          "y": 8
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Sharingan",
+          "onClick": {
+            "name": "SharinganAwake10Seconds"
+          },
+          "width": 103,
+          "height": 20,
+          "name": "Sharingan",
+          "x": 165,
+          "y": 26
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Byakugan",
+          "onClick": {
+            "name": "ByakuganAwake10Seconds"
+          },
+          "width": 103,
+          "height": 20,
+          "name": "Byakugan",
+          "x": 165,
+          "y": 46
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Ketsuryugan",
+          "onClick": {
+            "name": "KetsuryuganAwake10Seconds"
+          },
+          "width": 103,
+          "height": 20,
+          "name": "Ketsuryugan",
+          "x": 165,
+          "y": 66
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Reset Dojutsu",
+          "onClick": {
+            "name": "ResetDojutsu"
+          },
+          "width": 136,
+          "height": 20,
+          "name": "Reset Dojutsu",
+          "x": 6,
+          "y": 206
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Isshiki Dojutsu",
+          "onClick": {
+            "name": "CheatDojutsuButtonIsshikiDojutsu"
+          },
+          "width": 77,
+          "height": 20,
+          "name": "Isshiki Dojutsu",
+          "x": 6,
+          "y": 146
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Mangekyou Sharingan",
+          "onClick": {
+            "name": "MangekyouCheatGUIOpen"
+          },
+          "width": 77,
+          "height": 20,
+          "name": "Mangekyou Sharingan",
+          "x": 6,
+          "y": 86
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Kakashi Sharingan",
+          "onClick": {
+            "name": "KakashiSharinganCheat"
+          },
+          "width": 80,
+          "height": 20,
+          "name": "Kakashi Sharingan",
+          "x": 83,
+          "y": 26
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Rinnegan",
+          "onClick": {
+            "name": "CheatDojutsuButtonRinnegan"
+          },
+          "width": 77,
+          "height": 20,
+          "name": "Rinnegan",
+          "x": 6,
+          "y": 106
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Tenseigan",
+          "onClick": {
+            "name": "CheatDojutsuButtonTenseigan"
+          },
+          "width": 77,
+          "height": 20,
+          "name": "Tenseigan",
+          "x": 6,
+          "y": 126
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Tenseigan",
+          "onClick": {
+            "name": "TenseiganAwake10Seconds"
+          },
+          "width": 103,
+          "height": 20,
+          "name": "Tenseigan",
+          "x": 165,
+          "y": 86
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Isshiki Dojutsu",
+          "onClick": {
+            "name": "IsshikiDojutsuAwake10Seconds"
+          },
+          "width": 103,
+          "height": 20,
+          "name": "Isshiki Dojutsu",
+          "x": 165,
+          "y": 106
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Shimura Sharingan",
+          "onClick": {
+            "name": "CheatDojutstuButtonShimura"
+          },
+          "width": 80,
+          "height": 20,
+          "name": "Shimura Sharingan",
+          "x": 83,
+          "y": 46
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Kakashi Sharingan",
+          "onClick": {
+            "name": "KakashiSharinganAwake10Seconds"
+          },
+          "width": 103,
+          "height": 20,
+          "name": "Kakashi Sharingan",
+          "x": 165,
+          "y": 126
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Shimura Sharingan",
+          "onClick": {
+            "name": "ShimuraSharinganAwake10Seconds"
+          },
+          "width": 103,
+          "height": 20,
+          "name": "Shimura Sharingan",
+          "x": 165,
+          "y": 146
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

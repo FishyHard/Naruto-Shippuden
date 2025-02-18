@@ -1,0 +1,12 @@
+{
+  "parent": "naruto_shippuden:custom/gunbaishield",
+  "textures": {
+    "0": "naruto_shippuden:blocks/gunbai1",
+    "1": "naruto_shippuden:blocks/gunbai2",
+    "2": "naruto_shippuden:blocks/gunbai3",
+    "3": "naruto_shippuden:blocks/gunbai4",
+    "4": "naruto_shippuden:blocks/gunbai5",
+    "missing": "naruto_shippuden:blocks/",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

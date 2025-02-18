@@ -1,0 +1,10 @@
+{
+  "parent": "naruto_shippuden:custom/seven_star_sword",
+  "textures": {
+    "0": "naruto_shippuden:blocks/seven_star_sword1",
+    "1": "naruto_shippuden:blocks/seven_star_sword2",
+    "2": "naruto_shippuden:blocks/seven_star_sword3",
+    "3": "naruto_shippuden:blocks/seven_star_sword4",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

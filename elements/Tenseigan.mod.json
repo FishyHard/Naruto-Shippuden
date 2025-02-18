@@ -1,0 +1,12 @@
+{
+  "_fv": 33,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "C",
+    "keyBindingName": "Tenseigan Activate/Deactivate",
+    "keyBindingCategoryKey": "misc",
+    "onKeyPressed": {
+      "name": "TenseiganOnKeyPressed"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "naruto_shippuden:custom/asuma_chakra_blade",
+  "textures": {
+    "0": "naruto_shippuden:blocks/asuma_chakra_blade1",
+    "1": "naruto_shippuden:blocks/asuma_chakra_blade2",
+    "missing": "naruto_shippuden:blocks/asuma_chakra_blade2",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

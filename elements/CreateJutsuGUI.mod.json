@@ -1,0 +1,271 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "info_card_custom_jutsu_texture.png",
+          "use1Xscale": true,
+          "name": "info_card_custom_jutsu_texture.png",
+          "x": 101,
+          "y": 56
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Back",
+          "onClick": {
+            "name": "InfoCardOpenOnKeyPressed"
+          },
+          "width": 56,
+          "height": 20,
+          "name": "Back",
+          "x": 132,
+          "y": 36
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Create",
+          "width": 36,
+          "height": 20,
+          "name": "Create",
+          "x": 114,
+          "y": 116
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Create",
+          "onClick": {
+            "name": "JutsuCreateGUIOpen2"
+          },
+          "displayCondition": {
+            "name": "DisplayLearnCustomJutsu1"
+          },
+          "width": 36,
+          "height": 20,
+          "name": "Create",
+          "x": 114,
+          "y": 71
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Create",
+          "width": 36,
+          "height": 20,
+          "name": "Create",
+          "x": 114,
+          "y": 161
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Create",
+          "width": 36,
+          "height": 20,
+          "name": "Create",
+          "x": 114,
+          "y": 206
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Release:",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "DisplayUnlearnCustomJutsu1"
+          },
+          "name": "Release:",
+          "x": 105,
+          "y": 62
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:customjutsurelease1save>",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "DisplayUnlearnCustomJutsu1"
+          },
+          "name": "<VAR:customjutsurelease1save>",
+          "x": 150,
+          "y": 62
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Type:",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "DisplayUnlearnCustomJutsu1"
+          },
+          "name": "Type:",
+          "x": 105,
+          "y": 98
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:customjutsutype1save>",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "DisplayUnlearnCustomJutsu1"
+          },
+          "name": "<VAR:customjutsutype1save>",
+          "x": 135,
+          "y": 98
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Speed:",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "DisplayUnlearnCustomJutsu1"
+          },
+          "name": "Speed:",
+          "x": 105,
+          "y": 80
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:customjutsuspeed1save>",
+          "color": {
+            "value": -1,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "DisplayUnlearnCustomJutsu1"
+          },
+          "name": "<VAR:customjutsuspeed1save>",
+          "x": 141,
+          "y": 80
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Unlearn",
+          "onClick": {
+            "name": "UnlearnCustomJutsu1"
+          },
+          "displayCondition": {
+            "name": "DisplayUnlearnCustomJutsu1"
+          },
+          "width": 36,
+          "height": 20,
+          "name": "Unlearn",
+          "x": 330,
+          "y": 71
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "!!WARNING!! You get only half of JP price ",
+          "color": {
+            "value": -65536,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "DisplayUnlearnCustomJutsu1"
+          },
+          "name": "!!WARNING!! You get only half of JP price ",
+          "x": 193,
+          "y": 35
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "you bought if you unlearn it.",
+          "color": {
+            "value": -65536,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "DisplayUnlearnCustomJutsu1"
+          },
+          "name": "you bought if you unlearn it.",
+          "x": 195,
+          "y": 44
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "warning_under_dev.png",
+          "use1Xscale": true,
+          "name": "warning_under_dev.png",
+          "x": 153,
+          "y": 111
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "warning_under_dev.png",
+          "use1Xscale": true,
+          "name": "warning_under_dev.png",
+          "x": 153,
+          "y": 156
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "warning_under_dev.png",
+          "use1Xscale": true,
+          "name": "warning_under_dev.png",
+          "x": 153,
+          "y": 201
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "_fv": 33,
+  "_type": "tab",
+  "definition": {
+    "name": "Clan",
+    "icon": {
+      "value": "CUSTOM:UchihaRelease"
+    },
+    "showSearch": false
+  }
+}

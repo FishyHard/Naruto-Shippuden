@@ -1,0 +1,11 @@
+{
+  "parent": "naruto_shippuden:custom/ryo_case",
+  "textures": {
+    "0": "naruto_shippuden:blocks/ryo_case1",
+    "1": "naruto_shippuden:blocks/ryo_case2",
+    "2": "naruto_shippuden:blocks/ryo_case3",
+    "3": "naruto_shippuden:blocks/ryo_case4",
+    "4": "naruto_shippuden:blocks/ryo",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

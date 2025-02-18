@@ -1,0 +1,1104 @@
+{
+  "_fv": 33,
+  "_type": "gui",
+  "definition": {
+    "type": 0,
+    "width": 176,
+    "height": 166,
+    "inventoryOffsetX": 0,
+    "inventoryOffsetY": 0,
+    "renderBgLayer": false,
+    "doesPauseGame": false,
+    "components": [
+      {
+        "type": "image",
+        "data": {
+          "image": "info_card_dojutsu_texture.png",
+          "use1Xscale": true,
+          "name": "info_card_dojutsu_texture.png",
+          "x": -1,
+          "y": -2
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "sharingan2px1px2gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplaySharingan2x1Pupils2x1"
+          },
+          "name": "sharingan2px1px2gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Back",
+          "onClick": {
+            "name": "InfoCardOpenOnKeyPressed"
+          },
+          "width": 56,
+          "height": 20,
+          "name": "Back",
+          "x": 112,
+          "y": 17
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "sharingan2px2px1gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplaySharingan2x2Pupils2x1"
+          },
+          "name": "sharingan2px2px1gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "sharingan2px2px2gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplaySharingan2x2Pupils1x1"
+          },
+          "name": "sharingan2px2px2gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "sharingan2px1pxgui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplaySharingan2x1Pupils1x1"
+          },
+          "name": "sharingan2px1pxgui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "DojutsuButtonMinus"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "<",
+          "x": 213,
+          "y": 67
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "DojutsuButtonPlus"
+          },
+          "width": 20,
+          "height": 20,
+          "name": ">",
+          "x": 310,
+          "y": 67
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Dojutsu",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Dojutsu",
+          "x": 168,
+          "y": 72
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Pupils Height",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Pupils Height",
+          "x": 168,
+          "y": 102
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "PupilsHeightButtonMinus"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "<",
+          "x": 243,
+          "y": 97
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "PupilsHeightButtonMinus"
+          },
+          "width": 20,
+          "height": 20,
+          "name": ">",
+          "x": 292,
+          "y": 97
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "Eyes Height",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "Eyes Height",
+          "x": 167,
+          "y": 130
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "EyesHeightButtonMinus"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "<",
+          "x": 243,
+          "y": 125
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "EyesHeightButtonMinus"
+          },
+          "width": 20,
+          "height": 20,
+          "name": ">",
+          "x": 292,
+          "y": 125
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:Eyes_Height>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:Eyes_Height>",
+          "x": 275,
+          "y": 130
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:integer:Pupils_Height>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:integer:Pupils_Height>",
+          "x": 275,
+          "y": 103
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "byakugan_2x2_pupils_1x2_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayByakugan2x2Pupils2x1"
+          },
+          "name": "byakugan_2x2_pupils_1x2_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "byakugan_2x2_pupils_1x1_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayByakugan2x2Pupils1x1"
+          },
+          "name": "byakugan_2x2_pupils_1x1_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "byakugan_2x1_pupils_1x1_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayByakugan2x1Pupils1x1"
+          },
+          "name": "byakugan_2x1_pupils_1x1_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "byakugan_2x1_pupils_2x1_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayByakugan2x1Pupils2x1"
+          },
+          "name": "byakugan_2x1_pupils_2x1_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:DojutsuSelectResize>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:DojutsuSelectResize>",
+          "x": 235,
+          "y": 72
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "byakugan_activated_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayByakuganActivated2x1"
+          },
+          "name": "byakugan_activated_gui.png",
+          "x": 26,
+          "y": 96
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "byakugan_activated_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayByakuganActivated2x2"
+          },
+          "name": "byakugan_activated_gui.png",
+          "x": 26,
+          "y": 111
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "ketsuryugan_2x1_pupils_1x1_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKetsuryugan2x1Pupils1x1"
+          },
+          "name": "ketsuryugan_2x1_pupils_1x1_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "ketsuryugan_2x1_pupils_2x1_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKetsuryugan2x1Pupils2x1"
+          },
+          "name": "ketsuryugan_2x1_pupils_2x1_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "ketsuryugan_2x2_pupils_1x1_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKetsuryugan2x2Pupils1x1"
+          },
+          "name": "ketsuryugan_2x2_pupils_1x1_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "ketsuryugan_2x2_pupils_1x2_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKetsuryugan2x2Pupils2x1"
+          },
+          "name": "ketsuryugan_2x2_pupils_1x2_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "Select",
+          "onClick": {
+            "name": "SelectDojutsuInfo"
+          },
+          "width": 56,
+          "height": 20,
+          "name": "Select",
+          "x": 60,
+          "y": 202
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "isshiki_dojutsu_2x1_pupils_1x1_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayIsshikiDojutsu2x1Pupils1x1"
+          },
+          "name": "isshiki_dojutsu_2x1_pupils_1x1_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "isshiki_dojutsu_2x1_pupils_2x1_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayIsshikiDojutsu2x1Pupils2x1"
+          },
+          "name": "isshiki_dojutsu_2x1_pupils_2x1_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "isshiki_dojutsu_2x2_pupils_1x1_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayIsshikiDojutsu2x2Pupils1x1"
+          },
+          "name": "isshiki_dojutsu_2x2_pupils_1x1_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "isshiki_dojutsu_2x2_pupils_1x2_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayIsshikiDojutsu2x2Pupils2x1"
+          },
+          "name": "isshiki_dojutsu_2x2_pupils_1x2_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "voltic_mode_2x1_pupils_1x1_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayVoltic2x1Pupils1x1"
+          },
+          "name": "voltic_mode_2x1_pupils_1x1_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "voltic_mode_2x1_pupils_2x1_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayVoltic2x1Pupils2x1"
+          },
+          "name": "voltic_mode_2x1_pupils_2x1_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "voltic_mode_2x2_pupils_1x1_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayVoltic2x2Pupils2x1"
+          },
+          "name": "voltic_mode_2x2_pupils_1x1_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "voltic_mode_2x2_pupils_1x2_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayVoltic2x2Pupils1x1"
+          },
+          "name": "voltic_mode_2x2_pupils_1x2_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "sasukemangekyo2px2px2gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplaySasukeDojutsu2x2Pupils1x1"
+          },
+          "name": "sasukemangekyo2px2px2gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "sasukemangekyo2px2px1gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplaySasukeDojutsu2x2Pupils2x1"
+          },
+          "name": "sasukemangekyo2px2px1gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "sasukemangekyo2px1px2gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplaySasukeDojutsu2x1Pupils2x1"
+          },
+          "name": "sasukemangekyo2px1px2gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "sasukemangekyo2px1pxgui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplaySasukeDojutsu2x1Pupils1x1"
+          },
+          "name": "sasukemangekyo2px1pxgui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:DojutsuSelect2>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "displayCondition": {
+            "name": "DisplayMinus2Select"
+          },
+          "name": "<VAR:DojutsuSelect2>",
+          "x": 252,
+          "y": 40
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": "<",
+          "onClick": {
+            "name": "ButtonDojutsuSelect2Minus"
+          },
+          "displayCondition": {
+            "name": "DisplayMinus2Select"
+          },
+          "width": 20,
+          "height": 20,
+          "name": "<",
+          "x": 213,
+          "y": 35
+        }
+      },
+      {
+        "type": "button",
+        "data": {
+          "text": ">",
+          "onClick": {
+            "name": "ButtonDojutsuSelect2Plus"
+          },
+          "displayCondition": {
+            "name": "DisplayMinus2Select"
+          },
+          "width": 20,
+          "height": 20,
+          "name": ">",
+          "x": 310,
+          "y": 35
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "itachimangekyo2px1pxgui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayItachiDojutsu2x1Pupils1x1"
+          },
+          "name": "itachimangekyo2px1pxgui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "itachimangekyo2px1px2gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayItachiDojutsu2x1Pupils2x1"
+          },
+          "name": "itachimangekyo2px1px2gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "itachimangekyo2px2px1gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayItachiDojutsu2x2Pupils2x1"
+          },
+          "name": "itachimangekyo2px2px1gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "itachimangekyo2px2px2gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayItachiDojutsu2x2Pupils1x1"
+          },
+          "name": "itachimangekyo2px2px2gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "madaramangekyo2px1pxgui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayMadaraDojutsu2x1Pupils1x1"
+          },
+          "name": "madaramangekyo2px1pxgui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "madaramangekyo2px1px2gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayMadaraDojutsu2x1Pupils2x1"
+          },
+          "name": "madaramangekyo2px1px2gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "madaramangekyo2px2px2gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayMadaraDojutsu2x2Pupils1x1"
+          },
+          "name": "madaramangekyo2px2px2gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "madaramangekyo2px2px1gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayMadaraDojutsu2x2Pupils2x1"
+          },
+          "name": "madaramangekyo2px2px1gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "label",
+        "data": {
+          "text": "<VAR:DojutsuSelect3>",
+          "color": {
+            "value": -16777216,
+            "falpha": 0.0
+          },
+          "name": "<VAR:DojutsuSelect3>",
+          "x": 235,
+          "y": 81
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "obitomangekyo2px1pxgui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayObitoDojutsu2x1Pupils1x1"
+          },
+          "name": "obitomangekyo2px1pxgui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "obitomangekyo2px1px2gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayObitoDojutsu2x1Pupils2x1"
+          },
+          "name": "obitomangekyo2px1px2gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "obitomangekyo2px2px2gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayObitoDojutsu2x2Pupils1x1"
+          },
+          "name": "obitomangekyo2px2px2gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "obitomangekyo2px2px1gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayObitoDojutsu2x2Pupils2x1"
+          },
+          "name": "obitomangekyo2px2px1gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "shisuimangekyo2px1pxgui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayShisuiDojutsu2x1Pupils1x1"
+          },
+          "name": "shisuimangekyo2px1pxgui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "shisuimangekyo2px1px2gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayShisuiDojutsu2x1Pupils2x1"
+          },
+          "name": "shisuimangekyo2px1px2gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "shisuimangekyo2px2px2gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayShisuiDojutsu2x2Pupils1x1"
+          },
+          "name": "shisuimangekyo2px2px2gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "shisuimangekyo2px2px1gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayShisuiDojutsu2x2Pupils2x1"
+          },
+          "name": "shisuimangekyo2px2px1gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "scargui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayScar"
+          },
+          "name": "scargui.png",
+          "x": 104,
+          "y": 86
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "kakashisharingan2px1px2gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKakashi1Dojutsu2x1Pupils1x1"
+          },
+          "name": "kakashisharingan2px1px2gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "kakashisharingan2px1pxgui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKakashi1Dojutsu2x1Pupils2x1"
+          },
+          "name": "kakashisharingan2px1pxgui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "kakashisharingan2px2px2gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKakashi1Dojutsu2x2Pupils1x1"
+          },
+          "name": "kakashisharingan2px2px2gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "kakashisharingan2px2px1gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKakashi1Dojutsu2x2Pupils2x1"
+          },
+          "name": "kakashisharingan2px2px1gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "kakashimangekyo2px1pxgui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKakashiDojutsu2x1Pupils1x1"
+          },
+          "name": "kakashimangekyo2px1pxgui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "kakashimangekyo2px1px2gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKakashiDojutsu2x1Pupils2x1"
+          },
+          "name": "kakashimangekyo2px1px2gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "kakashimangekyo2px2px2gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKakashiDojutsu2x2Pupils1x1"
+          },
+          "name": "kakashimangekyo2px2px2gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "kakashimangekyo2px2px1gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayKakashiDojutsu2x2Pupils2x1"
+          },
+          "name": "kakashimangekyo2px2px1gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "furamingogan_2x1_pupils_1x1_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayMarcus2x1Pupils1x1"
+          },
+          "name": "furamingogan_2x1_pupils_1x1_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "furamingogan_2x1_pupils_2x1_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayMarcus2x1Pupils2x1"
+          },
+          "name": "furamingogan_2x1_pupils_2x1_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "furamingogan_2x2_pupils_1x1_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayMarcus2x2Pupils1x1"
+          },
+          "name": "furamingogan_2x2_pupils_1x1_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "furamingogan_2x2_pupils_1x2_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayMarcus2x2Pupils2x1"
+          },
+          "name": "furamingogan_2x2_pupils_1x2_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "rinnegan2px1px_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayRinnegan2x1Pupils1x1"
+          },
+          "name": "rinnegan2px1px_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "rinnegan2px1px2_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayRinnegan2x1Pupils2x1"
+          },
+          "name": "rinnegan2px1px2_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "rinnegan2px2px1_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayRinnegan2x2Pupils1x1"
+          },
+          "name": "rinnegan2px2px1_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "rinnegan2px2px2_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayRinnegan2x2Pupils2x1"
+          },
+          "name": "rinnegan2px2px2_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "tenseigan2px1px_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayTenseigan2x1Pupils1x1"
+          },
+          "name": "tenseigan2px1px_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "tenseigan1px2px2_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayTenseigan2x1Pupils2x1"
+          },
+          "name": "tenseigan1px2px2_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "tenseigan2px2px2_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayTenseigan2x2Pupils1x1"
+          },
+          "name": "tenseigan2px2px2_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      },
+      {
+        "type": "image",
+        "data": {
+          "image": "tenseigan2px2px1_gui.png",
+          "use1Xscale": true,
+          "displayCondition": {
+            "name": "DisplayTenseigan2x21Pupils2x1"
+          },
+          "name": "tenseigan2px2px1_gui.png",
+          "x": 40,
+          "y": 105
+        }
+      }
+    ],
+    "gridSettings": {
+      "sx": 18,
+      "sy": 18,
+      "ox": 11,
+      "oy": 15,
+      "snapOnGrid": false
+    }
+  }
+}
