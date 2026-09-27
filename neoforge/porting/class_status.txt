@@ -1,0 +1,112 @@
+MISSING net.minecraftforge.eventbus.api.SubscribeEvent net.minecraftforge.eventbus.api.SubscribeEvent 
+MISSING net.minecraft.util.ResourceLocation net.minecraft.resources.ResourceLocation 
+MISSING net.minecraftforge.api.distmarker.OnlyIn net.minecraftforge.api.distmarker.OnlyIn 
+MISSING net.minecraftforge.api.distmarker.Dist net.minecraftforge.api.distmarker.Dist 
+MISSING net.minecraft.util.text.StringTextComponent net.minecraft.network.chat.TextComponent 
+MISSING net.minecraftforge.registries.ForgeRegistries net.minecraftforge.registries.ForgeRegistries 
+MISSING net.minecraftforge.registries.ObjectHolder net.minecraftforge.registries.ObjectHolder 
+MISSING net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext 
+MOVED net.minecraft.entity.projectile.AbstractArrowEntity net.minecraft.world.entity.projectile.AbstractArrow net.minecraft.world.entity.projectile.arrow.AbstractArrow
+MISSING net.minecraftforge.common.MinecraftForge net.minecraftforge.common.MinecraftForge 
+MISSING net.minecraftforge.fml.network.NetworkHooks net.minecraftforge.fml.network.NetworkHooks 
+MISSING net.minecraft.item.UseAction net.minecraft.world.item.UseAnim 
+MISSING net.minecraftforge.fml.common.Mod net.minecraftforge.fml.common.Mod 
+MISSING net.minecraft.util.ActionResult net.minecraft.world.InteractionResultHolder 
+MISSING net.minecraftforge.items.ItemHandlerHelper net.minecraftforge.items.ItemHandlerHelper 
+MISSING net.minecraftforge.event.TickEvent net.minecraftforge.event.TickEvent 
+MISSING net.minecraftforge.event.RegistryEvent net.minecraftforge.event.RegistryEvent 
+MISSING net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent 
+MISSING net.minecraft.entity.SpawnReason net.minecraft.world.entity.MobSpawnType 
+MISSING net.minecraftforge.fml.network.NetworkEvent net.minecraftforge.fml.network.NetworkEvent 
+MISSING net.minecraftforge.fml.network.FMLPlayMessages net.minecraftforge.fml.network.FMLPlayMessages 
+MISSING net.minecraftforge.items.IItemHandler net.minecraftforge.items.IItemHandler 
+MISSING net.minecraftforge.fml.client.registry.RenderingRegistry net.minecraftforge.fml.client.registry.RenderingRegistry 
+MISSING net.minecraftforge.fml.DeferredWorkQueue net.minecraftforge.fml.DeferredWorkQueue 
+MOVED net.minecraftforge.client.event.RenderLivingEvent net.minecraftforge.client.event.RenderLivingEvent net.neoforged.neoforge.client.event.RenderLivingEvent
+MISSING net.minecraftforge.client.event.ModelRegistryEvent net.minecraftforge.client.event.ModelRegistryEvent 
+MISSING net.minecraftforge.items.ItemStackHandler net.minecraftforge.items.ItemStackHandler 
+MOVED net.minecraftforge.fml.network.IContainerFactory net.minecraftforge.fml.network.IContainerFactory net.neoforged.neoforge.network.IContainerFactory
+MISSING net.minecraftforge.fml.loading.FMLPaths net.minecraftforge.fml.loading.FMLPaths 
+MISSING net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent 
+MOVED net.minecraftforge.event.entity.player.PlayerEvent net.minecraftforge.event.entity.player.PlayerEvent net.neoforged.neoforge.event.entity.player.PlayerEvent
+MOVED net.minecraftforge.event.entity.EntityAttributeCreationEvent net.minecraftforge.event.entity.EntityAttributeCreationEvent net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent
+MISSING net.minecraft.entity.projectile.PotionEntity net.minecraft.world.entity.projectile.ThrownPotion 
+MISSING net.minecraft.entity.CreatureAttribute net.minecraft.world.entity.MobType 
+MISSING net.minecraftforge.eventbus.api.EventPriority net.minecraftforge.eventbus.api.EventPriority 
+MOVED net.minecraft.client.renderer.RenderType net.minecraft.client.renderer.RenderType net.minecraft.client.renderer.rendertype.RenderType
+MOVED net.minecraftforge.fml.network.PacketDistributor net.minecraftforge.fml.network.PacketDistributor net.neoforged.neoforge.network.PacketDistributor
+MISSING net.minecraftforge.fml.event.server.FMLServerStartingEvent net.minecraftforge.fml.event.server.FMLServerStartingEvent 
+MISSING net.minecraftforge.fml.common.ObfuscationReflectionHelper net.minecraftforge.fml.common.ObfuscationReflectionHelper 
+MISSING net.minecraftforge.eventbus.api.Event net.minecraftforge.eventbus.api.Event 
+MISSING net.minecraftforge.event.world.BiomeLoadingEvent net.minecraftforge.event.world.BiomeLoadingEvent 
+MISSING net.minecraftforge.common.util.LazyOptional net.minecraftforge.common.util.LazyOptional 
+MISSING net.minecraftforge.common.capabilities.Capability net.minecraftforge.common.capabilities.Capability 
+MISSING net.minecraftforge.client.event.RenderGameOverlayEvent net.minecraftforge.client.event.RenderGameOverlayEvent 
+MISSING net.minecraft.item.SwordItem net.minecraft.world.item.SwordItem 
+MISSING net.minecraft.item.IItemTier net.minecraft.world.item.Tier 
+MOVED net.minecraft.entity.monster.ZombieEntity net.minecraft.world.entity.monster.Zombie net.minecraft.world.entity.monster.zombie.Zombie
+MOVED net.minecraft.entity.monster.PillagerEntity net.minecraft.world.entity.monster.Pillager net.minecraft.world.entity.monster.illager.Pillager
+MISSING net.minecraft.entity.AgeableEntity net.minecraft.world.entity.AgableMob 
+MISSING net.minecraft.client.renderer.entity.PlayerRenderer net.minecraft.client.renderer.entity.player.PlayerRenderer 
+MISSING net.minecraft.client.renderer.IRenderTypeBuffer net.minecraft.client.renderer.MultiBufferSource 
+MOVED net.minecraft.block.material.Material net.minecraft.world.level.material.Material net.minecraft.client.resources.model.sprite.Material
+MISSING net.minecraftforge.items.wrapper.SidedInvWrapper net.minecraftforge.items.wrapper.SidedInvWrapper 
+MISSING net.minecraftforge.items.CapabilityItemHandler net.minecraftforge.items.CapabilityItemHandler 
+MISSING net.minecraftforge.forgespi.language.ModFileScanData net.minecraftforge.forgespi.language.ModFileScanData 
+MISSING net.minecraftforge.fml.network.simple.SimpleChannel net.minecraftforge.fml.network.simple.SimpleChannel 
+MOVED net.minecraftforge.fml.network.NetworkRegistry net.minecraftforge.fml.network.NetworkRegistry net.neoforged.neoforge.network.registration.NetworkRegistry
+MISSING net.minecraftforge.fml.client.registry.ClientRegistry net.minecraftforge.fml.client.registry.ClientRegistry 
+MISSING net.minecraftforge.fml.ModList net.minecraftforge.fml.ModList 
+MISSING net.minecraftforge.event.village.VillagerTradesEvent net.minecraftforge.event.village.VillagerTradesEvent 
+MOVED net.minecraftforge.event.entity.player.PlayerWakeUpEvent net.minecraftforge.event.entity.player.PlayerWakeUpEvent net.neoforged.neoforge.event.entity.player.PlayerWakeUpEvent
+MOVED net.minecraftforge.event.entity.living.LivingFallEvent net.minecraftforge.event.entity.living.LivingFallEvent net.neoforged.neoforge.event.entity.living.LivingFallEvent
+MOVED net.minecraftforge.event.entity.living.LivingEvent net.minecraftforge.event.entity.living.LivingEvent net.neoforged.neoforge.event.entity.living.LivingEvent
+MOVED net.minecraftforge.event.entity.living.LivingEntityUseItemEvent net.minecraftforge.event.entity.living.LivingEntityUseItemEvent net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent
+MOVED net.minecraftforge.event.entity.living.LivingDeathEvent net.minecraftforge.event.entity.living.LivingDeathEvent net.neoforged.neoforge.event.entity.living.LivingDeathEvent
+MISSING net.minecraftforge.event.entity.living.LivingAttackEvent net.minecraftforge.event.entity.living.LivingAttackEvent 
+MISSING net.minecraftforge.event.entity.EntityJoinWorldEvent net.minecraftforge.event.entity.EntityJoinWorldEvent 
+MISSING net.minecraftforge.event.entity.EntityEvent net.minecraftforge.event.entity.EntityEvent net.neoforged.neoforge.event.entity.EntityEvent net.minecraft.world.entity.EntityEvent
+MOVED net.minecraftforge.event.RegisterCommandsEvent net.minecraftforge.event.RegisterCommandsEvent net.neoforged.neoforge.event.RegisterCommandsEvent
+MOVED net.minecraftforge.event.ItemAttributeModifierEvent net.minecraftforge.event.ItemAttributeModifierEvent net.neoforged.neoforge.event.ItemAttributeModifierEvent
+MISSING net.minecraftforge.event.AttachCapabilitiesEvent net.minecraftforge.event.AttachCapabilitiesEvent 
+MISSING net.minecraftforge.common.util.ForgeSoundType net.minecraftforge.common.util.ForgeSoundType 
+MOVED net.minecraftforge.common.util.FakePlayerFactory net.minecraftforge.common.util.FakePlayerFactory net.neoforged.neoforge.common.util.FakePlayerFactory
+MOVED net.minecraftforge.common.util.FakePlayer net.minecraftforge.common.util.FakePlayer net.neoforged.neoforge.common.util.FakePlayer
+MISSING net.minecraftforge.common.capabilities.ICapabilitySerializable net.minecraftforge.common.capabilities.ICapabilitySerializable 
+MISSING net.minecraftforge.common.capabilities.CapabilityManager net.minecraftforge.common.capabilities.CapabilityManager 
+MISSING net.minecraftforge.common.capabilities.CapabilityInject net.minecraftforge.common.capabilities.CapabilityInject 
+MISSING net.minecraftforge.common.ToolType net.minecraftforge.common.ToolType 
+MISSING net.minecraftforge.common.ForgeMod net.minecraftforge.common.ForgeMod 
+MISSING net.minecraftforge.common.BasicTrade net.minecraftforge.common.BasicTrade 
+MISSING net.minecraftforge.client.gui.ForgeIngameGui net.minecraftforge.client.gui.ForgeIngameGui 
+MISSING net.minecraftforge.client.event.ParticleFactoryRegisterEvent net.minecraftforge.client.event.ParticleFactoryRegisterEvent 
+MOVED net.minecraftforge.client.event.InputEvent net.minecraftforge.client.event.InputEvent net.neoforged.neoforge.client.event.InputEvent
+MISSING net.minecraftforge.client.event.FOVUpdateEvent net.minecraftforge.client.event.FOVUpdateEvent 
+MISSING net.minecraftforge.client.event.EntityViewRenderEvent net.minecraftforge.client.event.EntityViewRenderEvent 
+MISSING net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilderBaseConfiguration 
+MISSING net.minecraft.world.gen.surfacebuilders.SurfaceBuilder net.minecraft.world.level.levelgen.surfacebuilders.SurfaceBuilder 
+MISSING net.minecraft.world.gen.placement.Placement net.minecraft.world.level.levelgen.placement.FeatureDecorator 
+MISSING net.minecraft.world.gen.placement.IPlacementConfig net.minecraft.world.level.levelgen.feature.configurations.DecoratorConfiguration 
+MISSING net.minecraft.world.gen.feature.NoFeatureConfig net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration 
+MISSING net.minecraft.world.gen.feature.IFeatureConfig net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration 
+MISSING net.minecraft.world.gen.feature.ConfiguredFeature net.minecraft.world.level.levelgen.feature.ConfiguredFeature 
+MOVED net.minecraft.world.GameRules net.minecraft.world.level.GameRules net.minecraft.world.level.gamerules.GameRules
+MISSING net.minecraft.util.registry.WorldGenRegistries net.minecraft.data.BuiltinRegistries 
+MISSING net.minecraft.util.math.vector.Vector3f com.mojang.math.Vector3f 
+MISSING net.minecraft.tags.Tag net.minecraft.tags.SetTag 
+MISSING net.minecraft.state.DirectionProperty net.minecraft.world.level.block.state.properties.DirectionProperty 
+MOVED net.minecraft.item.IArmorMaterial net.minecraft.world.item.ArmorMaterial net.minecraft.world.item.equipment.ArmorMaterial
+MISSING net.minecraft.item.ArmorItem net.minecraft.world.item.ArmorItem 
+MOVED net.minecraft.entity.monster.ZombifiedPiglinEntity net.minecraft.world.entity.monster.ZombifiedPiglin net.minecraft.world.entity.monster.zombie.ZombifiedPiglin
+MOVED net.minecraft.entity.monster.ZombieVillagerEntity net.minecraft.world.entity.monster.ZombieVillager net.minecraft.world.entity.monster.zombie.ZombieVillager
+MOVED net.minecraft.entity.monster.VindicatorEntity net.minecraft.world.entity.monster.Vindicator net.minecraft.world.entity.monster.illager.Vindicator
+MOVED net.minecraft.entity.monster.SkeletonEntity net.minecraft.world.entity.monster.Skeleton net.minecraft.world.entity.monster.skeleton.Skeleton
+MOVED net.minecraft.entity.monster.IllusionerEntity net.minecraft.world.entity.monster.Illusioner net.minecraft.world.entity.monster.illager.Illusioner
+MOVED net.minecraft.entity.monster.HuskEntity net.minecraft.world.entity.monster.Husk net.minecraft.world.entity.monster.zombie.Husk
+MOVED net.minecraft.entity.merchant.villager.VillagerTrades net.minecraft.world.entity.npc.VillagerTrades net.minecraft.world.item.trading.VillagerTrades
+MOVED net.minecraft.entity.merchant.villager.VillagerProfession net.minecraft.world.entity.npc.VillagerProfession net.minecraft.world.entity.npc.villager.VillagerProfession
+MOVED net.minecraft.entity.merchant.villager.VillagerEntity net.minecraft.world.entity.npc.Villager net.minecraft.world.entity.npc.villager.Villager
+MISSING net.minecraft.client.world.DimensionRenderInfo net.minecraft.client.renderer.DimensionSpecialEffects 
+MOVED net.minecraft.client.renderer.entity.model.PlayerModel net.minecraft.client.model.PlayerModel net.minecraft.client.model.player.PlayerModel
+MISSING net.minecraft.client.renderer.RenderTypeLookup net.minecraft.client.renderer.ItemBlockRenderTypes 
+MISSING net.minecraft.client.particle.SpriteTexturedParticle net.minecraft.client.particle.TextureSheetParticle 

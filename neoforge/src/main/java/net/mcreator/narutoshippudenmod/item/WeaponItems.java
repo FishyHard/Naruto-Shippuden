@@ -1,0 +1,1943 @@
+package net.mcreator.narutoshippudenmod.item;
+
+import net.mcreator.narutoshippudenmod.compat.Registration;
+import net.minecraft.server.level.ServerLevel;
+
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
+import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
+import net.mcreator.narutoshippudenmod.NarutoShippudenModElements;
+import net.mcreator.narutoshippudenmod.itemgroup.ModItemGroups.WeaponsItemGroup;
+import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.OtsutsukiToolsSwitchProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.AsumaChakraBladeToolInHandTickProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ChakraBladeRightclickedProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ExplosiveKunaiRightclickedProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.FlyingThunderGodKunaiEntitySwingsItemProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.FlyingThunderGodKunaiRightclickedProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.FumaShurikenRightclickedProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.GunbaiBlockToolInHandTickProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.GunbaiRightclickedProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.GunbaiSItemInInventoryTickProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.GunbaiShieldOnPlayerStoppedUsingProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.GunbaiToolInHandTickProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.HidanTripleBladeScytheToolInHandTickProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.HiramekareiEntitySwingsItemProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.HiramekareiRightclickedProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.HiramekareiToolInHandTickProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KabutowariRightclickedProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KabutowariToolInHandTickProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KatanaToolInHandTickProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KibaSwordRightclickedProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KibaSwordToolInHandTickProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KubikiribochoToolInHandTickProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KunaiRightclickedProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KusanagiSasukeLivingEntityIsHitWithToolProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KusanagiSasukeRightclickedProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KusanagiSasukeToolInHandTickProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.NuibariRightclickedProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.NuibariToolInHandTickProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.PoisonKunaiRightclickedProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.SamehadaLivingEntityIsHitWithToolProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.SamehadaRightclickedProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.SamehadaToolInInventoryTickProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ShibukiLivingEntityIsHitWithToolProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ShibukiRightclickedProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ShibukiToolInHandTickProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ShibukiToolInInventoryTickProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ShichiseikenToolInHandTickProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ShurikenRightclickedProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.TantoToolInHandTickProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ToolsDamageProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ToroiUniqueFumaShurikenRightclickedProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.WhiteLightChakraSabreRightclickedProcedure;
+import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.WhiteLightChakraSabreToolInHandTickProcedure;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
+
+import net.minecraft.world.item.ItemUseAnimation;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.Level;
+
+
+public final class WeaponItems {
+	private WeaponItems() {
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class ChakraBladeItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("chakra_blade", v -> block = (Item) v);
+		}
+
+		public ChakraBladeItem(NarutoShippudenModElements instance) {
+			super(instance, 1318);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("chakra_blade", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 12f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.4f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("\u00A72Flying Swallow: \u00A7bChakra cost: 20/sec"));
+					list.accept(Component.literal("\u00A78Kenjutsu Required: 20"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					ChakraBladeRightclickedProcedure.executeProcedure(
+							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						AsumaChakraBladeToolInHandTickProcedure.executeProcedure(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class ExplosiveKunaiItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("explosive_kunai", v -> block = (Item) v);
+		}
+
+		public ExplosiveKunaiItem(NarutoShippudenModElements instance) {
+			super(instance, 314);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new ItemCustom());
+		}
+
+		public static class ItemCustom extends Item {
+			public ItemCustom() {
+				super(Registration.itemProps("explosive_kunai", "WeaponsItemGroup").stacksTo(16).rarity(Rarity.COMMON));
+			}
+
+			@Override
+			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
+				return ItemUseAnimation.EAT;
+			}
+
+			@Override
+			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
+				return 1F;
+			}
+
+			@Override
+			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+				super.appendHoverText(itemstack, world, display, list, flag);
+				list.accept(Component.literal("\u00A77Shurikenjutsu Required: 20"));
+			}
+
+			@Override
+			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+				InteractionResult ar = super.use(world, entity, hand);
+				ItemStack itemstack = entity.getItemInHand(hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+
+				ExplosiveKunaiRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return ar;
+			}
+
+			@Override
+			public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, InteractionHand hand) {
+				boolean retval = super.onEntitySwing(itemstack, entity, hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+				Level world = entity.level();
+
+				ToolsDamageProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("itemstack", itemstack)).collect(HashMap::new,
+						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return retval;
+			}
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class FlyingThunderGodKunaiItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("flying_thunder_god_kunai", v -> block = (Item) v);
+		}
+
+		public FlyingThunderGodKunaiItem(NarutoShippudenModElements instance) {
+			super(instance, 731);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new ItemCustom());
+		}
+
+		public static class ItemCustom extends Item {
+			public ItemCustom() {
+				super(Registration.itemProps("flying_thunder_god_kunai", "WeaponsItemGroup").stacksTo(1).rarity(Rarity.COMMON));
+			}
+
+			@Override
+			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
+				return ItemUseAnimation.EAT;
+			}
+
+			@Override
+			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
+				return 1F;
+			}
+
+			@Override
+			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+				super.appendHoverText(itemstack, world, display, list, flag);
+				list.accept(Component.literal("\u00A7bChakra cost: 50"));
+				list.accept(Component.literal("\u00A73Ninjutsu Required: 10"));
+				list.accept(Component.literal("\u00A77Shurikenjutsu Required: 25"));
+			}
+
+			@Override
+			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+				InteractionResult ar = super.use(world, entity, hand);
+				ItemStack itemstack = entity.getItemInHand(hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+
+				FlyingThunderGodKunaiRightclickedProcedure.executeProcedure(Stream
+						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
+								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity),
+								new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return ar;
+			}
+
+			@Override
+			public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, InteractionHand hand) {
+				boolean retval = super.onEntitySwing(itemstack, entity, hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+				Level world = entity.level();
+
+				FlyingThunderGodKunaiEntitySwingsItemProcedure.executeProcedure(Stream
+						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
+								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity),
+								new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return retval;
+			}
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class FumaShurikenItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("fuma_shuriken", v -> block = (Item) v);
+		}
+
+		public FumaShurikenItem(NarutoShippudenModElements instance) {
+			super(instance, 976);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new ItemCustom());
+		}
+
+		public static class ItemCustom extends Item {
+			public ItemCustom() {
+				super(Registration.itemProps("fuma_shuriken", "WeaponsItemGroup").stacksTo(16).rarity(Rarity.COMMON));
+			}
+
+			@Override
+			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
+				return ItemUseAnimation.EAT;
+			}
+
+			@Override
+			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
+				return 1F;
+			}
+
+			@Override
+			public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
+				if (slot == EquipmentSlot.MAINHAND) {
+					ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+					builder.putAll(super.getDefaultAttributeModifiers(slot));
+					builder.put(Attributes.ATTACK_DAMAGE,
+							new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Item modifier", (double) 0, AttributeModifier.Operation.ADDITION));
+					builder.put(Attributes.ATTACK_SPEED,
+							new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Item modifier", -2.4, AttributeModifier.Operation.ADDITION));
+				}
+				return super.getDefaultAttributeModifiers(slot);
+			}
+
+			@Override
+			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+				super.appendHoverText(itemstack, world, display, list, flag);
+				list.accept(Component.literal("\u00A77Shurikenjutsu Required: 20"));
+			}
+
+			@Override
+			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+				InteractionResult ar = super.use(world, entity, hand);
+				ItemStack itemstack = entity.getItemInHand(hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+
+				FumaShurikenRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return ar;
+			}
+
+			@Override
+			public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, InteractionHand hand) {
+				boolean retval = super.onEntitySwing(itemstack, entity, hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+				Level world = entity.level();
+
+				ToolsDamageProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("itemstack", itemstack)).collect(HashMap::new,
+						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return retval;
+			}
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class GunbaiBlockItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("gunbai_block", v -> block = (Item) v);
+		}
+
+		public GunbaiBlockItem(NarutoShippudenModElements instance) {
+			super(instance, 1285);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("gunbai_block", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 20f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.7f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("Right-Click to use technique"));
+					list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
+					list.accept(Component.literal("\u00A72Block: Blocks any Attack"));
+					list.accept(Component.literal("\u00A72Wind Push: Pushes Enemies away from you"));
+					list.accept(Component.literal("\u00A78Kenjutsu Required: 25"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					GunbaiShieldOnPlayerStoppedUsingProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
+							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						GunbaiBlockToolInHandTickProcedure.executeProcedure(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+
+					GunbaiSItemInInventoryTickProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+							(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class GunbaiItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("gunbai", v -> block = (Item) v);
+		}
+
+		public GunbaiItem(NarutoShippudenModElements instance) {
+			super(instance, 214);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("gunbai", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 20f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.7f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("Right-Click to use technique"));
+					list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
+					list.accept(Component.literal("\u00A72Block: Blocks any Attack"));
+					list.accept(Component.literal("\u00A72Wind Push: Pushes Enemies away from you"));
+					list.accept(Component.literal("\u00A78Kenjutsu Required: 25"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					GunbaiRightclickedProcedure.executeProcedure(Stream
+							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("y", y),
+									new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						GunbaiToolInHandTickProcedure.executeProcedure(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class HiramekareiHammerFormItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("hiramekarei_hammer_form", v -> block = (Item) v);
+		}
+
+		public HiramekareiHammerFormItem(NarutoShippudenModElements instance) {
+			super(instance, 1292);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("hiramekarei_hammer_form", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 26f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.7f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("Right-Click to use technique"));
+					list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
+					list.accept(Component.literal("\u00A72Chakra Storing: \u00A7bChakra cost: 20/sec"));
+					list.accept(Component.literal("\u00A72Long-sword Form: \u00A7bChakra cost: 20/sec from Sword"));
+					list.accept(Component.literal("\u00A72Twinsword Form: \u00A7bChakra cost: 20/sec from Sword"));
+					list.accept(Component.literal("\u00A72Hammer Form: \u00A7bChakra cost: 300 from Sword"));
+					list.accept(Component.literal("\u00A78Kenjutsu Required: 45"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					HiramekareiRightclickedProcedure.executeProcedure(Stream
+							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x),
+									new AbstractMap.SimpleEntry<>("y", y), new AbstractMap.SimpleEntry<>("z", z),
+									new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, InteractionHand hand) {
+					boolean retval = super.onEntitySwing(itemstack, entity, hand);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					Level world = entity.level();
+
+					HiramekareiEntitySwingsItemProcedure.executeProcedure(
+							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						HiramekareiToolInHandTickProcedure.executeProcedure(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class HiramekareiItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("hiramekarei", v -> block = (Item) v);
+		}
+
+		public HiramekareiItem(NarutoShippudenModElements instance) {
+			super(instance, 215);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("hiramekarei", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 18f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.2f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("Right-Click to use technique"));
+					list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
+					list.accept(Component.literal("\u00A72Chakra Storing: \u00A7bChakra cost: 20/sec"));
+					list.accept(Component.literal("\u00A72Long-sword Form: \u00A7bChakra cost: 20/sec from Sword"));
+					list.accept(Component.literal("\u00A72Twinsword Form: \u00A7bChakra cost: 20/sec from Sword"));
+					list.accept(Component.literal("\u00A72Hammer Form: \u00A7bChakra cost: 300 from Sword"));
+					list.accept(Component.literal("\u00A78Kenjutsu Required: 45"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					HiramekareiRightclickedProcedure.executeProcedure(Stream
+							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x),
+									new AbstractMap.SimpleEntry<>("y", y), new AbstractMap.SimpleEntry<>("z", z),
+									new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, InteractionHand hand) {
+					boolean retval = super.onEntitySwing(itemstack, entity, hand);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					Level world = entity.level();
+
+					HiramekareiEntitySwingsItemProcedure.executeProcedure(
+							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						HiramekareiToolInHandTickProcedure.executeProcedure(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class HiramekareiSplittedItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("hiramekarei_splitted", v -> block = (Item) v);
+		}
+
+		public HiramekareiSplittedItem(NarutoShippudenModElements instance) {
+			super(instance, 216);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("hiramekarei_splitted", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 14f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.6f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("Right-Click to use technique"));
+					list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
+					list.accept(Component.literal("\u00A72Chakra Storing: \u00A7bChakra cost: 20/sec"));
+					list.accept(Component.literal("\u00A72Long-sword Form: \u00A7bChakra cost: 20/sec from Sword"));
+					list.accept(Component.literal("\u00A72Twinsword Form: \u00A7bChakra cost: 20/sec from Sword"));
+					list.accept(Component.literal("\u00A72Hammer Form: \u00A7bChakra cost: 300 from Sword"));
+					list.accept(Component.literal("\u00A78Kenjutsu Required: 45"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					HiramekareiRightclickedProcedure.executeProcedure(Stream
+							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x),
+									new AbstractMap.SimpleEntry<>("y", y), new AbstractMap.SimpleEntry<>("z", z),
+									new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, InteractionHand hand) {
+					boolean retval = super.onEntitySwing(itemstack, entity, hand);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					Level world = entity.level();
+
+					HiramekareiEntitySwingsItemProcedure.executeProcedure(
+							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						HiramekareiToolInHandTickProcedure.executeProcedure(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class KabutowariItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("kabutowari", v -> block = (Item) v);
+		}
+
+		public KabutowariItem(NarutoShippudenModElements instance) {
+			super(instance, 212);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("kabutowari", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 18f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("\u00A72Kabutowari Hammer: Throws up Enemies in air"));
+					list.accept(Component.literal("\u00A78Kenjutsu Required: 45"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					KabutowariRightclickedProcedure.executeProcedure(Stream
+							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x),
+									new AbstractMap.SimpleEntry<>("y", y), new AbstractMap.SimpleEntry<>("z", z),
+									new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						KabutowariToolInHandTickProcedure.executeProcedure(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class KatanaItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("katana", v -> block = (Item) v);
+		}
+
+		public KatanaItem(NarutoShippudenModElements instance) {
+			super(instance, 210);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("katana", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 10f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.5f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("\u00A78Kenjutsu Required: 15"));
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						KatanaToolInHandTickProcedure.executeProcedure(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class KatanaJonin1Item extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("katana_jonin_1", v -> block = (Item) v);
+		}
+
+		public KatanaJonin1Item(NarutoShippudenModElements instance) {
+			super(instance, 681);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("katana_jonin_1", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 12f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.5f)) {
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class KibaSwordItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("kiba_sword", v -> block = (Item) v);
+		}
+
+		public KibaSwordItem(NarutoShippudenModElements instance) {
+			super(instance, 209);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("kiba_sword", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 12f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.5f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("Right-Click to use technique"));
+					list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
+					list.accept(Component.literal("\u00A72Lightning Ball: \u00A7bChakra cost: 100 \u00A73Ninjutsu required: 5"));
+					list.accept(Component.literal("\u00A72Lightning: \u00A7bChakra cost: 150 \u00A73Ninjutsu required: 10"));
+					list.accept(Component.literal("\u00A72Lightning Wave: \u00A7bChakra cost: 200 \u00A73Ninjutsu required: 15"));
+					list.accept(Component.literal("\u00A78Kenjutsu Required: 45"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					KibaSwordRightclickedProcedure.executeProcedure(Stream
+							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x),
+									new AbstractMap.SimpleEntry<>("y", y), new AbstractMap.SimpleEntry<>("z", z),
+									new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						KibaSwordToolInHandTickProcedure.executeProcedure(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class KubikiribochoItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("kubikiribocho", v -> block = (Item) v);
+		}
+
+		public KubikiribochoItem(NarutoShippudenModElements instance) {
+			super(instance, 203);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("kubikiribocho", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 3000, 0f, 16f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.3f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("\u00A72The sword regeneration: +15 Durability to sword after Mob/Player kill"));
+					list.accept(Component.literal("\u00A78Kenjutsu Required: 45"));
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						KubikiribochoToolInHandTickProcedure.executeProcedure(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class KunaiItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("kunai", v -> block = (Item) v);
+		}
+
+		public KunaiItem(NarutoShippudenModElements instance) {
+			super(instance, 313);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new ItemCustom());
+		}
+
+		public static class ItemCustom extends Item {
+			public ItemCustom() {
+				super(Registration.itemProps("kunai", "WeaponsItemGroup").stacksTo(16).rarity(Rarity.COMMON));
+			}
+
+			@Override
+			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
+				return ItemUseAnimation.EAT;
+			}
+
+			@Override
+			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
+				return 1F;
+			}
+
+			@Override
+			public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
+				if (slot == EquipmentSlot.MAINHAND) {
+					ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+					builder.putAll(super.getDefaultAttributeModifiers(slot));
+					builder.put(Attributes.ATTACK_DAMAGE,
+							new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Item modifier", (double) 0, AttributeModifier.Operation.ADDITION));
+					builder.put(Attributes.ATTACK_SPEED,
+							new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Item modifier", -2.4, AttributeModifier.Operation.ADDITION));
+				}
+				return super.getDefaultAttributeModifiers(slot);
+			}
+
+			@Override
+			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+				super.appendHoverText(itemstack, world, display, list, flag);
+				list.accept(Component.literal("\u00A77Shurikenjutsu Required: 10"));
+			}
+
+			@Override
+			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+				InteractionResult ar = super.use(world, entity, hand);
+				ItemStack itemstack = entity.getItemInHand(hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+
+				KunaiRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return ar;
+			}
+
+			@Override
+			public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, InteractionHand hand) {
+				boolean retval = super.onEntitySwing(itemstack, entity, hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+				Level world = entity.level();
+
+				ToolsDamageProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("itemstack", itemstack)).collect(HashMap::new,
+						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return retval;
+			}
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class KusanagiSasukeItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("kusanagi_sasuke", v -> block = (Item) v);
+		}
+
+		public KusanagiSasukeItem(NarutoShippudenModElements instance) {
+			super(instance, 204);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("kusanagi_sasuke", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 12f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.5f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("\u00A72Channel Lightning Chakra: \u00A7bChakra cost: 20/sec"));
+					list.accept(Component.literal("\u00A78Kenjutsu Required: 25"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					KusanagiSasukeRightclickedProcedure.executeProcedure(
+							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
+					super.hurtEnemy(itemstack, entity, sourceentity);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					Level world = entity.level();
+
+					KusanagiSasukeLivingEntityIsHitWithToolProcedure.executeProcedure(
+							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return;
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						KusanagiSasukeToolInHandTickProcedure.executeProcedure(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class NuibariItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("nuibari", v -> block = (Item) v);
+		}
+
+		public NuibariItem(NarutoShippudenModElements instance) {
+			super(instance, 208);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("nuibari", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 12f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.3f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("Right-Click to use technique"));
+					list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
+					list.accept(Component.literal("\u00A72Nuibari: Throw Needle"));
+					list.accept(Component.literal("\u00A72Nuibari: Pull Needle"));
+					list.accept(Component.literal("\u00A78Kenjutsu Required: 45"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					NuibariRightclickedProcedure.executeProcedure(Stream
+							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("entity", entity),
+									new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						NuibariToolInHandTickProcedure.executeProcedure(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class OtsutsukiAxeItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("otsutsuki_axe", v -> block = (Item) v);
+		}
+
+		public OtsutsukiAxeItem(NarutoShippudenModElements instance) {
+			super(instance, 753);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_axe", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 20f, 0, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.3f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("Sneak Right-Click to change weapon type"));
+					list.accept(Component.literal("Right-Click transform weapon"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					OtsutsukiToolsSwitchProcedure.executeProcedure(
+							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class OtsutsukiBatItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("otsutsuki_bat", v -> block = (Item) v);
+		}
+
+		public OtsutsukiBatItem(NarutoShippudenModElements instance) {
+			super(instance, 754);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_bat", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 14f, 0, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.9f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("Sneak Right-Click to change weapon type"));
+					list.accept(Component.literal("Right-Click transform weapon"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					OtsutsukiToolsSwitchProcedure.executeProcedure(
+							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class OtsutsukiBladeItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("otsutsuki_blade", v -> block = (Item) v);
+		}
+
+		public OtsutsukiBladeItem(NarutoShippudenModElements instance) {
+			super(instance, 755);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_blade", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 10f, 0, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.2f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("Sneak Right-Click to change weapon type"));
+					list.accept(Component.literal("Right-Click transform weapon"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					OtsutsukiToolsSwitchProcedure.executeProcedure(
+							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class OtsutsukiChoppingSwordItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("otsutsuki_chopping_sword", v -> block = (Item) v);
+		}
+
+		public OtsutsukiChoppingSwordItem(NarutoShippudenModElements instance) {
+			super(instance, 756);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_chopping_sword", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 18f, 0, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.1f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("Sneak Right-Click to change weapon type"));
+					list.accept(Component.literal("Right-Click transform weapon"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					OtsutsukiToolsSwitchProcedure.executeProcedure(
+							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class OtsutsukiHammerItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("otsutsuki_hammer", v -> block = (Item) v);
+		}
+
+		public OtsutsukiHammerItem(NarutoShippudenModElements instance) {
+			super(instance, 757);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_hammer", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 22f, 0, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.5f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("Sneak Right-Click to change weapon type"));
+					list.accept(Component.literal("Right-Click transform weapon"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					OtsutsukiToolsSwitchProcedure.executeProcedure(
+							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class OtsutsukiKatanaItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("otsutsuki_katana", v -> block = (Item) v);
+		}
+
+		public OtsutsukiKatanaItem(NarutoShippudenModElements instance) {
+			super(instance, 758);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_katana", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 13f, 0, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("Sneak Right-Click to change weapon type"));
+					list.accept(Component.literal("Right-Click transform weapon"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					OtsutsukiToolsSwitchProcedure.executeProcedure(
+							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class OtsutsukiSpearItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("otsutsuki_spear", v -> block = (Item) v);
+		}
+
+		public OtsutsukiSpearItem(NarutoShippudenModElements instance) {
+			super(instance, 759);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_spear", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 15f, 0, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.6f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("Sneak Right-Click to change weapon type"));
+					list.accept(Component.literal("Right-Click transform weapon"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					OtsutsukiToolsSwitchProcedure.executeProcedure(
+							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class OtsutsukiSwordItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("otsutsuki_sword", v -> block = (Item) v);
+		}
+
+		public OtsutsukiSwordItem(NarutoShippudenModElements instance) {
+			super(instance, 760);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_sword", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 18f, 0, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.8f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("Sneak Right-Click to change weapon type"));
+					list.accept(Component.literal("Right-Click transform weapon"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					OtsutsukiToolsSwitchProcedure.executeProcedure(
+							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class PoisonKunaiItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("poison_kunai", v -> block = (Item) v);
+		}
+
+		public PoisonKunaiItem(NarutoShippudenModElements instance) {
+			super(instance, 1324);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new ItemCustom());
+		}
+
+		public static class ItemCustom extends Item {
+			public ItemCustom() {
+				super(Registration.itemProps("poison_kunai", "WeaponsItemGroup").stacksTo(16).rarity(Rarity.COMMON));
+			}
+
+			@Override
+			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
+				return ItemUseAnimation.EAT;
+			}
+
+			@Override
+			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
+				return 1F;
+			}
+
+			@Override
+			public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
+				if (slot == EquipmentSlot.MAINHAND) {
+					ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+					builder.putAll(super.getDefaultAttributeModifiers(slot));
+					builder.put(Attributes.ATTACK_DAMAGE,
+							new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Item modifier", (double) 0, AttributeModifier.Operation.ADDITION));
+					builder.put(Attributes.ATTACK_SPEED,
+							new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Item modifier", -2.4, AttributeModifier.Operation.ADDITION));
+				}
+				return super.getDefaultAttributeModifiers(slot);
+			}
+
+			@Override
+			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+				super.appendHoverText(itemstack, world, display, list, flag);
+				list.accept(Component.literal("\u00A77Shurikenjutsu Required: 15"));
+			}
+
+			@Override
+			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+				InteractionResult ar = super.use(world, entity, hand);
+				ItemStack itemstack = entity.getItemInHand(hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+
+				PoisonKunaiRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return ar;
+			}
+
+			@Override
+			public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, InteractionHand hand) {
+				boolean retval = super.onEntitySwing(itemstack, entity, hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+				Level world = entity.level();
+
+				ToolsDamageProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("itemstack", itemstack)).collect(HashMap::new,
+						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return retval;
+			}
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class SamehadaItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("samehada", v -> block = (Item) v);
+		}
+
+		public SamehadaItem(NarutoShippudenModElements instance) {
+			super(instance, 207);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("samehada", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 18f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.8f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("Right-Click to use technique"));
+					list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
+					list.accept(Component.literal("\u00A72Samehada: \u00A7bChakra cost: 10/sec"));
+					list.accept(Component.literal("\u00A72Chakra Steal: +5% Chakra Amount of Mob you hit"));
+					list.accept(Component.literal("\u00A72Chakra Heal:  +0.2% HP of Mob you hit"));
+					list.accept(Component.literal("\u00A78Kenjutsu Required: 45"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					SamehadaRightclickedProcedure.executeProcedure(
+							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
+					super.hurtEnemy(itemstack, entity, sourceentity);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					Level world = entity.level();
+
+					SamehadaLivingEntityIsHitWithToolProcedure.executeProcedure(Stream
+							.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity),
+									new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return;
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						SamehadaToolInInventoryTickProcedure.executeProcedure(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class ShibukiItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("shibuki", v -> block = (Item) v);
+		}
+
+		public ShibukiItem(NarutoShippudenModElements instance) {
+			super(instance, 213);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("shibuki", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 16f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.2f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("Right-Click to use technique"));
+					list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
+					list.accept(Component.literal("\u00A72Paper Bomb Trap: \u00A7bChakra cost: 350"));
+					list.accept(Component.literal("\u00A72Explosion: \u00A7bChakra cost: 20/sec"));
+					list.accept(Component.literal("\u00A72Explosions Trail: \u00A7bChakra cost: 100/sec"));
+					list.accept(Component.literal("\u00A78Kenjutsu Required: 45"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					ShibukiRightclickedProcedure.executeProcedure(Stream
+							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("y", y),
+									new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
+					super.hurtEnemy(itemstack, entity, sourceentity);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					Level world = entity.level();
+
+					ShibukiLivingEntityIsHitWithToolProcedure.executeProcedure(Stream
+							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("entity", entity),
+									new AbstractMap.SimpleEntry<>("sourceentity", sourceentity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return;
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						ShibukiToolInHandTickProcedure.executeProcedure(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+
+					ShibukiToolInInventoryTickProcedure.executeProcedure(Stream
+							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("entity", entity),
+									new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class ShichiseikenItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("shichiseiken", v -> block = (Item) v);
+		}
+
+		public ShichiseikenItem(NarutoShippudenModElements instance) {
+			super(instance, 1278);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("shichiseiken", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 17f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("\u00A78Kenjutsu Required: 35"));
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						ShichiseikenToolInHandTickProcedure.executeProcedure(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class ShurikenItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("shuriken", v -> block = (Item) v);
+		}
+
+		public ShurikenItem(NarutoShippudenModElements instance) {
+			super(instance, 315);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new ItemCustom());
+		}
+
+		public static class ItemCustom extends Item {
+			public ItemCustom() {
+				super(Registration.itemProps("shuriken", "WeaponsItemGroup").stacksTo(16).rarity(Rarity.COMMON));
+			}
+
+			@Override
+			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
+				return ItemUseAnimation.EAT;
+			}
+
+			@Override
+			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
+				return 1F;
+			}
+
+			@Override
+			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+				super.appendHoverText(itemstack, world, display, list, flag);
+				list.accept(Component.literal("\u00A77Shurikenjutsu Required: 5"));
+			}
+
+			@Override
+			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+				InteractionResult ar = super.use(world, entity, hand);
+				ItemStack itemstack = entity.getItemInHand(hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+
+				ShurikenRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return ar;
+			}
+
+			@Override
+			public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, InteractionHand hand) {
+				boolean retval = super.onEntitySwing(itemstack, entity, hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+				Level world = entity.level();
+
+				ToolsDamageProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("itemstack", itemstack)).collect(HashMap::new,
+						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return retval;
+			}
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class TantoItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("tanto", v -> block = (Item) v);
+		}
+
+		public TantoItem(NarutoShippudenModElements instance) {
+			super(instance, 205);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("tanto", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 5f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.7f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("\u00A78Kenjutsu Required: 5"));
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						TantoToolInHandTickProcedure.executeProcedure(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class ToroiUniqueFumaShurikenItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("toroi_unique_fuma_shuriken", v -> block = (Item) v);
+		}
+
+		public ToroiUniqueFumaShurikenItem(NarutoShippudenModElements instance) {
+			super(instance, 974);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new ItemCustom());
+		}
+
+		public static class ItemCustom extends Item {
+			public ItemCustom() {
+				super(Registration.itemProps("toroi_unique_fuma_shuriken", "WeaponsItemGroup").stacksTo(16).rarity(Rarity.COMMON));
+			}
+
+			@Override
+			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
+				return ItemUseAnimation.EAT;
+			}
+
+			@Override
+			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
+				return 1F;
+			}
+
+			@Override
+			public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
+				if (slot == EquipmentSlot.MAINHAND) {
+					ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+					builder.putAll(super.getDefaultAttributeModifiers(slot));
+					builder.put(Attributes.ATTACK_DAMAGE,
+							new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Item modifier", (double) 0, AttributeModifier.Operation.ADDITION));
+					builder.put(Attributes.ATTACK_SPEED,
+							new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Item modifier", -2.4, AttributeModifier.Operation.ADDITION));
+				}
+				return super.getDefaultAttributeModifiers(slot);
+			}
+
+			@Override
+			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+				super.appendHoverText(itemstack, world, display, list, flag);
+				list.accept(Component.literal("\u00A77Shurikenjutsu Required: 25"));
+			}
+
+			@Override
+			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+				InteractionResult ar = super.use(world, entity, hand);
+				ItemStack itemstack = entity.getItemInHand(hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+
+				ToroiUniqueFumaShurikenRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
+						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return ar;
+			}
+
+			@Override
+			public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, InteractionHand hand) {
+				boolean retval = super.onEntitySwing(itemstack, entity, hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+				Level world = entity.level();
+
+				ToolsDamageProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("itemstack", itemstack)).collect(HashMap::new,
+						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return retval;
+			}
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class TripleBladeScytheItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("triple_blade_scythe", v -> block = (Item) v);
+		}
+
+		public TripleBladeScytheItem(NarutoShippudenModElements instance) {
+			super(instance, 1316);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("triple_blade_scythe", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 13f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("\u00A78Kenjutsu Required: 30"));
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						HidanTripleBladeScytheToolInHandTickProcedure.executeProcedure(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class WhiteLightChakraSabreItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder("white_light_chakra_sabre", v -> block = (Item) v);
+		}
+
+		public WhiteLightChakraSabreItem(NarutoShippudenModElements instance) {
+			super(instance, 1301);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("white_light_chakra_sabre", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 6f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.6f)) {
+				@Override
+				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
+					super.appendHoverText(itemstack, world, display, list, flag);
+					list.accept(Component.literal("\u00A72White Light Chakra Sabre: \u00A7bChakra cost: 20/sec"));
+					list.accept(Component.literal("\u00A78Kenjutsu Required: 10"));
+				}
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = retval.getObject();
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					WhiteLightChakraSabreRightclickedProcedure.executeProcedure(
+							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						WhiteLightChakraSabreToolInHandTickProcedure.executeProcedure(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+}

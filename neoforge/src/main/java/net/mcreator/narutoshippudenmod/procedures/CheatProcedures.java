@@ -1,0 +1,990 @@
+package net.mcreator.narutoshippudenmod.procedures;
+
+import net.minecraft.util.RandomSource;
+
+import io.netty.buffer.Unpooled;
+import java.util.Map;
+import java.util.Random;
+import net.mcreator.narutoshippudenmod.NarutoShippudenMod;
+import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables;
+import net.mcreator.narutoshippudenmod.gui.CheatGuis.MangekyouSharinganCheatGui;
+import net.mcreator.narutoshippudenmod.gui.CheatGuis.NarutoShippudenCheatDojutsuGUIGui;
+import net.mcreator.narutoshippudenmod.gui.CheatGuis.NarutoShippudenCheatGUIGui;
+import net.mcreator.narutoshippudenmod.gui.CheatGuis.NarutoShippudenCheatKekkeiGenkaiGUIGui;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.multiplayer.PlayerInfo;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.LevelAccessor;
+
+
+public final class CheatProcedures {
+	private CheatProcedures() {
+	}
+
+	public static class CheatDojutstuButtonShimuraProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatDojutstuButtonShimura!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.SharinganShimura = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				String _setval = "1x1";
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.dojutsusharingan = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class CheatDojutsuButtonBackProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("world") == null) {
+				if (!dependencies.containsKey("world"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure CheatDojutsuButtonBack!");
+				return;
+			}
+			if (dependencies.get("x") == null) {
+				if (!dependencies.containsKey("x"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency x for procedure CheatDojutsuButtonBack!");
+				return;
+			}
+			if (dependencies.get("y") == null) {
+				if (!dependencies.containsKey("y"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency y for procedure CheatDojutsuButtonBack!");
+				return;
+			}
+			if (dependencies.get("z") == null) {
+				if (!dependencies.containsKey("z"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency z for procedure CheatDojutsuButtonBack!");
+				return;
+			}
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatDojutsuButtonBack!");
+				return;
+			}
+			LevelAccessor world = (LevelAccessor) dependencies.get("world");
+			double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
+			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
+			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				Entity _ent = entity;
+				if (_ent instanceof ServerPlayer) {
+					BlockPos _bpos = BlockPos.containing(x, y, z);
+					((ServerPlayer) _ent).openMenu(new MenuProvider() {
+						@Override
+						public Component getDisplayName() {
+							return Component.literal("NarutoShippudenCheatGUI");
+						}
+
+						@Override
+						public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+							return new NarutoShippudenCheatGUIGui.GuiContainerMod(id, inventory,
+									new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(_bpos));
+						}
+					}, _buf -> _buf.writeBlockPos(_bpos));
+				}
+			}
+		}
+	}
+
+	public static class CheatDojutsuButtonByakuganProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatDojutsuButtonByakugan!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.byakugan = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				String _setval = "1x1";
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.dojutsubyakugan = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class CheatDojutsuButtonIsshikiDojutsuProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatDojutsuButtonIsshikiDojutsu!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.isshikidojutsu = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				String _setval = "1x1";
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.dojutsuisshiki = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class CheatDojutsuButtonKetsuryuganProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatDojutsuButtonKetsuryugan!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.ketsuryugan = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				String _setval = "1x1";
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.dojutsuketsuryugan = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class CheatDojutsuButtonProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("world") == null) {
+				if (!dependencies.containsKey("world"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure CheatDojutsuButton!");
+				return;
+			}
+			if (dependencies.get("x") == null) {
+				if (!dependencies.containsKey("x"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency x for procedure CheatDojutsuButton!");
+				return;
+			}
+			if (dependencies.get("y") == null) {
+				if (!dependencies.containsKey("y"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency y for procedure CheatDojutsuButton!");
+				return;
+			}
+			if (dependencies.get("z") == null) {
+				if (!dependencies.containsKey("z"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency z for procedure CheatDojutsuButton!");
+				return;
+			}
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatDojutsuButton!");
+				return;
+			}
+			LevelAccessor world = (LevelAccessor) dependencies.get("world");
+			double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
+			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
+			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				Entity _ent = entity;
+				if (_ent instanceof ServerPlayer) {
+					BlockPos _bpos = BlockPos.containing(x, y, z);
+					((ServerPlayer) _ent).openMenu(new MenuProvider() {
+						@Override
+						public Component getDisplayName() {
+							return Component.literal("NarutoShippudenCheatDojutsuGUI");
+						}
+
+						@Override
+						public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+							return new NarutoShippudenCheatDojutsuGUIGui.GuiContainerMod(id, inventory,
+									new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(_bpos));
+						}
+					}, _buf -> _buf.writeBlockPos(_bpos));
+				}
+			}
+		}
+	}
+
+	public static class CheatDojutsuButtonRinneganProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatDojutsuButtonRinnegan!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.rinnegan = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				String _setval = "1x1";
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.dojutsurinnegan = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class CheatDojutsuButtonSharinganProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatDojutsuButtonSharingan!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.sharingan = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				String _setval = "1x1";
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.dojutsusharingan = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class CheatDojutsuButtonTenseiganProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatDojutsuButtonTenseigan!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.tenseigan = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				String _setval = "1x1";
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.dojutsutenseigan = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class CheatGUIProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("world") == null) {
+				if (!dependencies.containsKey("world"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure CheatGUI!");
+				return;
+			}
+			if (dependencies.get("x") == null) {
+				if (!dependencies.containsKey("x"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency x for procedure CheatGUI!");
+				return;
+			}
+			if (dependencies.get("y") == null) {
+				if (!dependencies.containsKey("y"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency y for procedure CheatGUI!");
+				return;
+			}
+			if (dependencies.get("z") == null) {
+				if (!dependencies.containsKey("z"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency z for procedure CheatGUI!");
+				return;
+			}
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatGUI!");
+				return;
+			}
+			LevelAccessor world = (LevelAccessor) dependencies.get("world");
+			double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
+			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
+			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
+			Entity entity = (Entity) dependencies.get("entity");
+			if (new Object() {
+				public boolean checkGamemode(Entity _ent) {
+					if (_ent instanceof ServerPlayer) {
+						return ((ServerPlayer) _ent).gameMode.getGameModeForPlayer() == GameType.CREATIVE;
+					} else if (_ent instanceof Player && _ent.level().isClientSide()) {
+						PlayerInfo _npi = Minecraft.getInstance().getConnection()
+								.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().getId());
+						return _npi != null && _npi.getGameMode() == GameType.CREATIVE;
+					}
+					return false;
+				}
+			}.checkGamemode(entity)) {
+				{
+					Entity _ent = entity;
+					if (_ent instanceof ServerPlayer) {
+						BlockPos _bpos = BlockPos.containing(x, y, z);
+						((ServerPlayer) _ent).openMenu(new MenuProvider() {
+							@Override
+							public Component getDisplayName() {
+								return Component.literal("NarutoShippudenCheatGUI");
+							}
+
+							@Override
+							public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+								return new NarutoShippudenCheatGUIGui.GuiContainerMod(id, inventory,
+										new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(_bpos));
+							}
+						}, _buf -> _buf.writeBlockPos(_bpos));
+					}
+				}
+			} else if (!(new Object() {
+				public boolean checkGamemode(Entity _ent) {
+					if (_ent instanceof ServerPlayer) {
+						return ((ServerPlayer) _ent).gameMode.getGameModeForPlayer() == GameType.CREATIVE;
+					} else if (_ent instanceof Player && _ent.level().isClientSide()) {
+						PlayerInfo _npi = Minecraft.getInstance().getConnection()
+								.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().getId());
+						return _npi != null && _npi.getGameMode() == GameType.CREATIVE;
+					}
+					return false;
+				}
+			}.checkGamemode(entity))) {
+				if (entity instanceof Player && !entity.level().isClientSide()) {
+					((Player) entity).sendSystemMessage(Component.literal("To use this command you have to be in creative."));
+				}
+			}
+		}
+	}
+
+	public static class CheatKekkeiGenkaiButtonBoilReleaseProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatKekkeiGenkaiButtonBoilRelease!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.boilreleaselogic = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class CheatKekkeiGenkaiButtonBoneReleaseProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatKekkeiGenkaiButtonBoneRelease!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.bonereleaselogic = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class CheatKekkeiGenkaiButtonDustReleaseProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatKekkeiGenkaiButtonDustRelease!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.dustreleaselogic = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class CheatKekkeiGenkaiButtonIceReleaseProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatKekkeiGenkaiButtonIceRelease!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.icereleaselogic = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class CheatKekkeiGenkaiButtonMagnetReleaseProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatKekkeiGenkaiButtonMagnetRelease!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.magnetreleaselogic = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class CheatKekkeiGenkaiButtonProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("world") == null) {
+				if (!dependencies.containsKey("world"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure CheatKekkeiGenkaiButton!");
+				return;
+			}
+			if (dependencies.get("x") == null) {
+				if (!dependencies.containsKey("x"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency x for procedure CheatKekkeiGenkaiButton!");
+				return;
+			}
+			if (dependencies.get("y") == null) {
+				if (!dependencies.containsKey("y"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency y for procedure CheatKekkeiGenkaiButton!");
+				return;
+			}
+			if (dependencies.get("z") == null) {
+				if (!dependencies.containsKey("z"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency z for procedure CheatKekkeiGenkaiButton!");
+				return;
+			}
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatKekkeiGenkaiButton!");
+				return;
+			}
+			LevelAccessor world = (LevelAccessor) dependencies.get("world");
+			double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
+			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
+			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				Entity _ent = entity;
+				if (_ent instanceof ServerPlayer) {
+					BlockPos _bpos = BlockPos.containing(x, y, z);
+					((ServerPlayer) _ent).openMenu(new MenuProvider() {
+						@Override
+						public Component getDisplayName() {
+							return Component.literal("NarutoShippudenCheatKekkeiGenkaiGUI");
+						}
+
+						@Override
+						public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+							return new NarutoShippudenCheatKekkeiGenkaiGUIGui.GuiContainerMod(id, inventory,
+									new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(_bpos));
+						}
+					}, _buf -> _buf.writeBlockPos(_bpos));
+				}
+			}
+		}
+	}
+
+	public static class CheatKekkeiGenkaiButtonSmokeReleaseProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatKekkeiGenkaiButtonSmokeRelease!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.smokereleaselogic = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class CheatKekkeiGenkaiButtonSteelReleaseProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatKekkeiGenkaiButtonSteelRelease!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.steelreleaselogic = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class CheatKekkeiGenkaiButtonStormReleaseProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatKekkeiGenkaiButtonStormRelease!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.stormreleaselogic = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class CheatKekkeiGenkaiButtonSwiftReleaseProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatKekkeiGenkaiButtonSwiftRelease!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.swiftreleaselogic = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class CheatKekkeiGenkaiButtonTyphoonReleaseProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatKekkeiGenkaiButtonTyphoonRelease!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.typhoonreleaslogic = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class CheatKekkeiGenkaiButtonWoodReleaseProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatKekkeiGenkaiButtonWoodRelease!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.woodreleaselogic = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class ItachiMSCheatProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure ItachiMSCheat!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				double _setval = (Mth.nextInt(RandomSource.create(), 1000, 1500));
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.Mangekyou_Sharingan = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.MangekyouSharinganItachi = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				String _setval = "1x1";
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.dojutsums = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class KakashiMSCheatProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure KakashiMSCheat!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				double _setval = (Mth.nextInt(RandomSource.create(), 1000, 1500));
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.Mangekyou_Sharingan = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.MangekyouSharinganKakashi = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				String _setval = "1x1";
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.dojutsums = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class KakashiSharinganCheatProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure KakashiSharinganCheat!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.SharinganKakashi = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				String _setval = "1x1";
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.dojutsusharingan = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class MadaraMSCheatProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure MadaraMSCheat!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				double _setval = (Mth.nextInt(RandomSource.create(), 1000, 1500));
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.Mangekyou_Sharingan = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.MangekyouSharinganMadara = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				String _setval = "1x1";
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.dojutsums = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class MangekyouCheatGUIOpenProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("world") == null) {
+				if (!dependencies.containsKey("world"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure MangekyouCheatGUIOpen!");
+				return;
+			}
+			if (dependencies.get("x") == null) {
+				if (!dependencies.containsKey("x"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency x for procedure MangekyouCheatGUIOpen!");
+				return;
+			}
+			if (dependencies.get("y") == null) {
+				if (!dependencies.containsKey("y"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency y for procedure MangekyouCheatGUIOpen!");
+				return;
+			}
+			if (dependencies.get("z") == null) {
+				if (!dependencies.containsKey("z"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency z for procedure MangekyouCheatGUIOpen!");
+				return;
+			}
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure MangekyouCheatGUIOpen!");
+				return;
+			}
+			LevelAccessor world = (LevelAccessor) dependencies.get("world");
+			double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
+			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
+			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				Entity _ent = entity;
+				if (_ent instanceof ServerPlayer) {
+					BlockPos _bpos = BlockPos.containing(x, y, z);
+					((ServerPlayer) _ent).openMenu(new MenuProvider() {
+						@Override
+						public Component getDisplayName() {
+							return Component.literal("MangekyouSharinganCheat");
+						}
+
+						@Override
+						public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+							return new MangekyouSharinganCheatGui.GuiContainerMod(id, inventory,
+									new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(_bpos));
+						}
+					}, _buf -> _buf.writeBlockPos(_bpos));
+				}
+			}
+		}
+	}
+
+	public static class ObitoMSCheatProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure ObitoMSCheat!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				double _setval = (Mth.nextInt(RandomSource.create(), 1000, 1500));
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.Mangekyou_Sharingan = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.MangekyouSharinganObito = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				String _setval = "1x1";
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.dojutsums = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class SasukeMSCheatProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure SasukeMSCheat!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				double _setval = (Mth.nextInt(RandomSource.create(), 1000, 1500));
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.Mangekyou_Sharingan = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.MangekyouSharinganSasuke = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				String _setval = "1x1";
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.dojutsums = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+
+	public static class ShisuiMSCheatProcedure {
+
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure ShisuiMSCheat!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			{
+				double _setval = (Mth.nextInt(RandomSource.create(), 1000, 1500));
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.Mangekyou_Sharingan = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				boolean _setval = (true);
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.MangekyouSharinganShisui = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+			{
+				String _setval = "1x1";
+				NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.dojutsums = _setval;
+					capability.syncPlayerVariables(entity);
+				});
+			}
+		}
+	}
+}
