@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#naruto_shippuden:dna",
+    "#naruto_shippuden:dna"
+  ],
+  "result": {
+    "id": "naruto_shippuden:undefined_dna"
+  }
+}

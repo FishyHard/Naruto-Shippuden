@@ -1,0 +1,7 @@
+{
+  "parent": "naruto_shippuden:custom/fist_rock",
+  "textures": {
+    "0": "naruto_shippuden:blocks/fistrock",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "naruto_shippuden:custom/otsutsuki_blade",
+  "textures": {
+    "0": "naruto_shippuden:blocks/otsutsuki_tool",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

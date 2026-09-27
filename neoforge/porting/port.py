@@ -198,6 +198,8 @@ def main():
             shutil.copy(src, out)
             n += 1
     print('wrote', n, 'files')
+    import resources
+    resources.build()
 
 
 if __name__ == '__main__':

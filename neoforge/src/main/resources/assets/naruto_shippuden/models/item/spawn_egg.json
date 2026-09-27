@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "naruto_shippuden:item/spawn_egg",
+    "layer1": "naruto_shippuden:item/spawn_egg_overlay"
+  }
+}

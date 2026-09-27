@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "naruto_shippuden:blocks/water_still",
+    "particle": "naruto_shippuden:blocks/water_still"
+  }
+}

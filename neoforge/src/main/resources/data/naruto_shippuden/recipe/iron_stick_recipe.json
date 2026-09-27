@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "0": "minecraft:iron_ingot",
+    "1": "minecraft:iron_ingot"
+  },
+  "pattern": [
+    "0",
+    "1"
+  ],
+  "result": {
+    "id": "naruto_shippuden:iron_stick",
+    "count": 4
+  }
+}

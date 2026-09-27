@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "0": "naruto_shippuden:silver_ryo"
+  },
+  "pattern": [
+    "0"
+  ],
+  "result": {
+    "id": "naruto_shippuden:bronze_ryo",
+    "count": 9
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "naruto_shippuden:item/spawn_egg",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 15627520
+      },
+      {
+        "type": "minecraft:constant",
+        "value": 11474711
+      }
+    ]
+  }
+}

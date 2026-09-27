@@ -1,0 +1,11 @@
+{
+  "parent": "naruto_shippuden:custom/shibuki",
+  "textures": {
+    "0": "naruto_shippuden:blocks/shibuki1",
+    "1": "naruto_shippuden:blocks/shibuki2",
+    "2": "naruto_shippuden:blocks/shibuki3",
+    "3": "naruto_shippuden:blocks/shibuki4",
+    "missing": "naruto_shippuden:blocks/shibuki1",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

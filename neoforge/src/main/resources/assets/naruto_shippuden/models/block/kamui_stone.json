@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "naruto_shippuden:blocks/kamui_stone",
+    "particle": "naruto_shippuden:blocks/kamui_stone"
+  }
+}

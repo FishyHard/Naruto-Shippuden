@@ -1,0 +1,110 @@
+{
+  "dust_release_and_tailed_beast_bomb": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "naruto_shippuden:dust_release",
+        "stream": false
+      }
+    ]
+  },
+  "sharingan": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "naruto_shippuden:sharingan_activate",
+        "stream": false
+      }
+    ]
+  },
+  "isshiki_dojutsu": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "naruto_shippuden:isshiki_dojutsu",
+        "stream": false
+      }
+    ]
+  },
+  "byakugan": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "naruto_shippuden:byakugan",
+        "stream": false
+      }
+    ]
+  },
+  "flying_thunder_god_sound": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "naruto_shippuden:hiraishin_sound_effect",
+        "stream": false
+      }
+    ]
+  },
+  "tenseigan": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "naruto_shippuden:tenseigan_sound_effect",
+        "stream": false
+      }
+    ]
+  },
+  "rinnegan": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "naruto_shippuden:rinnegan_activation",
+        "stream": false
+      }
+    ]
+  },
+  "dust_release": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "naruto_shippuden:dust_release",
+        "stream": false
+      }
+    ]
+  },
+  "shadow_clone": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "naruto_shippuden:shadow-clone",
+        "stream": false
+      }
+    ]
+  },
+  "clone_death": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "naruto_shippuden:clone-death",
+        "stream": false
+      }
+    ]
+  },
+  "kamui": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "naruto_shippuden:kamui",
+        "stream": false
+      }
+    ]
+  },
+  "mangekyou_sharingan": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "naruto_shippuden:mangekyou_sharingan",
+        "stream": false
+      }
+    ]
+  }
+}

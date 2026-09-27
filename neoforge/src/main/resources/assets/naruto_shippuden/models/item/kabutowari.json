@@ -1,0 +1,8 @@
+{
+  "parent": "naruto_shippuden:custom/kabutowari",
+  "textures": {
+    "0": "naruto_shippuden:blocks/kabutowari1",
+    "1": "naruto_shippuden:blocks/kabutowari2",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

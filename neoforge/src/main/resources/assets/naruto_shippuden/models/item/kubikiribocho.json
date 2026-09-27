@@ -1,0 +1,10 @@
+{
+  "parent": "naruto_shippuden:custom/kubikiribocho_naruto",
+  "textures": {
+    "0": "naruto_shippuden:blocks/kubikiribocho_naruto1",
+    "1": "naruto_shippuden:blocks/kubikiribocho_naruto2",
+    "2": "naruto_shippuden:blocks/kubikiribocho_naruto3",
+    "3": "naruto_shippuden:blocks/kubikiribocho_naruto4",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

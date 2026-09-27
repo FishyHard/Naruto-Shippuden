@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "0": "naruto_shippuden:shogi",
+    "1": "naruto_shippuden:shogi",
+    "2": "naruto_shippuden:shogi",
+    "3": "#minecraft:planks",
+    "4": "#minecraft:planks",
+    "5": "#minecraft:planks"
+  },
+  "pattern": [
+    "012",
+    "345"
+  ],
+  "result": {
+    "id": "naruto_shippuden:shogiboard"
+  }
+}

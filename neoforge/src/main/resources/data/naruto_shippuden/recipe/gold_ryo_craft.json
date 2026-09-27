@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "0": "naruto_shippuden:silver_ryo",
+    "1": "naruto_shippuden:silver_ryo",
+    "2": "naruto_shippuden:silver_ryo",
+    "3": "naruto_shippuden:silver_ryo",
+    "4": "naruto_shippuden:silver_ryo",
+    "5": "naruto_shippuden:silver_ryo",
+    "6": "naruto_shippuden:silver_ryo",
+    "7": "naruto_shippuden:silver_ryo",
+    "8": "naruto_shippuden:silver_ryo"
+  },
+  "pattern": [
+    "012",
+    "345",
+    "678"
+  ],
+  "result": {
+    "id": "naruto_shippuden:gold_ryo"
+  }
+}

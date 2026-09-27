@@ -1,0 +1,7 @@
+{
+  "parent": "naruto_shippuden:custom/bronze_ryo",
+  "textures": {
+    "1": "naruto_shippuden:blocks/bronze_ryo",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

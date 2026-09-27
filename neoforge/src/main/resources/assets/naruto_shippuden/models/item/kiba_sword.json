@@ -1,0 +1,11 @@
+{
+  "parent": "naruto_shippuden:custom/kiba_swords",
+  "textures": {
+    "0": "naruto_shippuden:blocks/kiba1",
+    "1": "naruto_shippuden:blocks/kiba2",
+    "2": "naruto_shippuden:blocks/kiba3",
+    "3": "naruto_shippuden:blocks/kiba4",
+    "missing": "naruto_shippuden:blocks/kiba4",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

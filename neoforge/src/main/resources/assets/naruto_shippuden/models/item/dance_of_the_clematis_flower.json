@@ -1,0 +1,7 @@
+{
+  "parent": "naruto_shippuden:custom/dance_of_the_clematis_flower",
+  "textures": {
+    "0": "naruto_shippuden:blocks/bone",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

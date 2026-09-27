@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "1": "naruto_shippuden:sharp_iron",
+    "3": "naruto_shippuden:sharp_iron",
+    "4": "minecraft:iron_ingot",
+    "5": "naruto_shippuden:sharp_iron",
+    "7": "naruto_shippuden:sharp_iron"
+  },
+  "pattern": [
+    " 1 ",
+    "345",
+    " 7 "
+  ],
+  "result": {
+    "id": "naruto_shippuden:shuriken",
+    "count": 5
+  }
+}

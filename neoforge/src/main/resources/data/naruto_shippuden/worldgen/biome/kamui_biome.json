@@ -1,0 +1,44 @@
+{
+  "attributes": {
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {}
+      },
+      "modifier": "overlay"
+    },
+    "minecraft:visual/water_fog_color": "#050533"
+  },
+  "carvers": [],
+  "downfall": 0.1,
+  "has_precipitation": false,
+  "temperature": 0.5,
+  "effects": {
+    "water_color": "#3f76e4",
+    "foliage_color": "#9e814d",
+    "grass_color": "#90814d"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [
+      "naruto_shippuden:kamui_tower_1",
+      "naruto_shippuden:kamui_tower_2",
+      "naruto_shippuden:kamui_tower_3",
+      "naruto_shippuden:kamui_tower_4",
+      "naruto_shippuden:kamui_tower_5",
+      "naruto_shippuden:kamui_tower_6",
+      "naruto_shippuden:kamui_tower_7",
+      "naruto_shippuden:kamui_tower_8",
+      "naruto_shippuden:kamui_tower_9"
+    ],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ]
+}

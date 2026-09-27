@@ -1,0 +1,10 @@
+{
+  "parent": "naruto_shippuden:custom/lionbluefist",
+  "textures": {
+    "0": "naruto_shippuden:blocks/lions1",
+    "1": "naruto_shippuden:blocks/lionblue2",
+    "2": "naruto_shippuden:blocks/lionblue3",
+    "3": "naruto_shippuden:blocks/lionblue4",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

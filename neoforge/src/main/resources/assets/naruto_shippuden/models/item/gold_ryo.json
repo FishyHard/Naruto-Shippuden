@@ -1,0 +1,7 @@
+{
+  "parent": "naruto_shippuden:custom/gold_ryo",
+  "textures": {
+    "0": "naruto_shippuden:blocks/gold_ryo",
+    "particle": "naruto_shippuden:items/none"
+  }
+}

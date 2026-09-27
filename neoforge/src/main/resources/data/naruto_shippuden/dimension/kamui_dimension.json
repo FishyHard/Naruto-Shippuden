@@ -1,0 +1,11 @@
+{
+  "type": "naruto_shippuden:kamui_dimension",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "naruto_shippuden:kamui_dimension",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "naruto_shippuden:kamui_biome"
+    }
+  }
+}
