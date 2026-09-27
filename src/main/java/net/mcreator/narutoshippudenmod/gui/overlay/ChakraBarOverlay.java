@@ -13,15 +13,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.client.Minecraft;
 
-import net.mcreator.narutoshippudenmod.procedures.HealthDisplayLength2Procedure;
-import net.mcreator.narutoshippudenmod.procedures.HealthDisplayLength1Procedure;
-import net.mcreator.narutoshippudenmod.procedures.ChakraDisplayLength7Procedure;
-import net.mcreator.narutoshippudenmod.procedures.ChakraDisplayLength6Procedure;
-import net.mcreator.narutoshippudenmod.procedures.ChakraDisplayLength5Procedure;
-import net.mcreator.narutoshippudenmod.procedures.ChakraDisplayLength4Procedure;
-import net.mcreator.narutoshippudenmod.procedures.ChakraDisplayLength3Procedure;
-import net.mcreator.narutoshippudenmod.procedures.ChakraDisplayLength2Procedure;
-import net.mcreator.narutoshippudenmod.procedures.ChakraDisplayLength1Procedure;
+import net.mcreator.narutoshippudenmod.procedures.GuiDisplayProcedures.HealthDisplayLength2Procedure;
+import net.mcreator.narutoshippudenmod.procedures.GuiDisplayProcedures.HealthDisplayLength1Procedure;
+import net.mcreator.narutoshippudenmod.procedures.GuiDisplayProcedures.ChakraDisplayLength7Procedure;
+import net.mcreator.narutoshippudenmod.procedures.GuiDisplayProcedures.ChakraDisplayLength6Procedure;
+import net.mcreator.narutoshippudenmod.procedures.GuiDisplayProcedures.ChakraDisplayLength5Procedure;
+import net.mcreator.narutoshippudenmod.procedures.GuiDisplayProcedures.ChakraDisplayLength4Procedure;
+import net.mcreator.narutoshippudenmod.procedures.GuiDisplayProcedures.ChakraDisplayLength3Procedure;
+import net.mcreator.narutoshippudenmod.procedures.GuiDisplayProcedures.ChakraDisplayLength2Procedure;
+import net.mcreator.narutoshippudenmod.procedures.GuiDisplayProcedures.ChakraDisplayLength1Procedure;
 import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables;
 
 import java.util.stream.Stream;
