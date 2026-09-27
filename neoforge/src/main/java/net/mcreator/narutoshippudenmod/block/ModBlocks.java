@@ -348,7 +348,6 @@ public final class ModBlocks {
 				this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
 			}
 
-			@OnlyIn(Dist.CLIENT)
 			public boolean skipRendering(BlockState state, BlockState adjacentBlockState, Direction side) {
 				return adjacentBlockState.getBlock() == this ? true : super.skipRendering(state, adjacentBlockState, side);
 			}
@@ -435,7 +434,6 @@ public final class ModBlocks {
 				this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
 			}
 
-			@OnlyIn(Dist.CLIENT)
 			public boolean skipRendering(BlockState state, BlockState adjacentBlockState, Direction side) {
 				return adjacentBlockState.getBlock() == this ? true : super.skipRendering(state, adjacentBlockState, side);
 			}
@@ -522,7 +520,6 @@ public final class ModBlocks {
 				this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
 			}
 
-			@OnlyIn(Dist.CLIENT)
 			public boolean skipRendering(BlockState state, BlockState adjacentBlockState, Direction side) {
 				return adjacentBlockState.getBlock() == this ? true : super.skipRendering(state, adjacentBlockState, side);
 			}
@@ -609,7 +606,6 @@ public final class ModBlocks {
 				this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
 			}
 
-			@OnlyIn(Dist.CLIENT)
 			public boolean skipRendering(BlockState state, BlockState adjacentBlockState, Direction side) {
 				return adjacentBlockState.getBlock() == this ? true : super.skipRendering(state, adjacentBlockState, side);
 			}

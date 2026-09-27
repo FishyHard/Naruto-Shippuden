@@ -3,6 +3,7 @@ package net.mcreator.narutoshippudenmod.procedures;
 import net.mcreator.narutoshippudenmod.compat.Compat;
 import net.minecraft.util.RandomSource;
 import net.minecraft.core.registries.Registries;
+import net.mcreator.narutoshippudenmod.compat.Registration;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
 import io.netty.buffer.Unpooled;
@@ -143,7 +144,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -170,7 +171,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -197,7 +198,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -224,7 +225,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -251,7 +252,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -278,7 +279,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -305,7 +306,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -332,7 +333,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -359,7 +360,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -386,7 +387,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -413,7 +414,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -440,7 +441,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -467,7 +468,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -494,7 +495,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -521,7 +522,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -548,7 +549,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -575,7 +576,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -602,7 +603,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -629,7 +630,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -656,7 +657,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -683,7 +684,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -710,7 +711,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -737,7 +738,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -764,7 +765,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -791,7 +792,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -818,7 +819,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -845,7 +846,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -873,7 +874,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -900,7 +901,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -927,7 +928,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -954,7 +955,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -981,7 +982,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -1008,7 +1009,7 @@ public final class MissionAndCommandProcedures {
 
 					public void start(LevelAccessor world, int waitTicks) {
 						this.waitTicks = waitTicks;
-						NeoForge.EVENT_BUS.register(this);
+						Registration.listen(NeoForge.EVENT_BUS, this);
 						this.world = world;
 					}
 
@@ -1332,7 +1333,7 @@ public final class MissionAndCommandProcedures {
 
 							public void start(LevelAccessor world, int waitTicks) {
 								this.waitTicks = waitTicks;
-								NeoForge.EVENT_BUS.register(this);
+								Registration.listen(NeoForge.EVENT_BUS, this);
 								this.world = world;
 							}
 
@@ -1361,7 +1362,7 @@ public final class MissionAndCommandProcedures {
 
 							public void start(LevelAccessor world, int waitTicks) {
 								this.waitTicks = waitTicks;
-								NeoForge.EVENT_BUS.register(this);
+								Registration.listen(NeoForge.EVENT_BUS, this);
 								this.world = world;
 							}
 
@@ -1389,7 +1390,7 @@ public final class MissionAndCommandProcedures {
 
 							public void start(LevelAccessor world, int waitTicks) {
 								this.waitTicks = waitTicks;
-								NeoForge.EVENT_BUS.register(this);
+								Registration.listen(NeoForge.EVENT_BUS, this);
 								this.world = world;
 							}
 
@@ -1418,7 +1419,7 @@ public final class MissionAndCommandProcedures {
 
 							public void start(LevelAccessor world, int waitTicks) {
 								this.waitTicks = waitTicks;
-								NeoForge.EVENT_BUS.register(this);
+								Registration.listen(NeoForge.EVENT_BUS, this);
 								this.world = world;
 							}
 
@@ -1447,7 +1448,7 @@ public final class MissionAndCommandProcedures {
 
 							public void start(LevelAccessor world, int waitTicks) {
 								this.waitTicks = waitTicks;
-								NeoForge.EVENT_BUS.register(this);
+								Registration.listen(NeoForge.EVENT_BUS, this);
 								this.world = world;
 							}
 
@@ -1585,7 +1586,7 @@ public final class MissionAndCommandProcedures {
 
 								public void start(LevelAccessor world, int waitTicks) {
 									this.waitTicks = waitTicks;
-									NeoForge.EVENT_BUS.register(this);
+									Registration.listen(NeoForge.EVENT_BUS, this);
 									this.world = world;
 								}
 
@@ -1613,7 +1614,7 @@ public final class MissionAndCommandProcedures {
 
 								public void start(LevelAccessor world, int waitTicks) {
 									this.waitTicks = waitTicks;
-									NeoForge.EVENT_BUS.register(this);
+									Registration.listen(NeoForge.EVENT_BUS, this);
 									this.world = world;
 								}
 
@@ -1688,7 +1689,7 @@ public final class MissionAndCommandProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 
@@ -1716,7 +1717,7 @@ public final class MissionAndCommandProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 
@@ -1746,7 +1747,7 @@ public final class MissionAndCommandProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 
@@ -1888,7 +1889,7 @@ public final class MissionAndCommandProcedures {
 
 								public void start(LevelAccessor world, int waitTicks) {
 									this.waitTicks = waitTicks;
-									NeoForge.EVENT_BUS.register(this);
+									Registration.listen(NeoForge.EVENT_BUS, this);
 									this.world = world;
 								}
 
@@ -1978,7 +1979,7 @@ public final class MissionAndCommandProcedures {
 
 								public void start(LevelAccessor world, int waitTicks) {
 									this.waitTicks = waitTicks;
-									NeoForge.EVENT_BUS.register(this);
+									Registration.listen(NeoForge.EVENT_BUS, this);
 									this.world = world;
 								}
 
@@ -2068,7 +2069,7 @@ public final class MissionAndCommandProcedures {
 
 								public void start(LevelAccessor world, int waitTicks) {
 									this.waitTicks = waitTicks;
-									NeoForge.EVENT_BUS.register(this);
+									Registration.listen(NeoForge.EVENT_BUS, this);
 									this.world = world;
 								}
 
@@ -2158,7 +2159,7 @@ public final class MissionAndCommandProcedures {
 
 								public void start(LevelAccessor world, int waitTicks) {
 									this.waitTicks = waitTicks;
-									NeoForge.EVENT_BUS.register(this);
+									Registration.listen(NeoForge.EVENT_BUS, this);
 									this.world = world;
 								}
 
@@ -2248,7 +2249,7 @@ public final class MissionAndCommandProcedures {
 
 								public void start(LevelAccessor world, int waitTicks) {
 									this.waitTicks = waitTicks;
-									NeoForge.EVENT_BUS.register(this);
+									Registration.listen(NeoForge.EVENT_BUS, this);
 									this.world = world;
 								}
 
@@ -2341,7 +2342,7 @@ public final class MissionAndCommandProcedures {
 
 								public void start(LevelAccessor world, int waitTicks) {
 									this.waitTicks = waitTicks;
-									NeoForge.EVENT_BUS.register(this);
+									Registration.listen(NeoForge.EVENT_BUS, this);
 									this.world = world;
 								}
 
@@ -2431,7 +2432,7 @@ public final class MissionAndCommandProcedures {
 
 								public void start(LevelAccessor world, int waitTicks) {
 									this.waitTicks = waitTicks;
-									NeoForge.EVENT_BUS.register(this);
+									Registration.listen(NeoForge.EVENT_BUS, this);
 									this.world = world;
 								}
 
@@ -2521,7 +2522,7 @@ public final class MissionAndCommandProcedures {
 
 								public void start(LevelAccessor world, int waitTicks) {
 									this.waitTicks = waitTicks;
-									NeoForge.EVENT_BUS.register(this);
+									Registration.listen(NeoForge.EVENT_BUS, this);
 									this.world = world;
 								}
 
@@ -2611,7 +2612,7 @@ public final class MissionAndCommandProcedures {
 
 								public void start(LevelAccessor world, int waitTicks) {
 									this.waitTicks = waitTicks;
-									NeoForge.EVENT_BUS.register(this);
+									Registration.listen(NeoForge.EVENT_BUS, this);
 									this.world = world;
 								}
 
@@ -2701,7 +2702,7 @@ public final class MissionAndCommandProcedures {
 
 								public void start(LevelAccessor world, int waitTicks) {
 									this.waitTicks = waitTicks;
-									NeoForge.EVENT_BUS.register(this);
+									Registration.listen(NeoForge.EVENT_BUS, this);
 									this.world = world;
 								}
 
@@ -2888,7 +2889,7 @@ public final class MissionAndCommandProcedures {
 
 							public void start(LevelAccessor world, int waitTicks) {
 								this.waitTicks = waitTicks;
-								NeoForge.EVENT_BUS.register(this);
+								Registration.listen(NeoForge.EVENT_BUS, this);
 								this.world = world;
 							}
 
@@ -2916,7 +2917,7 @@ public final class MissionAndCommandProcedures {
 
 							public void start(LevelAccessor world, int waitTicks) {
 								this.waitTicks = waitTicks;
-								NeoForge.EVENT_BUS.register(this);
+								Registration.listen(NeoForge.EVENT_BUS, this);
 								this.world = world;
 							}
 
@@ -2944,7 +2945,7 @@ public final class MissionAndCommandProcedures {
 
 							public void start(LevelAccessor world, int waitTicks) {
 								this.waitTicks = waitTicks;
-								NeoForge.EVENT_BUS.register(this);
+								Registration.listen(NeoForge.EVENT_BUS, this);
 								this.world = world;
 							}
 
@@ -3021,7 +3022,7 @@ public final class MissionAndCommandProcedures {
 
 								public void start(LevelAccessor world, int waitTicks) {
 									this.waitTicks = waitTicks;
-									NeoForge.EVENT_BUS.register(this);
+									Registration.listen(NeoForge.EVENT_BUS, this);
 									this.world = world;
 								}
 
@@ -3049,7 +3050,7 @@ public final class MissionAndCommandProcedures {
 
 								public void start(LevelAccessor world, int waitTicks) {
 									this.waitTicks = waitTicks;
-									NeoForge.EVENT_BUS.register(this);
+									Registration.listen(NeoForge.EVENT_BUS, this);
 									this.world = world;
 								}
 
@@ -3131,7 +3132,7 @@ public final class MissionAndCommandProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 
@@ -3159,7 +3160,7 @@ public final class MissionAndCommandProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 
@@ -3187,7 +3188,7 @@ public final class MissionAndCommandProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 
@@ -3215,7 +3216,7 @@ public final class MissionAndCommandProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 
@@ -3243,7 +3244,7 @@ public final class MissionAndCommandProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 
@@ -3452,7 +3453,7 @@ public final class MissionAndCommandProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 
@@ -3480,7 +3481,7 @@ public final class MissionAndCommandProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 
@@ -3598,7 +3599,7 @@ public final class MissionAndCommandProcedures {
 
 							public void start(LevelAccessor world, int waitTicks) {
 								this.waitTicks = waitTicks;
-								NeoForge.EVENT_BUS.register(this);
+								Registration.listen(NeoForge.EVENT_BUS, this);
 								this.world = world;
 							}
 
@@ -3717,7 +3718,7 @@ public final class MissionAndCommandProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 
@@ -3745,7 +3746,7 @@ public final class MissionAndCommandProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 
@@ -3773,7 +3774,7 @@ public final class MissionAndCommandProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 
@@ -3959,7 +3960,7 @@ public final class MissionAndCommandProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 
@@ -3987,7 +3988,7 @@ public final class MissionAndCommandProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 
@@ -4163,7 +4164,7 @@ public final class MissionAndCommandProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 
@@ -4398,7 +4399,7 @@ public final class MissionAndCommandProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 
@@ -4426,7 +4427,7 @@ public final class MissionAndCommandProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 

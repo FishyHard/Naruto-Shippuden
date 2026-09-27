@@ -124,4 +124,14 @@ public final class Registration {
 	public static Block block(String name) {
 		return BuiltInRegistries.BLOCK.getValue(id(name));
 	}
+
+	/** Registers an object's @SubscribeEvent methods; elements whose only listeners were ported elsewhere are skipped. */
+	public static void listen(net.neoforged.bus.api.IEventBus bus, Object listener) {
+		for (Class<?> c = listener.getClass(); c != null && c != Object.class; c = c.getSuperclass())
+			for (java.lang.reflect.Method m : c.getDeclaredMethods())
+				if (m.isAnnotationPresent(net.neoforged.bus.api.SubscribeEvent.class) && !java.lang.reflect.Modifier.isStatic(m.getModifiers())) {
+					bus.register(listener);
+					return;
+				}
+	}
 }

@@ -39,7 +39,6 @@ public final class NpcRenderers {
 	private NpcRenderers() {
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class AsumaRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.humanoid(event, AsumaEntity.entity, 0.5F, Identifier.parse("naruto_shippuden:textures/entities/sarutobi_asuma.png"), true);
@@ -49,7 +48,6 @@ public final class NpcRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class EarthGolemShinobiRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, EarthGolemShinobiEntity.entity, Modelearth_golem.LAYER, Modelearth_golem::new, 0.3F, Identifier.parse("naruto_shippuden:textures/entities/earth_golem.png"));
@@ -161,7 +159,6 @@ public final class NpcRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class HiddenCloudShinobiRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, HiddenCloudShinobiEntity.entity, ModelPlayer_Model.LAYER, ModelPlayer_Model::new, 0.5F, Identifier.parse("naruto_shippuden:textures/entities/hidden_cloud_shinobi.png"));
@@ -228,7 +225,6 @@ public final class NpcRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class HiddenLeafShinobiRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, HiddenLeafShinobiEntity.entity, ModelPlayer_Model.LAYER, ModelPlayer_Model::new, 0.5F, Identifier.parse("naruto_shippuden:textures/entities/hidden_leaf_shinobi.png"));
@@ -295,7 +291,6 @@ public final class NpcRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class HiddenMistShinobiRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, HiddenMistShinobiEntity.entity, ModelPlayer_Model.LAYER, ModelPlayer_Model::new, 0.5F, Identifier.parse("naruto_shippuden:textures/entities/hidden_mist_shinobi.png"));
@@ -362,7 +357,6 @@ public final class NpcRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class HiddenSandShinobiRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, HiddenSandShinobiEntity.entity, ModelPlayer_Model.LAYER, ModelPlayer_Model::new, 0.5F, Identifier.parse("naruto_shippuden:textures/entities/hidden_sand_shinobi.png"));
@@ -429,7 +423,6 @@ public final class NpcRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class HiddenStoneShinobiRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, HiddenStoneShinobiEntity.entity, ModelPlayer_Model.LAYER, ModelPlayer_Model::new, 0.5F, Identifier.parse("naruto_shippuden:textures/entities/hidden_stone_shinobi.png"));
@@ -496,7 +489,6 @@ public final class NpcRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class IrukaSenseiCloneRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.humanoid(event, IrukaSenseiCloneEntity.entity, 0.5F, Identifier.parse("naruto_shippuden:textures/entities/iruka_sensei.png"), true);
@@ -506,7 +498,6 @@ public final class NpcRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class IrukaSenseiRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.humanoid(event, IrukaSenseiEntity.entity, 0.5F, Identifier.parse("naruto_shippuden:textures/entities/iruka_sensei.png"), true);
@@ -516,7 +507,6 @@ public final class NpcRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class ShikamaruRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.humanoid(event, ShikamaruEntity.entity, 0.5F, Identifier.parse("naruto_shippuden:textures/entities/shikamaru.png"), true);
@@ -526,7 +516,6 @@ public final class NpcRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class TrainingDummyRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, TrainingDummyEntity.entity, ModelTrainingDummy.LAYER, ModelTrainingDummy::new, 0.3F, Identifier.parse("naruto_shippuden:textures/entities/training_dummy.png"));

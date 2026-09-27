@@ -172,7 +172,6 @@ public final class DojutsuItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -332,7 +331,6 @@ public final class DojutsuItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}

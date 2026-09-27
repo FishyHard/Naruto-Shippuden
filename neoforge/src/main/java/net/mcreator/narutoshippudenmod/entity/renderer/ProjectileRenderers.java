@@ -39,7 +39,6 @@ public final class ProjectileRenderers {
 	private ProjectileRenderers() {
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class AmaterasuFlameRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, AmaterasuFlameItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -85,7 +84,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class BlackIceDragonRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, BlackIceDragonItem.arrow, Modelblack_ice_dragon.LAYER, Modelblack_ice_dragon::new, Identifier.parse("naruto_shippuden:textures/entities/black_ice_dragon.png"));
@@ -179,7 +177,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class ChidoriSenbonRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, ChidoriSenbonItem.arrow, Modelchidorisenbon.LAYER, Modelchidorisenbon::new, Identifier.parse("naruto_shippuden:textures/entities/lightningblue.png"));
@@ -237,7 +234,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class CoercionSharinganRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, CoercionSharinganItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -283,7 +279,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class DemonicIllusionShacklingStakesTechniqueRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, DemonicIllusionShacklingStakesTechniqueItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -329,7 +324,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class DrowningWaterBlobTechniqueRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, DrowningWaterBlobTechniqueItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -375,7 +369,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class EarthBallRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, EarthBallItem.arrow, Modelgreat_fireball.LAYER, Modelgreat_fireball::new, Identifier.parse("naruto_shippuden:textures/custom_earth_jutsu.png"));
@@ -469,7 +462,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class EarthDiskRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, EarthDiskItem.arrow, ModelJutsu_Disk.LAYER, ModelJutsu_Disk::new, Identifier.parse("naruto_shippuden:textures/custom_earth_jutsu.png"));
@@ -545,7 +537,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class EarthSpearRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, EarthSpearItem.arrow, Modelearth_spear.LAYER, Modelearth_spear::new, Identifier.parse("naruto_shippuden:textures/entities/earth_wall.png"));
@@ -591,7 +582,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class EarthWaveRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, EarthWaveItem.arrow, ModelJutsu_Wave.LAYER, ModelJutsu_Wave::new, Identifier.parse("naruto_shippuden:textures/entities/custom_earth_jutsu.png"));
@@ -637,7 +627,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class ExplosiveKunaiBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, ExplosiveKunaiBulletItem.arrow, Modelexplosive_kunai_projectile.LAYER, Modelexplosive_kunai_projectile::new, Identifier.parse("naruto_shippuden:textures/entities/explosive_kunai.png"));
@@ -686,7 +675,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class FireBallRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, FireBallItem.arrow, Modelgreat_fireball.LAYER, Modelgreat_fireball::new, Identifier.parse("naruto_shippuden:textures/fireball.png"));
@@ -780,7 +768,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class FireDiskRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, FireDiskItem.arrow, ModelJutsu_Disk.LAYER, ModelJutsu_Disk::new, Identifier.parse("naruto_shippuden:textures/custom_fire_jutsu.png"));
@@ -856,7 +843,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class FireDragonFlameBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, FireDragonFlameBulletItem.arrow, ModelFire_Dragon_Flame_Bullet.LAYER, ModelFire_Dragon_Flame_Bullet::new, Identifier.parse("naruto_shippuden:textures/entities/fireball.png"));
@@ -971,7 +957,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class FireWaveRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, FireWaveItem.arrow, ModelJutsu_Wave.LAYER, ModelJutsu_Wave::new, Identifier.parse("naruto_shippuden:textures/custom_fire_jutsu_wave.png"));
@@ -1017,7 +1002,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class FlyingThunderGodKunaiBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.sprite(event, FlyingThunderGodKunaiBulletItem.arrow);
@@ -1027,7 +1011,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class FumaShurikenBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.sprite(event, FumaShurikenBulletItem.arrow);
@@ -1037,7 +1020,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class FumaShurikenClanRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.sprite(event, FumaShurikenClanItem.arrow);
@@ -1047,7 +1029,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class FuramingoganBeamRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, FuramingoganBeamItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -1093,7 +1074,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class FurykickRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, FurykickItem.arrow, Modelfurykick.LAYER, Modelfurykick::new, Identifier.parse("naruto_shippuden:textures/entities/passing_fang.png"));
@@ -1154,7 +1134,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class GreatFireDragonRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, GreatFireDragonItem.arrow, Modelgreat_fire_dragon.LAYER, Modelgreat_fire_dragon::new, Identifier.parse("naruto_shippuden:textures/entities/fireball.png"));
@@ -1269,7 +1248,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class GreatFireballRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, GreatFireballItem.arrow, Modelgreat_fireball.LAYER, Modelgreat_fireball::new, Identifier.parse("naruto_shippuden:textures/entities/fireball.png"));
@@ -1363,7 +1341,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class InsectBogRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, InsectBogItem.arrow, Modelgreat_fireball.LAYER, Modelgreat_fireball::new, Identifier.parse("naruto_shippuden:textures/entities/bugs.png"));
@@ -1457,7 +1434,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class IronSandBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, IronSandBulletItem.arrow, ModelSand_Iron_Bullets.LAYER, ModelSand_Iron_Bullets::new, Identifier.parse("naruto_shippuden:textures/entities/iron_sand.png"));
@@ -1503,7 +1479,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class KunaiBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, KunaiBulletItem.arrow, Modelkunai_projectile.LAYER, Modelkunai_projectile::new, Identifier.parse("naruto_shippuden:textures/entities/kunai.png"));
@@ -1552,7 +1527,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class LaserCircusRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, LaserCircusItem.arrow, Modellaser_circus.LAYER, Modellaser_circus::new, Identifier.parse("naruto_shippuden:textures/entities/laser_circus.png"));
@@ -1598,7 +1572,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class LightningBallCustomRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, LightningBallCustomItem.arrow, Modelgreat_fireball.LAYER, Modelgreat_fireball::new, Identifier.parse("naruto_shippuden:textures/custom_lightning_jutsu.png"));
@@ -1692,7 +1665,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class LightningBallRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, LightningBallItem.arrow, Modellightningball.LAYER, Modellightningball::new, Identifier.parse("naruto_shippuden:textures/entities/lightning.png"));
@@ -1792,7 +1764,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class LightningDiskRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, LightningDiskItem.arrow, ModelJutsu_Disk.LAYER, ModelJutsu_Disk::new, Identifier.parse("naruto_shippuden:textures/custom_lightning_jutsu.png"));
@@ -1868,7 +1839,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class LightningWaveRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, LightningWaveItem.arrow, ModelJutsu_Wave.LAYER, ModelJutsu_Wave::new, Identifier.parse("naruto_shippuden:textures/entities/custom_lightning_jutsu.png"));
@@ -1914,7 +1884,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class MirrorRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, MirrorItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -1960,7 +1929,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class NeedleSenbonRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, NeedleSenbonItem.arrow, Modelchidorisenbon.LAYER, Modelchidorisenbon::new, Identifier.parse("naruto_shippuden:textures/entities/passing_fang.png"));
@@ -2018,7 +1986,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class NuibariBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, NuibariBulletItem.arrow, Modelnuibari_projectile.LAYER, Modelnuibari_projectile::new, Identifier.parse("naruto_shippuden:textures/entities/nuibari_entity.png"));
@@ -2346,7 +2313,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class PhoenixFlowerJutsuRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, PhoenixFlowerJutsuItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/fireball.png"));
@@ -2392,7 +2358,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class PoisonKunaiBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, PoisonKunaiBulletItem.arrow, Modelkunai_projectile.LAYER, Modelkunai_projectile::new, Identifier.parse("naruto_shippuden:textures/entities/poison_kunai.png"));
@@ -2441,7 +2406,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class RasenshurikenRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, RasenshurikenItem.arrow, Modelrasenshuriken.LAYER, Modelrasenshuriken::new, Identifier.parse("naruto_shippuden:textures/entities/rasenshuriken.png"));
@@ -2491,7 +2455,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class ShurikenBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, ShurikenBulletItem.arrow, Modelshuriken_projectile.LAYER, Modelshuriken_projectile::new, Identifier.parse("naruto_shippuden:textures/entities/shuriken.png"));
@@ -2537,7 +2500,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class ShurikenClanRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, ShurikenClanItem.arrow, Modelshuriken_projectile.LAYER, Modelshuriken_projectile::new, Identifier.parse("naruto_shippuden:textures/entities/shuriken.png"));
@@ -2583,7 +2545,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class SmokeGunRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, SmokeGunItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -2629,7 +2590,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class SteelProjectileRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, SteelProjectileItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/steel_projectile.png"));
@@ -2675,7 +2635,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class TailedBeastBombRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, TailedBeastBombItem.arrow, Modeltailed_beast_bomb.LAYER, Modeltailed_beast_bomb::new, Identifier.parse("naruto_shippuden:textures/entities/tailed_beast_bomb.png"));
@@ -2727,7 +2686,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class ToroiUniqueFumaShurikenBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.sprite(event, ToroiUniqueFumaShurikenBulletItem.arrow);
@@ -2737,7 +2695,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class ToroiUniqueFumaShurikenClanRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.sprite(event, ToroiUniqueFumaShurikenClanItem.arrow);
@@ -2747,7 +2704,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class TreeBindRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, TreeBindItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -2793,7 +2749,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class UzumakiChainRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, UzumakiChainItem.arrow, Modeluzumaki_chain.LAYER, Modeluzumaki_chain::new, Identifier.parse("naruto_shippuden:textures/entities/uzumaki_chain.png"));
@@ -2839,7 +2794,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class VacuumSphereRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, VacuumSphereItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -2885,7 +2839,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class WaterBallRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, WaterBallItem.arrow, Modelgreat_fireball.LAYER, Modelgreat_fireball::new, Identifier.parse("naruto_shippuden:textures/custom_water_jutsu.png"));
@@ -2979,7 +2932,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class WaterDiskRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, WaterDiskItem.arrow, ModelJutsu_Disk.LAYER, ModelJutsu_Disk::new, Identifier.parse("naruto_shippuden:textures/custom_water_jutsu.png"));
@@ -3055,7 +3007,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class WaterDragonRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, WaterDragonItem.arrow, Modelwater_dragon.LAYER, Modelwater_dragon::new, Identifier.parse("naruto_shippuden:textures/entities/water_jutsu.png"));
@@ -3149,7 +3100,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class WaterGunRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, WaterGunItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/water_jutsu.png"));
@@ -3195,7 +3145,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class WaterSharkBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, WaterSharkBulletItem.arrow, Modelwater_shark_bullet.LAYER, Modelwater_shark_bullet::new, Identifier.parse("naruto_shippuden:textures/entities/water_jutsu.png"));
@@ -3265,7 +3214,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class WaterWaveRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, WaterWaveItem.arrow, ModelJutsu_Wave.LAYER, ModelJutsu_Wave::new, Identifier.parse("naruto_shippuden:textures/entities/custom_water_jutsu.png"));
@@ -3311,7 +3259,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class WindBallRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, WindBallItem.arrow, Modelgreat_fireball.LAYER, Modelgreat_fireball::new, Identifier.parse("naruto_shippuden:textures/custom_wind_jutsu.png"));
@@ -3405,7 +3352,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class WindDiskRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, WindDiskItem.arrow, ModelJutsu_Disk.LAYER, ModelJutsu_Disk::new, Identifier.parse("naruto_shippuden:textures/custom_wind_jutsu.png"));
@@ -3481,7 +3427,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class WindWaveRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, WindWaveItem.arrow, ModelJutsu_Wave.LAYER, ModelJutsu_Wave::new, Identifier.parse("naruto_shippuden:textures/entities/custom_wind_jutsu.png"));
@@ -3527,7 +3472,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class WoodDragonRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, WoodDragonItem.arrow, Modelwood_dragon.LAYER, Modelwood_dragon::new, Identifier.parse("naruto_shippuden:textures/entities/wood_dragon.png"));

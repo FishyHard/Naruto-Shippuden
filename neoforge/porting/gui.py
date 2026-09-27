@@ -173,7 +173,7 @@ def convert_menus(path, text):
         if scr:
             SCREENS.append((m.group(1), scr.group(1)))
     for cls, name in names.items():
-        body = re.sub(r'(public static class %s extends NarutoShippudenModElements\.ModElement \{.*?)NarutoShippudenMod\.MOD_BUS\.register\(new ContainerRegisterHandler\(\)\);' % cls,
+        body = re.sub(r'(public static class %s extends NarutoShippudenModElements\.ModElement \{.*?)(?:NarutoShippudenMod\.MOD_BUS\.register\(new ContainerRegisterHandler\(\)\)|Registration\.listen\(NarutoShippudenMod\.MOD_BUS, new ContainerRegisterHandler\(\)\));' % cls,
                       lambda m: m.group(1) + 'Registration.add(Registries.MENU, "%s", () -> containerType, null);' % name, body, count=1, flags=re.S)
     body = re.sub(r'\n\s*public static class ContainerRegisterHandler \{.*?\n\t\t\}\n', '\n', body, flags=re.S)
     body = re.sub(r'\n\s*@OnlyIn\(Dist\.CLIENT\)\s*\n\s*public void initElements\(\) \{\s*DeferredWorkQueue\.runLater\([^;]*\);\s*\}', '', body)

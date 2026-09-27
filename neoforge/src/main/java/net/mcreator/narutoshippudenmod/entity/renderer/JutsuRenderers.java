@@ -39,7 +39,6 @@ public final class JutsuRenderers {
 	private JutsuRenderers() {
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class ButterflyModeRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, ButterflyModeEntity.entity, ModelButterflyMode.LAYER, ModelButterflyMode::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -367,7 +366,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class CatChakraModeRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, CatChakraModeEntity.entity, Modelcatchakramode.LAYER, Modelcatchakramode::new, 0.3F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -511,7 +509,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class CatChakraModeSneakRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, CatChakraModeSneakEntity.entity, Modelcatchakramodesneak.LAYER, Modelcatchakramodesneak::new, 0.3F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -667,7 +664,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class DanceOfTheLarchRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, DanceOfTheLarchEntity.entity, ModelDance_of_the_Larch.LAYER, ModelDance_of_the_Larch::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -925,7 +921,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class DanceoftheLarchSneakRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, DanceoftheLarchSneakEntity.entity, ModelDance_of_the_Larch_Sneak.LAYER, ModelDance_of_the_Larch_Sneak::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -1192,7 +1187,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class DeadDemonConsumingSealRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, DeadDemonConsumingSealEntity.entity, ModelDead_Demon_Consuming_Seal.LAYER, ModelDead_Demon_Consuming_Seal::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -1661,7 +1655,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class DisruptionCubeRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, DisruptionCubeEntity.entity, ModelDisruption_Cube.LAYER, ModelDisruption_Cube::new, 6F, Identifier.parse("naruto_shippuden:textures/entities/disruption_cube.png"));
@@ -1707,7 +1700,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class DrowningWaterBlobTechniqueEntityRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, DrowningWaterBlobTechniqueEntityEntity.entity, ModelDrowning_Water_Blob_Technique.LAYER, ModelDrowning_Water_Blob_Technique::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -1755,7 +1747,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class DrowningWaterBlobTechniqueEntitySneakRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, DrowningWaterBlobTechniqueEntitySneakEntity.entity, ModelDrowning_Water_Blob_Technique_Sneak.LAYER, ModelDrowning_Water_Blob_Technique_Sneak::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -1803,7 +1794,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class EightTrigramsPalmsRevolvingHeavenRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, EightTrigramsPalmsRevolvingHeavenEntity.entity, Modeleight_trigrams_palms_revolving_heaven.LAYER, Modeleight_trigrams_palms_revolving_heaven::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -1895,7 +1885,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class EightTrigramsSixtyFourPalmsRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, EightTrigramsSixtyFourPalmsEntity.entity, ModelEight_Trigrams_Sixty_Four_Palms.LAYER, ModelEight_Trigrams_Sixty_Four_Palms::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/eight_trigrams_64_palms_texture.png"));
@@ -1941,7 +1930,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class FangRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, FangEntity.entity, Modelfang.LAYER, Modelfang::new, 0.3F, Identifier.parse("naruto_shippuden:textures/entities/passing_fang.png"));
@@ -2018,7 +2006,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class FlyingThunderGodKunaiEntityRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, FlyingThunderGodKunaiEntityEntity.entity, Modelflying_thunder_god_kunai_entity.LAYER, Modelflying_thunder_god_kunai_entity::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/print.png"));
@@ -2076,7 +2063,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class HumanBulletTankRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, HumanBulletTankEntity.entity, ModelHuman_Bullet_Tank.LAYER, ModelHuman_Bullet_Tank::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -2168,7 +2154,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class IceMirrorRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, IceMirrorEntity.entity, Modelice_mirror.LAYER, Modelice_mirror::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/mirror.png"));
@@ -2887,7 +2872,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class IceSpearRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, IceSpearEntity.entity, Modelice_spear.LAYER, Modelice_spear::new, 1F, Identifier.parse("naruto_shippuden:textures/entities/ice_spear.png"));
@@ -2933,7 +2917,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class InsectJarTechniqueRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, InsectJarTechniqueEntity.entity, Modeleight_trigrams_palms_revolving_heaven.LAYER, Modeleight_trigrams_palms_revolving_heaven::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -3025,7 +3008,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class MagnetCoatRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, MagnetCoatEntity.entity, ModelBlack_Iron_Sand_Coat.LAYER, ModelBlack_Iron_Sand_Coat::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -3175,7 +3157,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class MagnetCoatSneakRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, MagnetCoatSneakEntity.entity, ModelBlack_Iron_Sand_Coat_Sneak.LAYER, ModelBlack_Iron_Sand_Coat_Sneak::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -3334,7 +3315,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class MagnetHandsRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, MagnetHandsEntity.entity, ModelBlack_Iron_Sand_Hand.LAYER, ModelBlack_Iron_Sand_Hand::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -3682,7 +3662,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class MagnetHandsSneakRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, MagnetHandsSneakEntity.entity, ModelBlack_Iron_Sand_Hand_Sneak.LAYER, ModelBlack_Iron_Sand_Hand_Sneak::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -4039,7 +4018,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class MagnetWingsRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, MagnetWingsEntity.entity, ModelBlack_Iron_Sand_Wings.LAYER, ModelBlack_Iron_Sand_Wings::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -4381,7 +4359,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class RunningFireRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, RunningFireEntity.entity, Modelrunning_fire.LAYER, Modelrunning_fire::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/running_fire.png"));
@@ -4437,7 +4414,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class ShadowCloneRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.humanoid(event, ShadowCloneEntity.entity, 0.3F, Identifier.parse("naruto_shippuden:textures/entities/shadowclone.png"), true);
@@ -4447,7 +4423,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class ShadowImitationEntity2Renderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.humanoid(event, ShadowImitationEntity2Entity.entity, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"), true);
@@ -4457,7 +4432,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class ShadowImitationEntityRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.humanoid(event, ShadowImitationEntityEntity.entity, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"), true);
@@ -4467,7 +4441,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class ShadowImitationFieldTechniqueRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, ShadowImitationFieldTechniqueEntity.entity, ModelEight_Trigrams_Sixty_Four_Palms.LAYER, ModelEight_Trigrams_Sixty_Four_Palms::new, 7F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -4513,7 +4486,6 @@ public final class JutsuRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class SpikedHumanBulletTankRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, SpikedHumanBulletTankEntity.entity, Modelspiked_human_bullet_tank.LAYER, Modelspiked_human_bullet_tank::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));

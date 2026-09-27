@@ -1,5 +1,6 @@
 package net.mcreator.narutoshippudenmod.keybind;
 
+import net.mcreator.narutoshippudenmod.compat.Registration;
 import com.mojang.blaze3d.platform.InputConstants;
 
 import java.util.AbstractMap;

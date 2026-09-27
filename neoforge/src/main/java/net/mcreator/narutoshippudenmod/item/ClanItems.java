@@ -541,7 +541,6 @@ public final class ClanItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return new ItemStack(FumaShurikenItem.block);
 			}
@@ -1577,7 +1576,6 @@ public final class ClanItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -1770,7 +1768,6 @@ public final class ClanItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return new ItemStack(ToroiUniqueFumaShurikenItem.block);
 			}

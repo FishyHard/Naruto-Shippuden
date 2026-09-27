@@ -180,7 +180,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -355,7 +354,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -531,7 +529,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -678,7 +675,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -838,7 +834,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -996,7 +991,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -1141,7 +1135,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -1286,7 +1279,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -1431,7 +1423,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -1574,7 +1565,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -1721,7 +1711,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -1868,7 +1857,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -2062,7 +2050,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -2205,7 +2192,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -2350,7 +2336,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -2495,7 +2480,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -2653,7 +2637,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -2812,7 +2795,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -2957,7 +2939,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -3102,7 +3083,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -3247,7 +3227,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -3390,7 +3369,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -3548,7 +3526,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -3693,7 +3670,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -3838,7 +3814,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -4014,7 +3989,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -4158,7 +4132,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -4301,7 +4274,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -4470,7 +4442,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -4628,7 +4599,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -4788,7 +4758,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -4932,7 +4901,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -5077,7 +5045,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -5222,7 +5189,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -5365,7 +5331,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -5510,7 +5475,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -5653,7 +5617,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -5798,7 +5761,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -5943,7 +5905,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -6086,7 +6047,6 @@ public final class JutsuProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}

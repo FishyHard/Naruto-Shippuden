@@ -230,12 +230,10 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.input.KeyEvent;
 
-@OnlyIn(Dist.CLIENT)
 public final class InfoCardScreens {
 	private InfoCardScreens() {
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class InfoCardDojutsuGuiWindow extends AbstractContainerScreen<InfoCardDojutsuGui.GuiContainerMod> {
 		private final java.util.List<Runnable> _visibility = new java.util.ArrayList<>();
 
@@ -691,7 +689,6 @@ public final class InfoCardScreens {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class InfoCardGuiWindow extends AbstractContainerScreen<InfoCardGui.GuiContainerMod> {
 		private Level world;
 		private int x, y, z;
@@ -1055,7 +1052,6 @@ public final class InfoCardScreens {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class InfoCardMiniGameGuiWindow extends AbstractContainerScreen<InfoCardMiniGameGui.GuiContainerMod> {
 		private final java.util.List<Runnable> _visibility = new java.util.ArrayList<>();
 
@@ -1563,7 +1559,6 @@ public final class InfoCardScreens {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class InfoCardMissionsGuiWindow extends AbstractContainerScreen<InfoCardMissionsGui.GuiContainerMod> {
 		private Level world;
 		private int x, y, z;
@@ -1632,7 +1627,6 @@ public final class InfoCardScreens {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class InfoCardUpgradeGuiWindow extends AbstractContainerScreen<InfoCardUpgradeGui.GuiContainerMod> {
 		private Level world;
 		private int x, y, z;
@@ -1799,7 +1793,6 @@ public final class InfoCardScreens {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class StatSelectGuiWindow extends AbstractContainerScreen<StatSelectGui.GuiContainerMod> {
 		private Level world;
 		private int x, y, z;

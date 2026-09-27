@@ -28,12 +28,10 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.input.KeyEvent;
 
-@OnlyIn(Dist.CLIENT)
 public final class JutsuCreationScreens {
 	private JutsuCreationScreens() {
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class CreateJutsuGUI2GuiWindow extends AbstractContainerScreen<CreateJutsuGUI2Gui.GuiContainerMod> {
 		private Level world;
 		private int x, y, z;
@@ -175,7 +173,6 @@ public final class JutsuCreationScreens {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class CreateJutsuGUIGuiWindow extends AbstractContainerScreen<CreateJutsuGUIGui.GuiContainerMod> {
 		private final java.util.List<Runnable> _visibility = new java.util.ArrayList<>();
 

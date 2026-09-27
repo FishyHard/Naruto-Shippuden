@@ -2,6 +2,7 @@ package net.mcreator.narutoshippudenmod.procedures;
 
 import net.mcreator.narutoshippudenmod.compat.Compat;
 import net.minecraft.util.RandomSource;
+import net.mcreator.narutoshippudenmod.compat.Registration;
 import net.mcreator.narutoshippudenmod.client.ClientPostEffects;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
@@ -788,7 +789,7 @@ public final class JutsuEffectProcedures {
 
 				public void start(LevelAccessor world, int waitTicks) {
 					this.waitTicks = waitTicks;
-					NeoForge.EVENT_BUS.register(this);
+					Registration.listen(NeoForge.EVENT_BUS, this);
 					this.world = world;
 				}
 
@@ -835,7 +836,7 @@ public final class JutsuEffectProcedures {
 
 				public void start(LevelAccessor world, int waitTicks) {
 					this.waitTicks = waitTicks;
-					NeoForge.EVENT_BUS.register(this);
+					Registration.listen(NeoForge.EVENT_BUS, this);
 					this.world = world;
 				}
 
@@ -914,7 +915,7 @@ public final class JutsuEffectProcedures {
 
 				public void start(LevelAccessor world, int waitTicks) {
 					this.waitTicks = waitTicks;
-					NeoForge.EVENT_BUS.register(this);
+					Registration.listen(NeoForge.EVENT_BUS, this);
 					this.world = world;
 				}
 
@@ -1151,7 +1152,7 @@ public final class JutsuEffectProcedures {
 
 				public void start(LevelAccessor world, int waitTicks) {
 					this.waitTicks = waitTicks;
-					NeoForge.EVENT_BUS.register(this);
+					Registration.listen(NeoForge.EVENT_BUS, this);
 					this.world = world;
 				}
 
@@ -1217,7 +1218,7 @@ public final class JutsuEffectProcedures {
 
 				public void start(LevelAccessor world, int waitTicks) {
 					this.waitTicks = waitTicks;
-					NeoForge.EVENT_BUS.register(this);
+					Registration.listen(NeoForge.EVENT_BUS, this);
 					this.world = world;
 				}
 

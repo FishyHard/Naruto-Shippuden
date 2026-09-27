@@ -54,7 +54,7 @@ public final class SusanoEntities {
 
 		public ArmoredSusanoMadaraEntity(NarutoShippudenModElements instance) {
 			super(instance, 1267);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -161,7 +161,7 @@ public final class SusanoEntities {
 
 		public ArmoredSusanoSasukeEntity(NarutoShippudenModElements instance) {
 			super(instance, 1334);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -268,7 +268,7 @@ public final class SusanoEntities {
 
 		public ArmoredSusanoShisuiEntity(NarutoShippudenModElements instance) {
 			super(instance, 1333);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -375,7 +375,7 @@ public final class SusanoEntities {
 
 		public HumanoidSusanoItachiEntity(NarutoShippudenModElements instance) {
 			super(instance, 1263);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -482,7 +482,7 @@ public final class SusanoEntities {
 
 		public HumanoidSusanoMadaraEntity(NarutoShippudenModElements instance) {
 			super(instance, 1335);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -589,7 +589,7 @@ public final class SusanoEntities {
 
 		public HumanoidSusanoObitoEntity(NarutoShippudenModElements instance) {
 			super(instance, 1265);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -696,7 +696,7 @@ public final class SusanoEntities {
 
 		public HumanoidSusanoSasukeEntity(NarutoShippudenModElements instance) {
 			super(instance, 1266);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -803,7 +803,7 @@ public final class SusanoEntities {
 
 		public HumanoidSusanoShisuiEntity(NarutoShippudenModElements instance) {
 			super(instance, 1264);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -910,7 +910,7 @@ public final class SusanoEntities {
 
 		public RibcageSusanoEntity(NarutoShippudenModElements instance) {
 			super(instance, 1219);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -1017,7 +1017,7 @@ public final class SusanoEntities {
 
 		public SkeletonSusanoItachiEntity(NarutoShippudenModElements instance) {
 			super(instance, 1222);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -1124,7 +1124,7 @@ public final class SusanoEntities {
 
 		public SkeletonSusanoMadaraEntity(NarutoShippudenModElements instance) {
 			super(instance, 1223);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -1231,7 +1231,7 @@ public final class SusanoEntities {
 
 		public SkeletonSusanoObitoEntity(NarutoShippudenModElements instance) {
 			super(instance, 1224);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -1338,7 +1338,7 @@ public final class SusanoEntities {
 
 		public SkeletonSusanoSasukeEntity(NarutoShippudenModElements instance) {
 			super(instance, 1221);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -1445,7 +1445,7 @@ public final class SusanoEntities {
 
 		public SkeletonSusanoShisuiEntity(NarutoShippudenModElements instance) {
 			super(instance, 1225);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override

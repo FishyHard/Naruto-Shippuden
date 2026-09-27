@@ -179,6 +179,9 @@ def main():
             out = os.path.join(DST, rel)
             os.makedirs(os.path.dirname(out), exist_ok=True)
             text = transform(rel, open(src, encoding='utf-8').read())
+            # @OnlyIn no longer strips anything and NeoForge reports every use
+            text = re.sub(r'^[ \t]*@OnlyIn\(Dist\.CLIENT\)[ \t]*\n', '', text, flags=re.M)
+            text = re.sub(r'@OnlyIn\(Dist\.CLIENT\)\s*', '', text)
             open(out, 'w', encoding='utf-8').write(text)
             n += 1
     # generated client registration

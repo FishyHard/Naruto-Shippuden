@@ -723,6 +723,8 @@ def block_pos_containing(path, text):
             pos = m.end()
     out.append(text[pos:])
     return ''.join(out)
+sub(r'\bNeoForge\.EVENT_BUS\.register\(this\);', 'Registration.listen(NeoForge.EVENT_BUS, this);')
+sub(r'\bNarutoShippudenMod\.MOD_BUS\.register\((new EntityAttributesRegisterHandler\(\))\);', r'Registration.listen(NarutoShippudenMod.MOD_BUS, \1);')
 
 @func
 def attribute_modifier_events(path, text):

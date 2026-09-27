@@ -106,7 +106,7 @@ public final class SummonEntities {
 
 		public AkamaruEntity(NarutoShippudenModElements instance) {
 			super(instance, 555);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -359,7 +359,7 @@ public final class SummonEntities {
 
 		public CrowEntity(NarutoShippudenModElements instance) {
 			super(instance, 394);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -469,7 +469,7 @@ public final class SummonEntities {
 
 		public EarthGolemEntity(NarutoShippudenModElements instance) {
 			super(instance, 96);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -626,7 +626,7 @@ public final class SummonEntities {
 
 		public KirinEntity(NarutoShippudenModElements instance) {
 			super(instance, 75);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -760,7 +760,7 @@ public final class SummonEntities {
 
 		public KuramaEntity(NarutoShippudenModElements instance) {
 			super(instance, 153);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -905,7 +905,7 @@ public final class SummonEntities {
 
 		public MonsterCatEntity(NarutoShippudenModElements instance) {
 			super(instance, 840);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -1054,7 +1054,7 @@ public final class SummonEntities {
 
 		public ThreeHeadAkamaruEntity(NarutoShippudenModElements instance) {
 			super(instance, 1332);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -1268,7 +1268,7 @@ public final class SummonEntities {
 
 		public TwoHeadAkamaruEntity(NarutoShippudenModElements instance) {
 			super(instance, 563);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -1482,7 +1482,7 @@ public final class SummonEntities {
 
 		public WolfEntity(NarutoShippudenModElements instance) {
 			super(instance, 834);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -1641,7 +1641,7 @@ public final class SummonEntities {
 
 		public WoodGolemEntity(NarutoShippudenModElements instance) {
 			super(instance, 802);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override

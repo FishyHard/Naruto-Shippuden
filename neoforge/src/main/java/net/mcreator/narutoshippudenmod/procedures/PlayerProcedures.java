@@ -2,6 +2,7 @@ package net.mcreator.narutoshippudenmod.procedures;
 
 import net.mcreator.narutoshippudenmod.compat.Compat;
 import net.minecraft.util.RandomSource;
+import net.mcreator.narutoshippudenmod.compat.Registration;
 import net.mcreator.narutoshippudenmod.compat.ModArrow;
 import net.mcreator.narutoshippudenmod.compat.StackTag;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -3727,7 +3728,6 @@ public final class PlayerProcedures {
 	public static class PlayerModelChangeProcedure {
 		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
-			@OnlyIn(Dist.CLIENT)
 			@SubscribeEvent
 			public static void KleidersRenderEvent(RenderLivingEvent event) {
 				Entity entity = ModelSwapRenderers.entity(event);
@@ -4371,7 +4371,7 @@ public final class PlayerProcedures {
 
 				public void start(LevelAccessor world, int waitTicks) {
 					this.waitTicks = waitTicks;
-					NeoForge.EVENT_BUS.register(this);
+					Registration.listen(NeoForge.EVENT_BUS, this);
 					this.world = world;
 				}
 

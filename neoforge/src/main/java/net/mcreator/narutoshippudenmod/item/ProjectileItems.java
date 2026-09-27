@@ -140,7 +140,6 @@ public final class ProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -312,7 +311,6 @@ public final class ProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -457,7 +455,6 @@ public final class ProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return new ItemStack(FlyingThunderGodKunaiItem.block);
 			}
@@ -612,7 +609,6 @@ public final class ProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return new ItemStack(FumaShurikenItem.block);
 			}
@@ -767,7 +763,6 @@ public final class ProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -910,7 +905,6 @@ public final class ProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -1065,7 +1059,6 @@ public final class ProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -1223,7 +1216,6 @@ public final class ProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -1393,7 +1385,6 @@ public final class ProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}
@@ -1548,7 +1539,6 @@ public final class ProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return new ItemStack(ToroiUniqueFumaShurikenItem.block);
 			}
@@ -1703,7 +1693,6 @@ public final class ProjectileItems {
 			}
 
 			@Override
-			@OnlyIn(Dist.CLIENT)
 			public ItemStack getItem() {
 				return ItemStack.EMPTY;
 			}

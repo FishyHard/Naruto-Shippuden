@@ -25,12 +25,10 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.resources.Identifier;
 
-@OnlyIn(Dist.CLIENT)
 public final class CheatScreens {
 	private CheatScreens() {
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class MangekyouSharinganCheatGuiWindow extends AbstractContainerScreen<MangekyouSharinganCheatGui.GuiContainerMod> {
 		private Level world;
 		private int x, y, z;
@@ -119,7 +117,6 @@ public final class CheatScreens {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class NarutoShippudenCheatDojutsuGUIGuiWindow extends AbstractContainerScreen<NarutoShippudenCheatDojutsuGUIGui.GuiContainerMod> {
 		private Level world;
 		private int x, y, z;
@@ -283,7 +280,6 @@ public final class CheatScreens {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class NarutoShippudenCheatGUIGuiWindow extends AbstractContainerScreen<NarutoShippudenCheatGUIGui.GuiContainerMod> {
 		private Level world;
 		private int x, y, z;
@@ -463,7 +459,6 @@ public final class CheatScreens {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class NarutoShippudenCheatKekkeiGenkaiGUIGuiWindow extends AbstractContainerScreen<NarutoShippudenCheatKekkeiGenkaiGUIGui.GuiContainerMod> {
 		private Level world;
 		private int x, y, z;
@@ -613,7 +608,6 @@ public final class CheatScreens {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class PasswordGUIDojutsuGuiWindow extends AbstractContainerScreen<PasswordGUIDojutsuGui.GuiContainerMod> {
 		private Level world;
 		private int x, y, z;

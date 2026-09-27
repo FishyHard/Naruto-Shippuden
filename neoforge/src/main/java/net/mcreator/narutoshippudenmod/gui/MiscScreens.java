@@ -79,12 +79,10 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.input.KeyEvent;
 
-@OnlyIn(Dist.CLIENT)
 public final class MiscScreens {
 	private MiscScreens() {
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class AdventCalendarGUIGuiWindow extends AbstractContainerScreen<AdventCalendarGUIGui.GuiContainerMod> {
 		private final java.util.List<Runnable> _visibility = new java.util.ArrayList<>();
 
@@ -499,7 +497,6 @@ public final class MiscScreens {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class GeninHeadbandSelectGuiWindow extends AbstractContainerScreen<GeninHeadbandSelectGui.GuiContainerMod> {
 		private Level world;
 		private int x, y, z;
@@ -586,7 +583,6 @@ public final class MiscScreens {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class PatreonKitGuiWindow extends AbstractContainerScreen<PatreonKitGui.GuiContainerMod> {
 		private Level world;
 		private int x, y, z;

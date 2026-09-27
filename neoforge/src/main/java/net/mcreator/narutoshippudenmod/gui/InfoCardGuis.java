@@ -1,5 +1,6 @@
 package net.mcreator.narutoshippudenmod.gui;
 
+import net.mcreator.narutoshippudenmod.compat.Registration;
 import net.mcreator.narutoshippudenmod.NarutoShippudenMod;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
@@ -73,7 +74,6 @@ import net.neoforged.neoforge.network.IContainerFactory;
 import net.mcreator.narutoshippudenmod.compat.NetworkEvent;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.minecraft.core.registries.Registries;
-import net.mcreator.narutoshippudenmod.compat.Registration;
 import net.minecraft.world.item.ItemStack;
 
 public final class InfoCardGuis {
@@ -490,7 +490,7 @@ public final class InfoCardGuis {
 					GUISlotChangedMessage::handler);
 			containerType = IMenuTypeExtension.create(new GuiContainerModFactory());
 			Registration.add(Registries.MENU, "info_card_mini_game", () -> containerType, null);
-			NeoForge.EVENT_BUS.register(this);
+			Registration.listen(NeoForge.EVENT_BUS, this);
 		}
 
 		@SubscribeEvent

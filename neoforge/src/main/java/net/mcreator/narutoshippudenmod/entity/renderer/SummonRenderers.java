@@ -39,7 +39,6 @@ public final class SummonRenderers {
 	private SummonRenderers() {
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class AkamaruRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, AkamaruEntity.entity, ModelAkamaru_Young.LAYER, ModelAkamaru_Young::new, 0.15F, Identifier.parse("naruto_shippuden:textures/entities/akamaru_young.png"));
@@ -194,7 +193,6 @@ public final class SummonRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class CrowRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, CrowEntity.entity, Modelcrow.LAYER, Modelcrow::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/crow.png"));
@@ -289,7 +287,6 @@ public final class SummonRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class EarthGolemRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, EarthGolemEntity.entity, Modelearth_golem.LAYER, Modelearth_golem::new, 0.3F, Identifier.parse("naruto_shippuden:textures/entities/earth_golem.png"));
@@ -401,7 +398,6 @@ public final class SummonRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class KirinRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, KirinEntity.entity, ModelKirin.LAYER, ModelKirin::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/kirin.png"));
@@ -696,7 +692,6 @@ public final class SummonRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class KuramaRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, KuramaEntity.entity, Modelkurama.LAYER, Modelkurama::new, 10F, Identifier.parse("naruto_shippuden:textures/entities/kurama.png"));
@@ -1117,7 +1112,6 @@ public final class SummonRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class MonsterCatRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, MonsterCatEntity.entity, Modelmonstercat.LAYER, Modelmonstercat::new, 0.3F, Identifier.parse("naruto_shippuden:textures/entities/monstercat.png"));
@@ -1219,7 +1213,6 @@ public final class SummonRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class ThreeHeadAkamaruRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, ThreeHeadAkamaruEntity.entity, ModelThree_Head_Akamaru.LAYER, ModelThree_Head_Akamaru::new, 0.3F, Identifier.parse("naruto_shippuden:textures/entities/two_head_akamaru.png"));
@@ -1492,7 +1485,6 @@ public final class SummonRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class TwoHeadAkamaruRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, TwoHeadAkamaruEntity.entity, ModelTwo_Head_Akamaru.LAYER, ModelTwo_Head_Akamaru::new, 0.3F, Identifier.parse("naruto_shippuden:textures/entities/two_head_akamaru.png"));
@@ -1748,7 +1740,6 @@ public final class SummonRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class WolfRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, WolfEntity.entity, Modelwolf.LAYER, Modelwolf::new, 0.3F, Identifier.parse("naruto_shippuden:textures/entities/wolf.png"));
@@ -1951,7 +1942,6 @@ public final class SummonRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class WoodGolemRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, WoodGolemEntity.entity, Modelwood_golem.LAYER, Modelwood_golem::new, 1F, Identifier.parse("naruto_shippuden:textures/entities/wood_golem.png"));

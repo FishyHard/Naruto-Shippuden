@@ -2,6 +2,7 @@ package net.mcreator.narutoshippudenmod.procedures;
 
 import net.mcreator.narutoshippudenmod.compat.Compat;
 import net.minecraft.util.RandomSource;
+import net.mcreator.narutoshippudenmod.compat.Registration;
 import net.mcreator.narutoshippudenmod.compat.ModArrow;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
@@ -1299,7 +1300,7 @@ public final class KekkeiGenkaiProcedures {
 
 				public void start(LevelAccessor world, int waitTicks) {
 					this.waitTicks = waitTicks;
-					NeoForge.EVENT_BUS.register(this);
+					Registration.listen(NeoForge.EVENT_BUS, this);
 					this.world = world;
 				}
 
@@ -1354,7 +1355,7 @@ public final class KekkeiGenkaiProcedures {
 
 				public void start(LevelAccessor world, int waitTicks) {
 					this.waitTicks = waitTicks;
-					NeoForge.EVENT_BUS.register(this);
+					Registration.listen(NeoForge.EVENT_BUS, this);
 					this.world = world;
 				}
 
@@ -1409,7 +1410,7 @@ public final class KekkeiGenkaiProcedures {
 
 				public void start(LevelAccessor world, int waitTicks) {
 					this.waitTicks = waitTicks;
-					NeoForge.EVENT_BUS.register(this);
+					Registration.listen(NeoForge.EVENT_BUS, this);
 					this.world = world;
 				}
 
@@ -1641,7 +1642,7 @@ public final class KekkeiGenkaiProcedures {
 
 											public void start(LevelAccessor world, int waitTicks) {
 												this.waitTicks = waitTicks;
-												NeoForge.EVENT_BUS.register(this);
+												Registration.listen(NeoForge.EVENT_BUS, this);
 												this.world = world;
 											}
 
@@ -1666,7 +1667,7 @@ public final class KekkeiGenkaiProcedures {
 
 											public void start(LevelAccessor world, int waitTicks) {
 												this.waitTicks = waitTicks;
-												NeoForge.EVENT_BUS.register(this);
+												Registration.listen(NeoForge.EVENT_BUS, this);
 												this.world = world;
 											}
 
@@ -1716,7 +1717,7 @@ public final class KekkeiGenkaiProcedures {
 
 											public void start(LevelAccessor world, int waitTicks) {
 												this.waitTicks = waitTicks;
-												NeoForge.EVENT_BUS.register(this);
+												Registration.listen(NeoForge.EVENT_BUS, this);
 												this.world = world;
 											}
 
@@ -1741,7 +1742,7 @@ public final class KekkeiGenkaiProcedures {
 
 											public void start(LevelAccessor world, int waitTicks) {
 												this.waitTicks = waitTicks;
-												NeoForge.EVENT_BUS.register(this);
+												Registration.listen(NeoForge.EVENT_BUS, this);
 												this.world = world;
 											}
 
@@ -1791,7 +1792,7 @@ public final class KekkeiGenkaiProcedures {
 
 											public void start(LevelAccessor world, int waitTicks) {
 												this.waitTicks = waitTicks;
-												NeoForge.EVENT_BUS.register(this);
+												Registration.listen(NeoForge.EVENT_BUS, this);
 												this.world = world;
 											}
 
@@ -1816,7 +1817,7 @@ public final class KekkeiGenkaiProcedures {
 
 											public void start(LevelAccessor world, int waitTicks) {
 												this.waitTicks = waitTicks;
-												NeoForge.EVENT_BUS.register(this);
+												Registration.listen(NeoForge.EVENT_BUS, this);
 												this.world = world;
 											}
 
@@ -1866,7 +1867,7 @@ public final class KekkeiGenkaiProcedures {
 
 											public void start(LevelAccessor world, int waitTicks) {
 												this.waitTicks = waitTicks;
-												NeoForge.EVENT_BUS.register(this);
+												Registration.listen(NeoForge.EVENT_BUS, this);
 												this.world = world;
 											}
 
@@ -1891,7 +1892,7 @@ public final class KekkeiGenkaiProcedures {
 
 											public void start(LevelAccessor world, int waitTicks) {
 												this.waitTicks = waitTicks;
-												NeoForge.EVENT_BUS.register(this);
+												Registration.listen(NeoForge.EVENT_BUS, this);
 												this.world = world;
 											}
 
@@ -2300,7 +2301,7 @@ public final class KekkeiGenkaiProcedures {
 
 										public void start(LevelAccessor world, int waitTicks) {
 											this.waitTicks = waitTicks;
-											NeoForge.EVENT_BUS.register(this);
+											Registration.listen(NeoForge.EVENT_BUS, this);
 											this.world = world;
 										}
 
@@ -2621,7 +2622,7 @@ public final class KekkeiGenkaiProcedures {
 
 				public void start(LevelAccessor world, int waitTicks) {
 					this.waitTicks = waitTicks;
-					NeoForge.EVENT_BUS.register(this);
+					Registration.listen(NeoForge.EVENT_BUS, this);
 					this.world = world;
 				}
 
@@ -2643,7 +2644,7 @@ public final class KekkeiGenkaiProcedures {
 
 						public void start(LevelAccessor world, int waitTicks) {
 							this.waitTicks = waitTicks;
-							NeoForge.EVENT_BUS.register(this);
+							Registration.listen(NeoForge.EVENT_BUS, this);
 							this.world = world;
 						}
 
@@ -3048,7 +3049,7 @@ public final class KekkeiGenkaiProcedures {
 
 											public void start(LevelAccessor world, int waitTicks) {
 												this.waitTicks = waitTicks;
-												NeoForge.EVENT_BUS.register(this);
+												Registration.listen(NeoForge.EVENT_BUS, this);
 												this.world = world;
 											}
 
@@ -3095,7 +3096,7 @@ public final class KekkeiGenkaiProcedures {
 
 											public void start(LevelAccessor world, int waitTicks) {
 												this.waitTicks = waitTicks;
-												NeoForge.EVENT_BUS.register(this);
+												Registration.listen(NeoForge.EVENT_BUS, this);
 												this.world = world;
 											}
 
@@ -3463,7 +3464,7 @@ public final class KekkeiGenkaiProcedures {
 
 				public void start(LevelAccessor world, int waitTicks) {
 					this.waitTicks = waitTicks;
-					NeoForge.EVENT_BUS.register(this);
+					Registration.listen(NeoForge.EVENT_BUS, this);
 					this.world = world;
 				}
 
@@ -4814,7 +4815,7 @@ public final class KekkeiGenkaiProcedures {
 
 													public void start(LevelAccessor world, int waitTicks) {
 														this.waitTicks = waitTicks;
-														NeoForge.EVENT_BUS.register(this);
+														Registration.listen(NeoForge.EVENT_BUS, this);
 														this.world = world;
 													}
 
@@ -4839,7 +4840,7 @@ public final class KekkeiGenkaiProcedures {
 
 													public void start(LevelAccessor world, int waitTicks) {
 														this.waitTicks = waitTicks;
-														NeoForge.EVENT_BUS.register(this);
+														Registration.listen(NeoForge.EVENT_BUS, this);
 														this.world = world;
 													}
 
@@ -4864,7 +4865,7 @@ public final class KekkeiGenkaiProcedures {
 
 													public void start(LevelAccessor world, int waitTicks) {
 														this.waitTicks = waitTicks;
-														NeoForge.EVENT_BUS.register(this);
+														Registration.listen(NeoForge.EVENT_BUS, this);
 														this.world = world;
 													}
 
@@ -5293,7 +5294,7 @@ public final class KekkeiGenkaiProcedures {
 
 				public void start(LevelAccessor world, int waitTicks) {
 					this.waitTicks = waitTicks;
-					NeoForge.EVENT_BUS.register(this);
+					Registration.listen(NeoForge.EVENT_BUS, this);
 					this.world = world;
 				}
 

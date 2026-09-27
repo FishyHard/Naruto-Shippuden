@@ -39,7 +39,6 @@ public final class SusanoRenderers {
 	private SusanoRenderers() {
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class ArmoredSusanoMadaraRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, ArmoredSusanoMadaraEntity.entity, Modelsusanoarmoredmadara.LAYER, Modelsusanoarmoredmadara::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -505,7 +504,6 @@ public final class SusanoRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class ArmoredSusanoSasukeRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, ArmoredSusanoSasukeEntity.entity, Modelsusanoarmoredsasuke.LAYER, Modelsusanoarmoredsasuke::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -1151,7 +1149,6 @@ public final class SusanoRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class ArmoredSusanoShisuiRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, ArmoredSusanoShisuiEntity.entity, Modelsusanoarmoredshisui.LAYER, Modelsusanoarmoredshisui::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -1716,7 +1713,6 @@ public final class SusanoRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class HumanoidSusanoItachiRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, HumanoidSusanoItachiEntity.entity, Modelsusanohumanoiditachi.LAYER, Modelsusanohumanoiditachi::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -2023,7 +2019,6 @@ public final class SusanoRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class HumanoidSusanoMadaraRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, HumanoidSusanoMadaraEntity.entity, Modelsusanohumanoidmadara.LAYER, Modelsusanohumanoidmadara::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -2203,7 +2198,6 @@ public final class SusanoRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class HumanoidSusanoObitoRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, HumanoidSusanoObitoEntity.entity, Modelsusanohumanoidobito.LAYER, Modelsusanohumanoidobito::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -2383,7 +2377,6 @@ public final class SusanoRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class HumanoidSusanoSasukeRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, HumanoidSusanoSasukeEntity.entity, Modelsusanohumanoidsasuke.LAYER, Modelsusanohumanoidsasuke::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -2626,7 +2619,6 @@ public final class SusanoRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class HumanoidSusanoShisuiRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, HumanoidSusanoShisuiEntity.entity, Modelsusanohumanoidshisui.LAYER, Modelsusanohumanoidshisui::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -2923,7 +2915,6 @@ public final class SusanoRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class RibcageSusanoRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, RibcageSusanoEntity.entity, Modelribcage.LAYER, Modelribcage::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -3095,7 +3086,6 @@ public final class SusanoRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class SkeletonSusanoItachiRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, SkeletonSusanoItachiEntity.entity, Modelsusanoskeletonitachi.LAYER, Modelsusanoskeletonitachi::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -3590,7 +3580,6 @@ public final class SusanoRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class SkeletonSusanoMadaraRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, SkeletonSusanoMadaraEntity.entity, Modelsusanoskeletonmadara.LAYER, Modelsusanoskeletonmadara::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -4025,7 +4014,6 @@ public final class SusanoRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class SkeletonSusanoObitoRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, SkeletonSusanoObitoEntity.entity, Modelsusanoskeletonobito.LAYER, Modelsusanoskeletonobito::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -4475,7 +4463,6 @@ public final class SusanoRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class SkeletonSusanoSasukeRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, SkeletonSusanoSasukeEntity.entity, Modelsusanoskeletonsasuke.LAYER, Modelsusanoskeletonsasuke::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
@@ -4940,7 +4927,6 @@ public final class SusanoRenderers {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	public static class SkeletonSusanoShisuiRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.mob(event, SkeletonSusanoShisuiEntity.entity, Modelsusanoskeletonshisui.LAYER, Modelsusanoskeletonshisui::new, 0F, Identifier.parse("naruto_shippuden:textures/entities/none.png"));

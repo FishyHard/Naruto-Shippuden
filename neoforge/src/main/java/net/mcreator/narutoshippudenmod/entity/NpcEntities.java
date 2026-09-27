@@ -101,8 +101,8 @@ public final class NpcEntities {
 
 		public AsumaEntity(NarutoShippudenModElements instance) {
 			super(instance, 390);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
-			NeoForge.EVENT_BUS.register(this);
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
+			Registration.listen(NeoForge.EVENT_BUS, this);
 		}
 
 		@Override
@@ -233,7 +233,7 @@ public final class NpcEntities {
 
 		public EarthGolemShinobiEntity(NarutoShippudenModElements instance) {
 			super(instance, 1108);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -329,8 +329,8 @@ public final class NpcEntities {
 
 		public HiddenCloudShinobiEntity(NarutoShippudenModElements instance) {
 			super(instance, 1102);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
-			NeoForge.EVENT_BUS.register(this);
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
+			Registration.listen(NeoForge.EVENT_BUS, this);
 		}
 
 		@Override
@@ -465,8 +465,8 @@ public final class NpcEntities {
 
 		public HiddenLeafShinobiEntity(NarutoShippudenModElements instance) {
 			super(instance, 1098);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
-			NeoForge.EVENT_BUS.register(this);
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
+			Registration.listen(NeoForge.EVENT_BUS, this);
 		}
 
 		@Override
@@ -601,8 +601,8 @@ public final class NpcEntities {
 
 		public HiddenMistShinobiEntity(NarutoShippudenModElements instance) {
 			super(instance, 1100);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
-			NeoForge.EVENT_BUS.register(this);
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
+			Registration.listen(NeoForge.EVENT_BUS, this);
 		}
 
 		@Override
@@ -737,8 +737,8 @@ public final class NpcEntities {
 
 		public HiddenSandShinobiEntity(NarutoShippudenModElements instance) {
 			super(instance, 1104);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
-			NeoForge.EVENT_BUS.register(this);
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
+			Registration.listen(NeoForge.EVENT_BUS, this);
 		}
 
 		@Override
@@ -873,8 +873,8 @@ public final class NpcEntities {
 
 		public HiddenStoneShinobiEntity(NarutoShippudenModElements instance) {
 			super(instance, 1106);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
-			NeoForge.EVENT_BUS.register(this);
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
+			Registration.listen(NeoForge.EVENT_BUS, this);
 		}
 
 		@Override
@@ -1009,7 +1009,7 @@ public final class NpcEntities {
 
 		public IrukaSenseiCloneEntity(NarutoShippudenModElements instance) {
 			super(instance, 1184);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -1145,7 +1145,7 @@ public final class NpcEntities {
 
 		public IrukaSenseiEntity(NarutoShippudenModElements instance) {
 			super(instance, 1183);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -1267,8 +1267,8 @@ public final class NpcEntities {
 
 		public ShikamaruEntity(NarutoShippudenModElements instance) {
 			super(instance, 220);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
-			NeoForge.EVENT_BUS.register(this);
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
+			Registration.listen(NeoForge.EVENT_BUS, this);
 		}
 
 		@Override
@@ -1349,7 +1349,7 @@ public final class NpcEntities {
 
 		public TrainingDummyEntity(NarutoShippudenModElements instance) {
 			super(instance, 1191);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override

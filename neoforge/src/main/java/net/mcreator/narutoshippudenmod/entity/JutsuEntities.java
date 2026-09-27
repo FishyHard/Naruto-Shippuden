@@ -116,7 +116,7 @@ public final class JutsuEntities {
 
 		public ButterflyModeEntity(NarutoShippudenModElements instance) {
 			super(instance, 1159);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -265,7 +265,7 @@ public final class JutsuEntities {
 
 		public CatChakraModeEntity(NarutoShippudenModElements instance) {
 			super(instance, 841);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -414,7 +414,7 @@ public final class JutsuEntities {
 
 		public CatChakraModeSneakEntity(NarutoShippudenModElements instance) {
 			super(instance, 1009);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -563,7 +563,7 @@ public final class JutsuEntities {
 
 		public DanceOfTheLarchEntity(NarutoShippudenModElements instance) {
 			super(instance, 955);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -712,7 +712,7 @@ public final class JutsuEntities {
 
 		public DanceoftheLarchSneakEntity(NarutoShippudenModElements instance) {
 			super(instance, 1008);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -861,7 +861,7 @@ public final class JutsuEntities {
 
 		public DeadDemonConsumingSealEntity(NarutoShippudenModElements instance) {
 			super(instance, 682);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -968,7 +968,7 @@ public final class JutsuEntities {
 
 		public DisruptionCubeEntity(NarutoShippudenModElements instance) {
 			super(instance, 549);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -1113,7 +1113,7 @@ public final class JutsuEntities {
 
 		public DrowningWaterBlobTechniqueEntityEntity(NarutoShippudenModElements instance) {
 			super(instance, 949);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -1262,7 +1262,7 @@ public final class JutsuEntities {
 
 		public DrowningWaterBlobTechniqueEntitySneakEntity(NarutoShippudenModElements instance) {
 			super(instance, 1007);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -1411,7 +1411,7 @@ public final class JutsuEntities {
 
 		public EightTrigramsPalmsRevolvingHeavenEntity(NarutoShippudenModElements instance) {
 			super(instance, 450);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -1540,7 +1540,7 @@ public final class JutsuEntities {
 
 		public EightTrigramsSixtyFourPalmsEntity(NarutoShippudenModElements instance) {
 			super(instance, 531);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -1681,7 +1681,7 @@ public final class JutsuEntities {
 
 		public FangEntity(NarutoShippudenModElements instance) {
 			super(instance, 740);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -1861,7 +1861,7 @@ public final class JutsuEntities {
 
 		public FlyingThunderGodKunaiEntityEntity(NarutoShippudenModElements instance) {
 			super(instance, 734);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -1968,7 +1968,7 @@ public final class JutsuEntities {
 
 		public HumanBulletTankEntity(NarutoShippudenModElements instance) {
 			super(instance, 1019);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -2117,7 +2117,7 @@ public final class JutsuEntities {
 
 		public IceMirrorEntity(NarutoShippudenModElements instance) {
 			super(instance, 943);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -2266,7 +2266,7 @@ public final class JutsuEntities {
 
 		public IceSpearEntity(NarutoShippudenModElements instance) {
 			super(instance, 803);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -2401,7 +2401,7 @@ public final class JutsuEntities {
 
 		public InsectJarTechniqueEntity(NarutoShippudenModElements instance) {
 			super(instance, 929);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -2530,7 +2530,7 @@ public final class JutsuEntities {
 
 		public MagnetCoatEntity(NarutoShippudenModElements instance) {
 			super(instance, 988);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -2679,7 +2679,7 @@ public final class JutsuEntities {
 
 		public MagnetCoatSneakEntity(NarutoShippudenModElements instance) {
 			super(instance, 1010);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -2828,7 +2828,7 @@ public final class JutsuEntities {
 
 		public MagnetHandsEntity(NarutoShippudenModElements instance) {
 			super(instance, 990);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -2977,7 +2977,7 @@ public final class JutsuEntities {
 
 		public MagnetHandsSneakEntity(NarutoShippudenModElements instance) {
 			super(instance, 1012);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -3126,7 +3126,7 @@ public final class JutsuEntities {
 
 		public MagnetWingsEntity(NarutoShippudenModElements instance) {
 			super(instance, 989);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -3275,7 +3275,7 @@ public final class JutsuEntities {
 
 		public RunningFireEntity(NarutoShippudenModElements instance) {
 			super(instance, 21);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -3431,7 +3431,7 @@ public final class JutsuEntities {
 
 		public ShadowCloneEntity(NarutoShippudenModElements instance) {
 			super(instance, 1187);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -3616,7 +3616,7 @@ public final class JutsuEntities {
 
 		public ShadowImitationEntity2Entity(NarutoShippudenModElements instance) {
 			super(instance, 995);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -3816,7 +3816,7 @@ public final class JutsuEntities {
 
 		public ShadowImitationEntityEntity(NarutoShippudenModElements instance) {
 			super(instance, 994);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -4042,7 +4042,7 @@ public final class JutsuEntities {
 
 		public ShadowImitationFieldTechniqueEntity(NarutoShippudenModElements instance) {
 			super(instance, 1021);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
@@ -4198,7 +4198,7 @@ public final class JutsuEntities {
 
 		public SpikedHumanBulletTankEntity(NarutoShippudenModElements instance) {
 			super(instance, 1160);
-			NarutoShippudenMod.MOD_BUS.register(new EntityAttributesRegisterHandler());
+			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
 		}
 
 		@Override
