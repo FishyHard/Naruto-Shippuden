@@ -24,8 +24,7 @@ public class PoisonKunaiRightclickedProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).shurikenjutsu >= 15) {
+		if (NarutoShippudenModVariables.get(entity).shurikenjutsu >= 15) {
 			{
 				Entity _shootFrom = entity;
 				World projectileLevel = _shootFrom.world;
@@ -51,8 +50,7 @@ public class PoisonKunaiRightclickedProcedure {
 				((PlayerEntity) entity).inventory.func_234564_a_(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
 						((PlayerEntity) entity).container.func_234641_j_());
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).shurikenjutsu <= 14) {
+		} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 14) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Shurikenjutsu"), (true));
 			}

@@ -16,8 +16,7 @@ public class DisplayTenroSelectProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectclanrelease == 16) {
+		if (NarutoShippudenModVariables.get(entity).selectclanrelease == 16) {
 			return true;
 		}
 		return false;

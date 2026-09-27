@@ -16,8 +16,7 @@ public class DiplayFumaSelectProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectclanrelease == 22) {
+		if (NarutoShippudenModVariables.get(entity).selectclanrelease == 22) {
 			return true;
 		}
 		return false;

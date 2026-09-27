@@ -53,8 +53,7 @@ public class DisruptionCubeEntityFallsProcedure {
 			for (Entity entityiterator : _entfound) {
 				entityiterator.attackEntityFrom(DamageSource.GENERIC, (float) 25);
 				{
-					double _setval = ((entityiterator.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount / 2);
+					double _setval = (NarutoShippudenModVariables.get(entityiterator).ChakraAmount / 2);
 					entityiterator.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.ChakraAmount = _setval;
 						capability.syncPlayerVariables(entityiterator);

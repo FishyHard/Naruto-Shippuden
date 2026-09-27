@@ -52,10 +52,8 @@ public class IsshikiDojutsuOnKeyPressedProcedure {
 		double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsu == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsuactivate == false) {
+		if (NarutoShippudenModVariables.get(entity).isshikidojutsu == true) {
+			if (NarutoShippudenModVariables.get(entity).isshikidojutsuactivate == false) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A76Isshiki Dojutsu!"), (false));
 				}
@@ -80,8 +78,7 @@ public class IsshikiDojutsuOnKeyPressedProcedure {
 									.getValue(new ResourceLocation("naruto_shippuden:isshiki_dojutsu")),
 							SoundCategory.NEUTRAL, (float) 1, (float) 1, false);
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsuactivate == true) {
+			} else if (NarutoShippudenModVariables.get(entity).isshikidojutsuactivate == true) {
 				if (entity instanceof LivingEntity) {
 					((LivingEntity) entity).removePotionEffect(Effects.STRENGTH);
 				}
@@ -93,8 +90,7 @@ public class IsshikiDojutsuOnKeyPressedProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsu == false) {
+		} else if (NarutoShippudenModVariables.get(entity).isshikidojutsu == false) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked Isshiki Dojutsu"), (false));
 			}

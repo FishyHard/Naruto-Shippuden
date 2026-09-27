@@ -16,8 +16,7 @@ public class DiplayIzunoSelectProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectclanrelease == 18) {
+		if (NarutoShippudenModVariables.get(entity).selectclanrelease == 18) {
 			return true;
 		}
 		return false;

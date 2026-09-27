@@ -121,8 +121,7 @@ public class PlayerJoinTheWorldProcedure {
 				}
 				bufferedReader.close();
 				mainjsonobject = new Gson().fromJson(jsonstringbuilder.toString(), com.google.gson.JsonObject.class);
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).joinworld == false) {
+				if (NarutoShippudenModVariables.get(entity).joinworld == false) {
 					if (mainjsonobject.get("clan_random").getAsBoolean() == false) {
 						{
 							Entity _ent = entity;
@@ -337,8 +336,7 @@ public class PlayerJoinTheWorldProcedure {
 						});
 					}
 					PlayerName = (entity.getDisplayName().getString());
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).joinworld == true) {
+				} else if (NarutoShippudenModVariables.get(entity).joinworld == true) {
 					if (world instanceof World) {
 						((World) world).getGameRules().get(GameRules.KEEP_INVENTORY).set((true), ((World) world).getServer());
 					}

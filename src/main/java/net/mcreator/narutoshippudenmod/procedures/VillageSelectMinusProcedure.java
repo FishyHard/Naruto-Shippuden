@@ -16,8 +16,7 @@ public class VillageSelectMinusProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectvillage == 0) {
+		if (NarutoShippudenModVariables.get(entity).selectvillage == 0) {
 			{
 				double _setval = 4;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -25,11 +24,9 @@ public class VillageSelectMinusProcedure {
 					capability.syncPlayerVariables(entity);
 				});
 			}
-		} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectvillage == 0)) {
+		} else if (!(NarutoShippudenModVariables.get(entity).selectvillage == 0)) {
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectvillage - 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).selectvillage - 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.selectvillage = _setval;
 					capability.syncPlayerVariables(entity);

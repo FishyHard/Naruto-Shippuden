@@ -73,8 +73,7 @@ public class PlayerRespawnsProcedure {
 		double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).deathgod == true) {
+		if (NarutoShippudenModVariables.get(entity).deathgod == true) {
 			{
 				boolean _setval = (false);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -92,8 +91,7 @@ public class PlayerRespawnsProcedure {
 			if (entity instanceof PlayerEntity)
 				((PlayerEntity) entity).getCooldownTracker().setCooldown(UzumakiReleaseTechniqueItem.block, (int) 6000);
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).EightTrigramsPalmsRevolvingHeaven == true) {
+		if (NarutoShippudenModVariables.get(entity).EightTrigramsPalmsRevolvingHeaven == true) {
 			{
 				boolean _setval = (false);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -102,8 +100,7 @@ public class PlayerRespawnsProcedure {
 				});
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).InsectJarTechnique == true) {
+		if (NarutoShippudenModVariables.get(entity).InsectJarTechnique == true) {
 			{
 				boolean _setval = (false);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -112,8 +109,7 @@ public class PlayerRespawnsProcedure {
 				});
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).deathgodcooldown == true) {
+		if (NarutoShippudenModVariables.get(entity).deathgodcooldown == true) {
 			{
 				boolean _setval = (false);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -140,8 +136,7 @@ public class PlayerRespawnsProcedure {
 				});
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Gate8 == true) {
+		if (NarutoShippudenModVariables.get(entity).Gate8 == true) {
 			{
 				boolean _setval = (false);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -149,50 +144,41 @@ public class PlayerRespawnsProcedure {
 					capability.syncPlayerVariables(entity);
 				});
 			}
-			if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+			if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 				if (entity instanceof PlayerEntity)
 					((PlayerEntity) entity).getCooldownTracker().setCooldown(LeeReleaseTechniqueItem.block, (int) 3500);
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+			} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 				if (entity instanceof PlayerEntity)
 					((PlayerEntity) entity).getCooldownTracker().setCooldown(LeeReleaseTechniqueItem.block, (int) 3250);
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+			} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 				if (entity instanceof PlayerEntity)
 					((PlayerEntity) entity).getCooldownTracker().setCooldown(LeeReleaseTechniqueItem.block, (int) 3000);
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+			} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 				if (entity instanceof PlayerEntity)
 					((PlayerEntity) entity).getCooldownTracker().setCooldown(LeeReleaseTechniqueItem.block, (int) 2750);
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+			} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 				if (entity instanceof PlayerEntity)
 					((PlayerEntity) entity).getCooldownTracker().setCooldown(LeeReleaseTechniqueItem.block, (int) 2500);
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).medicine <= 300) {
+		if (NarutoShippudenModVariables.get(entity).medicine <= 300) {
 			if (world instanceof ServerWorld) {
 				((World) world).getServer().getCommandManager().handleCommand(
 						new CommandSource(ICommandSource.DUMMY, new Vector3d(x, y, z), Vector2f.ZERO, (ServerWorld) world, 4, "",
 								new StringTextComponent(""), ((World) world).getServer(), null).withFeedbackDisabled(),
 						("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.max_health base set "
-								+ (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).maxhealth));
+								+ NarutoShippudenModVariables.get(entity).maxhealth));
 			}
 			if (entity instanceof LivingEntity)
 				((LivingEntity) entity).setHealth((float) ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMaxHealth() : -1));
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraAmount = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).medicine >= 301) {
+		} else if (NarutoShippudenModVariables.get(entity).medicine >= 301) {
 			if (world instanceof ServerWorld) {
 				((World) world).getServer().getCommandManager().handleCommand(
 						new CommandSource(ICommandSource.DUMMY, new Vector3d(x, y, z), Vector2f.ZERO, (ServerWorld) world, 4, "",
@@ -202,16 +188,14 @@ public class PlayerRespawnsProcedure {
 			if (entity instanceof LivingEntity)
 				((LivingEntity) entity).setHealth((float) 620);
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraAmount = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).izanagiuse == true) {
+		if (NarutoShippudenModVariables.get(entity).izanagiuse == true) {
 			{
 				boolean _setval = (false);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {

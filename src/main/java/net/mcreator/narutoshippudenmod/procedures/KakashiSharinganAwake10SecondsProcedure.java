@@ -35,8 +35,7 @@ public class KakashiSharinganAwake10SecondsProcedure {
 		}
 		IWorld world = (IWorld) dependencies.get("world");
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).SharinganKakashi == false) {
+		if (NarutoShippudenModVariables.get(entity).SharinganKakashi == false) {
 			new Object() {
 				private int ticks = 0;
 				private float waitTicks;
@@ -88,8 +87,7 @@ public class KakashiSharinganAwake10SecondsProcedure {
 					MinecraftForge.EVENT_BUS.unregister(this);
 				}
 			}.start(world, (int) 200);
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).SharinganKakashi == true) {
+		} else if (NarutoShippudenModVariables.get(entity).SharinganKakashi == true) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You've already unlocked sharingan."), (false));
 			}

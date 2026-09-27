@@ -16,8 +16,7 @@ public class DisplayIburiInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).iburireleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).iburireleaselogic == true) {
 			return true;
 		}
 		return false;

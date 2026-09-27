@@ -59,17 +59,12 @@ public class BoilReleaseTechniqueRightclickedProcedure {
 		double zRadius = 0;
 		double particleAmount = 0;
 		double yaw = 0;
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).boilreleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).boilreleaselogic == true) {
 			if (!entity.isSneaking()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).boiltechnique == 0) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).boillearn >= 1) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 25) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 500) {
+				if (NarutoShippudenModVariables.get(entity).boiltechnique == 0) {
+					if (NarutoShippudenModVariables.get(entity).boillearn >= 1) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 25) {
+							if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 500) {
 								{
 									List<Entity> _entfound = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(x - (10 / 2d), y - (10 / 2d),
 											z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), null).stream().sorted(new Object() {
@@ -127,39 +122,31 @@ public class BoilReleaseTechniqueRightclickedProcedure {
 									((ServerWorld) world).spawnParticle(ParticleTypes.CLOUD, x, y, z, (int) 5, 2, 3, 0, 0);
 								}
 								{
-									double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 500);
+									double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 500);
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 										capability.ChakraAmount = _setval;
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 499) {
+							} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 24) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).boillearn >= 1)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).boillearn >= 1)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).boiltechnique == 1) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).boillearn >= 2) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 30) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 350) {
+				} else if (NarutoShippudenModVariables.get(entity).boiltechnique == 1) {
+					if (NarutoShippudenModVariables.get(entity).boillearn >= 2) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 30) {
+							if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 350) {
 								if (entity.rotationYaw < 0) {
 									yaw = Math.abs(entity.rotationYaw);
 									isNegative = (true);
@@ -268,39 +255,31 @@ public class BoilReleaseTechniqueRightclickedProcedure {
 									((ServerWorld) world).spawnParticle(ParticleTypes.CLOUD, x, y, z, (int) 5, 2, 3, 0, 0);
 								}
 								{
-									double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 350);
+									double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 350);
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 										capability.ChakraAmount = _setval;
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 349) {
+							} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 349) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 29) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).boilrelease >= 2)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).boilrelease >= 2)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).boiltechnique == 2) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).boillearn >= 3) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 35) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).UnrivaledStrength == false) {
+				} else if (NarutoShippudenModVariables.get(entity).boiltechnique == 2) {
+					if (NarutoShippudenModVariables.get(entity).boillearn >= 3) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 35) {
+							if (NarutoShippudenModVariables.get(entity).UnrivaledStrength == false) {
 								{
 									boolean _setval = (true);
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -308,8 +287,7 @@ public class BoilReleaseTechniqueRightclickedProcedure {
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).UnrivaledStrength == true) {
+							} else if (NarutoShippudenModVariables.get(entity).UnrivaledStrength == true) {
 								{
 									boolean _setval = (false);
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -317,65 +295,52 @@ public class BoilReleaseTechniqueRightclickedProcedure {
 										capability.syncPlayerVariables(entity);
 									});
 								}
-								if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+								if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(BoilReleaseTechniqueItem.block, (int) 750);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(BoilReleaseTechniqueItem.block, (int) 500);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(BoilReleaseTechniqueItem.block, (int) 300);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(BoilReleaseTechniqueItem.block, (int) 200);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(BoilReleaseTechniqueItem.block, (int) 100);
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 34) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 34) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).boilrelease >= 3)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).boilrelease >= 3)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
 				}
-				if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+				if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(BoilReleaseTechniqueItem.block, (int) 200);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(BoilReleaseTechniqueItem.block, (int) 160);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(BoilReleaseTechniqueItem.block, (int) 120);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(BoilReleaseTechniqueItem.block, (int) 80);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(BoilReleaseTechniqueItem.block, (int) 40);
 				}
 			} else if (entity.isSneaking()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).boiltechnique == 0) {
+				if (NarutoShippudenModVariables.get(entity).boiltechnique == 0) {
 					{
 						double _setval = 1;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -386,8 +351,7 @@ public class BoilReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Steam Dash"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).boiltechnique == 1) {
+				} else if (NarutoShippudenModVariables.get(entity).boiltechnique == 1) {
 					{
 						double _setval = 2;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -398,8 +362,7 @@ public class BoilReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Unrivalled Strength"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).boiltechnique == 2) {
+				} else if (NarutoShippudenModVariables.get(entity).boiltechnique == 2) {
 					{
 						double _setval = 0;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -412,8 +375,7 @@ public class BoilReleaseTechniqueRightclickedProcedure {
 					}
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).boilreleaselogic == false) {
+		} else if (NarutoShippudenModVariables.get(entity).boilreleaselogic == false) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this release."), (true));
 			}

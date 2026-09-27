@@ -16,8 +16,7 @@ public class HealthDisplayLength2Procedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((new java.text.DecimalFormat("##.##").format((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).HealthMax)).length() == 3) {
+		if ((new java.text.DecimalFormat("##.##").format(NarutoShippudenModVariables.get(entity).HealthMax)).length() == 3) {
 			return true;
 		}
 		return false;

@@ -33,8 +33,7 @@ public class SteelDNAImplantMobProcedure {
 		Entity sourceentity = (Entity) dependencies.get("sourceentity");
 		double random = 0;
 		if (entity instanceof PlayerEntity) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).steelreleaselogic == false) {
+			if (NarutoShippudenModVariables.get(entity).steelreleaselogic == false) {
 				random = (MathHelper.nextInt(new Random(), 1, 100));
 				if (random <= 50) {
 					if (entity instanceof PlayerEntity) {
@@ -68,8 +67,7 @@ public class SteelDNAImplantMobProcedure {
 					((PlayerEntity) sourceentity).inventory.func_234564_a_(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
 							((PlayerEntity) sourceentity).container.func_234641_j_());
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).steelreleaselogic == true) {
+			} else if (NarutoShippudenModVariables.get(entity).steelreleaselogic == true) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You already have Steel Release"), (false));
 				}

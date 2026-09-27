@@ -16,10 +16,8 @@ public class DisplayMSObitoInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganObito == true
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganKakashi == true) {
+		if (NarutoShippudenModVariables.get(entity).MangekyouSharinganObito == true
+				|| NarutoShippudenModVariables.get(entity).MangekyouSharinganKakashi == true) {
 			return true;
 		}
 		return false;

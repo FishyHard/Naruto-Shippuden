@@ -18,48 +18,35 @@ public class NinjutsuButtonProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).sp >= (entity
-						.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).spusecount) {
+		if (NarutoShippudenModVariables.get(entity).sp >= NarutoShippudenModVariables.get(entity).spusecount) {
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).sp
-						- (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).spusecount);
+				double _setval = (NarutoShippudenModVariables.get(entity).sp
+						- NarutoShippudenModVariables.get(entity).spusecount);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.sp = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu
-						+ (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).spusecount);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu
+						+ NarutoShippudenModVariables.get(entity).spusecount);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax
-						+ 10 * (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).spusecount);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax
+						+ 10 * NarutoShippudenModVariables.get(entity).spusecount);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).sp <= (entity
-						.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).spusecount) {
+		} else if (NarutoShippudenModVariables.get(entity).sp <= NarutoShippudenModVariables.get(entity).spusecount) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent(
-						("Not Enough SP Use Selected: " + (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).spusecount)),
+						("Not Enough SP Use Selected: " + NarutoShippudenModVariables.get(entity).spusecount)),
 						(false));
 			}
 		}

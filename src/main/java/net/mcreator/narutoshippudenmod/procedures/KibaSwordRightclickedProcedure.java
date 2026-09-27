@@ -71,10 +71,8 @@ public class KibaSwordRightclickedProcedure {
 						.getItem() == KibaSwordItem.block) {
 			if (!entity.isSneaking()) {
 				if (itemstack.getOrCreateTag().getDouble("KibaSwordMode") == 0) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 5) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 100) {
+					if (NarutoShippudenModVariables.get(entity).ninjutsu >= 5) {
+						if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 100) {
 							{
 								Entity _shootFrom = entity;
 								World projectileLevel = _shootFrom.world;
@@ -99,8 +97,7 @@ public class KibaSwordRightclickedProcedure {
 								}
 							}
 							{
-								double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 100);
+								double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 100);
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 									capability.ChakraAmount = _setval;
 									capability.syncPlayerVariables(entity);
@@ -108,23 +105,19 @@ public class KibaSwordRightclickedProcedure {
 							}
 							if (entity instanceof PlayerEntity)
 								((PlayerEntity) entity).getCooldownTracker().setCooldown(itemstack.getItem(), (int) 150);
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 99) {
+						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (true));
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 4) {
+					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 4) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (true));
 						}
 					}
 				} else if (itemstack.getOrCreateTag().getDouble("KibaSwordMode") == 1) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 10) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 150) {
+					if (NarutoShippudenModVariables.get(entity).ninjutsu >= 10) {
+						if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 							lightning = 1;
 							for (int index0 = 0; index0 < (int) (14); index0++) {
 								if (world instanceof ServerWorld) {
@@ -339,8 +332,7 @@ public class KibaSwordRightclickedProcedure {
 								lightning = (lightning + 1);
 							}
 							{
-								double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 150);
+								double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 150);
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 									capability.ChakraAmount = _setval;
 									capability.syncPlayerVariables(entity);
@@ -348,23 +340,19 @@ public class KibaSwordRightclickedProcedure {
 							}
 							if (entity instanceof PlayerEntity)
 								((PlayerEntity) entity).getCooldownTracker().setCooldown(itemstack.getItem(), (int) 200);
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 149) {
+						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (true));
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 9) {
+					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 9) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (true));
 						}
 					}
 				} else if (itemstack.getOrCreateTag().getDouble("KibaSwordMode") == 2) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 15) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 200) {
+					if (NarutoShippudenModVariables.get(entity).ninjutsu >= 15) {
+						if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 							if (world instanceof ServerWorld) {
 								((ServerWorld) world).spawnParticle(LightningParticle.particle, x, (y + 1.5), z, (int) 100, 0, 0, 0, 0.1);
 							}
@@ -386,8 +374,7 @@ public class KibaSwordRightclickedProcedure {
 								}
 							}
 							{
-								double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 200);
+								double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 200);
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 									capability.ChakraAmount = _setval;
 									capability.syncPlayerVariables(entity);
@@ -395,14 +382,12 @@ public class KibaSwordRightclickedProcedure {
 							}
 							if (entity instanceof PlayerEntity)
 								((PlayerEntity) entity).getCooldownTracker().setCooldown(itemstack.getItem(), (int) 250);
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 199) {
+						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (true));
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 14) {
+					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 14) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (true));
 						}

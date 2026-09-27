@@ -18,10 +18,8 @@ public class JutsuPowerOnKeyPressedProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 0) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupowerstat >= 1) {
+		if (NarutoShippudenModVariables.get(entity).jutsupower == 0) {
+			if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 1) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Jutsu Power: 2"), (true));
 				}
@@ -33,10 +31,8 @@ public class JutsuPowerOnKeyPressedProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 1) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupowerstat >= 2) {
+		} else if (NarutoShippudenModVariables.get(entity).jutsupower == 1) {
+			if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 2) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Jutsu Power: 3"), (true));
 				}
@@ -48,10 +44,8 @@ public class JutsuPowerOnKeyPressedProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 2) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupowerstat >= 3) {
+		} else if (NarutoShippudenModVariables.get(entity).jutsupower == 2) {
+			if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 3) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Jutsu Power: 4"), (true));
 				}
@@ -63,10 +57,8 @@ public class JutsuPowerOnKeyPressedProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 3) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupowerstat >= 4) {
+		} else if (NarutoShippudenModVariables.get(entity).jutsupower == 3) {
+			if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 4) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Jutsu Power: 5"), (true));
 				}
@@ -78,10 +70,8 @@ public class JutsuPowerOnKeyPressedProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 4) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupowerstat >= 5) {
+		} else if (NarutoShippudenModVariables.get(entity).jutsupower == 4) {
+			if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 5) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Jutsu Power: 6"), (true));
 				}
@@ -93,10 +83,8 @@ public class JutsuPowerOnKeyPressedProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 5) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupowerstat >= 6) {
+		} else if (NarutoShippudenModVariables.get(entity).jutsupower == 5) {
+			if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 6) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Jutsu Power: 7"), (true));
 				}
@@ -108,10 +96,8 @@ public class JutsuPowerOnKeyPressedProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 6) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupowerstat >= 7) {
+		} else if (NarutoShippudenModVariables.get(entity).jutsupower == 6) {
+			if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 7) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Jutsu Power: 8"), (true));
 				}
@@ -123,10 +109,8 @@ public class JutsuPowerOnKeyPressedProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 7) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupowerstat >= 8) {
+		} else if (NarutoShippudenModVariables.get(entity).jutsupower == 7) {
+			if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 8) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Jutsu Power: 9"), (true));
 				}
@@ -138,10 +122,8 @@ public class JutsuPowerOnKeyPressedProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 8) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupowerstat >= 9) {
+		} else if (NarutoShippudenModVariables.get(entity).jutsupower == 8) {
+			if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 9) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Jutsu Power: 10"), (true));
 				}
@@ -153,10 +135,8 @@ public class JutsuPowerOnKeyPressedProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 9) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupowerstat >= 0) {
+		} else if (NarutoShippudenModVariables.get(entity).jutsupower == 9) {
+			if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 0) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Jutsu Power: 1"), (true));
 				}

@@ -16,8 +16,7 @@ public class DisplayBoneInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).bonereleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).bonereleaselogic == true) {
 			return true;
 		}
 		return false;

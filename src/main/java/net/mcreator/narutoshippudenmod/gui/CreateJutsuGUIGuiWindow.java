@@ -95,22 +95,19 @@ public class CreateJutsuGUIGuiWindow extends ContainerScreen<CreateJutsuGUIGui.G
 			this.font.drawString(ms, "Release:", -20, 25, -1);
 		if (DisplayUnlearnCustomJutsu1Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 				(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-			this.font.drawString(ms, "" + ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease1save) + "", 24, 25, -1);
+			this.font.drawString(ms, "" + (NarutoShippudenModVariables.get(entity).customjutsurelease1save) + "", 24, 25, -1);
 		if (DisplayUnlearnCustomJutsu1Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 				(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
 			this.font.drawString(ms, "Type:", -20, 61, -1);
 		if (DisplayUnlearnCustomJutsu1Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 				(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-			this.font.drawString(ms, "" + ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype1save) + "", 9, 61, -1);
+			this.font.drawString(ms, "" + (NarutoShippudenModVariables.get(entity).customjutsutype1save) + "", 9, 61, -1);
 		if (DisplayUnlearnCustomJutsu1Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 				(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
 			this.font.drawString(ms, "Speed:", -20, 43, -1);
 		if (DisplayUnlearnCustomJutsu1Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 				(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-			this.font.drawString(ms, "" + ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save) + "", 15, 43, -1);
+			this.font.drawString(ms, "" + (NarutoShippudenModVariables.get(entity).customjutsuspeed1save) + "", 15, 43, -1);
 		if (DisplayUnlearnCustomJutsu1Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 				(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
 			this.font.drawString(ms, "!!WARNING!! You get only half of JP price ", 67, -2, -65536);

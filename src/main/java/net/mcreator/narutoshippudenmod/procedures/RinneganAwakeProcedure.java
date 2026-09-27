@@ -22,20 +22,13 @@ public class RinneganAwakeProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).uchihareleaselogic == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).firereleaselogic == true
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).earthreleaselogic == true
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).lightningreleaselogic == true
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).windreleaselogic == true
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).waterreleaselogic == true
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).woodreleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).uchihareleaselogic == true) {
+			if (NarutoShippudenModVariables.get(entity).firereleaselogic == true
+					&& NarutoShippudenModVariables.get(entity).earthreleaselogic == true
+					&& NarutoShippudenModVariables.get(entity).lightningreleaselogic == true
+					&& NarutoShippudenModVariables.get(entity).windreleaselogic == true
+					&& NarutoShippudenModVariables.get(entity).waterreleaselogic == true
+					&& NarutoShippudenModVariables.get(entity).woodreleaselogic == true) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You've awakened Rinnegan!"), (false));
 				}
@@ -59,8 +52,7 @@ public class RinneganAwakeProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsukireleaselogic == true) {
+		} else if (NarutoShippudenModVariables.get(entity).otsutsukireleaselogic == true) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You've awakened Rinnegan!"), (false));
 			}

@@ -16,8 +16,7 @@ public class DisplayFireSelectProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectnaturerelease == 0) {
+		if (NarutoShippudenModVariables.get(entity).selectnaturerelease == 0) {
 			return true;
 		}
 		return false;

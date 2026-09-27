@@ -60,15 +60,11 @@ public class StormReleaseTechniqueRightclickedProcedure {
 		double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).stormreleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).stormreleaselogic == true) {
 			if (!entity.isSneaking()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).stormtechnique == 0) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).stormlearn >= 1) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).stormlaser == false) {
+				if (NarutoShippudenModVariables.get(entity).stormtechnique == 0) {
+					if (NarutoShippudenModVariables.get(entity).stormlearn >= 1) {
+						if (NarutoShippudenModVariables.get(entity).stormlaser == false) {
 							{
 								boolean _setval = (true);
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -79,8 +75,7 @@ public class StormReleaseTechniqueRightclickedProcedure {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Laser Circus: On"), (false));
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).stormlaser == true) {
+						} else if (NarutoShippudenModVariables.get(entity).stormlaser == true) {
 							{
 								boolean _setval = (false);
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -92,20 +87,15 @@ public class StormReleaseTechniqueRightclickedProcedure {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Laser Circus: Off"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).stormlearn >= 1)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).stormlearn >= 1)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).stormtechnique == 1) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).stormlearn >= 2) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 30) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 500) {
+				} else if (NarutoShippudenModVariables.get(entity).stormtechnique == 1) {
+					if (NarutoShippudenModVariables.get(entity).stormlearn >= 2) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 30) {
+							if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 500) {
 								if (world instanceof ServerWorld) {
 									((ServerWorld) world).spawnParticle(SmokeParticle.particle, x, (y + 1.5), z, (int) 50, 0, 0, 0, 0.01);
 								}
@@ -205,56 +195,46 @@ public class StormReleaseTechniqueRightclickedProcedure {
 									}
 								}
 								{
-									double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 500);
+									double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 500);
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 										capability.ChakraAmount = _setval;
 										capability.syncPlayerVariables(entity);
 									});
 								}
-								if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+								if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(StormReleaseTechniqueItem.block, (int) 1000);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(StormReleaseTechniqueItem.block, (int) 800);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(StormReleaseTechniqueItem.block, (int) 600);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(StormReleaseTechniqueItem.block, (int) 400);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(StormReleaseTechniqueItem.block, (int) 150);
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 499) {
+							} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 29) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).stormlearn >= 2)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).stormlearn >= 2)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
 				}
 			} else if (entity.isSneaking()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).stormtechnique == 0) {
+				if (NarutoShippudenModVariables.get(entity).stormtechnique == 0) {
 					{
 						double _setval = 1;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -265,8 +245,7 @@ public class StormReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Thunder Cloud Inner Wave"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).stormtechnique == 1) {
+				} else if (NarutoShippudenModVariables.get(entity).stormtechnique == 1) {
 					{
 						double _setval = 0;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -279,8 +258,7 @@ public class StormReleaseTechniqueRightclickedProcedure {
 					}
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).stormreleaselogic == false) {
+		} else if (NarutoShippudenModVariables.get(entity).stormreleaselogic == false) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this release."), (true));
 			}

@@ -403,24 +403,17 @@ public class InfoCardGuiWindow extends ContainerScreen<InfoCardGui.GuiContainerM
 	@Override
 	protected void drawGuiContainerForegroundLayer(MatrixStack ms, int mouseX, int mouseY) {
 		this.font.drawString(ms, "LvL XP Max:", 121, -13, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).sp) + "", 196, -23, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).sp) + "", 196, -23, -16777216);
 		this.font.drawString(ms, "SP:", 179, -23, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp) + "", 138, -23, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).jp) + "", 138, -23, -16777216);
 		this.font.drawString(ms, "JP:", 121, -23, -16777216);
-		this.font.drawString(ms, "" + ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank) + "", -78, 118, -16777216);
+		this.font.drawString(ms, "" + (NarutoShippudenModVariables.get(entity).rank) + "", -78, 118, -16777216);
 		this.font.drawString(ms, "Level:", 52, -23, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELSTAT) + "", 85, -23, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).LEVELSTAT) + "", 85, -23, -16777216);
 		this.font.drawString(ms, "LvL XP:", 52, -13, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVEL) + "", 89, -13, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELMAX) + "", 180, -13, -16777216);
-		this.font.drawString(ms, "" + ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).village) + "", -71, 87, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).LEVEL) + "", 89, -13, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).LEVELMAX) + "", 180, -13, -16777216);
+		this.font.drawString(ms, "" + (NarutoShippudenModVariables.get(entity).village) + "", -71, 87, -16777216);
 	}
 
 	@Override

@@ -16,8 +16,7 @@ public class DisplayChinoikeSelectProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectclanrelease == 13) {
+		if (NarutoShippudenModVariables.get(entity).selectclanrelease == 13) {
 			return true;
 		}
 		return false;

@@ -16,14 +16,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Ball")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Slow")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 100) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Ball")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Slow")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 100) {
 			{
 				double _setval = 20;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -32,14 +28,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Wave")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Slow")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 100) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Wave")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Slow")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 100) {
 			{
 				double _setval = 25;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -48,14 +40,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Disk")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Slow")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 100) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Disk")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Slow")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 100) {
 			{
 				double _setval = 30;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -64,14 +52,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Ball")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Medium")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 100) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Ball")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Medium")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 100) {
 			{
 				double _setval = 25;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -80,14 +64,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Ball")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Fast")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 100) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Ball")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Fast")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 100) {
 			{
 				double _setval = 30;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -96,14 +76,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Wave")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Medium")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 100) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Wave")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Medium")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 100) {
 			{
 				double _setval = 30;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -112,14 +88,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Wave")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Fast")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 100) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Wave")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Fast")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 100) {
 			{
 				double _setval = 35;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -128,14 +100,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Disk")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Medium")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 100) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Disk")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Medium")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 100) {
 			{
 				double _setval = 35;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -144,14 +112,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Disk")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Fast")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 100) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Disk")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Fast")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 100) {
 			{
 				double _setval = 40;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -160,14 +124,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Ball")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Slow")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 200) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Ball")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Slow")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 200) {
 			{
 				double _setval = 25;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -176,14 +136,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Ball")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Slow")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 300) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Ball")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Slow")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 300) {
 			{
 				double _setval = 30;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -192,14 +148,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Ball")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Slow")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 400) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Ball")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Slow")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 400) {
 			{
 				double _setval = 35;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -208,14 +160,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Ball")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Slow")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 500) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Ball")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Slow")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 500) {
 			{
 				double _setval = 40;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -224,14 +172,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Ball")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Medium")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 200) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Ball")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Medium")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 200) {
 			{
 				double _setval = 30;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -240,14 +184,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Ball")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Medium")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 300) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Ball")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Medium")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 300) {
 			{
 				double _setval = 35;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -256,14 +196,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Ball")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Medium")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 400) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Ball")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Medium")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 400) {
 			{
 				double _setval = 40;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -272,14 +208,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Ball")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Medium")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 500) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Ball")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Medium")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 500) {
 			{
 				double _setval = 45;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -288,14 +220,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Ball")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Fast")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 200) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Ball")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Fast")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 200) {
 			{
 				double _setval = 35;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -304,14 +232,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Ball")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Fast")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 300) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Ball")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Fast")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 300) {
 			{
 				double _setval = 40;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -320,14 +244,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Ball")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Fast")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 400) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Ball")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Fast")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 400) {
 			{
 				double _setval = 45;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -336,14 +256,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Ball")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Fast")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 500) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Ball")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Fast")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 500) {
 			{
 				double _setval = 50;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -352,14 +268,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Wave")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Slow")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 200) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Wave")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Slow")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 200) {
 			{
 				double _setval = 30;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -368,14 +280,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Wave")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Slow")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 300) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Wave")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Slow")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 300) {
 			{
 				double _setval = 35;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -384,14 +292,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Wave")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Slow")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 400) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Wave")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Slow")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 400) {
 			{
 				double _setval = 40;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -400,14 +304,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Wave")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Slow")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 500) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Wave")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Slow")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 500) {
 			{
 				double _setval = 45;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -416,14 +316,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Wave")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Medium")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 200) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Wave")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Medium")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 200) {
 			{
 				double _setval = 35;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -432,14 +328,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Wave")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Medium")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 300) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Wave")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Medium")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 300) {
 			{
 				double _setval = 40;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -448,14 +340,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Wave")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Medium")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 400) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Wave")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Medium")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 400) {
 			{
 				double _setval = 45;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -464,14 +352,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Wave")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Medium")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 500) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Wave")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Medium")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 500) {
 			{
 				double _setval = 50;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -480,14 +364,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Wave")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Fast")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 200) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Wave")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Fast")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 200) {
 			{
 				double _setval = 40;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -496,14 +376,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Wave")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Fast")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 300) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Wave")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Fast")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 300) {
 			{
 				double _setval = 45;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -512,14 +388,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Wave")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Fast")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 400) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Wave")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Fast")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 400) {
 			{
 				double _setval = 50;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -528,14 +400,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Wave")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Fast")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 500) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Wave")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Fast")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 500) {
 			{
 				double _setval = 55;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -544,14 +412,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Disk")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Slow")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 200) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Disk")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Slow")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 200) {
 			{
 				double _setval = 35;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -560,14 +424,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Disk")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Slow")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 300) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Disk")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Slow")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 300) {
 			{
 				double _setval = 40;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -576,14 +436,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Disk")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Slow")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 400) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Disk")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Slow")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 400) {
 			{
 				double _setval = 45;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -592,14 +448,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Disk")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Slow")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 500) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Disk")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Slow")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 500) {
 			{
 				double _setval = 50;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -608,14 +460,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Disk")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Medium")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 200) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Disk")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Medium")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 200) {
 			{
 				double _setval = 40;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -624,14 +472,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Disk")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Medium")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 300) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Disk")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Medium")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 300) {
 			{
 				double _setval = 45;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -640,14 +484,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Disk")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Medium")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 400) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Disk")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Medium")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 400) {
 			{
 				double _setval = 50;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -656,14 +496,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Disk")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Medium")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 500) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Disk")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Medium")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 500) {
 			{
 				double _setval = 55;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -672,14 +508,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Disk")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Fast")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 200) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Disk")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Fast")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 200) {
 			{
 				double _setval = 45;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -688,14 +520,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Disk")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Fast")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 300) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Disk")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Fast")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 300) {
 			{
 				double _setval = 50;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -704,14 +532,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Disk")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Fast")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 400) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Disk")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Fast")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 400) {
 			{
 				double _setval = 55;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -720,14 +544,10 @@ public class CheckCustomJutsuJPPriceLightningProcedure {
 				});
 			}
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype).equals("Disk")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Fast")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 500) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsutype).equals("Disk")
+				&& (NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Fast")
+				&& (NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")
+				&& NarutoShippudenModVariables.get(entity).customjutsuchakra == 500) {
 			{
 				double _setval = 60;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {

@@ -73,8 +73,7 @@ public class PlayerWakeUpGlobalProcedure {
 			private void run() {
 				if (world.getWorldInfo().getDayTime() % 24000 == 20) {
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);

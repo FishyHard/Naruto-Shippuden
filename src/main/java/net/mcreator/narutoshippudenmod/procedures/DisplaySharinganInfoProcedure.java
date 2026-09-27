@@ -16,12 +16,9 @@ public class DisplaySharinganInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).sharingan == true
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).SharinganKakashi == true
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).SharinganShimura == true) {
+		if (NarutoShippudenModVariables.get(entity).sharingan == true
+				|| NarutoShippudenModVariables.get(entity).SharinganKakashi == true
+				|| NarutoShippudenModVariables.get(entity).SharinganShimura == true) {
 			return true;
 		}
 		return false;

@@ -16,8 +16,7 @@ public class HeadbandSelectNextProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).HeadbandSelect == 0) {
+		if (NarutoShippudenModVariables.get(entity).HeadbandSelect == 0) {
 			{
 				double _setval = 1;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -25,8 +24,7 @@ public class HeadbandSelectNextProcedure {
 					capability.syncPlayerVariables(entity);
 				});
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).HeadbandSelect == 1) {
+		} else if (NarutoShippudenModVariables.get(entity).HeadbandSelect == 1) {
 			{
 				double _setval = 2;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -34,8 +32,7 @@ public class HeadbandSelectNextProcedure {
 					capability.syncPlayerVariables(entity);
 				});
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).HeadbandSelect == 2) {
+		} else if (NarutoShippudenModVariables.get(entity).HeadbandSelect == 2) {
 			{
 				double _setval = 0;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {

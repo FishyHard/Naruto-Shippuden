@@ -38,17 +38,12 @@ public class LeeReleaseTechniqueRightclickedProcedure {
 		double potiontick5 = 0;
 		double potiontick6 = 0;
 		double potiontick7 = 0;
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).leereleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).leereleaselogic == true) {
 			if (!entity.isSneaking()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).lee_technique == 0) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).leelearn >= 1) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu >= 15
-								&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).Gate8 == false) {
+				if (NarutoShippudenModVariables.get(entity).lee_technique == 0) {
+					if (NarutoShippudenModVariables.get(entity).leelearn >= 1) {
+						if (NarutoShippudenModVariables.get(entity).taijutsu >= 15
+								&& NarutoShippudenModVariables.get(entity).Gate8 == false) {
 							if (entity instanceof LivingEntity)
 								((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.SPEED, (int) 2400, (int) 1, (false), (false)));
 							if (entity instanceof LivingEntity)
@@ -68,28 +63,21 @@ public class LeeReleaseTechniqueRightclickedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu <= 14
-								&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).Gate8 == false) {
+						} else if (NarutoShippudenModVariables.get(entity).taijutsu <= 14
+								&& NarutoShippudenModVariables.get(entity).Gate8 == false) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Taijutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).leelearn >= 1)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).leelearn >= 1)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).lee_technique == 1) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).leelearn >= 2) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu >= 30) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).gateslee == 1) {
+				} else if (NarutoShippudenModVariables.get(entity).lee_technique == 1) {
+					if (NarutoShippudenModVariables.get(entity).leelearn >= 2) {
+						if (NarutoShippudenModVariables.get(entity).taijutsu >= 30) {
+							if (NarutoShippudenModVariables.get(entity).gateslee == 1) {
 								potiontick = (new Object() {
 									int check(Entity _entity) {
 										if (_entity instanceof LivingEntity) {
@@ -129,32 +117,25 @@ public class LeeReleaseTechniqueRightclickedProcedure {
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).gateslee < 1) {
+							} else if (NarutoShippudenModVariables.get(entity).gateslee < 1) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Activate Gate Of Opening"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu <= 29) {
+						} else if (NarutoShippudenModVariables.get(entity).taijutsu <= 29) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Taijutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).leelearn >= 2)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).leelearn >= 2)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).lee_technique == 2) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).leelearn >= 3) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu >= 45) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).gateslee == 2) {
+				} else if (NarutoShippudenModVariables.get(entity).lee_technique == 2) {
+					if (NarutoShippudenModVariables.get(entity).leelearn >= 3) {
+						if (NarutoShippudenModVariables.get(entity).taijutsu >= 45) {
+							if (NarutoShippudenModVariables.get(entity).gateslee == 2) {
 								potiontick2 = (new Object() {
 									int check(Entity _entity) {
 										if (_entity instanceof LivingEntity) {
@@ -197,32 +178,25 @@ public class LeeReleaseTechniqueRightclickedProcedure {
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).gateslee < 2) {
+							} else if (NarutoShippudenModVariables.get(entity).gateslee < 2) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Activate Gate Of Healing"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu <= 44) {
+						} else if (NarutoShippudenModVariables.get(entity).taijutsu <= 44) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Taijutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).leelearn >= 3)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).leelearn >= 3)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).lee_technique == 3) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).leelearn >= 4) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu >= 60) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).gateslee == 3) {
+				} else if (NarutoShippudenModVariables.get(entity).lee_technique == 3) {
+					if (NarutoShippudenModVariables.get(entity).leelearn >= 4) {
+						if (NarutoShippudenModVariables.get(entity).taijutsu >= 60) {
+							if (NarutoShippudenModVariables.get(entity).gateslee == 3) {
 								potiontick3 = (new Object() {
 									int check(Entity _entity) {
 										if (_entity instanceof LivingEntity) {
@@ -265,32 +239,25 @@ public class LeeReleaseTechniqueRightclickedProcedure {
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).gateslee < 3) {
+							} else if (NarutoShippudenModVariables.get(entity).gateslee < 3) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Activate Gate Of Life"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu <= 59) {
+						} else if (NarutoShippudenModVariables.get(entity).taijutsu <= 59) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Taijutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).leelearn >= 4)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).leelearn >= 4)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).lee_technique == 4) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).leelearn >= 5) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu >= 75) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).gateslee == 4) {
+				} else if (NarutoShippudenModVariables.get(entity).lee_technique == 4) {
+					if (NarutoShippudenModVariables.get(entity).leelearn >= 5) {
+						if (NarutoShippudenModVariables.get(entity).taijutsu >= 75) {
+							if (NarutoShippudenModVariables.get(entity).gateslee == 4) {
 								potiontick4 = (new Object() {
 									int check(Entity _entity) {
 										if (_entity instanceof LivingEntity) {
@@ -333,32 +300,25 @@ public class LeeReleaseTechniqueRightclickedProcedure {
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).gateslee < 4) {
+							} else if (NarutoShippudenModVariables.get(entity).gateslee < 4) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Activate Gate Of Pain"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu <= 74) {
+						} else if (NarutoShippudenModVariables.get(entity).taijutsu <= 74) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Taijutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).leelearn >= 5)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).leelearn >= 5)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).lee_technique == 5) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).leelearn >= 6) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu >= 90) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).gateslee == 5) {
+				} else if (NarutoShippudenModVariables.get(entity).lee_technique == 5) {
+					if (NarutoShippudenModVariables.get(entity).leelearn >= 6) {
+						if (NarutoShippudenModVariables.get(entity).taijutsu >= 90) {
+							if (NarutoShippudenModVariables.get(entity).gateslee == 5) {
 								potiontick5 = (new Object() {
 									int check(Entity _entity) {
 										if (_entity instanceof LivingEntity) {
@@ -401,32 +361,25 @@ public class LeeReleaseTechniqueRightclickedProcedure {
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).gateslee < 5) {
+							} else if (NarutoShippudenModVariables.get(entity).gateslee < 5) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Activate Gate Of Limit"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu <= 89) {
+						} else if (NarutoShippudenModVariables.get(entity).taijutsu <= 89) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Taijutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).leelearn >= 6)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).leelearn >= 6)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).lee_technique == 6) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).leelearn >= 7) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu >= 105) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).gateslee == 6) {
+				} else if (NarutoShippudenModVariables.get(entity).lee_technique == 6) {
+					if (NarutoShippudenModVariables.get(entity).leelearn >= 7) {
+						if (NarutoShippudenModVariables.get(entity).taijutsu >= 105) {
+							if (NarutoShippudenModVariables.get(entity).gateslee == 6) {
 								potiontick6 = (new Object() {
 									int check(Entity _entity) {
 										if (_entity instanceof LivingEntity) {
@@ -469,32 +422,25 @@ public class LeeReleaseTechniqueRightclickedProcedure {
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).gateslee < 6) {
+							} else if (NarutoShippudenModVariables.get(entity).gateslee < 6) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Activate Gate Of View"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu <= 104) {
+						} else if (NarutoShippudenModVariables.get(entity).taijutsu <= 104) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Taijutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).leelearn >= 7)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).leelearn >= 7)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).lee_technique == 7) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).leelearn >= 8) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu >= 105) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).gateslee == 7) {
+				} else if (NarutoShippudenModVariables.get(entity).lee_technique == 7) {
+					if (NarutoShippudenModVariables.get(entity).leelearn >= 8) {
+						if (NarutoShippudenModVariables.get(entity).taijutsu >= 105) {
+							if (NarutoShippudenModVariables.get(entity).gateslee == 7) {
 								potiontick7 = (new Object() {
 									int check(Entity _entity) {
 										if (_entity instanceof LivingEntity) {
@@ -544,28 +490,24 @@ public class LeeReleaseTechniqueRightclickedProcedure {
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).gateslee < 7) {
+							} else if (NarutoShippudenModVariables.get(entity).gateslee < 7) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Activate Gate Of Wonder"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu <= 104) {
+						} else if (NarutoShippudenModVariables.get(entity).taijutsu <= 104) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Taijutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).leelearn >= 8)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).leelearn >= 8)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
 				}
 			} else if (entity.isSneaking()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).lee_technique == 0) {
+				if (NarutoShippudenModVariables.get(entity).lee_technique == 0) {
 					{
 						double _setval = 1;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -576,8 +518,7 @@ public class LeeReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Gate of Healing"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).lee_technique == 1) {
+				} else if (NarutoShippudenModVariables.get(entity).lee_technique == 1) {
 					{
 						double _setval = 2;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -588,8 +529,7 @@ public class LeeReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Gate of Life"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).lee_technique == 2) {
+				} else if (NarutoShippudenModVariables.get(entity).lee_technique == 2) {
 					{
 						double _setval = 3;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -600,8 +540,7 @@ public class LeeReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Gate of Pain"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).lee_technique == 3) {
+				} else if (NarutoShippudenModVariables.get(entity).lee_technique == 3) {
 					{
 						double _setval = 4;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -612,8 +551,7 @@ public class LeeReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Gate of Limit"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).lee_technique == 4) {
+				} else if (NarutoShippudenModVariables.get(entity).lee_technique == 4) {
 					{
 						double _setval = 5;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -624,8 +562,7 @@ public class LeeReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Gate of View"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).lee_technique == 5) {
+				} else if (NarutoShippudenModVariables.get(entity).lee_technique == 5) {
 					{
 						double _setval = 6;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -636,8 +573,7 @@ public class LeeReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected:  Gate of Wonder"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).lee_technique == 6) {
+				} else if (NarutoShippudenModVariables.get(entity).lee_technique == 6) {
 					{
 						double _setval = 7;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -648,8 +584,7 @@ public class LeeReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected:  Gate of Death"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).lee_technique == 7) {
+				} else if (NarutoShippudenModVariables.get(entity).lee_technique == 7) {
 					{
 						double _setval = 0;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -662,8 +597,7 @@ public class LeeReleaseTechniqueRightclickedProcedure {
 					}
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).leereleaselogic == false) {
+		} else if (NarutoShippudenModVariables.get(entity).leereleaselogic == false) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this release."), (true));
 			}

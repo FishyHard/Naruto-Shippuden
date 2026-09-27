@@ -34,17 +34,12 @@ public class MagnetReleaseTechniqueRightclickedProcedure {
 		}
 		IWorld world = (IWorld) dependencies.get("world");
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnetreleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).magnetreleaselogic == true) {
 			if (!entity.isSneaking()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnettechnique == 0) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnetlearn >= 1) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 25) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 0) {
+				if (NarutoShippudenModVariables.get(entity).magnettechnique == 0) {
+					if (NarutoShippudenModVariables.get(entity).magnetlearn >= 1) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 25) {
+							if (NarutoShippudenModVariables.get(entity).magnet_coat == 0) {
 								{
 									double _setval = 1;
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -52,8 +47,7 @@ public class MagnetReleaseTechniqueRightclickedProcedure {
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 1) {
+							} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 1) {
 								{
 									double _setval = 0;
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -61,41 +55,30 @@ public class MagnetReleaseTechniqueRightclickedProcedure {
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 2
-									|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 3) {
+							} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 2
+									|| NarutoShippudenModVariables.get(entity).magnet_coat == 3) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You've already activated Black Iron Armor"),
 											(false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 24) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnetlearn >= 1)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).magnetlearn >= 1)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnettechnique == 1) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnetlearn >= 2) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 30) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 500) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 1
-										|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 2
-										|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 3) {
+				} else if (NarutoShippudenModVariables.get(entity).magnettechnique == 1) {
+					if (NarutoShippudenModVariables.get(entity).magnetlearn >= 2) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 30) {
+							if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 500) {
+								if (NarutoShippudenModVariables.get(entity).magnet_coat == 1
+										|| NarutoShippudenModVariables.get(entity).magnet_coat == 2
+										|| NarutoShippudenModVariables.get(entity).magnet_coat == 3) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -213,8 +196,7 @@ public class MagnetReleaseTechniqueRightclickedProcedure {
 										}
 									}.start(world, (int) 70);
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 500);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 500);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
@@ -226,32 +208,25 @@ public class MagnetReleaseTechniqueRightclickedProcedure {
 												(false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 499) {
+							} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 29) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnetlearn >= 2)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).magnetlearn >= 2)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnettechnique == 2) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnetlearn >= 3) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 35) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 1) {
+				} else if (NarutoShippudenModVariables.get(entity).magnettechnique == 2) {
+					if (NarutoShippudenModVariables.get(entity).magnetlearn >= 3) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 35) {
+							if (NarutoShippudenModVariables.get(entity).magnet_coat == 1) {
 								{
 									double _setval = 2;
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -259,14 +234,12 @@ public class MagnetReleaseTechniqueRightclickedProcedure {
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 0) {
+							} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 0) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You have to use Iron Sand Coat first"),
 											(false));
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 2) {
+							} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 2) {
 								{
 									double _setval = 0;
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -274,33 +247,26 @@ public class MagnetReleaseTechniqueRightclickedProcedure {
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 3) {
+							} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 3) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You've already activated Black Iron Armor"),
 											(false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 34) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 34) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnetlearn >= 3)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).magnetlearn >= 3)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnettechnique == 3) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnetlearn >= 4) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 40) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 1) {
+				} else if (NarutoShippudenModVariables.get(entity).magnettechnique == 3) {
+					if (NarutoShippudenModVariables.get(entity).magnetlearn >= 4) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 40) {
+							if (NarutoShippudenModVariables.get(entity).magnet_coat == 1) {
 								{
 									double _setval = 3;
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -308,14 +274,12 @@ public class MagnetReleaseTechniqueRightclickedProcedure {
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 0) {
+							} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 0) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You have to use Iron Sand Coat first"),
 											(false));
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 3) {
+							} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 3) {
 								{
 									double _setval = 0;
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -323,50 +287,41 @@ public class MagnetReleaseTechniqueRightclickedProcedure {
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 2) {
+							} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 2) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You've already activated Black Iron Armor"),
 											(false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 39) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 39) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnetlearn >= 4)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).magnetlearn >= 4)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
 				}
-				if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+				if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 200);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 160);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 120);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 80);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 40);
 				}
 			} else if (entity.isSneaking()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnettechnique == 0) {
+				if (NarutoShippudenModVariables.get(entity).magnettechnique == 0) {
 					{
 						double _setval = 1;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -377,8 +332,7 @@ public class MagnetReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Iron Sand Drizzle"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnettechnique == 1) {
+				} else if (NarutoShippudenModVariables.get(entity).magnettechnique == 1) {
 					{
 						double _setval = 2;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -389,8 +343,7 @@ public class MagnetReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Black Iron Fists"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnettechnique == 2) {
+				} else if (NarutoShippudenModVariables.get(entity).magnettechnique == 2) {
 					{
 						double _setval = 3;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -401,8 +354,7 @@ public class MagnetReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Black Iron Wings"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnettechnique == 3) {
+				} else if (NarutoShippudenModVariables.get(entity).magnettechnique == 3) {
 					{
 						double _setval = 0;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -415,8 +367,7 @@ public class MagnetReleaseTechniqueRightclickedProcedure {
 					}
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnetreleaselogic == false) {
+		} else if (NarutoShippudenModVariables.get(entity).magnetreleaselogic == false) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this release."), (true));
 			}

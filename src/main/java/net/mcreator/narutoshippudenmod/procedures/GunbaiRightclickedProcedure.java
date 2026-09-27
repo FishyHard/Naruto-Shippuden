@@ -53,8 +53,7 @@ public class GunbaiRightclickedProcedure {
 		double distance = 0;
 		boolean reach = false;
 		ItemStack copy = ItemStack.EMPTY;
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).windreleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).windreleaselogic == true) {
 			if (!entity.isSneaking()) {
 				if (itemstack.getOrCreateTag().getDouble("GunbaiMode") == 0) {
 					if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHeldItemOffhand() : ItemStack.EMPTY)
@@ -76,8 +75,7 @@ public class GunbaiRightclickedProcedure {
 								}
 								copy = new ItemStack(GunbaiBlockItem.block);
 								{
-									CompoundNBT _nbtTag = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).gunbaicopy).getTag();
+									CompoundNBT _nbtTag = (NarutoShippudenModVariables.get(entity).gunbaicopy).getTag();
 									if (_nbtTag != null)
 										(copy).setTag(_nbtTag.copy());
 								}
@@ -109,8 +107,7 @@ public class GunbaiRightclickedProcedure {
 								}
 								copy = new ItemStack(GunbaiBlockItem.block);
 								{
-									CompoundNBT _nbtTag = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).gunbaicopy).getTag();
+									CompoundNBT _nbtTag = (NarutoShippudenModVariables.get(entity).gunbaicopy).getTag();
 									if (_nbtTag != null)
 										(copy).setTag(_nbtTag.copy());
 								}

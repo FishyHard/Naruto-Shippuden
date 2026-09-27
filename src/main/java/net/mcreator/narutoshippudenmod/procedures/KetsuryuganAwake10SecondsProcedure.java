@@ -32,8 +32,7 @@ public class KetsuryuganAwake10SecondsProcedure {
 		}
 		IWorld world = (IWorld) dependencies.get("world");
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).ketsuryugan == false) {
+		if (NarutoShippudenModVariables.get(entity).ketsuryugan == false) {
 			new Object() {
 				private int ticks = 0;
 				private float waitTicks;
@@ -83,8 +82,7 @@ public class KetsuryuganAwake10SecondsProcedure {
 					MinecraftForge.EVENT_BUS.unregister(this);
 				}
 			}.start(world, (int) 200);
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).ketsuryugan == true) {
+		} else if (NarutoShippudenModVariables.get(entity).ketsuryugan == true) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You've already unlocked ketsuryugan."), (false));
 			}

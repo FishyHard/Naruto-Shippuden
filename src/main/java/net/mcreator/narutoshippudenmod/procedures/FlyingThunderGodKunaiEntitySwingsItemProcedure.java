@@ -64,57 +64,40 @@ public class FlyingThunderGodKunaiEntitySwingsItemProcedure {
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 		Entity entity = (Entity) dependencies.get("entity");
 		ItemStack itemstack = (ItemStack) dependencies.get("itemstack");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).shurikenjutsu >= 25) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 10) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 50) {
+		if (NarutoShippudenModVariables.get(entity).shurikenjutsu >= 25) {
+			if (NarutoShippudenModVariables.get(entity).ninjutsu >= 10) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 50) {
 					if (!entity.isSneaking()) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaiteleportselect == 0) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos1logic == true) {
+						if (NarutoShippudenModVariables.get(entity).flyingthundergodkunaiteleportselect == 0) {
+							if (NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1logic == true) {
 								{
 									Entity _ent = entity;
 									_ent.setPositionAndUpdate(
-											((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-													.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos1x),
-											((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-													.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos1y),
-											((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-													.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos1z));
+											(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1x),
+											(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1y),
+											(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1z));
 									if (_ent instanceof ServerPlayerEntity) {
 										((ServerPlayerEntity) _ent).connection.setPlayerLocation(
-												((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos1x),
-												((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos1y),
-												((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos1z),
+												(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1x),
+												(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1y),
+												(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1z),
 												_ent.rotationYaw, _ent.rotationPitch, Collections.emptySet());
 									}
 								}
 								{
 									List<Entity> _entfound = world.getEntitiesWithinAABB(Entity.class,
 											new AxisAlignedBB(
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos1x)
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1x)
 															- (2 / 2d),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos1y)
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1y)
 															- (2 / 2d),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos1z)
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1z)
 															- (2 / 2d),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos1x)
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1x)
 															+ (2 / 2d),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos1y)
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1y)
 															+ (2 / 2d),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos1z)
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1z)
 															+ (2 / 2d)),
 											null).stream().sorted(new Object() {
 												Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
@@ -122,12 +105,9 @@ public class FlyingThunderGodKunaiEntitySwingsItemProcedure {
 															.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.getDistanceSq(_x, _y, _z)));
 												}
 											}.compareDistOf(
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos1x),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos1y),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos1z)))
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1x),
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1y),
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1z)))
 											.collect(Collectors.toList());
 									for (Entity entityiterator : _entfound) {
 										if (entityiterator instanceof FlyingThunderGodKunaiEntityEntity.CustomEntity) {
@@ -164,50 +144,36 @@ public class FlyingThunderGodKunaiEntitySwingsItemProcedure {
 								if (entity instanceof PlayerEntity)
 									((PlayerEntity) entity).getCooldownTracker().setCooldown(itemstack.getItem(), (int) 15);
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaiteleportselect == 1) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos2logic == true) {
+						} else if (NarutoShippudenModVariables.get(entity).flyingthundergodkunaiteleportselect == 1) {
+							if (NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2logic == true) {
 								{
 									Entity _ent = entity;
 									_ent.setPositionAndUpdate(
-											((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-													.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos2x),
-											((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-													.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos2y),
-											((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-													.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos2z));
+											(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2x),
+											(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2y),
+											(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2z));
 									if (_ent instanceof ServerPlayerEntity) {
 										((ServerPlayerEntity) _ent).connection.setPlayerLocation(
-												((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos2x),
-												((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos2y),
-												((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos2z),
+												(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2x),
+												(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2y),
+												(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2z),
 												_ent.rotationYaw, _ent.rotationPitch, Collections.emptySet());
 									}
 								}
 								{
 									List<Entity> _entfound = world.getEntitiesWithinAABB(Entity.class,
 											new AxisAlignedBB(
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos2x)
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2x)
 															- (2 / 2d),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos2y)
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2y)
 															- (2 / 2d),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos2z)
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2z)
 															- (2 / 2d),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos2x)
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2x)
 															+ (2 / 2d),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos2y)
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2y)
 															+ (2 / 2d),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos2z)
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2z)
 															+ (2 / 2d)),
 											null).stream().sorted(new Object() {
 												Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
@@ -215,12 +181,9 @@ public class FlyingThunderGodKunaiEntitySwingsItemProcedure {
 															.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.getDistanceSq(_x, _y, _z)));
 												}
 											}.compareDistOf(
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos2x),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos2y),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos2z)))
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2x),
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2y),
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2z)))
 											.collect(Collectors.toList());
 									for (Entity entityiterator : _entfound) {
 										if (entityiterator instanceof FlyingThunderGodKunaiEntityEntity.CustomEntity) {
@@ -257,50 +220,36 @@ public class FlyingThunderGodKunaiEntitySwingsItemProcedure {
 								if (entity instanceof PlayerEntity)
 									((PlayerEntity) entity).getCooldownTracker().setCooldown(itemstack.getItem(), (int) 15);
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaiteleportselect == 2) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos3logic == true) {
+						} else if (NarutoShippudenModVariables.get(entity).flyingthundergodkunaiteleportselect == 2) {
+							if (NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3logic == true) {
 								{
 									Entity _ent = entity;
 									_ent.setPositionAndUpdate(
-											((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-													.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos3x),
-											((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-													.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos3y),
-											((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-													.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos3z));
+											(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3x),
+											(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3y),
+											(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3z));
 									if (_ent instanceof ServerPlayerEntity) {
 										((ServerPlayerEntity) _ent).connection.setPlayerLocation(
-												((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos3x),
-												((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos3y),
-												((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos3z),
+												(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3x),
+												(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3y),
+												(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3z),
 												_ent.rotationYaw, _ent.rotationPitch, Collections.emptySet());
 									}
 								}
 								{
 									List<Entity> _entfound = world.getEntitiesWithinAABB(Entity.class,
 											new AxisAlignedBB(
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos3x)
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3x)
 															- (2 / 2d),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos3y)
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3y)
 															- (2 / 2d),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos3z)
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3z)
 															- (2 / 2d),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos3x)
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3x)
 															+ (2 / 2d),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos3y)
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3y)
 															+ (2 / 2d),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos3z)
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3z)
 															+ (2 / 2d)),
 											null).stream().sorted(new Object() {
 												Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
@@ -308,12 +257,9 @@ public class FlyingThunderGodKunaiEntitySwingsItemProcedure {
 															.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.getDistanceSq(_x, _y, _z)));
 												}
 											}.compareDistOf(
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos3x),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos3y),
-													((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaipos3z)))
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3x),
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3y),
+													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3z)))
 											.collect(Collectors.toList());
 									for (Entity entityiterator : _entfound) {
 										if (entityiterator instanceof FlyingThunderGodKunaiEntityEntity.CustomEntity) {
@@ -352,8 +298,7 @@ public class FlyingThunderGodKunaiEntitySwingsItemProcedure {
 							}
 						}
 					} else if (entity.isSneaking()) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaiteleportselect == 0) {
+						if (NarutoShippudenModVariables.get(entity).flyingthundergodkunaiteleportselect == 0) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Flying Thunder God Kunai: 2"), (true));
 							}
@@ -364,8 +309,7 @@ public class FlyingThunderGodKunaiEntitySwingsItemProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaiteleportselect == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).flyingthundergodkunaiteleportselect == 1) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Flying Thunder God Kunai: 3"), (true));
 							}
@@ -376,8 +320,7 @@ public class FlyingThunderGodKunaiEntitySwingsItemProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).flyingthundergodkunaiteleportselect == 2) {
+						} else if (NarutoShippudenModVariables.get(entity).flyingthundergodkunaiteleportselect == 2) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Flying Thunder God Kunai: 1"), (true));
 							}
@@ -390,20 +333,17 @@ public class FlyingThunderGodKunaiEntitySwingsItemProcedure {
 							}
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 49) {
+				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 49) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 9) {
+			} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 9) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).shurikenjutsu <= 24) {
+		} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 24) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Shurikenjutsu"), (false));
 			}

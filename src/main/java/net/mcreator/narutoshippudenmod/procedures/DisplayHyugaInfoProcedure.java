@@ -16,8 +16,7 @@ public class DisplayHyugaInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugareleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).hyugareleaselogic == true) {
 			return true;
 		}
 		return false;

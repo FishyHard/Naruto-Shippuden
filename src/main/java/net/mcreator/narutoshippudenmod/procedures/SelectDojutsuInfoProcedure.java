@@ -16,14 +16,10 @@ public class SelectDojutsuInfoProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Sharingan")) {
-			if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelect2).equals("Default")) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+		if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Sharingan")) {
+			if ((NarutoShippudenModVariables.get(entity).DojutsuSelect2).equals("Default")) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 					{
 						String _setval = "1x1";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -32,10 +28,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 					{
 						String _setval = "2x1";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -44,10 +38,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 					{
 						String _setval = "1x2";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -56,10 +48,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 					{
 						String _setval = "2x2";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -68,12 +58,9 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelect2).equals("Kakashi")) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelect2).equals("Kakashi")) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 					{
 						String _setval = "1x1";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -82,10 +69,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 					{
 						String _setval = "2x1";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -94,10 +79,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 					{
 						String _setval = "1x2";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -106,10 +89,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 					{
 						String _setval = "2x2";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -119,12 +100,9 @@ public class SelectDojutsuInfoProcedure {
 					}
 				}
 			}
-		} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Byakugan")) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+		} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Byakugan")) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 				{
 					String _setval = "1x1";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -133,10 +111,8 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 				{
 					String _setval = "2x1";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -145,10 +121,8 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 				{
 					String _setval = "1x2";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -157,10 +131,8 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 				{
 					String _setval = "2x2";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -169,12 +141,9 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-		} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Ketsuryugan")) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+		} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Ketsuryugan")) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 				{
 					String _setval = "1x1";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -183,10 +152,8 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 				{
 					String _setval = "2x1";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -195,10 +162,8 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 				{
 					String _setval = "1x2";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -207,10 +172,8 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 				{
 					String _setval = "2x2";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -219,16 +182,11 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-		} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Mangekyou")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelect3).equals("Sharingan")) {
-			if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelect2).equals("Sasuke")) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+		} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Mangekyou")
+				&& (NarutoShippudenModVariables.get(entity).DojutsuSelect3).equals("Sharingan")) {
+			if ((NarutoShippudenModVariables.get(entity).DojutsuSelect2).equals("Sasuke")) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 					{
 						String _setval = "1x1";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -237,10 +195,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 					{
 						String _setval = "2x1";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -249,10 +205,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 					{
 						String _setval = "1x2";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -261,10 +215,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 					{
 						String _setval = "2x2";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -273,12 +225,9 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelect2).equals("Itachi")) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelect2).equals("Itachi")) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 					{
 						String _setval = "1x1";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -287,10 +236,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 					{
 						String _setval = "2x1";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -299,10 +246,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 					{
 						String _setval = "1x2";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -311,10 +256,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 					{
 						String _setval = "2x2";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -323,12 +266,9 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelect2).equals("Madara")) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelect2).equals("Madara")) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 					{
 						String _setval = "1x1";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -337,10 +277,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 					{
 						String _setval = "2x1";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -349,10 +287,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 					{
 						String _setval = "1x2";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -361,10 +297,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 					{
 						String _setval = "2x2";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -373,12 +307,9 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelect2).equals("Obito")) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelect2).equals("Obito")) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 					{
 						String _setval = "1x1";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -387,10 +318,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 					{
 						String _setval = "2x1";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -399,10 +328,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 					{
 						String _setval = "1x2";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -411,10 +338,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 					{
 						String _setval = "2x2";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -423,12 +348,9 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelect2).equals("Shisui")) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelect2).equals("Shisui")) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 					{
 						String _setval = "1x1";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -437,10 +359,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 					{
 						String _setval = "2x1";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -449,10 +369,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 					{
 						String _setval = "1x2";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -461,10 +379,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 					{
 						String _setval = "2x2";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -473,12 +389,9 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelect2).equals("Kakashi")) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelect2).equals("Kakashi")) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 					{
 						String _setval = "1x1";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -487,10 +400,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 					{
 						String _setval = "2x1";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -499,10 +410,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 					{
 						String _setval = "1x2";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -511,10 +420,8 @@ public class SelectDojutsuInfoProcedure {
 						});
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 					{
 						String _setval = "2x2";
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -524,12 +431,9 @@ public class SelectDojutsuInfoProcedure {
 					}
 				}
 			}
-		} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Rinnegan")) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+		} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Rinnegan")) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 				{
 					String _setval = "1x1";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -538,10 +442,8 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 				{
 					String _setval = "2x1";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -550,10 +452,8 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 				{
 					String _setval = "1x2";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -562,10 +462,8 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 				{
 					String _setval = "2x2";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -574,12 +472,9 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-		} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Tenseigan")) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+		} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Tenseigan")) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 				{
 					String _setval = "1x1";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -588,10 +483,8 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 				{
 					String _setval = "2x1";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -600,10 +493,8 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 				{
 					String _setval = "1x2";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -612,10 +503,8 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 				{
 					String _setval = "2x2";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -624,12 +513,9 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-		} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Isshiki Dojutsu")) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+		} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Isshiki Dojutsu")) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 				{
 					String _setval = "1x1";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -638,10 +524,8 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 				{
 					String _setval = "2x1";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -650,10 +534,8 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 				{
 					String _setval = "1x2";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -662,10 +544,8 @@ public class SelectDojutsuInfoProcedure {
 					});
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2) {
+			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2) {
 				{
 					String _setval = "2x2";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {

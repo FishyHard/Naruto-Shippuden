@@ -52,20 +52,13 @@ public class MangekyouSharinganOnKeyPressedProcedure {
 		double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganSasuke == true
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganItachi == true
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganMadara == true
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganObito == true
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganShisui == true
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganKakashi == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganActivate == false) {
+		if (NarutoShippudenModVariables.get(entity).MangekyouSharinganSasuke == true
+				|| NarutoShippudenModVariables.get(entity).MangekyouSharinganItachi == true
+				|| NarutoShippudenModVariables.get(entity).MangekyouSharinganMadara == true
+				|| NarutoShippudenModVariables.get(entity).MangekyouSharinganObito == true
+				|| NarutoShippudenModVariables.get(entity).MangekyouSharinganShisui == true
+				|| NarutoShippudenModVariables.get(entity).MangekyouSharinganKakashi == true) {
+			if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == false) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A7cMangekyou Sharingan!"), (false));
 				}
@@ -89,8 +82,7 @@ public class MangekyouSharinganOnKeyPressedProcedure {
 									.getValue(new ResourceLocation("naruto_shippuden:mangekyou_sharingan")),
 							SoundCategory.NEUTRAL, (float) 1, (float) 1, false);
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganActivate == true) {
+			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == true) {
 				if (entity instanceof LivingEntity) {
 					((LivingEntity) entity).removePotionEffect(Effects.STRENGTH);
 				}
@@ -102,18 +94,12 @@ public class MangekyouSharinganOnKeyPressedProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganSasuke == false
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganItachi == false
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganMadara == false
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganObito == false
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganShisui == false
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganKakashi == false) {
+		} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganSasuke == false
+				|| NarutoShippudenModVariables.get(entity).MangekyouSharinganItachi == false
+				|| NarutoShippudenModVariables.get(entity).MangekyouSharinganMadara == false
+				|| NarutoShippudenModVariables.get(entity).MangekyouSharinganObito == false
+				|| NarutoShippudenModVariables.get(entity).MangekyouSharinganShisui == false
+				|| NarutoShippudenModVariables.get(entity).MangekyouSharinganKakashi == false) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked Mangekyou Sharingan"), (false));
 			}

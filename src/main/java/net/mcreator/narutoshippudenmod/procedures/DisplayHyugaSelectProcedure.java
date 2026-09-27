@@ -16,8 +16,7 @@ public class DisplayHyugaSelectProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectclanrelease == 2) {
+		if (NarutoShippudenModVariables.get(entity).selectclanrelease == 2) {
 			return true;
 		}
 		return false;

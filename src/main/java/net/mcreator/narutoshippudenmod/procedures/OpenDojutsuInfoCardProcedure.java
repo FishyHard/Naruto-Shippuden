@@ -56,10 +56,8 @@ public class OpenDojutsuInfoCardProcedure {
 		double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).BoxDeity == false
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).TheSirMarcus == false) {
+		if (NarutoShippudenModVariables.get(entity).BoxDeity == false
+				&& NarutoShippudenModVariables.get(entity).TheSirMarcus == false) {
 			{
 				Entity _ent = entity;
 				if (_ent instanceof ServerPlayerEntity) {
@@ -77,10 +75,8 @@ public class OpenDojutsuInfoCardProcedure {
 					}, _bpos);
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).BoxDeity == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Login_Dojutsu == false) {
+		} else if (NarutoShippudenModVariables.get(entity).BoxDeity == true) {
+			if (NarutoShippudenModVariables.get(entity).Login_Dojutsu == false) {
 				{
 					Entity _ent = entity;
 					if (_ent instanceof ServerPlayerEntity) {
@@ -99,8 +95,7 @@ public class OpenDojutsuInfoCardProcedure {
 						}, _bpos);
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Login_Dojutsu == true) {
+			} else if (NarutoShippudenModVariables.get(entity).Login_Dojutsu == true) {
 				{
 					Entity _ent = entity;
 					if (_ent instanceof ServerPlayerEntity) {
@@ -120,10 +115,8 @@ public class OpenDojutsuInfoCardProcedure {
 					}
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).TheSirMarcus == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Login_Dojutsu == false) {
+		} else if (NarutoShippudenModVariables.get(entity).TheSirMarcus == true) {
+			if (NarutoShippudenModVariables.get(entity).Login_Dojutsu == false) {
 				{
 					Entity _ent = entity;
 					if (_ent instanceof ServerPlayerEntity) {
@@ -142,8 +135,7 @@ public class OpenDojutsuInfoCardProcedure {
 						}, _bpos);
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Login_Dojutsu == true) {
+			} else if (NarutoShippudenModVariables.get(entity).Login_Dojutsu == true) {
 				{
 					Entity _ent = entity;
 					if (_ent instanceof ServerPlayerEntity) {

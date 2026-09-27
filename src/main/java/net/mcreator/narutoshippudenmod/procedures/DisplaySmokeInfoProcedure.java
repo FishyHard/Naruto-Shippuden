@@ -16,8 +16,7 @@ public class DisplaySmokeInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).smokereleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).smokereleaselogic == true) {
 			return true;
 		}
 		return false;

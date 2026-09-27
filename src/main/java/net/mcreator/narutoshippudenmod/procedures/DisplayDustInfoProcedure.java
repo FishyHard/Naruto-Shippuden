@@ -16,8 +16,7 @@ public class DisplayDustInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).dustreleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).dustreleaselogic == true) {
 			return true;
 		}
 		return false;

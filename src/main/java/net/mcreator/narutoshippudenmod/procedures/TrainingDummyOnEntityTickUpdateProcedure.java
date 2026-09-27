@@ -91,10 +91,8 @@ public class TrainingDummyOnEntityTickUpdateProcedure {
 					}.compareDistOf(x, y, z)).collect(Collectors.toList());
 			for (Entity entityiterator : _entfound) {
 				if (entityiterator instanceof PlayerEntity) {
-					if ((entityiterator.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 8) {
-						if ((entityiterator.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).TrainingDummyHits >= 100) {
+					if (NarutoShippudenModVariables.get(entityiterator).storymode == 8) {
+						if (NarutoShippudenModVariables.get(entityiterator).TrainingDummyHits >= 100) {
 							if (!entity.world.isRemote())
 								entity.remove();
 						}

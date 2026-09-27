@@ -16,8 +16,7 @@ public class CustomJutsuButtonMinusSpeedProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Slow")) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Slow")) {
 			{
 				String _setval = "Fast";
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -25,8 +24,7 @@ public class CustomJutsuButtonMinusSpeedProcedure {
 					capability.syncPlayerVariables(entity);
 				});
 			}
-		} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Medium")) {
+		} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Medium")) {
 			{
 				String _setval = "Slow";
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -34,8 +32,7 @@ public class CustomJutsuButtonMinusSpeedProcedure {
 					capability.syncPlayerVariables(entity);
 				});
 			}
-		} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed).equals("Fast")) {
+		} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed).equals("Fast")) {
 			{
 				String _setval = "Medium";
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {

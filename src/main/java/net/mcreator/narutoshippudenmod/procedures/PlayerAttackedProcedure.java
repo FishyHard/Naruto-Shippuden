@@ -68,23 +68,17 @@ public class PlayerAttackedProcedure {
 		Entity sourceentity = (Entity) dependencies.get("sourceentity");
 		ItemStack copy = ItemStack.EMPTY;
 		if (entity instanceof PlayerEntity) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DanceOfTheLarch == true) {
+			if (NarutoShippudenModVariables.get(entity).DanceOfTheLarch == true) {
 				sourceentity.attackEntityFrom(DamageSource.GENERIC, (float) 5);
 			}
 		}
 		if (entity instanceof PlayerEntity) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage >= 1) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).AmaterasuSusano == true) {
+			if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage >= 1) {
+				if (NarutoShippudenModVariables.get(entity).AmaterasuSusano == true) {
 					if (sourceentity instanceof PlayerEntity) {
-						if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansasukeamaterasulearn == 0) {
-							if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganSasuke == false
-									&& (sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganItachi == false) {
+						if (NarutoShippudenModVariables.get(sourceentity).mangekyousharingansasukeamaterasulearn == 0) {
+							if (NarutoShippudenModVariables.get(sourceentity).MangekyouSharinganSasuke == false
+									&& NarutoShippudenModVariables.get(sourceentity).MangekyouSharinganItachi == false) {
 								sourceentity.getPersistentData().putBoolean("Amaterasu", (true));
 								if (sourceentity instanceof LivingEntity)
 									((LivingEntity) sourceentity)
@@ -93,12 +87,9 @@ public class PlayerAttackedProcedure {
 							}
 						}
 					} else if (!(sourceentity instanceof PlayerEntity)) {
-						if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansasukeamaterasulearn == 0) {
-							if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganSasuke == false
-									&& (sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganItachi == false) {
+						if (NarutoShippudenModVariables.get(sourceentity).mangekyousharingansasukeamaterasulearn == 0) {
+							if (NarutoShippudenModVariables.get(sourceentity).MangekyouSharinganSasuke == false
+									&& NarutoShippudenModVariables.get(sourceentity).MangekyouSharinganItachi == false) {
 								if (sourceentity instanceof LivingEntity)
 									((LivingEntity) sourceentity)
 											.addPotionEffect(new EffectInstance(Effects.WITHER, (int) 999999, (int) 3, (false), (false)));
@@ -122,12 +113,10 @@ public class PlayerAttackedProcedure {
 						{
 							CompoundNBT _nbtTag = (copy).getTag();
 							if (_nbtTag != null)
-								((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).gunbaicopy).setTag(_nbtTag.copy());
+								(NarutoShippudenModVariables.get(entity).gunbaicopy).setTag(_nbtTag.copy());
 						}
 						if (entity instanceof LivingEntity) {
-							ItemStack _setstack = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).gunbaicopy);
+							ItemStack _setstack = (NarutoShippudenModVariables.get(entity).gunbaicopy);
 							_setstack.setCount((int) 1);
 							((LivingEntity) entity).setHeldItem(Hand.MAIN_HAND, _setstack);
 							if (entity instanceof ServerPlayerEntity)
@@ -156,12 +145,10 @@ public class PlayerAttackedProcedure {
 						{
 							CompoundNBT _nbtTag = (copy).getTag();
 							if (_nbtTag != null)
-								((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).gunbaicopy).setTag(_nbtTag.copy());
+								(NarutoShippudenModVariables.get(entity).gunbaicopy).setTag(_nbtTag.copy());
 						}
 						if (entity instanceof LivingEntity) {
-							ItemStack _setstack = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).gunbaicopy);
+							ItemStack _setstack = (NarutoShippudenModVariables.get(entity).gunbaicopy);
 							_setstack.setCount((int) 1);
 							((LivingEntity) entity).setHeldItem(Hand.OFF_HAND, _setstack);
 							if (entity instanceof ServerPlayerEntity)

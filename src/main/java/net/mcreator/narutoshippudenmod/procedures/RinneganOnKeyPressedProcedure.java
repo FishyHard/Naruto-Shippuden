@@ -52,10 +52,8 @@ public class RinneganOnKeyPressedProcedure {
 		double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).rinnegan == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).rinneganactivate == false) {
+		if (NarutoShippudenModVariables.get(entity).rinnegan == true) {
+			if (NarutoShippudenModVariables.get(entity).rinneganactivate == false) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A7dRinnegan!"), (false));
 				}
@@ -77,8 +75,7 @@ public class RinneganOnKeyPressedProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).rinneganactivate == true) {
+			} else if (NarutoShippudenModVariables.get(entity).rinneganactivate == true) {
 				if (entity instanceof LivingEntity) {
 					((LivingEntity) entity).removePotionEffect(Effects.STRENGTH);
 				}
@@ -90,8 +87,7 @@ public class RinneganOnKeyPressedProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).rinnegan == false) {
+		} else if (NarutoShippudenModVariables.get(entity).rinnegan == false) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked Rinnegan"), (false));
 			}

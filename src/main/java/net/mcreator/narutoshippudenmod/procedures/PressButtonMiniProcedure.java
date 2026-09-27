@@ -17,8 +17,7 @@ public class PressButtonMiniProcedure {
 		}
 		Entity entity = (Entity) dependencies.get("entity");
 		{
-			double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELMINIGAME + 1);
+			double _setval = (NarutoShippudenModVariables.get(entity).LEVELMINIGAME + 1);
 			entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 				capability.LEVELMINIGAME = _setval;
 				capability.syncPlayerVariables(entity);

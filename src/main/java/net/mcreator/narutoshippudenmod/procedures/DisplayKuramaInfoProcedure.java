@@ -16,8 +16,7 @@ public class DisplayKuramaInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).kuramareleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).kuramareleaselogic == true) {
 			return true;
 		}
 		return false;

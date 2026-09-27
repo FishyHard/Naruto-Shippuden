@@ -23,14 +23,10 @@ public class MangekyouSharinganItachiReleaseRightclickedProcedure {
 		}
 		Entity entity = (Entity) dependencies.get("entity");
 		if (!entity.isSneaking()) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganRelease == 0) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyoushrainganitachiamaterasulearn == 0) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp >= 10) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyoushrainganitachisusanolearn == 0) {
+			if (NarutoShippudenModVariables.get(entity).MangekyouSharinganRelease == 0) {
+				if (NarutoShippudenModVariables.get(entity).mangekyoushrainganitachiamaterasulearn == 0) {
+					if (NarutoShippudenModVariables.get(entity).jp >= 10) {
+						if (NarutoShippudenModVariables.get(entity).mangekyoushrainganitachisusanolearn == 0) {
 							if (entity instanceof PlayerEntity) {
 								ItemStack _setstack = new ItemStack(MangekyouSharinganItachiReleaseTechniqueItem.block);
 								_setstack.setCount((int) 1);
@@ -45,8 +41,7 @@ public class MangekyouSharinganItachiReleaseRightclickedProcedure {
 							});
 						}
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp - 10);
+							double _setval = (NarutoShippudenModVariables.get(entity).jp - 10);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.jp = _setval;
 								capability.syncPlayerVariables(entity);
@@ -55,19 +50,15 @@ public class MangekyouSharinganItachiReleaseRightclickedProcedure {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("-10 JP"), (false));
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp <= 9) {
+					} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough JP"), (false));
 						}
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganRelease == 1) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyoushrainganitachisusanorelease == 0) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp >= 10) {
+			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganRelease == 1) {
+				if (NarutoShippudenModVariables.get(entity).mangekyoushrainganitachisusanorelease == 0) {
+					if (NarutoShippudenModVariables.get(entity).jp >= 10) {
 						{
 							double _setval = 1;
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -76,16 +67,14 @@ public class MangekyouSharinganItachiReleaseRightclickedProcedure {
 							});
 						}
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp - 10);
+							double _setval = (NarutoShippudenModVariables.get(entity).jp - 10);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.jp = _setval;
 								capability.syncPlayerVariables(entity);
 							});
 						}
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyoushrainganitachisusanorelease + 1);
+							double _setval = (NarutoShippudenModVariables.get(entity).mangekyoushrainganitachisusanorelease + 1);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.mangekyoushrainganitachisusanorelease = _setval;
 								capability.syncPlayerVariables(entity);
@@ -94,16 +83,13 @@ public class MangekyouSharinganItachiReleaseRightclickedProcedure {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("-10 JP"), (false));
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp <= 9) {
+					} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough JP"), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyoushrainganitachisusanorelease == 1) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp >= 20) {
+				} else if (NarutoShippudenModVariables.get(entity).mangekyoushrainganitachisusanorelease == 1) {
+					if (NarutoShippudenModVariables.get(entity).jp >= 20) {
 						{
 							double _setval = 2;
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -112,16 +98,14 @@ public class MangekyouSharinganItachiReleaseRightclickedProcedure {
 							});
 						}
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp - 20);
+							double _setval = (NarutoShippudenModVariables.get(entity).jp - 20);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.jp = _setval;
 								capability.syncPlayerVariables(entity);
 							});
 						}
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyoushrainganitachisusanorelease + 1);
+							double _setval = (NarutoShippudenModVariables.get(entity).mangekyoushrainganitachisusanorelease + 1);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.mangekyoushrainganitachisusanorelease = _setval;
 								capability.syncPlayerVariables(entity);
@@ -130,16 +114,13 @@ public class MangekyouSharinganItachiReleaseRightclickedProcedure {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("-20 JP"), (false));
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp <= 19) {
+					} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough JP"), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyoushrainganitachisusanorelease == 2) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp >= 30) {
+				} else if (NarutoShippudenModVariables.get(entity).mangekyoushrainganitachisusanorelease == 2) {
+					if (NarutoShippudenModVariables.get(entity).jp >= 30) {
 						{
 							double _setval = 3;
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -148,16 +129,14 @@ public class MangekyouSharinganItachiReleaseRightclickedProcedure {
 							});
 						}
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp - 30);
+							double _setval = (NarutoShippudenModVariables.get(entity).jp - 30);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.jp = _setval;
 								capability.syncPlayerVariables(entity);
 							});
 						}
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyoushrainganitachisusanorelease + 1);
+							double _setval = (NarutoShippudenModVariables.get(entity).mangekyoushrainganitachisusanorelease + 1);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.mangekyoushrainganitachisusanorelease = _setval;
 								capability.syncPlayerVariables(entity);
@@ -166,8 +145,7 @@ public class MangekyouSharinganItachiReleaseRightclickedProcedure {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("-30 JP"), (false));
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp <= 29) {
+					} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough JP"), (false));
 						}
@@ -175,8 +153,7 @@ public class MangekyouSharinganItachiReleaseRightclickedProcedure {
 				}
 			}
 		} else if (entity.isSneaking()) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganRelease == 0) {
+			if (NarutoShippudenModVariables.get(entity).MangekyouSharinganRelease == 0) {
 				{
 					double _setval = 1;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -187,8 +164,7 @@ public class MangekyouSharinganItachiReleaseRightclickedProcedure {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Susano"), (true));
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganRelease == 1) {
+			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganRelease == 1) {
 				{
 					double _setval = 0;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {

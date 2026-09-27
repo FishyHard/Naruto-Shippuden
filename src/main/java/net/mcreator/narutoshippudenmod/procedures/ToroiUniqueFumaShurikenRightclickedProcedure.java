@@ -24,8 +24,7 @@ public class ToroiUniqueFumaShurikenRightclickedProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).shurikenjutsu >= 25) {
+		if (NarutoShippudenModVariables.get(entity).shurikenjutsu >= 25) {
 			{
 				Entity _shootFrom = entity;
 				World projectileLevel = _shootFrom.world;
@@ -52,8 +51,7 @@ public class ToroiUniqueFumaShurikenRightclickedProcedure {
 				((PlayerEntity) entity).inventory.func_234564_a_(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
 						((PlayerEntity) entity).container.func_234641_j_());
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).shurikenjutsu <= 24) {
+		} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 24) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Shurikenjutsu"), (false));
 			}

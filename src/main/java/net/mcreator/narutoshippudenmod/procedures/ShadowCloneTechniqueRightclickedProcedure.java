@@ -63,14 +63,10 @@ public class ShadowCloneTechniqueRightclickedProcedure {
 		Entity entity = (Entity) dependencies.get("entity");
 		double clonecount = 0;
 		double storyrandomclones = 0;
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 5) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 30) {
-				if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 14)
-						&& !((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 5)) {
+		if (NarutoShippudenModVariables.get(entity).ninjutsu >= 5) {
+			if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 30) {
+				if (!(NarutoShippudenModVariables.get(entity).storymode == 14)
+						&& !(NarutoShippudenModVariables.get(entity).storymode == 5)) {
 					clonecount = (MathHelper.nextInt(new Random(), 1, 6));
 					if ((entity.getHorizontalFacing()) == Direction.SOUTH) {
 						if (clonecount == 1) {
@@ -1144,10 +1140,8 @@ public class ShadowCloneTechniqueRightclickedProcedure {
 					}
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(ShadowCloneTechniqueItem.block, (int) 25);
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 14) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).StorymodeCooldown == 7) {
+				} else if (NarutoShippudenModVariables.get(entity).storymode == 14) {
+					if (NarutoShippudenModVariables.get(entity).StorymodeCooldown == 7) {
 						storyrandomclones = (MathHelper.nextInt(new Random(), 1, 2));
 						if (storyrandomclones == 1) {
 							if ((entity.getHorizontalFacing()) == Direction.SOUTH) {
@@ -1588,8 +1582,7 @@ public class ShadowCloneTechniqueRightclickedProcedure {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(ShadowCloneTechniqueItem.block, (int) 25);
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 5) {
+				} else if (NarutoShippudenModVariables.get(entity).storymode == 5) {
 					clonecount = (MathHelper.nextInt(new Random(), 1, 6));
 					if ((entity.getHorizontalFacing()) == Direction.SOUTH) {
 						if (clonecount == 1) {
@@ -2670,8 +2663,7 @@ public class ShadowCloneTechniqueRightclickedProcedure {
 					}
 				}
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 30);
+					double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 30);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.ChakraAmount = _setval;
 						capability.syncPlayerVariables(entity);
@@ -2679,14 +2671,12 @@ public class ShadowCloneTechniqueRightclickedProcedure {
 				}
 				if (entity instanceof PlayerEntity)
 					((PlayerEntity) entity).getCooldownTracker().setCooldown(ShadowCloneTechniqueItem.block, (int) 25);
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 29) {
+			} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 29) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 4) {
+		} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 4) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 			}

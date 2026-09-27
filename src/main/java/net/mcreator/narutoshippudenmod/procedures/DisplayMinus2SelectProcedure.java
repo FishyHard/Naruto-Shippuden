@@ -16,12 +16,9 @@ public class DisplayMinus2SelectProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Mangekyou")
-				|| ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelect3).equals("Sharingan")
-				|| ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Sharingan")) {
+		if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Mangekyou")
+				|| (NarutoShippudenModVariables.get(entity).DojutsuSelect3).equals("Sharingan")
+				|| (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Sharingan")) {
 			return true;
 		}
 		return false;

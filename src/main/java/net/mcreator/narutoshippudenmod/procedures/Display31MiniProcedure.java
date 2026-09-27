@@ -16,8 +16,7 @@ public class Display31MiniProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Mini_Game_Timer_Button == 31) {
+		if (NarutoShippudenModVariables.get(entity).Mini_Game_Timer_Button == 31) {
 			return true;
 		}
 		return false;

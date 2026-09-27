@@ -18,20 +18,13 @@ public class ResetDojutsuProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).byakuganactivate == true
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ketsuryuganactivate == true
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).sharinganactivate == true
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsuactivate == true
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganActivate == true
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).tenseiganactivate == true
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rinneganactivate == true)) {
+		if (!(NarutoShippudenModVariables.get(entity).byakuganactivate == true
+				|| NarutoShippudenModVariables.get(entity).ketsuryuganactivate == true
+				|| NarutoShippudenModVariables.get(entity).sharinganactivate == true
+				|| NarutoShippudenModVariables.get(entity).isshikidojutsuactivate == true
+				|| NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == true
+				|| NarutoShippudenModVariables.get(entity).tenseiganactivate == true
+				|| NarutoShippudenModVariables.get(entity).rinneganactivate == true)) {
 			{
 				boolean _setval = (false);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {

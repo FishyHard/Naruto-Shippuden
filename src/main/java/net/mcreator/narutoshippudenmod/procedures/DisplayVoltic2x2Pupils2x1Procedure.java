@@ -16,12 +16,9 @@ public class DisplayVoltic2x2Pupils2x1Procedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Voltic Mode")) {
+		if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+				&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2
+				&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Voltic Mode")) {
 			return true;
 		}
 		return false;

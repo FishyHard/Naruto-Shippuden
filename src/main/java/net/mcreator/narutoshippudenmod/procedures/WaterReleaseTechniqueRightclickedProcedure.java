@@ -58,17 +58,12 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 		double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).waterreleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).waterreleaselogic == true) {
 			if (!entity.isSneaking()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).water_technique == 0) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).waterlearn >= 1) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 5) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 100) {
+				if (NarutoShippudenModVariables.get(entity).water_technique == 0) {
+					if (NarutoShippudenModVariables.get(entity).waterlearn >= 1) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 5) {
+							if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 100) {
 								if ((entity.getHorizontalFacing()) == Direction.NORTH) {
 									if ((world.getBlockState(new BlockPos(x, y, z - 1))).getBlock() == Blocks.AIR
 											&& (world.getBlockState(new BlockPos(x - 1, y, z - 1))).getBlock() == Blocks.AIR
@@ -201,41 +196,32 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 									}
 								}
 								{
-									double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 100);
+									double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 100);
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 										capability.ChakraAmount = _setval;
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 99) {
+							} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 4) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 4) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).waterlearn >= 1)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).waterlearn >= 1)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).water_technique == 1) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).waterlearn >= 2) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 10) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 0) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 150) {
+				} else if (NarutoShippudenModVariables.get(entity).water_technique == 1) {
+					if (NarutoShippudenModVariables.get(entity).waterlearn >= 2) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 10) {
+							if (NarutoShippudenModVariables.get(entity).jutsupower == 0) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -352,23 +338,19 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}.start(world, (int) 20);
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 150);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 150);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 149) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 1) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 150) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 1) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -485,23 +467,19 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}.start(world, (int) 20);
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 150);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 150);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 149) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 2) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 150) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 2) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -618,23 +596,19 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}.start(world, (int) 20);
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 150);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 150);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 149) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 3) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 150) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 3) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -751,23 +725,19 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}.start(world, (int) 20);
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 150);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 150);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 149) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 4) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 150) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 4) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -884,23 +854,19 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}.start(world, (int) 20);
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 150);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 150);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 149) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 5) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 150) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 5) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -1017,23 +983,19 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}.start(world, (int) 20);
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 150);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 150);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 149) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 6) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 150) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 6) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -1150,23 +1112,19 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}.start(world, (int) 20);
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 150);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 150);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 149) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 7) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 150) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 7) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -1283,23 +1241,19 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}.start(world, (int) 20);
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 150);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 150);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 149) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 8) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 150) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 8) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -1416,23 +1370,19 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}.start(world, (int) 20);
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 150);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 150);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 149) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 9) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 150) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 9) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -1549,42 +1499,33 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}.start(world, (int) 20);
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 150);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 150);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 149) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 9) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 9) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).waterlearn >= 2)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).waterlearn >= 2)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).water_technique == 2) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).waterlearn >= 3) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 15) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 0) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 200) {
+				} else if (NarutoShippudenModVariables.get(entity).water_technique == 2) {
+					if (NarutoShippudenModVariables.get(entity).waterlearn >= 3) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 15) {
+							if (NarutoShippudenModVariables.get(entity).jutsupower == 0) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -1608,23 +1549,19 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 200);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 200);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 199) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 1) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 200) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 1) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -1648,23 +1585,19 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 200);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 200);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 199) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 2) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 200) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 2) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -1688,23 +1621,19 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 200);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 200);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 199) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 3) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 200) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 3) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -1728,23 +1657,19 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 200);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 200);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 199) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 4) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 200) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 4) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -1768,23 +1693,19 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 200);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 200);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 199) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 5) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 200) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 5) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -1808,23 +1729,19 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 200);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 200);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 199) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 6) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 200) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 6) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -1848,23 +1765,19 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 200);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 200);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 199) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 7) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 200) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 7) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -1888,23 +1801,19 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 200);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 200);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 199) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 8) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 200) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 8) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -1928,23 +1837,19 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 200);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 200);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 199) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 9) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 200) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 9) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -1968,42 +1873,33 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 										}
 									}
 									{
-										double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 200);
+										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 200);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 											capability.ChakraAmount = _setval;
 											capability.syncPlayerVariables(entity);
 										});
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 199) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 14) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 14) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).waterlearn >= 3)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).waterlearn >= 3)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).water_technique == 3) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).waterlearn >= 4) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 20) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 0) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 250) {
+				} else if (NarutoShippudenModVariables.get(entity).water_technique == 3) {
+					if (NarutoShippudenModVariables.get(entity).waterlearn >= 4) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 20) {
+							if (NarutoShippudenModVariables.get(entity).jutsupower == 0) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -2026,16 +1922,13 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 											projectileLevel.addEntity(_entityToSpawn);
 										}
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 249) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 1) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 250) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 1) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -2058,16 +1951,13 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 											projectileLevel.addEntity(_entityToSpawn);
 										}
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 249) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 2) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 250) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 2) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -2090,16 +1980,13 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 											projectileLevel.addEntity(_entityToSpawn);
 										}
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 249) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 3) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 250) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 3) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -2122,16 +2009,13 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 											projectileLevel.addEntity(_entityToSpawn);
 										}
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 249) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 4) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 250) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 4) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -2154,16 +2038,13 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 											projectileLevel.addEntity(_entityToSpawn);
 										}
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 249) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 5) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 250) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 5) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -2186,16 +2067,13 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 											projectileLevel.addEntity(_entityToSpawn);
 										}
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 249) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 6) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 250) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 6) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -2218,16 +2096,13 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 											projectileLevel.addEntity(_entityToSpawn);
 										}
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 249) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 7) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 250) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 7) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -2250,16 +2125,13 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 											projectileLevel.addEntity(_entityToSpawn);
 										}
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 249) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 8) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 250) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 8) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -2282,16 +2154,13 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 											projectileLevel.addEntity(_entityToSpawn);
 										}
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 249) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 9) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 250) {
+							} else if (NarutoShippudenModVariables.get(entity).jutsupower == 9) {
+								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 									{
 										Entity _shootFrom = entity;
 										World projectileLevel = _shootFrom.world;
@@ -2314,50 +2183,41 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 											projectileLevel.addEntity(_entityToSpawn);
 										}
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 249) {
+								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 									}
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 19) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).waterlearn >= 4)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).waterlearn >= 4)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
 				}
-				if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+				if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(WaterReleaseTechniqueItem.block, (int) 200);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(WaterReleaseTechniqueItem.block, (int) 160);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(WaterReleaseTechniqueItem.block, (int) 120);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(WaterReleaseTechniqueItem.block, (int) 80);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(WaterReleaseTechniqueItem.block, (int) 40);
 				}
 			} else if (entity.isSneaking()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).water_technique == 0) {
+				if (NarutoShippudenModVariables.get(entity).water_technique == 0) {
 					{
 						double _setval = 1;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -2368,8 +2228,7 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Water Gun"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).water_technique == 1) {
+				} else if (NarutoShippudenModVariables.get(entity).water_technique == 1) {
 					{
 						double _setval = 2;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -2380,8 +2239,7 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Water Shark Bullet Technique "), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).water_technique == 2) {
+				} else if (NarutoShippudenModVariables.get(entity).water_technique == 2) {
 					{
 						double _setval = 3;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -2392,8 +2250,7 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Water Dragon Bullet Technique"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).water_technique == 3) {
+				} else if (NarutoShippudenModVariables.get(entity).water_technique == 3) {
 					{
 						double _setval = 0;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -2406,8 +2263,7 @@ public class WaterReleaseTechniqueRightclickedProcedure {
 					}
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).waterreleaselogic == false) {
+		} else if (NarutoShippudenModVariables.get(entity).waterreleaselogic == false) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this release."), (true));
 			}

@@ -17,8 +17,7 @@ public class JPMINUS100Procedure {
 		}
 		Entity entity = (Entity) dependencies.get("entity");
 		{
-			double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp - 100);
+			double _setval = (NarutoShippudenModVariables.get(entity).jp - 100);
 			entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 				capability.jp = _setval;
 				capability.syncPlayerVariables(entity);

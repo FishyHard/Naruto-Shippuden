@@ -30,11 +30,9 @@ public class SamehadaToolInInventoryTickProcedure {
 		if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHeldItemMainhand() : ItemStack.EMPTY).getItem() == SamehadaItem.block
 				|| ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHeldItemOffhand() : ItemStack.EMPTY)
 						.getItem() == SamehadaItem.block) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 0.5) {
+			if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 0.5) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 0.5);
+					double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 0.5);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.ChakraAmount = _setval;
 						capability.syncPlayerVariables(entity);
@@ -67,8 +65,7 @@ public class SamehadaToolInInventoryTickProcedure {
 						.getItem()) {
 			if (itemstack.getItem() == ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHeldItemMainhand() : ItemStack.EMPTY)
 					.getItem()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).kenjutsu <= 44) {
+				if (NarutoShippudenModVariables.get(entity).kenjutsu <= 44) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Kenjutsu"), (true));
 					}
@@ -82,8 +79,7 @@ public class SamehadaToolInInventoryTickProcedure {
 				}
 			} else if (itemstack.getItem() == ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHeldItemOffhand() : ItemStack.EMPTY)
 					.getItem()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).kenjutsu <= 44) {
+				if (NarutoShippudenModVariables.get(entity).kenjutsu <= 44) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Kenjutsu"), (true));
 					}

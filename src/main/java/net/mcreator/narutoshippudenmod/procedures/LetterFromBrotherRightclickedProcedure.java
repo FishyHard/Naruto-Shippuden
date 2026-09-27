@@ -41,8 +41,7 @@ public class LetterFromBrotherRightclickedProcedure {
 		IWorld world = (IWorld) dependencies.get("world");
 		Entity entity = (Entity) dependencies.get("entity");
 		double random = 0;
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Mangekyou_Sharingan == false) {
+		if (NarutoShippudenModVariables.get(entity).Mangekyou_Sharingan == false) {
 			random = (MathHelper.nextInt(new Random(), 1, 5));
 			{
 				double _setval = (MathHelper.nextInt(new Random(), 1000, 1500));
@@ -949,8 +948,7 @@ public class LetterFromBrotherRightclickedProcedure {
 					MinecraftForge.EVENT_BUS.unregister(this);
 				}
 			}.start(world, (int) 1050);
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).uchihareleaselogic == true) {
+			if (NarutoShippudenModVariables.get(entity).uchihareleaselogic == true) {
 				if (random == 1) {
 					if (entity instanceof PlayerEntity) {
 						ItemStack _setstack = new ItemStack(MangekyouSharinganSasukeReleaseItem.block);
@@ -1018,8 +1016,7 @@ public class LetterFromBrotherRightclickedProcedure {
 					}
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).hatakereleaselogic == true) {
+			if (NarutoShippudenModVariables.get(entity).hatakereleaselogic == true) {
 				if (entity instanceof PlayerEntity) {
 					ItemStack _setstack = new ItemStack(MangekyouSharinganKakashiReleaseItem.block);
 					_setstack.setCount((int) 1);

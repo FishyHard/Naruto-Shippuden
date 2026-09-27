@@ -18,29 +18,19 @@ public class SusanoOnKeyPressedProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Mangekyou_Sharingan == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansasukesusanolearn == 0
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyoushrainganitachisusanolearn == 0
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharinganobitosusanolearn == 0
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharinganmadarasusanolearn == 0
-					&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharinganshisuisusanolearn == 0) {
+		if (NarutoShippudenModVariables.get(entity).Mangekyou_Sharingan == true) {
+			if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukesusanolearn == 0
+					&& NarutoShippudenModVariables.get(entity).mangekyoushrainganitachisusanolearn == 0
+					&& NarutoShippudenModVariables.get(entity).mangekyousharinganobitosusanolearn == 0
+					&& NarutoShippudenModVariables.get(entity).mangekyousharinganmadarasusanolearn == 0
+					&& NarutoShippudenModVariables.get(entity).mangekyousharinganshisuisusanolearn == 0) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked Susano"), (false));
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansasukesusanolearn >= 1) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganActivate == true) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansasukesusanolearn == 1) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+			} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukesusanolearn >= 1) {
+				if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == true) {
+					if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukesusanolearn == 1) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -48,8 +38,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -58,10 +47,8 @@ public class SusanoOnKeyPressedProcedure {
 								});
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansasukesusanolearn == 2) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+					} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukesusanolearn == 2) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -69,8 +56,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 2;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -78,8 +64,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 2) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -88,10 +73,8 @@ public class SusanoOnKeyPressedProcedure {
 								});
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansasukesusanolearn == 3) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+					} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukesusanolearn == 3) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -99,8 +82,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 2;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -108,8 +90,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 2) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 							{
 								double _setval = 3;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -117,8 +98,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 3) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -127,10 +107,8 @@ public class SusanoOnKeyPressedProcedure {
 								});
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansasukesusanolearn == 4) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+					} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukesusanolearn == 4) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -138,8 +116,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 2;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -147,8 +124,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 2) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 							{
 								double _setval = 3;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -156,8 +132,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 3) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 							{
 								double _setval = 4;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -165,8 +140,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 4) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 4) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -176,20 +150,15 @@ public class SusanoOnKeyPressedProcedure {
 							}
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganActivate == false) {
+				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == false) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't activated Mangekyou Sharingan"), (false));
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyoushrainganitachisusanolearn >= 1) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganActivate == true) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyoushrainganitachisusanolearn == 1) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+			} else if (NarutoShippudenModVariables.get(entity).mangekyoushrainganitachisusanolearn >= 1) {
+				if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == true) {
+					if (NarutoShippudenModVariables.get(entity).mangekyoushrainganitachisusanolearn == 1) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -197,8 +166,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -207,10 +175,8 @@ public class SusanoOnKeyPressedProcedure {
 								});
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyoushrainganitachisusanolearn == 2) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+					} else if (NarutoShippudenModVariables.get(entity).mangekyoushrainganitachisusanolearn == 2) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -218,8 +184,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 2;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -227,8 +192,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 2) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -237,10 +201,8 @@ public class SusanoOnKeyPressedProcedure {
 								});
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyoushrainganitachisusanolearn == 3) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+					} else if (NarutoShippudenModVariables.get(entity).mangekyoushrainganitachisusanolearn == 3) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -248,8 +210,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 2;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -257,8 +218,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 2) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 							{
 								double _setval = 3;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -266,8 +226,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 3) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -276,10 +235,8 @@ public class SusanoOnKeyPressedProcedure {
 								});
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyoushrainganitachisusanolearn == 4) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+					} else if (NarutoShippudenModVariables.get(entity).mangekyoushrainganitachisusanolearn == 4) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -287,8 +244,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 2;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -296,8 +252,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 2) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 							{
 								double _setval = 3;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -305,8 +260,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 3) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 							{
 								double _setval = 4;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -314,8 +268,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 4) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 4) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -325,20 +278,15 @@ public class SusanoOnKeyPressedProcedure {
 							}
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganActivate == false) {
+				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == false) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't activated Mangekyou Sharingan"), (false));
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharinganobitosusanolearn >= 1) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganActivate == true) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharinganobitosusanolearn == 1) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+			} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganobitosusanolearn >= 1) {
+				if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == true) {
+					if (NarutoShippudenModVariables.get(entity).mangekyousharinganobitosusanolearn == 1) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -346,8 +294,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -356,10 +303,8 @@ public class SusanoOnKeyPressedProcedure {
 								});
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharinganobitosusanolearn == 2) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+					} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganobitosusanolearn == 2) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -367,8 +312,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 2;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -376,8 +320,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 2) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -386,10 +329,8 @@ public class SusanoOnKeyPressedProcedure {
 								});
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharinganobitosusanolearn == 3) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+					} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganobitosusanolearn == 3) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -397,8 +338,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 2;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -406,8 +346,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 2) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 							{
 								double _setval = 3;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -415,8 +354,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 3) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -425,10 +363,8 @@ public class SusanoOnKeyPressedProcedure {
 								});
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharinganobitosusanolearn == 4) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+					} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganobitosusanolearn == 4) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -436,8 +372,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 2;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -445,8 +380,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 2) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 							{
 								double _setval = 3;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -454,8 +388,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 3) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 							{
 								double _setval = 4;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -463,8 +396,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 4) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 4) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -474,20 +406,15 @@ public class SusanoOnKeyPressedProcedure {
 							}
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganActivate == false) {
+				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == false) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't activated Mangekyou Sharingan"), (false));
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharinganmadarasusanolearn >= 1) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganActivate == true) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharinganmadarasusanolearn == 1) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+			} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganmadarasusanolearn >= 1) {
+				if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == true) {
+					if (NarutoShippudenModVariables.get(entity).mangekyousharinganmadarasusanolearn == 1) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -495,8 +422,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -505,10 +431,8 @@ public class SusanoOnKeyPressedProcedure {
 								});
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharinganmadarasusanolearn == 2) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+					} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganmadarasusanolearn == 2) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -516,8 +440,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 2;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -525,8 +448,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 2) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -535,10 +457,8 @@ public class SusanoOnKeyPressedProcedure {
 								});
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharinganmadarasusanolearn == 3) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+					} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganmadarasusanolearn == 3) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -546,8 +466,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 2;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -555,8 +474,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 2) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 							{
 								double _setval = 3;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -564,8 +482,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 3) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -574,10 +491,8 @@ public class SusanoOnKeyPressedProcedure {
 								});
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharinganmadarasusanolearn == 4) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+					} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganmadarasusanolearn == 4) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -585,8 +500,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 2;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -594,8 +508,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 2) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 							{
 								double _setval = 3;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -603,8 +516,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 3) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 							{
 								double _setval = 4;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -612,8 +524,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 4) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 4) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -623,20 +534,15 @@ public class SusanoOnKeyPressedProcedure {
 							}
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganActivate == false) {
+				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == false) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't activated Mangekyou Sharingan"), (false));
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharinganshisuisusanolearn >= 1) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganActivate == true) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharinganshisuisusanolearn == 1) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+			} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganshisuisusanolearn >= 1) {
+				if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == true) {
+					if (NarutoShippudenModVariables.get(entity).mangekyousharinganshisuisusanolearn == 1) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -644,8 +550,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -654,10 +559,8 @@ public class SusanoOnKeyPressedProcedure {
 								});
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharinganshisuisusanolearn == 2) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+					} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganshisuisusanolearn == 2) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -665,8 +568,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 2;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -674,8 +576,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 2) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -684,10 +585,8 @@ public class SusanoOnKeyPressedProcedure {
 								});
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharinganshisuisusanolearn == 3) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+					} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganshisuisusanolearn == 3) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -695,8 +594,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 2;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -704,8 +602,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 2) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 							{
 								double _setval = 3;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -713,8 +610,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 3) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -723,10 +619,8 @@ public class SusanoOnKeyPressedProcedure {
 								});
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharinganshisuisusanolearn == 4) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 0) {
+					} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganshisuisusanolearn == 4) {
+						if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -734,8 +628,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 							{
 								double _setval = 2;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -743,8 +636,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 2) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 							{
 								double _setval = 3;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -752,8 +644,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 3) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 							{
 								double _setval = 4;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -761,8 +652,7 @@ public class SusanoOnKeyPressedProcedure {
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 4) {
+						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 4) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -772,15 +662,13 @@ public class SusanoOnKeyPressedProcedure {
 							}
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganActivate == false) {
+				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == false) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't activated Mangekyou Sharingan"), (false));
 					}
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Mangekyou_Sharingan == false) {
+		} else if (NarutoShippudenModVariables.get(entity).Mangekyou_Sharingan == false) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked Mangekyou Sharingan"), (false));
 			}

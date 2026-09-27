@@ -53,8 +53,7 @@ public class ShibukiRightclickedProcedure {
 		ItemStack copy = ItemStack.EMPTY;
 		if (!entity.isSneaking()) {
 			if (itemstack.getOrCreateTag().getDouble("ShibukiMode") == 0) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 350) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 350) {
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.RESISTANCE, (int) 20, (int) 254, (false), (false)));
 					distance = 2;
@@ -147,15 +146,13 @@ public class ShibukiRightclickedProcedure {
 						}
 					}
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 350);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 350);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
 						});
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 349) {
+				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 349) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 					}

@@ -18,8 +18,7 @@ public class ChakraControlOnKeyPressedProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Chakra_Control == false) {
+		if (NarutoShippudenModVariables.get(entity).Chakra_Control == false) {
 			{
 				boolean _setval = (true);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -30,8 +29,7 @@ public class ChakraControlOnKeyPressedProcedure {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A7bChakra Control: On"), (false));
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Chakra_Control == true) {
+		} else if (NarutoShippudenModVariables.get(entity).Chakra_Control == true) {
 			{
 				boolean _setval = (false);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {

@@ -51,8 +51,7 @@ public class AkamaruRightClickedOnEntityProcedure {
 			if ((entity instanceof TameableEntity && sourceentity instanceof LivingEntity)
 					? ((TameableEntity) entity).isOwner((LivingEntity) sourceentity)
 					: false) {
-				if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).FollowAkamaru == true) {
+				if (NarutoShippudenModVariables.get(sourceentity).FollowAkamaru == true) {
 					{
 						boolean _setval = (false);
 						sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -63,8 +62,7 @@ public class AkamaruRightClickedOnEntityProcedure {
 					if (sourceentity instanceof PlayerEntity && !sourceentity.world.isRemote()) {
 						((PlayerEntity) sourceentity).sendStatusMessage(new StringTextComponent("Akamaru Not Following"), (true));
 					}
-				} else if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).FollowAkamaru == false) {
+				} else if (NarutoShippudenModVariables.get(sourceentity).FollowAkamaru == false) {
 					{
 						boolean _setval = (true);
 						sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {

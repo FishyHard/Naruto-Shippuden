@@ -50,7 +50,7 @@ public class FollowAkamaruProcedure {
 									return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.getDistanceSq(_x, _y, _z)));
 								}
 							}.compareDistOf((entity.getPosX()), (entity.getPosY()), (entity.getPosZ()))).findFirst().orElse(null))
-					&& (((Entity) world
+					&& NarutoShippudenModVariables.get(((Entity) world
 							.getEntitiesWithinAABB(PlayerEntity.class,
 									new AxisAlignedBB((entity.getPosX()) - (32 / 2d), (entity.getPosY()) - (32 / 2d), (entity.getPosZ()) - (32 / 2d),
 											(entity.getPosX()) + (32 / 2d), (entity.getPosY()) + (32 / 2d), (entity.getPosZ()) + (32 / 2d)),
@@ -59,9 +59,7 @@ public class FollowAkamaruProcedure {
 								Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 									return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.getDistanceSq(_x, _y, _z)));
 								}
-							}.compareDistOf((entity.getPosX()), (entity.getPosY()), (entity.getPosZ()))).findFirst().orElse(null))
-							.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).FollowAkamaru == true) {
+							}.compareDistOf((entity.getPosX()), (entity.getPosY()), (entity.getPosZ()))).findFirst().orElse(null))).FollowAkamaru == true) {
 				return true;
 			}
 		}

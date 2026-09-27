@@ -32,12 +32,10 @@ public class GunbaiShieldOnPlayerStoppedUsingProcedure {
 				{
 					CompoundNBT _nbtTag = (copy).getTag();
 					if (_nbtTag != null)
-						((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).gunbaicopy).setTag(_nbtTag.copy());
+						(NarutoShippudenModVariables.get(entity).gunbaicopy).setTag(_nbtTag.copy());
 				}
 				if (entity instanceof LivingEntity) {
-					ItemStack _setstack = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).gunbaicopy);
+					ItemStack _setstack = (NarutoShippudenModVariables.get(entity).gunbaicopy);
 					_setstack.setCount((int) 1);
 					((LivingEntity) entity).setHeldItem(Hand.MAIN_HAND, _setstack);
 					if (entity instanceof ServerPlayerEntity)
@@ -61,12 +59,10 @@ public class GunbaiShieldOnPlayerStoppedUsingProcedure {
 				{
 					CompoundNBT _nbtTag = (copy).getTag();
 					if (_nbtTag != null)
-						((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).gunbaicopy).setTag(_nbtTag.copy());
+						(NarutoShippudenModVariables.get(entity).gunbaicopy).setTag(_nbtTag.copy());
 				}
 				if (entity instanceof LivingEntity) {
-					ItemStack _setstack = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).gunbaicopy);
+					ItemStack _setstack = (NarutoShippudenModVariables.get(entity).gunbaicopy);
 					_setstack.setCount((int) 1);
 					((LivingEntity) entity).setHeldItem(Hand.OFF_HAND, _setstack);
 					if (entity instanceof ServerPlayerEntity)

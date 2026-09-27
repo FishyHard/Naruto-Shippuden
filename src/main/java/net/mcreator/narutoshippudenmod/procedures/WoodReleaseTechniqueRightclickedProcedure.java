@@ -61,17 +61,12 @@ public class WoodReleaseTechniqueRightclickedProcedure {
 		double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).woodreleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).woodreleaselogic == true) {
 			if (!entity.isSneaking()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).woodtechnique == 0) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).woodlearn >= 1) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 25) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 300) {
+				if (NarutoShippudenModVariables.get(entity).woodtechnique == 0) {
+					if (NarutoShippudenModVariables.get(entity).woodlearn >= 1) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 25) {
+							if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 300) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -93,60 +88,47 @@ public class WoodReleaseTechniqueRightclickedProcedure {
 									}
 								}
 								{
-									double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 300);
+									double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 300);
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 										capability.ChakraAmount = _setval;
 										capability.syncPlayerVariables(entity);
 									});
 								}
-								if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+								if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(WoodReleaseTechniqueItem.block, (int) 1000);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(WoodReleaseTechniqueItem.block, (int) 800);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(WoodReleaseTechniqueItem.block, (int) 600);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(WoodReleaseTechniqueItem.block, (int) 400);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(WoodReleaseTechniqueItem.block, (int) 150);
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 299) {
+							} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 299) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 24) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).woodlearn >= 1)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).woodlearn >= 1)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).woodtechnique == 1) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).woodlearn >= 2) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 30) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 500) {
+				} else if (NarutoShippudenModVariables.get(entity).woodtechnique == 1) {
+					if (NarutoShippudenModVariables.get(entity).woodlearn >= 2) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 30) {
+							if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 500) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -168,60 +150,47 @@ public class WoodReleaseTechniqueRightclickedProcedure {
 									}
 								}
 								{
-									double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 500);
+									double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 500);
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 										capability.ChakraAmount = _setval;
 										capability.syncPlayerVariables(entity);
 									});
 								}
-								if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+								if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(WoodReleaseTechniqueItem.block, (int) 1000);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(WoodReleaseTechniqueItem.block, (int) 800);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(WoodReleaseTechniqueItem.block, (int) 600);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(WoodReleaseTechniqueItem.block, (int) 400);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(WoodReleaseTechniqueItem.block, (int) 150);
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 499) {
+							} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 29) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).woodlearn >= 2)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).woodlearn >= 2)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).woodtechnique == 2) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).woodlearn >= 3) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 35) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 650) {
+				} else if (NarutoShippudenModVariables.get(entity).woodtechnique == 2) {
+					if (NarutoShippudenModVariables.get(entity).woodlearn >= 3) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 35) {
+							if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 650) {
 								if (world instanceof ServerWorld) {
 									Entity entityToSpawn = new WoodGolemEntity.CustomEntity(WoodGolemEntity.entity, (World) world);
 									entityToSpawn.setLocationAndAngles(x, y, z, (float) 0, (float) 0);
@@ -253,56 +222,46 @@ public class WoodReleaseTechniqueRightclickedProcedure {
 									}
 								}
 								{
-									double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 650);
+									double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 650);
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 										capability.ChakraAmount = _setval;
 										capability.syncPlayerVariables(entity);
 									});
 								}
-								if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+								if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(WoodReleaseTechniqueItem.block, (int) 1000);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(WoodReleaseTechniqueItem.block, (int) 800);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(WoodReleaseTechniqueItem.block, (int) 600);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(WoodReleaseTechniqueItem.block, (int) 400);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(WoodReleaseTechniqueItem.block, (int) 150);
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 649) {
+							} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 649) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 34) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 34) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).woodlearn >= 2)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).woodlearn >= 2)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
 				}
 			} else if (entity.isSneaking()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).woodtechnique == 0) {
+				if (NarutoShippudenModVariables.get(entity).woodtechnique == 0) {
 					{
 						double _setval = 1;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -313,8 +272,7 @@ public class WoodReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Tree Bind Flourishing Burial"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).woodtechnique == 1) {
+				} else if (NarutoShippudenModVariables.get(entity).woodtechnique == 1) {
 					{
 						double _setval = 2;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -325,8 +283,7 @@ public class WoodReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Wood Human Technique"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).woodtechnique == 2) {
+				} else if (NarutoShippudenModVariables.get(entity).woodtechnique == 2) {
 					{
 						double _setval = 0;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -339,8 +296,7 @@ public class WoodReleaseTechniqueRightclickedProcedure {
 					}
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).woodreleaselogic == false) {
+		} else if (NarutoShippudenModVariables.get(entity).woodreleaselogic == false) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this release."), (true));
 			}

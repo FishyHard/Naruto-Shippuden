@@ -93,8 +93,7 @@ public class PlayerModelChangeProcedure {
 		// Enter the FTL code here
 		Object _obj = dependencies.get("event");
 		RenderLivingEvent _evt = (RenderLivingEvent) _obj;
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).inuzuka_mode == 1) {
+		if (NarutoShippudenModVariables.get(entity).inuzuka_mode == 1) {
 			if (_evt.getRenderer() instanceof PlayerRenderer) {
 				if (_evt instanceof RenderLivingEvent.Pre) {
 					_evt.setCanceled(true);
@@ -102,8 +101,7 @@ public class PlayerModelChangeProcedure {
 				ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/two_head_akamaru.png", TwoHeadAkamaruRenderer.ModelTwo_Head_Akamaru::new);
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).inuzuka_mode == 2) {
+		if (NarutoShippudenModVariables.get(entity).inuzuka_mode == 2) {
 			if (_evt.getRenderer() instanceof PlayerRenderer) {
 				if (_evt instanceof RenderLivingEvent.Pre) {
 					_evt.setCanceled(true);
@@ -111,8 +109,7 @@ public class PlayerModelChangeProcedure {
 				ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/two_head_akamaru.png", ThreeHeadAkamaruRenderer.ModelThree_Head_Akamaru::new);
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).PassingFang == true) {
+		if (NarutoShippudenModVariables.get(entity).PassingFang == true) {
 			if (_evt.getRenderer() instanceof PlayerRenderer) {
 				if (_evt instanceof RenderLivingEvent.Pre) {
 					_evt.setCanceled(true);
@@ -120,8 +117,7 @@ public class PlayerModelChangeProcedure {
 				ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/passing_fang.png", FangRenderer.Modelfang::new);
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).tenromode == true) {
+		if (NarutoShippudenModVariables.get(entity).tenromode == true) {
 			if (_evt.getRenderer() instanceof PlayerRenderer) {
 				if (_evt instanceof RenderLivingEvent.Pre) {
 					_evt.setCanceled(true);
@@ -129,8 +125,7 @@ public class PlayerModelChangeProcedure {
 				ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/wolf.png", WolfRenderer.Modelwolf::new);
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunochakramode == true) {
+		if (NarutoShippudenModVariables.get(entity).izunochakramode == true) {
 			if (entity.isSneaking()) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
@@ -147,8 +142,7 @@ public class PlayerModelChangeProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunocat == true) {
+		if (NarutoShippudenModVariables.get(entity).izunocat == true) {
 			if (_evt.getRenderer() instanceof PlayerRenderer) {
 				if (_evt instanceof RenderLivingEvent.Pre) {
 					_evt.setCanceled(true);
@@ -164,8 +158,7 @@ public class PlayerModelChangeProcedure {
 				ModelSwapRenderers.renderMobAs(_evt, "naruto_shippuden:textures/entities/mirror.png", IceMirrorRenderer.Modelice_mirror::new);
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).ice_mirror == true) {
+		if (NarutoShippudenModVariables.get(entity).ice_mirror == true) {
 			if (_evt.getRenderer() instanceof PlayerRenderer) {
 				if (_evt instanceof RenderLivingEvent.Pre) {
 					//  _evt.setCanceled(true); 
@@ -181,8 +174,7 @@ public class PlayerModelChangeProcedure {
 				ModelSwapRenderers.renderMobAs(_evt, "naruto_shippuden:textures/entities/drowning_water_blob_technique.png", DrowningWaterBlobTechniqueEntityRenderer.ModelDrowning_Water_Blob_Technique::new);
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).waterblob == true) {
+		if (NarutoShippudenModVariables.get(entity).waterblob == true) {
 			if (entity.isSneaking()) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
@@ -199,8 +191,7 @@ public class PlayerModelChangeProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).DanceOfTheLarch == true) {
+		if (NarutoShippudenModVariables.get(entity).DanceOfTheLarch == true) {
 			if (entity.isSneaking()) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
@@ -217,8 +208,7 @@ public class PlayerModelChangeProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).hoshigakireleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).hoshigakireleaselogic == true) {
 			if (_evt.getRenderer() instanceof PlayerRenderer) {
 				if (_evt instanceof RenderLivingEvent.Pre) {
 					//  _evt.setCanceled(true); 
@@ -226,8 +216,7 @@ public class PlayerModelChangeProcedure {
 				ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/face_paint/hoshigaki.png");
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 1) {
+		if (NarutoShippudenModVariables.get(entity).magnet_coat == 1) {
 			if (entity.isSneaking()) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
@@ -243,8 +232,7 @@ public class PlayerModelChangeProcedure {
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/iron_sand.png", MagnetCoatRenderer.ModelBlack_Iron_Sand_Coat::new);
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 2) {
+		} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 2) {
 			if (entity.isSneaking()) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
@@ -260,8 +248,7 @@ public class PlayerModelChangeProcedure {
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/iron_sand.png", MagnetHandsRenderer.ModelBlack_Iron_Sand_Hand::new);
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 3) {
+		} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 3) {
 			if (_evt.getRenderer() instanceof PlayerRenderer) {
 				if (_evt instanceof RenderLivingEvent.Pre) {
 					//  _evt.setCanceled(true); 
@@ -269,8 +256,7 @@ public class PlayerModelChangeProcedure {
 				ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/iron_sand.png", MagnetWingsRenderer.ModelBlack_Iron_Sand_Wings::new);
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).deathgod == true) {
+		if (NarutoShippudenModVariables.get(entity).deathgod == true) {
 			if (_evt.getRenderer() instanceof PlayerRenderer) {
 				if (_evt instanceof RenderLivingEvent.Pre) {
 					//  _evt.setCanceled(true); 
@@ -278,8 +264,7 @@ public class PlayerModelChangeProcedure {
 				ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/dead_demon_consuming_seal.png", DeadDemonConsumingSealRenderer.ModelDead_Demon_Consuming_Seal::new);
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).EightTrigramsPalmsRevolvingHeaven == true) {
+		if (NarutoShippudenModVariables.get(entity).EightTrigramsPalmsRevolvingHeaven == true) {
 			if (_evt.getRenderer() instanceof PlayerRenderer) {
 				if (_evt instanceof RenderLivingEvent.Pre) {
 					_evt.setCanceled(true);
@@ -287,8 +272,7 @@ public class PlayerModelChangeProcedure {
 				ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/eight_trigrams_palms_revolving_heaven.png", EightTrigramsPalmsRevolvingHeavenRenderer.Modeleight_trigrams_palms_revolving_heaven::new);
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).InsectJarTechnique == true) {
+		if (NarutoShippudenModVariables.get(entity).InsectJarTechnique == true) {
 			if (_evt.getRenderer() instanceof PlayerRenderer) {
 				if (_evt instanceof RenderLivingEvent.Pre) {
 					_evt.setCanceled(true);
@@ -296,8 +280,7 @@ public class PlayerModelChangeProcedure {
 				ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/bugs.png", InsectJarTechniqueRenderer.Modeleight_trigrams_palms_revolving_heaven::new);
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).HumanBulletTank == true) {
+		if (NarutoShippudenModVariables.get(entity).HumanBulletTank == true) {
 			if (_evt.getRenderer() instanceof PlayerRenderer) {
 				if (_evt instanceof RenderLivingEvent.Pre) {
 					_evt.setCanceled(true);
@@ -305,8 +288,7 @@ public class PlayerModelChangeProcedure {
 				ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/human_bullet_tank.png", HumanBulletTankRenderer.ModelHuman_Bullet_Tank::new);
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).SpikedHumanBulletTank == true) {
+		if (NarutoShippudenModVariables.get(entity).SpikedHumanBulletTank == true) {
 			if (_evt.getRenderer() instanceof PlayerRenderer) {
 				if (_evt instanceof RenderLivingEvent.Pre) {
 					_evt.setCanceled(true);
@@ -314,58 +296,50 @@ public class PlayerModelChangeProcedure {
 				ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/spiked_human_bullet_tank.png", SpikedHumanBulletTankRenderer.Modelspiked_human_bullet_tank::new);
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).ButterflyMode == true) {
-			if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ButterFlyModeColor).equals("Blue")) {
+		if (NarutoShippudenModVariables.get(entity).ButterflyMode == true) {
+			if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Blue")) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_blue.png", ButterflyModeRenderer.ModelButterflyMode::new);
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ButterFlyModeColor).equals("Green")) {
+			} else if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Green")) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_green.png", ButterflyModeRenderer.ModelButterflyMode::new);
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ButterFlyModeColor).equals("Orange")) {
+			} else if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Orange")) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_orange.png", ButterflyModeRenderer.ModelButterflyMode::new);
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ButterFlyModeColor).equals("Pink")) {
+			} else if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Pink")) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_pink.png", ButterflyModeRenderer.ModelButterflyMode::new);
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ButterFlyModeColor).equals("Purple")) {
+			} else if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Purple")) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_purple.png", ButterflyModeRenderer.ModelButterflyMode::new);
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ButterFlyModeColor).equals("Red")) {
+			} else if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Red")) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_red.png", ButterflyModeRenderer.ModelButterflyMode::new);
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ButterFlyModeColor).equals("Yellow")) {
+			} else if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Yellow")) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
@@ -374,42 +348,36 @@ public class PlayerModelChangeProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganSasuke == true) {
+		if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
+			if (NarutoShippudenModVariables.get(entity).MangekyouSharinganSasuke == true) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_sasuke.png", RibcageSusanoRenderer.Modelribcage::new);
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganItachi == true) {
+			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganItachi == true) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_itachi.png", RibcageSusanoRenderer.Modelribcage::new);
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganMadara == true) {
+			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganMadara == true) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_madara.png", RibcageSusanoRenderer.Modelribcage::new);
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganObito == true) {
+			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganObito == true) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_obito.png", RibcageSusanoRenderer.Modelribcage::new);
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganShisui == true) {
+			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganShisui == true) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
@@ -417,42 +385,36 @@ public class PlayerModelChangeProcedure {
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_shisui.png", RibcageSusanoRenderer.Modelribcage::new);
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 2) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganSasuke == true) {
+		} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
+			if (NarutoShippudenModVariables.get(entity).MangekyouSharinganSasuke == true) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_sasuke.png", SkeletonSusanoSasukeRenderer.Modelsusanoskeletonsasuke::new);
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganItachi == true) {
+			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganItachi == true) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_itachi.png", SkeletonSusanoItachiRenderer.Modelsusanoskeletonitachi::new);
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganMadara == true) {
+			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganMadara == true) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_madara.png", SkeletonSusanoMadaraRenderer.Modelsusanoskeletonmadara::new);
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganObito == true) {
+			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganObito == true) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_obito.png", SkeletonSusanoObitoRenderer.Modelsusanoskeletonobito::new);
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganShisui == true) {
+			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganShisui == true) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
@@ -460,42 +422,36 @@ public class PlayerModelChangeProcedure {
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_shisui.png", SkeletonSusanoShisuiRenderer.Modelsusanoskeletonshisui::new);
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 3) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganSasuke == true) {
+		} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
+			if (NarutoShippudenModVariables.get(entity).MangekyouSharinganSasuke == true) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_sasuke.png", HumanoidSusanoSasukeRenderer.Modelsusanohumanoidsasuke::new);
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganItachi == true) {
+			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganItachi == true) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_itachi.png", HumanoidSusanoItachiRenderer.Modelsusanohumanoiditachi::new);
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganMadara == true) {
+			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganMadara == true) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_madara.png", HumanoidSusanoMadaraRenderer.Modelsusanohumanoidmadara::new);
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganObito == true) {
+			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganObito == true) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_obito.png", HumanoidSusanoObitoRenderer.Modelsusanohumanoidobito::new);
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganShisui == true) {
+			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganShisui == true) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
@@ -503,26 +459,22 @@ public class PlayerModelChangeProcedure {
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_shisui.png", HumanoidSusanoShisuiRenderer.Modelsusanohumanoidshisui::new);
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 4) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganSasuke == true) {
+		} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 4) {
+			if (NarutoShippudenModVariables.get(entity).MangekyouSharinganSasuke == true) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_sasuke.png", ArmoredSusanoSasukeRenderer.Modelsusanoarmoredsasuke::new);
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganMadara == true) {
+			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganMadara == true) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_madara.png", ArmoredSusanoMadaraRenderer.Modelsusanoarmoredmadara::new);
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganShisui == true) {
+			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganShisui == true) {
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 

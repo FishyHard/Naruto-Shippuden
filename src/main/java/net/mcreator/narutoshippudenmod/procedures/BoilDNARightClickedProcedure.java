@@ -26,8 +26,7 @@ public class BoilDNARightClickedProcedure {
 		}
 		Entity entity = (Entity) dependencies.get("entity");
 		double random = 0;
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).boilreleaselogic == false) {
+		if (NarutoShippudenModVariables.get(entity).boilreleaselogic == false) {
 			random = (MathHelper.nextInt(new Random(), 1, 100));
 			if (random <= 50) {
 				if (entity instanceof PlayerEntity) {
@@ -55,8 +54,7 @@ public class BoilDNARightClickedProcedure {
 				((PlayerEntity) entity).inventory.func_234564_a_(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
 						((PlayerEntity) entity).container.func_234641_j_());
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).boilreleaselogic == true) {
+		} else if (NarutoShippudenModVariables.get(entity).boilreleaselogic == true) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You already have Boil Release"), (false));
 			}

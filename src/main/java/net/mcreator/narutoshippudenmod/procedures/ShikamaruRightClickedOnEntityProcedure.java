@@ -52,8 +52,7 @@ public class ShikamaruRightClickedOnEntityProcedure {
 		double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 		Entity sourceentity = (Entity) dependencies.get("sourceentity");
-		if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).shikamaruquest == false) {
+		if (NarutoShippudenModVariables.get(sourceentity).shikamaruquest == false) {
 			if (sourceentity instanceof PlayerEntity && !sourceentity.world.isRemote()) {
 				((PlayerEntity) sourceentity).sendStatusMessage(new StringTextComponent("Shikamaru: Craft shogi board and bring it to me."), (false));
 			}
@@ -84,8 +83,7 @@ public class ShikamaruRightClickedOnEntityProcedure {
 					capability.syncPlayerVariables(sourceentity);
 				});
 			}
-		} else if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).shikamaruquest == true) {
+		} else if (NarutoShippudenModVariables.get(sourceentity).shikamaruquest == true) {
 			if ((sourceentity instanceof PlayerEntity)
 					? ((PlayerEntity) sourceentity).inventory.hasItemStack(new ItemStack(ShogiboardItem.block))
 					: false) {
@@ -112,8 +110,7 @@ public class ShikamaruRightClickedOnEntityProcedure {
 						ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) sourceentity), _setstack);
 					}
 					{
-						double _setval = ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).D_Mission + 1);
+						double _setval = (NarutoShippudenModVariables.get(sourceentity).D_Mission + 1);
 						sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.D_Mission = _setval;
 							capability.syncPlayerVariables(sourceentity);

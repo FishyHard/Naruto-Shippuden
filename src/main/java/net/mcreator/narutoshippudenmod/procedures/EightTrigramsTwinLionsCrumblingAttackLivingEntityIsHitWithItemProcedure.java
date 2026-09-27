@@ -28,35 +28,25 @@ public class EightTrigramsTwinLionsCrumblingAttackLivingEntityIsHitWithItemProce
 		}
 		Entity entity = (Entity) dependencies.get("entity");
 		Entity sourceentity = (Entity) dependencies.get("sourceentity");
-		if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 0) {
+		if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 0) {
 			entity.attackEntityFrom(DamageSource.GENERIC, (float) 20);
-		} else if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 1) {
+		} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 1) {
 			entity.attackEntityFrom(DamageSource.GENERIC, (float) 21);
-		} else if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 2) {
+		} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 2) {
 			entity.attackEntityFrom(DamageSource.GENERIC, (float) 22);
-		} else if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 3) {
+		} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 3) {
 			entity.attackEntityFrom(DamageSource.GENERIC, (float) 23);
-		} else if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 4) {
+		} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 4) {
 			entity.attackEntityFrom(DamageSource.GENERIC, (float) 24);
-		} else if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 5) {
+		} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 5) {
 			entity.attackEntityFrom(DamageSource.GENERIC, (float) 25);
-		} else if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 6) {
+		} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 6) {
 			entity.attackEntityFrom(DamageSource.GENERIC, (float) 26);
-		} else if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 7) {
+		} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 7) {
 			entity.attackEntityFrom(DamageSource.GENERIC, (float) 27);
-		} else if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 8) {
+		} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 8) {
 			entity.attackEntityFrom(DamageSource.GENERIC, (float) 28);
-		} else if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupower == 9) {
+		} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 9) {
 			entity.attackEntityFrom(DamageSource.GENERIC, (float) 29);
 		}
 		if (sourceentity instanceof PlayerEntity) {

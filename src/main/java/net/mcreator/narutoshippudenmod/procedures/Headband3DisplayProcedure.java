@@ -16,8 +16,7 @@ public class Headband3DisplayProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).HeadbandSelect == 2) {
+		if (NarutoShippudenModVariables.get(entity).HeadbandSelect == 2) {
 			return true;
 		}
 		return false;

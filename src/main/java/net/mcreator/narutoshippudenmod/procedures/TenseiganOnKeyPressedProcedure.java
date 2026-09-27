@@ -57,10 +57,8 @@ public class TenseiganOnKeyPressedProcedure {
 		double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).tenseigan == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).tenseiganactivate == false) {
+		if (NarutoShippudenModVariables.get(entity).tenseigan == true) {
+			if (NarutoShippudenModVariables.get(entity).tenseiganactivate == false) {
 				if (world.isRemote()) {
 					{
 						List<Entity> _entfound = world.getEntitiesWithinAABB(Entity.class,
@@ -100,8 +98,7 @@ public class TenseiganOnKeyPressedProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).tenseiganactivate == true) {
+			} else if (NarutoShippudenModVariables.get(entity).tenseiganactivate == true) {
 				if (world.isRemote()) {
 					{
 						List<Entity> _entfound = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(x - (1000 / 2d), y - (1000 / 2d),
@@ -131,8 +128,7 @@ public class TenseiganOnKeyPressedProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).tenseigan == false) {
+		} else if (NarutoShippudenModVariables.get(entity).tenseigan == false) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked Tenseigan"), (false));
 			}

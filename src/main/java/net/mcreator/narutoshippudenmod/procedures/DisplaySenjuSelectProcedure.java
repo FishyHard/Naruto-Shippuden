@@ -16,8 +16,7 @@ public class DisplaySenjuSelectProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectclanrelease == 19) {
+		if (NarutoShippudenModVariables.get(entity).selectclanrelease == 19) {
 			return true;
 		}
 		return false;

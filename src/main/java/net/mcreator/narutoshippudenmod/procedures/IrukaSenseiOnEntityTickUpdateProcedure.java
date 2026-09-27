@@ -58,16 +58,13 @@ public class IrukaSenseiOnEntityTickUpdateProcedure {
 					}.compareDistOf(x, y, z)).collect(Collectors.toList());
 			for (Entity entityiterator : _entfound) {
 				if (entityiterator instanceof PlayerEntity) {
-					if ((entityiterator.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 5) {
-						if ((entityiterator.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).StorymodeCooldown == 2) {
+					if (NarutoShippudenModVariables.get(entityiterator).storymode == 5) {
+						if (NarutoShippudenModVariables.get(entityiterator).StorymodeCooldown == 2) {
 							if (!entity.world.isRemote())
 								entity.remove();
 						}
 					}
-					if ((entityiterator.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 11) {
+					if (NarutoShippudenModVariables.get(entityiterator).storymode == 11) {
 						if (!entity.world.isRemote())
 							entity.remove();
 					}

@@ -33,8 +33,7 @@ public class EarthDNAImplantMobProcedure {
 		Entity sourceentity = (Entity) dependencies.get("sourceentity");
 		double randomearth = 0;
 		if (entity instanceof PlayerEntity) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).earthreleaselogic == false) {
+			if (NarutoShippudenModVariables.get(entity).earthreleaselogic == false) {
 				randomearth = (MathHelper.nextInt(new Random(), 1, 100));
 				if (randomearth <= 70) {
 					if (entity instanceof PlayerEntity) {
@@ -68,8 +67,7 @@ public class EarthDNAImplantMobProcedure {
 					((PlayerEntity) sourceentity).inventory.func_234564_a_(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
 							((PlayerEntity) sourceentity).container.func_234641_j_());
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).earthreleaselogic == true) {
+			} else if (NarutoShippudenModVariables.get(entity).earthreleaselogic == true) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You already have Earth Release"), (false));
 				}

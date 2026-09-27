@@ -16,8 +16,7 @@ public class DisplayShimuraInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).shimurareleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).shimurareleaselogic == true) {
 			return true;
 		}
 		return false;

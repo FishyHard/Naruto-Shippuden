@@ -122,8 +122,7 @@ public class DeathEntityGlobalTriggerProcedure {
 					&& !(entity instanceof ShadowCloneEntity.CustomEntity) && !(entity instanceof AkamaruEntity.CustomEntity)
 					&& !(entity instanceof EarthGolemShinobiEntity.CustomEntity)) {
 				{
-					double _setval = ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVEL + 1);
+					double _setval = (NarutoShippudenModVariables.get(sourceentity).LEVEL + 1);
 					sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.LEVEL = _setval;
 						capability.syncPlayerVariables(sourceentity);
@@ -137,8 +136,7 @@ public class DeathEntityGlobalTriggerProcedure {
 		if (sourceentity instanceof PlayerEntity) {
 			if (entity instanceof ZombieEntity) {
 				{
-					double _setval = ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).zombiekillcount + 1);
+					double _setval = (NarutoShippudenModVariables.get(sourceentity).zombiekillcount + 1);
 					sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.zombiekillcount = _setval;
 						capability.syncPlayerVariables(sourceentity);
@@ -149,8 +147,7 @@ public class DeathEntityGlobalTriggerProcedure {
 		if (sourceentity instanceof PlayerEntity) {
 			if (entity instanceof PillagerEntity) {
 				{
-					double _setval = ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).pillagerkillcount + 1);
+					double _setval = (NarutoShippudenModVariables.get(sourceentity).pillagerkillcount + 1);
 					sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.pillagerkillcount = _setval;
 						capability.syncPlayerVariables(sourceentity);
@@ -159,14 +156,10 @@ public class DeathEntityGlobalTriggerProcedure {
 			}
 		}
 		if (entity instanceof PlayerEntity
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).sharingan == true
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).sharinganactivate == true
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).izanagi == true
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).izanagiuse == false) {
+				&& NarutoShippudenModVariables.get(entity).sharingan == true
+				&& NarutoShippudenModVariables.get(entity).sharinganactivate == true
+				&& NarutoShippudenModVariables.get(entity).izanagi == true
+				&& NarutoShippudenModVariables.get(entity).izanagiuse == false) {
 			if (dependencies.get("event") != null) {
 				Object _obj = dependencies.get("event");
 				if (_obj instanceof Event) {
@@ -222,8 +215,7 @@ public class DeathEntityGlobalTriggerProcedure {
 			}
 		}
 		if (entity instanceof PlayerEntity) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).deathgod == true) {
+			if (NarutoShippudenModVariables.get(entity).deathgod == true) {
 				{
 					boolean _setval = (false);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {

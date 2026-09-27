@@ -16,16 +16,11 @@ public class DisplayMadaraDojutsu2x2Pupils2x1Procedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 2
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Mangekyou")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelect2).equals("Madara")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelect3).equals("Sharingan")) {
+		if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+				&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2
+				&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Mangekyou")
+				&& (NarutoShippudenModVariables.get(entity).DojutsuSelect2).equals("Madara")
+				&& (NarutoShippudenModVariables.get(entity).DojutsuSelect3).equals("Sharingan")) {
 			return true;
 		}
 		return false;

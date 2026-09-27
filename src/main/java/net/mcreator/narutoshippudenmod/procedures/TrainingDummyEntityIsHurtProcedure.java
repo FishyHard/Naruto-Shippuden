@@ -26,13 +26,10 @@ public class TrainingDummyEntityIsHurtProcedure {
 		Entity entity = (Entity) dependencies.get("entity");
 		Entity sourceentity = (Entity) dependencies.get("sourceentity");
 		if (entity.getPersistentData().getBoolean("Combat") == false) {
-			if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 8) {
-				if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).TrainingDummyHits <= 99) {
+			if (NarutoShippudenModVariables.get(sourceentity).storymode == 8) {
+				if (NarutoShippudenModVariables.get(sourceentity).TrainingDummyHits <= 99) {
 					{
-						double _setval = ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).TrainingDummyHits + 1);
+						double _setval = (NarutoShippudenModVariables.get(sourceentity).TrainingDummyHits + 1);
 						sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.TrainingDummyHits = _setval;
 							capability.syncPlayerVariables(sourceentity);
@@ -46,8 +43,7 @@ public class TrainingDummyEntityIsHurtProcedure {
 														- ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1))))
 										+ " \u00A76Hits: "
 										+ new java.text.DecimalFormat("##.##")
-												.format((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).TrainingDummyHits)
+												.format(NarutoShippudenModVariables.get(sourceentity).TrainingDummyHits)
 										+ "/100")), (true));
 					}
 					entity.getPersistentData().putDouble("TotalDamage",
@@ -100,13 +96,10 @@ public class TrainingDummyEntityIsHurtProcedure {
 			if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1) < ((entity instanceof LivingEntity)
 					? ((LivingEntity) entity).getMaxHealth()
 					: -1)) {
-				if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 8) {
-					if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).TrainingDummyHits <= 99) {
+				if (NarutoShippudenModVariables.get(sourceentity).storymode == 8) {
+					if (NarutoShippudenModVariables.get(sourceentity).TrainingDummyHits <= 99) {
 						{
-							double _setval = ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).TrainingDummyHits + 1);
+							double _setval = (NarutoShippudenModVariables.get(sourceentity).TrainingDummyHits + 1);
 							sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.TrainingDummyHits = _setval;
 								capability.syncPlayerVariables(sourceentity);
@@ -120,8 +113,7 @@ public class TrainingDummyEntityIsHurtProcedure {
 															- ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1))))
 											+ " \u00A76Hits: "
 											+ new java.text.DecimalFormat("##.##")
-													.format((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).TrainingDummyHits)
+													.format(NarutoShippudenModVariables.get(sourceentity).TrainingDummyHits)
 											+ "/100")),
 									(true));
 						}

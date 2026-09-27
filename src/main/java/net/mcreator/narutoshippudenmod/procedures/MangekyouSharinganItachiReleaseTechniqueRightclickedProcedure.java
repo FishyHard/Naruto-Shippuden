@@ -24,17 +24,12 @@ public class MangekyouSharinganItachiReleaseTechniqueRightclickedProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganItachi == true) {
+		if (NarutoShippudenModVariables.get(entity).MangekyouSharinganItachi == true) {
 			if (!entity.isSneaking()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganActivate == true) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyoushrainganitachiamaterasulearn >= 1) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 20) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 350) {
+				if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == true) {
+					if (NarutoShippudenModVariables.get(entity).mangekyoushrainganitachiamaterasulearn >= 1) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 20) {
+							if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 350) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -57,62 +52,51 @@ public class MangekyouSharinganItachiReleaseTechniqueRightclickedProcedure {
 									}
 								}
 								{
-									double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 350);
+									double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 350);
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 										capability.ChakraAmount = _setval;
 										capability.syncPlayerVariables(entity);
 									});
 								}
 								{
-									double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).Mangekyou_Sharingan_Technique_Use + 1);
+									double _setval = (NarutoShippudenModVariables.get(entity).Mangekyou_Sharingan_Technique_Use + 1);
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 										capability.Mangekyou_Sharingan_Technique_Use = _setval;
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 349) {
+							} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 349) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 19) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyoushrainganitachiamaterasulearn >= 1)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).mangekyoushrainganitachiamaterasulearn >= 1)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-					if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+					if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(MangekyouSharinganItachiReleaseTechniqueItem.block, (int) 200);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(MangekyouSharinganItachiReleaseTechniqueItem.block, (int) 160);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(MangekyouSharinganItachiReleaseTechniqueItem.block, (int) 120);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(MangekyouSharinganItachiReleaseTechniqueItem.block, (int) 80);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(MangekyouSharinganItachiReleaseTechniqueItem.block, (int) 40);
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganActivate == false) {
+				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == false) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Activate Mangekyou Sharingan"), (true));
 					}
@@ -122,8 +106,7 @@ public class MangekyouSharinganItachiReleaseTechniqueRightclickedProcedure {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Amaterasu"), (true));
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganItachi == false) {
+		} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganItachi == false) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this release."), (true));
 			}

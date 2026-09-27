@@ -16,8 +16,7 @@ public class DisplayHatakeSelectProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectclanrelease == 5) {
+		if (NarutoShippudenModVariables.get(entity).selectclanrelease == 5) {
 			return true;
 		}
 		return false;

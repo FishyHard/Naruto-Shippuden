@@ -75,8 +75,7 @@ public class NuibariRightclickedProcedure {
 				if (entity instanceof PlayerEntity)
 					((PlayerEntity) entity).getCooldownTracker().setCooldown(itemstack.getItem(), (int) 20);
 			} else if (itemstack.getOrCreateTag().getDouble("NuibariMode") == 1) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 100) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 100) {
 					distance = 3;
 					for (int index0 = 0; index0 < (int) (17); index0++) {
 						if (found == false) {
@@ -618,8 +617,7 @@ public class NuibariRightclickedProcedure {
 							}
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 99) {
+				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (true));
 					}

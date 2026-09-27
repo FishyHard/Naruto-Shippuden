@@ -59,14 +59,9 @@ public class ShadersProcedure {
 		Entity entity = (Entity) dependencies.get("entity");
 		if (world.isRemote()) {
 			if (entity instanceof PlayerEntity) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Mangekyou_Sharingan == true) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eternal_Mangekyou_Sharingan == false) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Mangekyou_Sharingan_Technique_Use >= (entity
-										.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).Mangekyou_Sharingan_Technique_Use_Max) {
+				if (NarutoShippudenModVariables.get(entity).Mangekyou_Sharingan == true) {
+					if (NarutoShippudenModVariables.get(entity).Eternal_Mangekyou_Sharingan == false) {
+						if (NarutoShippudenModVariables.get(entity).Mangekyou_Sharingan_Technique_Use >= NarutoShippudenModVariables.get(entity).Mangekyou_Sharingan_Technique_Use_Max) {
 							if (Minecraft.getInstance().gameRenderer.getShaderGroup() == null) {
 								Minecraft.getInstance().gameRenderer.loadShader(new ResourceLocation("shaders/post/blur.json"));
 							}

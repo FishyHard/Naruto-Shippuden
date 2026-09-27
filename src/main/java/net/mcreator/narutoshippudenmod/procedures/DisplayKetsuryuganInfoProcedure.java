@@ -16,8 +16,7 @@ public class DisplayKetsuryuganInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).ketsuryugan == true) {
+		if (NarutoShippudenModVariables.get(entity).ketsuryugan == true) {
 			return true;
 		}
 		return false;

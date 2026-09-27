@@ -131,13 +131,9 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 		LevelUPProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 				(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 		if (!entity.isSneaking()) {
-			if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= (entity
-							.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax)) {
+			if (!(NarutoShippudenModVariables.get(entity).ChakraAmount >= NarutoShippudenModVariables.get(entity).ChakraMax)) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount + 0.25);
+					double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount + 0.25);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.ChakraAmount = _setval;
 						capability.syncPlayerVariables(entity);
@@ -145,13 +141,9 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 			}
 		} else if (entity.isSneaking()) {
-			if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= (entity
-							.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax)) {
+			if (!(NarutoShippudenModVariables.get(entity).ChakraAmount >= NarutoShippudenModVariables.get(entity).ChakraMax)) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount + 0.5);
+					double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount + 0.5);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.ChakraAmount = _setval;
 						capability.syncPlayerVariables(entity);
@@ -164,14 +156,8 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 			}
 		}
 		if (entity.ticksExisted % 40 == 0 && !world.isRemote()) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELMINIGAME >= (entity
-							.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELMAXMINIGAME) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELMINIGAME == (entity
-								.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELMAXMINIGAME) {
+			if (NarutoShippudenModVariables.get(entity).LEVELMINIGAME >= NarutoShippudenModVariables.get(entity).LEVELMAXMINIGAME) {
+				if (NarutoShippudenModVariables.get(entity).LEVELMINIGAME == NarutoShippudenModVariables.get(entity).LEVELMAXMINIGAME) {
 					{
 						double _setval = 0;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -180,32 +166,28 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						});
 					}
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELMAXMINIGAME + 2);
+						double _setval = (NarutoShippudenModVariables.get(entity).LEVELMAXMINIGAME + 2);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.LEVELMAXMINIGAME = _setval;
 							capability.syncPlayerVariables(entity);
 						});
 					}
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELSTATMINIGAME + 1);
+						double _setval = (NarutoShippudenModVariables.get(entity).LEVELSTATMINIGAME + 1);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.LEVELSTATMINIGAME = _setval;
 							capability.syncPlayerVariables(entity);
 						});
 					}
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp + 1);
+						double _setval = (NarutoShippudenModVariables.get(entity).jp + 1);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.jp = _setval;
 							capability.syncPlayerVariables(entity);
 						});
 					}
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).sp + 1);
+						double _setval = (NarutoShippudenModVariables.get(entity).sp + 1);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.sp = _setval;
 							capability.syncPlayerVariables(entity);
@@ -215,53 +197,43 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						((PlayerEntity) entity)
 								.sendStatusMessage(
 										new StringTextComponent(("Level Up! Level: "
-												+ (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELSTATMINIGAME
+												+ NarutoShippudenModVariables.get(entity).LEVELSTATMINIGAME
 												+ " JP +1" + " SP +1")),
 										(true));
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELMINIGAME >= (entity
-								.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELMAXMINIGAME) {
+				if (NarutoShippudenModVariables.get(entity).LEVELMINIGAME >= NarutoShippudenModVariables.get(entity).LEVELMAXMINIGAME) {
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELMINIGAME
-								- (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELMAXMINIGAME);
+						double _setval = (NarutoShippudenModVariables.get(entity).LEVELMINIGAME
+								- NarutoShippudenModVariables.get(entity).LEVELMAXMINIGAME);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.LEVELMINIGAME = _setval;
 							capability.syncPlayerVariables(entity);
 						});
 					}
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELMAXMINIGAME + 2);
+						double _setval = (NarutoShippudenModVariables.get(entity).LEVELMAXMINIGAME + 2);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.LEVELMAXMINIGAME = _setval;
 							capability.syncPlayerVariables(entity);
 						});
 					}
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELSTATMINIGAME + 1);
+						double _setval = (NarutoShippudenModVariables.get(entity).LEVELSTATMINIGAME + 1);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.LEVELSTATMINIGAME = _setval;
 							capability.syncPlayerVariables(entity);
 						});
 					}
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp + 1);
+						double _setval = (NarutoShippudenModVariables.get(entity).jp + 1);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.jp = _setval;
 							capability.syncPlayerVariables(entity);
 						});
 					}
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).sp + 1);
+						double _setval = (NarutoShippudenModVariables.get(entity).sp + 1);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.sp = _setval;
 							capability.syncPlayerVariables(entity);
@@ -271,8 +243,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						((PlayerEntity) entity)
 								.sendStatusMessage(
 										new StringTextComponent(("Level Up! Level: "
-												+ (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELSTATMINIGAME
+												+ NarutoShippudenModVariables.get(entity).LEVELSTATMINIGAME
 												+ " JP +1" + " SP +1")),
 										(true));
 					}
@@ -281,16 +252,14 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 		}
 		if (entity.ticksExisted % 20 == 0 && !world.isRemote()) {
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).NarutoTimerAwakening + 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).NarutoTimerAwakening + 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.NarutoTimerAwakening = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).calendar_calculator + 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).calendar_calculator + 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.calendar_calculator = _setval;
 					capability.syncPlayerVariables(entity);
@@ -309,151 +278,113 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 				bufferedReader.close();
 				mainjsonobject = new Gson().fromJson(jsonstringbuilder.toString(), com.google.gson.JsonObject.class);
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).uchihareleaselogic == true) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).NarutoTimerAwakening >= mainjsonobject.get("sharingan_awake")
+				if (NarutoShippudenModVariables.get(entity).uchihareleaselogic == true) {
+					if (NarutoShippudenModVariables.get(entity).NarutoTimerAwakening >= mainjsonobject.get("sharingan_awake")
 									.getAsDouble()) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).sharingan == false) {
+						if (NarutoShippudenModVariables.get(entity).sharingan == false) {
 							SharinganAwakeProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 									(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 						}
 					}
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).NarutoTimerAwakening >= mainjsonobject
+					if (NarutoShippudenModVariables.get(entity).NarutoTimerAwakening >= mainjsonobject
 									.get("mangekyou_sharingan_awake").getAsDouble()) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyouletter == false) {
+						if (NarutoShippudenModVariables.get(entity).mangekyouletter == false) {
 							MSharinganAwakeProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 									(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 						}
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).hatakereleaselogic == true) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).NarutoTimerAwakening >= mainjsonobject.get("sharingan_awake")
+				if (NarutoShippudenModVariables.get(entity).hatakereleaselogic == true) {
+					if (NarutoShippudenModVariables.get(entity).NarutoTimerAwakening >= mainjsonobject.get("sharingan_awake")
 									.getAsDouble()) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).SharinganKakashi == false) {
+						if (NarutoShippudenModVariables.get(entity).SharinganKakashi == false) {
 							KakashiSharinganAwakeProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 						}
 					}
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).NarutoTimerAwakening >= mainjsonobject
+					if (NarutoShippudenModVariables.get(entity).NarutoTimerAwakening >= mainjsonobject
 									.get("mangekyou_sharingan_awake").getAsDouble()) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganKakashi == false) {
+						if (NarutoShippudenModVariables.get(entity).MangekyouSharinganKakashi == false) {
 							KakashiMSharinganAwakeProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 						}
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).shimurareleaselogic == true) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).NarutoTimerAwakening >= mainjsonobject.get("sharingan_awake")
+				if (NarutoShippudenModVariables.get(entity).shimurareleaselogic == true) {
+					if (NarutoShippudenModVariables.get(entity).NarutoTimerAwakening >= mainjsonobject.get("sharingan_awake")
 									.getAsDouble()) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).SharinganShimura == false) {
+						if (NarutoShippudenModVariables.get(entity).SharinganShimura == false) {
 							ShimuraSharinganAwakeProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 						}
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugareleaselogic == true) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).NarutoTimerAwakening >= mainjsonobject.get("byakugan_awake")
+				if (NarutoShippudenModVariables.get(entity).hyugareleaselogic == true) {
+					if (NarutoShippudenModVariables.get(entity).NarutoTimerAwakening >= mainjsonobject.get("byakugan_awake")
 									.getAsDouble()) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).byakugan == false) {
+						if (NarutoShippudenModVariables.get(entity).byakugan == false) {
 							ByakuganAwakeProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 									(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 						}
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).chinoikereleaselogic == true) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).NarutoTimerAwakening >= mainjsonobject
+				if (NarutoShippudenModVariables.get(entity).chinoikereleaselogic == true) {
+					if (NarutoShippudenModVariables.get(entity).NarutoTimerAwakening >= mainjsonobject
 									.get("ketsuryugan_awake").getAsDouble()) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ketsuryugan == false) {
+						if (NarutoShippudenModVariables.get(entity).ketsuryugan == false) {
 							KetsuryuganAwakeProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 						}
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsukireleaselogic == true) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_path == 1) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).NarutoTimerAwakening >= mainjsonobject
+				if (NarutoShippudenModVariables.get(entity).otsutsukireleaselogic == true) {
+					if (NarutoShippudenModVariables.get(entity).otsutsuki_path == 1) {
+						if (NarutoShippudenModVariables.get(entity).NarutoTimerAwakening >= mainjsonobject
 										.get("byakugan_awake").getAsDouble()) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).byakugan == false) {
+							if (NarutoShippudenModVariables.get(entity).byakugan == false) {
 								ByakuganAwakeProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_path == 2) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).NarutoTimerAwakening >= mainjsonobject
+					} else if (NarutoShippudenModVariables.get(entity).otsutsuki_path == 2) {
+						if (NarutoShippudenModVariables.get(entity).NarutoTimerAwakening >= mainjsonobject
 										.get("sharingan_awake").getAsDouble()) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).sharingan == false) {
+							if (NarutoShippudenModVariables.get(entity).sharingan == false) {
 								SharinganAwakeProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 							}
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_path == 3) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).NarutoTimerAwakening >= mainjsonobject
+					} else if (NarutoShippudenModVariables.get(entity).otsutsuki_path == 3) {
+						if (NarutoShippudenModVariables.get(entity).NarutoTimerAwakening >= mainjsonobject
 										.get("isshiki_dojutsu_awake").getAsDouble()) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsu == false) {
+							if (NarutoShippudenModVariables.get(entity).isshikidojutsu == false) {
 								IsshikiDojutsuAwakeProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 							}
 						}
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_path == 1) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).NarutoTimerAwakening >= mainjsonobject.get("tenseigan_awake")
+				if (NarutoShippudenModVariables.get(entity).otsutsuki_path == 1) {
+					if (NarutoShippudenModVariables.get(entity).NarutoTimerAwakening >= mainjsonobject.get("tenseigan_awake")
 									.getAsDouble()) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).tenseigan == false) {
+						if (NarutoShippudenModVariables.get(entity).tenseigan == false) {
 							TenseiganAwakeProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 									(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_path == 2) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).NarutoTimerAwakening >= mainjsonobject
+				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_path == 2) {
+					if (NarutoShippudenModVariables.get(entity).NarutoTimerAwakening >= mainjsonobject
 									.get("mangekyou_sharingan_awake").getAsDouble()) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_mangekyou == false) {
+						if (NarutoShippudenModVariables.get(entity).otsutsuki_mangekyou == false) {
 							MangekyouOtsutsukiAwakeProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 						}
 					}
 				}
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_path == 2) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).NarutoTimerAwakening >= mainjsonobject.get("rinnegan_awake")
+				if (NarutoShippudenModVariables.get(entity).otsutsuki_path == 2) {
+					if (NarutoShippudenModVariables.get(entity).NarutoTimerAwakening >= mainjsonobject.get("rinnegan_awake")
 									.getAsDouble()) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).rinnegan == false) {
+						if (NarutoShippudenModVariables.get(entity).rinnegan == false) {
 							RinneganAwakeProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 									(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 						}
@@ -464,12 +395,9 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				e.printStackTrace();
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).uzumakichains == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 10) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 1) {
+		if (NarutoShippudenModVariables.get(entity).uzumakichains == true) {
+			if (NarutoShippudenModVariables.get(entity).ninjutsu >= 10) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1) {
 					{
 						Entity _shootFrom = entity;
 						World projectileLevel = _shootFrom.world;
@@ -491,8 +419,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						}
 					}
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 1);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 1);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
@@ -501,15 +428,11 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).tenromode == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 20) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 2) {
+		if (NarutoShippudenModVariables.get(entity).tenromode == true) {
+			if (NarutoShippudenModVariables.get(entity).ninjutsu >= 20) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 2) {
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 2);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 2);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
@@ -521,8 +444,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.SPEED, (int) 10, (int) 1, (false), (false)));
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.STRENGTH, (int) 10, (int) 1, (false), (false)));
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 1.9) {
+				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 1.9) {
 					{
 						boolean _setval = (false);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -530,45 +452,35 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 							capability.syncPlayerVariables(entity);
 						});
 					}
-					if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+					if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(TenroReleaseTechniqueItem.block, (int) 1500);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(TenroReleaseTechniqueItem.block, (int) 1250);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(TenroReleaseTechniqueItem.block, (int) 1000);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(TenroReleaseTechniqueItem.block, (int) 750);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(TenroReleaseTechniqueItem.block, (int) 500);
 					}
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).swiftmode == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 30) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu >= 20) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 4) {
+		if (NarutoShippudenModVariables.get(entity).swiftmode == true) {
+			if (NarutoShippudenModVariables.get(entity).ninjutsu >= 30) {
+				if (NarutoShippudenModVariables.get(entity).taijutsu >= 20) {
+					if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 4) {
 						if (entity instanceof LivingEntity)
 							((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.SPEED, (int) 10, (int) 30, (false), (false)));
 						if (entity instanceof LivingEntity)
 							((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.STRENGTH, (int) 10, (int) 1, (false), (false)));
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 4);
+							double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 4);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.ChakraAmount = _setval;
 								capability.syncPlayerVariables(entity);
@@ -578,12 +490,9 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).stormlaser == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 25) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 1.7) {
+		if (NarutoShippudenModVariables.get(entity).stormlaser == true) {
+			if (NarutoShippudenModVariables.get(entity).ninjutsu >= 25) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1.7) {
 					{
 						Entity _shootFrom = entity;
 						World projectileLevel = _shootFrom.world;
@@ -605,8 +514,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						}
 					}
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 1.7);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 1.7);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
@@ -615,8 +523,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).hoshigakireleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).hoshigakireleaselogic == true) {
 			if (entity instanceof LivingEntity)
 				((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.RESISTANCE, (int) 10, (int) 0, (false), (false)));
 			if (entity instanceof LivingEntity)
@@ -630,13 +537,10 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 			if (entity instanceof LivingEntity)
 				((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.DOLPHINS_GRACE, (int) 10, (int) 3, (false), (false)));
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).DanceOfTheLarch == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 4) {
+		if (NarutoShippudenModVariables.get(entity).DanceOfTheLarch == true) {
+			if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 4) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 4);
+					double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 4);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.ChakraAmount = _setval;
 						capability.syncPlayerVariables(entity);
@@ -644,8 +548,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 				if (entity instanceof LivingEntity)
 					((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.RESISTANCE, (int) 10, (int) 2, (false), (false)));
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 3.9) {
+			} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 3.9) {
 				{
 					boolean _setval = (false);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -653,36 +556,28 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-				if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+				if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(BoneReleaseTechniqueItem.block, (int) 750);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(BoneReleaseTechniqueItem.block, (int) 500);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(BoneReleaseTechniqueItem.block, (int) 300);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(BoneReleaseTechniqueItem.block, (int) 200);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(BoneReleaseTechniqueItem.block, (int) 100);
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).ImperviousArmor == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 7) {
+		if (NarutoShippudenModVariables.get(entity).ImperviousArmor == true) {
+			if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 7) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 7);
+					double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 7);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.ChakraAmount = _setval;
 						capability.syncPlayerVariables(entity);
@@ -690,8 +585,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 				if (entity instanceof LivingEntity)
 					((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.RESISTANCE, (int) 10, (int) 3, (false), (false)));
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 6.9) {
+			} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 6.9) {
 				{
 					boolean _setval = (false);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -699,36 +593,28 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-				if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+				if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(SteelReleaseTechniqueItem.block, (int) 750);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(SteelReleaseTechniqueItem.block, (int) 500);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(SteelReleaseTechniqueItem.block, (int) 300);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(SteelReleaseTechniqueItem.block, (int) 200);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(SteelReleaseTechniqueItem.block, (int) 100);
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 1) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 5) {
+		if (NarutoShippudenModVariables.get(entity).magnet_coat == 1) {
+			if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 5) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 5);
+					double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 5);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.ChakraAmount = _setval;
 						capability.syncPlayerVariables(entity);
@@ -736,8 +622,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 				if (entity instanceof LivingEntity)
 					((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.RESISTANCE, (int) 10, (int) 2, (false), (false)));
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 4.9) {
+			} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 4.9) {
 				{
 					double _setval = 0;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -745,35 +630,27 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-				if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+				if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 750);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 500);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 300);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 200);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 100);
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 2) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 7) {
+		} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 2) {
+			if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 7) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 7);
+					double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 7);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.ChakraAmount = _setval;
 						capability.syncPlayerVariables(entity);
@@ -781,8 +658,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 				if (entity instanceof LivingEntity)
 					((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.RESISTANCE, (int) 10, (int) 3, (false), (false)));
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 6.9) {
+			} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 6.9) {
 				{
 					double _setval = 0;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -790,35 +666,27 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-				if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+				if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 750);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 500);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 300);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 200);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 100);
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).magnet_coat == 3) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 6) {
+		} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 3) {
+			if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 6) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 6);
+					double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 6);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.ChakraAmount = _setval;
 						capability.syncPlayerVariables(entity);
@@ -830,8 +698,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					((PlayerEntity) entity).abilities.isFlying = (true);
 					((PlayerEntity) entity).sendPlayerAbilities();
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 5.9) {
+			} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 5.9) {
 				{
 					double _setval = 0;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -844,36 +711,28 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					((PlayerEntity) entity).sendPlayerAbilities();
 				}
 				entity.setMotion(0, (-100), 0);
-				if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+				if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 750);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 500);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 300);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 200);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(MagnetReleaseTechniqueItem.block, (int) 100);
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Great_Water_Arm == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 2) {
+		if (NarutoShippudenModVariables.get(entity).Great_Water_Arm == true) {
+			if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 2) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 2);
+					double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 2);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.ChakraAmount = _setval;
 						capability.syncPlayerVariables(entity);
@@ -881,8 +740,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 				if (entity instanceof LivingEntity)
 					((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.STRENGTH, (int) 10, (int) 2, (false), (false)));
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 1.9) {
+			} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 1.9) {
 				{
 					boolean _setval = (false);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -890,38 +748,29 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-				if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+				if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(HozukiReleaseTechniqueItem.block, (int) 750);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(HozukiReleaseTechniqueItem.block, (int) 500);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(HozukiReleaseTechniqueItem.block, (int) 300);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(HozukiReleaseTechniqueItem.block, (int) 200);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(HozukiReleaseTechniqueItem.block, (int) 100);
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunochakramode == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 20) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 1) {
+		if (NarutoShippudenModVariables.get(entity).izunochakramode == true) {
+			if (NarutoShippudenModVariables.get(entity).ninjutsu >= 20) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1) {
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 1);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 1);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
@@ -931,8 +780,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.SPEED, (int) 10, (int) 1, (false), (false)));
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.STRENGTH, (int) 10, (int) 1, (false), (false)));
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 0.9) {
+				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 0.9) {
 					{
 						boolean _setval = (false);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -940,39 +788,30 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 							capability.syncPlayerVariables(entity);
 						});
 					}
-					if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+					if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 750);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 500);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 300);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 200);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 100);
 					}
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).HumanBulletTank == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 25) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 2) {
+		if (NarutoShippudenModVariables.get(entity).HumanBulletTank == true) {
+			if (NarutoShippudenModVariables.get(entity).ninjutsu >= 25) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 2) {
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 2);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 2);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
@@ -980,8 +819,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.SPEED, (int) 10, (int) 19, (false), (false)));
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 1.9) {
+				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 1.9) {
 					{
 						boolean _setval = (false);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -989,24 +827,19 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 							capability.syncPlayerVariables(entity);
 						});
 					}
-					if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+					if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(AkimichiReleaseTechniqueItem.block, (int) 750);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(AkimichiReleaseTechniqueItem.block, (int) 500);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(AkimichiReleaseTechniqueItem.block, (int) 300);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(AkimichiReleaseTechniqueItem.block, (int) 200);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(AkimichiReleaseTechniqueItem.block, (int) 100);
 					}
@@ -1032,15 +865,11 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).SpikedHumanBulletTank == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 30) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 3) {
+		if (NarutoShippudenModVariables.get(entity).SpikedHumanBulletTank == true) {
+			if (NarutoShippudenModVariables.get(entity).ninjutsu >= 30) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 3) {
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 3);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 3);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
@@ -1048,8 +877,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.SPEED, (int) 10, (int) 19, (false), (false)));
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 2.9) {
+				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 2.9) {
 					{
 						boolean _setval = (false);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -1057,24 +885,19 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 							capability.syncPlayerVariables(entity);
 						});
 					}
-					if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+					if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(AkimichiReleaseTechniqueItem.block, (int) 750);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(AkimichiReleaseTechniqueItem.block, (int) 500);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(AkimichiReleaseTechniqueItem.block, (int) 300);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(AkimichiReleaseTechniqueItem.block, (int) 200);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(AkimichiReleaseTechniqueItem.block, (int) 100);
 					}
@@ -1100,13 +923,10 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).ButterflyMode == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 4) {
+		if (NarutoShippudenModVariables.get(entity).ButterflyMode == true) {
+			if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 4) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 4);
+					double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 4);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.ChakraAmount = _setval;
 						capability.syncPlayerVariables(entity);
@@ -1116,8 +936,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					((PlayerEntity) entity).abilities.isFlying = (true);
 					((PlayerEntity) entity).sendPlayerAbilities();
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 3.9) {
+			} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 3.9) {
 				{
 					boolean _setval = (false);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -1130,38 +949,29 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					((PlayerEntity) entity).sendPlayerAbilities();
 				}
 				entity.setMotion(0, (-100), 0);
-				if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+				if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(AkimichiReleaseTechniqueItem.block, (int) 750);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(AkimichiReleaseTechniqueItem.block, (int) 500);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(AkimichiReleaseTechniqueItem.block, (int) 300);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(AkimichiReleaseTechniqueItem.block, (int) 200);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(AkimichiReleaseTechniqueItem.block, (int) 100);
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunocat == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 25) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 3) {
+		if (NarutoShippudenModVariables.get(entity).izunocat == true) {
+			if (NarutoShippudenModVariables.get(entity).ninjutsu >= 25) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 3) {
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 3);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 3);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
@@ -1169,8 +979,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.STRENGTH, (int) 10, (int) 3, (false), (false)));
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 2.9) {
+				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 2.9) {
 					{
 						boolean _setval = (false);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -1196,43 +1005,35 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 							EntityScale.set(_ent, EntityScale.EYE_HEIGHT, 1);
 						}
 					}
-					if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+					if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 1500);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 1250);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 1000);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 750);
-					} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 						if (entity instanceof PlayerEntity)
 							((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 500);
 					}
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu >= 121) {
+		if (NarutoShippudenModVariables.get(entity).taijutsu >= 121) {
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu - 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).taijutsu - 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.taijutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).sp + 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).sp + 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.sp = _setval;
 					capability.syncPlayerVariables(entity);
@@ -1242,19 +1043,16 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Your Taijutsu is maxed."), (true));
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).kenjutsu >= 101) {
+		if (NarutoShippudenModVariables.get(entity).kenjutsu >= 101) {
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).kenjutsu - 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).kenjutsu - 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.kenjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).sp + 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).sp + 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.sp = _setval;
 					capability.syncPlayerVariables(entity);
@@ -1264,19 +1062,16 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Your Kenjutsu is maxed."), (true));
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).shurikenjutsu >= 26) {
+		if (NarutoShippudenModVariables.get(entity).shurikenjutsu >= 26) {
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).shurikenjutsu - 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).shurikenjutsu - 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.shurikenjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).sp + 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).sp + 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.sp = _setval;
 					capability.syncPlayerVariables(entity);
@@ -1286,19 +1081,16 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Your Shurikenjutsu is maxed."), (true));
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).summoning >= 61) {
+		if (NarutoShippudenModVariables.get(entity).summoning >= 61) {
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).summoning - 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).summoning - 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.summoning = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).sp + 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).sp + 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.sp = _setval;
 					capability.syncPlayerVariables(entity);
@@ -1308,19 +1100,16 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Your Summoning is maxed."), (true));
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).kinjutsu >= 101) {
+		if (NarutoShippudenModVariables.get(entity).kinjutsu >= 101) {
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).kinjutsu - 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).kinjutsu - 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.kinjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).sp + 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).sp + 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.sp = _setval;
 					capability.syncPlayerVariables(entity);
@@ -1330,27 +1119,23 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Your Kinjutsu is maxed."), (true));
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).medicine >= 301) {
+		if (NarutoShippudenModVariables.get(entity).medicine >= 301) {
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).medicine - 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).medicine - 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.medicine = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).sp + 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).sp + 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.sp = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).maxhealth - 2);
+				double _setval = (NarutoShippudenModVariables.get(entity).maxhealth - 2);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.maxhealth = _setval;
 					capability.syncPlayerVariables(entity);
@@ -1361,34 +1146,29 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						new CommandSource(ICommandSource.DUMMY, new Vector3d(x, y, z), Vector2f.ZERO, (ServerWorld) world, 4, "",
 								new StringTextComponent(""), ((World) world).getServer(), null).withFeedbackDisabled(),
 						("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.max_health base set "
-								+ (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).maxhealth));
+								+ NarutoShippudenModVariables.get(entity).maxhealth));
 			}
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Your Medicine is maxed."), (true));
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).speed >= 11) {
+		if (NarutoShippudenModVariables.get(entity).speed >= 11) {
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).speed - 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).speed - 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.speed = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).sp + 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).sp + 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.sp = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).maxspeed - 0.005);
+				double _setval = (NarutoShippudenModVariables.get(entity).maxspeed - 0.005);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.maxspeed = _setval;
 					capability.syncPlayerVariables(entity);
@@ -1399,26 +1179,22 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						new CommandSource(ICommandSource.DUMMY, new Vector3d(x, y, z), Vector2f.ZERO, (ServerWorld) world, 4, "",
 								new StringTextComponent(""), ((World) world).getServer(), null).withFeedbackDisabled(),
 						("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.movement_speed base set "
-								+ (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).maxspeed));
+								+ NarutoShippudenModVariables.get(entity).maxspeed));
 			}
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Your Speed is maxed."), (true));
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupowerstat >= 11) {
+		if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 11) {
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupowerstat - 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).jutsupowerstat - 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.jutsupowerstat = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).sp + 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).sp + 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.sp = _setval;
 					capability.syncPlayerVariables(entity);
@@ -1428,19 +1204,16 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Your Jutsu Power is maxed."), (true));
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).genjutsu >= 71) {
+		if (NarutoShippudenModVariables.get(entity).genjutsu >= 71) {
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).genjutsu - 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).genjutsu - 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.genjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).sp + 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).sp + 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.sp = _setval;
 					capability.syncPlayerVariables(entity);
@@ -1450,19 +1223,16 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Your Genjutsu is maxed."), (true));
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ >= 221) {
+		if (NarutoShippudenModVariables.get(entity).IQ >= 221) {
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ - 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ - 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).sp + 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).sp + 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.sp = _setval;
 					capability.syncPlayerVariables(entity);
@@ -1472,10 +1242,8 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Your IQ is maxed."), (true));
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).SmokeForm == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 4) {
+		if (NarutoShippudenModVariables.get(entity).SmokeForm == true) {
+			if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 4) {
 				if (entity instanceof LivingEntity)
 					((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.FIRE_RESISTANCE, (int) 50, (int) 1, (false), (false)));
 				if (entity instanceof LivingEntity)
@@ -1490,15 +1258,13 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					((ServerWorld) world).spawnParticle(ParticleTypes.CLOUD, x, (y + 1), z, (int) 5, 0, 0, 0, 0);
 				}
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 4);
+					double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 4);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.ChakraAmount = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 3.9) {
+			} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 3.9) {
 				{
 					boolean _setval = (false);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -1506,33 +1272,26 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-				if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+				if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(SmokeReleaseTechniqueItem.block, (int) 750);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(SmokeReleaseTechniqueItem.block, (int) 500);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(SmokeReleaseTechniqueItem.block, (int) 300);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(SmokeReleaseTechniqueItem.block, (int) 200);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(SmokeReleaseTechniqueItem.block, (int) 100);
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).WindMode == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 1) {
+		if (NarutoShippudenModVariables.get(entity).WindMode == true) {
+			if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1) {
 				if (entity instanceof LivingEntity)
 					((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.SPEED, (int) 50, (int) 2, (false), (false)));
 				if (entity instanceof LivingEntity)
@@ -1542,15 +1301,13 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				if (entity instanceof LivingEntity)
 					((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.RESISTANCE, (int) 50, (int) 0, (false), (false)));
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 1);
+					double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 1);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.ChakraAmount = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 0.9) {
+			} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 0.9) {
 				{
 					boolean _setval = (false);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -1558,31 +1315,25 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-				if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+				if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(WindReleaseTechniqueItem.block, (int) 200);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(WindReleaseTechniqueItem.block, (int) 160);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(WindReleaseTechniqueItem.block, (int) 120);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(WindReleaseTechniqueItem.block, (int) 80);
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+				} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 					if (entity instanceof PlayerEntity)
 						((PlayerEntity) entity).getCooldownTracker().setCooldown(WindReleaseTechniqueItem.block, (int) 40);
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).VolticThomasCannonDamage == true) {
+		if (NarutoShippudenModVariables.get(entity).VolticThomasCannonDamage == true) {
 			{
 				List<Entity> _entfound = world
 						.getEntitiesWithinAABB(Entity.class,
@@ -1599,8 +1350,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).PassingFang == true) {
+		if (NarutoShippudenModVariables.get(entity).PassingFang == true) {
 			{
 				List<Entity> _entfound = world
 						.getEntitiesWithinAABB(Entity.class,
@@ -1617,8 +1367,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).NaraClanShadow == true) {
+		if (NarutoShippudenModVariables.get(entity).NaraClanShadow == true) {
 			if (shadow == null) {
 				shadow = (Entity) world
 						.getEntitiesWithinAABB(LivingEntity.class,
@@ -1715,114 +1464,72 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				});
 			}
 			for (int index0 = 0; index0 < (int) (20); index0++) {
-				if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1X
-						- (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow2X)
-						* ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1X
-								- (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow2X) >= ((entity
-												.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1Z
-												- (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow2Z)
-												* ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1Z
-														- (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-																.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow2Z)) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1X > (entity
-									.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow2X) {
+				if ((NarutoShippudenModVariables.get(entity).Shadow1X
+						- NarutoShippudenModVariables.get(entity).Shadow2X)
+						* (NarutoShippudenModVariables.get(entity).Shadow1X
+								- NarutoShippudenModVariables.get(entity).Shadow2X) >= (NarutoShippudenModVariables.get(entity).Shadow1Z
+												- NarutoShippudenModVariables.get(entity).Shadow2Z)
+												* (NarutoShippudenModVariables.get(entity).Shadow1Z
+														- NarutoShippudenModVariables.get(entity).Shadow2Z)) {
+					if (NarutoShippudenModVariables.get(entity).Shadow1X > NarutoShippudenModVariables.get(entity).Shadow2X) {
 						world.setBlockState(
 								new BlockPos(
-										(entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1X - 1,
+										NarutoShippudenModVariables.get(entity).Shadow1X - 1,
 										entity.getPosY(),
-										(entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1Z),
+										NarutoShippudenModVariables.get(entity).Shadow1Z),
 								NaraShadowBlock.block.getDefaultState(), 3);
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1X - 1);
+							double _setval = (NarutoShippudenModVariables.get(entity).Shadow1X - 1);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.Shadow1X = _setval;
 								capability.syncPlayerVariables(entity);
 							});
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1X < (entity
-									.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow2X) {
+					} else if (NarutoShippudenModVariables.get(entity).Shadow1X < NarutoShippudenModVariables.get(entity).Shadow2X) {
 						world.setBlockState(
 								new BlockPos(
-										(entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1X + 1,
+										NarutoShippudenModVariables.get(entity).Shadow1X + 1,
 										entity.getPosY(),
-										(entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1Z),
+										NarutoShippudenModVariables.get(entity).Shadow1Z),
 								NaraShadowBlock.block.getDefaultState(), 3);
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1X + 1);
+							double _setval = (NarutoShippudenModVariables.get(entity).Shadow1X + 1);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.Shadow1X = _setval;
 								capability.syncPlayerVariables(entity);
 							});
 						}
 					}
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1X
-						- (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow2X)
-						* ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1X
-								- (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow2X) < ((entity
-												.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1Z
-												- (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow2Z)
-												* ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1Z
-														- (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-																.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow2Z)) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1Z > (entity
-									.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow2Z) {
+				} else if ((NarutoShippudenModVariables.get(entity).Shadow1X
+						- NarutoShippudenModVariables.get(entity).Shadow2X)
+						* (NarutoShippudenModVariables.get(entity).Shadow1X
+								- NarutoShippudenModVariables.get(entity).Shadow2X) < (NarutoShippudenModVariables.get(entity).Shadow1Z
+												- NarutoShippudenModVariables.get(entity).Shadow2Z)
+												* (NarutoShippudenModVariables.get(entity).Shadow1Z
+														- NarutoShippudenModVariables.get(entity).Shadow2Z)) {
+					if (NarutoShippudenModVariables.get(entity).Shadow1Z > NarutoShippudenModVariables.get(entity).Shadow2Z) {
 						world.setBlockState(
 								new BlockPos(
-										(entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1X,
+										NarutoShippudenModVariables.get(entity).Shadow1X,
 										entity.getPosY(),
-										(entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1Z - 1),
+										NarutoShippudenModVariables.get(entity).Shadow1Z - 1),
 								NaraShadowBlock.block.getDefaultState(), 3);
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1Z - 1);
+							double _setval = (NarutoShippudenModVariables.get(entity).Shadow1Z - 1);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.Shadow1Z = _setval;
 								capability.syncPlayerVariables(entity);
 							});
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1Z < (entity
-									.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow2Z) {
+					} else if (NarutoShippudenModVariables.get(entity).Shadow1Z < NarutoShippudenModVariables.get(entity).Shadow2Z) {
 						world.setBlockState(
 								new BlockPos(
-										(entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1X,
+										NarutoShippudenModVariables.get(entity).Shadow1X,
 										entity.getPosY(),
-										(entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1Z + 1),
+										NarutoShippudenModVariables.get(entity).Shadow1Z + 1),
 								NaraShadowBlock.block.getDefaultState(), 3);
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shadow1Z + 1);
+							double _setval = (NarutoShippudenModVariables.get(entity).Shadow1Z + 1);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.Shadow1Z = _setval;
 								capability.syncPlayerVariables(entity);
@@ -1851,10 +1558,8 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 									return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.getDistanceSq(_x, _y, _z)));
 								}
 							}.compareDistOf((entity.getPosX()), (entity.getPosY()), (entity.getPosZ()))).findFirst().orElse(null))
-							.getPosX()) != (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ShadowX1
-									- (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ShadowX2
+							.getPosX()) != NarutoShippudenModVariables.get(entity).ShadowX1
+									- NarutoShippudenModVariables.get(entity).ShadowX2
 							|| Math.floor(entity.getPosZ())
 									- Math.floor(((Entity) world
 											.getEntitiesWithinAABB(ShadowImitationEntityEntity.CustomEntity.class,
@@ -1868,10 +1573,8 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 															.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.getDistanceSq(_x, _y, _z)));
 												}
 											}.compareDistOf((entity.getPosX()), (entity.getPosY()), (entity.getPosZ()))).findFirst().orElse(null))
-											.getPosZ()) != (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-													.orElse(new NarutoShippudenModVariables.PlayerVariables())).ShadowZ1
-													- (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).ShadowZ2)) {
+											.getPosZ()) != NarutoShippudenModVariables.get(entity).ShadowZ1
+													- NarutoShippudenModVariables.get(entity).ShadowZ2)) {
 				if (Math.floor(entity.getPosX() + ((Entity) world
 						.getEntitiesWithinAABB(ShadowImitationEntityEntity.CustomEntity.class,
 								new AxisAlignedBB((entity.getPosX()) - (30 / 2d), (entity.getPosY()) - (30 / 2d), (entity.getPosZ()) - (30 / 2d),
@@ -1882,8 +1585,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 								return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.getDistanceSq(_x, _y, _z)));
 							}
 						}.compareDistOf((entity.getPosX()), (entity.getPosY()), (entity.getPosZ()))).findFirst().orElse(null)).getPosX()) > Math
-								.floor((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).OriginalX1
+								.floor(NarutoShippudenModVariables.get(entity).OriginalX1
 										+ ((Entity) world
 												.getEntitiesWithinAABB(ShadowImitationEntityEntity.CustomEntity.class,
 														new AxisAlignedBB((entity.getPosX()) - (30 / 2d), (entity.getPosY()) - (30 / 2d),
@@ -1925,8 +1627,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 								return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.getDistanceSq(_x, _y, _z)));
 							}
 						}.compareDistOf((entity.getPosX()), (entity.getPosY()), (entity.getPosZ()))).findFirst().orElse(null)).getPosX()) < Math
-								.floor((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).OriginalX1
+								.floor(NarutoShippudenModVariables.get(entity).OriginalX1
 										+ ((Entity) world
 												.getEntitiesWithinAABB(ShadowImitationEntityEntity.CustomEntity.class,
 														new AxisAlignedBB((entity.getPosX()) - (30 / 2d), (entity.getPosY()) - (30 / 2d),
@@ -1968,8 +1669,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 								return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.getDistanceSq(_x, _y, _z)));
 							}
 						}.compareDistOf((entity.getPosX()), (entity.getPosY()), (entity.getPosZ()))).findFirst().orElse(null)).getPosZ()) > Math
-								.floor((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).OriginalZ1
+								.floor(NarutoShippudenModVariables.get(entity).OriginalZ1
 										+ ((Entity) world
 												.getEntitiesWithinAABB(ShadowImitationEntityEntity.CustomEntity.class,
 														new AxisAlignedBB((entity.getPosX()) - (30 / 2d), (entity.getPosY()) - (30 / 2d),
@@ -2011,8 +1711,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 								return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.getDistanceSq(_x, _y, _z)));
 							}
 						}.compareDistOf((entity.getPosX()), (entity.getPosY()), (entity.getPosZ()))).findFirst().orElse(null)).getPosZ()) < Math
-								.floor((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).OriginalZ1
+								.floor(NarutoShippudenModVariables.get(entity).OriginalZ1
 										+ ((Entity) world
 												.getEntitiesWithinAABB(ShadowImitationEntityEntity.CustomEntity.class,
 														new AxisAlignedBB((entity.getPosX()) - (30 / 2d), (entity.getPosY()) - (30 / 2d),
@@ -2047,8 +1746,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).medicine <= 300) {
+		if (NarutoShippudenModVariables.get(entity).medicine <= 300) {
 			{
 				double _setval = ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -2063,8 +1761,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					capability.syncPlayerVariables(entity);
 				});
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).medicine >= 301) {
+		} else if (NarutoShippudenModVariables.get(entity).medicine >= 301) {
 			{
 				double _setval = 620;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -2080,10 +1777,8 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				});
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Kagutsuchi == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 5) {
+		if (NarutoShippudenModVariables.get(entity).Kagutsuchi == true) {
+			if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 5) {
 				if (world
 						.isAirBlock(
 								new BlockPos(
@@ -2158,15 +1853,13 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					}
 				}
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 5);
+					double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 5);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.ChakraAmount = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 4.9) {
+			} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 4.9) {
 				{
 					boolean _setval = (false);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -2176,15 +1869,11 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).AmaterasuSusano == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 2) {
+		if (NarutoShippudenModVariables.get(entity).AmaterasuSusano == true) {
+			if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 2) {
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 2);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 2);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
@@ -2195,8 +1884,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					if (world instanceof ServerWorld) {
 						((ServerWorld) world).spawnParticle(AmaterasuFireParticle.particle, x, (y + 1), z, (int) 5, 0, 0, 0, 0.01);
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 1.9) {
+				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 1.9) {
 					{
 						double _setval = 0;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -2215,13 +1903,10 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						((LivingEntity) entity).removePotionEffect(Effects.RESISTANCE);
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 2) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 4) {
+			} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 4) {
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 4);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 4);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
@@ -2232,8 +1917,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					if (world instanceof ServerWorld) {
 						((ServerWorld) world).spawnParticle(AmaterasuFireParticle.particle, x, (y + 2), z, (int) 5, 0, 0, 0, 0.01);
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 3.9) {
+				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 3.9) {
 					{
 						double _setval = 0;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -2252,13 +1936,10 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						((LivingEntity) entity).removePotionEffect(Effects.RESISTANCE);
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 3) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 6) {
+			} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 6) {
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 6);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 6);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
@@ -2269,8 +1950,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					if (world instanceof ServerWorld) {
 						((ServerWorld) world).spawnParticle(AmaterasuFireParticle.particle, x, (y + 2), z, (int) 5, 0, 0, 0, 0.01);
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 5.9) {
+				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 5.9) {
 					{
 						double _setval = 0;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -2289,13 +1969,10 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						((LivingEntity) entity).removePotionEffect(Effects.RESISTANCE);
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 4) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 8) {
+			} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 4) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 8) {
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 8);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 8);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
@@ -2306,8 +1983,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					if (world instanceof ServerWorld) {
 						((ServerWorld) world).spawnParticle(AmaterasuFireParticle.particle, x, (y + 2), z, (int) 5, 0, 0, 0, 0.01);
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 7.9) {
+				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 7.9) {
 					{
 						double _setval = 0;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -2327,15 +2003,11 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					}
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).AmaterasuSusano == false) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 1) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 1) {
+		} else if (NarutoShippudenModVariables.get(entity).AmaterasuSusano == false) {
+			if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1) {
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 1);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 1);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
@@ -2343,8 +2015,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.RESISTANCE, (int) 10, (int) 0, (false), (false)));
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 0.9) {
+				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 0.9) {
 					{
 						double _setval = 0;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -2356,13 +2027,10 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						((LivingEntity) entity).removePotionEffect(Effects.RESISTANCE);
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 2) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 3) {
+			} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 3) {
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 3);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 3);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
@@ -2370,8 +2038,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.RESISTANCE, (int) 10, (int) 1, (false), (false)));
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 2.9) {
+				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 2.9) {
 					{
 						double _setval = 0;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -2383,13 +2050,10 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						((LivingEntity) entity).removePotionEffect(Effects.RESISTANCE);
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 3) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 5) {
+			} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 5) {
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 5);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 5);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
@@ -2397,8 +2061,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.RESISTANCE, (int) 10, (int) 2, (false), (false)));
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 4.9) {
+				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 4.9) {
 					{
 						double _setval = 0;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -2410,13 +2073,10 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 						((LivingEntity) entity).removePotionEffect(Effects.RESISTANCE);
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansusanostage == 4) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 7) {
+			} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 4) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 7) {
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 7);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 7);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
@@ -2424,8 +2084,7 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.RESISTANCE, (int) 10, (int) 3, (false), (false)));
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 6.9) {
+				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 6.9) {
 					{
 						double _setval = 0;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -2495,10 +2154,8 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 		}
 		{
 			double _setval = (0 + 76
-					- Math.ceil((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount
-							* (76 / Math.max((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax, 1))));
+					- Math.ceil(NarutoShippudenModVariables.get(entity).ChakraAmount
+							* (76 / Math.max(NarutoShippudenModVariables.get(entity).ChakraMax, 1))));
 			entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 				capability.ChakraBarfill = _setval;
 				capability.syncPlayerVariables(entity);
@@ -2506,29 +2163,23 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 		}
 		{
 			double _setval = (0 + 76
-					- Math.ceil((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).Health
-							* (76 / Math.max((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).HealthMax, 1))));
+					- Math.ceil(NarutoShippudenModVariables.get(entity).Health
+							* (76 / Math.max(NarutoShippudenModVariables.get(entity).HealthMax, 1))));
 			entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 				capability.HPBarfill = _setval;
 				capability.syncPlayerVariables(entity);
 			});
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).DashCooldown == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DashCooldownTicks <= 59) {
+		if (NarutoShippudenModVariables.get(entity).DashCooldown == true) {
+			if (NarutoShippudenModVariables.get(entity).DashCooldownTicks <= 59) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).DashCooldownTicks + 1);
+					double _setval = (NarutoShippudenModVariables.get(entity).DashCooldownTicks + 1);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.DashCooldownTicks = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DashCooldownTicks >= 60) {
+			} else if (NarutoShippudenModVariables.get(entity).DashCooldownTicks >= 60) {
 				{
 					boolean _setval = (false);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -2573,20 +2224,16 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).UpDashCooldown == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).UpDashCooldownTicks <= 59) {
+		if (NarutoShippudenModVariables.get(entity).UpDashCooldown == true) {
+			if (NarutoShippudenModVariables.get(entity).UpDashCooldownTicks <= 59) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).UpDashCooldownTicks + 1);
+					double _setval = (NarutoShippudenModVariables.get(entity).UpDashCooldownTicks + 1);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.UpDashCooldownTicks = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).UpDashCooldownTicks >= 60) {
+			} else if (NarutoShippudenModVariables.get(entity).UpDashCooldownTicks >= 60) {
 				{
 					boolean _setval = (false);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -2610,20 +2257,16 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Dash == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DashReset <= 9) {
+		if (NarutoShippudenModVariables.get(entity).Dash == true) {
+			if (NarutoShippudenModVariables.get(entity).DashReset <= 9) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).DashReset + 1);
+					double _setval = (NarutoShippudenModVariables.get(entity).DashReset + 1);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.DashReset = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DashReset >= 10) {
+			} else if (NarutoShippudenModVariables.get(entity).DashReset >= 10) {
 				{
 					double _setval = 0;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -2668,10 +2311,8 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Chakra_Control == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).WallClimb == false) {
+		if (NarutoShippudenModVariables.get(entity).Chakra_Control == true) {
+			if (NarutoShippudenModVariables.get(entity).WallClimb == false) {
 				if (Blocks.WATER == (world.getFluidState(new BlockPos(entity.getPosX(), entity.getPosY() - 1, entity.getPosZ())).getBlockState())
 						.getBlock()
 						|| Blocks.WATER == (world.getFluidState(new BlockPos(entity.getPosX(), entity.getPosY() - 1, entity.getPosZ()))
@@ -2697,10 +2338,8 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					}
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).WaterWalk == false) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).WHold == true) {
+			if (NarutoShippudenModVariables.get(entity).WaterWalk == false) {
+				if (NarutoShippudenModVariables.get(entity).WHold == true) {
 					if ((entity.getHorizontalFacing()) == Direction.NORTH) {
 						if (!BlockTags.getCollection().getTagByID(new ResourceLocation("minecraft:all_signs"))
 								.contains((world.getBlockState(new BlockPos(x, y, z - 1))).getBlock())

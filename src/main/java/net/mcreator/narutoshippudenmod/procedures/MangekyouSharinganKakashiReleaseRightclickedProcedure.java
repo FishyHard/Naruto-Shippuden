@@ -23,10 +23,8 @@ public class MangekyouSharinganKakashiReleaseRightclickedProcedure {
 		}
 		Entity entity = (Entity) dependencies.get("entity");
 		if (!entity.isSneaking()) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingankakashikamuilearn == 0) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp >= 35) {
+			if (NarutoShippudenModVariables.get(entity).mangekyousharingankakashikamuilearn == 0) {
+				if (NarutoShippudenModVariables.get(entity).jp >= 35) {
 					if (entity instanceof PlayerEntity) {
 						ItemStack _setstack = new ItemStack(MangekyouSharinganKakashiReleaseTechniqueItem.block);
 						_setstack.setCount((int) 1);
@@ -40,8 +38,7 @@ public class MangekyouSharinganKakashiReleaseRightclickedProcedure {
 						});
 					}
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp - 35);
+						double _setval = (NarutoShippudenModVariables.get(entity).jp - 35);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.jp = _setval;
 							capability.syncPlayerVariables(entity);
@@ -50,8 +47,7 @@ public class MangekyouSharinganKakashiReleaseRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("-35 JP"), (false));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp <= 34) {
+				} else if (NarutoShippudenModVariables.get(entity).jp <= 34) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough JP"), (false));
 					}

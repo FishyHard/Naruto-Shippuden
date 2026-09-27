@@ -16,8 +16,7 @@ public class DisplaySwiftInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).swiftreleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).swiftreleaselogic == true) {
 			return true;
 		}
 		return false;

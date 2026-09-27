@@ -18,8 +18,7 @@ public class MangekyouSharinganItachiReleaseTechniqueEntitySwingsItemProcedure {
 		}
 		Entity entity = (Entity) dependencies.get("entity");
 		{
-			double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Mangekyou_Sharingan_Technique_Use_Max);
+			double _setval = (NarutoShippudenModVariables.get(entity).Mangekyou_Sharingan_Technique_Use_Max);
 			entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 				capability.Mangekyou_Sharingan_Technique_Use = _setval;
 				capability.syncPlayerVariables(entity);

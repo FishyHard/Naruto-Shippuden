@@ -16,8 +16,7 @@ public class DisplaySarutobiInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).sarutobireleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).sarutobireleaselogic == true) {
 			return true;
 		}
 		return false;

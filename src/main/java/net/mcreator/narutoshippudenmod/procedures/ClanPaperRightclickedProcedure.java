@@ -66,32 +66,28 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 25);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 25);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).genjutsu + 15);
+				double _setval = (NarutoShippudenModVariables.get(entity).genjutsu + 15);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.genjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 120);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 120);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 250);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 250);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -120,32 +116,28 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 25);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 25);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).kinjutsu + 25);
+				double _setval = (NarutoShippudenModVariables.get(entity).kinjutsu + 25);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.kinjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 120);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 120);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 250);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 250);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -174,24 +166,21 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 15);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 15);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 115);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 115);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 150);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 150);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -217,24 +206,21 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 15);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 15);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 115);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 115);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 150);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 150);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -260,24 +246,21 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 10);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 10);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 90);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 90);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 100);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 100);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -303,32 +286,28 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 10);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 10);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).summoning + 10);
+				double _setval = (NarutoShippudenModVariables.get(entity).summoning + 10);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.summoning = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 85);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 85);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 100);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 100);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -357,24 +336,21 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 5);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 5);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 100);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 100);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 50);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 50);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -400,16 +376,14 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu + 25);
+				double _setval = (NarutoShippudenModVariables.get(entity).taijutsu + 25);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.taijutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 115);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 115);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
@@ -435,32 +409,28 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 10);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 10);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).shurikenjutsu + 10);
+				double _setval = (NarutoShippudenModVariables.get(entity).shurikenjutsu + 10);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.shurikenjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 115);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 115);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 100);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 100);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -489,24 +459,21 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 10);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 10);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 210);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 210);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 100);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 100);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -532,24 +499,21 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 20);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 20);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 125);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 125);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 200);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 200);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -582,32 +546,28 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 10);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 10);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).senjutsu + 5);
+				double _setval = (NarutoShippudenModVariables.get(entity).senjutsu + 5);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.senjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 125);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 125);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 100);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 100);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -636,8 +596,7 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 110);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 110);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
@@ -660,24 +619,21 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 5);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 5);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 80);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 80);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 50);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 50);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -703,24 +659,21 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 10);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 10);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 90);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 90);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 100);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 100);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -739,24 +692,21 @@ public class ClanPaperRightclickedProcedure {
 				ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 15);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 15);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 100);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 100);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 150);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 150);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -789,24 +739,21 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 5);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 5);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 95);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 95);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 50);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 50);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -832,32 +779,28 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 10);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 10);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).summoning + 10);
+				double _setval = (NarutoShippudenModVariables.get(entity).summoning + 10);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.summoning = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 105);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 105);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 100);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 100);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -886,24 +829,21 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 15);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 15);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 100);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 100);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 150);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 150);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -929,32 +869,28 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 10);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 10);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).genjutsu + 5);
+				double _setval = (NarutoShippudenModVariables.get(entity).genjutsu + 5);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.genjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 95);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 95);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 100);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 100);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -976,16 +912,14 @@ public class ClanPaperRightclickedProcedure {
 				ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 10);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 10);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 90);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 90);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
@@ -999,8 +933,7 @@ public class ClanPaperRightclickedProcedure {
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 100);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 100);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -1019,24 +952,21 @@ public class ClanPaperRightclickedProcedure {
 				ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 15);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 15);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 105);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 105);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 150);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 150);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -1062,24 +992,21 @@ public class ClanPaperRightclickedProcedure {
 				ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 10);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 10);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 90);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 90);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 100);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 100);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -1105,24 +1032,21 @@ public class ClanPaperRightclickedProcedure {
 				ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 25);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 25);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 90);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 90);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 250);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 250);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -1148,24 +1072,21 @@ public class ClanPaperRightclickedProcedure {
 				ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 10);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 10);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 90);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 90);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 100);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 100);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);
@@ -1191,24 +1112,21 @@ public class ClanPaperRightclickedProcedure {
 				ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 10);
+				double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 10);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ninjutsu = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ + 85);
+				double _setval = (NarutoShippudenModVariables.get(entity).IQ + 85);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.IQ = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 100);
+				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 100);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.ChakraMax = _setval;
 					capability.syncPlayerVariables(entity);

@@ -42,63 +42,47 @@ public class IsshikiDojutsuReleaseTechniqueRightclickedProcedure {
 		double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
 		Entity entity = (Entity) dependencies.get("entity");
 		{
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsu == true) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsuactivate == true) {
+			if (NarutoShippudenModVariables.get(entity).isshikidojutsu == true) {
+				if (NarutoShippudenModVariables.get(entity).isshikidojutsuactivate == true) {
 					if (!entity.isSneaking()) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsutechnique == 0) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsulearn >= 1) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 25) {
-									if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 500) {
+						if (NarutoShippudenModVariables.get(entity).isshikidojutsutechnique == 0) {
+							if (NarutoShippudenModVariables.get(entity).isshikidojutsulearn >= 1) {
+								if (NarutoShippudenModVariables.get(entity).ninjutsu >= 25) {
+									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 500) {
 										{
 											Entity _ent = entity;
 											if (!_ent.world.isRemote && _ent.world.getServer() != null) {
-												EntityScale.set(_ent, EntityScale.BASE, (entity
-																.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-																.orElse(new NarutoShippudenModVariables.PlayerVariables())).sukunahikonasize);
+												EntityScale.set(_ent, EntityScale.BASE, NarutoShippudenModVariables.get(entity).sukunahikonasize);
 											}
 										}
 										{
-											double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-													.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 500);
+											double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 500);
 											entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 													.ifPresent(capability -> {
 														capability.ChakraAmount = _setval;
 														capability.syncPlayerVariables(entity);
 													});
 										}
-									} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 499) {
+									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 										if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 											((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 										}
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 24) {
+								} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 									}
 								}
-							} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsulearn >= 1)) {
+							} else if (!(NarutoShippudenModVariables.get(entity).isshikidojutsulearn >= 1)) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."),
 											(false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsutechnique == 1) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsulearn >= 2) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 35) {
-									if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 1000) {
+						} else if (NarutoShippudenModVariables.get(entity).isshikidojutsutechnique == 1) {
+							if (NarutoShippudenModVariables.get(entity).isshikidojutsulearn >= 2) {
+								if (NarutoShippudenModVariables.get(entity).ninjutsu >= 35) {
+									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1000) {
 										if (world instanceof ServerWorld) {
 											Entity entityToSpawn = new DisruptionCubeEntity.CustomEntity(DisruptionCubeEntity.entity, (World) world);
 											entityToSpawn.setLocationAndAngles(
@@ -126,58 +110,48 @@ public class IsshikiDojutsuReleaseTechniqueRightclickedProcedure {
 											world.addEntity(entityToSpawn);
 										}
 										{
-											double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-													.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 1000);
+											double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 1000);
 											entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 													.ifPresent(capability -> {
 														capability.ChakraAmount = _setval;
 														capability.syncPlayerVariables(entity);
 													});
 										}
-									} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 999) {
+									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 999) {
 										if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 											((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 										}
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 34) {
+								} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 34) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 									}
 								}
-							} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsulearn >= 2)) {
+							} else if (!(NarutoShippudenModVariables.get(entity).isshikidojutsulearn >= 2)) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."),
 											(false));
 								}
 							}
 						}
-						if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+						if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 							if (entity instanceof PlayerEntity)
 								((PlayerEntity) entity).getCooldownTracker().setCooldown(IsshikiDojutsuReleaseTechniqueItem.block, (int) 200);
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 							if (entity instanceof PlayerEntity)
 								((PlayerEntity) entity).getCooldownTracker().setCooldown(IsshikiDojutsuReleaseTechniqueItem.block, (int) 160);
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 							if (entity instanceof PlayerEntity)
 								((PlayerEntity) entity).getCooldownTracker().setCooldown(IsshikiDojutsuReleaseTechniqueItem.block, (int) 120);
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 							if (entity instanceof PlayerEntity)
 								((PlayerEntity) entity).getCooldownTracker().setCooldown(IsshikiDojutsuReleaseTechniqueItem.block, (int) 80);
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 							if (entity instanceof PlayerEntity)
 								((PlayerEntity) entity).getCooldownTracker().setCooldown(IsshikiDojutsuReleaseTechniqueItem.block, (int) 40);
 						}
 					} else if (entity.isSneaking()) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsutechnique == 0) {
+						if (NarutoShippudenModVariables.get(entity).isshikidojutsutechnique == 0) {
 							{
 								double _setval = 1;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -188,8 +162,7 @@ public class IsshikiDojutsuReleaseTechniqueRightclickedProcedure {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Disruption Cube"), (true));
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsutechnique == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).isshikidojutsutechnique == 1) {
 							{
 								double _setval = 0;
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -202,14 +175,12 @@ public class IsshikiDojutsuReleaseTechniqueRightclickedProcedure {
 							}
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsuactivate == false) {
+				} else if (NarutoShippudenModVariables.get(entity).isshikidojutsuactivate == false) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Activate Isshiki Dojutsu"), (false));
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsu == false) {
+			} else if (NarutoShippudenModVariables.get(entity).isshikidojutsu == false) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this release."), (true));
 				}

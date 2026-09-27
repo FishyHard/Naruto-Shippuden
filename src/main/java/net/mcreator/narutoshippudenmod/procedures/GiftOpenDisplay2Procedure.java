@@ -16,8 +16,7 @@ public class GiftOpenDisplay2Procedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).giftcount >= 2) {
+		if (NarutoShippudenModVariables.get(entity).giftcount >= 2) {
 			return true;
 		}
 		return false;

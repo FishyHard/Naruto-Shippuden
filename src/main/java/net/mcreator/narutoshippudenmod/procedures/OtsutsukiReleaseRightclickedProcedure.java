@@ -25,26 +25,22 @@ public class OtsutsukiReleaseRightclickedProcedure {
 		Entity entity = (Entity) dependencies.get("entity");
 		double Random = 0;
 		Random = Math.random();
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_release == 0) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp >= 30) {
+		if (NarutoShippudenModVariables.get(entity).otsutsuki_release == 0) {
+			if (NarutoShippudenModVariables.get(entity).jp >= 30) {
 				if (entity instanceof PlayerEntity) {
 					ItemStack _setstack = new ItemStack(OtsutsukiSwordItem.block);
 					_setstack.setCount((int) 1);
 					ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 				}
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp - 30);
+					double _setval = (NarutoShippudenModVariables.get(entity).jp - 30);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.jp = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_release + 1);
+					double _setval = (NarutoShippudenModVariables.get(entity).otsutsuki_release + 1);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.otsutsuki_release = _setval;
 						capability.syncPlayerVariables(entity);
@@ -53,14 +49,12 @@ public class OtsutsukiReleaseRightclickedProcedure {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("-30 JP"), (false));
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp <= 29) {
+			} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough JP"), (false));
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_release == 1) {
+		} else if (NarutoShippudenModVariables.get(entity).otsutsuki_release == 1) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Wait For Newer Updates"), (false));
 			}

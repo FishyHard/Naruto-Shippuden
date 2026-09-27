@@ -85,36 +85,26 @@ public class VolticModeTechniqueRightclickedProcedure {
 		double xRadius8 = 0;
 		double loop8 = 0;
 		double yaw = 0;
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).BoxDeity == true) {
+		if (NarutoShippudenModVariables.get(entity).BoxDeity == true) {
 			if (!entity.isSneaking()) {
 				yaw = (entity.rotationYaw);
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).voltic_technique == 0) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).volticlearn >= 1) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 15) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 100) {
-								if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+				if (NarutoShippudenModVariables.get(entity).voltic_technique == 0) {
+					if (NarutoShippudenModVariables.get(entity).volticlearn >= 1) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 15) {
+							if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 100) {
+								if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(VolticModeTechniqueItem.block, (int) 200);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(VolticModeTechniqueItem.block, (int) 160);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(VolticModeTechniqueItem.block, (int) 120);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(VolticModeTechniqueItem.block, (int) 80);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(VolticModeTechniqueItem.block, (int) 40);
 								}
@@ -208,119 +198,93 @@ public class VolticModeTechniqueRightclickedProcedure {
 											(z + 0 + Math.sin(((Math.PI * 2) / particleAmount) * loop8) * zRadius8), 0, 0, 0);
 									loop8 = (loop8 + 1);
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 99) {
+							} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 14) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 14) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).volticlearn >= 1)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).volticlearn >= 1)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).voltic_technique == 1) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).volticlearn >= 2) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 20) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 450) {
+				} else if (NarutoShippudenModVariables.get(entity).voltic_technique == 1) {
+					if (NarutoShippudenModVariables.get(entity).volticlearn >= 2) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 20) {
+							if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 450) {
 								if (entity instanceof PlayerEntity) {
 									ItemStack _setstack = new ItemStack(BladeOfLightningItem.block);
 									_setstack.setCount((int) 1);
 									ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 								}
 								{
-									double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 450);
+									double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 450);
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 										capability.ChakraAmount = _setval;
 										capability.syncPlayerVariables(entity);
 									});
 								}
-								if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+								if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(VolticModeTechniqueItem.block, (int) 3000);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(VolticModeTechniqueItem.block, (int) 2500);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(VolticModeTechniqueItem.block, (int) 2000);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(VolticModeTechniqueItem.block, (int) 1500);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(VolticModeTechniqueItem.block, (int) 1000);
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 449) {
+							} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 449) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 19) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).volticlearn >= 2)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).volticlearn >= 2)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).voltic_technique == 2) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).volticlearn >= 3) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 25) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 500) {
+				} else if (NarutoShippudenModVariables.get(entity).voltic_technique == 2) {
+					if (NarutoShippudenModVariables.get(entity).volticlearn >= 3) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 25) {
+							if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 500) {
 								entity.setMotion((7 * Math.cos((yaw + 90) * (Math.PI / 180))), 2, (7 * Math.sin((yaw + 90) * (Math.PI / 180))));
 								{
-									double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 500);
+									double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 500);
 									entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 										capability.ChakraAmount = _setval;
 										capability.syncPlayerVariables(entity);
 									});
 								}
-								if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+								if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(VolticModeTechniqueItem.block, (int) 3500);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(VolticModeTechniqueItem.block, (int) 3000);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(VolticModeTechniqueItem.block, (int) 2500);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(VolticModeTechniqueItem.block, (int) 2000);
-								} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+								} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 									if (entity instanceof PlayerEntity)
 										((PlayerEntity) entity).getCooldownTracker().setCooldown(VolticModeTechniqueItem.block, (int) 1500);
 								}
@@ -331,28 +295,24 @@ public class VolticModeTechniqueRightclickedProcedure {
 										capability.syncPlayerVariables(entity);
 									});
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 499) {
+							} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 24) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).volticlearn >= 3)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).volticlearn >= 3)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
 				}
 			} else if (entity.isSneaking()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).voltic_technique == 0) {
+				if (NarutoShippudenModVariables.get(entity).voltic_technique == 0) {
 					{
 						double _setval = 1;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -363,8 +323,7 @@ public class VolticModeTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Voltic Execution"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).voltic_technique == 1) {
+				} else if (NarutoShippudenModVariables.get(entity).voltic_technique == 1) {
 					{
 						double _setval = 2;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -375,8 +334,7 @@ public class VolticModeTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Voltic Thomas Cannon"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).voltic_technique == 2) {
+				} else if (NarutoShippudenModVariables.get(entity).voltic_technique == 2) {
 					{
 						double _setval = 0;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -389,8 +347,7 @@ public class VolticModeTechniqueRightclickedProcedure {
 					}
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).BoxDeity == false) {
+		} else if (NarutoShippudenModVariables.get(entity).BoxDeity == false) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this release."), (true));
 			}

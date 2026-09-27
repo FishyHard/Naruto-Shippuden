@@ -35,18 +35,13 @@ public class SamehadaLivingEntityIsHitWithToolProcedure {
 		double chakraamountuser = 0;
 		if (itemstack.getOrCreateTag().getDouble("SamehadaMode") == 0) {
 			if (entity instanceof PlayerEntity) {
-				chakraamountuser = ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount
-						+ ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount / 100) * 5);
-				chakramaxuser = ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax);
+				chakraamountuser = (NarutoShippudenModVariables.get(sourceentity).ChakraAmount
+						+ (NarutoShippudenModVariables.get(entity).ChakraAmount / 100) * 5);
+				chakramaxuser = (NarutoShippudenModVariables.get(sourceentity).ChakraMax);
 				if (chakraamountuser <= chakramaxuser) {
 					{
-						double _setval = ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount
-								+ ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount / 100) * 5);
+						double _setval = (NarutoShippudenModVariables.get(sourceentity).ChakraAmount
+								+ (NarutoShippudenModVariables.get(entity).ChakraAmount / 100) * 5);
 						sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(sourceentity);
@@ -54,8 +49,7 @@ public class SamehadaLivingEntityIsHitWithToolProcedure {
 					}
 				} else if (!(chakraamountuser <= chakramaxuser)) {
 					{
-						double _setval = ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax);
+						double _setval = (NarutoShippudenModVariables.get(sourceentity).ChakraMax);
 						sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(sourceentity);
@@ -64,15 +58,12 @@ public class SamehadaLivingEntityIsHitWithToolProcedure {
 				}
 			} else {
 				if (!(entity.getPersistentData().getDouble("ChakraMax") == 0)) {
-					chakraamountuser = ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount
+					chakraamountuser = (NarutoShippudenModVariables.get(sourceentity).ChakraAmount
 							+ (entity.getPersistentData().getDouble("ChakraAmount") / 100) * 5);
-					chakramaxuser = ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax);
+					chakramaxuser = (NarutoShippudenModVariables.get(sourceentity).ChakraMax);
 					if (chakraamountuser <= chakramaxuser) {
 						{
-							double _setval = ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount
+							double _setval = (NarutoShippudenModVariables.get(sourceentity).ChakraAmount
 									+ (entity.getPersistentData().getDouble("ChakraAmount") / 100) * 5);
 							sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.ChakraAmount = _setval;
@@ -81,8 +72,7 @@ public class SamehadaLivingEntityIsHitWithToolProcedure {
 						}
 					} else if (!(chakraamountuser <= chakramaxuser)) {
 						{
-							double _setval = ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax);
+							double _setval = (NarutoShippudenModVariables.get(sourceentity).ChakraMax);
 							sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.ChakraAmount = _setval;
 								capability.syncPlayerVariables(sourceentity);
@@ -96,8 +86,7 @@ public class SamehadaLivingEntityIsHitWithToolProcedure {
 				if (sourceentity instanceof LivingEntity)
 					((LivingEntity) sourceentity)
 							.setHealth((float) (((sourceentity instanceof LivingEntity) ? ((LivingEntity) sourceentity).getHealth() : -1)
-									+ Math.ceil(((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount / 5000) * 10)));
+									+ Math.ceil((NarutoShippudenModVariables.get(entity).ChakraAmount / 5000) * 10)));
 			} else {
 				if (sourceentity instanceof LivingEntity)
 					((LivingEntity) sourceentity)

@@ -39,121 +39,97 @@ public class UnlearnCustomJutsu1Procedure {
 				|| ((entity instanceof PlayerEntity)
 						? ((PlayerEntity) entity).inventory.hasItemStack(new ItemStack(CustomFireReleaseTechniqueItem.block))
 						: false)) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsujpcost == 10) {
+			if (NarutoShippudenModVariables.get(entity).customjutsujpcost == 10) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp + 5);
+					double _setval = (NarutoShippudenModVariables.get(entity).jp + 5);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.jp = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsujpcost == 15) {
+			} else if (NarutoShippudenModVariables.get(entity).customjutsujpcost == 15) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp + 8);
+					double _setval = (NarutoShippudenModVariables.get(entity).jp + 8);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.jp = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsujpcost == 20) {
+			} else if (NarutoShippudenModVariables.get(entity).customjutsujpcost == 20) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp + 10);
+					double _setval = (NarutoShippudenModVariables.get(entity).jp + 10);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.jp = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsujpcost == 25) {
+			} else if (NarutoShippudenModVariables.get(entity).customjutsujpcost == 25) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp + 13);
+					double _setval = (NarutoShippudenModVariables.get(entity).jp + 13);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.jp = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsujpcost == 30) {
+			} else if (NarutoShippudenModVariables.get(entity).customjutsujpcost == 30) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp + 15);
+					double _setval = (NarutoShippudenModVariables.get(entity).jp + 15);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.jp = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsujpcost == 35) {
+			} else if (NarutoShippudenModVariables.get(entity).customjutsujpcost == 35) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp + 18);
+					double _setval = (NarutoShippudenModVariables.get(entity).jp + 18);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.jp = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsujpcost == 40) {
+			} else if (NarutoShippudenModVariables.get(entity).customjutsujpcost == 40) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp + 20);
+					double _setval = (NarutoShippudenModVariables.get(entity).jp + 20);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.jp = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsujpcost == 45) {
+			} else if (NarutoShippudenModVariables.get(entity).customjutsujpcost == 45) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp + 23);
+					double _setval = (NarutoShippudenModVariables.get(entity).jp + 23);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.jp = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsujpcost == 50) {
+			} else if (NarutoShippudenModVariables.get(entity).customjutsujpcost == 50) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp + 25);
+					double _setval = (NarutoShippudenModVariables.get(entity).jp + 25);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.jp = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsujpcost == 55) {
+			} else if (NarutoShippudenModVariables.get(entity).customjutsujpcost == 55) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp + 28);
+					double _setval = (NarutoShippudenModVariables.get(entity).jp + 28);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.jp = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsujpcost == 60) {
+			} else if (NarutoShippudenModVariables.get(entity).customjutsujpcost == 60) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp + 30);
+					double _setval = (NarutoShippudenModVariables.get(entity).jp + 30);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.jp = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsujpcost == 65) {
+			} else if (NarutoShippudenModVariables.get(entity).customjutsujpcost == 65) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp + 33);
+					double _setval = (NarutoShippudenModVariables.get(entity).jp + 33);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.jp = _setval;
 						capability.syncPlayerVariables(entity);

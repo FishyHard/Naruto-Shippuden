@@ -31,8 +31,7 @@ public class GunbaiSItemInInventoryTickProcedure {
 						((PlayerEntity) entity).container.func_234641_j_());
 			}
 			if (entity instanceof PlayerEntity) {
-				ItemStack _setstack = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).gunbaicopy);
+				ItemStack _setstack = (NarutoShippudenModVariables.get(entity).gunbaicopy);
 				_setstack.setCount((int) 1);
 				ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 			}

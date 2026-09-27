@@ -16,8 +16,7 @@ public class DisplayMSMadaraInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganMadara == true) {
+		if (NarutoShippudenModVariables.get(entity).MangekyouSharinganMadara == true) {
 			return true;
 		}
 		return false;

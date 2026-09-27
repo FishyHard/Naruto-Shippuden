@@ -16,10 +16,8 @@ public class Gift1Procedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).calendar_calculator >= 1200
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).giftcount == 0) {
+		if (NarutoShippudenModVariables.get(entity).calendar_calculator >= 1200
+				&& NarutoShippudenModVariables.get(entity).giftcount == 0) {
 			return true;
 		}
 		return false;

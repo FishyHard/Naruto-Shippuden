@@ -16,8 +16,7 @@ public class DisplayCloudSelectProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectvillage == 2) {
+		if (NarutoShippudenModVariables.get(entity).selectvillage == 2) {
 			return true;
 		}
 		return false;

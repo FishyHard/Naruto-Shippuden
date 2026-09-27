@@ -16,10 +16,8 @@ public class Gift22Procedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).calendar_calculator >= 26400
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).giftcount == 21) {
+		if (NarutoShippudenModVariables.get(entity).calendar_calculator >= 26400
+				&& NarutoShippudenModVariables.get(entity).giftcount == 21) {
 			return true;
 		}
 		return false;

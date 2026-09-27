@@ -128,14 +128,11 @@ public class InfoCardMiniGameGuiWindow extends ContainerScreen<InfoCardMiniGameG
 	@Override
 	protected void drawGuiContainerForegroundLayer(MatrixStack ms, int mouseX, int mouseY) {
 		this.font.drawString(ms, "LvL XP Max:", 134, 9, -1);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELMINIGAME) + "", 103, 9, -1);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).LEVELMINIGAME) + "", 103, 9, -1);
 		this.font.drawString(ms, "LvL XP:", 64, 9, -1);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELMAXMINIGAME) + "", 195, 9, -1);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).LEVELMAXMINIGAME) + "", 195, 9, -1);
 		this.font.drawString(ms, "Level:", 64, -4, -1);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELSTATMINIGAME) + "", 98, -4, -1);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).LEVELSTATMINIGAME) + "", 98, -4, -1);
 	}
 
 	@Override

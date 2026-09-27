@@ -16,8 +16,7 @@ public class DisplayUzumakiSelectProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectclanrelease == 1) {
+		if (NarutoShippudenModVariables.get(entity).selectclanrelease == 1) {
 			return true;
 		}
 		return false;

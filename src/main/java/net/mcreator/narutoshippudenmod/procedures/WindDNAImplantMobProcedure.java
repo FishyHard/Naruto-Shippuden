@@ -33,8 +33,7 @@ public class WindDNAImplantMobProcedure {
 		Entity sourceentity = (Entity) dependencies.get("sourceentity");
 		double randomwind = 0;
 		if (entity instanceof PlayerEntity) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).windreleaselogic == false) {
+			if (NarutoShippudenModVariables.get(entity).windreleaselogic == false) {
 				randomwind = (MathHelper.nextInt(new Random(), 1, 100));
 				if (randomwind <= 70) {
 					if (entity instanceof PlayerEntity) {
@@ -68,8 +67,7 @@ public class WindDNAImplantMobProcedure {
 					((PlayerEntity) sourceentity).inventory.func_234564_a_(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
 							((PlayerEntity) sourceentity).container.func_234641_j_());
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).windreleaselogic == true) {
+			} else if (NarutoShippudenModVariables.get(entity).windreleaselogic == true) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You already have Wind Release"), (false));
 				}

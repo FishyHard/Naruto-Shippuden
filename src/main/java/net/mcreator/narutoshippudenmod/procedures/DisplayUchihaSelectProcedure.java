@@ -16,8 +16,7 @@ public class DisplayUchihaSelectProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectclanrelease == 0) {
+		if (NarutoShippudenModVariables.get(entity).selectclanrelease == 0) {
 			return true;
 		}
 		return false;

@@ -16,8 +16,7 @@ public class NatureReleasePlusProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectnaturerelease == 4) {
+		if (NarutoShippudenModVariables.get(entity).selectnaturerelease == 4) {
 			{
 				double _setval = 0;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -25,11 +24,9 @@ public class NatureReleasePlusProcedure {
 					capability.syncPlayerVariables(entity);
 				});
 			}
-		} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectnaturerelease == 4)) {
+		} else if (!(NarutoShippudenModVariables.get(entity).selectnaturerelease == 4)) {
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectnaturerelease + 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).selectnaturerelease + 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.selectnaturerelease = _setval;
 					capability.syncPlayerVariables(entity);

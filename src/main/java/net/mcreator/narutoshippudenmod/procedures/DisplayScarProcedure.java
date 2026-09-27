@@ -16,10 +16,8 @@ public class DisplayScarProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelect2).equals("Kakashi")
-				|| ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelect2).equals("Kakashi ")) {
+		if ((NarutoShippudenModVariables.get(entity).DojutsuSelect2).equals("Kakashi")
+				|| (NarutoShippudenModVariables.get(entity).DojutsuSelect2).equals("Kakashi ")) {
 			return true;
 		}
 		return false;

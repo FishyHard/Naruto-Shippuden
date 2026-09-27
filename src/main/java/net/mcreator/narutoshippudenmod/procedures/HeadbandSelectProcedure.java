@@ -35,114 +35,96 @@ public class HeadbandSelectProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).HeadbandSelect == 0) {
-			if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).village).equals("Hidden Leaf")) {
+		if (NarutoShippudenModVariables.get(entity).HeadbandSelect == 0) {
+			if ((NarutoShippudenModVariables.get(entity).village).equals("Hidden Leaf")) {
 				if (entity instanceof PlayerEntity) {
 					ItemStack _setstack = new ItemStack(GeninKonohagakureItem.helmet);
 					_setstack.setCount((int) 1);
 					ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).village).equals("Hidden Stone")) {
+			} else if ((NarutoShippudenModVariables.get(entity).village).equals("Hidden Stone")) {
 				if (entity instanceof PlayerEntity) {
 					ItemStack _setstack = new ItemStack(GeninIwagakureItem.helmet);
 					_setstack.setCount((int) 1);
 					ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).village).equals("Hidden Mist")) {
+			} else if ((NarutoShippudenModVariables.get(entity).village).equals("Hidden Mist")) {
 				if (entity instanceof PlayerEntity) {
 					ItemStack _setstack = new ItemStack(GeninKirigakureItem.helmet);
 					_setstack.setCount((int) 1);
 					ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).village).equals("Hidden Sand")) {
+			} else if ((NarutoShippudenModVariables.get(entity).village).equals("Hidden Sand")) {
 				if (entity instanceof PlayerEntity) {
 					ItemStack _setstack = new ItemStack(GeninSunagakureItem.helmet);
 					_setstack.setCount((int) 1);
 					ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).village).equals("Hidden Cloud")) {
+			} else if ((NarutoShippudenModVariables.get(entity).village).equals("Hidden Cloud")) {
 				if (entity instanceof PlayerEntity) {
 					ItemStack _setstack = new ItemStack(GeninKumogakureItem.helmet);
 					_setstack.setCount((int) 1);
 					ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).HeadbandSelect == 1) {
-			if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).village).equals("Hidden Leaf")) {
+		} else if (NarutoShippudenModVariables.get(entity).HeadbandSelect == 1) {
+			if ((NarutoShippudenModVariables.get(entity).village).equals("Hidden Leaf")) {
 				if (entity instanceof PlayerEntity) {
 					ItemStack _setstack = new ItemStack(GeninKonohagakureBlackItem.helmet);
 					_setstack.setCount((int) 1);
 					ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).village).equals("Hidden Stone")) {
+			} else if ((NarutoShippudenModVariables.get(entity).village).equals("Hidden Stone")) {
 				if (entity instanceof PlayerEntity) {
 					ItemStack _setstack = new ItemStack(GeninIwagakureBlackItem.helmet);
 					_setstack.setCount((int) 1);
 					ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).village).equals("Hidden Mist")) {
+			} else if ((NarutoShippudenModVariables.get(entity).village).equals("Hidden Mist")) {
 				if (entity instanceof PlayerEntity) {
 					ItemStack _setstack = new ItemStack(GeninKirigakureBlackItem.helmet);
 					_setstack.setCount((int) 1);
 					ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).village).equals("Hidden Sand")) {
+			} else if ((NarutoShippudenModVariables.get(entity).village).equals("Hidden Sand")) {
 				if (entity instanceof PlayerEntity) {
 					ItemStack _setstack = new ItemStack(GeninSunagakureBlackItem.helmet);
 					_setstack.setCount((int) 1);
 					ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).village).equals("Hidden Cloud")) {
+			} else if ((NarutoShippudenModVariables.get(entity).village).equals("Hidden Cloud")) {
 				if (entity instanceof PlayerEntity) {
 					ItemStack _setstack = new ItemStack(GeninKumogakureBlackItem.helmet);
 					_setstack.setCount((int) 1);
 					ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).HeadbandSelect == 2) {
-			if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).village).equals("Hidden Leaf")) {
+		} else if (NarutoShippudenModVariables.get(entity).HeadbandSelect == 2) {
+			if ((NarutoShippudenModVariables.get(entity).village).equals("Hidden Leaf")) {
 				if (entity instanceof PlayerEntity) {
 					ItemStack _setstack = new ItemStack(GeninKonohagakureRedItem.helmet);
 					_setstack.setCount((int) 1);
 					ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).village).equals("Hidden Stone")) {
+			} else if ((NarutoShippudenModVariables.get(entity).village).equals("Hidden Stone")) {
 				if (entity instanceof PlayerEntity) {
 					ItemStack _setstack = new ItemStack(GeninIwagakureRedItem.helmet);
 					_setstack.setCount((int) 1);
 					ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).village).equals("Hidden Mist")) {
+			} else if ((NarutoShippudenModVariables.get(entity).village).equals("Hidden Mist")) {
 				if (entity instanceof PlayerEntity) {
 					ItemStack _setstack = new ItemStack(GeninKirigakureRedItem.helmet);
 					_setstack.setCount((int) 1);
 					ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).village).equals("Hidden Sand")) {
+			} else if ((NarutoShippudenModVariables.get(entity).village).equals("Hidden Sand")) {
 				if (entity instanceof PlayerEntity) {
 					ItemStack _setstack = new ItemStack(GeninSunagakureRedItem.helmet);
 					_setstack.setCount((int) 1);
 					ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).village).equals("Hidden Cloud")) {
+			} else if ((NarutoShippudenModVariables.get(entity).village).equals("Hidden Cloud")) {
 				if (entity instanceof PlayerEntity) {
 					ItemStack _setstack = new ItemStack(GeninKumogakureRedItem.helmet);
 					_setstack.setCount((int) 1);

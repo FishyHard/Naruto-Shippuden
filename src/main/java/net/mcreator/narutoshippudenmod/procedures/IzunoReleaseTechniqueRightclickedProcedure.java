@@ -20,20 +20,14 @@ public class IzunoReleaseTechniqueRightclickedProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunoreleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).izunoreleaselogic == true) {
 			if (!entity.isSneaking()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunotechnique == 0) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunolearn >= 1) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 20) {
+				if (NarutoShippudenModVariables.get(entity).izunotechnique == 0) {
+					if (NarutoShippudenModVariables.get(entity).izunolearn >= 1) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 20) {
 							if (!entity.isSneaking()) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunocat == false) {
-									if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunochakramode == false) {
+								if (NarutoShippudenModVariables.get(entity).izunocat == false) {
+									if (NarutoShippudenModVariables.get(entity).izunochakramode == false) {
 										{
 											boolean _setval = (true);
 											entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
@@ -42,8 +36,7 @@ public class IzunoReleaseTechniqueRightclickedProcedure {
 														capability.syncPlayerVariables(entity);
 													});
 										}
-									} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunochakramode == true) {
+									} else if (NarutoShippudenModVariables.get(entity).izunochakramode == true) {
 										{
 											boolean _setval = (false);
 											entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
@@ -52,24 +45,19 @@ public class IzunoReleaseTechniqueRightclickedProcedure {
 														capability.syncPlayerVariables(entity);
 													});
 										}
-										if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+										if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 											if (entity instanceof PlayerEntity)
 												((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 750);
-										} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+										} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 											if (entity instanceof PlayerEntity)
 												((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 500);
-										} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+										} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 											if (entity instanceof PlayerEntity)
 												((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 300);
-										} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+										} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 											if (entity instanceof PlayerEntity)
 												((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 200);
-										} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-												.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+										} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 											if (entity instanceof PlayerEntity)
 												((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 100);
 										}
@@ -81,28 +69,21 @@ public class IzunoReleaseTechniqueRightclickedProcedure {
 									}
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 19) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunolearn >= 1)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).izunolearn >= 1)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunotechnique == 1) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunolearn >= 2) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 25) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunochakramode == false) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunocat == false) {
+				} else if (NarutoShippudenModVariables.get(entity).izunotechnique == 1) {
+					if (NarutoShippudenModVariables.get(entity).izunolearn >= 2) {
+						if (NarutoShippudenModVariables.get(entity).ninjutsu >= 25) {
+							if (NarutoShippudenModVariables.get(entity).izunochakramode == false) {
+								if (NarutoShippudenModVariables.get(entity).izunocat == false) {
 									{
 										boolean _setval = (true);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -128,8 +109,7 @@ public class IzunoReleaseTechniqueRightclickedProcedure {
 											EntityScale.set(_ent, EntityScale.EYE_HEIGHT, 4);
 										}
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunocat == true) {
+								} else if (NarutoShippudenModVariables.get(entity).izunocat == true) {
 									{
 										boolean _setval = (false);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -155,24 +135,19 @@ public class IzunoReleaseTechniqueRightclickedProcedure {
 											EntityScale.set(_ent, EntityScale.EYE_HEIGHT, 1);
 										}
 									}
-									if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+									if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 										if (entity instanceof PlayerEntity)
 											((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 1500);
-									} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+									} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 										if (entity instanceof PlayerEntity)
 											((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 1250);
-									} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+									} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 										if (entity instanceof PlayerEntity)
 											((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 1000);
-									} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+									} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 										if (entity instanceof PlayerEntity)
 											((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 750);
-									} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+									} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 										if (entity instanceof PlayerEntity)
 											((PlayerEntity) entity).getCooldownTracker().setCooldown(IzunoReleaseTechniqueItem.block, (int) 500);
 									}
@@ -183,22 +158,19 @@ public class IzunoReleaseTechniqueRightclickedProcedure {
 											.sendStatusMessage(new StringTextComponent("You can't use both cat modes at the same time"), (false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 24) {
+						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 							if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 							}
 						}
-					} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunolearn >= 3)) {
+					} else if (!(NarutoShippudenModVariables.get(entity).izunolearn >= 3)) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."), (false));
 						}
 					}
 				}
 			} else if (entity.isSneaking()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunotechnique == 0) {
+				if (NarutoShippudenModVariables.get(entity).izunotechnique == 0) {
 					{
 						double _setval = 1;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -209,8 +181,7 @@ public class IzunoReleaseTechniqueRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Monster Cat Beckoning Technique"), (true));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunotechnique == 1) {
+				} else if (NarutoShippudenModVariables.get(entity).izunotechnique == 1) {
 					{
 						double _setval = 0;
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -223,8 +194,7 @@ public class IzunoReleaseTechniqueRightclickedProcedure {
 					}
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).izunoreleaselogic == false) {
+		} else if (NarutoShippudenModVariables.get(entity).izunoreleaselogic == false) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this release."), (true));
 			}

@@ -16,8 +16,7 @@ public class DisplayOtsutsukiSelectProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectclanrelease == 4) {
+		if (NarutoShippudenModVariables.get(entity).selectclanrelease == 4) {
 			return true;
 		}
 		return false;

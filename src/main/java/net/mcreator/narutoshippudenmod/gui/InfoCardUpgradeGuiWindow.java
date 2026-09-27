@@ -78,32 +78,19 @@ public class InfoCardUpgradeGuiWindow extends ContainerScreen<InfoCardUpgradeGui
 	protected void drawGuiContainerForegroundLayer(MatrixStack ms, int mouseX, int mouseY) {
 		this.font.drawString(ms, "SP Use Count", -105, 64, -1);
 		this.font.drawString(ms, "Selected:", -105, 74, -1);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).spusecount) + "", -55, 74, -1);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu) + "", 91, -22, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu) + "", 91, 6, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).kenjutsu) + "", 91, 30, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).shurikenjutsu) + "", 115, 54, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).summoning) + "", 101, 77, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).kinjutsu) + "", 88, 102, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).senjutsu) + "", 93, 126, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).medicine) + "", 96, 150, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).speed) + "", 79, 174, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsupowerstat) + "", 200, -21, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).genjutsu) + "", 188, 6, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).IQ) + "", 154, 31, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).spusecount) + "", -55, 74, -1);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).ninjutsu) + "", 91, -22, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).taijutsu) + "", 91, 6, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).kenjutsu) + "", 91, 30, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).shurikenjutsu) + "", 115, 54, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).summoning) + "", 101, 77, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).kinjutsu) + "", 88, 102, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).senjutsu) + "", 93, 126, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).medicine) + "", 96, 150, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).speed) + "", 79, 174, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).jutsupowerstat) + "", 200, -21, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).genjutsu) + "", 188, 6, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).IQ) + "", 154, 31, -16777216);
 	}
 
 	@Override

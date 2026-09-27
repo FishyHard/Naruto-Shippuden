@@ -16,8 +16,7 @@ public class DisplaySenjuInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).senjureleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).senjureleaselogic == true) {
 			return true;
 		}
 		return false;

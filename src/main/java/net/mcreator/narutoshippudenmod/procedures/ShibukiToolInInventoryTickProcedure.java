@@ -37,18 +37,15 @@ public class ShibukiToolInInventoryTickProcedure {
 		Entity entity = (Entity) dependencies.get("entity");
 		ItemStack itemstack = (ItemStack) dependencies.get("itemstack");
 		if (itemstack.getOrCreateTag().getBoolean("ShibukiExplosion") == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 1) {
+			if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1) {
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 1);
+					double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 1);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.ChakraAmount = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 0.9) {
+			} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 0.9) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (true));
 				}
@@ -57,8 +54,7 @@ public class ShibukiToolInInventoryTickProcedure {
 		}
 		if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHeldItemMainhand() : ItemStack.EMPTY).getItem() == itemstack.getItem()) {
 			if (itemstack.getOrCreateTag().getBoolean("ShibukiExplosionTrail") == true) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 5) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 5) {
 					if (world instanceof World && !((World) world).isRemote) {
 						((World) world).createExplosion(null,
 								(int) (entity.world.rayTraceBlocks(new RayTraceContext(entity.getEyePosition(1f),
@@ -76,15 +72,13 @@ public class ShibukiToolInInventoryTickProcedure {
 								(float) 5, Explosion.Mode.DESTROY);
 					}
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 5);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 5);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
 						});
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 4.9) {
+				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 4.9) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (true));
 					}
@@ -94,8 +88,7 @@ public class ShibukiToolInInventoryTickProcedure {
 		} else if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHeldItemOffhand() : ItemStack.EMPTY).getItem() == itemstack
 				.getItem()) {
 			if (itemstack.getOrCreateTag().getBoolean("ShibukiExplosionTrail") == true) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 5) {
+				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 5) {
 					if (world instanceof World && !((World) world).isRemote) {
 						((World) world).createExplosion(null,
 								(int) (entity.world.rayTraceBlocks(new RayTraceContext(entity.getEyePosition(1f),
@@ -113,15 +106,13 @@ public class ShibukiToolInInventoryTickProcedure {
 								(float) 5, Explosion.Mode.DESTROY);
 					}
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 5);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 5);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
 						});
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 4.9) {
+				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 4.9) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (true));
 					}

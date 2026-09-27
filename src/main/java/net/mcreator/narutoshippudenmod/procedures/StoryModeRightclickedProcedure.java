@@ -97,10 +97,8 @@ public class StoryModeRightclickedProcedure {
 		double savezbeforeteleport = 0;
 		double randomgenjutsu = 0;
 		double randomgenin = 0;
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 21) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).StorymodeCooldown == 10) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 21) {
+			if (NarutoShippudenModVariables.get(entity).StorymodeCooldown == 10) {
 				{
 					Entity _ent = entity;
 					if (_ent instanceof ServerPlayerEntity) {
@@ -121,10 +119,8 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 20) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).StorymodeCooldown == 9) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 20) {
+			if (NarutoShippudenModVariables.get(entity).StorymodeCooldown == 9) {
 				if ((entity.world.getDimensionKey()) == (RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 						new ResourceLocation("naruto_shippuden:story_mode_dimension")))) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
@@ -285,24 +281,21 @@ public class StoryModeRightclickedProcedure {
 								((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A78End of Act 2 - Genin Exam"), (false));
 							}
 							{
-								double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVEL + 25);
+								double _setval = (NarutoShippudenModVariables.get(entity).LEVEL + 25);
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 									capability.LEVEL = _setval;
 									capability.syncPlayerVariables(entity);
 								});
 							}
 							{
-								double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu + 5);
+								double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 5);
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 									capability.ninjutsu = _setval;
 									capability.syncPlayerVariables(entity);
 								});
 							}
 							{
-								double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax + 50);
+								double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 50);
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 									capability.ChakraMax = _setval;
 									capability.syncPlayerVariables(entity);
@@ -367,10 +360,8 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 19) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).StorymodeCooldown == 8) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 19) {
+			if (NarutoShippudenModVariables.get(entity).StorymodeCooldown == 8) {
 				if ((entity.world.getDimensionKey()) == (RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 						new ResourceLocation("naruto_shippuden:story_mode_dimension")))) {
 					randomgenjutsu = (MathHelper.nextInt(new Random(), 1, 10));
@@ -491,8 +482,7 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 18) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 18) {
 			if ((entity.world.getDimensionKey()) == (RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 					new ResourceLocation("naruto_shippuden:story_mode_dimension")))) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
@@ -628,12 +618,10 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 17) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 17) {
 			if ((entity.world.getDimensionKey()) == (RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 					new ResourceLocation("naruto_shippuden:story_mode_dimension")))) {
-				if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).StoryModeGeninFight).equals("Win")) {
+				if ((NarutoShippudenModVariables.get(entity).StoryModeGeninFight).equals("Win")) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity)
 								.sendStatusMessage(new StringTextComponent(("\u00A77Genin Examiner: (impressed) Excellent footwork and timing, "
@@ -656,8 +644,7 @@ public class StoryModeRightclickedProcedure {
 							capability.syncPlayerVariables(entity);
 						});
 					}
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).StoryModeGeninFight).equals("Defeat")) {
+				} else if ((NarutoShippudenModVariables.get(entity).StoryModeGeninFight).equals("Defeat")) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A74Defeat"), (true));
 					}
@@ -690,12 +677,10 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 16) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 16) {
 			if ((entity.world.getDimensionKey()) == (RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 					new ResourceLocation("naruto_shippuden:story_mode_dimension")))) {
-				if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).StoryModeGeninFight).equals(" ")) {
+				if ((NarutoShippudenModVariables.get(entity).StoryModeGeninFight).equals(" ")) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A78Part 3: The Second Challenge - Taijutsu Showdown"),
 								(false));
@@ -1177,8 +1162,7 @@ public class StoryModeRightclickedProcedure {
 							});
 						}
 					}
-				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).StoryModeGeninFight).equals("Defeat")) {
+				} else if ((NarutoShippudenModVariables.get(entity).StoryModeGeninFight).equals("Defeat")) {
 					randomgenin = (MathHelper.nextInt(new Random(), 1, 5));
 					if (randomgenin == 1) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
@@ -1678,8 +1662,7 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 15) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 15) {
 			if ((entity.world.getDimensionKey()) == (RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 					new ResourceLocation("naruto_shippuden:story_mode_dimension")))) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
@@ -1721,10 +1704,8 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 14) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).StorymodeCooldown == 7) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 14) {
+			if (NarutoShippudenModVariables.get(entity).StorymodeCooldown == 7) {
 				if ((entity.world.getDimensionKey()) == (RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 						new ResourceLocation("naruto_shippuden:story_mode_dimension")))) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
@@ -1755,10 +1736,8 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 13) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).StorymodeCooldown == 6) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 13) {
+			if (NarutoShippudenModVariables.get(entity).StorymodeCooldown == 6) {
 				if ((entity.world.getDimensionKey()) == (RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 						new ResourceLocation("naruto_shippuden:story_mode_dimension")))) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
@@ -1889,12 +1868,9 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 12) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).StorymodeCooldown == 5) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELSTAT >= 15) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 12) {
+			if (NarutoShippudenModVariables.get(entity).StorymodeCooldown == 5) {
+				if (NarutoShippudenModVariables.get(entity).LEVELSTAT >= 15) {
 					if ((entity.world.getDimensionKey()) == (RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 							new ResourceLocation("naruto_shippuden:story_mode_dimension")))) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
@@ -1999,8 +1975,7 @@ public class StoryModeRightclickedProcedure {
 							}
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELSTAT <= 14) {
+				} else if (NarutoShippudenModVariables.get(entity).LEVELSTAT <= 14) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A78You have to be Level 15 to continue Story Mode."),
 								(false));
@@ -2008,8 +1983,7 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 11) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 11) {
 			if ((entity.world.getDimensionKey()) == (RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 					new ResourceLocation("naruto_shippuden:story_mode_dimension")))) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
@@ -2164,8 +2138,7 @@ public class StoryModeRightclickedProcedure {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A7e+25 LvL XP"), (false));
 						}
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVEL + 25);
+							double _setval = (NarutoShippudenModVariables.get(entity).LEVEL + 25);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.LEVEL = _setval;
 								capability.syncPlayerVariables(entity);
@@ -2212,10 +2185,8 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 10) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).StorymodeCooldown == 4) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 10) {
+			if (NarutoShippudenModVariables.get(entity).StorymodeCooldown == 4) {
 				if ((entity.world.getDimensionKey()) == (RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 						new ResourceLocation("naruto_shippuden:story_mode_dimension")))) {
 					randomgenjutsu = (MathHelper.nextInt(new Random(), 1, 10));
@@ -2230,16 +2201,14 @@ public class StoryModeRightclickedProcedure {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A74+5 Genjutsu"), (false));
 						}
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVEL + 10);
+							double _setval = (NarutoShippudenModVariables.get(entity).LEVEL + 10);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.LEVEL = _setval;
 								capability.syncPlayerVariables(entity);
 							});
 						}
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).genjutsu + 5);
+							double _setval = (NarutoShippudenModVariables.get(entity).genjutsu + 5);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.genjutsu = _setval;
 								capability.syncPlayerVariables(entity);
@@ -2289,8 +2258,7 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 9) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 9) {
 			if ((entity.world.getDimensionKey()) == (RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 					new ResourceLocation("naruto_shippuden:story_mode_dimension")))) {
 				if ((entity.getHorizontalFacing()) == Direction.SOUTH) {
@@ -2451,10 +2419,8 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 8) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).TrainingDummyHits >= 100) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 8) {
+			if (NarutoShippudenModVariables.get(entity).TrainingDummyHits >= 100) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A7e+10 LvL XP"), (false));
 				}
@@ -2462,16 +2428,14 @@ public class StoryModeRightclickedProcedure {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A7a+5 Taijutsu"), (false));
 				}
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVEL + 10);
+					double _setval = (NarutoShippudenModVariables.get(entity).LEVEL + 10);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.LEVEL = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).taijutsu + 5);
+					double _setval = (NarutoShippudenModVariables.get(entity).taijutsu + 5);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.taijutsu = _setval;
 						capability.syncPlayerVariables(entity);
@@ -2484,23 +2448,19 @@ public class StoryModeRightclickedProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).TrainingDummyHits >= 100)) {
+			} else if (!(NarutoShippudenModVariables.get(entity).TrainingDummyHits >= 100)) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(
 							new StringTextComponent(("\u00A78Practise on Training Dummy to improve your taijutsu." + " \u00A76Hits: "
 									+ new java.text.DecimalFormat("##.##")
-											.format((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-													.orElse(new NarutoShippudenModVariables.PlayerVariables())).TrainingDummyHits)
+											.format(NarutoShippudenModVariables.get(entity).TrainingDummyHits)
 									+ "/100")),
 							(true));
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 7) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).StorymodeCooldown == 3) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 7) {
+			if (NarutoShippudenModVariables.get(entity).StorymodeCooldown == 3) {
 				if ((entity.world.getDimensionKey()) == (RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 						new ResourceLocation("naruto_shippuden:story_mode_dimension")))) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
@@ -2623,8 +2583,7 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 6) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 6) {
 			if ((entity.world.getDimensionKey()) == (RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 					new ResourceLocation("naruto_shippuden:story_mode_dimension")))) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
@@ -2758,10 +2717,8 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 5) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).StorymodeCooldown == 2) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 5) {
+			if (NarutoShippudenModVariables.get(entity).StorymodeCooldown == 2) {
 				if ((entity.world.getDimensionKey()) == (RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 						new ResourceLocation("naruto_shippuden:story_mode_dimension")))) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
@@ -2791,8 +2748,7 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 4) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 4) {
 			if ((entity.world.getDimensionKey()) == (RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 					new ResourceLocation("naruto_shippuden:story_mode_dimension")))) {
 				if ((entity.getHorizontalFacing()) == Direction.SOUTH) {
@@ -2942,8 +2898,7 @@ public class StoryModeRightclickedProcedure {
 									new StringTextComponent("\u00A78Iruka-sensei performs the Shadow Clone Jutsu, creating multiple clones."),
 									(false));
 						}
-						if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).directionstorymode).equals("South")) {
+						if ((NarutoShippudenModVariables.get(entity).directionstorymode).equals("South")) {
 							if (world instanceof ServerWorld) {
 								Entity entityToSpawn = new IrukaSenseiCloneEntity.CustomEntity(IrukaSenseiCloneEntity.entity, (World) world);
 								entityToSpawn.setLocationAndAngles(x, y, (z + 5), (float) (entity.rotationYaw + 180), (float) 0);
@@ -2980,8 +2935,7 @@ public class StoryModeRightclickedProcedure {
 											(ILivingEntityData) null, (CompoundNBT) null);
 								world.addEntity(entityToSpawn);
 							}
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).directionstorymode).equals("North")) {
+						} else if ((NarutoShippudenModVariables.get(entity).directionstorymode).equals("North")) {
 							if (world instanceof ServerWorld) {
 								Entity entityToSpawn = new IrukaSenseiCloneEntity.CustomEntity(IrukaSenseiCloneEntity.entity, (World) world);
 								entityToSpawn.setLocationAndAngles(x, y, (z - 5), (float) (entity.rotationYaw + 180), (float) 0);
@@ -3018,8 +2972,7 @@ public class StoryModeRightclickedProcedure {
 											(ILivingEntityData) null, (CompoundNBT) null);
 								world.addEntity(entityToSpawn);
 							}
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).directionstorymode).equals("West")) {
+						} else if ((NarutoShippudenModVariables.get(entity).directionstorymode).equals("West")) {
 							if (world instanceof ServerWorld) {
 								Entity entityToSpawn = new IrukaSenseiCloneEntity.CustomEntity(IrukaSenseiCloneEntity.entity, (World) world);
 								entityToSpawn.setLocationAndAngles((x - 5), y, z, (float) (entity.rotationYaw + 180), (float) 0);
@@ -3056,8 +3009,7 @@ public class StoryModeRightclickedProcedure {
 											(ILivingEntityData) null, (CompoundNBT) null);
 								world.addEntity(entityToSpawn);
 							}
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).directionstorymode).equals("East")) {
+						} else if ((NarutoShippudenModVariables.get(entity).directionstorymode).equals("East")) {
 							if (world instanceof ServerWorld) {
 								Entity entityToSpawn = new IrukaSenseiCloneEntity.CustomEntity(IrukaSenseiCloneEntity.entity, (World) world);
 								entityToSpawn.setLocationAndAngles((x + 5), y, z, (float) 0, (float) (entity.rotationYaw + 180));
@@ -3178,10 +3130,8 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 3) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELSTAT >= 5) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 3) {
+			if (NarutoShippudenModVariables.get(entity).LEVELSTAT >= 5) {
 				if ((entity.world.getDimensionKey()) == (World.OVERWORLD)) {
 					{
 						double _setval = 4;
@@ -3211,16 +3161,14 @@ public class StoryModeRightclickedProcedure {
 						}
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVELSTAT <= 4) {
+			} else if (NarutoShippudenModVariables.get(entity).LEVELSTAT <= 4) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A78You have to be Level 5 to continue Story Mode."),
 							(false));
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 2) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 2) {
 			if ((entity.world.getDimensionKey()) == (World.OVERWORLD)) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A78You have been deafeted by nine tail fox."), (false));
@@ -3229,8 +3177,7 @@ public class StoryModeRightclickedProcedure {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A7e+10 LvL XP"), (false));
 				}
 				{
-					double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).LEVEL + 10);
+					double _setval = (NarutoShippudenModVariables.get(entity).LEVEL + 10);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.LEVEL = _setval;
 						capability.syncPlayerVariables(entity);
@@ -3254,10 +3201,8 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 1) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).StorymodeCooldown == 1) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 1) {
+			if (NarutoShippudenModVariables.get(entity).StorymodeCooldown == 1) {
 				if ((entity.world.getDimensionKey()) == (RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 						new ResourceLocation("naruto_shippuden:story_mode_dimension")))) {
 					if ((entity.getHorizontalFacing()) == Direction.SOUTH) {
@@ -3351,8 +3296,7 @@ public class StoryModeRightclickedProcedure {
 				}
 			}
 		}
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 0) {
+		if (NarutoShippudenModVariables.get(entity).storymode == 0) {
 			if ((entity.world.getDimensionKey()) == (RegistryKey.getOrCreateKey(Registry.WORLD_KEY,
 					new ResourceLocation("naruto_shippuden:story_mode_dimension")))) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {

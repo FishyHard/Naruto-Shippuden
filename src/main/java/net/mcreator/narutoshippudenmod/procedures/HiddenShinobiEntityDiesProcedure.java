@@ -59,12 +59,9 @@ public class HiddenShinobiEntityDiesProcedure {
 		Entity entity = (Entity) dependencies.get("entity");
 		Entity sourceentity = (Entity) dependencies.get("sourceentity");
 		if (sourceentity instanceof PlayerEntity) {
-			if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 16) {
-				if (!((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).StoryModeGeninFight).equals(" ")) {
-					if (((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).StoryModeGeninFight).equals("Leaf")) {
+			if (NarutoShippudenModVariables.get(sourceentity).storymode == 16) {
+				if (!(NarutoShippudenModVariables.get(sourceentity).StoryModeGeninFight).equals(" ")) {
+					if ((NarutoShippudenModVariables.get(sourceentity).StoryModeGeninFight).equals("Leaf")) {
 						if (entity instanceof HiddenLeafShinobiEntity.CustomEntity) {
 							{
 								double _setval = 17;
@@ -81,8 +78,7 @@ public class HiddenShinobiEntityDiesProcedure {
 								});
 							}
 						}
-					} else if (((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).StoryModeGeninFight).equals("Sand")) {
+					} else if ((NarutoShippudenModVariables.get(sourceentity).StoryModeGeninFight).equals("Sand")) {
 						if (entity instanceof HiddenSandShinobiEntity.CustomEntity) {
 							{
 								double _setval = 17;
@@ -99,8 +95,7 @@ public class HiddenShinobiEntityDiesProcedure {
 								});
 							}
 						}
-					} else if (((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).StoryModeGeninFight).equals("Stone")) {
+					} else if ((NarutoShippudenModVariables.get(sourceentity).StoryModeGeninFight).equals("Stone")) {
 						if (entity instanceof HiddenStoneShinobiEntity.CustomEntity) {
 							{
 								double _setval = 17;
@@ -117,8 +112,7 @@ public class HiddenShinobiEntityDiesProcedure {
 								});
 							}
 						}
-					} else if (((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).StoryModeGeninFight).equals("Cloud")) {
+					} else if ((NarutoShippudenModVariables.get(sourceentity).StoryModeGeninFight).equals("Cloud")) {
 						if (entity instanceof HiddenCloudShinobiEntity.CustomEntity) {
 							{
 								double _setval = 17;
@@ -135,8 +129,7 @@ public class HiddenShinobiEntityDiesProcedure {
 								});
 							}
 						}
-					} else if (((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).StoryModeGeninFight).equals("Mist")) {
+					} else if ((NarutoShippudenModVariables.get(sourceentity).StoryModeGeninFight).equals("Mist")) {
 						if (entity instanceof HiddenMistShinobiEntity.CustomEntity) {
 							{
 								double _setval = 17;
@@ -168,12 +161,9 @@ public class HiddenShinobiEntityDiesProcedure {
 					}.compareDistOf(x, y, z)).collect(Collectors.toList());
 			for (Entity entityiterator : _entfound) {
 				if (entityiterator instanceof PlayerEntity) {
-					if ((entityiterator.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).storymode == 16) {
-						if (!((entityiterator.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).StoryModeGeninFight).equals(" ")) {
-							if (((entityiterator.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).StoryModeGeninFight).equals("Leaf")) {
+					if (NarutoShippudenModVariables.get(entityiterator).storymode == 16) {
+						if (!(NarutoShippudenModVariables.get(entityiterator).StoryModeGeninFight).equals(" ")) {
+							if ((NarutoShippudenModVariables.get(entityiterator).StoryModeGeninFight).equals("Leaf")) {
 								if (entity instanceof HiddenLeafShinobiEntity.CustomEntity) {
 									{
 										double _setval = 17;
@@ -192,8 +182,7 @@ public class HiddenShinobiEntityDiesProcedure {
 												});
 									}
 								}
-							} else if (((entityiterator.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).StoryModeGeninFight).equals("Sand")) {
+							} else if ((NarutoShippudenModVariables.get(entityiterator).StoryModeGeninFight).equals("Sand")) {
 								if (entity instanceof HiddenSandShinobiEntity.CustomEntity) {
 									{
 										double _setval = 17;
@@ -212,8 +201,7 @@ public class HiddenShinobiEntityDiesProcedure {
 												});
 									}
 								}
-							} else if (((entityiterator.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).StoryModeGeninFight).equals("Stone")) {
+							} else if ((NarutoShippudenModVariables.get(entityiterator).StoryModeGeninFight).equals("Stone")) {
 								if (entity instanceof HiddenStoneShinobiEntity.CustomEntity) {
 									{
 										double _setval = 17;
@@ -232,8 +220,7 @@ public class HiddenShinobiEntityDiesProcedure {
 												});
 									}
 								}
-							} else if (((entityiterator.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).StoryModeGeninFight).equals("Cloud")) {
+							} else if ((NarutoShippudenModVariables.get(entityiterator).StoryModeGeninFight).equals("Cloud")) {
 								if (entity instanceof HiddenCloudShinobiEntity.CustomEntity) {
 									{
 										double _setval = 17;
@@ -252,8 +239,7 @@ public class HiddenShinobiEntityDiesProcedure {
 												});
 									}
 								}
-							} else if (((entityiterator.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).StoryModeGeninFight).equals("Mist")) {
+							} else if ((NarutoShippudenModVariables.get(entityiterator).StoryModeGeninFight).equals("Mist")) {
 								if (entity instanceof HiddenMistShinobiEntity.CustomEntity) {
 									{
 										double _setval = 17;

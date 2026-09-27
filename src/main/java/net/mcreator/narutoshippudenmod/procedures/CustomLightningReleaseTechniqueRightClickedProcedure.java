@@ -25,16 +25,11 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 		}
 		Entity entity = (Entity) dependencies.get("entity");
 		if (!entity.isSneaking()) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra1save == 100) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 5) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 100) {
-						if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype1save).equals("Ball")) {
-							if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Slow")) {
+			if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 100) {
+				if (NarutoShippudenModVariables.get(entity).ninjutsu >= 5) {
+					if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 100) {
+						if ((NarutoShippudenModVariables.get(entity).customjutsutype1save).equals("Ball")) {
+							if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Slow")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -56,8 +51,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Medium")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Medium")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -79,8 +73,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Fast")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Fast")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -103,10 +96,8 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 									}
 								}
 							}
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype1save).equals("Wave")) {
-							if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Slow")) {
+						} else if ((NarutoShippudenModVariables.get(entity).customjutsutype1save).equals("Wave")) {
+							if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Slow")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -128,8 +119,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Medium")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Medium")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -151,8 +141,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Fast")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Fast")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -175,10 +164,8 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 									}
 								}
 							}
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype1save).equals("Disk")) {
-							if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Slow")) {
+						} else if ((NarutoShippudenModVariables.get(entity).customjutsutype1save).equals("Disk")) {
+							if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Slow")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -200,8 +187,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Medium")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Medium")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -223,8 +209,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Fast")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Fast")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -249,35 +234,27 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 							}
 						}
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 100);
+							double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 100);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.ChakraAmount = _setval;
 								capability.syncPlayerVariables(entity);
 							});
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 99) {
+					} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 4) {
+				} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 4) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu (5 Required)"), (false));
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra1save == 200) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 15) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 200) {
-						if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype1save).equals("Ball")) {
-							if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Slow")) {
+			} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 200) {
+				if (NarutoShippudenModVariables.get(entity).ninjutsu >= 15) {
+					if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
+						if ((NarutoShippudenModVariables.get(entity).customjutsutype1save).equals("Ball")) {
+							if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Slow")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -299,8 +276,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Medium")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Medium")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -322,8 +298,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Fast")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Fast")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -346,10 +321,8 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 									}
 								}
 							}
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype1save).equals("Wave")) {
-							if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Slow")) {
+						} else if ((NarutoShippudenModVariables.get(entity).customjutsutype1save).equals("Wave")) {
+							if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Slow")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -371,8 +344,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Medium")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Medium")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -394,8 +366,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Fast")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Fast")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -418,10 +389,8 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 									}
 								}
 							}
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype1save).equals("Disk")) {
-							if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Slow")) {
+						} else if ((NarutoShippudenModVariables.get(entity).customjutsutype1save).equals("Disk")) {
+							if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Slow")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -443,8 +412,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Medium")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Medium")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -466,8 +434,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Fast")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Fast")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -492,35 +459,27 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 							}
 						}
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 100);
+							double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 100);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.ChakraAmount = _setval;
 								capability.syncPlayerVariables(entity);
 							});
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 199) {
+					} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 14) {
+				} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 14) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu (15 Required)"), (false));
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra1save == 300) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 25) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 300) {
-						if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype1save).equals("Ball")) {
-							if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Slow")) {
+			} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 300) {
+				if (NarutoShippudenModVariables.get(entity).ninjutsu >= 25) {
+					if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 300) {
+						if ((NarutoShippudenModVariables.get(entity).customjutsutype1save).equals("Ball")) {
+							if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Slow")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -542,8 +501,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Medium")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Medium")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -565,8 +523,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Fast")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Fast")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -589,10 +546,8 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 									}
 								}
 							}
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype1save).equals("Wave")) {
-							if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Slow")) {
+						} else if ((NarutoShippudenModVariables.get(entity).customjutsutype1save).equals("Wave")) {
+							if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Slow")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -614,8 +569,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Medium")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Medium")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -637,8 +591,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Fast")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Fast")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -661,10 +614,8 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 									}
 								}
 							}
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype1save).equals("Disk")) {
-							if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Slow")) {
+						} else if ((NarutoShippudenModVariables.get(entity).customjutsutype1save).equals("Disk")) {
+							if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Slow")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -686,8 +637,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Medium")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Medium")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -709,8 +659,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Fast")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Fast")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -735,35 +684,27 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 							}
 						}
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 100);
+							double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 100);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.ChakraAmount = _setval;
 								capability.syncPlayerVariables(entity);
 							});
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 299) {
+					} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 299) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 24) {
+				} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu (25 Required)"), (false));
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra1save == 400) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 30) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 400) {
-						if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype1save).equals("Ball")) {
-							if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Slow")) {
+			} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 400) {
+				if (NarutoShippudenModVariables.get(entity).ninjutsu >= 30) {
+					if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 400) {
+						if ((NarutoShippudenModVariables.get(entity).customjutsutype1save).equals("Ball")) {
+							if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Slow")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -785,8 +726,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Medium")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Medium")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -808,8 +748,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Fast")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Fast")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -832,10 +771,8 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 									}
 								}
 							}
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype1save).equals("Wave")) {
-							if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Slow")) {
+						} else if ((NarutoShippudenModVariables.get(entity).customjutsutype1save).equals("Wave")) {
+							if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Slow")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -857,8 +794,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Medium")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Medium")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -880,8 +816,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Fast")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Fast")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -904,10 +839,8 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 									}
 								}
 							}
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype1save).equals("Disk")) {
-							if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Slow")) {
+						} else if ((NarutoShippudenModVariables.get(entity).customjutsutype1save).equals("Disk")) {
+							if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Slow")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -929,8 +862,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Medium")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Medium")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -952,8 +884,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Fast")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Fast")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -978,35 +909,27 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 							}
 						}
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 100);
+							double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 100);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.ChakraAmount = _setval;
 								capability.syncPlayerVariables(entity);
 							});
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 399) {
+					} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 399) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 29) {
+				} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu (30 Required)"), (false));
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra1save == 500) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 35) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 500) {
-						if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype1save).equals("Ball")) {
-							if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Slow")) {
+			} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 500) {
+				if (NarutoShippudenModVariables.get(entity).ninjutsu >= 35) {
+					if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 500) {
+						if ((NarutoShippudenModVariables.get(entity).customjutsutype1save).equals("Ball")) {
+							if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Slow")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -1028,8 +951,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Medium")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Medium")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -1051,8 +973,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Fast")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Fast")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -1075,10 +996,8 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 									}
 								}
 							}
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype1save).equals("Wave")) {
-							if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Slow")) {
+						} else if ((NarutoShippudenModVariables.get(entity).customjutsutype1save).equals("Wave")) {
+							if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Slow")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -1100,8 +1019,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Medium")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Medium")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -1123,8 +1041,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Fast")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Fast")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -1147,10 +1064,8 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 									}
 								}
 							}
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype1save).equals("Disk")) {
-							if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Slow")) {
+						} else if ((NarutoShippudenModVariables.get(entity).customjutsutype1save).equals("Disk")) {
+							if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Slow")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -1172,8 +1087,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Medium")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Medium")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -1195,8 +1109,7 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 										projectileLevel.addEntity(_entityToSpawn);
 									}
 								}
-							} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save).equals("Fast")) {
+							} else if ((NarutoShippudenModVariables.get(entity).customjutsuspeed1save).equals("Fast")) {
 								{
 									Entity _shootFrom = entity;
 									World projectileLevel = _shootFrom.world;
@@ -1221,21 +1134,18 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 							}
 						}
 						{
-							double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 100);
+							double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 100);
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 								capability.ChakraAmount = _setval;
 								capability.syncPlayerVariables(entity);
 							});
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 499) {
+					} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 						}
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 34) {
+				} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 34) {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu (35 Required)"), (false));
 					}
@@ -1247,20 +1157,15 @@ public class CustomLightningReleaseTechniqueRightClickedProcedure {
 						.sendStatusMessage(
 								new StringTextComponent(
 										("Jutsu Info: " + "Jutsu Name: "
-												+ (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).jutsunamesave1
+												+ NarutoShippudenModVariables.get(entity).jutsunamesave1
 												+ " Release: "
-												+ (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease1save
+												+ NarutoShippudenModVariables.get(entity).customjutsurelease1save
 												+ " Type: "
-												+ (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype1save
+												+ NarutoShippudenModVariables.get(entity).customjutsutype1save
 												+ " Speed: "
-												+ (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed1save
+												+ NarutoShippudenModVariables.get(entity).customjutsuspeed1save
 												+ " \u00A7bChakra Cost: "
-												+ (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-														.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra1save)),
+												+ NarutoShippudenModVariables.get(entity).customjutsuchakra1save)),
 								(false));
 			}
 		}

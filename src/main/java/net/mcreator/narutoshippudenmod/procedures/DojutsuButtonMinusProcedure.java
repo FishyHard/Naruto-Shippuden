@@ -16,12 +16,9 @@ public class DojutsuButtonMinusProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).BoxDeity == false
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).TheSirMarcus == false) {
-			if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Sharingan")) {
+		if (NarutoShippudenModVariables.get(entity).BoxDeity == false
+				&& NarutoShippudenModVariables.get(entity).TheSirMarcus == false) {
+			if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Sharingan")) {
 				{
 					String _setval = "Isshiki Dojutsu";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -36,8 +33,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Byakugan")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Byakugan")) {
 				{
 					String _setval = "Sharingan";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -52,8 +48,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Ketsuryugan")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Ketsuryugan")) {
 				{
 					String _setval = "Byakugan";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -61,8 +56,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Mangekyou")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Mangekyou")) {
 				{
 					String _setval = "Ketsuryugan";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -84,8 +78,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Rinnegan")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Rinnegan")) {
 				{
 					String _setval = "Mangekyou";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -107,8 +100,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Tenseigan")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Tenseigan")) {
 				{
 					String _setval = "Rinnegan";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -116,8 +108,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Isshiki Dojutsu")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Isshiki Dojutsu")) {
 				{
 					String _setval = "Tenseigan";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -126,10 +117,8 @@ public class DojutsuButtonMinusProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).BoxDeity == true) {
-			if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Voltic Mode")) {
+		} else if (NarutoShippudenModVariables.get(entity).BoxDeity == true) {
+			if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Voltic Mode")) {
 				{
 					String _setval = "Isshiki Dojutsu";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -144,8 +133,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Sharingan")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Sharingan")) {
 				{
 					String _setval = "Voltic Mode";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -153,8 +141,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Byakugan")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Byakugan")) {
 				{
 					String _setval = "Sharingan";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -169,8 +156,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Ketsuryugan")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Ketsuryugan")) {
 				{
 					String _setval = "Byakugan";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -178,8 +164,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Mangekyou")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Mangekyou")) {
 				{
 					String _setval = "Ketsuryugan";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -194,8 +179,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Rinnegan")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Rinnegan")) {
 				{
 					String _setval = "Mangekyou";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -217,8 +201,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Tenseigan")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Tenseigan")) {
 				{
 					String _setval = "Rinnegan";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -226,8 +209,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Isshiki Dojutsu")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Isshiki Dojutsu")) {
 				{
 					String _setval = "Tenseigan";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -236,10 +218,8 @@ public class DojutsuButtonMinusProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).TheSirMarcus == true) {
-			if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Furamingogan")) {
+		} else if (NarutoShippudenModVariables.get(entity).TheSirMarcus == true) {
+			if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Furamingogan")) {
 				{
 					String _setval = "Isshiki Dojutsu";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -254,8 +234,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Sharingan")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Sharingan")) {
 				{
 					String _setval = "Furamingogan";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -263,8 +242,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Byakugan")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Byakugan")) {
 				{
 					String _setval = "Sharingan";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -279,8 +257,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Ketsuryugan")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Ketsuryugan")) {
 				{
 					String _setval = "Byakugan";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -288,8 +265,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Mangekyou")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Mangekyou")) {
 				{
 					String _setval = "Ketsuryugan";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -304,8 +280,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Rinnegan")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Rinnegan")) {
 				{
 					String _setval = "Mangekyou";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -327,8 +302,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Tenseigan")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Tenseigan")) {
 				{
 					String _setval = "Rinnegan";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -336,8 +310,7 @@ public class DojutsuButtonMinusProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Isshiki Dojutsu")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Isshiki Dojutsu")) {
 				{
 					String _setval = "Tenseigan";
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {

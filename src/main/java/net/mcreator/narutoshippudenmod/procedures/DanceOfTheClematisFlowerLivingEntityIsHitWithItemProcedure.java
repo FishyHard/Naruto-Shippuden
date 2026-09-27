@@ -28,10 +28,8 @@ public class DanceOfTheClematisFlowerLivingEntityIsHitWithItemProcedure {
 		}
 		Entity entity = (Entity) dependencies.get("entity");
 		Entity sourceentity = (Entity) dependencies.get("sourceentity");
-		if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 20) {
-			if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 350) {
+		if (NarutoShippudenModVariables.get(sourceentity).ninjutsu >= 20) {
+			if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount >= 350) {
 				entity.attackEntityFrom(DamageSource.GENERIC, (float) 35);
 				if (sourceentity instanceof PlayerEntity) {
 					ItemStack _stktoremove = new ItemStack(DanceOfTheClematisFlowerItem.block);
@@ -39,21 +37,18 @@ public class DanceOfTheClematisFlowerLivingEntityIsHitWithItemProcedure {
 							((PlayerEntity) sourceentity).container.func_234641_j_());
 				}
 				{
-					double _setval = ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 350);
+					double _setval = (NarutoShippudenModVariables.get(sourceentity).ChakraAmount - 350);
 					sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.ChakraAmount = _setval;
 						capability.syncPlayerVariables(sourceentity);
 					});
 				}
-			} else if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 349) {
+			} else if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount <= 349) {
 				if (sourceentity instanceof PlayerEntity && !sourceentity.world.isRemote()) {
 					((PlayerEntity) sourceentity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 				}
 			}
-		} else if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 19) {
+		} else if (NarutoShippudenModVariables.get(sourceentity).ninjutsu <= 19) {
 			if (sourceentity instanceof PlayerEntity && !sourceentity.world.isRemote()) {
 				((PlayerEntity) sourceentity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 			}

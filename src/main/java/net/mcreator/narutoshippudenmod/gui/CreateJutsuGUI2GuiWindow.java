@@ -88,19 +88,13 @@ public class CreateJutsuGUI2GuiWindow extends ContainerScreen<CreateJutsuGUI2Gui
 		this.font.drawString(ms, "Speed:", 15, 97, -16777216);
 		this.font.drawString(ms, "Release:", 15, 122, -16777216);
 		this.font.drawString(ms, "Chakra:", 108, 98, -16777216);
-		this.font.drawString(ms, "" + ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).player_name) + "", 48, 52, -16777216);
-		this.font.drawString(ms, "" + ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsutype) + "", 42, 74, -16777216);
-		this.font.drawString(ms, "" + ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuspeed) + "", 48, 97, -16777216);
-		this.font.drawString(ms, "" + ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease) + "", 58, 122, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra) + "", 146, 98, -16777216);
+		this.font.drawString(ms, "" + (NarutoShippudenModVariables.get(entity).player_name) + "", 48, 52, -16777216);
+		this.font.drawString(ms, "" + (NarutoShippudenModVariables.get(entity).customjutsutype) + "", 42, 74, -16777216);
+		this.font.drawString(ms, "" + (NarutoShippudenModVariables.get(entity).customjutsuspeed) + "", 48, 97, -16777216);
+		this.font.drawString(ms, "" + (NarutoShippudenModVariables.get(entity).customjutsurelease) + "", 58, 122, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).customjutsuchakra) + "", 146, 98, -16777216);
 		this.font.drawString(ms, "Check JP Price:", 175, 24, -1);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsujpcost) + "", 255, 24, -1);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).customjutsujpcost) + "", 255, 24, -1);
 	}
 
 	@Override

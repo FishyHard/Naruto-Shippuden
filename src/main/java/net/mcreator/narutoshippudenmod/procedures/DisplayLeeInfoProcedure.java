@@ -16,8 +16,7 @@ public class DisplayLeeInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).leereleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).leereleaselogic == true) {
 			return true;
 		}
 		return false;

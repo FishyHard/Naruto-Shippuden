@@ -16,8 +16,7 @@ public class DiplaySarutobiSelectProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectclanrelease == 21) {
+		if (NarutoShippudenModVariables.get(entity).selectclanrelease == 21) {
 			return true;
 		}
 		return false;

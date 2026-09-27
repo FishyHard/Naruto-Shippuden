@@ -21,10 +21,8 @@ public class KetsuryuganOnKeyPressedProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).ketsuryugan == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ketsuryuganactivate == false) {
+		if (NarutoShippudenModVariables.get(entity).ketsuryugan == true) {
+			if (NarutoShippudenModVariables.get(entity).ketsuryuganactivate == false) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A7cKetsuryugan!"), (false));
 				}
@@ -37,8 +35,7 @@ public class KetsuryuganOnKeyPressedProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ketsuryuganactivate == true) {
+			} else if (NarutoShippudenModVariables.get(entity).ketsuryuganactivate == true) {
 				if (entity instanceof LivingEntity) {
 					((LivingEntity) entity).removePotionEffect(Effects.STRENGTH);
 				}
@@ -50,8 +47,7 @@ public class KetsuryuganOnKeyPressedProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).ketsuryugan == false) {
+		} else if (NarutoShippudenModVariables.get(entity).ketsuryugan == false) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked Ketsuryugan"), (false));
 			}

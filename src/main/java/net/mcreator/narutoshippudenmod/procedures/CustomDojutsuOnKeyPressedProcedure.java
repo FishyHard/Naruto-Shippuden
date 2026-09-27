@@ -21,10 +21,8 @@ public class CustomDojutsuOnKeyPressedProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).BoxDeity == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).VolticMode == false) {
+		if (NarutoShippudenModVariables.get(entity).BoxDeity == true) {
+			if (NarutoShippudenModVariables.get(entity).VolticMode == false) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A7aVoltic Mode!"), (false));
 				}
@@ -43,8 +41,7 @@ public class CustomDojutsuOnKeyPressedProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).VolticMode == true) {
+			} else if (NarutoShippudenModVariables.get(entity).VolticMode == true) {
 				if (entity instanceof LivingEntity) {
 					((LivingEntity) entity).removePotionEffect(Effects.STRENGTH);
 				}
@@ -65,10 +62,8 @@ public class CustomDojutsuOnKeyPressedProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).TheSirMarcus == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Furamingogan == false) {
+		} else if (NarutoShippudenModVariables.get(entity).TheSirMarcus == true) {
+			if (NarutoShippudenModVariables.get(entity).Furamingogan == false) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A7dFuramingogan!"), (false));
 				}
@@ -85,8 +80,7 @@ public class CustomDojutsuOnKeyPressedProcedure {
 						capability.syncPlayerVariables(entity);
 					});
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).Furamingogan == true) {
+			} else if (NarutoShippudenModVariables.get(entity).Furamingogan == true) {
 				if (entity instanceof LivingEntity) {
 					((LivingEntity) entity).removePotionEffect(Effects.STRENGTH);
 				}
@@ -104,10 +98,8 @@ public class CustomDojutsuOnKeyPressedProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).BoxDeity == false
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).TheSirMarcus == false) {
+		} else if (NarutoShippudenModVariables.get(entity).BoxDeity == false
+				&& NarutoShippudenModVariables.get(entity).TheSirMarcus == false) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked Custom Dojutsu"), (false));
 			}

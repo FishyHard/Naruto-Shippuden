@@ -23,28 +23,23 @@ public class HoshigakiReleaseRightclickedProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).hoshigaki_release == 0) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp >= 5) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).waterreleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).hoshigaki_release == 0) {
+			if (NarutoShippudenModVariables.get(entity).jp >= 5) {
+				if (NarutoShippudenModVariables.get(entity).waterreleaselogic == true) {
 					if (entity instanceof PlayerEntity) {
 						ItemStack _setstack = new ItemStack(HoshigakiReleaseTechniqueItem.block);
 						_setstack.setCount((int) 1);
 						ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 					}
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp - 5);
+						double _setval = (NarutoShippudenModVariables.get(entity).jp - 5);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.jp = _setval;
 							capability.syncPlayerVariables(entity);
 						});
 					}
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).hoshigaki_release + 1);
+						double _setval = (NarutoShippudenModVariables.get(entity).hoshigaki_release + 1);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.hoshigaki_release = _setval;
 							capability.syncPlayerVariables(entity);
@@ -53,8 +48,7 @@ public class HoshigakiReleaseRightclickedProcedure {
 					if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 						((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("-10 JP"), (false));
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).waterreleaselogic == false) {
+				} else if (NarutoShippudenModVariables.get(entity).waterreleaselogic == false) {
 					if (entity instanceof PlayerEntity) {
 						ItemStack _setstack = new ItemStack(HoshigakiReleaseTechniqueItem.block);
 						_setstack.setCount((int) 1);
@@ -66,16 +60,14 @@ public class HoshigakiReleaseRightclickedProcedure {
 						ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) entity), _setstack);
 					}
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp - 5);
+						double _setval = (NarutoShippudenModVariables.get(entity).jp - 5);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.jp = _setval;
 							capability.syncPlayerVariables(entity);
 						});
 					}
 					{
-						double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).hoshigaki_release + 1);
+						double _setval = (NarutoShippudenModVariables.get(entity).hoshigaki_release + 1);
 						entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.hoshigaki_release = _setval;
 							capability.syncPlayerVariables(entity);
@@ -92,8 +84,7 @@ public class HoshigakiReleaseRightclickedProcedure {
 						});
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).jp <= 4) {
+			} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough JP"), (false));
 				}

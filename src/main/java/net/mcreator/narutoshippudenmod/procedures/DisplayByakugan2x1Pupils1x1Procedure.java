@@ -16,12 +16,9 @@ public class DisplayByakugan2x1Pupils1x1Procedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 1
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Byakugan")) {
+		if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
+				&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1
+				&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Byakugan")) {
 			return true;
 		}
 		return false;

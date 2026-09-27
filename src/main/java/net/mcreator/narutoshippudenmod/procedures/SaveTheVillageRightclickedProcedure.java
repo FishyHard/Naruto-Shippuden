@@ -23,8 +23,7 @@ public class SaveTheVillageRightclickedProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).zombiekillcount >= 10) {
+		if (NarutoShippudenModVariables.get(entity).zombiekillcount >= 10) {
 			if (entity instanceof PlayerEntity) {
 				ItemStack _setstack = new ItemStack(BanknoteOfRyoItem.block);
 				_setstack.setCount((int) 20);
@@ -35,8 +34,7 @@ public class SaveTheVillageRightclickedProcedure {
 				((PlayerEntity) entity).inventory.func_234564_a_(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
 						((PlayerEntity) entity).container.func_234641_j_());
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).zombiekillcount <= 9) {
+		} else if (NarutoShippudenModVariables.get(entity).zombiekillcount <= 9) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Kill 10 Zombies"), (false));
 			}

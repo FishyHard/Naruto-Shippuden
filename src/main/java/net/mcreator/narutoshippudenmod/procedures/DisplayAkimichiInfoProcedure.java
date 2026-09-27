@@ -16,8 +16,7 @@ public class DisplayAkimichiInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).akimichireleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).akimichireleaselogic == true) {
 			return true;
 		}
 		return false;

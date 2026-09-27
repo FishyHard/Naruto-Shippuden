@@ -16,8 +16,7 @@ public class DisplayEarthSelectProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectnaturerelease == 4) {
+		if (NarutoShippudenModVariables.get(entity).selectnaturerelease == 4) {
 			return true;
 		}
 		return false;

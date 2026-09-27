@@ -521,18 +521,13 @@ public class InfoCardDojutsuGuiWindow extends ContainerScreen<InfoCardDojutsuGui
 		this.font.drawString(ms, "Dojutsu", 42, 35, -16777216);
 		this.font.drawString(ms, "Pupils Height", 42, 65, -16777216);
 		this.font.drawString(ms, "Eyes Height", 41, 93, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height) + "", 149, 93, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height) + "", 149, 66, -16777216);
-		this.font.drawString(ms, "" + ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize) + "", 109, 35, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).Eyes_Height) + "", 149, 93, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).Pupils_Height) + "", 149, 66, -16777216);
+		this.font.drawString(ms, "" + (NarutoShippudenModVariables.get(entity).DojutsuSelectResize) + "", 109, 35, -16777216);
 		if (DisplayMinus2SelectProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 				(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-			this.font.drawString(ms, "" + ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelect2) + "", 126, 3, -16777216);
-		this.font.drawString(ms, "" + ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelect3) + "", 109, 44, -16777216);
+			this.font.drawString(ms, "" + (NarutoShippudenModVariables.get(entity).DojutsuSelect2) + "", 126, 3, -16777216);
+		this.font.drawString(ms, "" + (NarutoShippudenModVariables.get(entity).DojutsuSelect3) + "", 109, 44, -16777216);
 	}
 
 	@Override

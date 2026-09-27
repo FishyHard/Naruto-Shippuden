@@ -19,8 +19,7 @@ public class AkimichiReleaseTechniqueEntitySwingsItemProcedure {
 		}
 		Entity entity = (Entity) dependencies.get("entity");
 		if (entity.isSneaking()) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).caloriecontrol == 1) {
+			if (NarutoShippudenModVariables.get(entity).caloriecontrol == 1) {
 				{
 					double _setval = 2;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -31,8 +30,7 @@ public class AkimichiReleaseTechniqueEntitySwingsItemProcedure {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Size: 2"), (true));
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).caloriecontrol == 2) {
+			} else if (NarutoShippudenModVariables.get(entity).caloriecontrol == 2) {
 				{
 					double _setval = 3;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -43,8 +41,7 @@ public class AkimichiReleaseTechniqueEntitySwingsItemProcedure {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Size: 3"), (true));
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).caloriecontrol == 3) {
+			} else if (NarutoShippudenModVariables.get(entity).caloriecontrol == 3) {
 				{
 					double _setval = 4;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -55,8 +52,7 @@ public class AkimichiReleaseTechniqueEntitySwingsItemProcedure {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Size: 4"), (true));
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).caloriecontrol == 4) {
+			} else if (NarutoShippudenModVariables.get(entity).caloriecontrol == 4) {
 				{
 					double _setval = 5;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -67,8 +63,7 @@ public class AkimichiReleaseTechniqueEntitySwingsItemProcedure {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Size: 5"), (true));
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).caloriecontrol == 5) {
+			} else if (NarutoShippudenModVariables.get(entity).caloriecontrol == 5) {
 				{
 					double _setval = 1;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {

@@ -16,8 +16,7 @@ public class CustomJutsuButtonMinusFireProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Fire")) {
+		if ((NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Fire")) {
 			{
 				String _setval = "Earth";
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -25,8 +24,7 @@ public class CustomJutsuButtonMinusFireProcedure {
 					capability.syncPlayerVariables(entity);
 				});
 			}
-		} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Earth")) {
+		} else if ((NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Earth")) {
 			{
 				String _setval = "Water";
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -34,8 +32,7 @@ public class CustomJutsuButtonMinusFireProcedure {
 					capability.syncPlayerVariables(entity);
 				});
 			}
-		} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Water")) {
+		} else if ((NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Water")) {
 			{
 				String _setval = "Lightning";
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -43,8 +40,7 @@ public class CustomJutsuButtonMinusFireProcedure {
 					capability.syncPlayerVariables(entity);
 				});
 			}
-		} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Lightning")) {
+		} else if ((NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Lightning")) {
 			{
 				String _setval = "Wind";
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -52,8 +48,7 @@ public class CustomJutsuButtonMinusFireProcedure {
 					capability.syncPlayerVariables(entity);
 				});
 			}
-		} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsurelease).equals("Wind")) {
+		} else if ((NarutoShippudenModVariables.get(entity).customjutsurelease).equals("Wind")) {
 			{
 				String _setval = "Fire";
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {

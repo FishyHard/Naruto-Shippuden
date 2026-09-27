@@ -23,14 +23,10 @@ public class UpDashOnKeyPressedProcedure {
 		}
 		Entity entity = (Entity) dependencies.get("entity");
 		double WPress = 0;
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Chakra_Control == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).UpDashCooldown == false) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).WaterWalk == false
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).WallClimb == false) {
+		if (NarutoShippudenModVariables.get(entity).Chakra_Control == true) {
+			if (NarutoShippudenModVariables.get(entity).UpDashCooldown == false) {
+				if (NarutoShippudenModVariables.get(entity).WaterWalk == false
+						&& NarutoShippudenModVariables.get(entity).WallClimb == false) {
 					if (new Object() {
 						public boolean checkGamemode(Entity _ent) {
 							if (_ent instanceof ServerPlayerEntity) {
@@ -43,18 +39,15 @@ public class UpDashOnKeyPressedProcedure {
 							return false;
 						}
 					}.checkGamemode(entity)) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).SpacePressed == 0) {
+						if (NarutoShippudenModVariables.get(entity).SpacePressed == 0) {
 							{
-								double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).SpacePressed + 1);
+								double _setval = (NarutoShippudenModVariables.get(entity).SpacePressed + 1);
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 									capability.SpacePressed = _setval;
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).SpacePressed == 1) {
+						} else if (NarutoShippudenModVariables.get(entity).SpacePressed == 1) {
 							entity.setMotion(0, 1, 0);
 							{
 								boolean _setval = (true);

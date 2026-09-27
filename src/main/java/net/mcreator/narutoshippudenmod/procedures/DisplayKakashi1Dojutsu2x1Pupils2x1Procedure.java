@@ -16,14 +16,10 @@ public class DisplayKakashi1Dojutsu2x1Pupils2x1Procedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Pupils_Height == 2
-				&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).Eyes_Height == 1
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelectResize).equals("Sharingan")
-				&& ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).DojutsuSelect2).equals("Kakashi")) {
+		if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
+				&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1
+				&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Sharingan")
+				&& (NarutoShippudenModVariables.get(entity).DojutsuSelect2).equals("Kakashi")) {
 			return true;
 		}
 		return false;

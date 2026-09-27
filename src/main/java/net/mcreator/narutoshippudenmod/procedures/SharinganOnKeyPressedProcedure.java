@@ -52,12 +52,9 @@ public class SharinganOnKeyPressedProcedure {
 		double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).sharingan == true
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).SharinganKakashi == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).sharinganactivate == false) {
+		if (NarutoShippudenModVariables.get(entity).sharingan == true
+				|| NarutoShippudenModVariables.get(entity).SharinganKakashi == true) {
+			if (NarutoShippudenModVariables.get(entity).sharinganactivate == false) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A7cSharingan!"), (false));
 				}
@@ -79,8 +76,7 @@ public class SharinganOnKeyPressedProcedure {
 							(net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("naruto_shippuden:sharingan")),
 							SoundCategory.NEUTRAL, (float) 1, (float) 1, false);
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).sharinganactivate == true) {
+			} else if (NarutoShippudenModVariables.get(entity).sharinganactivate == true) {
 				if (entity instanceof LivingEntity) {
 					((LivingEntity) entity).removePotionEffect(Effects.STRENGTH);
 				}
@@ -92,10 +88,8 @@ public class SharinganOnKeyPressedProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).SharinganShimura == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).shimura_active == false) {
+		} else if (NarutoShippudenModVariables.get(entity).SharinganShimura == true) {
+			if (NarutoShippudenModVariables.get(entity).shimura_active == false) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("\u00A7cSharingan!"), (false));
 				}
@@ -117,8 +111,7 @@ public class SharinganOnKeyPressedProcedure {
 							(net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("naruto_shippuden:sharingan")),
 							SoundCategory.NEUTRAL, (float) 1, (float) 1, false);
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).shimura_active == true) {
+			} else if (NarutoShippudenModVariables.get(entity).shimura_active == true) {
 				if (entity instanceof LivingEntity) {
 					((LivingEntity) entity).removePotionEffect(Effects.STRENGTH);
 				}
@@ -130,12 +123,9 @@ public class SharinganOnKeyPressedProcedure {
 					});
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).sharingan == false
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).SharinganKakashi == false
-				|| (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).SharinganShimura == false) {
+		} else if (NarutoShippudenModVariables.get(entity).sharingan == false
+				|| NarutoShippudenModVariables.get(entity).SharinganKakashi == false
+				|| NarutoShippudenModVariables.get(entity).SharinganShimura == false) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked Sharingan"), (false));
 			}

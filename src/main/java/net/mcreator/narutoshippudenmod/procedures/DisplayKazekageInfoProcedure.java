@@ -16,8 +16,7 @@ public class DisplayKazekageInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).kazekagereleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).kazekagereleaselogic == true) {
 			return true;
 		}
 		return false;

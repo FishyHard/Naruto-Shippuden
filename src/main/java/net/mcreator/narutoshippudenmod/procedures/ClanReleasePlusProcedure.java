@@ -16,8 +16,7 @@ public class ClanReleasePlusProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectclanrelease == 25) {
+		if (NarutoShippudenModVariables.get(entity).selectclanrelease == 25) {
 			{
 				double _setval = 0;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -25,11 +24,9 @@ public class ClanReleasePlusProcedure {
 					capability.syncPlayerVariables(entity);
 				});
 			}
-		} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectclanrelease == 25)) {
+		} else if (!(NarutoShippudenModVariables.get(entity).selectclanrelease == 25)) {
 			{
-				double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectclanrelease + 1);
+				double _setval = (NarutoShippudenModVariables.get(entity).selectclanrelease + 1);
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 					capability.selectclanrelease = _setval;
 					capability.syncPlayerVariables(entity);

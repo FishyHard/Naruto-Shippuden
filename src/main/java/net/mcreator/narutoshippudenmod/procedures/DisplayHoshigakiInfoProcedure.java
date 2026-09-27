@@ -16,8 +16,7 @@ public class DisplayHoshigakiInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).hoshigakireleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).hoshigakireleaselogic == true) {
 			return true;
 		}
 		return false;

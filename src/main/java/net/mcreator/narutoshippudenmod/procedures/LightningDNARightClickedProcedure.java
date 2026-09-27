@@ -26,8 +26,7 @@ public class LightningDNARightClickedProcedure {
 		}
 		Entity entity = (Entity) dependencies.get("entity");
 		double randomlightning = 0;
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).lightningreleaselogic == false) {
+		if (NarutoShippudenModVariables.get(entity).lightningreleaselogic == false) {
 			randomlightning = (MathHelper.nextInt(new Random(), 1, 100));
 			if (randomlightning <= 70) {
 				if (entity instanceof PlayerEntity) {
@@ -55,8 +54,7 @@ public class LightningDNARightClickedProcedure {
 				((PlayerEntity) entity).inventory.func_234564_a_(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
 						((PlayerEntity) entity).container.func_234641_j_());
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).lightningreleaselogic == true) {
+		} else if (NarutoShippudenModVariables.get(entity).lightningreleaselogic == true) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You already have Lightning Release"), (false));
 			}

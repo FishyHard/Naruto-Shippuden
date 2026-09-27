@@ -16,8 +16,7 @@ public class ChakraDisplayLength7Procedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((new java.text.DecimalFormat("##.##").format((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax)).length() == 7) {
+		if ((new java.text.DecimalFormat("##.##").format(NarutoShippudenModVariables.get(entity).ChakraMax)).length() == 7) {
 			return true;
 		}
 		return false;

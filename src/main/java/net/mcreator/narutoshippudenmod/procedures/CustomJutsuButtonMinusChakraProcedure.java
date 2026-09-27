@@ -16,8 +16,7 @@ public class CustomJutsuButtonMinusChakraProcedure {
 			return;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 100) {
+		if (NarutoShippudenModVariables.get(entity).customjutsuchakra == 100) {
 			{
 				double _setval = 500;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -25,8 +24,7 @@ public class CustomJutsuButtonMinusChakraProcedure {
 					capability.syncPlayerVariables(entity);
 				});
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 500) {
+		} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra == 500) {
 			{
 				double _setval = 400;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -34,8 +32,7 @@ public class CustomJutsuButtonMinusChakraProcedure {
 					capability.syncPlayerVariables(entity);
 				});
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 400) {
+		} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra == 400) {
 			{
 				double _setval = 300;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -43,8 +40,7 @@ public class CustomJutsuButtonMinusChakraProcedure {
 					capability.syncPlayerVariables(entity);
 				});
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 300) {
+		} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra == 300) {
 			{
 				double _setval = 200;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -52,8 +48,7 @@ public class CustomJutsuButtonMinusChakraProcedure {
 					capability.syncPlayerVariables(entity);
 				});
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).customjutsuchakra == 200) {
+		} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra == 200) {
 			{
 				double _setval = 100;
 				entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {

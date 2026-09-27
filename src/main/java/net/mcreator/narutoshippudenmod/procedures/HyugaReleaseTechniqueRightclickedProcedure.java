@@ -71,19 +71,13 @@ public class HyugaReleaseTechniqueRightclickedProcedure {
 		double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugareleaselogic == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).byakuganactivate == true) {
+		if (NarutoShippudenModVariables.get(entity).hyugareleaselogic == true) {
+			if (NarutoShippudenModVariables.get(entity).byakuganactivate == true) {
 				if (!entity.isSneaking()) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).byakuganactivate == true) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugatechnique == 0) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugalearn >= 1) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).gentlefist == false) {
+					if (NarutoShippudenModVariables.get(entity).byakuganactivate == true) {
+						if (NarutoShippudenModVariables.get(entity).hyugatechnique == 0) {
+							if (NarutoShippudenModVariables.get(entity).hyugalearn >= 1) {
+								if (NarutoShippudenModVariables.get(entity).gentlefist == false) {
 									{
 										boolean _setval = (true);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -94,8 +88,7 @@ public class HyugaReleaseTechniqueRightclickedProcedure {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Gentle Fist: On"), (false));
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).gentlefist == true) {
+								} else if (NarutoShippudenModVariables.get(entity).gentlefist == true) {
 									{
 										boolean _setval = (false);
 										entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -107,21 +100,16 @@ public class HyugaReleaseTechniqueRightclickedProcedure {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Gentle Fist: Off"), (false));
 									}
 								}
-							} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugalearn >= 1)) {
+							} else if (!(NarutoShippudenModVariables.get(entity).hyugalearn >= 1)) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."),
 											(false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugatechnique == 1) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugalearn >= 2) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 20) {
-									if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 350) {
+						} else if (NarutoShippudenModVariables.get(entity).hyugatechnique == 1) {
+							if (NarutoShippudenModVariables.get(entity).hyugalearn >= 2) {
+								if (NarutoShippudenModVariables.get(entity).ninjutsu >= 20) {
+									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 350) {
 										new Object() {
 											private int ticks = 0;
 											private float waitTicks;
@@ -149,10 +137,8 @@ public class HyugaReleaseTechniqueRightclickedProcedure {
 														&& ((entity instanceof LivingEntity)
 																? ((LivingEntity) entity).getHeldItemOffhand()
 																: ItemStack.EMPTY).getItem() == Blocks.AIR.asItem()) {
-													if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 20) {
-														if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-																.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 350) {
+													if (NarutoShippudenModVariables.get(entity).ninjutsu >= 20) {
+														if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 350) {
 															if (entity instanceof LivingEntity) {
 																ItemStack _setstack = new ItemStack(GentleStepTwinLionFistsItem.block);
 																_setstack.setCount((int) 1);
@@ -168,9 +154,7 @@ public class HyugaReleaseTechniqueRightclickedProcedure {
 																	((ServerPlayerEntity) entity).inventory.markDirty();
 															}
 															{
-																double _setval = ((entity
-																		.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-																		.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount
+																double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount
 																		- 350);
 																entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 																		.ifPresent(capability -> {
@@ -178,16 +162,13 @@ public class HyugaReleaseTechniqueRightclickedProcedure {
 																			capability.syncPlayerVariables(entity);
 																		});
 															}
-														} else if ((entity
-																.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-																.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 349) {
+														} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 349) {
 															if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 																((PlayerEntity) entity)
 																		.sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 															}
 														}
-													} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 19) {
+													} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 														if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 															((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"),
 																	(false));
@@ -202,33 +183,26 @@ public class HyugaReleaseTechniqueRightclickedProcedure {
 												MinecraftForge.EVENT_BUS.unregister(this);
 											}
 										}.start(world, (int) 40);
-									} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 349) {
+									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 349) {
 										if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 											((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 										}
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 19) {
+								} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 									}
 								}
-							} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugalearn >= 2)) {
+							} else if (!(NarutoShippudenModVariables.get(entity).hyugalearn >= 2)) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."),
 											(false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugatechnique == 2) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugalearn >= 3) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 30) {
-									if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 500) {
+						} else if (NarutoShippudenModVariables.get(entity).hyugatechnique == 2) {
+							if (NarutoShippudenModVariables.get(entity).hyugalearn >= 3) {
+								if (NarutoShippudenModVariables.get(entity).ninjutsu >= 30) {
+									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 500) {
 										new Object() {
 											private int ticks = 0;
 											private float waitTicks;
@@ -256,10 +230,8 @@ public class HyugaReleaseTechniqueRightclickedProcedure {
 														&& ((entity instanceof LivingEntity)
 																? ((LivingEntity) entity).getHeldItemOffhand()
 																: ItemStack.EMPTY).getItem() == Blocks.AIR.asItem()) {
-													if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 30) {
-														if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-																.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 500) {
+													if (NarutoShippudenModVariables.get(entity).ninjutsu >= 30) {
+														if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 500) {
 															if (entity instanceof LivingEntity) {
 																ItemStack _setstack = new ItemStack(EightTrigramsTwinLionsCrumblingAttackItem.block);
 																_setstack.setCount((int) 1);
@@ -275,9 +247,7 @@ public class HyugaReleaseTechniqueRightclickedProcedure {
 																	((ServerPlayerEntity) entity).inventory.markDirty();
 															}
 															{
-																double _setval = ((entity
-																		.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-																		.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount
+																double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount
 																		- 500);
 																entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 																		.ifPresent(capability -> {
@@ -285,16 +255,13 @@ public class HyugaReleaseTechniqueRightclickedProcedure {
 																			capability.syncPlayerVariables(entity);
 																		});
 															}
-														} else if ((entity
-																.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-																.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 499) {
+														} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 															if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 																((PlayerEntity) entity)
 																		.sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 															}
 														}
-													} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-															.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 29) {
+													} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 														if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 															((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"),
 																	(false));
@@ -309,33 +276,26 @@ public class HyugaReleaseTechniqueRightclickedProcedure {
 												MinecraftForge.EVENT_BUS.unregister(this);
 											}
 										}.start(world, (int) 40);
-									} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 499) {
+									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 										if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 											((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 										}
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 29) {
+								} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 									}
 								}
-							} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugalearn >= 3)) {
+							} else if (!(NarutoShippudenModVariables.get(entity).hyugalearn >= 3)) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."),
 											(false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugatechnique == 3) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugalearn >= 4) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 40) {
-									if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 650) {
+						} else if (NarutoShippudenModVariables.get(entity).hyugatechnique == 3) {
+							if (NarutoShippudenModVariables.get(entity).hyugalearn >= 4) {
+								if (NarutoShippudenModVariables.get(entity).ninjutsu >= 40) {
+									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 650) {
 										{
 											List<Entity> _entfound = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(x - (3 / 2d),
 													y - (3 / 2d), z - (3 / 2d), x + (3 / 2d), y + (3 / 2d), z + (3 / 2d)), null).stream()
@@ -416,41 +376,33 @@ public class HyugaReleaseTechniqueRightclickedProcedure {
 											((LivingEntity) entity).addPotionEffect(
 													new EffectInstance(HyugaPotionEffect.potion, (int) 60, (int) 254, (false), (false)));
 										{
-											double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-													.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 650);
+											double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 650);
 											entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 													.ifPresent(capability -> {
 														capability.ChakraAmount = _setval;
 														capability.syncPlayerVariables(entity);
 													});
 										}
-									} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 649) {
+									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 649) {
 										if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 											((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 										}
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 39) {
+								} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 39) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 									}
 								}
-							} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugalearn >= 4)) {
+							} else if (!(NarutoShippudenModVariables.get(entity).hyugalearn >= 4)) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."),
 											(false));
 								}
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugatechnique == 4) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugalearn >= 5) {
-								if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu >= 45) {
-									if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 900) {
+						} else if (NarutoShippudenModVariables.get(entity).hyugatechnique == 4) {
+							if (NarutoShippudenModVariables.get(entity).hyugalearn >= 5) {
+								if (NarutoShippudenModVariables.get(entity).ninjutsu >= 45) {
+									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 900) {
 										{
 											List<Entity> _entfound = world
 													.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(x - (12 / 2d), y - (12 / 2d),
@@ -534,64 +486,53 @@ public class HyugaReleaseTechniqueRightclickedProcedure {
 											world.addEntity(entityToSpawn);
 										}
 										{
-											double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-													.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 900);
+											double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 900);
 											entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 													.ifPresent(capability -> {
 														capability.ChakraAmount = _setval;
 														capability.syncPlayerVariables(entity);
 													});
 										}
-									} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-											.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 899) {
+									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 899) {
 										if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 											((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 										}
 									}
-								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).ninjutsu <= 44) {
+								} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 44) {
 									if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 										((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Not Enough Ninjutsu"), (false));
 									}
 								}
-							} else if (!((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugalearn >= 5)) {
+							} else if (!(NarutoShippudenModVariables.get(entity).hyugalearn >= 5)) {
 								if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 									((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this technique."),
 											(false));
 								}
 							}
 						}
-						if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+						if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 							if (entity instanceof PlayerEntity)
 								((PlayerEntity) entity).getCooldownTracker().setCooldown(HyugaReleaseTechniqueItem.block, (int) 200);
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 							if (entity instanceof PlayerEntity)
 								((PlayerEntity) entity).getCooldownTracker().setCooldown(HyugaReleaseTechniqueItem.block, (int) 160);
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 							if (entity instanceof PlayerEntity)
 								((PlayerEntity) entity).getCooldownTracker().setCooldown(HyugaReleaseTechniqueItem.block, (int) 120);
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 							if (entity instanceof PlayerEntity)
 								((PlayerEntity) entity).getCooldownTracker().setCooldown(HyugaReleaseTechniqueItem.block, (int) 80);
-						} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 							if (entity instanceof PlayerEntity)
 								((PlayerEntity) entity).getCooldownTracker().setCooldown(HyugaReleaseTechniqueItem.block, (int) 40);
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).byakuganactivate == false) {
+					} else if (NarutoShippudenModVariables.get(entity).byakuganactivate == false) {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Activate your Byakugan"), (true));
 						}
 					}
 				} else if (entity.isSneaking()) {
-					if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugatechnique == 0) {
+					if (NarutoShippudenModVariables.get(entity).hyugatechnique == 0) {
 						{
 							double _setval = 1;
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -602,8 +543,7 @@ public class HyugaReleaseTechniqueRightclickedProcedure {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Gentle Step Twin Lion Fists"), (true));
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugatechnique == 1) {
+					} else if (NarutoShippudenModVariables.get(entity).hyugatechnique == 1) {
 						{
 							double _setval = 2;
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -615,8 +555,7 @@ public class HyugaReleaseTechniqueRightclickedProcedure {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Eight Trigrams Twin Lions Crumbling Attack"),
 									(true));
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugatechnique == 2) {
+					} else if (NarutoShippudenModVariables.get(entity).hyugatechnique == 2) {
 						{
 							double _setval = 3;
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -628,8 +567,7 @@ public class HyugaReleaseTechniqueRightclickedProcedure {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Eight Trigrams Palms Revolving Heaven"),
 									(true));
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugatechnique == 3) {
+					} else if (NarutoShippudenModVariables.get(entity).hyugatechnique == 3) {
 						{
 							double _setval = 4;
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -640,8 +578,7 @@ public class HyugaReleaseTechniqueRightclickedProcedure {
 						if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 							((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Eight Trigrams Sixty-Four Palms"), (true));
 						}
-					} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugatechnique == 4) {
+					} else if (NarutoShippudenModVariables.get(entity).hyugatechnique == 4) {
 						{
 							double _setval = 0;
 							entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -654,14 +591,12 @@ public class HyugaReleaseTechniqueRightclickedProcedure {
 						}
 					}
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).byakuganactivate == false) {
+			} else if (NarutoShippudenModVariables.get(entity).byakuganactivate == false) {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Activate Byakugan"), (true));
 				}
 			}
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).hyugareleaselogic == false) {
+		} else if (NarutoShippudenModVariables.get(entity).hyugareleaselogic == false) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this release."), (true));
 			}

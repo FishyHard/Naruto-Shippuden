@@ -39,8 +39,7 @@ public class OtsutsukiToolsSwitchProcedure {
 		ItemStack tool = ItemStack.EMPTY;
 		tool = itemstack;
 		if (entity.isSneaking()) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_tool == 0) {
+			if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 0) {
 				{
 					double _setval = 1;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -51,8 +50,7 @@ public class OtsutsukiToolsSwitchProcedure {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Otsutsuki Axe"), (true));
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_tool == 1) {
+			} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 1) {
 				{
 					double _setval = 2;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -63,8 +61,7 @@ public class OtsutsukiToolsSwitchProcedure {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Otsutsuki Bat"), (true));
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_tool == 2) {
+			} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 2) {
 				{
 					double _setval = 3;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -75,8 +72,7 @@ public class OtsutsukiToolsSwitchProcedure {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Otsutsuki Blade"), (true));
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_tool == 3) {
+			} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 3) {
 				{
 					double _setval = 4;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -87,8 +83,7 @@ public class OtsutsukiToolsSwitchProcedure {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Otsutsuki Chopping Sword"), (true));
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_tool == 4) {
+			} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 4) {
 				{
 					double _setval = 5;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -99,8 +94,7 @@ public class OtsutsukiToolsSwitchProcedure {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Otsutsuki Hammer"), (true));
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_tool == 5) {
+			} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 5) {
 				{
 					double _setval = 6;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -111,8 +105,7 @@ public class OtsutsukiToolsSwitchProcedure {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Otsutsuki Katana"), (true));
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_tool == 6) {
+			} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 6) {
 				{
 					double _setval = 7;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -123,8 +116,7 @@ public class OtsutsukiToolsSwitchProcedure {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("Selected: Otsutsuki Spear"), (true));
 				}
-			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_tool == 7) {
+			} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 7) {
 				{
 					double _setval = 0;
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -138,8 +130,7 @@ public class OtsutsukiToolsSwitchProcedure {
 			}
 		} else if (!entity.isSneaking()) {
 			if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHeldItemMainhand() : ItemStack.EMPTY).getItem() == (tool).getItem()) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_tool == 0) {
+				if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 0) {
 					if (entity instanceof LivingEntity) {
 						ItemStack _setstack = new ItemStack(OtsutsukiSwordItem.block);
 						_setstack.setCount((int) 1);
@@ -147,8 +138,7 @@ public class OtsutsukiToolsSwitchProcedure {
 						if (entity instanceof ServerPlayerEntity)
 							((ServerPlayerEntity) entity).inventory.markDirty();
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_tool == 1) {
+				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 1) {
 					if (entity instanceof LivingEntity) {
 						ItemStack _setstack = new ItemStack(OtsutsukiAxeItem.block);
 						_setstack.setCount((int) 1);
@@ -156,8 +146,7 @@ public class OtsutsukiToolsSwitchProcedure {
 						if (entity instanceof ServerPlayerEntity)
 							((ServerPlayerEntity) entity).inventory.markDirty();
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_tool == 2) {
+				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 2) {
 					if (entity instanceof LivingEntity) {
 						ItemStack _setstack = new ItemStack(OtsutsukiBatItem.block);
 						_setstack.setCount((int) 1);
@@ -165,8 +154,7 @@ public class OtsutsukiToolsSwitchProcedure {
 						if (entity instanceof ServerPlayerEntity)
 							((ServerPlayerEntity) entity).inventory.markDirty();
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_tool == 3) {
+				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 3) {
 					if (entity instanceof LivingEntity) {
 						ItemStack _setstack = new ItemStack(OtsutsukiBladeItem.block);
 						_setstack.setCount((int) 1);
@@ -174,8 +162,7 @@ public class OtsutsukiToolsSwitchProcedure {
 						if (entity instanceof ServerPlayerEntity)
 							((ServerPlayerEntity) entity).inventory.markDirty();
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_tool == 4) {
+				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 4) {
 					if (entity instanceof LivingEntity) {
 						ItemStack _setstack = new ItemStack(OtsutsukiChoppingSwordItem.block);
 						_setstack.setCount((int) 1);
@@ -183,8 +170,7 @@ public class OtsutsukiToolsSwitchProcedure {
 						if (entity instanceof ServerPlayerEntity)
 							((ServerPlayerEntity) entity).inventory.markDirty();
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_tool == 5) {
+				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 5) {
 					if (entity instanceof LivingEntity) {
 						ItemStack _setstack = new ItemStack(OtsutsukiHammerItem.block);
 						_setstack.setCount((int) 1);
@@ -192,8 +178,7 @@ public class OtsutsukiToolsSwitchProcedure {
 						if (entity instanceof ServerPlayerEntity)
 							((ServerPlayerEntity) entity).inventory.markDirty();
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_tool == 6) {
+				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 6) {
 					if (entity instanceof LivingEntity) {
 						ItemStack _setstack = new ItemStack(OtsutsukiKatanaItem.block);
 						_setstack.setCount((int) 1);
@@ -201,8 +186,7 @@ public class OtsutsukiToolsSwitchProcedure {
 						if (entity instanceof ServerPlayerEntity)
 							((ServerPlayerEntity) entity).inventory.markDirty();
 					}
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).otsutsuki_tool == 7) {
+				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 7) {
 					if (entity instanceof LivingEntity) {
 						ItemStack _setstack = new ItemStack(OtsutsukiSpearItem.block);
 						_setstack.setCount((int) 1);

@@ -31,12 +31,9 @@ public class AmaterasuFlameProjectileHitsLivingEntityProcedure {
 		IWorld world = (IWorld) dependencies.get("world");
 		Entity entity = (Entity) dependencies.get("entity");
 		if (entity instanceof PlayerEntity) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).mangekyousharingansasukeamaterasulearn == 0) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganSasuke == false
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).MangekyouSharinganItachi == false) {
+			if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukeamaterasulearn == 0) {
+				if (NarutoShippudenModVariables.get(entity).MangekyouSharinganSasuke == false
+						&& NarutoShippudenModVariables.get(entity).MangekyouSharinganItachi == false) {
 					entity.getPersistentData().putBoolean("Amaterasu", (true));
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.WITHER, (int) 999999, (int) 3, (false), (false)));

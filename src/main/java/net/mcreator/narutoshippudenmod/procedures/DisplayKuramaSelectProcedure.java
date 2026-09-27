@@ -16,8 +16,7 @@ public class DisplayKuramaSelectProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectclanrelease == 20) {
+		if (NarutoShippudenModVariables.get(entity).selectclanrelease == 20) {
 			return true;
 		}
 		return false;

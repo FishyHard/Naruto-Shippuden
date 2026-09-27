@@ -25,24 +25,19 @@ public class GatesGreen4EffectExpiresProcedure {
 				capability.syncPlayerVariables(entity);
 			});
 		}
-		if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Academy Student")) {
+		if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 			if (entity instanceof PlayerEntity)
 				((PlayerEntity) entity).getCooldownTracker().setCooldown(LeeReleaseTechniqueItem.block, (int) 2500);
-		} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Genin")) {
+		} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 			if (entity instanceof PlayerEntity)
 				((PlayerEntity) entity).getCooldownTracker().setCooldown(LeeReleaseTechniqueItem.block, (int) 2250);
-		} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Chunin")) {
+		} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 			if (entity instanceof PlayerEntity)
 				((PlayerEntity) entity).getCooldownTracker().setCooldown(LeeReleaseTechniqueItem.block, (int) 2000);
-		} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Jonin")) {
+		} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 			if (entity instanceof PlayerEntity)
 				((PlayerEntity) entity).getCooldownTracker().setCooldown(LeeReleaseTechniqueItem.block, (int) 1750);
-		} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).rank).equals("Kage")) {
+		} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 			if (entity instanceof PlayerEntity)
 				((PlayerEntity) entity).getCooldownTracker().setCooldown(LeeReleaseTechniqueItem.block, (int) 1500);
 		}

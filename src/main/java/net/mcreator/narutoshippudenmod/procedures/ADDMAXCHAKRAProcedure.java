@@ -17,8 +17,7 @@ public class ADDMAXCHAKRAProcedure {
 		}
 		Entity entity = (Entity) dependencies.get("entity");
 		{
-			double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraMax);
+			double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax);
 			entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 				capability.ChakraAmount = _setval;
 				capability.syncPlayerVariables(entity);

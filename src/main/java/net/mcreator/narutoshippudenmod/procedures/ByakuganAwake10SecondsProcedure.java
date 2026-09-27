@@ -32,8 +32,7 @@ public class ByakuganAwake10SecondsProcedure {
 		}
 		IWorld world = (IWorld) dependencies.get("world");
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).byakugan == false) {
+		if (NarutoShippudenModVariables.get(entity).byakugan == false) {
 			new Object() {
 				private int ticks = 0;
 				private float waitTicks;
@@ -81,8 +80,7 @@ public class ByakuganAwake10SecondsProcedure {
 					MinecraftForge.EVENT_BUS.unregister(this);
 				}
 			}.start(world, (int) 200);
-		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).byakugan == true) {
+		} else if (NarutoShippudenModVariables.get(entity).byakugan == true) {
 			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 				((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You've already unlocked byakugan."), (false));
 			}

@@ -82,8 +82,7 @@ public class EntityFallsProcedure {
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 		Entity entity = (Entity) dependencies.get("entity");
 		if (entity instanceof PlayerEntity) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).furamingogan_jump == true) {
+			if (NarutoShippudenModVariables.get(entity).furamingogan_jump == true) {
 				{
 					boolean _setval = (false);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -110,8 +109,7 @@ public class EntityFallsProcedure {
 					}
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).VolticThomasCannonDamage == true) {
+			if (NarutoShippudenModVariables.get(entity).VolticThomasCannonDamage == true) {
 				{
 					boolean _setval = (false);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
@@ -120,8 +118,7 @@ public class EntityFallsProcedure {
 					});
 				}
 			}
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).PassingFang == true) {
+			if (NarutoShippudenModVariables.get(entity).PassingFang == true) {
 				{
 					boolean _setval = (false);
 					entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {

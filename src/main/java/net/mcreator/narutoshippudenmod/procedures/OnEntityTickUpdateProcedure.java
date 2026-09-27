@@ -102,12 +102,10 @@ public class OnEntityTickUpdateProcedure {
 					return false;
 				}
 			}.checkGamemode(entity))) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).KamuiPhantomPhase == true) {
+				if (NarutoShippudenModVariables.get(entity).KamuiPhantomPhase == true) {
 					entity.noClip = true;
 					entity.setMotion((entity.getLookVec().x * 0.25), (entity.getLookVec().y * 0.25), (entity.getLookVec().z * 0.25));
-				} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).KamuiPhantomPhase == false) {
+				} else if (NarutoShippudenModVariables.get(entity).KamuiPhantomPhase == false) {
 					entity.noClip = false;
 				}
 			}

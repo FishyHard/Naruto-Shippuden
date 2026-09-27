@@ -76,20 +76,13 @@ public class InfoCardMissionsGuiWindow extends ContainerScreen<InfoCardMissionsG
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(MatrixStack ms, int mouseX, int mouseY) {
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).D_Mission) + "", -90, 86, -16777216);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).C_Mission) + "", -90, 105, -16776961);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).B_Mission) + "", -90, 123, -16711885);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).A_Mission) + "", -90, 143, -65536);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).S_Mission) + "", -90, 164, -26368);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).SS_Mission) + "", -85, 184, -256);
-		this.font.drawString(ms, "" + (int) ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Shinobi_Murder_Count) + "", 175, -12, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).D_Mission) + "", -90, 86, -16777216);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).C_Mission) + "", -90, 105, -16776961);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).B_Mission) + "", -90, 123, -16711885);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).A_Mission) + "", -90, 143, -65536);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).S_Mission) + "", -90, 164, -26368);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).SS_Mission) + "", -85, 184, -256);
+		this.font.drawString(ms, "" + (int) (NarutoShippudenModVariables.get(entity).Shinobi_Murder_Count) + "", 175, -12, -16777216);
 	}
 
 	@Override

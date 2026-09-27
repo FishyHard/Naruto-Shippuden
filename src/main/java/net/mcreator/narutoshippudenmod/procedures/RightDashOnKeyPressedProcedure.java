@@ -24,14 +24,10 @@ public class RightDashOnKeyPressedProcedure {
 		}
 		Entity entity = (Entity) dependencies.get("entity");
 		double WPress = 0;
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Chakra_Control == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DashCooldown == false) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).WaterWalk == false
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).WallClimb == false) {
+		if (NarutoShippudenModVariables.get(entity).Chakra_Control == true) {
+			if (NarutoShippudenModVariables.get(entity).DashCooldown == false) {
+				if (NarutoShippudenModVariables.get(entity).WaterWalk == false
+						&& NarutoShippudenModVariables.get(entity).WallClimb == false) {
 					if (new Object() {
 						public boolean checkGamemode(Entity _ent) {
 							if (_ent instanceof ServerPlayerEntity) {
@@ -44,20 +40,16 @@ public class RightDashOnKeyPressedProcedure {
 							return false;
 						}
 					}.checkGamemode(entity)) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).DPressed == 0) {
+						if (NarutoShippudenModVariables.get(entity).DPressed == 0) {
 							{
-								double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).DPressed + 1);
+								double _setval = (NarutoShippudenModVariables.get(entity).DPressed + 1);
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 									capability.DPressed = _setval;
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).DPressed == 1) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).SpaceHold == false) {
+						} else if (NarutoShippudenModVariables.get(entity).DPressed == 1) {
+							if (NarutoShippudenModVariables.get(entity).SpaceHold == false) {
 								if ((entity.getHorizontalFacing()) == Direction.NORTH) {
 									entity.setMotion(1.5, 0, 0);
 								} else if ((entity.getHorizontalFacing()) == Direction.WEST) {
@@ -67,8 +59,7 @@ public class RightDashOnKeyPressedProcedure {
 								} else if ((entity.getHorizontalFacing()) == Direction.EAST) {
 									entity.setMotion(0, 0, 1.5);
 								}
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).SpaceHold == true) {
+							} else if (NarutoShippudenModVariables.get(entity).SpaceHold == true) {
 								if ((entity.getHorizontalFacing()) == Direction.NORTH) {
 									entity.setMotion(1.5, (entity.getLookVec().y * 1.5), 0);
 								} else if ((entity.getHorizontalFacing()) == Direction.WEST) {

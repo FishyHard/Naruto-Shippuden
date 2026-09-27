@@ -27,10 +27,8 @@ public class BoilReleaseTechniqueLivingEntityIsHitWithItemProcedure {
 		Entity sourceentity = (Entity) dependencies.get("sourceentity");
 		boolean isNegative = false;
 		double yaw = 0;
-		if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).UnrivaledStrength == true) {
-			if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount >= 400) {
+		if (NarutoShippudenModVariables.get(sourceentity).UnrivaledStrength == true) {
+			if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount >= 400) {
 				if (sourceentity.rotationYaw < 0) {
 					yaw = Math.abs(sourceentity.rotationYaw);
 					isNegative = (true);
@@ -83,15 +81,13 @@ public class BoilReleaseTechniqueLivingEntityIsHitWithItemProcedure {
 				}
 				entity.attackEntityFrom(DamageSource.GENERIC, (float) 25);
 				{
-					double _setval = ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-							.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount - 400);
+					double _setval = (NarutoShippudenModVariables.get(sourceentity).ChakraAmount - 400);
 					sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 						capability.ChakraAmount = _setval;
 						capability.syncPlayerVariables(sourceentity);
 					});
 				}
-			} else if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).ChakraAmount <= 399) {
+			} else if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount <= 399) {
 				if (sourceentity instanceof PlayerEntity && !sourceentity.world.isRemote()) {
 					((PlayerEntity) sourceentity).sendStatusMessage(new StringTextComponent("Not Enough Chakra"), (false));
 				}

@@ -52,8 +52,7 @@ public class AsumaRightClickedOnEntityProcedure {
 		double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
 		double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 		Entity sourceentity = (Entity) dependencies.get("sourceentity");
-		if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).asumaquest == false) {
+		if (NarutoShippudenModVariables.get(sourceentity).asumaquest == false) {
 			if (sourceentity instanceof PlayerEntity && !sourceentity.world.isRemote()) {
 				((PlayerEntity) sourceentity).sendStatusMessage(new StringTextComponent("Asuma: Bring me Chakra Blade from Weaponsmith Villager."),
 						(false));
@@ -70,8 +69,7 @@ public class AsumaRightClickedOnEntityProcedure {
 					capability.syncPlayerVariables(sourceentity);
 				});
 			}
-		} else if ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).asumaquest == true) {
+		} else if (NarutoShippudenModVariables.get(sourceentity).asumaquest == true) {
 			if (((sourceentity instanceof PlayerEntity)
 					? ((PlayerEntity) sourceentity).inventory.hasItemStack(new ItemStack(ChakraBladeItem.block))
 					: false)
@@ -109,8 +107,7 @@ public class AsumaRightClickedOnEntityProcedure {
 						ItemHandlerHelper.giveItemToPlayer(((PlayerEntity) sourceentity), _setstack);
 					}
 					{
-						double _setval = ((sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).C_Mission + 1);
+						double _setval = (NarutoShippudenModVariables.get(sourceentity).C_Mission + 1);
 						sourceentity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 							capability.C_Mission = _setval;
 							capability.syncPlayerVariables(sourceentity);

@@ -16,8 +16,7 @@ public class DisplaySandSelectProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).selectvillage == 3) {
+		if (NarutoShippudenModVariables.get(entity).selectvillage == 3) {
 			return true;
 		}
 		return false;

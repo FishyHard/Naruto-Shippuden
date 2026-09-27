@@ -23,14 +23,10 @@ public class ForwardDashOnKeyPressedProcedure {
 		}
 		Entity entity = (Entity) dependencies.get("entity");
 		double WPress = 0;
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).Chakra_Control == true) {
-			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-					.orElse(new NarutoShippudenModVariables.PlayerVariables())).DashCooldown == false) {
-				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-						.orElse(new NarutoShippudenModVariables.PlayerVariables())).WaterWalk == false
-						&& (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).WallClimb == false) {
+		if (NarutoShippudenModVariables.get(entity).Chakra_Control == true) {
+			if (NarutoShippudenModVariables.get(entity).DashCooldown == false) {
+				if (NarutoShippudenModVariables.get(entity).WaterWalk == false
+						&& NarutoShippudenModVariables.get(entity).WallClimb == false) {
 					if (new Object() {
 						public boolean checkGamemode(Entity _ent) {
 							if (_ent instanceof ServerPlayerEntity) {
@@ -43,23 +39,18 @@ public class ForwardDashOnKeyPressedProcedure {
 							return false;
 						}
 					}.checkGamemode(entity)) {
-						if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).WPressed == 0) {
+						if (NarutoShippudenModVariables.get(entity).WPressed == 0) {
 							{
-								double _setval = ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-										.orElse(new NarutoShippudenModVariables.PlayerVariables())).WPressed + 1);
+								double _setval = (NarutoShippudenModVariables.get(entity).WPressed + 1);
 								entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null).ifPresent(capability -> {
 									capability.WPressed = _setval;
 									capability.syncPlayerVariables(entity);
 								});
 							}
-						} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-								.orElse(new NarutoShippudenModVariables.PlayerVariables())).WPressed == 1) {
-							if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).SpaceHold == false) {
+						} else if (NarutoShippudenModVariables.get(entity).WPressed == 1) {
+							if (NarutoShippudenModVariables.get(entity).SpaceHold == false) {
 								entity.setMotion((entity.getLookVec().x * 2.5), 0, (entity.getLookVec().z * 2.5));
-							} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-									.orElse(new NarutoShippudenModVariables.PlayerVariables())).SpaceHold == true) {
+							} else if (NarutoShippudenModVariables.get(entity).SpaceHold == true) {
 								entity.setMotion((entity.getLookVec().x * 1.5), (entity.getLookVec().y * 1.5), (entity.getLookVec().z * 1.5));
 								{
 									boolean _setval = (true);

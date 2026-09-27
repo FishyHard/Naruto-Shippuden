@@ -16,8 +16,7 @@ public class DisplayWindInfoProcedure {
 			return false;
 		}
 		Entity entity = (Entity) dependencies.get("entity");
-		if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-				.orElse(new NarutoShippudenModVariables.PlayerVariables())).windreleaselogic == true) {
+		if (NarutoShippudenModVariables.get(entity).windreleaselogic == true) {
 			return true;
 		}
 		return false;
