@@ -217,8 +217,9 @@ public class EntityScale extends NarutoShippudenModElements.ModElement {
 			event.getMatrixStack().pop();
 	}
 
+	/** Lowest priority so overlays other handlers draw in Post (dojutsu eyes, Susanoo) still get the scale. */
 	@OnlyIn(Dist.CLIENT)
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void onRenderPost(RenderLivingEvent.Post<?, ?> event) {
 		if (!ModelSwapRenderers.isOwnRenderer(event.getRenderer()) && scaledRenders.remove(event.getEntity()))
 			event.getMatrixStack().pop();
