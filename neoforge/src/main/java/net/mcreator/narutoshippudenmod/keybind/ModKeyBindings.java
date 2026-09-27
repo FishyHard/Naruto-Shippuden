@@ -1,5 +1,7 @@
 package net.mcreator.narutoshippudenmod.keybind;
 
+import com.mojang.blaze3d.platform.InputConstants;
+
 import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +42,6 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.bus.api.SubscribeEvent;
 
 import net.mcreator.narutoshippudenmod.compat.NetworkEvent;
-import org.lwjgl.glfw.GLFW;
 
 public final class ModKeyBindings {
 	private ModKeyBindings() {
@@ -48,33 +49,11 @@ public final class ModKeyBindings {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class BackDashKeyBinding extends NarutoShippudenModElements.ModElement {
-		@OnlyIn(Dist.CLIENT)
-		private KeyMapping keys;
 
 		public BackDashKeyBinding(NarutoShippudenModElements instance) {
 			super(instance, 1173);
 			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
 					KeyBindingPressedMessage::handler);
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void initElements() {
-			keys = new KeyMapping("", GLFW.GLFW_KEY_S, "");
-			NeoForge.EVENT_BUS.register(this);
-		}
-
-		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
-		public void onKeyInput(InputEvent.KeyInputEvent event) {
-			if (Minecraft.getInstance().screen == null) {
-				if (event.getKey() == keys.getKey().getValue()) {
-					if (event.getAction() == GLFW.GLFW_PRESS) {
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-						pressAction(Minecraft.getInstance().player, 0, 0);
-					}
-				}
-			}
 		}
 
 		public static class KeyBindingPressedMessage {
@@ -104,7 +83,7 @@ public final class ModKeyBindings {
 			}
 		}
 
-		private static void pressAction(Player entity, int type, int pressedms) {
+		public static void pressAction(Player entity, int type, int pressedms) {
 			Level world = entity.level();
 			double x = entity.getX();
 			double y = entity.getY();
@@ -122,34 +101,11 @@ public final class ModKeyBindings {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class ByakuganKeyBinding extends NarutoShippudenModElements.ModElement {
-		@OnlyIn(Dist.CLIENT)
-		private KeyMapping keys;
 
 		public ByakuganKeyBinding(NarutoShippudenModElements instance) {
 			super(instance, 375);
 			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
 					KeyBindingPressedMessage::handler);
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void initElements() {
-			keys = new KeyMapping("key.naruto_shippuden.byakugan", GLFW.GLFW_KEY_B, "key.categories.misc");
-			ClientRegistry.registerKeyBinding(keys);
-			NeoForge.EVENT_BUS.register(this);
-		}
-
-		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
-		public void onKeyInput(InputEvent.KeyInputEvent event) {
-			if (Minecraft.getInstance().screen == null) {
-				if (event.getKey() == keys.getKey().getValue()) {
-					if (event.getAction() == GLFW.GLFW_PRESS) {
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-						pressAction(Minecraft.getInstance().player, 0, 0);
-					}
-				}
-			}
 		}
 
 		public static class KeyBindingPressedMessage {
@@ -179,7 +135,7 @@ public final class ModKeyBindings {
 			}
 		}
 
-		private static void pressAction(Player entity, int type, int pressedms) {
+		public static void pressAction(Player entity, int type, int pressedms) {
 			Level world = entity.level();
 			double x = entity.getX();
 			double y = entity.getY();
@@ -199,40 +155,11 @@ public final class ModKeyBindings {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class ChakraControlKeyBinding extends NarutoShippudenModElements.ModElement {
-		@OnlyIn(Dist.CLIENT)
-		private KeyMapping keys;
-		private long lastpress = 0;
 
 		public ChakraControlKeyBinding(NarutoShippudenModElements instance) {
 			super(instance, 472);
 			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
 					KeyBindingPressedMessage::handler);
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void initElements() {
-			keys = new KeyMapping("key.naruto_shippuden.chakra_control", GLFW.GLFW_KEY_G, "key.categories.misc");
-			ClientRegistry.registerKeyBinding(keys);
-			NeoForge.EVENT_BUS.register(this);
-		}
-
-		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
-		public void onKeyInput(InputEvent.KeyInputEvent event) {
-			if (Minecraft.getInstance().screen == null) {
-				if (event.getKey() == keys.getKey().getValue()) {
-					if (event.getAction() == GLFW.GLFW_PRESS) {
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-						pressAction(Minecraft.getInstance().player, 0, 0);
-						lastpress = System.currentTimeMillis();
-					} else if (event.getAction() == GLFW.GLFW_RELEASE) {
-						int dt = (int) (System.currentTimeMillis() - lastpress);
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(1, dt));
-						pressAction(Minecraft.getInstance().player, 1, dt);
-					}
-				}
-			}
 		}
 
 		public static class KeyBindingPressedMessage {
@@ -262,7 +189,7 @@ public final class ModKeyBindings {
 			}
 		}
 
-		private static void pressAction(Player entity, int type, int pressedms) {
+		public static void pressAction(Player entity, int type, int pressedms) {
 			Level world = entity.level();
 			double x = entity.getX();
 			double y = entity.getY();
@@ -285,34 +212,11 @@ public final class ModKeyBindings {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class CustomDojutsuKeyBinding extends NarutoShippudenModElements.ModElement {
-		@OnlyIn(Dist.CLIENT)
-		private KeyMapping keys;
 
 		public CustomDojutsuKeyBinding(NarutoShippudenModElements instance) {
 			super(instance, 673);
 			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
 					KeyBindingPressedMessage::handler);
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void initElements() {
-			keys = new KeyMapping("key.naruto_shippuden.custom_dojutsu", GLFW.GLFW_KEY_R, "key.categories.misc");
-			ClientRegistry.registerKeyBinding(keys);
-			NeoForge.EVENT_BUS.register(this);
-		}
-
-		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
-		public void onKeyInput(InputEvent.KeyInputEvent event) {
-			if (Minecraft.getInstance().screen == null) {
-				if (event.getKey() == keys.getKey().getValue()) {
-					if (event.getAction() == GLFW.GLFW_PRESS) {
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-						pressAction(Minecraft.getInstance().player, 0, 0);
-					}
-				}
-			}
 		}
 
 		public static class KeyBindingPressedMessage {
@@ -342,7 +246,7 @@ public final class ModKeyBindings {
 			}
 		}
 
-		private static void pressAction(Player entity, int type, int pressedms) {
+		public static void pressAction(Player entity, int type, int pressedms) {
 			Level world = entity.level();
 			double x = entity.getX();
 			double y = entity.getY();
@@ -360,39 +264,11 @@ public final class ModKeyBindings {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class ForwardDashKeyBinding extends NarutoShippudenModElements.ModElement {
-		@OnlyIn(Dist.CLIENT)
-		private KeyMapping keys;
-		private long lastpress = 0;
 
 		public ForwardDashKeyBinding(NarutoShippudenModElements instance) {
 			super(instance, 1170);
 			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
 					KeyBindingPressedMessage::handler);
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void initElements() {
-			keys = new KeyMapping("", GLFW.GLFW_KEY_W, "");
-			NeoForge.EVENT_BUS.register(this);
-		}
-
-		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
-		public void onKeyInput(InputEvent.KeyInputEvent event) {
-			if (Minecraft.getInstance().screen == null) {
-				if (event.getKey() == keys.getKey().getValue()) {
-					if (event.getAction() == GLFW.GLFW_PRESS) {
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-						pressAction(Minecraft.getInstance().player, 0, 0);
-						lastpress = System.currentTimeMillis();
-					} else if (event.getAction() == GLFW.GLFW_RELEASE) {
-						int dt = (int) (System.currentTimeMillis() - lastpress);
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(1, dt));
-						pressAction(Minecraft.getInstance().player, 1, dt);
-					}
-				}
-			}
 		}
 
 		public static class KeyBindingPressedMessage {
@@ -422,7 +298,7 @@ public final class ModKeyBindings {
 			}
 		}
 
-		private static void pressAction(Player entity, int type, int pressedms) {
+		public static void pressAction(Player entity, int type, int pressedms) {
 			Level world = entity.level();
 			double x = entity.getX();
 			double y = entity.getY();
@@ -445,34 +321,11 @@ public final class ModKeyBindings {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class InfoCardOpenKeyBinding extends NarutoShippudenModElements.ModElement {
-		@OnlyIn(Dist.CLIENT)
-		private KeyMapping keys;
 
 		public InfoCardOpenKeyBinding(NarutoShippudenModElements instance) {
 			super(instance, 18);
 			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
 					KeyBindingPressedMessage::handler);
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void initElements() {
-			keys = new KeyMapping("key.naruto_shippuden.info_card_open", GLFW.GLFW_KEY_I, "key.categories.misc");
-			ClientRegistry.registerKeyBinding(keys);
-			NeoForge.EVENT_BUS.register(this);
-		}
-
-		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
-		public void onKeyInput(InputEvent.KeyInputEvent event) {
-			if (Minecraft.getInstance().screen == null) {
-				if (event.getKey() == keys.getKey().getValue()) {
-					if (event.getAction() == GLFW.GLFW_PRESS) {
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-						pressAction(Minecraft.getInstance().player, 0, 0);
-					}
-				}
-			}
 		}
 
 		public static class KeyBindingPressedMessage {
@@ -502,7 +355,7 @@ public final class ModKeyBindings {
 			}
 		}
 
-		private static void pressAction(Player entity, int type, int pressedms) {
+		public static void pressAction(Player entity, int type, int pressedms) {
 			Level world = entity.level();
 			double x = entity.getX();
 			double y = entity.getY();
@@ -522,34 +375,11 @@ public final class ModKeyBindings {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class IsshikiDojutsuKeyBinding extends NarutoShippudenModElements.ModElement {
-		@OnlyIn(Dist.CLIENT)
-		private KeyMapping keys;
 
 		public IsshikiDojutsuKeyBinding(NarutoShippudenModElements instance) {
 			super(instance, 546);
 			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
 					KeyBindingPressedMessage::handler);
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void initElements() {
-			keys = new KeyMapping("key.naruto_shippuden.isshiki_dojutsu", GLFW.GLFW_KEY_H, "key.categories.misc");
-			ClientRegistry.registerKeyBinding(keys);
-			NeoForge.EVENT_BUS.register(this);
-		}
-
-		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
-		public void onKeyInput(InputEvent.KeyInputEvent event) {
-			if (Minecraft.getInstance().screen == null) {
-				if (event.getKey() == keys.getKey().getValue()) {
-					if (event.getAction() == GLFW.GLFW_PRESS) {
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-						pressAction(Minecraft.getInstance().player, 0, 0);
-					}
-				}
-			}
 		}
 
 		public static class KeyBindingPressedMessage {
@@ -579,7 +409,7 @@ public final class ModKeyBindings {
 			}
 		}
 
-		private static void pressAction(Player entity, int type, int pressedms) {
+		public static void pressAction(Player entity, int type, int pressedms) {
 			Level world = entity.level();
 			double x = entity.getX();
 			double y = entity.getY();
@@ -599,34 +429,11 @@ public final class ModKeyBindings {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class JutsuPowerKeyBinding extends NarutoShippudenModElements.ModElement {
-		@OnlyIn(Dist.CLIENT)
-		private KeyMapping keys;
 
 		public JutsuPowerKeyBinding(NarutoShippudenModElements instance) {
 			super(instance, 150);
 			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
 					KeyBindingPressedMessage::handler);
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void initElements() {
-			keys = new KeyMapping("key.naruto_shippuden.jutsu_power", GLFW.GLFW_KEY_MINUS, "key.categories.misc");
-			ClientRegistry.registerKeyBinding(keys);
-			NeoForge.EVENT_BUS.register(this);
-		}
-
-		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
-		public void onKeyInput(InputEvent.KeyInputEvent event) {
-			if (Minecraft.getInstance().screen == null) {
-				if (event.getKey() == keys.getKey().getValue()) {
-					if (event.getAction() == GLFW.GLFW_PRESS) {
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-						pressAction(Minecraft.getInstance().player, 0, 0);
-					}
-				}
-			}
 		}
 
 		public static class KeyBindingPressedMessage {
@@ -656,7 +463,7 @@ public final class ModKeyBindings {
 			}
 		}
 
-		private static void pressAction(Player entity, int type, int pressedms) {
+		public static void pressAction(Player entity, int type, int pressedms) {
 			Level world = entity.level();
 			double x = entity.getX();
 			double y = entity.getY();
@@ -674,34 +481,11 @@ public final class ModKeyBindings {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class KetsuryuganKeyBinding extends NarutoShippudenModElements.ModElement {
-		@OnlyIn(Dist.CLIENT)
-		private KeyMapping keys;
 
 		public KetsuryuganKeyBinding(NarutoShippudenModElements instance) {
 			super(instance, 377);
 			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
 					KeyBindingPressedMessage::handler);
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void initElements() {
-			keys = new KeyMapping("key.naruto_shippuden.ketsuryugan", GLFW.GLFW_KEY_K, "key.categories.misc");
-			ClientRegistry.registerKeyBinding(keys);
-			NeoForge.EVENT_BUS.register(this);
-		}
-
-		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
-		public void onKeyInput(InputEvent.KeyInputEvent event) {
-			if (Minecraft.getInstance().screen == null) {
-				if (event.getKey() == keys.getKey().getValue()) {
-					if (event.getAction() == GLFW.GLFW_PRESS) {
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-						pressAction(Minecraft.getInstance().player, 0, 0);
-					}
-				}
-			}
 		}
 
 		public static class KeyBindingPressedMessage {
@@ -731,7 +515,7 @@ public final class ModKeyBindings {
 			}
 		}
 
-		private static void pressAction(Player entity, int type, int pressedms) {
+		public static void pressAction(Player entity, int type, int pressedms) {
 			Level world = entity.level();
 			double x = entity.getX();
 			double y = entity.getY();
@@ -749,33 +533,11 @@ public final class ModKeyBindings {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class LeftDashKeyBinding extends NarutoShippudenModElements.ModElement {
-		@OnlyIn(Dist.CLIENT)
-		private KeyMapping keys;
 
 		public LeftDashKeyBinding(NarutoShippudenModElements instance) {
 			super(instance, 1171);
 			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
 					KeyBindingPressedMessage::handler);
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void initElements() {
-			keys = new KeyMapping("", GLFW.GLFW_KEY_A, "");
-			NeoForge.EVENT_BUS.register(this);
-		}
-
-		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
-		public void onKeyInput(InputEvent.KeyInputEvent event) {
-			if (Minecraft.getInstance().screen == null) {
-				if (event.getKey() == keys.getKey().getValue()) {
-					if (event.getAction() == GLFW.GLFW_PRESS) {
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-						pressAction(Minecraft.getInstance().player, 0, 0);
-					}
-				}
-			}
 		}
 
 		public static class KeyBindingPressedMessage {
@@ -805,7 +567,7 @@ public final class ModKeyBindings {
 			}
 		}
 
-		private static void pressAction(Player entity, int type, int pressedms) {
+		public static void pressAction(Player entity, int type, int pressedms) {
 			Level world = entity.level();
 			double x = entity.getX();
 			double y = entity.getY();
@@ -823,34 +585,11 @@ public final class ModKeyBindings {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class MangekyouSharinganKeyBinding extends NarutoShippudenModElements.ModElement {
-		@OnlyIn(Dist.CLIENT)
-		private KeyMapping keys;
 
 		public MangekyouSharinganKeyBinding(NarutoShippudenModElements instance) {
 			super(instance, 638);
 			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
 					KeyBindingPressedMessage::handler);
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void initElements() {
-			keys = new KeyMapping("key.naruto_shippuden.mangekyou_sharingan", GLFW.GLFW_KEY_N, "key.categories.misc");
-			ClientRegistry.registerKeyBinding(keys);
-			NeoForge.EVENT_BUS.register(this);
-		}
-
-		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
-		public void onKeyInput(InputEvent.KeyInputEvent event) {
-			if (Minecraft.getInstance().screen == null) {
-				if (event.getKey() == keys.getKey().getValue()) {
-					if (event.getAction() == GLFW.GLFW_PRESS) {
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-						pressAction(Minecraft.getInstance().player, 0, 0);
-					}
-				}
-			}
 		}
 
 		public static class KeyBindingPressedMessage {
@@ -880,7 +619,7 @@ public final class ModKeyBindings {
 			}
 		}
 
-		private static void pressAction(Player entity, int type, int pressedms) {
+		public static void pressAction(Player entity, int type, int pressedms) {
 			Level world = entity.level();
 			double x = entity.getX();
 			double y = entity.getY();
@@ -900,33 +639,11 @@ public final class ModKeyBindings {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class RightDashKeyBinding extends NarutoShippudenModElements.ModElement {
-		@OnlyIn(Dist.CLIENT)
-		private KeyMapping keys;
 
 		public RightDashKeyBinding(NarutoShippudenModElements instance) {
 			super(instance, 1172);
 			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
 					KeyBindingPressedMessage::handler);
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void initElements() {
-			keys = new KeyMapping("", GLFW.GLFW_KEY_D, "");
-			NeoForge.EVENT_BUS.register(this);
-		}
-
-		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
-		public void onKeyInput(InputEvent.KeyInputEvent event) {
-			if (Minecraft.getInstance().screen == null) {
-				if (event.getKey() == keys.getKey().getValue()) {
-					if (event.getAction() == GLFW.GLFW_PRESS) {
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-						pressAction(Minecraft.getInstance().player, 0, 0);
-					}
-				}
-			}
 		}
 
 		public static class KeyBindingPressedMessage {
@@ -956,7 +673,7 @@ public final class ModKeyBindings {
 			}
 		}
 
-		private static void pressAction(Player entity, int type, int pressedms) {
+		public static void pressAction(Player entity, int type, int pressedms) {
 			Level world = entity.level();
 			double x = entity.getX();
 			double y = entity.getY();
@@ -974,34 +691,11 @@ public final class ModKeyBindings {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class RinneganKeyBinding extends NarutoShippudenModElements.ModElement {
-		@OnlyIn(Dist.CLIENT)
-		private KeyMapping keys;
 
 		public RinneganKeyBinding(NarutoShippudenModElements instance) {
 			super(instance, 779);
 			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
 					KeyBindingPressedMessage::handler);
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void initElements() {
-			keys = new KeyMapping("key.naruto_shippuden.rinnegan", GLFW.GLFW_KEY_Z, "key.categories.misc");
-			ClientRegistry.registerKeyBinding(keys);
-			NeoForge.EVENT_BUS.register(this);
-		}
-
-		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
-		public void onKeyInput(InputEvent.KeyInputEvent event) {
-			if (Minecraft.getInstance().screen == null) {
-				if (event.getKey() == keys.getKey().getValue()) {
-					if (event.getAction() == GLFW.GLFW_PRESS) {
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-						pressAction(Minecraft.getInstance().player, 0, 0);
-					}
-				}
-			}
 		}
 
 		public static class KeyBindingPressedMessage {
@@ -1031,7 +725,7 @@ public final class ModKeyBindings {
 			}
 		}
 
-		private static void pressAction(Player entity, int type, int pressedms) {
+		public static void pressAction(Player entity, int type, int pressedms) {
 			Level world = entity.level();
 			double x = entity.getX();
 			double y = entity.getY();
@@ -1051,34 +745,11 @@ public final class ModKeyBindings {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class SharinganKeyBinding extends NarutoShippudenModElements.ModElement {
-		@OnlyIn(Dist.CLIENT)
-		private KeyMapping keys;
 
 		public SharinganKeyBinding(NarutoShippudenModElements instance) {
 			super(instance, 374);
 			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
 					KeyBindingPressedMessage::handler);
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void initElements() {
-			keys = new KeyMapping("key.naruto_shippuden.sharingan", GLFW.GLFW_KEY_V, "key.categories.misc");
-			ClientRegistry.registerKeyBinding(keys);
-			NeoForge.EVENT_BUS.register(this);
-		}
-
-		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
-		public void onKeyInput(InputEvent.KeyInputEvent event) {
-			if (Minecraft.getInstance().screen == null) {
-				if (event.getKey() == keys.getKey().getValue()) {
-					if (event.getAction() == GLFW.GLFW_PRESS) {
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-						pressAction(Minecraft.getInstance().player, 0, 0);
-					}
-				}
-			}
 		}
 
 		public static class KeyBindingPressedMessage {
@@ -1108,7 +779,7 @@ public final class ModKeyBindings {
 			}
 		}
 
-		private static void pressAction(Player entity, int type, int pressedms) {
+		public static void pressAction(Player entity, int type, int pressedms) {
 			Level world = entity.level();
 			double x = entity.getX();
 			double y = entity.getY();
@@ -1128,34 +799,11 @@ public final class ModKeyBindings {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class SusanoKeyBinding extends NarutoShippudenModElements.ModElement {
-		@OnlyIn(Dist.CLIENT)
-		private KeyMapping keys;
 
 		public SusanoKeyBinding(NarutoShippudenModElements instance) {
 			super(instance, 1226);
 			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
 					KeyBindingPressedMessage::handler);
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void initElements() {
-			keys = new KeyMapping("key.naruto_shippuden.susano", GLFW.GLFW_KEY_J, "key.categories.misc");
-			ClientRegistry.registerKeyBinding(keys);
-			NeoForge.EVENT_BUS.register(this);
-		}
-
-		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
-		public void onKeyInput(InputEvent.KeyInputEvent event) {
-			if (Minecraft.getInstance().screen == null) {
-				if (event.getKey() == keys.getKey().getValue()) {
-					if (event.getAction() == GLFW.GLFW_PRESS) {
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-						pressAction(Minecraft.getInstance().player, 0, 0);
-					}
-				}
-			}
 		}
 
 		public static class KeyBindingPressedMessage {
@@ -1185,7 +833,7 @@ public final class ModKeyBindings {
 			}
 		}
 
-		private static void pressAction(Player entity, int type, int pressedms) {
+		public static void pressAction(Player entity, int type, int pressedms) {
 			Level world = entity.level();
 			double x = entity.getX();
 			double y = entity.getY();
@@ -1203,34 +851,11 @@ public final class ModKeyBindings {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class TenseiganKeyBinding extends NarutoShippudenModElements.ModElement {
-		@OnlyIn(Dist.CLIENT)
-		private KeyMapping keys;
 
 		public TenseiganKeyBinding(NarutoShippudenModElements instance) {
 			super(instance, 778);
 			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
 					KeyBindingPressedMessage::handler);
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void initElements() {
-			keys = new KeyMapping("key.naruto_shippuden.tenseigan", GLFW.GLFW_KEY_C, "key.categories.misc");
-			ClientRegistry.registerKeyBinding(keys);
-			NeoForge.EVENT_BUS.register(this);
-		}
-
-		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
-		public void onKeyInput(InputEvent.KeyInputEvent event) {
-			if (Minecraft.getInstance().screen == null) {
-				if (event.getKey() == keys.getKey().getValue()) {
-					if (event.getAction() == GLFW.GLFW_PRESS) {
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-						pressAction(Minecraft.getInstance().player, 0, 0);
-					}
-				}
-			}
 		}
 
 		public static class KeyBindingPressedMessage {
@@ -1260,7 +885,7 @@ public final class ModKeyBindings {
 			}
 		}
 
-		private static void pressAction(Player entity, int type, int pressedms) {
+		public static void pressAction(Player entity, int type, int pressedms) {
 			Level world = entity.level();
 			double x = entity.getX();
 			double y = entity.getY();
@@ -1280,39 +905,11 @@ public final class ModKeyBindings {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class UpDashKeyBinding extends NarutoShippudenModElements.ModElement {
-		@OnlyIn(Dist.CLIENT)
-		private KeyMapping keys;
-		private long lastpress = 0;
 
 		public UpDashKeyBinding(NarutoShippudenModElements instance) {
 			super(instance, 1175);
 			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
 					KeyBindingPressedMessage::handler);
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void initElements() {
-			keys = new KeyMapping("", GLFW.GLFW_KEY_SPACE, "");
-			NeoForge.EVENT_BUS.register(this);
-		}
-
-		@SubscribeEvent
-		@OnlyIn(Dist.CLIENT)
-		public void onKeyInput(InputEvent.KeyInputEvent event) {
-			if (Minecraft.getInstance().screen == null) {
-				if (event.getKey() == keys.getKey().getValue()) {
-					if (event.getAction() == GLFW.GLFW_PRESS) {
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(0, 0));
-						pressAction(Minecraft.getInstance().player, 0, 0);
-						lastpress = System.currentTimeMillis();
-					} else if (event.getAction() == GLFW.GLFW_RELEASE) {
-						int dt = (int) (System.currentTimeMillis() - lastpress);
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new KeyBindingPressedMessage(1, dt));
-						pressAction(Minecraft.getInstance().player, 1, dt);
-					}
-				}
-			}
 		}
 
 		public static class KeyBindingPressedMessage {
@@ -1342,7 +939,7 @@ public final class ModKeyBindings {
 			}
 		}
 
-		private static void pressAction(Player entity, int type, int pressedms) {
+		public static void pressAction(Player entity, int type, int pressedms) {
 			Level world = entity.level();
 			double x = entity.getX();
 			double y = entity.getY();

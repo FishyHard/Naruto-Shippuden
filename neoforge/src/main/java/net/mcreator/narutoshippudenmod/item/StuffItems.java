@@ -1,5 +1,6 @@
 package net.mcreator.narutoshippudenmod.item;
 
+import net.minecraft.core.registries.Registries;
 import net.mcreator.narutoshippudenmod.compat.Registration;
 
 import java.util.AbstractMap;
@@ -33,7 +34,7 @@ public final class StuffItems {
 	public static class BanknoteOfRyoItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("banknote_of_ryo", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "banknote_of_ryo", v -> block = (Item) v);
 		}
 
 		public BanknoteOfRyoItem(NarutoShippudenModElements instance) {
@@ -72,7 +73,7 @@ public final class StuffItems {
 	public static class BronzeRyoItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("bronze_ryo", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "bronze_ryo", v -> block = (Item) v);
 		}
 
 		public BronzeRyoItem(NarutoShippudenModElements instance) {
@@ -105,7 +106,7 @@ public final class StuffItems {
 	public static class CaseOfRyoItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("case_of_ryo", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "case_of_ryo", v -> block = (Item) v);
 		}
 
 		public CaseOfRyoItem(NarutoShippudenModElements instance) {
@@ -144,7 +145,7 @@ public final class StuffItems {
 	public static class ChakraPaperItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("chakra_paper", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "chakra_paper", v -> block = (Item) v);
 		}
 
 		public ChakraPaperItem(NarutoShippudenModElements instance) {
@@ -190,7 +191,7 @@ public final class StuffItems {
 	public static class ClanPaperItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("clan_paper", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "clan_paper", v -> block = (Item) v);
 		}
 
 		public ClanPaperItem(NarutoShippudenModElements instance) {
@@ -236,7 +237,7 @@ public final class StuffItems {
 	public static class GoldRyoItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("gold_ryo", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "gold_ryo", v -> block = (Item) v);
 		}
 
 		public GoldRyoItem(NarutoShippudenModElements instance) {
@@ -269,7 +270,7 @@ public final class StuffItems {
 	public static class IronStickItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("iron_stick", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "iron_stick", v -> block = (Item) v);
 		}
 
 		public IronStickItem(NarutoShippudenModElements instance) {
@@ -302,7 +303,7 @@ public final class StuffItems {
 	public static class SharpIronItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("sharp_iron", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "sharp_iron", v -> block = (Item) v);
 		}
 
 		public SharpIronItem(NarutoShippudenModElements instance) {
@@ -335,7 +336,7 @@ public final class StuffItems {
 	public static class ShogiItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("shogi", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "shogi", v -> block = (Item) v);
 		}
 
 		public ShogiItem(NarutoShippudenModElements instance) {
@@ -368,7 +369,7 @@ public final class StuffItems {
 	public static class ShogiboardItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("shogiboard", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "shogiboard", v -> block = (Item) v);
 		}
 
 		public ShogiboardItem(NarutoShippudenModElements instance) {
@@ -401,7 +402,7 @@ public final class StuffItems {
 	public static class SilverRyoItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("silver_ryo", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "silver_ryo", v -> block = (Item) v);
 		}
 
 		public SilverRyoItem(NarutoShippudenModElements instance) {
@@ -434,7 +435,7 @@ public final class StuffItems {
 	public static class WadOfRyoItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("wad_of_ryo", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "wad_of_ryo", v -> block = (Item) v);
 		}
 
 		public WadOfRyoItem(NarutoShippudenModElements instance) {

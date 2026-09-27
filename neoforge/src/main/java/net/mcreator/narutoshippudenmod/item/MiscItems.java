@@ -1,5 +1,6 @@
 package net.mcreator.narutoshippudenmod.item;
 
+import net.minecraft.core.registries.Registries;
 import net.mcreator.narutoshippudenmod.compat.Registration;
 
 import net.mcreator.narutoshippudenmod.NarutoShippudenModElements;
@@ -18,7 +19,7 @@ public final class MiscItems {
 	public static class SpawnItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("spawn", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "spawn", v -> block = (Item) v);
 		}
 
 		public SpawnItem(NarutoShippudenModElements instance) {
@@ -51,7 +52,7 @@ public final class MiscItems {
 	public static class TechniquesTabItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("techniques_tab", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "techniques_tab", v -> block = (Item) v);
 		}
 
 		public TechniquesTabItem(NarutoShippudenModElements instance) {

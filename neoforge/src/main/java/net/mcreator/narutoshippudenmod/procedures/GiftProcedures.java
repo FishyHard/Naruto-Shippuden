@@ -36,7 +36,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.LevelAccessor;
 
-import net.mcreator.narutoshippudenmod.compat.ItemHandlerHelper;
 
 public final class GiftProcedures {
 	private GiftProcedures() {

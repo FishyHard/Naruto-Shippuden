@@ -61,7 +61,7 @@ public final class KeybindProcedures {
 									return ((ServerPlayer) _ent).gameMode.getGameModeForPlayer() == GameType.SURVIVAL;
 								} else if (_ent instanceof Player && _ent.level().isClientSide()) {
 									PlayerInfo _npi = Minecraft.getInstance().getConnection()
-											.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().getId());
+											.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().id());
 									return _npi != null && _npi.getGameMode() == GameType.SURVIVAL;
 								}
 								return false;
@@ -170,7 +170,7 @@ public final class KeybindProcedures {
 									}.compareDistOf(x, y, z)).collect(Collectors.toList());
 							for (Entity entityiterator : _entfound) {
 								if (!(entityiterator == entity)) {
-									entityiterator.setGlowing(true);
+									entityiterator.setGlowingTag(true);
 								}
 							}
 						}
@@ -205,7 +205,7 @@ public final class KeybindProcedures {
 									}.compareDistOf(x, y, z)).collect(Collectors.toList());
 							for (Entity entityiterator : _entfound) {
 								if (!(entityiterator == entity)) {
-									entityiterator.setGlowing(false);
+									entityiterator.setGlowingTag(false);
 								}
 							}
 						}
@@ -424,7 +424,7 @@ public final class KeybindProcedures {
 									return ((ServerPlayer) _ent).gameMode.getGameModeForPlayer() == GameType.SURVIVAL;
 								} else if (_ent instanceof Player && _ent.level().isClientSide()) {
 									PlayerInfo _npi = Minecraft.getInstance().getConnection()
-											.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().getId());
+											.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().id());
 									return _npi != null && _npi.getGameMode() == GameType.SURVIVAL;
 								}
 								return false;
@@ -851,7 +851,7 @@ public final class KeybindProcedures {
 									return ((ServerPlayer) _ent).gameMode.getGameModeForPlayer() == GameType.SURVIVAL;
 								} else if (_ent instanceof Player && _ent.level().isClientSide()) {
 									PlayerInfo _npi = Minecraft.getInstance().getConnection()
-											.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().getId());
+											.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().id());
 									return _npi != null && _npi.getGameMode() == GameType.SURVIVAL;
 								}
 								return false;
@@ -1038,7 +1038,7 @@ public final class KeybindProcedures {
 									return ((ServerPlayer) _ent).gameMode.getGameModeForPlayer() == GameType.SURVIVAL;
 								} else if (_ent instanceof Player && _ent.level().isClientSide()) {
 									PlayerInfo _npi = Minecraft.getInstance().getConnection()
-											.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().getId());
+											.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().id());
 									return _npi != null && _npi.getGameMode() == GameType.SURVIVAL;
 								}
 								return false;
@@ -2020,7 +2020,7 @@ public final class KeybindProcedures {
 									}.compareDistOf(x, y, z)).collect(Collectors.toList());
 							for (Entity entityiterator : _entfound) {
 								if (!(entityiterator == entity)) {
-									entityiterator.setGlowing(true);
+									entityiterator.setGlowingTag(true);
 								}
 							}
 						}
@@ -2059,7 +2059,7 @@ public final class KeybindProcedures {
 									}.compareDistOf(x, y, z)).collect(Collectors.toList());
 							for (Entity entityiterator : _entfound) {
 								if (!(entityiterator == entity)) {
-									entityiterator.setGlowing(false);
+									entityiterator.setGlowingTag(false);
 								}
 							}
 						}
@@ -2106,7 +2106,7 @@ public final class KeybindProcedures {
 									return ((ServerPlayer) _ent).gameMode.getGameModeForPlayer() == GameType.SURVIVAL;
 								} else if (_ent instanceof Player && _ent.level().isClientSide()) {
 									PlayerInfo _npi = Minecraft.getInstance().getConnection()
-											.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().getId());
+											.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().id());
 									return _npi != null && _npi.getGameMode() == GameType.SURVIVAL;
 								}
 								return false;

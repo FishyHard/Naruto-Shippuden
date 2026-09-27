@@ -1,5 +1,6 @@
 package net.mcreator.narutoshippudenmod.item;
 
+import net.minecraft.core.registries.Registries;
 import net.mcreator.narutoshippudenmod.compat.Registration;
 import net.minecraft.server.level.ServerLevel;
 
@@ -86,7 +87,7 @@ public final class WeaponItems {
 	public static class ChakraBladeItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("chakra_blade", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "chakra_blade", v -> block = (Item) v);
 		}
 
 		public ChakraBladeItem(NarutoShippudenModElements instance) {
@@ -106,7 +107,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -139,7 +140,7 @@ public final class WeaponItems {
 	public static class ExplosiveKunaiItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("explosive_kunai", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "explosive_kunai", v -> block = (Item) v);
 		}
 
 		public ExplosiveKunaiItem(NarutoShippudenModElements instance) {
@@ -204,7 +205,7 @@ public final class WeaponItems {
 	public static class FlyingThunderGodKunaiItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("flying_thunder_god_kunai", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "flying_thunder_god_kunai", v -> block = (Item) v);
 		}
 
 		public FlyingThunderGodKunaiItem(NarutoShippudenModElements instance) {
@@ -277,7 +278,7 @@ public final class WeaponItems {
 	public static class FumaShurikenItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("fuma_shuriken", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "fuma_shuriken", v -> block = (Item) v);
 		}
 
 		public FumaShurikenItem(NarutoShippudenModElements instance) {
@@ -302,19 +303,6 @@ public final class WeaponItems {
 			@Override
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
-			}
-
-			@Override
-			public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
-				if (slot == EquipmentSlot.MAINHAND) {
-					ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-					builder.putAll(super.getDefaultAttributeModifiers(slot));
-					builder.put(Attributes.ATTACK_DAMAGE,
-							new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Item modifier", (double) 0, AttributeModifier.Operation.ADDITION));
-					builder.put(Attributes.ATTACK_SPEED,
-							new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Item modifier", -2.4, AttributeModifier.Operation.ADDITION));
-				}
-				return super.getDefaultAttributeModifiers(slot);
 			}
 
 			@Override
@@ -355,7 +343,7 @@ public final class WeaponItems {
 	public static class GunbaiBlockItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("gunbai_block", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "gunbai_block", v -> block = (Item) v);
 		}
 
 		public GunbaiBlockItem(NarutoShippudenModElements instance) {
@@ -378,7 +366,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -413,7 +401,7 @@ public final class WeaponItems {
 	public static class GunbaiItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("gunbai", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "gunbai", v -> block = (Item) v);
 		}
 
 		public GunbaiItem(NarutoShippudenModElements instance) {
@@ -436,7 +424,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -470,7 +458,7 @@ public final class WeaponItems {
 	public static class HiramekareiHammerFormItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("hiramekarei_hammer_form", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "hiramekarei_hammer_form", v -> block = (Item) v);
 		}
 
 		public HiramekareiHammerFormItem(NarutoShippudenModElements instance) {
@@ -495,7 +483,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -544,7 +532,7 @@ public final class WeaponItems {
 	public static class HiramekareiItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("hiramekarei", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "hiramekarei", v -> block = (Item) v);
 		}
 
 		public HiramekareiItem(NarutoShippudenModElements instance) {
@@ -569,7 +557,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -618,7 +606,7 @@ public final class WeaponItems {
 	public static class HiramekareiSplittedItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("hiramekarei_splitted", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "hiramekarei_splitted", v -> block = (Item) v);
 		}
 
 		public HiramekareiSplittedItem(NarutoShippudenModElements instance) {
@@ -643,7 +631,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -692,7 +680,7 @@ public final class WeaponItems {
 	public static class KabutowariItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("kabutowari", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "kabutowari", v -> block = (Item) v);
 		}
 
 		public KabutowariItem(NarutoShippudenModElements instance) {
@@ -712,7 +700,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -747,7 +735,7 @@ public final class WeaponItems {
 	public static class KatanaItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("katana", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "katana", v -> block = (Item) v);
 		}
 
 		public KatanaItem(NarutoShippudenModElements instance) {
@@ -785,7 +773,7 @@ public final class WeaponItems {
 	public static class KatanaJonin1Item extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("katana_jonin_1", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "katana_jonin_1", v -> block = (Item) v);
 		}
 
 		public KatanaJonin1Item(NarutoShippudenModElements instance) {
@@ -803,7 +791,7 @@ public final class WeaponItems {
 	public static class KibaSwordItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("kiba_sword", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "kiba_sword", v -> block = (Item) v);
 		}
 
 		public KibaSwordItem(NarutoShippudenModElements instance) {
@@ -827,7 +815,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -862,7 +850,7 @@ public final class WeaponItems {
 	public static class KubikiribochoItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("kubikiribocho", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "kubikiribocho", v -> block = (Item) v);
 		}
 
 		public KubikiribochoItem(NarutoShippudenModElements instance) {
@@ -901,7 +889,7 @@ public final class WeaponItems {
 	public static class KunaiItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("kunai", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "kunai", v -> block = (Item) v);
 		}
 
 		public KunaiItem(NarutoShippudenModElements instance) {
@@ -926,19 +914,6 @@ public final class WeaponItems {
 			@Override
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
-			}
-
-			@Override
-			public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
-				if (slot == EquipmentSlot.MAINHAND) {
-					ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-					builder.putAll(super.getDefaultAttributeModifiers(slot));
-					builder.put(Attributes.ATTACK_DAMAGE,
-							new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Item modifier", (double) 0, AttributeModifier.Operation.ADDITION));
-					builder.put(Attributes.ATTACK_SPEED,
-							new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Item modifier", -2.4, AttributeModifier.Operation.ADDITION));
-				}
-				return super.getDefaultAttributeModifiers(slot);
 			}
 
 			@Override
@@ -979,7 +954,7 @@ public final class WeaponItems {
 	public static class KusanagiSasukeItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("kusanagi_sasuke", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "kusanagi_sasuke", v -> block = (Item) v);
 		}
 
 		public KusanagiSasukeItem(NarutoShippudenModElements instance) {
@@ -999,7 +974,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -1046,7 +1021,7 @@ public final class WeaponItems {
 	public static class NuibariItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("nuibari", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "nuibari", v -> block = (Item) v);
 		}
 
 		public NuibariItem(NarutoShippudenModElements instance) {
@@ -1069,7 +1044,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -1103,7 +1078,7 @@ public final class WeaponItems {
 	public static class OtsutsukiAxeItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("otsutsuki_axe", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "otsutsuki_axe", v -> block = (Item) v);
 		}
 
 		public OtsutsukiAxeItem(NarutoShippudenModElements instance) {
@@ -1123,7 +1098,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -1141,7 +1116,7 @@ public final class WeaponItems {
 	public static class OtsutsukiBatItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("otsutsuki_bat", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "otsutsuki_bat", v -> block = (Item) v);
 		}
 
 		public OtsutsukiBatItem(NarutoShippudenModElements instance) {
@@ -1161,7 +1136,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -1179,7 +1154,7 @@ public final class WeaponItems {
 	public static class OtsutsukiBladeItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("otsutsuki_blade", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "otsutsuki_blade", v -> block = (Item) v);
 		}
 
 		public OtsutsukiBladeItem(NarutoShippudenModElements instance) {
@@ -1199,7 +1174,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -1217,7 +1192,7 @@ public final class WeaponItems {
 	public static class OtsutsukiChoppingSwordItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("otsutsuki_chopping_sword", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "otsutsuki_chopping_sword", v -> block = (Item) v);
 		}
 
 		public OtsutsukiChoppingSwordItem(NarutoShippudenModElements instance) {
@@ -1237,7 +1212,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -1255,7 +1230,7 @@ public final class WeaponItems {
 	public static class OtsutsukiHammerItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("otsutsuki_hammer", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "otsutsuki_hammer", v -> block = (Item) v);
 		}
 
 		public OtsutsukiHammerItem(NarutoShippudenModElements instance) {
@@ -1275,7 +1250,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -1293,7 +1268,7 @@ public final class WeaponItems {
 	public static class OtsutsukiKatanaItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("otsutsuki_katana", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "otsutsuki_katana", v -> block = (Item) v);
 		}
 
 		public OtsutsukiKatanaItem(NarutoShippudenModElements instance) {
@@ -1313,7 +1288,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -1331,7 +1306,7 @@ public final class WeaponItems {
 	public static class OtsutsukiSpearItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("otsutsuki_spear", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "otsutsuki_spear", v -> block = (Item) v);
 		}
 
 		public OtsutsukiSpearItem(NarutoShippudenModElements instance) {
@@ -1351,7 +1326,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -1369,7 +1344,7 @@ public final class WeaponItems {
 	public static class OtsutsukiSwordItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("otsutsuki_sword", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "otsutsuki_sword", v -> block = (Item) v);
 		}
 
 		public OtsutsukiSwordItem(NarutoShippudenModElements instance) {
@@ -1389,7 +1364,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -1407,7 +1382,7 @@ public final class WeaponItems {
 	public static class PoisonKunaiItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("poison_kunai", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "poison_kunai", v -> block = (Item) v);
 		}
 
 		public PoisonKunaiItem(NarutoShippudenModElements instance) {
@@ -1432,19 +1407,6 @@ public final class WeaponItems {
 			@Override
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
-			}
-
-			@Override
-			public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
-				if (slot == EquipmentSlot.MAINHAND) {
-					ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-					builder.putAll(super.getDefaultAttributeModifiers(slot));
-					builder.put(Attributes.ATTACK_DAMAGE,
-							new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Item modifier", (double) 0, AttributeModifier.Operation.ADDITION));
-					builder.put(Attributes.ATTACK_SPEED,
-							new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Item modifier", -2.4, AttributeModifier.Operation.ADDITION));
-				}
-				return super.getDefaultAttributeModifiers(slot);
 			}
 
 			@Override
@@ -1485,7 +1447,7 @@ public final class WeaponItems {
 	public static class SamehadaItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("samehada", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "samehada", v -> block = (Item) v);
 		}
 
 		public SamehadaItem(NarutoShippudenModElements instance) {
@@ -1509,7 +1471,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -1557,7 +1519,7 @@ public final class WeaponItems {
 	public static class ShibukiItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("shibuki", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "shibuki", v -> block = (Item) v);
 		}
 
 		public ShibukiItem(NarutoShippudenModElements instance) {
@@ -1581,7 +1543,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();
@@ -1635,7 +1597,7 @@ public final class WeaponItems {
 	public static class ShichiseikenItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("shichiseiken", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "shichiseiken", v -> block = (Item) v);
 		}
 
 		public ShichiseikenItem(NarutoShippudenModElements instance) {
@@ -1673,7 +1635,7 @@ public final class WeaponItems {
 	public static class ShurikenItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("shuriken", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "shuriken", v -> block = (Item) v);
 		}
 
 		public ShurikenItem(NarutoShippudenModElements instance) {
@@ -1738,7 +1700,7 @@ public final class WeaponItems {
 	public static class TantoItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("tanto", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "tanto", v -> block = (Item) v);
 		}
 
 		public TantoItem(NarutoShippudenModElements instance) {
@@ -1776,7 +1738,7 @@ public final class WeaponItems {
 	public static class ToroiUniqueFumaShurikenItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("toroi_unique_fuma_shuriken", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "toroi_unique_fuma_shuriken", v -> block = (Item) v);
 		}
 
 		public ToroiUniqueFumaShurikenItem(NarutoShippudenModElements instance) {
@@ -1801,19 +1763,6 @@ public final class WeaponItems {
 			@Override
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
-			}
-
-			@Override
-			public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
-				if (slot == EquipmentSlot.MAINHAND) {
-					ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-					builder.putAll(super.getDefaultAttributeModifiers(slot));
-					builder.put(Attributes.ATTACK_DAMAGE,
-							new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Item modifier", (double) 0, AttributeModifier.Operation.ADDITION));
-					builder.put(Attributes.ATTACK_SPEED,
-							new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Item modifier", -2.4, AttributeModifier.Operation.ADDITION));
-				}
-				return super.getDefaultAttributeModifiers(slot);
 			}
 
 			@Override
@@ -1854,7 +1803,7 @@ public final class WeaponItems {
 	public static class TripleBladeScytheItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("triple_blade_scythe", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "triple_blade_scythe", v -> block = (Item) v);
 		}
 
 		public TripleBladeScytheItem(NarutoShippudenModElements instance) {
@@ -1892,7 +1841,7 @@ public final class WeaponItems {
 	public static class WhiteLightChakraSabreItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("white_light_chakra_sabre", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "white_light_chakra_sabre", v -> block = (Item) v);
 		}
 
 		public WhiteLightChakraSabreItem(NarutoShippudenModElements instance) {
@@ -1912,7 +1861,7 @@ public final class WeaponItems {
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = retval.getObject();
+					ItemStack itemstack = entity.getItemInHand(hand);
 					double x = entity.getX();
 					double y = entity.getY();
 					double z = entity.getZ();

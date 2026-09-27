@@ -47,7 +47,13 @@ def find_block(text, start):
 
 def scan_chain(text, i):
     """From i, skip a chain of .method(...) calls with balanced parentheses; returns the index after the chain."""
-    while text.startswith('.', i):
+    while True:
+        k = i
+        while text[k] in ' \t\n':
+            k += 1
+        if text[k] != '.':
+            return i
+        i = k
         j = text.index('(', i)
         depth = 0
         while True:
@@ -62,7 +68,6 @@ def scan_chain(text, i):
                 j = text.index('"', j + 1)
             j += 1
         i = j + 1
-    return i
 
 
 ELEMENT_RE = re.compile(r'public static class \w+ extends NarutoShippudenModElements\.ModElement \{')
@@ -91,6 +96,7 @@ def func(f):
 
 
 # ---------------------------------------------------------------- text / identifiers
+sub(r'\.setCustomClientFactory\([\w:]+\)', '')
 sub(r'new Component\(', 'Component.literal(')
 sub(r'new TranslatableComponent\(', 'Component.translatable(')
 sub(r'new Identifier\(("[^"]*")\)', r'Identifier.parse(\1)')
@@ -161,8 +167,8 @@ sub(r'InteractionResult\.sidedSuccess\(([^()]+)\)', r'InteractionResult.SUCCESS'
 
 # ---------------------------------------------------------------- batch 2
 # chat vs action-bar messages
-sub(r'\.displayClientMessage\(([^;]+?),\s*\(?true\)?\);', r'.sendOverlayMessage(\1);', re.S)
-sub(r'\.displayClientMessage\(([^;]+?),\s*\(?false\)?\);', r'.sendSystemMessage(\1);', re.S)
+sub(r'\.displayClientMessage\(((?:"(?:[^"\\]|\\.)*"|[^;"])+?),\s*\(?true\)?\);', r'.sendOverlayMessage(\1);', re.S)
+sub(r'\.displayClientMessage\(((?:"(?:[^"\\]|\\.)*"|[^;"])+?),\s*\(?false\)?\);', r'.sendSystemMessage(\1);', re.S)
 # commands
 sub(r'(\b[\w.()]+?)\.level\(\)\.getServer\(\)\.getCommands\(\)\.performCommand\(\s*\1\.createCommandSourceStack\(\)\.withSuppressedOutput\(\)\.withPermission\(4\),\s*', r'Compat.runCommand(\1, ')
 sub(r'(\b[\w.()]+?)\.getServer\(\)\.getCommands\(\)\.performCommand\(\s*new CommandSourceStack\(CommandSource\.NULL, new Vec3\(([^()]*)\), Vec2\.ZERO, \(ServerLevel\) \w+, 4, "",\s*Component\.literal\(""\), \w+\.getServer\(\), null\)\.withSuppressedOutput\(\),\s*', r'Compat.runCommandAt(\1, \2, ')
@@ -186,8 +192,62 @@ sub(r'(\w+)\.isProjectile\(\)', r'\1.is(net.minecraft.tags.DamageTypeTags.IS_PRO
 sub(r'(\w+)\.isMagic\(\)', r'\1.is(net.minecraft.tags.DamageTypeTags.WITCH_RESISTANT_TO)')
 sub(r'(\w+)\.getMsgId\(\)', r'\1.getMsgId()')
 # item stack custom data
-sub(r'(\b[\w.()]+?)\.getOrCreateTag\(\)', r'StackTag.of(\1)')
-sub(r'(\b[\w.()]+?)\.getTag\(\)', r'StackTag.of(\1)')
+def receiver_start(text, end):
+    """Start index of the expression whose member access ends at `end` (the index of the '.')."""
+    i = end
+    while True:
+        k = i
+        while k > 0 and text[k - 1] in ' \t\n':
+            k -= 1
+        if k > 0 and text[k - 1] == ')':
+            depth = 0
+            j = k - 1
+            while True:
+                c = text[j]
+                if c == ')':
+                    depth += 1
+                elif c == '(':
+                    depth -= 1
+                    if depth == 0:
+                        break
+                j -= 1
+            i = j
+            if j > 0 and (text[j - 1].isalnum() or text[j - 1] == '_'):
+                continue
+            k2 = j
+            while k2 > 0 and text[k2 - 1] in ' \t\n':
+                k2 -= 1
+            if k2 > 0 and text[k2 - 1] == '.':
+                i = k2 - 1
+                continue
+            return i
+        elif k > 0 and (text[k - 1].isalnum() or text[k - 1] == '_'):
+            j = k
+            while j > 0 and (text[j - 1].isalnum() or text[j - 1] == '_'):
+                j -= 1
+            i = j
+            k2 = j
+            while k2 > 0 and text[k2 - 1] in ' \t\n':
+                k2 -= 1
+            if k2 > 0 and text[k2 - 1] == '.':
+                i = k2 - 1
+                continue
+            if text[max(0, i - 4):i] == 'new ':
+                i -= 4
+            return i
+        else:
+            return i
+
+
+@func
+def stack_tags(path, text):
+    rx = re.compile(r'\s*\.(?:getOrCreateTag|getTag)\(\)')
+    while True:
+        m = rx.search(text)
+        if not m:
+            return text
+        st = receiver_start(text, m.start())
+        text = text[:st] + 'StackTag.of(' + text[st:m.start()] + ')' + text[m.end():]
 # inventory removal: clearOrCountMatchingItems(pred, count, craftingInventory)
 sub(r'\.clearOrCountMatchingItems\(([^;]*?), \(int\) ([^,;]+?), \(\(Player\) \w+\)\.inventoryMenu\.getCraftSlots\(\)\)', r'.clearOrCountMatchingItems(\1, (int) \2, ((Player) entity).inventoryMenu.getCraftSlots())')
 # position helpers
@@ -214,11 +274,18 @@ sub(r'\bevent\.world\b', 'event.getLevel()')
 
 
 # ---------------------------------------------------------------- registration: @ObjectHolder fields -> Registration.holder
+HOLDER_REGISTRY = {'Item': 'ITEM', 'Block': 'BLOCK', 'EntityType': 'ENTITY_TYPE', 'BlockEntityType': 'BLOCK_ENTITY_TYPE',
+                   'MobEffect': 'MOB_EFFECT', 'SimpleParticleType': 'PARTICLE_TYPE', 'ParticleType': 'PARTICLE_TYPE', 'MenuType': 'MENU',
+                   'SoundEvent': 'SOUND_EVENT', 'Enchantment': 'ENCHANTMENT'}
+
+
 @func
 def object_holders(path, text):
     def repl(m):
         ind, name, typ, field = m.group(2), m.group(1), m.group(3), m.group(4)
-        return '%spublic static %s %s;\n%sstatic {\n%s\tRegistration.holder("%s", v -> %s = (%s) v);\n%s}' % (ind, typ, field, ind, ind, name, field, typ, ind)
+        reg = HOLDER_REGISTRY.get(typ.split('<')[0], 'ITEM')
+        return '%spublic static %s %s;\n%sstatic {\n%s\tRegistration.holder(Registries.%s, "%s", v -> %s = (%s) v);\n%s}' % (
+            ind, typ, field, ind, ind, reg, name, field, typ, ind)
     return re.sub(r'@ObjectHolder\("naruto_shippuden:(\w+)"\)\s*\n(\s*)public static final ([\w.]+(?:<[^>]*>)?) (\w+) = null;', repl, text)
 
 
@@ -295,13 +362,13 @@ def rewrite_props(text, prefix_re, make):
 @func
 def block_items(path, text):
     def per_element(block):
-        holder = re.search(r'Registration\.holder\("(\w+)"', block)
+        holder = re.search(r'Registration\.holder\((?:Registries\.\w+, )?"(\w+)"', block)
         if not holder:
             return block
         name = holder.group(1)
 
         def make(m, chain, t, i):
-            tail = re.match(r'\)\)\.setRegistryName\(block\.getRegistryName\(\)\)', t[i:])
+            tail = re.match(r'\)\)?\.setRegistryName\(block\.getRegistryName\(\)\)', t[i:])
             if not tail:
                 return None
             return 'new BlockItem(block, %s.useBlockDescriptionPrefix())' % props_call(name, chain), i + tail.end()
@@ -312,7 +379,7 @@ def block_items(path, text):
 @func
 def spawn_eggs(path, text):
     def make(m, chain, t, i):
-        tail = re.match(r'\)\)\s*\.setRegistryName\("(\w+)"\)', t[i:])
+        tail = re.match(r'\)\s*\)?\s*\.setRegistryName\("(\w+)"\)', t[i:])
         if not tail:
             return None
         return 'new SpawnEggItem(%s.spawnEgg(%s))' % (props_call(tail.group(1), chain), m.group(1)), i + tail.end()
@@ -393,7 +460,7 @@ sub(r'(\w+) != Compat\.damage\(\)\.(\w+\((?:null)?\))', lambda m: '!%s.is(net.mi
 def entity_types(path, text):
     """Static EntityType fields built at class-init time -> built inside registration with a registry key."""
     def per_element(block):
-        for m in list(re.finditer(r'public static (?:final )?EntityType (\w+) = \((EntityType\.Builder\.<(\w+)>of\(.*?)\)\.build\("(\w+)"\)\.setRegistryName\("\w+"\);', block, re.S)):
+        for m in list(re.finditer(r'public static (?:final )?EntityType (\w+) = \((EntityType\.Builder\.<(\w+)>of\(.*?)\)\s*\.build\("(\w+)"\)\s*\.setRegistryName\("\w+"\);', block, re.S)):
             field, builder, cls, name = m.groups()
             builder = re.sub(r'\.setCustomClientFactory\([^()]*\)', '', builder)
             block = block.replace(m.group(0), 'public static EntityType<%s> %s;' % (cls, field))
@@ -444,9 +511,236 @@ sub(r'new InteractionResult\(InteractionResult\.(\w+), [^;]*\)(?=;)', r'Interact
 sub(r'\(net\.minecraft\.sounds\.SoundEvent\) BuiltInRegistries\.SOUND_EVENT\.getValue\(Identifier\.parse\(("[^"]*")\)\)', r'Compat.sound(\1)')
 sub(r'BuiltInRegistries\.SOUND_EVENT\.getValue\(Identifier\.parse\(("[^"]*")\)\)', r'Compat.sound(\1)')
 
+sub(r'new SoundEvent\(Identifier\.parse\(("[^"]*")\)\)', r'Compat.sound(\1)')
+
+sub(r'GLFW\.GLFW_KEY_(\w+)', r'InputConstants.KEY_\1')
+sub(r'GLFW\.GLFW_(PRESS|RELEASE|REPEAT)\b', r'InputConstants.\1')
+
+sub(r'Minecraft\.getInstance\(\)\.screen\b', 'Minecraft.getInstance().gui.screen()')
+sub(r'Minecraft\.getInstance\(\)\.setScreen\(', 'Minecraft.getInstance().gui.setScreen(')
+
+# model swaps (Kleiders replacement) need the model layer; the render event only carries a render state
+sub(r'ModelSwapRenderers\.(renderPlayerAs|renderMobAs)\((\w+), ("[^"]*"), ([\w.]+)::new\)', r'ModelSwapRenderers.\1(\2, \3, \4.LAYER, \4::new)')
+sub(r'(RenderLivingEvent event\) \{\s*Entity entity = )event\.getEntity\(\);', r'\1ModelSwapRenderers.entity(event);\n\t\t\tif (entity == null)\n\t\t\t\treturn;')
+
 # ---------------------------------------------------------------- opening GUIs
 sub(r'NetworkHooks\.openGui\(\(ServerPlayer\) (\w+), ', r'((ServerPlayer) \1).openMenu(')
 sub(r'\}, (_bpos|\w+Pos)\);', r'}, _buf -> _buf.writeBlockPos(\1));')
+
+
+# ---------------------------------------------------------------- long tail batch
+sub(r'(?<![\w).])world\.getCurrentDifficultyAt\(', '((ServerLevel) world).getCurrentDifficultyAt(')
+sub(r'BlockTags\.getAllTags\(\)\.getTagOrEmpty\((Identifier\.parse\("[^"]*"\))\)\s*\.contains\(', r'Compat.blockHasTag(\1, ')
+sub(r'ItemTags\.getAllTags\(\)\.getTagOrEmpty\((Identifier\.parse\("[^"]*"\))\)\s*\.contains\(', r'Compat.itemHasTag(\1, ')
+sub(r'EntityTypeTags\.getAllTags\(\)\.getTagOrEmpty\((Identifier\.parse\("[^"]*"\))\)\s*\.contains\(', r'Compat.entityHasTag(\1, ')
+sub(r'InteractionResult\.sidedSuccess\((?:[^()]|\([^()]*\))*\)', 'InteractionResult.SUCCESS')
+sub(r'\bBlocks\.GRASS\b', 'Blocks.SHORT_GRASS')
+sub(r'\.getGameProfile\(\)\.getId\(\)', '.getGameProfile().id()')
+sub(r'\.getGameProfile\(\)\.getName\(\)', '.getGameProfile().name()')
+sub(r'AttributeModifier\.Operation\.ADDITION\b', 'AttributeModifier.Operation.ADD_VALUE')
+sub(r'AttributeModifier\.Operation\.MULTIPLY_BASE\b', 'AttributeModifier.Operation.ADD_MULTIPLIED_BASE')
+sub(r'AttributeModifier\.Operation\.MULTIPLY_TOTAL\b', 'AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL')
+sub(r'\bBASE_ATTACK_DAMAGE_UUID\b', 'BASE_ATTACK_DAMAGE_ID')
+sub(r'\bBASE_ATTACK_SPEED_UUID\b', 'BASE_ATTACK_SPEED_ID')
+sub(r'(\w+)\.setGlowing\(', r'\1.setGlowingTag(')
+sub(r'\(([\w.()]+)\)\.setHoverName\(', r'Compat.setName(\1, ')
+sub(r'([\w.]+)\.setHoverName\(', r'Compat.setName(\1, ')
+sub(r'\(([\w.()]+)\)\.setTag\(', r'Compat.setCustomData(\1, ')
+sub(r'(\w+)\.isEdible\(\)', r'\1.components().has(net.minecraft.core.component.DataComponents.FOOD)')
+sub(r'Minecraft\.getInstance\(\)\.gameRenderer\.loadEffect\(', 'ClientPostEffects.set(')
+sub(r'Minecraft\.getInstance\(\)\.gameRenderer\.shutdownEffect\(\)', 'ClientPostEffects.clear()')
+sub(r'Minecraft\.getInstance\(\)\.gameRenderer\.currentEffect\(\)', 'ClientPostEffects.current()')
+sub(r'Minecraft\.getInstance\(\)\.gameRenderer\.displayItemActivation\(', 'Minecraft.getInstance().player.displayItemActivation(')
+sub(r'GameRules\.RULE_KEEPINVENTORY\b', 'net.minecraft.world.level.gamerules.GameRules.KEEP_INVENTORY')
+sub(r'GameRules\.RULE_FALL_DAMAGE\b', 'net.minecraft.world.level.gamerules.GameRules.FALL_DAMAGE')
+sub(r'(\w+)\.getLevelData\(\)\.getGameRules\(\)\.getBoolean\(([\w.]+)\)', r'((ServerLevel) \1).getGameRules().get(\2)')
+sub(r'(\w+)\.getGameRules\(\)\.getBoolean\(([\w.]+)\)', r'\1.getGameRules().get(\2)')
+sub(r'@Mod\.EventBusSubscriber\(bus = Mod\.EventBusSubscriber\.Bus\.MOD\)', '@EventBusSubscriber(modid = "naruto_shippuden")')
+sub(r'@Mod\.EventBusSubscriber(\(\))?(?!\()', '@EventBusSubscriber(modid = "naruto_shippuden")')
+
+
+# ---------------------------------------------------------------- entities batch 2
+sub(r'this\.usePlayerItem\((\w+), (\w+)\);', r'this.usePlayerItem((Player) \1, hand, \2);')
+sub(r'Mth\.sqrt\(', '(float) Math.sqrt(')
+sub(r'(\w+)\.getFoodProperties\(\)\.getNutrition\(\)', r'itemstack.get(net.minecraft.core.component.DataComponents.FOOD).nutrition()')
+sub(r'\((\w+)\) (\w+)\.create\((\w+)\);', r'(\1) \2.create(\3, EntitySpawnReason.BREEDING);')
+sub(r'(\w+)\.awardKillScore\((\w+), (\w+), (\w+)\);', r'\1.awardKillScore(\2, \4);')
+sub(r'public void awardKillScore\(Entity (\w+), int (\w+), DamageSource (\w+)\)', r'public void awardKillScore(Entity \1, DamageSource \3)')
+sub(r'new FollowOwnerGoal\(this, ([^,]+), ([^,]+), ([^,]+), (?:true|false)\)', r'new FollowOwnerGoal(this, \1, \2, \3)')
+sub(r'public boolean causeFallDamage\(float (\w+), float (\w+)\)', r'public boolean causeFallDamage(double \1, float \2, DamageSource damageSource)')
+sub(r'super\.causeFallDamage\((\w+), (\w+)\)', r'super.causeFallDamage(\1, \2, damageSource)')
+sub(r'public boolean canChangeDimensions\(\)', 'public boolean canUsePortal(boolean allowPassengers)')
+sub(r'public void customServerAiStep\(\)', 'protected void customServerAiStep(ServerLevel level)')
+sub(r'super\.customServerAiStep\(\);', 'super.customServerAiStep(level);')
+sub(r'protected double getAttackReachSqr\(LivingEntity (\w+)\) \{\s*return ([^;]+);\s*\}',
+    r'protected boolean canPerformAttack(LivingEntity \1) {\n\t\t\t\t\t\treturn this.isTimeToAttack() && this.mob.distanceToSqr(\1) <= (\2) && this.mob.getSensing().hasLineOfSight(\1);\n\t\t\t\t\t}')
+# the attribute-map overrides built a map but returned the parent's result, so they never did anything
+sub(r'\n\s*@Override\s*\n\s*public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers\(EquipmentSlot slot\) \{.*?\n\t\t\t\treturn super\.getDefaultAttributeModifiers\(slot\);\s*\n\t\t\t\}', '', re.S)
+sub(r'\n\s*@Override\s*\n\s*public net\.minecraft\.sounds\.SoundEvent getEatingSound\(\) \{[^}]*\}', '')
+sub(r'\n\s*@Override\s*\n\s*public boolean hasCraftingRemainingItem\(\) \{[^}]*\}', '')
+sub(r'\n\s*@Override\s*\n\s*public ItemStack getContainerItem\(ItemStack \w+\) \{[^}]*\}', '')
+sub(r'\.getMaterial\(\) == Material\.(\w+)', r'.is(Compat.materialTag("\1"))')
+sub(r'SpawnPlacements\.Type\.(\w+)', r'net.minecraft.world.entity.SpawnPlacementTypes.\1')
+
+
+@func
+def spawn_rules(path, text):
+    """Natural spawns -> data (biome modifiers), spawn placement -> RegisterSpawnPlacementsEvent via Compat."""
+    def per_element(block):
+        key = re.search(r'Registration\.entityKey\("(\w+)"\)', block)
+        m = re.search(r'\n\s*@SubscribeEvent\s*\n\s*public void addFeatureToBiomes\(BiomeLoadingEvent event\) \{', block)
+        if m and key:
+            end = find_block(block, m.start())
+            body = block[m.end():end]
+            biomes = re.findall(r'Identifier\.parse\("([\w:/]+)"\)\.equals\(event\.getName\(\)\)', body)
+            spawn = re.search(r'getSpawner\(MobCategory\.(\w+)\)\.add\(new MobSpawnSettings\.SpawnerData\(\w+, (\d+), (\d+), (\d+)\)\)', body)
+            if spawn:
+                SPAWNS.append((key.group(1), spawn.group(1), int(spawn.group(2)), int(spawn.group(3)), int(spawn.group(4)), biomes))
+            block = block[:m.start()] + block[end:]
+        sp = re.search(r'SpawnPlacements\.register\((\w+), (.*?)\);\n', block, re.S)
+        if sp:
+            block = block.replace(sp.group(0), '')
+            block = block.replace('public void initElements() {', 'public void initElements() {\n\t\t\tCompat.spawnPlacement(() -> %s, %s);' % (sp.group(1), sp.group(2)), 1)
+        return block
+    return for_each_element(text, per_element)
+
+
+SPAWNS = []
+
+# ---------------------------------------------------------------- procedures batch
+# spawning mobs: finalizeSpawn lost the NBT argument
+sub(r'(finalizeSpawn\([^;]*?),\s*\(SpawnGroupData\) null,\s*\(CompoundTag\) null\)', r'\1, (SpawnGroupData) null)')
+sub(r'(finalizeSpawn\([^;]*?),\s*(\w+|\(SpawnGroupData\) null|null),\s*(?:\(CompoundTag\) )?null\)', r'\1, \2)')
+sub(r'public SpawnGroupData finalizeSpawn\(ServerLevelAccessor (\w+), DifficultyInstance (\w+), EntitySpawnReason (\w+),\s*(?:@Nullable )?SpawnGroupData (\w+),\s*(?:@Nullable )?CompoundTag \w+\)',
+    r'public SpawnGroupData finalizeSpawn(ServerLevelAccessor \1, DifficultyInstance \2, EntitySpawnReason \3, SpawnGroupData \4)')
+sub(r'super\.finalizeSpawn\((\w+), (\w+), (\w+), (\w+), \w+\)', r'super.finalizeSpawn(\1, \2, \3, \4)')
+# inventory removal gained a "counting only" flag
+sub(r'\.clearOrCountMatchingItems\(([^;]*?), \(int\) ', r'.clearOrCountMatchingItems(\1, false, (int) ')
+# dropping items: server-side prediction
+sub(r'\.drop\(([^;]*?), (true|false), (true|false)\);', r'.drop(\1, \2, net.minecraft.util.Prediction.SERVER_ONLY);')
+sub(r'\b(player|_player|_player_|\(\(Player\) \w+\))\.drop\(([^;,]*?), (true|false)\);', r'\1.drop(\2, \3, net.minecraft.util.Prediction.SERVER_ONLY);')
+# running commands as a position
+sub(r'\(\((?:Level|ServerLevel)\) (\w+)\)\.getServer\(\)\.getCommands\(\)\.performCommand\(\s*new CommandSourceStack\(CommandSource\.NULL, new Vec3\(((?:[^()]|\([^()]*\))*)\), Vec2\.ZERO, \(ServerLevel\) \w+, 4,\s*"",\s*Component\.literal\(""\),\s*\(\((?:Level|ServerLevel)\) \w+\)\.getServer\(\), null\)\.withSuppressedOutput\(\),\s*',
+    r'Compat.runCommandAt(\1, \2, ')
+sub(r'(\w+)\.getServer\(\)\.getCommands\(\)\.performCommand\(\s*new CommandSourceStack\(CommandSource\.NULL, new Vec3\(([^()]*)\), Vec2\.ZERO, \(ServerLevel\) \w+, 4, "",\s*Component\.literal\(""\), \w+\.getServer\(\), null\)\.withSuppressedOutput\(\),\s*',
+    r'Compat.runCommandAt(\1, \2, ')
+# cooldowns are per stack (group) now
+sub(r'\.getCooldowns\(\)\.addCooldown\(([^;]*?)\.getItem\(\),(\s*)', r'.getCooldowns().addCooldown(\1,\2')
+sub(r'\.getCooldowns\(\)\.addCooldown\(([\w.]+)\.block,(\s*)', r'.getCooldowns().addCooldown(new ItemStack(\1.block),\2')
+sub(r'\.getCooldowns\(\)\.isOnCooldown\(([^;]*?)\.getItem\(\)\)', r'.getCooldowns().isOnCooldown(\1)')
+sub(r'\.getCooldowns\(\)\.isOnCooldown\(([\w.]+)\.block\)', r'.getCooldowns().isOnCooldown(new ItemStack(\1.block))')
+sub(r'\.getCooldowns\(\)\.removeCooldown\(([^;]*?)\.getItem\(\)\)', r'.getCooldowns().removeCooldown(\1.getItem().builtInRegistryHolder().key().identifier())')
+# changing dimension
+sub(r'\(\(ServerPlayer\) (\w+)\)\.teleportTo\((\w+), ([^;]*?), (\w+)\.getYRot\(\), (\w+)\.getXRot\(\)\);',
+    r'((ServerPlayer) \1).teleportTo(\2, \3, java.util.Set.of(), \4.getYRot(), \5.getXRot(), true);')
+sub(r'new ClientboundUpdateMobEffectPacket\(([^;]*?), (\w+)\)\)', r'new ClientboundUpdateMobEffectPacket(\1, \2, false))')
+sub(r'(\b_ent|\bentity)\.getServer\(\)', r'\1.level().getServer()')
+sub(r'\(\(ServerPlayer\) (\w+)\)\.server\b', r'((ServerPlayer) \1).level().getServer()')
+sub(r'\.getAdvancements\(\)\s*\.getAdvancement\(', '.getAdvancements().get(')
+sub(r'\.connection\.teleport\(([^;]*?),\s*Collections\.emptySet\(\)\);', r'.connection.teleport(\1);')
+sub(r'\.getRespawnData\(\)\.pos\(\)', '.getRespawnData().pos()')
+# hands and taming
+sub(r'\.swing\((InteractionHand\.\w+|\w+), true\);', r'.swing(\1, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);')
+sub(r'\.swing\((InteractionHand\.\w+|hand)\);', r'.swing(\1, net.minecraft.world.item.component.SwingAnimation.DEFAULT, false);')
+sub(r'\.setTame\(\((true|false)\)\);', r'.setTame(\1, true);')
+sub(r'\.setTame\((true|false)\);', r'.setTame(\1, true);')
+sub(r'net\.minecraftforge\.event\.ForgeEventFactory\.onAnimalTame\(', 'net.neoforged.neoforge.event.EventHooks.onAnimalTame(')
+# explosions
+sub(r'Explosion\.BlockInteraction\.NONE', 'Level.ExplosionInteraction.NONE')
+sub(r'Explosion\.BlockInteraction\.(BREAK|DESTROY)', 'Level.ExplosionInteraction.TNT')
+sub(r'\.explode\(null, \(int\) ([^,]+), \(int\) ([^,]+), \(int\) ([^,]+), ', r'.explode(null, \1, \2, \3, ')
+# misc entity API
+sub(r'(\w+)\.setInvulnerable\(', r'\1.setPermanentlyInvulnerable(')
+sub(r'\(\(ServerLevel\) (\w+)\)\.setDayTime\(\(int\) ([^;]+)\);', r'Compat.runCommandAt(\1, 0, 0, 0, "time set " + (int) (\2));')
+sub(r'\(\(Level\) (\w+)\)\.getGameRules\(\)\.getRule\(([\w.]+)\)\.set\(\(?(true|false)\)?, [^;]+\);', r'((ServerLevel) \1).getGameRules().set(\2, \3, ((ServerLevel) \1).getServer());')
+sub(r'\.getRule\(([\w.]+)\)\.get\(\)', r'.get(\1)')
+sub(r'EntityType\.LIGHTNING_BOLT\.create\(\(Level\) (\w+)\)', r'EntityType.LIGHTNING_BOLT.create((Level) \1, EntitySpawnReason.TRIGGERED)')
+sub(r'(\w+)\.create\(\(Level\) (\w+)\)', r'\1.create((Level) \2, EntitySpawnReason.TRIGGERED)')
+sub(r'\)\.yRot\b', r').getYRot()')
+sub(r'\)\.xRot\b', r').getXRot()')
+sub(r'\bParticleTypes\.FLASH\b', 'ColorParticleOption.create(ParticleTypes.FLASH, -1)')
+sub(r'CompoundTag (\w+) = \(StackTag\.of\(([^;]*)\)\);', r'CompoundTag \1 = StackTag.of(\2).copy();')
+sub(r'CompoundTag (\w+) = StackTag\.of\(([^;]*)\);', r'CompoundTag \1 = StackTag.of(\2).copy();')
+# events
+sub(r'if \((\w+)\.isCancelable\(\)\)\s*\n(\s*)\1\.setCanceled\(true\);', r'if (\1 instanceof net.neoforged.bus.api.ICancellableEvent _cancellable)\n\2_cancellable.setCanceled(true);')
+sub(r'(\w+)\.isCancelable\(\)', r'(\1 instanceof net.neoforged.bus.api.ICancellableEvent)')
+sub(r'\bevent\.getPlayer\(\)', 'event.getEntity()')
+# items
+sub(r'InteractionResult (\w+) = super\.use\((\w+), (\w+), (\w+)\);\s*\n(\s*)ItemStack itemstack = \1\.getObject\(\);',
+    r'InteractionResult \1 = super.use(\2, \3, \4);\n\5ItemStack itemstack = \3.getItemInHand(\4);')
+sub(r'\.saturationMod\(', '.saturationModifier(')
+sub(r'new DamageSource\("[^"]*"\)(?:\.\w+\(\))*', r'Compat.damage().genericKill()')
+# worn armour: slots 0-3 are feet..head
+sub(r'\(\(Player\) (\w+)\)\.getInventory\(\)\.armor\.set\(\(int\) (\d),', lambda m: '((Player) %s).setItemSlot(EquipmentSlot.%s,' % (m.group(1), ['FEET', 'LEGS', 'CHEST', 'HEAD'][int(m.group(2))]))
+sub(r'\(\(Player\) (\w+)\)\.getInventory\(\)\.armor\.get\(\(int\) (\d)\)', lambda m: '((Player) %s).getItemBySlot(EquipmentSlot.%s)' % (m.group(1), ['FEET', 'LEGS', 'CHEST', 'HEAD'][int(m.group(2))]))
+# boss bars
+sub(r'new ServerBossEvent\(this\.getDisplayName\(\)', 'new ServerBossEvent(java.util.UUID.randomUUID(), this.getDisplayName()')
+sub(r'\.bossInfo\.setPercent\(', '.bossInfo.setProgress(')
+sub(r'(\w+)\.this\.doHurtTarget\((\w+)\)', r'\1.this.doHurtTarget((ServerLevel) \1.this.level(), \2)')
+sub(r'this\.doHurtTarget\((\w+)\)', r'this.doHurtTarget((ServerLevel) this.level(), \1)')
+
+sub(r'\bNeoAttributes\.ENTITY_INTERACTION_RANGE\b', 'Attributes.ENTITY_INTERACTION_RANGE')
+sub(r'\.alwaysEat\(\)', '.alwaysEdible()')
+sub(r'\s*\.meat\(\)', '')
+sub(r'LivingEvent\.LivingUpdateEvent\b', 'EntityTickEvent.Pre')
+sub(r'\bevent\.getEntityLiving\(\)', 'event.getEntity()')
+sub(r'(\w+)\.getLevelData\(\)\.getDayTime\(\)', r'((Level) \1).getDefaultClockTime()')
+sub(r'(\w+)\.getDayTime\(\)', r'((Level) \1).getDefaultClockTime()')
+sub(r'\bevent\.getWorld\(\)', 'event.getLevel()')
+sub(r'EntityType\.([A-Z][A-Z_0-9]+)\b', r'net.minecraft.world.entity.EntityTypes.\1')
+sub(r'if \((\w+) instanceof ([\w.]+)\) \{\s*\n(\s*)\1\.setCanceled\(true\);', r'if (\1 instanceof \2 _cancelable) {\n\3_cancelable.setCanceled(true);')
+sub(r'\(\(ServerPlayer\) (\w+)\)\.teleportTo\((\w+), ((?:[^;]|\n)*?),\s*(\w+)\.getYRot\(\),\s*(\w+)\.getXRot\(\)\);',
+    r'((ServerPlayer) \1).teleportTo(\2, \3, java.util.Set.of(), \4.getYRot(), \5.getXRot(), true);')
+
+
+
+@func
+def block_pos_containing(path, text):
+    """new BlockPos(x, y, z) took doubles in 1.16 (floored); 26.3 wants ints, BlockPos.containing floors doubles."""
+    out = []
+    pos = 0
+    for m in re.finditer(r'new BlockPos\(', text):
+        if m.start() < pos:
+            continue
+        i = m.end()
+        depth = 1
+        commas = 0
+        while depth:
+            c = text[i]
+            if c in '([':
+                depth += 1
+            elif c in ')]':
+                depth -= 1
+            elif c == ',' and depth == 1:
+                commas += 1
+            elif c == '"':
+                i += 1
+                while text[i] != '"':
+                    i += 2 if text[i] == '\\' else 1
+            i += 1
+        if commas == 2:
+            out.append(text[pos:m.start()] + 'BlockPos.containing(')
+            pos = m.end()
+    out.append(text[pos:])
+    return ''.join(out)
+
+@func
+def attribute_modifier_events(path, text):
+    """ItemAttributeModifierEvent: no slot getter any more, the slot group is given with each modifier."""
+    rx = re.compile(r'dependencies\.get\("event"\) instanceof ItemAttributeModifierEvent\s*&& \(\(ItemAttributeModifierEvent\) dependencies\.get\("event"\)\)\.getSlotType\(\) == EquipmentSlot\.(\w+)\) \{')
+    while True:
+        m = rx.search(text)
+        if not m:
+            break
+        end = find_block(text, m.end() - 1)
+        block = re.sub(r'_event\.addModifier\(([^;]*?), (\w+)\);', r'_event.addModifier(\1, \2, net.minecraft.world.entity.EquipmentSlotGroup.%s);' % m.group(1), text[m.end():end])
+        text = text[:m.start()] + 'dependencies.get("event") instanceof ItemAttributeModifierEvent) {' + block + text[end:]
+    text = re.sub(r'new AttributeModifier\(UUID\.fromString\("[^"]*"\),\s*"naruto_shippuden\." \+ "(\w+)",\s*',
+                  lambda m: 'new AttributeModifier(Identifier.fromNamespaceAndPath("naruto_shippuden", "%s"), ' % re.sub(r'(?<!^)(?=[A-Z])', '_', m.group(1)).lower(), text)
+    text = re.sub(r'\b[\w.]*\bREACH_DISTANCE\b(?:\.get\(\))?|\bNeoAttributes\.ENTITY_INTERACTION_RANGE\b', 'Attributes.ENTITY_INTERACTION_RANGE', text)
+    text = re.sub(r'_event\.addModifier\(net\.minecraft\.world\.entity\.ai\.attributes\.Attributes\.', '_event.addModifier(Attributes.', text)
+    return text
+
 
 # ---------------------------------------------------------------- player variables writes
 sub(r'(\b[\w.]+(?:\(\))?)\.getCapability\(NarutoShippudenModVariables\.PLAYER_VARIABLES_CAPABILITY, null\)\s*\.ifPresent\(', r'NarutoShippudenModVariables.ifPresent(\1, ')
@@ -469,6 +763,11 @@ ENSURE = {
     'Item': 'net.minecraft.world.item.Item',
     'NarutoShippudenMod': 'net.mcreator.narutoshippudenmod.NarutoShippudenMod',
     'ModArrow': 'net.mcreator.narutoshippudenmod.compat.ModArrow',
+    'InputConstants': 'com.mojang.blaze3d.platform.InputConstants',
+    'ModelSwapRenderers': 'net.mcreator.narutoshippudenmod.core.ModelSwapRenderers',
+    'ClientPostEffects': 'net.mcreator.narutoshippudenmod.client.ClientPostEffects',
+    'EntitySpawnReason': 'net.minecraft.world.entity.EntitySpawnReason',
+    'Player': 'net.minecraft.world.entity.player.Player',
     'StackTag': 'net.mcreator.narutoshippudenmod.compat.StackTag',
     'ServerLevel': 'net.minecraft.server.level.ServerLevel',
     'Entity': 'net.minecraft.world.entity.Entity',
@@ -476,14 +775,22 @@ ENSURE = {
     'PlayerTickEvent': 'net.neoforged.neoforge.event.tick.PlayerTickEvent',
     'ServerTickEvent': 'net.neoforged.neoforge.event.tick.ServerTickEvent',
     'LevelTickEvent': 'net.neoforged.neoforge.event.tick.LevelTickEvent',
+    'EntityTickEvent': 'net.neoforged.neoforge.event.tick.EntityTickEvent',
     'ClientTickEvent': 'net.neoforged.neoforge.client.event.ClientTickEvent',
     'EventBusSubscriber': 'net.neoforged.fml.common.EventBusSubscriber',
     'NeoForge': 'net.neoforged.neoforge.common.NeoForge',
+    'EquipmentSlot': 'net.minecraft.world.entity.EquipmentSlot',
+    'Level': 'net.minecraft.world.level.Level',
+    'ColorParticleOption': 'net.minecraft.core.particles.ColorParticleOption',
+    'ParticleTypes': 'net.minecraft.core.particles.ParticleTypes',
+    'Attributes': 'net.minecraft.world.entity.ai.attributes.Attributes',
 }
 
 
 def ensure_imports(path, text):
     head, body = split_header(text)
+    head = re.sub(r'^import org\.lwjgl\.glfw\.GLFW;\n', '', head, flags=re.M)
+    head = re.sub(r'^import net\.minecraftforge\.[\w.]+;\n', '', head, flags=re.M)
     have = set(re.findall(r'^import [\w.]+\.(\w+);', head, re.M))
     pkg = re.search(r'^package ([\w.]+);', head, re.M).group(1)
     add = []

@@ -2,6 +2,7 @@ package net.mcreator.narutoshippudenmod.world.structure;
 
 import net.minecraft.util.RandomSource;
 import net.minecraft.core.registries.Registries;
+import net.neoforged.fml.common.EventBusSubscriber;
 
 import java.util.AbstractMap;
 import java.util.HashMap;
@@ -20,39 +21,51 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockIgnoreProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import net.minecraft.world.level.levelgen.feature.configurations.DecoratorConfiguration;
-import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
 
 
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
+import com.mojang.serialization.MapCodec;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.mcreator.narutoshippudenmod.compat.Registration;
 
 public final class KamuiTowerStructures {
 	private KamuiTowerStructures() {
 	}
 
-	@Mod.EventBusSubscriber
-	public static class KamuiTower1Structure {
-		private static Feature<NoneFeatureConfiguration> feature = null;
-		private static ConfiguredFeature<?, ?> configuredFeature = null;
+	public static void register() {
+		KamuiTower1Structure.register();
+		KamuiTower2Structure.register();
+		KamuiTower3Structure.register();
+		KamuiTower4Structure.register();
+		KamuiTower5Structure.register();
+		KamuiTower6Structure.register();
+		KamuiTower7Structure.register();
+		KamuiTower8Structure.register();
+		KamuiTower9Structure.register();
+	}
 
-		@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-		public static class FeatureRegisterHandler {
-			@SubscribeEvent
-			public static void registerFeature(RegistryEvent.Register<Feature<?>> event) {
-				feature = new Feature<NoneFeatureConfiguration>(NoneFeatureConfiguration.CODEC) {
-					@Override
-					public boolean place(WorldGenLevel world, ChunkGenerator generator, RandomSource random, BlockPos pos, NoneFeatureConfiguration config) {
+	public record KamuiTower1Structure() implements Feature {
+		public static final MapCodec<KamuiTower1Structure> CODEC = MapCodec.unit(KamuiTower1Structure::new);
+
+		static void register() {
+			Registration.add(Registries.FEATURE_TYPE, "kamui_tower_1", () -> CODEC, null);
+		}
+
+		@Override
+		public MapCodec<KamuiTower1Structure> codec() {
+			return CODEC;
+		}
+
+		@Override
+		public boolean place(WorldGenLevel world, ChunkGenerator generator, RandomSource random, BlockPos pos) {
+
 						int ci = (pos.getX() >> 4) << 4;
 						int ck = (pos.getZ() >> 4) << 4;
 						ResourceKey<Level> dimensionType = world.getLevel().dimension();
@@ -79,44 +92,32 @@ public final class KamuiTowerStructures {
 												new AbstractMap.SimpleEntry<>("z", z))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
 									continue;
-								StructureTemplate template = world.getLevel().getStructureManager()
-										.getOrCreate(Identifier.fromNamespaceAndPath("naruto_shippuden", "kamui_tower1"));
+								StructureTemplate template = world.getLevel().getServer().getStructureTemplateManager().getOrCreate(Identifier.fromNamespaceAndPath("naruto_shippuden", "kamui_tower1"));
 								if (template == null)
 									return false;
-								template.placeInWorldChunk(world, spawnTo,
-										new StructurePlaceSettings().setRotation(rotation).setRandom(random).setMirror(mirror)
-												.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setChunkPos(null).setIgnoreEntities(false),
-										random);
+								template.placeInWorld(world, spawnTo, spawnTo, new StructurePlaceSettings().setRotation(rotation).setRandom(random).setMirror(mirror)
+												.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setIgnoreEntities(false), random, 2);
 							}
 						}
 						return true;
-					}
-				};
-				configuredFeature = feature.configured(FeatureConfiguration.NONE)
-						.decorated(FeatureDecorator.NOPE.configured(DecoratorConfiguration.NONE));
-				event.getRegistry().register(feature.setRegistryName("kamui_tower_1"));
-				Registry.register(BuiltInRegistries.CONFIGURED_FEATURE, Identifier.parse("naruto_shippuden:kamui_tower_1"), configuredFeature);
-			}
-		}
-
-		@SubscribeEvent
-		public static void addFeatureToBiomes(BiomeLoadingEvent event) {
-			event.getGeneration().getFeatures(GenerationStep.Decoration.SURFACE_STRUCTURES).add(() -> configuredFeature);
 		}
 	}
 
-	@Mod.EventBusSubscriber
-	public static class KamuiTower2Structure {
-		private static Feature<NoneFeatureConfiguration> feature = null;
-		private static ConfiguredFeature<?, ?> configuredFeature = null;
+	public record KamuiTower2Structure() implements Feature {
+		public static final MapCodec<KamuiTower2Structure> CODEC = MapCodec.unit(KamuiTower2Structure::new);
 
-		@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-		public static class FeatureRegisterHandler {
-			@SubscribeEvent
-			public static void registerFeature(RegistryEvent.Register<Feature<?>> event) {
-				feature = new Feature<NoneFeatureConfiguration>(NoneFeatureConfiguration.CODEC) {
-					@Override
-					public boolean place(WorldGenLevel world, ChunkGenerator generator, RandomSource random, BlockPos pos, NoneFeatureConfiguration config) {
+		static void register() {
+			Registration.add(Registries.FEATURE_TYPE, "kamui_tower_2", () -> CODEC, null);
+		}
+
+		@Override
+		public MapCodec<KamuiTower2Structure> codec() {
+			return CODEC;
+		}
+
+		@Override
+		public boolean place(WorldGenLevel world, ChunkGenerator generator, RandomSource random, BlockPos pos) {
+
 						int ci = (pos.getX() >> 4) << 4;
 						int ck = (pos.getZ() >> 4) << 4;
 						ResourceKey<Level> dimensionType = world.getLevel().dimension();
@@ -143,44 +144,32 @@ public final class KamuiTowerStructures {
 												new AbstractMap.SimpleEntry<>("z", z))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
 									continue;
-								StructureTemplate template = world.getLevel().getStructureManager()
-										.getOrCreate(Identifier.fromNamespaceAndPath("naruto_shippuden", "kamui_tower2"));
+								StructureTemplate template = world.getLevel().getServer().getStructureTemplateManager().getOrCreate(Identifier.fromNamespaceAndPath("naruto_shippuden", "kamui_tower2"));
 								if (template == null)
 									return false;
-								template.placeInWorldChunk(world, spawnTo,
-										new StructurePlaceSettings().setRotation(rotation).setRandom(random).setMirror(mirror)
-												.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setChunkPos(null).setIgnoreEntities(false),
-										random);
+								template.placeInWorld(world, spawnTo, spawnTo, new StructurePlaceSettings().setRotation(rotation).setRandom(random).setMirror(mirror)
+												.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setIgnoreEntities(false), random, 2);
 							}
 						}
 						return true;
-					}
-				};
-				configuredFeature = feature.configured(FeatureConfiguration.NONE)
-						.decorated(FeatureDecorator.NOPE.configured(DecoratorConfiguration.NONE));
-				event.getRegistry().register(feature.setRegistryName("kamui_tower_2"));
-				Registry.register(BuiltInRegistries.CONFIGURED_FEATURE, Identifier.parse("naruto_shippuden:kamui_tower_2"), configuredFeature);
-			}
-		}
-
-		@SubscribeEvent
-		public static void addFeatureToBiomes(BiomeLoadingEvent event) {
-			event.getGeneration().getFeatures(GenerationStep.Decoration.SURFACE_STRUCTURES).add(() -> configuredFeature);
 		}
 	}
 
-	@Mod.EventBusSubscriber
-	public static class KamuiTower3Structure {
-		private static Feature<NoneFeatureConfiguration> feature = null;
-		private static ConfiguredFeature<?, ?> configuredFeature = null;
+	public record KamuiTower3Structure() implements Feature {
+		public static final MapCodec<KamuiTower3Structure> CODEC = MapCodec.unit(KamuiTower3Structure::new);
 
-		@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-		public static class FeatureRegisterHandler {
-			@SubscribeEvent
-			public static void registerFeature(RegistryEvent.Register<Feature<?>> event) {
-				feature = new Feature<NoneFeatureConfiguration>(NoneFeatureConfiguration.CODEC) {
-					@Override
-					public boolean place(WorldGenLevel world, ChunkGenerator generator, RandomSource random, BlockPos pos, NoneFeatureConfiguration config) {
+		static void register() {
+			Registration.add(Registries.FEATURE_TYPE, "kamui_tower_3", () -> CODEC, null);
+		}
+
+		@Override
+		public MapCodec<KamuiTower3Structure> codec() {
+			return CODEC;
+		}
+
+		@Override
+		public boolean place(WorldGenLevel world, ChunkGenerator generator, RandomSource random, BlockPos pos) {
+
 						int ci = (pos.getX() >> 4) << 4;
 						int ck = (pos.getZ() >> 4) << 4;
 						ResourceKey<Level> dimensionType = world.getLevel().dimension();
@@ -207,44 +196,32 @@ public final class KamuiTowerStructures {
 												new AbstractMap.SimpleEntry<>("z", z))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
 									continue;
-								StructureTemplate template = world.getLevel().getStructureManager()
-										.getOrCreate(Identifier.fromNamespaceAndPath("naruto_shippuden", "kamui_tower3"));
+								StructureTemplate template = world.getLevel().getServer().getStructureTemplateManager().getOrCreate(Identifier.fromNamespaceAndPath("naruto_shippuden", "kamui_tower3"));
 								if (template == null)
 									return false;
-								template.placeInWorldChunk(world, spawnTo,
-										new StructurePlaceSettings().setRotation(rotation).setRandom(random).setMirror(mirror)
-												.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setChunkPos(null).setIgnoreEntities(false),
-										random);
+								template.placeInWorld(world, spawnTo, spawnTo, new StructurePlaceSettings().setRotation(rotation).setRandom(random).setMirror(mirror)
+												.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setIgnoreEntities(false), random, 2);
 							}
 						}
 						return true;
-					}
-				};
-				configuredFeature = feature.configured(FeatureConfiguration.NONE)
-						.decorated(FeatureDecorator.NOPE.configured(DecoratorConfiguration.NONE));
-				event.getRegistry().register(feature.setRegistryName("kamui_tower_3"));
-				Registry.register(BuiltInRegistries.CONFIGURED_FEATURE, Identifier.parse("naruto_shippuden:kamui_tower_3"), configuredFeature);
-			}
-		}
-
-		@SubscribeEvent
-		public static void addFeatureToBiomes(BiomeLoadingEvent event) {
-			event.getGeneration().getFeatures(GenerationStep.Decoration.SURFACE_STRUCTURES).add(() -> configuredFeature);
 		}
 	}
 
-	@Mod.EventBusSubscriber
-	public static class KamuiTower4Structure {
-		private static Feature<NoneFeatureConfiguration> feature = null;
-		private static ConfiguredFeature<?, ?> configuredFeature = null;
+	public record KamuiTower4Structure() implements Feature {
+		public static final MapCodec<KamuiTower4Structure> CODEC = MapCodec.unit(KamuiTower4Structure::new);
 
-		@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-		public static class FeatureRegisterHandler {
-			@SubscribeEvent
-			public static void registerFeature(RegistryEvent.Register<Feature<?>> event) {
-				feature = new Feature<NoneFeatureConfiguration>(NoneFeatureConfiguration.CODEC) {
-					@Override
-					public boolean place(WorldGenLevel world, ChunkGenerator generator, RandomSource random, BlockPos pos, NoneFeatureConfiguration config) {
+		static void register() {
+			Registration.add(Registries.FEATURE_TYPE, "kamui_tower_4", () -> CODEC, null);
+		}
+
+		@Override
+		public MapCodec<KamuiTower4Structure> codec() {
+			return CODEC;
+		}
+
+		@Override
+		public boolean place(WorldGenLevel world, ChunkGenerator generator, RandomSource random, BlockPos pos) {
+
 						int ci = (pos.getX() >> 4) << 4;
 						int ck = (pos.getZ() >> 4) << 4;
 						ResourceKey<Level> dimensionType = world.getLevel().dimension();
@@ -271,44 +248,32 @@ public final class KamuiTowerStructures {
 												new AbstractMap.SimpleEntry<>("z", z))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
 									continue;
-								StructureTemplate template = world.getLevel().getStructureManager()
-										.getOrCreate(Identifier.fromNamespaceAndPath("naruto_shippuden", "kamui_tower4"));
+								StructureTemplate template = world.getLevel().getServer().getStructureTemplateManager().getOrCreate(Identifier.fromNamespaceAndPath("naruto_shippuden", "kamui_tower4"));
 								if (template == null)
 									return false;
-								template.placeInWorldChunk(world, spawnTo,
-										new StructurePlaceSettings().setRotation(rotation).setRandom(random).setMirror(mirror)
-												.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setChunkPos(null).setIgnoreEntities(false),
-										random);
+								template.placeInWorld(world, spawnTo, spawnTo, new StructurePlaceSettings().setRotation(rotation).setRandom(random).setMirror(mirror)
+												.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setIgnoreEntities(false), random, 2);
 							}
 						}
 						return true;
-					}
-				};
-				configuredFeature = feature.configured(FeatureConfiguration.NONE)
-						.decorated(FeatureDecorator.NOPE.configured(DecoratorConfiguration.NONE));
-				event.getRegistry().register(feature.setRegistryName("kamui_tower_4"));
-				Registry.register(BuiltInRegistries.CONFIGURED_FEATURE, Identifier.parse("naruto_shippuden:kamui_tower_4"), configuredFeature);
-			}
-		}
-
-		@SubscribeEvent
-		public static void addFeatureToBiomes(BiomeLoadingEvent event) {
-			event.getGeneration().getFeatures(GenerationStep.Decoration.SURFACE_STRUCTURES).add(() -> configuredFeature);
 		}
 	}
 
-	@Mod.EventBusSubscriber
-	public static class KamuiTower5Structure {
-		private static Feature<NoneFeatureConfiguration> feature = null;
-		private static ConfiguredFeature<?, ?> configuredFeature = null;
+	public record KamuiTower5Structure() implements Feature {
+		public static final MapCodec<KamuiTower5Structure> CODEC = MapCodec.unit(KamuiTower5Structure::new);
 
-		@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-		public static class FeatureRegisterHandler {
-			@SubscribeEvent
-			public static void registerFeature(RegistryEvent.Register<Feature<?>> event) {
-				feature = new Feature<NoneFeatureConfiguration>(NoneFeatureConfiguration.CODEC) {
-					@Override
-					public boolean place(WorldGenLevel world, ChunkGenerator generator, RandomSource random, BlockPos pos, NoneFeatureConfiguration config) {
+		static void register() {
+			Registration.add(Registries.FEATURE_TYPE, "kamui_tower_5", () -> CODEC, null);
+		}
+
+		@Override
+		public MapCodec<KamuiTower5Structure> codec() {
+			return CODEC;
+		}
+
+		@Override
+		public boolean place(WorldGenLevel world, ChunkGenerator generator, RandomSource random, BlockPos pos) {
+
 						int ci = (pos.getX() >> 4) << 4;
 						int ck = (pos.getZ() >> 4) << 4;
 						ResourceKey<Level> dimensionType = world.getLevel().dimension();
@@ -335,44 +300,32 @@ public final class KamuiTowerStructures {
 												new AbstractMap.SimpleEntry<>("z", z))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
 									continue;
-								StructureTemplate template = world.getLevel().getStructureManager()
-										.getOrCreate(Identifier.fromNamespaceAndPath("naruto_shippuden", "kamui_tower5"));
+								StructureTemplate template = world.getLevel().getServer().getStructureTemplateManager().getOrCreate(Identifier.fromNamespaceAndPath("naruto_shippuden", "kamui_tower5"));
 								if (template == null)
 									return false;
-								template.placeInWorldChunk(world, spawnTo,
-										new StructurePlaceSettings().setRotation(rotation).setRandom(random).setMirror(mirror)
-												.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setChunkPos(null).setIgnoreEntities(false),
-										random);
+								template.placeInWorld(world, spawnTo, spawnTo, new StructurePlaceSettings().setRotation(rotation).setRandom(random).setMirror(mirror)
+												.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setIgnoreEntities(false), random, 2);
 							}
 						}
 						return true;
-					}
-				};
-				configuredFeature = feature.configured(FeatureConfiguration.NONE)
-						.decorated(FeatureDecorator.NOPE.configured(DecoratorConfiguration.NONE));
-				event.getRegistry().register(feature.setRegistryName("kamui_tower_5"));
-				Registry.register(BuiltInRegistries.CONFIGURED_FEATURE, Identifier.parse("naruto_shippuden:kamui_tower_5"), configuredFeature);
-			}
-		}
-
-		@SubscribeEvent
-		public static void addFeatureToBiomes(BiomeLoadingEvent event) {
-			event.getGeneration().getFeatures(GenerationStep.Decoration.SURFACE_STRUCTURES).add(() -> configuredFeature);
 		}
 	}
 
-	@Mod.EventBusSubscriber
-	public static class KamuiTower6Structure {
-		private static Feature<NoneFeatureConfiguration> feature = null;
-		private static ConfiguredFeature<?, ?> configuredFeature = null;
+	public record KamuiTower6Structure() implements Feature {
+		public static final MapCodec<KamuiTower6Structure> CODEC = MapCodec.unit(KamuiTower6Structure::new);
 
-		@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-		public static class FeatureRegisterHandler {
-			@SubscribeEvent
-			public static void registerFeature(RegistryEvent.Register<Feature<?>> event) {
-				feature = new Feature<NoneFeatureConfiguration>(NoneFeatureConfiguration.CODEC) {
-					@Override
-					public boolean place(WorldGenLevel world, ChunkGenerator generator, RandomSource random, BlockPos pos, NoneFeatureConfiguration config) {
+		static void register() {
+			Registration.add(Registries.FEATURE_TYPE, "kamui_tower_6", () -> CODEC, null);
+		}
+
+		@Override
+		public MapCodec<KamuiTower6Structure> codec() {
+			return CODEC;
+		}
+
+		@Override
+		public boolean place(WorldGenLevel world, ChunkGenerator generator, RandomSource random, BlockPos pos) {
+
 						int ci = (pos.getX() >> 4) << 4;
 						int ck = (pos.getZ() >> 4) << 4;
 						ResourceKey<Level> dimensionType = world.getLevel().dimension();
@@ -399,44 +352,32 @@ public final class KamuiTowerStructures {
 												new AbstractMap.SimpleEntry<>("z", z))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
 									continue;
-								StructureTemplate template = world.getLevel().getStructureManager()
-										.getOrCreate(Identifier.fromNamespaceAndPath("naruto_shippuden", "kamui_tower6"));
+								StructureTemplate template = world.getLevel().getServer().getStructureTemplateManager().getOrCreate(Identifier.fromNamespaceAndPath("naruto_shippuden", "kamui_tower6"));
 								if (template == null)
 									return false;
-								template.placeInWorldChunk(world, spawnTo,
-										new StructurePlaceSettings().setRotation(rotation).setRandom(random).setMirror(mirror)
-												.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setChunkPos(null).setIgnoreEntities(false),
-										random);
+								template.placeInWorld(world, spawnTo, spawnTo, new StructurePlaceSettings().setRotation(rotation).setRandom(random).setMirror(mirror)
+												.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setIgnoreEntities(false), random, 2);
 							}
 						}
 						return true;
-					}
-				};
-				configuredFeature = feature.configured(FeatureConfiguration.NONE)
-						.decorated(FeatureDecorator.NOPE.configured(DecoratorConfiguration.NONE));
-				event.getRegistry().register(feature.setRegistryName("kamui_tower_6"));
-				Registry.register(BuiltInRegistries.CONFIGURED_FEATURE, Identifier.parse("naruto_shippuden:kamui_tower_6"), configuredFeature);
-			}
-		}
-
-		@SubscribeEvent
-		public static void addFeatureToBiomes(BiomeLoadingEvent event) {
-			event.getGeneration().getFeatures(GenerationStep.Decoration.SURFACE_STRUCTURES).add(() -> configuredFeature);
 		}
 	}
 
-	@Mod.EventBusSubscriber
-	public static class KamuiTower7Structure {
-		private static Feature<NoneFeatureConfiguration> feature = null;
-		private static ConfiguredFeature<?, ?> configuredFeature = null;
+	public record KamuiTower7Structure() implements Feature {
+		public static final MapCodec<KamuiTower7Structure> CODEC = MapCodec.unit(KamuiTower7Structure::new);
 
-		@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-		public static class FeatureRegisterHandler {
-			@SubscribeEvent
-			public static void registerFeature(RegistryEvent.Register<Feature<?>> event) {
-				feature = new Feature<NoneFeatureConfiguration>(NoneFeatureConfiguration.CODEC) {
-					@Override
-					public boolean place(WorldGenLevel world, ChunkGenerator generator, RandomSource random, BlockPos pos, NoneFeatureConfiguration config) {
+		static void register() {
+			Registration.add(Registries.FEATURE_TYPE, "kamui_tower_7", () -> CODEC, null);
+		}
+
+		@Override
+		public MapCodec<KamuiTower7Structure> codec() {
+			return CODEC;
+		}
+
+		@Override
+		public boolean place(WorldGenLevel world, ChunkGenerator generator, RandomSource random, BlockPos pos) {
+
 						int ci = (pos.getX() >> 4) << 4;
 						int ck = (pos.getZ() >> 4) << 4;
 						ResourceKey<Level> dimensionType = world.getLevel().dimension();
@@ -463,44 +404,32 @@ public final class KamuiTowerStructures {
 												new AbstractMap.SimpleEntry<>("z", z))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
 									continue;
-								StructureTemplate template = world.getLevel().getStructureManager()
-										.getOrCreate(Identifier.fromNamespaceAndPath("naruto_shippuden", "kamui_tower7"));
+								StructureTemplate template = world.getLevel().getServer().getStructureTemplateManager().getOrCreate(Identifier.fromNamespaceAndPath("naruto_shippuden", "kamui_tower7"));
 								if (template == null)
 									return false;
-								template.placeInWorldChunk(world, spawnTo,
-										new StructurePlaceSettings().setRotation(rotation).setRandom(random).setMirror(mirror)
-												.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setChunkPos(null).setIgnoreEntities(false),
-										random);
+								template.placeInWorld(world, spawnTo, spawnTo, new StructurePlaceSettings().setRotation(rotation).setRandom(random).setMirror(mirror)
+												.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setIgnoreEntities(false), random, 2);
 							}
 						}
 						return true;
-					}
-				};
-				configuredFeature = feature.configured(FeatureConfiguration.NONE)
-						.decorated(FeatureDecorator.NOPE.configured(DecoratorConfiguration.NONE));
-				event.getRegistry().register(feature.setRegistryName("kamui_tower_7"));
-				Registry.register(BuiltInRegistries.CONFIGURED_FEATURE, Identifier.parse("naruto_shippuden:kamui_tower_7"), configuredFeature);
-			}
-		}
-
-		@SubscribeEvent
-		public static void addFeatureToBiomes(BiomeLoadingEvent event) {
-			event.getGeneration().getFeatures(GenerationStep.Decoration.SURFACE_STRUCTURES).add(() -> configuredFeature);
 		}
 	}
 
-	@Mod.EventBusSubscriber
-	public static class KamuiTower8Structure {
-		private static Feature<NoneFeatureConfiguration> feature = null;
-		private static ConfiguredFeature<?, ?> configuredFeature = null;
+	public record KamuiTower8Structure() implements Feature {
+		public static final MapCodec<KamuiTower8Structure> CODEC = MapCodec.unit(KamuiTower8Structure::new);
 
-		@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-		public static class FeatureRegisterHandler {
-			@SubscribeEvent
-			public static void registerFeature(RegistryEvent.Register<Feature<?>> event) {
-				feature = new Feature<NoneFeatureConfiguration>(NoneFeatureConfiguration.CODEC) {
-					@Override
-					public boolean place(WorldGenLevel world, ChunkGenerator generator, RandomSource random, BlockPos pos, NoneFeatureConfiguration config) {
+		static void register() {
+			Registration.add(Registries.FEATURE_TYPE, "kamui_tower_8", () -> CODEC, null);
+		}
+
+		@Override
+		public MapCodec<KamuiTower8Structure> codec() {
+			return CODEC;
+		}
+
+		@Override
+		public boolean place(WorldGenLevel world, ChunkGenerator generator, RandomSource random, BlockPos pos) {
+
 						int ci = (pos.getX() >> 4) << 4;
 						int ck = (pos.getZ() >> 4) << 4;
 						ResourceKey<Level> dimensionType = world.getLevel().dimension();
@@ -527,44 +456,32 @@ public final class KamuiTowerStructures {
 												new AbstractMap.SimpleEntry<>("z", z))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
 									continue;
-								StructureTemplate template = world.getLevel().getStructureManager()
-										.getOrCreate(Identifier.fromNamespaceAndPath("naruto_shippuden", "kamui_tower8"));
+								StructureTemplate template = world.getLevel().getServer().getStructureTemplateManager().getOrCreate(Identifier.fromNamespaceAndPath("naruto_shippuden", "kamui_tower8"));
 								if (template == null)
 									return false;
-								template.placeInWorldChunk(world, spawnTo,
-										new StructurePlaceSettings().setRotation(rotation).setRandom(random).setMirror(mirror)
-												.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setChunkPos(null).setIgnoreEntities(false),
-										random);
+								template.placeInWorld(world, spawnTo, spawnTo, new StructurePlaceSettings().setRotation(rotation).setRandom(random).setMirror(mirror)
+												.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setIgnoreEntities(false), random, 2);
 							}
 						}
 						return true;
-					}
-				};
-				configuredFeature = feature.configured(FeatureConfiguration.NONE)
-						.decorated(FeatureDecorator.NOPE.configured(DecoratorConfiguration.NONE));
-				event.getRegistry().register(feature.setRegistryName("kamui_tower_8"));
-				Registry.register(BuiltInRegistries.CONFIGURED_FEATURE, Identifier.parse("naruto_shippuden:kamui_tower_8"), configuredFeature);
-			}
-		}
-
-		@SubscribeEvent
-		public static void addFeatureToBiomes(BiomeLoadingEvent event) {
-			event.getGeneration().getFeatures(GenerationStep.Decoration.SURFACE_STRUCTURES).add(() -> configuredFeature);
 		}
 	}
 
-	@Mod.EventBusSubscriber
-	public static class KamuiTower9Structure {
-		private static Feature<NoneFeatureConfiguration> feature = null;
-		private static ConfiguredFeature<?, ?> configuredFeature = null;
+	public record KamuiTower9Structure() implements Feature {
+		public static final MapCodec<KamuiTower9Structure> CODEC = MapCodec.unit(KamuiTower9Structure::new);
 
-		@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-		public static class FeatureRegisterHandler {
-			@SubscribeEvent
-			public static void registerFeature(RegistryEvent.Register<Feature<?>> event) {
-				feature = new Feature<NoneFeatureConfiguration>(NoneFeatureConfiguration.CODEC) {
-					@Override
-					public boolean place(WorldGenLevel world, ChunkGenerator generator, RandomSource random, BlockPos pos, NoneFeatureConfiguration config) {
+		static void register() {
+			Registration.add(Registries.FEATURE_TYPE, "kamui_tower_9", () -> CODEC, null);
+		}
+
+		@Override
+		public MapCodec<KamuiTower9Structure> codec() {
+			return CODEC;
+		}
+
+		@Override
+		public boolean place(WorldGenLevel world, ChunkGenerator generator, RandomSource random, BlockPos pos) {
+
 						int ci = (pos.getX() >> 4) << 4;
 						int ck = (pos.getZ() >> 4) << 4;
 						ResourceKey<Level> dimensionType = world.getLevel().dimension();
@@ -591,29 +508,14 @@ public final class KamuiTowerStructures {
 												new AbstractMap.SimpleEntry<>("z", z))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
 									continue;
-								StructureTemplate template = world.getLevel().getStructureManager()
-										.getOrCreate(Identifier.fromNamespaceAndPath("naruto_shippuden", "kamui_tower9"));
+								StructureTemplate template = world.getLevel().getServer().getStructureTemplateManager().getOrCreate(Identifier.fromNamespaceAndPath("naruto_shippuden", "kamui_tower9"));
 								if (template == null)
 									return false;
-								template.placeInWorldChunk(world, spawnTo,
-										new StructurePlaceSettings().setRotation(rotation).setRandom(random).setMirror(mirror)
-												.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setChunkPos(null).setIgnoreEntities(false),
-										random);
+								template.placeInWorld(world, spawnTo, spawnTo, new StructurePlaceSettings().setRotation(rotation).setRandom(random).setMirror(mirror)
+												.addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).setIgnoreEntities(false), random, 2);
 							}
 						}
 						return true;
-					}
-				};
-				configuredFeature = feature.configured(FeatureConfiguration.NONE)
-						.decorated(FeatureDecorator.NOPE.configured(DecoratorConfiguration.NONE));
-				event.getRegistry().register(feature.setRegistryName("kamui_tower_9"));
-				Registry.register(BuiltInRegistries.CONFIGURED_FEATURE, Identifier.parse("naruto_shippuden:kamui_tower_9"), configuredFeature);
-			}
-		}
-
-		@SubscribeEvent
-		public static void addFeatureToBiomes(BiomeLoadingEvent event) {
-			event.getGeneration().getFeatures(GenerationStep.Decoration.SURFACE_STRUCTURES).add(() -> configuredFeature);
 		}
 	}
 }

@@ -1,5 +1,7 @@
 package net.mcreator.narutoshippudenmod.compat;
 
+import java.util.function.Supplier;
+
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.registries.Registries;
@@ -46,7 +48,7 @@ public final class Compat {
 	/** Gives the stack to the player, dropping whatever does not fit (was ItemHandlerHelper.giveItemToPlayer). */
 	public static void giveItemToPlayer(Player player, ItemStack stack) {
 		if (!player.getInventory().add(stack))
-			player.drop(stack, false);
+			player.drop(stack, false, net.minecraft.util.Prediction.SERVER_ONLY);
 	}
 
 	/** Runs a command as the entity with full permissions and no chat output (server side only). */
@@ -77,7 +79,7 @@ public final class Compat {
 	}
 
 	public static boolean entityHasTag(EntityType<?> type, Identifier tag) {
-		return type.is(TagKey.create(Registries.ENTITY_TYPE, tag));
+		return type.builtInRegistryHolder().is(TagKey.create(Registries.ENTITY_TYPE, tag));
 	}
 
 	/** Knockback for the mod's projectiles (arrows lost the knockback field). */
@@ -93,5 +95,69 @@ public final class Compat {
 			key = Identifier.fromNamespaceAndPath("naruto_shippuden", "silent");
 		net.minecraft.sounds.SoundEvent sound = net.minecraft.core.registries.BuiltInRegistries.SOUND_EVENT.getValue(key);
 		return sound != null ? sound : net.minecraft.sounds.SoundEvent.createVariableRangeEvent(key);
+	}
+
+	public static boolean blockHasTag(Identifier tag, Block block) {
+		return blockHasTag(block, tag);
+	}
+
+	public static boolean blockHasTag(Identifier tag, BlockState state) {
+		return blockHasTag(state, tag);
+	}
+
+	public static boolean itemHasTag(Identifier tag, Item item) {
+		return itemHasTag(item, tag);
+	}
+
+	public static boolean entityHasTag(Identifier tag, EntityType<?> type) {
+		return entityHasTag(type, tag);
+	}
+
+	/** Custom item name (was ItemStack.setHoverName). */
+	public static ItemStack setName(ItemStack stack, Component name) {
+		stack.set(net.minecraft.core.component.DataComponents.CUSTOM_NAME, name);
+		return stack;
+	}
+
+	/** Replaces the stack's custom data (was ItemStack.setTag). */
+	public static void setCustomData(ItemStack stack, net.minecraft.nbt.CompoundTag tag) {
+		net.minecraft.world.item.component.CustomData.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA, stack, tag);
+	}
+
+	/** Block "materials" are gone; the checks the mod made map onto these tags. */
+	public static TagKey<Block> materialTag(String material) {
+		return switch (material) {
+			case "GRASS" -> net.minecraft.tags.BlockTags.DIRT;
+			case "STONE" -> net.minecraft.tags.BlockTags.BASE_STONE_OVERWORLD;
+			case "WOOD", "NETHER_WOOD" -> net.minecraft.tags.BlockTags.LOGS;
+			case "LEAVES" -> net.minecraft.tags.BlockTags.LEAVES;
+			case "SAND" -> net.minecraft.tags.BlockTags.SAND;
+			case "SNOW", "TOP_SNOW" -> net.minecraft.tags.BlockTags.SNOW;
+			case "ICE", "ICE_SOLID" -> net.minecraft.tags.BlockTags.ICE;
+			case "WOOL" -> net.minecraft.tags.BlockTags.WOOL;
+			case "DIRT" -> net.minecraft.tags.BlockTags.DIRT;
+			case "PLANT", "REPLACEABLE_PLANT" -> net.minecraft.tags.BlockTags.REPLACEABLE_BY_TREES;
+			default -> TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath("naruto_shippuden", "material_" + material.toLowerCase()));
+		};
+	}
+
+	private record SpawnPlacementEntry(Supplier<? extends EntityType<?>> type, net.minecraft.world.entity.SpawnPlacementType placement,
+			net.minecraft.world.level.levelgen.Heightmap.Types heightmap, net.minecraft.world.entity.SpawnPlacements.SpawnPredicate<?> predicate) {
+	}
+
+	private static final java.util.List<SpawnPlacementEntry> SPAWN_PLACEMENTS = new java.util.ArrayList<>();
+
+	/** Recorded now, applied when NeoForge asks for spawn placements (the entity type does not exist yet). */
+	public static <T extends Entity> void spawnPlacement(Supplier<EntityType<T>> type, net.minecraft.world.entity.SpawnPlacementType placement,
+			net.minecraft.world.level.levelgen.Heightmap.Types heightmap, net.minecraft.world.entity.SpawnPlacements.SpawnPredicate<T> predicate) {
+		SPAWN_PLACEMENTS.add(new SpawnPlacementEntry(type, placement, heightmap, predicate));
+	}
+
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	@SubscribeEvent
+	public static void registerSpawnPlacements(net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent event) {
+		for (SpawnPlacementEntry entry : SPAWN_PLACEMENTS)
+			event.register((EntityType) entry.type().get(), entry.placement(), entry.heightmap(), (net.minecraft.world.entity.SpawnPlacements.SpawnPredicate) entry.predicate(),
+					net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent.Operation.REPLACE);
 	}
 }

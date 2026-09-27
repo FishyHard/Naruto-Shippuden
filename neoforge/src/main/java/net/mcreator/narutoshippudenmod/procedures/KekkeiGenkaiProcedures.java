@@ -111,10 +111,8 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.common.NeoForge;
-import net.mcreator.narutoshippudenmod.compat.TickEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.loading.FMLPaths;
-import net.mcreator.narutoshippudenmod.compat.ItemHandlerHelper;
 import net.minecraft.core.registries.BuiltInRegistries;
 
 public final class KekkeiGenkaiProcedures {
@@ -183,7 +181,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(BoilDNAReleaseItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).boilreleaselogic == true) {
@@ -234,7 +232,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(BoilDNAReleaseItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).boilreleaselogic == true) {
@@ -858,7 +856,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(BoneDNAReleaseItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).bonereleaselogic == true) {
@@ -909,7 +907,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(BoneDNAReleaseItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).bonereleaselogic == true) {
@@ -1480,7 +1478,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(DustDNAReleaseItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).dustreleaselogic == true) {
@@ -1531,7 +1529,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(DustDNAReleaseItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).dustreleaselogic == true) {
@@ -1700,7 +1698,7 @@ public final class KekkeiGenkaiProcedures {
 															} else if (entityiterator instanceof Player) {
 																if (entityiterator instanceof LivingEntity) {
 																	((LivingEntity) entityiterator).hurt(
-																			new DamageSource("erased in dust").bypassArmor(), (float) 9999);
+																			Compat.damage().genericKill(), (float) 9999);
 																}
 															}
 														}
@@ -1775,7 +1773,7 @@ public final class KekkeiGenkaiProcedures {
 															} else if (entityiterator instanceof Player) {
 																if (entityiterator instanceof LivingEntity) {
 																	((LivingEntity) entityiterator).hurt(
-																			new DamageSource("erased in dust").bypassArmor(), (float) 9999);
+																			Compat.damage().genericKill(), (float) 9999);
 																}
 															}
 														}
@@ -1850,7 +1848,7 @@ public final class KekkeiGenkaiProcedures {
 															} else if (entityiterator instanceof Player) {
 																if (entityiterator instanceof LivingEntity) {
 																	((LivingEntity) entityiterator).hurt(
-																			new DamageSource("erased in dust").bypassArmor(), (float) 9999);
+																			Compat.damage().genericKill(), (float) 9999);
 																}
 															}
 														}
@@ -1925,7 +1923,7 @@ public final class KekkeiGenkaiProcedures {
 															} else if (entityiterator instanceof Player) {
 																if (entityiterator instanceof LivingEntity) {
 																	((LivingEntity) entityiterator).hurt(
-																			new DamageSource("erased in dust").bypassArmor(), (float) 9999);
+																			Compat.damage().genericKill(), (float) 9999);
 																}
 															}
 														}
@@ -2046,7 +2044,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(IceDNAReleaseItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).icereleaselogic == true) {
@@ -2097,7 +2095,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(IceDNAReleaseItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).icereleaselogic == true) {
@@ -2340,8 +2338,7 @@ public final class KekkeiGenkaiProcedures {
 														world.getRandom().nextFloat() * 360F, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											NeoForge.EVENT_BUS.unregister(this);
@@ -2682,8 +2679,7 @@ public final class KekkeiGenkaiProcedures {
 			Entity entity = (Entity) dependencies.get("entity");
 			if (((entity instanceof ServerPlayer) && (entity.level() instanceof ServerLevel))
 					? ((ServerPlayer) entity).getAdvancements()
-							.getOrStartProgress(((MinecraftServer) ((ServerPlayer) entity).server).getAdvancements()
-									.getAdvancement(Identifier.parse("minecraft:adventure/summon_iron_golem")))
+							.getOrStartProgress(((MinecraftServer) ((ServerPlayer) entity).level().getServer()).getAdvancements().get(Identifier.parse("minecraft:adventure/summon_iron_golem")))
 							.isDone()
 					: false) {
 				if (entity instanceof Player) {
@@ -2693,13 +2689,12 @@ public final class KekkeiGenkaiProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(IronDefenseItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (!(((entity instanceof ServerPlayer) && (entity.level() instanceof ServerLevel))
 					? ((ServerPlayer) entity).getAdvancements()
-							.getOrStartProgress(((MinecraftServer) ((ServerPlayer) entity).server).getAdvancements()
-									.getAdvancement(Identifier.parse("minecraft:adventure/summon_iron_golem")))
+							.getOrStartProgress(((MinecraftServer) ((ServerPlayer) entity).level().getServer()).getAdvancements().get(Identifier.parse("minecraft:adventure/summon_iron_golem")))
 							.isDone()
 					: false)) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
@@ -2757,7 +2752,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(MagnetDNAReleaseItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).magnetreleaselogic == true) {
@@ -2808,7 +2803,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(MagnetDNAReleaseItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).magnetreleaselogic == true) {
@@ -3363,7 +3358,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(SmokeDNAReleaseItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).smokereleaselogic == true) {
@@ -3414,7 +3409,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(SmokeDNAReleaseItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).smokereleaselogic == true) {
@@ -4221,7 +4216,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(SteelDNAReleaseItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).steelreleaselogic == true) {
@@ -4272,7 +4267,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(SteelDNAReleaseItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).steelreleaselogic == true) {
@@ -4577,7 +4572,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(StormDNAReleaseItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).stormreleaselogic == true) {
@@ -4628,7 +4623,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(StormDNAReleaseItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).stormreleaselogic == true) {
@@ -5010,7 +5005,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(SwiftReleaseItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).swiftreleaselogic == true) {
@@ -5061,7 +5056,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(SwiftDNAReleaseItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).swiftreleaselogic == true) {
@@ -5090,7 +5085,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 					if (entity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(SwiftReleaseItem.block);
-						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) entity).inventoryMenu.getCraftSlots());
 					}
 					{
@@ -5267,52 +5262,28 @@ public final class KekkeiGenkaiProcedures {
 			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 			Entity entity = (Entity) dependencies.get("entity");
 			if (world instanceof ServerLevel) {
-				((Level) world).getServer().getCommands().performCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-								Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-						"/summon armor_stand ~ ~-3 ~ {Invulnerable:1b,Invisible:1b,PersistenceRequired:1b,NoGravity:1b,Tags:[\"treecorereverse\",\"dielol\"],Rotation:[-60F,-45F]}");
+				Compat.runCommandAt(world, x, y, z, "/summon armor_stand ~ ~-3 ~ {Invulnerable:1b,Invisible:1b,PersistenceRequired:1b,NoGravity:1b,Tags:[\"treecorereverse\",\"dielol\"],Rotation:[-60F,-45F]}");
 			}
 			if (world instanceof ServerLevel) {
-				((Level) world).getServer().getCommands().performCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-								Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-						"/summon armor_stand ~ ~-3 ~ {Invulnerable:1b,NoGravity:1b,Invisible:1b,PersistenceRequired:1b,Tags:[\"treecore\",\"dielol\"],Rotation:[60F,-45F]}");
+				Compat.runCommandAt(world, x, y, z, "/summon armor_stand ~ ~-3 ~ {Invulnerable:1b,NoGravity:1b,Invisible:1b,PersistenceRequired:1b,Tags:[\"treecore\",\"dielol\"],Rotation:[60F,-45F]}");
 			}
 			if (world instanceof ServerLevel) {
-				((Level) world).getServer().getCommands().performCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-								Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-						"/summon armor_stand ~ ~-3 ~ {Invulnerable:1b,NoGravity:1b,Invisible:1b,PersistenceRequired:1b,Tags:[\"treecoretwo\",\"dielol\"],Rotation:[60F,-45F]}");
+				Compat.runCommandAt(world, x, y, z, "/summon armor_stand ~ ~-3 ~ {Invulnerable:1b,NoGravity:1b,Invisible:1b,PersistenceRequired:1b,Tags:[\"treecoretwo\",\"dielol\"],Rotation:[60F,-45F]}");
 			}
 			if (world instanceof ServerLevel) {
-				((Level) world).getServer().getCommands().performCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-								Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-						"/summon armor_stand ~ ~-3 ~ {Invulnerable:1b,NoGravity:1b,Invisible:1b,PersistenceRequired:1b,Tags:[\"treecorereversetwo\",\"dielol\"],Rotation:[-60F,-45F]}");
+				Compat.runCommandAt(world, x, y, z, "/summon armor_stand ~ ~-3 ~ {Invulnerable:1b,NoGravity:1b,Invisible:1b,PersistenceRequired:1b,Tags:[\"treecorereversetwo\",\"dielol\"],Rotation:[-60F,-45F]}");
 			}
 			if (world instanceof ServerLevel) {
-				((Level) world).getServer().getCommands().performCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-								Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-						"/execute as @e[tag=treecore] at @s run tp @s ~ ~-0.9 ~ ~10 ~");
+				Compat.runCommandAt(world, x, y, z, "/execute as @e[tag=treecore] at @s run tp @s ~ ~-0.9 ~ ~10 ~");
 			}
 			if (world instanceof ServerLevel) {
-				((Level) world).getServer().getCommands().performCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-								Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-						"/execute as @e[tag=treecorereverse] at @s run tp @s ~ ~-0.9 ~ ~10 ~");
+				Compat.runCommandAt(world, x, y, z, "/execute as @e[tag=treecorereverse] at @s run tp @s ~ ~-0.9 ~ ~10 ~");
 			}
 			if (world instanceof ServerLevel) {
-				((Level) world).getServer().getCommands().performCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-								Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-						"/execute as @e[tag=treecorereversetwo] at @s run tp @s ~ ~-0.9 ~ ~-10 ~");
+				Compat.runCommandAt(world, x, y, z, "/execute as @e[tag=treecorereversetwo] at @s run tp @s ~ ~-0.9 ~ ~-10 ~");
 			}
 			if (world instanceof ServerLevel) {
-				((Level) world).getServer().getCommands().performCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-								Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-						"/execute as @e[tag=treecoretwo] at @s run tp @s ~ ~-0.9 ~ ~-10 ~");
+				Compat.runCommandAt(world, x, y, z, "/execute as @e[tag=treecoretwo] at @s run tp @s ~ ~-0.9 ~ ~-10 ~");
 			}
 			entity.getPersistentData().putDouble("closer", 2);
 			new Object() {
@@ -5338,10 +5309,7 @@ public final class KekkeiGenkaiProcedures {
 				private void run() {
 					for (int index0 = 0; index0 < (int) (50); index0++) {
 						if (world instanceof ServerLevel) {
-							((Level) world).getServer().getCommands().performCommand(
-									new CommandSourceStack(CommandSource.NULL, new Vec3((x + 1), y, (z + 1)), Vec2.ZERO, (ServerLevel) world, 4, "",
-											Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-									("summon armor_stand " + "~" + new java.text.DecimalFormat("##.##").format((Math.random() * 20) / 10 - 2) + " ~"
+							Compat.runCommandAt(world, (x + 1), y, (z + 1), ("summon armor_stand " + "~" + new java.text.DecimalFormat("##.##").format((Math.random() * 20) / 10 - 2) + " ~"
 											+ new java.text.DecimalFormat("##.##").format((Math.random() * 20) / 10 + 3) + " ~"
 											+ new java.text.DecimalFormat("##.##").format((Math.random() * 20) / 10 - 2)
 											+ " {NoGravity:1b,Silent:1b,Marker:1b,Invisible:1b,Invulnerable:1b,Tags:[\"dielolleave\"],PersistenceRequired:1b,Rotation:[35F,45F],Pose:{Head:[0f,35f,0f]},ArmorItems:[{},{},{},{id:\"minecraft:oak_leaves\",Count:1b}]}"));
@@ -5395,60 +5363,36 @@ public final class KekkeiGenkaiProcedures {
 			entity.setDeltaMovement(0, 0, 0);
 			entity.getPersistentData().putDouble("closer", (entity.getPersistentData().getDoubleOr("closer", 0) - 0.04));
 			if (world instanceof ServerLevel) {
-				((Level) world).getServer().getCommands().performCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-								Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-						("/execute as @e[tag=treecore] at @s run summon armor_stand ^ ^ ^"
+				Compat.runCommandAt(world, x, y, z, ("/execute as @e[tag=treecore] at @s run summon armor_stand ^ ^ ^"
 								+ new java.text.DecimalFormat("##.##").format(entity.getPersistentData().getDoubleOr("closer", 0))
 								+ " {NoGravity:1b,Silent:1b,Marker:1b,Invisible:1b,Invulnerable:1b,Tags:[\"dielol\"],PersistenceRequired:1b,Rotation:[35F,45F],Pose:{Head:[0f,35f,0f]},ArmorItems:[{},{},{},{id:\"minecraft:oak_log\",Count:1b}]}"));
 			}
 			if (world instanceof ServerLevel) {
-				((Level) world).getServer().getCommands().performCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-								Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-						("/execute as @e[tag=treecorereverse] at @s run summon armor_stand ^ ^ ^"
+				Compat.runCommandAt(world, x, y, z, ("/execute as @e[tag=treecorereverse] at @s run summon armor_stand ^ ^ ^"
 								+ new java.text.DecimalFormat("##.##").format(entity.getPersistentData().getDoubleOr("closer", 0))
 								+ " {NoGravity:1b,Silent:1b,Marker:1b,Invisible:1b,Invulnerable:1b,Tags:[\"dielol\"],PersistenceRequired:1b,Rotation:[35F,45F],Pose:{Head:[0f,35f,0f]},ArmorItems:[{},{},{},{id:\"minecraft:oak_log\",Count:1b}]}"));
 			}
 			if (world instanceof ServerLevel) {
-				((Level) world).getServer().getCommands().performCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-								Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-						("/execute as @e[tag=treecorereversetwo] at @s run summon armor_stand ^ ^ ^"
+				Compat.runCommandAt(world, x, y, z, ("/execute as @e[tag=treecorereversetwo] at @s run summon armor_stand ^ ^ ^"
 								+ new java.text.DecimalFormat("##.##").format(entity.getPersistentData().getDoubleOr("closer", 0))
 								+ " {NoGravity:1b,Silent:1b,Marker:1b,Invisible:1b,Invulnerable:1b,Tags:[\"dielol\"],PersistenceRequired:1b,Rotation:[35F,45F],Pose:{Head:[0f,35f,0f]},ArmorItems:[{},{},{},{id:\"minecraft:oak_log\",Count:1b}]}"));
 			}
 			if (world instanceof ServerLevel) {
-				((Level) world).getServer().getCommands().performCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-								Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-						("/execute as @e[tag=treecoretwo] at @s run summon armor_stand ^ ^ ^"
+				Compat.runCommandAt(world, x, y, z, ("/execute as @e[tag=treecoretwo] at @s run summon armor_stand ^ ^ ^"
 								+ new java.text.DecimalFormat("##.##").format(entity.getPersistentData().getDoubleOr("closer", 0))
 								+ " {NoGravity:1b,Silent:1b,Marker:1b,Invisible:1b,Invulnerable:1b,Tags:[\"dielol\"],PersistenceRequired:1b,Rotation:[35F,45F],Pose:{Head:[0f,35f,0f]},ArmorItems:[{},{},{},{id:\"minecraft:oak_log\",Count:1b}]}"));
 			}
 			if (world instanceof ServerLevel) {
-				((Level) world).getServer().getCommands().performCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-								Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-						"/execute as @e[tag=treecore] at @s run tp @s ~ ~0.13 ~ ~15 ~");
+				Compat.runCommandAt(world, x, y, z, "/execute as @e[tag=treecore] at @s run tp @s ~ ~0.13 ~ ~15 ~");
 			}
 			if (world instanceof ServerLevel) {
-				((Level) world).getServer().getCommands().performCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-								Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-						"/execute as @e[tag=treecorereverse] at @s run tp @s ~ ~0.13 ~ ~-15 ~");
+				Compat.runCommandAt(world, x, y, z, "/execute as @e[tag=treecorereverse] at @s run tp @s ~ ~0.13 ~ ~-15 ~");
 			}
 			if (world instanceof ServerLevel) {
-				((Level) world).getServer().getCommands().performCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-								Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-						"/execute as @e[tag=treecorereversetwo] at @s run tp @s ~ ~0.13 ~ ~15 ~");
+				Compat.runCommandAt(world, x, y, z, "/execute as @e[tag=treecorereversetwo] at @s run tp @s ~ ~0.13 ~ ~15 ~");
 			}
 			if (world instanceof ServerLevel) {
-				((Level) world).getServer().getCommands().performCommand(
-						new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-								Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-						"/execute as @e[tag=treecoretwo] at @s run tp @s ~ ~0.13 ~ ~-15 ~");
+				Compat.runCommandAt(world, x, y, z, "/execute as @e[tag=treecoretwo] at @s run tp @s ~ ~0.13 ~ ~-15 ~");
 			}
 		}
 	}
@@ -5518,7 +5462,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(TyphoonDNAReleaseItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).typhoonreleaslogic == true) {
@@ -5569,7 +5513,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(TyphoonDNAReleaseItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).typhoonreleaslogic == true) {
@@ -5629,7 +5573,7 @@ public final class KekkeiGenkaiProcedures {
 				if (NarutoShippudenModVariables.get(entity).jp >= 30) {
 					if (entity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(TyphoonReleaseItem.block);
-						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) entity).inventoryMenu.getCraftSlots());
 					}
 					{
@@ -6152,7 +6096,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 					if (entity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(UndefinedDNAItem.block);
-						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) entity).inventoryMenu.getCraftSlots());
 					}
 
@@ -6211,7 +6155,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(WoodDNAReleaseItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).woodreleaselogic == true) {
@@ -6262,7 +6206,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(WoodDNAReleaseItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).woodreleaselogic == true) {
@@ -6559,8 +6503,7 @@ public final class KekkeiGenkaiProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									{
@@ -6575,7 +6518,7 @@ public final class KekkeiGenkaiProcedures {
 										for (Entity entityiterator : _entfound) {
 											if (entityiterator instanceof WoodGolemEntity.CustomEntity) {
 												if ((entityiterator instanceof TamableAnimal) && (entity instanceof Player)) {
-													((TamableAnimal) entityiterator).setTame(true);
+													((TamableAnimal) entityiterator).setTame(true, true);
 													((TamableAnimal) entityiterator).tame((Player) entity);
 												}
 											}

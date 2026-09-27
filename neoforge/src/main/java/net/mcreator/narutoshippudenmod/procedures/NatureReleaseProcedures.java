@@ -75,9 +75,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.common.NeoForge;
-import net.mcreator.narutoshippudenmod.compat.TickEvent;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.mcreator.narutoshippudenmod.compat.ItemHandlerHelper;
 import net.minecraft.core.registries.BuiltInRegistries;
 
 public final class NatureReleaseProcedures {
@@ -132,7 +130,7 @@ public final class NatureReleaseProcedures {
 					}
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(EarthDNAItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).earthreleaselogic == true) {
@@ -183,7 +181,7 @@ public final class NatureReleaseProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(EarthDNAItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).earthreleaselogic == true) {
@@ -411,8 +409,7 @@ public final class NatureReleaseProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									{
@@ -427,7 +424,7 @@ public final class NatureReleaseProcedures {
 										for (Entity entityiterator : _entfound) {
 											if (entityiterator instanceof EarthGolemEntity.CustomEntity) {
 												if ((entityiterator instanceof TamableAnimal) && (entity instanceof Player)) {
-													((TamableAnimal) entityiterator).setTame(true);
+													((TamableAnimal) entityiterator).setTame(true, true);
 													((TamableAnimal) entityiterator).tame((Player) entity);
 												}
 											}
@@ -1120,7 +1117,7 @@ public final class NatureReleaseProcedures {
 					}
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(FireDNAReleaseItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).firereleaselogic == true) {
@@ -1171,7 +1168,7 @@ public final class NatureReleaseProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(FireDNAReleaseItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).firereleaselogic == true) {
@@ -1378,8 +1375,7 @@ public final class NatureReleaseProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									{
@@ -4666,7 +4662,7 @@ public final class NatureReleaseProcedures {
 					}
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(LightningDNAItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).lightningreleaselogic == true) {
@@ -4717,7 +4713,7 @@ public final class NatureReleaseProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(LightningDNAItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).lightningreleaselogic == true) {
@@ -5567,34 +5563,22 @@ public final class NatureReleaseProcedures {
 									if ((entity.getDirection()) == Direction.SOUTH) {
 										entity.setDeltaMovement(0, 0.5, 8);
 										if (world instanceof ServerLevel) {
-											((Level) world).getServer().getCommands().performCommand(
-													new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4,
-															"", Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-													"/effect give @p minecraft:slow_falling 3 0");
+											Compat.runCommandAt(world, x, y, z, "/effect give @p minecraft:slow_falling 3 0");
 										}
 									} else if ((entity.getDirection()) == Direction.NORTH) {
 										entity.setDeltaMovement(0, 0.5, (-8));
 										if (world instanceof ServerLevel) {
-											((Level) world).getServer().getCommands().performCommand(
-													new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4,
-															"", Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-													"/effect give @p minecraft:slow_falling 3 0");
+											Compat.runCommandAt(world, x, y, z, "/effect give @p minecraft:slow_falling 3 0");
 										}
 									} else if ((entity.getDirection()) == Direction.WEST) {
 										entity.setDeltaMovement((-8), 0.5, 0);
 										if (world instanceof ServerLevel) {
-											((Level) world).getServer().getCommands().performCommand(
-													new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4,
-															"", Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-													"/effect give @p minecraft:slow_falling 3 0");
+											Compat.runCommandAt(world, x, y, z, "/effect give @p minecraft:slow_falling 3 0");
 										}
 									} else if ((entity.getDirection()) == Direction.EAST) {
 										entity.setDeltaMovement(8, 0.5, 0);
 										if (world instanceof ServerLevel) {
-											((Level) world).getServer().getCommands().performCommand(
-													new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4,
-															"", Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-													"/effect give @p minecraft:slow_falling 3 0");
+											Compat.runCommandAt(world, x, y, z, "/effect give @p minecraft:slow_falling 3 0");
 										}
 									}
 									{
@@ -5645,8 +5629,7 @@ public final class NatureReleaseProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									{
@@ -5791,7 +5774,7 @@ public final class NatureReleaseProcedures {
 					}
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(WaterDNAReleaseItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).waterreleaselogic == true) {
@@ -5842,7 +5825,7 @@ public final class NatureReleaseProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(WaterDNAReleaseItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).waterreleaselogic == true) {
@@ -8293,7 +8276,7 @@ public final class NatureReleaseProcedures {
 					}
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(WindDNAItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).windreleaselogic == true) {
@@ -8344,7 +8327,7 @@ public final class NatureReleaseProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(WindDNAItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).windreleaselogic == true) {
@@ -8561,10 +8544,7 @@ public final class NatureReleaseProcedures {
 										}
 										entity.setDeltaMovement(0, 1, 5);
 										if (world instanceof ServerLevel) {
-											((Level) world).getServer().getCommands().performCommand(
-													new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4,
-															"", Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-													"/effect give @p minecraft:slow_falling 3 0");
+											Compat.runCommandAt(world, x, y, z, "/effect give @p minecraft:slow_falling 3 0");
 										}
 									} else if ((entity.getDirection()) == Direction.NORTH) {
 										if (world instanceof Level && !world.isClientSide()) {
@@ -8580,10 +8560,7 @@ public final class NatureReleaseProcedures {
 										}
 										entity.setDeltaMovement(0, 1, (-5));
 										if (world instanceof ServerLevel) {
-											((Level) world).getServer().getCommands().performCommand(
-													new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4,
-															"", Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-													"/effect give @p minecraft:slow_falling 3 0");
+											Compat.runCommandAt(world, x, y, z, "/effect give @p minecraft:slow_falling 3 0");
 										}
 									} else if ((entity.getDirection()) == Direction.WEST) {
 										if (world instanceof Level && !world.isClientSide()) {
@@ -8599,10 +8576,7 @@ public final class NatureReleaseProcedures {
 										}
 										entity.setDeltaMovement((-5), 1, 0);
 										if (world instanceof ServerLevel) {
-											((Level) world).getServer().getCommands().performCommand(
-													new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4,
-															"", Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-													"/effect give @p minecraft:slow_falling 3 0");
+											Compat.runCommandAt(world, x, y, z, "/effect give @p minecraft:slow_falling 3 0");
 										}
 									} else if ((entity.getDirection()) == Direction.EAST) {
 										if (world instanceof Level && !world.isClientSide()) {
@@ -8618,10 +8592,7 @@ public final class NatureReleaseProcedures {
 										}
 										entity.setDeltaMovement(5, 1, 0);
 										if (world instanceof ServerLevel) {
-											((Level) world).getServer().getCommands().performCommand(
-													new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4,
-															"", Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-													"/effect give @p minecraft:slow_falling 3 0");
+											Compat.runCommandAt(world, x, y, z, "/effect give @p minecraft:slow_falling 3 0");
 										}
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {

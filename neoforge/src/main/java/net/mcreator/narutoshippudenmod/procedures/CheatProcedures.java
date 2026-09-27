@@ -362,7 +362,7 @@ public final class CheatProcedures {
 						return ((ServerPlayer) _ent).gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 					} else if (_ent instanceof Player && _ent.level().isClientSide()) {
 						PlayerInfo _npi = Minecraft.getInstance().getConnection()
-								.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().getId());
+								.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().id());
 						return _npi != null && _npi.getGameMode() == GameType.CREATIVE;
 					}
 					return false;
@@ -392,7 +392,7 @@ public final class CheatProcedures {
 						return ((ServerPlayer) _ent).gameMode.getGameModeForPlayer() == GameType.CREATIVE;
 					} else if (_ent instanceof Player && _ent.level().isClientSide()) {
 						PlayerInfo _npi = Minecraft.getInstance().getConnection()
-								.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().getId());
+								.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().id());
 						return _npi != null && _npi.getGameMode() == GameType.CREATIVE;
 					}
 					return false;

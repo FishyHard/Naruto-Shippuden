@@ -1,5 +1,6 @@
 package net.mcreator.narutoshippudenmod.item;
 
+import net.minecraft.core.registries.Registries;
 import net.mcreator.narutoshippudenmod.compat.Registration;
 
 import java.util.AbstractMap;
@@ -48,7 +49,7 @@ public final class ReleaseItems {
 	public static class BoilReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("boil_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "boil_release", v -> block = (Item) v);
 		}
 
 		public BoilReleaseItem(NarutoShippudenModElements instance) {
@@ -102,7 +103,7 @@ public final class ReleaseItems {
 	public static class BoneReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("bone_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "bone_release", v -> block = (Item) v);
 		}
 
 		public BoneReleaseItem(NarutoShippudenModElements instance) {
@@ -156,7 +157,7 @@ public final class ReleaseItems {
 	public static class ChakraNatureResetItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("chakra_nature_reset", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "chakra_nature_reset", v -> block = (Item) v);
 		}
 
 		public ChakraNatureResetItem(NarutoShippudenModElements instance) {
@@ -208,7 +209,7 @@ public final class ReleaseItems {
 	public static class DustReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("dust_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "dust_release", v -> block = (Item) v);
 		}
 
 		public DustReleaseItem(NarutoShippudenModElements instance) {
@@ -260,7 +261,7 @@ public final class ReleaseItems {
 	public static class EarthReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("earth_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "earth_release", v -> block = (Item) v);
 		}
 
 		public EarthReleaseItem(NarutoShippudenModElements instance) {
@@ -315,7 +316,7 @@ public final class ReleaseItems {
 	public static class FireReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("fire_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "fire_release", v -> block = (Item) v);
 		}
 
 		public FireReleaseItem(NarutoShippudenModElements instance) {
@@ -370,7 +371,7 @@ public final class ReleaseItems {
 	public static class IceReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("ice_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "ice_release", v -> block = (Item) v);
 		}
 
 		public IceReleaseItem(NarutoShippudenModElements instance) {
@@ -424,7 +425,7 @@ public final class ReleaseItems {
 	public static class LightningReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("lightning_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "lightning_release", v -> block = (Item) v);
 		}
 
 		public LightningReleaseItem(NarutoShippudenModElements instance) {
@@ -479,7 +480,7 @@ public final class ReleaseItems {
 	public static class MagnetReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("magnet_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "magnet_release", v -> block = (Item) v);
 		}
 
 		public MagnetReleaseItem(NarutoShippudenModElements instance) {
@@ -534,7 +535,7 @@ public final class ReleaseItems {
 	public static class SmokeReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("smoke_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "smoke_release", v -> block = (Item) v);
 		}
 
 		public SmokeReleaseItem(NarutoShippudenModElements instance) {
@@ -588,7 +589,7 @@ public final class ReleaseItems {
 	public static class SteelReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("steel_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "steel_release", v -> block = (Item) v);
 		}
 
 		public SteelReleaseItem(NarutoShippudenModElements instance) {
@@ -641,7 +642,7 @@ public final class ReleaseItems {
 	public static class StormReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("storm_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "storm_release", v -> block = (Item) v);
 		}
 
 		public StormReleaseItem(NarutoShippudenModElements instance) {
@@ -694,7 +695,7 @@ public final class ReleaseItems {
 	public static class SwiftReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("swift_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "swift_release", v -> block = (Item) v);
 		}
 
 		public SwiftReleaseItem(NarutoShippudenModElements instance) {
@@ -746,7 +747,7 @@ public final class ReleaseItems {
 	public static class TyphoonReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("typhoon_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "typhoon_release", v -> block = (Item) v);
 		}
 
 		public TyphoonReleaseItem(NarutoShippudenModElements instance) {
@@ -800,7 +801,7 @@ public final class ReleaseItems {
 	public static class WaterReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("water_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "water_release", v -> block = (Item) v);
 		}
 
 		public WaterReleaseItem(NarutoShippudenModElements instance) {
@@ -855,7 +856,7 @@ public final class ReleaseItems {
 	public static class WindReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("wind_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "wind_release", v -> block = (Item) v);
 		}
 
 		public WindReleaseItem(NarutoShippudenModElements instance) {
@@ -910,7 +911,7 @@ public final class ReleaseItems {
 	public static class WoodReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("wood_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "wood_release", v -> block = (Item) v);
 		}
 
 		public WoodReleaseItem(NarutoShippudenModElements instance) {

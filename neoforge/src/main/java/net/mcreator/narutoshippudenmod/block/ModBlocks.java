@@ -1,6 +1,8 @@
 package net.mcreator.narutoshippudenmod.block;
 
+import net.mcreator.narutoshippudenmod.compat.Compat;
 import net.minecraft.util.RandomSource;
+import net.minecraft.core.registries.Registries;
 import net.mcreator.narutoshippudenmod.compat.Registration;
 import net.mcreator.narutoshippudenmod.NarutoShippudenMod;
 import net.mcreator.narutoshippudenmod.compat.StackTag;
@@ -84,11 +86,10 @@ import net.neoforged.neoforge.common.util.DeferredSoundType;
 
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-
-
-
-
-
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 
 public final class ModBlocks {
 	private ModBlocks() {
@@ -98,69 +99,55 @@ public final class ModBlocks {
 	public static class AmaterasuBlock extends NarutoShippudenModElements.ModElement {
 				public static Block block;
 		static {
-			Registration.holder("amaterasu", v -> block = (Block) v);
+			Registration.holder(Registries.BLOCK, "amaterasu", v -> block = (Block) v);
 		}
 				public static BlockEntityType<CustomTileEntity> tileEntityType;
 		static {
-			Registration.holder("amaterasu", v -> tileEntityType = (BlockEntityType<CustomTileEntity>) v);
+			Registration.holder(Registries.BLOCK_ENTITY_TYPE, "amaterasu", v -> tileEntityType = (BlockEntityType<CustomTileEntity>) v);
 		}
 
 		public AmaterasuBlock(NarutoShippudenModElements instance) {
 			super(instance, 1203);
-			NarutoShippudenMod.MOD_BUS.register(new TileEntityRegisterHandler());
+			Registration.add(Registries.BLOCK_ENTITY_TYPE, "amaterasu", () -> new BlockEntityType<>(CustomTileEntity::new, block), null);
 		}
 
 		@Override
 		public void initElements() {
 			elements.blocks.add(() -> new CustomBlock());
-			elements.items.add(() -> new BlockItem(block, new Item.Properties().tab(null)).setRegistryName(block.getRegistryName()));
+			elements.items.add(() -> new BlockItem(block, Registration.itemProps("amaterasu", null).useBlockDescriptionPrefix()));
 		}
 
-		public static class TileEntityRegisterHandler {
-			@SubscribeEvent
-			public void registerTileEntity(RegistryEvent.Register<BlockEntityType<?>> event) {
-				event.getRegistry().register(BlockEntityType.Builder.of(CustomTileEntity::new, block).build(null).setRegistryName("amaterasu"));
-			}
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void clientLoad(FMLClientSetupEvent event) {
-			RenderTypeLookup.setRenderLayer(block, RenderType.cutoutMipped());
-		}
-
-		public static class CustomBlock extends Block {
+		public static class CustomBlock extends Block implements EntityBlock {
 			public CustomBlock() {
-				super(Block.Properties.of(Material.FIRE)
-						.sound(new DeferredSoundType(1.0f, 1.0f, () -> new SoundEvent(Identifier.parse("block.fire.ambient")),
-								() -> new SoundEvent(Identifier.parse("block.fire.ambient")),
-								() -> new SoundEvent(Identifier.parse("block.fire.ambient")),
-								() -> new SoundEvent(Identifier.parse("entity.player.hurt_on_fire")),
-								() -> new SoundEvent(Identifier.parse("block.fire.ambient"))))
-						.strength(-1, 3600000).lightLevel(s -> 0).noCollission().noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
-				setRegistryName("amaterasu");
+				super(Registration.blockProps("amaterasu", BlockBehaviour.Properties.of().replaceable()
+						.sound(new DeferredSoundType(1.0f, 1.0f, () -> Compat.sound("block.fire.ambient"),
+								() -> Compat.sound("block.fire.ambient"),
+								() -> Compat.sound("block.fire.ambient"),
+								() -> Compat.sound("entity.player.hurt_on_fire"),
+								() -> Compat.sound("block.fire.ambient")))
+						.strength(-1, 3600000).lightLevel(s -> 0).noCollision().noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
 			}
 
 			@Override
-			public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+			protected boolean propagatesSkylightDown(BlockState state) {
 				return true;
 			}
 
 			@Override
-			public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+			protected int getLightDampening(BlockState state) {
 				return 0;
 			}
 
 			@Override
 			public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-				Vec3 offset = state.getOffset(world, pos);
+				Vec3 offset = state.getOffset(pos);
 				return Shapes.or(box(0, 0, 0, 16, 1, 16))
 
 						.move(offset.x, offset.y, offset.z);
 			}
 
 			@Override
-			public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+			public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 				List<ItemStack> dropsOriginal = super.getDrops(state, builder);
 				if (!dropsOriginal.isEmpty())
 					return dropsOriginal;
@@ -173,7 +160,7 @@ public final class ModBlocks {
 				int x = pos.getX();
 				int y = pos.getY();
 				int z = pos.getZ();
-				world.getBlockTicks().scheduleTick(pos, this, 1);
+				world.scheduleTick(pos, this, 1);
 
 				AmaterasuBlockAddedProcedure.executeProcedure(Stream
 						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
@@ -192,12 +179,12 @@ public final class ModBlocks {
 						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
 								new AbstractMap.SimpleEntry<>("z", z))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				world.getBlockTicks().scheduleTick(pos, this, 1);
+				world.scheduleTick(pos, this, 1);
 			}
 
 			@Override
-			public void entityInside(BlockState blockstate, Level world, BlockPos pos, Entity entity) {
-				super.entityInside(blockstate, world, pos, entity);
+			protected void entityInside(BlockState blockstate, Level world, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean isPrecise) {
+				super.entityInside(blockstate, world, pos, entity, effectApplier, isPrecise);
 				int x = pos.getX();
 				int y = pos.getY();
 				int z = pos.getZ();
@@ -207,146 +194,14 @@ public final class ModBlocks {
 			}
 
 			@Override
-			public MenuProvider getMenuProvider(BlockState state, Level worldIn, BlockPos pos) {
-				BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-				return tileEntity instanceof MenuProvider ? (MenuProvider) tileEntity : null;
-			}
-
-			@Override
-			public boolean hasTileEntity(BlockState state) {
-				return true;
-			}
-
-			@Override
-			public BlockEntity createTileEntity(BlockState state, BlockGetter world) {
-				return new CustomTileEntity();
-			}
-
-			@Override
-			public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int eventID, int eventParam) {
-				super.triggerEvent(state, world, pos, eventID, eventParam);
-				BlockEntity tileentity = world.getBlockEntity(pos);
-				return tileentity == null ? false : tileentity.triggerEvent(eventID, eventParam);
+			public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+				return new CustomTileEntity(pos, state);
 			}
 		}
 
-		public static class CustomTileEntity extends RandomizableContainerBlockEntity implements WorldlyContainer {
-			private NonNullList<ItemStack> stacks = NonNullList.<ItemStack>withSize(0, ItemStack.EMPTY);
-
-			protected CustomTileEntity() {
-				super(tileEntityType);
-			}
-
-			@Override
-			public void load(BlockState blockState, CompoundTag compound) {
-				super.load(blockState, compound);
-				if (!this.tryLoadLootTable(compound)) {
-					this.stacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-				}
-				ContainerHelper.loadAllItems(compound, this.stacks);
-			}
-
-			@Override
-			public CompoundTag save(CompoundTag compound) {
-				super.save(compound);
-				if (!this.trySaveLootTable(compound)) {
-					ContainerHelper.saveAllItems(compound, this.stacks);
-				}
-				return compound;
-			}
-
-			@Override
-			public ClientboundBlockEntityDataPacket getUpdatePacket() {
-				return new ClientboundBlockEntityDataPacket(this.worldPosition, 0, this.getUpdateTag());
-			}
-
-			@Override
-			public CompoundTag getUpdateTag() {
-				return this.save(new CompoundTag());
-			}
-
-			@Override
-			public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-				this.load(this.getBlockState(), StackTag.of(pkt));
-			}
-
-			@Override
-			public int getContainerSize() {
-				return stacks.size();
-			}
-
-			@Override
-			public boolean isEmpty() {
-				for (ItemStack itemstack : this.stacks)
-					if (!itemstack.isEmpty())
-						return false;
-				return true;
-			}
-
-			@Override
-			public Component getDefaultName() {
-				return Component.literal("amaterasu");
-			}
-
-			@Override
-			public int getMaxStackSize() {
-				return 64;
-			}
-
-			@Override
-			public AbstractContainerMenu createMenu(int id, Inventory player) {
-				return ChestMenu.threeRows(id, player, this);
-			}
-
-			@Override
-			public Component getDisplayName() {
-				return Component.literal("Amaterasu");
-			}
-
-			@Override
-			protected NonNullList<ItemStack> getItems() {
-				return this.stacks;
-			}
-
-			@Override
-			protected void setItems(NonNullList<ItemStack> stacks) {
-				this.stacks = stacks;
-			}
-
-			@Override
-			public boolean canPlaceItem(int index, ItemStack stack) {
-				return true;
-			}
-
-			@Override
-			public int[] getSlotsForFace(Direction side) {
-				return IntStream.range(0, this.getContainerSize()).toArray();
-			}
-
-			@Override
-			public boolean canPlaceItemThroughFace(int index, ItemStack stack, @Nullable Direction direction) {
-				return this.canPlaceItem(index, stack);
-			}
-
-			@Override
-			public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
-				return true;
-			}
-
-			private final LazyOptional<? extends IItemHandler>[] handlers = SidedInvWrapper.create(this, Direction.values());
-
-			@Override
-			public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
-				if (!this.remove && facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-					return handlers[facing.ordinal()].cast();
-				return super.getCapability(capability, facing);
-			}
-
-			@Override
-			public void setRemoved() {
-				super.setRemoved();
-				for (LazyOptional<? extends IItemHandler> handler : handlers)
-					handler.invalidate();
+		public static class CustomTileEntity extends BlockEntity {
+			public CustomTileEntity(BlockPos pos, BlockState state) {
+				super(tileEntityType, pos, state);
 			}
 		}
 	}
@@ -355,69 +210,55 @@ public final class ModBlocks {
 	public static class AmaterasuSpreadBlock extends NarutoShippudenModElements.ModElement {
 				public static Block block;
 		static {
-			Registration.holder("amaterasu_spread", v -> block = (Block) v);
+			Registration.holder(Registries.BLOCK, "amaterasu_spread", v -> block = (Block) v);
 		}
 				public static BlockEntityType<CustomTileEntity> tileEntityType;
 		static {
-			Registration.holder("amaterasu_spread", v -> tileEntityType = (BlockEntityType<CustomTileEntity>) v);
+			Registration.holder(Registries.BLOCK_ENTITY_TYPE, "amaterasu_spread", v -> tileEntityType = (BlockEntityType<CustomTileEntity>) v);
 		}
 
 		public AmaterasuSpreadBlock(NarutoShippudenModElements instance) {
 			super(instance, 1208);
-			NarutoShippudenMod.MOD_BUS.register(new TileEntityRegisterHandler());
+			Registration.add(Registries.BLOCK_ENTITY_TYPE, "amaterasu_spread", () -> new BlockEntityType<>(CustomTileEntity::new, block), null);
 		}
 
 		@Override
 		public void initElements() {
 			elements.blocks.add(() -> new CustomBlock());
-			elements.items.add(() -> new BlockItem(block, new Item.Properties().tab(null)).setRegistryName(block.getRegistryName()));
+			elements.items.add(() -> new BlockItem(block, Registration.itemProps("amaterasu_spread", null).useBlockDescriptionPrefix()));
 		}
 
-		public static class TileEntityRegisterHandler {
-			@SubscribeEvent
-			public void registerTileEntity(RegistryEvent.Register<BlockEntityType<?>> event) {
-				event.getRegistry().register(BlockEntityType.Builder.of(CustomTileEntity::new, block).build(null).setRegistryName("amaterasu_spread"));
-			}
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void clientLoad(FMLClientSetupEvent event) {
-			RenderTypeLookup.setRenderLayer(block, RenderType.cutoutMipped());
-		}
-
-		public static class CustomBlock extends Block {
+		public static class CustomBlock extends Block implements EntityBlock {
 			public CustomBlock() {
-				super(Block.Properties.of(Material.FIRE)
-						.sound(new DeferredSoundType(1.0f, 1.0f, () -> new SoundEvent(Identifier.parse("block.fire.ambient")),
-								() -> new SoundEvent(Identifier.parse("block.fire.ambient")),
-								() -> new SoundEvent(Identifier.parse("block.fire.ambient")),
-								() -> new SoundEvent(Identifier.parse("entity.player.hurt_on_fire")),
-								() -> new SoundEvent(Identifier.parse("block.fire.ambient"))))
-						.strength(-1, 3600000).lightLevel(s -> 0).noCollission().noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
-				setRegistryName("amaterasu_spread");
+				super(Registration.blockProps("amaterasu_spread", BlockBehaviour.Properties.of().replaceable()
+						.sound(new DeferredSoundType(1.0f, 1.0f, () -> Compat.sound("block.fire.ambient"),
+								() -> Compat.sound("block.fire.ambient"),
+								() -> Compat.sound("block.fire.ambient"),
+								() -> Compat.sound("entity.player.hurt_on_fire"),
+								() -> Compat.sound("block.fire.ambient")))
+						.strength(-1, 3600000).lightLevel(s -> 0).noCollision().noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
 			}
 
 			@Override
-			public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+			protected boolean propagatesSkylightDown(BlockState state) {
 				return true;
 			}
 
 			@Override
-			public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+			protected int getLightDampening(BlockState state) {
 				return 0;
 			}
 
 			@Override
 			public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-				Vec3 offset = state.getOffset(world, pos);
+				Vec3 offset = state.getOffset(pos);
 				return Shapes.or(box(0, 0, 0, 16, 1, 16))
 
 						.move(offset.x, offset.y, offset.z);
 			}
 
 			@Override
-			public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+			public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 				List<ItemStack> dropsOriginal = super.getDrops(state, builder);
 				if (!dropsOriginal.isEmpty())
 					return dropsOriginal;
@@ -430,7 +271,7 @@ public final class ModBlocks {
 				int x = pos.getX();
 				int y = pos.getY();
 				int z = pos.getZ();
-				world.getBlockTicks().scheduleTick(pos, this, 1);
+				world.scheduleTick(pos, this, 1);
 
 				AmaterasuBlockAddedProcedure.executeProcedure(Stream
 						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
@@ -449,12 +290,12 @@ public final class ModBlocks {
 						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
 								new AbstractMap.SimpleEntry<>("z", z))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				world.getBlockTicks().scheduleTick(pos, this, 1);
+				world.scheduleTick(pos, this, 1);
 			}
 
 			@Override
-			public void entityInside(BlockState blockstate, Level world, BlockPos pos, Entity entity) {
-				super.entityInside(blockstate, world, pos, entity);
+			protected void entityInside(BlockState blockstate, Level world, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean isPrecise) {
+				super.entityInside(blockstate, world, pos, entity, effectApplier, isPrecise);
 				int x = pos.getX();
 				int y = pos.getY();
 				int z = pos.getZ();
@@ -464,146 +305,14 @@ public final class ModBlocks {
 			}
 
 			@Override
-			public MenuProvider getMenuProvider(BlockState state, Level worldIn, BlockPos pos) {
-				BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-				return tileEntity instanceof MenuProvider ? (MenuProvider) tileEntity : null;
-			}
-
-			@Override
-			public boolean hasTileEntity(BlockState state) {
-				return true;
-			}
-
-			@Override
-			public BlockEntity createTileEntity(BlockState state, BlockGetter world) {
-				return new CustomTileEntity();
-			}
-
-			@Override
-			public boolean triggerEvent(BlockState state, Level world, BlockPos pos, int eventID, int eventParam) {
-				super.triggerEvent(state, world, pos, eventID, eventParam);
-				BlockEntity tileentity = world.getBlockEntity(pos);
-				return tileentity == null ? false : tileentity.triggerEvent(eventID, eventParam);
+			public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+				return new CustomTileEntity(pos, state);
 			}
 		}
 
-		public static class CustomTileEntity extends RandomizableContainerBlockEntity implements WorldlyContainer {
-			private NonNullList<ItemStack> stacks = NonNullList.<ItemStack>withSize(0, ItemStack.EMPTY);
-
-			protected CustomTileEntity() {
-				super(tileEntityType);
-			}
-
-			@Override
-			public void load(BlockState blockState, CompoundTag compound) {
-				super.load(blockState, compound);
-				if (!this.tryLoadLootTable(compound)) {
-					this.stacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-				}
-				ContainerHelper.loadAllItems(compound, this.stacks);
-			}
-
-			@Override
-			public CompoundTag save(CompoundTag compound) {
-				super.save(compound);
-				if (!this.trySaveLootTable(compound)) {
-					ContainerHelper.saveAllItems(compound, this.stacks);
-				}
-				return compound;
-			}
-
-			@Override
-			public ClientboundBlockEntityDataPacket getUpdatePacket() {
-				return new ClientboundBlockEntityDataPacket(this.worldPosition, 0, this.getUpdateTag());
-			}
-
-			@Override
-			public CompoundTag getUpdateTag() {
-				return this.save(new CompoundTag());
-			}
-
-			@Override
-			public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-				this.load(this.getBlockState(), StackTag.of(pkt));
-			}
-
-			@Override
-			public int getContainerSize() {
-				return stacks.size();
-			}
-
-			@Override
-			public boolean isEmpty() {
-				for (ItemStack itemstack : this.stacks)
-					if (!itemstack.isEmpty())
-						return false;
-				return true;
-			}
-
-			@Override
-			public Component getDefaultName() {
-				return Component.literal("amaterasu_spread");
-			}
-
-			@Override
-			public int getMaxStackSize() {
-				return 64;
-			}
-
-			@Override
-			public AbstractContainerMenu createMenu(int id, Inventory player) {
-				return ChestMenu.threeRows(id, player, this);
-			}
-
-			@Override
-			public Component getDisplayName() {
-				return Component.literal("Amaterasu");
-			}
-
-			@Override
-			protected NonNullList<ItemStack> getItems() {
-				return this.stacks;
-			}
-
-			@Override
-			protected void setItems(NonNullList<ItemStack> stacks) {
-				this.stacks = stacks;
-			}
-
-			@Override
-			public boolean canPlaceItem(int index, ItemStack stack) {
-				return true;
-			}
-
-			@Override
-			public int[] getSlotsForFace(Direction side) {
-				return IntStream.range(0, this.getContainerSize()).toArray();
-			}
-
-			@Override
-			public boolean canPlaceItemThroughFace(int index, ItemStack stack, @Nullable Direction direction) {
-				return this.canPlaceItem(index, stack);
-			}
-
-			@Override
-			public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
-				return true;
-			}
-
-			private final LazyOptional<? extends IItemHandler>[] handlers = SidedInvWrapper.create(this, Direction.values());
-
-			@Override
-			public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
-				if (!this.remove && facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-					return handlers[facing.ordinal()].cast();
-				return super.getCapability(capability, facing);
-			}
-
-			@Override
-			public void setRemoved() {
-				super.setRemoved();
-				for (LazyOptional<? extends IItemHandler> handler : handlers)
-					handler.invalidate();
+		public static class CustomTileEntity extends BlockEntity {
+			public CustomTileEntity(BlockPos pos, BlockState state) {
+				super(tileEntityType, pos, state);
 			}
 		}
 	}
@@ -612,7 +321,7 @@ public final class ModBlocks {
 	public static class DustBlockBlock extends NarutoShippudenModElements.ModElement {
 				public static Block block;
 		static {
-			Registration.holder("dust_block", v -> block = (Block) v);
+			Registration.holder(Registries.BLOCK, "dust_block", v -> block = (Block) v);
 		}
 
 		public DustBlockBlock(NarutoShippudenModElements instance) {
@@ -622,28 +331,21 @@ public final class ModBlocks {
 		@Override
 		public void initElements() {
 			elements.blocks.add(() -> new CustomBlock());
-			elements.items.add(() -> new BlockItem(block, new Item.Properties().tab(null)).setRegistryName(block.getRegistryName()));
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void clientLoad(FMLClientSetupEvent event) {
-			RenderTypeLookup.setRenderLayer(block, RenderType.translucent());
+			elements.items.add(() -> new BlockItem(block, Registration.itemProps("dust_block", null).useBlockDescriptionPrefix()));
 		}
 
 		public static class CustomBlock extends Block {
-			public static final EnumProperty FACING = HorizontalDirectionalBlock.FACING;
+			public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
 			public CustomBlock() {
-				super(Block.Properties.of(Material.AIR)
-						.sound(new DeferredSoundType(1.0f, 1.0f, () -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release")),
-								() -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release")),
-								() -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release")),
-								() -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release")),
-								() -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release"))))
-						.strength(-1, 3600000).lightLevel(s -> 0).noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
+				super(Registration.blockProps("dust_block", BlockBehaviour.Properties.of().replaceable()
+						.sound(new DeferredSoundType(1.0f, 1.0f, () -> Compat.sound("naruto_shippuden:dust_release"),
+								() -> Compat.sound("naruto_shippuden:dust_release"),
+								() -> Compat.sound("naruto_shippuden:dust_release"),
+								() -> Compat.sound("naruto_shippuden:dust_release"),
+								() -> Compat.sound("naruto_shippuden:dust_release")))
+						.strength(-1, 3600000).lightLevel(s -> 0).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
 				this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-				setRegistryName("dust_block");
 			}
 
 			@OnlyIn(Dist.CLIENT)
@@ -652,12 +354,12 @@ public final class ModBlocks {
 			}
 
 			@Override
-			public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+			protected boolean propagatesSkylightDown(BlockState state) {
 				return true;
 			}
 
 			@Override
-			public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+			protected int getLightDampening(BlockState state) {
 				return 0;
 			}
 
@@ -680,7 +382,7 @@ public final class ModBlocks {
 			}
 
 			@Override
-			public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+			public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 				List<ItemStack> dropsOriginal = super.getDrops(state, builder);
 				if (!dropsOriginal.isEmpty())
 					return dropsOriginal;
@@ -706,7 +408,7 @@ public final class ModBlocks {
 	public static class DustBlockView2Block extends NarutoShippudenModElements.ModElement {
 				public static Block block;
 		static {
-			Registration.holder("dust_block_view_2", v -> block = (Block) v);
+			Registration.holder(Registries.BLOCK, "dust_block_view_2", v -> block = (Block) v);
 		}
 
 		public DustBlockView2Block(NarutoShippudenModElements instance) {
@@ -716,28 +418,21 @@ public final class ModBlocks {
 		@Override
 		public void initElements() {
 			elements.blocks.add(() -> new CustomBlock());
-			elements.items.add(() -> new BlockItem(block, new Item.Properties().tab(null)).setRegistryName(block.getRegistryName()));
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void clientLoad(FMLClientSetupEvent event) {
-			RenderTypeLookup.setRenderLayer(block, RenderType.translucent());
+			elements.items.add(() -> new BlockItem(block, Registration.itemProps("dust_block_view_2", null).useBlockDescriptionPrefix()));
 		}
 
 		public static class CustomBlock extends Block {
-			public static final EnumProperty FACING = HorizontalDirectionalBlock.FACING;
+			public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
 			public CustomBlock() {
-				super(Block.Properties.of(Material.AIR)
-						.sound(new DeferredSoundType(1.0f, 1.0f, () -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release")),
-								() -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release")),
-								() -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release")),
-								() -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release")),
-								() -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release"))))
-						.strength(-1, 3600000).lightLevel(s -> 0).noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
+				super(Registration.blockProps("dust_block_view_2", BlockBehaviour.Properties.of().replaceable()
+						.sound(new DeferredSoundType(1.0f, 1.0f, () -> Compat.sound("naruto_shippuden:dust_release"),
+								() -> Compat.sound("naruto_shippuden:dust_release"),
+								() -> Compat.sound("naruto_shippuden:dust_release"),
+								() -> Compat.sound("naruto_shippuden:dust_release"),
+								() -> Compat.sound("naruto_shippuden:dust_release")))
+						.strength(-1, 3600000).lightLevel(s -> 0).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
 				this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-				setRegistryName("dust_block_view_2");
 			}
 
 			@OnlyIn(Dist.CLIENT)
@@ -746,12 +441,12 @@ public final class ModBlocks {
 			}
 
 			@Override
-			public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+			protected boolean propagatesSkylightDown(BlockState state) {
 				return true;
 			}
 
 			@Override
-			public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+			protected int getLightDampening(BlockState state) {
 				return 0;
 			}
 
@@ -774,7 +469,7 @@ public final class ModBlocks {
 			}
 
 			@Override
-			public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+			public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 				List<ItemStack> dropsOriginal = super.getDrops(state, builder);
 				if (!dropsOriginal.isEmpty())
 					return dropsOriginal;
@@ -800,7 +495,7 @@ public final class ModBlocks {
 	public static class DustBlockView3Block extends NarutoShippudenModElements.ModElement {
 				public static Block block;
 		static {
-			Registration.holder("dust_block_view_3", v -> block = (Block) v);
+			Registration.holder(Registries.BLOCK, "dust_block_view_3", v -> block = (Block) v);
 		}
 
 		public DustBlockView3Block(NarutoShippudenModElements instance) {
@@ -810,28 +505,21 @@ public final class ModBlocks {
 		@Override
 		public void initElements() {
 			elements.blocks.add(() -> new CustomBlock());
-			elements.items.add(() -> new BlockItem(block, new Item.Properties().tab(null)).setRegistryName(block.getRegistryName()));
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void clientLoad(FMLClientSetupEvent event) {
-			RenderTypeLookup.setRenderLayer(block, RenderType.translucent());
+			elements.items.add(() -> new BlockItem(block, Registration.itemProps("dust_block_view_3", null).useBlockDescriptionPrefix()));
 		}
 
 		public static class CustomBlock extends Block {
-			public static final EnumProperty FACING = HorizontalDirectionalBlock.FACING;
+			public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
 			public CustomBlock() {
-				super(Block.Properties.of(Material.AIR)
-						.sound(new DeferredSoundType(1.0f, 1.0f, () -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release")),
-								() -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release")),
-								() -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release")),
-								() -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release")),
-								() -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release"))))
-						.strength(-1, 3600000).lightLevel(s -> 0).noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
+				super(Registration.blockProps("dust_block_view_3", BlockBehaviour.Properties.of().replaceable()
+						.sound(new DeferredSoundType(1.0f, 1.0f, () -> Compat.sound("naruto_shippuden:dust_release"),
+								() -> Compat.sound("naruto_shippuden:dust_release"),
+								() -> Compat.sound("naruto_shippuden:dust_release"),
+								() -> Compat.sound("naruto_shippuden:dust_release"),
+								() -> Compat.sound("naruto_shippuden:dust_release")))
+						.strength(-1, 3600000).lightLevel(s -> 0).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
 				this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-				setRegistryName("dust_block_view_3");
 			}
 
 			@OnlyIn(Dist.CLIENT)
@@ -840,12 +528,12 @@ public final class ModBlocks {
 			}
 
 			@Override
-			public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+			protected boolean propagatesSkylightDown(BlockState state) {
 				return true;
 			}
 
 			@Override
-			public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+			protected int getLightDampening(BlockState state) {
 				return 0;
 			}
 
@@ -868,7 +556,7 @@ public final class ModBlocks {
 			}
 
 			@Override
-			public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+			public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 				List<ItemStack> dropsOriginal = super.getDrops(state, builder);
 				if (!dropsOriginal.isEmpty())
 					return dropsOriginal;
@@ -894,7 +582,7 @@ public final class ModBlocks {
 	public static class DustBlockViewBlock extends NarutoShippudenModElements.ModElement {
 				public static Block block;
 		static {
-			Registration.holder("dust_block_view", v -> block = (Block) v);
+			Registration.holder(Registries.BLOCK, "dust_block_view", v -> block = (Block) v);
 		}
 
 		public DustBlockViewBlock(NarutoShippudenModElements instance) {
@@ -904,28 +592,21 @@ public final class ModBlocks {
 		@Override
 		public void initElements() {
 			elements.blocks.add(() -> new CustomBlock());
-			elements.items.add(() -> new BlockItem(block, new Item.Properties().tab(null)).setRegistryName(block.getRegistryName()));
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void clientLoad(FMLClientSetupEvent event) {
-			RenderTypeLookup.setRenderLayer(block, RenderType.translucent());
+			elements.items.add(() -> new BlockItem(block, Registration.itemProps("dust_block_view", null).useBlockDescriptionPrefix()));
 		}
 
 		public static class CustomBlock extends Block {
-			public static final EnumProperty FACING = HorizontalDirectionalBlock.FACING;
+			public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
 			public CustomBlock() {
-				super(Block.Properties.of(Material.AIR)
-						.sound(new DeferredSoundType(1.0f, 1.0f, () -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release")),
-								() -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release")),
-								() -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release")),
-								() -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release")),
-								() -> new SoundEvent(Identifier.parse("naruto_shippuden:dust_release"))))
-						.strength(-1, 3600000).lightLevel(s -> 0).noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
+				super(Registration.blockProps("dust_block_view", BlockBehaviour.Properties.of().replaceable()
+						.sound(new DeferredSoundType(1.0f, 1.0f, () -> Compat.sound("naruto_shippuden:dust_release"),
+								() -> Compat.sound("naruto_shippuden:dust_release"),
+								() -> Compat.sound("naruto_shippuden:dust_release"),
+								() -> Compat.sound("naruto_shippuden:dust_release"),
+								() -> Compat.sound("naruto_shippuden:dust_release")))
+						.strength(-1, 3600000).lightLevel(s -> 0).noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
 				this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-				setRegistryName("dust_block_view");
 			}
 
 			@OnlyIn(Dist.CLIENT)
@@ -934,12 +615,12 @@ public final class ModBlocks {
 			}
 
 			@Override
-			public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+			protected boolean propagatesSkylightDown(BlockState state) {
 				return true;
 			}
 
 			@Override
-			public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+			protected int getLightDampening(BlockState state) {
 				return 0;
 			}
 
@@ -962,7 +643,7 @@ public final class ModBlocks {
 			}
 
 			@Override
-			public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+			public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 				List<ItemStack> dropsOriginal = super.getDrops(state, builder);
 				if (!dropsOriginal.isEmpty())
 					return dropsOriginal;
@@ -988,7 +669,7 @@ public final class ModBlocks {
 	public static class EarthWallBlock extends NarutoShippudenModElements.ModElement {
 				public static Block block;
 		static {
-			Registration.holder("earth_wall", v -> block = (Block) v);
+			Registration.holder(Registries.BLOCK, "earth_wall", v -> block = (Block) v);
 		}
 
 		public EarthWallBlock(NarutoShippudenModElements instance) {
@@ -998,22 +679,21 @@ public final class ModBlocks {
 		@Override
 		public void initElements() {
 			elements.blocks.add(() -> new CustomBlock());
-			elements.items.add(() -> new BlockItem(block, new Item.Properties().tab(null)).setRegistryName(block.getRegistryName()));
+			elements.items.add(() -> new BlockItem(block, Registration.itemProps("earth_wall", null).useBlockDescriptionPrefix()));
 		}
 
 		public static class CustomBlock extends Block {
 			public CustomBlock() {
-				super(Block.Properties.of(Material.DIRT).sound(SoundType.GRAVEL).strength(-1, 3600000).lightLevel(s -> 0));
-				setRegistryName("earth_wall");
+				super(Registration.blockProps("earth_wall", BlockBehaviour.Properties.of().sound(SoundType.GRAVEL).strength(-1, 3600000).lightLevel(s -> 0)));
 			}
 
 			@Override
-			public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+			protected int getLightDampening(BlockState state) {
 				return 15;
 			}
 
 			@Override
-			public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+			public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 				List<ItemStack> dropsOriginal = super.getDrops(state, builder);
 				if (!dropsOriginal.isEmpty())
 					return dropsOriginal;
@@ -1039,7 +719,7 @@ public final class ModBlocks {
 	public static class KamuiStoneBlock extends NarutoShippudenModElements.ModElement {
 				public static Block block;
 		static {
-			Registration.holder("kamui_stone", v -> block = (Block) v);
+			Registration.holder(Registries.BLOCK, "kamui_stone", v -> block = (Block) v);
 		}
 
 		public KamuiStoneBlock(NarutoShippudenModElements instance) {
@@ -1049,23 +729,21 @@ public final class ModBlocks {
 		@Override
 		public void initElements() {
 			elements.blocks.add(() -> new CustomBlock());
-			elements.items.add(() -> new BlockItem(block, new Item.Properties().tab(BlocksItemGroup.tab)).setRegistryName(block.getRegistryName()));
+			elements.items.add(() -> new BlockItem(block, Registration.itemProps("kamui_stone", "BlocksItemGroup").useBlockDescriptionPrefix()));
 		}
 
 		public static class CustomBlock extends Block {
 			public CustomBlock() {
-				super(Block.Properties.of(Material.STONE).sound(SoundType.STONE).strength(1f, 10f).lightLevel(s -> 0).harvestLevel(2)
-						.harvestTool(ToolType.PICKAXE));
-				setRegistryName("kamui_stone");
+				super(Registration.blockProps("kamui_stone", BlockBehaviour.Properties.of().sound(SoundType.STONE).strength(1f, 10f).lightLevel(s -> 0).requiresCorrectToolForDrops()));
 			}
 
 			@Override
-			public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+			protected int getLightDampening(BlockState state) {
 				return 15;
 			}
 
 			@Override
-			public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+			public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 				List<ItemStack> dropsOriginal = super.getDrops(state, builder);
 				if (!dropsOriginal.isEmpty())
 					return dropsOriginal;
@@ -1078,7 +756,7 @@ public final class ModBlocks {
 	public static class KamuiVoidBlock extends NarutoShippudenModElements.ModElement {
 				public static Block block;
 		static {
-			Registration.holder("kamui_void", v -> block = (Block) v);
+			Registration.holder(Registries.BLOCK, "kamui_void", v -> block = (Block) v);
 		}
 
 		public KamuiVoidBlock(NarutoShippudenModElements instance) {
@@ -1088,22 +766,21 @@ public final class ModBlocks {
 		@Override
 		public void initElements() {
 			elements.blocks.add(() -> new CustomBlock());
-			elements.items.add(() -> new BlockItem(block, new Item.Properties().tab(null)).setRegistryName(block.getRegistryName()));
+			elements.items.add(() -> new BlockItem(block, Registration.itemProps("kamui_void", null).useBlockDescriptionPrefix()));
 		}
 
 		public static class CustomBlock extends Block {
 			public CustomBlock() {
-				super(Block.Properties.of(Material.DECORATION).sound(SoundType.STONE).strength(-1, 3600000).lightLevel(s -> 0));
-				setRegistryName("kamui_void");
+				super(Registration.blockProps("kamui_void", BlockBehaviour.Properties.of().sound(SoundType.STONE).strength(-1, 3600000).lightLevel(s -> 0)));
 			}
 
 			@Override
-			public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+			protected int getLightDampening(BlockState state) {
 				return 15;
 			}
 
 			@Override
-			public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+			public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 				List<ItemStack> dropsOriginal = super.getDrops(state, builder);
 				if (!dropsOriginal.isEmpty())
 					return dropsOriginal;
@@ -1116,7 +793,7 @@ public final class ModBlocks {
 	public static class NaraShadowBlock extends NarutoShippudenModElements.ModElement {
 				public static Block block;
 		static {
-			Registration.holder("nara_shadow", v -> block = (Block) v);
+			Registration.holder(Registries.BLOCK, "nara_shadow", v -> block = (Block) v);
 		}
 
 		public NaraShadowBlock(NarutoShippudenModElements instance) {
@@ -1126,23 +803,22 @@ public final class ModBlocks {
 		@Override
 		public void initElements() {
 			elements.blocks.add(() -> new CustomBlock());
-			elements.items.add(() -> new BlockItem(block, new Item.Properties().tab(null)).setRegistryName(block.getRegistryName()));
+			elements.items.add(() -> new BlockItem(block, Registration.itemProps("nara_shadow", null).useBlockDescriptionPrefix()));
 		}
 
 		public static class CustomBlock extends Block {
 			public CustomBlock() {
-				super(Block.Properties.of(Material.WATER).sound(SoundType.GRAVEL).strength(-1, 3600000).lightLevel(s -> 0)
-						.noCollission());
-				setRegistryName("nara_shadow");
+				super(Registration.blockProps("nara_shadow", BlockBehaviour.Properties.of().replaceable().sound(SoundType.GRAVEL).strength(-1, 3600000).lightLevel(s -> 0)
+						.noCollision()));
 			}
 
 			@Override
-			public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+			protected int getLightDampening(BlockState state) {
 				return 15;
 			}
 
 			@Override
-			public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+			public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 				List<ItemStack> dropsOriginal = super.getDrops(state, builder);
 				if (!dropsOriginal.isEmpty())
 					return dropsOriginal;
@@ -1168,7 +844,7 @@ public final class ModBlocks {
 	public static class PaperBombBlock extends NarutoShippudenModElements.ModElement {
 				public static Block block;
 		static {
-			Registration.holder("paper_bomb", v -> block = (Block) v);
+			Registration.holder(Registries.BLOCK, "paper_bomb", v -> block = (Block) v);
 		}
 
 		public PaperBombBlock(NarutoShippudenModElements instance) {
@@ -1178,38 +854,36 @@ public final class ModBlocks {
 		@Override
 		public void initElements() {
 			elements.blocks.add(() -> new CustomBlock());
-			elements.items.add(() -> new BlockItem(block, new Item.Properties().tab(BlocksItemGroup.tab)).setRegistryName(block.getRegistryName()));
-		}
-
-		@Override
-		@OnlyIn(Dist.CLIENT)
-		public void clientLoad(FMLClientSetupEvent event) {
-			RenderTypeLookup.setRenderLayer(block, RenderType.cutoutMipped());
+			elements.items.add(() -> new BlockItem(block, Registration.itemProps("paper_bomb", "BlocksItemGroup").useBlockDescriptionPrefix()));
 		}
 
 		public static class CustomBlock extends FallingBlock {
-			public static final EnumProperty FACING = HorizontalDirectionalBlock.FACING;
+			@Override
+			public int getDustColor(BlockState state, BlockGetter level, BlockPos pos) {
+				return -8356741;
+			}
+
+			public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
 			public CustomBlock() {
-				super(Block.Properties.of(Material.CLOTH_DECORATION).sound(SoundType.VINE).strength(0.1f, 0.1f).lightLevel(s -> 0)
-						.noCollission().noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
+				super(Registration.blockProps("paper_bomb", BlockBehaviour.Properties.of().sound(SoundType.VINE).strength(0.1f, 0.1f).lightLevel(s -> 0)
+						.noCollision().noOcclusion().isRedstoneConductor((bs, br, bp) -> false)));
 				this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
-				setRegistryName("paper_bomb");
 			}
 
 			@Override
-			public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+			protected boolean propagatesSkylightDown(BlockState state) {
 				return true;
 			}
 
 			@Override
-			public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+			protected int getLightDampening(BlockState state) {
 				return 0;
 			}
 
 			@Override
 			public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-				Vec3 offset = state.getOffset(world, pos);
+				Vec3 offset = state.getOffset(pos);
 				switch ((Direction) state.getValue(FACING)) {
 					case SOUTH :
 					default :
@@ -1250,7 +924,7 @@ public final class ModBlocks {
 			}
 
 			@Override
-			public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+			public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 				List<ItemStack> dropsOriginal = super.getDrops(state, builder);
 				if (!dropsOriginal.isEmpty())
 					return dropsOriginal;
@@ -1258,8 +932,8 @@ public final class ModBlocks {
 			}
 
 			@Override
-			public void entityInside(BlockState blockstate, Level world, BlockPos pos, Entity entity) {
-				super.entityInside(blockstate, world, pos, entity);
+			protected void entityInside(BlockState blockstate, Level world, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean isPrecise) {
+				super.entityInside(blockstate, world, pos, entity, effectApplier, isPrecise);
 				int x = pos.getX();
 				int y = pos.getY();
 				int z = pos.getZ();
@@ -1271,8 +945,8 @@ public final class ModBlocks {
 			}
 
 			@Override
-			public void stepOn(Level world, BlockPos pos, Entity entity) {
-				super.stepOn(world, pos, entity);
+			public void stepOn(Level world, BlockPos pos, BlockState onState, Entity entity) {
+				super.stepOn(world, pos, onState, entity);
 				int x = pos.getX();
 				int y = pos.getY();
 				int z = pos.getZ();
@@ -1307,7 +981,7 @@ public final class ModBlocks {
 	public static class WaterwallBlock extends NarutoShippudenModElements.ModElement {
 				public static Block block;
 		static {
-			Registration.holder("waterwall", v -> block = (Block) v);
+			Registration.holder(Registries.BLOCK, "waterwall", v -> block = (Block) v);
 		}
 
 		public WaterwallBlock(NarutoShippudenModElements instance) {
@@ -1317,23 +991,22 @@ public final class ModBlocks {
 		@Override
 		public void initElements() {
 			elements.blocks.add(() -> new CustomBlock());
-			elements.items.add(() -> new BlockItem(block, new Item.Properties().tab(null)).setRegistryName(block.getRegistryName()));
+			elements.items.add(() -> new BlockItem(block, Registration.itemProps("waterwall", null).useBlockDescriptionPrefix()));
 		}
 
 		public static class CustomBlock extends Block {
 			public CustomBlock() {
-				super(Block.Properties.of(Material.WATER).sound(SoundType.GRAVEL).strength(-1, 3600000).lightLevel(s -> 0)
-						.noCollission());
-				setRegistryName("waterwall");
+				super(Registration.blockProps("waterwall", BlockBehaviour.Properties.of().replaceable().sound(SoundType.GRAVEL).strength(-1, 3600000).lightLevel(s -> 0)
+						.noCollision()));
 			}
 
 			@Override
-			public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+			protected int getLightDampening(BlockState state) {
 				return 15;
 			}
 
 			@Override
-			public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+			public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 				List<ItemStack> dropsOriginal = super.getDrops(state, builder);
 				if (!dropsOriginal.isEmpty())
 					return dropsOriginal;
@@ -1354,8 +1027,8 @@ public final class ModBlocks {
 			}
 
 			@Override
-			public void entityInside(BlockState blockstate, Level world, BlockPos pos, Entity entity) {
-				super.entityInside(blockstate, world, pos, entity);
+			protected void entityInside(BlockState blockstate, Level world, BlockPos pos, Entity entity, InsideBlockEffectApplier effectApplier, boolean isPrecise) {
+				super.entityInside(blockstate, world, pos, entity, effectApplier, isPrecise);
 				int x = pos.getX();
 				int y = pos.getY();
 				int z = pos.getZ();

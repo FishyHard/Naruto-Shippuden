@@ -74,7 +74,7 @@ public final class JutsuCreationScreens {
 		}
 
 		@Override
-		public void tick() {
+		protected void containerTick() {
 		}
 
 		@Override
@@ -230,7 +230,7 @@ public final class JutsuCreationScreens {
 		}
 
 		@Override
-		public void tick() {
+		protected void containerTick() {
 		}
 
 		@Override

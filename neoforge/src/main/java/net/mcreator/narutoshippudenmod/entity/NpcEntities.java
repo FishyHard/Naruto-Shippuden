@@ -107,31 +107,16 @@ public final class NpcEntities {
 
 		@Override
 		public void initElements() {
+			Compat.spawnPlacement(() -> entity, net.minecraft.world.entity.SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+					(entityType, world, reason, pos,
+							random) -> (world.getBlockState(pos.below()).is(Compat.materialTag("GRASS")) && world.getRawBrightness(pos, 0) > 8));
 			elements.entities.add(() -> entity = (EntityType.Builder.<CustomEntity>of(CustomEntity::new, MobCategory.CREATURE) .setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3) .sized(0.6f, 1.8f)).build(Registration.entityKey("asuma")));
-			elements.items.add(() -> new SpawnEggItem(entity, -11513752, -7510683, new Item.Properties().tab(SpawnEggsItemGroup.tab))
-					.setRegistryName("asuma_spawn_egg"));
-		}
-
-		@SubscribeEvent
-		public void addFeatureToBiomes(BiomeLoadingEvent event) {
-			boolean biomeCriteria = false;
-			if (Identifier.parse("plains").equals(event.getName()))
-				biomeCriteria = true;
-			if (Identifier.parse("taiga_mountains").equals(event.getName()))
-				biomeCriteria = true;
-			if (Identifier.parse("river").equals(event.getName()))
-				biomeCriteria = true;
-			if (!biomeCriteria)
-				return;
-			event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(entity, 10, 1, 1));
+			elements.items.add(() -> new SpawnEggItem(Registration.itemProps("asuma_spawn_egg", "SpawnEggsItemGroup").spawnEgg(entity)));
 		}
 
 		@Override
 		public void init(FMLCommonSetupEvent event) {
-			SpawnPlacements.register(entity, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-					(entityType, world, reason, pos,
-							random) -> (world.getBlockState(pos.below()).getMaterial() == Material.GRASS && world.getRawBrightness(pos, 0) > 8));
-		}
+					}
 
 		public static class EntityAttributesRegisterHandler {
 			@SubscribeEvent
@@ -161,8 +146,8 @@ public final class NpcEntities {
 				super.registerGoals();
 				this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.5, true) {
 					@Override
-					protected double getAttackReachSqr(LivingEntity entity) {
-						return (double) (4.0 + entity.getBbWidth() * entity.getBbWidth());
+					protected boolean canPerformAttack(LivingEntity entity) {
+						return this.isTimeToAttack() && this.mob.distanceToSqr(entity) <= ((double) (4.0 + entity.getBbWidth() * entity.getBbWidth())) && this.mob.getSensing().hasLineOfSight(entity);
 					}
 				});
 				this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8));
@@ -212,7 +197,7 @@ public final class NpcEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				double x = this.getX();
 				double y = this.getY();
@@ -289,8 +274,8 @@ public final class NpcEntities {
 				super.registerGoals();
 				this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2, true) {
 					@Override
-					protected double getAttackReachSqr(LivingEntity entity) {
-						return (double) (4.0 + entity.getBbWidth() * entity.getBbWidth());
+					protected boolean canPerformAttack(LivingEntity entity) {
+						return this.isTimeToAttack() && this.mob.distanceToSqr(entity) <= ((double) (4.0 + entity.getBbWidth() * entity.getBbWidth())) && this.mob.getSensing().hasLineOfSight(entity);
 					}
 				});
 				this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
@@ -350,31 +335,16 @@ public final class NpcEntities {
 
 		@Override
 		public void initElements() {
+			Compat.spawnPlacement(() -> entity, net.minecraft.world.entity.SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+					(entityType, world, reason, pos,
+							random) -> (world.getBlockState(pos.below()).is(Compat.materialTag("GRASS")) && world.getRawBrightness(pos, 0) > 8));
 			elements.entities.add(() -> entity = (EntityType.Builder.<CustomEntity>of(CustomEntity::new, MobCategory.CREATURE) .setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3) .sized(0.6f, 1.8f)).build(Registration.entityKey("hidden_cloud_shinobi")));
-			elements.items.add(() -> new SpawnEggItem(entity, -591950, -11311731, new Item.Properties().tab(SpawnEggsItemGroup.tab))
-					.setRegistryName("hidden_cloud_shinobi_spawn_egg"));
-		}
-
-		@SubscribeEvent
-		public void addFeatureToBiomes(BiomeLoadingEvent event) {
-			boolean biomeCriteria = false;
-			if (Identifier.parse("plains").equals(event.getName()))
-				biomeCriteria = true;
-			if (Identifier.parse("taiga_mountains").equals(event.getName()))
-				biomeCriteria = true;
-			if (Identifier.parse("river").equals(event.getName()))
-				biomeCriteria = true;
-			if (!biomeCriteria)
-				return;
-			event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(entity, 10, 1, 1));
+			elements.items.add(() -> new SpawnEggItem(Registration.itemProps("hidden_cloud_shinobi_spawn_egg", "SpawnEggsItemGroup").spawnEgg(entity)));
 		}
 
 		@Override
 		public void init(FMLCommonSetupEvent event) {
-			SpawnPlacements.register(entity, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-					(entityType, world, reason, pos,
-							random) -> (world.getBlockState(pos.below()).getMaterial() == Material.GRASS && world.getRawBrightness(pos, 0) > 8));
-		}
+					}
 
 		public static class EntityAttributesRegisterHandler {
 			@SubscribeEvent
@@ -402,8 +372,8 @@ public final class NpcEntities {
 				super.registerGoals();
 				this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.5, true) {
 					@Override
-					protected double getAttackReachSqr(LivingEntity entity) {
-						return (double) (4.0 + entity.getBbWidth() * entity.getBbWidth());
+					protected boolean canPerformAttack(LivingEntity entity) {
+						return this.isTimeToAttack() && this.mob.distanceToSqr(entity) <= ((double) (4.0 + entity.getBbWidth() * entity.getBbWidth())) && this.mob.getSensing().hasLineOfSight(entity);
 					}
 				});
 				this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8));
@@ -461,8 +431,8 @@ public final class NpcEntities {
 			}
 
 			@Override
-			public void awardKillScore(Entity entity, int score, DamageSource damageSource) {
-				super.awardKillScore(entity, score, damageSource);
+			public void awardKillScore(Entity entity, DamageSource damageSource) {
+				super.awardKillScore(entity, damageSource);
 				double x = this.getX();
 				double y = this.getY();
 				double z = this.getZ();
@@ -501,31 +471,16 @@ public final class NpcEntities {
 
 		@Override
 		public void initElements() {
+			Compat.spawnPlacement(() -> entity, net.minecraft.world.entity.SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+					(entityType, world, reason, pos,
+							random) -> (world.getBlockState(pos.below()).is(Compat.materialTag("GRASS")) && world.getRawBrightness(pos, 0) > 8));
 			elements.entities.add(() -> entity = (EntityType.Builder.<CustomEntity>of(CustomEntity::new, MobCategory.CREATURE) .setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3) .sized(0.6f, 1.8f)).build(Registration.entityKey("hidden_leaf_shinobi")));
-			elements.items.add(() -> new SpawnEggItem(entity, -13750738, -13024682, new Item.Properties().tab(SpawnEggsItemGroup.tab))
-					.setRegistryName("hidden_leaf_shinobi_spawn_egg"));
-		}
-
-		@SubscribeEvent
-		public void addFeatureToBiomes(BiomeLoadingEvent event) {
-			boolean biomeCriteria = false;
-			if (Identifier.parse("plains").equals(event.getName()))
-				biomeCriteria = true;
-			if (Identifier.parse("taiga_mountains").equals(event.getName()))
-				biomeCriteria = true;
-			if (Identifier.parse("river").equals(event.getName()))
-				biomeCriteria = true;
-			if (!biomeCriteria)
-				return;
-			event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(entity, 10, 1, 1));
+			elements.items.add(() -> new SpawnEggItem(Registration.itemProps("hidden_leaf_shinobi_spawn_egg", "SpawnEggsItemGroup").spawnEgg(entity)));
 		}
 
 		@Override
 		public void init(FMLCommonSetupEvent event) {
-			SpawnPlacements.register(entity, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-					(entityType, world, reason, pos,
-							random) -> (world.getBlockState(pos.below()).getMaterial() == Material.GRASS && world.getRawBrightness(pos, 0) > 8));
-		}
+					}
 
 		public static class EntityAttributesRegisterHandler {
 			@SubscribeEvent
@@ -553,8 +508,8 @@ public final class NpcEntities {
 				super.registerGoals();
 				this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.5, true) {
 					@Override
-					protected double getAttackReachSqr(LivingEntity entity) {
-						return (double) (4.0 + entity.getBbWidth() * entity.getBbWidth());
+					protected boolean canPerformAttack(LivingEntity entity) {
+						return this.isTimeToAttack() && this.mob.distanceToSqr(entity) <= ((double) (4.0 + entity.getBbWidth() * entity.getBbWidth())) && this.mob.getSensing().hasLineOfSight(entity);
 					}
 				});
 				this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8));
@@ -612,8 +567,8 @@ public final class NpcEntities {
 			}
 
 			@Override
-			public void awardKillScore(Entity entity, int score, DamageSource damageSource) {
-				super.awardKillScore(entity, score, damageSource);
+			public void awardKillScore(Entity entity, DamageSource damageSource) {
+				super.awardKillScore(entity, damageSource);
 				double x = this.getX();
 				double y = this.getY();
 				double z = this.getZ();
@@ -652,31 +607,16 @@ public final class NpcEntities {
 
 		@Override
 		public void initElements() {
+			Compat.spawnPlacement(() -> entity, net.minecraft.world.entity.SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+					(entityType, world, reason, pos,
+							random) -> (world.getBlockState(pos.below()).is(Compat.materialTag("GRASS")) && world.getRawBrightness(pos, 0) > 8));
 			elements.entities.add(() -> entity = (EntityType.Builder.<CustomEntity>of(CustomEntity::new, MobCategory.CREATURE) .setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3) .sized(0.6f, 1.8f)).build(Registration.entityKey("hidden_mist_shinobi")));
-			elements.items.add(() -> new SpawnEggItem(entity, -11190234, -13024682, new Item.Properties().tab(SpawnEggsItemGroup.tab))
-					.setRegistryName("hidden_mist_shinobi_spawn_egg"));
-		}
-
-		@SubscribeEvent
-		public void addFeatureToBiomes(BiomeLoadingEvent event) {
-			boolean biomeCriteria = false;
-			if (Identifier.parse("plains").equals(event.getName()))
-				biomeCriteria = true;
-			if (Identifier.parse("taiga_mountains").equals(event.getName()))
-				biomeCriteria = true;
-			if (Identifier.parse("river").equals(event.getName()))
-				biomeCriteria = true;
-			if (!biomeCriteria)
-				return;
-			event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(entity, 10, 1, 1));
+			elements.items.add(() -> new SpawnEggItem(Registration.itemProps("hidden_mist_shinobi_spawn_egg", "SpawnEggsItemGroup").spawnEgg(entity)));
 		}
 
 		@Override
 		public void init(FMLCommonSetupEvent event) {
-			SpawnPlacements.register(entity, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-					(entityType, world, reason, pos,
-							random) -> (world.getBlockState(pos.below()).getMaterial() == Material.GRASS && world.getRawBrightness(pos, 0) > 8));
-		}
+					}
 
 		public static class EntityAttributesRegisterHandler {
 			@SubscribeEvent
@@ -704,8 +644,8 @@ public final class NpcEntities {
 				super.registerGoals();
 				this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.5, true) {
 					@Override
-					protected double getAttackReachSqr(LivingEntity entity) {
-						return (double) (4.0 + entity.getBbWidth() * entity.getBbWidth());
+					protected boolean canPerformAttack(LivingEntity entity) {
+						return this.isTimeToAttack() && this.mob.distanceToSqr(entity) <= ((double) (4.0 + entity.getBbWidth() * entity.getBbWidth())) && this.mob.getSensing().hasLineOfSight(entity);
 					}
 				});
 				this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8));
@@ -763,8 +703,8 @@ public final class NpcEntities {
 			}
 
 			@Override
-			public void awardKillScore(Entity entity, int score, DamageSource damageSource) {
-				super.awardKillScore(entity, score, damageSource);
+			public void awardKillScore(Entity entity, DamageSource damageSource) {
+				super.awardKillScore(entity, damageSource);
 				double x = this.getX();
 				double y = this.getY();
 				double z = this.getZ();
@@ -803,31 +743,16 @@ public final class NpcEntities {
 
 		@Override
 		public void initElements() {
+			Compat.spawnPlacement(() -> entity, net.minecraft.world.entity.SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+					(entityType, world, reason, pos,
+							random) -> (world.getBlockState(pos.below()).is(Compat.materialTag("GRASS")) && world.getRawBrightness(pos, 0) > 8));
 			elements.entities.add(() -> entity = (EntityType.Builder.<CustomEntity>of(CustomEntity::new, MobCategory.CREATURE) .setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3) .sized(0.6f, 1.8f)).build(Registration.entityKey("hidden_sand_shinobi")));
-			elements.items.add(() -> new SpawnEggItem(entity, -10066330, -15132391, new Item.Properties().tab(SpawnEggsItemGroup.tab))
-					.setRegistryName("hidden_sand_shinobi_spawn_egg"));
-		}
-
-		@SubscribeEvent
-		public void addFeatureToBiomes(BiomeLoadingEvent event) {
-			boolean biomeCriteria = false;
-			if (Identifier.parse("plains").equals(event.getName()))
-				biomeCriteria = true;
-			if (Identifier.parse("taiga_mountains").equals(event.getName()))
-				biomeCriteria = true;
-			if (Identifier.parse("river").equals(event.getName()))
-				biomeCriteria = true;
-			if (!biomeCriteria)
-				return;
-			event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(entity, 10, 1, 1));
+			elements.items.add(() -> new SpawnEggItem(Registration.itemProps("hidden_sand_shinobi_spawn_egg", "SpawnEggsItemGroup").spawnEgg(entity)));
 		}
 
 		@Override
 		public void init(FMLCommonSetupEvent event) {
-			SpawnPlacements.register(entity, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-					(entityType, world, reason, pos,
-							random) -> (world.getBlockState(pos.below()).getMaterial() == Material.GRASS && world.getRawBrightness(pos, 0) > 8));
-		}
+					}
 
 		public static class EntityAttributesRegisterHandler {
 			@SubscribeEvent
@@ -855,8 +780,8 @@ public final class NpcEntities {
 				super.registerGoals();
 				this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.5, true) {
 					@Override
-					protected double getAttackReachSqr(LivingEntity entity) {
-						return (double) (4.0 + entity.getBbWidth() * entity.getBbWidth());
+					protected boolean canPerformAttack(LivingEntity entity) {
+						return this.isTimeToAttack() && this.mob.distanceToSqr(entity) <= ((double) (4.0 + entity.getBbWidth() * entity.getBbWidth())) && this.mob.getSensing().hasLineOfSight(entity);
 					}
 				});
 				this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8));
@@ -914,8 +839,8 @@ public final class NpcEntities {
 			}
 
 			@Override
-			public void awardKillScore(Entity entity, int score, DamageSource damageSource) {
-				super.awardKillScore(entity, score, damageSource);
+			public void awardKillScore(Entity entity, DamageSource damageSource) {
+				super.awardKillScore(entity, damageSource);
 				double x = this.getX();
 				double y = this.getY();
 				double z = this.getZ();
@@ -954,31 +879,16 @@ public final class NpcEntities {
 
 		@Override
 		public void initElements() {
+			Compat.spawnPlacement(() -> entity, net.minecraft.world.entity.SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+					(entityType, world, reason, pos,
+							random) -> (world.getBlockState(pos.below()).is(Compat.materialTag("GRASS")) && world.getRawBrightness(pos, 0) > 8));
 			elements.entities.add(() -> entity = (EntityType.Builder.<CustomEntity>of(CustomEntity::new, MobCategory.CREATURE) .setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3) .sized(0.6f, 1.8f)).build(Registration.entityKey("hidden_stone_shinobi")));
-			elements.items.add(() -> new SpawnEggItem(entity, -6126278, -4748748, new Item.Properties().tab(SpawnEggsItemGroup.tab))
-					.setRegistryName("hidden_stone_shinobi_spawn_egg"));
-		}
-
-		@SubscribeEvent
-		public void addFeatureToBiomes(BiomeLoadingEvent event) {
-			boolean biomeCriteria = false;
-			if (Identifier.parse("plains").equals(event.getName()))
-				biomeCriteria = true;
-			if (Identifier.parse("taiga_mountains").equals(event.getName()))
-				biomeCriteria = true;
-			if (Identifier.parse("river").equals(event.getName()))
-				biomeCriteria = true;
-			if (!biomeCriteria)
-				return;
-			event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(entity, 10, 1, 1));
+			elements.items.add(() -> new SpawnEggItem(Registration.itemProps("hidden_stone_shinobi_spawn_egg", "SpawnEggsItemGroup").spawnEgg(entity)));
 		}
 
 		@Override
 		public void init(FMLCommonSetupEvent event) {
-			SpawnPlacements.register(entity, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-					(entityType, world, reason, pos,
-							random) -> (world.getBlockState(pos.below()).getMaterial() == Material.GRASS && world.getRawBrightness(pos, 0) > 8));
-		}
+					}
 
 		public static class EntityAttributesRegisterHandler {
 			@SubscribeEvent
@@ -1006,8 +916,8 @@ public final class NpcEntities {
 				super.registerGoals();
 				this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.5, true) {
 					@Override
-					protected double getAttackReachSqr(LivingEntity entity) {
-						return (double) (4.0 + entity.getBbWidth() * entity.getBbWidth());
+					protected boolean canPerformAttack(LivingEntity entity) {
+						return this.isTimeToAttack() && this.mob.distanceToSqr(entity) <= ((double) (4.0 + entity.getBbWidth() * entity.getBbWidth())) && this.mob.getSensing().hasLineOfSight(entity);
 					}
 				});
 				this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8));
@@ -1065,8 +975,8 @@ public final class NpcEntities {
 			}
 
 			@Override
-			public void awardKillScore(Entity entity, int score, DamageSource damageSource) {
-				super.awardKillScore(entity, score, damageSource);
+			public void awardKillScore(Entity entity, DamageSource damageSource) {
+				super.awardKillScore(entity, damageSource);
 				double x = this.getX();
 				double y = this.getY();
 				double z = this.getZ();
@@ -1363,31 +1273,16 @@ public final class NpcEntities {
 
 		@Override
 		public void initElements() {
+			Compat.spawnPlacement(() -> entity, net.minecraft.world.entity.SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+					(entityType, world, reason, pos,
+							random) -> (world.getBlockState(pos.below()).is(Compat.materialTag("GRASS")) && world.getRawBrightness(pos, 0) > 8));
 			elements.entities.add(() -> entity = (EntityType.Builder.<CustomEntity>of(CustomEntity::new, MobCategory.CREATURE) .setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3) .sized(0.6f, 1.8f)).build(Registration.entityKey("shikamaru")));
-			elements.items.add(() -> new SpawnEggItem(entity, -10182549, -12500671, new Item.Properties().tab(SpawnEggsItemGroup.tab))
-					.setRegistryName("shikamaru_spawn_egg"));
-		}
-
-		@SubscribeEvent
-		public void addFeatureToBiomes(BiomeLoadingEvent event) {
-			boolean biomeCriteria = false;
-			if (Identifier.parse("plains").equals(event.getName()))
-				biomeCriteria = true;
-			if (Identifier.parse("taiga_mountains").equals(event.getName()))
-				biomeCriteria = true;
-			if (Identifier.parse("river").equals(event.getName()))
-				biomeCriteria = true;
-			if (!biomeCriteria)
-				return;
-			event.getSpawns().getSpawner(MobCategory.CREATURE).add(new MobSpawnSettings.SpawnerData(entity, 10, 1, 1));
+			elements.items.add(() -> new SpawnEggItem(Registration.itemProps("shikamaru_spawn_egg", "SpawnEggsItemGroup").spawnEgg(entity)));
 		}
 
 		@Override
 		public void init(FMLCommonSetupEvent event) {
-			SpawnPlacements.register(entity, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-					(entityType, world, reason, pos,
-							random) -> (world.getBlockState(pos.below()).getMaterial() == Material.GRASS && world.getRawBrightness(pos, 0) > 8));
-		}
+					}
 
 		public static class EntityAttributesRegisterHandler {
 			@SubscribeEvent
@@ -1432,7 +1327,7 @@ public final class NpcEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				double x = this.getX();
 				double y = this.getY();

@@ -6,6 +6,8 @@ import net.mcreator.narutoshippudenmod.compat.ModArrow;
 import net.mcreator.narutoshippudenmod.compat.StackTag;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -163,7 +165,6 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.mcreator.narutoshippudenmod.compat.TickEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
@@ -175,7 +176,6 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLPaths;
 
-import net.mcreator.narutoshippudenmod.compat.ItemHandlerHelper;
 
 public final class PlayerProcedures {
 	private PlayerProcedures() {
@@ -449,7 +449,7 @@ public final class PlayerProcedures {
 	}
 
 	public static class NarutoshippudenconfigProcedure {
-		@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
 			@SubscribeEvent
 			public static void init(FMLCommonSetupEvent event) {
@@ -499,11 +499,11 @@ public final class PlayerProcedures {
 	}
 
 	public static class OnEntityTickUpdateProcedure {
-		@Mod.EventBusSubscriber
+		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
 			@SubscribeEvent
-			public static void onEntityTick(LivingEvent.LivingUpdateEvent event) {
-				Entity entity = event.getEntityLiving();
+			public static void onEntityTick(EntityTickEvent.Pre event) {
+				Entity entity = event.getEntity();
 				Level world = entity.level();
 				double i = entity.getX();
 				double j = entity.getY();
@@ -559,7 +559,7 @@ public final class PlayerProcedures {
 							return ((ServerPlayer) _ent).gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 						} else if (_ent instanceof Player && _ent.level().isClientSide()) {
 							PlayerInfo _npi = Minecraft.getInstance().getConnection()
-									.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().getId());
+									.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().id());
 							return _npi != null && _npi.getGameMode() == GameType.SPECTATOR;
 						}
 						return false;
@@ -572,7 +572,7 @@ public final class PlayerProcedures {
 							return ((ServerPlayer) _ent).gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
 						} else if (_ent instanceof Player && _ent.level().isClientSide()) {
 							PlayerInfo _npi = Minecraft.getInstance().getConnection()
-									.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().getId());
+									.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().id());
 							return _npi != null && _npi.getGameMode() == GameType.SPECTATOR;
 						}
 						return false;
@@ -595,7 +595,7 @@ public final class PlayerProcedures {
 	}
 
 	public static class OnPlayerTickUpdateGlobalTriggerProcedure {
-		@Mod.EventBusSubscriber
+		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
 			@SubscribeEvent
 			public static void onPlayerTick(PlayerTickEvent.Post event) {
@@ -1664,10 +1664,7 @@ public final class PlayerProcedures {
 					});
 				}
 				if (world instanceof ServerLevel) {
-					((Level) world).getServer().getCommands().performCommand(
-							new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-									Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-							("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.max_health base set "
+					Compat.runCommandAt(world, x, y, z, ("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.max_health base set "
 									+ NarutoShippudenModVariables.get(entity).maxhealth));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
@@ -1697,10 +1694,7 @@ public final class PlayerProcedures {
 					});
 				}
 				if (world instanceof ServerLevel) {
-					((Level) world).getServer().getCommands().performCommand(
-							new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-									Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-							("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.movement_speed base set "
+					Compat.runCommandAt(world, x, y, z, ("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.movement_speed base set "
 									+ NarutoShippudenModVariables.get(entity).maxspeed));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
@@ -1995,7 +1989,7 @@ public final class PlayerProcedures {
 															- NarutoShippudenModVariables.get(entity).Shadow2Z)) {
 						if (NarutoShippudenModVariables.get(entity).Shadow1X > NarutoShippudenModVariables.get(entity).Shadow2X) {
 							world.setBlock(
-									new BlockPos(
+									BlockPos.containing(
 											NarutoShippudenModVariables.get(entity).Shadow1X - 1,
 											entity.getY(),
 											NarutoShippudenModVariables.get(entity).Shadow1Z),
@@ -2009,7 +2003,7 @@ public final class PlayerProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).Shadow1X < NarutoShippudenModVariables.get(entity).Shadow2X) {
 							world.setBlock(
-									new BlockPos(
+									BlockPos.containing(
 											NarutoShippudenModVariables.get(entity).Shadow1X + 1,
 											entity.getY(),
 											NarutoShippudenModVariables.get(entity).Shadow1Z),
@@ -2031,7 +2025,7 @@ public final class PlayerProcedures {
 															- NarutoShippudenModVariables.get(entity).Shadow2Z)) {
 						if (NarutoShippudenModVariables.get(entity).Shadow1Z > NarutoShippudenModVariables.get(entity).Shadow2Z) {
 							world.setBlock(
-									new BlockPos(
+									BlockPos.containing(
 											NarutoShippudenModVariables.get(entity).Shadow1X,
 											entity.getY(),
 											NarutoShippudenModVariables.get(entity).Shadow1Z - 1),
@@ -2045,7 +2039,7 @@ public final class PlayerProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).Shadow1Z < NarutoShippudenModVariables.get(entity).Shadow2Z) {
 							world.setBlock(
-									new BlockPos(
+									BlockPos.containing(
 											NarutoShippudenModVariables.get(entity).Shadow1X,
 											entity.getY(),
 											NarutoShippudenModVariables.get(entity).Shadow1Z + 1),
@@ -2303,7 +2297,7 @@ public final class PlayerProcedures {
 				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 5) {
 					if (world
 							.isEmptyBlock(
-									new BlockPos(
+									BlockPos.containing(
 											entity.level().clip(
 													new ClipContext(entity.getEyePosition(1f),
 															entity.getEyePosition(1f).add(entity.getViewVector(1f).x * 8, entity.getViewVector(1f).y * 8,
@@ -2319,7 +2313,7 @@ public final class PlayerProcedures {
 															entity.getViewVector(1f).z * 8),
 													ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity)).getBlockPos().getZ()))
 							|| !world
-									.getBlockState(new BlockPos(
+									.getBlockState(BlockPos.containing(
 											entity.level()
 													.clip(new ClipContext(entity.getEyePosition(1f),
 															entity.getEyePosition(1f).add(entity.getViewVector(1f).x * 8, entity.getViewVector(1f).y * 8,
@@ -2338,7 +2332,7 @@ public final class PlayerProcedures {
 													ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity)).getBlockPos().getZ()))
 									.canOcclude()) {
 						world.setBlock(
-								new BlockPos(
+								BlockPos.containing(
 										entity.level().clip(new ClipContext(entity.getEyePosition(1f),
 												entity.getEyePosition(1f).add(entity.getViewVector(1f).x * 8, entity.getViewVector(1f).y * 8,
 														entity.getViewVector(1f).z * 8),
@@ -2356,7 +2350,7 @@ public final class PlayerProcedures {
 												ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity)).getBlockPos().getZ()),
 								AmaterasuSpreadBlock.block.defaultBlockState(), 3);
 						if (!world.isClientSide()) {
-							BlockPos _bp = new BlockPos(
+							BlockPos _bp = BlockPos.containing(
 									entity.level().clip(new ClipContext(entity.getEyePosition(1f),
 											entity.getEyePosition(1f).add(entity.getViewVector(1f).x * 8, entity.getViewVector(1f).y * 8, entity.getViewVector(1f).z * 8),
 											ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity)).getBlockPos().getX(),
@@ -2623,54 +2617,52 @@ public final class PlayerProcedures {
 			if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY).getItem() == HiramekareiItem.block
 					|| ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY)
 							.getItem() == HiramekareiSplittedItem.block) {
-				if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : StackTag.of(ItemStack.EMPTY))
+				if (StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY))
 						.getBooleanOr("HiramekareiSharp", false) == true) {
-					if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : StackTag.of(ItemStack.EMPTY))
+					if (StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY))
 							.getDoubleOr("Chakra", 0) >= 1) {
-						((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : StackTag.of(ItemStack.EMPTY))
-								.putDouble("Chakra", (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY)
-										.getOrCreateTag().getDoubleOr("Chakra", 0) - 1));
-						((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : StackTag.of(ItemStack.EMPTY))
+						StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY))
+								.putDouble("Chakra", (StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY)).getDoubleOr("Chakra", 0) - 1));
+						StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY))
 								.putDouble("HiramekareiSharp", 1);
-					} else if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : StackTag.of(ItemStack.EMPTY))
+					} else if (StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY))
 							.getDoubleOr("Chakra", 0) <= 0.9) {
-						((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : StackTag.of(ItemStack.EMPTY))
+						StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY))
 								.putDouble("HiramekareiSharp", 0);
-						((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : StackTag.of(ItemStack.EMPTY))
+						StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY))
 								.putBoolean("HiramekareiSharp", (false));
 						if (entity instanceof Player && !entity.level().isClientSide()) {
 							((Player) entity).sendOverlayMessage(Component.literal("Hiramekarei Sharp: Off"));
 						}
 					}
 				} else {
-					((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : StackTag.of(ItemStack.EMPTY))
+					StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY))
 							.putDouble("HiramekareiSharp", 0);
 				}
 			} else if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY)
 					.getItem() == HiramekareiItem.block
 					|| ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY)
 							.getItem() == HiramekareiSplittedItem.block) {
-				if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : StackTag.of(ItemStack.EMPTY))
+				if (StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY))
 						.getBooleanOr("HiramekareiSharp", false) == true) {
-					if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : StackTag.of(ItemStack.EMPTY))
+					if (StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY))
 							.getDoubleOr("Chakra", 0) >= 1) {
-						((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : StackTag.of(ItemStack.EMPTY))
-								.putDouble("Chakra", (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY)
-										.getOrCreateTag().getDoubleOr("Chakra", 0) - 1));
-						((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : StackTag.of(ItemStack.EMPTY))
+						StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY))
+								.putDouble("Chakra", (StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY)).getDoubleOr("Chakra", 0) - 1));
+						StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY))
 								.putDouble("HiramekareiSharp", 1);
-					} else if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : StackTag.of(ItemStack.EMPTY))
+					} else if (StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY))
 							.getDoubleOr("Chakra", 0) <= 0.9) {
-						((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : StackTag.of(ItemStack.EMPTY))
+						StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY))
 								.putDouble("HiramekareiSharp", 0);
-						((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : StackTag.of(ItemStack.EMPTY))
+						StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY))
 								.putBoolean("HiramekareiSharp", (false));
 						if (entity instanceof Player && !entity.level().isClientSide()) {
 							((Player) entity).sendOverlayMessage(Component.literal("Hiramekarei Sharp: Off"));
 						}
 					}
 				} else {
-					((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : StackTag.of(ItemStack.EMPTY))
+					StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY))
 							.putDouble("HiramekareiSharp", 0);
 				}
 			}
@@ -2863,56 +2855,31 @@ public final class PlayerProcedures {
 				if (NarutoShippudenModVariables.get(entity).WaterWalk == false) {
 					if (NarutoShippudenModVariables.get(entity).WHold == true) {
 						if ((entity.getDirection()) == Direction.NORTH) {
-							if (!BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:all_signs"))
-									.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:banners"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:beds"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:bee_growables"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:buttons"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:campfires"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:climbable"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:crops"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wool_carpets"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:fall_damage_resetting"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:fence_gates"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:fences"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:flower_pots"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:flowers"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:rails"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:trapdoors"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:unstable_bottom_center"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wall_corals"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wall_signs"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wither_immune"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:pressure_plates"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:replaceable_plants"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wall_post_override"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:underwater_bonemeals"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:piglin_repellents"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+							if (!Compat.blockHasTag(Identifier.parse("minecraft:all_signs"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:banners"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:beds"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:bee_growables"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:buttons"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:campfires"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:climbable"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:crops"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wool_carpets"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:fall_damage_resetting"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:fence_gates"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:fences"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:flower_pots"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:flowers"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:rails"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:trapdoors"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:unstable_bottom_center"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wall_corals"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wall_signs"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wither_immune"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:pressure_plates"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:replaceable_plants"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wall_post_override"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:underwater_bonemeals"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:piglin_repellents"), (world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock())
 									&& !((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock() == Blocks.BROWN_MUSHROOM)
 									&& !((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock() == Blocks.RED_MUSHROOM)
 									&& !((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock() == Blocks.WARPED_FUNGUS)
@@ -2935,10 +2902,10 @@ public final class PlayerProcedures {
 									&& !((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock() == Blocks.LEVER)
 									&& !((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock() == Blocks.REDSTONE_WIRE)
 									&& !world.isEmptyBlock(BlockPos.containing(x, y, z - 1))
-									&& !((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock() == Blocks.GRASS)
+									&& !((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock() == Blocks.SHORT_GRASS)
 									&& !((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock() == Blocks.FERN)
 									&& !((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock() == Blocks.DEAD_BUSH)
-									&& !((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock() == Blocks.GRASS)
+									&& !((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock() == Blocks.SHORT_GRASS)
 									&& !((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock() == Blocks.SUGAR_CANE)
 									&& !((world.getBlockState(BlockPos.containing(x, y, z - 1))).getBlock() == Blocks.TALL_GRASS)) {
 								if (entity instanceof LivingEntity)
@@ -2960,56 +2927,31 @@ public final class PlayerProcedures {
 								}
 							}
 						} else if ((entity.getDirection()) == Direction.SOUTH) {
-							if (!BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:all_signs"))
-									.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:banners"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:beds"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:bee_growables"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:buttons"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:campfires"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:climbable"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:crops"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wool_carpets"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:fall_damage_resetting"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:fence_gates"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:fences"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:flower_pots"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:flowers"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:rails"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:trapdoors"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:unstable_bottom_center"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wall_corals"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wall_signs"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wither_immune"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:pressure_plates"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:replaceable_plants"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wall_post_override"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:underwater_bonemeals"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:piglin_repellents"))
-											.contains((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+							if (!Compat.blockHasTag(Identifier.parse("minecraft:all_signs"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:banners"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:beds"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:bee_growables"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:buttons"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:campfires"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:climbable"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:crops"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wool_carpets"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:fall_damage_resetting"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:fence_gates"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:fences"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:flower_pots"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:flowers"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:rails"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:trapdoors"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:unstable_bottom_center"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wall_corals"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wall_signs"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wither_immune"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:pressure_plates"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:replaceable_plants"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wall_post_override"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:underwater_bonemeals"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:piglin_repellents"), (world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock())
 									&& !((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock() == Blocks.BROWN_MUSHROOM)
 									&& !((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock() == Blocks.RED_MUSHROOM)
 									&& !((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock() == Blocks.WARPED_FUNGUS)
@@ -3033,9 +2975,9 @@ public final class PlayerProcedures {
 									&& !((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock() == Blocks.REDSTONE_WIRE)
 									&& !((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock() == Blocks.TRIPWIRE)
 									&& !world.isEmptyBlock(BlockPos.containing(x, y, z + 1))
-									&& !((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock() == Blocks.GRASS)
+									&& !((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock() == Blocks.SHORT_GRASS)
 									&& !((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock() == Blocks.FERN)
-									&& !((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock() == Blocks.GRASS)
+									&& !((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock() == Blocks.SHORT_GRASS)
 									&& !((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock() == Blocks.DEAD_BUSH)
 									&& !((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock() == Blocks.SUGAR_CANE)
 									&& !((world.getBlockState(BlockPos.containing(x, y, z + 1))).getBlock() == Blocks.TALL_GRASS)) {
@@ -3058,56 +3000,31 @@ public final class PlayerProcedures {
 								}
 							}
 						} else if ((entity.getDirection()) == Direction.WEST) {
-							if (!BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:all_signs"))
-									.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:banners"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:beds"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:bee_growables"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:buttons"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:campfires"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:climbable"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:crops"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wool_carpets"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:fall_damage_resetting"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:fence_gates"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:fences"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:flower_pots"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:flowers"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:rails"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:trapdoors"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:unstable_bottom_center"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wall_corals"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wall_signs"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wither_immune"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:pressure_plates"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:replaceable_plants"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wall_post_override"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:underwater_bonemeals"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:piglin_repellents"))
-											.contains((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+							if (!Compat.blockHasTag(Identifier.parse("minecraft:all_signs"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:banners"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:beds"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:bee_growables"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:buttons"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:campfires"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:climbable"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:crops"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wool_carpets"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:fall_damage_resetting"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:fence_gates"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:fences"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:flower_pots"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:flowers"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:rails"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:trapdoors"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:unstable_bottom_center"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wall_corals"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wall_signs"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wither_immune"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:pressure_plates"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:replaceable_plants"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wall_post_override"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:underwater_bonemeals"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:piglin_repellents"), (world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock())
 									&& !((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock() == Blocks.BROWN_MUSHROOM)
 									&& !((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock() == Blocks.RED_MUSHROOM)
 									&& !((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock() == Blocks.WARPED_FUNGUS)
@@ -3131,9 +3048,9 @@ public final class PlayerProcedures {
 									&& !((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock() == Blocks.REDSTONE_WIRE)
 									&& !((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock() == Blocks.TRIPWIRE)
 									&& !world.isEmptyBlock(BlockPos.containing(x - 1, y, z))
-									&& !((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock() == Blocks.GRASS)
+									&& !((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock() == Blocks.SHORT_GRASS)
 									&& !((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock() == Blocks.FERN)
-									&& !((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock() == Blocks.GRASS)
+									&& !((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock() == Blocks.SHORT_GRASS)
 									&& !((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock() == Blocks.DEAD_BUSH)
 									&& !((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock() == Blocks.SUGAR_CANE)
 									&& !((world.getBlockState(BlockPos.containing(x - 1, y, z))).getBlock() == Blocks.TALL_GRASS)) {
@@ -3156,56 +3073,31 @@ public final class PlayerProcedures {
 								}
 							}
 						} else if ((entity.getDirection()) == Direction.EAST) {
-							if (!BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:all_signs"))
-									.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:banners"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:beds"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:bee_growables"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:buttons"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:campfires"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:climbable"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:crops"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wool_carpets"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:fall_damage_resetting"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:fence_gates"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:fences"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:flower_pots"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:flowers"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:rails"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:trapdoors"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:unstable_bottom_center"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wall_corals"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wall_signs"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wither_immune"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:pressure_plates"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:replaceable_plants"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:wall_post_override"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:underwater_bonemeals"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
-									&& !BlockTags.getAllTags().getTagOrEmpty(Identifier.parse("minecraft:piglin_repellents"))
-											.contains((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+							if (!Compat.blockHasTag(Identifier.parse("minecraft:all_signs"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:banners"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:beds"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:bee_growables"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:buttons"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:campfires"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:climbable"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:crops"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wool_carpets"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:fall_damage_resetting"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:fence_gates"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:fences"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:flower_pots"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:flowers"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:rails"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:trapdoors"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:unstable_bottom_center"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wall_corals"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wall_signs"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wither_immune"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:pressure_plates"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:replaceable_plants"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:wall_post_override"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:underwater_bonemeals"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
+									&& !Compat.blockHasTag(Identifier.parse("minecraft:piglin_repellents"), (world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock())
 									&& !((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock() == Blocks.BROWN_MUSHROOM)
 									&& !((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock() == Blocks.RED_MUSHROOM)
 									&& !((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock() == Blocks.WARPED_FUNGUS)
@@ -3229,9 +3121,9 @@ public final class PlayerProcedures {
 									&& !((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock() == Blocks.REDSTONE_WIRE)
 									&& !((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock() == Blocks.TRIPWIRE)
 									&& !world.isEmptyBlock(BlockPos.containing(x + 1, y, z))
-									&& !((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock() == Blocks.GRASS)
+									&& !((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock() == Blocks.SHORT_GRASS)
 									&& !((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock() == Blocks.FERN)
-									&& !((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock() == Blocks.GRASS)
+									&& !((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock() == Blocks.SHORT_GRASS)
 									&& !((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock() == Blocks.DEAD_BUSH)
 									&& !((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock() == Blocks.SUGAR_CANE)
 									&& !((world.getBlockState(BlockPos.containing(x + 1, y, z))).getBlock() == Blocks.TALL_GRASS)) {
@@ -3261,7 +3153,7 @@ public final class PlayerProcedures {
 	}
 
 	public static class PlayerAttackedProcedure {
-		@Mod.EventBusSubscriber
+		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
 			@SubscribeEvent
 			public static void onEntityAttacked(LivingIncomingDamageEvent event) {
@@ -3343,13 +3235,13 @@ public final class PlayerProcedures {
 								.getItem() == GunbaiBlockItem.block) {
 					if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY)
 							.getItem() == GunbaiBlockItem.block) {
-						if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : StackTag.of(ItemStack.EMPTY))
+						if (StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY))
 								.getBooleanOr("defense", false) == true) {
 							copy = ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY);
 							{
-								CompoundTag _nbtTag = (StackTag.of(copy));
+								CompoundTag _nbtTag = StackTag.of((copy)).copy();
 								if (_nbtTag != null)
-									(NarutoShippudenModVariables.get(entity).gunbaicopy).setTag(_nbtTag.copy());
+									Compat.setCustomData(NarutoShippudenModVariables.get(entity).gunbaicopy, _nbtTag.copy());
 							}
 							if (entity instanceof LivingEntity) {
 								ItemStack _setstack = (NarutoShippudenModVariables.get(entity).gunbaicopy);
@@ -3358,30 +3250,30 @@ public final class PlayerProcedures {
 								if (entity instanceof ServerPlayer)
 									((ServerPlayer) entity).getInventory().setChanged();
 							}
-							((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : StackTag.of(ItemStack.EMPTY))
+							StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY))
 									.putBoolean("defense", (false));
 							if (entity instanceof Player)
 								((Player) entity).getCooldowns().addCooldown(
-										((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY).getItem(),
+										((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY),
 										(int) 300);
 							if (dependencies.get("event") != null) {
 								Object _obj = dependencies.get("event");
 								if (_obj instanceof Event) {
 									Event _evt = (Event) _obj;
-									if (_evt.isCancelable())
-										_evt.setCanceled(true);
+									if (_evt instanceof net.neoforged.bus.api.ICancellableEvent _cancellable)
+										_cancellable.setCanceled(true);
 								}
 							}
 						}
 					} else if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY)
 							.getItem() == GunbaiBlockItem.block) {
-						if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : StackTag.of(ItemStack.EMPTY))
+						if (StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY))
 								.getBooleanOr("defense", false) == true) {
 							copy = ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY);
 							{
-								CompoundTag _nbtTag = (StackTag.of(copy));
+								CompoundTag _nbtTag = StackTag.of((copy)).copy();
 								if (_nbtTag != null)
-									(NarutoShippudenModVariables.get(entity).gunbaicopy).setTag(_nbtTag.copy());
+									Compat.setCustomData(NarutoShippudenModVariables.get(entity).gunbaicopy, _nbtTag.copy());
 							}
 							if (entity instanceof LivingEntity) {
 								ItemStack _setstack = (NarutoShippudenModVariables.get(entity).gunbaicopy);
@@ -3390,18 +3282,18 @@ public final class PlayerProcedures {
 								if (entity instanceof ServerPlayer)
 									((ServerPlayer) entity).getInventory().setChanged();
 							}
-							((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : StackTag.of(ItemStack.EMPTY))
+							StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY))
 									.putBoolean("defense", (false));
 							if (entity instanceof Player)
 								((Player) entity).getCooldowns().addCooldown(
-										((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY).getItem(),
+										((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY),
 										(int) 300);
 							if (dependencies.get("event") != null) {
 								Object _obj = dependencies.get("event");
 								if (_obj instanceof Event) {
 									Event _evt = (Event) _obj;
-									if (_evt.isCancelable())
-										_evt.setCanceled(true);
+									if (_evt instanceof net.neoforged.bus.api.ICancellableEvent _cancellable)
+										_cancellable.setCanceled(true);
 								}
 							}
 						}
@@ -3412,7 +3304,7 @@ public final class PlayerProcedures {
 	}
 
 	public static class PlayerDrinksMilkProcedure {
-		@Mod.EventBusSubscriber
+		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
 			@SubscribeEvent
 			public static void onUseItemStart(LivingEntityUseItemEvent.Finish event) {
@@ -3461,11 +3353,11 @@ public final class PlayerProcedures {
 	}
 
 	public static class PlayerJoinTheWorldProcedure {
-		@Mod.EventBusSubscriber
+		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
 			@SubscribeEvent
 			public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-				Entity entity = event.getPlayer();
+				Entity entity = event.getEntity();
 				Map<String, Object> dependencies = new HashMap<>();
 				dependencies.put("x", entity.getX());
 				dependencies.put("y", entity.getY());
@@ -3710,10 +3602,10 @@ public final class PlayerProcedures {
 							}
 						}
 						if (world instanceof Level) {
-							((Level) world).getGameRules().getRule(GameRules.RULE_KEEPINVENTORY).set((true), ((Level) world).getServer());
+							((ServerLevel) world).getGameRules().set(net.minecraft.world.level.gamerules.GameRules.KEEP_INVENTORY, true, ((ServerLevel) world).getServer());
 						}
 						if (world instanceof Level) {
-							((Level) world).getGameRules().getRule(GameRules.RULE_FALL_DAMAGE).set((false), ((Level) world).getServer());
+							((ServerLevel) world).getGameRules().set(net.minecraft.world.level.gamerules.GameRules.FALL_DAMAGE, false, ((ServerLevel) world).getServer());
 						}
 						if (entity instanceof Player) {
 							ItemStack _setstack = new ItemStack(IchirakuRamenItem.block);
@@ -3742,10 +3634,10 @@ public final class PlayerProcedures {
 						PlayerName = (entity.getDisplayName().getString());
 					} else if (NarutoShippudenModVariables.get(entity).joinworld == true) {
 						if (world instanceof Level) {
-							((Level) world).getGameRules().getRule(GameRules.RULE_KEEPINVENTORY).set((true), ((Level) world).getServer());
+							((ServerLevel) world).getGameRules().set(net.minecraft.world.level.gamerules.GameRules.KEEP_INVENTORY, true, ((ServerLevel) world).getServer());
 						}
 						if (world instanceof Level) {
-							((Level) world).getGameRules().getRule(GameRules.RULE_FALL_DAMAGE).set((false), ((Level) world).getServer());
+							((ServerLevel) world).getGameRules().set(net.minecraft.world.level.gamerules.GameRules.FALL_DAMAGE, false, ((ServerLevel) world).getServer());
 						}
 					}
 					if ((entity.getDisplayName().getString()).equals("BoxDeity")) {
@@ -3789,11 +3681,11 @@ public final class PlayerProcedures {
 	}
 
 	public static class PlayerJoinTheWorldSkinProcedure {
-		@Mod.EventBusSubscriber
+		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
 			@SubscribeEvent
 			public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-				Entity entity = event.getPlayer();
+				Entity entity = event.getEntity();
 				Map<String, Object> dependencies = new HashMap<>();
 				dependencies.put("x", entity.getX());
 				dependencies.put("y", entity.getY());
@@ -3833,12 +3725,14 @@ public final class PlayerProcedures {
 	}
 
 	public static class PlayerModelChangeProcedure {
-		@Mod.EventBusSubscriber
+		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
 			@OnlyIn(Dist.CLIENT)
 			@SubscribeEvent
 			public static void KleidersRenderEvent(RenderLivingEvent event) {
-				Entity entity = event.getEntity();
+				Entity entity = ModelSwapRenderers.entity(event);
+			if (entity == null)
+				return;
 				Level world = entity.level();
 				double i = entity.getX();
 				double j = entity.getY();
@@ -3868,34 +3762,34 @@ public final class PlayerProcedures {
 			RenderLivingEvent _evt = (RenderLivingEvent) _obj;
 			if (NarutoShippudenModVariables.get(entity).inuzuka_mode == 1) {
 				if (_evt.getRenderer() instanceof AvatarRenderer) {
-					if (_evt instanceof RenderLivingEvent.Pre) {
-						_evt.setCanceled(true);
+					if (_evt instanceof RenderLivingEvent.Pre _cancelable) {
+						_cancelable.setCanceled(true);
 					}
-					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/two_head_akamaru.png", TwoHeadAkamaruRenderer.ModelTwo_Head_Akamaru::new);
+					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/two_head_akamaru.png", TwoHeadAkamaruRenderer.ModelTwo_Head_Akamaru.LAYER, TwoHeadAkamaruRenderer.ModelTwo_Head_Akamaru::new);
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).inuzuka_mode == 2) {
 				if (_evt.getRenderer() instanceof AvatarRenderer) {
-					if (_evt instanceof RenderLivingEvent.Pre) {
-						_evt.setCanceled(true);
+					if (_evt instanceof RenderLivingEvent.Pre _cancelable) {
+						_cancelable.setCanceled(true);
 					}
-					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/two_head_akamaru.png", ThreeHeadAkamaruRenderer.ModelThree_Head_Akamaru::new);
+					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/two_head_akamaru.png", ThreeHeadAkamaruRenderer.ModelThree_Head_Akamaru.LAYER, ThreeHeadAkamaruRenderer.ModelThree_Head_Akamaru::new);
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).PassingFang == true) {
 				if (_evt.getRenderer() instanceof AvatarRenderer) {
-					if (_evt instanceof RenderLivingEvent.Pre) {
-						_evt.setCanceled(true);
+					if (_evt instanceof RenderLivingEvent.Pre _cancelable) {
+						_cancelable.setCanceled(true);
 					}
-					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/passing_fang.png", FangRenderer.Modelfang::new);
+					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/passing_fang.png", FangRenderer.Modelfang.LAYER, FangRenderer.Modelfang::new);
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).tenromode == true) {
 				if (_evt.getRenderer() instanceof AvatarRenderer) {
-					if (_evt instanceof RenderLivingEvent.Pre) {
-						_evt.setCanceled(true);
+					if (_evt instanceof RenderLivingEvent.Pre _cancelable) {
+						_cancelable.setCanceled(true);
 					}
-					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/wolf.png", WolfRenderer.Modelwolf::new);
+					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/wolf.png", WolfRenderer.Modelwolf.LAYER, WolfRenderer.Modelwolf::new);
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).izunochakramode == true) {
@@ -3904,23 +3798,23 @@ public final class PlayerProcedures {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/catchakramode.png", CatChakraModeSneakRenderer.Modelcatchakramodesneak::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/catchakramode.png", CatChakraModeSneakRenderer.Modelcatchakramodesneak.LAYER, CatChakraModeSneakRenderer.Modelcatchakramodesneak::new);
 					}
 				} else if (!entity.isShiftKeyDown()) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/catchakramode.png", CatChakraModeRenderer.Modelcatchakramode::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/catchakramode.png", CatChakraModeRenderer.Modelcatchakramode.LAYER, CatChakraModeRenderer.Modelcatchakramode::new);
 					}
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).izunocat == true) {
 				if (_evt.getRenderer() instanceof AvatarRenderer) {
-					if (_evt instanceof RenderLivingEvent.Pre) {
-						_evt.setCanceled(true);
+					if (_evt instanceof RenderLivingEvent.Pre _cancelable) {
+						_cancelable.setCanceled(true);
 					}
-					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/monstercat.png", MonsterCatRenderer.Modelmonstercat::new);
+					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/monstercat.png", MonsterCatRenderer.Modelmonstercat.LAYER, MonsterCatRenderer.Modelmonstercat::new);
 				}
 			}
 			if (entity.getPersistentData().getBooleanOr("mirror", false) == true) {
@@ -3928,7 +3822,7 @@ public final class PlayerProcedures {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					ModelSwapRenderers.renderMobAs(_evt, "naruto_shippuden:textures/entities/mirror.png", IceMirrorRenderer.Modelice_mirror::new);
+					ModelSwapRenderers.renderMobAs(_evt, "naruto_shippuden:textures/entities/mirror.png", IceMirrorRenderer.Modelice_mirror.LAYER, IceMirrorRenderer.Modelice_mirror::new);
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).ice_mirror == true) {
@@ -3936,7 +3830,7 @@ public final class PlayerProcedures {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/mirror.png", IceMirrorRenderer.Modelice_mirror::new);
+					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/mirror.png", IceMirrorRenderer.Modelice_mirror.LAYER, IceMirrorRenderer.Modelice_mirror::new);
 				}
 			}
 			if (entity.getPersistentData().getBooleanOr("waterblob", false) == true) {
@@ -3944,7 +3838,7 @@ public final class PlayerProcedures {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					ModelSwapRenderers.renderMobAs(_evt, "naruto_shippuden:textures/entities/drowning_water_blob_technique.png", DrowningWaterBlobTechniqueEntityRenderer.ModelDrowning_Water_Blob_Technique::new);
+					ModelSwapRenderers.renderMobAs(_evt, "naruto_shippuden:textures/entities/drowning_water_blob_technique.png", DrowningWaterBlobTechniqueEntityRenderer.ModelDrowning_Water_Blob_Technique.LAYER, DrowningWaterBlobTechniqueEntityRenderer.ModelDrowning_Water_Blob_Technique::new);
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).waterblob == true) {
@@ -3953,14 +3847,14 @@ public final class PlayerProcedures {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/drowning_water_blob_technique.png", DrowningWaterBlobTechniqueEntitySneakRenderer.ModelDrowning_Water_Blob_Technique_Sneak::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/drowning_water_blob_technique.png", DrowningWaterBlobTechniqueEntitySneakRenderer.ModelDrowning_Water_Blob_Technique_Sneak.LAYER, DrowningWaterBlobTechniqueEntitySneakRenderer.ModelDrowning_Water_Blob_Technique_Sneak::new);
 					}
 				} else if (!entity.isShiftKeyDown()) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/drowning_water_blob_technique.png", DrowningWaterBlobTechniqueEntityRenderer.ModelDrowning_Water_Blob_Technique::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/drowning_water_blob_technique.png", DrowningWaterBlobTechniqueEntityRenderer.ModelDrowning_Water_Blob_Technique.LAYER, DrowningWaterBlobTechniqueEntityRenderer.ModelDrowning_Water_Blob_Technique::new);
 					}
 				}
 			}
@@ -3970,14 +3864,14 @@ public final class PlayerProcedures {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/bone.png", DanceoftheLarchSneakRenderer.ModelDance_of_the_Larch_Sneak::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/bone.png", DanceoftheLarchSneakRenderer.ModelDance_of_the_Larch_Sneak.LAYER, DanceoftheLarchSneakRenderer.ModelDance_of_the_Larch_Sneak::new);
 					}
 				} else if (!entity.isShiftKeyDown()) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/bone.png", DanceOfTheLarchRenderer.ModelDance_of_the_Larch::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/bone.png", DanceOfTheLarchRenderer.ModelDance_of_the_Larch.LAYER, DanceOfTheLarchRenderer.ModelDance_of_the_Larch::new);
 					}
 				}
 			}
@@ -3995,14 +3889,14 @@ public final class PlayerProcedures {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/iron_sand.png", MagnetCoatSneakRenderer.ModelBlack_Iron_Sand_Coat_Sneak::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/iron_sand.png", MagnetCoatSneakRenderer.ModelBlack_Iron_Sand_Coat_Sneak.LAYER, MagnetCoatSneakRenderer.ModelBlack_Iron_Sand_Coat_Sneak::new);
 					}
 				} else if (!entity.isShiftKeyDown()) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/iron_sand.png", MagnetCoatRenderer.ModelBlack_Iron_Sand_Coat::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/iron_sand.png", MagnetCoatRenderer.ModelBlack_Iron_Sand_Coat.LAYER, MagnetCoatRenderer.ModelBlack_Iron_Sand_Coat::new);
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 2) {
@@ -4011,14 +3905,14 @@ public final class PlayerProcedures {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/iron_sand.png", MagnetHandsSneakRenderer.ModelBlack_Iron_Sand_Hand_Sneak::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/iron_sand.png", MagnetHandsSneakRenderer.ModelBlack_Iron_Sand_Hand_Sneak.LAYER, MagnetHandsSneakRenderer.ModelBlack_Iron_Sand_Hand_Sneak::new);
 					}
 				} else if (!entity.isShiftKeyDown()) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/iron_sand.png", MagnetHandsRenderer.ModelBlack_Iron_Sand_Hand::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/iron_sand.png", MagnetHandsRenderer.ModelBlack_Iron_Sand_Hand.LAYER, MagnetHandsRenderer.ModelBlack_Iron_Sand_Hand::new);
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 3) {
@@ -4026,7 +3920,7 @@ public final class PlayerProcedures {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/iron_sand.png", MagnetWingsRenderer.ModelBlack_Iron_Sand_Wings::new);
+					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/iron_sand.png", MagnetWingsRenderer.ModelBlack_Iron_Sand_Wings.LAYER, MagnetWingsRenderer.ModelBlack_Iron_Sand_Wings::new);
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).deathgod == true) {
@@ -4034,39 +3928,39 @@ public final class PlayerProcedures {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/dead_demon_consuming_seal.png", DeadDemonConsumingSealRenderer.ModelDead_Demon_Consuming_Seal::new);
+					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/dead_demon_consuming_seal.png", DeadDemonConsumingSealRenderer.ModelDead_Demon_Consuming_Seal.LAYER, DeadDemonConsumingSealRenderer.ModelDead_Demon_Consuming_Seal::new);
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).EightTrigramsPalmsRevolvingHeaven == true) {
 				if (_evt.getRenderer() instanceof AvatarRenderer) {
-					if (_evt instanceof RenderLivingEvent.Pre) {
-						_evt.setCanceled(true);
+					if (_evt instanceof RenderLivingEvent.Pre _cancelable) {
+						_cancelable.setCanceled(true);
 					}
-					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/eight_trigrams_palms_revolving_heaven.png", EightTrigramsPalmsRevolvingHeavenRenderer.Modeleight_trigrams_palms_revolving_heaven::new);
+					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/eight_trigrams_palms_revolving_heaven.png", EightTrigramsPalmsRevolvingHeavenRenderer.Modeleight_trigrams_palms_revolving_heaven.LAYER, EightTrigramsPalmsRevolvingHeavenRenderer.Modeleight_trigrams_palms_revolving_heaven::new);
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).InsectJarTechnique == true) {
 				if (_evt.getRenderer() instanceof AvatarRenderer) {
-					if (_evt instanceof RenderLivingEvent.Pre) {
-						_evt.setCanceled(true);
+					if (_evt instanceof RenderLivingEvent.Pre _cancelable) {
+						_cancelable.setCanceled(true);
 					}
-					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/bugs.png", InsectJarTechniqueRenderer.Modeleight_trigrams_palms_revolving_heaven::new);
+					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/bugs.png", InsectJarTechniqueRenderer.Modeleight_trigrams_palms_revolving_heaven.LAYER, InsectJarTechniqueRenderer.Modeleight_trigrams_palms_revolving_heaven::new);
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).HumanBulletTank == true) {
 				if (_evt.getRenderer() instanceof AvatarRenderer) {
-					if (_evt instanceof RenderLivingEvent.Pre) {
-						_evt.setCanceled(true);
+					if (_evt instanceof RenderLivingEvent.Pre _cancelable) {
+						_cancelable.setCanceled(true);
 					}
-					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/human_bullet_tank.png", HumanBulletTankRenderer.ModelHuman_Bullet_Tank::new);
+					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/human_bullet_tank.png", HumanBulletTankRenderer.ModelHuman_Bullet_Tank.LAYER, HumanBulletTankRenderer.ModelHuman_Bullet_Tank::new);
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).SpikedHumanBulletTank == true) {
 				if (_evt.getRenderer() instanceof AvatarRenderer) {
-					if (_evt instanceof RenderLivingEvent.Pre) {
-						_evt.setCanceled(true);
+					if (_evt instanceof RenderLivingEvent.Pre _cancelable) {
+						_cancelable.setCanceled(true);
 					}
-					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/spiked_human_bullet_tank.png", SpikedHumanBulletTankRenderer.Modelspiked_human_bullet_tank::new);
+					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/spiked_human_bullet_tank.png", SpikedHumanBulletTankRenderer.Modelspiked_human_bullet_tank.LAYER, SpikedHumanBulletTankRenderer.Modelspiked_human_bullet_tank::new);
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).ButterflyMode == true) {
@@ -4075,49 +3969,49 @@ public final class PlayerProcedures {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_blue.png", ButterflyModeRenderer.ModelButterflyMode::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_blue.png", ButterflyModeRenderer.ModelButterflyMode.LAYER, ButterflyModeRenderer.ModelButterflyMode::new);
 					}
 				} else if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Green")) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_green.png", ButterflyModeRenderer.ModelButterflyMode::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_green.png", ButterflyModeRenderer.ModelButterflyMode.LAYER, ButterflyModeRenderer.ModelButterflyMode::new);
 					}
 				} else if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Orange")) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_orange.png", ButterflyModeRenderer.ModelButterflyMode::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_orange.png", ButterflyModeRenderer.ModelButterflyMode.LAYER, ButterflyModeRenderer.ModelButterflyMode::new);
 					}
 				} else if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Pink")) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_pink.png", ButterflyModeRenderer.ModelButterflyMode::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_pink.png", ButterflyModeRenderer.ModelButterflyMode.LAYER, ButterflyModeRenderer.ModelButterflyMode::new);
 					}
 				} else if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Purple")) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_purple.png", ButterflyModeRenderer.ModelButterflyMode::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_purple.png", ButterflyModeRenderer.ModelButterflyMode.LAYER, ButterflyModeRenderer.ModelButterflyMode::new);
 					}
 				} else if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Red")) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_red.png", ButterflyModeRenderer.ModelButterflyMode::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_red.png", ButterflyModeRenderer.ModelButterflyMode.LAYER, ButterflyModeRenderer.ModelButterflyMode::new);
 					}
 				} else if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Yellow")) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_yellow.png", ButterflyModeRenderer.ModelButterflyMode::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_yellow.png", ButterflyModeRenderer.ModelButterflyMode.LAYER, ButterflyModeRenderer.ModelButterflyMode::new);
 					}
 				}
 			}
@@ -4127,35 +4021,35 @@ public final class PlayerProcedures {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_sasuke.png", RibcageSusanoRenderer.Modelribcage::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_sasuke.png", RibcageSusanoRenderer.Modelribcage.LAYER, RibcageSusanoRenderer.Modelribcage::new);
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganItachi == true) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_itachi.png", RibcageSusanoRenderer.Modelribcage::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_itachi.png", RibcageSusanoRenderer.Modelribcage.LAYER, RibcageSusanoRenderer.Modelribcage::new);
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganMadara == true) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_madara.png", RibcageSusanoRenderer.Modelribcage::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_madara.png", RibcageSusanoRenderer.Modelribcage.LAYER, RibcageSusanoRenderer.Modelribcage::new);
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganObito == true) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_obito.png", RibcageSusanoRenderer.Modelribcage::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_obito.png", RibcageSusanoRenderer.Modelribcage.LAYER, RibcageSusanoRenderer.Modelribcage::new);
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganShisui == true) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_shisui.png", RibcageSusanoRenderer.Modelribcage::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_shisui.png", RibcageSusanoRenderer.Modelribcage.LAYER, RibcageSusanoRenderer.Modelribcage::new);
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
@@ -4164,35 +4058,35 @@ public final class PlayerProcedures {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_sasuke.png", SkeletonSusanoSasukeRenderer.Modelsusanoskeletonsasuke::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_sasuke.png", SkeletonSusanoSasukeRenderer.Modelsusanoskeletonsasuke.LAYER, SkeletonSusanoSasukeRenderer.Modelsusanoskeletonsasuke::new);
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganItachi == true) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_itachi.png", SkeletonSusanoItachiRenderer.Modelsusanoskeletonitachi::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_itachi.png", SkeletonSusanoItachiRenderer.Modelsusanoskeletonitachi.LAYER, SkeletonSusanoItachiRenderer.Modelsusanoskeletonitachi::new);
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganMadara == true) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_madara.png", SkeletonSusanoMadaraRenderer.Modelsusanoskeletonmadara::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_madara.png", SkeletonSusanoMadaraRenderer.Modelsusanoskeletonmadara.LAYER, SkeletonSusanoMadaraRenderer.Modelsusanoskeletonmadara::new);
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganObito == true) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_obito.png", SkeletonSusanoObitoRenderer.Modelsusanoskeletonobito::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_obito.png", SkeletonSusanoObitoRenderer.Modelsusanoskeletonobito.LAYER, SkeletonSusanoObitoRenderer.Modelsusanoskeletonobito::new);
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganShisui == true) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_shisui.png", SkeletonSusanoShisuiRenderer.Modelsusanoskeletonshisui::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_shisui.png", SkeletonSusanoShisuiRenderer.Modelsusanoskeletonshisui.LAYER, SkeletonSusanoShisuiRenderer.Modelsusanoskeletonshisui::new);
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
@@ -4201,35 +4095,35 @@ public final class PlayerProcedures {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_sasuke.png", HumanoidSusanoSasukeRenderer.Modelsusanohumanoidsasuke::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_sasuke.png", HumanoidSusanoSasukeRenderer.Modelsusanohumanoidsasuke.LAYER, HumanoidSusanoSasukeRenderer.Modelsusanohumanoidsasuke::new);
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganItachi == true) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_itachi.png", HumanoidSusanoItachiRenderer.Modelsusanohumanoiditachi::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_itachi.png", HumanoidSusanoItachiRenderer.Modelsusanohumanoiditachi.LAYER, HumanoidSusanoItachiRenderer.Modelsusanohumanoiditachi::new);
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganMadara == true) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_madara.png", HumanoidSusanoMadaraRenderer.Modelsusanohumanoidmadara::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_madara.png", HumanoidSusanoMadaraRenderer.Modelsusanohumanoidmadara.LAYER, HumanoidSusanoMadaraRenderer.Modelsusanohumanoidmadara::new);
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganObito == true) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_obito.png", HumanoidSusanoObitoRenderer.Modelsusanohumanoidobito::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_obito.png", HumanoidSusanoObitoRenderer.Modelsusanohumanoidobito.LAYER, HumanoidSusanoObitoRenderer.Modelsusanohumanoidobito::new);
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganShisui == true) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_shisui.png", HumanoidSusanoShisuiRenderer.Modelsusanohumanoidshisui::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_shisui.png", HumanoidSusanoShisuiRenderer.Modelsusanohumanoidshisui.LAYER, HumanoidSusanoShisuiRenderer.Modelsusanohumanoidshisui::new);
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 4) {
@@ -4238,21 +4132,21 @@ public final class PlayerProcedures {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_sasuke.png", ArmoredSusanoSasukeRenderer.Modelsusanoarmoredsasuke::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_sasuke.png", ArmoredSusanoSasukeRenderer.Modelsusanoarmoredsasuke.LAYER, ArmoredSusanoSasukeRenderer.Modelsusanoarmoredsasuke::new);
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganMadara == true) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_madara.png", ArmoredSusanoMadaraRenderer.Modelsusanoarmoredmadara::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_madara.png", ArmoredSusanoMadaraRenderer.Modelsusanoarmoredmadara.LAYER, ArmoredSusanoMadaraRenderer.Modelsusanoarmoredmadara::new);
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganShisui == true) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_shisui.png", ArmoredSusanoShisuiRenderer.Modelsusanoarmoredshisui::new);
+						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/susano/susano_shisui.png", ArmoredSusanoShisuiRenderer.Modelsusanoarmoredshisui.LAYER, ArmoredSusanoShisuiRenderer.Modelsusanoarmoredshisui::new);
 					}
 				}
 			}
@@ -4260,11 +4154,11 @@ public final class PlayerProcedures {
 	}
 
 	public static class PlayerRespawnsProcedure {
-		@Mod.EventBusSubscriber
+		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
 			@SubscribeEvent
 			public static void onPlayerRespawned(PlayerEvent.PlayerRespawnEvent event) {
-				Entity entity = event.getPlayer();
+				Entity entity = event.getEntity();
 				Map<String, Object> dependencies = new HashMap<>();
 				dependencies.put("x", entity.getX());
 				dependencies.put("y", entity.getY());
@@ -4398,10 +4292,7 @@ public final class PlayerProcedures {
 			}
 			if (NarutoShippudenModVariables.get(entity).medicine <= 300) {
 				if (world instanceof ServerLevel) {
-					((Level) world).getServer().getCommands().performCommand(
-							new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-									Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-							("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.max_health base set "
+					Compat.runCommandAt(world, x, y, z, ("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.max_health base set "
 									+ NarutoShippudenModVariables.get(entity).maxhealth));
 				}
 				if (entity instanceof LivingEntity)
@@ -4415,10 +4306,7 @@ public final class PlayerProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).medicine >= 301) {
 				if (world instanceof ServerLevel) {
-					((Level) world).getServer().getCommands().performCommand(
-							new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-									Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-							("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.max_health base set " + 620));
+					Compat.runCommandAt(world, x, y, z, ("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.max_health base set " + 620));
 				}
 				if (entity instanceof LivingEntity)
 					((LivingEntity) entity).setHealth((float) 620);
@@ -4443,7 +4331,7 @@ public final class PlayerProcedures {
 	}
 
 	public static class PlayerWakeUpGlobalProcedure {
-		@Mod.EventBusSubscriber
+		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
 			@SubscribeEvent
 			public static void onEntityEndSleep(PlayerWakeUpEvent event) {
@@ -4497,7 +4385,7 @@ public final class PlayerProcedures {
 				}
 
 				private void run() {
-					if (world.getLevelData().getDayTime() % 24000 == 20) {
+					if (((Level) world).getDefaultClockTime() % 24000 == 20) {
 						{
 							double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax);
 							NarutoShippudenModVariables.ifPresent(entity, capability -> {
@@ -4571,10 +4459,7 @@ public final class PlayerProcedures {
 					});
 				}
 				if (world instanceof ServerLevel) {
-					((Level) world).getServer().getCommands().performCommand(
-							new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-									Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-							("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.movement_speed base set "
+					Compat.runCommandAt(world, x, y, z, ("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.movement_speed base set "
 									+ NarutoShippudenModVariables.get(entity).maxspeed));
 				}
 			} else if (NarutoShippudenModVariables.get(entity).sp <= NarutoShippudenModVariables.get(entity).spusecount) {

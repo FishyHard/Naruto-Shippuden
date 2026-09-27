@@ -3,7 +3,9 @@ package net.mcreator.narutoshippudenmod.procedures;
 import net.mcreator.narutoshippudenmod.compat.Compat;
 import net.minecraft.util.RandomSource;
 import net.mcreator.narutoshippudenmod.compat.ModArrow;
+import net.mcreator.narutoshippudenmod.core.ModelSwapRenderers;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
 import com.google.gson.Gson;
 import java.io.BufferedReader;
@@ -102,7 +104,6 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.mcreator.narutoshippudenmod.compat.TickEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
@@ -110,7 +111,6 @@ import net.neoforged.bus.api.Event;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLPaths;
-import net.mcreator.narutoshippudenmod.compat.ItemHandlerHelper;
 import net.minecraft.core.registries.BuiltInRegistries;
 
 public final class EntityProcedures {
@@ -380,7 +380,7 @@ public final class EntityProcedures {
 										}
 									}
 									if (entity instanceof LivingEntity) {
-										((LivingEntity) entity).swing(InteractionHand.OFF_HAND, true);
+										((LivingEntity) entity).swing(InteractionHand.OFF_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 									}
 									entity.getPersistentData().putDouble("ChakraAmount", (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 350));
 								} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 349) {
@@ -709,12 +709,12 @@ public final class EntityProcedures {
 						}
 						if (sourceentity instanceof Player) {
 							ItemStack _stktoremove = new ItemStack(AsumaQuestCItem.block);
-							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 									((Player) sourceentity).inventoryMenu.getCraftSlots());
 						}
 						if (sourceentity instanceof Player) {
 							ItemStack _stktoremove = new ItemStack(ChakraBladeItem.block);
-							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 2,
+							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 2,
 									((Player) sourceentity).inventoryMenu.getCraftSlots());
 						}
 						if (sourceentity instanceof Player) {
@@ -779,7 +779,7 @@ public final class EntityProcedures {
 	}
 
 	public static class DeathEntityGlobalTriggerProcedure {
-		@Mod.EventBusSubscriber
+		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
 			@SubscribeEvent
 			public static void onEntityDeath(LivingDeathEvent event) {
@@ -890,8 +890,8 @@ public final class EntityProcedures {
 					Object _obj = dependencies.get("event");
 					if (_obj instanceof Event) {
 						Event _evt = (Event) _obj;
-						if (_evt.isCancelable())
-							_evt.setCanceled(true);
+						if (_evt instanceof net.neoforged.bus.api.ICancellableEvent _cancellable)
+							_cancellable.setCanceled(true);
 					}
 				}
 				if (entity instanceof LivingEntity)
@@ -970,8 +970,8 @@ public final class EntityProcedures {
 					Object _obj = dependencies.get("event");
 					if (_obj instanceof Event) {
 						Event _evt = (Event) _obj;
-						if (_evt.isCancelable())
-							_evt.setCanceled(true);
+						if (_evt instanceof net.neoforged.bus.api.ICancellableEvent _cancellable)
+							_cancellable.setCanceled(true);
 					}
 				}
 				if (world instanceof Level && !world.isClientSide()) {
@@ -1173,7 +1173,7 @@ public final class EntityProcedures {
 	}
 
 	public static class EntityFallsProcedure {
-		@Mod.EventBusSubscriber
+		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
 			@SubscribeEvent
 			public static void onEntityFall(LivingFallEvent event) {
@@ -1281,7 +1281,7 @@ public final class EntityProcedures {
 	}
 
 	public static class EntitySpawnsProcedure {
-		@Mod.EventBusSubscriber
+		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
 			@SubscribeEvent
 			public static void onEntitySpawned(EntityJoinLevelEvent event) {
@@ -1289,7 +1289,7 @@ public final class EntityProcedures {
 				double i = entity.getX();
 				double j = entity.getY();
 				double k = entity.getZ();
-				Level world = event.getWorld();
+				Level world = event.getLevel();
 				Map<String, Object> dependencies = new HashMap<>();
 				dependencies.put("x", i);
 				dependencies.put("y", j);
@@ -1483,7 +1483,7 @@ public final class EntityProcedures {
 											}
 										}
 										if (entity instanceof LivingEntity) {
-											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, true);
+											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 										}
 										entity.getPersistentData().putDouble("ChakraAmount",
 												(entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 150));
@@ -1517,7 +1517,7 @@ public final class EntityProcedures {
 											}
 										}
 										if (entity instanceof LivingEntity) {
-											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, true);
+											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 										}
 										entity.getPersistentData().putDouble("ChakraAmount",
 												(entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 100));
@@ -1560,8 +1560,7 @@ public final class EntityProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (entity instanceof LivingEntity)
@@ -1728,7 +1727,7 @@ public final class EntityProcedures {
 										entity.getPersistentData().putDouble("ChakraAmount",
 												(entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 150));
 										if (entity instanceof LivingEntity) {
-											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, true);
+											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 										}
 									} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
@@ -1762,7 +1761,7 @@ public final class EntityProcedures {
 										entity.getPersistentData().putDouble("ChakraAmount",
 												(entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 200));
 										if (entity instanceof LivingEntity) {
-											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, true);
+											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 										}
 									} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
@@ -1796,7 +1795,7 @@ public final class EntityProcedures {
 										entity.getPersistentData().putDouble("ChakraAmount",
 												(entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 100));
 										if (entity instanceof LivingEntity) {
-											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, true);
+											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 										}
 									} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 99) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
@@ -1968,7 +1967,7 @@ public final class EntityProcedures {
 										entity.getPersistentData().putDouble("ChakraAmount",
 												(entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 250));
 										if (entity instanceof LivingEntity) {
-											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, true);
+											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 										}
 									} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
@@ -2002,7 +2001,7 @@ public final class EntityProcedures {
 										entity.getPersistentData().putDouble("ChakraAmount",
 												(entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 200));
 										if (entity instanceof LivingEntity) {
-											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, true);
+											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 										}
 									} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
@@ -2035,7 +2034,7 @@ public final class EntityProcedures {
 										entity.getPersistentData().putDouble("ChakraAmount",
 												(entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 150));
 										if (entity instanceof LivingEntity) {
-											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, true);
+											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 										}
 									} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
@@ -2109,7 +2108,7 @@ public final class EntityProcedures {
 										}
 									}
 									if (entity instanceof LivingEntity) {
-										((LivingEntity) entity).swing(InteractionHand.OFF_HAND, true);
+										((LivingEntity) entity).swing(InteractionHand.OFF_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 									}
 									entity.getPersistentData().putDouble("ChakraAmount", (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 350));
 								} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 349) {
@@ -2249,7 +2248,7 @@ public final class EntityProcedures {
 											((LivingEntity) entity)
 													.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, (int) 60, (int) 254, (false), (false)));
 										if (entity instanceof LivingEntity) {
-											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, true);
+											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 										}
 										entity.getPersistentData().putDouble("ChakraAmount",
 												(entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 250));
@@ -2283,7 +2282,7 @@ public final class EntityProcedures {
 											}
 										}
 										if (entity instanceof LivingEntity) {
-											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, true);
+											((LivingEntity) entity).swing(InteractionHand.OFF_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 										}
 										entity.getPersistentData().putDouble("ChakraAmount",
 												(entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 150));
@@ -2895,7 +2894,7 @@ public final class EntityProcedures {
 										}
 									}
 									if (entity instanceof LivingEntity) {
-										((LivingEntity) entity).swing(InteractionHand.OFF_HAND, true);
+										((LivingEntity) entity).swing(InteractionHand.OFF_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 									}
 									entity.getPersistentData().putDouble("ChakraAmount", (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 250));
 								} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 249) {
@@ -2930,8 +2929,8 @@ public final class EntityProcedures {
 						entityToSpawn.setYHeadRot((float) 0);
 						entityToSpawn.setDeltaMovement(0, 0, 0);
 						if (entityToSpawn instanceof Mob)
-							((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world, world.getCurrentDifficultyAt(entityToSpawn.blockPosition()),
-									EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null, (CompoundTag) null);
+							((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world, ((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()),
+									EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 						world.addFreshEntity(entityToSpawn);
 					}
 					entity.getPersistentData().putDouble("ChakraAmount", (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 150));
@@ -3110,34 +3109,34 @@ public final class EntityProcedures {
 			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 			Entity entity = (Entity) dependencies.get("entity");
 			if (world instanceof Level && !((Level) world).isClientSide()) {
-				((Level) world).explode(null, (int) x, (int) y, (int) z, (float) 9, Explosion.BlockInteraction.NONE);
+				((Level) world).explode(null, x, y, z, (float) 9, Level.ExplosionInteraction.NONE);
 			}
 			if (world instanceof Level && !((Level) world).isClientSide()) {
-				((Level) world).explode(null, (int) x, (int) y, (int) z, (float) 9, Explosion.BlockInteraction.NONE);
+				((Level) world).explode(null, x, y, z, (float) 9, Level.ExplosionInteraction.NONE);
 			}
 			if (world instanceof Level && !((Level) world).isClientSide()) {
-				((Level) world).explode(null, (int) x, (int) y, (int) z, (float) 9, Explosion.BlockInteraction.NONE);
+				((Level) world).explode(null, x, y, z, (float) 9, Level.ExplosionInteraction.NONE);
 			}
 			if (world instanceof ServerLevel) {
-				LightningBolt _ent = EntityType.LIGHTNING_BOLT.create((Level) world);
+				LightningBolt _ent = net.minecraft.world.entity.EntityTypes.LIGHTNING_BOLT.create((Level) world, EntitySpawnReason.TRIGGERED);
 				_ent.snapTo(Vec3.atBottomCenterOf(BlockPos.containing(x, y, z + 1)));
 				_ent.setVisualOnly(true);
 				((Level) world).addFreshEntity(_ent);
 			}
 			if (world instanceof ServerLevel) {
-				LightningBolt _ent = EntityType.LIGHTNING_BOLT.create((Level) world);
+				LightningBolt _ent = net.minecraft.world.entity.EntityTypes.LIGHTNING_BOLT.create((Level) world, EntitySpawnReason.TRIGGERED);
 				_ent.snapTo(Vec3.atBottomCenterOf(BlockPos.containing(x, y, z - 1)));
 				_ent.setVisualOnly(true);
 				((Level) world).addFreshEntity(_ent);
 			}
 			if (world instanceof ServerLevel) {
-				LightningBolt _ent = EntityType.LIGHTNING_BOLT.create((Level) world);
+				LightningBolt _ent = net.minecraft.world.entity.EntityTypes.LIGHTNING_BOLT.create((Level) world, EntitySpawnReason.TRIGGERED);
 				_ent.snapTo(Vec3.atBottomCenterOf(BlockPos.containing(x - 1, y, z)));
 				_ent.setVisualOnly(true);
 				((Level) world).addFreshEntity(_ent);
 			}
 			if (world instanceof ServerLevel) {
-				LightningBolt _ent = EntityType.LIGHTNING_BOLT.create((Level) world);
+				LightningBolt _ent = net.minecraft.world.entity.EntityTypes.LIGHTNING_BOLT.create((Level) world, EntitySpawnReason.TRIGGERED);
 				_ent.snapTo(Vec3.atBottomCenterOf(BlockPos.containing(x + 1, y, z)));
 				_ent.setVisualOnly(true);
 				((Level) world).addFreshEntity(_ent);
@@ -3162,12 +3161,14 @@ public final class EntityProcedures {
 	}
 
 	public static class NPCModelChangeProcedure {
-		@Mod.EventBusSubscriber
+		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
 			@OnlyIn(Dist.CLIENT)
 			@SubscribeEvent
 			public static void KleidersRenderEvent(RenderLivingEvent event) {
-				Entity entity = event.getEntity();
+				Entity entity = ModelSwapRenderers.entity(event);
+			if (entity == null)
+				return;
 				Level world = entity.level();
 				double i = entity.getX();
 				double j = entity.getY();
@@ -3379,12 +3380,12 @@ public final class EntityProcedures {
 						}
 						if (sourceentity instanceof Player) {
 							ItemStack _stktoremove = new ItemStack(ShikamaruQuestDItem.block);
-							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 									((Player) sourceentity).inventoryMenu.getCraftSlots());
 						}
 						if (sourceentity instanceof Player) {
 							ItemStack _stktoremove = new ItemStack(ShogiboardItem.block);
-							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 									((Player) sourceentity).inventoryMenu.getCraftSlots());
 						}
 						if (sourceentity instanceof Player) {

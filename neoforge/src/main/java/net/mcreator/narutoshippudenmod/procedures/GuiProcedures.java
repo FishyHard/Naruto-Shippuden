@@ -101,7 +101,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
 import net.neoforged.fml.loading.FMLPaths;
 
-import net.mcreator.narutoshippudenmod.compat.ItemHandlerHelper;
 
 public final class GuiProcedures {
 	private GuiProcedures() {
@@ -3218,10 +3217,7 @@ public final class GuiProcedures {
 					});
 				}
 				if (world instanceof ServerLevel) {
-					((Level) world).getServer().getCommands().performCommand(
-							new CommandSourceStack(CommandSource.NULL, new Vec3(x, y, z), Vec2.ZERO, (ServerLevel) world, 4, "",
-									Component.literal(""), ((Level) world).getServer(), null).withSuppressedOutput(),
-							("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.max_health base set "
+					Compat.runCommandAt(world, x, y, z, ("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.max_health base set "
 									+ NarutoShippudenModVariables.get(entity).maxhealth));
 				}
 			} else if (NarutoShippudenModVariables.get(entity).sp <= NarutoShippudenModVariables.get(entity).spusecount) {

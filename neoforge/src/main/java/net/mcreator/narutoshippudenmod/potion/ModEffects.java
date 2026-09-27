@@ -1,6 +1,8 @@
 package net.mcreator.narutoshippudenmod.potion;
 
+import net.minecraft.core.registries.Registries;
 import net.mcreator.narutoshippudenmod.compat.Registration;
+import net.neoforged.fml.common.EventBusSubscriber;
 
 import java.util.AbstractMap;
 import java.util.HashMap;
@@ -36,9 +38,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 
 public final class ModEffects {

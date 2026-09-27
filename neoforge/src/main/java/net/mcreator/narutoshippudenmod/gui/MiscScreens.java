@@ -256,7 +256,7 @@ public final class MiscScreens {
 		}
 
 		@Override
-		public void tick() {
+		protected void containerTick() {
 		}
 
 		@Override
@@ -549,7 +549,7 @@ public final class MiscScreens {
 		}
 
 		@Override
-		public void tick() {
+		protected void containerTick() {
 		}
 
 		@Override
@@ -624,7 +624,7 @@ public final class MiscScreens {
 		}
 
 		@Override
-		public void tick() {
+		protected void containerTick() {
 		}
 
 		@Override

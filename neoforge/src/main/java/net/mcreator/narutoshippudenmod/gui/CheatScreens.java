@@ -65,7 +65,7 @@ public final class CheatScreens {
 		}
 
 		@Override
-		public void tick() {
+		protected void containerTick() {
 		}
 
 		@Override
@@ -128,14 +128,12 @@ public final class CheatScreens {
 
 		public NarutoShippudenCheatDojutsuGUIGuiWindow(NarutoShippudenCheatDojutsuGUIGui.GuiContainerMod container, Inventory inventory,
 				Component text) {
-			super(container, inventory, text);
+			super(container, inventory, text, 176, 166);
 			this.world = container.world;
 			this.x = container.x;
 			this.y = container.y;
 			this.z = container.z;
 			this.entity = container.entity;
-			this.imageWidth = 176;
-			this.imageHeight = 166;
 		}
 
 		
@@ -157,7 +155,7 @@ public final class CheatScreens {
 		}
 
 		@Override
-		public void tick() {
+		protected void containerTick() {
 		}
 
 		@Override
@@ -320,7 +318,7 @@ public final class CheatScreens {
 		}
 
 		@Override
-		public void tick() {
+		protected void containerTick() {
 		}
 
 		@Override
@@ -474,14 +472,12 @@ public final class CheatScreens {
 
 		public NarutoShippudenCheatKekkeiGenkaiGUIGuiWindow(NarutoShippudenCheatKekkeiGenkaiGUIGui.GuiContainerMod container, Inventory inventory,
 				Component text) {
-			super(container, inventory, text);
+			super(container, inventory, text, 176, 166);
 			this.world = container.world;
 			this.x = container.x;
 			this.y = container.y;
 			this.z = container.z;
 			this.entity = container.entity;
-			this.imageWidth = 176;
-			this.imageHeight = 166;
 		}
 
 		
@@ -503,7 +499,7 @@ public final class CheatScreens {
 		}
 
 		@Override
-		public void tick() {
+		protected void containerTick() {
 		}
 
 		@Override
@@ -655,7 +651,7 @@ public final class CheatScreens {
 		}
 
 		@Override
-		public void tick() {
+		protected void containerTick() {
 		}
 
 		@Override

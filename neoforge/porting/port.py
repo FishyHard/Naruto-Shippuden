@@ -117,10 +117,22 @@ def transform(path, text):
 import effects  # noqa: E402
 import armor  # noqa: E402
 import gui  # noqa: E402
+import blocks  # noqa: E402
+import particles  # noqa: E402
+import keybinds  # noqa: E402
+import itemgroups  # noqa: E402
+import structures  # noqa: E402
+import overlay  # noqa: E402
 
 POST = {
     'potion/ModEffects.java': effects.convert,
     'item/ArmorItems.java': armor.convert,
+    'block/ModBlocks.java': blocks.convert,
+    'particle/ModParticles.java': particles.convert,
+    'keybind/ModKeyBindings.java': keybinds.convert,
+    'itemgroup/ModItemGroups.java': itemgroups.convert,
+    'world/structure/KamuiTowerStructures.java': structures.convert,
+    'gui/overlay/ChakraBarOverlay.java': overlay.convert,
     'Screens.java': gui.convert_screens,
     'Guis.java': gui.convert_menus,
 }
@@ -134,6 +146,7 @@ def client_hub():
              'import net.neoforged.fml.common.EventBusSubscriber;', 'import net.neoforged.neoforge.client.event.EntityRenderersEvent;',
              'import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;',
              'import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;',
+             'import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;',
              'import net.mcreator.narutoshippudenmod.gui.*;'] + ['import net.mcreator.narutoshippudenmod.gui.%s.*;' % g for g in
              sorted(f[:-5] for f in os.listdir(os.path.join(SRC, 'net/mcreator/narutoshippudenmod/gui')) if f.endswith('.java'))] + ['',
              '/** Client-side registration: entity renderers, model layers and item extensions. */',
@@ -143,7 +156,8 @@ def client_hub():
     lines += ['\t}', '', '\t@SubscribeEvent', '\tpublic static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {']
     lines += ['\t\t%s.registerLayers(event);' % r for r in regs]
     lines += ['\t\tArmorModels.registerLayers(event);', '\t}', '', '\t@SubscribeEvent',
-              '\tpublic static void registerScreens(RegisterMenuScreensEvent event) {']
+              '\tpublic static void registerParticles(RegisterParticleProvidersEvent event) {', '\t\tModParticleProviders.register(event);', '\t}', '',
+              '\t@SubscribeEvent', '\tpublic static void registerScreens(RegisterMenuScreensEvent event) {']
     lines += ['\t\tevent.register(%s.containerType, %s::new);' % (g, w) for g, w in gui.SCREENS]
     lines += ['\t}', '', '\t@SubscribeEvent',
               '\tpublic static void registerExtensions(RegisterClientExtensionsEvent event) {', '\t\tArmorModels.registerExtensions(event);', '\t}', '}']
@@ -171,6 +185,8 @@ def main():
     base = os.path.join(DST, 'net/mcreator/narutoshippudenmod/client')
     os.makedirs(base, exist_ok=True)
     open(os.path.join(base, 'ArmorModels.java'), 'w').write(armor.client_file())
+    open(os.path.join(base, 'ModParticleProviders.java'), 'w').write(particles.client_file())
+    open(os.path.join(base, 'ModKeyMappings.java'), 'w').write(keybinds.client_file())
     open(os.path.join(base, 'ModClient.java'), 'w').write(client_hub())
     # hand-written files override / add
     over = os.path.join(HERE, 'override')

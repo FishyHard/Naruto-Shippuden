@@ -66,7 +66,6 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.NeoForge;
 
-import net.mcreator.narutoshippudenmod.compat.TickEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 
 

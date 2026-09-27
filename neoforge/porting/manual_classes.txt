@@ -48,7 +48,6 @@ net.minecraftforge.fml.network.simple.SimpleChannel       -
 net.minecraftforge.fml.network.NetworkRegistry            -
 net.minecraftforge.fml.client.registry.RenderingRegistry  -
 net.minecraftforge.fml.client.registry.ClientRegistry     -
-net.minecraftforge.event.TickEvent                        net.mcreator.narutoshippudenmod.compat.TickEvent
 net.minecraftforge.event.entity.player.PlayerEvent        net.neoforged.neoforge.event.entity.player.PlayerEvent
 net.minecraftforge.event.entity.player.PlayerWakeUpEvent  net.neoforged.neoforge.event.entity.player.PlayerWakeUpEvent
 net.minecraftforge.event.entity.living.LivingFallEvent    net.neoforged.neoforge.event.entity.living.LivingFallEvent
@@ -75,7 +74,6 @@ net.minecraftforge.common.capabilities.CapabilityInject   -
 net.minecraftforge.common.ToolType                        -
 net.minecraftforge.common.ForgeMod                        net.neoforged.neoforge.common.NeoForgeMod
 net.minecraftforge.common.BasicTrade                      -
-net.minecraftforge.items.ItemHandlerHelper                net.mcreator.narutoshippudenmod.compat.ItemHandlerHelper
 net.minecraftforge.items.IItemHandler                     -
 net.minecraftforge.items.ItemStackHandler                 -
 net.minecraftforge.items.wrapper.SidedInvWrapper          -

@@ -1,5 +1,6 @@
 package net.mcreator.narutoshippudenmod.item;
 
+import net.minecraft.core.registries.Registries;
 import net.mcreator.narutoshippudenmod.compat.Registration;
 
 import java.util.AbstractMap;
@@ -37,7 +38,7 @@ public final class MissionItems {
 	public static class AsumaQuestCItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("asuma_quest_c", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "asuma_quest_c", v -> block = (Item) v);
 		}
 
 		public AsumaQuestCItem(NarutoShippudenModElements instance) {
@@ -70,7 +71,7 @@ public final class MissionItems {
 	public static class IronDefenseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("iron_defense", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "iron_defense", v -> block = (Item) v);
 		}
 
 		public IronDefenseItem(NarutoShippudenModElements instance) {
@@ -122,7 +123,7 @@ public final class MissionItems {
 	public static class LetterFromBrotherItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("letter_from_brother", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "letter_from_brother", v -> block = (Item) v);
 		}
 
 		public LetterFromBrotherItem(NarutoShippudenModElements instance) {
@@ -169,7 +170,7 @@ public final class MissionItems {
 	public static class PillageThePostItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("pillage_the_post", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "pillage_the_post", v -> block = (Item) v);
 		}
 
 		public PillageThePostItem(NarutoShippudenModElements instance) {
@@ -221,7 +222,7 @@ public final class MissionItems {
 	public static class SaveTheVillageItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("save_the_village", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "save_the_village", v -> block = (Item) v);
 		}
 
 		public SaveTheVillageItem(NarutoShippudenModElements instance) {
@@ -273,7 +274,7 @@ public final class MissionItems {
 	public static class ShikamaruQuestDItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("shikamaru_quest_d", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "shikamaru_quest_d", v -> block = (Item) v);
 		}
 
 		public ShikamaruQuestDItem(NarutoShippudenModElements instance) {
@@ -306,7 +307,7 @@ public final class MissionItems {
 	public static class StoryModeItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("story_mode", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "story_mode", v -> block = (Item) v);
 		}
 
 		public StoryModeItem(NarutoShippudenModElements instance) {

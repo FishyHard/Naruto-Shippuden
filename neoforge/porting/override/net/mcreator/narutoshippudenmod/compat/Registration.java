@@ -29,6 +29,7 @@ public final class Registration {
 	public static final String MODID = "naruto_shippuden";
 	private static String pendingName;
 	private static final Map<String, List<Consumer<Object>>> HOLDERS = new HashMap<>();
+	private static ResourceKey<? extends Registry<?>> currentRegistry;
 	private static final List<Entry<?>> EXTRA = new ArrayList<>();
 
 	private Registration() {
@@ -69,13 +70,14 @@ public final class Registration {
 		return ResourceKey.create(Registries.ENTITY_TYPE, id(name));
 	}
 
-	/** Called with the object registered under this name (replaces @ObjectHolder fields). */
-	public static void holder(String name, Consumer<Object> setter) {
-		HOLDERS.computeIfAbsent(name, k -> new ArrayList<>()).add(setter);
+	/** Called with the object registered under this name in that registry (replaces @ObjectHolder fields). */
+	public static void holder(ResourceKey<? extends Registry<?>> registry, String name, Consumer<Object> setter) {
+		HOLDERS.computeIfAbsent(registry.identifier() + "|" + name, k -> new ArrayList<>()).add(setter);
 	}
 
 	/** Registers an item/block/entity type built by the supplier under the name it recorded while being built. */
-	public static <T> void registerNamed(RegisterEvent.RegisterHelper<T> helper, Supplier<? extends T> supplier) {
+	public static <T> void registerNamed(ResourceKey<? extends Registry<T>> registry, RegisterEvent.RegisterHelper<T> helper,
+			Supplier<? extends T> supplier) {
 		pendingName = null;
 		T value = supplier.get();
 		String name = pendingName;
@@ -83,11 +85,11 @@ public final class Registration {
 			throw new IllegalStateException("Object registered without a name: " + value);
 		pendingName = null;
 		helper.register(id(name), value);
-		fire(name, value);
+		fire(registry, name, value);
 	}
 
-	private static void fire(String name, Object value) {
-		List<Consumer<Object>> setters = HOLDERS.get(name);
+	private static void fire(ResourceKey<? extends Registry<?>> registry, String name, Object value) {
+		List<Consumer<Object>> setters = HOLDERS.get(registry.identifier() + "|" + name);
 		if (setters != null)
 			setters.forEach(s -> s.accept(value));
 	}
@@ -114,7 +116,7 @@ public final class Registration {
 		T value = entry.factory().get();
 		Registry<T> registry = (Registry<T>) event.getRegistry();
 		Holder<T> holder = Registry.registerForHolder(registry, id(entry.name()), value);
-		fire(entry.name(), value);
+		fire(entry.registry(), entry.name(), value);
 		if (entry.onRegistered() != null)
 			entry.onRegistered().accept(holder);
 	}

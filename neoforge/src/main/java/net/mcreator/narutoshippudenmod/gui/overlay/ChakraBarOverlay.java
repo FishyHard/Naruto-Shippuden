@@ -1,6 +1,8 @@
 
 package net.mcreator.narutoshippudenmod.gui.overlay;
 
+import net.neoforged.fml.common.EventBusSubscriber;
+
 import net.neoforged.fml.common.Mod;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.EventPriority;
@@ -28,18 +30,19 @@ import java.util.stream.Stream;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.AbstractMap;
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.platform.GlStateManager;
-
-@Mod.EventBusSubscriber
+@EventBusSubscriber(modid = "naruto_shippuden", value = Dist.CLIENT)
 public class ChakraBarOverlay {
-	@OnlyIn(Dist.CLIENT)
-	@SubscribeEvent(priority = EventPriority.NORMAL)
-	public static void eventHandler(RenderGameOverlayEvent.Post event) {
-		if (event.getType() == RenderGameOverlayEvent.ElementType.HELMET) {
-			int w = event.getWindow().getGuiScaledWidth();
-			int h = event.getWindow().getGuiScaledHeight();
+	/** Chakra and health numbers on the right side of the screen. */
+	public static void render(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker) {
+		Identifier _tex = null;
+{
+			int w = graphics.guiWidth();
+			int h = graphics.guiHeight();
 			int posX = w / 2;
 			int posY = h / 2;
 			Level _world = null;
@@ -57,121 +60,62 @@ public class ChakraBarOverlay {
 			double x = _x;
 			double y = _y;
 			double z = _z;
-			RenderSystem.disableDepthTest();
-			RenderSystem.depthMask(false);
-			RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA,
-					GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-			RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-			RenderSystem.disableAlphaTest();
 			if (true) {
 				if (ChakraDisplayLength1Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-					Minecraft.getInstance().font
-							.draw(event.getMatrixStack(),
-									"" + (int) (NarutoShippudenModVariables.get(entity).ChakraAmount) + "",
-									w - 13, h / 2 - 30, -16737793);
+					graphics.text(Minecraft.getInstance().font, "" + (int) (NarutoShippudenModVariables.get(entity).ChakraAmount) + "", w - 13, h / 2 - 30, -16737793, false);
 				if (ChakraDisplayLength1Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-					Minecraft.getInstance().font
-							.draw(event.getMatrixStack(),
-									"" + (int) (NarutoShippudenModVariables.get(entity).ChakraMax) + "",
-									w - 13, h / 2 - 10, -16737793);
+					graphics.text(Minecraft.getInstance().font, "" + (int) (NarutoShippudenModVariables.get(entity).ChakraMax) + "", w - 13, h / 2 - 10, -16737793, false);
 				if (ChakraDisplayLength2Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-					Minecraft.getInstance().font
-							.draw(event.getMatrixStack(),
-									"" + (int) (NarutoShippudenModVariables.get(entity).ChakraAmount) + "",
-									w - 19, h / 2 - 30, -16737793);
+					graphics.text(Minecraft.getInstance().font, "" + (int) (NarutoShippudenModVariables.get(entity).ChakraAmount) + "", w - 19, h / 2 - 30, -16737793, false);
 				if (ChakraDisplayLength2Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-					Minecraft.getInstance().font
-							.draw(event.getMatrixStack(),
-									"" + (int) (NarutoShippudenModVariables.get(entity).ChakraMax) + "",
-									w - 19, h / 2 - 10, -16737793);
+					graphics.text(Minecraft.getInstance().font, "" + (int) (NarutoShippudenModVariables.get(entity).ChakraMax) + "", w - 19, h / 2 - 10, -16737793, false);
 				if (ChakraDisplayLength3Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-					Minecraft.getInstance().font
-							.draw(event.getMatrixStack(),
-									"" + (int) (NarutoShippudenModVariables.get(entity).ChakraAmount) + "",
-									w - 25, h / 2 - 30, -16737793);
+					graphics.text(Minecraft.getInstance().font, "" + (int) (NarutoShippudenModVariables.get(entity).ChakraAmount) + "", w - 25, h / 2 - 30, -16737793, false);
 				if (ChakraDisplayLength3Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-					Minecraft.getInstance().font
-							.draw(event.getMatrixStack(),
-									"" + (int) (NarutoShippudenModVariables.get(entity).ChakraMax) + "",
-									w - 25, h / 2 - 10, -16737793);
+					graphics.text(Minecraft.getInstance().font, "" + (int) (NarutoShippudenModVariables.get(entity).ChakraMax) + "", w - 25, h / 2 - 10, -16737793, false);
 				if (ChakraDisplayLength4Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-					Minecraft.getInstance().font
-							.draw(event.getMatrixStack(),
-									"" + (int) (NarutoShippudenModVariables.get(entity).ChakraAmount) + "",
-									w - 31, h / 2 - 30, -16737793);
+					graphics.text(Minecraft.getInstance().font, "" + (int) (NarutoShippudenModVariables.get(entity).ChakraAmount) + "", w - 31, h / 2 - 30, -16737793, false);
 				if (ChakraDisplayLength4Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-					Minecraft.getInstance().font
-							.draw(event.getMatrixStack(),
-									"" + (int) (NarutoShippudenModVariables.get(entity).ChakraMax) + "",
-									w - 31, h / 2 - 10, -16737793);
+					graphics.text(Minecraft.getInstance().font, "" + (int) (NarutoShippudenModVariables.get(entity).ChakraMax) + "", w - 31, h / 2 - 10, -16737793, false);
 				if (ChakraDisplayLength5Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-					Minecraft.getInstance().font
-							.draw(event.getMatrixStack(),
-									"" + (int) (NarutoShippudenModVariables.get(entity).ChakraAmount) + "",
-									w - 37, h / 2 - 30, -16737793);
+					graphics.text(Minecraft.getInstance().font, "" + (int) (NarutoShippudenModVariables.get(entity).ChakraAmount) + "", w - 37, h / 2 - 30, -16737793, false);
 				if (ChakraDisplayLength5Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-					Minecraft.getInstance().font
-							.draw(event.getMatrixStack(),
-									"" + (int) (NarutoShippudenModVariables.get(entity).ChakraMax) + "",
-									w - 37, h / 2 - 10, -16737793);
+					graphics.text(Minecraft.getInstance().font, "" + (int) (NarutoShippudenModVariables.get(entity).ChakraMax) + "", w - 37, h / 2 - 10, -16737793, false);
 				if (ChakraDisplayLength6Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-					Minecraft.getInstance().font
-							.draw(event.getMatrixStack(),
-									"" + (int) (NarutoShippudenModVariables.get(entity).ChakraAmount) + "",
-									w - 43, h / 2 - 30, -16737793);
+					graphics.text(Minecraft.getInstance().font, "" + (int) (NarutoShippudenModVariables.get(entity).ChakraAmount) + "", w - 43, h / 2 - 30, -16737793, false);
 				if (ChakraDisplayLength6Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-					Minecraft.getInstance().font
-							.draw(event.getMatrixStack(),
-									"" + (int) (NarutoShippudenModVariables.get(entity).ChakraMax) + "",
-									w - 43, h / 2 - 10, -16737793);
+					graphics.text(Minecraft.getInstance().font, "" + (int) (NarutoShippudenModVariables.get(entity).ChakraMax) + "", w - 43, h / 2 - 10, -16737793, false);
 				if (ChakraDisplayLength7Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-					Minecraft.getInstance().font
-							.draw(event.getMatrixStack(),
-									"" + (int) (NarutoShippudenModVariables.get(entity).ChakraAmount) + "",
-									w - 49, h / 2 - 30, -16737793);
+					graphics.text(Minecraft.getInstance().font, "" + (int) (NarutoShippudenModVariables.get(entity).ChakraAmount) + "", w - 49, h / 2 - 30, -16737793, false);
 				if (ChakraDisplayLength7Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-					Minecraft.getInstance().font
-							.draw(event.getMatrixStack(),
-									"" + (int) (NarutoShippudenModVariables.get(entity).ChakraMax) + "",
-									w - 49, h / 2 - 10, -16737793);
+					graphics.text(Minecraft.getInstance().font, "" + (int) (NarutoShippudenModVariables.get(entity).ChakraMax) + "", w - 49, h / 2 - 10, -16737793, false);
 				if (HealthDisplayLength2Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-					Minecraft.getInstance().font
-							.draw(event.getMatrixStack(),
-									"" + (int) (NarutoShippudenModVariables.get(entity).Health) + "",
-									w - 25, h / 2 + 60, -3796205);
+					graphics.text(Minecraft.getInstance().font, "" + (int) (NarutoShippudenModVariables.get(entity).Health) + "", w - 25, h / 2 + 60, -3796205, false);
 				if (HealthDisplayLength1Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-					Minecraft.getInstance().font.draw(event.getMatrixStack(),
-							"" + (int) (NarutoShippudenModVariables.get(entity).Health) + "",
-									w - 19, h / 2 + 60, -3796205);
+					graphics.text(Minecraft.getInstance().font, "" + (int) (NarutoShippudenModVariables.get(entity).Health) + "", w - 19, h / 2 + 60, -3796205, false);
 				if (HealthDisplayLength2Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-					Minecraft.getInstance().font
-							.draw(event.getMatrixStack(),
-									"" + (int) (NarutoShippudenModVariables.get(entity).HealthMax) + "",
-									w - 25, h / 2 + 80, -3796205);
+					graphics.text(Minecraft.getInstance().font, "" + (int) (NarutoShippudenModVariables.get(entity).HealthMax) + "", w - 25, h / 2 + 80, -3796205, false);
 				if (HealthDisplayLength1Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll)))
-					Minecraft.getInstance().font
-							.draw(event.getMatrixStack(),
-									"" + (int) (NarutoShippudenModVariables.get(entity).HealthMax) + "",
-									w - 19, h / 2 + 80, -3796205);
-				Minecraft.getInstance().getTextureManager().bind(Identifier.parse("naruto_shippuden:textures/screens/chakrabar.png"));
+					graphics.text(Minecraft.getInstance().font, "" + (int) (NarutoShippudenModVariables.get(entity).HealthMax) + "", w - 19, h / 2 + 80, -3796205, false);
+				_tex = Identifier.parse("naruto_shippuden:textures/screens/chakrabar.png");
 				int xLoc = w - 7;
 				int yLoc = h / 2 - 50;
 				int mainImagePositionX = 0;
@@ -182,23 +126,25 @@ public class ChakraBarOverlay {
 				int progressImagePositionY = 0;
 				int progressHorizontal = 7;
 				int progressVertical = (int) NarutoShippudenModVariables.get(entity).ChakraBarfill;
-				Minecraft.getInstance().gui.blit(event.getMatrixStack(), xLoc, yLoc, mainImagePositionX, mainImagePositionY, imageWidth,
+				graphics.blit(RenderPipelines.GUI_TEXTURED, _tex, xLoc, yLoc, mainImagePositionX, mainImagePositionY, imageWidth,
 						imageHeight, 15, 76);
-				Minecraft.getInstance().gui.blit(event.getMatrixStack(), xLoc, yLoc, progressImagePositionX, progressImagePositionY,
+				graphics.blit(RenderPipelines.GUI_TEXTURED, _tex, xLoc, yLoc, progressImagePositionX, progressImagePositionY,
 						progressHorizontal, progressVertical, 15, 76);
-				Minecraft.getInstance().getTextureManager().bind(Identifier.parse("naruto_shippuden:textures/screens/healthbar.png"));
+				_tex = Identifier.parse("naruto_shippuden:textures/screens/healthbar.png");
 				int xLoc2 = w - 7;
 				int yLoc2 = h / 2 + 40;
 				int progressVertical2 = (int) NarutoShippudenModVariables.get(entity).HPBarfill;
-				Minecraft.getInstance().gui.blit(event.getMatrixStack(), xLoc2, yLoc2, mainImagePositionX, mainImagePositionY, imageWidth,
+				graphics.blit(RenderPipelines.GUI_TEXTURED, _tex, xLoc2, yLoc2, mainImagePositionX, mainImagePositionY, imageWidth,
 						imageHeight, 15, 76);
-				Minecraft.getInstance().gui.blit(event.getMatrixStack(), xLoc2, yLoc2, progressImagePositionX, progressImagePositionY,
+				graphics.blit(RenderPipelines.GUI_TEXTURED, _tex, xLoc2, yLoc2, progressImagePositionX, progressImagePositionY,
 						progressHorizontal, progressVertical2, 15, 76);
 			}
-			RenderSystem.depthMask(true);
-			RenderSystem.enableDepthTest();
-			RenderSystem.enableAlphaTest();
-			RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		}
+	
+	}
+
+	@SubscribeEvent
+	public static void register(RegisterGuiLayersEvent event) {
+		event.registerAboveAll(Identifier.fromNamespaceAndPath("naruto_shippuden", "chakra_bar"), ChakraBarOverlay::render);
 	}
 }

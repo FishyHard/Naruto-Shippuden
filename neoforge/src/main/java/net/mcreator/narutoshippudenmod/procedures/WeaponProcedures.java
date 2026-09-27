@@ -4,6 +4,8 @@ import net.mcreator.narutoshippudenmod.compat.Compat;
 import net.minecraft.util.RandomSource;
 import net.mcreator.narutoshippudenmod.compat.ModArrow;
 import net.mcreator.narutoshippudenmod.compat.StackTag;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -80,7 +82,6 @@ import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
-import net.mcreator.narutoshippudenmod.compat.ItemHandlerHelper;
 import net.minecraft.core.registries.BuiltInRegistries;
 
 public final class WeaponProcedures {
@@ -119,7 +120,7 @@ public final class WeaponProcedures {
 					StackTag.of(itemstack).putBoolean("FlyingSwallow", (false));
 					StackTag.of(itemstack).putDouble("FlyingSwallowSharp", 0);
 					if (entity instanceof Player)
-						((Player) entity).getCooldowns().addCooldown(itemstack.getItem(), (int) 300);
+						((Player) entity).getCooldowns().addCooldown(itemstack, (int) 300);
 				}
 			}
 			if (itemstack.getItem() == ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY).getItem()
@@ -134,7 +135,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getMainHandItem().isEmpty() && _player_.getMainHandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getMainHandItem().shrink(1);
 							}
 						}
@@ -148,7 +149,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getOffhandItem().isEmpty() && _player_.getOffhandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getOffhandItem().shrink(1);
 							}
 						}
@@ -224,7 +225,7 @@ public final class WeaponProcedures {
 			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
 			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 			if (world instanceof Level && !((Level) world).isClientSide()) {
-				((Level) world).explode(null, (int) x, (int) y, (int) z, (float) 3, Explosion.BlockInteraction.BREAK);
+				((Level) world).explode(null, x, y, z, (float) 3, Level.ExplosionInteraction.TNT);
 			}
 		}
 	}
@@ -261,7 +262,7 @@ public final class WeaponProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(ExplosiveKunaiItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 19) {
@@ -309,7 +310,7 @@ public final class WeaponProcedures {
 				Entity _ent = entity;
 				_ent.teleportTo(x, y, z);
 				if (_ent instanceof ServerPlayer) {
-					((ServerPlayer) _ent).connection.teleport(x, y, z, _ent.getYRot(), _ent.getXRot(), Collections.emptySet());
+					((ServerPlayer) _ent).connection.teleport(x, y, z, _ent.getYRot(), _ent.getXRot());
 				}
 			}
 			if (world instanceof Level && !world.isClientSide()) {
@@ -382,7 +383,7 @@ public final class WeaponProcedures {
 													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1x),
 													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1y),
 													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos1z),
-													_ent.getYRot(), _ent.getXRot(), Collections.emptySet());
+													_ent.getYRot(), _ent.getXRot());
 										}
 									}
 									{
@@ -443,7 +444,7 @@ public final class WeaponProcedures {
 												SoundSource.NEUTRAL, (float) 1, (float) 1, false);
 									}
 									if (entity instanceof Player)
-										((Player) entity).getCooldowns().addCooldown(itemstack.getItem(), (int) 15);
+										((Player) entity).getCooldowns().addCooldown(itemstack, (int) 15);
 								}
 							} else if (NarutoShippudenModVariables.get(entity).flyingthundergodkunaiteleportselect == 1) {
 								if (NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2logic == true) {
@@ -458,7 +459,7 @@ public final class WeaponProcedures {
 													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2x),
 													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2y),
 													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos2z),
-													_ent.getYRot(), _ent.getXRot(), Collections.emptySet());
+													_ent.getYRot(), _ent.getXRot());
 										}
 									}
 									{
@@ -519,7 +520,7 @@ public final class WeaponProcedures {
 												SoundSource.NEUTRAL, (float) 1, (float) 1, false);
 									}
 									if (entity instanceof Player)
-										((Player) entity).getCooldowns().addCooldown(itemstack.getItem(), (int) 15);
+										((Player) entity).getCooldowns().addCooldown(itemstack, (int) 15);
 								}
 							} else if (NarutoShippudenModVariables.get(entity).flyingthundergodkunaiteleportselect == 2) {
 								if (NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3logic == true) {
@@ -534,7 +535,7 @@ public final class WeaponProcedures {
 													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3x),
 													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3y),
 													(NarutoShippudenModVariables.get(entity).flyingthundergodkunaipos3z),
-													_ent.getYRot(), _ent.getXRot(), Collections.emptySet());
+													_ent.getYRot(), _ent.getXRot());
 										}
 									}
 									{
@@ -595,7 +596,7 @@ public final class WeaponProcedures {
 												SoundSource.NEUTRAL, (float) 1, (float) 1, false);
 									}
 									if (entity instanceof Player)
-										((Player) entity).getCooldowns().addCooldown(itemstack.getItem(), (int) 15);
+										((Player) entity).getCooldowns().addCooldown(itemstack, (int) 15);
 								}
 							}
 						} else if (entity.isShiftKeyDown()) {
@@ -724,7 +725,7 @@ public final class WeaponProcedures {
 								});
 							}
 							if (entity instanceof Player)
-								((Player) entity).getCooldowns().addCooldown(itemstack.getItem(), (int) 15);
+								((Player) entity).getCooldowns().addCooldown(itemstack, (int) 15);
 						} else if (entity.isShiftKeyDown()) {
 							if (NarutoShippudenModVariables.get(entity).flyingthundergodkunaicount == 0
 									&& NarutoShippudenModVariables.get(entity).flyingthundergodkunaicount1 == 0
@@ -738,8 +739,7 @@ public final class WeaponProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								{
@@ -789,8 +789,7 @@ public final class WeaponProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								{
@@ -840,8 +839,7 @@ public final class WeaponProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								{
@@ -891,8 +889,7 @@ public final class WeaponProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								{
@@ -942,8 +939,7 @@ public final class WeaponProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								{
@@ -993,8 +989,7 @@ public final class WeaponProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								{
@@ -1044,8 +1039,7 @@ public final class WeaponProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								{
@@ -1170,7 +1164,7 @@ public final class WeaponProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(FumaShurikenItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 19) {
@@ -1208,7 +1202,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getMainHandItem().isEmpty() && _player_.getMainHandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getMainHandItem().shrink(1);
 							}
 						}
@@ -1222,7 +1216,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getOffhandItem().isEmpty() && _player_.getOffhandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getOffhandItem().shrink(1);
 							}
 						}
@@ -1271,7 +1265,7 @@ public final class WeaponProcedures {
 										.getItem() == GunbaiItem.block) {
 							if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY)
 									.getItem() == GunbaiItem.block) {
-								if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : StackTag.of(ItemStack.EMPTY))
+								if (StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY))
 										.getBooleanOr("defense", false) == false) {
 									{
 										ItemStack _setval = (((entity instanceof LivingEntity)
@@ -1284,9 +1278,9 @@ public final class WeaponProcedures {
 									}
 									copy = new ItemStack(GunbaiBlockItem.block);
 									{
-										CompoundTag _nbtTag = (StackTag.of(NarutoShippudenModVariables.get(entity).gunbaicopy));
+										CompoundTag _nbtTag = StackTag.of((NarutoShippudenModVariables.get(entity).gunbaicopy)).copy();
 										if (_nbtTag != null)
-											(copy).setTag(_nbtTag.copy());
+											Compat.setCustomData(copy, _nbtTag.copy());
 									}
 									if (entity instanceof LivingEntity) {
 										ItemStack _setstack = (copy);
@@ -1295,7 +1289,7 @@ public final class WeaponProcedures {
 										if (entity instanceof ServerPlayer)
 											((ServerPlayer) entity).getInventory().setChanged();
 									}
-									((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : StackTag.of(ItemStack.EMPTY))
+									StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY))
 											.putBoolean("defense", (true));
 									if (entity instanceof Player && !entity.level().isClientSide()) {
 										((Player) entity).sendOverlayMessage(Component.literal("Defense: On"));
@@ -1303,7 +1297,7 @@ public final class WeaponProcedures {
 								}
 							} else if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY)
 									.getItem() == GunbaiItem.block) {
-								if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : StackTag.of(ItemStack.EMPTY))
+								if (StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY))
 										.getBooleanOr("defense", false) == false) {
 									{
 										ItemStack _setval = (((entity instanceof LivingEntity)
@@ -1316,9 +1310,9 @@ public final class WeaponProcedures {
 									}
 									copy = new ItemStack(GunbaiBlockItem.block);
 									{
-										CompoundTag _nbtTag = (StackTag.of(NarutoShippudenModVariables.get(entity).gunbaicopy));
+										CompoundTag _nbtTag = StackTag.of((NarutoShippudenModVariables.get(entity).gunbaicopy)).copy();
 										if (_nbtTag != null)
-											(copy).setTag(_nbtTag.copy());
+											Compat.setCustomData(copy, _nbtTag.copy());
 									}
 									if (entity instanceof LivingEntity) {
 										ItemStack _setstack = (copy);
@@ -1327,7 +1321,7 @@ public final class WeaponProcedures {
 										if (entity instanceof ServerPlayer)
 											((ServerPlayer) entity).getInventory().setChanged();
 									}
-									((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : StackTag.of(ItemStack.EMPTY))
+									StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY))
 											.putBoolean("defense", (true));
 									if (entity instanceof Player && !entity.level().isClientSide()) {
 										((Player) entity).sendOverlayMessage(Component.literal("Defense: On"));
@@ -1493,7 +1487,7 @@ public final class WeaponProcedures {
 							}
 						}
 						if (entity instanceof Player)
-							((Player) entity).getCooldowns().addCooldown(itemstack.getItem(), (int) 300);
+							((Player) entity).getCooldowns().addCooldown(itemstack, (int) 300);
 					}
 				} else if (entity.isShiftKeyDown()) {
 					if (StackTag.of(itemstack).getDoubleOr("GunbaiMode", 0) == 0) {
@@ -1530,7 +1524,7 @@ public final class WeaponProcedures {
 							.getItem() == GunbaiBlockItem.block)) {
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(GunbaiBlockItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 				if (entity instanceof Player) {
@@ -1553,13 +1547,13 @@ public final class WeaponProcedures {
 			Entity entity = (Entity) dependencies.get("entity");
 			ItemStack copy = ItemStack.EMPTY;
 			if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY).getItem() == GunbaiBlockItem.block) {
-				if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : StackTag.of(ItemStack.EMPTY))
+				if (StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY))
 						.getBooleanOr("defense", false) == true) {
 					copy = ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY);
 					{
-						CompoundTag _nbtTag = (StackTag.of(copy));
+						CompoundTag _nbtTag = StackTag.of((copy)).copy();
 						if (_nbtTag != null)
-							(NarutoShippudenModVariables.get(entity).gunbaicopy).setTag(_nbtTag.copy());
+							Compat.setCustomData(NarutoShippudenModVariables.get(entity).gunbaicopy, _nbtTag.copy());
 					}
 					if (entity instanceof LivingEntity) {
 						ItemStack _setstack = (NarutoShippudenModVariables.get(entity).gunbaicopy);
@@ -1568,25 +1562,25 @@ public final class WeaponProcedures {
 						if (entity instanceof ServerPlayer)
 							((ServerPlayer) entity).getInventory().setChanged();
 					}
-					((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : StackTag.of(ItemStack.EMPTY))
+					StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY))
 							.putBoolean("defense", (false));
 					if (entity instanceof Player && !entity.level().isClientSide()) {
 						((Player) entity).sendOverlayMessage(Component.literal("Defense: Off"));
 					}
 					if (entity instanceof Player)
 						((Player) entity).getCooldowns().addCooldown(
-								((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY).getItem(),
+								((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY),
 								(int) 300);
 				}
 			} else if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY)
 					.getItem() == GunbaiBlockItem.block) {
-				if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : StackTag.of(ItemStack.EMPTY))
+				if (StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY))
 						.getBooleanOr("defense", false) == true) {
 					copy = ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY);
 					{
-						CompoundTag _nbtTag = (StackTag.of(copy));
+						CompoundTag _nbtTag = StackTag.of((copy)).copy();
 						if (_nbtTag != null)
-							(NarutoShippudenModVariables.get(entity).gunbaicopy).setTag(_nbtTag.copy());
+							Compat.setCustomData(NarutoShippudenModVariables.get(entity).gunbaicopy, _nbtTag.copy());
 					}
 					if (entity instanceof LivingEntity) {
 						ItemStack _setstack = (NarutoShippudenModVariables.get(entity).gunbaicopy);
@@ -1595,14 +1589,14 @@ public final class WeaponProcedures {
 						if (entity instanceof ServerPlayer)
 							((ServerPlayer) entity).getInventory().setChanged();
 					}
-					((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : StackTag.of(ItemStack.EMPTY))
+					StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY))
 							.putBoolean("defense", (false));
 					if (entity instanceof Player && !entity.level().isClientSide()) {
 						((Player) entity).sendOverlayMessage(Component.literal("Defense: Off"));
 					}
 					if (entity instanceof Player)
 						((Player) entity).getCooldowns().addCooldown(
-								((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY).getItem(), (int) 300);
+								((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY), (int) 300);
 				}
 			}
 		}
@@ -1635,7 +1629,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getMainHandItem().isEmpty() && _player_.getMainHandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getMainHandItem().shrink(1);
 							}
 						}
@@ -1649,7 +1643,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getOffhandItem().isEmpty() && _player_.getOffhandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getOffhandItem().shrink(1);
 							}
 						}
@@ -1686,7 +1680,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getMainHandItem().isEmpty() && _player_.getMainHandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getMainHandItem().shrink(1);
 							}
 						}
@@ -1700,7 +1694,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getOffhandItem().isEmpty() && _player_.getOffhandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getOffhandItem().shrink(1);
 							}
 						}
@@ -1727,7 +1721,7 @@ public final class WeaponProcedures {
 			ItemStack itemstack = (ItemStack) dependencies.get("itemstack");
 			if (entity instanceof Player && !entity.level().isClientSide()) {
 				((Player) entity).sendOverlayMessage(
-						Component.literal(("Chakra Storing: " + StackTag.of(Math.round(itemstack).getDoubleOr("Chakra", 0)))));
+						Component.literal(("Chakra Storing: " + Math.round(StackTag.of(itemstack).getDoubleOr("Chakra", 0)))));
 			}
 		}
 	}
@@ -2044,7 +2038,7 @@ public final class WeaponProcedures {
 							}
 						}
 						if (entity instanceof Player)
-							((Player) entity).getCooldowns().addCooldown(itemstack.getItem(), (int) 300);
+							((Player) entity).getCooldowns().addCooldown(itemstack, (int) 300);
 						StackTag.of(itemstack).putDouble("Chakra", (StackTag.of(itemstack).getDoubleOr("Chakra", 0) - 300));
 					} else if (StackTag.of(itemstack).getDoubleOr("Chakra", 0) <= 299) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
@@ -2068,12 +2062,12 @@ public final class WeaponProcedures {
 							((ServerPlayer) entity).getInventory().setChanged();
 					}
 					{
-						CompoundTag _nbtTag = (StackTag.of(copy));
+						CompoundTag _nbtTag = StackTag.of((copy)).copy();
 						if (_nbtTag != null)
-							(copy2).setTag(_nbtTag.copy());
+							Compat.setCustomData(copy2, _nbtTag.copy());
 					}
-					(StackTag.of(copy2)).putBoolean("ChakraStoring", (false));
-					(StackTag.of(copy2)).putBoolean("HiramekareiSharp", (false));
+					StackTag.of((copy2)).putBoolean("ChakraStoring", (false));
+					StackTag.of((copy2)).putBoolean("HiramekareiSharp", (false));
 				} else if (StackTag.of(itemstack).getDoubleOr("HiramekareiMode", 0) == 1) {
 					StackTag.of(itemstack).putDouble("HiramekareiMode", 2);
 					if (entity instanceof Player && !entity.level().isClientSide()) {
@@ -2089,12 +2083,12 @@ public final class WeaponProcedures {
 							((ServerPlayer) entity).getInventory().setChanged();
 					}
 					{
-						CompoundTag _nbtTag = (StackTag.of(copy));
+						CompoundTag _nbtTag = StackTag.of((copy)).copy();
 						if (_nbtTag != null)
-							(copy2).setTag(_nbtTag.copy());
+							Compat.setCustomData(copy2, _nbtTag.copy());
 					}
-					(StackTag.of(copy2)).putBoolean("ChakraStoring", (false));
-					(StackTag.of(copy2)).putBoolean("HiramekareiSharp", (false));
+					StackTag.of((copy2)).putBoolean("ChakraStoring", (false));
+					StackTag.of((copy2)).putBoolean("HiramekareiSharp", (false));
 				} else if (StackTag.of(itemstack).getDoubleOr("HiramekareiMode", 0) == 2) {
 					StackTag.of(itemstack).putDouble("HiramekareiMode", 3);
 					if (entity instanceof Player && !entity.level().isClientSide()) {
@@ -2110,12 +2104,12 @@ public final class WeaponProcedures {
 							((ServerPlayer) entity).getInventory().setChanged();
 					}
 					{
-						CompoundTag _nbtTag = (StackTag.of(copy));
+						CompoundTag _nbtTag = StackTag.of((copy)).copy();
 						if (_nbtTag != null)
-							(copy2).setTag(_nbtTag.copy());
+							Compat.setCustomData(copy2, _nbtTag.copy());
 					}
-					(StackTag.of(copy2)).putBoolean("ChakraStoring", (false));
-					(StackTag.of(copy2)).putBoolean("HiramekareiSharp", (false));
+					StackTag.of((copy2)).putBoolean("ChakraStoring", (false));
+					StackTag.of((copy2)).putBoolean("HiramekareiSharp", (false));
 				} else if (StackTag.of(itemstack).getDoubleOr("HiramekareiMode", 0) == 3) {
 					StackTag.of(itemstack).putDouble("HiramekareiMode", 0);
 					if (entity instanceof Player && !entity.level().isClientSide()) {
@@ -2131,12 +2125,12 @@ public final class WeaponProcedures {
 							((ServerPlayer) entity).getInventory().setChanged();
 					}
 					{
-						CompoundTag _nbtTag = (StackTag.of(copy));
+						CompoundTag _nbtTag = StackTag.of((copy)).copy();
 						if (_nbtTag != null)
-							(copy2).setTag(_nbtTag.copy());
+							Compat.setCustomData(copy2, _nbtTag.copy());
 					}
-					(StackTag.of(copy2)).putBoolean("ChakraStoring", (false));
-					(StackTag.of(copy2)).putBoolean("HiramekareiSharp", (false));
+					StackTag.of((copy2)).putBoolean("ChakraStoring", (false));
+					StackTag.of((copy2)).putBoolean("HiramekareiSharp", (false));
 				}
 			}
 		}
@@ -2170,7 +2164,7 @@ public final class WeaponProcedures {
 						StackTag.of(itemstack).putDouble("Chakra", (StackTag.of(itemstack).getDoubleOr("Chakra", 0) + 1));
 						if (entity instanceof Player && !entity.level().isClientSide()) {
 							((Player) entity).sendOverlayMessage(
-									Component.literal(("Chakra Storing: " + StackTag.of(Math.round(itemstack).getDoubleOr("Chakra", 0)))));
+									Component.literal(("Chakra Storing: " + Math.round(StackTag.of(itemstack).getDoubleOr("Chakra", 0)))));
 						}
 					}
 				}
@@ -2187,7 +2181,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getMainHandItem().isEmpty() && _player_.getMainHandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getMainHandItem().shrink(1);
 							}
 						}
@@ -2201,7 +2195,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getOffhandItem().isEmpty() && _player_.getOffhandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getOffhandItem().shrink(1);
 							}
 						}
@@ -2442,7 +2436,7 @@ public final class WeaponProcedures {
 				}
 			}
 			if (entity instanceof Player)
-				((Player) entity).getCooldowns().addCooldown(itemstack.getItem(), (int) 200);
+				((Player) entity).getCooldowns().addCooldown(itemstack, (int) 200);
 		}
 	}
 
@@ -2473,7 +2467,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getMainHandItem().isEmpty() && _player_.getMainHandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getMainHandItem().shrink(1);
 							}
 						}
@@ -2487,7 +2481,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getOffhandItem().isEmpty() && _player_.getOffhandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getOffhandItem().shrink(1);
 							}
 						}
@@ -2524,7 +2518,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getMainHandItem().isEmpty() && _player_.getMainHandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getMainHandItem().shrink(1);
 							}
 						}
@@ -2538,7 +2532,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getOffhandItem().isEmpty() && _player_.getOffhandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getOffhandItem().shrink(1);
 							}
 						}
@@ -2626,7 +2620,7 @@ public final class WeaponProcedures {
 									});
 								}
 								if (entity instanceof Player)
-									((Player) entity).getCooldowns().addCooldown(itemstack.getItem(), (int) 150);
+									((Player) entity).getCooldowns().addCooldown(itemstack, (int) 150);
 							} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
 									((Player) entity).sendOverlayMessage(Component.literal("Not Enough Chakra"));
@@ -2861,7 +2855,7 @@ public final class WeaponProcedures {
 									});
 								}
 								if (entity instanceof Player)
-									((Player) entity).getCooldowns().addCooldown(itemstack.getItem(), (int) 200);
+									((Player) entity).getCooldowns().addCooldown(itemstack, (int) 200);
 							} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
 									((Player) entity).sendOverlayMessage(Component.literal("Not Enough Chakra"));
@@ -2903,7 +2897,7 @@ public final class WeaponProcedures {
 									});
 								}
 								if (entity instanceof Player)
-									((Player) entity).getCooldowns().addCooldown(itemstack.getItem(), (int) 250);
+									((Player) entity).getCooldowns().addCooldown(itemstack, (int) 250);
 							} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
 									((Player) entity).sendOverlayMessage(Component.literal("Not Enough Chakra"));
@@ -2971,7 +2965,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getMainHandItem().isEmpty() && _player_.getMainHandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getMainHandItem().shrink(1);
 							}
 						}
@@ -2985,7 +2979,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getOffhandItem().isEmpty() && _player_.getOffhandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getOffhandItem().shrink(1);
 							}
 						}
@@ -3022,7 +3016,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getMainHandItem().isEmpty() && _player_.getMainHandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getMainHandItem().shrink(1);
 							}
 						}
@@ -3036,7 +3030,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getOffhandItem().isEmpty() && _player_.getOffhandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getOffhandItem().shrink(1);
 							}
 						}
@@ -3113,7 +3107,7 @@ public final class WeaponProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(KunaiItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 9) {
@@ -3224,7 +3218,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getMainHandItem().isEmpty() && _player_.getMainHandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getMainHandItem().shrink(1);
 							}
 						}
@@ -3238,7 +3232,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getOffhandItem().isEmpty() && _player_.getOffhandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getOffhandItem().shrink(1);
 							}
 						}
@@ -3312,7 +3306,7 @@ public final class WeaponProcedures {
 						}
 					}
 					if (entity instanceof Player)
-						((Player) entity).getCooldowns().addCooldown(itemstack.getItem(), (int) 20);
+						((Player) entity).getCooldowns().addCooldown(itemstack, (int) 20);
 				} else if (StackTag.of(itemstack).getDoubleOr("NuibariMode", 0) == 1) {
 					if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 100) {
 						distance = 3;
@@ -3905,7 +3899,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getMainHandItem().isEmpty() && _player_.getMainHandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getMainHandItem().shrink(1);
 							}
 						}
@@ -3919,7 +3913,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getOffhandItem().isEmpty() && _player_.getOffhandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getOffhandItem().shrink(1);
 							}
 						}
@@ -3958,7 +3952,7 @@ public final class WeaponProcedures {
 			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 			world.setBlock(BlockPos.containing(x, y, z), Blocks.AIR.defaultBlockState(), 3);
 			if (world instanceof Level && !((Level) world).isClientSide()) {
-				((Level) world).explode(null, (int) x, (int) y, (int) z, (float) 5, Explosion.BlockInteraction.DESTROY);
+				((Level) world).explode(null, x, y, z, (float) 5, Level.ExplosionInteraction.TNT);
 			}
 		}
 	}
@@ -4044,7 +4038,7 @@ public final class WeaponProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(PoisonKunaiItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 14) {
@@ -4205,7 +4199,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getMainHandItem().isEmpty() && _player_.getMainHandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getMainHandItem().shrink(1);
 							}
 						}
@@ -4214,7 +4208,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getOffhandItem().isEmpty() && _player_.getOffhandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getOffhandItem().shrink(1);
 							}
 						}
@@ -4233,7 +4227,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getMainHandItem().isEmpty() && _player_.getMainHandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getMainHandItem().shrink(1);
 							}
 						}
@@ -4247,7 +4241,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getOffhandItem().isEmpty() && _player_.getOffhandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getOffhandItem().shrink(1);
 							}
 						}
@@ -4288,8 +4282,8 @@ public final class WeaponProcedures {
 				if (sourceentity instanceof LivingEntity)
 					((LivingEntity) sourceentity).addEffect(new MobEffectInstance(MobEffects.RESISTANCE, (int) 20, (int) 254, (false), (false)));
 				if (world instanceof Level && !((Level) world).isClientSide()) {
-					((Level) world).explode(null, (int) (entity.getX()), (int) (entity.getY()), (int) (entity.getZ()), (float) 5,
-							Explosion.BlockInteraction.DESTROY);
+					((Level) world).explode(null, (entity.getX()), (entity.getY()), (entity.getZ()), (float) 5,
+							Level.ExplosionInteraction.TNT);
 				}
 			}
 		}
@@ -4340,7 +4334,7 @@ public final class WeaponProcedures {
 							for (int index1 = 0; index1 < (int) (6); index1++) {
 								if (world
 										.isEmptyBlock(
-												new BlockPos(
+												BlockPos.containing(
 														entity.level()
 																.clip(new ClipContext(entity.getEyePosition(1f),
 																		entity.getEyePosition(1f).add(entity.getViewVector(1f).x * distance,
@@ -4354,7 +4348,7 @@ public final class WeaponProcedures {
 																				entity.getViewVector(1f).y * distance, entity.getViewVector(1f).z * distance),
 																		ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity))
 																.getBlockPos().getZ()))
-										|| !world.getBlockState(new BlockPos(
+										|| !world.getBlockState(BlockPos.containing(
 												entity.level().clip(new ClipContext(entity.getEyePosition(1f),
 														entity.getEyePosition(1f).add(entity.getViewVector(1f).x * distance, entity.getViewVector(1f).y * distance,
 																entity.getViewVector(1f).z * distance),
@@ -4368,7 +4362,7 @@ public final class WeaponProcedures {
 														.getBlockPos().getZ()))
 												.canOcclude()) {
 									world.setBlock(
-											new BlockPos(
+											BlockPos.containing(
 													entity.level()
 															.clip(
 																	new ClipContext(entity.getEyePosition(1f),
@@ -4387,7 +4381,7 @@ public final class WeaponProcedures {
 									found = (true);
 								} else if (!world
 										.isEmptyBlock(
-												new BlockPos(
+												BlockPos.containing(
 														entity.level()
 																.clip(new ClipContext(entity.getEyePosition(1f),
 																		entity.getEyePosition(1f).add(entity.getViewVector(1f).x * distance,
@@ -4401,7 +4395,7 @@ public final class WeaponProcedures {
 																				entity.getViewVector(1f).y * distance, entity.getViewVector(1f).z * distance),
 																		ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity))
 																.getBlockPos().getZ()))
-										&& world.getBlockState(new BlockPos(
+										&& world.getBlockState(BlockPos.containing(
 												entity.level().clip(new ClipContext(entity.getEyePosition(1f),
 														entity.getEyePosition(1f).add(entity.getViewVector(1f).x * distance, entity.getViewVector(1f).y * distance,
 																entity.getViewVector(1f).z * distance),
@@ -4508,7 +4502,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getMainHandItem().isEmpty() && _player_.getMainHandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getMainHandItem().shrink(1);
 							}
 						}
@@ -4522,7 +4516,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getOffhandItem().isEmpty() && _player_.getOffhandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getOffhandItem().shrink(1);
 							}
 						}
@@ -4586,7 +4580,7 @@ public final class WeaponProcedures {
 											entity.getEyePosition(1f).add(entity.getViewVector(1f).x * 15, entity.getViewVector(1f).y * 15,
 													entity.getViewVector(1f).z * 15),
 											ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity)).getBlockPos().getZ()),
-									(float) 5, Explosion.BlockInteraction.DESTROY);
+									(float) 5, Level.ExplosionInteraction.TNT);
 						}
 						{
 							double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 5);
@@ -4620,7 +4614,7 @@ public final class WeaponProcedures {
 											entity.getEyePosition(1f).add(entity.getViewVector(1f).x * 15, entity.getViewVector(1f).y * 15,
 													entity.getViewVector(1f).z * 15),
 											ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, entity)).getBlockPos().getZ()),
-									(float) 5, Explosion.BlockInteraction.DESTROY);
+									(float) 5, Level.ExplosionInteraction.TNT);
 						}
 						{
 							double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 5);
@@ -4667,7 +4661,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getMainHandItem().isEmpty() && _player_.getMainHandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getMainHandItem().shrink(1);
 							}
 						}
@@ -4681,7 +4675,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getOffhandItem().isEmpty() && _player_.getOffhandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getOffhandItem().shrink(1);
 							}
 						}
@@ -4758,7 +4752,7 @@ public final class WeaponProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(ShurikenItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 4) {
@@ -4796,7 +4790,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getMainHandItem().isEmpty() && _player_.getMainHandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getMainHandItem().shrink(1);
 							}
 						}
@@ -4810,7 +4804,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getOffhandItem().isEmpty() && _player_.getOffhandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getOffhandItem().shrink(1);
 							}
 						}
@@ -4918,7 +4912,7 @@ public final class WeaponProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(ToroiUniqueFumaShurikenItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 24) {
@@ -4930,7 +4924,7 @@ public final class WeaponProcedures {
 	}
 
 	public static class WeaponDamageModifierProcedure {
-		@Mod.EventBusSubscriber
+		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
 			@SubscribeEvent
 			public static void addAttributeModifier(ItemAttributeModifierEvent event) {
@@ -4953,97 +4947,78 @@ public final class WeaponProcedures {
 			AttributeModifier modify = null;
 			AttributeModifier modify2 = null;
 			if (itemstack.getItem() == HiramekareiItem.block || itemstack.getItem() == HiramekareiSplittedItem.block) {
-				if (dependencies.get("event") instanceof ItemAttributeModifierEvent
-						&& ((ItemAttributeModifierEvent) dependencies.get("event")).getSlotType() == EquipmentSlot.MAINHAND) {
+				if (dependencies.get("event") instanceof ItemAttributeModifierEvent) {
 					ItemAttributeModifierEvent _event = (ItemAttributeModifierEvent) dependencies.get("event");
 					SharpLevel = (StackTag.of(itemstack).getDoubleOr("HiramekareiSharp", 0));
-					modify = new AttributeModifier(UUID.fromString("9ef97f14-fb9d-4860-8d83-15e8d640a447"), "naruto_shippuden." + "HiramekareiSharp",
-							SharpLevel, AttributeModifier.Operation.MULTIPLY_BASE);
-					_event.addModifier(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE, modify);
+					modify = new AttributeModifier(Identifier.fromNamespaceAndPath("naruto_shippuden", "hiramekarei_sharp"), SharpLevel, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+					_event.addModifier(Attributes.ATTACK_DAMAGE, modify, net.minecraft.world.entity.EquipmentSlotGroup.MAINHAND);
 				}
 			} else if (itemstack.getItem() == HiramekareiItem.block || itemstack.getItem() == HiramekareiSplittedItem.block) {
-				if (dependencies.get("event") instanceof ItemAttributeModifierEvent
-						&& ((ItemAttributeModifierEvent) dependencies.get("event")).getSlotType() == EquipmentSlot.OFFHAND) {
+				if (dependencies.get("event") instanceof ItemAttributeModifierEvent) {
 					ItemAttributeModifierEvent _event = (ItemAttributeModifierEvent) dependencies.get("event");
 					SharpLevel = (StackTag.of(itemstack).getDoubleOr("HiramekareiSharp", 0));
-					modify = new AttributeModifier(UUID.fromString("9ef97f14-fb9d-4860-8d83-15e8d640a447"), "naruto_shippuden." + "HiramekareiSharp",
-							SharpLevel, AttributeModifier.Operation.MULTIPLY_BASE);
-					_event.addModifier(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE, modify);
+					modify = new AttributeModifier(Identifier.fromNamespaceAndPath("naruto_shippuden", "hiramekarei_sharp"), SharpLevel, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+					_event.addModifier(Attributes.ATTACK_DAMAGE, modify, net.minecraft.world.entity.EquipmentSlotGroup.OFFHAND);
 				}
 			}
 			if (itemstack.getItem() == KusanagiSasukeItem.block) {
-				if (dependencies.get("event") instanceof ItemAttributeModifierEvent
-						&& ((ItemAttributeModifierEvent) dependencies.get("event")).getSlotType() == EquipmentSlot.MAINHAND) {
+				if (dependencies.get("event") instanceof ItemAttributeModifierEvent) {
 					ItemAttributeModifierEvent _event = (ItemAttributeModifierEvent) dependencies.get("event");
 					SharpLevel = (StackTag.of(itemstack).getDoubleOr("KusanagiSharp", 0));
 					ReachLevel = (StackTag.of(itemstack).getDoubleOr("KusanagiReach", 0));
-					modify = new AttributeModifier(UUID.fromString("a1ee4a52-cccf-4c63-9716-76f065b3a744"), "naruto_shippuden." + "KusanagiSharp",
-							SharpLevel, AttributeModifier.Operation.ADDITION);
-					modify2 = new AttributeModifier(UUID.fromString("72438fca-67d7-4e13-98bf-fd22f8229b3b"), "naruto_shippuden." + "KusanagiReach",
-							ReachLevel, AttributeModifier.Operation.ADDITION);
-					_event.addModifier(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE, modify);
-					_event.addModifier(NeoForgeMod.REACH_DISTANCE.get(), modify2);
+					modify = new AttributeModifier(Identifier.fromNamespaceAndPath("naruto_shippuden", "kusanagi_sharp"), SharpLevel, AttributeModifier.Operation.ADD_VALUE);
+					modify2 = new AttributeModifier(Identifier.fromNamespaceAndPath("naruto_shippuden", "kusanagi_reach"), ReachLevel, AttributeModifier.Operation.ADD_VALUE);
+					_event.addModifier(Attributes.ATTACK_DAMAGE, modify, net.minecraft.world.entity.EquipmentSlotGroup.MAINHAND);
+					_event.addModifier(Attributes.ENTITY_INTERACTION_RANGE, modify2, net.minecraft.world.entity.EquipmentSlotGroup.MAINHAND);
 				}
 			}
 			if (itemstack.getItem() == WhiteLightChakraSabreItem.block) {
-				if (dependencies.get("event") instanceof ItemAttributeModifierEvent
-						&& ((ItemAttributeModifierEvent) dependencies.get("event")).getSlotType() == EquipmentSlot.MAINHAND) {
+				if (dependencies.get("event") instanceof ItemAttributeModifierEvent) {
 					ItemAttributeModifierEvent _event = (ItemAttributeModifierEvent) dependencies.get("event");
 					SharpLevel = (StackTag.of(itemstack).getDoubleOr("WhiteLightChakraSabreSharp", 0));
-					modify = new AttributeModifier(UUID.fromString("48c4c3c3-f3b3-491b-8f05-a4238726d696"),
-							"naruto_shippuden." + "WhiteLightChakraSabreSharp", SharpLevel, AttributeModifier.Operation.ADDITION);
-					_event.addModifier(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE, modify);
+					modify = new AttributeModifier(Identifier.fromNamespaceAndPath("naruto_shippuden", "white_light_chakra_sabre_sharp"), SharpLevel, AttributeModifier.Operation.ADD_VALUE);
+					_event.addModifier(Attributes.ATTACK_DAMAGE, modify, net.minecraft.world.entity.EquipmentSlotGroup.MAINHAND);
 				}
 			}
 			if (itemstack.getItem() == ChakraBladeItem.block) {
-				if (dependencies.get("event") instanceof ItemAttributeModifierEvent
-						&& ((ItemAttributeModifierEvent) dependencies.get("event")).getSlotType() == EquipmentSlot.MAINHAND) {
+				if (dependencies.get("event") instanceof ItemAttributeModifierEvent) {
 					ItemAttributeModifierEvent _event = (ItemAttributeModifierEvent) dependencies.get("event");
 					SharpLevel = (StackTag.of(itemstack).getDoubleOr("FlyingSwallowSharp", 0));
-					modify = new AttributeModifier(UUID.fromString("1a894d1a-b601-4117-8a44-22f1c5cd20ce"), "naruto_shippuden." + "FlyingSwallowSharp",
-							SharpLevel, AttributeModifier.Operation.ADDITION);
-					_event.addModifier(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE, modify);
+					modify = new AttributeModifier(Identifier.fromNamespaceAndPath("naruto_shippuden", "flying_swallow_sharp"), SharpLevel, AttributeModifier.Operation.ADD_VALUE);
+					_event.addModifier(Attributes.ATTACK_DAMAGE, modify, net.minecraft.world.entity.EquipmentSlotGroup.MAINHAND);
 				}
 			}
 			if (itemstack.getItem() == KunaiItem.block || itemstack.getItem() == ExplosiveKunaiItem.block
 					|| itemstack.getItem() == PoisonKunaiItem.block) {
-				if (dependencies.get("event") instanceof ItemAttributeModifierEvent
-						&& ((ItemAttributeModifierEvent) dependencies.get("event")).getSlotType() == EquipmentSlot.MAINHAND) {
+				if (dependencies.get("event") instanceof ItemAttributeModifierEvent) {
 					ItemAttributeModifierEvent _event = (ItemAttributeModifierEvent) dependencies.get("event");
 					SharpLevel = (StackTag.of(itemstack).getDoubleOr("KunaiDamage", 0));
-					modify = new AttributeModifier(UUID.fromString("dfa6db09-2311-4e14-a41b-a6cac416e530"), "naruto_shippuden." + "KunaiDamage",
-							SharpLevel, AttributeModifier.Operation.ADDITION);
-					_event.addModifier(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE, modify);
+					modify = new AttributeModifier(Identifier.fromNamespaceAndPath("naruto_shippuden", "kunai_damage"), SharpLevel, AttributeModifier.Operation.ADD_VALUE);
+					_event.addModifier(Attributes.ATTACK_DAMAGE, modify, net.minecraft.world.entity.EquipmentSlotGroup.MAINHAND);
 				}
 			}
 			if (itemstack.getItem() == ShurikenItem.block) {
-				if (dependencies.get("event") instanceof ItemAttributeModifierEvent
-						&& ((ItemAttributeModifierEvent) dependencies.get("event")).getSlotType() == EquipmentSlot.MAINHAND) {
+				if (dependencies.get("event") instanceof ItemAttributeModifierEvent) {
 					ItemAttributeModifierEvent _event = (ItemAttributeModifierEvent) dependencies.get("event");
 					SharpLevel = (StackTag.of(itemstack).getDoubleOr("ShurikenDamage", 0));
-					modify = new AttributeModifier(UUID.fromString("b1e338f9-4714-4653-bbc9-d6e47db0a739"), "naruto_shippuden." + "ShurikenDamage",
-							SharpLevel, AttributeModifier.Operation.ADDITION);
-					_event.addModifier(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE, modify);
+					modify = new AttributeModifier(Identifier.fromNamespaceAndPath("naruto_shippuden", "shuriken_damage"), SharpLevel, AttributeModifier.Operation.ADD_VALUE);
+					_event.addModifier(Attributes.ATTACK_DAMAGE, modify, net.minecraft.world.entity.EquipmentSlotGroup.MAINHAND);
 				}
 			}
 			if (itemstack.getItem() == FumaShurikenItem.block) {
-				if (dependencies.get("event") instanceof ItemAttributeModifierEvent
-						&& ((ItemAttributeModifierEvent) dependencies.get("event")).getSlotType() == EquipmentSlot.MAINHAND) {
+				if (dependencies.get("event") instanceof ItemAttributeModifierEvent) {
 					ItemAttributeModifierEvent _event = (ItemAttributeModifierEvent) dependencies.get("event");
 					SharpLevel = (StackTag.of(itemstack).getDoubleOr("FuumaShurikenDamage", 0));
-					modify = new AttributeModifier(UUID.fromString("86f67277-1d6e-4870-9aec-85f99bb39641"), "naruto_shippuden." + "FuumaShurikenDamage",
-							SharpLevel, AttributeModifier.Operation.ADDITION);
-					_event.addModifier(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE, modify);
+					modify = new AttributeModifier(Identifier.fromNamespaceAndPath("naruto_shippuden", "fuuma_shuriken_damage"), SharpLevel, AttributeModifier.Operation.ADD_VALUE);
+					_event.addModifier(Attributes.ATTACK_DAMAGE, modify, net.minecraft.world.entity.EquipmentSlotGroup.MAINHAND);
 				}
 			}
 			if (itemstack.getItem() == ToroiUniqueFumaShurikenItem.block) {
-				if (dependencies.get("event") instanceof ItemAttributeModifierEvent
-						&& ((ItemAttributeModifierEvent) dependencies.get("event")).getSlotType() == EquipmentSlot.MAINHAND) {
+				if (dependencies.get("event") instanceof ItemAttributeModifierEvent) {
 					ItemAttributeModifierEvent _event = (ItemAttributeModifierEvent) dependencies.get("event");
 					SharpLevel = (StackTag.of(itemstack).getDoubleOr("ToroiFuumaShurikenDamage", 0));
-					modify = new AttributeModifier(UUID.fromString("d1d98255-6cc2-457d-b2a4-bcc84a01be9f"),
-							"naruto_shippuden." + "ToroiFuumaShurikenDamage", SharpLevel, AttributeModifier.Operation.ADDITION);
-					_event.addModifier(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE, modify);
+					modify = new AttributeModifier(Identifier.fromNamespaceAndPath("naruto_shippuden", "toroi_fuuma_shuriken_damage"), SharpLevel, AttributeModifier.Operation.ADD_VALUE);
+					_event.addModifier(Attributes.ATTACK_DAMAGE, modify, net.minecraft.world.entity.EquipmentSlotGroup.MAINHAND);
 				}
 			}
 		}
@@ -5111,7 +5086,7 @@ public final class WeaponProcedures {
 					StackTag.of(itemstack).putBoolean("WhiteLightChakraSabreMode", (false));
 					StackTag.of(itemstack).putDouble("WhiteLightChakraSabreSharp", 0);
 					if (entity instanceof Player)
-						((Player) entity).getCooldowns().addCooldown(itemstack.getItem(), (int) 300);
+						((Player) entity).getCooldowns().addCooldown(itemstack, (int) 300);
 				}
 			}
 			if (itemstack.getItem() == ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY).getItem()
@@ -5126,7 +5101,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getMainHandItem().isEmpty() && _player_.getMainHandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getMainHandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getMainHandItem().shrink(1);
 							}
 						}
@@ -5140,7 +5115,7 @@ public final class WeaponProcedures {
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
 							if (!_player_.getOffhandItem().isEmpty() && _player_.getOffhandItem().getCount() > 0) {
-								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, false);
+								_player_.drop(new ItemStack(_player_.getOffhandItem().getItem(), 1), false, net.minecraft.util.Prediction.SERVER_ONLY);
 								_player_.getOffhandItem().shrink(1);
 							}
 						}

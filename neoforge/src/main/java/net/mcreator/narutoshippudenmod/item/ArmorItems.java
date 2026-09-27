@@ -1,6 +1,7 @@
 package net.mcreator.narutoshippudenmod.item;
 
 import net.mcreator.narutoshippudenmod.compat.Compat;
+import net.minecraft.core.registries.Registries;
 import net.mcreator.narutoshippudenmod.compat.Registration;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -37,19 +38,19 @@ public final class ArmorItems {
 	public static class GeninIwagakureBlackItem extends NarutoShippudenModElements.ModElement {
 	public static Item helmet;
 		static {
-			Registration.holder("genin_iwagakure_black_helmet", v -> helmet = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_iwagakure_black_helmet", v -> helmet = (Item) v);
 		}
 	public static Item body;
 		static {
-			Registration.holder("genin_iwagakure_black_chestplate", v -> body = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_iwagakure_black_chestplate", v -> body = (Item) v);
 		}
 	public static Item legs;
 		static {
-			Registration.holder("genin_iwagakure_black_leggings", v -> legs = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_iwagakure_black_leggings", v -> legs = (Item) v);
 		}
 	public static Item boots;
 		static {
-			Registration.holder("genin_iwagakure_black_boots", v -> boots = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_iwagakure_black_boots", v -> boots = (Item) v);
 		}
 		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_iwagakure_black")));
 
@@ -67,19 +68,19 @@ public final class ArmorItems {
 	public static class GeninIwagakureItem extends NarutoShippudenModElements.ModElement {
 	public static Item helmet;
 		static {
-			Registration.holder("genin_iwagakure_helmet", v -> helmet = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_iwagakure_helmet", v -> helmet = (Item) v);
 		}
 	public static Item body;
 		static {
-			Registration.holder("genin_iwagakure_chestplate", v -> body = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_iwagakure_chestplate", v -> body = (Item) v);
 		}
 	public static Item legs;
 		static {
-			Registration.holder("genin_iwagakure_leggings", v -> legs = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_iwagakure_leggings", v -> legs = (Item) v);
 		}
 	public static Item boots;
 		static {
-			Registration.holder("genin_iwagakure_boots", v -> boots = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_iwagakure_boots", v -> boots = (Item) v);
 		}
 		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_iwagakure")));
 
@@ -97,19 +98,19 @@ public final class ArmorItems {
 	public static class GeninIwagakureRedItem extends NarutoShippudenModElements.ModElement {
 	public static Item helmet;
 		static {
-			Registration.holder("genin_iwagakure_red_helmet", v -> helmet = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_iwagakure_red_helmet", v -> helmet = (Item) v);
 		}
 	public static Item body;
 		static {
-			Registration.holder("genin_iwagakure_red_chestplate", v -> body = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_iwagakure_red_chestplate", v -> body = (Item) v);
 		}
 	public static Item legs;
 		static {
-			Registration.holder("genin_iwagakure_red_leggings", v -> legs = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_iwagakure_red_leggings", v -> legs = (Item) v);
 		}
 	public static Item boots;
 		static {
-			Registration.holder("genin_iwagakure_red_boots", v -> boots = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_iwagakure_red_boots", v -> boots = (Item) v);
 		}
 		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_iwagakure_red")));
 
@@ -127,19 +128,19 @@ public final class ArmorItems {
 	public static class GeninKirigakureBlackItem extends NarutoShippudenModElements.ModElement {
 	public static Item helmet;
 		static {
-			Registration.holder("genin_kirigakure_black_helmet", v -> helmet = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kirigakure_black_helmet", v -> helmet = (Item) v);
 		}
 	public static Item body;
 		static {
-			Registration.holder("genin_kirigakure_black_chestplate", v -> body = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kirigakure_black_chestplate", v -> body = (Item) v);
 		}
 	public static Item legs;
 		static {
-			Registration.holder("genin_kirigakure_black_leggings", v -> legs = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kirigakure_black_leggings", v -> legs = (Item) v);
 		}
 	public static Item boots;
 		static {
-			Registration.holder("genin_kirigakure_black_boots", v -> boots = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kirigakure_black_boots", v -> boots = (Item) v);
 		}
 		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_kirigakure_black")));
 
@@ -157,19 +158,19 @@ public final class ArmorItems {
 	public static class GeninKirigakureItem extends NarutoShippudenModElements.ModElement {
 	public static Item helmet;
 		static {
-			Registration.holder("genin_kirigakure_helmet", v -> helmet = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kirigakure_helmet", v -> helmet = (Item) v);
 		}
 	public static Item body;
 		static {
-			Registration.holder("genin_kirigakure_chestplate", v -> body = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kirigakure_chestplate", v -> body = (Item) v);
 		}
 	public static Item legs;
 		static {
-			Registration.holder("genin_kirigakure_leggings", v -> legs = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kirigakure_leggings", v -> legs = (Item) v);
 		}
 	public static Item boots;
 		static {
-			Registration.holder("genin_kirigakure_boots", v -> boots = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kirigakure_boots", v -> boots = (Item) v);
 		}
 		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_kirigakure")));
 
@@ -187,19 +188,19 @@ public final class ArmorItems {
 	public static class GeninKirigakureRedItem extends NarutoShippudenModElements.ModElement {
 	public static Item helmet;
 		static {
-			Registration.holder("genin_kirigakure_red_helmet", v -> helmet = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kirigakure_red_helmet", v -> helmet = (Item) v);
 		}
 	public static Item body;
 		static {
-			Registration.holder("genin_kirigakure_red_chestplate", v -> body = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kirigakure_red_chestplate", v -> body = (Item) v);
 		}
 	public static Item legs;
 		static {
-			Registration.holder("genin_kirigakure_red_leggings", v -> legs = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kirigakure_red_leggings", v -> legs = (Item) v);
 		}
 	public static Item boots;
 		static {
-			Registration.holder("genin_kirigakure_red_boots", v -> boots = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kirigakure_red_boots", v -> boots = (Item) v);
 		}
 		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_kirigakure_red")));
 
@@ -217,19 +218,19 @@ public final class ArmorItems {
 	public static class GeninKonohagakureBlackItem extends NarutoShippudenModElements.ModElement {
 	public static Item helmet;
 		static {
-			Registration.holder("genin_konohagakure_black_helmet", v -> helmet = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_konohagakure_black_helmet", v -> helmet = (Item) v);
 		}
 	public static Item body;
 		static {
-			Registration.holder("genin_konohagakure_black_chestplate", v -> body = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_konohagakure_black_chestplate", v -> body = (Item) v);
 		}
 	public static Item legs;
 		static {
-			Registration.holder("genin_konohagakure_black_leggings", v -> legs = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_konohagakure_black_leggings", v -> legs = (Item) v);
 		}
 	public static Item boots;
 		static {
-			Registration.holder("genin_konohagakure_black_boots", v -> boots = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_konohagakure_black_boots", v -> boots = (Item) v);
 		}
 		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_konohagakure_black")));
 
@@ -247,19 +248,19 @@ public final class ArmorItems {
 	public static class GeninKonohagakureItem extends NarutoShippudenModElements.ModElement {
 	public static Item helmet;
 		static {
-			Registration.holder("genin_konohagakure_helmet", v -> helmet = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_konohagakure_helmet", v -> helmet = (Item) v);
 		}
 	public static Item body;
 		static {
-			Registration.holder("genin_konohagakure_chestplate", v -> body = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_konohagakure_chestplate", v -> body = (Item) v);
 		}
 	public static Item legs;
 		static {
-			Registration.holder("genin_konohagakure_leggings", v -> legs = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_konohagakure_leggings", v -> legs = (Item) v);
 		}
 	public static Item boots;
 		static {
-			Registration.holder("genin_konohagakure_boots", v -> boots = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_konohagakure_boots", v -> boots = (Item) v);
 		}
 		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_konohagakure")));
 
@@ -277,19 +278,19 @@ public final class ArmorItems {
 	public static class GeninKonohagakureRedItem extends NarutoShippudenModElements.ModElement {
 	public static Item helmet;
 		static {
-			Registration.holder("genin_konohagakure_red_helmet", v -> helmet = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_konohagakure_red_helmet", v -> helmet = (Item) v);
 		}
 	public static Item body;
 		static {
-			Registration.holder("genin_konohagakure_red_chestplate", v -> body = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_konohagakure_red_chestplate", v -> body = (Item) v);
 		}
 	public static Item legs;
 		static {
-			Registration.holder("genin_konohagakure_red_leggings", v -> legs = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_konohagakure_red_leggings", v -> legs = (Item) v);
 		}
 	public static Item boots;
 		static {
-			Registration.holder("genin_konohagakure_red_boots", v -> boots = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_konohagakure_red_boots", v -> boots = (Item) v);
 		}
 		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_konohagakure_red")));
 
@@ -307,19 +308,19 @@ public final class ArmorItems {
 	public static class GeninKumogakureBlackItem extends NarutoShippudenModElements.ModElement {
 	public static Item helmet;
 		static {
-			Registration.holder("genin_kumogakure_black_helmet", v -> helmet = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kumogakure_black_helmet", v -> helmet = (Item) v);
 		}
 	public static Item body;
 		static {
-			Registration.holder("genin_kumogakure_black_chestplate", v -> body = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kumogakure_black_chestplate", v -> body = (Item) v);
 		}
 	public static Item legs;
 		static {
-			Registration.holder("genin_kumogakure_black_leggings", v -> legs = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kumogakure_black_leggings", v -> legs = (Item) v);
 		}
 	public static Item boots;
 		static {
-			Registration.holder("genin_kumogakure_black_boots", v -> boots = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kumogakure_black_boots", v -> boots = (Item) v);
 		}
 		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_kumogakure_black")));
 
@@ -337,19 +338,19 @@ public final class ArmorItems {
 	public static class GeninKumogakureItem extends NarutoShippudenModElements.ModElement {
 	public static Item helmet;
 		static {
-			Registration.holder("genin_kumogakure_helmet", v -> helmet = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kumogakure_helmet", v -> helmet = (Item) v);
 		}
 	public static Item body;
 		static {
-			Registration.holder("genin_kumogakure_chestplate", v -> body = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kumogakure_chestplate", v -> body = (Item) v);
 		}
 	public static Item legs;
 		static {
-			Registration.holder("genin_kumogakure_leggings", v -> legs = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kumogakure_leggings", v -> legs = (Item) v);
 		}
 	public static Item boots;
 		static {
-			Registration.holder("genin_kumogakure_boots", v -> boots = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kumogakure_boots", v -> boots = (Item) v);
 		}
 		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_kumogakure")));
 
@@ -367,19 +368,19 @@ public final class ArmorItems {
 	public static class GeninKumogakureRedItem extends NarutoShippudenModElements.ModElement {
 	public static Item helmet;
 		static {
-			Registration.holder("genin_kumogakure_red_helmet", v -> helmet = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kumogakure_red_helmet", v -> helmet = (Item) v);
 		}
 	public static Item body;
 		static {
-			Registration.holder("genin_kumogakure_red_chestplate", v -> body = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kumogakure_red_chestplate", v -> body = (Item) v);
 		}
 	public static Item legs;
 		static {
-			Registration.holder("genin_kumogakure_red_leggings", v -> legs = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kumogakure_red_leggings", v -> legs = (Item) v);
 		}
 	public static Item boots;
 		static {
-			Registration.holder("genin_kumogakure_red_boots", v -> boots = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_kumogakure_red_boots", v -> boots = (Item) v);
 		}
 		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_kumogakure_red")));
 
@@ -397,19 +398,19 @@ public final class ArmorItems {
 	public static class GeninSunagakureBlackItem extends NarutoShippudenModElements.ModElement {
 	public static Item helmet;
 		static {
-			Registration.holder("genin_sunagakure_black_helmet", v -> helmet = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_sunagakure_black_helmet", v -> helmet = (Item) v);
 		}
 	public static Item body;
 		static {
-			Registration.holder("genin_sunagakure_black_chestplate", v -> body = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_sunagakure_black_chestplate", v -> body = (Item) v);
 		}
 	public static Item legs;
 		static {
-			Registration.holder("genin_sunagakure_black_leggings", v -> legs = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_sunagakure_black_leggings", v -> legs = (Item) v);
 		}
 	public static Item boots;
 		static {
-			Registration.holder("genin_sunagakure_black_boots", v -> boots = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_sunagakure_black_boots", v -> boots = (Item) v);
 		}
 		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_sunagakure_black")));
 
@@ -427,19 +428,19 @@ public final class ArmorItems {
 	public static class GeninSunagakureItem extends NarutoShippudenModElements.ModElement {
 	public static Item helmet;
 		static {
-			Registration.holder("genin_sunagakure_helmet", v -> helmet = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_sunagakure_helmet", v -> helmet = (Item) v);
 		}
 	public static Item body;
 		static {
-			Registration.holder("genin_sunagakure_chestplate", v -> body = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_sunagakure_chestplate", v -> body = (Item) v);
 		}
 	public static Item legs;
 		static {
-			Registration.holder("genin_sunagakure_leggings", v -> legs = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_sunagakure_leggings", v -> legs = (Item) v);
 		}
 	public static Item boots;
 		static {
-			Registration.holder("genin_sunagakure_boots", v -> boots = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_sunagakure_boots", v -> boots = (Item) v);
 		}
 		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_sunagakure")));
 
@@ -457,19 +458,19 @@ public final class ArmorItems {
 	public static class GeninSunagakureRedItem extends NarutoShippudenModElements.ModElement {
 	public static Item helmet;
 		static {
-			Registration.holder("genin_sunagakure_red_helmet", v -> helmet = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_sunagakure_red_helmet", v -> helmet = (Item) v);
 		}
 	public static Item body;
 		static {
-			Registration.holder("genin_sunagakure_red_chestplate", v -> body = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_sunagakure_red_chestplate", v -> body = (Item) v);
 		}
 	public static Item legs;
 		static {
-			Registration.holder("genin_sunagakure_red_leggings", v -> legs = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_sunagakure_red_leggings", v -> legs = (Item) v);
 		}
 	public static Item boots;
 		static {
-			Registration.holder("genin_sunagakure_red_boots", v -> boots = (Item) v);
+			Registration.holder(Registries.ITEM, "genin_sunagakure_red_boots", v -> boots = (Item) v);
 		}
 		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_sunagakure_red")));
 

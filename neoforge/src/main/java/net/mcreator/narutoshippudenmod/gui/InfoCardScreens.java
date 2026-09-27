@@ -597,7 +597,7 @@ public final class InfoCardScreens {
 		}
 
 		@Override
-		public void tick() {
+		protected void containerTick() {
 		}
 
 		@Override
@@ -995,7 +995,7 @@ public final class InfoCardScreens {
 		}
 
 		@Override
-		public void tick() {
+		protected void containerTick() {
 		}
 
 		@Override
@@ -1101,7 +1101,7 @@ public final class InfoCardScreens {
 		}
 
 		@Override
-		public void tick() {
+		protected void containerTick() {
 		}
 
 		@Override
@@ -1601,7 +1601,7 @@ public final class InfoCardScreens {
 		}
 
 		@Override
-		public void tick() {
+		protected void containerTick() {
 		}
 
 		@Override
@@ -1670,7 +1670,7 @@ public final class InfoCardScreens {
 		}
 
 		@Override
-		public void tick() {
+		protected void containerTick() {
 		}
 
 		@Override
@@ -2014,7 +2014,7 @@ public final class InfoCardScreens {
 		}
 
 		@Override
-		public void tick() {
+		protected void containerTick() {
 		}
 
 		@Override

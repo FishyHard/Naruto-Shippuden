@@ -1,5 +1,6 @@
 package net.mcreator.narutoshippudenmod.item;
 
+import net.minecraft.core.registries.Registries;
 import net.mcreator.narutoshippudenmod.compat.Registration;
 
 import java.util.AbstractMap;
@@ -65,7 +66,7 @@ public final class DnaItems {
 	public static class BoilDNAReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("boil_dna_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "boil_dna_release", v -> block = (Item) v);
 		}
 
 		public BoilDNAReleaseItem(NarutoShippudenModElements instance) {
@@ -131,7 +132,7 @@ public final class DnaItems {
 	public static class BoneDNAReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("bone_dna_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "bone_dna_release", v -> block = (Item) v);
 		}
 
 		public BoneDNAReleaseItem(NarutoShippudenModElements instance) {
@@ -197,7 +198,7 @@ public final class DnaItems {
 	public static class DustDNAReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("dust_dna_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "dust_dna_release", v -> block = (Item) v);
 		}
 
 		public DustDNAReleaseItem(NarutoShippudenModElements instance) {
@@ -263,7 +264,7 @@ public final class DnaItems {
 	public static class EarthDNAItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("earth_dna", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "earth_dna", v -> block = (Item) v);
 		}
 
 		public EarthDNAItem(NarutoShippudenModElements instance) {
@@ -329,7 +330,7 @@ public final class DnaItems {
 	public static class FireDNAReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("fire_dna_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "fire_dna_release", v -> block = (Item) v);
 		}
 
 		public FireDNAReleaseItem(NarutoShippudenModElements instance) {
@@ -395,7 +396,7 @@ public final class DnaItems {
 	public static class IceDNAReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("ice_dna_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "ice_dna_release", v -> block = (Item) v);
 		}
 
 		public IceDNAReleaseItem(NarutoShippudenModElements instance) {
@@ -461,7 +462,7 @@ public final class DnaItems {
 	public static class LightningDNAItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("lightning_dna", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "lightning_dna", v -> block = (Item) v);
 		}
 
 		public LightningDNAItem(NarutoShippudenModElements instance) {
@@ -527,7 +528,7 @@ public final class DnaItems {
 	public static class MagnetDNAReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("magnet_dna_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "magnet_dna_release", v -> block = (Item) v);
 		}
 
 		public MagnetDNAReleaseItem(NarutoShippudenModElements instance) {
@@ -593,7 +594,7 @@ public final class DnaItems {
 	public static class SmokeDNAReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("smoke_dna_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "smoke_dna_release", v -> block = (Item) v);
 		}
 
 		public SmokeDNAReleaseItem(NarutoShippudenModElements instance) {
@@ -659,7 +660,7 @@ public final class DnaItems {
 	public static class SteelDNAReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("steel_dna_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "steel_dna_release", v -> block = (Item) v);
 		}
 
 		public SteelDNAReleaseItem(NarutoShippudenModElements instance) {
@@ -725,7 +726,7 @@ public final class DnaItems {
 	public static class StormDNAReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("storm_dna_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "storm_dna_release", v -> block = (Item) v);
 		}
 
 		public StormDNAReleaseItem(NarutoShippudenModElements instance) {
@@ -791,7 +792,7 @@ public final class DnaItems {
 	public static class SwiftDNAReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("swift_dna_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "swift_dna_release", v -> block = (Item) v);
 		}
 
 		public SwiftDNAReleaseItem(NarutoShippudenModElements instance) {
@@ -857,7 +858,7 @@ public final class DnaItems {
 	public static class TyphoonDNAReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("typhoon_dna_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "typhoon_dna_release", v -> block = (Item) v);
 		}
 
 		public TyphoonDNAReleaseItem(NarutoShippudenModElements instance) {
@@ -923,7 +924,7 @@ public final class DnaItems {
 	public static class UndefinedDNAItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("undefined_dna", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "undefined_dna", v -> block = (Item) v);
 		}
 
 		public UndefinedDNAItem(NarutoShippudenModElements instance) {
@@ -975,7 +976,7 @@ public final class DnaItems {
 	public static class WaterDNAReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("water_dna_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "water_dna_release", v -> block = (Item) v);
 		}
 
 		public WaterDNAReleaseItem(NarutoShippudenModElements instance) {
@@ -1041,7 +1042,7 @@ public final class DnaItems {
 	public static class WindDNAItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("wind_dna", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "wind_dna", v -> block = (Item) v);
 		}
 
 		public WindDNAItem(NarutoShippudenModElements instance) {
@@ -1107,7 +1108,7 @@ public final class DnaItems {
 	public static class WoodDNAReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("wood_dna_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "wood_dna_release", v -> block = (Item) v);
 		}
 
 		public WoodDNAReleaseItem(NarutoShippudenModElements instance) {

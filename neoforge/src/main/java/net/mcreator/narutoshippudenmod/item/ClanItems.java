@@ -2,6 +2,7 @@ package net.mcreator.narutoshippudenmod.item;
 
 import net.mcreator.narutoshippudenmod.compat.Compat;
 import net.minecraft.util.RandomSource;
+import net.minecraft.core.registries.Registries;
 import net.mcreator.narutoshippudenmod.compat.Registration;
 import net.mcreator.narutoshippudenmod.compat.ModArrow;
 
@@ -84,7 +85,7 @@ public final class ClanItems {
 	public static class AburameReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("aburame_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "aburame_release", v -> block = (Item) v);
 		}
 
 		public AburameReleaseItem(NarutoShippudenModElements instance) {
@@ -138,7 +139,7 @@ public final class ClanItems {
 	public static class AkimichiReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("akimichi_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "akimichi_release", v -> block = (Item) v);
 		}
 
 		public AkimichiReleaseItem(NarutoShippudenModElements instance) {
@@ -193,7 +194,7 @@ public final class ClanItems {
 	public static class ChinoikeReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("chinoike_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "chinoike_release", v -> block = (Item) v);
 		}
 
 		public ChinoikeReleaseItem(NarutoShippudenModElements instance) {
@@ -226,7 +227,7 @@ public final class ClanItems {
 	public static class ClanResetStatItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("clan_reset_stat", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "clan_reset_stat", v -> block = (Item) v);
 		}
 
 		public ClanResetStatItem(NarutoShippudenModElements instance) {
@@ -246,16 +247,6 @@ public final class ClanItems {
 			@Override
 			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
 				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public boolean hasCraftingRemainingItem() {
-				return true;
-			}
-
-			@Override
-			public ItemStack getContainerItem(ItemStack itemstack) {
-				return new ItemStack(this);
 			}
 
 			@Override
@@ -288,7 +279,7 @@ public final class ClanItems {
 	public static class DanceOfTheCamelliaItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("dance_of_the_camellia", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "dance_of_the_camellia", v -> block = (Item) v);
 		}
 
 		public DanceOfTheCamelliaItem(NarutoShippudenModElements instance) {
@@ -335,7 +326,7 @@ public final class ClanItems {
 	public static class DanceOfTheClematisFlowerItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("dance_of_the_clematis_flower", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "dance_of_the_clematis_flower", v -> block = (Item) v);
 		}
 
 		public DanceOfTheClematisFlowerItem(NarutoShippudenModElements instance) {
@@ -382,7 +373,7 @@ public final class ClanItems {
 	public static class EightTrigramsTwinLionsCrumblingAttackItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("eight_trigrams_twin_lions_crumbling_attack", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "eight_trigrams_twin_lions_crumbling_attack", v -> block = (Item) v);
 		}
 
 		public EightTrigramsTwinLionsCrumblingAttackItem(NarutoShippudenModElements instance) {
@@ -429,7 +420,7 @@ public final class ClanItems {
 	public static class FumaReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("fuma_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "fuma_release", v -> block = (Item) v);
 		}
 
 		public FumaReleaseItem(NarutoShippudenModElements instance) {
@@ -483,7 +474,7 @@ public final class ClanItems {
 	public static class FumaShurikenClanItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("fuma_shuriken_clan", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "fuma_shuriken_clan", v -> block = (Item) v);
 		}
 		public static EntityType<ArrowCustomEntity> arrow;
 
@@ -602,7 +593,7 @@ public final class ClanItems {
 			double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
 			double d1 = target.getX() - entity.getX();
 			double d3 = target.getZ() - entity.getZ();
-			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) Mth.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 0f * 2, 12.0F);
+			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) (float) Math.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 0f * 2, 12.0F);
 			entityarrow.setSilent(true);
 			entityarrow.setBaseDamage(0);
 			Compat.setKnockback(entityarrow, 0);
@@ -622,7 +613,7 @@ public final class ClanItems {
 	public static class GentleStepTwinLionFistsItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("gentle_step_twin_lion_fists", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "gentle_step_twin_lion_fists", v -> block = (Item) v);
 		}
 
 		public GentleStepTwinLionFistsItem(NarutoShippudenModElements instance) {
@@ -669,7 +660,7 @@ public final class ClanItems {
 	public static class HatakeReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("hatake_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "hatake_release", v -> block = (Item) v);
 		}
 
 		public HatakeReleaseItem(NarutoShippudenModElements instance) {
@@ -721,7 +712,7 @@ public final class ClanItems {
 	public static class HoshigakiReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("hoshigaki_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "hoshigaki_release", v -> block = (Item) v);
 		}
 
 		public HoshigakiReleaseItem(NarutoShippudenModElements instance) {
@@ -774,7 +765,7 @@ public final class ClanItems {
 	public static class HozukiReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("hozuki_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "hozuki_release", v -> block = (Item) v);
 		}
 
 		public HozukiReleaseItem(NarutoShippudenModElements instance) {
@@ -828,7 +819,7 @@ public final class ClanItems {
 	public static class HyugaReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("hyuga_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "hyuga_release", v -> block = (Item) v);
 		}
 
 		public HyugaReleaseItem(NarutoShippudenModElements instance) {
@@ -884,7 +875,7 @@ public final class ClanItems {
 	public static class IburiReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("iburi_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "iburi_release", v -> block = (Item) v);
 		}
 
 		public IburiReleaseItem(NarutoShippudenModElements instance) {
@@ -936,7 +927,7 @@ public final class ClanItems {
 	public static class InuzukaReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("inuzuka_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "inuzuka_release", v -> block = (Item) v);
 		}
 
 		public InuzukaReleaseItem(NarutoShippudenModElements instance) {
@@ -991,7 +982,7 @@ public final class ClanItems {
 	public static class IzunoReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("izuno_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "izuno_release", v -> block = (Item) v);
 		}
 
 		public IzunoReleaseItem(NarutoShippudenModElements instance) {
@@ -1046,7 +1037,7 @@ public final class ClanItems {
 	public static class KaguyaReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("kaguya_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "kaguya_release", v -> block = (Item) v);
 		}
 
 		public KaguyaReleaseItem(NarutoShippudenModElements instance) {
@@ -1098,7 +1089,7 @@ public final class ClanItems {
 	public static class KazekageReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("kazekage_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "kazekage_release", v -> block = (Item) v);
 		}
 
 		public KazekageReleaseItem(NarutoShippudenModElements instance) {
@@ -1150,7 +1141,7 @@ public final class ClanItems {
 	public static class KuramaReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("kurama_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "kurama_release", v -> block = (Item) v);
 		}
 
 		public KuramaReleaseItem(NarutoShippudenModElements instance) {
@@ -1183,7 +1174,7 @@ public final class ClanItems {
 	public static class LeeReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("lee_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "lee_release", v -> block = (Item) v);
 		}
 
 		public LeeReleaseItem(NarutoShippudenModElements instance) {
@@ -1243,7 +1234,7 @@ public final class ClanItems {
 	public static class NamikazeReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("namikaze_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "namikaze_release", v -> block = (Item) v);
 		}
 
 		public NamikazeReleaseItem(NarutoShippudenModElements instance) {
@@ -1296,7 +1287,7 @@ public final class ClanItems {
 	public static class NaraReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("nara_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "nara_release", v -> block = (Item) v);
 		}
 
 		public NaraReleaseItem(NarutoShippudenModElements instance) {
@@ -1329,7 +1320,7 @@ public final class ClanItems {
 	public static class OtsutsukiReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("otsutsuki_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "otsutsuki_release", v -> block = (Item) v);
 		}
 
 		public OtsutsukiReleaseItem(NarutoShippudenModElements instance) {
@@ -1381,7 +1372,7 @@ public final class ClanItems {
 	public static class SarutobiReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("sarutobi_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "sarutobi_release", v -> block = (Item) v);
 		}
 
 		public SarutobiReleaseItem(NarutoShippudenModElements instance) {
@@ -1434,7 +1425,7 @@ public final class ClanItems {
 	public static class SenjuReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("senju_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "senju_release", v -> block = (Item) v);
 		}
 
 		public SenjuReleaseItem(NarutoShippudenModElements instance) {
@@ -1486,7 +1477,7 @@ public final class ClanItems {
 	public static class ShimuraReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("shimura_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "shimura_release", v -> block = (Item) v);
 		}
 
 		public ShimuraReleaseItem(NarutoShippudenModElements instance) {
@@ -1519,7 +1510,7 @@ public final class ClanItems {
 	public static class ShurikenClanItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("shuriken_clan", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "shuriken_clan", v -> block = (Item) v);
 		}
 		public static EntityType<ArrowCustomEntity> arrow;
 
@@ -1638,7 +1629,7 @@ public final class ClanItems {
 			double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
 			double d1 = target.getX() - entity.getX();
 			double d3 = target.getZ() - entity.getZ();
-			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) Mth.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 2f * 2, 12.0F);
+			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) (float) Math.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 2f * 2, 12.0F);
 			entityarrow.setSilent(true);
 			entityarrow.setBaseDamage(0);
 			Compat.setKnockback(entityarrow, 0);
@@ -1658,7 +1649,7 @@ public final class ClanItems {
 	public static class TenroReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("tenro_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "tenro_release", v -> block = (Item) v);
 		}
 
 		public TenroReleaseItem(NarutoShippudenModElements instance) {
@@ -1712,7 +1703,7 @@ public final class ClanItems {
 	public static class ToroiUniqueFumaShurikenClanItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("toroi_unique_fuma_shuriken_clan", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "toroi_unique_fuma_shuriken_clan", v -> block = (Item) v);
 		}
 		public static EntityType<ArrowCustomEntity> arrow;
 
@@ -1831,7 +1822,7 @@ public final class ClanItems {
 			double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
 			double d1 = target.getX() - entity.getX();
 			double d3 = target.getZ() - entity.getZ();
-			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) Mth.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 0f * 2, 12.0F);
+			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) (float) Math.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 0f * 2, 12.0F);
 			entityarrow.setSilent(true);
 			entityarrow.setBaseDamage(0);
 			Compat.setKnockback(entityarrow, 0);
@@ -1851,7 +1842,7 @@ public final class ClanItems {
 	public static class TsuchigumoReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("tsuchigumo_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "tsuchigumo_release", v -> block = (Item) v);
 		}
 
 		public TsuchigumoReleaseItem(NarutoShippudenModElements instance) {
@@ -1903,7 +1894,7 @@ public final class ClanItems {
 	public static class UchihaReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("uchiha_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "uchiha_release", v -> block = (Item) v);
 		}
 
 		public UchihaReleaseItem(NarutoShippudenModElements instance) {
@@ -1936,7 +1927,7 @@ public final class ClanItems {
 	public static class UzumakiReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("uzumaki_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "uzumaki_release", v -> block = (Item) v);
 		}
 
 		public UzumakiReleaseItem(NarutoShippudenModElements instance) {
@@ -1990,7 +1981,7 @@ public final class ClanItems {
 	public static class YukiReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("yuki_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "yuki_release", v -> block = (Item) v);
 		}
 
 		public YukiReleaseItem(NarutoShippudenModElements instance) {

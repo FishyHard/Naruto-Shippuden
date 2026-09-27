@@ -2,6 +2,7 @@ package net.mcreator.narutoshippudenmod.item;
 
 import net.mcreator.narutoshippudenmod.compat.Compat;
 import net.minecraft.util.RandomSource;
+import net.minecraft.core.registries.Registries;
 import net.mcreator.narutoshippudenmod.compat.Registration;
 import net.mcreator.narutoshippudenmod.compat.ModArrow;
 
@@ -72,7 +73,7 @@ public final class ProjectileItems {
 	public static class ExplosiveKunaiBulletItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("explosive_kunai_bullet", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "explosive_kunai_bullet", v -> block = (Item) v);
 		}
 		public static EntityType<ArrowCustomEntity> arrow;
 
@@ -224,7 +225,7 @@ public final class ProjectileItems {
 			double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
 			double d1 = target.getX() - entity.getX();
 			double d3 = target.getZ() - entity.getZ();
-			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) Mth.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 2f * 2, 12.0F);
+			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) (float) Math.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 2f * 2, 12.0F);
 			entityarrow.setSilent(true);
 			entityarrow.setBaseDamage(0);
 			Compat.setKnockback(entityarrow, 0);
@@ -244,7 +245,7 @@ public final class ProjectileItems {
 	public static class FireDragonFlameBulletItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("fire_dragon_flame_bullet", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "fire_dragon_flame_bullet", v -> block = (Item) v);
 		}
 		public static EntityType<ArrowCustomEntity> arrow;
 
@@ -368,7 +369,7 @@ public final class ProjectileItems {
 			double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
 			double d1 = target.getX() - entity.getX();
 			double d3 = target.getZ() - entity.getZ();
-			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) Mth.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 1f * 2, 12.0F);
+			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) (float) Math.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 1f * 2, 12.0F);
 			entityarrow.setSilent(true);
 			entityarrow.setBaseDamage(15);
 			Compat.setKnockback(entityarrow, 1);
@@ -389,7 +390,7 @@ public final class ProjectileItems {
 	public static class FlyingThunderGodKunaiBulletItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("flying_thunder_god_kunai_bullet", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "flying_thunder_god_kunai_bullet", v -> block = (Item) v);
 		}
 		public static EntityType<ArrowCustomEntity> arrow;
 
@@ -524,7 +525,7 @@ public final class ProjectileItems {
 			double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
 			double d1 = target.getX() - entity.getX();
 			double d3 = target.getZ() - entity.getZ();
-			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) Mth.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 0f * 2, 12.0F);
+			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) (float) Math.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 0f * 2, 12.0F);
 			entityarrow.setSilent(true);
 			entityarrow.setBaseDamage(0);
 			Compat.setKnockback(entityarrow, 0);
@@ -544,7 +545,7 @@ public final class ProjectileItems {
 	public static class FumaShurikenBulletItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("fuma_shuriken_bullet", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "fuma_shuriken_bullet", v -> block = (Item) v);
 		}
 		public static EntityType<ArrowCustomEntity> arrow;
 
@@ -679,7 +680,7 @@ public final class ProjectileItems {
 			double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
 			double d1 = target.getX() - entity.getX();
 			double d3 = target.getZ() - entity.getZ();
-			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) Mth.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 0f * 2, 12.0F);
+			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) (float) Math.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 0f * 2, 12.0F);
 			entityarrow.setSilent(true);
 			entityarrow.setBaseDamage(0);
 			Compat.setKnockback(entityarrow, 0);
@@ -699,7 +700,7 @@ public final class ProjectileItems {
 	public static class IronSandBulletItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("iron_sand_bullet", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "iron_sand_bullet", v -> block = (Item) v);
 		}
 		public static EntityType<ArrowCustomEntity> arrow;
 
@@ -822,7 +823,7 @@ public final class ProjectileItems {
 			double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
 			double d1 = target.getX() - entity.getX();
 			double d3 = target.getZ() - entity.getZ();
-			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) Mth.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 1f * 2, 12.0F);
+			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) (float) Math.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 1f * 2, 12.0F);
 			entityarrow.setSilent(true);
 			entityarrow.setBaseDamage(10);
 			Compat.setKnockback(entityarrow, 1);
@@ -842,7 +843,7 @@ public final class ProjectileItems {
 	public static class KunaiBulletItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("kunai_bullet", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "kunai_bullet", v -> block = (Item) v);
 		}
 		public static EntityType<ArrowCustomEntity> arrow;
 
@@ -977,7 +978,7 @@ public final class ProjectileItems {
 			double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
 			double d1 = target.getX() - entity.getX();
 			double d3 = target.getZ() - entity.getZ();
-			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) Mth.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 2f * 2, 12.0F);
+			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) (float) Math.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 2f * 2, 12.0F);
 			entityarrow.setSilent(true);
 			entityarrow.setBaseDamage(0);
 			Compat.setKnockback(entityarrow, 0);
@@ -997,7 +998,7 @@ public final class ProjectileItems {
 	public static class NuibariBulletItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("nuibari_bullet", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "nuibari_bullet", v -> block = (Item) v);
 		}
 		public static EntityType<ArrowCustomEntity> arrow;
 
@@ -1135,7 +1136,7 @@ public final class ProjectileItems {
 			double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
 			double d1 = target.getX() - entity.getX();
 			double d3 = target.getZ() - entity.getZ();
-			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) Mth.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 0f * 2, 12.0F);
+			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) (float) Math.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 0f * 2, 12.0F);
 			entityarrow.setSilent(true);
 			entityarrow.setBaseDamage(0);
 			Compat.setKnockback(entityarrow, 0);
@@ -1155,7 +1156,7 @@ public final class ProjectileItems {
 	public static class PoisonKunaiBulletItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("poison_kunai_bullet", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "poison_kunai_bullet", v -> block = (Item) v);
 		}
 		public static EntityType<ArrowCustomEntity> arrow;
 
@@ -1305,7 +1306,7 @@ public final class ProjectileItems {
 			double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
 			double d1 = target.getX() - entity.getX();
 			double d3 = target.getZ() - entity.getZ();
-			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) Mth.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 2f * 2, 12.0F);
+			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) (float) Math.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 2f * 2, 12.0F);
 			entityarrow.setSilent(true);
 			entityarrow.setBaseDamage(0);
 			Compat.setKnockback(entityarrow, 0);
@@ -1325,7 +1326,7 @@ public final class ProjectileItems {
 	public static class ShurikenBulletItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("shuriken_bullet", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "shuriken_bullet", v -> block = (Item) v);
 		}
 		public static EntityType<ArrowCustomEntity> arrow;
 
@@ -1460,7 +1461,7 @@ public final class ProjectileItems {
 			double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
 			double d1 = target.getX() - entity.getX();
 			double d3 = target.getZ() - entity.getZ();
-			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) Mth.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 2f * 2, 12.0F);
+			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) (float) Math.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 2f * 2, 12.0F);
 			entityarrow.setSilent(true);
 			entityarrow.setBaseDamage(0);
 			Compat.setKnockback(entityarrow, 0);
@@ -1480,7 +1481,7 @@ public final class ProjectileItems {
 	public static class ToroiUniqueFumaShurikenBulletItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("toroi_unique_fuma_shuriken_bullet", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "toroi_unique_fuma_shuriken_bullet", v -> block = (Item) v);
 		}
 		public static EntityType<ArrowCustomEntity> arrow;
 
@@ -1615,7 +1616,7 @@ public final class ProjectileItems {
 			double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
 			double d1 = target.getX() - entity.getX();
 			double d3 = target.getZ() - entity.getZ();
-			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) Mth.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 0f * 2, 12.0F);
+			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) (float) Math.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 0f * 2, 12.0F);
 			entityarrow.setSilent(true);
 			entityarrow.setBaseDamage(0);
 			Compat.setKnockback(entityarrow, 0);
@@ -1635,7 +1636,7 @@ public final class ProjectileItems {
 	public static class WaterSharkBulletItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("water_shark_bullet", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "water_shark_bullet", v -> block = (Item) v);
 		}
 		public static EntityType<ArrowCustomEntity> arrow;
 
@@ -1758,7 +1759,7 @@ public final class ProjectileItems {
 			double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
 			double d1 = target.getX() - entity.getX();
 			double d3 = target.getZ() - entity.getZ();
-			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) Mth.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 1f * 2, 12.0F);
+			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) (float) Math.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 1f * 2, 12.0F);
 			entityarrow.setSilent(true);
 			entityarrow.setBaseDamage(10);
 			Compat.setKnockback(entityarrow, 1);

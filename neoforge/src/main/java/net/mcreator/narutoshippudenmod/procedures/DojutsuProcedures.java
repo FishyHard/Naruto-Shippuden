@@ -5,6 +5,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.core.registries.Registries;
 import net.mcreator.narutoshippudenmod.compat.ModArrow;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -84,10 +85,8 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.mcreator.narutoshippudenmod.compat.TickEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
-import net.mcreator.narutoshippudenmod.compat.ItemHandlerHelper;
 import net.minecraft.core.registries.BuiltInRegistries;
 
 public final class DojutsuProcedures {
@@ -250,18 +249,20 @@ public final class DojutsuProcedures {
 						SoundSource.NEUTRAL, (float) 1, (float) 1, false);
 			}
 			if (world.isClientSide()) {
-				Minecraft.getInstance().gameRenderer.displayItemActivation(new ItemStack(SharinganReleaseTechniqueItem.block));
+				Minecraft.getInstance().player.displayItemActivation(new ItemStack(SharinganReleaseTechniqueItem.block));
 			}
 		}
 	}
 
 	public static class DojutsuRendererProcedure {
-		@Mod.EventBusSubscriber
+		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
 			@OnlyIn(Dist.CLIENT)
 			@SubscribeEvent
 			public static void KleidersRenderEvent(RenderLivingEvent event) {
-				Entity entity = event.getEntity();
+				Entity entity = ModelSwapRenderers.entity(event);
+			if (entity == null)
+				return;
 				Level world = entity.level();
 				double i = entity.getX();
 				double j = entity.getY();
@@ -1663,8 +1664,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											{
@@ -1946,8 +1946,7 @@ public final class DojutsuProcedures {
 						Entity _ent = entity;
 						_ent.teleportTo(x, notair, z);
 						if (_ent instanceof ServerPlayer) {
-							((ServerPlayer) _ent).connection.teleport(x, notair, z, _ent.getYRot(), _ent.getXRot(),
-									Collections.emptySet());
+							((ServerPlayer) _ent).connection.teleport(x, notair, z, _ent.getYRot(), _ent.getXRot());
 						}
 					}
 				} else if (!world.isEmptyBlock(BlockPos.containing(x, notair, z))) {
@@ -3331,7 +3330,7 @@ public final class DojutsuProcedures {
 												0, 0, 0);
 										if (world instanceof Level && !world.isClientSide()) {
 											((Level) world).playSound(null,
-													new BlockPos(
+													BlockPos.containing(
 															entity.level()
 																	.clip(new ClipContext(entity.getEyePosition(1f),
 																			entity.getEyePosition(1f).add(entity.getViewVector(1f).x * distance,
@@ -4434,7 +4433,7 @@ public final class DojutsuProcedures {
 															.getBlockPos().getZ()),
 													0, 0, 0);
 											if (world instanceof Level && !world.isClientSide()) {
-												((Level) world).playSound(null, new BlockPos(
+												((Level) world).playSound(null, BlockPos.containing(
 														entity.level()
 																.clip(new ClipContext(entity.getEyePosition(1f),
 																		entity.getEyePosition(1f).add(entity.getViewVector(1f).x * distance,
@@ -4507,7 +4506,7 @@ public final class DojutsuProcedures {
 												capability.syncPlayerVariables(entity);
 											});
 										}
-										entity.setInvulnerable((true));
+										entity.setPermanentlyInvulnerable((true));
 										if (entity instanceof Player) {
 											((Player) entity).getAbilities().flying = (true);
 											((Player) entity).onUpdateAbilities();
@@ -4540,7 +4539,7 @@ public final class DojutsuProcedures {
 																capability.syncPlayerVariables(entity);
 															});
 												}
-												entity.setInvulnerable((false));
+												entity.setPermanentlyInvulnerable((false));
 												if (entity instanceof Player) {
 													((Player) entity).getAbilities().flying = (false);
 													((Player) entity).onUpdateAbilities();
@@ -6070,8 +6069,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6083,8 +6081,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6096,8 +6093,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6109,8 +6105,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6122,8 +6117,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6135,8 +6129,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6148,8 +6141,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6161,8 +6153,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6174,8 +6165,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6187,8 +6177,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6200,8 +6189,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6213,8 +6201,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6226,8 +6213,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6239,8 +6225,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6252,8 +6237,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6265,8 +6249,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6278,8 +6261,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6291,8 +6273,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6304,8 +6285,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6317,8 +6297,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6330,8 +6309,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6343,8 +6321,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6356,8 +6333,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											if (world instanceof ServerLevel) {
@@ -6369,8 +6345,7 @@ public final class DojutsuProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											{

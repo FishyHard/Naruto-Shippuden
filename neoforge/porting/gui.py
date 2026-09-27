@@ -54,7 +54,7 @@ def convert_screens(path, text):
             blk = re.sub(r'\n\s*this\.imageHeight = \d+;', '', blk)
             blk = blk.replace('super(container, inventory, text);', 'super(container, inventory, text, %s, %s);' % (w.group(1), h.group(1)))
         return blk
-    body = re.sub(r'public \w+GuiWindow\(\w+\.GuiContainerMod container, Inventory inventory, Component text\) \{.*?\n\t\t\}', ctor, body, flags=re.S)
+    body = re.sub(r'public \w+GuiWindow\(\w+\.GuiContainerMod container, Inventory inventory,\s*Component text\) \{.*?\n\t\t\}', ctor, body, flags=re.S)
     # the base screen draws background, widgets and tooltips
     body = method_blocks(body, r'@Override\s*\n\s*public void render\(PoseStack \w+, int \w+, int \w+, float \w+\)\s*\{', lambda m, b: '')
 
@@ -82,7 +82,7 @@ def convert_screens(path, text):
     body = method_blocks(body, r'@Override\s*\n\s*public boolean keyPressed\(int (\w+), int (\w+), int (\w+)\)\s*\{', keys)
 
     def tick(m, b):
-        return m.group(0) + re.sub(r'\n\s*\w+\.tick\(\);', '', b)
+        return m.group(0).replace('public void tick()', 'protected void containerTick()') + re.sub(r'\n\s*\w+\.tick\(\);', '', b).replace('super.tick();', 'super.containerTick();')
     body = method_blocks(body, r'public void tick\(\)\s*\{', tick)
     body = re.sub(r'\n\s*(?:Minecraft\.getInstance\(\)|minecraft)\.keyboardHandler\.setSendRepeatsToGui\(\w+\);', '', body)
 

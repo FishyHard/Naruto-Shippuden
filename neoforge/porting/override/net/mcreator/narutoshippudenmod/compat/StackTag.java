@@ -77,4 +77,9 @@ public final class StackTag {
 	public void remove(String key) {
 		write(tag -> tag.remove(key));
 	}
+
+	/** A detached copy of the stack's custom data. */
+	public CompoundTag copy() {
+		return read();
+	}
 }

@@ -1,5 +1,6 @@
 package net.mcreator.narutoshippudenmod.item;
 
+import net.minecraft.core.registries.Registries;
 import net.mcreator.narutoshippudenmod.compat.Registration;
 
 import java.util.AbstractMap;
@@ -37,7 +38,7 @@ public final class FoodItems {
 	public static class AdventCalendarItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("advent_calendar", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "advent_calendar", v -> block = (Item) v);
 		}
 
 		public AdventCalendarItem(NarutoShippudenModElements instance) {
@@ -85,7 +86,7 @@ public final class FoodItems {
 	public static class ChristmasRamenItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("christmas_ramen", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "christmas_ramen", v -> block = (Item) v);
 		}
 
 		public ChristmasRamenItem(NarutoShippudenModElements instance) {
@@ -99,9 +100,7 @@ public final class FoodItems {
 
 		public static class ItemCustom extends Item {
 			public ItemCustom() {
-				super(Registration.itemProps("christmas_ramen", null).stacksTo(16).rarity(Rarity.EPIC).food((new FoodProperties.Builder()).nutrition(15).saturationMod(0.3f)
-
-						.meat().build()));
+				super(Registration.itemProps("christmas_ramen", null).stacksTo(16).rarity(Rarity.EPIC).food((new FoodProperties.Builder()).nutrition(15).saturationModifier(0.3f).build()));
 			}
 
 			@Override
@@ -127,7 +126,7 @@ public final class FoodItems {
 	public static class GingerbreadItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("gingerbread", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "gingerbread", v -> block = (Item) v);
 		}
 
 		public GingerbreadItem(NarutoShippudenModElements instance) {
@@ -141,9 +140,7 @@ public final class FoodItems {
 
 		public static class ItemCustom extends Item {
 			public ItemCustom() {
-				super(Registration.itemProps("gingerbread", null).stacksTo(16).rarity(Rarity.EPIC).food((new FoodProperties.Builder()).nutrition(15).saturationMod(0.3f)
-
-						.meat().build()));
+				super(Registration.itemProps("gingerbread", null).stacksTo(16).rarity(Rarity.EPIC).food((new FoodProperties.Builder()).nutrition(15).saturationModifier(0.3f).build()));
 			}
 
 			@Override
@@ -169,7 +166,7 @@ public final class FoodItems {
 	public static class IchirakuRamenItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("ichiraku_ramen", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "ichiraku_ramen", v -> block = (Item) v);
 		}
 
 		public IchirakuRamenItem(NarutoShippudenModElements instance) {
@@ -184,9 +181,7 @@ public final class FoodItems {
 		public static class ItemCustom extends Item {
 			public ItemCustom() {
 				super(Registration.itemProps("ichiraku_ramen", "FoodItemGroup").stacksTo(64).rarity(Rarity.EPIC)
-						.food((new FoodProperties.Builder()).nutrition(15).saturationMod(0.3f)
-
-								.meat().build()));
+						.food((new FoodProperties.Builder()).nutrition(15).saturationModifier(0.3f).build()));
 			}
 
 			@Override

@@ -1,5 +1,6 @@
 package net.mcreator.narutoshippudenmod.item;
 
+import net.minecraft.core.registries.Registries;
 import net.mcreator.narutoshippudenmod.compat.Registration;
 
 import java.util.AbstractMap;
@@ -61,7 +62,7 @@ public final class TechniqueItems {
 	public static class AburameReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("aburame_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "aburame_release_technique", v -> block = (Item) v);
 		}
 
 		public AburameReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -119,7 +120,7 @@ public final class TechniqueItems {
 	public static class AkimichiReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("akimichi_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "akimichi_release_technique", v -> block = (Item) v);
 		}
 
 		public AkimichiReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -190,7 +191,7 @@ public final class TechniqueItems {
 	public static class FumaReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("fuma_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "fuma_release_technique", v -> block = (Item) v);
 		}
 
 		public FumaReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -249,7 +250,7 @@ public final class TechniqueItems {
 	public static class HoshigakiReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("hoshigaki_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "hoshigaki_release_technique", v -> block = (Item) v);
 		}
 
 		public HoshigakiReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -282,7 +283,7 @@ public final class TechniqueItems {
 	public static class HozukiReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("hozuki_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "hozuki_release_technique", v -> block = (Item) v);
 		}
 
 		public HozukiReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -339,7 +340,7 @@ public final class TechniqueItems {
 	public static class HyugaReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("hyuga_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "hyuga_release_technique", v -> block = (Item) v);
 		}
 
 		public HyugaReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -414,7 +415,7 @@ public final class TechniqueItems {
 	public static class InuzukaReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("inuzuka_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "inuzuka_release_technique", v -> block = (Item) v);
 		}
 
 		public InuzukaReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -475,7 +476,7 @@ public final class TechniqueItems {
 	public static class IsshikiDojutsuReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("isshiki_dojutsu_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "isshiki_dojutsu_release_technique", v -> block = (Item) v);
 		}
 
 		public IsshikiDojutsuReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -546,7 +547,7 @@ public final class TechniqueItems {
 	public static class IzunoReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("izuno_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "izuno_release_technique", v -> block = (Item) v);
 		}
 
 		public IzunoReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -599,7 +600,7 @@ public final class TechniqueItems {
 	public static class LeeReleaseDrunkenFistItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("lee_release_drunken_fist", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "lee_release_drunken_fist", v -> block = (Item) v);
 		}
 
 		public LeeReleaseDrunkenFistItem(NarutoShippudenModElements instance) {
@@ -614,17 +615,12 @@ public final class TechniqueItems {
 		public static class ItemCustom extends Item {
 			public ItemCustom() {
 				super(Registration.itemProps("lee_release_drunken_fist", "TechniquesItemGroup").stacksTo(1).rarity(Rarity.COMMON)
-						.food((new FoodProperties.Builder()).nutrition(0).saturationMod(0f).alwaysEat().build()));
+						.food((new FoodProperties.Builder()).nutrition(0).saturationModifier(0f).alwaysEdible().build()));
 			}
 
 			@Override
 			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
 				return ItemUseAnimation.DRINK;
-			}
-
-			@Override
-			public net.minecraft.sounds.SoundEvent getEatingSound() {
-				return net.minecraft.sounds.SoundEvents.GENERIC_DRINK;
 			}
 
 			@Override
@@ -666,7 +662,7 @@ public final class TechniqueItems {
 					if (entity instanceof Player) {
 						Player player = (Player) entity;
 						if (!player.isCreative() && !player.getInventory().add(retval))
-							player.drop(retval, false);
+							player.drop(retval, false, net.minecraft.util.Prediction.SERVER_ONLY);
 					}
 					return itemstack;
 				}
@@ -678,7 +674,7 @@ public final class TechniqueItems {
 	public static class LeeReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("lee_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "lee_release_technique", v -> block = (Item) v);
 		}
 
 		public LeeReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -752,7 +748,7 @@ public final class TechniqueItems {
 	public static class MangekyouSharinganItachiReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("mangekyou_sharingan_itachi_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "mangekyou_sharingan_itachi_release_technique", v -> block = (Item) v);
 		}
 
 		public MangekyouSharinganItachiReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -827,7 +823,7 @@ public final class TechniqueItems {
 	public static class MangekyouSharinganKakashiReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("mangekyou_sharingan_kakashi_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "mangekyou_sharingan_kakashi_release_technique", v -> block = (Item) v);
 		}
 
 		public MangekyouSharinganKakashiReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -883,7 +879,7 @@ public final class TechniqueItems {
 	public static class MangekyouSharinganObitoReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("mangekyou_sharingan_obito_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "mangekyou_sharingan_obito_release_technique", v -> block = (Item) v);
 		}
 
 		public MangekyouSharinganObitoReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -942,7 +938,7 @@ public final class TechniqueItems {
 	public static class MangekyouSharinganSasukeReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("mangekyou_sharingan_sasuke_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "mangekyou_sharingan_sasuke_release_technique", v -> block = (Item) v);
 		}
 
 		public MangekyouSharinganSasukeReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -1008,7 +1004,7 @@ public final class TechniqueItems {
 	public static class NaraReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("nara_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "nara_release_technique", v -> block = (Item) v);
 		}
 
 		public NaraReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -1053,7 +1049,7 @@ public final class TechniqueItems {
 	public static class SarutobiReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("sarutobi_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "sarutobi_release_technique", v -> block = (Item) v);
 		}
 
 		public SarutobiReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -1110,7 +1106,7 @@ public final class TechniqueItems {
 	public static class ShadowCloneTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("shadow_clone_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "shadow_clone_technique", v -> block = (Item) v);
 		}
 
 		public ShadowCloneTechniqueItem(NarutoShippudenModElements instance) {
@@ -1125,7 +1121,7 @@ public final class TechniqueItems {
 		public static class ItemCustom extends Item {
 			public ItemCustom() {
 				super(Registration.itemProps("shadow_clone_technique", "TechniquesItemGroup").stacksTo(1).rarity(Rarity.COMMON)
-						.food((new FoodProperties.Builder()).nutrition(0).saturationMod(0f).alwaysEat().build()));
+						.food((new FoodProperties.Builder()).nutrition(0).saturationModifier(0f).alwaysEdible().build()));
 			}
 
 			@Override
@@ -1174,7 +1170,7 @@ public final class TechniqueItems {
 					if (entity instanceof Player) {
 						Player player = (Player) entity;
 						if (!player.isCreative() && !player.getInventory().add(retval))
-							player.drop(retval, false);
+							player.drop(retval, false, net.minecraft.util.Prediction.SERVER_ONLY);
 					}
 					return itemstack;
 				}
@@ -1186,7 +1182,7 @@ public final class TechniqueItems {
 	public static class SharinganReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("sharingan_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "sharingan_release_technique", v -> block = (Item) v);
 		}
 
 		public SharinganReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -1248,7 +1244,7 @@ public final class TechniqueItems {
 	public static class TenroReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("tenro_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "tenro_release_technique", v -> block = (Item) v);
 		}
 
 		public TenroReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -1304,7 +1300,7 @@ public final class TechniqueItems {
 	public static class TsuchigumoReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("tsuchigumo_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "tsuchigumo_release_technique", v -> block = (Item) v);
 		}
 
 		public TsuchigumoReleaseTechniqueItem(NarutoShippudenModElements instance) {
@@ -1358,7 +1354,7 @@ public final class TechniqueItems {
 	public static class UzumakiReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("uzumaki_release_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "uzumaki_release_technique", v -> block = (Item) v);
 		}
 
 		public UzumakiReleaseTechniqueItem(NarutoShippudenModElements instance) {

@@ -205,7 +205,7 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				sourceentity.startRiding(this);
 				return retval;
@@ -245,7 +245,7 @@ public final class JutsuEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -354,7 +354,7 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				sourceentity.startRiding(this);
 				return retval;
@@ -394,7 +394,7 @@ public final class JutsuEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -503,7 +503,7 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				sourceentity.startRiding(this);
 				return retval;
@@ -543,7 +543,7 @@ public final class JutsuEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -652,7 +652,7 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				sourceentity.startRiding(this);
 				return retval;
@@ -692,7 +692,7 @@ public final class JutsuEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -801,7 +801,7 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				sourceentity.startRiding(this);
 				return retval;
@@ -841,7 +841,7 @@ public final class JutsuEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -1023,7 +1023,7 @@ public final class JutsuEntities {
 			}
 
 			@Override
-			public boolean causeFallDamage(float l, float d) {
+			public boolean causeFallDamage(double l, float d, DamageSource damageSource) {
 				double x = this.getX();
 				double y = this.getY();
 				double z = this.getZ();
@@ -1033,7 +1033,7 @@ public final class JutsuEntities {
 						.of(new AbstractMap.SimpleEntry<>("world", level()), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
 								new AbstractMap.SimpleEntry<>("z", z))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return super.causeFallDamage(l, d);
+				return super.causeFallDamage(l, d, damageSource);
 			}
 
 			@Override
@@ -1202,7 +1202,7 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				sourceentity.startRiding(this);
 				return retval;
@@ -1242,7 +1242,7 @@ public final class JutsuEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -1351,7 +1351,7 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				sourceentity.startRiding(this);
 				return retval;
@@ -1391,7 +1391,7 @@ public final class JutsuEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -1470,7 +1470,7 @@ public final class JutsuEntities {
 			}
 
 			@Override
-			public boolean causeFallDamage(float l, float d) {
+			public boolean causeFallDamage(double l, float d, DamageSource damageSource) {
 				return false;
 			}
 
@@ -1598,7 +1598,7 @@ public final class JutsuEntities {
 			}
 
 			@Override
-			public boolean causeFallDamage(float l, float d) {
+			public boolean causeFallDamage(double l, float d, DamageSource damageSource) {
 				return false;
 			}
 
@@ -1784,39 +1784,39 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				Item item = itemstack.getItem();
 				if (itemstack.getItem() instanceof SpawnEggItem) {
 					retval = super.mobInteract(sourceentity, hand);
 				} else if (this.level().isClientSide()) {
 					retval = (this.isTame() && this.isOwnedBy(sourceentity) || this.isFood(itemstack))
-							? InteractionResult.sidedSuccess(this.level().isClientSide())
+							? InteractionResult.SUCCESS
 							: InteractionResult.PASS;
 				} else {
 					if (this.isTame()) {
 						if (this.isOwnedBy(sourceentity)) {
-							if (item.isEdible() && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem(sourceentity, itemstack);
-								this.heal((float) item.getFoodProperties().getNutrition());
-								retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+							if (item.components().has(net.minecraft.core.component.DataComponents.FOOD) && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
+								this.usePlayerItem((Player) sourceentity, hand, itemstack);
+								this.heal((float) itemstack.get(net.minecraft.core.component.DataComponents.FOOD).nutrition());
+								retval = InteractionResult.SUCCESS;
 							} else if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem(sourceentity, itemstack);
+								this.usePlayerItem((Player) sourceentity, hand, itemstack);
 								this.heal(4);
-								retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+								retval = InteractionResult.SUCCESS;
 							} else {
 								retval = super.mobInteract(sourceentity, hand);
 							}
 						}
 					} else if (this.isFood(itemstack)) {
-						this.usePlayerItem(sourceentity, itemstack);
-						if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, sourceentity)) {
+						this.usePlayerItem((Player) sourceentity, hand, itemstack);
+						if (this.random.nextInt(3) == 0 && !net.neoforged.neoforge.event.EventHooks.onAnimalTame(this, sourceentity)) {
 							this.tame(sourceentity);
 							this.level().broadcastEntityEvent(this, (byte) 7);
 						} else {
 							this.level().broadcastEntityEvent(this, (byte) 6);
 						}
 						this.setPersistenceRequired();
-						retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+						retval = InteractionResult.SUCCESS;
 					} else {
 						retval = super.mobInteract(sourceentity, hand);
 						if (retval == InteractionResult.SUCCESS || retval == InteractionResult.CONSUME)
@@ -1828,9 +1828,8 @@ public final class JutsuEntities {
 
 			@Override
 			public AgeableMob getBreedOffspring(ServerLevel serverWorld, AgeableMob ageable) {
-				CustomEntity retval = (CustomEntity) entity.create(serverWorld);
-				retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), EntitySpawnReason.BREEDING,
-						(SpawnGroupData) null, (CompoundTag) null);
+				CustomEntity retval = (CustomEntity) entity.create(serverWorld, EntitySpawnReason.BREEDING);
+				retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), EntitySpawnReason.BREEDING, (SpawnGroupData) null);
 				return retval;
 			}
 
@@ -2058,7 +2057,7 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				sourceentity.startRiding(this);
 				return retval;
@@ -2098,7 +2097,7 @@ public final class JutsuEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -2207,7 +2206,7 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				sourceentity.startRiding(this);
 				return retval;
@@ -2247,7 +2246,7 @@ public final class JutsuEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -2461,7 +2460,7 @@ public final class JutsuEntities {
 			}
 
 			@Override
-			public boolean causeFallDamage(float l, float d) {
+			public boolean causeFallDamage(double l, float d, DamageSource damageSource) {
 				return false;
 			}
 
@@ -2620,7 +2619,7 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				sourceentity.startRiding(this);
 				return retval;
@@ -2660,7 +2659,7 @@ public final class JutsuEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -2769,7 +2768,7 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				sourceentity.startRiding(this);
 				return retval;
@@ -2809,7 +2808,7 @@ public final class JutsuEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -2918,7 +2917,7 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				sourceentity.startRiding(this);
 				return retval;
@@ -2958,7 +2957,7 @@ public final class JutsuEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -3067,7 +3066,7 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				sourceentity.startRiding(this);
 				return retval;
@@ -3107,7 +3106,7 @@ public final class JutsuEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -3216,7 +3215,7 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				sourceentity.startRiding(this);
 				return retval;
@@ -3256,7 +3255,7 @@ public final class JutsuEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -3335,7 +3334,7 @@ public final class JutsuEntities {
 			}
 
 			@Override
-			public boolean causeFallDamage(float l, float d) {
+			public boolean causeFallDamage(double l, float d, DamageSource damageSource) {
 				return false;
 			}
 
@@ -3471,11 +3470,11 @@ public final class JutsuEntities {
 				super.registerGoals();
 				this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2, false) {
 					@Override
-					protected double getAttackReachSqr(LivingEntity entity) {
-						return (double) (4.0 + entity.getBbWidth() * entity.getBbWidth());
+					protected boolean canPerformAttack(LivingEntity entity) {
+						return this.isTimeToAttack() && this.mob.distanceToSqr(entity) <= ((double) (4.0 + entity.getBbWidth() * entity.getBbWidth())) && this.mob.getSensing().hasLineOfSight(entity);
 					}
 				});
-				this.goalSelector.addGoal(2, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
+				this.goalSelector.addGoal(2, new FollowOwnerGoal(this, 1, (float) 10, (float) 2));
 				this.goalSelector.addGoal(3, new RandomStrollGoal(this, 1));
 				this.goalSelector.addGoal(4, new OwnerHurtByTargetGoal(this));
 				this.goalSelector.addGoal(5, new OwnerHurtTargetGoal(this));
@@ -3539,39 +3538,39 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				Item item = itemstack.getItem();
 				if (itemstack.getItem() instanceof SpawnEggItem) {
 					retval = super.mobInteract(sourceentity, hand);
 				} else if (this.level().isClientSide()) {
 					retval = (this.isTame() && this.isOwnedBy(sourceentity) || this.isFood(itemstack))
-							? InteractionResult.sidedSuccess(this.level().isClientSide())
+							? InteractionResult.SUCCESS
 							: InteractionResult.PASS;
 				} else {
 					if (this.isTame()) {
 						if (this.isOwnedBy(sourceentity)) {
-							if (item.isEdible() && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem(sourceentity, itemstack);
-								this.heal((float) item.getFoodProperties().getNutrition());
-								retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+							if (item.components().has(net.minecraft.core.component.DataComponents.FOOD) && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
+								this.usePlayerItem((Player) sourceentity, hand, itemstack);
+								this.heal((float) itemstack.get(net.minecraft.core.component.DataComponents.FOOD).nutrition());
+								retval = InteractionResult.SUCCESS;
 							} else if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem(sourceentity, itemstack);
+								this.usePlayerItem((Player) sourceentity, hand, itemstack);
 								this.heal(4);
-								retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+								retval = InteractionResult.SUCCESS;
 							} else {
 								retval = super.mobInteract(sourceentity, hand);
 							}
 						}
 					} else if (this.isFood(itemstack)) {
-						this.usePlayerItem(sourceentity, itemstack);
-						if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, sourceentity)) {
+						this.usePlayerItem((Player) sourceentity, hand, itemstack);
+						if (this.random.nextInt(3) == 0 && !net.neoforged.neoforge.event.EventHooks.onAnimalTame(this, sourceentity)) {
 							this.tame(sourceentity);
 							this.level().broadcastEntityEvent(this, (byte) 7);
 						} else {
 							this.level().broadcastEntityEvent(this, (byte) 6);
 						}
 						this.setPersistenceRequired();
-						retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+						retval = InteractionResult.SUCCESS;
 					} else {
 						retval = super.mobInteract(sourceentity, hand);
 						if (retval == InteractionResult.SUCCESS || retval == InteractionResult.CONSUME)
@@ -3597,9 +3596,8 @@ public final class JutsuEntities {
 
 			@Override
 			public AgeableMob getBreedOffspring(ServerLevel serverWorld, AgeableMob ageable) {
-				CustomEntity retval = (CustomEntity) entity.create(serverWorld);
-				retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), EntitySpawnReason.BREEDING,
-						(SpawnGroupData) null, (CompoundTag) null);
+				CustomEntity retval = (CustomEntity) entity.create(serverWorld, EntitySpawnReason.BREEDING);
+				retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), EntitySpawnReason.BREEDING, (SpawnGroupData) null);
 				return retval;
 			}
 
@@ -3707,39 +3705,39 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				Item item = itemstack.getItem();
 				if (itemstack.getItem() instanceof SpawnEggItem) {
 					retval = super.mobInteract(sourceentity, hand);
 				} else if (this.level().isClientSide()) {
 					retval = (this.isTame() && this.isOwnedBy(sourceentity) || this.isFood(itemstack))
-							? InteractionResult.sidedSuccess(this.level().isClientSide())
+							? InteractionResult.SUCCESS
 							: InteractionResult.PASS;
 				} else {
 					if (this.isTame()) {
 						if (this.isOwnedBy(sourceentity)) {
-							if (item.isEdible() && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem(sourceentity, itemstack);
-								this.heal((float) item.getFoodProperties().getNutrition());
-								retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+							if (item.components().has(net.minecraft.core.component.DataComponents.FOOD) && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
+								this.usePlayerItem((Player) sourceentity, hand, itemstack);
+								this.heal((float) itemstack.get(net.minecraft.core.component.DataComponents.FOOD).nutrition());
+								retval = InteractionResult.SUCCESS;
 							} else if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem(sourceentity, itemstack);
+								this.usePlayerItem((Player) sourceentity, hand, itemstack);
 								this.heal(4);
-								retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+								retval = InteractionResult.SUCCESS;
 							} else {
 								retval = super.mobInteract(sourceentity, hand);
 							}
 						}
 					} else if (this.isFood(itemstack)) {
-						this.usePlayerItem(sourceentity, itemstack);
-						if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, sourceentity)) {
+						this.usePlayerItem((Player) sourceentity, hand, itemstack);
+						if (this.random.nextInt(3) == 0 && !net.neoforged.neoforge.event.EventHooks.onAnimalTame(this, sourceentity)) {
 							this.tame(sourceentity);
 							this.level().broadcastEntityEvent(this, (byte) 7);
 						} else {
 							this.level().broadcastEntityEvent(this, (byte) 6);
 						}
 						this.setPersistenceRequired();
-						retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+						retval = InteractionResult.SUCCESS;
 					} else {
 						retval = super.mobInteract(sourceentity, hand);
 						if (retval == InteractionResult.SUCCESS || retval == InteractionResult.CONSUME)
@@ -3752,9 +3750,8 @@ public final class JutsuEntities {
 
 			@Override
 			public AgeableMob getBreedOffspring(ServerLevel serverWorld, AgeableMob ageable) {
-				CustomEntity retval = (CustomEntity) entity.create(serverWorld);
-				retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), EntitySpawnReason.BREEDING,
-						(SpawnGroupData) null, (CompoundTag) null);
+				CustomEntity retval = (CustomEntity) entity.create(serverWorld, EntitySpawnReason.BREEDING);
+				retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), EntitySpawnReason.BREEDING, (SpawnGroupData) null);
 				return retval;
 			}
 
@@ -3799,7 +3796,7 @@ public final class JutsuEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -3922,39 +3919,39 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				Item item = itemstack.getItem();
 				if (itemstack.getItem() instanceof SpawnEggItem) {
 					retval = super.mobInteract(sourceentity, hand);
 				} else if (this.level().isClientSide()) {
 					retval = (this.isTame() && this.isOwnedBy(sourceentity) || this.isFood(itemstack))
-							? InteractionResult.sidedSuccess(this.level().isClientSide())
+							? InteractionResult.SUCCESS
 							: InteractionResult.PASS;
 				} else {
 					if (this.isTame()) {
 						if (this.isOwnedBy(sourceentity)) {
-							if (item.isEdible() && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem(sourceentity, itemstack);
-								this.heal((float) item.getFoodProperties().getNutrition());
-								retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+							if (item.components().has(net.minecraft.core.component.DataComponents.FOOD) && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
+								this.usePlayerItem((Player) sourceentity, hand, itemstack);
+								this.heal((float) itemstack.get(net.minecraft.core.component.DataComponents.FOOD).nutrition());
+								retval = InteractionResult.SUCCESS;
 							} else if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem(sourceentity, itemstack);
+								this.usePlayerItem((Player) sourceentity, hand, itemstack);
 								this.heal(4);
-								retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+								retval = InteractionResult.SUCCESS;
 							} else {
 								retval = super.mobInteract(sourceentity, hand);
 							}
 						}
 					} else if (this.isFood(itemstack)) {
-						this.usePlayerItem(sourceentity, itemstack);
-						if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, sourceentity)) {
+						this.usePlayerItem((Player) sourceentity, hand, itemstack);
+						if (this.random.nextInt(3) == 0 && !net.neoforged.neoforge.event.EventHooks.onAnimalTame(this, sourceentity)) {
 							this.tame(sourceentity);
 							this.level().broadcastEntityEvent(this, (byte) 7);
 						} else {
 							this.level().broadcastEntityEvent(this, (byte) 6);
 						}
 						this.setPersistenceRequired();
-						retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+						retval = InteractionResult.SUCCESS;
 					} else {
 						retval = super.mobInteract(sourceentity, hand);
 						if (retval == InteractionResult.SUCCESS || retval == InteractionResult.CONSUME)
@@ -3979,9 +3976,8 @@ public final class JutsuEntities {
 
 			@Override
 			public AgeableMob getBreedOffspring(ServerLevel serverWorld, AgeableMob ageable) {
-				CustomEntity retval = (CustomEntity) entity.create(serverWorld);
-				retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), EntitySpawnReason.BREEDING,
-						(SpawnGroupData) null, (CompoundTag) null);
+				CustomEntity retval = (CustomEntity) entity.create(serverWorld, EntitySpawnReason.BREEDING);
+				retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), EntitySpawnReason.BREEDING, (SpawnGroupData) null);
 				return retval;
 			}
 
@@ -4026,7 +4022,7 @@ public final class JutsuEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -4105,7 +4101,7 @@ public final class JutsuEntities {
 			}
 
 			@Override
-			public boolean causeFallDamage(float l, float d) {
+			public boolean causeFallDamage(double l, float d, DamageSource damageSource) {
 				return false;
 			}
 
@@ -4291,7 +4287,7 @@ public final class JutsuEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				sourceentity.startRiding(this);
 				return retval;
@@ -4331,7 +4327,7 @@ public final class JutsuEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);

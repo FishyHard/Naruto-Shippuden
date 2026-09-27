@@ -171,9 +171,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.common.NeoForge;
-import net.mcreator.narutoshippudenmod.compat.TickEvent;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.mcreator.narutoshippudenmod.compat.ItemHandlerHelper;
 import net.minecraft.core.registries.BuiltInRegistries;
 
 public final class ClanProcedures {
@@ -773,7 +771,7 @@ public final class ClanProcedures {
 									.setHealth((float) (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1) + 2));
 						if (sourceentity instanceof Player) {
 							ItemStack _stktoremove = new ItemStack(Items.PORKCHOP);
-							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 									((Player) sourceentity).inventoryMenu.getCraftSlots());
 						}
 					}
@@ -788,7 +786,7 @@ public final class ClanProcedures {
 									.setHealth((float) (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1) + 2));
 						if (sourceentity instanceof Player) {
 							ItemStack _stktoremove = new ItemStack(Items.BEEF);
-							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 									((Player) sourceentity).inventoryMenu.getCraftSlots());
 						}
 					}
@@ -803,7 +801,7 @@ public final class ClanProcedures {
 									.setHealth((float) (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1) + 2));
 						if (sourceentity instanceof Player) {
 							ItemStack _stktoremove = new ItemStack(Items.CHICKEN);
-							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 									((Player) sourceentity).inventoryMenu.getCraftSlots());
 						}
 					}
@@ -818,7 +816,7 @@ public final class ClanProcedures {
 									.setHealth((float) (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1) + 2));
 						if (sourceentity instanceof Player) {
 							ItemStack _stktoremove = new ItemStack(Items.RABBIT);
-							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 									((Player) sourceentity).inventoryMenu.getCraftSlots());
 						}
 					}
@@ -833,7 +831,7 @@ public final class ClanProcedures {
 									.setHealth((float) (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1) + 2));
 						if (sourceentity instanceof Player) {
 							ItemStack _stktoremove = new ItemStack(Items.MUTTON);
-							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 									((Player) sourceentity).inventoryMenu.getCraftSlots());
 						}
 					}
@@ -848,7 +846,7 @@ public final class ClanProcedures {
 									.setHealth((float) (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1) + 4));
 						if (sourceentity instanceof Player) {
 							ItemStack _stktoremove = new ItemStack(Items.COOKED_PORKCHOP);
-							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 									((Player) sourceentity).inventoryMenu.getCraftSlots());
 						}
 					}
@@ -863,7 +861,7 @@ public final class ClanProcedures {
 									.setHealth((float) (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1) + 4));
 						if (sourceentity instanceof Player) {
 							ItemStack _stktoremove = new ItemStack(Items.COOKED_BEEF);
-							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 									((Player) sourceentity).inventoryMenu.getCraftSlots());
 						}
 					}
@@ -878,7 +876,7 @@ public final class ClanProcedures {
 									.setHealth((float) (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1) + 4));
 						if (sourceentity instanceof Player) {
 							ItemStack _stktoremove = new ItemStack(Items.COOKED_CHICKEN);
-							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 									((Player) sourceentity).inventoryMenu.getCraftSlots());
 						}
 					}
@@ -893,7 +891,7 @@ public final class ClanProcedures {
 									.setHealth((float) (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1) + 4));
 						if (sourceentity instanceof Player) {
 							ItemStack _stktoremove = new ItemStack(Items.COOKED_RABBIT);
-							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 									((Player) sourceentity).inventoryMenu.getCraftSlots());
 						}
 					}
@@ -908,7 +906,7 @@ public final class ClanProcedures {
 									.setHealth((float) (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1) + 4));
 						if (sourceentity instanceof Player) {
 							ItemStack _stktoremove = new ItemStack(Items.COOKED_MUTTON);
-							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+							((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 									((Player) sourceentity).inventoryMenu.getCraftSlots());
 						}
 					}
@@ -1524,7 +1522,7 @@ public final class ClanProcedures {
 			}
 			if (entity instanceof Player) {
 				ItemStack _stktoremove = new ItemStack(ChakraNatureResetItem.block);
-				((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+				((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 						((Player) entity).inventoryMenu.getCraftSlots());
 			}
 		}
@@ -2066,7 +2064,7 @@ public final class ClanProcedures {
 			}
 			if (entity instanceof Player) {
 				ItemStack _stktoremove = new ItemStack(ChakraPaperItem.block);
-				((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+				((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 						((Player) entity).inventoryMenu.getCraftSlots());
 			}
 		}
@@ -3179,7 +3177,7 @@ public final class ClanProcedures {
 			}
 			if (entity instanceof Player) {
 				ItemStack _stktoremove = new ItemStack(ClanPaperItem.block);
-				((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+				((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 						((Player) entity).inventoryMenu.getCraftSlots());
 			}
 		}
@@ -3378,7 +3376,7 @@ public final class ClanProcedures {
 			}
 			if (entity instanceof Player) {
 				ItemStack _stktoremove = new ItemStack(ClanResetStatItem.block);
-				((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+				((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 						((Player) entity).inventoryMenu.getCraftSlots());
 			}
 		}
@@ -3404,7 +3402,7 @@ public final class ClanProcedures {
 					entity.hurt(Compat.damage().generic(), (float) 20);
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(DanceOfTheCamelliaItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 					{
@@ -3448,7 +3446,7 @@ public final class ClanProcedures {
 					entity.hurt(Compat.damage().generic(), (float) 35);
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(DanceOfTheClematisFlowerItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 					{
@@ -3521,7 +3519,7 @@ public final class ClanProcedures {
 				((LivingEntity) entity)
 						.addEffect(new MobEffectInstance(CoercionSharinganEffectPotionEffect.potion, (int) 100, (int) 0, (false), (false)));
 			if (world.isClientSide()) {
-				Minecraft.getInstance().gameRenderer.displayItemActivation(new ItemStack(SharinganReleaseTechniqueItem.block));
+				Minecraft.getInstance().player.displayItemActivation(new ItemStack(SharinganReleaseTechniqueItem.block));
 			}
 			if (world instanceof Level && !world.isClientSide()) {
 				((Level) world).playSound(null, BlockPos.containing(x, y, z),
@@ -3676,7 +3674,7 @@ public final class ClanProcedures {
 			}
 			if (sourceentity instanceof Player) {
 				ItemStack _stktoremove = new ItemStack(EightTrigramsTwinLionsCrumblingAttackItem.block);
-				((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 2,
+				((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 2,
 						((Player) sourceentity).inventoryMenu.getCraftSlots());
 			}
 		}
@@ -3722,7 +3720,7 @@ public final class ClanProcedures {
 					}
 					if (sourceentity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(FistRockItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) sourceentity).inventoryMenu.getCraftSlots());
 					}
 					{
@@ -4503,7 +4501,7 @@ public final class ClanProcedures {
 			}
 			if (sourceentity instanceof Player) {
 				ItemStack _stktoremove = new ItemStack(GentleStepTwinLionFistsItem.block);
-				((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 2,
+				((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 2,
 						((Player) sourceentity).inventoryMenu.getCraftSlots());
 			}
 		}
@@ -5754,8 +5752,7 @@ public final class ClanProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											{
@@ -5915,7 +5912,7 @@ public final class ClanProcedures {
 					}
 					if (entity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(IburiReleaseItem.block);
-						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) entity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
@@ -6166,8 +6163,7 @@ public final class ClanProcedures {
 												entityToSpawn.setDeltaMovement(0, 0, 0);
 												if (entityToSpawn instanceof Mob)
 													((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-															world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-															(SpawnGroupData) null, (CompoundTag) null);
+															((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 												world.addFreshEntity(entityToSpawn);
 											}
 											{
@@ -6185,7 +6181,7 @@ public final class ClanProcedures {
 																? ((TamableAnimal) entityiterator).isTame()
 																: false)) {
 															if ((entityiterator instanceof TamableAnimal) && (entity instanceof Player)) {
-																((TamableAnimal) entityiterator).setTame(true);
+																((TamableAnimal) entityiterator).setTame(true, true);
 																((TamableAnimal) entityiterator).tame((Player) entity);
 															}
 														}
@@ -6236,7 +6232,7 @@ public final class ClanProcedures {
 										return ((ServerPlayer) _ent).gameMode.getGameModeForPlayer() == GameType.SURVIVAL;
 									} else if (_ent instanceof Player && _ent.level().isClientSide()) {
 										PlayerInfo _npi = Minecraft.getInstance().getConnection()
-												.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().getId());
+												.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().id());
 										return _npi != null && _npi.getGameMode() == GameType.SURVIVAL;
 									}
 									return false;
@@ -6374,23 +6370,23 @@ public final class ClanProcedures {
 											}
 											if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 												if (entity instanceof Player)
-													((Player) entity).getCooldowns().addCooldown(InuzukaReleaseTechniqueItem.block,
+													((Player) entity).getCooldowns().addCooldown(new ItemStack(InuzukaReleaseTechniqueItem.block),
 															(int) 900);
 											} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 												if (entity instanceof Player)
-													((Player) entity).getCooldowns().addCooldown(InuzukaReleaseTechniqueItem.block,
+													((Player) entity).getCooldowns().addCooldown(new ItemStack(InuzukaReleaseTechniqueItem.block),
 															(int) 800);
 											} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 												if (entity instanceof Player)
-													((Player) entity).getCooldowns().addCooldown(InuzukaReleaseTechniqueItem.block,
+													((Player) entity).getCooldowns().addCooldown(new ItemStack(InuzukaReleaseTechniqueItem.block),
 															(int) 700);
 											} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 												if (entity instanceof Player)
-													((Player) entity).getCooldowns().addCooldown(InuzukaReleaseTechniqueItem.block,
+													((Player) entity).getCooldowns().addCooldown(new ItemStack(InuzukaReleaseTechniqueItem.block),
 															(int) 600);
 											} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 												if (entity instanceof Player)
-													((Player) entity).getCooldowns().addCooldown(InuzukaReleaseTechniqueItem.block,
+													((Player) entity).getCooldowns().addCooldown(new ItemStack(InuzukaReleaseTechniqueItem.block),
 															(int) 400);
 											}
 										}
@@ -6539,23 +6535,23 @@ public final class ClanProcedures {
 												akamarutrue = (false);
 												if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 													if (entity instanceof Player)
-														((Player) entity).getCooldowns().addCooldown(InuzukaReleaseTechniqueItem.block,
+														((Player) entity).getCooldowns().addCooldown(new ItemStack(InuzukaReleaseTechniqueItem.block),
 																(int) 900);
 												} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
 													if (entity instanceof Player)
-														((Player) entity).getCooldowns().addCooldown(InuzukaReleaseTechniqueItem.block,
+														((Player) entity).getCooldowns().addCooldown(new ItemStack(InuzukaReleaseTechniqueItem.block),
 																(int) 800);
 												} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
 													if (entity instanceof Player)
-														((Player) entity).getCooldowns().addCooldown(InuzukaReleaseTechniqueItem.block,
+														((Player) entity).getCooldowns().addCooldown(new ItemStack(InuzukaReleaseTechniqueItem.block),
 																(int) 700);
 												} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
 													if (entity instanceof Player)
-														((Player) entity).getCooldowns().addCooldown(InuzukaReleaseTechniqueItem.block,
+														((Player) entity).getCooldowns().addCooldown(new ItemStack(InuzukaReleaseTechniqueItem.block),
 																(int) 600);
 												} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
 													if (entity instanceof Player)
-														((Player) entity).getCooldowns().addCooldown(InuzukaReleaseTechniqueItem.block,
+														((Player) entity).getCooldowns().addCooldown(new ItemStack(InuzukaReleaseTechniqueItem.block),
 																(int) 400);
 												}
 											}
@@ -6953,7 +6949,7 @@ public final class ClanProcedures {
 					}
 					if (entity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(KaguyaReleaseItem.block);
-						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) entity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
@@ -7007,7 +7003,7 @@ public final class ClanProcedures {
 					}
 					if (entity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(KazekageReleaseItem.block);
-						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) entity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
@@ -9344,7 +9340,7 @@ public final class ClanProcedures {
 						if (playerowner == entityiterator) {
 							if (entity instanceof LivingEntity) {
 								if (entity instanceof Player)
-									((Player) entity).getInventory().armor.set((int) 0,
+									((Player) entity).setItemSlot(EquipmentSlot.FEET,
 											((playerowner instanceof LivingEntity)
 													? ((LivingEntity) playerowner).getItemBySlot(EquipmentSlot.FEET)
 													: ItemStack.EMPTY));
@@ -9358,7 +9354,7 @@ public final class ClanProcedures {
 							}
 							if (entity instanceof LivingEntity) {
 								if (entity instanceof Player)
-									((Player) entity).getInventory().armor.set((int) 1,
+									((Player) entity).setItemSlot(EquipmentSlot.LEGS,
 											((playerowner instanceof LivingEntity)
 													? ((LivingEntity) playerowner).getItemBySlot(EquipmentSlot.LEGS)
 													: ItemStack.EMPTY));
@@ -9372,7 +9368,7 @@ public final class ClanProcedures {
 							}
 							if (entity instanceof LivingEntity) {
 								if (entity instanceof Player)
-									((Player) entity).getInventory().armor.set((int) 2,
+									((Player) entity).setItemSlot(EquipmentSlot.CHEST,
 											((playerowner instanceof LivingEntity)
 													? ((LivingEntity) playerowner).getItemBySlot(EquipmentSlot.CHEST)
 													: ItemStack.EMPTY));
@@ -9386,7 +9382,7 @@ public final class ClanProcedures {
 							}
 							if (entity instanceof LivingEntity) {
 								if (entity instanceof Player)
-									((Player) entity).getInventory().armor.set((int) 3,
+									((Player) entity).setItemSlot(EquipmentSlot.HEAD,
 											((playerowner instanceof LivingEntity)
 													? ((LivingEntity) playerowner).getItemBySlot(EquipmentSlot.HEAD)
 													: ItemStack.EMPTY));
@@ -9596,8 +9592,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 2) {
@@ -9609,8 +9604,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9621,8 +9615,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 3) {
@@ -9634,8 +9627,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9646,8 +9638,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9658,8 +9649,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 4) {
@@ -9671,8 +9661,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9683,8 +9672,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9695,8 +9683,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9707,8 +9694,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 5) {
@@ -9720,8 +9706,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9732,8 +9717,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9744,8 +9728,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9756,8 +9739,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9768,8 +9750,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 6) {
@@ -9781,8 +9762,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9793,8 +9773,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9805,8 +9784,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9817,8 +9795,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9829,8 +9806,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9841,8 +9817,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							}
@@ -9856,8 +9831,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 2) {
@@ -9869,8 +9843,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9881,8 +9854,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 3) {
@@ -9894,8 +9866,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9906,8 +9877,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9918,8 +9888,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 4) {
@@ -9931,8 +9900,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9943,8 +9911,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9955,8 +9922,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9967,8 +9933,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 5) {
@@ -9980,8 +9945,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -9992,8 +9956,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10004,8 +9967,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10016,8 +9978,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10028,8 +9989,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 6) {
@@ -10041,8 +10001,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10053,8 +10012,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10065,8 +10023,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10077,8 +10034,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10089,8 +10045,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10101,8 +10056,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							}
@@ -10116,8 +10070,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 2) {
@@ -10129,8 +10082,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10141,8 +10093,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 3) {
@@ -10154,8 +10105,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10166,8 +10116,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10178,8 +10127,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 4) {
@@ -10191,8 +10139,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10203,8 +10150,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10215,8 +10161,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10227,8 +10172,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 5) {
@@ -10240,8 +10184,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10252,8 +10195,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10264,8 +10206,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10276,8 +10217,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10288,8 +10228,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 6) {
@@ -10301,8 +10240,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10313,8 +10251,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10325,8 +10262,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10337,8 +10273,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10349,8 +10284,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10361,8 +10295,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							}
@@ -10376,8 +10309,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 2) {
@@ -10389,8 +10321,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10401,8 +10332,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 3) {
@@ -10414,8 +10344,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10426,8 +10355,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10438,8 +10366,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 4) {
@@ -10451,8 +10378,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10463,8 +10389,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10475,8 +10400,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10487,8 +10411,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 5) {
@@ -10500,8 +10423,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10512,8 +10434,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10524,8 +10445,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10536,8 +10456,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10548,8 +10467,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 6) {
@@ -10561,8 +10479,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10573,8 +10490,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10585,8 +10501,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10597,8 +10512,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10609,8 +10523,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -10621,8 +10534,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							}
@@ -10639,7 +10551,7 @@ public final class ClanProcedures {
 								if (entityiterator instanceof ShadowCloneEntity.CustomEntity) {
 									if (!((entityiterator instanceof TamableAnimal) ? ((TamableAnimal) entityiterator).isTame() : false)) {
 										if ((entityiterator instanceof TamableAnimal) && (entity instanceof Player)) {
-											((TamableAnimal) entityiterator).setTame(true);
+											((TamableAnimal) entityiterator).setTame(true, true);
 											((TamableAnimal) entityiterator).tame((Player) entity);
 										}
 										entityiterator.setYRot((float) ((entity.getYRot())));
@@ -10671,8 +10583,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10683,8 +10594,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10695,8 +10605,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10707,8 +10616,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10719,8 +10627,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10731,8 +10638,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10743,8 +10649,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10755,8 +10660,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 								} else if ((entity.getDirection()) == Direction.NORTH) {
@@ -10768,8 +10672,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10780,8 +10683,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10792,8 +10694,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10804,8 +10705,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10816,8 +10716,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10828,8 +10727,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10840,8 +10738,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10852,8 +10749,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 								} else if ((entity.getDirection()) == Direction.WEST) {
@@ -10865,8 +10761,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10877,8 +10772,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10889,8 +10783,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10901,8 +10794,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10913,8 +10805,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10925,8 +10816,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10937,8 +10827,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10949,8 +10838,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 								} else if ((entity.getDirection()) == Direction.EAST) {
@@ -10962,8 +10850,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10974,8 +10861,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10986,8 +10872,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -10998,8 +10883,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -11010,8 +10894,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -11022,8 +10905,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -11034,8 +10916,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 									if (world instanceof ServerLevel) {
@@ -11046,8 +10927,7 @@ public final class ClanProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 								}
@@ -11064,7 +10944,7 @@ public final class ClanProcedures {
 										if (entityiterator instanceof ShadowCloneEntity.CustomEntity) {
 											if (!((entityiterator instanceof TamableAnimal) ? ((TamableAnimal) entityiterator).isTame() : false)) {
 												if ((entityiterator instanceof TamableAnimal) && (entity instanceof Player)) {
-													((TamableAnimal) entityiterator).setTame(true);
+													((TamableAnimal) entityiterator).setTame(true, true);
 													((TamableAnimal) entityiterator).tame((Player) entity);
 												}
 												entityiterator.setYRot((float) ((entity.getYRot())));
@@ -11111,8 +10991,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 2) {
@@ -11124,8 +11003,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11136,8 +11014,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 3) {
@@ -11149,8 +11026,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11161,8 +11037,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11173,8 +11048,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 4) {
@@ -11186,8 +11060,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11198,8 +11071,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11210,8 +11082,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11222,8 +11093,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 5) {
@@ -11235,8 +11105,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11247,8 +11116,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11259,8 +11127,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11271,8 +11138,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11283,8 +11149,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 6) {
@@ -11296,8 +11161,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11308,8 +11172,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11320,8 +11183,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11332,8 +11194,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11344,8 +11205,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11356,8 +11216,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							}
@@ -11371,8 +11230,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 2) {
@@ -11384,8 +11242,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11396,8 +11253,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 3) {
@@ -11409,8 +11265,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11421,8 +11276,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11433,8 +11287,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 4) {
@@ -11446,8 +11299,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11458,8 +11310,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11470,8 +11321,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11482,8 +11332,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 5) {
@@ -11495,8 +11344,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11507,8 +11355,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11519,8 +11366,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11531,8 +11377,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11543,8 +11388,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 6) {
@@ -11556,8 +11400,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11568,8 +11411,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11580,8 +11422,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11592,8 +11433,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11604,8 +11444,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11616,8 +11455,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							}
@@ -11631,8 +11469,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 2) {
@@ -11644,8 +11481,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11656,8 +11492,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 3) {
@@ -11669,8 +11504,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11681,8 +11515,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11693,8 +11526,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 4) {
@@ -11706,8 +11538,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11718,8 +11549,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11730,8 +11560,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11742,8 +11571,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 5) {
@@ -11755,8 +11583,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11767,8 +11594,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11779,8 +11605,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11791,8 +11616,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11803,8 +11627,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 6) {
@@ -11816,8 +11639,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11828,8 +11650,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11840,8 +11661,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11852,8 +11672,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11864,8 +11683,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11876,8 +11694,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							}
@@ -11891,8 +11708,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 2) {
@@ -11904,8 +11720,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11916,8 +11731,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 3) {
@@ -11929,8 +11743,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11941,8 +11754,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11953,8 +11765,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 4) {
@@ -11966,8 +11777,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11978,8 +11788,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -11990,8 +11799,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -12002,8 +11810,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 5) {
@@ -12015,8 +11822,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -12027,8 +11833,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -12039,8 +11844,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -12051,8 +11855,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -12063,8 +11866,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if (clonecount == 6) {
@@ -12076,8 +11878,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -12088,8 +11889,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -12100,8 +11900,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -12112,8 +11911,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -12124,8 +11922,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -12136,8 +11933,7 @@ public final class ClanProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							}
@@ -12154,7 +11950,7 @@ public final class ClanProcedures {
 								if (entityiterator instanceof ShadowCloneEntity.CustomEntity) {
 									if (!((entityiterator instanceof TamableAnimal) ? ((TamableAnimal) entityiterator).isTame() : false)) {
 										if ((entityiterator instanceof TamableAnimal) && (entity instanceof Player)) {
-											((TamableAnimal) entityiterator).setTame(true);
+											((TamableAnimal) entityiterator).setTame(true, true);
 											((TamableAnimal) entityiterator).tame((Player) entity);
 										}
 										entityiterator.setYRot((float) ((entity.getYRot())));
@@ -12212,7 +12008,7 @@ public final class ClanProcedures {
 			Entity entity = (Entity) dependencies.get("entity");
 			(entity.getVehicle()).setYRot((float) ((((entity instanceof TamableAnimal)
 					? ((TamableAnimal) entity).getOwner()
-					: null).yRot)));
+					: null).getYRot())));
 			entity.setYBodyRot(entity.getYRot());
 			entity.yRotO = entity.getYRot();
 			if (entity instanceof LivingEntity) {
@@ -12222,7 +12018,7 @@ public final class ClanProcedures {
 			}
 			(entity.getVehicle()).setXRot((float) ((((entity instanceof TamableAnimal)
 					? ((TamableAnimal) entity).getOwner()
-					: null).xRot)));
+					: null).getXRot())));
 			if ((entity.getVehicle()) instanceof LivingEntity)
 				((LivingEntity) (entity.getVehicle())).addEffect(new MobEffectInstance(MobEffects.SLOWNESS, (int) 60, (int) 99, (false), (false)));
 		}
@@ -12263,7 +12059,7 @@ public final class ClanProcedures {
 								return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
 							}
 						}.compareDistOf((entity.getX()), (entity.getY()), (entity.getZ()))).findFirst().orElse(null)) instanceof Player)) {
-					((TamableAnimal) entity).setTame(true);
+					((TamableAnimal) entity).setTame(true, true);
 					((TamableAnimal) entity).tame((Player) ((Entity) world
 							.getEntitiesOfClass(Player.class,
 									new AABB((entity.getX()) - (40 / 2d), (entity.getY()) - (40 / 2d), (entity.getZ()) - (40 / 2d),
@@ -12471,7 +12267,7 @@ public final class ClanProcedures {
 					}
 					if (entity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(TenroReleaseItem.block);
-						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) entity).inventoryMenu.getCraftSlots());
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
@@ -12773,16 +12569,16 @@ public final class ClanProcedures {
 								});
 							}
 							if (world instanceof Level && !((Level) world).isClientSide()) {
-								((Level) world).explode(null, (int) (x + 7), (int) y, (int) z, (float) 5, Explosion.BlockInteraction.NONE);
+								((Level) world).explode(null, (x + 7), y, z, (float) 5, Level.ExplosionInteraction.NONE);
 							}
 							if (world instanceof Level && !((Level) world).isClientSide()) {
-								((Level) world).explode(null, (int) x, (int) y, (int) (z + 7), (float) 5, Explosion.BlockInteraction.NONE);
+								((Level) world).explode(null, x, y, (z + 7), (float) 5, Level.ExplosionInteraction.NONE);
 							}
 							if (world instanceof Level && !((Level) world).isClientSide()) {
-								((Level) world).explode(null, (int) (x - 7), (int) y, (int) z, (float) 5, Explosion.BlockInteraction.NONE);
+								((Level) world).explode(null, (x - 7), y, z, (float) 5, Level.ExplosionInteraction.NONE);
 							}
 							if (world instanceof Level && !((Level) world).isClientSide()) {
-								((Level) world).explode(null, (int) x, (int) y, (int) (z - 7), (float) 5, Explosion.BlockInteraction.NONE);
+								((Level) world).explode(null, x, y, (z - 7), (float) 5, Level.ExplosionInteraction.NONE);
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 299) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
@@ -13333,7 +13129,7 @@ public final class ClanProcedures {
 					}
 					if (entity instanceof Player) {
 						ItemStack _stktoremove = new ItemStack(YukiReleaseItem.block);
-						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 								((Player) entity).inventoryMenu.getCraftSlots());
 					}
 					{

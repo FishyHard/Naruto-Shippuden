@@ -18,6 +18,10 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.mcreator.narutoshippudenmod.compat.Registration;
 
 public final class ModItemGroups {
 	private ModItemGroups() {
@@ -31,18 +35,12 @@ public final class ModItemGroups {
 
 		@Override
 		public void initElements() {
-			tab = new CreativeModeTab("tabarmor") {
-				@OnlyIn(Dist.CLIENT)
-				@Override
-				public ItemStack makeIcon() {
-					return new ItemStack(GeninKonohagakureBlackItem.helmet);
-				}
-
-				@OnlyIn(Dist.CLIENT)
-				public boolean hasSearchBar() {
-					return false;
-				}
-			};
+			Registration.add(Registries.CREATIVE_MODE_TAB, "tabarmor", () -> CreativeModeTab.builder()
+					.title(Component.translatable("itemGroup.tabarmor"))
+					.icon(() -> new ItemStack(GeninKonohagakureBlackItem.helmet))
+					.displayItems((parameters, output) -> Registration.TAB_ITEMS.getOrDefault("ArmorItemGroup", java.util.List.of())
+							.forEach(name -> output.accept(BuiltInRegistries.ITEM.getValue(Registration.id(name)))))
+					.build(), holder -> tab = holder.value());
 		}
 
 		public static CreativeModeTab tab;
@@ -56,18 +54,12 @@ public final class ModItemGroups {
 
 		@Override
 		public void initElements() {
-			tab = new CreativeModeTab("tabblocks") {
-				@OnlyIn(Dist.CLIENT)
-				@Override
-				public ItemStack makeIcon() {
-					return new ItemStack(KamuiStoneBlock.block);
-				}
-
-				@OnlyIn(Dist.CLIENT)
-				public boolean hasSearchBar() {
-					return false;
-				}
-			};
+			Registration.add(Registries.CREATIVE_MODE_TAB, "tabblocks", () -> CreativeModeTab.builder()
+					.title(Component.translatable("itemGroup.tabblocks"))
+					.icon(() -> new ItemStack(KamuiStoneBlock.block))
+					.displayItems((parameters, output) -> Registration.TAB_ITEMS.getOrDefault("BlocksItemGroup", java.util.List.of())
+							.forEach(name -> output.accept(BuiltInRegistries.ITEM.getValue(Registration.id(name)))))
+					.build(), holder -> tab = holder.value());
 		}
 
 		public static CreativeModeTab tab;
@@ -81,18 +73,12 @@ public final class ModItemGroups {
 
 		@Override
 		public void initElements() {
-			tab = new CreativeModeTab("tabclans") {
-				@OnlyIn(Dist.CLIENT)
-				@Override
-				public ItemStack makeIcon() {
-					return new ItemStack(UchihaReleaseItem.block);
-				}
-
-				@OnlyIn(Dist.CLIENT)
-				public boolean hasSearchBar() {
-					return false;
-				}
-			};
+			Registration.add(Registries.CREATIVE_MODE_TAB, "tabclans", () -> CreativeModeTab.builder()
+					.title(Component.translatable("itemGroup.tabclans"))
+					.icon(() -> new ItemStack(UchihaReleaseItem.block))
+					.displayItems((parameters, output) -> Registration.TAB_ITEMS.getOrDefault("ClansItemGroup", java.util.List.of())
+							.forEach(name -> output.accept(BuiltInRegistries.ITEM.getValue(Registration.id(name)))))
+					.build(), holder -> tab = holder.value());
 		}
 
 		public static CreativeModeTab tab;
@@ -106,18 +92,12 @@ public final class ModItemGroups {
 
 		@Override
 		public void initElements() {
-			tab = new CreativeModeTab("tabdna") {
-				@OnlyIn(Dist.CLIENT)
-				@Override
-				public ItemStack makeIcon() {
-					return new ItemStack(UndefinedDNAItem.block);
-				}
-
-				@OnlyIn(Dist.CLIENT)
-				public boolean hasSearchBar() {
-					return false;
-				}
-			};
+			Registration.add(Registries.CREATIVE_MODE_TAB, "tabdna", () -> CreativeModeTab.builder()
+					.title(Component.translatable("itemGroup.tabdna"))
+					.icon(() -> new ItemStack(UndefinedDNAItem.block))
+					.displayItems((parameters, output) -> Registration.TAB_ITEMS.getOrDefault("DNAItemGroup", java.util.List.of())
+							.forEach(name -> output.accept(BuiltInRegistries.ITEM.getValue(Registration.id(name)))))
+					.build(), holder -> tab = holder.value());
 		}
 
 		public static CreativeModeTab tab;
@@ -131,18 +111,12 @@ public final class ModItemGroups {
 
 		@Override
 		public void initElements() {
-			tab = new CreativeModeTab("tabdojutsu") {
-				@OnlyIn(Dist.CLIENT)
-				@Override
-				public ItemStack makeIcon() {
-					return new ItemStack(SharinganReleaseItem.block);
-				}
-
-				@OnlyIn(Dist.CLIENT)
-				public boolean hasSearchBar() {
-					return false;
-				}
-			};
+			Registration.add(Registries.CREATIVE_MODE_TAB, "tabdojutsu", () -> CreativeModeTab.builder()
+					.title(Component.translatable("itemGroup.tabdojutsu"))
+					.icon(() -> new ItemStack(SharinganReleaseItem.block))
+					.displayItems((parameters, output) -> Registration.TAB_ITEMS.getOrDefault("DojutsuItemGroup", java.util.List.of())
+							.forEach(name -> output.accept(BuiltInRegistries.ITEM.getValue(Registration.id(name)))))
+					.build(), holder -> tab = holder.value());
 		}
 
 		public static CreativeModeTab tab;
@@ -156,18 +130,12 @@ public final class ModItemGroups {
 
 		@Override
 		public void initElements() {
-			tab = new CreativeModeTab("tabfood") {
-				@OnlyIn(Dist.CLIENT)
-				@Override
-				public ItemStack makeIcon() {
-					return new ItemStack(IchirakuRamenItem.block);
-				}
-
-				@OnlyIn(Dist.CLIENT)
-				public boolean hasSearchBar() {
-					return false;
-				}
-			};
+			Registration.add(Registries.CREATIVE_MODE_TAB, "tabfood", () -> CreativeModeTab.builder()
+					.title(Component.translatable("itemGroup.tabfood"))
+					.icon(() -> new ItemStack(IchirakuRamenItem.block))
+					.displayItems((parameters, output) -> Registration.TAB_ITEMS.getOrDefault("FoodItemGroup", java.util.List.of())
+							.forEach(name -> output.accept(BuiltInRegistries.ITEM.getValue(Registration.id(name)))))
+					.build(), holder -> tab = holder.value());
 		}
 
 		public static CreativeModeTab tab;
@@ -181,18 +149,12 @@ public final class ModItemGroups {
 
 		@Override
 		public void initElements() {
-			tab = new CreativeModeTab("tabmissions") {
-				@OnlyIn(Dist.CLIENT)
-				@Override
-				public ItemStack makeIcon() {
-					return new ItemStack(ShikamaruQuestDItem.block);
-				}
-
-				@OnlyIn(Dist.CLIENT)
-				public boolean hasSearchBar() {
-					return false;
-				}
-			};
+			Registration.add(Registries.CREATIVE_MODE_TAB, "tabmissions", () -> CreativeModeTab.builder()
+					.title(Component.translatable("itemGroup.tabmissions"))
+					.icon(() -> new ItemStack(ShikamaruQuestDItem.block))
+					.displayItems((parameters, output) -> Registration.TAB_ITEMS.getOrDefault("MissionsItemGroup", java.util.List.of())
+							.forEach(name -> output.accept(BuiltInRegistries.ITEM.getValue(Registration.id(name)))))
+					.build(), holder -> tab = holder.value());
 		}
 
 		public static CreativeModeTab tab;
@@ -206,18 +168,12 @@ public final class ModItemGroups {
 
 		@Override
 		public void initElements() {
-			tab = new CreativeModeTab("tabrelease_technique") {
-				@OnlyIn(Dist.CLIENT)
-				@Override
-				public ItemStack makeIcon() {
-					return new ItemStack(IceReleaseTechniqueItem.block);
-				}
-
-				@OnlyIn(Dist.CLIENT)
-				public boolean hasSearchBar() {
-					return false;
-				}
-			};
+			Registration.add(Registries.CREATIVE_MODE_TAB, "tabrelease_technique", () -> CreativeModeTab.builder()
+					.title(Component.translatable("itemGroup.tabrelease_technique"))
+					.icon(() -> new ItemStack(IceReleaseTechniqueItem.block))
+					.displayItems((parameters, output) -> Registration.TAB_ITEMS.getOrDefault("ReleaseTechniqueItemGroup", java.util.List.of())
+							.forEach(name -> output.accept(BuiltInRegistries.ITEM.getValue(Registration.id(name)))))
+					.build(), holder -> tab = holder.value());
 		}
 
 		public static CreativeModeTab tab;
@@ -231,18 +187,12 @@ public final class ModItemGroups {
 
 		@Override
 		public void initElements() {
-			tab = new CreativeModeTab("tabreleases") {
-				@OnlyIn(Dist.CLIENT)
-				@Override
-				public ItemStack makeIcon() {
-					return new ItemStack(FireReleaseItem.block);
-				}
-
-				@OnlyIn(Dist.CLIENT)
-				public boolean hasSearchBar() {
-					return false;
-				}
-			};
+			Registration.add(Registries.CREATIVE_MODE_TAB, "tabreleases", () -> CreativeModeTab.builder()
+					.title(Component.translatable("itemGroup.tabreleases"))
+					.icon(() -> new ItemStack(FireReleaseItem.block))
+					.displayItems((parameters, output) -> Registration.TAB_ITEMS.getOrDefault("ReleasesItemGroup", java.util.List.of())
+							.forEach(name -> output.accept(BuiltInRegistries.ITEM.getValue(Registration.id(name)))))
+					.build(), holder -> tab = holder.value());
 		}
 
 		public static CreativeModeTab tab;
@@ -256,18 +206,12 @@ public final class ModItemGroups {
 
 		@Override
 		public void initElements() {
-			tab = new CreativeModeTab("tabspawn_eggs") {
-				@OnlyIn(Dist.CLIENT)
-				@Override
-				public ItemStack makeIcon() {
-					return new ItemStack(SpawnItem.block);
-				}
-
-				@OnlyIn(Dist.CLIENT)
-				public boolean hasSearchBar() {
-					return false;
-				}
-			};
+			Registration.add(Registries.CREATIVE_MODE_TAB, "tabspawn_eggs", () -> CreativeModeTab.builder()
+					.title(Component.translatable("itemGroup.tabspawn_eggs"))
+					.icon(() -> new ItemStack(SpawnItem.block))
+					.displayItems((parameters, output) -> Registration.TAB_ITEMS.getOrDefault("SpawnEggsItemGroup", java.util.List.of())
+							.forEach(name -> output.accept(BuiltInRegistries.ITEM.getValue(Registration.id(name)))))
+					.build(), holder -> tab = holder.value());
 		}
 
 		public static CreativeModeTab tab;
@@ -281,18 +225,12 @@ public final class ModItemGroups {
 
 		@Override
 		public void initElements() {
-			tab = new CreativeModeTab("tabstuff") {
-				@OnlyIn(Dist.CLIENT)
-				@Override
-				public ItemStack makeIcon() {
-					return new ItemStack(ChakraPaperItem.block);
-				}
-
-				@OnlyIn(Dist.CLIENT)
-				public boolean hasSearchBar() {
-					return false;
-				}
-			};
+			Registration.add(Registries.CREATIVE_MODE_TAB, "tabstuff", () -> CreativeModeTab.builder()
+					.title(Component.translatable("itemGroup.tabstuff"))
+					.icon(() -> new ItemStack(ChakraPaperItem.block))
+					.displayItems((parameters, output) -> Registration.TAB_ITEMS.getOrDefault("StuffItemGroup", java.util.List.of())
+							.forEach(name -> output.accept(BuiltInRegistries.ITEM.getValue(Registration.id(name)))))
+					.build(), holder -> tab = holder.value());
 		}
 
 		public static CreativeModeTab tab;
@@ -306,18 +244,12 @@ public final class ModItemGroups {
 
 		@Override
 		public void initElements() {
-			tab = new CreativeModeTab("tabtechniques") {
-				@OnlyIn(Dist.CLIENT)
-				@Override
-				public ItemStack makeIcon() {
-					return new ItemStack(TechniquesTabItem.block);
-				}
-
-				@OnlyIn(Dist.CLIENT)
-				public boolean hasSearchBar() {
-					return false;
-				}
-			};
+			Registration.add(Registries.CREATIVE_MODE_TAB, "tabtechniques", () -> CreativeModeTab.builder()
+					.title(Component.translatable("itemGroup.tabtechniques"))
+					.icon(() -> new ItemStack(TechniquesTabItem.block))
+					.displayItems((parameters, output) -> Registration.TAB_ITEMS.getOrDefault("TechniquesItemGroup", java.util.List.of())
+							.forEach(name -> output.accept(BuiltInRegistries.ITEM.getValue(Registration.id(name)))))
+					.build(), holder -> tab = holder.value());
 		}
 
 		public static CreativeModeTab tab;
@@ -331,18 +263,12 @@ public final class ModItemGroups {
 
 		@Override
 		public void initElements() {
-			tab = new CreativeModeTab("tabweapons") {
-				@OnlyIn(Dist.CLIENT)
-				@Override
-				public ItemStack makeIcon() {
-					return new ItemStack(GunbaiItem.block);
-				}
-
-				@OnlyIn(Dist.CLIENT)
-				public boolean hasSearchBar() {
-					return false;
-				}
-			};
+			Registration.add(Registries.CREATIVE_MODE_TAB, "tabweapons", () -> CreativeModeTab.builder()
+					.title(Component.translatable("itemGroup.tabweapons"))
+					.icon(() -> new ItemStack(GunbaiItem.block))
+					.displayItems((parameters, output) -> Registration.TAB_ITEMS.getOrDefault("WeaponsItemGroup", java.util.List.of())
+							.forEach(name -> output.accept(BuiltInRegistries.ITEM.getValue(Registration.id(name)))))
+					.build(), holder -> tab = holder.value());
 		}
 
 		public static CreativeModeTab tab;

@@ -74,7 +74,7 @@ def convert(path, text):
             if model:
                 parts, order, tw, th = models.parse_model(model.group(1), model_src[model.group(1)])
                 code = models.emit_part(parts, model.group(2), 'root', part_name='head', pose_override='PartPose.ZERO')
-                holder = re.search(r'Registration\.holder\("%s", v -> (\w+) =' % item_name, block).group(1)
+                holder = re.search(r'Registration\.holder\((?:Registries\.\w+, )?"%s", v -> (\w+) =' % item_name, block).group(1)
                 CLIENT_ENTRIES.append((cls, holder, item_name, code, tw, th, tex.group(1) if tex else None))
         # rebuild element: holders, constructor, material, initElements
         holders = re.findall(r'\t*public static Item \w+;\n\s*static \{\n[^}]*\}', block)

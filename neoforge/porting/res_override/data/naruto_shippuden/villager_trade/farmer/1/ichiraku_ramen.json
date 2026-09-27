@@ -1,0 +1,12 @@
+{
+  "wants": {
+    "id": "naruto_shippuden:banknote_of_ryo",
+    "count": 2
+  },
+  "gives": {
+    "id": "naruto_shippuden:ichiraku_ramen"
+  },
+  "max_uses": 10,
+  "xp": 2,
+  "reputation_discount": 0.05
+}

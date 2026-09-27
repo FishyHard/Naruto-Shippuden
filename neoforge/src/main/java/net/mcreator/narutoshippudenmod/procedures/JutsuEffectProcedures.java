@@ -2,8 +2,11 @@ package net.mcreator.narutoshippudenmod.procedures;
 
 import net.mcreator.narutoshippudenmod.compat.Compat;
 import net.minecraft.util.RandomSource;
+import net.mcreator.narutoshippudenmod.client.ClientPostEffects;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.minecraft.core.particles.ColorParticleOption;
 
 import java.io.File;
 import java.util.Collection;
@@ -38,7 +41,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.common.NeoForge;
-import net.mcreator.narutoshippudenmod.compat.TickEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -931,7 +933,7 @@ public final class JutsuEffectProcedures {
 					NeoForge.EVENT_BUS.unregister(this);
 				}
 			}.start(world, (int) 2);
-			world.addParticle(ParticleTypes.FLASH, x, y, z, 0, 0, 0);
+			world.addParticle(ColorParticleOption.create(ParticleTypes.FLASH, -1), x, y, z, 0, 0, 0);
 		}
 	}
 
@@ -965,13 +967,13 @@ public final class JutsuEffectProcedures {
 			com.google.gson.JsonObject mainjsonobject = new com.google.gson.JsonObject();
 			File NarutoShippuden = new File("");
 			if (world instanceof Level && !((Level) world).isClientSide()) {
-				((Level) world).explode(null, (int) x, (int) y, (int) z, (float) 7, Explosion.BlockInteraction.NONE);
+				((Level) world).explode(null, x, y, z, (float) 7, Level.ExplosionInteraction.NONE);
 			}
 		}
 	}
 
 	public static class ShadersProcedure {
-		@Mod.EventBusSubscriber
+		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
 			@SubscribeEvent
 			public static void onPlayerTick(PlayerTickEvent.Post event) {
@@ -1011,13 +1013,13 @@ public final class JutsuEffectProcedures {
 					if (NarutoShippudenModVariables.get(entity).Mangekyou_Sharingan == true) {
 						if (NarutoShippudenModVariables.get(entity).Eternal_Mangekyou_Sharingan == false) {
 							if (NarutoShippudenModVariables.get(entity).Mangekyou_Sharingan_Technique_Use >= NarutoShippudenModVariables.get(entity).Mangekyou_Sharingan_Technique_Use_Max) {
-								if (Minecraft.getInstance().gameRenderer.currentEffect() == null) {
-									Minecraft.getInstance().gameRenderer.loadEffect(Identifier.parse("shaders/post/blur.json"));
+								if (ClientPostEffects.current() == null) {
+									ClientPostEffects.set(Identifier.parse("shaders/post/blur.json"));
 								}
 							}
 						} else {
-							if (!(Minecraft.getInstance().gameRenderer.currentEffect() == null)) {
-								Minecraft.getInstance().gameRenderer.shutdownEffect();
+							if (!(ClientPostEffects.current() == null)) {
+								ClientPostEffects.clear();
 							}
 						}
 					}
@@ -1033,8 +1035,8 @@ public final class JutsuEffectProcedures {
 							return false;
 						}
 					}.check(entity)) {
-						if (Minecraft.getInstance().gameRenderer.currentEffect() == null) {
-							Minecraft.getInstance().gameRenderer.loadEffect(Identifier.parse("naruto_shippuden:shaders/post/coercionsharingan.json"));
+						if (ClientPostEffects.current() == null) {
+							ClientPostEffects.set(Identifier.parse("naruto_shippuden:shaders/post/coercionsharingan.json"));
 						}
 					} else if (!(new Object() {
 						boolean check(Entity _entity) {
@@ -1048,8 +1050,8 @@ public final class JutsuEffectProcedures {
 							return false;
 						}
 					}.check(entity))) {
-						if (!(Minecraft.getInstance().gameRenderer.currentEffect() == null)) {
-							Minecraft.getInstance().gameRenderer.shutdownEffect();
+						if (!(ClientPostEffects.current() == null)) {
+							ClientPostEffects.clear();
 						}
 					}
 				}
@@ -1085,19 +1087,19 @@ public final class JutsuEffectProcedures {
 			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
 			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 			if (world instanceof Level && !((Level) world).isClientSide()) {
-				((Level) world).explode(null, (int) x, (int) y, (int) z, (float) 4, Explosion.BlockInteraction.NONE);
+				((Level) world).explode(null, x, y, z, (float) 4, Level.ExplosionInteraction.NONE);
 			}
 			if (world instanceof Level && !((Level) world).isClientSide()) {
-				((Level) world).explode(null, (int) x, (int) y, (int) z, (float) 4, Explosion.BlockInteraction.NONE);
+				((Level) world).explode(null, x, y, z, (float) 4, Level.ExplosionInteraction.NONE);
 			}
 			if (world instanceof Level && !((Level) world).isClientSide()) {
-				((Level) world).explode(null, (int) x, (int) y, (int) z, (float) 4, Explosion.BlockInteraction.NONE);
+				((Level) world).explode(null, x, y, z, (float) 4, Level.ExplosionInteraction.NONE);
 			}
 			if (world instanceof Level && !((Level) world).isClientSide()) {
-				((Level) world).explode(null, (int) x, (int) y, (int) z, (float) 4, Explosion.BlockInteraction.NONE);
+				((Level) world).explode(null, x, y, z, (float) 4, Level.ExplosionInteraction.NONE);
 			}
 			if (world instanceof Level && !((Level) world).isClientSide()) {
-				((Level) world).explode(null, (int) x, (int) y, (int) z, (float) 4, Explosion.BlockInteraction.NONE);
+				((Level) world).explode(null, x, y, z, (float) 4, Level.ExplosionInteraction.NONE);
 			}
 		}
 	}

@@ -29,7 +29,10 @@ public class NarutoShippudenMod {
 		MOD_BUS = modBus;
 		NarutoShippudenModVariables.register(modBus);
 		Registration.register(modBus);
+		net.mcreator.narutoshippudenmod.core.EntityScale.register(modBus);
 		net.mcreator.narutoshippudenmod.potion.ModEffects.register();
+		net.mcreator.narutoshippudenmod.particle.ModParticles.register();
+		net.mcreator.narutoshippudenmod.world.structure.KamuiTowerStructures.register();
 		elements = new NarutoShippudenModElements();
 		modBus.addListener(this::registerAll);
 		modBus.addListener(this::init);
@@ -40,9 +43,9 @@ public class NarutoShippudenMod {
 	}
 
 	private void registerAll(RegisterEvent event) {
-		event.register(Registries.BLOCK, helper -> elements.blocks.forEach(s -> Registration.registerNamed(helper, s)));
-		event.register(Registries.ITEM, helper -> elements.items.forEach(s -> Registration.registerNamed(helper, s)));
-		event.register(Registries.ENTITY_TYPE, helper -> elements.entities.forEach(s -> Registration.registerNamed(helper, s)));
+		event.register(Registries.BLOCK, helper -> elements.blocks.forEach(s -> Registration.registerNamed(Registries.BLOCK, helper, s)));
+		event.register(Registries.ITEM, helper -> elements.items.forEach(s -> Registration.registerNamed(Registries.ITEM, helper, s)));
+		event.register(Registries.ENTITY_TYPE, helper -> elements.entities.forEach(s -> Registration.registerNamed(Registries.ENTITY_TYPE, helper, s)));
 		event.register(Registries.SOUND_EVENT, helper -> NarutoShippudenModElements.sounds.forEach(helper::register));
 	}
 

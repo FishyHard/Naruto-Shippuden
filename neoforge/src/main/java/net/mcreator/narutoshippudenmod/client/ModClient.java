@@ -7,6 +7,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.mcreator.narutoshippudenmod.gui.*;
 import net.mcreator.narutoshippudenmod.gui.CheatGuis.*;
 import net.mcreator.narutoshippudenmod.gui.CheatScreens.*;
@@ -268,6 +269,11 @@ public final class ModClient {
 		SusanoRenderers.SkeletonSusanoSasukeRenderer.registerLayers(event);
 		SusanoRenderers.SkeletonSusanoShisuiRenderer.registerLayers(event);
 		ArmorModels.registerLayers(event);
+	}
+
+	@SubscribeEvent
+	public static void registerParticles(RegisterParticleProvidersEvent event) {
+		ModParticleProviders.register(event);
 	}
 
 	@SubscribeEvent

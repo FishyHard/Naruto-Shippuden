@@ -37,7 +37,6 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
-import net.mcreator.narutoshippudenmod.compat.ItemHandlerHelper;
 
 public final class CustomJutsuProcedures {
 	private CustomJutsuProcedures() {
@@ -10881,7 +10880,7 @@ public final class CustomJutsuProcedures {
 							}
 							if ((NarutoShippudenModVariables.get(entity).customjutsureleasesave).equals("Fire")) {
 								customjutsuname = new ItemStack(CustomFireReleaseTechniqueItem.block);
-								((customjutsuname)).setHoverName(Component.literal(
+								Compat.setName((customjutsuname), Component.literal(
 										("Fire Release: " + NarutoShippudenModVariables.get(entity).jutsunamesave1)));
 								if (entity instanceof Player) {
 									ItemStack _setstack = (customjutsuname);
@@ -10890,7 +10889,7 @@ public final class CustomJutsuProcedures {
 								}
 							} else if ((NarutoShippudenModVariables.get(entity).customjutsureleasesave).equals("Lightning")) {
 								customjutsuname = new ItemStack(CustomLightningReleaseTechniqueItem.block);
-								((customjutsuname)).setHoverName(Component.literal(
+								Compat.setName((customjutsuname), Component.literal(
 										("Lightning Release: " + NarutoShippudenModVariables.get(entity).jutsunamesave1)));
 								if (entity instanceof Player) {
 									ItemStack _setstack = (customjutsuname);
@@ -10899,7 +10898,7 @@ public final class CustomJutsuProcedures {
 								}
 							} else if ((NarutoShippudenModVariables.get(entity).customjutsureleasesave).equals("Wind")) {
 								customjutsuname = new ItemStack(CustomWindReleaseTechniqueItem.block);
-								((customjutsuname)).setHoverName(Component.literal(
+								Compat.setName((customjutsuname), Component.literal(
 										("Wind Release: " + NarutoShippudenModVariables.get(entity).jutsunamesave1)));
 								if (entity instanceof Player) {
 									ItemStack _setstack = (customjutsuname);
@@ -10908,7 +10907,7 @@ public final class CustomJutsuProcedures {
 								}
 							} else if ((NarutoShippudenModVariables.get(entity).customjutsureleasesave).equals("Water")) {
 								customjutsuname = new ItemStack(CustomWaterReleaseTechniqueItem.block);
-								((customjutsuname)).setHoverName(Component.literal(
+								Compat.setName((customjutsuname), Component.literal(
 										("Water Release: " + NarutoShippudenModVariables.get(entity).jutsunamesave1)));
 								if (entity instanceof Player) {
 									ItemStack _setstack = (customjutsuname);
@@ -10917,7 +10916,7 @@ public final class CustomJutsuProcedures {
 								}
 							} else if ((NarutoShippudenModVariables.get(entity).customjutsureleasesave).equals("Earth")) {
 								customjutsuname = new ItemStack(CustomEarthReleaseTechniqueItem.block);
-								((customjutsuname)).setHoverName(Component.literal(
+								Compat.setName((customjutsuname), Component.literal(
 										("Earth Release: " + NarutoShippudenModVariables.get(entity).jutsunamesave1)));
 								if (entity instanceof Player) {
 									ItemStack _setstack = (customjutsuname);
@@ -11100,27 +11099,27 @@ public final class CustomJutsuProcedures {
 					((Player) entity).closeContainer();
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(CustomFireReleaseTechniqueItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(CustomLightningReleaseTechniqueItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(CustomWindReleaseTechniqueItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(CustomWaterReleaseTechniqueItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(CustomEarthReleaseTechniqueItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (!((entity instanceof Player)

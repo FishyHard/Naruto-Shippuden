@@ -2,6 +2,7 @@ package net.mcreator.narutoshippudenmod.item;
 
 import net.mcreator.narutoshippudenmod.compat.Compat;
 import net.minecraft.util.RandomSource;
+import net.minecraft.core.registries.Registries;
 import net.mcreator.narutoshippudenmod.compat.Registration;
 import net.mcreator.narutoshippudenmod.compat.ModArrow;
 
@@ -71,7 +72,7 @@ public final class DojutsuItems {
 	public static class ByakuganReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("byakugan_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "byakugan_release", v -> block = (Item) v);
 		}
 
 		public ByakuganReleaseItem(NarutoShippudenModElements instance) {
@@ -104,7 +105,7 @@ public final class DojutsuItems {
 	public static class CoercionSharinganItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("coercion_sharingan", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "coercion_sharingan", v -> block = (Item) v);
 		}
 		public static EntityType<ArrowCustomEntity> arrow;
 
@@ -244,7 +245,7 @@ public final class DojutsuItems {
 			double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
 			double d1 = target.getX() - entity.getX();
 			double d3 = target.getZ() - entity.getZ();
-			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) Mth.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 12f * 2, 12.0F);
+			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) (float) Math.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 12f * 2, 12.0F);
 			entityarrow.setSilent(true);
 			entityarrow.setBaseDamage(1);
 			Compat.setKnockback(entityarrow, 0);
@@ -264,7 +265,7 @@ public final class DojutsuItems {
 	public static class FuramingoganBeamItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("furamingogan_beam", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "furamingogan_beam", v -> block = (Item) v);
 		}
 		public static EntityType<ArrowCustomEntity> arrow;
 
@@ -402,7 +403,7 @@ public final class DojutsuItems {
 			double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
 			double d1 = target.getX() - entity.getX();
 			double d3 = target.getZ() - entity.getZ();
-			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) Mth.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 4f * 2, 12.0F);
+			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) (float) Math.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 4f * 2, 12.0F);
 			entityarrow.setSilent(true);
 			entityarrow.setBaseDamage(1);
 			Compat.setKnockback(entityarrow, 0);
@@ -422,7 +423,7 @@ public final class DojutsuItems {
 	public static class FuramingoganReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("furamingogan_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "furamingogan_release", v -> block = (Item) v);
 		}
 
 		public FuramingoganReleaseItem(NarutoShippudenModElements instance) {
@@ -476,7 +477,7 @@ public final class DojutsuItems {
 	public static class FuramingoganTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("furamingogan_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "furamingogan_technique", v -> block = (Item) v);
 		}
 
 		public FuramingoganTechniqueItem(NarutoShippudenModElements instance) {
@@ -534,7 +535,7 @@ public final class DojutsuItems {
 	public static class IsshikiDojutsuReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("isshiki_dojutsu_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "isshiki_dojutsu_release", v -> block = (Item) v);
 		}
 
 		public IsshikiDojutsuReleaseItem(NarutoShippudenModElements instance) {
@@ -587,7 +588,7 @@ public final class DojutsuItems {
 	public static class KetsuryuganReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("ketsuryugan_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "ketsuryugan_release", v -> block = (Item) v);
 		}
 
 		public KetsuryuganReleaseItem(NarutoShippudenModElements instance) {
@@ -620,7 +621,7 @@ public final class DojutsuItems {
 	public static class MangekyouSharinganItachiReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("mangekyou_sharingan_itachi_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "mangekyou_sharingan_itachi_release", v -> block = (Item) v);
 		}
 
 		public MangekyouSharinganItachiReleaseItem(NarutoShippudenModElements instance) {
@@ -679,7 +680,7 @@ public final class DojutsuItems {
 	public static class MangekyouSharinganKakashiReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("mangekyou_sharingan_kakashi_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "mangekyou_sharingan_kakashi_release", v -> block = (Item) v);
 		}
 
 		public MangekyouSharinganKakashiReleaseItem(NarutoShippudenModElements instance) {
@@ -732,7 +733,7 @@ public final class DojutsuItems {
 	public static class MangekyouSharinganMadaraReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("mangekyou_sharingan_madara_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "mangekyou_sharingan_madara_release", v -> block = (Item) v);
 		}
 
 		public MangekyouSharinganMadaraReleaseItem(NarutoShippudenModElements instance) {
@@ -788,7 +789,7 @@ public final class DojutsuItems {
 	public static class MangekyouSharinganObitoReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("mangekyou_sharingan_obito_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "mangekyou_sharingan_obito_release", v -> block = (Item) v);
 		}
 
 		public MangekyouSharinganObitoReleaseItem(NarutoShippudenModElements instance) {
@@ -849,7 +850,7 @@ public final class DojutsuItems {
 	public static class MangekyouSharinganSasukeReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("mangekyou_sharingan_sasuke_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "mangekyou_sharingan_sasuke_release", v -> block = (Item) v);
 		}
 
 		public MangekyouSharinganSasukeReleaseItem(NarutoShippudenModElements instance) {
@@ -912,7 +913,7 @@ public final class DojutsuItems {
 	public static class MangekyouSharinganShisuiReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("mangekyou_sharingan_shisui_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "mangekyou_sharingan_shisui_release", v -> block = (Item) v);
 		}
 
 		public MangekyouSharinganShisuiReleaseItem(NarutoShippudenModElements instance) {
@@ -968,7 +969,7 @@ public final class DojutsuItems {
 	public static class RinneganReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("rinnegan_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "rinnegan_release", v -> block = (Item) v);
 		}
 
 		public RinneganReleaseItem(NarutoShippudenModElements instance) {
@@ -1001,7 +1002,7 @@ public final class DojutsuItems {
 	public static class SharinganReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("sharingan_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "sharingan_release", v -> block = (Item) v);
 		}
 
 		public SharinganReleaseItem(NarutoShippudenModElements instance) {
@@ -1056,7 +1057,7 @@ public final class DojutsuItems {
 	public static class TenseiganReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("tenseigan_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "tenseigan_release", v -> block = (Item) v);
 		}
 
 		public TenseiganReleaseItem(NarutoShippudenModElements instance) {
@@ -1089,7 +1090,7 @@ public final class DojutsuItems {
 	public static class VolticModeReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("voltic_mode_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "voltic_mode_release", v -> block = (Item) v);
 		}
 
 		public VolticModeReleaseItem(NarutoShippudenModElements instance) {
@@ -1143,7 +1144,7 @@ public final class DojutsuItems {
 	public static class VolticModeTechniqueItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder("voltic_mode_technique", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "voltic_mode_technique", v -> block = (Item) v);
 		}
 
 		public VolticModeTechniqueItem(NarutoShippudenModElements instance) {

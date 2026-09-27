@@ -65,10 +65,8 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.common.NeoForge;
-import net.mcreator.narutoshippudenmod.compat.TickEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 
-import net.mcreator.narutoshippudenmod.compat.ItemHandlerHelper;
 import net.minecraft.core.registries.BuiltInRegistries;
 
 public final class MissionAndCommandProcedures {
@@ -1128,7 +1126,7 @@ public final class MissionAndCommandProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(LetterFromBrotherItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			}
@@ -1221,7 +1219,7 @@ public final class MissionAndCommandProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(PillageThePostItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).pillagerkillcount <= 4) {
@@ -1249,7 +1247,7 @@ public final class MissionAndCommandProcedures {
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(SaveTheVillageItem.block);
-					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), (int) 1,
+					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
 			} else if (NarutoShippudenModVariables.get(entity).zombiekillcount <= 9) {
@@ -1538,16 +1536,16 @@ public final class MissionAndCommandProcedures {
 							if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 								ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 										Identifier.parse("naruto_shippuden:story_mode_dimension"));
-								ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+								ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 								if (nextWorld != null) {
 									((ServerPlayer) _ent).connection
 											.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 									((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(),
-											nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(), _ent.getXRot());
+											nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 									((ServerPlayer) _ent).connection.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 									for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
 										((ServerPlayer) _ent).connection
-												.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+												.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 									}
 									((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 								}
@@ -1659,16 +1657,16 @@ public final class MissionAndCommandProcedures {
 							if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 								ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 										Identifier.parse("naruto_shippuden:story_mode_dimension"));
-								ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+								ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 								if (nextWorld != null) {
 									((ServerPlayer) _ent).connection
 											.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 									((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(),
-											nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(), _ent.getXRot());
+											nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 									((ServerPlayer) _ent).connection.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 									for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
 										((ServerPlayer) _ent).connection
-												.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+												.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 									}
 									((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 								}
@@ -1795,14 +1793,14 @@ public final class MissionAndCommandProcedures {
 						if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 							ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 									Identifier.parse("naruto_shippuden:story_mode_dimension"));
-							ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+							ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 							if (nextWorld != null) {
 								((ServerPlayer) _ent).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 								((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(), nextWorld.getRespawnData().pos().getY() + 1,
-										nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(), _ent.getXRot());
+										nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 								((ServerPlayer) _ent).connection.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 								for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
-									((ServerPlayer) _ent).connection.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+									((ServerPlayer) _ent).connection.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 								}
 								((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 							}
@@ -1854,14 +1852,14 @@ public final class MissionAndCommandProcedures {
 						if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 							ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 									Identifier.parse("naruto_shippuden:story_mode_dimension"));
-							ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+							ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 							if (nextWorld != null) {
 								((ServerPlayer) _ent).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 								((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(), nextWorld.getRespawnData().pos().getY() + 1,
-										nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(), _ent.getXRot());
+										nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 								((ServerPlayer) _ent).connection.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 								for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
-									((ServerPlayer) _ent).connection.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+									((ServerPlayer) _ent).connection.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 								}
 								((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 							}
@@ -1914,8 +1912,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.NORTH) {
@@ -1928,8 +1925,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.WEST) {
@@ -1942,8 +1938,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.EAST) {
@@ -1956,8 +1951,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									}
@@ -2008,8 +2002,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.NORTH) {
@@ -2022,8 +2015,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.WEST) {
@@ -2036,8 +2028,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.EAST) {
@@ -2050,8 +2041,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									}
@@ -2102,8 +2092,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.NORTH) {
@@ -2116,8 +2105,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.WEST) {
@@ -2130,8 +2118,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.EAST) {
@@ -2144,8 +2131,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									}
@@ -2196,8 +2182,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.NORTH) {
@@ -2210,8 +2195,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.WEST) {
@@ -2224,8 +2208,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.EAST) {
@@ -2238,8 +2221,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									}
@@ -2290,8 +2272,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.NORTH) {
@@ -2304,8 +2285,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.WEST) {
@@ -2318,8 +2298,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.EAST) {
@@ -2332,8 +2311,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									}
@@ -2387,8 +2365,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.NORTH) {
@@ -2401,8 +2378,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.WEST) {
@@ -2415,8 +2391,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.EAST) {
@@ -2429,8 +2404,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									}
@@ -2481,8 +2455,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.NORTH) {
@@ -2495,8 +2468,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.WEST) {
@@ -2509,8 +2481,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.EAST) {
@@ -2523,8 +2494,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									}
@@ -2575,8 +2545,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.NORTH) {
@@ -2589,8 +2558,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.WEST) {
@@ -2603,8 +2571,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.EAST) {
@@ -2617,8 +2584,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									}
@@ -2669,8 +2635,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.NORTH) {
@@ -2683,8 +2648,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.WEST) {
@@ -2697,8 +2661,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.EAST) {
@@ -2711,8 +2674,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									}
@@ -2763,8 +2725,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.NORTH) {
@@ -2777,8 +2738,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.WEST) {
@@ -2791,8 +2751,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									} else if ((entity.getDirection()) == Direction.EAST) {
@@ -2805,8 +2764,7 @@ public final class MissionAndCommandProcedures {
 											entityToSpawn.setDeltaMovement(0, 0, 0);
 											if (entityToSpawn instanceof Mob)
 												((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-														world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-														(SpawnGroupData) null, (CompoundTag) null);
+														((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 											world.addFreshEntity(entityToSpawn);
 										}
 									}
@@ -2828,14 +2786,14 @@ public final class MissionAndCommandProcedures {
 						if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 							ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 									Identifier.parse("naruto_shippuden:story_mode_dimension"));
-							ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+							ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 							if (nextWorld != null) {
 								((ServerPlayer) _ent).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 								((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(), nextWorld.getRespawnData().pos().getY() + 1,
-										nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(), _ent.getXRot());
+										nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 								((ServerPlayer) _ent).connection.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 								for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
-									((ServerPlayer) _ent).connection.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+									((ServerPlayer) _ent).connection.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 								}
 								((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 							}
@@ -2870,14 +2828,14 @@ public final class MissionAndCommandProcedures {
 						if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 							ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 									Identifier.parse("naruto_shippuden:story_mode_dimension"));
-							ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+							ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 							if (nextWorld != null) {
 								((ServerPlayer) _ent).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 								((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(), nextWorld.getRespawnData().pos().getY() + 1,
-										nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(), _ent.getXRot());
+										nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 								((ServerPlayer) _ent).connection.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 								for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
-									((ServerPlayer) _ent).connection.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+									((ServerPlayer) _ent).connection.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 								}
 								((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 							}
@@ -2898,16 +2856,16 @@ public final class MissionAndCommandProcedures {
 							if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 								ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 										Identifier.parse("naruto_shippuden:story_mode_dimension"));
-								ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+								ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 								if (nextWorld != null) {
 									((ServerPlayer) _ent).connection
 											.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 									((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(),
-											nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(), _ent.getXRot());
+											nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 									((ServerPlayer) _ent).connection.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 									for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
 										((ServerPlayer) _ent).connection
-												.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+												.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 									}
 									((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 								}
@@ -3027,16 +2985,16 @@ public final class MissionAndCommandProcedures {
 							if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 								ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 										Identifier.parse("naruto_shippuden:story_mode_dimension"));
-								ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+								ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 								if (nextWorld != null) {
 									((ServerPlayer) _ent).connection
 											.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 									((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(),
-											nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(), _ent.getXRot());
+											nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 									((ServerPlayer) _ent).connection.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 									for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
 										((ServerPlayer) _ent).connection
-												.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+												.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 									}
 									((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 								}
@@ -3132,18 +3090,17 @@ public final class MissionAndCommandProcedures {
 								if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 									ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 											Identifier.parse("naruto_shippuden:story_mode_dimension"));
-									ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+									ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 									if (nextWorld != null) {
 										((ServerPlayer) _ent).connection
 												.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 										((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(),
-												nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(),
-												_ent.getXRot());
+												nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 										((ServerPlayer) _ent).connection
 												.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 										for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
 											((ServerPlayer) _ent).connection
-													.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+													.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 										}
 										((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 									}
@@ -3189,9 +3146,8 @@ public final class MissionAndCommandProcedures {
 
 						private void run() {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).displayClientMessage(Component.literal(
-										"\u00A77Iruka-sensei: (proudly) You all did great today! Remember, becoming a ninja is not just about skills; it's about friendship, courage, and protecting those you care about."),
-										(false));
+								((Player) entity).sendSystemMessage(Component.literal(
+										"\u00A77Iruka-sensei: (proudly) You all did great today! Remember, becoming a ninja is not just about skills; it's about friendship, courage, and protecting those you care about."));
 							}
 							NeoForge.EVENT_BUS.unregister(this);
 						}
@@ -3342,14 +3298,14 @@ public final class MissionAndCommandProcedures {
 						if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 							ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 									Identifier.parse("naruto_shippuden:story_mode_dimension"));
-							ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+							ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 							if (nextWorld != null) {
 								((ServerPlayer) _ent).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 								((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(), nextWorld.getRespawnData().pos().getY() + 1,
-										nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(), _ent.getXRot());
+										nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 								((ServerPlayer) _ent).connection.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 								for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
-									((ServerPlayer) _ent).connection.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+									((ServerPlayer) _ent).connection.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 								}
 								((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 							}
@@ -3412,16 +3368,16 @@ public final class MissionAndCommandProcedures {
 							if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 								ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 										Identifier.parse("naruto_shippuden:story_mode_dimension"));
-								ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+								ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 								if (nextWorld != null) {
 									((ServerPlayer) _ent).connection
 											.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 									((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(),
-											nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(), _ent.getXRot());
+											nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 									((ServerPlayer) _ent).connection.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 									for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
 										((ServerPlayer) _ent).connection
-												.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+												.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 									}
 									((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 								}
@@ -3442,8 +3398,7 @@ public final class MissionAndCommandProcedures {
 							entityToSpawn.setDeltaMovement(0, 0, 0);
 							if (entityToSpawn instanceof Mob)
 								((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-										world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null,
-										(CompoundTag) null);
+										((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 							world.addFreshEntity(entityToSpawn);
 						}
 					} else if ((entity.getDirection()) == Direction.NORTH) {
@@ -3455,8 +3410,7 @@ public final class MissionAndCommandProcedures {
 							entityToSpawn.setDeltaMovement(0, 0, 0);
 							if (entityToSpawn instanceof Mob)
 								((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-										world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null,
-										(CompoundTag) null);
+										((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 							world.addFreshEntity(entityToSpawn);
 						}
 					} else if ((entity.getDirection()) == Direction.DOWN) {
@@ -3468,8 +3422,7 @@ public final class MissionAndCommandProcedures {
 							entityToSpawn.setDeltaMovement(0, 0, 0);
 							if (entityToSpawn instanceof Mob)
 								((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-										world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null,
-										(CompoundTag) null);
+										((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 							world.addFreshEntity(entityToSpawn);
 						}
 					} else if ((entity.getDirection()) == Direction.EAST) {
@@ -3481,8 +3434,7 @@ public final class MissionAndCommandProcedures {
 							entityToSpawn.setDeltaMovement(0, 0, 0);
 							if (entityToSpawn instanceof Mob)
 								((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-										world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null,
-										(CompoundTag) null);
+										((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 							world.addFreshEntity(entityToSpawn);
 						}
 					}
@@ -3574,14 +3526,14 @@ public final class MissionAndCommandProcedures {
 						if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 							ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 									Identifier.parse("naruto_shippuden:story_mode_dimension"));
-							ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+							ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 							if (nextWorld != null) {
 								((ServerPlayer) _ent).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 								((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(), nextWorld.getRespawnData().pos().getY() + 1,
-										nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(), _ent.getXRot());
+										nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 								((ServerPlayer) _ent).connection.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 								for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
-									((ServerPlayer) _ent).connection.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+									((ServerPlayer) _ent).connection.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 								}
 								((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 							}
@@ -3673,8 +3625,7 @@ public final class MissionAndCommandProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 								} else if ((entity.getDirection()) == Direction.NORTH) {
@@ -3686,8 +3637,7 @@ public final class MissionAndCommandProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 								} else if ((entity.getDirection()) == Direction.WEST) {
@@ -3699,8 +3649,7 @@ public final class MissionAndCommandProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 								} else if ((entity.getDirection()) == Direction.EAST) {
@@ -3712,8 +3661,7 @@ public final class MissionAndCommandProcedures {
 										entityToSpawn.setDeltaMovement(0, 0, 0);
 										if (entityToSpawn instanceof Mob)
 											((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-													world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-													(SpawnGroupData) null, (CompoundTag) null);
+													((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 										world.addFreshEntity(entityToSpawn);
 									}
 								}
@@ -3733,16 +3681,16 @@ public final class MissionAndCommandProcedures {
 							if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 								ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 										Identifier.parse("naruto_shippuden:story_mode_dimension"));
-								ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+								ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 								if (nextWorld != null) {
 									((ServerPlayer) _ent).connection
 											.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 									((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(),
-											nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(), _ent.getXRot());
+											nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 									((ServerPlayer) _ent).connection.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 									for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
 										((ServerPlayer) _ent).connection
-												.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+												.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 									}
 									((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 								}
@@ -3868,14 +3816,14 @@ public final class MissionAndCommandProcedures {
 						if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 							ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 									Identifier.parse("naruto_shippuden:story_mode_dimension"));
-							ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+							ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 							if (nextWorld != null) {
 								((ServerPlayer) _ent).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 								((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(), nextWorld.getRespawnData().pos().getY() + 1,
-										nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(), _ent.getXRot());
+										nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 								((ServerPlayer) _ent).connection.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 								for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
-									((ServerPlayer) _ent).connection.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+									((ServerPlayer) _ent).connection.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 								}
 								((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 							}
@@ -3896,16 +3844,16 @@ public final class MissionAndCommandProcedures {
 							if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 								ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 										Identifier.parse("naruto_shippuden:story_mode_dimension"));
-								ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+								ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 								if (nextWorld != null) {
 									((ServerPlayer) _ent).connection
 											.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 									((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(),
-											nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(), _ent.getXRot());
+											nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 									((ServerPlayer) _ent).connection.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 									for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
 										((ServerPlayer) _ent).connection
-												.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+												.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 									}
 									((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 								}
@@ -3926,8 +3874,7 @@ public final class MissionAndCommandProcedures {
 							entityToSpawn.setDeltaMovement(0, 0, 0);
 							if (entityToSpawn instanceof Mob)
 								((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-										world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null,
-										(CompoundTag) null);
+										((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 							world.addFreshEntity(entityToSpawn);
 						}
 						{
@@ -3946,8 +3893,7 @@ public final class MissionAndCommandProcedures {
 							entityToSpawn.setDeltaMovement(0, 0, 0);
 							if (entityToSpawn instanceof Mob)
 								((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-										world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null,
-										(CompoundTag) null);
+										((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 							world.addFreshEntity(entityToSpawn);
 						}
 						{
@@ -3966,8 +3912,7 @@ public final class MissionAndCommandProcedures {
 							entityToSpawn.setDeltaMovement(0, 0, 0);
 							if (entityToSpawn instanceof Mob)
 								((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-										world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null,
-										(CompoundTag) null);
+										((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 							world.addFreshEntity(entityToSpawn);
 						}
 						{
@@ -3986,8 +3931,7 @@ public final class MissionAndCommandProcedures {
 							entityToSpawn.setDeltaMovement(0, 0, 0);
 							if (entityToSpawn instanceof Mob)
 								((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-										world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null,
-										(CompoundTag) null);
+										((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 							world.addFreshEntity(entityToSpawn);
 						}
 						{
@@ -4070,8 +4014,7 @@ public final class MissionAndCommandProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -4082,8 +4025,7 @@ public final class MissionAndCommandProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -4094,8 +4036,7 @@ public final class MissionAndCommandProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if ((NarutoShippudenModVariables.get(entity).directionstorymode).equals("North")) {
@@ -4107,8 +4048,7 @@ public final class MissionAndCommandProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -4119,8 +4059,7 @@ public final class MissionAndCommandProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -4131,8 +4070,7 @@ public final class MissionAndCommandProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if ((NarutoShippudenModVariables.get(entity).directionstorymode).equals("West")) {
@@ -4144,8 +4082,7 @@ public final class MissionAndCommandProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -4156,8 +4093,7 @@ public final class MissionAndCommandProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -4168,8 +4104,7 @@ public final class MissionAndCommandProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							} else if ((NarutoShippudenModVariables.get(entity).directionstorymode).equals("East")) {
@@ -4181,8 +4116,7 @@ public final class MissionAndCommandProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -4193,8 +4127,7 @@ public final class MissionAndCommandProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 								if (world instanceof ServerLevel) {
@@ -4205,8 +4138,7 @@ public final class MissionAndCommandProcedures {
 									entityToSpawn.setDeltaMovement(0, 0, 0);
 									if (entityToSpawn instanceof Mob)
 										((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-												world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-												(SpawnGroupData) null, (CompoundTag) null);
+												((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 									world.addFreshEntity(entityToSpawn);
 								}
 							}
@@ -4277,14 +4209,14 @@ public final class MissionAndCommandProcedures {
 						if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 							ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 									Identifier.parse("naruto_shippuden:story_mode_dimension"));
-							ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+							ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 							if (nextWorld != null) {
 								((ServerPlayer) _ent).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 								((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(), nextWorld.getRespawnData().pos().getY() + 1,
-										nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(), _ent.getXRot());
+										nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 								((ServerPlayer) _ent).connection.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 								for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
-									((ServerPlayer) _ent).connection.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+									((ServerPlayer) _ent).connection.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 								}
 								((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 							}
@@ -4307,16 +4239,16 @@ public final class MissionAndCommandProcedures {
 							if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 								ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 										Identifier.parse("naruto_shippuden:story_mode_dimension"));
-								ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+								ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 								if (nextWorld != null) {
 									((ServerPlayer) _ent).connection
 											.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 									((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(),
-											nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(), _ent.getXRot());
+											nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 									((ServerPlayer) _ent).connection.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 									for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
 										((ServerPlayer) _ent).connection
-												.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+												.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 									}
 									((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 								}
@@ -4353,7 +4285,7 @@ public final class MissionAndCommandProcedures {
 					}
 					if (world.isClientSide()) {
 						if (world instanceof ServerLevel)
-							((ServerLevel) world).setDayTime((int) 0);
+							Compat.runCommandAt(world, 0, 0, 0, "time set " + (int) (0));
 					}
 				} else if ((entity.level().dimension()) == (ResourceKey.create(Registries.DIMENSION,
 						Identifier.parse("naruto_shippuden:story_mode_dimension")))) {
@@ -4375,8 +4307,7 @@ public final class MissionAndCommandProcedures {
 								entityToSpawn.setDeltaMovement(0, 0, 0);
 								if (entityToSpawn instanceof Mob)
 									((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-											world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-											(SpawnGroupData) null, (CompoundTag) null);
+											((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 								world.addFreshEntity(entityToSpawn);
 							}
 						} else if ((entity.getDirection()) == Direction.NORTH) {
@@ -4388,8 +4319,7 @@ public final class MissionAndCommandProcedures {
 								entityToSpawn.setDeltaMovement(0, 0, 0);
 								if (entityToSpawn instanceof Mob)
 									((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-											world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-											(SpawnGroupData) null, (CompoundTag) null);
+											((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 								world.addFreshEntity(entityToSpawn);
 							}
 						} else if ((entity.getDirection()) == Direction.WEST) {
@@ -4401,8 +4331,7 @@ public final class MissionAndCommandProcedures {
 								entityToSpawn.setDeltaMovement(0, 0, 0);
 								if (entityToSpawn instanceof Mob)
 									((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-											world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-											(SpawnGroupData) null, (CompoundTag) null);
+											((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 								world.addFreshEntity(entityToSpawn);
 							}
 						} else if ((entity.getDirection()) == Direction.EAST) {
@@ -4414,8 +4343,7 @@ public final class MissionAndCommandProcedures {
 								entityToSpawn.setDeltaMovement(0, 0, 0);
 								if (entityToSpawn instanceof Mob)
 									((Mob) entityToSpawn).finalizeSpawn((ServerLevel) world,
-											world.getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED,
-											(SpawnGroupData) null, (CompoundTag) null);
+											((ServerLevel) world).getCurrentDifficultyAt(entityToSpawn.blockPosition()), EntitySpawnReason.MOB_SUMMONED, (SpawnGroupData) null);
 								world.addFreshEntity(entityToSpawn);
 							}
 						}
@@ -4431,7 +4359,7 @@ public final class MissionAndCommandProcedures {
 						}
 						if (world.isClientSide()) {
 							if (world instanceof ServerLevel)
-								((ServerLevel) world).setDayTime((int) 19000);
+								Compat.runCommandAt(world, 0, 0, 0, "time set " + (int) (19000));
 						}
 					} else if ((entity.level().dimension()) == (Level.OVERWORLD)) {
 						{
@@ -4439,16 +4367,16 @@ public final class MissionAndCommandProcedures {
 							if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 								ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 										Identifier.parse("naruto_shippuden:story_mode_dimension"));
-								ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+								ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 								if (nextWorld != null) {
 									((ServerPlayer) _ent).connection
 											.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 									((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(),
-											nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(), _ent.getXRot());
+											nextWorld.getRespawnData().pos().getY() + 1, nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 									((ServerPlayer) _ent).connection.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 									for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
 										((ServerPlayer) _ent).connection
-												.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+												.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 									}
 									((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 								}
@@ -4538,14 +4466,14 @@ public final class MissionAndCommandProcedures {
 						if (!_ent.level().isClientSide() && _ent instanceof ServerPlayer) {
 							ResourceKey<Level> destinationType = ResourceKey.create(Registries.DIMENSION,
 									Identifier.parse("naruto_shippuden:story_mode_dimension"));
-							ServerLevel nextWorld = _ent.getServer().getLevel(destinationType);
+							ServerLevel nextWorld = _ent.level().getServer().getLevel(destinationType);
 							if (nextWorld != null) {
 								((ServerPlayer) _ent).connection.send(new ClientboundGameEventPacket(ClientboundGameEventPacket.WIN_GAME, 0));
 								((ServerPlayer) _ent).teleportTo(nextWorld, nextWorld.getRespawnData().pos().getX(), nextWorld.getRespawnData().pos().getY() + 1,
-										nextWorld.getRespawnData().pos().getZ(), _ent.getYRot(), _ent.getXRot());
+										nextWorld.getRespawnData().pos().getZ(), java.util.Set.of(), _ent.getYRot(), _ent.getXRot(), true);
 								((ServerPlayer) _ent).connection.send(new ClientboundPlayerAbilitiesPacket(((ServerPlayer) _ent).getAbilities()));
 								for (MobEffectInstance effectinstance : ((ServerPlayer) _ent).getActiveEffects()) {
-									((ServerPlayer) _ent).connection.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance));
+									((ServerPlayer) _ent).connection.send(new ClientboundUpdateMobEffectPacket(_ent.getId(), effectinstance, false));
 								}
 								((ServerPlayer) _ent).connection.send(new ClientboundLevelEventPacket(1032, BlockPos.ZERO, 0, false));
 							}

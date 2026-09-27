@@ -18,7 +18,7 @@ def convert(path, text):
     for m in re.finditer(r'public static class (\w+PotionEffect) \{', body):
         cls = m.group(1)
         block = body[m.start():find_block(body, m.start())]
-        name = re.search(r'Registration\.holder\("(\w+)"', block) or re.search(r'setRegistryName\("(\w+)"\)', block)
+        name = re.search(r'Registration\.holder\((?:Registries\.\w+, )?"(\w+)"', block) or re.search(r'setRegistryName\("(\w+)"\)', block)
         name = name.group(1)
         cat, color = re.search(r'super\(MobEffectCategory\.(\w+), (-?\w+)\);', block).groups()
         hidden = any(re.search(r'public boolean %s\([^)]*\)\s*\{\s*return false;' % n, block) for n in ('shouldRender', 'shouldRenderInvText', 'shouldRenderHUD'))

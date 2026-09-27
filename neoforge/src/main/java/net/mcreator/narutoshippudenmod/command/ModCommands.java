@@ -1,5 +1,7 @@
 package net.mcreator.narutoshippudenmod.command;
 
+import net.neoforged.fml.common.EventBusSubscriber;
+
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import java.util.AbstractMap;
@@ -23,7 +25,7 @@ public final class ModCommands {
 	private ModCommands() {
 	}
 
-	@Mod.EventBusSubscriber
+	@EventBusSubscriber(modid = "naruto_shippuden")
 	public static class InfonarutoshippudenCommand {
 		@SubscribeEvent
 		public static void registerCommands(RegisterCommandsEvent event) {
@@ -73,7 +75,7 @@ public final class ModCommands {
 		}
 	}
 
-	@Mod.EventBusSubscriber
+	@EventBusSubscriber(modid = "naruto_shippuden")
 	public static class NarutoShippudenCheatCommand {
 		@SubscribeEvent
 		public static void registerCommands(RegisterCommandsEvent event) {
@@ -129,7 +131,7 @@ public final class ModCommands {
 		}
 	}
 
-	@Mod.EventBusSubscriber
+	@EventBusSubscriber(modid = "naruto_shippuden")
 	public static class PatreonKitCommandCommand {
 		@SubscribeEvent
 		public static void registerCommands(RegisterCommandsEvent event) {

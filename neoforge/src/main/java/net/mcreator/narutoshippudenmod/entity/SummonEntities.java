@@ -143,7 +143,7 @@ public final class SummonEntities {
 			@Override
 			protected void registerGoals() {
 				super.registerGoals();
-				this.goalSelector.addGoal(1, new FollowOwnerGoal(this, 1, (float) 6, (float) 32, false) {
+				this.goalSelector.addGoal(1, new FollowOwnerGoal(this, 1, (float) 6, (float) 32) {
 					@Override
 					public boolean canUse() {
 						double x = CustomEntity.this.getX();
@@ -157,8 +157,8 @@ public final class SummonEntities {
 				});
 				this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2, false) {
 					@Override
-					protected double getAttackReachSqr(LivingEntity entity) {
-						return (double) (4.0 + entity.getBbWidth() * entity.getBbWidth());
+					protected boolean canPerformAttack(LivingEntity entity) {
+						return this.isTimeToAttack() && this.mob.distanceToSqr(entity) <= ((double) (4.0 + entity.getBbWidth() * entity.getBbWidth())) && this.mob.getSensing().hasLineOfSight(entity);
 					}
 
 					@Override
@@ -287,39 +287,39 @@ public final class SummonEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				Item item = itemstack.getItem();
 				if (itemstack.getItem() instanceof SpawnEggItem) {
 					retval = super.mobInteract(sourceentity, hand);
 				} else if (this.level().isClientSide()) {
 					retval = (this.isTame() && this.isOwnedBy(sourceentity) || this.isFood(itemstack))
-							? InteractionResult.sidedSuccess(this.level().isClientSide())
+							? InteractionResult.SUCCESS
 							: InteractionResult.PASS;
 				} else {
 					if (this.isTame()) {
 						if (this.isOwnedBy(sourceentity)) {
-							if (item.isEdible() && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem(sourceentity, itemstack);
-								this.heal((float) item.getFoodProperties().getNutrition());
-								retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+							if (item.components().has(net.minecraft.core.component.DataComponents.FOOD) && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
+								this.usePlayerItem((Player) sourceentity, hand, itemstack);
+								this.heal((float) itemstack.get(net.minecraft.core.component.DataComponents.FOOD).nutrition());
+								retval = InteractionResult.SUCCESS;
 							} else if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem(sourceentity, itemstack);
+								this.usePlayerItem((Player) sourceentity, hand, itemstack);
 								this.heal(4);
-								retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+								retval = InteractionResult.SUCCESS;
 							} else {
 								retval = super.mobInteract(sourceentity, hand);
 							}
 						}
 					} else if (this.isFood(itemstack)) {
-						this.usePlayerItem(sourceentity, itemstack);
-						if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, sourceentity)) {
+						this.usePlayerItem((Player) sourceentity, hand, itemstack);
+						if (this.random.nextInt(3) == 0 && !net.neoforged.neoforge.event.EventHooks.onAnimalTame(this, sourceentity)) {
 							this.tame(sourceentity);
 							this.level().broadcastEntityEvent(this, (byte) 7);
 						} else {
 							this.level().broadcastEntityEvent(this, (byte) 6);
 						}
 						this.setPersistenceRequired();
-						retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+						retval = InteractionResult.SUCCESS;
 					} else {
 						retval = super.mobInteract(sourceentity, hand);
 						if (retval == InteractionResult.SUCCESS || retval == InteractionResult.CONSUME)
@@ -339,9 +339,8 @@ public final class SummonEntities {
 
 			@Override
 			public AgeableMob getBreedOffspring(ServerLevel serverWorld, AgeableMob ageable) {
-				CustomEntity retval = (CustomEntity) entity.create(serverWorld);
-				retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), EntitySpawnReason.BREEDING,
-						(SpawnGroupData) null, (CompoundTag) null);
+				CustomEntity retval = (CustomEntity) entity.create(serverWorld, EntitySpawnReason.BREEDING);
+				retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), EntitySpawnReason.BREEDING, (SpawnGroupData) null);
 				return retval;
 			}
 
@@ -431,7 +430,7 @@ public final class SummonEntities {
 			}
 
 			@Override
-			public boolean causeFallDamage(float l, float d) {
+			public boolean causeFallDamage(double l, float d, DamageSource damageSource) {
 				return false;
 			}
 
@@ -511,13 +510,13 @@ public final class SummonEntities {
 				super.registerGoals();
 				this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2, true) {
 					@Override
-					protected double getAttackReachSqr(LivingEntity entity) {
-						return (double) (4.0 + entity.getBbWidth() * entity.getBbWidth());
+					protected boolean canPerformAttack(LivingEntity entity) {
+						return this.isTimeToAttack() && this.mob.distanceToSqr(entity) <= ((double) (4.0 + entity.getBbWidth() * entity.getBbWidth())) && this.mob.getSensing().hasLineOfSight(entity);
 					}
 				});
 				this.goalSelector.addGoal(2, new OwnerHurtByTargetGoal(this));
 				this.goalSelector.addGoal(3, new OwnerHurtTargetGoal(this));
-				this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
+				this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1, (float) 10, (float) 2));
 				this.goalSelector.addGoal(5, new RandomStrollGoal(this, 1));
 				this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
 				this.goalSelector.addGoal(7, new FloatGoal(this));
@@ -563,39 +562,39 @@ public final class SummonEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				Item item = itemstack.getItem();
 				if (itemstack.getItem() instanceof SpawnEggItem) {
 					retval = super.mobInteract(sourceentity, hand);
 				} else if (this.level().isClientSide()) {
 					retval = (this.isTame() && this.isOwnedBy(sourceentity) || this.isFood(itemstack))
-							? InteractionResult.sidedSuccess(this.level().isClientSide())
+							? InteractionResult.SUCCESS
 							: InteractionResult.PASS;
 				} else {
 					if (this.isTame()) {
 						if (this.isOwnedBy(sourceentity)) {
-							if (item.isEdible() && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem(sourceentity, itemstack);
-								this.heal((float) item.getFoodProperties().getNutrition());
-								retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+							if (item.components().has(net.minecraft.core.component.DataComponents.FOOD) && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
+								this.usePlayerItem((Player) sourceentity, hand, itemstack);
+								this.heal((float) itemstack.get(net.minecraft.core.component.DataComponents.FOOD).nutrition());
+								retval = InteractionResult.SUCCESS;
 							} else if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem(sourceentity, itemstack);
+								this.usePlayerItem((Player) sourceentity, hand, itemstack);
 								this.heal(4);
-								retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+								retval = InteractionResult.SUCCESS;
 							} else {
 								retval = super.mobInteract(sourceentity, hand);
 							}
 						}
 					} else if (this.isFood(itemstack)) {
-						this.usePlayerItem(sourceentity, itemstack);
-						if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, sourceentity)) {
+						this.usePlayerItem((Player) sourceentity, hand, itemstack);
+						if (this.random.nextInt(3) == 0 && !net.neoforged.neoforge.event.EventHooks.onAnimalTame(this, sourceentity)) {
 							this.tame(sourceentity);
 							this.level().broadcastEntityEvent(this, (byte) 7);
 						} else {
 							this.level().broadcastEntityEvent(this, (byte) 6);
 						}
 						this.setPersistenceRequired();
-						retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+						retval = InteractionResult.SUCCESS;
 					} else {
 						retval = super.mobInteract(sourceentity, hand);
 						if (retval == InteractionResult.SUCCESS || retval == InteractionResult.CONSUME)
@@ -607,9 +606,8 @@ public final class SummonEntities {
 
 			@Override
 			public AgeableMob getBreedOffspring(ServerLevel serverWorld, AgeableMob ageable) {
-				CustomEntity retval = (CustomEntity) entity.create(serverWorld);
-				retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), EntitySpawnReason.BREEDING,
-						(SpawnGroupData) null, (CompoundTag) null);
+				CustomEntity retval = (CustomEntity) entity.create(serverWorld, EntitySpawnReason.BREEDING);
+				retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), EntitySpawnReason.BREEDING, (SpawnGroupData) null);
 				return retval;
 			}
 
@@ -684,7 +682,7 @@ public final class SummonEntities {
 			}
 
 			@Override
-			public boolean causeFallDamage(float l, float d) {
+			public boolean causeFallDamage(double l, float d, DamageSource damageSource) {
 				double x = this.getX();
 				double y = this.getY();
 				double z = this.getZ();
@@ -694,7 +692,7 @@ public final class SummonEntities {
 						.of(new AbstractMap.SimpleEntry<>("world", level()), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
 								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return super.causeFallDamage(l, d);
+				return super.causeFallDamage(l, d, damageSource);
 			}
 
 			@Override
@@ -758,9 +756,7 @@ public final class SummonEntities {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class KuramaEntity extends NarutoShippudenModElements.ModElement {
-		public static EntityType entity = (EntityType.Builder.<CustomEntity>of(CustomEntity::new, MobCategory.MONSTER)
-				.setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(CustomEntity::new).sized(15f, 20f))
-				.build("kurama").setRegistryName("kurama");
+		public static EntityType<CustomEntity> entity;
 
 		public KuramaEntity(NarutoShippudenModElements instance) {
 			super(instance, 153);
@@ -769,9 +765,8 @@ public final class SummonEntities {
 
 		@Override
 		public void initElements() {
-			elements.entities.add(() -> entity);
-			elements.items.add(() -> new SpawnEggItem(entity, -1149696, -5302505, new Item.Properties().tab(SpawnEggsItemGroup.tab))
-					.setRegistryName("kurama_spawn_egg"));
+			elements.entities.add(() -> entity = (EntityType.Builder.<CustomEntity>of(CustomEntity::new, MobCategory.MONSTER) .setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).sized(15f, 20f)).build(Registration.entityKey("kurama")));
+			elements.items.add(() -> new SpawnEggItem(Registration.itemProps("kurama_spawn_egg", "SpawnEggsItemGroup").spawnEgg(entity)));
 		}
 
 		@Override
@@ -878,11 +873,11 @@ public final class SummonEntities {
 			}
 
 			@Override
-			public boolean canChangeDimensions() {
+			public boolean canUsePortal(boolean allowPassengers) {
 				return false;
 			}
 
-			private final ServerBossEvent bossInfo = new ServerBossEvent(this.getDisplayName(), BossEvent.BossBarColor.YELLOW, BossEvent.BossBarOverlay.PROGRESS);
+			private final ServerBossEvent bossInfo = new ServerBossEvent(java.util.UUID.randomUUID(), this.getDisplayName(), BossEvent.BossBarColor.YELLOW, BossEvent.BossBarOverlay.PROGRESS);
 
 			@Override
 			public void startSeenByPlayer(ServerPlayer player) {
@@ -897,9 +892,9 @@ public final class SummonEntities {
 			}
 
 			@Override
-			public void customServerAiStep() {
-				super.customServerAiStep();
-				this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+			protected void customServerAiStep(ServerLevel level) {
+				super.customServerAiStep(level);
+				this.bossInfo.setProgress(this.getHealth() / this.getMaxHealth());
 			}
 		}
 	}
@@ -999,7 +994,7 @@ public final class SummonEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				sourceentity.startRiding(this);
 				return retval;
@@ -1039,7 +1034,7 @@ public final class SummonEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -1162,39 +1157,39 @@ public final class SummonEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				Item item = itemstack.getItem();
 				if (itemstack.getItem() instanceof SpawnEggItem) {
 					retval = super.mobInteract(sourceentity, hand);
 				} else if (this.level().isClientSide()) {
 					retval = (this.isTame() && this.isOwnedBy(sourceentity) || this.isFood(itemstack))
-							? InteractionResult.sidedSuccess(this.level().isClientSide())
+							? InteractionResult.SUCCESS
 							: InteractionResult.PASS;
 				} else {
 					if (this.isTame()) {
 						if (this.isOwnedBy(sourceentity)) {
-							if (item.isEdible() && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem(sourceentity, itemstack);
-								this.heal((float) item.getFoodProperties().getNutrition());
-								retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+							if (item.components().has(net.minecraft.core.component.DataComponents.FOOD) && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
+								this.usePlayerItem((Player) sourceentity, hand, itemstack);
+								this.heal((float) itemstack.get(net.minecraft.core.component.DataComponents.FOOD).nutrition());
+								retval = InteractionResult.SUCCESS;
 							} else if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem(sourceentity, itemstack);
+								this.usePlayerItem((Player) sourceentity, hand, itemstack);
 								this.heal(4);
-								retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+								retval = InteractionResult.SUCCESS;
 							} else {
 								retval = super.mobInteract(sourceentity, hand);
 							}
 						}
 					} else if (this.isFood(itemstack)) {
-						this.usePlayerItem(sourceentity, itemstack);
-						if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, sourceentity)) {
+						this.usePlayerItem((Player) sourceentity, hand, itemstack);
+						if (this.random.nextInt(3) == 0 && !net.neoforged.neoforge.event.EventHooks.onAnimalTame(this, sourceentity)) {
 							this.tame(sourceentity);
 							this.level().broadcastEntityEvent(this, (byte) 7);
 						} else {
 							this.level().broadcastEntityEvent(this, (byte) 6);
 						}
 						this.setPersistenceRequired();
-						retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+						retval = InteractionResult.SUCCESS;
 					} else {
 						retval = super.mobInteract(sourceentity, hand);
 						if (retval == InteractionResult.SUCCESS || retval == InteractionResult.CONSUME)
@@ -1207,9 +1202,8 @@ public final class SummonEntities {
 
 			@Override
 			public AgeableMob getBreedOffspring(ServerLevel serverWorld, AgeableMob ageable) {
-				CustomEntity retval = (CustomEntity) entity.create(serverWorld);
-				retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), EntitySpawnReason.BREEDING,
-						(SpawnGroupData) null, (CompoundTag) null);
+				CustomEntity retval = (CustomEntity) entity.create(serverWorld, EntitySpawnReason.BREEDING);
+				retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), EntitySpawnReason.BREEDING, (SpawnGroupData) null);
 				return retval;
 			}
 
@@ -1254,7 +1248,7 @@ public final class SummonEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -1377,39 +1371,39 @@ public final class SummonEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				Item item = itemstack.getItem();
 				if (itemstack.getItem() instanceof SpawnEggItem) {
 					retval = super.mobInteract(sourceentity, hand);
 				} else if (this.level().isClientSide()) {
 					retval = (this.isTame() && this.isOwnedBy(sourceentity) || this.isFood(itemstack))
-							? InteractionResult.sidedSuccess(this.level().isClientSide())
+							? InteractionResult.SUCCESS
 							: InteractionResult.PASS;
 				} else {
 					if (this.isTame()) {
 						if (this.isOwnedBy(sourceentity)) {
-							if (item.isEdible() && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem(sourceentity, itemstack);
-								this.heal((float) item.getFoodProperties().getNutrition());
-								retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+							if (item.components().has(net.minecraft.core.component.DataComponents.FOOD) && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
+								this.usePlayerItem((Player) sourceentity, hand, itemstack);
+								this.heal((float) itemstack.get(net.minecraft.core.component.DataComponents.FOOD).nutrition());
+								retval = InteractionResult.SUCCESS;
 							} else if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem(sourceentity, itemstack);
+								this.usePlayerItem((Player) sourceentity, hand, itemstack);
 								this.heal(4);
-								retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+								retval = InteractionResult.SUCCESS;
 							} else {
 								retval = super.mobInteract(sourceentity, hand);
 							}
 						}
 					} else if (this.isFood(itemstack)) {
-						this.usePlayerItem(sourceentity, itemstack);
-						if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, sourceentity)) {
+						this.usePlayerItem((Player) sourceentity, hand, itemstack);
+						if (this.random.nextInt(3) == 0 && !net.neoforged.neoforge.event.EventHooks.onAnimalTame(this, sourceentity)) {
 							this.tame(sourceentity);
 							this.level().broadcastEntityEvent(this, (byte) 7);
 						} else {
 							this.level().broadcastEntityEvent(this, (byte) 6);
 						}
 						this.setPersistenceRequired();
-						retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+						retval = InteractionResult.SUCCESS;
 					} else {
 						retval = super.mobInteract(sourceentity, hand);
 						if (retval == InteractionResult.SUCCESS || retval == InteractionResult.CONSUME)
@@ -1422,9 +1416,8 @@ public final class SummonEntities {
 
 			@Override
 			public AgeableMob getBreedOffspring(ServerLevel serverWorld, AgeableMob ageable) {
-				CustomEntity retval = (CustomEntity) entity.create(serverWorld);
-				retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), EntitySpawnReason.BREEDING,
-						(SpawnGroupData) null, (CompoundTag) null);
+				CustomEntity retval = (CustomEntity) entity.create(serverWorld, EntitySpawnReason.BREEDING);
+				retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), EntitySpawnReason.BREEDING, (SpawnGroupData) null);
 				return retval;
 			}
 
@@ -1469,7 +1462,7 @@ public final class SummonEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -1588,7 +1581,7 @@ public final class SummonEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				super.mobInteract(sourceentity, hand);
 				sourceentity.startRiding(this);
 				return retval;
@@ -1628,7 +1621,7 @@ public final class SummonEntities {
 					
 					double d1 = this.getX() - this.xo;
 					double d0 = this.getZ() - this.zo;
-					float f1 = Mth.sqrt(d1 * d1 + d0 * d0) * 4.0F;
+					float f1 = (float) Math.sqrt(d1 * d1 + d0 * d0) * 4.0F;
 					if (f1 > 1.0F)
 						f1 = 1.0F;
 					this.walkAnimation.update(f1, 0.4F, 1.0F);
@@ -1644,9 +1637,7 @@ public final class SummonEntities {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class WoodGolemEntity extends NarutoShippudenModElements.ModElement {
-		public static EntityType entity = (EntityType.Builder.<CustomEntity>of(CustomEntity::new, MobCategory.MONSTER)
-				.setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).setCustomClientFactory(CustomEntity::new).sized(3f, 7f))
-				.build("wood_golem").setRegistryName("wood_golem");
+		public static EntityType<CustomEntity> entity;
 
 		public WoodGolemEntity(NarutoShippudenModElements instance) {
 			super(instance, 802);
@@ -1655,7 +1646,7 @@ public final class SummonEntities {
 
 		@Override
 		public void initElements() {
-			elements.entities.add(() -> entity);
+			elements.entities.add(() -> entity = (EntityType.Builder.<CustomEntity>of(CustomEntity::new, MobCategory.MONSTER) .setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).sized(3f, 7f)).build(Registration.entityKey("wood_golem")));
 		}
 
 		@Override
@@ -1719,7 +1710,7 @@ public final class SummonEntities {
 					public void tick() {
 						LivingEntity livingentity = CustomEntity.this.getTarget();
 						if (CustomEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
-							CustomEntity.this.doHurtTarget(livingentity);
+							CustomEntity.this.doHurtTarget((ServerLevel) CustomEntity.this.level(), livingentity);
 						} else {
 							double d0 = CustomEntity.this.distanceToSqr(livingentity);
 							if (d0 < 16) {
@@ -1731,13 +1722,13 @@ public final class SummonEntities {
 				});
 				this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2, false) {
 					@Override
-					protected double getAttackReachSqr(LivingEntity entity) {
-						return (double) (4.0 + entity.getBbWidth() * entity.getBbWidth());
+					protected boolean canPerformAttack(LivingEntity entity) {
+						return this.isTimeToAttack() && this.mob.distanceToSqr(entity) <= ((double) (4.0 + entity.getBbWidth() * entity.getBbWidth())) && this.mob.getSensing().hasLineOfSight(entity);
 					}
 				});
 				this.goalSelector.addGoal(3, new OwnerHurtByTargetGoal(this));
 				this.goalSelector.addGoal(4, new OwnerHurtTargetGoal(this));
-				this.goalSelector.addGoal(5, new FollowOwnerGoal(this, 1, (float) 10, (float) 2, false));
+				this.goalSelector.addGoal(5, new FollowOwnerGoal(this, 1, (float) 10, (float) 2));
 				this.goalSelector.addGoal(6, new RandomStrollGoal(this, 1));
 				this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
 				this.goalSelector.addGoal(8, new FloatGoal(this));
@@ -1783,39 +1774,39 @@ public final class SummonEntities {
 			@Override
 			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+				InteractionResult retval = InteractionResult.SUCCESS;
 				Item item = itemstack.getItem();
 				if (itemstack.getItem() instanceof SpawnEggItem) {
 					retval = super.mobInteract(sourceentity, hand);
 				} else if (this.level().isClientSide()) {
 					retval = (this.isTame() && this.isOwnedBy(sourceentity) || this.isFood(itemstack))
-							? InteractionResult.sidedSuccess(this.level().isClientSide())
+							? InteractionResult.SUCCESS
 							: InteractionResult.PASS;
 				} else {
 					if (this.isTame()) {
 						if (this.isOwnedBy(sourceentity)) {
-							if (item.isEdible() && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem(sourceentity, itemstack);
-								this.heal((float) item.getFoodProperties().getNutrition());
-								retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+							if (item.components().has(net.minecraft.core.component.DataComponents.FOOD) && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
+								this.usePlayerItem((Player) sourceentity, hand, itemstack);
+								this.heal((float) itemstack.get(net.minecraft.core.component.DataComponents.FOOD).nutrition());
+								retval = InteractionResult.SUCCESS;
 							} else if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem(sourceentity, itemstack);
+								this.usePlayerItem((Player) sourceentity, hand, itemstack);
 								this.heal(4);
-								retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+								retval = InteractionResult.SUCCESS;
 							} else {
 								retval = super.mobInteract(sourceentity, hand);
 							}
 						}
 					} else if (this.isFood(itemstack)) {
-						this.usePlayerItem(sourceentity, itemstack);
-						if (this.random.nextInt(3) == 0 && !net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, sourceentity)) {
+						this.usePlayerItem((Player) sourceentity, hand, itemstack);
+						if (this.random.nextInt(3) == 0 && !net.neoforged.neoforge.event.EventHooks.onAnimalTame(this, sourceentity)) {
 							this.tame(sourceentity);
 							this.level().broadcastEntityEvent(this, (byte) 7);
 						} else {
 							this.level().broadcastEntityEvent(this, (byte) 6);
 						}
 						this.setPersistenceRequired();
-						retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+						retval = InteractionResult.SUCCESS;
 					} else {
 						retval = super.mobInteract(sourceentity, hand);
 						if (retval == InteractionResult.SUCCESS || retval == InteractionResult.CONSUME)
@@ -1827,9 +1818,8 @@ public final class SummonEntities {
 
 			@Override
 			public AgeableMob getBreedOffspring(ServerLevel serverWorld, AgeableMob ageable) {
-				CustomEntity retval = (CustomEntity) entity.create(serverWorld);
-				retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), EntitySpawnReason.BREEDING,
-						(SpawnGroupData) null, (CompoundTag) null);
+				CustomEntity retval = (CustomEntity) entity.create(serverWorld, EntitySpawnReason.BREEDING);
+				retval.finalizeSpawn(serverWorld, serverWorld.getCurrentDifficultyAt(retval.blockPosition()), EntitySpawnReason.BREEDING, (SpawnGroupData) null);
 				return retval;
 			}
 
