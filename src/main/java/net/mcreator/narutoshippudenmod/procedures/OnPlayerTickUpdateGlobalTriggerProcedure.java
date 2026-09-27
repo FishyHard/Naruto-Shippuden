@@ -51,6 +51,7 @@ import net.mcreator.narutoshippudenmod.entity.ShadowImitationEntityEntity;
 import net.mcreator.narutoshippudenmod.block.NaraShadowBlock;
 import net.mcreator.narutoshippudenmod.block.AmaterasuSpreadBlock;
 import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables;
+import net.mcreator.narutoshippudenmod.core.EntityScale;
 import net.mcreator.narutoshippudenmod.NarutoShippudenMod;
 
 import java.util.stream.Stream;
@@ -1180,22 +1181,19 @@ public class OnPlayerTickUpdateGlobalTriggerProcedure {
 					{
 						Entity _ent = entity;
 						if (!_ent.world.isRemote && _ent.world.getServer() != null) {
-							_ent.world.getServer().getCommandManager().handleCommand(
-									_ent.getCommandSource().withFeedbackDisabled().withPermissionLevel(4), "/scale set pehkui:hitbox_height 1");
+							EntityScale.set(_ent, EntityScale.HITBOX_HEIGHT, 1);
 						}
 					}
 					{
 						Entity _ent = entity;
 						if (!_ent.world.isRemote && _ent.world.getServer() != null) {
-							_ent.world.getServer().getCommandManager().handleCommand(
-									_ent.getCommandSource().withFeedbackDisabled().withPermissionLevel(4), "/scale set pehkui:hitbox_width 1");
+							EntityScale.set(_ent, EntityScale.HITBOX_WIDTH, 1);
 						}
 					}
 					{
 						Entity _ent = entity;
 						if (!_ent.world.isRemote && _ent.world.getServer() != null) {
-							_ent.world.getServer().getCommandManager().handleCommand(
-									_ent.getCommandSource().withFeedbackDisabled().withPermissionLevel(4), "/scale set pehkui:eye_height 1");
+							EntityScale.set(_ent, EntityScale.EYE_HEIGHT, 1);
 						}
 					}
 					if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)

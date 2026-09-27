@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 
 import net.mcreator.narutoshippudenmod.item.AkimichiReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables;
+import net.mcreator.narutoshippudenmod.core.EntityScale;
 import net.mcreator.narutoshippudenmod.NarutoShippudenMod;
 
 import java.util.Map;
@@ -33,11 +34,8 @@ public class AkimichiReleaseTechniqueRightclickedProcedure {
 								{
 									Entity _ent = entity;
 									if (!_ent.world.isRemote && _ent.world.getServer() != null) {
-										_ent.world.getServer().getCommandManager().handleCommand(
-												_ent.getCommandSource().withFeedbackDisabled().withPermissionLevel(4),
-												("/scale set pehkui:base "
-														+ (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-																.orElse(new NarutoShippudenModVariables.PlayerVariables())).caloriecontrol));
+										EntityScale.set(_ent, EntityScale.BASE, (entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
+																.orElse(new NarutoShippudenModVariables.PlayerVariables())).caloriecontrol);
 									}
 								}
 								{

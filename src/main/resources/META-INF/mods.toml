@@ -6,7 +6,7 @@ license="Mozilla Public License 2.0"
 modId="naruto_shippuden"
 version="2.7.0"
 displayName="Naruto Shippuden"
-credits="Created using mod maker MCreator - https://mcreator.net/about"
+credits="Originally created with MCreator - https://mcreator.net/about"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/narutomod https://modrinth.com/mod/naruto-shippuden"
 authors="FishyHard, Aqua"
 
@@ -16,49 +16,3 @@ authors="FishyHard, Aqua"
     versionRange="[1.16.5]"
     ordering="NONE"
     side="BOTH"
-
-
-[[dependencies.naruto_shippuden]]
-    modId="pehkui"
-    mandatory=true
-    versionRange="[0,)"
-    ordering="NONE"
-    side="BOTH"
-[[dependencies.naruto_shippuden]]
-    modId="fishyhard_fhcore"
-    mandatory=true
-    versionRange="[0,)"
-    ordering="NONE"
-    side="BOTH"
-[[dependencies.naruto_shippuden]]
-    modId="kleiders_custom_renderer"
-    mandatory=true
-    versionRange="[0,)"
-    ordering="NONE"
-    side="BOTH"
-
-[[dependencies.naruto_shippuden]]
-    modId="kleidersplayerrenderer"
-    mandatory=false
-    versionRange="[0,)"
-    ordering="NONE"
-    side="BOTH"
-[[dependencies.naruto_shippuden]]
-    modId="pehkui"
-    mandatory=false
-    versionRange="[0,)"
-    ordering="NONE"
-    side="BOTH"
-[[dependencies.naruto_shippuden]]
-    modId="fishyhard_fhcore"
-    mandatory=false
-    versionRange="[0,)"
-    ordering="NONE"
-    side="BOTH"
-[[dependencies.naruto_shippuden]]
-    modId="kleiders_custom_renderer"
-    mandatory=false
-    versionRange="[0,)"
-    ordering="NONE"
-    side="BOTH"
-

@@ -15,6 +15,7 @@ import net.minecraft.entity.Entity;
 import net.mcreator.narutoshippudenmod.item.IsshikiDojutsuReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.entity.DisruptionCubeEntity;
 import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables;
+import net.mcreator.narutoshippudenmod.core.EntityScale;
 import net.mcreator.narutoshippudenmod.NarutoShippudenMod;
 
 import java.util.Map;
@@ -40,7 +41,7 @@ public class IsshikiDojutsuReleaseTechniqueRightclickedProcedure {
 		IWorld world = (IWorld) dependencies.get("world");
 		double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
 		Entity entity = (Entity) dependencies.get("entity");
-		if (net.minecraftforge.fml.ModList.get().isLoaded("pehkui")) {
+		{
 			if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 					.orElse(new NarutoShippudenModVariables.PlayerVariables())).isshikidojutsu == true) {
 				if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
@@ -57,11 +58,9 @@ public class IsshikiDojutsuReleaseTechniqueRightclickedProcedure {
 										{
 											Entity _ent = entity;
 											if (!_ent.world.isRemote && _ent.world.getServer() != null) {
-												_ent.world.getServer().getCommandManager().handleCommand(
-														_ent.getCommandSource().withFeedbackDisabled().withPermissionLevel(4),
-														("/scale set pehkui:base " + (entity
+												EntityScale.set(_ent, EntityScale.BASE, (entity
 																.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
-																.orElse(new NarutoShippudenModVariables.PlayerVariables())).sukunahikonasize));
+																.orElse(new NarutoShippudenModVariables.PlayerVariables())).sukunahikonasize);
 											}
 										}
 										{
@@ -214,12 +213,6 @@ public class IsshikiDojutsuReleaseTechniqueRightclickedProcedure {
 				if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
 					((PlayerEntity) entity).sendStatusMessage(new StringTextComponent("You haven't unlocked this release."), (true));
 				}
-			}
-		} else if (!net.minecraftforge.fml.ModList.get().isLoaded("pehkui")) {
-			if (entity instanceof PlayerEntity && !entity.world.isRemote()) {
-				((PlayerEntity) entity).sendStatusMessage(
-						new StringTextComponent("You can use this only with Pehkui Mod Loaded: https://www.curseforge.com/minecraft/mc-mods/pehkui"),
-						(false));
 			}
 		}
 	}

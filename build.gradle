@@ -10,9 +10,9 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 
-version = '1.0'
-group = 'com.yourname.modid'
-archivesBaseName = 'modid'
+version = '2.7.0'
+group = 'net.mcreator.narutoshippudenmod'
+archivesBaseName = 'naruto_shippuden'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
@@ -32,7 +32,7 @@ minecraft {
             ]
 
             mods {
-                examplemod {
+                naruto_shippuden {
                     source sourceSets.main
                 }
             }
@@ -50,7 +50,7 @@ minecraft {
             ]
 
             mods {
-                examplemod {
+                naruto_shippuden {
                     source sourceSets.main
                 }
             }
@@ -61,6 +61,3 @@ minecraft {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.26'
 }
-
-apply from: 'mcreator.gradle'
-

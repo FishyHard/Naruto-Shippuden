@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 
 import net.mcreator.narutoshippudenmod.item.IzunoReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables;
+import net.mcreator.narutoshippudenmod.core.EntityScale;
 import net.mcreator.narutoshippudenmod.NarutoShippudenMod;
 
 import java.util.Map;
@@ -112,25 +113,19 @@ public class IzunoReleaseTechniqueRightclickedProcedure {
 									{
 										Entity _ent = entity;
 										if (!_ent.world.isRemote && _ent.world.getServer() != null) {
-											_ent.world.getServer().getCommandManager().handleCommand(
-													_ent.getCommandSource().withFeedbackDisabled().withPermissionLevel(4),
-													"/scale set pehkui:hitbox_height 2.5");
+											EntityScale.set(_ent, EntityScale.HITBOX_HEIGHT, 2.5);
 										}
 									}
 									{
 										Entity _ent = entity;
 										if (!_ent.world.isRemote && _ent.world.getServer() != null) {
-											_ent.world.getServer().getCommandManager().handleCommand(
-													_ent.getCommandSource().withFeedbackDisabled().withPermissionLevel(4),
-													"/scale set pehkui:hitbox_width 4");
+											EntityScale.set(_ent, EntityScale.HITBOX_WIDTH, 4);
 										}
 									}
 									{
 										Entity _ent = entity;
 										if (!_ent.world.isRemote && _ent.world.getServer() != null) {
-											_ent.world.getServer().getCommandManager().handleCommand(
-													_ent.getCommandSource().withFeedbackDisabled().withPermissionLevel(4),
-													"/scale set pehkui:eye_height 4");
+											EntityScale.set(_ent, EntityScale.EYE_HEIGHT, 4);
 										}
 									}
 								} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
@@ -145,25 +140,19 @@ public class IzunoReleaseTechniqueRightclickedProcedure {
 									{
 										Entity _ent = entity;
 										if (!_ent.world.isRemote && _ent.world.getServer() != null) {
-											_ent.world.getServer().getCommandManager().handleCommand(
-													_ent.getCommandSource().withFeedbackDisabled().withPermissionLevel(4),
-													"/scale set pehkui:hitbox_height 1");
+											EntityScale.set(_ent, EntityScale.HITBOX_HEIGHT, 1);
 										}
 									}
 									{
 										Entity _ent = entity;
 										if (!_ent.world.isRemote && _ent.world.getServer() != null) {
-											_ent.world.getServer().getCommandManager().handleCommand(
-													_ent.getCommandSource().withFeedbackDisabled().withPermissionLevel(4),
-													"/scale set pehkui:hitbox_width 1");
+											EntityScale.set(_ent, EntityScale.HITBOX_WIDTH, 1);
 										}
 									}
 									{
 										Entity _ent = entity;
 										if (!_ent.world.isRemote && _ent.world.getServer() != null) {
-											_ent.world.getServer().getCommandManager().handleCommand(
-													_ent.getCommandSource().withFeedbackDisabled().withPermissionLevel(4),
-													"/scale set pehkui:eye_height 1");
+											EntityScale.set(_ent, EntityScale.EYE_HEIGHT, 1);
 										}
 									}
 									if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)

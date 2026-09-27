@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
 
 import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables;
+import net.mcreator.narutoshippudenmod.core.ModelSwapRenderers;
 import net.mcreator.narutoshippudenmod.NarutoShippudenMod;
 
 import java.util.Map;
@@ -61,10 +62,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x1_pupils_1x1.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x1_pupils_1x1.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsubyakugan).equals("2x1")) {
@@ -72,10 +70,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x1_pupils_2x1.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x1_pupils_2x1.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsubyakugan).equals("1x2")) {
@@ -83,10 +78,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x2_pupils_1x1.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x2_pupils_1x1.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsubyakugan).equals("2x2")) {
@@ -94,10 +86,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x2_pupils_1x2.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x2_pupils_1x2.png");
 					}
 				}
 			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
@@ -108,10 +97,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x1_pupils_1x1_not_active.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x1_pupils_1x1_not_active.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsubyakugan).equals("2x1")) {
@@ -119,10 +105,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x1_pupils_2x1_not_active.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x1_pupils_2x1_not_active.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsubyakugan).equals("1x2")) {
@@ -130,10 +113,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x2_pupils_1x1_not_active.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x2_pupils_1x1_not_active.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsubyakugan).equals("2x2")) {
@@ -141,10 +121,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x2_pupils_1x2_not_active.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x2_pupils_1x2_not_active.png");
 					}
 				}
 			}
@@ -157,10 +134,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/ketsuryugan/ketsuryugan_2x1_pupils_1x1.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/ketsuryugan/ketsuryugan_2x1_pupils_1x1.png");
 				}
 			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 					.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsuketsuryugan).equals("2x1")) {
@@ -168,10 +142,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/ketsuryugan/ketsuryugan_2x1_pupils_2x1.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/ketsuryugan/ketsuryugan_2x1_pupils_2x1.png");
 				}
 			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 					.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsuketsuryugan).equals("1x2")) {
@@ -179,10 +150,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/ketsuryugan/ketsuryugan_2x2_pupils_1x1.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/ketsuryugan/ketsuryugan_2x2_pupils_1x1.png");
 				}
 			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 					.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsuketsuryugan).equals("2x2")) {
@@ -190,10 +158,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/ketsuryugan/ketsuryugan_2x2_pupils_1x2.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/ketsuryugan/ketsuryugan_2x2_pupils_1x2.png");
 				}
 			}
 		}
@@ -207,10 +172,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/sharingan/sharingan2px1px.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/sharingan/sharingan2px1px.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsusharingan).equals("2x1")) {
@@ -218,10 +180,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/sharingan/sharingan2px1px2.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/sharingan/sharingan2px1px2.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsusharingan).equals("1x2")) {
@@ -229,10 +188,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/sharingan/sharingan2px2px2.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/sharingan/sharingan2px2px2.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsusharingan).equals("2x2")) {
@@ -240,10 +196,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/sharingan/sharingan2px2px1.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/sharingan/sharingan2px2px1.png");
 					}
 				}
 			}
@@ -255,10 +208,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/sharingan/kakashi/kakashisharingan2px1px.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/sharingan/kakashi/kakashisharingan2px1px.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsusharingan).equals("2x1")) {
@@ -266,10 +216,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/sharingan/kakashi/kakashisharingan2px1px2.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/sharingan/kakashi/kakashisharingan2px1px2.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsusharingan).equals("1x2")) {
@@ -277,10 +224,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/sharingan/kakashi/kakashisharingan2px2px2.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/sharingan/kakashi/kakashisharingan2px2px2.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsusharingan).equals("2x2")) {
@@ -288,10 +232,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/sharingan/kakashi/kakashisharingan2px2px1.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/sharingan/kakashi/kakashisharingan2px2px1.png");
 					}
 				}
 			}
@@ -306,10 +247,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/sasuke/sasukemangekyo2px1px.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/sasuke/sasukemangekyo2px1px.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsums).equals("2x1")) {
@@ -317,10 +255,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/sasuke/sasukemangekyo2px1px2.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/sasuke/sasukemangekyo2px1px2.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsums).equals("1x2")) {
@@ -328,10 +263,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/sasuke/sasukemangekyo2px2px2.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/sasuke/sasukemangekyo2px2px2.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsums).equals("2x2")) {
@@ -339,10 +271,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/sasuke/sasukemangekyo2px2px1.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/sasuke/sasukemangekyo2px2px1.png");
 					}
 				}
 			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
@@ -353,10 +282,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/itachi/itachimangekyo2px1px.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/itachi/itachimangekyo2px1px.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsums).equals("2x1")) {
@@ -364,10 +290,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/itachi/itachimangekyo2px1px2.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/itachi/itachimangekyo2px1px2.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsums).equals("1x2")) {
@@ -375,10 +298,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/itachi/itachimangekyo2px2px2.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/itachi/itachimangekyo2px2px2.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsums).equals("2x2")) {
@@ -386,10 +306,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/itachi/itachimangekyo2px2px1.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/itachi/itachimangekyo2px2px1.png");
 					}
 				}
 			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
@@ -400,10 +317,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/madara/madaramangekyo2px1px.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/madara/madaramangekyo2px1px.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsums).equals("2x1")) {
@@ -411,10 +325,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/madara/madaramangekyo2px1px2.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/madara/madaramangekyo2px1px2.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsums).equals("1x2")) {
@@ -422,10 +333,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/madara/madaramangekyo2px2px2.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/madara/madaramangekyo2px2px2.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsums).equals("2x2")) {
@@ -433,10 +341,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/madara/madaramangekyo2px2px1.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/madara/madaramangekyo2px2px1.png");
 					}
 				}
 			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
@@ -447,10 +352,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/obito/obitomangekyo2px1px.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/obito/obitomangekyo2px1px.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsums).equals("2x1")) {
@@ -458,10 +360,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/obito/obitomangekyo2px1px2"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/obito/obitomangekyo2px1px2");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsums).equals("1x2")) {
@@ -469,10 +368,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/obito/obitomangekyo2px2px2.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/obito/obitomangekyo2px2px2.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsums).equals("2x2")) {
@@ -480,10 +376,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/obito/obitomangekyo2px2px1.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/obito/obitomangekyo2px2px1.png");
 					}
 				}
 			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
@@ -494,10 +387,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/shisui/shisuimangekyo2px1px.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/shisui/shisuimangekyo2px1px.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsums).equals("2x1")) {
@@ -505,10 +395,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/shisui/shisuimangekyo2px1px2.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/shisui/shisuimangekyo2px1px2.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsums).equals("1x2")) {
@@ -516,10 +403,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/shisui/shisuimangekyo2px2px2.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/shisui/shisuimangekyo2px2px2.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsums).equals("2x2")) {
@@ -527,10 +411,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/shisui/shisuimangekyo2px2px1.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/shisui/shisuimangekyo2px2px1.png");
 					}
 				}
 			} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
@@ -541,10 +422,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/kakashi/kakashimangekyo2px1px.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/kakashi/kakashimangekyo2px1px.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsums).equals("2x1")) {
@@ -552,10 +430,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/kakashi/kakashimangekyo2px1px2.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/kakashi/kakashimangekyo2px1px2.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsums).equals("1x2")) {
@@ -563,10 +438,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/kakashi/kakashimangekyo2px2px2.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/kakashi/kakashimangekyo2px2px2.png");
 					}
 				} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 						.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsums).equals("2x2")) {
@@ -574,10 +446,7 @@ public class DojutsuRendererProcedure {
 						if (_evt instanceof RenderLivingEvent.Pre) {
 							//  _evt.setCanceled(true); 
 						}
-						new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-								new ResourceLocation("naruto_shippuden:textures/dojutsu/mangekyou_sharingan/kakashi/kakashimangekyo2px2px1.png"))
-								.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-										_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+						ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/mangekyou_sharingan/kakashi/kakashimangekyo2px2px1.png");
 					}
 				}
 			}
@@ -590,10 +459,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/rinnegan/rinnegan_2x1_pupils_1x1.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/rinnegan/rinnegan_2x1_pupils_1x1.png");
 				}
 			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 					.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsurinnegan).equals("2x1")) {
@@ -601,10 +467,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/rinnegan/rinnegan_2x1_pupils_2x1.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/rinnegan/rinnegan_2x1_pupils_2x1.png");
 				}
 			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 					.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsurinnegan).equals("1x2")) {
@@ -612,10 +475,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/rinnegan/rinnegan_2x2_pupils_1x1.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/rinnegan/rinnegan_2x2_pupils_1x1.png");
 				}
 			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 					.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsurinnegan).equals("2x2")) {
@@ -623,10 +483,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/rinnegan/rinnegan_2x2_pupils_1x2.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/rinnegan/rinnegan_2x2_pupils_1x2.png");
 				}
 			}
 		}
@@ -638,10 +495,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/tenseigan/tenseigan_2x1_pupils_1x1.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/tenseigan/tenseigan_2x1_pupils_1x1.png");
 				}
 			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 					.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsutenseigan).equals("2x1")) {
@@ -649,10 +503,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/tenseigan/tenseigan_2x1_pupils_2x1.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/tenseigan/tenseigan_2x1_pupils_2x1.png");
 				}
 			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 					.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsutenseigan).equals("1x2")) {
@@ -660,10 +511,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/tenseigan/tenseigan_2x2_pupils_1x1.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/tenseigan/tenseigan_2x2_pupils_1x1.png");
 				}
 			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 					.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsutenseigan).equals("2x2")) {
@@ -671,10 +519,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/tenseigan/tenseigan_2x2_pupils_1x2.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/tenseigan/tenseigan_2x2_pupils_1x2.png");
 				}
 			}
 		}
@@ -686,10 +531,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/isshiki/isshiki_dojutsu_2x1_pupils_1x1.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/isshiki/isshiki_dojutsu_2x1_pupils_1x1.png");
 				}
 			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 					.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsuisshiki).equals("2x1")) {
@@ -697,10 +539,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/isshiki/isshiki_dojutsu_2x1_pupils_2x1.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/isshiki/isshiki_dojutsu_2x1_pupils_2x1.png");
 				}
 			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 					.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsuisshiki).equals("1x2")) {
@@ -708,10 +547,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/isshiki/isshiki_dojutsu_2x2_pupils_1x1.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/isshiki/isshiki_dojutsu_2x2_pupils_1x1.png");
 				}
 			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 					.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsuisshiki).equals("2x2")) {
@@ -719,10 +555,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/isshiki/isshiki_dojutsu_2x2_pupils_1x2.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/isshiki/isshiki_dojutsu_2x2_pupils_1x2.png");
 				}
 			}
 		}
@@ -734,10 +567,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/shimura/sharingan2px1px.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/shimura/sharingan2px1px.png");
 				}
 			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 					.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsusharingan).equals("2x1")) {
@@ -745,10 +575,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/shimura/sharingan2px1px2.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/shimura/sharingan2px1px2.png");
 				}
 			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 					.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsusharingan).equals("1x2")) {
@@ -756,10 +583,7 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/shimura/sharingan2px2px2.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/shimura/sharingan2px2px2.png");
 				}
 			} else if (((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 					.orElse(new NarutoShippudenModVariables.PlayerVariables())).dojutsusharingan).equals("2x2")) {
@@ -767,29 +591,20 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/shimura/sharingan2px2px1.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/shimura/sharingan2px2px1.png");
 				}
 			}
 			if (_evt.getRenderer() instanceof PlayerRenderer) {
 				if (_evt instanceof RenderLivingEvent.Pre) {
 					//  _evt.setCanceled(true); 
 				}
-				new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-						new ResourceLocation("naruto_shippuden:textures/dojutsu/shimura/shimura_body.png"))
-						.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-								_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+				ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/shimura/shimura_body.png");
 			}
 			if (_evt.getRenderer() instanceof PlayerRenderer) {
 				if (_evt instanceof RenderLivingEvent.Pre) {
 					//  _evt.setCanceled(true); 
 				}
-				new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-						new ResourceLocation("naruto_shippuden:textures/dojutsu/shimura/shimura_head_open.png"))
-						.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-								_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+				ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/shimura/shimura_head_open.png");
 			}
 		} else if ((entity.getCapability(NarutoShippudenModVariables.PLAYER_VARIABLES_CAPABILITY, null)
 				.orElse(new NarutoShippudenModVariables.PlayerVariables())).shimura_active == false) {
@@ -799,19 +614,13 @@ public class DojutsuRendererProcedure {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/shimura/shimura_body.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/shimura/shimura_body.png");
 				}
 				if (_evt.getRenderer() instanceof PlayerRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 
 					}
-					new com.kleiders.kleidersplayerrenderer.InternalPlayerRenderer(_evt.getRenderer().getRenderManager(),
-							new ResourceLocation("naruto_shippuden:textures/dojutsu/shimura/shimura_head.png"))
-							.render((AbstractClientPlayerEntity) _evt.getEntity(), _evt.getEntity().rotationYaw, _evt.getPartialRenderTick(),
-									_evt.getMatrixStack(), _evt.getBuffers(), _evt.getLight());
+					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/dojutsu/shimura/shimura_head.png");
 				}
 			}
 		}
