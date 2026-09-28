@@ -8,6 +8,8 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.ArmorModelSet;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -27,14 +29,25 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 import java.util.function.Function;
 
 /** The renderer shapes the mod uses, shared by every entity instead of one anonymous class each. */
 @SuppressWarnings({"unchecked", "rawtypes"})
+@EventBusSubscriber(modid = "naruto_shippuden", value = Dist.CLIENT)
 public final class ModRenderers {
+	/** 1.16 humanoid layout (64x32, left limbs mirror the right ones); the NPC skins use it, not the 64x64 player one. */
+	public static final ModelLayerLocation LEGACY_HUMANOID = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "legacy_humanoid"), "main");
+
 	private ModRenderers() {
+	}
+
+	@SubscribeEvent
+	public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+		event.registerLayerDefinition(LEGACY_HUMANOID, () -> LayerDefinition.create(HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F), 64, 32));
 	}
 
 	/** Mob drawn with one of the mod's models and a fixed texture. */
@@ -82,7 +95,7 @@ public final class ModRenderers {
 		private final Identifier texture;
 
 		PlayerShapedRenderer(EntityRendererProvider.Context context, float shadow, Identifier texture, boolean armor) {
-			super(context, new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER)), shadow);
+			super(context, new HumanoidModel<>(context.bakeLayer(LEGACY_HUMANOID)), shadow);
 			this.texture = texture;
 			if (armor)
 				this.addLayer(new HumanoidArmorLayer<>(this, ArmorModelSet.bake(ModelLayers.PLAYER_ARMOR, context.getModelSet(), HumanoidModel::new),

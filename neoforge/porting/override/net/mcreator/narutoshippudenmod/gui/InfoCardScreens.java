@@ -12,6 +12,8 @@ import net.mcreator.narutoshippudenmod.procedures.GuiDisplayProcedures;
 
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 
@@ -200,7 +202,7 @@ public final class InfoCardScreens {
 	// ------------------------------------------------------------------ info card
 	public static class InfoCardGuiWindow extends ModScreen<InfoCardGui.GuiContainerMod> {
 		public InfoCardGuiWindow(InfoCardGui.GuiContainerMod container, Inventory inventory, Component text) {
-			super(container, inventory, Component.literal("Info Card"), 260, 176, container.entity, container.x, container.y, container.z);
+			super(container, inventory, Component.literal("Info Card"), 300, 174, container.entity, container.x, container.y, container.z);
 		}
 
 		@Override
@@ -212,40 +214,40 @@ public final class InfoCardScreens {
 		@Override
 		protected void init() {
 			super.init();
-			button("Stats", 0, 8, 148, 48);
-			button("Quests", 1, 57, 148, 48);
-			button("Mini Game", 2, 106, 148, 48);
-			button("Dojutsu", 3, 155, 148, 48);
-			button("Jutsu", 4, 204, 148, 48);
+			pageTabs("info");
 		}
 
 		@Override
 		protected void background(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
-			playerPreview(graphics, 8, 18, 54, 72, mouseX, mouseY);
-			iconSlot(graphics, first(Icons.CLANS), 234, 16, mouseX, mouseY);
+			playerPreview(graphics, 8, 40, 54, 72, mouseX, mouseY);
+			iconSlot(graphics, first(Icons.CLANS), 274, 38, mouseX, mouseY);
 			PlayerVariables vars = vars();
-			progressBar(graphics, 70, 69, 182, vars.LEVELMAX <= 0 ? 0 : (float) (vars.LEVEL / vars.LEVELMAX));
+			float progress = vars.LEVELMAX <= 0 ? 0 : (float) (vars.LEVEL / vars.LEVELMAX);
+			progressBar(graphics, 70, 89, 182, progress);
+			if (hovered(70, 87, 182, 9, mouseX, mouseY))
+				graphics.setTooltipForNextFrame(Component.literal(number(vars.LEVELMAX - vars.LEVEL) + " XP to level " + number(vars.LEVELSTAT + 1)), mouseX, mouseY);
 			List<ModScreen.Icon> abilities = shown(Icons.ABILITIES);
 			for (int i = 0; i < 16; i++)
-				iconSlot(graphics, i < abilities.size() ? abilities.get(i) : null, 8 + i % 8 * 18, 106 + i / 8 * 18, mouseX, mouseY);
+				iconSlot(graphics, i < abilities.size() ? abilities.get(i) : null, 8 + i % 8 * 18, 130 + i / 8 * 18, mouseX, mouseY);
 			List<ModScreen.Icon> natures = shown(Icons.NATURES);
 			for (int i = 0; i < 5; i++)
-				iconSlot(graphics, i < natures.size() ? natures.get(i) : null, 162 + i * 18, 106, mouseX, mouseY);
+				iconSlot(graphics, i < natures.size() ? natures.get(i) : null, 202 + i * 18, 130, mouseX, mouseY);
 		}
 
 		@Override
 		protected void labels(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
 			PlayerVariables vars = vars();
 			ModScreen.Icon clan = first(Icons.CLANS);
-			text(graphics, "Village: " + clean(vars.village, "None"), 70, 20);
-			text(graphics, "Rank: " + clean(vars.rank, "None"), 70, 31);
-			text(graphics, "Clan: " + (clan == null ? "None" : clan.name()), 70, 42);
-			text(graphics, "Level " + number(vars.LEVELSTAT), 70, 58);
-			textRight(graphics, number(vars.LEVEL) + " / " + number(vars.LEVELMAX) + " XP", 252, 58);
-			text(graphics, "JP: " + number(vars.jp), 70, 79);
-			text(graphics, "SP: " + number(vars.sp), 130, 79);
-			text(graphics, "Kekkei Genkai & Dojutsu", 8, 96);
-			text(graphics, "Nature", 162, 96);
+			text(graphics, "Village: " + clean(vars.village, "None"), 70, 42);
+			text(graphics, "Rank: " + clean(vars.rank, "None"), 70, 53);
+			text(graphics, "Clan: " + (clan == null ? "None" : clan.name()), 70, 64);
+			text(graphics, "Level " + number(vars.LEVELSTAT), 70, 78);
+			textRight(graphics, number(vars.LEVEL) + " / " + number(vars.LEVELMAX) + " XP", 252, 78);
+			text(graphics, "JP: " + number(vars.jp), 70, 100);
+			text(graphics, "SP: " + number(vars.sp), 120, 100);
+			text(graphics, "Chakra: " + number(vars.ChakraAmount) + " / " + number(vars.ChakraMax), 170, 100);
+			text(graphics, "Kekkei Genkai & Dojutsu", 8, 120);
+			text(graphics, "Nature", 202, 120);
 		}
 	}
 
@@ -259,8 +261,10 @@ public final class InfoCardScreens {
 				new Stat("Senjutsu", 10, v -> v.senjutsu), new Stat("Medicine", 11, v -> v.medicine), new Stat("Speed", 12, v -> v.speed),
 				new Stat("Jutsu Power", 13, v -> v.jutsupowerstat), new Stat("Genjutsu", 14, v -> v.genjutsu), new Stat("IQ", 15, v -> v.IQ)};
 
+		private EditBox perClick;
+
 		public InfoCardUpgradeGuiWindow(InfoCardUpgradeGui.GuiContainerMod container, Inventory inventory, Component text) {
-			super(container, inventory, Component.literal("Stats"), 260, 178, container.entity, container.x, container.y, container.z);
+			super(container, inventory, Component.literal("Stats"), 300, 200, container.entity, container.x, container.y, container.z);
 		}
 
 		@Override
@@ -272,43 +276,61 @@ public final class InfoCardScreens {
 		@Override
 		protected void init() {
 			super.init();
-			for (int i = 0; i < STATS.length; i++)
-				button("+", STATS[i].id(), 8 + i / 6 * 126 + 98, 18 + i % 6 * 21, 20);
-			button("Back", 0, 8, 150, 60);
+			pageTabs("stats");
+			for (int i = 0; i < STATS.length; i++) {
+				Button plus = button("+", STATS[i].id(), 8 + i / 6 * 144 + 120, 40 + i % 6 * 21, 20);
+				onRefresh(() -> plus.active = vars().sp >= Math.max(1, vars().spusecount));
+			}
+			perClick = numberField(84, 172, 40, vars().spusecount);
+			addRenderableWidget(Button.builder(Component.literal("Set"), b -> setPerClick(parse(perClick, 1))).bounds(leftPos + 126, topPos + 172, 32, 20).build());
 			int[] amounts = {1, 5, 10};
 			for (int i = 0; i < 3; i++) {
 				int amount = amounts[i];
-				Button button = button(String.valueOf(amount), i + 1, 186 + i * 22, 150, 22);
-				onRefresh(() -> button.active = (int) vars().spusecount != amount);
+				Button quick = Button.builder(Component.literal(String.valueOf(amount)), b -> setPerClick(amount)).bounds(leftPos + 164 + i * 24, topPos + 172, 22, 20)
+						.build();
+				addRenderableWidget(quick);
+				onRefresh(() -> quick.active = (int) vars().spusecount != amount);
 			}
+			Button max = Button.builder(Component.literal("All"), b -> setPerClick(Math.max(1, vars().sp))).bounds(leftPos + 236, topPos + 172, 56, 20)
+					.tooltip(Tooltip.create(Component.literal("Spend all your SP with one click"))).build();
+			addRenderableWidget(max);
+			onRefresh(() -> {
+				if (!perClick.isFocused())
+					perClick.setValue(number(vars().spusecount));
+			});
+		}
+
+		private void setPerClick(double amount) {
+			action("set", "sp_per_click", Math.max(1, Math.min(1000, amount)));
+			perClick.setFocused(false);
 		}
 
 		@Override
 		protected void background(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
 			for (int i = 0; i < STATS.length; i++)
-				inset(graphics, 8 + i / 6 * 126, 18 + i % 6 * 21, 98, 20);
+				inset(graphics, 8 + i / 6 * 144, 40 + i % 6 * 21, 118, 20);
 		}
 
 		@Override
 		protected void labels(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
 			PlayerVariables vars = vars();
-			textRight(graphics, "SP: " + number(vars.sp), 252, 6);
+			textRight(graphics, "SP: " + number(vars.sp), 292, 6);
 			for (int i = 0; i < STATS.length; i++) {
-				int sx = 8 + i / 6 * 126, sy = 18 + i % 6 * 21;
+				int sx = 8 + i / 6 * 144, sy = 40 + i % 6 * 21;
 				graphics.text(font, STATS[i].name(), sx + 5, sy + 6, 0xFFFFFFFF, true);
 				String value = number(STATS[i].value().applyAsDouble(vars));
-				graphics.text(font, value, sx + 94 - font.width(value), sy + 6, 0xFFFFFF55, true);
+				graphics.text(font, value, sx + 114 - font.width(value), sy + 6, 0xFFFFFF55, true);
 			}
-			textRight(graphics, "Per click:", 182, 156);
+			text(graphics, "SP per click", 8, 178);
 		}
 	}
 
 	// ------------------------------------------------------------------ dojutsu appearance
 	public static class InfoCardDojutsuGuiWindow extends ModScreen<InfoCardDojutsuGui.GuiContainerMod> {
-		static final int EYE_X = 26, EYE_Y = 46;
+		static final int EYE_X = 26, EYE_Y = 68;
 
 		public InfoCardDojutsuGuiWindow(InfoCardDojutsuGui.GuiContainerMod container, Inventory inventory, Component text) {
-			super(container, inventory, Component.literal("Dojutsu"), 260, 158, container.entity, container.x, container.y, container.z);
+			super(container, inventory, Component.literal("Dojutsu"), 300, 180, container.entity, container.x, container.y, container.z);
 		}
 
 		@Override
@@ -320,22 +342,21 @@ public final class InfoCardScreens {
 		@Override
 		protected void init() {
 			super.init();
+			pageTabs("dojutsu");
 			Predicate<Map<String, Object>> variants = GuiDisplayProcedures.DisplayMinus2SelectProcedure::executeProcedure;
-			button("<", 8, 148, 28, 20, 20, variants);
-			button(">", 9, 232, 28, 20, 20, variants);
-			button("<", 1, 148, 62, 20);
-			button(">", 2, 232, 62, 20);
-			button("<", 3, 148, 96, 20);
-			button(">", 4, 232, 96, 20);
-			button("<", 5, 148, 130, 20);
-			button(">", 6, 232, 130, 20);
-			button("Select", 7, 8, 112, 64);
-			button("Back", 0, 76, 112, 64);
+			button("<", 8, 148, 50, 20, 20, variants);
+			button(">", 9, 272, 50, 20, 20, variants);
+			int[][] ids = {{1, 2}, {3, 4}, {5, 6}};
+			for (int row = 0; row < 3; row++) {
+				button("<", ids[row][0], 148, 84 + row * 34, 20);
+				button(">", ids[row][1], 272, 84 + row * 34, 20);
+			}
+			button("Select", 7, 8, 134, 132).setTooltip(Tooltip.create(Component.literal("Use this dojutsu and eye shape")));
 		}
 
 		@Override
 		protected void background(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
-			darkInset(graphics, 8, 18, 132, 88);
+			darkInset(graphics, 8, 40, 132, 88);
 			for (Eye eye : EYES)
 				if (is(eye.shown()))
 					texture(graphics, eye.texture(), EYE_X + eye.dx(), EYE_Y + eye.dy(), eye.width(), eye.height());
@@ -345,21 +366,21 @@ public final class InfoCardScreens {
 		protected void labels(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
 			PlayerVariables vars = vars();
 			if (is(GuiDisplayProcedures.DisplayMinus2SelectProcedure::executeProcedure)) {
-				text(graphics, "Variant", 148, 18);
-				textCentered(graphics, vars.DojutsuSelect2, 200, 34, TEXT);
+				text(graphics, "Variant", 148, 40);
+				textCentered(graphics, vars.DojutsuSelect2, 220, 56, TEXT);
 			}
-			text(graphics, "Dojutsu", 148, 52);
+			text(graphics, "Dojutsu", 148, 74);
 			String line2 = vars.DojutsuSelect3 == null ? "" : vars.DojutsuSelect3.trim();
 			if (line2.isEmpty()) {
-				textCentered(graphics, vars.DojutsuSelectResize, 200, 68, TEXT);
+				textCentered(graphics, vars.DojutsuSelectResize, 220, 90, TEXT);
 			} else {
-				textCentered(graphics, vars.DojutsuSelectResize, 200, 63, TEXT);
-				textCentered(graphics, line2, 200, 72, TEXT);
+				textCentered(graphics, vars.DojutsuSelectResize, 220, 85, TEXT);
+				textCentered(graphics, line2, 220, 94, TEXT);
 			}
-			text(graphics, "Pupil Height", 148, 86);
-			textCentered(graphics, number(vars.Pupils_Height), 200, 102, TEXT);
-			text(graphics, "Eye Height", 148, 120);
-			textCentered(graphics, number(vars.Eyes_Height), 200, 136, TEXT);
+			text(graphics, "Pupil Height", 148, 108);
+			textCentered(graphics, number(vars.Pupils_Height), 220, 124, TEXT);
+			text(graphics, "Eye Height", 148, 142);
+			textCentered(graphics, number(vars.Eyes_Height), 220, 158, TEXT);
 		}
 	}
 
@@ -373,7 +394,7 @@ public final class InfoCardScreens {
 				new Rank("SS", 0xFFFFFF55, v -> v.SS_Mission)};
 
 		public InfoCardMissionsGuiWindow(InfoCardMissionsGui.GuiContainerMod container, Inventory inventory, Component text) {
-			super(container, inventory, Component.literal("Missions"), 176, 184, container.entity, container.x, container.y, container.z);
+			super(container, inventory, Component.literal("Quests"), 300, 168, container.entity, container.x, container.y, container.z);
 		}
 
 		@Override
@@ -385,27 +406,32 @@ public final class InfoCardScreens {
 		@Override
 		protected void init() {
 			super.init();
-			button("Back", 0, 58, 156, 60);
+			pageTabs("missions");
 		}
 
 		@Override
 		protected void background(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
 			for (int i = 0; i < RANKS.length; i++)
-				inset(graphics, 8, 18 + i * 20, 18, 18);
+				inset(graphics, 8, 40 + i * 20, 18, 18);
 		}
 
 		@Override
 		protected void labels(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
 			PlayerVariables vars = vars();
+			double total = 0;
 			for (int i = 0; i < RANKS.length; i++) {
 				Rank rank = RANKS[i];
-				int ry = 18 + i * 20;
+				int ry = 40 + i * 20;
+				double count = rank.count().applyAsDouble(vars);
+				total += count;
 				graphics.text(font, rank.letter(), 17 - font.width(rank.letter()) / 2, ry + 5, rank.color(), true);
 				text(graphics, rank.letter() + "-Rank missions", 32, ry + 5);
-				textRight(graphics, number(rank.count().applyAsDouble(vars)), 168, ry + 5);
+				textRight(graphics, number(count), 144, ry + 5);
 			}
-			text(graphics, "Shinobi defeated", 8, 142);
-			textRight(graphics, number(vars.Shinobi_Murder_Count), 168, 142);
+			text(graphics, "Missions done", 160, 45);
+			textRight(graphics, number(total), 292, 45);
+			text(graphics, "Shinobi defeated", 160, 65);
+			textRight(graphics, number(vars.Shinobi_Murder_Count), 292, 65);
 		}
 	}
 
@@ -464,7 +490,7 @@ public final class InfoCardScreens {
 				GuiDisplayProcedures.Display48MiniProcedure::executeProcedure);
 
 		public InfoCardMiniGameGuiWindow(InfoCardMiniGameGui.GuiContainerMod container, Inventory inventory, Component text) {
-			super(container, inventory, Component.literal("Mini Game"), 176, 170, container.entity, container.x, container.y, container.z);
+			super(container, inventory, Component.literal("Mini Game"), 300, 170, container.entity, container.x, container.y, container.z);
 		}
 
 		@Override
@@ -476,23 +502,25 @@ public final class InfoCardScreens {
 		@Override
 		protected void init() {
 			super.init();
+			pageTabs("minigame");
 			for (int cell = 0; cell < 48; cell++)
-				button(" ", CELL_IDS[cell], 8 + cell % 8 * 20, 18 + cell / 8 * 20, 20, 20, CELLS.get(cell));
-			button("Back", 0, 120, 142, 48);
+				button(" ", CELL_IDS[cell], 8 + cell % 8 * 20, 40 + cell / 8 * 20, 20, 20, CELLS.get(cell));
 		}
 
 		@Override
 		protected void background(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
-			darkInset(graphics, 7, 17, 162, 122);
+			darkInset(graphics, 7, 39, 162, 122);
 			PlayerVariables vars = vars();
-			progressBar(graphics, 8, 157, 106, vars.LEVELMAXMINIGAME <= 0 ? 0 : (float) (vars.LEVELMINIGAME / vars.LEVELMAXMINIGAME));
+			progressBar(graphics, 178, 68, 114, vars.LEVELMAXMINIGAME <= 0 ? 0 : (float) (vars.LEVELMINIGAME / vars.LEVELMAXMINIGAME));
 		}
 
 		@Override
 		protected void labels(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
 			PlayerVariables vars = vars();
-			textRight(graphics, "Level " + number(vars.LEVELSTATMINIGAME), 168, 6);
-			text(graphics, number(vars.LEVELMINIGAME) + " / " + number(vars.LEVELMAXMINIGAME) + " XP", 8, 146);
+			text(graphics, "Level " + number(vars.LEVELSTATMINIGAME), 178, 42);
+			text(graphics, number(vars.LEVELMINIGAME) + " / " + number(vars.LEVELMAXMINIGAME) + " XP", 178, 56);
+			graphics.text(font, "Click the lit square", 178, 84, MUTED, false);
+			graphics.text(font, "before it moves.", 178, 94, MUTED, false);
 		}
 	}
 

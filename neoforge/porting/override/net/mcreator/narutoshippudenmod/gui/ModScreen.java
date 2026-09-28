@@ -1,19 +1,25 @@
 package net.mcreator.narutoshippudenmod.gui;
 
 import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables;
+import net.mcreator.narutoshippudenmod.core.NarutoActions;
+
+import com.mojang.blaze3d.platform.InputConstants;
 
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Util;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,10 +75,29 @@ public abstract class ModScreen<M extends AbstractContainerMenu> extends Abstrac
 		return procedure.test(dependencies);
 	}
 
+	/** Where the cursor was when the last mod screen closed; see {@link #init()}. */
+	private static double lastMouseX, lastMouseY;
+	private static long lastClosed;
+	private boolean cursorRestored;
+
 	@Override
 	protected void init() {
 		refresh.clear();
+		// the server opens the next page by closing this menu first, which centres the cursor: put it back
+		if (!cursorRestored) {
+			cursorRestored = true;
+			if (Util.getMillis() - lastClosed < 1500)
+				InputConstants.releaseMouse(minecraft.getWindow(), lastMouseX, lastMouseY);
+		}
 		super.init();
+	}
+
+	@Override
+	public void removed() {
+		super.removed();
+		lastMouseX = minecraft.mouseHandler.xpos();
+		lastMouseY = minecraft.mouseHandler.ypos();
+		lastClosed = Util.getMillis();
 	}
 
 	protected Button button(String label, int id, int bx, int by, int width) {
@@ -89,6 +114,57 @@ public abstract class ModScreen<M extends AbstractContainerMenu> extends Abstrac
 		if (shownIf != null)
 			refresh.add(() -> button.visible = is(shownIf));
 		return button;
+	}
+
+	/** Asks the server to do one of the named {@link NarutoActions} (cheats need creative mode or operator rights). */
+	protected void action(String kind, String key, double amount) {
+		ClientPacketDistributor.sendToServer(new NarutoActions.Action(kind, key, amount));
+	}
+
+	// ------------------------------------------------------------------ info card page tabs
+	static final String[][] PAGES = {{"info", "Info"}, {"stats", "Stats"}, {"missions", "Quests"}, {"dojutsu", "Dojutsu"}, {"jutsu", "Jutsu"},
+			{"minigame", "Game"}};
+	private @Nullable String currentPage;
+
+	/** The row of info card page tabs (also on keys 1 to 6); pages using it are 300 wide and start their content at y 40. */
+	protected void pageTabs(String current) {
+		currentPage = current;
+		for (int i = 0; i < PAGES.length; i++) {
+			String page = PAGES[i][0];
+			Button tab = Button.builder(Component.literal(PAGES[i][1]), b -> action("page", page, 0)).bounds(leftPos + 10 + i * 47, topPos + 16, 46, 20)
+					.tooltip(Tooltip.create(Component.literal("Key " + (i + 1)))).build();
+			tab.active = !page.equals(current);
+			addRenderableWidget(tab);
+		}
+	}
+
+	/** A text field for whole numbers. */
+	protected EditBox numberField(int bx, int by, int width, double initial) {
+		EditBox box = new EditBox(font, leftPos + bx, topPos + by, width, 20, Component.literal(""));
+		box.setMaxLength(12);
+		box.setValue(number(initial));
+		digitsOnly(box, true, null);
+		addRenderableWidget(box);
+		return box;
+	}
+
+	/** Keeps only digits (and a leading minus) in {@code box}; {@code then} sees the cleaned text. */
+	protected static void digitsOnly(EditBox box, boolean negative, java.util.function.@Nullable Consumer<String> then) {
+		box.setResponder(value -> {
+			String cleaned = value.replaceAll(negative ? "(?!^-)[^0-9]" : "[^0-9]", "");
+			if (!cleaned.equals(value))
+				box.setValue(cleaned);
+			else if (then != null)
+				then.accept(cleaned);
+		});
+	}
+
+	protected static double parse(EditBox box, double fallback) {
+		try {
+			return Double.parseDouble(box.getValue());
+		} catch (NumberFormatException e) {
+			return fallback;
+		}
 	}
 
 	/** Runs every frame before drawing, for state that follows the player's variables. */
@@ -140,6 +216,11 @@ public abstract class ModScreen<M extends AbstractContainerMenu> extends Abstrac
 		}
 		if (getFocused() instanceof EditBox box && box.isFocused()) {
 			box.keyPressed(event);
+			return true;
+		}
+		int page = event.key() - 49;
+		if (currentPage != null && page >= 0 && page < PAGES.length && !PAGES[page][0].equals(currentPage)) {
+			action("page", PAGES[page][0], 0);
 			return true;
 		}
 		return super.keyPressed(event);

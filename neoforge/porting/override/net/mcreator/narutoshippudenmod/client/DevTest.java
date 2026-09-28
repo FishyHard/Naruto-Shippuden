@@ -29,33 +29,39 @@ public final class DevTest {
 			"CheatGuis$NarutoShippudenCheatDojutsuGUIGui", "CheatGuis$NarutoShippudenCheatGUIGui", "CheatGuis$NarutoShippudenCheatKekkeiGenkaiGUIGui",
 			"CheatGuis$PasswordGUIDojutsuGui", "MiscGuis$AdventCalendarGUIGui", "MiscGuis$GeninHeadbandSelectGui", "MiscGuis$PatreonKitGui",
 			"JutsuCreationGuis$CreateJutsuGUIGui", "JutsuCreationGuis$CreateJutsuGUI2Gui"};
-	private static int screenIndex = -1;
+	private static final java.util.List<Runnable> STEPS = new java.util.ArrayList<>();
+	private static int step;
 	private static int screenTicks;
 
 	private DevTest() {
 	}
 
-	private static void screens(Minecraft mc, Screen screen) {
-		if (++screenTicks < 60)
-			return;
-		if (screenIndex < 0)
-			Screenshot.grab(mc.gameDirectory, "screen_hud.png", mc.gameRenderer.mainRenderTarget(), 1, msg -> NarutoShippudenMod.LOGGER.info("DEVTEST {}", msg.getString()));
-		if (screenIndex >= 0 && screen != null) {
-			String name = MENUS[screenIndex].substring(MENUS[screenIndex].indexOf('$') + 1);
-			Screenshot.grab(mc.gameDirectory, "screen_" + name + ".png", mc.gameRenderer.mainRenderTarget(), 1,
-					msg -> NarutoShippudenMod.LOGGER.info("DEVTEST {}", msg.getString()));
-		}
-		screenTicks = 0;
-		screenIndex++;
-		if (screenIndex >= MENUS.length) {
-			NarutoShippudenMod.LOGGER.info("DEVTEST screens done");
-			mc.stop();
-			return;
-		}
+	private static void shot(Minecraft mc, String name) {
+		Screenshot.grab(mc.gameDirectory, "screen_" + name + ".png", mc.gameRenderer.mainRenderTarget(), 1,
+				msg -> NarutoShippudenMod.LOGGER.info("DEVTEST {}", msg.getString()));
+	}
+
+	private static void onServer(Minecraft mc, java.util.function.Consumer<net.minecraft.server.level.ServerPlayer> task) {
 		var server = mc.getSingleplayerServer();
-		String menu = MENUS[screenIndex];
-		server.execute(() -> {
-			var player = server.getPlayerList().getPlayer(mc.player.getUUID());
+		server.execute(() -> task.accept(server.getPlayerList().getPlayer(mc.player.getUUID())));
+	}
+
+	private static void command(Minecraft mc, String command) {
+		onServer(mc, player -> player.level().getServer().getCommands().performPrefixedCommand(player.createCommandSourceStack().withPermission(
+				net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER), command));
+	}
+
+	private static void click(Minecraft mc, String label) {
+		if (mc.gui.screen() != null)
+			for (var child : java.util.List.copyOf(mc.gui.screen().children()))
+				if (child instanceof net.minecraft.client.gui.components.AbstractButton b && b.getMessage().getString().equals(label)) {
+					b.onPress(new net.minecraft.client.input.KeyEvent(com.mojang.blaze3d.platform.InputConstants.KEY_RETURN, 0, 0));
+					return;
+				}
+	}
+
+	private static void open(Minecraft mc, String menu) {
+		onServer(mc, player -> {
 			try {
 				var ctor = Class.forName("net.mcreator.narutoshippudenmod.gui." + menu + "$GuiContainerMod").getConstructor(int.class,
 						net.minecraft.world.entity.player.Inventory.class, net.minecraft.network.FriendlyByteBuf.class);
@@ -72,6 +78,55 @@ public final class DevTest {
 				NarutoShippudenMod.LOGGER.error("DEVTEST cannot open {}", menu, e);
 			}
 		});
+	}
+
+	/** Every mod screen, the cheat tabs, then NPCs and the Byakugan outline in the world; 60 ticks per step. */
+	private static void buildSteps(Minecraft mc) {
+		STEPS.add(() -> shot(mc, "hud"));
+		for (String menu : MENUS) {
+			String name = menu.substring(menu.indexOf('$') + 1);
+			STEPS.add(() -> open(mc, menu));
+			STEPS.add(() -> shot(mc, name));
+			if (name.equals("NarutoShippudenCheatGUIGui")) {
+				STEPS.add(() -> click(mc, "Dojutsu"));
+				STEPS.add(() -> shot(mc, name + "_dojutsu"));
+				STEPS.add(() -> click(mc, "Kekkei Genkai"));
+				STEPS.add(() -> shot(mc, name + "_kekkei"));
+				STEPS.add(() -> click(mc, "Player"));
+			}
+		}
+		STEPS.add(() -> {
+			mc.player.closeContainer();
+			mc.options.setCameraType(CameraType.FIRST_PERSON);
+			onServer(mc, player -> {
+				player.setYRot(0);
+				player.setXRot(10);
+				NarutoShippudenModVariables.ifPresent(player, v -> {
+					v.byakugan = true;
+					v.byakuganactivate = true;
+					v.syncPlayerVariables(player);
+				});
+			});
+			command(mc, "tp @s ~ ~ ~ 0 10");
+			command(mc, "summon naruto_shippuden:asuma ~-1.5 ~ ~4 {NoAI:1b,Rotation:[180f,0f]}");
+			command(mc, "summon naruto_shippuden:shikamaru ~1.5 ~ ~4 {NoAI:1b,Rotation:[180f,0f]}");
+			command(mc, "summon minecraft:zombie ~ ~ ~10 {NoAI:1b,Rotation:[180f,0f]}");
+		});
+		STEPS.add(() -> shot(mc, "world"));
+		STEPS.add(() -> {
+			NarutoShippudenMod.LOGGER.info("DEVTEST screens done");
+			mc.stop();
+		});
+	}
+
+	private static void screens(Minecraft mc, Screen screen) {
+		if (++screenTicks < 60)
+			return;
+		screenTicks = 0;
+		if (STEPS.isEmpty())
+			buildSteps(mc);
+		if (step < STEPS.size())
+			STEPS.get(step++).run();
 	}
 
 	@SubscribeEvent
