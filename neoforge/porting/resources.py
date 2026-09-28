@@ -302,12 +302,17 @@ NO_SPAWNS = {'argument': {'spawn_costs': {}, 'spawns_by_category': {}}, 'modifie
 
 def dimensions():
     mc = os.path.join(HERE, 'vanilla')
-    # Kamui: floating islands of kamui void in a black, skyless space (1.16: noise terrain made of kamui_void, no fog)
+    # Kamui: a flat kamui_void floor up to y=63 in a black, skyless space. 1.16 had biome depth -1 / scale 0 and
+    # kamui_void as the fluid below sea level 63, which filled everything to a flat top at 63; the Kamui technique
+    # teleports to y=71 and the enter procedure drops the player to the first air from y=64 (towers stand on 64).
     noise = json.load(open(os.path.join(mc, 'floating_islands.json')))
     noise['default_block'] = '%s:kamui_void' % NS
     noise['default_fluid'] = 'minecraft:air'
     noise['disable_mob_generation'] = True
     noise['material_rule'] = {'type': 'minecraft:sequence', 'sequence': []}
+    noise['sea_level'] = 63
+    noise['noise_router']['final_density'] = {'type': 'minecraft:gradient', 'axis': 'y', 'from_coordinate': 63,
+                                              'from_value': 1.0, 'to_coordinate': 64, 'to_value': -1.0}
     noise.pop('debug_functions', None)
     write('data/%s/worldgen/noise_settings/kamui_dimension.json' % NS, noise)
     write('data/%s/dimension_type/kamui_dimension.json' % NS, {
