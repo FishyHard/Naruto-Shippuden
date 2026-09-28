@@ -338,7 +338,7 @@ public final class ClanProcedures {
 									}
 									{
 										List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(x - (10 / 2d), y - (10 / 2d),
-												z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), null).stream().sorted(new Object() {
+												z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), e -> true).stream().sorted(new Object() {
 													Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 														return Comparator
 																.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -458,8 +458,7 @@ public final class ClanProcedures {
 								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 500) {
 									{
 										List<Entity> _entfound = world.getEntitiesOfClass(Entity.class,
-												new AABB(x - (3 / 2d), y - (3 / 2d), z - (3 / 2d), x + (3 / 2d), y + (3 / 2d), z + (3 / 2d)),
-												null).stream().sorted(new Object() {
+												new AABB(x - (3 / 2d), y - (3 / 2d), z - (3 / 2d), x + (3 / 2d), y + (3 / 2d), z + (3 / 2d)), e -> true).stream().sorted(new Object() {
 													Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 														return Comparator
 																.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -3762,8 +3761,7 @@ public final class ClanProcedures {
 			if (((Entity) world
 					.getEntitiesOfClass(Player.class,
 							new AABB((entity.getX()) - (32 / 2d), (entity.getY()) - (32 / 2d), (entity.getZ()) - (32 / 2d),
-									(entity.getX()) + (32 / 2d), (entity.getY()) + (32 / 2d), (entity.getZ()) + (32 / 2d)),
-							null)
+									(entity.getX()) + (32 / 2d), (entity.getY()) + (32 / 2d), (entity.getZ()) + (32 / 2d)), e -> true)
 					.stream().sorted(new Object() {
 						Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 							return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -3774,8 +3772,7 @@ public final class ClanProcedures {
 						: null) == ((Entity) world
 								.getEntitiesOfClass(Player.class,
 										new AABB((entity.getX()) - (32 / 2d), (entity.getY()) - (32 / 2d), (entity.getZ()) - (32 / 2d),
-												(entity.getX()) + (32 / 2d), (entity.getY()) + (32 / 2d), (entity.getZ()) + (32 / 2d)),
-										null)
+												(entity.getX()) + (32 / 2d), (entity.getY()) + (32 / 2d), (entity.getZ()) + (32 / 2d)), e -> true)
 								.stream().sorted(new Object() {
 									Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 										return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -3784,8 +3781,7 @@ public final class ClanProcedures {
 						&& NarutoShippudenModVariables.get(((Entity) world
 								.getEntitiesOfClass(Player.class,
 										new AABB((entity.getX()) - (32 / 2d), (entity.getY()) - (32 / 2d), (entity.getZ()) - (32 / 2d),
-												(entity.getX()) + (32 / 2d), (entity.getY()) + (32 / 2d), (entity.getZ()) + (32 / 2d)),
-										null)
+												(entity.getX()) + (32 / 2d), (entity.getY()) + (32 / 2d), (entity.getZ()) + (32 / 2d)), e -> true)
 								.stream().sorted(new Object() {
 									Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 										return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -5573,7 +5569,7 @@ public final class ClanProcedures {
 										if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 650) {
 											{
 												List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(x - (3 / 2d),
-														y - (3 / 2d), z - (3 / 2d), x + (3 / 2d), y + (3 / 2d), z + (3 / 2d)), null).stream()
+														y - (3 / 2d), z - (3 / 2d), x + (3 / 2d), y + (3 / 2d), z + (3 / 2d)), e -> true).stream()
 														.sorted(new Object() {
 															Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 																return Comparator.comparing(
@@ -5678,7 +5674,7 @@ public final class ClanProcedures {
 											{
 												List<Entity> _entfound = world
 														.getEntitiesOfClass(Entity.class, new AABB(x - (12 / 2d), y - (12 / 2d),
-																z - (12 / 2d), x + (12 / 2d), y + (12 / 2d), z + (12 / 2d)), null)
+																z - (12 / 2d), x + (12 / 2d), y + (12 / 2d), z + (12 / 2d)), e -> true)
 														.stream().sorted(new Object() {
 															Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 																return Comparator.comparing(
@@ -6169,7 +6165,7 @@ public final class ClanProcedures {
 											}
 											{
 												List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(x - (5 / 2d),
-														y - (5 / 2d), z - (5 / 2d), x + (5 / 2d), y + (5 / 2d), z + (5 / 2d)), null).stream()
+														y - (5 / 2d), z - (5 / 2d), x + (5 / 2d), y + (5 / 2d), z + (5 / 2d)), e -> true).stream()
 														.sorted(new Object() {
 															Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 																return Comparator.comparing(
@@ -8493,8 +8489,7 @@ public final class ClanProcedures {
 			if (((Entity) world
 					.getEntitiesOfClass(Player.class,
 							new AABB((entity.getX()) - (32 / 2d), (entity.getY()) - (32 / 2d), (entity.getZ()) - (32 / 2d),
-									(entity.getX()) + (32 / 2d), (entity.getY()) + (32 / 2d), (entity.getZ()) + (32 / 2d)),
-							null)
+									(entity.getX()) + (32 / 2d), (entity.getY()) + (32 / 2d), (entity.getZ()) + (32 / 2d)), e -> true)
 					.stream().sorted(new Object() {
 						Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 							return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -8505,8 +8500,7 @@ public final class ClanProcedures {
 						: null) == ((Entity) world
 								.getEntitiesOfClass(Player.class,
 										new AABB((entity.getX()) - (32 / 2d), (entity.getY()) - (32 / 2d), (entity.getZ()) - (32 / 2d),
-												(entity.getX()) + (32 / 2d), (entity.getY()) + (32 / 2d), (entity.getZ()) + (32 / 2d)),
-										null)
+												(entity.getX()) + (32 / 2d), (entity.getY()) + (32 / 2d), (entity.getZ()) + (32 / 2d)), e -> true)
 								.stream().sorted(new Object() {
 									Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 										return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -8515,8 +8509,7 @@ public final class ClanProcedures {
 						&& NarutoShippudenModVariables.get(((Entity) world
 								.getEntitiesOfClass(Player.class,
 										new AABB((entity.getX()) - (32 / 2d), (entity.getY()) - (32 / 2d), (entity.getZ()) - (32 / 2d),
-												(entity.getX()) + (32 / 2d), (entity.getY()) + (32 / 2d), (entity.getZ()) + (32 / 2d)),
-										null)
+												(entity.getX()) + (32 / 2d), (entity.getY()) + (32 / 2d), (entity.getZ()) + (32 / 2d)), e -> true)
 								.stream().sorted(new Object() {
 									Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 										return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -8955,7 +8948,7 @@ public final class ClanProcedures {
 									}.start(world, (int) 20);
 									{
 										List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(x - (10 / 2d), y - (10 / 2d),
-												z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), null).stream().sorted(new Object() {
+												z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), e -> true).stream().sorted(new Object() {
 													Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 														return Comparator
 																.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -9330,7 +9323,7 @@ public final class ClanProcedures {
 			{
 				List<Entity> _entfound = world
 						.getEntitiesOfClass(Entity.class,
-								new AABB(x - (15 / 2d), y - (15 / 2d), z - (15 / 2d), x + (15 / 2d), y + (15 / 2d), z + (15 / 2d)), null)
+								new AABB(x - (15 / 2d), y - (15 / 2d), z - (15 / 2d), x + (15 / 2d), y + (15 / 2d), z + (15 / 2d)), e -> true)
 						.stream().sorted(new Object() {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -9514,7 +9507,7 @@ public final class ClanProcedures {
 			{
 				List<Entity> _entfound = world
 						.getEntitiesOfClass(Entity.class,
-								new AABB(x - (10 / 2d), y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), null)
+								new AABB(x - (10 / 2d), y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), e -> true)
 						.stream().sorted(new Object() {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -10542,7 +10535,7 @@ public final class ClanProcedures {
 						}
 						{
 							List<Entity> _entfound = world.getEntitiesOfClass(Entity.class,
-									new AABB(x - (10 / 2d), y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), null)
+									new AABB(x - (10 / 2d), y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), e -> true)
 									.stream().sorted(new Object() {
 										Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 											return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -10934,8 +10927,7 @@ public final class ClanProcedures {
 								}
 								{
 									List<Entity> _entfound = world.getEntitiesOfClass(Entity.class,
-											new AABB(x - (10 / 2d), y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)),
-											null).stream().sorted(new Object() {
+											new AABB(x - (10 / 2d), y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), e -> true).stream().sorted(new Object() {
 												Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 													return Comparator
 															.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -11941,7 +11933,7 @@ public final class ClanProcedures {
 						}
 						{
 							List<Entity> _entfound = world.getEntitiesOfClass(Entity.class,
-									new AABB(x - (10 / 2d), y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), null)
+									new AABB(x - (10 / 2d), y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), e -> true)
 									.stream().sorted(new Object() {
 										Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 											return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -12043,8 +12035,7 @@ public final class ClanProcedures {
 			if (((Entity) world
 					.getEntitiesOfClass(Player.class,
 							new AABB((entity.getX()) - (40 / 2d), (entity.getY()) - (40 / 2d), (entity.getZ()) - (40 / 2d),
-									(entity.getX()) + (40 / 2d), (entity.getY()) + (40 / 2d), (entity.getZ()) + (40 / 2d)),
-							null)
+									(entity.getX()) + (40 / 2d), (entity.getY()) + (40 / 2d), (entity.getZ()) + (40 / 2d)), e -> true)
 					.stream().sorted(new Object() {
 						Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 							return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -12053,8 +12044,7 @@ public final class ClanProcedures {
 				if ((entity instanceof TamableAnimal) && (((Entity) world
 						.getEntitiesOfClass(Player.class,
 								new AABB((entity.getX()) - (40 / 2d), (entity.getY()) - (40 / 2d), (entity.getZ()) - (40 / 2d),
-										(entity.getX()) + (40 / 2d), (entity.getY()) + (40 / 2d), (entity.getZ()) + (40 / 2d)),
-								null)
+										(entity.getX()) + (40 / 2d), (entity.getY()) + (40 / 2d), (entity.getZ()) + (40 / 2d)), e -> true)
 						.stream().sorted(new Object() {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -12064,8 +12054,7 @@ public final class ClanProcedures {
 					((TamableAnimal) entity).tame((Player) ((Entity) world
 							.getEntitiesOfClass(Player.class,
 									new AABB((entity.getX()) - (40 / 2d), (entity.getY()) - (40 / 2d), (entity.getZ()) - (40 / 2d),
-											(entity.getX()) + (40 / 2d), (entity.getY()) + (40 / 2d), (entity.getZ()) + (40 / 2d)),
-									null)
+											(entity.getX()) + (40 / 2d), (entity.getY()) + (40 / 2d), (entity.getZ()) + (40 / 2d)), e -> true)
 							.stream().sorted(new Object() {
 								Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 									return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -12076,8 +12065,7 @@ public final class ClanProcedures {
 			if (((Entity) world
 					.getEntitiesOfClass(LivingEntity.class,
 							new AABB((entity.getX()) - (10 / 2d), (entity.getY()) - (10 / 2d), (entity.getZ()) - (10 / 2d),
-									(entity.getX()) + (10 / 2d), (entity.getY()) + (10 / 2d), (entity.getZ()) + (10 / 2d)),
-							null)
+									(entity.getX()) + (10 / 2d), (entity.getY()) + (10 / 2d), (entity.getZ()) + (10 / 2d)), e -> true)
 					.stream().sorted(new Object() {
 						Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 							return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -12086,8 +12074,7 @@ public final class ClanProcedures {
 				entity.startRiding(((Entity) world
 						.getEntitiesOfClass(LivingEntity.class,
 								new AABB((entity.getX()) - (10 / 2d), (entity.getY()) - (10 / 2d), (entity.getZ()) - (10 / 2d),
-										(entity.getX()) + (10 / 2d), (entity.getY()) + (10 / 2d), (entity.getZ()) + (10 / 2d)),
-								null)
+										(entity.getX()) + (10 / 2d), (entity.getY()) + (10 / 2d), (entity.getZ()) + (10 / 2d)), e -> true)
 						.stream().sorted(new Object() {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -12127,7 +12114,7 @@ public final class ClanProcedures {
 			{
 				List<Entity> _entfound = world
 						.getEntitiesOfClass(Entity.class,
-								new AABB(x - (13 / 2d), y - (13 / 2d), z - (13 / 2d), x + (13 / 2d), y + (13 / 2d), z + (13 / 2d)), null)
+								new AABB(x - (13 / 2d), y - (13 / 2d), z - (13 / 2d), x + (13 / 2d), y + (13 / 2d), z + (13 / 2d)), e -> true)
 						.stream().sorted(new Object() {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));

@@ -415,8 +415,7 @@ public final class NatureReleaseProcedures {
 									}
 									{
 										List<Entity> _entfound = world.getEntitiesOfClass(Entity.class,
-												new AABB(x - (3 / 2d), y - (3 / 2d), z - (3 / 2d), x + (3 / 2d), y + (3 / 2d), z + (3 / 2d)),
-												null).stream().sorted(new Object() {
+												new AABB(x - (3 / 2d), y - (3 / 2d), z - (3 / 2d), x + (3 / 2d), y + (3 / 2d), z + (3 / 2d)), e -> true).stream().sorted(new Object() {
 													Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 														return Comparator
 																.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));

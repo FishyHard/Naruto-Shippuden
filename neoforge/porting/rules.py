@@ -907,3 +907,10 @@ def ensure_imports(path, text):
 
 
 RULES.append(ensure_imports)
+
+
+@func
+def entity_selector_not_null(path, text):
+    """26.3 getEntitiesOfClass needs a predicate; MCreator passed null."""
+    rx = re.compile(r'(\.getEntitiesOfClass\(\w+\.class,\s*new AABB\((?:[^()]|\([^()]*(?:\([^()]*\))*[^()]*\))*\)),\s*null\)')
+    return rx.sub(r'\1, e -> true)', text)

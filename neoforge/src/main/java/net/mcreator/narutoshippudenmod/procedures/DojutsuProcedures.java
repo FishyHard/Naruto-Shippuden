@@ -986,7 +986,7 @@ public final class DojutsuProcedures {
 								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 									{
 										List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(x - (12 / 2d), y - (12 / 2d),
-												z - (12 / 2d), x + (12 / 2d), y + (12 / 2d), z + (12 / 2d)), null).stream().sorted(new Object() {
+												z - (12 / 2d), x + (12 / 2d), y + (12 / 2d), z + (12 / 2d)), e -> true).stream().sorted(new Object() {
 													Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 														return Comparator
 																.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -5015,7 +5015,7 @@ public final class DojutsuProcedures {
 										}
 										{
 											List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(x - (10 / 2d),
-													y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), null).stream()
+													y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), e -> true).stream()
 													.sorted(new Object() {
 														Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 															return Comparator
@@ -6351,7 +6351,7 @@ public final class DojutsuProcedures {
 											{
 												List<Entity> _entfound = world
 														.getEntitiesOfClass(Entity.class, new AABB(x - (10 / 2d), y - (10 / 2d),
-																z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), null)
+																z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), e -> true)
 														.stream().sorted(new Object() {
 															Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 																return Comparator.comparing(
@@ -6934,7 +6934,7 @@ public final class DojutsuProcedures {
 									}
 									{
 										List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(x - (10 / 2d), y - (10 / 2d),
-												z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), null).stream().sorted(new Object() {
+												z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), e -> true).stream().sorted(new Object() {
 													Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 														return Comparator
 																.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));

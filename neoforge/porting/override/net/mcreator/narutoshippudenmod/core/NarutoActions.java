@@ -233,7 +233,7 @@ public final class NarutoActions {
 	// ------------------------------------------------------------------ network: the menus' requests
 	/**
 	 * kind: set (key = value id, amount), dojutsu (key = dojutsu id, amount = seconds, below 0 = give now), kekkei_genkai,
-	 * rank, reset, page (key = id).
+	 * rank, reset, page (key = id), jutsu (key = technique item id, amount = jutsu index), learn (key = release item id).
 	 */
 	public record Action(String kind, String key, double amount) implements CustomPacketPayload {
 		public static final Type<Action> TYPE = new Type<>(Identifier.fromNamespaceAndPath("naruto_shippuden", "action"));
@@ -256,7 +256,7 @@ public final class NarutoActions {
 			if (!(context.player() instanceof ServerPlayer player))
 				return;
 			boolean open = action.kind().equals("page") && !action.key().equals("select")
-					|| action.kind().equals("set") && action.key().equals(SP_PER_CLICK);
+					|| action.kind().equals("set") && action.key().equals(SP_PER_CLICK) || action.kind().equals("jutsu") || action.kind().equals("learn");
 			if (!open && !canCheat(player)) {
 				player.sendSystemMessage(Component.literal("Cheats need creative mode or operator rights."));
 				return;
@@ -276,6 +276,16 @@ public final class NarutoActions {
 				case "rank" -> runEntry(player, RANKS.get(action.key()));
 				case "reset" -> runEntry(player, RESETS.get(action.key()));
 				case "page" -> runEntry(player, PAGES.get(action.key()));
+				case "jutsu" -> {
+					Identifier item = Identifier.tryParse(action.key());
+					if (item != null)
+						net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.select(player, item, (int) action.amount());
+				}
+				case "learn" -> {
+					Identifier item = Identifier.tryParse(action.key());
+					if (item != null)
+						net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.learn(player, item);
+				}
 				default -> {
 				}
 			}

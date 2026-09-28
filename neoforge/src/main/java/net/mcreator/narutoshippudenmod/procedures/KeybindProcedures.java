@@ -162,8 +162,7 @@ public final class KeybindProcedures {
 					if (world.isClientSide()) {
 						{
 							List<Entity> _entfound = world.getEntitiesOfClass(Entity.class,
-									new AABB(x - (500 / 2d), y - (500 / 2d), z - (500 / 2d), x + (500 / 2d), y + (500 / 2d), z + (500 / 2d)),
-									null).stream().sorted(new Object() {
+									new AABB(x - (500 / 2d), y - (500 / 2d), z - (500 / 2d), x + (500 / 2d), y + (500 / 2d), z + (500 / 2d)), e -> true).stream().sorted(new Object() {
 										Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 											return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
 										}
@@ -198,7 +197,7 @@ public final class KeybindProcedures {
 					if (world.isClientSide()) {
 						{
 							List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(x - (1000 / 2d), y - (1000 / 2d),
-									z - (1000 / 2d), x + (1000 / 2d), y + (1000 / 2d), z + (1000 / 2d)), null).stream().sorted(new Object() {
+									z - (1000 / 2d), x + (1000 / 2d), y + (1000 / 2d), z + (1000 / 2d)), e -> true).stream().sorted(new Object() {
 										Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 											return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
 										}
@@ -2012,8 +2011,7 @@ public final class KeybindProcedures {
 					if (world.isClientSide()) {
 						{
 							List<Entity> _entfound = world.getEntitiesOfClass(Entity.class,
-									new AABB(x - (500 / 2d), y - (500 / 2d), z - (500 / 2d), x + (500 / 2d), y + (500 / 2d), z + (500 / 2d)),
-									null).stream().sorted(new Object() {
+									new AABB(x - (500 / 2d), y - (500 / 2d), z - (500 / 2d), x + (500 / 2d), y + (500 / 2d), z + (500 / 2d)), e -> true).stream().sorted(new Object() {
 										Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 											return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
 										}
@@ -2052,7 +2050,7 @@ public final class KeybindProcedures {
 					if (world.isClientSide()) {
 						{
 							List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(x - (1000 / 2d), y - (1000 / 2d),
-									z - (1000 / 2d), x + (1000 / 2d), y + (1000 / 2d), z + (1000 / 2d)), null).stream().sorted(new Object() {
+									z - (1000 / 2d), x + (1000 / 2d), y + (1000 / 2d), z + (1000 / 2d)), e -> true).stream().sorted(new Object() {
 										Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 											return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
 										}

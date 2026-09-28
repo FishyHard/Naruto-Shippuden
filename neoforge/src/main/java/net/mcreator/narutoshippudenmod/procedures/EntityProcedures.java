@@ -187,7 +187,7 @@ public final class EntityProcedures {
 					{
 						List<Entity> _entfound = world
 								.getEntitiesOfClass(Entity.class,
-										new AABB(x - (10 / 2d), y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), null)
+										new AABB(x - (10 / 2d), y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), e -> true)
 								.stream().sorted(new Object() {
 									Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 										return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -431,7 +431,7 @@ public final class EntityProcedures {
 					{
 						List<Entity> _entfound = world
 								.getEntitiesOfClass(Entity.class,
-										new AABB(x - (10 / 2d), y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), null)
+										new AABB(x - (10 / 2d), y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), e -> true)
 								.stream().sorted(new Object() {
 									Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 										return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -920,8 +920,7 @@ public final class EntityProcedures {
 			if (entity instanceof AkamaruEntity.CustomEntity) {
 				{
 					List<Entity> _entfound = world.getEntitiesOfClass(Entity.class,
-							new AABB(x - (10000 / 2d), y - (10000 / 2d), z - (10000 / 2d), x + (10000 / 2d), y + (10000 / 2d), z + (10000 / 2d)),
-							null).stream().sorted(new Object() {
+							new AABB(x - (10000 / 2d), y - (10000 / 2d), z - (10000 / 2d), x + (10000 / 2d), y + (10000 / 2d), z + (10000 / 2d)), e -> true).stream().sorted(new Object() {
 								Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 									return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
 								}
@@ -1112,7 +1111,7 @@ public final class EntityProcedures {
 			{
 				List<Entity> _entfound = world
 						.getEntitiesOfClass(Entity.class,
-								new AABB(x - (15 / 2d), y - (15 / 2d), z - (15 / 2d), x + (15 / 2d), y + (15 / 2d), z + (15 / 2d)), null)
+								new AABB(x - (15 / 2d), y - (15 / 2d), z - (15 / 2d), x + (15 / 2d), y + (15 / 2d), z + (15 / 2d)), e -> true)
 						.stream().sorted(new Object() {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -1246,7 +1245,7 @@ public final class EntityProcedures {
 					{
 						List<Entity> _entfound = world
 								.getEntitiesOfClass(Entity.class,
-										new AABB(x - (15 / 2d), y - (15 / 2d), z - (15 / 2d), x + (15 / 2d), y + (15 / 2d), z + (15 / 2d)), null)
+										new AABB(x - (15 / 2d), y - (15 / 2d), z - (15 / 2d), x + (15 / 2d), y + (15 / 2d), z + (15 / 2d)), e -> true)
 								.stream().sorted(new Object() {
 									Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 										return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -1540,7 +1539,7 @@ public final class EntityProcedures {
 					{
 						List<Entity> _entfound = world
 								.getEntitiesOfClass(Entity.class,
-										new AABB(x - (10 / 2d), y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), null)
+										new AABB(x - (10 / 2d), y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), e -> true)
 								.stream().sorted(new Object() {
 									Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 										return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -1588,7 +1587,7 @@ public final class EntityProcedures {
 					{
 						List<Entity> _entfound = world
 								.getEntitiesOfClass(Entity.class,
-										new AABB(x - (10 / 2d), y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), null)
+										new AABB(x - (10 / 2d), y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), e -> true)
 								.stream().sorted(new Object() {
 									Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 										return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -1827,7 +1826,7 @@ public final class EntityProcedures {
 					{
 						List<Entity> _entfound = world
 								.getEntitiesOfClass(Entity.class,
-										new AABB(x - (5 / 2d), y - (5 / 2d), z - (5 / 2d), x + (5 / 2d), y + (5 / 2d), z + (5 / 2d)), null)
+										new AABB(x - (5 / 2d), y - (5 / 2d), z - (5 / 2d), x + (5 / 2d), y + (5 / 2d), z + (5 / 2d)), e -> true)
 								.stream().sorted(new Object() {
 									Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 										return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -2366,7 +2365,7 @@ public final class EntityProcedures {
 					{
 						List<Entity> _entfound = world
 								.getEntitiesOfClass(Entity.class,
-										new AABB(x - (15 / 2d), y - (15 / 2d), z - (15 / 2d), x + (15 / 2d), y + (15 / 2d), z + (15 / 2d)), null)
+										new AABB(x - (15 / 2d), y - (15 / 2d), z - (15 / 2d), x + (15 / 2d), y + (15 / 2d), z + (15 / 2d)), e -> true)
 								.stream().sorted(new Object() {
 									Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 										return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -2581,7 +2580,7 @@ public final class EntityProcedures {
 			{
 				List<Entity> _entfound = world
 						.getEntitiesOfClass(Entity.class,
-								new AABB(x - (25 / 2d), y - (25 / 2d), z - (25 / 2d), x + (25 / 2d), y + (25 / 2d), z + (25 / 2d)), null)
+								new AABB(x - (25 / 2d), y - (25 / 2d), z - (25 / 2d), x + (25 / 2d), y + (25 / 2d), z + (25 / 2d)), e -> true)
 						.stream().sorted(new Object() {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -3052,7 +3051,7 @@ public final class EntityProcedures {
 			{
 				List<Entity> _entfound = world
 						.getEntitiesOfClass(Entity.class,
-								new AABB(x - (25 / 2d), y - (25 / 2d), z - (25 / 2d), x + (25 / 2d), y + (25 / 2d), z + (25 / 2d)), null)
+								new AABB(x - (25 / 2d), y - (25 / 2d), z - (25 / 2d), x + (25 / 2d), y + (25 / 2d), z + (25 / 2d)), e -> true)
 						.stream().sorted(new Object() {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -3276,7 +3275,7 @@ public final class EntityProcedures {
 			{
 				List<Entity> _entfound = world
 						.getEntitiesOfClass(Entity.class,
-								new AABB(x - (4 / 2d), y - (4 / 2d), z - (4 / 2d), x + (4 / 2d), y + (4 / 2d), z + (4 / 2d)), null)
+								new AABB(x - (4 / 2d), y - (4 / 2d), z - (4 / 2d), x + (4 / 2d), y + (4 / 2d), z + (4 / 2d)), e -> true)
 						.stream().sorted(new Object() {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -3615,7 +3614,7 @@ public final class EntityProcedures {
 				{
 					List<Entity> _entfound = world
 							.getEntitiesOfClass(Entity.class,
-									new AABB(x - (10 / 2d), y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), null)
+									new AABB(x - (10 / 2d), y - (10 / 2d), z - (10 / 2d), x + (10 / 2d), y + (10 / 2d), z + (10 / 2d)), e -> true)
 							.stream().sorted(new Object() {
 								Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 									return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
@@ -3645,7 +3644,7 @@ public final class EntityProcedures {
 			{
 				List<Entity> _entfound = world
 						.getEntitiesOfClass(Entity.class,
-								new AABB(x - (15 / 2d), y - (15 / 2d), z - (15 / 2d), x + (15 / 2d), y + (15 / 2d), z + (15 / 2d)), null)
+								new AABB(x - (15 / 2d), y - (15 / 2d), z - (15 / 2d), x + (15 / 2d), y + (15 / 2d), z + (15 / 2d)), e -> true)
 						.stream().sorted(new Object() {
 							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
 								return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));

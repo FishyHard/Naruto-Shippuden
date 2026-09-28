@@ -113,6 +113,41 @@ public final class DevTest {
 			command(mc, "summon minecraft:zombie ~ ~ ~10 {NoAI:1b,Rotation:[180f,0f]}");
 		});
 		STEPS.add(() -> shot(mc, "world"));
+		// jutsu: learn from the fire scroll, choose on the wheel, cast
+		STEPS.add(() -> {
+			command(mc, "clear @s");
+			command(mc, "give @s naruto_shippuden:fire_release");
+			command(mc, "naruto set jp 100 @s");
+			command(mc, "naruto set ninjutsu 50 @s");
+			command(mc, "naruto set chakra 500 @s");
+			mc.player.getInventory().setSelectedSlot(0);
+		});
+		STEPS.add(() -> mc.gui.setScreen(new JutsuClient.ScrollScreen(
+				net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.RELEASES.get(net.minecraft.resources.Identifier.parse("naruto_shippuden:fire_release")),
+				net.minecraft.network.chat.Component.literal("Fire Release"))));
+		STEPS.add(() -> click(mc, "5 JP"));
+		STEPS.add(() -> click(mc, "10 JP"));
+		STEPS.add(() -> shot(mc, "jutsu_scroll"));
+		STEPS.add(() -> {
+			mc.player.closeContainer();
+			mc.gui.setScreen(null);
+			for (int slot = 0; slot < 9; slot++)
+				if (net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.technique(mc.player.getInventory().getItem(slot)) != null)
+					mc.player.getInventory().setSelectedSlot(slot);
+		});
+		STEPS.add(() -> mc.gui.setScreen(new JutsuClient.WheelScreen(JutsuClient.held(mc.player))));
+		STEPS.add(() -> shot(mc, "jutsu_wheel"));
+		STEPS.add(() -> {
+			mc.gui.setScreen(null);
+			NarutoShippudenMod.LOGGER.info("DEVTEST chakra before cast {}", NarutoShippudenModVariables.get(mc.player).ChakraAmount);
+			mc.gameMode.useItem(mc.player, net.minecraft.world.InteractionHand.MAIN_HAND);
+		});
+		STEPS.add(() -> {
+			NarutoShippudenMod.LOGGER.info("DEVTEST chakra after cast {} cooldown {}", NarutoShippudenModVariables.get(mc.player).ChakraAmount,
+					mc.player.getCooldowns().isOnCooldown(mc.player.getMainHandItem()));
+			mc.gameMode.useItem(mc.player, net.minecraft.world.InteractionHand.MAIN_HAND);
+			shot(mc, "jutsu_cast");
+		});
 		STEPS.add(() -> {
 			NarutoShippudenMod.LOGGER.info("DEVTEST screens done");
 			mc.stop();

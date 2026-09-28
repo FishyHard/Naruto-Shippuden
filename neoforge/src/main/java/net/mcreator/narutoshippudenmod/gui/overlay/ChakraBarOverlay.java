@@ -1,6 +1,7 @@
 package net.mcreator.narutoshippudenmod.gui.overlay;
 
 import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables;
+import net.mcreator.narutoshippudenmod.core.jutsu.Jutsus;
 import net.mcreator.narutoshippudenmod.gui.ModScreen;
 
 import net.minecraft.client.DeltaTracker;
@@ -8,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -41,6 +43,16 @@ public class ChakraBarOverlay {
 		int left = Math.min(width / 2 + 91 + 28, width - BAR_WIDTH - textWidth - 6);
 		row(graphics, font, left, height - 19, vars.ChakraAmount, vars.ChakraMax, chakra, CHAKRA_BACKGROUND, CHAKRA_PROGRESS, 0xFF55C8FF);
 		row(graphics, font, left, height - 9, vars.Health, vars.HealthMax, health, HEALTH_BACKGROUND, HEALTH_PROGRESS, 0xFFFF5555);
+		// the jutsu the held technique item will cast
+		for (InteractionHand hand : InteractionHand.values()) {
+			Jutsus.Technique technique = Jutsus.technique(player.getItemInHand(hand));
+			if (technique != null) {
+				Jutsus.Jutsu jutsu = technique.selected(vars);
+				graphics.text(font, font.plainSubstrByWidth(jutsu.name(), width - left - 4), left, height - 31,
+						jutsu.isLearned(vars) ? 0xFFFFFF55 : 0xFFAAAAAA, true);
+				break;
+			}
+		}
 	}
 
 	private static void row(GuiGraphicsExtractor graphics, Font font, int left, int top, double value, double max, String text, Identifier background,
