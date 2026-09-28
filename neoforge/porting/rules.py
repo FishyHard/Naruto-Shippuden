@@ -914,3 +914,16 @@ def entity_selector_not_null(path, text):
     """26.3 getEntitiesOfClass needs a predicate; MCreator passed null."""
     rx = re.compile(r'(\.getEntitiesOfClass\(\w+\.class,\s*new AABB\((?:[^()]|\([^()]*(?:\([^()]*\))*[^()]*\))*\)),\s*null\)')
     return rx.sub(r'\1, e -> true)', text)
+
+
+@func
+def drop_item_hover_text(path, text):
+    """Item descriptions come from client/ItemDescriptions (one vanilla-style table), so drop MCreator's appendHoverText."""
+    if '/item/' not in path.replace('\\', '/') and not path.replace('\\', '/').startswith('item/'):
+        return text
+    rx = re.compile(r'\n[ \t]*(?:@Override\s*)?public void appendHoverText\(')
+    while True:
+        m = rx.search(text)
+        if not m:
+            return text
+        text = text[:m.start()] + text[find_block(text, m.end()):]

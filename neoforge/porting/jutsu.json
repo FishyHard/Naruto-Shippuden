@@ -1,0 +1,4587 @@
+{
+ "tech": [
+  {
+   "proc": "AburameReleaseTechniqueRightclicked",
+   "cls": "ClanProcedures",
+   "item": [
+    "AburameReleaseTechniqueItem",
+    "aburame_release_technique"
+   ],
+   "tvar": "aburametechnique",
+   "ms": false,
+   "itemcd": [
+    "AburameReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Poison Cloud Technique",
+     "learn": [
+      "aburamelearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 250,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Insect Jar Technique",
+     "learn": [
+      "aburamelearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "25"
+     ],
+     "chakra": 500,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Insect Bog",
+     "learn": [
+      "aburamelearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "30"
+     ],
+     "chakra": 650,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "AkimichiReleaseTechniqueRightclicked",
+   "cls": "ClanProcedures",
+   "item": [
+    "AkimichiReleaseTechniqueItem",
+    "akimichi_release_technique"
+   ],
+   "tvar": "akimichitechnique",
+   "ms": false,
+   "itemcd": [
+    "AkimichiReleaseTechniqueItem",
+    "750"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Calorie Control",
+     "learn": [
+      "akimichilearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 300,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Human Bullet Tank",
+     "learn": [
+      "akimichilearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "25"
+     ],
+     "chakra": 0,
+     "cd": [
+      750,
+      500,
+      300,
+      200,
+      100
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Spiked Human Bullet Tank",
+     "learn": [
+      "akimichilearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "30"
+     ],
+     "chakra": 0,
+     "cd": [
+      750,
+      500,
+      300,
+      200,
+      100
+     ]
+    },
+    {
+     "index": 3,
+     "name": "Butterfly Mode",
+     "learn": [
+      "akimichilearn",
+      "4"
+     ],
+     "stat": [
+      "ninjutsu",
+      "35"
+     ],
+     "chakra": 0,
+     "cd": [
+      750,
+      500,
+      300,
+      200,
+      100
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "BoilReleaseTechniqueRightclicked",
+   "cls": "KekkeiGenkaiProcedures",
+   "item": [
+    "BoilReleaseTechniqueItem",
+    "boil_release_technique"
+   ],
+   "tvar": "boiltechnique",
+   "ms": false,
+   "itemcd": [
+    "BoilReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Skilled Mist Technique",
+     "learn": [
+      "boillearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "25"
+     ],
+     "chakra": 500,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Steam Dash",
+     "learn": [
+      "boillearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "30"
+     ],
+     "chakra": 350,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Unrivalled Strength",
+     "learn": [
+      "boillearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "35"
+     ],
+     "chakra": 0,
+     "cd": [
+      750,
+      500,
+      300,
+      200,
+      100
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "BoneReleaseTechniqueRightclicked",
+   "cls": "KekkeiGenkaiProcedures",
+   "item": [
+    "BoneReleaseTechniqueItem",
+    "bone_release_technique"
+   ],
+   "tvar": "bonetechnique",
+   "ms": false,
+   "itemcd": [
+    "BoneReleaseTechniqueItem",
+    "750"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Dance of the Camellia",
+     "learn": [
+      "bonelearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 200,
+     "cd": [
+      750,
+      500,
+      300,
+      200,
+      100
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Dance of the Clematis: Flower",
+     "learn": [
+      "bonelearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "25"
+     ],
+     "chakra": 350,
+     "cd": [
+      750,
+      500,
+      300,
+      200,
+      100
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Dance of the Larch",
+     "learn": [
+      "bonelearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "30"
+     ],
+     "chakra": 0,
+     "cd": [
+      750,
+      500,
+      300,
+      200,
+      100
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "DustReleaseTechniqueRightclicked",
+   "cls": "KekkeiGenkaiProcedures",
+   "item": [
+    "DustReleaseTechniqueItem",
+    "dust_release_technique"
+   ],
+   "tvar": "dusttechnique",
+   "ms": false,
+   "itemcd": [
+    "DustReleaseTechniqueItem",
+    "10000"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "?",
+     "learn": [
+      "dustlearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "70"
+     ],
+     "chakra": 5000,
+     "cd": [
+      10000,
+      7500,
+      5000,
+      3500,
+      2500
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "EarthReleaseTechniqueRightclicked",
+   "cls": "NatureReleaseProcedures",
+   "item": [
+    "EarthReleaseTechniqueItem",
+    "earth_release_technique"
+   ],
+   "tvar": "earth_technique",
+   "ms": false,
+   "itemcd": [
+    "EarthReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Fist Rock Technique",
+     "learn": [
+      "earthlearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "5"
+     ],
+     "chakra": 100,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Golem Technique",
+     "learn": [
+      "earthlearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "10"
+     ],
+     "chakra": 150,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Earth-Style Wall",
+     "learn": [
+      "earthlearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "15"
+     ],
+     "chakra": 200,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 3,
+     "name": "Earth Spear",
+     "learn": [
+      "earthlearn",
+      "4"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 250,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "FireReleaseTechniqueRightclicked",
+   "cls": "NatureReleaseProcedures",
+   "item": [
+    "FireReleaseTechniqueItem",
+    "fire_release_technique"
+   ],
+   "tvar": "firetechnique",
+   "ms": false,
+   "itemcd": [
+    "FireReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Running Fire",
+     "learn": [
+      "firelearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "5"
+     ],
+     "chakra": 100,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Great Fireball Technique",
+     "learn": [
+      "firelearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "10"
+     ],
+     "chakra": 150,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Great Dragon Fire Technique",
+     "learn": [
+      "firelearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "15"
+     ],
+     "chakra": 200,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 3,
+     "name": "Phoenix Flower Jutsu",
+     "learn": [
+      "firelearn",
+      "4"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 250,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "FumaReleaseTechniqueRightclicked",
+   "cls": "ClanProcedures",
+   "item": [
+    "FumaReleaseTechniqueItem",
+    "fuma_release_technique"
+   ],
+   "tvar": "fumatechnique",
+   "ms": false,
+   "itemcd": [
+    "FumaReleaseTechniqueItem",
+    "140"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Shuriken",
+     "learn": [
+      "fumalearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "15"
+     ],
+     "chakra": 30,
+     "cd": [
+      140,
+      100,
+      60,
+      40,
+      20
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Fuma Shuriken",
+     "learn": [
+      "fumalearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 50,
+     "cd": [
+      140,
+      100,
+      60,
+      40,
+      20
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Toroi Unique Fuma Shuriken",
+     "learn": [
+      "fumalearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "25"
+     ],
+     "chakra": 80,
+     "cd": [
+      140,
+      100,
+      60,
+      40,
+      20
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "FuramingoganTechniqueRightclicked",
+   "cls": "DojutsuProcedures",
+   "item": [
+    "FuramingoganTechniqueItem",
+    "furamingogan_technique"
+   ],
+   "tvar": "furamingogan_technique",
+   "ms": false,
+   "itemcd": [
+    "FuramingoganTechniqueItem",
+    "2500"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Furamingogan Secret Ritual",
+     "learn": [
+      "furamingoganlearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "15"
+     ],
+     "chakra": 150,
+     "cd": [
+      750,
+      500,
+      400,
+      300,
+      200
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Furamingogan Beam",
+     "learn": [
+      "furamingoganlearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 350,
+     "cd": [
+      1500,
+      1000,
+      750,
+      500,
+      250
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Furamingogan Jump",
+     "learn": [
+      "furamingoganlearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "25"
+     ],
+     "chakra": 500,
+     "cd": [
+      2500,
+      2000,
+      1500,
+      1000,
+      500
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "HozukiReleaseTechniqueRightclicked",
+   "cls": "ClanProcedures",
+   "item": [
+    "HozukiReleaseTechniqueItem",
+    "hozuki_release_technique"
+   ],
+   "tvar": "hozukitechnique",
+   "ms": false,
+   "itemcd": [
+    "HozukiReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Drowning Water Blob Technique",
+     "learn": [
+      "hozukilearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "15"
+     ],
+     "chakra": 200,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Water Gun Technique",
+     "learn": [
+      "hozukilearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 300,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Great Water Arm Technique",
+     "learn": [
+      "hozukilearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "25"
+     ],
+     "chakra": 0,
+     "cd": [
+      750,
+      500,
+      300,
+      200,
+      100
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "HyugaReleaseTechniqueRightclicked",
+   "cls": "ClanProcedures",
+   "item": [
+    "HyugaReleaseTechniqueItem",
+    "hyuga_release_technique"
+   ],
+   "tvar": "hyugatechnique",
+   "ms": false,
+   "itemcd": [
+    "HyugaReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Gentle Fist",
+     "learn": [
+      "hyugalearn",
+      "1"
+     ],
+     "stat": null,
+     "chakra": 0,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Gentle Step Twin Lion Fists",
+     "learn": [
+      "hyugalearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 350,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Eight Trigrams Twin Lions Crumbling Attack",
+     "learn": [
+      "hyugalearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "30"
+     ],
+     "chakra": 500,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 3,
+     "name": "Eight Trigrams Palms Revolving Heaven",
+     "learn": [
+      "hyugalearn",
+      "4"
+     ],
+     "stat": [
+      "ninjutsu",
+      "40"
+     ],
+     "chakra": 650,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 4,
+     "name": "Eight Trigrams Sixty-Four Palms",
+     "learn": [
+      "hyugalearn",
+      "5"
+     ],
+     "stat": [
+      "ninjutsu",
+      "45"
+     ],
+     "chakra": 900,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "IceReleaseTechniqueRightclicked",
+   "cls": "KekkeiGenkaiProcedures",
+   "item": [
+    "IceReleaseTechniqueItem",
+    "ice_release_technique"
+   ],
+   "tvar": "icetechnique",
+   "ms": false,
+   "itemcd": [
+    "IceReleaseTechniqueItem",
+    "1000"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Certain-Kill Ice Spears",
+     "learn": [
+      "icelearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 300,
+     "cd": [
+      100,
+      80,
+      60,
+      40,
+      20
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Demonic Mirroring Ice Crystals",
+     "learn": [
+      "icelearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "30"
+     ],
+     "chakra": 500,
+     "cd": [
+      1000,
+      800,
+      600,
+      400,
+      150
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Black Dragon Blizzard",
+     "learn": [
+      "icelearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "35"
+     ],
+     "chakra": 750,
+     "cd": [
+      1000,
+      800,
+      600,
+      400,
+      150
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "InuzukaReleaseTechniqueRightclicked",
+   "cls": "ClanProcedures",
+   "item": [
+    "InuzukaReleaseTechniqueItem",
+    "inuzuka_release_technique"
+   ],
+   "tvar": "inuzukatechnique",
+   "ms": false,
+   "itemcd": [
+    "InuzukaReleaseTechniqueItem",
+    "500"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Akamaru",
+     "learn": [
+      "inuzukalearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "10"
+     ],
+     "chakra": 200,
+     "cd": [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Passing Fang",
+     "learn": [
+      "inuzukalearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "15"
+     ],
+     "chakra": 350,
+     "cd": [
+      500,
+      400,
+      300,
+      200,
+      100
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Human Beast Combination Transformation: Double-Headed Wolf",
+     "learn": [
+      "inuzukalearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 500,
+     "cd": [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "index": 3,
+     "name": "Human Beast Mixture Transformation \\u2014 Three-Headed Wolf",
+     "learn": [
+      "inuzukalearn",
+      "4"
+     ],
+     "stat": [
+      "ninjutsu",
+      "25"
+     ],
+     "chakra": 750,
+     "cd": [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "IsshikiDojutsuReleaseTechniqueRightclicked",
+   "cls": "DojutsuProcedures",
+   "item": [
+    "IsshikiDojutsuReleaseTechniqueItem",
+    "isshiki_dojutsu_release_technique"
+   ],
+   "tvar": "isshikidojutsutechnique",
+   "ms": false,
+   "itemcd": [
+    "IsshikiDojutsuReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Sukunahikona",
+     "learn": [
+      "isshikidojutsulearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "25"
+     ],
+     "chakra": 500,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Disruption Cube",
+     "learn": [
+      "isshikidojutsulearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "35"
+     ],
+     "chakra": 1000,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "IzunoReleaseTechniqueRightclicked",
+   "cls": "ClanProcedures",
+   "item": [
+    "IzunoReleaseTechniqueItem",
+    "izuno_release_technique"
+   ],
+   "tvar": "izunotechnique",
+   "ms": false,
+   "itemcd": [
+    "IzunoReleaseTechniqueItem",
+    "1500"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Cat Covering",
+     "learn": [
+      "izunolearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 0,
+     "cd": [
+      750,
+      500,
+      300,
+      200,
+      100
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Monster Cat Beckoning Technique",
+     "learn": [
+      "izunolearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "25"
+     ],
+     "chakra": 0,
+     "cd": [
+      1500,
+      1250,
+      1000,
+      750,
+      500
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "LeeReleaseTechniqueRightclicked",
+   "cls": "ClanProcedures",
+   "item": [
+    "LeeReleaseTechniqueItem",
+    "lee_release_technique"
+   ],
+   "tvar": "lee_technique",
+   "ms": false,
+   "itemcd": null,
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Gate of Opening",
+     "learn": [
+      "leelearn",
+      "1"
+     ],
+     "stat": null,
+     "chakra": 0,
+     "cd": [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Gate of Healing",
+     "learn": [
+      "leelearn",
+      "2"
+     ],
+     "stat": [
+      "taijutsu",
+      "30"
+     ],
+     "chakra": 0,
+     "cd": [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Gate of Life",
+     "learn": [
+      "leelearn",
+      "3"
+     ],
+     "stat": [
+      "taijutsu",
+      "45"
+     ],
+     "chakra": 0,
+     "cd": [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "index": 3,
+     "name": "Gate of Pain",
+     "learn": [
+      "leelearn",
+      "4"
+     ],
+     "stat": [
+      "taijutsu",
+      "60"
+     ],
+     "chakra": 0,
+     "cd": [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "index": 4,
+     "name": "Gate of Limit",
+     "learn": [
+      "leelearn",
+      "5"
+     ],
+     "stat": [
+      "taijutsu",
+      "75"
+     ],
+     "chakra": 0,
+     "cd": [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "index": 5,
+     "name": "Gate of View",
+     "learn": [
+      "leelearn",
+      "6"
+     ],
+     "stat": [
+      "taijutsu",
+      "90"
+     ],
+     "chakra": 0,
+     "cd": [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "index": 6,
+     "name": "Gate of Wonder",
+     "learn": [
+      "leelearn",
+      "7"
+     ],
+     "stat": [
+      "taijutsu",
+      "105"
+     ],
+     "chakra": 0,
+     "cd": [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "index": 7,
+     "name": "Gate of Death",
+     "learn": [
+      "leelearn",
+      "8"
+     ],
+     "stat": [
+      "taijutsu",
+      "105"
+     ],
+     "chakra": 0,
+     "cd": [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "LightningReleaseTechniqueRightclicked",
+   "cls": "NatureReleaseProcedures",
+   "item": [
+    "LightningReleaseTechniqueItem",
+    "lightning_release_technique"
+   ],
+   "tvar": "lightning_technique",
+   "ms": false,
+   "itemcd": [
+    "LightningReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Lightning Ball Technique",
+     "learn": [
+      "lightninglearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "5"
+     ],
+     "chakra": 100,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Chidori Senbon",
+     "learn": [
+      "lightninglearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "10"
+     ],
+     "chakra": 150,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Lariat",
+     "learn": [
+      "lightninglearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "15"
+     ],
+     "chakra": 200,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 3,
+     "name": "Kirin",
+     "learn": [
+      "lightninglearn",
+      "4"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 250,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "MagnetReleaseTechniqueRightclicked",
+   "cls": "KekkeiGenkaiProcedures",
+   "item": [
+    "MagnetReleaseTechniqueItem",
+    "magnet_release_technique"
+   ],
+   "tvar": "magnettechnique",
+   "ms": false,
+   "itemcd": [
+    "MagnetReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Iron Sand Coat",
+     "learn": [
+      "magnetlearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "25"
+     ],
+     "chakra": 0,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Iron Sand Drizzle",
+     "learn": [
+      "magnetlearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "30"
+     ],
+     "chakra": 500,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Black Iron Fists",
+     "learn": [
+      "magnetlearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "35"
+     ],
+     "chakra": 0,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 3,
+     "name": "Black Iron Wings",
+     "learn": [
+      "magnetlearn",
+      "4"
+     ],
+     "stat": [
+      "ninjutsu",
+      "40"
+     ],
+     "chakra": 0,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "MangekyouSharinganItachiReleaseTechniqueRightclicked",
+   "cls": "DojutsuProcedures",
+   "item": [
+    "MangekyouSharinganItachiReleaseTechniqueItem",
+    "mangekyou_sharingan_itachi_release_technique"
+   ],
+   "tvar": null,
+   "ms": true,
+   "itemcd": null,
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Amaterasu",
+     "learn": [
+      "mangekyoushrainganitachiamaterasulearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 350,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "MangekyouSharinganKakashiReleaseTechniqueRightclicked",
+   "cls": "DojutsuProcedures",
+   "item": [
+    "MangekyouSharinganKakashiReleaseTechniqueItem",
+    "mangekyou_sharingan_kakashi_release_technique"
+   ],
+   "tvar": null,
+   "ms": true,
+   "itemcd": null,
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Kamui Long-Range",
+     "learn": [
+      "mangekyousharingankakashikamuilearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 350,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "MangekyouSharinganObitoReleaseRightclick",
+   "cls": "DojutsuProcedures",
+   "item": [
+    "MangekyouSharinganObitoReleaseTechniqueItem",
+    "mangekyou_sharingan_obito_release_technique"
+   ],
+   "tvar": "mangekyousharinganobitokamuitechnique",
+   "ms": true,
+   "itemcd": [
+    "MangekyouSharinganObitoReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Kamui Self-Teleportation",
+     "learn": [
+      "mangekyousharinganobitokamuilearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 350,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Kamui Short-Range",
+     "learn": [
+      "mangekyousharinganobitokamuilearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 350,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Kamui Phantom Phasing",
+     "learn": [
+      "mangekyousharinganobitokamuilearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "30"
+     ],
+     "chakra": 500,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "MangekyouSharinganSasukeReleaseRightclick",
+   "cls": "DojutsuProcedures",
+   "item": [
+    "MangekyouSharinganSasukeReleaseTechniqueItem",
+    "mangekyou_sharingan_sasuke_release_technique"
+   ],
+   "tvar": "mangekyousharingansasukeamaterasutechnique",
+   "ms": true,
+   "itemcd": [
+    "MangekyouSharinganSasukeReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Amaterasu",
+     "learn": [
+      "mangekyousharingansasukeamaterasulearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 350,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Blaze Release: Kagutsuchi",
+     "learn": [
+      "mangekyousharingansasukeamaterasulearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "25"
+     ],
+     "chakra": 0,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Blaze Release: Honoikazuchi",
+     "learn": [
+      "mangekyousharingansasukeamaterasulearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "30"
+     ],
+     "chakra": 500,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 3,
+     "name": "Amaterasu: Flame Wrapping Fire",
+     "learn": [
+      "mangekyousharingansasukeamaterasulearn",
+      "4"
+     ],
+     "stat": [
+      "ninjutsu",
+      "35"
+     ],
+     "chakra": 0,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "SarutobiReleaseTechniqueRightclicked",
+   "cls": "ClanProcedures",
+   "item": [
+    "SarutobiReleaseTechniqueItem",
+    "sarutobi_release_technique"
+   ],
+   "tvar": "sarutobitechnique",
+   "ms": false,
+   "itemcd": [
+    "SarutobiReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Ash Pile Burning",
+     "learn": [
+      "sarutobilearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 250,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Fire Dragon Flame Bullet",
+     "learn": [
+      "sarutobilearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "25"
+     ],
+     "chakra": 350,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "SharinganReleaseTechniqueRightclicked",
+   "cls": "DojutsuProcedures",
+   "item": [
+    "SharinganReleaseTechniqueItem",
+    "sharingan_release_technique"
+   ],
+   "tvar": "sharingantechnique",
+   "ms": false,
+   "itemcd": [
+    "SharinganReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Coercion Sharingan",
+     "learn": [
+      "sharinganlearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "10"
+     ],
+     "chakra": 200,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Demonic Illusion: Mirage Crow",
+     "learn": [
+      "sharinganlearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 350,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Demonic Illusion: Shackling Stakes Technique",
+     "learn": [
+      "sharinganlearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "30"
+     ],
+     "chakra": 500,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "SmokeReleaseTechniqueRightclicked",
+   "cls": "KekkeiGenkaiProcedures",
+   "item": [
+    "SmokeReleaseTechniqueItem",
+    "smoke_release_technique"
+   ],
+   "tvar": "smoketechnique",
+   "ms": false,
+   "itemcd": [
+    "SmokeReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Smoke Form",
+     "learn": [
+      "ninjutsu",
+      "20"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 0,
+     "cd": [
+      750,
+      500,
+      300,
+      200,
+      100
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Smoke Fist",
+     "learn": [
+      "smokelearn",
+      "2"
+     ],
+     "stat": null,
+     "chakra": 0,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Smoke Gun",
+     "learn": [
+      "smokelearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "50"
+     ],
+     "chakra": 1000,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "SteelReleaseTechniqueRightclicked",
+   "cls": "KekkeiGenkaiProcedures",
+   "item": [
+    "SteelReleaseTechniqueItem",
+    "steel_release_technique"
+   ],
+   "tvar": "steeltechnique",
+   "ms": false,
+   "itemcd": [
+    "SteelReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Impervious Armour",
+     "learn": [
+      "steellearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 0,
+     "cd": [
+      750,
+      500,
+      300,
+      200,
+      100
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Steel Projectile",
+     "learn": [
+      "steellearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "25"
+     ],
+     "chakra": 450,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "StormReleaseTechniqueRightclicked",
+   "cls": "KekkeiGenkaiProcedures",
+   "item": [
+    "StormReleaseTechniqueItem",
+    "storm_release_technique"
+   ],
+   "tvar": "stormtechnique",
+   "ms": false,
+   "itemcd": [
+    "StormReleaseTechniqueItem",
+    "1000"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Laser Circus",
+     "learn": [
+      "stormlearn",
+      "1"
+     ],
+     "stat": null,
+     "chakra": 0,
+     "cd": [
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Thunder Cloud Inner Wave",
+     "learn": [
+      "stormlearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "30"
+     ],
+     "chakra": 500,
+     "cd": [
+      1000,
+      800,
+      600,
+      400,
+      150
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "SwiftReleaseTechniqueRightclicked",
+   "cls": "KekkeiGenkaiProcedures",
+   "item": [
+    "SwiftReleaseTechniqueItem",
+    "swift_release_technique"
+   ],
+   "tvar": null,
+   "ms": false,
+   "itemcd": null,
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Shadowless Flight",
+     "learn": [
+      "swiftlearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "30"
+     ],
+     "chakra": 0,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "TenroReleaseTechniqueRightclicked",
+   "cls": "ClanProcedures",
+   "item": [
+    "TenroReleaseTechniqueItem",
+    "tenro_release_technique"
+   ],
+   "tvar": "tenrotechnique",
+   "ms": false,
+   "itemcd": [
+    "TenroReleaseTechniqueItem",
+    "500"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Beast-Human Fury Kicks",
+     "learn": [
+      "tenrolearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "15"
+     ],
+     "chakra": 50,
+     "cd": [
+      20,
+      15,
+      10,
+      5,
+      3
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Beast-Human Transformation Technique",
+     "learn": [
+      "tenrolearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 0,
+     "cd": [
+      1500,
+      1250,
+      1000,
+      750,
+      500
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Beast-Human Needle Senbon",
+     "learn": [
+      "tenrolearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "25"
+     ],
+     "chakra": 300,
+     "cd": [
+      500,
+      400,
+      300,
+      200,
+      100
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "TyphoonReleaseTechniqueRightclicked",
+   "cls": "KekkeiGenkaiProcedures",
+   "item": [
+    "TyphoonReleaseTechniqueItem",
+    "typhoon_release_technique"
+   ],
+   "tvar": "typhoontechnique",
+   "ms": false,
+   "itemcd": [
+    "TyphoonReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Great Consecutive Bursting Strong Winds",
+     "learn": [
+      "typhoonlearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 300,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Great Consecutive Bursting Extreme Winds",
+     "learn": [
+      "typhoonlearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "25"
+     ],
+     "chakra": 450,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "UzumakiReleaseTechniqueRightclicked",
+   "cls": "ClanProcedures",
+   "item": [
+    "UzumakiReleaseTechniqueItem",
+    "uzumaki_release_technique"
+   ],
+   "tvar": "uzumakitechnique",
+   "ms": false,
+   "itemcd": [
+    "UzumakiReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Adamantine Sealing Chains",
+     "learn": [
+      "uzumakilearn",
+      "1"
+     ],
+     "stat": null,
+     "chakra": 0,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Heal Bite",
+     "learn": [
+      "uzumakilearn",
+      "2"
+     ],
+     "stat": null,
+     "chakra": 0,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Dead Demon Consuming Seal",
+     "learn": [
+      "uzumakilearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "30"
+     ],
+     "chakra": 500,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "VolticModeTechniqueRightclicked",
+   "cls": "DojutsuProcedures",
+   "item": [
+    "VolticModeTechniqueItem",
+    "voltic_mode_technique"
+   ],
+   "tvar": "voltic_technique",
+   "ms": false,
+   "itemcd": [
+    "VolticModeTechniqueItem",
+    "3500"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Voltic Hammer",
+     "learn": [
+      "volticlearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "15"
+     ],
+     "chakra": 100,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Voltic Execution",
+     "learn": [
+      "volticlearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 450,
+     "cd": [
+      3000,
+      2500,
+      2000,
+      1500,
+      1000
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Voltic Thomas Cannon",
+     "learn": [
+      "volticlearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "25"
+     ],
+     "chakra": 500,
+     "cd": [
+      3500,
+      3000,
+      2500,
+      2000,
+      1500
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "WaterReleaseTechniqueRightclicked",
+   "cls": "NatureReleaseProcedures",
+   "item": [
+    "WaterReleaseTechniqueItem",
+    "water_release_technique"
+   ],
+   "tvar": "water_technique",
+   "ms": false,
+   "itemcd": [
+    "WaterReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Water Formation Wall",
+     "learn": [
+      "waterlearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "5"
+     ],
+     "chakra": 100,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Water Gun",
+     "learn": [
+      "waterlearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "10"
+     ],
+     "chakra": 150,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Water Shark Bullet Technique",
+     "learn": [
+      "waterlearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "15"
+     ],
+     "chakra": 200,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 3,
+     "name": "Water Dragon Bullet Technique",
+     "learn": [
+      "waterlearn",
+      "4"
+     ],
+     "stat": [
+      "ninjutsu",
+      "20"
+     ],
+     "chakra": 250,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "WindReleaseTechniqueRightclicked",
+   "cls": "NatureReleaseProcedures",
+   "item": [
+    "WindReleaseTechniqueItem",
+    "wind_release_technique"
+   ],
+   "tvar": "wind_technique",
+   "ms": false,
+   "itemcd": [
+    "WindReleaseTechniqueItem",
+    "200"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Boruto Stream",
+     "learn": [
+      "windlearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "5"
+     ],
+     "chakra": 100,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Vacuum Sphere",
+     "learn": [
+      "windlearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "10"
+     ],
+     "chakra": 150,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Wind Mode",
+     "learn": [
+      "windlearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "10"
+     ],
+     "chakra": 0,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    },
+    {
+     "index": 3,
+     "name": "Rasenshuriken",
+     "learn": [
+      "windlearn",
+      "4"
+     ],
+     "stat": [
+      "ninjutsu",
+      "10"
+     ],
+     "chakra": 250,
+     "cd": [
+      200,
+      160,
+      120,
+      80,
+      40
+     ]
+    }
+   ]
+  },
+  {
+   "proc": "WoodReleaseTechniqueRightclicked",
+   "cls": "KekkeiGenkaiProcedures",
+   "item": [
+    "WoodReleaseTechniqueItem",
+    "wood_release_technique"
+   ],
+   "tvar": "woodtechnique",
+   "ms": false,
+   "itemcd": [
+    "WoodReleaseTechniqueItem",
+    "1000"
+   ],
+   "jutsu": [
+    {
+     "index": 0,
+     "name": "Wood Dragon Technique",
+     "learn": [
+      "woodlearn",
+      "1"
+     ],
+     "stat": [
+      "ninjutsu",
+      "25"
+     ],
+     "chakra": 300,
+     "cd": [
+      1000,
+      800,
+      600,
+      400,
+      150
+     ]
+    },
+    {
+     "index": 1,
+     "name": "Tree Bind Flourishing Burial",
+     "learn": [
+      "woodlearn",
+      "2"
+     ],
+     "stat": [
+      "ninjutsu",
+      "30"
+     ],
+     "chakra": 500,
+     "cd": [
+      1000,
+      800,
+      600,
+      400,
+      150
+     ]
+    },
+    {
+     "index": 2,
+     "name": "Wood Human Technique",
+     "learn": [
+      "woodlearn",
+      "3"
+     ],
+     "stat": [
+      "ninjutsu",
+      "35"
+     ],
+     "chakra": 650,
+     "cd": [
+      1000,
+      800,
+      600,
+      400,
+      150
+     ]
+    }
+   ]
+  }
+ ],
+ "buy": [
+  {
+   "proc": "AburameReleaseRightclick",
+   "item": [
+    "AburameReleaseItem",
+    "aburame_release"
+   ],
+   "tiers": [
+    {
+     "counter": "aburame_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 10,
+     "learn": [
+      "1",
+      "aburamelearn"
+     ],
+     "give": "AburameReleaseTechniqueItem"
+    },
+    {
+     "counter": "aburame_release",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 15,
+     "learn": [
+      "2",
+      "aburamelearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "aburame_release",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 20,
+     "learn": [
+      "3",
+      "aburamelearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "AkimichiReleaseRightclick",
+   "item": [
+    "AkimichiReleaseItem",
+    "akimichi_release"
+   ],
+   "tiers": [
+    {
+     "counter": "akimichirelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 15,
+     "learn": [
+      "1",
+      "akimichilearn"
+     ],
+     "give": "AkimichiReleaseTechniqueItem"
+    },
+    {
+     "counter": "akimichirelease",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 20,
+     "learn": [
+      "2",
+      "akimichilearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "akimichirelease",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 25,
+     "learn": [
+      "3",
+      "akimichilearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "akimichirelease",
+     "sneak": -1,
+     "tier": 3,
+     "cost": 30,
+     "learn": [
+      "4",
+      "akimichilearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "BoilReleaseRightClicked",
+   "item": [
+    "BoilReleaseItem",
+    "boil_release"
+   ],
+   "tiers": [
+    {
+     "counter": "boilrelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 20,
+     "learn": [
+      "1",
+      "boillearn"
+     ],
+     "give": "BoilReleaseTechniqueItem"
+    },
+    {
+     "counter": "boilrelease",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 25,
+     "learn": [
+      "2",
+      "boillearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "boilrelease",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 30,
+     "learn": [
+      "3",
+      "boillearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "BoneReleaseRightclicked",
+   "item": [
+    "BoneReleaseItem",
+    "bone_release"
+   ],
+   "tiers": [
+    {
+     "counter": "bone_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 15,
+     "learn": [
+      "1",
+      "bonelearn"
+     ],
+     "give": "BoneReleaseTechniqueItem"
+    },
+    {
+     "counter": "bone_release",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 20,
+     "learn": [
+      "2",
+      "bonelearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "bone_release",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 25,
+     "learn": [
+      "3",
+      "bonelearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "DustReleaseRightClicked",
+   "item": [
+    "DustReleaseItem",
+    "dust_release"
+   ],
+   "tiers": [
+    {
+     "counter": "dustrelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 100,
+     "learn": [
+      "1",
+      "dustlearn"
+     ],
+     "give": "DustReleaseTechniqueItem"
+    }
+   ]
+  },
+  {
+   "proc": "EarthReleaseRightClicked",
+   "item": [
+    "EarthReleaseItem",
+    "earth_release"
+   ],
+   "tiers": [
+    {
+     "counter": "earth_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 5,
+     "learn": [
+      "1",
+      "earthlearn"
+     ],
+     "give": "EarthReleaseTechniqueItem"
+    },
+    {
+     "counter": "earth_release",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 10,
+     "learn": [
+      "2",
+      "earthlearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "earth_release",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 15,
+     "learn": [
+      "3",
+      "earthlearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "earth_release",
+     "sneak": -1,
+     "tier": 3,
+     "cost": 20,
+     "learn": [
+      "4",
+      "earthlearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "FireReleaseRightclicked",
+   "item": [
+    "FireReleaseItem",
+    "fire_release"
+   ],
+   "tiers": [
+    {
+     "counter": "fire_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 5,
+     "learn": [
+      "1",
+      "firelearn"
+     ],
+     "give": "FireReleaseTechniqueItem"
+    },
+    {
+     "counter": "fire_release",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 10,
+     "learn": [
+      "2",
+      "firelearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "fire_release",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 15,
+     "learn": [
+      "3",
+      "firelearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "fire_release",
+     "sneak": -1,
+     "tier": 3,
+     "cost": 20,
+     "learn": [
+      "4",
+      "firelearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "FumaReleaseRightclick",
+   "item": [
+    "FumaReleaseItem",
+    "fuma_release"
+   ],
+   "tiers": [
+    {
+     "counter": "fumarelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 10,
+     "learn": [
+      "1",
+      "fumalearn"
+     ],
+     "give": "FumaReleaseTechniqueItem"
+    },
+    {
+     "counter": "fumarelease",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 15,
+     "learn": [
+      "2",
+      "fumalearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "fumarelease",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 20,
+     "learn": [
+      "3",
+      "fumalearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "FuramingoganReleaseRightclicked",
+   "item": [
+    "FuramingoganReleaseItem",
+    "furamingogan_release"
+   ],
+   "tiers": [
+    {
+     "counter": "furamingoganrelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 15,
+     "learn": [
+      "1",
+      "furamingoganlearn"
+     ],
+     "give": "FuramingoganTechniqueItem"
+    },
+    {
+     "counter": "furamingoganrelease",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 20,
+     "learn": [
+      "2",
+      "furamingoganlearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "furamingoganrelease",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 25,
+     "learn": [
+      "3",
+      "furamingoganlearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "HatakeReleaseRightclicked",
+   "item": [
+    "HatakeReleaseItem",
+    "hatake_release"
+   ],
+   "tiers": [
+    {
+     "counter": "hatakelearn",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 5,
+     "learn": null,
+     "give": "WhiteLightChakraSabreItem"
+    }
+   ]
+  },
+  {
+   "proc": "HoshigakiReleaseRightclicked",
+   "item": [
+    "HoshigakiReleaseItem",
+    "hoshigaki_release"
+   ],
+   "tiers": [
+    {
+     "counter": "hoshigaki_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 5,
+     "learn": null,
+     "give": "HoshigakiReleaseTechniqueItem"
+    }
+   ]
+  },
+  {
+   "proc": "HozukiReleaseRightclick",
+   "item": [
+    "HozukiReleaseItem",
+    "hozuki_release"
+   ],
+   "tiers": [
+    {
+     "counter": "hozukirelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 10,
+     "learn": [
+      "1",
+      "hozukilearn"
+     ],
+     "give": "HozukiReleaseTechniqueItem"
+    },
+    {
+     "counter": "hozukirelease",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 15,
+     "learn": [
+      "2",
+      "hozukilearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "hozukirelease",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 20,
+     "learn": [
+      "3",
+      "hozukilearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "HyugaReleaseRightclicked",
+   "item": [
+    "HyugaReleaseItem",
+    "hyuga_release"
+   ],
+   "tiers": [
+    {
+     "counter": "hyugarelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 15,
+     "learn": [
+      "1",
+      "hyugalearn"
+     ],
+     "give": "HyugaReleaseTechniqueItem"
+    },
+    {
+     "counter": "hyugarelease",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 20,
+     "learn": [
+      "2",
+      "hyugalearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "hyugarelease",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 25,
+     "learn": [
+      "3",
+      "hyugalearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "hyugarelease",
+     "sneak": -1,
+     "tier": 3,
+     "cost": 30,
+     "learn": [
+      "4",
+      "hyugalearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "hyugarelease",
+     "sneak": -1,
+     "tier": 4,
+     "cost": 35,
+     "learn": [
+      "5",
+      "hyugalearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "IburiReleaseRightclicked",
+   "item": [
+    "IburiReleaseItem",
+    "iburi_release"
+   ],
+   "tiers": [
+    {
+     "counter": "iburi_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 5,
+     "learn": null,
+     "give": "SmokeReleaseItem"
+    }
+   ]
+  },
+  {
+   "proc": "IceReleaseRightclicked",
+   "item": [
+    "IceReleaseItem",
+    "ice_release"
+   ],
+   "tiers": [
+    {
+     "counter": "ice_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 15,
+     "learn": [
+      "1",
+      "icelearn"
+     ],
+     "give": "IceReleaseTechniqueItem"
+    },
+    {
+     "counter": "ice_release",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 20,
+     "learn": [
+      "2",
+      "icelearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "ice_release",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 25,
+     "learn": [
+      "3",
+      "icelearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "InuzukaReleaseRightclicked",
+   "item": [
+    "InuzukaReleaseItem",
+    "inuzuka_release"
+   ],
+   "tiers": [
+    {
+     "counter": "inuzuka_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 5,
+     "learn": [
+      "1",
+      "inuzukalearn"
+     ],
+     "give": "InuzukaReleaseTechniqueItem"
+    },
+    {
+     "counter": "inuzuka_release",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 10,
+     "learn": [
+      "2",
+      "inuzukalearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "inuzuka_release",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 15,
+     "learn": [
+      "3",
+      "inuzukalearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "inuzuka_release",
+     "sneak": -1,
+     "tier": 3,
+     "cost": 20,
+     "learn": [
+      "4",
+      "inuzukalearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "IsshikiDojutsuReleaseRightclicked",
+   "item": [
+    "IsshikiDojutsuReleaseItem",
+    "isshiki_dojutsu_release"
+   ],
+   "tiers": [
+    {
+     "counter": "isshikidojutsurelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 25,
+     "learn": [
+      "1",
+      "isshikidojutsulearn"
+     ],
+     "give": "IsshikiDojutsuReleaseTechniqueItem"
+    },
+    {
+     "counter": "isshikidojutsurelease",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 40,
+     "learn": [
+      "2",
+      "isshikidojutsulearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "IzunoReleaseRightclicked",
+   "item": [
+    "IzunoReleaseItem",
+    "izuno_release"
+   ],
+   "tiers": [
+    {
+     "counter": "izuno_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 25,
+     "learn": [
+      "1",
+      "izunolearn"
+     ],
+     "give": "IzunoReleaseTechniqueItem"
+    },
+    {
+     "counter": "izuno_release",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 30,
+     "learn": [
+      "2",
+      "izunolearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "KaguyaReleaseRightclicked",
+   "item": [
+    "KaguyaReleaseItem",
+    "kaguya_release"
+   ],
+   "tiers": [
+    {
+     "counter": "kaguya_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 5,
+     "learn": null,
+     "give": "BoneReleaseItem"
+    }
+   ]
+  },
+  {
+   "proc": "KazekageReleaseRightclicked",
+   "item": [
+    "KazekageReleaseItem",
+    "kazekage_release"
+   ],
+   "tiers": [
+    {
+     "counter": "kazekage_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 5,
+     "learn": null,
+     "give": "MagnetReleaseItem"
+    }
+   ]
+  },
+  {
+   "proc": "LeeReleaseRightclicked",
+   "item": [
+    "LeeReleaseItem",
+    "lee_release"
+   ],
+   "tiers": [
+    {
+     "counter": "lee_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 10,
+     "learn": [
+      "1",
+      "leelearn"
+     ],
+     "give": "LeeReleaseDrunkenFistItem"
+    },
+    {
+     "counter": "lee_release",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 20,
+     "learn": [
+      "2",
+      "leelearn"
+     ],
+     "give": "LeeReleaseTechniqueItem"
+    },
+    {
+     "counter": "lee_release",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 25,
+     "learn": [
+      "3",
+      "leelearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "lee_release",
+     "sneak": -1,
+     "tier": 3,
+     "cost": 30,
+     "learn": [
+      "4",
+      "leelearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "lee_release",
+     "sneak": -1,
+     "tier": 4,
+     "cost": 35,
+     "learn": [
+      "5",
+      "leelearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "lee_release",
+     "sneak": -1,
+     "tier": 5,
+     "cost": 40,
+     "learn": [
+      "6",
+      "leelearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "lee_release",
+     "sneak": -1,
+     "tier": 6,
+     "cost": 45,
+     "learn": [
+      "7",
+      "leelearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "lee_release",
+     "sneak": -1,
+     "tier": 7,
+     "cost": 50,
+     "learn": [
+      "8",
+      "leelearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "lee_release",
+     "sneak": -1,
+     "tier": 8,
+     "cost": 55,
+     "learn": [
+      "9",
+      "leelearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "LightningReleaseRightClicked",
+   "item": [
+    "LightningReleaseItem",
+    "lightning_release"
+   ],
+   "tiers": [
+    {
+     "counter": "lightning_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 5,
+     "learn": [
+      "1",
+      "lightninglearn"
+     ],
+     "give": "LightningReleaseTechniqueItem"
+    },
+    {
+     "counter": "lightning_release",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 10,
+     "learn": [
+      "2",
+      "lightninglearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "lightning_release",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 15,
+     "learn": [
+      "3",
+      "lightninglearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "lightning_release",
+     "sneak": -1,
+     "tier": 3,
+     "cost": 20,
+     "learn": [
+      "4",
+      "lightninglearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "MagnetReleaseRightclicked",
+   "item": [
+    "MagnetReleaseItem",
+    "magnet_release"
+   ],
+   "tiers": [
+    {
+     "counter": "magnet_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 25,
+     "learn": [
+      "1",
+      "magnetlearn"
+     ],
+     "give": "MagnetReleaseTechniqueItem"
+    },
+    {
+     "counter": "magnet_release",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 30,
+     "learn": [
+      "2",
+      "magnetlearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "magnet_release",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 35,
+     "learn": [
+      "3",
+      "magnetlearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "magnet_release",
+     "sneak": -1,
+     "tier": 3,
+     "cost": 40,
+     "learn": [
+      "4",
+      "magnetlearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "MangekyouSharinganItachiReleaseRightclicked",
+   "item": [
+    "MangekyouSharinganItachiReleaseItem",
+    "mangekyou_sharingan_itachi_release"
+   ],
+   "tiers": [
+    {
+     "counter": "mangekyoushrainganitachiamaterasulearn",
+     "sneak": 0,
+     "tier": 0,
+     "cost": 10,
+     "learn": [
+      "1",
+      "mangekyoushrainganitachiamaterasulearn"
+     ],
+     "give": "MangekyouSharinganItachiReleaseTechniqueItem"
+    },
+    {
+     "counter": "mangekyoushrainganitachisusanorelease",
+     "sneak": 1,
+     "tier": 0,
+     "cost": 10,
+     "learn": [
+      "1",
+      "mangekyoushrainganitachisusanolearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "mangekyoushrainganitachisusanorelease",
+     "sneak": 1,
+     "tier": 1,
+     "cost": 20,
+     "learn": [
+      "2",
+      "mangekyoushrainganitachisusanolearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "mangekyoushrainganitachisusanorelease",
+     "sneak": 1,
+     "tier": 2,
+     "cost": 30,
+     "learn": [
+      "3",
+      "mangekyoushrainganitachisusanolearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "MangekyouSharinganKakashiReleaseRightclicked",
+   "item": [
+    "MangekyouSharinganKakashiReleaseItem",
+    "mangekyou_sharingan_kakashi_release"
+   ],
+   "tiers": [
+    {
+     "counter": "mangekyousharingankakashikamuilearn",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 35,
+     "learn": [
+      "1",
+      "mangekyousharingankakashikamuilearn"
+     ],
+     "give": "MangekyouSharinganKakashiReleaseTechniqueItem"
+    }
+   ]
+  },
+  {
+   "proc": "MangekyouSharinganMadaraReleaseRightclicked",
+   "item": [
+    "MangekyouSharinganMadaraReleaseItem",
+    "mangekyou_sharingan_madara_release"
+   ],
+   "tiers": [
+    {
+     "counter": "mangekyousharinganmadarasusanorelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 10,
+     "learn": [
+      "1",
+      "mangekyousharinganmadarasusanolearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "mangekyousharinganmadarasusanorelease",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 20,
+     "learn": [
+      "2",
+      "mangekyousharinganmadarasusanolearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "mangekyousharinganmadarasusanorelease",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 30,
+     "learn": [
+      "3",
+      "mangekyousharinganmadarasusanolearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "mangekyousharinganmadarasusanorelease",
+     "sneak": -1,
+     "tier": 3,
+     "cost": 40,
+     "learn": [
+      "4",
+      "mangekyousharinganmadarasusanolearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "MangekyouSharinganObitoReleaseRightclicked",
+   "item": [
+    "MangekyouSharinganObitoReleaseItem",
+    "mangekyou_sharingan_obito_release"
+   ],
+   "tiers": [
+    {
+     "counter": "mangekyousharinganobitokamuirelease",
+     "sneak": 0,
+     "tier": 0,
+     "cost": 20,
+     "learn": [
+      "1",
+      "mangekyousharinganobitokamuilearn"
+     ],
+     "give": "MangekyouSharinganObitoReleaseTechniqueItem"
+    },
+    {
+     "counter": "mangekyousharinganobitokamuirelease",
+     "sneak": 0,
+     "tier": 1,
+     "cost": 30,
+     "learn": [
+      "2",
+      "mangekyousharinganobitokamuilearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "mangekyousharinganobitokamuirelease",
+     "sneak": 0,
+     "tier": 2,
+     "cost": 35,
+     "learn": [
+      "3",
+      "mangekyousharinganobitokamuilearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "mangekyousharinganobitosusanorelease",
+     "sneak": 1,
+     "tier": 0,
+     "cost": 10,
+     "learn": [
+      "1",
+      "mangekyousharinganobitosusanolearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "mangekyousharinganobitosusanorelease",
+     "sneak": 1,
+     "tier": 1,
+     "cost": 20,
+     "learn": [
+      "2",
+      "mangekyousharinganobitosusanolearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "mangekyousharinganobitosusanorelease",
+     "sneak": 1,
+     "tier": 2,
+     "cost": 30,
+     "learn": [
+      "3",
+      "mangekyousharinganobitosusanolearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "MangekyouSharinganSasukeReleaseRightclicked",
+   "item": [
+    "MangekyouSharinganSasukeReleaseItem",
+    "mangekyou_sharingan_sasuke_release"
+   ],
+   "tiers": [
+    {
+     "counter": "mangekyousharingansasukeamaterasurelease",
+     "sneak": 0,
+     "tier": 0,
+     "cost": 10,
+     "learn": [
+      "1",
+      "mangekyousharingansasukeamaterasulearn"
+     ],
+     "give": "MangekyouSharinganSasukeReleaseTechniqueItem"
+    },
+    {
+     "counter": "mangekyousharingansasukeamaterasurelease",
+     "sneak": 0,
+     "tier": 1,
+     "cost": 15,
+     "learn": [
+      "2",
+      "mangekyousharingansasukeamaterasulearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "mangekyousharingansasukeamaterasurelease",
+     "sneak": 0,
+     "tier": 2,
+     "cost": 20,
+     "learn": [
+      "3",
+      "mangekyousharingansasukeamaterasulearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "mangekyousharingansasukeamaterasurelease",
+     "sneak": 0,
+     "tier": 3,
+     "cost": 25,
+     "learn": [
+      "4",
+      "mangekyousharingansasukeamaterasulearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "mangekyousharingansasukesusanorelease",
+     "sneak": 1,
+     "tier": 0,
+     "cost": 10,
+     "learn": [
+      "1",
+      "mangekyousharingansasukesusanolearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "mangekyousharingansasukesusanorelease",
+     "sneak": 1,
+     "tier": 1,
+     "cost": 20,
+     "learn": [
+      "2",
+      "mangekyousharingansasukesusanolearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "mangekyousharingansasukesusanorelease",
+     "sneak": 1,
+     "tier": 2,
+     "cost": 30,
+     "learn": [
+      "3",
+      "mangekyousharingansasukesusanolearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "mangekyousharingansasukesusanorelease",
+     "sneak": 1,
+     "tier": 3,
+     "cost": 40,
+     "learn": [
+      "4",
+      "mangekyousharingansasukesusanolearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "MangekyouSharinganShisuiReleaseRightclicked",
+   "item": [
+    "MangekyouSharinganShisuiReleaseItem",
+    "mangekyou_sharingan_shisui_release"
+   ],
+   "tiers": [
+    {
+     "counter": "mangekyousharinganshisuisusanorelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 10,
+     "learn": [
+      "1",
+      "mangekyousharinganshisuisusanolearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "mangekyousharinganshisuisusanorelease",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 20,
+     "learn": [
+      "2",
+      "mangekyousharinganshisuisusanolearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "mangekyousharinganshisuisusanorelease",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 30,
+     "learn": [
+      "3",
+      "mangekyousharinganshisuisusanolearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "mangekyousharinganshisuisusanorelease",
+     "sneak": -1,
+     "tier": 3,
+     "cost": 40,
+     "learn": [
+      "4",
+      "mangekyousharinganshisuisusanolearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "NamikazeReleaseRightclicked",
+   "item": [
+    "NamikazeReleaseItem",
+    "namikaze_release"
+   ],
+   "tiers": [
+    {
+     "counter": "namikaze_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 5,
+     "learn": null,
+     "give": "StormReleaseItem"
+    },
+    {
+     "counter": "namikaze_release",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 10,
+     "learn": null,
+     "give": "FlyingThunderGodKunaiItem"
+    }
+   ]
+  },
+  {
+   "proc": "OtsutsukiReleaseRightclicked",
+   "item": [
+    "OtsutsukiReleaseItem",
+    "otsutsuki_release"
+   ],
+   "tiers": [
+    {
+     "counter": "otsutsuki_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 30,
+     "learn": null,
+     "give": "OtsutsukiSwordItem"
+    }
+   ]
+  },
+  {
+   "proc": "SarutobiReleaseRightclick",
+   "item": [
+    "SarutobiReleaseItem",
+    "sarutobi_release"
+   ],
+   "tiers": [
+    {
+     "counter": "sarutobirelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 10,
+     "learn": [
+      "1",
+      "sarutobilearn"
+     ],
+     "give": "SarutobiReleaseTechniqueItem"
+    },
+    {
+     "counter": "sarutobirelease",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 15,
+     "learn": [
+      "2",
+      "sarutobilearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "SenjuReleaseRightclicked",
+   "item": [
+    "SenjuReleaseItem",
+    "senju_release"
+   ],
+   "tiers": [
+    {
+     "counter": "senju_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 5,
+     "learn": null,
+     "give": "WoodReleaseItem"
+    }
+   ]
+  },
+  {
+   "proc": "SharinganReleaseRightclicked",
+   "item": [
+    "SharinganReleaseItem",
+    "sharingan_release"
+   ],
+   "tiers": [
+    {
+     "counter": "sharinganrelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 15,
+     "learn": [
+      "1",
+      "sharinganlearn"
+     ],
+     "give": "SharinganReleaseTechniqueItem"
+    },
+    {
+     "counter": "sharinganrelease",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 20,
+     "learn": [
+      "2",
+      "sharinganlearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "sharinganrelease",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 25,
+     "learn": [
+      "3",
+      "sharinganlearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "sharinganrelease",
+     "sneak": -1,
+     "tier": 3,
+     "cost": 30,
+     "learn": [
+      "4",
+      "sharinganlearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "SmokeReleaseRightclicked",
+   "item": [
+    "SmokeReleaseItem",
+    "smoke_release"
+   ],
+   "tiers": [
+    {
+     "counter": "smokerelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 25,
+     "learn": [
+      "1",
+      "smokelearn"
+     ],
+     "give": "SmokeReleaseTechniqueItem"
+    },
+    {
+     "counter": "smokerelease",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 30,
+     "learn": [
+      "2",
+      "smokelearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "smokerelease",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 35,
+     "learn": [
+      "3",
+      "smokelearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "SteelReleaseRightClicked",
+   "item": [
+    "SteelReleaseItem",
+    "steel_release"
+   ],
+   "tiers": [
+    {
+     "counter": "steelrelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 25,
+     "learn": [
+      "1",
+      "steellearn"
+     ],
+     "give": "SteelReleaseTechniqueItem"
+    },
+    {
+     "counter": "steelrelease",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 30,
+     "learn": [
+      "2",
+      "steellearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "StormReleaseRightclicked",
+   "item": [
+    "StormReleaseItem",
+    "storm_release"
+   ],
+   "tiers": [
+    {
+     "counter": "storm_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 25,
+     "learn": [
+      "1",
+      "stormlearn"
+     ],
+     "give": "StormReleaseTechniqueItem"
+    },
+    {
+     "counter": "storm_release",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 30,
+     "learn": [
+      "2",
+      "stormlearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "SwiftReleaseRightClicked",
+   "item": [
+    "SwiftReleaseItem",
+    "swift_release"
+   ],
+   "tiers": [
+    {
+     "counter": "swiftrelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 35,
+     "learn": [
+      "1",
+      "swiftlearn"
+     ],
+     "give": "SwiftReleaseTechniqueItem"
+    }
+   ]
+  },
+  {
+   "proc": "TenroReleaseRightclicked",
+   "item": [
+    "TenroReleaseItem",
+    "tenro_release"
+   ],
+   "tiers": [
+    {
+     "counter": "tenro_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 15,
+     "learn": [
+      "1",
+      "tenrolearn"
+     ],
+     "give": "TenroReleaseTechniqueItem"
+    },
+    {
+     "counter": "tenro_release",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 20,
+     "learn": [
+      "2",
+      "tenrolearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "tenro_release",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 25,
+     "learn": [
+      "3",
+      "tenrolearn"
+     ],
+     "give": "TenroReleaseItem"
+    }
+   ]
+  },
+  {
+   "proc": "TsuchigumoReleaseRightclick",
+   "item": [
+    "TsuchigumoReleaseItem",
+    "tsuchigumo_release"
+   ],
+   "tiers": [
+    {
+     "counter": "tsuchigumorelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 20,
+     "learn": [
+      "1",
+      "tsuchigumolearn"
+     ],
+     "give": "TsuchigumoReleaseTechniqueItem"
+    }
+   ]
+  },
+  {
+   "proc": "TyphoonReleaseRightClicked",
+   "item": [
+    "TyphoonReleaseItem",
+    "typhoon_release"
+   ],
+   "tiers": [
+    {
+     "counter": "typhoonrelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 25,
+     "learn": [
+      "1",
+      "typhoonlearn"
+     ],
+     "give": "TyphoonReleaseTechniqueItem"
+    },
+    {
+     "counter": "typhoonrelease",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 30,
+     "learn": [
+      "2",
+      "typhoonlearn"
+     ],
+     "give": "TyphoonReleaseItem"
+    }
+   ]
+  },
+  {
+   "proc": "UzumakiReleaseRightclicked",
+   "item": [
+    "UzumakiReleaseItem",
+    "uzumaki_release"
+   ],
+   "tiers": [
+    {
+     "counter": "uzumakirelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 15,
+     "learn": [
+      "1",
+      "uzumakilearn"
+     ],
+     "give": "UzumakiReleaseTechniqueItem"
+    },
+    {
+     "counter": "uzumakirelease",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 20,
+     "learn": [
+      "2",
+      "uzumakilearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "uzumakirelease",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 25,
+     "learn": [
+      "3",
+      "uzumakilearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "VolticModeReleaseRightclicked",
+   "item": [
+    "VolticModeReleaseItem",
+    "voltic_mode_release"
+   ],
+   "tiers": [
+    {
+     "counter": "volticrelease",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 25,
+     "learn": [
+      "1",
+      "volticlearn"
+     ],
+     "give": "VolticModeTechniqueItem"
+    },
+    {
+     "counter": "volticrelease",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 35,
+     "learn": [
+      "2",
+      "volticlearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "volticrelease",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 50,
+     "learn": [
+      "3",
+      "volticlearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "WaterReleaseRightClicked",
+   "item": [
+    "WaterReleaseItem",
+    "water_release"
+   ],
+   "tiers": [
+    {
+     "counter": "water_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 5,
+     "learn": [
+      "1",
+      "waterlearn"
+     ],
+     "give": "WaterReleaseTechniqueItem"
+    },
+    {
+     "counter": "water_release",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 10,
+     "learn": [
+      "2",
+      "waterlearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "water_release",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 15,
+     "learn": [
+      "3",
+      "waterlearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "water_release",
+     "sneak": -1,
+     "tier": 3,
+     "cost": 20,
+     "learn": [
+      "4",
+      "waterlearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "WindReleaseRightclicked",
+   "item": [
+    "WindReleaseItem",
+    "wind_release"
+   ],
+   "tiers": [
+    {
+     "counter": "wind_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 5,
+     "learn": [
+      "1",
+      "windlearn"
+     ],
+     "give": "WindReleaseTechniqueItem"
+    },
+    {
+     "counter": "wind_release",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 10,
+     "learn": [
+      "2",
+      "windlearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "wind_release",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 15,
+     "learn": [
+      "3",
+      "windlearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "wind_release",
+     "sneak": -1,
+     "tier": 3,
+     "cost": 20,
+     "learn": [
+      "4",
+      "windlearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "WoodReleaseRightclicked",
+   "item": [
+    "WoodReleaseItem",
+    "wood_release"
+   ],
+   "tiers": [
+    {
+     "counter": "wood_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 20,
+     "learn": [
+      "1",
+      "woodlearn"
+     ],
+     "give": "WoodReleaseTechniqueItem"
+    },
+    {
+     "counter": "wood_release",
+     "sneak": -1,
+     "tier": 1,
+     "cost": 25,
+     "learn": [
+      "2",
+      "woodlearn"
+     ],
+     "give": null
+    },
+    {
+     "counter": "wood_release",
+     "sneak": -1,
+     "tier": 2,
+     "cost": 30,
+     "learn": [
+      "3",
+      "woodlearn"
+     ],
+     "give": null
+    }
+   ]
+  },
+  {
+   "proc": "YukiReleaseRightclicked",
+   "item": [
+    "YukiReleaseItem",
+    "yuki_release"
+   ],
+   "tiers": [
+    {
+     "counter": "yuki_release",
+     "sneak": -1,
+     "tier": 0,
+     "cost": 5,
+     "learn": null,
+     "give": "IceReleaseItem"
+    }
+   ]
+  }
+ ]
+}

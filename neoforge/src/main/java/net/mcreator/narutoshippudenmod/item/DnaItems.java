@@ -93,11 +93,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Implant Chance 50%"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -159,11 +154,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Implant Chance 50%"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -225,11 +215,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Implant Chance 50%"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -291,11 +276,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Implant Chance 70%"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -357,11 +337,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Implant Chance 70%"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -423,11 +398,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Implant Chance 50%"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -489,11 +459,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Implant Chance 70%"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -555,11 +520,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Implant Chance 50%"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -621,11 +581,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Implant Chance 50%"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -687,11 +642,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Implant Chance 50%"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -753,11 +703,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Implant Chance 50%"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -819,11 +764,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Implant Chance 50%"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -885,11 +825,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Implant Chance 50%"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -951,11 +886,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Identifying chance 50%"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1003,11 +933,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Implant Chance 70%"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1069,11 +994,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Implant Chance 70%"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1135,11 +1055,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Implant Chance 50%"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {

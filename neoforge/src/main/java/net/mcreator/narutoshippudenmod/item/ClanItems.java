@@ -112,13 +112,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Aburame Release: Poison Cloud Technique \u00A74Cost: 10 JP"));
-				list.accept(Component.literal("\u00A76Learn Aburame Release: Insect Jar Technique  \u00A74Cost: 15 JP"));
-				list.accept(Component.literal("\u00A76Learn Aburame Release: Insect Bog  \u00A74Cost: 20 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -166,14 +159,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Akimichi Release: Calorie Control \u00A74Cost: 15 JP"));
-				list.accept(Component.literal("\u00A76Learn Akimichi Release: Human Bullet Tank \u00A74Cost: 20 JP"));
-				list.accept(Component.literal("\u00A76Learn Akimichi Release: Spiked Human Bullet Tank \u00A74Cost: 25 JP"));
-				list.accept(Component.literal("\u00A76Learn Akimichi Release: Butterfly Mode \u00A74Cost: 30 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -254,11 +239,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Right-Click to reset your clan"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -447,13 +427,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Fuma Release: Shuriken \u00A74Cost: 10 JP"));
-				list.accept(Component.literal("\u00A76Learn Fuma Release: Fuma Shuriken  \u00A74Cost: 15 JP"));
-				list.accept(Component.literal("\u00A76Learn Fuma Release: Toroi Unique Fuma Shuriken \u00A74Cost: 20 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -686,11 +659,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Hatake Release: White Light Chakra Sword \u00A74Cost: 5 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -738,12 +706,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Hoshigaki Release: Water Release"));
-				list.accept(Component.literal("Hoshigaki Release \u00A74Cost: 5 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -791,13 +753,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Hozuki Release: Drowning Water Blob Technique \u00A74Cost: 10 JP"));
-				list.accept(Component.literal("\u00A76Learn Hozuki Release: Water Gun Technique  \u00A74Cost: 15 JP"));
-				list.accept(Component.literal("\u00A76Learn Hozuki Release: Great Water Arm Technique \u00A74Cost: 20 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -845,15 +800,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Hyuga Release: Gentle Fist \u00A74Cost: 15 JP"));
-				list.accept(Component.literal("\u00A76Learn Hyuga Release: Gentle Step Twin Lion Fists \u00A74Cost: 20 JP"));
-				list.accept(Component.literal("\u00A76Learn Hyuga Release: Eight Trigrams Twin Lions Crumbling Attack \u00A74Cost: 25 JP"));
-				list.accept(Component.literal("\u00A76Learn Hyuga Release: Eight Trigrams Palms Revolving Heaven \u00A74Cost: 30 JP"));
-				list.accept(Component.literal("\u00A76Learn Hyuga Release: Eight Trigrams Sixty-Four Palms \u00A74Cost: 35 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -901,11 +847,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Iburi Release: Smoke Release \u00A74Cost: 5 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -953,14 +894,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Inuzuka Release: Akamaru \u00A74Cost: 5 JP"));
-				list.accept(Component.literal("\u00A76Learn Inuzuka Release: Passing Fang \u00A74Cost: 10 JP"));
-				list.accept(Component.literal("\u00A76Learn Inuzuka Release: Double-Headed Wolf \u00A74Cost: 15 JP"));
-				list.accept(Component.literal("\u00A76Learn Inuzuka Release: Three-Headed Wolf \u00A74Cost: 20 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1008,14 +941,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Right-Click to use technique"));
-				list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-				list.accept(Component.literal("\u00A76Learn Izuno Release: Cat Covering \u00A74Cost: 25 JP"));
-				list.accept(Component.literal("\u00A76Learn Izuno Release: Monster Cat Beckoning Technique \u00A74Cost: 30 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1063,11 +988,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Kaguya Release: Bone Release \u00A74Cost: 5 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1115,11 +1035,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Kazekage Release: Magnet Release \u00A74Cost: 5 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1200,19 +1115,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Lee Release: Drunken Fist \u00A74Cost: 10 JP"));
-				list.accept(Component.literal("\u00A76Learn Lee Release: Gate of Opening \u00A74Cost: 20 JP"));
-				list.accept(Component.literal("\u00A76Learn Lee Release: Gate of Healing \u00A74Cost: 25 JP"));
-				list.accept(Component.literal("\u00A76Learn Lee Release: Gate of Life \u00A74Cost: 30 JP"));
-				list.accept(Component.literal("\u00A76Learn Lee Release: Gate of Pain \u00A74Cost: 35 JP"));
-				list.accept(Component.literal("\u00A76Learn Lee Release: Gate of Limit \u00A74Cost: 40 JP"));
-				list.accept(Component.literal("\u00A76Learn Lee Release: Gate of View \u00A74Cost: 45 JP"));
-				list.accept(Component.literal("\u00A76Learn Lee Release: Gate of Wonder \u00A74Cost: 50 JP"));
-				list.accept(Component.literal("\u00A76Learn Lee Release: Gate of Death \u00A74Cost: 55 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1260,12 +1162,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Namikaze Release: Storm Release \u00A74Cost: 5 JP"));
-				list.accept(Component.literal("\u00A76Learn Namikaze Release: Flying Thunder God Kunai Technique \u00A74Cost: 10 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1346,11 +1242,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Otsutsuki Release: Tool Creation Technique \u00A74Cost: 35 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1398,12 +1289,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Sarutobi Release: Ash Pile Burning \u00A74Cost: 10 JP"));
-				list.accept(Component.literal("\u00A76Learn Sarutobi Release: Fire Dragon Flame Bullet  \u00A74Cost: 15 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1451,11 +1336,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Senju Release: Wood Release \u00A74Cost: 5 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1674,13 +1554,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Tenro Release: Beast-Human Fury Kicks \u00A74Cost: 15 JP"));
-				list.accept(Component.literal("\u00A76Learn Tenro Release: Beast-Human Transformation Technique  \u00A74Cost: 20 JP"));
-				list.accept(Component.literal("\u00A76Learn Tenro Release: Beast-Human Needle Senbon \u00A74Cost: 25 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1866,11 +1739,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Tsuchigumo Release: Fury \u00A74Cost: 20 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1951,13 +1819,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Uzumaki Release: Adamantine Sealing Chains \u00A74Cost: 15 JP"));
-				list.accept(Component.literal("\u00A76Learn Uzumaki Release: Heal Bite \u00A74Cost: 20 JP"));
-				list.accept(Component.literal("\u00A76Learn Uzumaki Release: Dead Demon Consuming Seal \u00A74Cost: 25 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -2005,11 +1866,6 @@ public final class ClanItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A76Learn Yuki Release: Ice Release \u00A74Cost: 5 JP"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {

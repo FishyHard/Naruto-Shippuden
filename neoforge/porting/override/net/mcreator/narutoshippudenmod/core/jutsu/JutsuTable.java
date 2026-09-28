@@ -1,6 +1,7 @@
 package net.mcreator.narutoshippudenmod.core.jutsu;
 
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures;
+import net.mcreator.narutoshippudenmod.procedures.CustomJutsuProcedures;
 import net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures;
 import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures;
 import net.mcreator.narutoshippudenmod.procedures.NatureReleaseProcedures;
@@ -164,6 +165,22 @@ final class JutsuTable {
 				jutsu("Wood Dragon Technique", v -> v.woodlearn, 1, "Ninjutsu", v -> v.ninjutsu, 25, 300, 1000, 800, 600, 400, 150),
 				jutsu("Tree Bind Flourishing Burial", v -> v.woodlearn, 2, "Ninjutsu", v -> v.ninjutsu, 30, 500, 1000, 800, 600, 400, 150),
 				jutsu("Wood Human Technique", v -> v.woodlearn, 3, "Ninjutsu", v -> v.ninjutsu, 35, 650, 1000, 800, 600, 400, 150));
+		technique("shadow_clone_technique", v -> 0, (v, i) -> {}, null, ClanProcedures.ShadowCloneTechniqueRightclickedProcedure::executeProcedure,
+				jutsu("Shadow Clone Technique", v -> 1, 1, "Ninjutsu", v -> v.ninjutsu, 5, 30, 25, 25, 25, 25, 25));
+		technique("tsuchigumo_release_technique", v -> 0, (v, i) -> {}, null, ClanProcedures.TsuchigumoReleaseFuryRightclickedProcedure::executeProcedure,
+				jutsu("Fury", v -> v.tsuchigumolearn, 1, "Ninjutsu", v -> v.ninjutsu, 20, 300, 200, 160, 120, 80, 40));
+		technique("lee_release_drunken_fist", v -> 0, (v, i) -> {}, null, ClanProcedures.LeeReleaseDrunkenFistRightclickedProcedure::executeProcedure,
+				jutsu("Drunken Fist", v -> v.leelearn, 1, null, v -> v.ninjutsu, 0, 0, 3000, 2500, 2200, 2000, 1800));
+		technique("custom_fire_release_technique", v -> 0, (v, i) -> {}, null, CustomJutsuProcedures.CustomFireReleaseTechniqueRightclickedProcedure::executeProcedure,
+				jutsu("Custom Jutsu", v -> 1, 1, "Ninjutsu", v -> v.ninjutsu, 5, 0, 60, 50, 40, 30, 20));
+		technique("custom_earth_release_technique", v -> 0, (v, i) -> {}, null, CustomJutsuProcedures.CustomEarthReleaseTechniqueRightClickedProcedure::executeProcedure,
+				jutsu("Custom Jutsu", v -> 1, 1, "Ninjutsu", v -> v.ninjutsu, 5, 0, 60, 50, 40, 30, 20));
+		technique("custom_water_release_technique", v -> 0, (v, i) -> {}, null, CustomJutsuProcedures.CustomWaterReleaseTechniqueRightClickedProcedure::executeProcedure,
+				jutsu("Custom Jutsu", v -> 1, 1, "Ninjutsu", v -> v.ninjutsu, 5, 0, 60, 50, 40, 30, 20));
+		technique("custom_wind_release_technique", v -> 0, (v, i) -> {}, null, CustomJutsuProcedures.CustomWindReleaseTechniqueRightClickedProcedure::executeProcedure,
+				jutsu("Custom Jutsu", v -> 1, 1, "Ninjutsu", v -> v.ninjutsu, 5, 0, 60, 50, 40, 30, 20));
+		technique("custom_lightning_release_technique", v -> 0, (v, i) -> {}, null, CustomJutsuProcedures.CustomLightningReleaseTechniqueRightClickedProcedure::executeProcedure,
+				jutsu("Custom Jutsu", v -> 1, 1, "Ninjutsu", v -> v.ninjutsu, 5, 0, 60, 50, 40, 30, 20));
 
 		release("aburame_release", ClanProcedures.AburameReleaseRightclickProcedure::executeProcedure,
 				track("", v -> v.aburame_release, -1, "aburame_release_technique", v -> v.aburamelearn,

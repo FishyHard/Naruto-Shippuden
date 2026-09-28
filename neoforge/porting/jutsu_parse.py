@@ -79,7 +79,7 @@ for name,(cls,body) in sorted(procs.items()):
         give=re.search(r'new ItemStack\((\w+)\.block\)',blk)
         rows.append(dict(counter=var,sneak=sneak,tier=int(t),cost=int(cost),learn=lv.groups() if lv else None,give=give.group(1) if give else None))
     buys.append(dict(proc=name,item=items.get(name),tiers=rows))
-json.dump(dict(tech=out,buy=buys),open('/private/tmp/claude-501/-Users-fishyhard-Desktop-Minecraft-Mods/6560ed1d-3cd8-4983-b972-2816362ee963/scratchpad/jutsu.json','w'),indent=1)
+json.dump(dict(tech=out,buy=buys),open(os.path.join(os.path.dirname(__file__),'jutsu.json'),'w'),indent=1)
 for t in out:
     print(t['proc'],t['item'][1] if t['item'] else None,t['tvar'],t['ms'],[(j['name'][:22],j['learn'],j['chakra']) for j in t['jutsu']])
 print('BUY')

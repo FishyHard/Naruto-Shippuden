@@ -35,7 +35,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.List;
@@ -43,7 +42,7 @@ import java.util.Optional;
 
 import org.jspecify.annotations.Nullable;
 
-/** Client half of {@link Jutsus}: the jutsu wheel (hold X), the jutsu scroll screen and the item tooltips. */
+/** Client half of {@link Jutsus}: the jutsu wheel (hold X), the jutsu scroll screen (tooltips are in ItemDescriptions). */
 @EventBusSubscriber(modid = "naruto_shippuden", value = Dist.CLIENT)
 public final class JutsuClient {
 	public static final KeyMapping WHEEL = new KeyMapping("key.naruto_shippuden.jutsu_wheel", InputConstants.KEY_X, KeyMapping.Category.MISC);
@@ -93,23 +92,6 @@ public final class JutsuClient {
 		Release release = Jutsus.release(event.getItemStack());
 		if (release != null && event.getLevel().isClientSide())
 			Minecraft.getInstance().gui.setScreen(new ScrollScreen(release, event.getItemStack().getHoverName()));
-	}
-
-	@SubscribeEvent
-	public static void tooltip(ItemTooltipEvent event) {
-		if (event.getEntity() == null)
-			return;
-		PlayerVariables variables = NarutoShippudenModVariables.get(event.getEntity());
-		Technique technique = Jutsus.technique(event.getItemStack());
-		List<Component> lines = event.getToolTip();
-		if (technique != null) {
-			lines.removeIf(line -> line.getString().startsWith("Shift Right-Click"));
-			lines.add(Component.literal("Jutsu: " + technique.selected(variables).name()).withStyle(ChatFormatting.GOLD));
-			lines.add(Component.literal("Right-click to use, hold ").append(WHEEL.getTranslatedKeyMessage()).append(" to choose")
-					.withStyle(ChatFormatting.GRAY));
-		} else if (Jutsus.release(event.getItemStack()) != null) {
-			lines.add(Component.literal("Right-click to open the jutsu scroll").withStyle(ChatFormatting.GRAY));
-		}
 	}
 
 	// ------------------------------------------------------------------ shared text

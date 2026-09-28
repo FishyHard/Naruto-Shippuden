@@ -89,15 +89,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Right-Click to use technique"));
-				list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-				list.accept(Component.literal("\u00A72Poison Cloud Technique: \u00A7bChakra cost: 250 \u00A73Ninjutsu required: 20"));
-				list.accept(Component.literal("\u00A72Insect Jar Technique: \u00A7bChakra cost: 500 \u00A73Ninjutsu required: 25"));
-				list.accept(Component.literal("\u00A72Insect Bog: \u00A7bChakra cost: 650 \u00A73Ninjutsu required: 30"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -147,17 +138,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Right-Click to use technique"));
-				list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-				list.accept(Component.literal("Sneak and Left-Click to change Calorie Control size"));
-				list.accept(Component.literal("\u00A72Calorie Control: \u00A7bChakra cost: 300 \u00A73Ninjutsu required: 20"));
-				list.accept(Component.literal("\u00A72Human Bullet Tank: \u00A7bChakra cost: 40/sec \u00A73Ninjutsu required: 25"));
-				list.accept(Component.literal("\u00A72Spiked Human Bullet Tank: \u00A7bChakra cost: 60/sec \u00A73Ninjutsu required: 30"));
-				list.accept(Component.literal("\u00A72Butterfly Mode: \u00A7bChakra cost: 80/sec \u00A73Ninjutsu required: 35"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -218,18 +198,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Right-Click to use technique"));
-				list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-				list.accept(Component.literal("\u00A72Shuriken: \u00A7bChakra cost: 30 \u00A73Ninjutsu required: 15"));
-				list.accept(Component.literal("\u00A77Shurikenjutsu Required: 5"));
-				list.accept(Component.literal("\u00A72Fuma Shuriken: \u00A7bChakra cost: 50 \u00A73Ninjutsu required: 20"));
-				list.accept(Component.literal("\u00A77Shurikenjutsu Required: 20"));
-				list.accept(Component.literal("\u00A72Toroi Unique Fuma Shuriken: \u00A7bChakra cost: 80 \u00A73Ninjutsu required: 25"));
-				list.accept(Component.literal("\u00A77Shurikenjutsu Required: 25"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -310,15 +278,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Right-Click to use technique"));
-				list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-				list.accept(Component.literal("\u00A72Drowning Water Blob Technique: \u00A7bChakra cost: 200 \u00A73Ninjutsu required: 15"));
-				list.accept(Component.literal("\u00A72Water Gun Technique: \u00A7bChakra cost: 300 \u00A73Ninjutsu required: 20"));
-				list.accept(Component.literal("\u00A72Great Water Arm Technique: \u00A7bChakra cost: 40/sec \u00A73Ninjutsu required: 25"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -367,18 +326,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Right-Click to use technique"));
-				list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-				list.accept(Component.literal("\u00A72Gentle Fist: \u00A7bChakra cost: 200 \u00A73Ninjutsu required: 10"));
-				list.accept(Component.literal("\u00A72Gentle Step Twin Lion Fists: \u00A7bChakra cost: 350 \u00A73Ninjutsu required: 20"));
-				list.accept(Component.literal(
-						"\u00A72Eight Trigrams Twin Lions Crumbling Attack: \u00A7bChakra cost: 500 \u00A73Ninjutsu required: 30"));
-				list.accept(Component.literal("\u00A72Eight Trigrams Palms Revolving Heaven: \u00A7bChakra cost: 650 \u00A73Ninjutsu required: 40"));
-				list.accept(Component.literal("\u00A72Eight Trigrams Sixty-Four Palms: \u00A7bChakra cost: 900 \u00A73Ninjutsu required: 45"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -442,18 +389,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Right-Click to use technique"));
-				list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-				list.accept(Component.literal("\u00A72Akamaru: \u00A7bChakra cost: 200 \u00A73Ninjutsu required: 10 \u00A7cSummoning required: 10"));
-				list.accept(Component.literal("\u00A72Passing Fang: \u00A7bChakra cost: 350 \u00A73Ninjutsu required: 15"));
-				list.accept(Component.literal(
-						"\u00A72Two-Headed Wolf: \u00A7bChakra cost: 500 \u00A73Ninjutsu required: 20 \u00A7cSummoning required: 20"));
-				list.accept(Component.literal(
-						"\u00A72Three-Headed Wolf: \u00A7bChakra cost: 750 \u00A73Ninjutsu required: 25 \u00A7cSummoning required: 25"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -503,15 +438,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Right-Click to use technique"));
-				list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-				list.accept(Component.literal("Sneak and Left-Click to change size of Sukunahikona"));
-				list.accept(Component.literal("\u00A72Sukunahikona: \u00A7bChakra cost: 500 \u00A73Ninjutsu required: 25"));
-				list.accept(Component.literal("\u00A72Disruption Cube: \u00A7bChakra cost: 1000 \u00A73Ninjutsu required: 35"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -574,12 +500,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A72Cat Covering: \u00A7bChakra cost: 20/sec \u00A73Ninjutsu required: 20"));
-				list.accept(Component.literal("\u00A72Monster Cat Beckoning Technique: \u00A7bChakra cost: 60/sec \u00A73Ninjutsu required: 25"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -633,11 +553,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A72Drunken Fist: \u00A7bChakra cost: 0 \u00A73Ninjutsu required: 0"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -701,20 +616,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Right-Click to use technique"));
-				list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-				list.accept(Component.literal("\u00A72Gate Of Opening: \u00A7aTaijutsu required: 15"));
-				list.accept(Component.literal("\u00A72Gate Of Healing: \u00A7aTaijutsu required: 30"));
-				list.accept(Component.literal("\u00A72Gate Of Life: \u00A7aTaijutsu required: 45"));
-				list.accept(Component.literal("\u00A72Gate Of Pain: \u00A7aTaijutsu required: 60"));
-				list.accept(Component.literal("\u00A72Gate Of Limit: \u00A7aTaijutsu required: 75"));
-				list.accept(Component.literal("\u00A72Gate Of View: \u00A7aTaijutsu required: 90"));
-				list.accept(Component.literal("\u00A72Gate Of Wonder: \u00A7aTaijutsu required: 105"));
-				list.accept(Component.literal("\u00A72Gate Of Death: \u00A7aTaijutsu required: 120"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -775,20 +676,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Right-Click to use technique"));
-				list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-				list.accept(Component.literal("\u00A78Amaterasu"));
-				list.accept(Component.literal("\u00A72Amaterasu:  \u00A7bChakra cost: 350 \u00A73Ninjutsu required: 20"));
-				list.accept(Component.literal("\u00A7cSusano"));
-				list.accept(Component.literal("\u00A72Ribcage: \u00A7bChakra cost: 20/sec"));
-				list.accept(Component.literal("\u00A72Skeletal Susano: \u00A7bChakra cost: 60/sec"));
-				list.accept(Component.literal("\u00A72Humanoid Susano: \u00A7bChakra cost: 100/sec"));
-				list.accept(Component.literal("\u00A72Armored Susano: \u00A7bChakra cost: 140/sec"));
-				list.accept(Component.literal("\u00A72Perfect Susano: \u00A7bChakra cost: 180/sec"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -850,14 +737,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Right-Click to use technique"));
-				list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-				list.accept(Component.literal("\u00A78Kamui"));
-				list.accept(Component.literal("\u00A72Kamui Long-Range:  \u00A7bChakra cost: 350 \u00A73Ninjutsu required: 20"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -906,16 +785,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Right-Click to use technique"));
-				list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-				list.accept(Component.literal("\u00A78Kamui"));
-				list.accept(Component.literal("\u00A72Kamui Self-Teleportation:  \u00A7bChakra cost: 350 \u00A73Ninjutsu required: 20"));
-				list.accept(Component.literal("\u00A72Kamui Short-Range:  \u00A7bChakra cost: 350 \u00A73Ninjutsu required: 20"));
-				list.accept(Component.literal("\u00A72Kamui Phantom Phasing:  \u00A7bChakra cost: 350 \u00A73Ninjutsu required: 20"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -965,23 +834,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Right-Click to use technique"));
-				list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-				list.accept(Component.literal("\u00A78Amaterasu"));
-				list.accept(Component.literal("\u00A72Amaterasu:  \u00A7bChakra cost: 350 \u00A73Ninjutsu required: 20"));
-				list.accept(Component.literal("\u00A72Blaze Release: Kagutsuchi: \u00A7bChakra cost: 100/sec \u00A73Ninjutsu required: 25"));
-				list.accept(Component.literal("\u00A72Blaze Release: Honoikazuchi: \u00A7bChakra cost: 500 \u00A73Ninjutsu required: 30"));
-				list.accept(Component.literal("\u00A72Amaterasu: Flame Wrapping Fire: \u00A7bChakra cost: 20/sec \u00A73Ninjutsu required: 35"));
-				list.accept(Component.literal("\u00A75Susano"));
-				list.accept(Component.literal("\u00A72Ribcage: \u00A7bChakra cost: 20/sec"));
-				list.accept(Component.literal("\u00A72Skeletal Susano: \u00A7bChakra cost: 60/sec"));
-				list.accept(Component.literal("\u00A72Humanoid Susano: \u00A7bChakra cost: 100/sec"));
-				list.accept(Component.literal("\u00A72Armored Susano: \u00A7bChakra cost: 140/sec"));
-				list.accept(Component.literal("\u00A72Perfect Susano: \u00A7bChakra cost: 180/sec"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1076,14 +928,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Right-Click to use technique"));
-				list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-				list.accept(Component.literal("\u00A72Ash Pile Burning: \u00A7bChakra cost: 250 \u00A73Ninjutsu required: 20"));
-				list.accept(Component.literal("\u00A72Fire Dragon Flame Bullet: \u00A7bChakra cost: 350 \u00A73Ninjutsu required: 25"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1139,11 +983,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A72Shadow Clone Technique: \u00A7bChakra cost: 30 \u00A73Ninjutsu required: 5"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1209,19 +1048,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Right-Click to use technique"));
-				list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-				list.accept(Component.literal(
-						"\u00A72Coercion Sharingan: \u00A7bChakra cost: 200 \u00A73Ninjutsu required: 10 \u00A74Genjutsu required: 5"));
-				list.accept(Component.literal(
-						"\u00A72Demonic Illusion: Mirage Crow: \u00A7bChakra cost: 350 \u00A73Ninjutsu required: 20 \u00A74Genjutsu required: 10"));
-				list.accept(Component.literal(
-						"\u00A72Demonic Illusion: Shackling Stakes Technique: \u00A7bChakra cost: 500 \u00A73Ninjutsu required: 30 \u00A74Genjutsu required: 15"));
-				list.accept(Component.literal("\u00A72Izanagi: \u00A7bActivate Sharingan"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1271,15 +1097,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Right-Click to use technique"));
-				list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-				list.accept(Component.literal("\u00A72Beast-Human Fury Kicks: \u00A7bChakra cost: 50 \u00A73Ninjutsu required: 15"));
-				list.accept(Component.literal("\u00A72Beast-Human Transformation Technique: \u00A7bChakra cost: 50/sec \u00A73Ninjutsu required: 20"));
-				list.accept(Component.literal("\u00A72Beast-Human Needle Senbon \u00A7bChakra cost: 300 \u00A73Ninjutsu required: 25"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1327,11 +1144,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A72Fury: \u00A7bChakra cost: 300 \u00A73Ninjutsu required: 20"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1381,15 +1193,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("Right-Click to use technique"));
-				list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-				list.accept(Component.literal("\u00A72Adamantine Sealing Chains: \u00A7bChakra cost: 20/sec \u00A73Ninjutsu required: 10"));
-				list.accept(Component.literal("\u00A72Heal Bite: \u00A7bChakra cost: 350 \u00A73Ninjutsu required: 20"));
-				list.accept(Component.literal("\u00A72Dead Demon Consuming Seal: \u00A7bChakra cost: 500 \u00A73Ninjutsu required: 30"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {

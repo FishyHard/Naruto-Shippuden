@@ -61,11 +61,6 @@ public final class StuffItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("(200 Gold Ryo)"));
-			}
 		}
 	}
 
@@ -133,11 +128,6 @@ public final class StuffItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("(500000 Gold Ryo)"));
-			}
 		}
 	}
 
@@ -462,11 +452,6 @@ public final class StuffItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("(10000 Gold Ryo)"));
-			}
 		}
 	}
 }

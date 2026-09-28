@@ -164,6 +164,24 @@ public final class DevTest {
 			mc.gui.setScreen(null);
 			NarutoShippudenMod.LOGGER.info("DEVTEST still connected {}", mc.getConnection() != null);
 		});
+		// item descriptions: log a few, and show the technique, scroll, weapon and a multi-track scroll
+		for (String id : new String[] { "fire_release_technique", "fire_release", "samehada", "mangekyou_sharingan_sasuke_release", "shadow_clone_technique" }) {
+			net.minecraft.world.item.ItemStack stack = new net.minecraft.world.item.ItemStack(
+					net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", id)));
+			STEPS.add(() -> {
+				NarutoShippudenMod.LOGGER.info("DEVTEST tooltip {}: {}", id, stack.getTooltipLines(net.minecraft.world.item.Item.TooltipContext.of(mc.level),
+						mc.player, net.minecraft.world.item.TooltipFlag.NORMAL).stream().map(c -> c.getString()).toList());
+				mc.gui.setScreen(new Screen(net.minecraft.network.chat.Component.literal("tooltip")) {
+					@Override
+					public void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+						super.extractRenderState(graphics, mouseX, mouseY, a);
+						graphics.item(stack, width / 2 - 8, height / 2 - 40);
+						graphics.setTooltipForNextFrame(font, stack, width / 2 - 60, height / 2 - 10);
+					}
+				});
+			});
+			STEPS.add(() -> shot(mc, "tooltip_" + id));
+		}
 		STEPS.add(() -> {
 			NarutoShippudenMod.LOGGER.info("DEVTEST screens done");
 			mc.stop();

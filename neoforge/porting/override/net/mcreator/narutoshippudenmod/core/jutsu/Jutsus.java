@@ -129,13 +129,16 @@ public final class Jutsus {
 			return gives == null ? "Tier " + (tier + 1) : "Unlocks " + new ItemStack(BuiltInRegistries.ITEM.getValue(gives)).getHoverName().getString();
 		}
 
-		/** The jutsu a tier unlocks (by its learn value), empty for tiers that only give an item. */
+		/** The jutsu a tier unlocks (by its learn value, on the track's technique or the one it gives), empty for tiers that only give an item. */
 		public List<Jutsu> unlocks(Tier tier) {
 			List<Jutsu> list = new ArrayList<>();
-			if (technique != null && tier.learn() > 0)
-				for (Jutsu jutsu : technique.jutsu)
-					if (jutsu.tier() == tier.learn())
-						list.add(jutsu);
+			if (tier.learn() <= 0)
+				return list;
+			for (Technique from : new Technique[] { technique, tier.gives() == null ? null : TECHNIQUES.get(tier.gives()) })
+				if (from != null)
+					for (Jutsu jutsu : from.jutsu)
+						if (jutsu.tier() == tier.learn() && !list.contains(jutsu))
+							list.add(jutsu);
 			return list;
 		}
 	}

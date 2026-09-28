@@ -1,6 +1,7 @@
 import re,glob,json,os
 ROOT=__import__('os').path.join(__import__('os').path.dirname(__file__), '..', 'src/main/java/net/mcreator/narutoshippudenmod/') + '/'
-d=json.load(open('jutsu.json'))
+HERE=os.path.dirname(os.path.abspath(__file__))
+d=json.load(open(os.path.join(HERE,'jutsu.json')))
 # item class -> registry id
 cls2id={}
 for f in glob.glob(ROOT+'item/*.java'):
@@ -32,6 +33,18 @@ for t in d['tech']:
     techs[item]=lv if tv or True else lv
     sel='v -> v.%s, (v, i) -> v.%s = i'%(tv,tv) if tv else 'v -> 0, (v, i) -> {}'
     lines.append('\t\ttechnique("%s", %s, %s, %s.%sProcedure::executeProcedure,\n\t\t\t\t%s);'%(item,sel,ms,proc_cls[t['proc']],t['proc'],',\n\t\t\t\t'.join(js)))
+# technique items whose procedures have no "Selected:" branches, written by hand
+CD=lambda *t: ', '.join(map(str,t))
+EXTRA=[('shadow_clone_technique','ClanProcedures','ShadowCloneTechniqueRightclicked','jutsu("Shadow Clone Technique", v -> 1, 1, "Ninjutsu", v -> v.ninjutsu, 5, 30, %s)'%CD(25,25,25,25,25)),
+	('tsuchigumo_release_technique','ClanProcedures','TsuchigumoReleaseFuryRightclicked','jutsu("Fury", v -> v.tsuchigumolearn, 1, "Ninjutsu", v -> v.ninjutsu, 20, 300, %s)'%CD(200,160,120,80,40)),
+	('lee_release_drunken_fist','ClanProcedures','LeeReleaseDrunkenFistRightclicked','jutsu("Drunken Fist", v -> v.leelearn, 1, null, v -> v.ninjutsu, 0, 0, %s)'%CD(3000,2500,2200,2000,1800))]
+for element in ('Fire','Earth','Water','Wind','Lightning'):
+	# the chakra cost is chosen when the jutsu is created, so the procedure checks it
+	EXTRA.append(('custom_%s_release_technique'%element.lower(),'CustomJutsuProcedures','Custom%sReleaseTechniqueRight%sedProcedure'%(element,'click' if element=='Fire' else 'Click'),
+		'jutsu("Custom Jutsu", v -> 1, 1, "Ninjutsu", v -> v.ninjutsu, 5, 0, %s)'%CD(60,50,40,30,20)))
+for item,cls,proc,j in EXTRA:
+	proc=proc if proc.endswith('Procedure') else proc+'Procedure'
+	lines.append('\t\ttechnique("%s", v -> 0, (v, i) -> {}, null, %s.%s::executeProcedure,\n\t\t\t\t%s);'%(item,cls,proc,j))
 rel=[]
 for b in d['buy']:
     if not b['item']: continue
@@ -48,7 +61,7 @@ for b in d['buy']:
         tracks.append('track("%s", v -> v.%s, %d, %s, %s,\n\t\t\t\t\t%s)'%(label,counter,tiers[0]['sneak'],'"%s"'%tech if tech else 'null','v -> v.%s'%learnvar if learnvar else 'null',parts))
     else:
         rel.append('\t\trelease("%s", %s.%sProcedure::executeProcedure,\n\t\t\t\t%s);'%(b['item'][1],proc_cls[b['proc']],b['proc'],',\n\t\t\t\t'.join(tracks)))
-imports=sorted({proc_cls[t['proc']] for t in d['tech']}|{proc_cls[b['proc']] for b in d['buy']})
+imports=sorted({proc_cls[t['proc']] for t in d['tech']}|{proc_cls[b['proc']] for b in d['buy']}|{e[1] for e in EXTRA})
 out='''package net.mcreator.narutoshippudenmod.core.jutsu;
 
 %s
@@ -76,6 +89,5 @@ final class JutsuTable {
 	}
 }
 '''%('\n'.join('import net.mcreator.narutoshippudenmod.procedures.%s;'%c for c in imports),'\n'.join(lines),'\n'.join(rel))
-os.makedirs(ROOT+'core/jutsu',exist_ok=True)
-open('JutsuTable.java','w').write(out)
+open(os.path.join(HERE,'override/net/mcreator/narutoshippudenmod/core/jutsu/JutsuTable.java'),'w').write(out)
 print(len(lines),'techniques',sum(l.count('jutsu(') for l in lines),'jutsu',len(rel),'releases')

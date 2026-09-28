@@ -97,12 +97,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("chakra_blade", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 12f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.4f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("\u00A72Flying Swallow: \u00A7bChakra cost: 20/sec"));
-					list.accept(Component.literal("\u00A78Kenjutsu Required: 20"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -167,11 +161,6 @@ public final class WeaponItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A77Shurikenjutsu Required: 20"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -232,13 +221,6 @@ public final class WeaponItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A7bChakra cost: 50"));
-				list.accept(Component.literal("\u00A73Ninjutsu Required: 10"));
-				list.accept(Component.literal("\u00A77Shurikenjutsu Required: 25"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -305,11 +287,6 @@ public final class WeaponItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A77Shurikenjutsu Required: 20"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -353,15 +330,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("gunbai_block", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 20f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.7f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("Right-Click to use technique"));
-					list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-					list.accept(Component.literal("\u00A72Block: Blocks any Attack"));
-					list.accept(Component.literal("\u00A72Wind Push: Pushes Enemies away from you"));
-					list.accept(Component.literal("\u00A78Kenjutsu Required: 25"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -411,15 +379,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("gunbai", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 20f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.7f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("Right-Click to use technique"));
-					list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-					list.accept(Component.literal("\u00A72Block: Blocks any Attack"));
-					list.accept(Component.literal("\u00A72Wind Push: Pushes Enemies away from you"));
-					list.accept(Component.literal("\u00A78Kenjutsu Required: 25"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -468,17 +427,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("hiramekarei_hammer_form", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 26f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.7f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("Right-Click to use technique"));
-					list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-					list.accept(Component.literal("\u00A72Chakra Storing: \u00A7bChakra cost: 20/sec"));
-					list.accept(Component.literal("\u00A72Long-sword Form: \u00A7bChakra cost: 20/sec from Sword"));
-					list.accept(Component.literal("\u00A72Twinsword Form: \u00A7bChakra cost: 20/sec from Sword"));
-					list.accept(Component.literal("\u00A72Hammer Form: \u00A7bChakra cost: 300 from Sword"));
-					list.accept(Component.literal("\u00A78Kenjutsu Required: 45"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -542,17 +490,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("hiramekarei", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 18f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.2f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("Right-Click to use technique"));
-					list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-					list.accept(Component.literal("\u00A72Chakra Storing: \u00A7bChakra cost: 20/sec"));
-					list.accept(Component.literal("\u00A72Long-sword Form: \u00A7bChakra cost: 20/sec from Sword"));
-					list.accept(Component.literal("\u00A72Twinsword Form: \u00A7bChakra cost: 20/sec from Sword"));
-					list.accept(Component.literal("\u00A72Hammer Form: \u00A7bChakra cost: 300 from Sword"));
-					list.accept(Component.literal("\u00A78Kenjutsu Required: 45"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -616,17 +553,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("hiramekarei_splitted", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 14f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.6f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("Right-Click to use technique"));
-					list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-					list.accept(Component.literal("\u00A72Chakra Storing: \u00A7bChakra cost: 20/sec"));
-					list.accept(Component.literal("\u00A72Long-sword Form: \u00A7bChakra cost: 20/sec from Sword"));
-					list.accept(Component.literal("\u00A72Twinsword Form: \u00A7bChakra cost: 20/sec from Sword"));
-					list.accept(Component.literal("\u00A72Hammer Form: \u00A7bChakra cost: 300 from Sword"));
-					list.accept(Component.literal("\u00A78Kenjutsu Required: 45"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -690,12 +616,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("kabutowari", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 18f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("\u00A72Kabutowari Hammer: Throws up Enemies in air"));
-					list.accept(Component.literal("\u00A78Kenjutsu Required: 45"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -745,11 +665,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("katana", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 10f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.5f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("\u00A78Kenjutsu Required: 15"));
-				}
 
 				@Override
 				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
@@ -801,16 +716,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("kiba_sword", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 12f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.5f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("Right-Click to use technique"));
-					list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-					list.accept(Component.literal("\u00A72Lightning Ball: \u00A7bChakra cost: 100 \u00A73Ninjutsu required: 5"));
-					list.accept(Component.literal("\u00A72Lightning: \u00A7bChakra cost: 150 \u00A73Ninjutsu required: 10"));
-					list.accept(Component.literal("\u00A72Lightning Wave: \u00A7bChakra cost: 200 \u00A73Ninjutsu required: 15"));
-					list.accept(Component.literal("\u00A78Kenjutsu Required: 45"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -860,12 +765,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("kubikiribocho", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 3000, 0f, 16f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.3f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("\u00A72The sword regeneration: +15 Durability to sword after Mob/Player kill"));
-					list.accept(Component.literal("\u00A78Kenjutsu Required: 45"));
-				}
 
 				@Override
 				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
@@ -916,11 +815,6 @@ public final class WeaponItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A77Shurikenjutsu Required: 10"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -964,12 +858,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("kusanagi_sasuke", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 12f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.5f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("\u00A72Channel Lightning Chakra: \u00A7bChakra cost: 20/sec"));
-					list.accept(Component.literal("\u00A78Kenjutsu Required: 25"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1031,15 +919,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("nuibari", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 12f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.3f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("Right-Click to use technique"));
-					list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-					list.accept(Component.literal("\u00A72Nuibari: Throw Needle"));
-					list.accept(Component.literal("\u00A72Nuibari: Pull Needle"));
-					list.accept(Component.literal("\u00A78Kenjutsu Required: 45"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1088,12 +967,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_axe", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 20f, 1, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.3f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("Sneak Right-Click to change weapon type"));
-					list.accept(Component.literal("Right-Click transform weapon"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1126,12 +999,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_bat", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 14f, 1, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.9f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("Sneak Right-Click to change weapon type"));
-					list.accept(Component.literal("Right-Click transform weapon"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1164,12 +1031,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_blade", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 10f, 1, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.2f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("Sneak Right-Click to change weapon type"));
-					list.accept(Component.literal("Right-Click transform weapon"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1202,12 +1063,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_chopping_sword", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 18f, 1, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.1f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("Sneak Right-Click to change weapon type"));
-					list.accept(Component.literal("Right-Click transform weapon"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1240,12 +1095,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_hammer", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 22f, 1, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.5f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("Sneak Right-Click to change weapon type"));
-					list.accept(Component.literal("Right-Click transform weapon"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1278,12 +1127,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_katana", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 13f, 1, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("Sneak Right-Click to change weapon type"));
-					list.accept(Component.literal("Right-Click transform weapon"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1316,12 +1159,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_spear", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 15f, 1, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.6f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("Sneak Right-Click to change weapon type"));
-					list.accept(Component.literal("Right-Click transform weapon"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1354,12 +1191,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_sword", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 18f, 1, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.8f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("Sneak Right-Click to change weapon type"));
-					list.accept(Component.literal("Right-Click transform weapon"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1409,11 +1240,6 @@ public final class WeaponItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A77Shurikenjutsu Required: 15"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1457,16 +1283,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("samehada", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 18f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.8f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("Right-Click to use technique"));
-					list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-					list.accept(Component.literal("\u00A72Samehada: \u00A7bChakra cost: 10/sec"));
-					list.accept(Component.literal("\u00A72Chakra Steal: +5% Chakra Amount of Mob you hit"));
-					list.accept(Component.literal("\u00A72Chakra Heal:  +0.2% HP of Mob you hit"));
-					list.accept(Component.literal("\u00A78Kenjutsu Required: 45"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1529,16 +1345,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("shibuki", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 16f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.2f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("Right-Click to use technique"));
-					list.accept(Component.literal("Sneak and Right-Click to select or change technique"));
-					list.accept(Component.literal("\u00A72Paper Bomb Trap: \u00A7bChakra cost: 350"));
-					list.accept(Component.literal("\u00A72Explosion: \u00A7bChakra cost: 20/sec"));
-					list.accept(Component.literal("\u00A72Explosions Trail: \u00A7bChakra cost: 100/sec"));
-					list.accept(Component.literal("\u00A78Kenjutsu Required: 45"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1607,11 +1413,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("shichiseiken", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 17f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("\u00A78Kenjutsu Required: 35"));
-				}
 
 				@Override
 				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
@@ -1662,11 +1463,6 @@ public final class WeaponItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A77Shurikenjutsu Required: 5"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1710,11 +1506,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("tanto", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 5f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.7f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("\u00A78Kenjutsu Required: 5"));
-				}
 
 				@Override
 				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
@@ -1765,11 +1556,6 @@ public final class WeaponItems {
 				return 1F;
 			}
 
-			@Override
-			public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-				super.appendHoverText(itemstack, world, display, list, flag);
-				list.accept(Component.literal("\u00A77Shurikenjutsu Required: 25"));
-			}
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -1813,11 +1599,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("triple_blade_scythe", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 13f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("\u00A78Kenjutsu Required: 30"));
-				}
 
 				@Override
 				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
@@ -1851,12 +1632,6 @@ public final class WeaponItems {
 		@Override
 		public void initElements() {
 			elements.items.add(() -> new Item(Registration.itemProps("white_light_chakra_sabre", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 6f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.6f)) {
-				@Override
-				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
-					super.appendHoverText(itemstack, world, display, list, flag);
-					list.accept(Component.literal("\u00A72White Light Chakra Sabre: \u00A7bChakra cost: 20/sec"));
-					list.accept(Component.literal("\u00A78Kenjutsu Required: 10"));
-				}
 
 				@Override
 				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
