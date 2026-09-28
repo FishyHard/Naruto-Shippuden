@@ -883,7 +883,7 @@ public final class ModBlocks {
 				switch ((Direction) state.getValue(FACING)) {
 					case SOUTH :
 					default :
-						return Shapes.or(box(12, 0, 10, 4, 1, 6))
+						return Shapes.or(box(4, 0, 6, 12, 1, 10))
 
 								.move(offset.x, offset.y, offset.z);
 					case NORTH :
@@ -891,11 +891,11 @@ public final class ModBlocks {
 
 								.move(offset.x, offset.y, offset.z);
 					case EAST :
-						return Shapes.or(box(10, 0, 4, 6, 1, 12))
+						return Shapes.or(box(6, 0, 4, 10, 1, 12))
 
 								.move(offset.x, offset.y, offset.z);
 					case WEST :
-						return Shapes.or(box(6, 0, 12, 10, 1, 4))
+						return Shapes.or(box(6, 0, 4, 10, 1, 12))
 
 								.move(offset.x, offset.y, offset.z);
 				}

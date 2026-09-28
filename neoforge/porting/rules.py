@@ -751,6 +751,20 @@ def client_subscribers(path, text):
         return m.group(0)
     return re.sub(r'@EventBusSubscriber\(modid = "naruto_shippuden"\)', fix, text)
 
+
+@func
+def box_order(path, text):
+    """MCreator's rotated shapes swap min and max (tolerated in 1.16, rejected by 26.3's Shapes.box)."""
+    num = r'(-?\d+(?:\.\d+)?)'
+
+    def fix(m):
+        v = [float(x) for x in m.groups()]
+        lo = [min(v[i], v[i + 3]) for i in range(3)]
+        hi = [max(v[i], v[i + 3]) for i in range(3)]
+        return 'box(%s)' % ', '.join('%g' % x for x in lo + hi)
+    return re.sub(r'(?<![\w.])box\(%s\)' % ', '.join([num] * 6), fix, text)
+
+
 @func
 def attribute_modifier_events(path, text):
     """ItemAttributeModifierEvent: no slot getter any more, the slot group is given with each modifier."""
