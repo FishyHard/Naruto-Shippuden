@@ -114,7 +114,7 @@ def convert_screens(path, text):
             if b[j:j + 2] == ' {':
                 anon_end = find_block(b, j)
                 anon = b[j:anon_end]
-                cond = re.search(r'if \((.*?)\)\s*super\.render\(', anon, re.S)
+                cond = re.search(r'if \((.*?)\)\s*super\.\w+\(', anon, re.S)
                 counter[0] += 1
                 var = '_button%d' % counter[0]
                 out.append('Button %s = %s;\n\t\t\tthis.addRenderableWidget(%s);\n\t\t\t_visibility.add(() -> %s.visible = %s)'
