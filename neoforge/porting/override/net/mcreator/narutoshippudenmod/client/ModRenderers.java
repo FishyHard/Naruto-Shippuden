@@ -32,7 +32,6 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import java.util.function.Function;
 
 /** The renderer shapes the mod uses, shared by every entity instead of one anonymous class each. */
-@OnlyIn(Dist.CLIENT)
 @SuppressWarnings({"unchecked", "rawtypes"})
 public final class ModRenderers {
 	private ModRenderers() {

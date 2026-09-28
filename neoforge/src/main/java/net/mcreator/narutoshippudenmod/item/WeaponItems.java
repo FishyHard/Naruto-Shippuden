@@ -1087,7 +1087,7 @@ public final class WeaponItems {
 
 		@Override
 		public void initElements() {
-			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_axe", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 20f, 0, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.3f)) {
+			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_axe", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 20f, 1, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.3f)) {
 				@Override
 				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
 					super.appendHoverText(itemstack, world, display, list, flag);
@@ -1125,7 +1125,7 @@ public final class WeaponItems {
 
 		@Override
 		public void initElements() {
-			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_bat", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 14f, 0, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.9f)) {
+			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_bat", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 14f, 1, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.9f)) {
 				@Override
 				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
 					super.appendHoverText(itemstack, world, display, list, flag);
@@ -1163,7 +1163,7 @@ public final class WeaponItems {
 
 		@Override
 		public void initElements() {
-			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_blade", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 10f, 0, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.2f)) {
+			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_blade", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 10f, 1, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.2f)) {
 				@Override
 				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
 					super.appendHoverText(itemstack, world, display, list, flag);
@@ -1201,7 +1201,7 @@ public final class WeaponItems {
 
 		@Override
 		public void initElements() {
-			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_chopping_sword", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 18f, 0, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.1f)) {
+			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_chopping_sword", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 18f, 1, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.1f)) {
 				@Override
 				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
 					super.appendHoverText(itemstack, world, display, list, flag);
@@ -1239,7 +1239,7 @@ public final class WeaponItems {
 
 		@Override
 		public void initElements() {
-			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_hammer", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 22f, 0, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.5f)) {
+			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_hammer", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 22f, 1, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.5f)) {
 				@Override
 				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
 					super.appendHoverText(itemstack, world, display, list, flag);
@@ -1277,7 +1277,7 @@ public final class WeaponItems {
 
 		@Override
 		public void initElements() {
-			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_katana", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 13f, 0, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3f)) {
+			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_katana", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 13f, 1, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3f)) {
 				@Override
 				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
 					super.appendHoverText(itemstack, world, display, list, flag);
@@ -1315,7 +1315,7 @@ public final class WeaponItems {
 
 		@Override
 		public void initElements() {
-			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_spear", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 15f, 0, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.6f)) {
+			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_spear", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 15f, 1, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.6f)) {
 				@Override
 				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
 					super.appendHoverText(itemstack, world, display, list, flag);
@@ -1353,7 +1353,7 @@ public final class WeaponItems {
 
 		@Override
 		public void initElements() {
-			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_sword", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 18f, 0, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.8f)) {
+			elements.items.add(() -> new Item(Registration.itemProps("otsutsuki_sword", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 0, 0f, 18f, 1, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.8f)) {
 				@Override
 				public void appendHoverText(ItemStack itemstack, Item.TooltipContext world, net.minecraft.world.item.component.TooltipDisplay display, java.util.function.Consumer<Component> list, TooltipFlag flag) {
 					super.appendHoverText(itemstack, world, display, list, flag);

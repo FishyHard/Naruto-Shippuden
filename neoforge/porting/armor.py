@@ -26,7 +26,7 @@ def convert(path, text):
         kb = val(block, 'getKnockbackResistance') or '0f'
         EQUIPMENT_ASSETS.append(name)
         material = ('new ArmorMaterial(%s, Map.of(ArmorType.BOOTS, %s, ArmorType.LEGGINGS, %s, ArmorType.CHESTPLATE, %s, ArmorType.HELMET, %s, '
-                    'ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, %s, %s, ItemTags.REPAIRS_LEATHER_ARMOR, '
+                    'ArmorType.BODY, 0), 1, SoundEvents.ARMOR_EQUIP_GENERIC, %s, %s, ItemTags.REPAIRS_LEATHER_ARMOR, '
                     'ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("%s")))' % (dur, defense[0], defense[1], defense[2], defense[3], tough, kb, name))
         # model classes kept in the element (1.16 form) -> parse for the client layer
         model_src = {}

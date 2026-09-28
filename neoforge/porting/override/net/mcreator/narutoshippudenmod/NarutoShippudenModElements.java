@@ -92,7 +92,6 @@ public class NarutoShippudenModElements {
 		public void serverLoad(ServerStartingEvent event) {
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		public void clientLoad(FMLClientSetupEvent event) {
 		}
 

@@ -137,12 +137,36 @@ def spawn_egg_textures():
 
 
 def atlases():
-    # 26.3 only stitches block/ and item/ by default; the mod keeps its textures in blocks/ and items/
-    sources = {'sources': [{'type': 'minecraft:directory', 'source': 'items', 'prefix': 'items/'},
-                           {'type': 'minecraft:directory', 'source': 'blocks', 'prefix': 'blocks/'},
-                           {'type': 'minecraft:directory', 'source': 'item', 'prefix': 'item/'}]}
-    write('assets/minecraft/atlases/items.json', sources)
-    write('assets/minecraft/atlases/blocks.json', sources)
+    # 26.3 only stitches block/ and item/ by default; the mod keeps its textures in blocks/ and items/.
+    # Block models may only use the block atlas; item models fall back to it for their blocks/ textures.
+    write('assets/minecraft/atlases/items.json', {'sources': [
+        {'type': 'minecraft:directory', 'source': 'items', 'prefix': 'items/'},
+        {'type': 'minecraft:directory', 'source': 'item', 'prefix': 'item/'}]})
+    write('assets/minecraft/atlases/blocks.json', {'sources': [
+        {'type': 'minecraft:directory', 'source': 'blocks', 'prefix': 'blocks/'}]})
+
+
+def clamp_uvs():
+    """Some Blockbench models have UVs past the texture edge; 1.16 sampled whatever was next to the sprite, 26.3
+    refuses to bake the model. Clamp them onto the texture."""
+    root = os.path.join(NEW, 'assets', NS, 'models')
+    for d, _, files in os.walk(root):
+        for f in files:
+            path = os.path.join(d, f)
+            try:
+                data = json.load(open(path, encoding='utf-8-sig'))
+            except ValueError:
+                print('resources: not JSON, left as is:', os.path.relpath(path, root))
+                continue
+            changed = False
+            for e in data.get('elements', []):
+                for face in e.get('faces', {}).values():
+                    uv = face.get('uv')
+                    if uv and any(v < 0 or v > 16 for v in uv):
+                        face['uv'] = [min(16, max(0, v)) for v in uv]
+                        changed = True
+            if changed:
+                write(os.path.relpath(path, NEW), data)
 
 
 def block_render_types():
@@ -280,8 +304,8 @@ def dimensions():
     mc = os.path.join(HERE, 'vanilla')
     # Kamui: floating islands of kamui void in a black, skyless space (1.16: noise terrain made of kamui_void, no fog)
     noise = json.load(open(os.path.join(mc, 'floating_islands.json')))
-    noise['default_block'] = {'Name': '%s:kamui_void' % NS}
-    noise['default_fluid'] = {'Name': 'minecraft:air'}
+    noise['default_block'] = '%s:kamui_void' % NS
+    noise['default_fluid'] = 'minecraft:air'
     noise['disable_mob_generation'] = True
     noise['material_rule'] = {'type': 'minecraft:sequence', 'sequence': []}
     noise.pop('debug_functions', None)
@@ -311,7 +335,7 @@ def dimensions():
         # step 4 = surface structures: the kamui towers place themselves inside the chunk
         'features': [[], [], [], [], ['%s:%s' % (NS, f) for f in structures.FEATURES], [], [], [], [], [], []]})
     for f in structures.FEATURES:
-        write('data/%s/worldgen/configured_feature/%s.json' % (NS, f), {'type': '%s:%s' % (NS, f)})
+        write('data/%s/worldgen/feature/%s.json' % (NS, f), {'type': '%s:%s' % (NS, f)})
         write('data/%s/worldgen/placed_feature/%s.json' % (NS, f), {'feature': '%s:%s' % (NS, f), 'placement': []})
 
     # Story mode: overworld-shaped terrain with a single custom biome
@@ -340,13 +364,14 @@ def spawns():
         count = lo if lo == hi else {'type': 'minecraft:uniform', 'min_inclusive': lo, 'max_inclusive': hi}
         write('data/%s/neoforge/biome_modifier/spawn_%s.json' % (NS, key), {
             'type': 'neoforge:add_spawns', 'biomes': sorted(set(ids)) if isinstance(ids, list) else ids,
-            'spawners': {'data': {'type': '%s:%s' % (NS, key), 'count': count}, 'weight': weight}})
+            'spawners': {'type': '%s:%s' % (NS, key), 'count': count, 'weight': weight}})
 
 
 def build():
     copy_assets()
     items = item_definitions()
     atlases()
+    clamp_uvs()
     block_render_types()
     equipment_assets()
     post_effects()

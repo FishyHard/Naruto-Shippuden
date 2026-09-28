@@ -18,7 +18,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 
 /** Particle behaviour and providers (client only). */
-@OnlyIn(Dist.CLIENT)
 public final class ModParticleProviders {
 	private ModParticleProviders() {
 	}
@@ -42,7 +41,6 @@ public final class ModParticleProviders {
 	}
 
 	static class AmaterasuFireParticle {
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticle extends SingleQuadParticle {
 			private final SpriteSet spriteSet;
 
@@ -74,7 +72,6 @@ public final class ModParticleProviders {
 			}
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticleFactory implements ParticleProvider<SimpleParticleType> {
 			private final SpriteSet spriteSet;
 
@@ -90,7 +87,6 @@ public final class ModParticleProviders {
 	}
 
 	static class AshParticle {
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticle extends SingleQuadParticle {
 			private final SpriteSet spriteSet;
 
@@ -122,7 +118,6 @@ public final class ModParticleProviders {
 			}
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticleFactory implements ParticleProvider<SimpleParticleType> {
 			private final SpriteSet spriteSet;
 
@@ -138,7 +133,6 @@ public final class ModParticleProviders {
 	}
 
 	static class BlueSteamParticle {
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticle extends SingleQuadParticle {
 			private final SpriteSet spriteSet;
 
@@ -170,7 +164,6 @@ public final class ModParticleProviders {
 			}
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticleFactory implements ParticleProvider<SimpleParticleType> {
 			private final SpriteSet spriteSet;
 
@@ -186,7 +179,6 @@ public final class ModParticleProviders {
 	}
 
 	static class ChakraParticle {
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticle extends SingleQuadParticle {
 			private final SpriteSet spriteSet;
 
@@ -218,7 +210,6 @@ public final class ModParticleProviders {
 			}
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticleFactory implements ParticleProvider<SimpleParticleType> {
 			private final SpriteSet spriteSet;
 
@@ -234,7 +225,6 @@ public final class ModParticleProviders {
 	}
 
 	static class FlameParticle {
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticle extends SingleQuadParticle {
 			private final SpriteSet spriteSet;
 
@@ -266,7 +256,6 @@ public final class ModParticleProviders {
 			}
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticleFactory implements ParticleProvider<SimpleParticleType> {
 			private final SpriteSet spriteSet;
 
@@ -282,7 +271,6 @@ public final class ModParticleProviders {
 	}
 
 	static class FuramingoganParticleParticle {
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticle extends SingleQuadParticle {
 			private final SpriteSet spriteSet;
 
@@ -314,7 +302,6 @@ public final class ModParticleProviders {
 			}
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticleFactory implements ParticleProvider<SimpleParticleType> {
 			private final SpriteSet spriteSet;
 
@@ -330,7 +317,6 @@ public final class ModParticleProviders {
 	}
 
 	static class GreenSteamParticle {
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticle extends SingleQuadParticle {
 			private final SpriteSet spriteSet;
 
@@ -362,7 +348,6 @@ public final class ModParticleProviders {
 			}
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticleFactory implements ParticleProvider<SimpleParticleType> {
 			private final SpriteSet spriteSet;
 
@@ -378,7 +363,6 @@ public final class ModParticleProviders {
 	}
 
 	static class KamuiParticleParticle {
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticle extends SingleQuadParticle {
 			private final SpriteSet spriteSet;
 
@@ -410,7 +394,6 @@ public final class ModParticleProviders {
 			}
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticleFactory implements ParticleProvider<SimpleParticleType> {
 			private final SpriteSet spriteSet;
 
@@ -426,7 +409,6 @@ public final class ModParticleProviders {
 	}
 
 	static class LightningParticle {
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticle extends SingleQuadParticle {
 			private final SpriteSet spriteSet;
 
@@ -458,7 +440,6 @@ public final class ModParticleProviders {
 			}
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticleFactory implements ParticleProvider<SimpleParticleType> {
 			private final SpriteSet spriteSet;
 
@@ -474,7 +455,6 @@ public final class ModParticleProviders {
 	}
 
 	static class RedSteamParticle {
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticle extends SingleQuadParticle {
 			private final SpriteSet spriteSet;
 
@@ -506,7 +486,6 @@ public final class ModParticleProviders {
 			}
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticleFactory implements ParticleProvider<SimpleParticleType> {
 			private final SpriteSet spriteSet;
 
@@ -522,7 +501,6 @@ public final class ModParticleProviders {
 	}
 
 	static class SmokeParticle {
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticle extends SingleQuadParticle {
 			private final SpriteSet spriteSet;
 
@@ -554,7 +532,6 @@ public final class ModParticleProviders {
 			}
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticleFactory implements ParticleProvider<SimpleParticleType> {
 			private final SpriteSet spriteSet;
 
@@ -570,7 +547,6 @@ public final class ModParticleProviders {
 	}
 
 	static class StormParticle {
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticle extends SingleQuadParticle {
 			private final SpriteSet spriteSet;
 
@@ -602,7 +578,6 @@ public final class ModParticleProviders {
 			}
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticleFactory implements ParticleProvider<SimpleParticleType> {
 			private final SpriteSet spriteSet;
 
@@ -618,7 +593,6 @@ public final class ModParticleProviders {
 	}
 
 	static class TailedBeastBombParticleBlueParticle {
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticle extends SingleQuadParticle {
 			private final SpriteSet spriteSet;
 
@@ -647,7 +621,6 @@ public final class ModParticleProviders {
 			}
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticleFactory implements ParticleProvider<SimpleParticleType> {
 			private final SpriteSet spriteSet;
 
@@ -663,7 +636,6 @@ public final class ModParticleProviders {
 	}
 
 	static class TailedBeastBombParticleRedParticle {
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticle extends SingleQuadParticle {
 			private final SpriteSet spriteSet;
 
@@ -692,7 +664,6 @@ public final class ModParticleProviders {
 			}
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticleFactory implements ParticleProvider<SimpleParticleType> {
 			private final SpriteSet spriteSet;
 
@@ -708,7 +679,6 @@ public final class ModParticleProviders {
 	}
 
 	static class VolticParticleParticle {
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticle extends SingleQuadParticle {
 			private final SpriteSet spriteSet;
 
@@ -740,7 +710,6 @@ public final class ModParticleProviders {
 			}
 		}
 
-		@OnlyIn(Dist.CLIENT)
 		static class CustomParticleFactory implements ParticleProvider<SimpleParticleType> {
 			private final SpriteSet spriteSet;
 

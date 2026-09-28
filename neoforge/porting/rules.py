@@ -1,4 +1,5 @@
 """Ordered code transformation rules: each is fn(relpath, text) -> text."""
+import os
 import re
 
 SKIP = set()
@@ -330,7 +331,9 @@ def swords(path, text):
         tail = re.match(r'\s*\.setRegistryName\("(\w+)"\)', text[body_end:])
         name = tail.group(1)
         material = 'new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, %s, %s, %s, %s, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS)' % (
-            val('getUses'), val('getSpeed'), val('getAttackDamageBonus'), val('getEnchantmentValue'))
+            val('getUses'), val('getSpeed'), val('getAttackDamageBonus'),
+            # 26.3 rejects an enchantability of 0
+            '1' if val('getEnchantmentValue').strip() in ('0', '(int) 0') else val('getEnchantmentValue'))
         props = props_call(name, '.sword(%s, %s, %s)' % (material, dmg, speed) + chain)
         out.append(text[pos:m.start()])
         out.append('new Item(%s)%s' % (props, text[body_start:body_end]))
@@ -725,6 +728,28 @@ def block_pos_containing(path, text):
     return ''.join(out)
 sub(r'\bNeoForge\.EVENT_BUS\.register\(this\);', 'Registration.listen(NeoForge.EVENT_BUS, this);')
 sub(r'\bNarutoShippudenMod\.MOD_BUS\.register\((new EntityAttributesRegisterHandler\(\))\);', r'Registration.listen(NarutoShippudenMod.MOD_BUS, \1);')
+
+
+CLIENT_EVENTS = sorted(f[:-5] for f in os.listdir('/home/user/mcsrc/net/neoforged/neoforge/client/event') if f.endswith('Event.java')) if os.path.isdir('/home/user/mcsrc/net/neoforged/neoforge/client/event') else []
+CLIENT_EVENTS = CLIENT_EVENTS or ['RenderLivingEvent', 'RenderPlayerEvent', 'RenderGuiEvent', 'RenderGuiLayerEvent', 'InputEvent', 'ClientTickEvent',
+                                  'ViewportEvent', 'ScreenEvent', 'RenderHandEvent', 'RenderLevelStageEvent', 'ComputeFovModifierEvent', 'RenderNameTagEvent',
+                                  'MovementInputUpdateEvent', 'ClientChatEvent', 'ClientPlayerNetworkEvent']
+
+
+@func
+def client_subscribers(path, text):
+    """Kleiders render events fired for both phases of the abstract event; NeoForge needs a concrete one (Pre, where the
+    swap cancels the normal render). Subscribers to client events must not be loaded on a dedicated server."""
+    text = re.sub(r'public static void (\w+)\(RenderLivingEvent event\)', r'public static void \1(RenderLivingEvent.Pre event)', text)
+    ev = '|'.join(CLIENT_EVENTS)
+    def fix(m):
+        start = m.end()
+        nxt = text.find('@EventBusSubscriber', start)
+        seg = text[start:nxt if nxt != -1 else len(text)]
+        if re.search(r'@SubscribeEvent\s*\n\s*public (?:static )?void \w+\((?:%s)\b' % ev, seg):
+            return '@EventBusSubscriber(modid = "naruto_shippuden", value = net.neoforged.api.distmarker.Dist.CLIENT)'
+        return m.group(0)
+    return re.sub(r'@EventBusSubscriber\(modid = "naruto_shippuden"\)', fix, text)
 
 @func
 def attribute_modifier_events(path, text):

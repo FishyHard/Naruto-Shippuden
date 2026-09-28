@@ -6,10 +6,8 @@
     "minecraft:taiga"
   ],
   "spawners": {
-    "data": {
-      "type": "naruto_shippuden:shikamaru",
-      "count": 1
-    },
+    "type": "naruto_shippuden:shikamaru",
+    "count": 1,
     "weight": 10
   }
 }

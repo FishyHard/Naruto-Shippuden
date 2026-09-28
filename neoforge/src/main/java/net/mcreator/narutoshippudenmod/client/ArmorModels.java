@@ -21,7 +21,6 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
 /** Custom helmet (headband) models and textures, registered as client item extensions. */
-@OnlyIn(Dist.CLIENT)
 public final class ArmorModels {
 	private ArmorModels() {
 	}

@@ -52,7 +52,7 @@ public final class ArmorItems {
 		static {
 			Registration.holder(Registries.ITEM, "genin_iwagakure_black_boots", v -> boots = (Item) v);
 		}
-		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_iwagakure_black")));
+		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 1, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_iwagakure_black")));
 
 		public GeninIwagakureBlackItem(NarutoShippudenModElements instance) {
 			super(instance, 1039);
@@ -82,7 +82,7 @@ public final class ArmorItems {
 		static {
 			Registration.holder(Registries.ITEM, "genin_iwagakure_boots", v -> boots = (Item) v);
 		}
-		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_iwagakure")));
+		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 1, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_iwagakure")));
 
 		public GeninIwagakureItem(NarutoShippudenModElements instance) {
 			super(instance, 1034);
@@ -112,7 +112,7 @@ public final class ArmorItems {
 		static {
 			Registration.holder(Registries.ITEM, "genin_iwagakure_red_boots", v -> boots = (Item) v);
 		}
-		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_iwagakure_red")));
+		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 1, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_iwagakure_red")));
 
 		public GeninIwagakureRedItem(NarutoShippudenModElements instance) {
 			super(instance, 1044);
@@ -142,7 +142,7 @@ public final class ArmorItems {
 		static {
 			Registration.holder(Registries.ITEM, "genin_kirigakure_black_boots", v -> boots = (Item) v);
 		}
-		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_kirigakure_black")));
+		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 1, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_kirigakure_black")));
 
 		public GeninKirigakureBlackItem(NarutoShippudenModElements instance) {
 			super(instance, 1037);
@@ -172,7 +172,7 @@ public final class ArmorItems {
 		static {
 			Registration.holder(Registries.ITEM, "genin_kirigakure_boots", v -> boots = (Item) v);
 		}
-		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_kirigakure")));
+		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 1, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_kirigakure")));
 
 		public GeninKirigakureItem(NarutoShippudenModElements instance) {
 			super(instance, 1032);
@@ -202,7 +202,7 @@ public final class ArmorItems {
 		static {
 			Registration.holder(Registries.ITEM, "genin_kirigakure_red_boots", v -> boots = (Item) v);
 		}
-		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_kirigakure_red")));
+		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 1, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_kirigakure_red")));
 
 		public GeninKirigakureRedItem(NarutoShippudenModElements instance) {
 			super(instance, 1042);
@@ -232,7 +232,7 @@ public final class ArmorItems {
 		static {
 			Registration.holder(Registries.ITEM, "genin_konohagakure_black_boots", v -> boots = (Item) v);
 		}
-		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_konohagakure_black")));
+		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 1, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_konohagakure_black")));
 
 		public GeninKonohagakureBlackItem(NarutoShippudenModElements instance) {
 			super(instance, 1035);
@@ -262,7 +262,7 @@ public final class ArmorItems {
 		static {
 			Registration.holder(Registries.ITEM, "genin_konohagakure_boots", v -> boots = (Item) v);
 		}
-		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_konohagakure")));
+		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 1, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_konohagakure")));
 
 		public GeninKonohagakureItem(NarutoShippudenModElements instance) {
 			super(instance, 1030);
@@ -292,7 +292,7 @@ public final class ArmorItems {
 		static {
 			Registration.holder(Registries.ITEM, "genin_konohagakure_red_boots", v -> boots = (Item) v);
 		}
-		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_konohagakure_red")));
+		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 1, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_konohagakure_red")));
 
 		public GeninKonohagakureRedItem(NarutoShippudenModElements instance) {
 			super(instance, 1040);
@@ -322,7 +322,7 @@ public final class ArmorItems {
 		static {
 			Registration.holder(Registries.ITEM, "genin_kumogakure_black_boots", v -> boots = (Item) v);
 		}
-		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_kumogakure_black")));
+		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 1, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_kumogakure_black")));
 
 		public GeninKumogakureBlackItem(NarutoShippudenModElements instance) {
 			super(instance, 1038);
@@ -352,7 +352,7 @@ public final class ArmorItems {
 		static {
 			Registration.holder(Registries.ITEM, "genin_kumogakure_boots", v -> boots = (Item) v);
 		}
-		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_kumogakure")));
+		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 1, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_kumogakure")));
 
 		public GeninKumogakureItem(NarutoShippudenModElements instance) {
 			super(instance, 1033);
@@ -382,7 +382,7 @@ public final class ArmorItems {
 		static {
 			Registration.holder(Registries.ITEM, "genin_kumogakure_red_boots", v -> boots = (Item) v);
 		}
-		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_kumogakure_red")));
+		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 1, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_kumogakure_red")));
 
 		public GeninKumogakureRedItem(NarutoShippudenModElements instance) {
 			super(instance, 1043);
@@ -412,7 +412,7 @@ public final class ArmorItems {
 		static {
 			Registration.holder(Registries.ITEM, "genin_sunagakure_black_boots", v -> boots = (Item) v);
 		}
-		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_sunagakure_black")));
+		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 1, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_sunagakure_black")));
 
 		public GeninSunagakureBlackItem(NarutoShippudenModElements instance) {
 			super(instance, 1036);
@@ -442,7 +442,7 @@ public final class ArmorItems {
 		static {
 			Registration.holder(Registries.ITEM, "genin_sunagakure_boots", v -> boots = (Item) v);
 		}
-		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_sunagakure")));
+		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 1, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_sunagakure")));
 
 		public GeninSunagakureItem(NarutoShippudenModElements instance) {
 			super(instance, 1031);
@@ -472,7 +472,7 @@ public final class ArmorItems {
 		static {
 			Registration.holder(Registries.ITEM, "genin_sunagakure_red_boots", v -> boots = (Item) v);
 		}
-		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 0, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_sunagakure_red")));
+		public static final ArmorMaterial MATERIAL = new ArmorMaterial(272, Map.of(ArmorType.BOOTS, 0, ArmorType.LEGGINGS, 0, ArmorType.CHESTPLATE, 0, ArmorType.HELMET, 3, ArmorType.BODY, 0), 1, SoundEvents.ARMOR_EQUIP_GENERIC, 0f, 0f, ItemTags.REPAIRS_LEATHER_ARMOR, ResourceKey.create(EquipmentAssets.ROOT_ID, Registration.id("genin_sunagakure_red")));
 
 		public GeninSunagakureRedItem(NarutoShippudenModElements instance) {
 			super(instance, 1041);

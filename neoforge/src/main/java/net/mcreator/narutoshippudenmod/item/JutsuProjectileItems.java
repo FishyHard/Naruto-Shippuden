@@ -453,7 +453,7 @@ public final class JutsuProjectileItems {
 
 		@Override
 		public void initElements() {
-			elements.items.add(() -> new Item(Registration.itemProps("blade_of_lightning", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1, 0f, 36f, 0, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3f)) {
+			elements.items.add(() -> new Item(Registration.itemProps("blade_of_lightning", null).sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 1, 0f, 36f, 1, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3f)) {
 			});
 		}
 	}

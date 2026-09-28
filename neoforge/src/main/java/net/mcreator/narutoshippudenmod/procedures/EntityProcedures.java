@@ -3162,10 +3162,10 @@ public final class EntityProcedures {
 	}
 
 	public static class NPCModelChangeProcedure {
-		@EventBusSubscriber(modid = "naruto_shippuden")
+		@EventBusSubscriber(modid = "naruto_shippuden", value = net.neoforged.api.distmarker.Dist.CLIENT)
 		private static class GlobalTrigger {
 			@SubscribeEvent
-			public static void KleidersRenderEvent(RenderLivingEvent event) {
+			public static void KleidersRenderEvent(RenderLivingEvent.Pre event) {
 				Entity entity = ModelSwapRenderers.entity(event);
 			if (entity == null)
 				return;

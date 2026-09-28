@@ -187,8 +187,9 @@ def main():
     # generated client registration
     base = os.path.join(DST, 'net/mcreator/narutoshippudenmod/client')
     os.makedirs(base, exist_ok=True)
-    open(os.path.join(base, 'ArmorModels.java'), 'w').write(armor.client_file())
-    open(os.path.join(base, 'ModParticleProviders.java'), 'w').write(particles.client_file())
+    no_only_in = lambda t: re.sub(r'@OnlyIn\(Dist\.CLIENT\)\s*', '', t)
+    open(os.path.join(base, 'ArmorModels.java'), 'w').write(no_only_in(armor.client_file()))
+    open(os.path.join(base, 'ModParticleProviders.java'), 'w').write(no_only_in(particles.client_file()))
     open(os.path.join(base, 'ModKeyMappings.java'), 'w').write(keybinds.client_file())
     open(os.path.join(base, 'ModClient.java'), 'w').write(client_hub())
     # hand-written files override / add
