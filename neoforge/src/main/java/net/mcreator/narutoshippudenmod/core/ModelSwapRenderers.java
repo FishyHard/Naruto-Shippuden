@@ -61,7 +61,8 @@ public final class ModelSwapRenderers {
 	/** Draws the player with a custom model and texture (was KleidersPlayerRenderer). */
 	public static void renderPlayerAs(RenderLivingEvent<?, ?, ?> event, String texture, ModelLayerLocation layer,
 			Function<ModelPart, ? extends EntityModel<?>> factory) {
-		draw(event, MODELS.computeIfAbsent(layer, l -> factory.apply(Minecraft.getInstance().getEntityModels().bakeLayer(l))), Identifier.parse(texture), 1.0F);
+		draw(event, MODELS.computeIfAbsent(layer, l -> factory.apply(Minecraft.getInstance().getEntityModels().bakeLayer(l))),
+				RenderTypes.entityTranslucent(Identifier.parse(texture)), 1.0F);
 	}
 
 	/** Draws a mob with a custom model and texture (was KleidersEntityRenderer). */
@@ -76,11 +77,12 @@ public final class ModelSwapRenderers {
 			return;
 		if (overlayModel == null)
 			overlayModel = new PlayerModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER), false);
-		draw(event, overlayModel, Identifier.parse(texture), 0.9375F);
+		// the eyes lie exactly on the skin, so they need the decal render type (depth offset) to show on top of it
+		draw(event, overlayModel, RenderTypes.entityCutoutZOffset(Identifier.parse(texture)), 0.9375F);
 	}
 
 	/** Same transforms LivingEntityRenderer applies before drawing its own model. */
-	private static void draw(RenderLivingEvent<?, ?, ?> event, EntityModel model, Identifier texture, float modelScale) {
+	private static void draw(RenderLivingEvent<?, ?, ?> event, EntityModel model, net.minecraft.client.renderer.rendertype.RenderType renderType, float modelScale) {
 		LivingEntityRenderState state = event.getRenderState();
 		PoseStack pose = event.getPoseStack();
 		pose.pushPose();
@@ -91,7 +93,7 @@ public final class ModelSwapRenderers {
 		pose.scale(modelScale, modelScale, modelScale);
 		pose.translate(0.0F, -1.501F, 0.0F);
 		model.setupAnim(state);
-		event.getSubmitNodeCollector().submitModel(model, state, pose, RenderTypes.entityTranslucent(texture), state.lightCoords,
+		event.getSubmitNodeCollector().submitModel(model, state, pose, renderType, state.lightCoords,
 				LivingEntityRenderer.getOverlayCoords(state, 0.0F), state.outlineColor);
 		pose.popPose();
 	}
