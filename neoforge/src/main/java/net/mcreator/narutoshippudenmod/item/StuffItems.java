@@ -31,40 +31,6 @@ public final class StuffItems {
 	}
 
 	@NarutoShippudenModElements.ModElement.Tag
-	public static class BanknoteOfRyoItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "banknote_of_ryo", v -> block = (Item) v);
-		}
-
-		public BanknoteOfRyoItem(NarutoShippudenModElements instance) {
-			super(instance, 284);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("banknote_of_ryo", "StuffItemGroup").stacksTo(64).rarity(Rarity.COMMON));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
 	public static class BronzeRyoItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
@@ -94,40 +60,6 @@ public final class StuffItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class CaseOfRyoItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "case_of_ryo", v -> block = (Item) v);
-		}
-
-		public CaseOfRyoItem(NarutoShippudenModElements instance) {
-			super(instance, 286);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("case_of_ryo", "StuffItemGroup").stacksTo(1).rarity(Rarity.COMMON));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
 		}
 	}
 
@@ -421,37 +353,4 @@ public final class StuffItems {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class WadOfRyoItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "wad_of_ryo", v -> block = (Item) v);
-		}
-
-		public WadOfRyoItem(NarutoShippudenModElements instance) {
-			super(instance, 285);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("wad_of_ryo", "StuffItemGroup").stacksTo(64).rarity(Rarity.COMMON));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-		}
-	}
 }

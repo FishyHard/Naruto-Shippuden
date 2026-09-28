@@ -1,0 +1,13 @@
+{
+  "wants": {
+    "id": "naruto_shippuden:silver_ryo",
+    "count": 2
+  },
+  "gives": {
+    "id": "naruto_shippuden:genin_iwagakure_helmet",
+    "count": 1
+  },
+  "max_uses": 3,
+  "xp": 0,
+  "reputation_discount": 0.0
+}

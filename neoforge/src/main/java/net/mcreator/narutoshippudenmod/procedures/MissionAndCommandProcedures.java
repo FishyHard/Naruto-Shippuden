@@ -32,7 +32,6 @@ import net.mcreator.narutoshippudenmod.item.MissionItems.LetterFromBrotherItem;
 import net.mcreator.narutoshippudenmod.item.MissionItems.PillageThePostItem;
 import net.mcreator.narutoshippudenmod.item.MissionItems.SaveTheVillageItem;
 import net.mcreator.narutoshippudenmod.item.MissionItems.StoryModeItem;
-import net.mcreator.narutoshippudenmod.item.StuffItems.BanknoteOfRyoItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.ShadowCloneTechniqueItem;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.SpawnGroupData;
@@ -1214,9 +1213,7 @@ public final class MissionAndCommandProcedures {
 			Entity entity = (Entity) dependencies.get("entity");
 			if (NarutoShippudenModVariables.get(entity).pillagerkillcount >= 5) {
 				if (entity instanceof Player) {
-					ItemStack _setstack = new ItemStack(BanknoteOfRyoItem.block);
-					_setstack.setCount((int) 20);
-					Compat.giveItemToPlayer(((Player) entity), _setstack);
+					net.mcreator.narutoshippudenmod.economy.Ryo.give((Player) entity, 180);
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(PillageThePostItem.block);
@@ -1242,9 +1239,7 @@ public final class MissionAndCommandProcedures {
 			Entity entity = (Entity) dependencies.get("entity");
 			if (NarutoShippudenModVariables.get(entity).zombiekillcount >= 10) {
 				if (entity instanceof Player) {
-					ItemStack _setstack = new ItemStack(BanknoteOfRyoItem.block);
-					_setstack.setCount((int) 20);
-					Compat.giveItemToPlayer(((Player) entity), _setstack);
+					net.mcreator.narutoshippudenmod.economy.Ryo.give((Player) entity, 180);
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(SaveTheVillageItem.block);

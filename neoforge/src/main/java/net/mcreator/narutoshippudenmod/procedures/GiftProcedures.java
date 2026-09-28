@@ -10,10 +10,8 @@ import net.mcreator.narutoshippudenmod.gui.MiscGuis.AdventCalendarGUIGui;
 import net.mcreator.narutoshippudenmod.item.DnaItems.UndefinedDNAItem;
 import net.mcreator.narutoshippudenmod.item.FoodItems.ChristmasRamenItem;
 import net.mcreator.narutoshippudenmod.item.FoodItems.GingerbreadItem;
-import net.mcreator.narutoshippudenmod.item.StuffItems.BanknoteOfRyoItem;
 import net.mcreator.narutoshippudenmod.item.StuffItems.IronStickItem;
 import net.mcreator.narutoshippudenmod.item.StuffItems.SharpIronItem;
-import net.mcreator.narutoshippudenmod.item.StuffItems.WadOfRyoItem;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.ChakraBladeItem;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.KatanaItem;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.KusanagiSasukeItem;
@@ -571,9 +569,7 @@ public final class GiftProcedures {
 			}
 			Entity entity = (Entity) dependencies.get("entity");
 			if (entity instanceof Player) {
-				ItemStack _setstack = new ItemStack(WadOfRyoItem.block);
-				_setstack.setCount((int) 1);
-				Compat.giveItemToPlayer(((Player) entity), _setstack);
+				net.mcreator.narutoshippudenmod.economy.Ryo.give((Player) entity, 81);
 			}
 			{
 				double _setval = 11;
@@ -983,9 +979,7 @@ public final class GiftProcedures {
 				Compat.giveItemToPlayer(((Player) entity), _setstack);
 			}
 			if (entity instanceof Player) {
-				ItemStack _setstack = new ItemStack(WadOfRyoItem.block);
-				_setstack.setCount((int) 3);
-				Compat.giveItemToPlayer(((Player) entity), _setstack);
+				net.mcreator.narutoshippudenmod.economy.Ryo.give((Player) entity, 243);
 			}
 			{
 				double _setval = (NarutoShippudenModVariables.get(entity).LEVEL + 30);
@@ -1017,9 +1011,7 @@ public final class GiftProcedures {
 			}
 			Entity entity = (Entity) dependencies.get("entity");
 			if (entity instanceof Player) {
-				ItemStack _setstack = new ItemStack(BanknoteOfRyoItem.block);
-				_setstack.setCount((int) 5);
-				Compat.giveItemToPlayer(((Player) entity), _setstack);
+				net.mcreator.narutoshippudenmod.economy.Ryo.give((Player) entity, 45);
 			}
 			{
 				double _setval = 2;

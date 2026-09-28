@@ -1,0 +1,13 @@
+{
+  "wants": {
+    "id": "naruto_shippuden:silver_ryo",
+    "count": 2
+  },
+  "gives": {
+    "id": "naruto_shippuden:explosive_kunai",
+    "count": 2
+  },
+  "max_uses": 16,
+  "xp": 0,
+  "reputation_discount": 0.0
+}

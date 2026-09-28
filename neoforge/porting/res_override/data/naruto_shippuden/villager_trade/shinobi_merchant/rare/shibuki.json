@@ -1,0 +1,13 @@
+{
+  "wants": {
+    "id": "naruto_shippuden:gold_ryo",
+    "count": 6
+  },
+  "gives": {
+    "id": "naruto_shippuden:shibuki",
+    "count": 1
+  },
+  "max_uses": 1,
+  "xp": 0,
+  "reputation_discount": 0.0
+}

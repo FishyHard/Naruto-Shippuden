@@ -44,7 +44,6 @@
   "item.naruto_shippuden.custom_earth_release_technique": "Earth Release",
   "effect.gates_green_6": "Gates",
   "item.naruto_shippuden.fire_dragon_flame_bullet": "Fire Dragon Flame Bullet",
-  "item.naruto_shippuden.banknote_of_ryo": "Banknote Of Ryo",
   "itemGroup.tabtechniques": "Techniques",
   "advancements.voltic_2x_2_pupil_1x_1.title": "Voltic Mode",
   "entity.naruto_shippuden.shadow_imitation_field_technique": "Shadow Imitation Field Technique",
@@ -321,7 +320,6 @@
   "item.naruto_shippuden.armored_susano_madara_spawn_egg": "Armored Susano Madara Spawn Egg",
   "item.naruto_shippuden.shadow_imitation_field_technique_spawn_egg": "Shadow Imitation Field Technique Spawn Egg",
   "entity.naruto_shippuden.dead_demon_consuming_seal": "Dead Demon Consuming Seal",
-  "item.naruto_shippuden.case_of_ryo": "Ryo Case",
   "entity.naruto_shippuden.magnet_hands": "Magnet Hands",
   "block.naruto_shippuden.dust_block": "Dust Release",
   "item.naruto_shippuden.shogiboard": "Shogi board",
@@ -372,7 +370,6 @@
   "item.naruto_shippuden.skeleton_susano_shisui_spawn_egg": "Skeleton Susano Shisui Spawn Egg",
   "item.naruto_shippuden.kazekage_release": "Kazekage Release",
   "item.naruto_shippuden.mangekyou_sharingan_sasuke_release_technique": "Sasuke Mangekyou Sharingan Release Technique",
-  "item.naruto_shippuden.wad_of_ryo": "Wad Of Ryo",
   "entity.naruto_shippuden.drowning_water_blob_technique_entity": "Drowning Water Blob Technique",
   "key.naruto_shippuden.jutsu_power": "Jutsu-Power",
   "entity.naruto_shippuden.skeleton_susano_obito": "Skeleton Susano Obito",
@@ -517,5 +514,7 @@
   "entity.naruto_shippuden.armored_susano_sasuke": "Armored Susano Sasuke",
   "item.naruto_shippuden.kamui_dimension": "Story Mode Dimension Portal Igniter",
   "item.naruto_shippuden.phoenix_flower_jutsu": "Great Fireball",
-  "key.naruto_shippuden.jutsu_wheel": "Jutsu Wheel"
+  "key.naruto_shippuden.jutsu_wheel": "Jutsu Wheel",
+  "entity.naruto_shippuden.shinobi_merchant": "Shinobi Merchant",
+  "item.naruto_shippuden.shinobi_merchant_spawn_egg": "Shinobi Merchant Spawn Egg"
 }

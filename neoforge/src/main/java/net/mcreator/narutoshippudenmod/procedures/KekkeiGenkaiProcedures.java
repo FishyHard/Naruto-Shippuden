@@ -74,7 +74,6 @@ import net.mcreator.narutoshippudenmod.item.ReleaseTechniqueItems.StormReleaseTe
 import net.mcreator.narutoshippudenmod.item.ReleaseTechniqueItems.SwiftReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.ReleaseTechniqueItems.TyphoonReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.ReleaseTechniqueItems.WoodReleaseTechniqueItem;
-import net.mcreator.narutoshippudenmod.item.StuffItems.WadOfRyoItem;
 import net.mcreator.narutoshippudenmod.particle.ModParticles.SmokeParticle;
 import net.mcreator.narutoshippudenmod.particle.ModParticles.StormParticle;
 import net.mcreator.narutoshippudenmod.potion.ModEffects.TreeBindFlourishingBurialPotionEffect;
@@ -2683,9 +2682,7 @@ public final class KekkeiGenkaiProcedures {
 							.isDone()
 					: false) {
 				if (entity instanceof Player) {
-					ItemStack _setstack = new ItemStack(WadOfRyoItem.block);
-					_setstack.setCount((int) 3);
-					Compat.giveItemToPlayer(((Player) entity), _setstack);
+					net.mcreator.narutoshippudenmod.economy.Ryo.give((Player) entity, 243);
 				}
 				if (entity instanceof Player) {
 					ItemStack _stktoremove = new ItemStack(IronDefenseItem.block);

@@ -55,10 +55,8 @@ import net.mcreator.narutoshippudenmod.item.MissionItems.AsumaQuestCItem;
 import net.mcreator.narutoshippudenmod.item.MissionItems.ShikamaruQuestDItem;
 import net.mcreator.narutoshippudenmod.item.ProjectileItems.ShurikenBulletItem;
 import net.mcreator.narutoshippudenmod.item.ProjectileItems.WaterSharkBulletItem;
-import net.mcreator.narutoshippudenmod.item.StuffItems.BanknoteOfRyoItem;
 import net.mcreator.narutoshippudenmod.item.StuffItems.ShogiItem;
 import net.mcreator.narutoshippudenmod.item.StuffItems.ShogiboardItem;
-import net.mcreator.narutoshippudenmod.item.StuffItems.WadOfRyoItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.LeeReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.ChakraBladeItem;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.KubikiribochoItem;
@@ -719,14 +717,10 @@ public final class EntityProcedures {
 									((Player) sourceentity).inventoryMenu.getCraftSlots());
 						}
 						if (sourceentity instanceof Player) {
-							ItemStack _setstack = new ItemStack(WadOfRyoItem.block);
-							_setstack.setCount((int) 2);
-							Compat.giveItemToPlayer(((Player) sourceentity), _setstack);
+							net.mcreator.narutoshippudenmod.economy.Ryo.give((Player) sourceentity, 162);
 						}
 						if (sourceentity instanceof Player) {
-							ItemStack _setstack = new ItemStack(BanknoteOfRyoItem.block);
-							_setstack.setCount((int) 10);
-							Compat.giveItemToPlayer(((Player) sourceentity), _setstack);
+							net.mcreator.narutoshippudenmod.economy.Ryo.give((Player) sourceentity, 90);
 						}
 						{
 							double _setval = (NarutoShippudenModVariables.get(sourceentity).C_Mission + 1);
@@ -786,7 +780,7 @@ public final class EntityProcedures {
 			public static void onEntityDeath(LivingDeathEvent event) {
 				if (event != null && event.getEntity() != null) {
 					Entity entity = event.getEntity();
-					Entity sourceentity = event.getSource().getEntity();
+					Entity sourceentity = net.mcreator.narutoshippudenmod.core.Progression.credit(event);
 					double i = entity.getX();
 					double j = entity.getY();
 					double k = entity.getZ();
@@ -848,16 +842,7 @@ public final class EntityProcedures {
 				if (!(entity instanceof CrowEntity.CustomEntity) && !(entity instanceof EarthGolemEntity.CustomEntity)
 						&& !(entity instanceof ShadowCloneEntity.CustomEntity) && !(entity instanceof AkamaruEntity.CustomEntity)
 						&& !(entity instanceof EarthGolemShinobiEntity.CustomEntity)) {
-					{
-						double _setval = (NarutoShippudenModVariables.get(sourceentity).LEVEL + 1);
-						NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-							capability.LEVEL = _setval;
-							capability.syncPlayerVariables(sourceentity);
-						});
-					}
-					if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-						((Player) sourceentity).sendOverlayMessage(Component.literal(("+" + "1 " + "LvL XP")));
-					}
+					net.mcreator.narutoshippudenmod.core.Progression.onKill(sourceentity, entity);
 				}
 			}
 			if (sourceentity instanceof Player) {
@@ -3388,9 +3373,7 @@ public final class EntityProcedures {
 									((Player) sourceentity).inventoryMenu.getCraftSlots());
 						}
 						if (sourceentity instanceof Player) {
-							ItemStack _setstack = new ItemStack(BanknoteOfRyoItem.block);
-							_setstack.setCount((int) 15);
-							Compat.giveItemToPlayer(((Player) sourceentity), _setstack);
+							net.mcreator.narutoshippudenmod.economy.Ryo.give((Player) sourceentity, 135);
 						}
 						{
 							double _setval = (NarutoShippudenModVariables.get(sourceentity).D_Mission + 1);

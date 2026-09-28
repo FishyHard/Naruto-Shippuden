@@ -247,7 +247,7 @@ public final class Jutsus {
 		if (sneaking)
 			player.setShiftKeyDown(false);
 		try {
-			technique.cast.accept(dependencies(player, stack));
+			net.mcreator.narutoshippudenmod.core.Progression.casting(player, () -> technique.cast.accept(dependencies(player, stack)));
 		} finally {
 			if (sneaking)
 				player.setShiftKeyDown(true);

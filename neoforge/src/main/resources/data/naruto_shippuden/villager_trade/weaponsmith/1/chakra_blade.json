@@ -1,15 +1,12 @@
 {
   "wants": {
-    "id": "naruto_shippuden:wad_of_ryo"
-  },
-  "additional_wants": {
-    "id": "minecraft:iron_ingot",
-    "count": 20
+    "id": "naruto_shippuden:gold_ryo",
+    "count": 1
   },
   "gives": {
     "id": "naruto_shippuden:chakra_blade"
   },
   "max_uses": 1,
-  "xp": 7,
-  "reputation_discount": 0.05
+  "xp": 0,
+  "reputation_discount": 0.0
 }

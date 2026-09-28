@@ -77,9 +77,9 @@ public final class ItemDescriptions {
 		add("boil_dna_release bone_dna_release dust_dna_release ice_dna_release magnet_dna_release smoke_dna_release steel_dna_release"
 				+ " storm_dna_release swift_dna_release typhoon_dna_release wood_dna_release", gray("50% implant chance"));
 		add("undefined_dna", gray("50% chance to identify"));
-		add("banknote_of_ryo", gray("Worth 200 Ryo"));
-		add("wad_of_ryo", gray("Worth 10,000 Ryo"));
-		add("case_of_ryo", gray("Worth 500,000 Ryo"));
+		add("bronze_ryo", gray("9 craft into 1 Silver Ryo"));
+		add("silver_ryo", gray("Worth 9 Bronze Ryo"), gray("9 craft into 1 Gold Ryo"));
+		add("gold_ryo", gray("Worth 9 Silver Ryo"));
 		add("iron_defense", gray("Build an Iron Golem"));
 		add("pillage_the_post", gray("Kill 5 Pillagers"));
 		add("save_the_village", gray("Kill 10 Zombies"));

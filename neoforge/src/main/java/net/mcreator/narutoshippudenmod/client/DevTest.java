@@ -82,6 +82,11 @@ public final class DevTest {
 
 	/** Every mod screen, the cheat tabs, then NPCs and the Byakugan outline in the world; 60 ticks per step. */
 	private static void buildSteps(Minecraft mc) {
+		if (System.getProperty("naruto.devtest.only", "").equals("economy")) {
+			economySteps(mc);
+			STEPS.add(mc::stop);
+			return;
+		}
 		STEPS.add(() -> shot(mc, "hud"));
 		for (String menu : MENUS) {
 			String name = menu.substring(menu.indexOf('$') + 1);
@@ -182,10 +187,56 @@ public final class DevTest {
 			});
 			STEPS.add(() -> shot(mc, "tooltip_" + id));
 		}
+		economySteps(mc);
 		STEPS.add(() -> {
 			NarutoShippudenMod.LOGGER.info("DEVTEST screens done");
 			mc.stop();
 		});
+	}
+
+	private static void run(net.minecraft.server.level.ServerPlayer player, String command) {
+		player.level().getServer().getCommands().performPrefixedCommand(player.createCommandSourceStack().withPermission(
+				net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER), command);
+	}
+
+	private static void logProgress(net.minecraft.server.level.ServerPlayer player, String when) {
+		var v = NarutoShippudenModVariables.get(player);
+		long coins = player.level().getEntities(net.minecraft.world.entity.EntityTypes.ITEM, player.getBoundingBox().inflate(16), e -> true).stream()
+				.filter(e -> e.getItem().getItem().toString().contains("ryo")).mapToInt(e -> e.getItem().getCount()).sum();
+		NarutoShippudenMod.LOGGER.info("DEVTEST progress {}: level {} xp {}/{} jp {} sp {} chakraMax {} ryo on ground {}", when, v.LEVELSTAT, v.LEVEL, v.LEVELMAX,
+				v.jp, v.sp, v.ChakraMax, coins);
+	}
+
+	/** The Shinobi Merchant's shop, and a kill made by a jutsu summon counting for the player. */
+	private static void economySteps(Minecraft mc) {
+		STEPS.add(() -> {
+			mc.gui.setScreen(null);
+			command(mc, "kill @e[type=!player]");
+			command(mc, "time set day");
+			command(mc, "tp @s ~ ~ ~ 0 10");
+			command(mc, "summon naruto_shippuden:shinobi_merchant ~ ~ ~3 {NoAI:1b,Rotation:[180f,0f]}");
+			command(mc, "give @s naruto_shippuden:gold_ryo 3");
+		});
+		STEPS.add(() -> shot(mc, "merchant_world"));
+		STEPS.add(() -> onServer(mc, player -> player.level().getEntities(net.mcreator.narutoshippudenmod.economy.ShinobiMerchant.entity,
+				player.getBoundingBox().inflate(8), e -> true).forEach(m -> m.mobInteract(player, net.minecraft.world.InteractionHand.MAIN_HAND))));
+		STEPS.add(() -> shot(mc, "merchant_trades"));
+		STEPS.add(() -> {
+			mc.player.closeContainer();
+			onServer(mc, player -> {
+				logProgress(player, "before kill");
+				net.mcreator.narutoshippudenmod.core.Progression.casting(player,
+						() -> run(player, "summon minecraft:iron_golem ~ ~ ~-5 {Tags:[\"helper\"],NoAI:1b}"));
+				run(player, "summon minecraft:zombie ~2 ~ ~-5 {Tags:[\"victim\"],NoAI:1b}");
+				run(player, "damage @e[tag=victim,limit=1] 100 minecraft:mob_attack by @e[tag=helper,limit=1]");
+			});
+		});
+		STEPS.add(() -> onServer(mc, player -> {
+			logProgress(player, "after summon kill");
+			net.mcreator.narutoshippudenmod.core.Progression.addXp(player, 300);
+			logProgress(player, "after 300 xp");
+		}));
+		STEPS.add(() -> shot(mc, "level_up"));
 	}
 
 	private static void screens(Minecraft mc, Screen screen) {

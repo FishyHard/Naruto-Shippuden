@@ -1,0 +1,17 @@
+{
+  "wants": {
+    "id": "naruto_shippuden:silver_ryo",
+    "count": 1
+  },
+  "gives": {
+    "id": "naruto_shippuden:tanto",
+    "count": 1
+  },
+  "max_uses": 3,
+  "xp": 0,
+  "reputation_discount": 0.0,
+  "additional_wants": {
+    "id": "naruto_shippuden:bronze_ryo",
+    "count": 4
+  }
+}
