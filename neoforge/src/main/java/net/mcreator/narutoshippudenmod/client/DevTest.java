@@ -117,6 +117,7 @@ public final class DevTest {
 		STEPS.add(() -> {
 			command(mc, "clear @s");
 			command(mc, "give @s naruto_shippuden:fire_release");
+			command(mc, "give @s naruto_shippuden:fire_release_technique");
 			command(mc, "naruto set jp 100 @s");
 			command(mc, "naruto set ninjutsu 50 @s");
 			command(mc, "naruto set chakra 500 @s");
@@ -125,8 +126,7 @@ public final class DevTest {
 		STEPS.add(() -> mc.gui.setScreen(new JutsuClient.ScrollScreen(
 				net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.RELEASES.get(net.minecraft.resources.Identifier.parse("naruto_shippuden:fire_release")),
 				net.minecraft.network.chat.Component.literal("Fire Release"))));
-		STEPS.add(() -> click(mc, "5 JP"));
-		STEPS.add(() -> click(mc, "10 JP"));
+		STEPS.add(() -> click(mc, "15 JP"));
 		STEPS.add(() -> shot(mc, "jutsu_scroll"));
 		STEPS.add(() -> {
 			mc.player.closeContainer();
@@ -135,7 +135,10 @@ public final class DevTest {
 				if (net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.technique(mc.player.getInventory().getItem(slot)) != null)
 					mc.player.getInventory().setSelectedSlot(slot);
 		});
-		STEPS.add(() -> mc.gui.setScreen(new JutsuClient.WheelScreen(JutsuClient.held(mc.player))));
+		STEPS.add(() -> {
+			if (JutsuClient.held(mc.player) != null)
+				mc.gui.setScreen(new JutsuClient.WheelScreen(JutsuClient.held(mc.player)));
+		});
 		STEPS.add(() -> shot(mc, "jutsu_wheel"));
 		STEPS.add(() -> {
 			mc.gui.setScreen(null);
@@ -147,6 +150,19 @@ public final class DevTest {
 					mc.player.getCooldowns().isOnCooldown(mc.player.getMainHandItem()));
 			mc.gameMode.useItem(mc.player, net.minecraft.world.InteractionHand.MAIN_HAND);
 			shot(mc, "jutsu_cast");
+		});
+		STEPS.add(() -> {
+			command(mc, "give @s naruto_shippuden:mangekyou_sharingan_sasuke_release");
+			command(mc, "naruto set jp 40 @s");
+		});
+		STEPS.add(() -> mc.gui.setScreen(new JutsuClient.ScrollScreen(
+				net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.RELEASES.get(net.minecraft.resources.Identifier.parse("naruto_shippuden:mangekyou_sharingan_sasuke_release")),
+				net.minecraft.network.chat.Component.literal("Mangekyou Sharingan (Sasuke)"))));
+		STEPS.add(() -> click(mc, "10 JP"));
+		STEPS.add(() -> shot(mc, "jutsu_scroll_ms"));
+		STEPS.add(() -> {
+			mc.gui.setScreen(null);
+			NarutoShippudenMod.LOGGER.info("DEVTEST still connected {}", mc.getConnection() != null);
 		});
 		STEPS.add(() -> {
 			NarutoShippudenMod.LOGGER.info("DEVTEST screens done");

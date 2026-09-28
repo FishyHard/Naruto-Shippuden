@@ -132,7 +132,7 @@ public final class JutsuClient {
 	/** A stack whose cooldown group is this jutsu, to read its cooldown from the player's ItemCooldowns. */
 	static ItemStack cooldownProbe(Jutsu jutsu) {
 		ItemStack stack = new ItemStack(BuiltInRegistries.ITEM.getValue(jutsu.technique().item));
-		stack.set(DataComponents.USE_COOLDOWN, new UseCooldown(0.0F, Optional.of(jutsu.cooldownGroup())));
+		stack.set(DataComponents.USE_COOLDOWN, new UseCooldown(0.05F, Optional.of(jutsu.cooldownGroup())));
 		return stack;
 	}
 
@@ -163,8 +163,16 @@ public final class JutsuClient {
 			return technique.jutsu.size();
 		}
 
+		/** Box width: wide enough for the longest name (up to 170), so names are not cut. */
+		private int boxWidth() {
+			int widest = 0;
+			for (Jutsu jutsu : technique.jutsu)
+				widest = Math.max(widest, font.width(jutsu.name()));
+			return Mth.clamp(widest + 12, 90, 170);
+		}
+
 		private int boxX(int i) {
-			return width / 2 + (int) (Mth.cos(angle(i)) * (count() <= 4 ? 70 : 96)) - 55;
+			return width / 2 + (int) (Mth.cos(angle(i)) * (boxWidth() / 2 + (count() <= 4 ? 18 : 40))) - boxWidth() / 2;
 		}
 
 		private int boxY(int i) {
@@ -192,13 +200,14 @@ public final class JutsuClient {
 				Jutsu jutsu = technique.jutsu.get(i);
 				int x = boxX(i), y = boxY(i);
 				boolean learned = jutsu.isLearned(variables);
-				graphics.blitSprite(RenderPipelines.GUI_TEXTURED, i == hovered ? PANEL : INSET, x, y, 110, 20);
+				int w = boxWidth();
+				graphics.blitSprite(RenderPipelines.GUI_TEXTURED, i == hovered ? PANEL : INSET, x, y, w, 20);
 				float cooldown = player.getCooldowns().getCooldownPercent(probes[i], a);
 				if (cooldown > 0)
-					graphics.fill(x + 1, y + 1, x + 1 + (int) (108 * cooldown), y + 19, 0x60000000);
-				String name = font.plainSubstrByWidth(jutsu.name(), 102);
+					graphics.fill(x + 1, y + 1, x + 1 + (int) ((w - 2) * cooldown), y + 19, 0x60000000);
+				String name = font.plainSubstrByWidth(jutsu.name(), w - 8);
 				int color = !learned ? 0xFF9A9A9A : i == hovered ? TEXT : i == selected ? 0xFFFFFF55 : 0xFFFFFFFF;
-				graphics.text(font, name, x + 55 - font.width(name) / 2, y + 6, color, i != hovered && learned);
+				graphics.text(font, name, x + w / 2 - font.width(name) / 2, y + 6, color, i != hovered && learned);
 			}
 			// the middle: the item and what the pointed-at jutsu needs
 			graphics.item(new ItemStack(BuiltInRegistries.ITEM.getValue(technique.item)), width / 2 - 8, height / 2 - 8);
@@ -231,17 +240,28 @@ public final class JutsuClient {
 	}
 
 	// ------------------------------------------------------------------ the jutsu scroll
-	/** Every tier of a release: what it unlocks, what it needs, the JP price and a Learn button for the next one. */
+	/**
+	 * Every tier of a release, track by track (a Mangekyou scroll lists its jutsu and its Susanoo): what it unlocks, what it
+	 * needs, the JP price and a Learn button on the next tier of each track.
+	 */
 	static class ScrollScreen extends Screen {
-		private static final int W = 276, ROW = 30, ROWS = 5;
+		private static final int W = 300, ROW = 30, ROWS = 6;
 		private final Release release;
+		/** Flattened list: header rows (tier -1) and tier rows. */
+		private final List<int[]> rows = new java.util.ArrayList<>();
 		private int scroll;
-		private int owned = -1;
-		private double jp = -1;
+		private String state = "";
 
 		ScrollScreen(Release release, Component name) {
 			super(name);
 			this.release = release;
+			boolean headers = release.tracks().size() > 1;
+			for (int t = 0; t < release.tracks().size(); t++) {
+				if (headers)
+					rows.add(new int[] {t, -1});
+				for (int tier = 0; tier < release.tracks().get(t).tiers().size(); tier++)
+					rows.add(new int[] {t, tier});
+			}
 		}
 
 		private int left() {
@@ -253,24 +273,39 @@ public final class JutsuClient {
 		}
 
 		private int maxScroll() {
-			return Math.max(0, release.tiers().size() - ROWS);
+			return Math.max(0, rows.size() - ROWS);
+		}
+
+		private String state(PlayerVariables variables) {
+			StringBuilder text = new StringBuilder().append(variables.jp);
+			for (Jutsus.Track track : release.tracks())
+				text.append('/').append(track.owned(variables));
+			return text.toString();
+		}
+
+		private String header(int track) {
+			Jutsus.Track info = release.tracks().get(track);
+			if (!info.label().isEmpty())
+				return info.label();
+			return "Jutsu";
 		}
 
 		@Override
 		protected void init() {
 			PlayerVariables variables = NarutoShippudenModVariables.get(minecraft.player);
-			owned = release.owned(variables);
-			jp = variables.jp;
-			for (int row = 0; row < ROWS && scroll + row < release.tiers().size(); row++) {
-				int tier = scroll + row;
+			state = state(variables);
+			for (int row = 0; row < ROWS && scroll + row < rows.size(); row++) {
+				int track = rows.get(scroll + row)[0], tier = rows.get(scroll + row)[1];
+				Jutsus.Track info = release.tracks().get(track);
+				int owned = info.owned(variables);
 				if (tier < owned)
 					continue;
-				Tier info = release.tiers().get(tier);
-				Button learn = Button.builder(Component.literal(info.cost() + " JP"), b -> send("learn", release.item().toString(), 0))
-						.bounds(left() + W - 8 - 8 - 56, top() + 20 + row * ROW + 3, 56, 20).build();
-				learn.active = tier == owned && variables.jp >= info.cost();
+				Tier price = info.tiers().get(tier);
+				Button learn = Button.builder(Component.literal(price.cost() + " JP"), b -> send("learn", release.item().toString(), track))
+						.bounds(left() + W - 8 - 8 - 56, top() + 20 + row * ROW + 4, 56, 20).build();
+				learn.active = tier == owned && variables.jp >= price.cost();
 				learn.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.literal(tier == owned
-						? variables.jp >= info.cost() ? "Learn for " + info.cost() + " JP" : "Not enough JP"
+						? variables.jp >= price.cost() ? "Learn for " + price.cost() + " JP" : "Not enough JP"
 						: "Learn the ones above first")));
 				addRenderableWidget(learn);
 			}
@@ -283,8 +318,7 @@ public final class JutsuClient {
 
 		@Override
 		public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
-			PlayerVariables variables = NarutoShippudenModVariables.get(minecraft.player);
-			if (release.owned(variables) != owned || variables.jp != jp)
+			if (!state(NarutoShippudenModVariables.get(minecraft.player)).equals(state))
 				rebuildWidgets();
 			super.extractRenderState(graphics, mouseX, mouseY, a);
 		}
@@ -295,29 +329,34 @@ public final class JutsuClient {
 			PlayerVariables variables = NarutoShippudenModVariables.get(minecraft.player);
 			int x = left(), y = top();
 			graphics.blitSprite(RenderPipelines.GUI_TEXTURED, PANEL, x, y, W, 26 + ROWS * ROW + 6);
-			graphics.text(font, title, x + 8, y + 6, TEXT, false);
 			String jpText = "JP: " + (int) variables.jp;
+			graphics.text(font, font.plainSubstrByWidth(title.getString(), W - 24 - font.width(jpText)), x + 8, y + 6, TEXT, false);
 			graphics.text(font, jpText, x + W - 8 - font.width(jpText), y + 6, TEXT, false);
-			for (int row = 0; row < ROWS && scroll + row < release.tiers().size(); row++) {
-				int tier = scroll + row, ry = y + 20 + row * ROW;
-				Tier info = release.tiers().get(tier);
+			for (int row = 0; row < ROWS && scroll + row < rows.size(); row++) {
+				int track = rows.get(scroll + row)[0], tier = rows.get(scroll + row)[1], ry = y + 20 + row * ROW;
+				Jutsus.Track info = release.tracks().get(track);
+				if (tier < 0) {
+					graphics.text(font, header(track), x + 10, ry + 16, TEXT, false);
+					continue;
+				}
 				graphics.blitSprite(RenderPipelines.GUI_TEXTURED, INSET, x + 8, ry, W - 16 - 8, ROW - 2);
-				List<Jutsu> unlocks = release.unlocks(info);
-				String name = unlocks.isEmpty() ? info.gives() == null ? "Tier " + (tier + 1)
-						: "Unlocks " + new ItemStack(BuiltInRegistries.ITEM.getValue(info.gives())).getHoverName().getString()
-						: unlocks.getFirst().name();
+				boolean learned = tier < info.owned(variables);
+				String name = info.name(tier);
+				List<Jutsu> unlocks = info.unlocks(info.tiers().get(tier));
 				String detail = unlocks.isEmpty() ? "" : details(unlocks.getFirst(), variables);
-				boolean learned = tier < owned;
-				int textRight = learned ? W - 16 - 8 - 22 : W - 16 - 8 - 64;
-				graphics.text(font, font.plainSubstrByWidth(name, textRight - 8), x + 13, ry + 5, learned ? 0xFFFFFF55 : 0xFFFFFFFF, true);
-				graphics.text(font, font.plainSubstrByWidth(detail, textRight - 8), x + 13, ry + 16, 0xFFD0D0D0, true);
+				int textWidth = (learned ? W - 16 - 8 - 26 : W - 16 - 8 - 66) - 8;
+				String shown = font.plainSubstrByWidth(name, textWidth);
+				graphics.text(font, shown, x + 13, ry + 5, learned ? 0xFFFFFF55 : 0xFFFFFFFF, true);
+				graphics.text(font, font.plainSubstrByWidth(detail, textWidth), x + 13, ry + 16, 0xFFD0D0D0, true);
+				if (!shown.equals(name) && mouseX >= x + 8 && mouseX < x + 8 + textWidth && mouseY >= ry && mouseY < ry + ROW - 2)
+					graphics.setTooltipForNextFrame(Component.literal(name), mouseX, mouseY);
 				if (learned)
 					graphics.blitSprite(RenderPipelines.GUI_TEXTURED, CHECKMARK, x + W - 8 - 8 - 20, ry + 10, 9, 8);
 			}
 			// scrollbar
 			int barX = x + W - 8 - 6, barTop = y + 20, barHeight = ROWS * ROW - 2;
 			graphics.blitSprite(RenderPipelines.GUI_TEXTURED, INSET, barX, barTop, 6, barHeight);
-			int thumb = maxScroll() == 0 ? barHeight - 2 : Math.max(10, barHeight * ROWS / release.tiers().size());
+			int thumb = maxScroll() == 0 ? barHeight - 2 : Math.max(10, (barHeight - 2) * ROWS / rows.size());
 			int thumbY = barTop + 1 + (maxScroll() == 0 ? 0 : (barHeight - 2 - thumb) * scroll / maxScroll());
 			graphics.fill(barX + 1, thumbY, barX + 5, thumbY + thumb, 0xFFC6C6C6);
 			graphics.fill(barX + 1, thumbY, barX + 4, thumbY + thumb - 1, 0xFFFFFFFF);

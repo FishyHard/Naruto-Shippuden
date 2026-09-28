@@ -284,7 +284,7 @@ public final class NarutoActions {
 				case "learn" -> {
 					Identifier item = Identifier.tryParse(action.key());
 					if (item != null)
-						net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.learn(player, item);
+						net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.learn(player, item, (int) action.amount());
 				}
 				default -> {
 				}

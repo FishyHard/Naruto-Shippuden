@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.ObjDoubleConsumer;
+import java.util.function.Predicate;
 import java.util.function.ToDoubleFunction;
 
 import org.jspecify.annotations.Nullable;
@@ -56,12 +57,16 @@ public final class Jutsus {
 		final ToDoubleFunction<PlayerVariables> selected;
 		final ObjDoubleConsumer<PlayerVariables> select;
 		final Consumer<Map<String, Object>> cast;
+		/** Extra condition of every jutsu on this item (the Mangekyou Sharingan being active), or null. */
+		final @Nullable Predicate<PlayerVariables> requirement;
 		public final List<Jutsu> jutsu = new ArrayList<>();
 
-		Technique(Identifier item, ToDoubleFunction<PlayerVariables> selected, ObjDoubleConsumer<PlayerVariables> select, Consumer<Map<String, Object>> cast) {
+		Technique(Identifier item, ToDoubleFunction<PlayerVariables> selected, ObjDoubleConsumer<PlayerVariables> select,
+				@Nullable Predicate<PlayerVariables> requirement, Consumer<Map<String, Object>> cast) {
 			this.item = item;
 			this.selected = selected;
 			this.select = select;
+			this.requirement = requirement;
 			this.cast = cast;
 		}
 
@@ -98,11 +103,30 @@ public final class Jutsus {
 	public record Tier(int cost, double learn, @Nullable Identifier gives) {
 	}
 
-	public record Release(Identifier item, ToDoubleFunction<PlayerVariables> bought, Consumer<Map<String, Object>> buy, @Nullable Technique technique,
+	/** A release scroll: one or more tracks (a Mangekyou scroll has its jutsu and its Susanoo), bought by one procedure. */
+	public record Release(Identifier item, Consumer<Map<String, Object>> buy, List<Track> tracks) {
+	}
+
+	/**
+	 * A line of tiers bought in order. {@code selector} is the value the buy procedure expects in the Mangekyou track
+	 * variable (-1: none).
+	 */
+	public record Track(String label, ToDoubleFunction<PlayerVariables> bought, int selector, @Nullable Technique technique,
 			@Nullable ToDoubleFunction<PlayerVariables> learnVariable, List<Tier> tiers) {
 		/** How many tiers the player has bought. */
 		public int owned(PlayerVariables variables) {
 			return (int) bought.applyAsDouble(variables);
+		}
+
+		/** What a tier is called: the jutsu it unlocks, the Susanoo stage or the item it gives. */
+		public String name(int tier) {
+			List<Jutsu> unlocks = unlocks(tiers.get(tier));
+			if (!unlocks.isEmpty())
+				return unlocks.getFirst().name();
+			if (!label.isEmpty())
+				return label + " Stage " + (tier + 1);
+			Identifier gives = tiers.get(tier).gives();
+			return gives == null ? "Tier " + (tier + 1) : "Unlocks " + new ItemStack(BuiltInRegistries.ITEM.getValue(gives)).getHoverName().getString();
 		}
 
 		/** The jutsu a tier unlocks (by its learn value), empty for tiers that only give an item. */
@@ -127,8 +151,8 @@ public final class Jutsus {
 	}
 
 	static void technique(String item, ToDoubleFunction<PlayerVariables> selected, ObjDoubleConsumer<PlayerVariables> select,
-			Consumer<Map<String, Object>> cast, JutsuSpec... specs) {
-		Technique technique = new Technique(id(item), selected, select, cast);
+			@Nullable Predicate<PlayerVariables> requirement, Consumer<Map<String, Object>> cast, JutsuSpec... specs) {
+		Technique technique = new Technique(id(item), selected, select, requirement, cast);
 		for (JutsuSpec s : specs)
 			technique.jutsu.add(new Jutsu(technique, technique.jutsu.size(), s.name(), s.learned(), s.tier(), s.statName(), s.stat(), s.statMin(), s.chakra(),
 					s.cooldowns()));
@@ -139,9 +163,13 @@ public final class Jutsus {
 		return new Tier(cost, learn, gives == null ? null : id(gives));
 	}
 
-	static void release(String item, ToDoubleFunction<PlayerVariables> bought, Consumer<Map<String, Object>> buy, @Nullable String technique,
+	static Track track(String label, ToDoubleFunction<PlayerVariables> bought, int selector, @Nullable String technique,
 			@Nullable ToDoubleFunction<PlayerVariables> learnVariable, Tier... tiers) {
-		RELEASES.put(id(item), new Release(id(item), bought, buy, technique == null ? null : TECHNIQUES.get(id(technique)), learnVariable, List.of(tiers)));
+		return new Track(label, bought, selector, technique == null ? null : TECHNIQUES.get(id(technique)), learnVariable, List.of(tiers));
+	}
+
+	static void release(String item, Consumer<Map<String, Object>> buy, Track... tracks) {
+		RELEASES.put(id(item), new Release(id(item), buy, List.of(tracks)));
 	}
 
 	private static Identifier id(String path) {
@@ -177,10 +205,12 @@ public final class Jutsus {
 	}
 
 	/** Gives the stack the selected jutsu's cooldown group, so the vanilla overlay shows that jutsu's cooldown. */
+	// seconds must be positive (the item codec rejects 0, which kicked creative players and dropped the item on save); never applied
+
 	static void showCooldownOf(ItemStack stack, Jutsu jutsu) {
 		UseCooldown current = stack.get(DataComponents.USE_COOLDOWN);
 		if (current == null || !current.cooldownGroup().equals(Optional.of(jutsu.cooldownGroup())))
-			stack.set(DataComponents.USE_COOLDOWN, new UseCooldown(0.0F, Optional.of(jutsu.cooldownGroup())));
+			stack.set(DataComponents.USE_COOLDOWN, new UseCooldown(0.05F, Optional.of(jutsu.cooldownGroup())));
 	}
 
 	public static void cast(ServerPlayer player, InteractionHand hand) {
@@ -193,6 +223,10 @@ public final class Jutsus {
 		showCooldownOf(stack, jutsu);
 		if (!jutsu.isLearned(variables)) {
 			tell(player, "You haven't learned " + jutsu.name() + " yet");
+			return;
+		}
+		if (technique.requirement != null && !technique.requirement.test(variables)) {
+			tell(player, "Activate the Mangekyou Sharingan first");
 			return;
 		}
 		if (!jutsu.meetsStat(variables)) {
@@ -237,19 +271,34 @@ public final class Jutsus {
 		tell(player, "Selected: " + jutsu.name());
 	}
 
-	public static void learn(ServerPlayer player, Identifier item) {
+	/** Buys the next tier of a track with the release's own procedure (which sends the JP message and gives items). */
+	public static void learn(ServerPlayer player, Identifier item, int trackIndex) {
 		Release release = RELEASES.get(item);
-		if (release == null)
+		if (release == null || trackIndex < 0 || trackIndex >= release.tracks().size())
 			return;
+		Track track = release.tracks().get(trackIndex);
 		PlayerVariables variables = NarutoShippudenModVariables.get(player);
-		int next = release.owned(variables);
-		if (next >= release.tiers().size())
+		int next = track.owned(variables);
+		if (next >= track.tiers().size())
 			return;
-		if (variables.jp < release.tiers().get(next).cost()) {
+		if (variables.jp < track.tiers().get(next).cost()) {
 			tell(player, "Not enough JP");
 			return;
 		}
-		release.buy().accept(dependencies(player, player.getMainHandItem()));
+		if (track.selector() >= 0)
+			NarutoShippudenModVariables.ifPresent(player, v -> v.MangekyouSharinganRelease = track.selector());
+		// the procedures switch tracks instead of buying while sneaking
+		boolean sneaking = player.isShiftKeyDown();
+		if (sneaking)
+			player.setShiftKeyDown(false);
+		try {
+			release.buy().accept(dependencies(player, player.getMainHandItem()));
+		} finally {
+			if (sneaking)
+				player.setShiftKeyDown(true);
+		}
+		if (track.owned(NarutoShippudenModVariables.get(player)) > next)
+			tell(player, "Learned: " + track.name(next));
 	}
 
 	// ------------------------------------------------------------------ right-clicks
