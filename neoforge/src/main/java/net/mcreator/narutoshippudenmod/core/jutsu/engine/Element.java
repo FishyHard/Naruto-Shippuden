@@ -38,7 +38,26 @@ public enum Element {
 			SoundEvents.LIGHTNING_BOLT_IMPACT),
 	SWIFT(0xFFFFF6C8, 0xFFFFFFFF, true, ParticleTypes.END_ROD, ParticleTypes.CLOUD, SoundEvents.BREEZE_JUMP, SoundEvents.BREEZE_LAND),
 	WOOD(0xFF7A5230, 0xFFB5D96A, false, new BlockParticleOption(ParticleTypes.BLOCK, Blocks.OAK_LEAVES.defaultBlockState()),
-			new BlockParticleOption(ParticleTypes.BLOCK, Blocks.OAK_LOG.defaultBlockState()), SoundEvents.WOOD_PLACE, SoundEvents.WOOD_BREAK);
+			new BlockParticleOption(ParticleTypes.BLOCK, Blocks.OAK_LOG.defaultBlockState()), SoundEvents.WOOD_PLACE, SoundEvents.WOOD_BREAK),
+	// clans
+	/** Hyuga chakra: the Gentle Fist, Rotation and the twin lions. */
+	CHAKRA(0xFF7FC4FF, 0xFFF0FAFF, true, new DustParticleOptions(0x9ED6FF, 1.0F), ParticleTypes.END_ROD, SoundEvents.BREEZE_SHOOT,
+			SoundEvents.PLAYER_ATTACK_KNOCKBACK),
+	/** Aburame destruction bugs. */
+	INSECT(0xFF2A2B22, 0xFF6B7A3C, false, new DustParticleOptions(0x1C1C16, 1.0F), new DustParticleOptions(0x3B4128, 1.1F),
+			SoundEvents.BEEHIVE_WORK, SoundEvents.SILVERFISH_HURT),
+	/** The Eight Gates' green aura and steam. */
+	GATE(0xFF5CFF86, 0xFFE8FFEC, true, new DustParticleOptions(0x6CFF94, 1.3F), ParticleTypes.CLOUD, SoundEvents.WARDEN_HEARTBEAT,
+			SoundEvents.GENERIC_EXPLODE.value()),
+	/** The Gate of Death's blood-red steam (Night Guy). */
+	NIGHT(0xFFFF2E2E, 0xFFFFD6C8, true, new DustParticleOptions(0xFF2A2A, 1.6F), ParticleTypes.CLOUD, SoundEvents.WARDEN_SONIC_BOOM,
+			SoundEvents.GENERIC_EXPLODE.value()),
+	/** Uzumaki sealing chakra: the golden chains. */
+	SEAL(0xFFFFC23D, 0xFFFFF5CC, true, new DustParticleOptions(0xFFCC4D, 1.0F), ParticleTypes.END_ROD, SoundEvents.CHAIN_PLACE,
+			SoundEvents.AMETHYST_BLOCK_BREAK),
+	/** Beast chakra (Inuzuka, Tenro, Izuno): grey fangs and claws. */
+	BEAST(0xFFB8B0A4, 0xFFFFFFFF, false, new DustParticleOptions(0xA8A198, 1.2F), ParticleTypes.POOF, SoundEvents.EVOKER_FANGS_ATTACK,
+			SoundEvents.PLAYER_ATTACK_SWEEP);
 
 	/** ARGB colour of the outer body and of the bright core. */
 	public final int color, core;

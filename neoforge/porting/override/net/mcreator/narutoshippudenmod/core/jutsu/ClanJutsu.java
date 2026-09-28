@@ -1,0 +1,1111 @@
+package net.mcreator.narutoshippudenmod.core.jutsu;
+
+import static net.mcreator.narutoshippudenmod.core.jutsu.NatureJutsu.level;
+import static net.mcreator.narutoshippudenmod.core.jutsu.NatureJutsu.nature;
+import static net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.after;
+import static net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.burst;
+import static net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.channel;
+import static net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.cone;
+import static net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.damage;
+import static net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.enemies;
+import static net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.line;
+import static net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.lookPoint;
+import static net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.puff;
+import static net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.shoot;
+import static net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.sound;
+import static net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.spray;
+import static net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.turned;
+
+import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables;
+import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables.PlayerVariables;
+import net.mcreator.narutoshippudenmod.core.EntityScale;
+import net.mcreator.narutoshippudenmod.core.jutsu.NatureJutsu.Def;
+import net.mcreator.narutoshippudenmod.core.jutsu.engine.Element;
+import net.mcreator.narutoshippudenmod.core.jutsu.engine.JutsuEngine;
+import net.mcreator.narutoshippudenmod.core.jutsu.engine.JutsuProjectile;
+import net.mcreator.narutoshippudenmod.core.jutsu.engine.JutsuProjectile.Shape;
+import net.mcreator.narutoshippudenmod.core.jutsu.engine.JutsuRank;
+import net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques;
+import net.mcreator.narutoshippudenmod.entity.SummonEntities.AkamaruEntity;
+
+import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.OwnableEntity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.function.Consumer;
+import java.util.function.IntConsumer;
+
+import org.jspecify.annotations.Nullable;
+
+/**
+ * The clans' techniques on the jutsu engine. Transformations (the Akimichi tank and butterfly, the Inuzuka wolves, the Izuno cat,
+ * the Tenro beast) keep their player models, switched on by the old flags for a set time; the Eight Gates are timed modes that
+ * cost health. Like the natures, each clan keeps its old save variables and prices every jutsu by its {@link JutsuRank}.
+ */
+@EventBusSubscriber(modid = "naruto_shippuden")
+public final class ClanJutsu {
+	private ClanJutsu() {
+	}
+
+	static void register() {
+		nature("aburame", "Aburame Clan", v -> v.aburamereleaselogic, v -> v.aburametechnique, (v, i) -> v.aburametechnique = i, v -> v.aburamelearn,
+				(v, i) -> v.aburamelearn = i, v -> v.aburame_release, (v, i) -> v.aburame_release = i,
+				new Def("Parasitic Insect Cloud", JutsuRank.C, ClanJutsu::insectCloud),
+				new Def("Insect Jar Technique", JutsuRank.B, ClanJutsu::insectJar),
+				new Def("Insect Bog", JutsuRank.A, ClanJutsu::insectBog));
+		nature("akimichi", "Akimichi Clan", v -> v.akimichireleaselogic, v -> v.akimichitechnique, (v, i) -> v.akimichitechnique = i,
+				v -> v.akimichilearn, (v, i) -> v.akimichilearn = i, v -> v.akimichirelease, (v, i) -> v.akimichirelease = i,
+				new Def("Expansion Technique", JutsuRank.C, ClanJutsu::expansion),
+				new Def("Human Bullet Tank", JutsuRank.B, p -> bulletTank(p, false)),
+				new Def("Spiked Human Bullet Tank", JutsuRank.A, p -> bulletTank(p, true)),
+				new Def("Butterfly Mode", JutsuRank.S, ClanJutsu::butterfly));
+		nature("fuma", "Fuma Clan", v -> v.fumareleaselogic, v -> v.fumatechnique, (v, i) -> v.fumatechnique = i, v -> v.fumalearn,
+				(v, i) -> v.fumalearn = i, v -> v.fumarelease, (v, i) -> v.fumarelease = i,
+				new Def("Shuriken Barrage", JutsuRank.D, ClanJutsu::shurikenBarrage),
+				new Def("Fuma Shuriken", JutsuRank.C, ClanJutsu::fumaShuriken),
+				new Def("Toroi's Magnetic Fuma Shuriken", JutsuRank.B, ClanJutsu::toroiShuriken));
+		nature("hozuki", "Hozuki Clan", v -> v.hozukireleaselogic, v -> v.hozukitechnique, (v, i) -> v.hozukitechnique = i, v -> v.hozukilearn,
+				(v, i) -> v.hozukilearn = i, v -> v.hozukirelease, (v, i) -> v.hozukirelease = i,
+				new Def("Water Gun Technique", JutsuRank.D, ClanJutsu::waterPistol),
+				new Def("Drowning Water Blob Technique", JutsuRank.C, ClanJutsu::drowningBlob),
+				new Def("Great Water Arm Technique", JutsuRank.B, ClanJutsu::waterArm));
+		nature("hyuga", "Hyuga Clan", v -> v.hyugareleaselogic, v -> v.hyugatechnique, (v, i) -> v.hyugatechnique = i, v -> v.hyugalearn,
+				(v, i) -> v.hyugalearn = i, v -> v.hyugarelease, (v, i) -> v.hyugarelease = i,
+				new Def("Gentle Fist", JutsuRank.D, ClanJutsu::gentleFist, "Taijutsu"),
+				new Def("Gentle Step Twin Lion Fists", JutsuRank.C, ClanJutsu::twinLions),
+				new Def("Eight Trigrams Twin Lions Crumbling Attack", JutsuRank.B, ClanJutsu::crumblingAttack),
+				new Def("Eight Trigrams Palms Revolving Heaven", JutsuRank.A, ClanJutsu::rotation),
+				new Def("Eight Trigrams Sixty-Four Palms", JutsuRank.S, ClanJutsu::sixtyFourPalms, "Taijutsu"));
+		nature("inuzuka", "Inuzuka Clan", v -> v.inuzukareleaselogic, v -> v.inuzukatechnique, (v, i) -> v.inuzukatechnique = i,
+				v -> v.inuzukalearn, (v, i) -> v.inuzukalearn = i, v -> v.inuzuka_release, (v, i) -> v.inuzuka_release = i,
+				new Def("Akamaru", JutsuRank.D, ClanJutsu::akamaru, "Summoning"),
+				new Def("Passing Fang", JutsuRank.C, ClanJutsu::passingFang, "Taijutsu"),
+				new Def("Human Beast Combination Transformation: Double-Headed Wolf", JutsuRank.B, p -> wolf(p, 1)),
+				new Def("Human Beast Mixture Transformation: Three-Headed Wolf", JutsuRank.A, p -> wolf(p, 2)));
+		nature("izuno", "Izuno Clan", v -> v.izunoreleaselogic, v -> v.izunotechnique, (v, i) -> v.izunotechnique = i, v -> v.izunolearn,
+				(v, i) -> v.izunolearn = i, v -> v.izuno_release, (v, i) -> v.izuno_release = i,
+				new Def("Cat Covering", JutsuRank.B, ClanJutsu::catCovering),
+				new Def("Monster Cat Beckoning Technique", JutsuRank.A, ClanJutsu::monsterCat));
+		nature("lee", "Lee Clan", v -> v.leereleaselogic, v -> v.lee_technique, (v, i) -> v.lee_technique = i, v -> v.leelearn,
+				(v, i) -> v.leelearn = i, v -> v.lee_release, (v, i) -> v.lee_release = i,
+				new Def("Drunken Fist", JutsuRank.D, ClanJutsu::drunkenFist, "Taijutsu"),
+				new Def("Gate of Opening", JutsuRank.D, p -> gate(p, 1), "Taijutsu"),
+				new Def("Gate of Healing", JutsuRank.D, p -> gate(p, 2), "Taijutsu"),
+				new Def("Gate of Life", JutsuRank.C, p -> gate(p, 3), "Taijutsu"),
+				new Def("Gate of Pain", JutsuRank.C, p -> gate(p, 4), "Taijutsu"),
+				new Def("Gate of Limit: Hidden Lotus", JutsuRank.B, p -> gate(p, 5), "Taijutsu"),
+				new Def("Gate of View: Morning Peacock", JutsuRank.B, p -> gate(p, 6), "Taijutsu"),
+				new Def("Gate of Wonder: Daytime Tiger", JutsuRank.A, p -> gate(p, 7), "Taijutsu"),
+				new Def("Gate of Death: Night Guy", JutsuRank.S, p -> gate(p, 8), "Taijutsu"));
+		// the old separate Drunken Fist item still works for those who have one
+		JutsuRank d = JutsuRank.D;
+		Jutsus.technique("lee_release_drunken_fist", v -> 0, (v, i) -> {
+		}, v -> v.leereleaselogic, deps -> {
+			if (deps.get("entity") instanceof ServerPlayer player) {
+				NarutoShippudenModVariables.ifPresent(player, vars -> {
+					vars.ChakraAmount -= d.chakra;
+					vars.syncPlayerVariables(player);
+				});
+				drunkenFist(player);
+			}
+		}, Jutsus.jutsu("Drunken Fist", v -> v.leelearn, 1, "Taijutsu", v -> v.taijutsu, d.ninjutsu, d.chakra, d.cooldowns()));
+		nature("sarutobi", "Sarutobi Clan", v -> v.sarutobireleaselogic, v -> v.sarutobitechnique, (v, i) -> v.sarutobitechnique = i,
+				v -> v.sarutobilearn, (v, i) -> v.sarutobilearn = i, v -> v.sarutobirelease, (v, i) -> v.sarutobirelease = i,
+				new Def("Ash Pile Burning", JutsuRank.C, ClanJutsu::ashPile),
+				new Def("Fire Dragon Flame Bullet", JutsuRank.B, ClanJutsu::flameBullet));
+		nature("tenro", "Tenro Clan", v -> v.tenroreleaselogic, v -> v.tenrotechnique, (v, i) -> v.tenrotechnique = i, v -> v.tenrolearn,
+				(v, i) -> v.tenrolearn = i, v -> v.tenro_release, (v, i) -> v.tenro_release = i,
+				new Def("Beast-Human Fury Kicks", JutsuRank.D, ClanJutsu::furyKicks, "Taijutsu"),
+				new Def("Beast-Human Needle Senbon", JutsuRank.C, ClanJutsu::needleSenbon),
+				new Def("Beast-Human Transformation Technique", JutsuRank.B, ClanJutsu::beastHuman));
+		nature("uzumaki", "Uzumaki Clan", v -> v.uzumakireleaselogic, v -> v.uzumakitechnique, (v, i) -> v.uzumakitechnique = i,
+				v -> v.uzumakilearn, (v, i) -> v.uzumakilearn = i, v -> v.uzumakirelease, (v, i) -> v.uzumakirelease = i,
+				new Def("Heal Bite", JutsuRank.D, ClanJutsu::healBite),
+				new Def("Adamantine Sealing Chains", JutsuRank.C, ClanJutsu::sealingChains),
+				new Def("Dead Demon Consuming Seal", JutsuRank.S, ClanJutsu::deadDemon));
+		nature("tsuchigumo", "Tsuchigumo Clan", v -> v.tsuchigumoreleaselogic, v -> 0, (v, i) -> {
+		}, v -> v.tsuchigumolearn, (v, i) -> v.tsuchigumolearn = i, v -> v.tsuchigumorelease, (v, i) -> v.tsuchigumorelease = i,
+				new Def("Forbidden Technique: Fury", JutsuRank.S, ClanJutsu::fury));
+	}
+
+	/** The old item hooks (hit or swing with a clan technique) did the old jutsu's effects; the remade jutsu don't use them. */
+	public static void unused(Map<String, Object> dependencies) {
+	}
+
+	// ------------------------------------------------------------------ helpers
+	private static void set(ServerPlayer p, Consumer<PlayerVariables> change) {
+		NarutoShippudenModVariables.ifPresent(p, v -> {
+			change.accept(v);
+			v.syncPlayerVariables(p);
+		});
+	}
+
+	/** Keeps an effect on while re-applied every 10 ticks (no particles, shown on the HUD). */
+	private static void keep(LivingEntity entity, Holder<MobEffect> effect, int amplifier) {
+		if (amplifier >= 0)
+			entity.addEffect(new MobEffectInstance(effect, effect == MobEffects.NIGHT_VISION ? 260 : 25, amplifier, false, false, true));
+	}
+
+	private static void tell(ServerPlayer p, String message) {
+		p.sendOverlayMessage(Component.literal(message));
+	}
+
+	/** The enemy the caster is looking at (closest to the crosshair, in sight), within range. */
+	private static @Nullable LivingEntity target(ServerPlayer p, double range) {
+		Vec3 eye = p.getEyePosition(), look = p.getLookAngle();
+		LivingEntity best = null;
+		double bestScore = 0.9;
+		for (LivingEntity e : enemies(level(p), p, p.getBoundingBox().inflate(range), e -> true)) {
+			Vec3 to = e.getBoundingBox().getCenter().subtract(eye);
+			double distance = to.length(), score = to.normalize().dot(look) - distance / (range * 20);
+			if (distance <= range && score > bestScore && p.hasLineOfSight(e)) {
+				bestScore = score;
+				best = e;
+			}
+		}
+		return best;
+	}
+
+	/** A projectile that starts somewhere other than the caster's eyes. */
+	private static JutsuProjectile spawn(ServerPlayer p, Element element, Shape shape, float size, Vec3 at, Vec3 velocity, float damage) {
+		JutsuProjectile projectile = new JutsuProjectile(JutsuEngine.PROJECTILE, level(p));
+		projectile.look(element, shape, size);
+		projectile.setOwner(p);
+		projectile.setPos(at);
+		projectile.setDeltaMovement(velocity);
+		projectile.damage = damage;
+		level(p).addFreshEntity(projectile);
+		return projectile;
+	}
+
+	/** A see-through sphere around an entity (or standing at a point) for a while: Rotation, water prisons, insect jars. */
+	private static JutsuProjectile shell(ServerPlayer p, @Nullable Entity on, Vec3 at, Element element, float size, int ticks) {
+		JutsuProjectile shell = spawn(p, element, Shape.SHELL, size, at.subtract(0, size / 2, 0), Vec3.ZERO, 0);
+		shell.pierce = -1;
+		shell.knockback = 0;
+		shell.life = ticks;
+		if (on != null)
+			channel(p, ticks, 1, t -> {
+				if (on.isAlive() && shell.isAlive())
+					shell.setPos(on.getBoundingBox().getCenter().subtract(0, size / 2, 0));
+			});
+		return shell;
+	}
+
+	/** Turns a flag on for a while (a model such as Passing Fang's drill), without ending the caster's mode. */
+	private static void flag(ServerPlayer p, int ticks, Consumer<PlayerVariables> on, Consumer<PlayerVariables> off) {
+		set(p, on);
+		after(level(p), ticks, () -> set(p, off));
+	}
+
+	// ------------------------------------------------------------------ modes (one at a time: a new one ends the last)
+	private static final Map<UUID, Integer> MODE = new HashMap<>();
+	private static final Map<UUID, Runnable> MODE_END = new HashMap<>();
+
+	/**
+	 * A timed transformation or stance: on sets its flags (and the model), each runs every tick, and off (plus the size going
+	 * back to normal) runs when it ends, when another mode starts, or when the caster dies or leaves.
+	 */
+	private static void mode(ServerPlayer p, int ticks, float scale, Consumer<PlayerVariables> on, Consumer<PlayerVariables> off, IntConsumer each) {
+		endMode(p);
+		int generation = MODE.merge(p.getUUID(), 1, Integer::sum);
+		set(p, on);
+		if (scale != 1)
+			EntityScale.set(p, EntityScale.BASE, scale);
+		MODE_END.put(p.getUUID(), () -> {
+			set(p, off);
+			if (scale != 1)
+				EntityScale.set(p, EntityScale.BASE, 1);
+		});
+		channel(p, ticks, 1, t -> {
+			if (!Integer.valueOf(generation).equals(MODE.get(p.getUUID())))
+				return;
+			each.accept(t);
+			if (t == ticks - 1)
+				endMode(p);
+		});
+	}
+
+	private static void endMode(ServerPlayer p) {
+		Runnable end = MODE_END.remove(p.getUUID());
+		if (end != null)
+			end.run();
+	}
+
+	/** Ends the caster's transformation or stance at once. */
+	public static void stop(ServerPlayer p) {
+		endMode(p);
+		DRUNK.remove(p.getUUID());
+		set(p, ClanJutsu::clearFlags);
+	}
+
+	/** Flags left on by a crash or an old save would keep the model forever. */
+	private static void clearFlags(PlayerVariables v) {
+		v.HumanBulletTank = v.SpikedHumanBulletTank = v.ButterflyMode = false;
+		v.tenromode = v.izunochakramode = v.izunocat = v.PassingFang = v.deathgod = v.Gate8 = false;
+		v.EightTrigramsPalmsRevolvingHeaven = v.InsectJarTechnique = false;
+		v.inuzuka_mode = 0;
+		v.gateslee = 0;
+	}
+
+	@SubscribeEvent
+	public static void loggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+		if (event.getEntity() instanceof ServerPlayer player)
+			set(player, ClanJutsu::clearFlags);
+	}
+
+	@SubscribeEvent
+	public static void loggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
+		if (event.getEntity() instanceof ServerPlayer player)
+			endMode(player);
+	}
+
+	@SubscribeEvent
+	public static void died(LivingDeathEvent event) {
+		if (event.getEntity() instanceof ServerPlayer player) {
+			endMode(player);
+			set(player, ClanJutsu::clearFlags);
+		}
+	}
+
+	// ------------------------------------------------------------------ aburame
+	/** A buzzing swarm of insects around a point that poisons and eats at everything in it. */
+	private static void swarm(ServerPlayer p, Vec3 at, double radius, int ticks) {
+		ServerLevel level = level(p);
+		channel(p, ticks, 2, t -> {
+			for (int i = 0; i < 40; i++) {
+				double a = level.getRandom().nextDouble() * Math.PI * 2, r = Math.sqrt(level.getRandom().nextDouble()) * radius;
+				double y = level.getRandom().nextDouble() * 2.4;
+				level.sendParticles(i % 4 == 0 ? Element.INSECT.puff : Element.INSECT.trail, at.x + Math.cos(a) * r, at.y + y, at.z + Math.sin(a) * r, 1, 0.1, 0.1, 0.1, 0.03);
+			}
+			if (t % 10 == 0) {
+				for (LivingEntity target : enemies(level, p, new AABB(at, at).inflate(radius, 3, radius), e -> e.distanceToSqr(at) <= radius * radius + 4))
+					damage(p, target, 1.5F, Element.INSECT);
+				sound(level, at, SoundEvents.BEEHIVE_WORK, 0.8F, 1.5F);
+			}
+		});
+	}
+
+	/** A cloud of insects flies out (drawn to enemies) and swarms where it lands for five seconds. */
+	private static void insectCloud(ServerPlayer p) {
+		JutsuProjectile cloud = shoot(p, Element.INSECT, Shape.NONE, 1.4F, 0.7F, 2);
+		cloud.homing = 0.15F;
+		cloud.life = 40;
+		cloud.knockback = 0;
+		cloud.onImpact = c -> swarm(p, c.position(), 3.5, 100);
+		channel(p, 40, 1, t -> {
+			if (cloud.isAlive())
+				level(p).sendParticles(Element.INSECT.trail, cloud.getX(), cloud.getY() + 0.7, cloud.getZ(), 25, 0.7, 0.6, 0.7, 0.04);
+		});
+		sound(level(p), p.getEyePosition(), SoundEvents.BEEHIVE_WORK, 1.5F, 1.2F);
+	}
+
+	/** Insects wall in the enemy being looked at (or the spot): trapped, slowed and drained for five seconds. */
+	private static void insectJar(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity target = target(p, 20);
+		sound(level, p.getEyePosition(), SoundEvents.BEEHIVE_WORK, 2, 0.9F);
+		if (target == null) {
+			Vec3 at = lookPoint(p, 20);
+			shell(p, null, at.add(0, 1.2, 0), Element.INSECT, 4.5F, 100);
+			swarm(p, at, 2.2, 100);
+			return;
+		}
+		float size = Math.max(target.getBbWidth(), target.getBbHeight()) + 1.2F;
+		shell(p, target, target.getBoundingBox().getCenter(), Element.INSECT, size, 100);
+		channel(p, 100, 5, t -> {
+			if (!target.isAlive())
+				return;
+			target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 3, false, false));
+			if (t % 10 == 0) {
+				damage(p, target, 2.5F, Element.INSECT);
+				// the bugs feed on chakra
+				if (target instanceof ServerPlayer victim)
+					set(victim, v -> v.ChakraAmount = Math.max(0, v.ChakraAmount - 20));
+			}
+		});
+	}
+
+	/** A carpet of insects spreads forward over the ground, bogging down and eating everything on it. */
+	private static void insectBog(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 origin = p.position(), dir = p.getLookAngle().multiply(1, 0, 1).normalize(), side = new Vec3(-dir.z, 0, dir.x);
+		double cos = Math.cos(Math.toRadians(35));
+		sound(level, origin, SoundEvents.BEEHIVE_WORK, 2, 0.6F);
+		channel(p, 80, 2, t -> {
+			double reach = Math.min(14, 2 + t * 0.4);
+			for (int i = 0; i < 22; i++) {
+				double d = level.getRandom().nextDouble() * reach, s = (level.getRandom().nextDouble() - 0.5) * d * 1.2;
+				Vec3 at = origin.add(dir.scale(d)).add(side.scale(s));
+				level.sendParticles(i % 3 == 0 ? Element.INSECT.puff : Element.INSECT.trail, at.x, at.y + 0.15, at.z, 1, 0.2, 0.05, 0.2, 0.01);
+			}
+			if (t % 10 != 0)
+				return;
+			Vec3 middle = origin.add(dir.scale(reach / 2));
+			for (LivingEntity target : enemies(level, p, new AABB(middle, middle).inflate(reach / 2 + 1, 2, reach / 2 + 1), e -> {
+				Vec3 to = e.position().subtract(origin).multiply(1, 0, 1);
+				return to.length() <= reach && to.normalize().dot(dir) >= cos;
+			})) {
+				target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 30, 4, false, false));
+				target.setDeltaMovement(target.getDeltaMovement().multiply(0.2, 0, 0.2).add(0, Math.min(0, target.getDeltaMovement().y), 0));
+				damage(p, target, 3, Element.INSECT);
+			}
+		});
+	}
+
+	// ------------------------------------------------------------------ akimichi
+	/** Grows to a giant for twenty seconds: much stronger and tougher, a little slower. */
+	private static void expansion(ServerPlayer p) {
+		puff(level(p), p.position().add(0, 1, 0), Element.BEAST, 2);
+		sound(level(p), p.position(), SoundEvents.RAVAGER_ROAR, 1, 0.8F);
+		mode(p, 400, 2.5F, v -> {
+		}, v -> {
+		}, t -> {
+			if (t % 10 == 0) {
+				keep(p, MobEffects.STRENGTH, 1);
+				keep(p, MobEffects.RESISTANCE, 0);
+				keep(p, MobEffects.SLOWNESS, 0);
+			}
+		});
+	}
+
+	/** Swells into a rolling ball (spiked: bigger, faster, longer) that the caster steers, flattening whatever it runs over. */
+	private static void bulletTank(ServerPlayer p, boolean spiked) {
+		ServerLevel level = level(p);
+		int ticks = spiked ? 80 : 60;
+		float hurt = spiked ? 12 : 8;
+		double speed = spiked ? 1.1 : 0.9;
+		Map<LivingEntity, Integer> lastHit = new HashMap<>();
+		sound(level, p.position(), SoundEvents.RAVAGER_ROAR, 1, spiked ? 0.7F : 0.9F);
+		mode(p, ticks, spiked ? 1.25F : 1, v -> {
+			if (spiked)
+				v.SpikedHumanBulletTank = true;
+			else
+				v.HumanBulletTank = true;
+		}, v -> v.HumanBulletTank = v.SpikedHumanBulletTank = false, t -> {
+			Vec3 look = p.getLookAngle().multiply(1, 0, 1).normalize();
+			p.setDeltaMovement(look.x * speed, p.getDeltaMovement().y, look.z * speed);
+			p.syncVelocity = true;
+			p.fallDistance = 0;
+			if (t % 10 == 0)
+				keep(p, MobEffects.RESISTANCE, 2);
+			level.sendParticles(Element.EARTH.trail, p.getX(), p.getY() + 0.1, p.getZ(), 4, 0.6, 0.05, 0.6, 0.05);
+			if (t % 6 == 0)
+				sound(level, p.position(), SoundEvents.ROOTED_DIRT_BREAK, 1, 0.5F);
+			for (LivingEntity target : enemies(level, p, p.getBoundingBox().inflate(0.8), e -> lastHit.getOrDefault(e, -99) + 10 <= t)) {
+				lastHit.put(target, t);
+				damage(p, target, hurt, Element.EARTH);
+				target.push(look.x * 1.5, 0.55, look.z * 1.5);
+				target.syncVelocity = true;
+				sound(level, target.position(), SoundEvents.PLAYER_ATTACK_KNOCKBACK, 1, 0.6F);
+			}
+		});
+	}
+
+	private static final List<String> BUTTERFLY = List.of("Blue", "Green", "Orange", "Pink", "Purple", "Red");
+
+	/** Burns fat into chakra: glowing butterfly wings and thirty seconds of overwhelming strength. */
+	private static void butterfly(ServerPlayer p) {
+		ServerLevel level = level(p);
+		puff(level, p.position().add(0, 1, 0), Element.CHAKRA, 3);
+		level.sendParticles(ParticleTypes.END_ROD, p.getX(), p.getY() + 1, p.getZ(), 60, 0.5, 1, 0.5, 0.25);
+		sound(level, p.position(), SoundEvents.BEACON_POWER_SELECT, 1.5F, 0.6F);
+		mode(p, 600, 1, v -> {
+			v.ButterflyMode = true;
+			if (!BUTTERFLY.contains(v.ButterFlyModeColor))
+				v.ButterFlyModeColor = "Blue";
+		}, v -> v.ButterflyMode = false, t -> {
+			if (t % 10 == 0) {
+				keep(p, MobEffects.STRENGTH, 3);
+				keep(p, MobEffects.SPEED, 1);
+				keep(p, MobEffects.RESISTANCE, 1);
+				keep(p, MobEffects.JUMP_BOOST, 1);
+			}
+			if (t % 3 == 0)
+				level.sendParticles(Element.CHAKRA.trail, p.getX(), p.getY() + 1.3, p.getZ(), 3, 0.9, 0.5, 0.9, 0.01);
+		});
+	}
+
+	// ------------------------------------------------------------------ fuma
+	/** Five shuriken in a fan. */
+	private static void shurikenBarrage(ServerPlayer p) {
+		for (int i = -2; i <= 2; i++) {
+			JutsuProjectile star = shoot(p, Element.STEEL, Shape.SHURIKEN, 0.5F, turned(p, i * 6, 0).scale(1.9), 4);
+			star.life = 25;
+			star.knockback = 0.2F;
+		}
+		sound(level(p), p.getEyePosition(), SoundEvents.PLAYER_ATTACK_SWEEP, 1, 1.8F);
+	}
+
+	/** A great windmill shuriken that cuts through everything on its way out, then comes back to the thrower. */
+	private static void fumaShuriken(ServerPlayer p) {
+		JutsuProjectile star = shoot(p, Element.STEEL, Shape.SHURIKEN, 1.6F, 1.3F, 10);
+		star.pierce = -1;
+		star.life = 60;
+		star.knockback = 0.8F;
+		channel(p, 60, 1, t -> {
+			if (!star.isAlive())
+				return;
+			if (t >= 14) {
+				Vec3 back = p.getEyePosition().subtract(0, 1, 0).subtract(star.position());
+				if (back.length() < 1.5) {
+					star.discard();
+					return;
+				}
+				star.setDeltaMovement(back.normalize().scale(1.3));
+			}
+			if (t % 5 == 0)
+				sound(level(p), star.position(), SoundEvents.PLAYER_ATTACK_SWEEP, 0.7F, 0.6F);
+		});
+		sound(level(p), p.getEyePosition(), SoundEvents.PLAYER_ATTACK_SWEEP, 1.2F, 0.7F);
+	}
+
+	/** An iron shuriken steered by magnetism: it seeks its target and bursts into four smaller seeking blades. */
+	private static void toroiShuriken(ServerPlayer p) {
+		JutsuProjectile star = shoot(p, Element.MAGNET, Shape.SHURIKEN, 2.4F, 1.0F, 14);
+		star.pierce = 1;
+		star.homing = 0.1F;
+		star.life = 50;
+		star.knockback = 1.2F;
+		star.onImpact = s -> {
+			ServerLevel level = level(p);
+			puff(level, s.position(), Element.MAGNET, 1.5F);
+			for (int i = 0; i < 4; i++) {
+				double a = i * Math.PI / 2 + Math.PI / 4;
+				JutsuProjectile blade = spawn(p, Element.MAGNET, Shape.SHURIKEN, 0.8F, s.position().add(0, 0.4, 0),
+						new Vec3(Math.cos(a) * 0.9, 0.25, Math.sin(a) * 0.9), 7);
+				blade.homing = 0.35F;
+				blade.life = 30;
+			}
+			sound(level, s.position(), SoundEvents.CHAIN_BREAK, 1.5F, 0.6F);
+		};
+		channel(p, 50, 2, t -> {
+			if (star.isAlive())
+				level(p).sendParticles(Element.MAGNET.trail, star.getX(), star.getY() + 1.2, star.getZ(), 4, 1, 0.2, 1, 0.02);
+		});
+		sound(level(p), p.getEyePosition(), SoundEvents.CHAIN_PLACE, 1.5F, 0.5F);
+	}
+
+	// ------------------------------------------------------------------ hozuki
+	/** A quick stream of water bullets flicked from the fingertip. */
+	private static void waterPistol(ServerPlayer p) {
+		channel(p, 10, 2, t -> {
+			JutsuProjectile bullet = shoot(p, Element.WATER, Shape.ORB, 0.3F,
+					turned(p, (p.getRandom().nextFloat() - 0.5F) * 4, (p.getRandom().nextFloat() - 0.5F) * 4).scale(2.2), 3);
+			bullet.life = 25;
+			bullet.knockback = 0.3F;
+			sound(level(p), p.getEyePosition(), SoundEvents.PLAYER_SPLASH_HIGH_SPEED, 0.5F, 1.8F);
+		});
+	}
+
+	/** A blob of water that swallows whoever it hits: trapped in a floating sphere, they slowly drown. */
+	private static void drowningBlob(ServerPlayer p) {
+		JutsuProjectile blob = shoot(p, Element.WATER, Shape.ORB, 0.8F, 1.0F, 3);
+		blob.homing = 0.12F;
+		blob.life = 40;
+		blob.knockback = 0;
+		blob.onHit = (b, target) -> {
+			ServerLevel level = level(p);
+			float size = Math.max(target.getBbWidth(), target.getBbHeight()) + 1.2F;
+			shell(p, target, target.getBoundingBox().getCenter(), Element.WATER, size, 80);
+			channel(p, 80, 2, t -> {
+				if (!target.isAlive())
+					return;
+				target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 3, false, false));
+				target.addEffect(new MobEffectInstance(MobEffects.MINING_FATIGUE, 10, 2, false, false));
+				target.setAirSupply(Math.max(-20, target.getAirSupply() - 8));
+				level.sendParticles(ParticleTypes.BUBBLE, target.getX(), target.getEyeY(), target.getZ(), 3, 0.3, 0.3, 0.3, 0.05);
+				if (t % 20 == 0)
+					damage(p, target, 2, Element.WATER);
+			});
+			sound(level, target.position(), SoundEvents.PLAYER_SPLASH, 1.2F, 0.6F);
+		};
+		sound(level(p), p.getEyePosition(), SoundEvents.PLAYER_SPLASH_HIGH_SPEED, 1, 1);
+	}
+
+	/** The arm swells with water into a giant fist that punches forward, still joined to the arm. */
+	private static void waterArm(ServerPlayer p) {
+		ServerLevel level = level(p);
+		JutsuProjectile fist = shoot(p, Element.WATER, Shape.ORB, 1.9F, 1.3F, 16);
+		fist.life = 12;
+		fist.pierce = 3;
+		fist.knockback = 3;
+		fist.onImpact = f -> burst(level, f.position().add(0, 0.9, 0), 2.5F, 6, 1, Element.WATER, f);
+		channel(p, 13, 1, t -> {
+			if (!fist.isAlive())
+				return;
+			Vec3 shoulder = p.getEyePosition().subtract(0, 0.5, 0).add(turned(p, 90, 0).scale(0.35));
+			line(level, Element.WATER.puff, shoulder, fist.getBoundingBox().getCenter(), 0.3);
+		});
+		sound(level, p.getEyePosition(), SoundEvents.PLAYER_SPLASH_HIGH_SPEED, 1.5F, 0.6F);
+	}
+
+	// ------------------------------------------------------------------ hyuga
+	/** A palm strike that closes the chakra points: weakens, and drains an enemy ninja's chakra. */
+	private static void gentleFist(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 look = p.getLookAngle();
+		p.setDeltaMovement(look.x * 0.5, 0.05, look.z * 0.5);
+		p.syncVelocity = true;
+		for (LivingEntity target : cone(p, 3.8, 40)) {
+			damage(p, target, 7, Element.CHAKRA);
+			if (target instanceof ServerPlayer victim)
+				set(victim, v -> v.ChakraAmount = Math.max(0, v.ChakraAmount - 60));
+			puff(level, target.getBoundingBox().getCenter(), Element.CHAKRA, 0.6F);
+		}
+		Vec3 palm = p.getEyePosition().add(look.scale(1.5)).subtract(0, 0.3, 0);
+		level.sendParticles(ParticleTypes.END_ROD, palm.x, palm.y, palm.z, 10, 0.15, 0.15, 0.15, 0.08);
+		sound(level, p.position(), SoundEvents.PLAYER_ATTACK_STRONG, 1, 1.3F);
+	}
+
+	/** Two roaring chakra lions leap from the palms at the enemy. */
+	private static void twinLions(ServerPlayer p) {
+		for (int side = -1; side <= 1; side += 2) {
+			JutsuProjectile lion = shoot(p, Element.CHAKRA, Shape.LION, 1.1F, turned(p, side * 10, 0).scale(1.1), 9);
+			lion.homing = 0.15F;
+			lion.life = 40;
+			lion.knockback = 1;
+			lion.onImpact = l -> puff(level(p), l.position(), Element.CHAKRA, 1);
+		}
+		sound(level(p), p.getEyePosition(), SoundEvents.RAVAGER_ROAR, 0.8F, 1.6F);
+	}
+
+	/** A rush through the enemies, ending in a crushing blast of the lions' chakra. */
+	private static void crumblingAttack(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Techniques.dash(p, 8, 8, Element.CHAKRA);
+		after(level, 8, () -> {
+			Vec3 at = p.position().add(0, 1, 0).add(p.getLookAngle().multiply(1, 0, 1).normalize().scale(1.5));
+			burst(level, at, 3.5F, 16, 1.5F, Element.CHAKRA, p);
+			sound(level, at, SoundEvents.RAVAGER_ROAR, 1, 1.4F);
+		});
+	}
+
+	/** Rotation: a spinning dome of chakra that throws back everything around and turns aside projectiles. */
+	private static void rotation(ServerPlayer p) {
+		ServerLevel level = level(p);
+		shell(p, p, p.getBoundingBox().getCenter(), Element.CHAKRA, 4.6F, 30);
+		sound(level, p.position(), SoundEvents.BREEZE_WIND_CHARGE_BURST.value(), 1.5F, 0.8F);
+		channel(p, 30, 1, t -> {
+			keep(p, MobEffects.RESISTANCE, 4);
+			p.setDeltaMovement(0, Math.min(0, p.getDeltaMovement().y), 0);
+			p.syncVelocity = true;
+			Vec3 c = p.getBoundingBox().getCenter();
+			for (LivingEntity target : enemies(level, p, p.getBoundingBox().inflate(3.3), e -> e.distanceToSqr(c) < 3.6 * 3.6)) {
+				Vec3 away = target.position().subtract(p.position()).multiply(1, 0, 1).normalize();
+				target.push(away.x * 1.2, 0.35, away.z * 1.2);
+				target.syncVelocity = true;
+				if (t % 5 == 0)
+					damage(p, target, 3, Element.CHAKRA);
+			}
+			for (Projectile shot : level.getEntitiesOfClass(Projectile.class, p.getBoundingBox().inflate(3.3), e -> e.getOwner() != p)) {
+				puff(level, shot.position(), Element.CHAKRA, 0.5F);
+				shot.discard();
+			}
+			for (int i = 0; i < 6; i++) {
+				double a = t * 0.7 + i * Math.PI / 3;
+				level.sendParticles(Element.CHAKRA.trail, c.x + Math.cos(a) * 2.4, c.y - 1 + level.getRandom().nextDouble() * 2.5, c.z + Math.sin(a) * 2.4,
+						1, 0, 0, 0, 0);
+			}
+		});
+	}
+
+	private static final String[] PALMS = { "Two palms!", "Four palms!", "Eight palms!", "Sixteen palms!", "Thirty-two palms!", "Sixty-four palms!" };
+
+	/** Sixty-four palms at the chakra points of everyone in reach, holding them in place, then a final blow that throws them. */
+	private static void sixtyFourPalms(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 feet = p.position();
+		sound(level, feet, SoundEvents.BEACON_ACTIVATE, 1, 1.4F);
+		channel(p, 32, 1, t -> {
+			p.setDeltaMovement(0, Math.min(0, p.getDeltaMovement().y), 0);
+			p.syncVelocity = true;
+			if (t % 4 == 0)
+				// the trigram circle on the ground
+				for (int i = 0; i < 32; i++) {
+					double a = i * Math.PI / 16;
+					level.sendParticles(Element.CHAKRA.trail, feet.x + Math.cos(a) * 3, feet.y + 0.1, feet.z + Math.sin(a) * 3, 1, 0, 0, 0, 0);
+				}
+			if (Integer.bitCount(t + 1) == 1)
+				tell(p, PALMS[Integer.numberOfTrailingZeros(t + 1)]);
+			for (LivingEntity target : cone(p, 4, 45)) {
+				target.setDeltaMovement(0, Math.min(0, target.getDeltaMovement().y), 0);
+				damage(p, target, 0.7F, Element.CHAKRA);
+				Vec3 c = target.getBoundingBox().getCenter();
+				level.sendParticles(ParticleTypes.CRIT, c.x, c.y, c.z, 2, 0.3, 0.4, 0.3, 0.1);
+				level.sendParticles(Element.CHAKRA.trail, c.x, c.y, c.z, 2, 0.3, 0.4, 0.3, 0);
+				if (t == 31) {
+					Vec3 away = target.position().subtract(p.position()).multiply(1, 0, 1).normalize();
+					damage(p, target, 10, Element.CHAKRA);
+					target.push(away.x * 2, 0.6, away.z * 2);
+					target.syncVelocity = true;
+				}
+			}
+			if (t % 2 == 0)
+				sound(level, p.position(), SoundEvents.PLAYER_ATTACK_WEAK, 0.7F, 1.2F + t * 0.02F);
+		});
+	}
+
+	// ------------------------------------------------------------------ inuzuka
+	/** Calls Akamaru (again, if he is already out) to fight alongside for a minute. */
+	private static void akamaru(ServerPlayer p) {
+		ServerLevel level = level(p);
+		for (AkamaruEntity.CustomEntity old : level.getEntitiesOfClass(AkamaruEntity.CustomEntity.class, p.getBoundingBox().inflate(64), d -> d.isOwnedBy(p))) {
+			puff(level, old.position().add(0, 0.4, 0), Element.BEAST, 0.8F);
+			old.discard();
+		}
+		Vec3 at = p.position().add(p.getLookAngle().multiply(1, 0, 1).normalize().scale(2));
+		AkamaruEntity.CustomEntity dog = new AkamaruEntity.CustomEntity(AkamaruEntity.entity, level);
+		dog.snapTo(at.x, p.getY(), at.z, p.getYRot(), 0);
+		dog.finalizeSpawn(level, level.getCurrentDifficultyAt(dog.blockPosition()), EntitySpawnReason.MOB_SUMMONED, null);
+		dog.tame(p);
+		level.addFreshEntity(dog);
+		level.sendParticles(ParticleTypes.POOF, at.x, at.y + 0.4, at.z, 20, 0.4, 0.4, 0.4, 0.05);
+		sound(level, at, SoundEvents.EVOKER_FANGS_ATTACK, 1, 1.4F);
+		after(level, 1200, () -> {
+			if (dog.isAlive()) {
+				level.sendParticles(ParticleTypes.POOF, dog.getX(), dog.getY() + 0.4, dog.getZ(), 20, 0.4, 0.4, 0.4, 0.05);
+				dog.discard();
+			}
+		});
+	}
+
+	/** Spins into a grey drill and tears through everything in a line. */
+	private static void passingFang(ServerPlayer p) {
+		flag(p, 14, v -> v.PassingFang = true, v -> v.PassingFang = false);
+		Techniques.dash(p, 13, 12, Element.BEAST);
+		channel(p, 12, 1, t -> level(p).sendParticles(ParticleTypes.SWEEP_ATTACK, p.getX(), p.getY() + 0.8, p.getZ(), 1, 0.4, 0.4, 0.4, 0));
+	}
+
+	/** Merges with Akamaru into a giant wolf (three heads at the second stage): a charge, then thirty seconds as the beast. */
+	private static void wolf(ServerPlayer p, int stage) {
+		ServerLevel level = level(p);
+		level.sendParticles(ParticleTypes.POOF, p.getX(), p.getY() + 1, p.getZ(), 40, 0.8, 1, 0.8, 0.05);
+		sound(level, p.position(), SoundEvents.RAVAGER_ROAR, 1.5F, 1.1F - stage * 0.15F);
+		mode(p, 600, 1, v -> v.inuzuka_mode = stage, v -> v.inuzuka_mode = 0, t -> {
+			if (t % 10 == 0) {
+				keep(p, MobEffects.STRENGTH, stage);
+				keep(p, MobEffects.SPEED, 1);
+				keep(p, MobEffects.RESISTANCE, stage - 1);
+				keep(p, MobEffects.JUMP_BOOST, 1);
+			}
+			if (t % 4 == 0)
+				level.sendParticles(Element.BEAST.trail, p.getX(), p.getY() + 0.8, p.getZ(), 2, 0.6, 0.5, 0.6, 0.01);
+		});
+		Techniques.dash(p, 10, 10 + stage * 4, Element.BEAST);
+	}
+
+	// ------------------------------------------------------------------ izuno
+	/** Cat chakra covers the body: forty seconds of speed, great leaps, night sight and soft landings. */
+	private static void catCovering(ServerPlayer p) {
+		ServerLevel level = level(p);
+		puff(level, p.position().add(0, 1, 0), Element.CHAKRA, 1.5F);
+		sound(level, p.position(), SoundEvents.BREEZE_JUMP, 1, 1.4F);
+		mode(p, 800, 1, v -> v.izunochakramode = true, v -> v.izunochakramode = false, t -> {
+			if (t % 10 == 0) {
+				keep(p, MobEffects.SPEED, 2);
+				keep(p, MobEffects.JUMP_BOOST, 1);
+				keep(p, MobEffects.STRENGTH, 0);
+				if (t % 200 == 0)
+					keep(p, MobEffects.NIGHT_VISION, 0);
+			}
+			p.fallDistance = 0;
+			if (t % 3 == 0)
+				level.sendParticles(Element.CHAKRA.trail, p.getX(), p.getY() + 1, p.getZ(), 2, 0.4, 0.6, 0.4, 0.01);
+		});
+	}
+
+	/** Becomes a giant monster cat that pounces, then fights as the beast for thirty seconds. */
+	private static void monsterCat(ServerPlayer p) {
+		ServerLevel level = level(p);
+		level.sendParticles(ParticleTypes.POOF, p.getX(), p.getY() + 1, p.getZ(), 60, 1.5, 1.5, 1.5, 0.05);
+		sound(level, p.position(), SoundEvents.RAVAGER_ROAR, 1.5F, 1.4F);
+		mode(p, 600, 2.5F, v -> v.izunocat = true, v -> v.izunocat = false, t -> {
+			if (t % 10 == 0) {
+				keep(p, MobEffects.STRENGTH, 2);
+				keep(p, MobEffects.RESISTANCE, 1);
+				keep(p, MobEffects.SPEED, 0);
+			}
+			p.fallDistance = 0;
+		});
+		Vec3 look = p.getLookAngle().multiply(1, 0, 1).normalize();
+		p.setDeltaMovement(look.x * 1.3, 0.9, look.z * 1.3);
+		p.syncVelocity = true;
+		after(level, 14, () -> {
+			if (p.isAlive())
+				burst(level, p.position(), 4.5F, 14, 1.5F, Element.BEAST, p);
+		});
+	}
+
+	// ------------------------------------------------------------------ lee
+	private static final Map<UUID, Integer> DRUNK = new HashMap<>();
+
+	/** Twenty seconds of the Drunken Fist: staggering out of the way and lashing out at anything that comes close. */
+	private static void drunkenFist(ServerPlayer p) {
+		ServerLevel level = level(p);
+		int generation = DRUNK.merge(p.getUUID(), 1, Integer::sum);
+		sound(level, p.position(), SoundEvents.GENERIC_DRINK.value(), 1, 0.7F);
+		channel(p, 400, 2, t -> {
+			if (!Integer.valueOf(generation).equals(DRUNK.get(p.getUUID())))
+				return;
+			if (t % 10 == 0)
+				keep(p, MobEffects.SPEED, 1);
+			if (t % 8 != 0)
+				return;
+			List<LivingEntity> near = cone(p, 3.5, 75);
+			if (near.isEmpty())
+				return;
+			// sway to one side, then swing
+			Vec3 look = p.getLookAngle().multiply(1, 0, 1).normalize(), side = new Vec3(-look.z, 0, look.x).scale(p.getRandom().nextBoolean() ? 0.5 : -0.5);
+			p.setDeltaMovement(side.x + look.x * 0.2, 0.15, side.z + look.z * 0.2);
+			p.syncVelocity = true;
+			p.swing(net.minecraft.world.InteractionHand.MAIN_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
+			for (LivingEntity target : near) {
+				damage(p, target, 5, Element.BEAST);
+				target.push(look.x * 0.6, 0.25, look.z * 0.6);
+				target.syncVelocity = true;
+				level.sendParticles(ParticleTypes.SWEEP_ATTACK, target.getX(), target.getY() + 1, target.getZ(), 1, 0, 0, 0, 0);
+			}
+			sound(level, p.position(), SoundEvents.PLAYER_ATTACK_STRONG, 1, 0.8F + p.getRandom().nextFloat() * 0.4F);
+		});
+	}
+
+	private static final int[] GATE_SPEED = { 0, 0, 1, 1, 2, 2, 3, 4 }, GATE_STRENGTH = { 0, 0, 1, 1, 2, 3, 4, 6 };
+
+	/**
+	 * Opens the Eight Gates up to the given one: more speed and strength with each gate, a heavier toll on the body from the
+	 * third, and from the fifth a technique on opening. After the Gate of Death the body is left spent.
+	 */
+	private static void gate(ServerPlayer p, int gate) {
+		ServerLevel level = level(p);
+		Element aura = gate == 8 ? Element.NIGHT : Element.GATE;
+		int ticks = gate >= 6 && gate < 8 ? 300 : 400;
+		puff(level, p.position().add(0, 1, 0), aura, 1 + gate * 0.3F);
+		level.sendParticles(ParticleTypes.CLOUD, p.getX(), p.getY() + 0.5, p.getZ(), gate * 8, 0.6, 0.8, 0.6, 0.15);
+		sound(level, p.position(), SoundEvents.WARDEN_HEARTBEAT, 2, 1.3F - gate * 0.08F);
+		if (gate >= 5)
+			// the chakra released cracks the ground
+			burst(level, p.position(), 2 + gate * 0.3F, gate * 2, 1, aura, p);
+		mode(p, ticks, 1, v -> {
+			v.gateslee = gate;
+			v.Gate8 = gate == 8;
+		}, v -> {
+			v.gateslee = 0;
+			v.Gate8 = false;
+			if (gate == 8 && p.isAlive()) {
+				p.setHealth(Math.min(p.getHealth(), 2));
+				p.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 1200, 2));
+				p.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 1200, 1));
+			}
+		}, t -> {
+			if (t % 10 == 0) {
+				keep(p, MobEffects.SPEED, GATE_SPEED[gate - 1]);
+				keep(p, MobEffects.STRENGTH, GATE_STRENGTH[gate - 1]);
+				keep(p, MobEffects.RESISTANCE, gate >= 7 ? 2 : gate >= 4 ? 1 : -1);
+				keep(p, MobEffects.REGENERATION, gate == 2 ? 1 : -1);
+			}
+			if (gate >= 3 && t % 40 == 20 && p.getHealth() > (gate - 2) * 0.5F + 1)
+				p.setHealth(p.getHealth() - (gate - 2) * 0.5F);
+			if (t % 2 == 0) {
+				level.sendParticles(aura.trail, p.getX(), p.getY() + 1, p.getZ(), gate, 0.4, 0.8, 0.4, 0.02);
+				if (gate >= 3)
+					level.sendParticles(ParticleTypes.CLOUD, p.getX(), p.getY() + 1.2, p.getZ(), 1, 0.3, 0.5, 0.3, 0.02);
+			}
+		});
+		switch (gate) {
+			case 5 -> hiddenLotus(p);
+			case 6 -> morningPeacock(p);
+			case 7 -> daytimeTiger(p);
+			case 8 -> nightGuy(p);
+			default -> {
+			}
+		}
+	}
+
+	/** Kicks the enemy high into the air, follows, and drives them into the ground. */
+	private static void hiddenLotus(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity target = target(p, 5);
+		if (target == null)
+			return;
+		target.setDeltaMovement(0, 1.6, 0);
+		target.syncVelocity = true;
+		p.setDeltaMovement(0, 1.5, 0);
+		p.syncVelocity = true;
+		sound(level, target.position(), SoundEvents.PLAYER_ATTACK_KNOCKBACK, 1.5F, 0.6F);
+		after(level, 14, () -> {
+			if (target.isAlive()) {
+				target.setDeltaMovement(0, -2.5, 0);
+				target.syncVelocity = true;
+			}
+		});
+		after(level, 20, () -> {
+			burst(level, target.position(), 3, 18, 1, Element.GATE, p);
+			puff(level, target.position(), Element.EARTH, 2.5F);
+		});
+	}
+
+	/** A storm of punches so fast they catch fire, fanned out like a peacock's tail. */
+	private static void morningPeacock(ServerPlayer p) {
+		channel(p, 20, 1, t -> {
+			for (int i = 0; i < 2; i++) {
+				JutsuProjectile punch = shoot(p, Element.FIRE, Shape.ORB, 0.35F,
+						turned(p, (p.getRandom().nextFloat() - 0.5F) * 40, (p.getRandom().nextFloat() - 0.5F) * 24).scale(1.6), 3);
+				punch.life = 12;
+				punch.knockback = 0.2F;
+			}
+			if (t % 3 == 0)
+				sound(level(p), p.getEyePosition(), SoundEvents.PLAYER_ATTACK_STRONG, 0.8F, 1.4F);
+		});
+		sound(level(p), p.getEyePosition(), SoundEvents.BLAZE_SHOOT, 1.2F, 0.8F);
+	}
+
+	/** One punch that compresses the air into a charging tiger. */
+	private static void daytimeTiger(ServerPlayer p) {
+		ServerLevel level = level(p);
+		sound(level, p.getEyePosition(), SoundEvents.WARDEN_SONIC_BOOM, 1.5F, 0.8F);
+		after(level, 6, () -> {
+			JutsuProjectile tiger = shoot(p, Element.GATE, Shape.LION, 3.2F, 0.95F, 26);
+			tiger.pierce = -1;
+			tiger.life = 40;
+			tiger.knockback = 2.5F;
+			tiger.onImpact = t -> burst(level, t.position().add(0, 1.6, 0), 5, 18, 2, Element.GATE, t);
+		});
+	}
+
+	/** Night Guy: a kick that rides a blood-red dragon of steam through everything ahead. */
+	private static void nightGuy(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 look = p.getLookAngle().multiply(1, 0, 1).normalize();
+		JutsuProjectile dragon = shoot(p, Element.NIGHT, Shape.DRAGON, 2.2F, new Vec3(look.x * 1.5, 0, look.z * 1.5), 40);
+		dragon.pierce = -1;
+		dragon.life = 22;
+		dragon.knockback = 3;
+		dragon.onImpact = d -> burst(level, d.position(), 4, 20, 2, Element.NIGHT, d);
+		sound(level, p.position(), SoundEvents.WARDEN_SONIC_BOOM, 2, 0.5F);
+		channel(p, 16, 1, t -> {
+			keep(p, MobEffects.RESISTANCE, 4);
+			p.setDeltaMovement(look.x * 1.5, Math.max(0.02, p.getDeltaMovement().y), look.z * 1.5);
+			p.syncVelocity = true;
+			p.fallDistance = 0;
+		});
+	}
+
+	// ------------------------------------------------------------------ sarutobi
+	/** Breathes a cloud of hot ash that blinds, then ignites it with a click of the teeth. */
+	private static void ashPile(ServerPlayer p) {
+		ServerLevel level = level(p);
+		List<Vec3> points = new ArrayList<>();
+		sound(level, p.getEyePosition(), SoundEvents.FIRE_EXTINGUISH, 1.2F, 0.5F);
+		channel(p, 20, 1, t -> {
+			Vec3 mouth = p.getEyePosition().add(p.getLookAngle().scale(0.6)).subtract(0, 0.2, 0);
+			for (int i = 0; i < 6; i++)
+				spray(level, i % 2 == 0 ? ParticleTypes.LARGE_SMOKE : ParticleTypes.SMOKE, mouth, p.getLookAngle(), 0.35 + level.getRandom().nextDouble() * 0.2, 0.5);
+			if (t % 4 == 0)
+				points.add(lookPoint(p, 3 + t * 0.45));
+			for (LivingEntity target : cone(p, 11, 25))
+				target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 60, 0, false, false));
+		});
+		after(level, 45, () -> {
+			if (!p.isAlive())
+				return;
+			sound(level, p.position(), SoundEvents.FLINTANDSTEEL_USE, 1.5F, 1);
+			for (Vec3 at : points) {
+				burst(level, at, 3, 10, 0.6F, Element.FIRE, p);
+				level.sendParticles(ParticleTypes.FLAME, at.x, at.y, at.z, 30, 1.2, 1, 1.2, 0.05);
+			}
+		});
+	}
+
+	/** A fire dragon that spits fireballs at enemies near its path. */
+	private static void flameBullet(ServerPlayer p) {
+		ServerLevel level = level(p);
+		JutsuProjectile dragon = shoot(p, Element.FIRE, Shape.DRAGON, 1.2F, 1.0F, 12);
+		dragon.life = 50;
+		dragon.pierce = -1;
+		dragon.knockback = 1;
+		dragon.onImpact = d -> burst(level, d.position(), 3, 10, 1, Element.FIRE, d);
+		channel(p, 50, 10, t -> {
+			if (t == 0 || !dragon.isAlive())
+				return;
+			Vec3 mouth = dragon.getBoundingBox().getCenter();
+			enemies(level, p, dragon.getBoundingBox().inflate(16), e -> true).stream()
+					.min((a, b) -> Double.compare(a.distanceToSqr(mouth), b.distanceToSqr(mouth))).ifPresent(target -> {
+						Vec3 aim = target.getBoundingBox().getCenter().subtract(mouth).normalize().scale(1.4);
+						JutsuProjectile ball = spawn(p, Element.FIRE, Shape.ORB, 0.5F, mouth, aim, 6);
+						ball.life = 20;
+						ball.onImpact = b -> puff(level, b.position(), Element.FIRE, 0.8F);
+						sound(level, mouth, SoundEvents.BLAZE_SHOOT, 1, 1.2F);
+					});
+		});
+		sound(level, p.getEyePosition(), SoundEvents.BLAZE_SHOOT, 1.5F, 0.6F);
+	}
+
+	// ------------------------------------------------------------------ tenro
+	/** Three quick kicks; the last one launches. */
+	private static void furyKicks(ServerPlayer p) {
+		ServerLevel level = level(p);
+		channel(p, 12, 4, t -> {
+			boolean last = t == 8;
+			Vec3 look = p.getLookAngle().multiply(1, 0, 1).normalize();
+			p.setDeltaMovement(look.x * 0.4, last ? 0.4 : 0.1, look.z * 0.4);
+			p.syncVelocity = true;
+			for (LivingEntity target : cone(p, 3.5, 50)) {
+				damage(p, target, 4, Element.BEAST);
+				target.push(look.x * (last ? 1.5 : 0.4), last ? 0.7 : 0.1, look.z * (last ? 1.5 : 0.4));
+				target.syncVelocity = true;
+			}
+			Vec3 at = p.getEyePosition().add(look.scale(1.8)).subtract(0, 0.6, 0);
+			level.sendParticles(ParticleTypes.SWEEP_ATTACK, at.x, at.y, at.z, 1, 0, 0, 0, 0);
+			sound(level, p.position(), SoundEvents.PLAYER_ATTACK_SWEEP, 1, 1.2F + t * 0.05F);
+		});
+	}
+
+	/** Nine poisoned senbon in a fan. */
+	private static void needleSenbon(ServerPlayer p) {
+		for (int i = -4; i <= 4; i++) {
+			JutsuProjectile needle = shoot(p, Element.STEEL, Shape.NEEDLE, 0.18F, turned(p, i * 4, (p.getRandom().nextFloat() - 0.5F) * 2).scale(2.4), 3);
+			needle.life = 25;
+			needle.knockback = 0.05F;
+			needle.onHit = (n, target) -> target.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 1, false, true));
+		}
+		sound(level(p), p.getEyePosition(), SoundEvents.PLAYER_ATTACK_SWEEP, 0.8F, 2);
+	}
+
+	/** Becomes a wolf-like beast for forty seconds: fast, strong and a high jumper. */
+	private static void beastHuman(ServerPlayer p) {
+		ServerLevel level = level(p);
+		level.sendParticles(ParticleTypes.POOF, p.getX(), p.getY() + 1, p.getZ(), 40, 0.6, 1, 0.6, 0.05);
+		sound(level, p.position(), SoundEvents.RAVAGER_ROAR, 1, 1.5F);
+		mode(p, 800, 1, v -> v.tenromode = true, v -> v.tenromode = false, t -> {
+			if (t % 10 == 0) {
+				keep(p, MobEffects.SPEED, 1);
+				keep(p, MobEffects.STRENGTH, 1);
+				keep(p, MobEffects.JUMP_BOOST, 1);
+			}
+		});
+	}
+
+	// ------------------------------------------------------------------ uzumaki
+	/** Heals by letting chakra be drawn from a bite: health back at the cost of some hunger; tamed allies nearby heal too. */
+	private static void healBite(ServerPlayer p) {
+		ServerLevel level = level(p);
+		p.heal(8);
+		p.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1));
+		p.getFoodData().setFoodLevel(Math.max(0, p.getFoodData().getFoodLevel() - 3));
+		for (LivingEntity ally : level.getEntitiesOfClass(LivingEntity.class, p.getBoundingBox().inflate(6),
+				e -> e instanceof OwnableEntity own && own.getOwner() == p)) {
+			ally.heal(6);
+			level.sendParticles(ParticleTypes.HEART, ally.getX(), ally.getY() + ally.getBbHeight(), ally.getZ(), 3, 0.3, 0.2, 0.3, 0);
+		}
+		puff(level, p.position().add(0, 1, 0), Element.SEAL, 0.8F);
+		level.sendParticles(ParticleTypes.HEART, p.getX(), p.getY() + 2, p.getZ(), 5, 0.4, 0.2, 0.4, 0);
+		sound(level, p.position(), SoundEvents.GENERIC_EAT.value(), 1, 0.8F);
+	}
+
+	/** Golden chakra chains shoot from the back, seek enemies and bind them in place for four seconds. */
+	private static void sealingChains(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 look = p.getLookAngle();
+		for (int i = 0; i < 5; i++) {
+			JutsuProjectile chain = shoot(p, Element.SEAL, Shape.NEEDLE, 0.3F, turned(p, (i - 2) * 12, -8 + (i % 2) * 10).scale(1.5), 4);
+			chain.setPos(p.position().add(0, 1.1, 0).subtract(look.multiply(1, 0, 1).scale(0.4)));
+			chain.homing = 0.3F;
+			chain.life = 30;
+			chain.knockback = 0;
+			channel(p, 30, 1, t -> {
+				if (chain.isAlive())
+					line(level, Element.SEAL.trail, p.position().add(0, 1.1, 0), chain.getBoundingBox().getCenter(), 0.45);
+			});
+			chain.onHit = (c, target) -> channel(p, 80, 1, t -> {
+				if (!target.isAlive())
+					return;
+				target.setDeltaMovement(0, Math.min(0, target.getDeltaMovement().y), 0);
+				target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 5, false, false));
+				if (t % 2 == 0)
+					line(level, Element.SEAL.trail, p.position().add(0, 1.1, 0), target.getBoundingBox().getCenter(), 0.5);
+				if (t % 20 == 0)
+					damage(p, target, 2, Element.SEAL);
+			});
+		}
+		sound(level, p.position(), SoundEvents.CHAIN_PLACE, 1.5F, 0.8F);
+	}
+
+	/** The Death God appears behind the caster and tears out the soul of the enemy looked at, at the cost of half the caster's life. */
+	private static void deadDemon(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity target = target(p, 10);
+		if (target == null) {
+			tell(p, "The Death God finds no one to seal");
+			return;
+		}
+		flag(p, 50, v -> v.deathgod = true, v -> v.deathgod = false);
+		sound(level, p.position(), SoundEvents.WITHER_SPAWN, 1, 0.6F);
+		channel(p, 40, 2, t -> {
+			if (!target.isAlive())
+				return;
+			target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 6, false, false));
+			line(level, ParticleTypes.SOUL, target.getBoundingBox().getCenter(), p.getBoundingBox().getCenter(), 0.6);
+			level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, p.getX(), p.getY() + 2.5, p.getZ(), 3, 0.6, 0.6, 0.6, 0.01);
+		});
+		after(level, 40, () -> {
+			if (!target.isAlive() || !p.isAlive())
+				return;
+			damage(p, target, 50, Element.SEAL);
+			puff(level, target.getBoundingBox().getCenter(), Element.SEAL, 1.5F);
+			level.sendParticles(ParticleTypes.SCULK_SOUL, target.getX(), target.getY() + 1, target.getZ(), 15, 0.4, 0.6, 0.4, 0.05);
+			p.setHealth(Math.max(1, p.getHealth() / 2));
+			p.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 1200, 1));
+			p.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 600, 0));
+			sound(level, target.position(), SoundEvents.WITHER_DEATH, 0.8F, 1.2F);
+		});
+	}
+
+	// ------------------------------------------------------------------ tsuchigumo
+	/** The clan's forbidden technique: a ball of chakra swells where the caster looks and explodes like a small sun. */
+	private static void fury(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 at = lookPoint(p, 30);
+		JutsuProjectile core = spawn(p, Element.FIRE, Shape.ORB, 0.5F, at, Vec3.ZERO, 0);
+		core.pierce = -1;
+		core.knockback = 0;
+		core.life = 40;
+		channel(p, 30, 1, t -> {
+			float size = 0.5F + t * 0.12F;
+			core.look(Element.FIRE, Shape.ORB, size);
+			core.setPos(at.subtract(0, size / 2, 0));
+			level.sendParticles(Element.EARTH.trail, at.x, at.y - size / 2, at.z, 6, 2.5, 0.2, 2.5, 0.1);
+			if (t % 6 == 0)
+				sound(level, at, SoundEvents.BEACON_POWER_SELECT, 1.5F, 0.5F + t * 0.03F);
+		});
+		after(level, 30, () -> {
+			burst(level, at, 8, 35, 2.5F, Element.FIRE, core);
+			core.discard();
+			level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, at.x, at.y, at.z, 3, 2, 1, 2, 0);
+			puff(level, at, Element.EARTH, 5);
+			sound(level, at, SoundEvents.GENERIC_EXPLODE.value(), 3, 0.6F);
+		});
+	}
+}

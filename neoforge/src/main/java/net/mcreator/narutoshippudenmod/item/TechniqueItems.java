@@ -160,7 +160,7 @@ public final class TechniqueItems {
 				double z = entity.getZ();
 				Level world = entity.level();
 
-				AkimichiReleaseTechniqueEntitySwingsItemProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return retval;
 			}
@@ -350,7 +350,7 @@ public final class TechniqueItems {
 				double z = entity.getZ();
 				Level world = entity.level();
 
-				HyugaReleaseTechniqueLivingEntityIsHitWithItemProcedure.executeProcedure(
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
 								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return;
@@ -638,7 +638,7 @@ public final class TechniqueItems {
 				double z = entity.getZ();
 				Level world = entity.level();
 
-				LeeReleaseTechniqueLivingEntityIsHitWithItemProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return retval;
 			}
@@ -1215,7 +1215,7 @@ public final class TechniqueItems {
 				double z = entity.getZ();
 				Level world = entity.level();
 
-				UzumakiReleaseTechniqueLivingEntityIsHitWithItemProcedure.executeProcedure(
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
 								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return;

@@ -64,7 +64,19 @@ final class NatureJutsu {
 	private NatureJutsu() {
 	}
 
-	record Def(String name, JutsuRank rank, Consumer<ServerPlayer> cast) {
+	/** A jutsu of a release: its rank sets the price and the level of its stat (Ninjutsu unless given) it needs. */
+	record Def(String name, JutsuRank rank, Consumer<ServerPlayer> cast, String stat) {
+		Def(String name, JutsuRank rank, Consumer<ServerPlayer> cast) {
+			this(name, rank, cast, "Ninjutsu");
+		}
+
+		ToDoubleFunction<PlayerVariables> statValue() {
+			return switch (stat) {
+				case "Taijutsu" -> v -> v.taijutsu;
+				case "Summoning" -> v -> v.summoning;
+				default -> v -> v.ninjutsu;
+			};
+		}
 	}
 
 	static void register() {
@@ -108,7 +120,7 @@ final class NatureJutsu {
 		Jutsus.JutsuSpec[] specs = new Jutsus.JutsuSpec[defs.length];
 		for (int i = 0; i < defs.length; i++) {
 			JutsuRank rank = defs[i].rank;
-			specs[i] = Jutsus.jutsu(defs[i].name, learned, i + 1, "Ninjutsu", v -> v.ninjutsu, rank.ninjutsu, rank.chakra, rank.cooldowns());
+			specs[i] = Jutsus.jutsu(defs[i].name, learned, i + 1, defs[i].stat, defs[i].statValue(), rank.ninjutsu, rank.chakra, rank.cooldowns());
 		}
 		Jutsus.technique(item, selected, select, has, deps -> {
 			if (!(deps.get("entity") instanceof ServerPlayer player))
@@ -148,8 +160,10 @@ final class NatureJutsu {
 		}, Jutsus.track("", bought, -1, item, learned, tiers));
 	}
 
-	/** "You don't have the Fire nature" / "You haven't unlocked Ice Release". */
+	/** "You don't have the Fire nature" / "You haven't unlocked Ice Release" / "You aren't of the Hyuga Clan". */
 	private static String missing(String title) {
+		if (title.endsWith("Clan"))
+			return "You aren't of the " + title;
 		return title.endsWith("Release") ? "You haven't unlocked " + title : "You don't have the " + title + " nature";
 	}
 

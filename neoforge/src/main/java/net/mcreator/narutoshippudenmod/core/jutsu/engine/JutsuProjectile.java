@@ -228,6 +228,12 @@ public class JutsuProjectile extends Projectile {
 		/** Nothing but the particle trail (wind bullets). */
 		NONE,
 		/** A glowing cube (Dust Release). */
-		CUBE
+		CUBE,
+		/** A spinning four-bladed windmill shuriken. */
+		SHURIKEN,
+		/** A chakra lion's head (Twin Lion Fists). */
+		LION,
+		/** A see-through sphere of swirling chakra, water or insects around someone (Rotation, Water Prison, Insect Jar). */
+		SHELL
 	}
 }

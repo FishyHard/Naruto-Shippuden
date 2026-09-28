@@ -98,6 +98,10 @@ public final class Techniques {
 			case ICE -> target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 60, 3, false, false));
 			case BOIL -> target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, 1, false, false));
 			case SMOKE -> target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, false));
+			case INSECT -> target.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 0, false, false));
+			// the Gentle Fist closes chakra points
+			case CHAKRA -> target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 1, false, false));
+			case SEAL -> target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 40, 4, false, false));
 			default -> {
 			}
 		}

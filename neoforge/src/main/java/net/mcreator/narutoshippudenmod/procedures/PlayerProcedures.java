@@ -749,7 +749,7 @@ public final class PlayerProcedures {
 					}
 				}
 			}
-			if (NarutoShippudenModVariables.get(entity).tenromode == true) {
+			if (false && NarutoShippudenModVariables.get(entity).tenromode == true) {
 				if (NarutoShippudenModVariables.get(entity).ninjutsu >= 20) {
 					if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 2) {
 						{
@@ -1087,7 +1087,7 @@ public final class PlayerProcedures {
 					}
 				}
 			}
-			if (NarutoShippudenModVariables.get(entity).izunochakramode == true) {
+			if (false && NarutoShippudenModVariables.get(entity).izunochakramode == true) {
 				if (NarutoShippudenModVariables.get(entity).ninjutsu >= 20) {
 					if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1) {
 						{
@@ -1128,7 +1128,7 @@ public final class PlayerProcedures {
 					}
 				}
 			}
-			if (NarutoShippudenModVariables.get(entity).HumanBulletTank == true) {
+			if (false && NarutoShippudenModVariables.get(entity).HumanBulletTank == true) {
 				if (NarutoShippudenModVariables.get(entity).ninjutsu >= 25) {
 					if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 2) {
 						{
@@ -1185,7 +1185,7 @@ public final class PlayerProcedures {
 					}
 				}
 			}
-			if (NarutoShippudenModVariables.get(entity).SpikedHumanBulletTank == true) {
+			if (false && NarutoShippudenModVariables.get(entity).SpikedHumanBulletTank == true) {
 				if (NarutoShippudenModVariables.get(entity).ninjutsu >= 30) {
 					if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 3) {
 						{
@@ -1242,7 +1242,7 @@ public final class PlayerProcedures {
 					}
 				}
 			}
-			if (NarutoShippudenModVariables.get(entity).ButterflyMode == true) {
+			if (false && NarutoShippudenModVariables.get(entity).ButterflyMode == true) {
 				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 4) {
 					{
 						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 4);
@@ -1286,7 +1286,7 @@ public final class PlayerProcedures {
 					}
 				}
 			}
-			if (NarutoShippudenModVariables.get(entity).izunocat == true) {
+			if (false && NarutoShippudenModVariables.get(entity).izunocat == true) {
 				if (NarutoShippudenModVariables.get(entity).ninjutsu >= 25) {
 					if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 3) {
 						{
@@ -1663,7 +1663,7 @@ public final class PlayerProcedures {
 					}
 				}
 			}
-			if (NarutoShippudenModVariables.get(entity).PassingFang == true) {
+			if (false && NarutoShippudenModVariables.get(entity).PassingFang == true) {
 				{
 					List<Entity> _entfound = world
 							.getEntitiesOfClass(Entity.class,

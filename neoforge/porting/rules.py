@@ -933,3 +933,24 @@ def drop_item_hover_text(path, text):
 def golem_renderers(path, text):
     """The Earth Golem and Wood Human are drawn by client/jutsu/GolemRenderer (the remade model)."""
     return re.sub(r'\n\t*ModRenderers\.mob\(event, (?:EarthGolemEntity|WoodGolemEntity)\.entity,[^\n]*', '\n\t\t\t// drawn by client.jutsu.GolemRenderer', text)
+
+
+CLAN_MODES = ('tenromode', 'izunochakramode', 'izunocat', 'HumanBulletTank', 'SpikedHumanBulletTank', 'ButterflyMode', 'PassingFang')
+
+
+@func
+def clan_mode_ticks(path, text):
+    """core/jutsu/ClanJutsu runs the clan transformations (effects, damage, timing); switch off the old per-tick blocks, which drained
+    chakra every tick, gave Speed 20 and hurt everything near without credit. The render swaps that test the same flags stay."""
+    if not path.replace('\\', '/').endswith('PlayerProcedures.java'):
+        return text
+    rx = re.compile(r'if \((NarutoShippudenModVariables\.get\(entity\)\.(?:%s) == true)\) \{(?=\s*\n\s*(?:if \(NarutoShippudenModVariables\.get\(entity\)\.(?:ninjutsu|ChakraAmount)|\{\s*\n\s*List<Entity> _entfound))'
+                    % '|'.join(CLAN_MODES))
+    return rx.sub(r'if (false && \1) {', text)
+
+
+@func
+def clan_item_hooks(path, text):
+    """The clan technique items' hit and swing hooks belong to the old jutsu (Lee's gates, the Death God seal, the Gentle Fist)."""
+    return re.sub(r'\b(?:Hyuga|Lee|Uzumaki)ReleaseTechniqueLivingEntityIsHitWithItemProcedure\.executeProcedure\(|\bAkimichiReleaseTechniqueEntitySwingsItemProcedure\.executeProcedure\(',
+                  'net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(', text)

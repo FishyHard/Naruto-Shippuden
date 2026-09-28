@@ -60,6 +60,8 @@ public class JutsuProjectileRenderer extends EntityRenderer<JutsuProjectile, Jut
 	private final ModelPart disc = bake(root -> box(root, "disc", -14, -0.3F, -14, 28, 0.6F, 28));
 	private final ModelPart cube = bake(root -> box(root, "cube", -8, -8, -8, 16, 16, 16));
 	private final ModelPart needle = bake(root -> box(root, "needle", -0.4F, -0.4F, -7, 0.8F, 0.8F, 14));
+	private final ModelPart shuriken = bake(JutsuProjectileRenderer::shuriken);
+	private final ModelPart lion = bake(JutsuProjectileRenderer::lion);
 
 	public JutsuProjectileRenderer(EntityRendererProvider.Context context) {
 		super(context);
@@ -147,6 +149,36 @@ public class JutsuProjectileRenderer extends EntityRenderer<JutsuProjectile, Jut
 			box(arm, "tip", PartPose.offsetAndRotation(0, 0, 12.5F, 0, -0.6F, 0), -2.5F, -0.4F, 0, 5, 0.8F, 8);
 			box(arm, "hook", PartPose.offsetAndRotation(-1, 0, 19, 0, -1.3F, 0), -1.2F, -0.3F, 0, 2.4F, 0.6F, 5);
 		}
+	}
+
+	/** A Fuma shuriken: a ringed hub and four long swept blades, flat in the XZ plane (radius 16). */
+	private static void shuriken(PartDefinition root) {
+		box(root, "hub", -3, -0.8F, -3, 6, 1.6F, 6);
+		box(root, "hub2", PartPose.rotation(0, 0.785F, 0), -2.6F, -1, -2.6F, 5.2F, 2, 5.2F);
+		for (int i = 0; i < 4; i++) {
+			PartDefinition arm = root.addOrReplaceChild("arm" + i, CubeListBuilder.create().addBox(-2.2F, -0.5F, 2, 4.4F, 1, 7),
+					PartPose.rotation(0, i * Mth.HALF_PI, 0));
+			box(arm, "mid", PartPose.offsetAndRotation(0, 0, 8.5F, 0, -0.35F, 0), -1.8F, -0.4F, 0, 3.6F, 0.8F, 5);
+			box(arm, "tip", PartPose.offsetAndRotation(-1.4F, 0, 13, 0, -0.8F, 0), -1.1F, -0.3F, 0, 2.2F, 0.6F, 4.5F);
+			// the sharpened back edge
+			box(arm, "edge", PartPose.offsetAndRotation(2.2F, 0, 3, 0, 0.5F, 0), -0.4F, -0.25F, 0, 0.8F, 0.5F, 6);
+		}
+	}
+
+	/** A roaring chakra lion's head (radius about 8, facing +Z). */
+	private static void lion(PartDefinition root) {
+		box(root, "skull", -4, -3, -4, 8, 7, 8);
+		box(root, "muzzle", -2.8F, -3, 3.5F, 5.6F, 4, 4);
+		box(root, "nose", -1.5F, 0.3F, 7, 3, 1.5F, 1.2F);
+		box(root, "brow", PartPose.rotation(0.2F, 0, 0), -4.2F, 2.5F, 1, 8.4F, 1.6F, 3);
+		PartDefinition jaw = root.addOrReplaceChild("jaw", CubeListBuilder.create().addBox(-2.4F, -1.6F, 0, 4.8F, 1.6F, 5.5F), PartPose.offset(0, -3, 2.5F));
+		box(jaw, "fl", 1.2F, 0, 4, 0.8F, 1.4F, 0.8F);
+		box(jaw, "fr", -2, 0, 4, 0.8F, 1.4F, 0.8F);
+		box(root, "earL", PartPose.offsetAndRotation(3, 4, -1, 0, 0, -0.3F), -1, 0, -0.5F, 2, 2.5F, 1);
+		box(root, "earR", PartPose.offsetAndRotation(-3, 4, -1, 0, 0, 0.3F), -1, 0, -0.5F, 2, 2.5F, 1);
+		// the mane: flames of chakra fanned round the head
+		for (int i = 0; i < 10; i++)
+			box(root, "mane" + i, PartPose.offsetAndRotation(0, 0.5F, -2.5F, -0.35F, 0, i * Mth.TWO_PI / 10), -2, 3.5F, -1.5F, 4, 6.5F - (i % 2) * 2, 3);
 	}
 
 	// ------------------------------------------------------------------ render state
@@ -285,6 +317,32 @@ public class JutsuProjectileRenderer extends EntityRenderer<JutsuProjectile, Jut
 				pose.rotateDegrees(Axis.YP, age * 4);
 				pose.rotateDegrees(Axis.XP, age * 3);
 				glow(collector, cube, pose, state.element, age, 1.2F, state.lightCoords);
+			}
+			case SHURIKEN -> {
+				face(pose, state.yRot, state.xRot * 0.3F);
+				pose.scale(s * 0.9F, s * 0.9F, s * 0.9F);
+				pose.rotateDegrees(Axis.YP, -age * 50);
+				glow(collector, shuriken, pose, state.element, age, 0, state.lightCoords);
+			}
+			case LION -> {
+				face(pose, state.yRot, state.xRot);
+				pose.scale(s, s, s);
+				lion.getChild("jaw").xRot = 0.35F + 0.25F * Mth.sin(age * 0.6F);
+				pose.rotate(Axis.ZP, 0.08F * Mth.sin(age * 0.5F));
+				glow(collector, lion, pose, state.element, age, 1.12F, state.lightCoords);
+				collector.submitModelPart(eyes, pose, RenderTypes.entityTranslucentEmissive(CHAKRA), LIGHT, OverlayTexture.NO_OVERLAY, null, 0xFFFFFFFF);
+			}
+			case SHELL -> {
+				pose.scale(s, s, s);
+				pose.rotateDegrees(Axis.YP, age * (state.element == Element.CHAKRA ? 40 : 6));
+				int alpha = state.element == Element.INSECT ? 0x90 : 0x48;
+				RenderType body = state.element.glows ? RenderTypes.entityTranslucentEmissive(CHAKRA) : RenderTypes.entityTranslucent(CHAKRA);
+				collector.submitModelPart(orb, pose, body, state.element.glows ? LIGHT : state.lightCoords, OverlayTexture.NO_OVERLAY, null,
+						alpha << 24 | state.element.color & 0xFFFFFF);
+				float scroll = age * 0.04F % 1;
+				pose.scale(1.04F, 1.04F, 1.04F);
+				collector.submitModelPart(orb, pose, RenderTypes.energySwirl(SWIRL, scroll, scroll), LIGHT, OverlayTexture.NO_OVERLAY, null,
+						0xFF000000 | scale(state.element.glows ? state.element.color : state.element.core, 0.7F));
 			}
 			case NONE -> {
 			}

@@ -220,13 +220,17 @@ public final class DevTest {
 	/** Casts every remade nature jutsu at a row of training targets and screenshots each in flight and afterwards. */
 	private static final int[] FREEZE_AT = { 7, 9, 12, 12 };
 	private static final net.minecraft.world.phys.Vec3[] home = new net.minecraft.world.phys.Vec3[1];
+	private static final net.minecraft.world.phys.Vec3[] arena = new net.minecraft.world.phys.Vec3[1];
 
 	private static void jutsuSteps(Minecraft mc) {
 		String[] natures = { "fire", "water", "wind", "earth", "lightning", "boil", "bone", "dust", "ice", "magnet", "smoke", "steel", "storm", "swift",
-				"typhoon", "wood" };
+				"typhoon", "wood", "aburame", "akimichi", "fuma", "hozuki", "hyuga", "inuzuka", "izuno", "lee", "sarutobi", "tenro", "uzumaki",
+				"tsuchigumo" };
 		String only = System.getProperty("naruto.devtest.jutsu", "");
 		STEPS.add(() -> {
 			mc.gui.setScreen(null);
+			mc.options.pauseOnLostFocus = false;
+			arena[0] = mc.player.position();
 			mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
 			command(mc, "kill @e[type=!player]");
 			command(mc, "time set day");
@@ -247,6 +251,12 @@ public final class DevTest {
 				v.steelreleaselogic = v.stormreleaselogic = v.swiftreleaselogic = v.typhoonreleaslogic = v.woodreleaselogic = true;
 				v.boillearn = v.bonelearn = v.dustlearn = v.icelearn = v.magnetlearn = v.smokelearn = v.steellearn = v.stormlearn = v.swiftlearn = 4;
 				v.typhoonlearn = v.woodlearn = 4;
+				v.aburamereleaselogic = v.akimichireleaselogic = v.fumareleaselogic = v.hozukireleaselogic = v.hyugareleaselogic = true;
+				v.inuzukareleaselogic = v.izunoreleaselogic = v.leereleaselogic = v.sarutobireleaselogic = v.tenroreleaselogic = true;
+				v.uzumakireleaselogic = v.tsuchigumoreleaselogic = true;
+				v.aburamelearn = v.akimichilearn = v.fumalearn = v.hozukilearn = v.hyugalearn = v.inuzukalearn = v.izunolearn = v.leelearn = 9;
+				v.sarutobilearn = v.tenrolearn = v.uzumakilearn = v.tsuchigumolearn = 9;
+				v.taijutsu = v.summoning = 60;
 				v.ninjutsu = 60;
 				v.byakuganactivate = false;
 				v.ChakraMax = 5000;
@@ -257,7 +267,7 @@ public final class DevTest {
 				command(mc, "summon minecraft:husk ~" + i * 2 + " ~ ~16 {NoAI:1b,PersistenceRequired:1b,attributes:[{id:\"minecraft:max_health\",base:500}],Health:500f}");
 		});
 		for (String nature : natures) {
-			if (!only.isEmpty() && !only.equals(nature))
+			if (!only.isEmpty() && !java.util.List.of(only.split(",")).contains(nature))
 				continue;
 			int count = net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.TECHNIQUES
 					.get(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", nature + "_release_technique")).jutsu.size();
@@ -266,7 +276,10 @@ public final class DevTest {
 				int freeze = nature.equals("lightning") && i == 3 ? 19 : nature.equals("lightning") && i == 2 ? 13 : FREEZE_AT[Math.min(i, 3)];
 				STEPS.add(() -> {
 					command(mc, "item replace entity @s weapon.mainhand with naruto_shippuden:" + nature + "_release_technique");
+					// transformations and dashes carry the player off: end them and go back to the arena
+					command(mc, String.format(java.util.Locale.ROOT, "tp @s %.2f %.2f %.2f 0 5", arena[0].x, arena[0].y, arena[0].z));
 					onServer(mc, player -> {
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.stop(player);
 						NarutoShippudenModVariables.ifPresent(player, v -> {
 							v.ChakraAmount = 5000;
 							v.syncPlayerVariables(player);
