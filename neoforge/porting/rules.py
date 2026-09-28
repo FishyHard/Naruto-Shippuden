@@ -927,3 +927,9 @@ def drop_item_hover_text(path, text):
         if not m:
             return text
         text = text[:m.start()] + text[find_block(text, m.end()):]
+
+
+@func
+def golem_renderers(path, text):
+    """The Earth Golem and Wood Human are drawn by client/jutsu/GolemRenderer (the remade model)."""
+    return re.sub(r'\n\t*ModRenderers\.mob\(event, (?:EarthGolemEntity|WoodGolemEntity)\.entity,[^\n]*', '\n\t\t\t// drawn by client.jutsu.GolemRenderer', text)

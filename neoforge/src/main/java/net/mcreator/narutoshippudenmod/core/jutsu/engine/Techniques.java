@@ -70,7 +70,7 @@ public final class Techniques {
 				&& player.getPersistentData().getLongOr(WIND_CLOAK, 0) > player.level().getGameTime()) {
 			Vec3 away = event.getEntity().position().subtract(player.position()).multiply(1, 0, 1).normalize();
 			event.getEntity().push(away.x * 1.4, 0.35, away.z * 1.4);
-			event.getEntity().needsSync = true;
+			event.getEntity().syncVelocity = true;
 			((ServerLevel) player.level()).sendParticles(ParticleTypes.GUST, event.getEntity().getX(), event.getEntity().getY() + 1, event.getEntity().getZ(), 1, 0, 0, 0, 0);
 		}
 	}
@@ -94,7 +94,10 @@ public final class Techniques {
 		switch (element) {
 			case FIRE -> target.igniteForSeconds(4);
 			case WATER -> target.clearFire();
-			case LIGHTNING -> target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 30, 2, false, false));
+			case LIGHTNING, STORM -> target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 30, 2, false, false));
+			case ICE -> target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 60, 3, false, false));
+			case BOIL -> target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, 1, false, false));
+			case SMOKE -> target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, false));
 			default -> {
 			}
 		}
@@ -119,7 +122,7 @@ public final class Techniques {
 			damage(direct, target, (float) (damage * Mth.clamp(falloff, 0.5, 1)), element);
 			Vec3 away = target.position().subtract(at).normalize();
 			target.push(away.x * knockback, 0.25 + knockback * 0.2, away.z * knockback);
-			target.needsSync = true;
+			target.syncVelocity = true;
 		}
 		puff(level, at, element, radius);
 		sound(level, at, element.impact, 1.2F, 0.9F + level.getRandom().nextFloat() * 0.2F);
@@ -210,21 +213,25 @@ public final class Techniques {
 	}
 
 	// ------------------------------------------------------------------ movement
-	/** Launches the caster forward; enemies they pass through are hurt once. */
+	/** Rushes the caster forward for a few ticks; enemies they pass through are hurt once and thrown. */
 	public static void dash(ServerPlayer caster, double distance, float damage, Element element) {
-		Vec3 look = caster.getLookAngle().multiply(1, 0.3, 1).normalize();
-		caster.setDeltaMovement(look.scale(distance / 5));
-		caster.needsSync = true;
+		Vec3 look = caster.getLookAngle().multiply(1, 0, 1).normalize();
+		int ticks = Math.max(3, (int) Math.round(distance / 1.4));
 		List<Entity> struck = new ArrayList<>();
-		channel(caster, 10, 1, tick -> {
+		sound((ServerLevel) caster.level(), caster.position(), element.cast, 1, 1.4F);
+		channel(caster, ticks + 4, 1, tick -> {
 			caster.fallDistance = 0;
 			ServerLevel level = (ServerLevel) caster.level();
+			if (tick < ticks) {
+				caster.setDeltaMovement(look.x * 1.4, Math.max(caster.getDeltaMovement().y, 0.05), look.z * 1.4);
+				caster.syncVelocity = true;
+			}
 			puff(level, caster.position().add(0, 1, 0), element, 0.6F);
 			for (LivingEntity target : enemies(level, caster, caster.getBoundingBox().inflate(1.2), e -> !struck.contains(e))) {
 				struck.add(target);
 				damage(caster, target, damage, element);
 				target.push(look.x * 1.2, 0.5, look.z * 1.2);
-				target.needsSync = true;
+				target.syncVelocity = true;
 			}
 		});
 	}

@@ -289,7 +289,7 @@ public final class SummonRenderers {
 
 	public static class EarthGolemRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.mob(event, EarthGolemEntity.entity, Modelearth_golem.LAYER, Modelearth_golem::new, 0.3F, Identifier.parse("naruto_shippuden:textures/entities/earth_golem.png"));
+			// drawn by client.jutsu.GolemRenderer
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -1938,7 +1938,7 @@ public final class SummonRenderers {
 
 	public static class WoodGolemRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.mob(event, WoodGolemEntity.entity, Modelwood_golem.LAYER, Modelwood_golem::new, 1F, Identifier.parse("naruto_shippuden:textures/entities/wood_golem.png"));
+			// drawn by client.jutsu.GolemRenderer
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {

@@ -58,6 +58,7 @@ public class JutsuProjectileRenderer extends EntityRenderer<JutsuProjectile, Jut
 	private final ModelPart shark = bake(JutsuProjectileRenderer::shark);
 	private final ModelPart blades = bake(JutsuProjectileRenderer::blades);
 	private final ModelPart disc = bake(root -> box(root, "disc", -14, -0.3F, -14, 28, 0.6F, 28));
+	private final ModelPart cube = bake(root -> box(root, "cube", -8, -8, -8, 16, 16, 16));
 	private final ModelPart needle = bake(root -> box(root, "needle", -0.4F, -0.4F, -7, 0.8F, 0.8F, 14));
 
 	public JutsuProjectileRenderer(EntityRendererProvider.Context context) {
@@ -205,10 +206,15 @@ public class JutsuProjectileRenderer extends EntityRenderer<JutsuProjectile, Jut
 	}
 
 	// ------------------------------------------------------------------ drawing
-	/** Bright solid core, element-coloured glowing body, soft halo. */
-	private static void glow(SubmitNodeCollector collector, ModelPart part, PoseStack pose, Element element, float age, float halo) {
-		boolean water = element == Element.WATER, earth = element == Element.EARTH;
-		RenderType body = water || earth ? RenderTypes.entityTranslucent(CHAKRA) : RenderTypes.entityTranslucentEmissive(CHAKRA);
+	/** Bright solid core, element-coloured glowing body, soft halo; solid elements (bone, iron sand, wood) are simply lit. */
+	private static void glow(SubmitNodeCollector collector, ModelPart part, PoseStack pose, Element element, float age, float halo, int light) {
+		if (!element.glows) {
+			collector.submitModelPart(part, pose, RenderTypes.entityTranslucent(CHAKRA), light, OverlayTexture.NO_OVERLAY, null,
+					0xF2000000 | element.color & 0xFFFFFF);
+			return;
+		}
+		boolean water = element == Element.WATER;
+		RenderType body = water ? RenderTypes.entityTranslucent(CHAKRA) : RenderTypes.entityTranslucentEmissive(CHAKRA);
 		collector.submitModelPart(part, pose, body, LIGHT, OverlayTexture.NO_OVERLAY, null, (water ? 0xC0 : 0xE0) << 24 | element.color & 0xFFFFFF);
 		pose.pushPose();
 		pose.scale(0.62F, 0.62F, 0.62F);
@@ -245,35 +251,41 @@ public class JutsuProjectileRenderer extends EntityRenderer<JutsuProjectile, Jut
 				pose.rotateDegrees(Axis.XP, age * 7);
 				float pulse = 1 + 0.05F * Mth.sin(age * 0.8F);
 				pose.scale(pulse, pulse, pulse);
-				glow(collector, orb, pose, state.element, age, 1.25F);
+				glow(collector, orb, pose, state.element, age, 1.25F, state.lightCoords);
 			}
 			case NEEDLE -> {
 				face(pose, state.yRot, state.xRot);
 				pose.scale(s * 4, s * 4, s * 4);
-				glow(collector, needle, pose, state.element, age, 2.2F);
+				glow(collector, needle, pose, state.element, age, 2.2F, state.lightCoords);
 			}
 			case SHARK -> {
 				face(pose, state.yRot, state.xRot);
 				pose.scale(s, s, s);
 				shark.getChild("tail").yRot = 0.45F * Mth.sin(age * 0.9F);
 				pose.rotate(Axis.YP, 0.12F * Mth.sin(age * 0.9F + 1));
-				glow(collector, shark, pose, state.element, age, 1.12F);
+				glow(collector, shark, pose, state.element, age, 1.12F, state.lightCoords);
 			}
 			case RASENSHURIKEN -> {
 				face(pose, state.yRot, 0);
 				pose.scale(s * 0.9F, s * 0.9F, s * 0.9F);
 				pose.pushPose();
 				pose.rotateDegrees(Axis.YP, age * 45);
-				glow(collector, blades, pose, state.element, age, 0);
+				glow(collector, blades, pose, state.element, age, 0, state.lightCoords);
 				pose.rotateDegrees(Axis.YP, -age * 20);
 				float scroll = age * 0.05F % 1;
 				collector.submitModelPart(disc, pose, RenderTypes.energySwirl(SWIRL, scroll, scroll), LIGHT, OverlayTexture.NO_OVERLAY, null, 0xFF6FA8A0);
 				pose.popPose();
 				pose.scale(0.45F, 0.45F, 0.45F);
 				pose.rotateDegrees(Axis.XP, age * 20);
-				glow(collector, orb, pose, Element.LIGHTNING, age, 1.3F);
+				glow(collector, orb, pose, Element.LIGHTNING, age, 1.3F, state.lightCoords);
 			}
 			case DRAGON -> dragon(state, pose, collector);
+			case CUBE -> {
+				pose.scale(s, s, s);
+				pose.rotateDegrees(Axis.YP, age * 4);
+				pose.rotateDegrees(Axis.XP, age * 3);
+				glow(collector, cube, pose, state.element, age, 1.2F, state.lightCoords);
+			}
 			case NONE -> {
 			}
 		}
@@ -295,7 +307,7 @@ public class JutsuProjectileRenderer extends EntityRenderer<JutsuProjectile, Jut
 			face(pose, (float) (Mth.atan2(facing.x, facing.z) * Mth.RAD_TO_DEG), (float) (Mth.atan2(facing.y, facing.horizontalDistance()) * Mth.RAD_TO_DEG));
 			pose.scale(s * taper, s * taper, s * taper);
 			segment.getChild("legL").visible = segment.getChild("legR").visible = i == 2 || i == 9;
-			glow(collector, segment, pose, state.element, age + i, 1.1F);
+			glow(collector, segment, pose, state.element, age + i, 1.1F, state.lightCoords);
 			pose.popPose();
 		}
 		pose.pushPose();
@@ -304,7 +316,7 @@ public class JutsuProjectileRenderer extends EntityRenderer<JutsuProjectile, Jut
 		head.getChild("jaw").xRot = 0.25F + 0.2F * Mth.sin(age * 0.4F);
 		head.getChild("whiskerL").yRot = 2.4F + 0.15F * Mth.sin(age * 0.3F);
 		head.getChild("whiskerR").yRot = -2.4F - 0.15F * Mth.sin(age * 0.3F);
-		glow(collector, head, pose, state.element, age, 1.08F);
+		glow(collector, head, pose, state.element, age, 1.08F, state.lightCoords);
 		collector.submitModelPart(eyes, pose, RenderTypes.entityTranslucentEmissive(CHAKRA), LIGHT, OverlayTexture.NO_OVERLAY, null, 0xFFFFFFFF);
 		pose.popPose();
 	}

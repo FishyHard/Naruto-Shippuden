@@ -184,6 +184,7 @@ public final class Jutsus {
 	static {
 		JutsuTable.register();
 		NatureJutsu.register();
+		KekkeiGenkaiJutsu.register();
 	}
 
 	public static @Nullable Technique technique(ItemStack stack) {

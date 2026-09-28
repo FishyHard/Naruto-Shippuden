@@ -120,6 +120,7 @@ public class JutsuProjectile extends Projectile {
 				Techniques.damage(this, target, damage, element());
 				if (knockback > 0)
 					target.push(motion.normalize().x * knockback, 0.15 * knockback, motion.normalize().z * knockback);
+				target.syncVelocity = true;
 				onHit.accept(this, target);
 				if (pierce >= 0 && hit.size() > pierce) {
 					impact(target.position().add(0, target.getBbHeight() / 2, 0));
@@ -225,6 +226,8 @@ public class JutsuProjectile extends Projectile {
 		/** A thin needle (senbon). */
 		NEEDLE,
 		/** Nothing but the particle trail (wind bullets). */
-		NONE
+		NONE,
+		/** A glowing cube (Dust Release). */
+		CUBE
 	}
 }

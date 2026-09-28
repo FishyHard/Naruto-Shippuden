@@ -23,7 +23,6 @@ import net.mcreator.narutoshippudenmod.core.jutsu.engine.JutsuProjectile.Shape;
 import net.mcreator.narutoshippudenmod.core.jutsu.engine.JutsuRank;
 import net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques;
 import net.mcreator.narutoshippudenmod.entity.SummonEntities.EarthGolemEntity;
-import net.mcreator.narutoshippudenmod.entity.SummonEntities.KirinEntity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -40,7 +39,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
@@ -66,7 +64,7 @@ final class NatureJutsu {
 	private NatureJutsu() {
 	}
 
-	private record Def(String name, JutsuRank rank, Consumer<ServerPlayer> cast) {
+	record Def(String name, JutsuRank rank, Consumer<ServerPlayer> cast) {
 	}
 
 	static void register() {
@@ -98,12 +96,12 @@ final class NatureJutsu {
 				v -> v.lightninglearn, (v, i) -> v.lightninglearn = i, v -> v.lightning_release, (v, i) -> v.lightning_release = i,
 				new Def("Chidori Senbon", JutsuRank.D, NatureJutsu::chidoriSenbon),
 				new Def("Lightning Ball", JutsuRank.C, NatureJutsu::lightningBall),
-				new Def("Lariat", JutsuRank.B, p -> Techniques.dash(p, 10, 12, Element.LIGHTNING)),
+				new Def("Lightning Lariat", JutsuRank.B, NatureJutsu::lariat),
 				new Def("Kirin", JutsuRank.S, NatureJutsu::kirin));
 	}
 
-	/** Registers a nature's technique item and scroll, replacing the old MCreator ones. */
-	private static void nature(String id, String title, Predicate<PlayerVariables> has, ToDoubleFunction<PlayerVariables> selected,
+	/** Registers a release's technique item and scroll (natures and kekkei genkai), replacing the old MCreator ones. */
+	static void nature(String id, String title, Predicate<PlayerVariables> has, ToDoubleFunction<PlayerVariables> selected,
 			ObjDoubleConsumer<PlayerVariables> select, ToDoubleFunction<PlayerVariables> learned, ObjDoubleConsumer<PlayerVariables> setLearned,
 			ToDoubleFunction<PlayerVariables> bought, ObjDoubleConsumer<PlayerVariables> setBought, Def... defs) {
 		String item = id + "_release_technique";
@@ -123,7 +121,7 @@ final class NatureJutsu {
 			});
 			def.cast.accept(player);
 		}, specs);
-		Jutsus.TECHNIQUES.get(Identifier.fromNamespaceAndPath("naruto_shippuden", item)).requirementMessage = "You don't have the " + title + " nature";
+		Jutsus.TECHNIQUES.get(Identifier.fromNamespaceAndPath("naruto_shippuden", item)).requirementMessage = missing(title);
 
 		Jutsus.Tier[] tiers = new Jutsus.Tier[defs.length];
 		for (int i = 0; i < defs.length; i++)
@@ -134,7 +132,7 @@ final class NatureJutsu {
 			PlayerVariables v = NarutoShippudenModVariables.get(player);
 			int next = (int) bought.applyAsDouble(v);
 			if (!has.test(v)) {
-				player.sendOverlayMessage(Component.literal("You don't have the " + title + " nature"));
+				player.sendOverlayMessage(Component.literal(missing(title)));
 				return;
 			}
 			if (next >= defs.length || v.jp < defs[next].rank.jp)
@@ -150,7 +148,12 @@ final class NatureJutsu {
 		}, Jutsus.track("", bought, -1, item, learned, tiers));
 	}
 
-	private static ServerLevel level(ServerPlayer player) {
+	/** "You don't have the Fire nature" / "You haven't unlocked Ice Release". */
+	private static String missing(String title) {
+		return title.endsWith("Release") ? "You haven't unlocked " + title : "You don't have the " + title + " nature";
+	}
+
+	static ServerLevel level(ServerPlayer player) {
 		return (ServerLevel) player.level();
 	}
 
@@ -225,7 +228,7 @@ final class NatureJutsu {
 			for (LivingEntity target : enemies(level, p, p.getBoundingBox().inflate(2.8), e -> true)) {
 				Vec3 away = target.position().subtract(c).multiply(1, 0, 1).normalize();
 				target.push(away.x * 0.6, 0.1, away.z * 0.6);
-				target.needsSync = true;
+				target.syncVelocity = true;
 			}
 			for (Projectile incoming : level.getEntitiesOfClass(Projectile.class, p.getBoundingBox().inflate(3),
 					e -> Techniques.isEnemy(p, e) && e.getOwner() != p)) {
@@ -264,7 +267,7 @@ final class NatureJutsu {
 		for (LivingEntity target : cone(p, 8, 35)) {
 			damage(p, target, 5, Element.WIND);
 			target.push(look.x * 2.2, 0.45, look.z * 2.2);
-			target.needsSync = true;
+			target.syncVelocity = true;
 		}
 		for (int i = 1; i <= 7; i++) {
 			Vec3 at = p.getEyePosition().add(look.scale(i));
@@ -306,7 +309,7 @@ final class NatureJutsu {
 				for (LivingEntity target : enemies(level, p, new AABB(c, c).inflate(4.5), e -> e.distanceToSqr(c) < 20)) {
 					Vec3 in = c.subtract(target.position()).normalize().scale(0.25);
 					target.setDeltaMovement(target.getDeltaMovement().scale(0.5).add(in));
-					target.needsSync = true;
+					target.syncVelocity = true;
 					if (t % 6 == 0)
 						damage(s, target, 2.5F, Element.WIND);
 				}
@@ -318,7 +321,7 @@ final class NatureJutsu {
 	}
 
 	// ------------------------------------------------------------------ earth
-	private static final Predicate<BlockState> OPEN = BlockState::canBeReplaced;
+	static final Predicate<BlockState> OPEN = BlockState::canBeReplaced;
 
 	private static BlockState dripstone(SpeleothemThickness thickness) {
 		return Blocks.POINTED_DRIPSTONE.defaultBlockState().setValue(PointedDripstoneBlock.TIP_DIRECTION, Direction.UP)
@@ -326,7 +329,7 @@ final class NatureJutsu {
 	}
 
 	/** The ground on a column: the first open block with something solid under it, near y. */
-	private static BlockPos ground(ServerLevel level, double x, double y, double z) {
+	static BlockPos ground(ServerLevel level, double x, double y, double z) {
 		BlockPos pos = BlockPos.containing(x, y + 2, z);
 		for (int i = 0; i < 6 && !(OPEN.test(level.getBlockState(pos)) && !OPEN.test(level.getBlockState(pos.below()))); i++)
 			pos = pos.below();
@@ -350,7 +353,7 @@ final class NatureJutsu {
 				struck.add(target);
 				damage(p, target, 9, Element.EARTH);
 				target.push(0, 0.9, 0);
-				target.needsSync = true;
+				target.syncVelocity = true;
 			}
 		});
 	}
@@ -453,35 +456,79 @@ final class NatureJutsu {
 		sound(level(p), p.getEyePosition(), SoundEvents.BEACON_POWER_SELECT, 1, 2);
 	}
 
-	/** Kirin: the lightning beast dives from the sky onto the target, followed by a storm of bolts. */
+	/**
+	 * Lightning Lariat: the caster charges up in crackling lightning armor, then charges forward (steering with their look) and
+	 * clotheslines the first enemy in the way, launching it with a shockwave. Running into a wall ends the charge in a shockwave too.
+	 */
+	private static void lariat(ServerPlayer p) {
+		ServerLevel level = level(p);
+		sound(level, p.position(), SoundEvents.BEACON_POWER_SELECT, 1.2F, 0.6F);
+		p.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 40, 2, false, false));
+		boolean[] done = { false };
+		channel(p, 26, 1, t -> {
+			Vec3 body = p.position().add(0, 1, 0);
+			level.sendParticles(ParticleTypes.ELECTRIC_SPARK, body.x, body.y, body.z, done[0] ? 2 : 10, 0.45, 0.8, 0.45, 0.25);
+			if (done[0])
+				return;
+			if (t < 8) {
+				// charging: rooted in place, the armor flares up
+				p.setDeltaMovement(0, Math.min(p.getDeltaMovement().y, 0), 0);
+				p.syncVelocity = true;
+				if (t % 3 == 0)
+					sound(level, body, SoundEvents.BEACON_POWER_SELECT, 0.6F, 1.2F + t * 0.1F);
+				return;
+			}
+			Vec3 look = p.getLookAngle().multiply(1, 0, 1).normalize();
+			p.setDeltaMovement(look.x * 1.6, Math.min(p.getDeltaMovement().y, 0.1), look.z * 1.6);
+			p.syncVelocity = true;
+			p.fallDistance = 0;
+			line(level, ParticleTypes.ELECTRIC_SPARK, body, body.subtract(look.scale(2.5)), 0.4);
+			LivingEntity hit = enemies(level, p, p.getBoundingBox().inflate(0.9).move(look.scale(0.8)), e -> true).stream().findFirst().orElse(null);
+			if (hit != null || p.horizontalCollision) {
+				done[0] = true;
+				Vec3 at = hit != null ? hit.getBoundingBox().getCenter() : body.add(look);
+				if (hit != null) {
+					damage(p, hit, 18, Element.LIGHTNING);
+					hit.setDeltaMovement(look.x * 2.6, 0.9, look.z * 2.6);
+					hit.syncVelocity = true;
+				}
+				burst(level, at, 3, 7, 1.5F, Element.LIGHTNING, p);
+				level.sendParticles(ParticleTypes.EXPLOSION, at.x, at.y, at.z, 1, 0, 0, 0, 0);
+				sound(level, at, SoundEvents.LIGHTNING_BOLT_IMPACT, 1.5F, 1.4F);
+				p.setDeltaMovement(look.scale(-0.3).add(0, 0.2, 0));
+				p.syncVelocity = true;
+			}
+		});
+	}
+
+	/** Kirin: thunderclouds gather over the target, then a huge dragon of lightning dives onto it, followed by a storm of bolts. */
 	private static void kirin(ServerPlayer p) {
 		ServerLevel level = level(p);
 		Vec3 target = lookPoint(p, 40);
-		Vec3 sky = target.add(0, 22, 0);
-		level.sendParticles(ParticleTypes.LARGE_SMOKE, sky.x, sky.y, sky.z, 60, 4, 1, 4, 0.01);
+		Vec3 sky = target.add(p.getLookAngle().multiply(-1, 0, -1).normalize().scale(10)).add(0, 26, 0);
 		sound(level, target, SoundEvents.LIGHTNING_BOLT_THUNDER, 3, 0.7F);
-		Mob beast = KirinEntity.entity.create(level, EntitySpawnReason.TRIGGERED);
-		if (beast != null) {
-			beast.setNoAi(true);
-			beast.setPermanentlyInvulnerable(true);
-			beast.snapTo(sky.x, sky.y, sky.z, p.getYRot(), 90);
-			level.addFreshEntity(beast);
-		}
-		channel(p, 30, 1, t -> {
-			if (beast != null && t < 20) {
-				Vec3 pos = sky.lerp(target, (t + 1) / 20.0);
-				beast.snapTo(pos.x, pos.y, pos.z, beast.getYRot(), 90);
-				level.sendParticles(ParticleTypes.ELECTRIC_SPARK, pos.x, pos.y + 1, pos.z, 20, 0.8, 1.5, 0.8, 0.2);
-			}
-			if (t == 20) {
-				if (beast != null)
-					beast.discard();
-				Techniques.strike(level, target, 5, 25, p);
-			}
-			if (t > 20 && t % 3 == 0) {
-				double a = level.getRandom().nextDouble() * Math.PI * 2, r = 2 + level.getRandom().nextDouble() * 3;
-				Techniques.strike(level, target.add(Math.cos(a) * r, 0, Math.sin(a) * r), 2.5F, 8, p);
-			}
+		channel(p, 12, 2, t -> {
+			level.sendParticles(ParticleTypes.LARGE_SMOKE, sky.x, sky.y, sky.z, 40, 5, 1, 5, 0.01);
+			level.sendParticles(ParticleTypes.ELECTRIC_SPARK, sky.x, sky.y - 1, sky.z, 30, 5, 1, 5, 0.3);
+		});
+		Techniques.after(level, 12, () -> {
+			JutsuProjectile kirin = new JutsuProjectile(net.mcreator.narutoshippudenmod.core.jutsu.engine.JutsuEngine.PROJECTILE, level);
+			kirin.look(Element.LIGHTNING, Shape.DRAGON, 3.2F);
+			kirin.setOwner(p);
+			kirin.setPos(sky);
+			kirin.setDeltaMovement(target.subtract(sky).normalize().scale(1.9));
+			kirin.damage = 20;
+			kirin.pierce = -1;
+			kirin.life = 40;
+			kirin.onImpact = k -> {
+				Techniques.strike(level, target, 5.5F, 25, k);
+				channel(p, 24, 3, t -> {
+					double a = level.getRandom().nextDouble() * Math.PI * 2, r = 2 + level.getRandom().nextDouble() * 4;
+					Techniques.strike(level, target.add(Math.cos(a) * r, 0, Math.sin(a) * r), 2.5F, 8, k);
+				});
+			};
+			level.addFreshEntity(kirin);
+			sound(level, sky, SoundEvents.ENDER_DRAGON_GROWL, 3, 1.8F);
 		});
 	}
 }

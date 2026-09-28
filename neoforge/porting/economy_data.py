@@ -13,15 +13,13 @@ S, G = 9, 81
 VILLAGES = ['konohagakure', 'sunagakure', 'kirigakure', 'kumogakure', 'iwagakure']
 HEADBAND_COLORS = ['', 'black_', 'red_']
 
+# only everyday shinobi gear: character weapons (Seven Swordsmen blades, Asuma's chakra blades...), clan items, headbands and
+# chakra paper come from the story, clans and villages, never from a shop
 SETS = {
     'tools': (4, 16, [('kunai', 4, 4), ('shuriken', 8, 4), ('poison_kunai', 4, S), ('explosive_kunai', 2, 2 * S),
-                      ('fuma_shuriken', 1, 3 * S), ('chakra_paper', 1, 6)]),
-    'weapons': (2, 3, [('tanto', 1, S + 4), ('katana', 1, 3 * S), ('chakra_blade', 1, G), ('triple_blade_scythe', 1, G + 4 * S),
-                       ('shichiseiken', 1, 2 * G)]),
-    'headbands': (2, 3, [('genin_%s_%shelmet' % (v, color), 1, 2 * S) for v in VILLAGES for color in HEADBAND_COLORS]),
-    'food': (1, 16, [('ichiraku_ramen', 1, 4)]),
-    'rare': (1, 1, [('kubikiribocho', 1, 6 * G), ('kabutowari', 1, 6 * G), ('shibuki', 1, 6 * G), ('nuibari', 1, 6 * G),
-                    ('gunbai', 1, 5 * G), ('kiba_sword', 1, 7 * G), ('hiramekarei', 1, 7 * G), ('samehada', 1, 8 * G)]),
+                      ('sharp_iron', 2, 3), ('iron_stick', 4, 2)]),
+    'weapons': (2, 3, [('tanto', 1, S + 4), ('katana', 1, 3 * S)]),
+    'food': (2, 16, [('ichiraku_ramen', 1, 4), ('minecraft:bread', 3, 2), ('minecraft:cooked_salmon', 2, 3)]),
 }
 # what the merchant buys: (vanilla item, count, paid in bronze)
 BUYING = (2, 12, [('rotten_flesh', 16, 2), ('bone', 12, 2), ('string', 12, 2), ('gunpowder', 6, 3), ('ender_pearl', 2, S),
@@ -64,7 +62,8 @@ def trade_set(name, amount, trades):
 
 
 for name, (amount, uses, items) in SETS.items():
-    trade_set(name, amount, [(item, trade(coins(price), {'id': '%s:%s' % (NS, item), 'count': count}, uses)) for item, count, price in items])
+    trade_set(name, amount, [(item.split(':')[-1], trade(coins(price), {'id': item if ':' in item else '%s:%s' % (NS, item), 'count': count}, uses))
+                             for item, count, price in items])
 amount, uses, items = BUYING
 trade_set('buying', amount, [(item, trade([{'id': 'minecraft:' + item, 'count': count}], coins(price)[0], uses)) for item, count, price in items])
 

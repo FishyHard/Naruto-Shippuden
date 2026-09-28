@@ -222,7 +222,8 @@ public final class DevTest {
 	private static final net.minecraft.world.phys.Vec3[] home = new net.minecraft.world.phys.Vec3[1];
 
 	private static void jutsuSteps(Minecraft mc) {
-		String[] natures = { "fire", "water", "wind", "earth", "lightning" };
+		String[] natures = { "fire", "water", "wind", "earth", "lightning", "boil", "bone", "dust", "ice", "magnet", "smoke", "steel", "storm", "swift",
+				"typhoon", "wood" };
 		String only = System.getProperty("naruto.devtest.jutsu", "");
 		STEPS.add(() -> {
 			mc.gui.setScreen(null);
@@ -242,6 +243,10 @@ public final class DevTest {
 			onServer(mc, player -> NarutoShippudenModVariables.ifPresent(player, v -> {
 				v.firereleaselogic = v.waterreleaselogic = v.windreleaselogic = v.earthreleaselogic = v.lightningreleaselogic = true;
 				v.firelearn = v.waterlearn = v.windlearn = v.earthlearn = v.lightninglearn = 4;
+				v.boilreleaselogic = v.bonereleaselogic = v.dustreleaselogic = v.icereleaselogic = v.magnetreleaselogic = v.smokereleaselogic = true;
+				v.steelreleaselogic = v.stormreleaselogic = v.swiftreleaselogic = v.typhoonreleaslogic = v.woodreleaselogic = true;
+				v.boillearn = v.bonelearn = v.dustlearn = v.icelearn = v.magnetlearn = v.smokelearn = v.steellearn = v.stormlearn = v.swiftlearn = 4;
+				v.typhoonlearn = v.woodlearn = 4;
 				v.ninjutsu = 60;
 				v.byakuganactivate = false;
 				v.ChakraMax = 5000;
@@ -254,8 +259,11 @@ public final class DevTest {
 		for (String nature : natures) {
 			if (!only.isEmpty() && !only.equals(nature))
 				continue;
-			for (int index = 0; index < 4; index++) {
+			int count = net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.TECHNIQUES
+					.get(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", nature + "_release_technique")).jutsu.size();
+			for (int index = 0; index < count; index++) {
 				int i = index;
+				int freeze = nature.equals("lightning") && i == 3 ? 19 : nature.equals("lightning") && i == 2 ? 13 : FREEZE_AT[Math.min(i, 3)];
 				STEPS.add(() -> {
 					command(mc, "item replace entity @s weapon.mainhand with naruto_shippuden:" + nature + "_release_technique");
 					onServer(mc, player -> {
@@ -264,6 +272,7 @@ public final class DevTest {
 							v.syncPlayerVariables(player);
 						});
 						player.getCooldowns().removeCooldown(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", nature + "_release_technique/" + i));
+						player.removeAllEffects();
 						net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.select(player,
 								net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", nature + "_release_technique"), i);
 					});
@@ -273,11 +282,13 @@ public final class DevTest {
 					home[0] = mc.player.position();
 					mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
 					mc.gameMode.useItem(mc.player, net.minecraft.world.InteractionHand.MAIN_HAND);
-					nextDelay = FREEZE_AT[i];
+					nextDelay = freeze;
 				});
 				STEPS.add(() -> {
 					command(mc, "tick freeze");
-					command(mc, "execute at @s rotated ~ 0 run tp @s ^-8 ^2.5 ^7 facing ^ ^1 ^7");
+					// Kirin comes from the sky: look up at its dive
+					command(mc, nature.equals("lightning") && i == 3 ? "execute at @s rotated ~ 0 run tp @s ^-14 ^3 ^4 facing ^ ^12 ^14"
+							: "execute at @s rotated ~ 0 run tp @s ^-8 ^2.5 ^7 facing ^ ^1 ^7");
 					mc.options.setCameraType(CameraType.FIRST_PERSON);
 					nextDelay = 6;
 				});
@@ -286,7 +297,7 @@ public final class DevTest {
 					command(mc, String.format(java.util.Locale.ROOT, "tp @s %.2f %.2f %.2f 0 5", home[0].x, home[0].y, home[0].z));
 					command(mc, "tick unfreeze");
 					mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
-					nextDelay = 16;
+					nextDelay = 24;
 				});
 				STEPS.add(() -> {
 					shot(mc, "jutsu_" + nature + "_" + i + "_b");

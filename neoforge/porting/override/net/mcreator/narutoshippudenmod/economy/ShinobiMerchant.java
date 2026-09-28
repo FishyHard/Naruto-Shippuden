@@ -56,13 +56,13 @@ import java.util.List;
 import org.jspecify.annotations.Nullable;
 
 /**
- * The Shinobi Merchant: a travelling trader who sells ninja tools, weapons, armor and food for Ryo and buys mob loot. Like the
+ * The Shinobi Merchant: a travelling trader who sells ninja tools, basic blades and food for Ryo and buys mob loot. Like the
  * wandering trader he turns up near a player (at the village bell when there is one) every day or so and leaves after two days.
  */
 @NarutoShippudenModElements.ModElement.Tag
 public class ShinobiMerchant extends NarutoShippudenModElements.ModElement {
 	public static EntityType<Merchant> entity;
-	private static final String[] TRADE_SETS = { "tools", "weapons", "headbands", "food", "buying" };
+	private static final String[] TRADE_SETS = { "tools", "weapons", "food", "buying" };
 	private static int spawnDelay = 24000;
 	private static int spawnChance = 25;
 
@@ -174,9 +174,6 @@ public class ShinobiMerchant extends NarutoShippudenModElements.ModElement {
 			MerchantOffers offers = getOffers();
 			for (String name : TRADE_SETS)
 				addOffersFromTradeSet(level, offers, tradeSet(name));
-			// a legendary blade now and then
-			if (random.nextInt(5) < 2)
-				addOffersFromTradeSet(level, offers, tradeSet("rare"));
 		}
 
 		@Override
