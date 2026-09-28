@@ -59,6 +59,8 @@ public final class Jutsus {
 		final Consumer<Map<String, Object>> cast;
 		/** Extra condition of every jutsu on this item (the Mangekyou Sharingan being active), or null. */
 		final @Nullable Predicate<PlayerVariables> requirement;
+		/** Shown when the requirement is not met. */
+		String requirementMessage = "Activate the Mangekyou Sharingan first";
 		public final List<Jutsu> jutsu = new ArrayList<>();
 
 		Technique(Identifier item, ToDoubleFunction<PlayerVariables> selected, ObjDoubleConsumer<PlayerVariables> select,
@@ -181,6 +183,7 @@ public final class Jutsus {
 
 	static {
 		JutsuTable.register();
+		NatureJutsu.register();
 	}
 
 	public static @Nullable Technique technique(ItemStack stack) {
@@ -229,7 +232,7 @@ public final class Jutsus {
 			return;
 		}
 		if (technique.requirement != null && !technique.requirement.test(variables)) {
-			tell(player, "Activate the Mangekyou Sharingan first");
+			tell(player, technique.requirementMessage);
 			return;
 		}
 		if (!jutsu.meetsStat(variables)) {

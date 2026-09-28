@@ -82,6 +82,16 @@ public final class DevTest {
 
 	/** Every mod screen, the cheat tabs, then NPCs and the Byakugan outline in the world; 60 ticks per step. */
 	private static void buildSteps(Minecraft mc) {
+		if (System.getProperty("naruto.devtest.only", "").equals("jutsu")) {
+			jutsuSteps(mc);
+			STEPS.add(mc::stop);
+			return;
+		}
+		if (System.getProperty("naruto.devtest.only", "").equals("models")) {
+			modelSteps(mc);
+			STEPS.add(mc::stop);
+			return;
+		}
 		if (System.getProperty("naruto.devtest.only", "").equals("economy")) {
 			economySteps(mc);
 			STEPS.add(mc::stop);
@@ -207,6 +217,104 @@ public final class DevTest {
 				v.jp, v.sp, v.ChakraMax, coins);
 	}
 
+	/** Casts every remade nature jutsu at a row of training targets and screenshots each in flight and afterwards. */
+	private static final int[] FREEZE_AT = { 7, 9, 12, 12 };
+	private static final net.minecraft.world.phys.Vec3[] home = new net.minecraft.world.phys.Vec3[1];
+
+	private static void jutsuSteps(Minecraft mc) {
+		String[] natures = { "fire", "water", "wind", "earth", "lightning" };
+		String only = System.getProperty("naruto.devtest.jutsu", "");
+		STEPS.add(() -> {
+			mc.gui.setScreen(null);
+			mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
+			command(mc, "kill @e[type=!player]");
+			command(mc, "time set day");
+			command(mc, "weather clear");
+			command(mc, "gamemode creative");
+			command(mc, "clear @s");
+			command(mc, "tp @s ~ ~ ~ 0 5");
+			// a flat, open arena so the side camera sees the whole jutsu
+			for (String half : new String[] { "~-24 %s ~-8 ~0 %s ~32", "~1 %s ~-8 ~24 %s ~32" }) {
+				command(mc, "fill " + String.format(half, "~", "~20") + " air");
+				command(mc, "fill " + String.format(half, "~-1", "~-1") + " grass_block");
+				command(mc, "fill " + String.format(half, "~-4", "~-2") + " dirt");
+			}
+			onServer(mc, player -> NarutoShippudenModVariables.ifPresent(player, v -> {
+				v.firereleaselogic = v.waterreleaselogic = v.windreleaselogic = v.earthreleaselogic = v.lightningreleaselogic = true;
+				v.firelearn = v.waterlearn = v.windlearn = v.earthlearn = v.lightninglearn = 4;
+				v.ninjutsu = 60;
+				v.byakuganactivate = false;
+				v.ChakraMax = 5000;
+				v.ChakraAmount = 5000;
+				v.syncPlayerVariables(player);
+			}));
+			for (int i = -2; i <= 2; i++)
+				command(mc, "summon minecraft:husk ~" + i * 2 + " ~ ~16 {NoAI:1b,PersistenceRequired:1b,attributes:[{id:\"minecraft:max_health\",base:500}],Health:500f}");
+		});
+		for (String nature : natures) {
+			if (!only.isEmpty() && !only.equals(nature))
+				continue;
+			for (int index = 0; index < 4; index++) {
+				int i = index;
+				STEPS.add(() -> {
+					command(mc, "item replace entity @s weapon.mainhand with naruto_shippuden:" + nature + "_release_technique");
+					onServer(mc, player -> {
+						NarutoShippudenModVariables.ifPresent(player, v -> {
+							v.ChakraAmount = 5000;
+							v.syncPlayerVariables(player);
+						});
+						player.getCooldowns().removeCooldown(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", nature + "_release_technique/" + i));
+						net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.select(player,
+								net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", nature + "_release_technique"), i);
+					});
+					nextDelay = 5;
+				});
+				STEPS.add(() -> {
+					home[0] = mc.player.position();
+					mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
+					mc.gameMode.useItem(mc.player, net.minecraft.world.InteractionHand.MAIN_HAND);
+					nextDelay = FREEZE_AT[i];
+				});
+				STEPS.add(() -> {
+					command(mc, "tick freeze");
+					command(mc, "execute at @s rotated ~ 0 run tp @s ^-8 ^2.5 ^7 facing ^ ^1 ^7");
+					mc.options.setCameraType(CameraType.FIRST_PERSON);
+					nextDelay = 6;
+				});
+				STEPS.add(() -> {
+					shot(mc, "jutsu_" + nature + "_" + i + "_a");
+					command(mc, String.format(java.util.Locale.ROOT, "tp @s %.2f %.2f %.2f 0 5", home[0].x, home[0].y, home[0].z));
+					command(mc, "tick unfreeze");
+					mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
+					nextDelay = 16;
+				});
+				STEPS.add(() -> {
+					shot(mc, "jutsu_" + nature + "_" + i + "_b");
+					NarutoShippudenMod.LOGGER.info("DEVTEST cast {} {}: chakra {}", nature, i, NarutoShippudenModVariables.get(mc.player).ChakraAmount);
+					nextDelay = 60;
+				});
+			}
+		}
+	}
+
+	/** Jutsu models side by side, frozen in the air in front of the camera. */
+	private static void modelSteps(Minecraft mc) {
+		STEPS.add(() -> {
+			mc.gui.setScreen(null);
+			mc.options.setCameraType(CameraType.FIRST_PERSON);
+			command(mc, "kill @e[type=!player]");
+			command(mc, "time set day");
+			command(mc, "tp @s ~ ~ ~ 0 0");
+			String[] ids = System.getProperty("naruto.devtest.models", "kirin,projectile_great_fire_dragon,projectile_great_fireball,projectile_lightning_ball,projectile_rasenshuriken")
+					.split(",");
+			for (int i = 0; i < ids.length; i++)
+				command(mc, "summon naruto_shippuden:" + ids[i] + " ~" + (i - ids.length / 2) * 3 + " ~1.5 ~8 {NoAI:1b,NoGravity:1b,Motion:[0d,0d,0d],Rotation:[180f,0f]}");
+		});
+		STEPS.add(() -> shot(mc, "models"));
+		STEPS.add(() -> command(mc, "tp @s ~ ~ ~ 60 0"));
+		STEPS.add(() -> shot(mc, "models_side"));
+	}
+
 	/** The Shinobi Merchant's shop, and a kill made by a jutsu summon counting for the player. */
 	private static void economySteps(Minecraft mc) {
 		STEPS.add(() -> {
@@ -239,10 +347,14 @@ public final class DevTest {
 		STEPS.add(() -> shot(mc, "level_up"));
 	}
 
+	/** Ticks before the next step (a step may shorten it, e.g. to screenshot a jutsu in flight). */
+	private static int nextDelay = 60;
+
 	private static void screens(Minecraft mc, Screen screen) {
-		if (++screenTicks < 60)
+		if (++screenTicks < nextDelay)
 			return;
 		screenTicks = 0;
+		nextDelay = 60;
 		if (STEPS.isEmpty())
 			buildSteps(mc);
 		if (step < STEPS.size())

@@ -516,5 +516,9 @@
   "item.naruto_shippuden.phoenix_flower_jutsu": "Great Fireball",
   "key.naruto_shippuden.jutsu_wheel": "Jutsu Wheel",
   "entity.naruto_shippuden.shinobi_merchant": "Shinobi Merchant",
-  "item.naruto_shippuden.shinobi_merchant_spawn_egg": "Shinobi Merchant Spawn Egg"
+  "item.naruto_shippuden.shinobi_merchant_spawn_egg": "Shinobi Merchant Spawn Egg",
+  "death.attack.naruto_shippuden.jutsu": "%1$s was struck down by a jutsu",
+  "death.attack.naruto_shippuden.jutsu.player": "%1$s was struck down by %2$s's jutsu",
+  "death.attack.naruto_shippuden.jutsu.item": "%1$s was struck down by %2$s's jutsu",
+  "entity.naruto_shippuden.jutsu_projectile": "Jutsu"
 }
