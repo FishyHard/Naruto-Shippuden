@@ -789,6 +789,16 @@ def multipart_hitboxes(path, text):
     return text
 
 
+@func
+def drop_old_cheat_command(path, text):
+    """/narutoshippudencheat is replaced by /naruto cheat (command/NarutoCommand)."""
+    m = re.search(r'\t@EventBusSubscriber\(modid = "naruto_shippuden"\)\n\tpublic static class NarutoShippudenCheatCommand \{', text)
+    if not m:
+        return text
+    end = find_block(text, m.end() - 1)
+    return text[:m.start()] + text[end:].lstrip('\n')
+
+
 KURAMA_ROAR_EVENT = 100
 
 

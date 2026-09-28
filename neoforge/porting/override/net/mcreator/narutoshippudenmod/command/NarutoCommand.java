@@ -40,7 +40,7 @@ import java.util.function.Consumer;
  * /naruto rank &lt;rank&gt; [players]
  * /naruto reset &lt;stats|info|level|dojutsu&gt; [players]
  * </pre>
- * Everything but cheat, info and patreon needs operator rights. The old commands still work.
+ * Everything but cheat, info and patreon needs operator rights. /naruto cheat replaces /narutoshippudencheat.
  */
 @EventBusSubscriber(modid = "naruto_shippuden")
 public final class NarutoCommand {
