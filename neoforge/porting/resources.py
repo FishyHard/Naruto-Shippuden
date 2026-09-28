@@ -321,6 +321,8 @@ def dimensions():
             'minecraft:gameplay/bed_rule': {'can_set_spawn': 'never', 'can_sleep': 'never', 'destroy_on_use': False},
             'minecraft:gameplay/respawn_anchor_works': False,
             'minecraft:gameplay/can_start_raid': False,
+            # 26.3 lights skyless dimensions with this colour instead of ambient_light (1.16: 0.5 -> half brightness)
+            'minecraft:visual/ambient_light_color': '#808080',
             'minecraft:visual/fog_color': '#000000',
             'minecraft:visual/sky_color': '#000000',
             'minecraft:visual/sky_light_factor': 0.0,
