@@ -1101,13 +1101,7 @@ public final class SummonRenderers {
 				f3 = living.yRot;
 				f4 = living.xRot;
 			}
-		this.Head.yRot = f3 / (180F / (float) Math.PI);
-		this.Head.xRot = f4 / (180F / (float) Math.PI);
-		this.LeftBackLeg.xRot = Mth.cos(f * 1.0F) * -1.0F * f1;
-		this.RightFrontLeg.xRot = Mth.cos(f * 1.0F) * 1.0F * f1;
-		this.LeftFrontLeg.xRot = Mth.cos(f * 1.0F) * -1.0F * f1;
-		this.RightBackLeg.xRot = Mth.cos(f * 1.0F) * 1.0F * f1;
-		
+		net.mcreator.narutoshippudenmod.client.KuramaAnimation.animate(this, state);
 		}
 		}
 	}

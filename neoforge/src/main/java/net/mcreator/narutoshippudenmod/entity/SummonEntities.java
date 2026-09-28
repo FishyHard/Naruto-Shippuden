@@ -756,6 +756,7 @@ public final class SummonEntities {
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class KuramaEntity extends NarutoShippudenModElements.ModElement {
+		public static final int ROAR_TICKS = 30;
 		public static EntityType<CustomEntity> entity;
 
 		public KuramaEntity(NarutoShippudenModElements instance) {
@@ -789,6 +790,46 @@ public final class SummonEntities {
 		}
 
 		public static class CustomEntity extends Monster implements RangedAttackMob {
+
+			private final net.mcreator.narutoshippudenmod.core.MultipartHitbox hitbox = net.mcreator.narutoshippudenmod.core.MultipartHitbox.kurama(this);
+
+			@Override
+			public boolean isMultipartEntity() {
+				return true;
+			}
+
+			@Override
+			public net.neoforged.neoforge.entity.PartEntity<?>[] getParts() {
+				return hitbox.parts();
+			}
+
+			@Override
+			public boolean isPickable() {
+				return false;
+			}
+
+			@Override
+			public void recreateFromPacket(net.minecraft.network.protocol.game.ClientboundAddEntityPacket packet) {
+				super.recreateFromPacket(packet);
+				hitbox.syncIds(packet.getId());
+			}
+
+			@Override
+			public void aiStep() {
+				super.aiStep();
+				hitbox.update();
+			}
+
+			/** Client side: the tick count when the last roar started (see client/KuramaAnimation). */
+			public int roarTick = -1000;
+
+			@Override
+			public void handleEntityEvent(byte id) {
+				if (id == 100)
+					roarTick = tickCount;
+				else
+					super.handleEntityEvent(id);
+			}
 
 			public CustomEntity(EntityType<CustomEntity> type, Level world) {
 				super(type, world);
@@ -869,6 +910,7 @@ public final class SummonEntities {
 			}
 
 			public void performRangedAttack(LivingEntity target, float flval) {
+				this.level().broadcastEntityEvent(this, (byte) 100);
 				TailedBeastBombItem.shoot(this, target);
 			}
 

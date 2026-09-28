@@ -765,6 +765,57 @@ def box_order(path, text):
     return re.sub(r'(?<![\w.])box\(%s\)' % ', '.join([num] * 6), fix, text)
 
 
+MULTIPART = {'KuramaEntity': 'kurama'}
+
+
+@func
+def multipart_hitboxes(path, text):
+    """Big bosses get ender-dragon style part hitboxes (core/MultipartHitbox) instead of one huge box."""
+    for element, layout in MULTIPART.items():
+        m = re.search(r'public static class %s extends NarutoShippudenModElements\.ModElement \{' % element, text)
+        if not m:
+            continue
+        c = re.compile(r'public CustomEntity\(EntityType<CustomEntity> type, Level world\) \{').search(text, m.end())
+        if not c or 'MultipartHitbox' in text[m.end():c.start()]:
+            continue
+        code = ('private final net.mcreator.narutoshippudenmod.core.MultipartHitbox hitbox = net.mcreator.narutoshippudenmod.core.MultipartHitbox.%s(this);\n\n'
+                '\t\t\t@Override\n\t\t\tpublic boolean isMultipartEntity() {\n\t\t\t\treturn true;\n\t\t\t}\n\n'
+                '\t\t\t@Override\n\t\t\tpublic net.neoforged.neoforge.entity.PartEntity<?>[] getParts() {\n\t\t\t\treturn hitbox.parts();\n\t\t\t}\n\n'
+                '\t\t\t@Override\n\t\t\tpublic boolean isPickable() {\n\t\t\t\treturn false;\n\t\t\t}\n\n'
+                '\t\t\t@Override\n\t\t\tpublic void recreateFromPacket(net.minecraft.network.protocol.game.ClientboundAddEntityPacket packet) {\n'
+                '\t\t\t\tsuper.recreateFromPacket(packet);\n\t\t\t\thitbox.syncIds(packet.getId());\n\t\t\t}\n\n'
+                '\t\t\t@Override\n\t\t\tpublic void aiStep() {\n\t\t\t\tsuper.aiStep();\n\t\t\t\thitbox.update();\n\t\t\t}\n\n\t\t\t') % layout
+        text = text[:c.start()] + code + text[c.start():]
+    return text
+
+
+KURAMA_ROAR_EVENT = 100
+
+
+@func
+def kurama_animation(path, text):
+    """Kurama: procedural animation (client/KuramaAnimation) and a roar event sent when it fires a tailed beast bomb."""
+    m = re.search(r'public static class Modelkurama extends EntityModel<EntityRenderState> \{', text)
+    if m:
+        s = text.find('private void setupAnimCompat(EntityRenderState state) {', m.end())
+        head = text.find('this.Head.yRot = ', s)
+        end = find_block(text, s) - 1
+        if s != -1 and head != -1 and head < end:
+            text = text[:head] + 'net.mcreator.narutoshippudenmod.client.KuramaAnimation.animate(this, state);\n\t\t' + text[end:]
+    m = re.search(r'public static class KuramaEntity extends NarutoShippudenModElements\.ModElement \{', text)
+    if m and 'ROAR_TICKS' not in text:
+        text = text[:m.end()] + '\n\t\tpublic static final int ROAR_TICKS = 30;' + text[m.end():]
+        shoot = text.find('TailedBeastBombItem.shoot(this, target);', m.end())
+        text = text[:shoot] + 'this.level().broadcastEntityEvent(this, (byte) %d);\n\t\t\t\t' % KURAMA_ROAR_EVENT + text[shoot:]
+        c = text.find('public CustomEntity(EntityType<CustomEntity> type, Level world) {', m.end())
+        text = text[:c] + ('/** Client side: the tick count when the last roar started (see client/KuramaAnimation). */\n'
+                           '\t\t\tpublic int roarTick = -1000;\n\n'
+                           '\t\t\t@Override\n\t\t\tpublic void handleEntityEvent(byte id) {\n'
+                           '\t\t\t\tif (id == %d)\n\t\t\t\t\troarTick = tickCount;\n\t\t\t\telse\n\t\t\t\t\tsuper.handleEntityEvent(id);\n\t\t\t}\n\n\t\t\t'
+                           % KURAMA_ROAR_EVENT) + text[c:]
+    return text
+
+
 @func
 def attribute_modifier_events(path, text):
     """ItemAttributeModifierEvent: no slot getter any more, the slot group is given with each modifier."""
