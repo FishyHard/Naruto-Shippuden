@@ -959,7 +959,7 @@ public final class SummonRenderers {
 		public static LayerDefinition createBodyLayer() {
 			MeshDefinition mesh = new MeshDefinition();
 			PartDefinition root = mesh.getRoot();
-			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), PartPose.offset(0.0F, -79.2F, 0.0F).scaled(4.5F, 4.5F, 4.5F));
+			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), new PartPose(0.0F, -79.2F, 0.0F, 0.0F, 0.0F, 0.0F, 4.5F, 4.5F, 4.5F));
 			PartDefinition p1 = transform0.addOrReplaceChild("Head", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.7394F, -25.9465F, -57.5589F, 0.0F, 0.0F, 0.0F));
 			PartDefinition p2 = p1.addOrReplaceChild("cube_r1", CubeListBuilder.create().mirror(true).texOffs(0, 58).addBox(-30.1F, -93.9F, 14.5F, 3.0F, 13.0F, 13.0F), PartPose.offsetAndRotation(-13.0F, 24.0F, 89.0F, 1.5708F, -0.3491F, 0.0F));
 			PartDefinition p3 = p1.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 58).addBox(27.1F, -93.9F, 14.5F, 3.0F, 13.0F, 13.0F), PartPose.offsetAndRotation(14.4788F, 24.0F, 89.0F, 1.5708F, 0.3491F, 0.0F));

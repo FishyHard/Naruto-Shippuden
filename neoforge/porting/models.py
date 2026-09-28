@@ -190,7 +190,8 @@ def convert_model(cls_name, body, layer_id):
     for gi, ((off3, sc3), tops) in enumerate(groups):
         pose = 'PartPose.offset(%s, %s, %s)' % tuple(fnum(v) for v in off3)
         if sc3 != (1.0, 1.0, 1.0):
-            pose += '.scaled(%s, %s, %s)' % tuple(fnum(v) for v in sc3)
+            # not PartPose.scaled(): that also multiplies the offset, which is already in the parent's space
+            pose = 'new PartPose(%s, %s, %s, 0.0F, 0.0F, 0.0F, %s, %s, %s)' % tuple(fnum(v) for v in off3 + sc3)
         lines.append('\t\tPartDefinition transform%d = root.addOrReplaceChild("transform%d", CubeListBuilder.create(), %s);' % (gi, gi, pose))
         for t in tops:
             emit(t, 'transform%d' % gi)
