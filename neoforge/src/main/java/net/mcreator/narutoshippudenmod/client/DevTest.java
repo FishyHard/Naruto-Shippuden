@@ -206,6 +206,14 @@ public final class DevTest {
 			nextDelay = 20;
 		});
 		STEPS.add(() -> shot(mc, "b6_clones_toast"));
+		STEPS.add(() -> onServer(mc, p -> {
+			p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,
+					new net.minecraft.world.item.ItemStack(net.mcreator.narutoshippudenmod.item.TechniqueItems.ShadowCloneTechniqueItem.block));
+			p.setShiftKeyDown(true);
+			net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.cast(p, net.minecraft.world.InteractionHand.MAIN_HAND);
+			p.setShiftKeyDown(false);
+			NarutoShippudenMod.LOGGER.info("DEVTEST clones after release: {}", net.mcreator.narutoshippudenmod.core.jutsu.ShadowClones.clonesOf(p).size());
+		}));
 		STEPS.add(() -> {
 			command(mc, "kill @e[type=naruto_shippuden:shadow_clone]");
 			onServer(mc, p -> {

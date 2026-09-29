@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * The Shadow Clone Technique: real clones that look like their maker (skin, armour, what they hold), fight at their side and
  * vanish in a puff of smoke when hit hard or after a minute. How many can be kept at once grows with Ninjutsu (one at the start,
- * up to eight: the Multiple Shadow Clone Technique), and each costs its share of chakra. Casting while sneaking dispels them all.
+ * up to eight: the Multiple Shadow Clone Technique), and each costs its share of chakra. Casting while sneaking releases them all (Jutsus sends sneak + right-click to release).
  */
 public final class ShadowClones {
 	private static final double CHAKRA_EACH = 25;
@@ -43,11 +43,6 @@ public final class ShadowClones {
 			return;
 		ServerLevel level = (ServerLevel) p.level();
 		List<ShadowCloneEntity.CustomEntity> clones = clonesOf(p);
-		if (p.isShiftKeyDown()) {
-			clones.forEach(ShadowClones::dispel);
-			p.sendOverlayMessage(Component.literal(clones.isEmpty() ? "No clones to release" : "Released " + clones.size() + " clone" + (clones.size() == 1 ? "" : "s")));
-			return;
-		}
 		PlayerVariables v = NarutoShippudenModVariables.get(p);
 		int room = limit(v) - clones.size(), afford = (int) Math.floor(v.ChakraAmount / CHAKRA_EACH), count = Math.min(room, afford);
 		if (room <= 0) {
@@ -90,6 +85,13 @@ public final class ShadowClones {
 	private static void puff(ServerLevel level, Entity clone) {
 		level.sendParticles(ParticleTypes.POOF, clone.getX(), clone.getY() + 1, clone.getZ(), 20, 0.3, 0.6, 0.3, 0.04);
 		level.sendParticles(ParticleTypes.CLOUD, clone.getX(), clone.getY() + 1, clone.getZ(), 8, 0.3, 0.6, 0.3, 0.02);
+	}
+
+	/** Sneak + right-click with the technique: every clone is released at once. */
+	public static void release(ServerPlayer p) {
+		List<ShadowCloneEntity.CustomEntity> clones = clonesOf(p);
+		clones.forEach(ShadowClones::dispel);
+		p.sendOverlayMessage(Component.literal(clones.isEmpty() ? "No clones to release" : "Released " + clones.size() + " clone" + (clones.size() == 1 ? "" : "s")));
 	}
 
 	/** Gone in a puff of smoke. */

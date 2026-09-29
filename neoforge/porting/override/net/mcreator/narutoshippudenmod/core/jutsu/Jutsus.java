@@ -61,6 +61,8 @@ public final class Jutsus {
 		@Nullable Predicate<PlayerVariables> requirement;
 		/** Shown when the requirement is not met. */
 		String requirementMessage = "Activate the Mangekyou Sharingan first";
+		/** What sneak + right-click does instead of casting (Shadow Clones: release them), or null to cast as usual. */
+		@Nullable Consumer<ServerPlayer> onSneak;
 		public final List<Jutsu> jutsu = new ArrayList<>();
 
 		Technique(Identifier item, ToDoubleFunction<PlayerVariables> selected, ObjDoubleConsumer<PlayerVariables> select,
@@ -227,6 +229,10 @@ public final class Jutsus {
 		Technique technique = technique(stack);
 		if (technique == null)
 			return;
+		if (technique.onSneak != null && player.isShiftKeyDown()) {
+			technique.onSneak.accept(player);
+			return;
+		}
 		PlayerVariables variables = NarutoShippudenModVariables.get(player);
 		Jutsu jutsu = technique.selected(variables);
 		showCooldownOf(stack, jutsu);
