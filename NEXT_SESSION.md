@@ -1,77 +1,202 @@
-# Handoff: Naruto Shippuden mod → NeoForge 26.3 port
+# Naruto Shippuden: NeoForge 26.3 port, handoff notes
 
-Paste the "Prompt" section below into a new Claude Code session on this repository.
+Read this first in a new session. It covers what the project is, how the code is laid out, how the main systems work, how
+to build and test, and how the user likes to work.
 
-## Prompt
+## The project
 
-You are continuing the port of the Naruto Shippuden Minecraft mod (repo `FishyHard/Naruto-Shippuden`, private copy
-`FishyHard/Naruto_Shippuden_Claude`) from Forge 1.16.5 (MCreator) to **NeoForge 26.3 (26.3.0.26-beta)**.
-Work on branch `claude/clever-tesla-qme96b`, and push to both repos (the copy remote may need adding:
-`git remote add copy https://github.com/FishyHard/Naruto_Shippuden_Claude.git`). Don't open PRs unless asked.
+- **What it is:** the Naruto Shippuden Minecraft mod (originally made in MCreator for Forge 1.16.5), ported to **NeoForge 26.3**
+  (26.3.0.26-beta, Java 25). Most jutsu, the economy, the dojutsu and the clans have since been rebuilt by hand.
+- **Checkout:** `~/Desktop/Minecraft Mods/Naruto-Shippuden`, branch `claude/clever-tesla-qme96b`.
+- **Remotes:** `origin` = FishyHard/Naruto-Shippuden, `copy` = FishyHard/Naruto_Shippuden_Claude. Push every commit to both.
+  **Don't open PRs.**
+- **Mod jar:** `neoforge/build/libs/naruto_shippuden-3.0.0.jar`. The user installs it themselves (macOS, Prism Launcher),
+  plays, and sends screenshots with feedback. Send the jar with SendUserFile and give a clear changelog.
 
-The user tests jars themselves (macOS M1, Prism Launcher, instance "26.3", Java 25). They send crash logs and you
-fix them, rebuild, and send the jar (`neoforge/build/libs/naruto_shippuden-3.0.0.jar`).
+## How the user works
 
-### Immediate task (unfinished in the last session)
-The game crashed when looking at a **paper bomb** block:
-`IllegalArgumentException: The min values need to be smaller or equals to the max values` at
-`ModBlocks$PaperBombBlock$CustomBlock.getShape`. MCreator wrote rotated shapes with min/max swapped.
+- Feedback comes in big batches with screenshots. Do all of it, test what can be tested in the dev client, then
+  send **one jar plus a changelog** of what changed. They prefer that to long visual checks in development.
+- They want vanilla-looking results: vanilla-style GUIs, text above the hotbar, keys in the Controls menu.
+- Follow the Naruto wiki for jutsu (names, what they do). Existing models and textures stay unless they ask for new ones.
+- Ranks must **never** be tied to levels.
+- The Shinobi Merchant must not sell character weapons (Seven Swordsmen blades, chakra blades), headbands or chakra paper.
+- The YouTuber extras (Voltic Mode, Furamingogan, Custom Dojutsu) were removed on request. Don't bring them back.
+- Removed clans (keep their logo textures): Izuno, Kurama, Shimura (the Shimura Sharingan stays), Namikaze, Kazekage,
+  Hatake, Otsutsuki, Senju, Tenro, Yuki, Hoshigaki, Kaguya.
 
-The fix was written but may not be committed yet (git was unavailable at the end of the last session):
-- `neoforge/porting/rules.py`: new `box_order` rule (normalises `box(a,b,c,d,e,f)` literals).
-- `neoforge/src/main/java/net/mcreator/narutoshippudenmod/block/ModBlocks.java`, around line 886: the SOUTH,
-  EAST and WEST cases must be `box(4, 0, 6, 12, 1, 10)`, `box(6, 0, 4, 10, 1, 12)`, `box(6, 0, 4, 10, 1, 12)`.
+## Build
 
-Check `git log`/`git diff`. If these are missing, re-apply them. Then build, commit, push to both remotes and
-send the jar.
+```
+cd neoforge && JAVA_HOME=~/.jdks/jdk-25.0.4.1+1/Contents/Home ./gradlew build
+```
 
-### Status
-Compile, dedicated-server start, client start and in-world rendering are verified. The user reported that everything
-works; dojutsu rendering was fixed with `RenderTypes.entityCutoutZOffset`. The only known open bug is the paper bomb
-crash above.
+A build takes about 4 minutes. zsh doesn't split unquoted variables into words, so use arrays in shell loops.
 
-### Layout
-- `src/` (repo root): the original 1.16.5 mod (Forge 36, Java 8). Build with Java 8. It's still the source of truth
-  for the port.
-- `neoforge/`: the 26.3 port (ModDevGradle, Java 25). Build with
-  `cd neoforge && JAVA_HOME=<java25> ./gradlew build`.
-- `neoforge/porting/`: the conversion pipeline that generated `neoforge/src/main` from the 1.16.5 sources:
-  - `port.py`: main entry point. It reads 1.16.5 sources remapped to Mojang names. That remap was a git worktree at
-    `/home/user/remap`, made by building the 1.16.5 project with `mappings channel: 'official'`. It also reads 26.3 MC
-    sources extracted to `/home/user/mcsrc` for API lookups.
-  - `rules.py` holds the ordered regex/function rules; the per-system converters are `models.py`, `renderers.py`,
-    `gui.py`, `blocks.py`, `armor.py`, `effects.py`, `particles.py`, `keybinds.py`, `itemgroups.py`,
-    `structures.py`, `overlay.py` and `resources.py`.
-  - `override/`: hand-written Java files (compat layer `compat/*`, `core/EntityScale`, `core/ModelSwapRenderers`,
-    network, variables).
-  - `res_override/`: hand-written data (villager trades).
-  - The copy in the repo has `/home/user/...` paths inside. In a fresh container, **edit files in
-    `neoforge/src/main` directly** for small fixes. Regenerating needs the remap worktree and mcsrc recreated, so
-    only do that for large changes. When you fix something by hand, also add the matching rule to
-    `porting/rules.py` so a regeneration keeps it.
+## Layout
 
-### Key decisions and replacements
-- Pehkui → `core/EntityScale` (vanilla `SCALE` attribute plus hitbox and eye multipliers through `EntityEvent.Size`).
-- Kleiders custom renderer → `core/ModelSwapRenderers`:
-  - Model swaps are drawn in `RenderLivingEvent.Pre`.
-  - The entity is attached to the render state with a `ContextKey`.
-  - Dojutsu eyes are drawn with `entityCutoutZOffset` (decal), because they lie exactly on the skin.
-- FHCore has been removed.
-- Villager trades are data now: `data/naruto_shippuden/villager_trade` plus the level_1 tags.
-- The Kamui dimension is floating islands of kamui_void; Story Mode uses overworld noise with a fixed biome.
-- NPC spawns are NeoForge `add_spawns` biome modifiers.
-- Texture folders `items/` and `blocks/` are added to the item and block atlases via
-  `assets/minecraft/atlases/*.json`. Block models may only use the block atlas.
+| Path | What it is |
+|---|---|
+| `src/` (repo root) | The original 1.16.5 MCreator mod. Only for reference. |
+| `neoforge/src/main/java/net/mcreator/narutoshippudenmod/` | The port. Most files were **generated** from 1.16.5 by the porting pipeline; the rest are copies of the overrides. |
+| `neoforge/porting/override/…` | **Hand-written Java.** Everything new lives here: the jutsu engine, GUIs and renderers. Each file is copied over its `src` twin. |
+| `neoforge/porting/rules.py` | Ordered regex and function **rules** that fix or rewrite the generated code. Every hand fix to a generated file needs a matching rule. |
+| `neoforge/porting/res_override/` | Hand-written resources, such as the lang file and trades. `src/main/resources` has the same files, so edit both. |
+| `neoforge/porting/*.py` | The rest of the converter (`port.py` and the per-system converters), plus the tools below. |
+| `neoforge/run/saves/devtest` | The dev test world. |
 
-### Testing headless (Linux container)
-- Server: `./gradlew runServer`. To send console commands, enable RCON in `run/server.properties`.
-- Client: set `SDL_VIDEODRIVER=offscreen`, `LIBGL_ALWAYS_SOFTWARE=1` and `GALLIUM_DRIVER=llvmpipe`, unset
-  `DISPLAY`, and set `earlyWindowControl = false` in `run/config/fml.toml`.
-- Use `./gradlew runClient -PquickPlay=<world in run/saves> -PdevTest`. `client/DevTest.java` then clicks through
-  the experimental-settings and stat-select screens, turns on the Byakugan, switches to the front camera and saves
-  `run/screenshots/devtest_*.png`.
-- When killing processes, use `pkill -f "fml[.]modFolders"` (the brackets stop pkill from matching your own shell).
+### How to change code
 
-### For the user on Mac
-If the game hangs on the NeoForge loading window, set `earlyWindowControl = false` in the instance's
-`minecraft/config/fml.toml`.
+1. **Hand-written code:** edit it in `porting/override/…`, then run `rsync -a porting/override/ src/main/java/`.
+   Before you rsync, `cmp` each override against its `src` copy: an override was stale once and nearly undid a feature.
+   If you edit a `src` copy of an override directly, copy it back into `porting/override`.
+2. **Generated code** (procedures, items, entities, renderers): write a **rule** in `porting/rules.py`, then apply it to
+   `src`. Use `@func` for body-only rules; `split_header` keeps imports out. The small runner I used is below. It applies
+   named rules to every generated file that isn't an override.
+
+```python
+import sys, os, glob
+sys.path.insert(0, '.')                   # run from neoforge/porting
+import rules
+fns = [getattr(rules, n) for n in sys.argv[1:]]
+over = {os.path.relpath(p, 'override') for p in glob.glob('override/**/*.java', recursive=True)}
+for p in glob.glob('../src/main/java/**/*.java', recursive=True):
+    rel = os.path.relpath(p, '../src/main/java/')
+    if rel in over: continue
+    s = t = open(p).read()
+    for f in fns:
+        head, body = rules.split_header(t); t = head + f(rel, body)
+    if t != s: open(p, 'w').write(t)
+```
+
+   Useful helpers in `rules.py`:
+   - `find_block(text, i)` finds the end of the `{…}` block that starts at `i`. It knows about strings and comments.
+   - `remove_class(text, name)`
+   - `remove_if_blocks(text, cond_regex)`
+3. **Dead code:** `python3 porting/dead_code.py porting/dead_classes.txt` lists member classes nothing live reaches:
+   procedures, entities, renderers, projectile items, effects and particles. The `dead_code` rule removes them along
+   with their imports and renderer registrations. The list only ever grows.
+4. `JutsuTable.java` is now **maintained by hand**, and `jutsu_table.py` is retired. Entries that the new jutsu classes
+   register again point at the `NEW_ENGINE` no-op.
+
+## Main systems (all in `porting/override/net/mcreator/narutoshippudenmod/`)
+
+### Jutsu engine (`core/jutsu/`)
+
+- `Jutsus` is the registry of **techniques** and **releases**.
+  - A technique is an item with a wheel of jutsu; a release is a scroll where jutsu are bought with JP.
+  - `Jutsus.cast` runs on right-click and cancels the item's own `use()`. It checks, in order: learned, requirement,
+    stat, chakra, cooldown.
+  - Sneaking is switched off during a cast (the old procedures used sneak to cycle jutsu). A technique can take
+    sneak + right-click itself through `Technique.onSneak`; Shadow Clone uses it to release its clones.
+- `engine/JutsuRank` has ranks E to S. Each rank sets the JP price, the Ninjutsu needed, the chakra cost and the cooldown.
+  Cooldowns get shorter at higher shinobi ranks.
+- `engine/Techniques` has the building blocks: `shoot`, `burst`, `cone`, `dash`, `strike`, `line`, `puff`, `channel`
+  (repeat for N ticks) and `after` (delay).
+  - `damage` scales with Ninjutsu: +1% per point, up to 2.5×.
+  - `jutsuPower(entity)` feeds the old procedures their power tier (0–9) from Ninjutsu.
+- `engine/JutsuProjectile` is the one projectile type for all jutsu. Its `Shape`s are ORB, DRAGON, SHARK,
+  RASENSHURIKEN, NEEDLE, NONE, CUBE, SHURIKEN, LION, SHELL, ROD, DAIKOKUTEN, VORTEX and KUNAI. `client/jutsu/JutsuProjectileRenderer`
+  draws each shape as glowing models built from cubes, tinted by the `Element`.
+- `engine/Displays` makes animated block-display "sculptures", such as tree bind and the ice mirror dome.
+- **Jutsu classes**, all registered with `nature(id, title, …, new Def(name, rank, cast[, stat]))`:
+  - `NatureJutsu`: the five natures.
+  - `KekkeiGenkaiJutsu`: the kekkei genkai.
+  - `ClanJutsu`: the clans. Timed transformations use `mode()`; only one mode runs at a time, and it is cleaned up on
+    death and logout.
+  - `DojutsuJutsu`: Sharingan, Kokugan (ids still say `isshiki_dojutsu`), and the Mangekyou (Amaterasu, Kamui with its
+    wormhole and phasing, and more).
+  - They reuse the old save variables: `…technique`, `…learn` and `…release`.
+- **Inuzuka:** Akamaru, Four Legs, Dynamic Marking, Passing Fang, Man Beast Clone, Fang Over Fang, Tunneling Fang.
+  Akamaru's form (normal, clone or drill) is a synced value set by the `akamaru` rule.
+- `FlyingRaijin` is a technique with a wheel on the Flying Raijin Kunai (ids still say `flying_thunder_god_kunai`):
+  Throw Marked Kunai, Write Formula, Marking Strike, Flying Raijin, Level Two, Release Formulas. Formulas are saved
+  in the player's persistent data, and marked creatures are kept in memory.
+- `ShadowClones`: the clone limit grows with Ninjutsu (1 + Ninjutsu/15, at most 8). Each clone costs 25 chakra and
+  lasts 60 s. Sneak + right-click releases them. Clones render with their owner's skin.
+- `ThrownWeapons`: thrown shuriken and kunai arrows are swapped for `JutsuProjectile`s, so they look like the Fuma clan's.
+  Their old landing procedures still drop the item or explode. Flying Raijin kunai stay arrows.
+
+### Player systems (`core/`)
+
+- `Eyes`: one Dojutsu key (tap to open or step up to the Mangekyou, sneak-tap to close everything, hold for a wheel)
+  and a Susanoo key (hold to grow it, tap to dismiss). Only one Mangekyou is kept: getting a new one replaces the old.
+- `ChakraControl`: the G key toggles it. While it's on you can:
+  - walk on water and climb walls (client-side movement);
+  - use Focus (sneak and stand still) to regenerate chakra and sense nearby creatures;
+  - hit harder with sprinting punches (chakra-enhanced);
+  - dash with Left Alt, in the direction you're walking.
+- `NarutoActions`: the one client→server action packet (the cheats, info-card pages, eye, Susanoo, chakra and dash keys).
+- `ModelSwapRenderers`: model swaps (Susanoo, Passing Fang and others) are drawn with the player's full body rotation,
+  including gliding and swimming.
+  - Dojutsu eyes are drawn in the Post event, so they hide when a form replaces the player.
+  - A closed eye's texture gives way to any open eye.
+- `EntityScale` scales entities (it replaced Pehkui), and `Progression` handles XP and levels.
+- **Removed:** the Jutsu Power stat and its key (power follows Ninjutsu now). Also the old WASD double-tap dash keys.
+
+### Client (`client/`)
+
+- `EyeKeys` (all the keys, in their own "Naruto Shippuden" Controls category), `JutsuClient` (the jutsu wheel and
+  scroll) and `WheelLayout` (the shared wheel layout, which keeps buttons from overlapping).
+- `MessageToast`: every action-bar message becomes a small dark panel above the hotbar.
+  - Its icon is the held item; an XP bottle for XP and JP; a book for stat gains; the eye itself for dojutsu; the
+    player's own Mangekyou for the Susanoo.
+  - "Label: value" shows the label in grey, and anything in brackets is grey too.
+- `client/jutsu/`:
+  - `AkamaruRenderer`: his own copy of the model with a separate **Neck** part, and wolf-like animations.
+  - `AkimichiRenderer`: the tank ball, and the butterfly wings drawn as a body **layer**.
+  - `KamuiClient`: phasing no-clip, set in `MovementInputUpdateEvent`.
+  - `ShadowCloneRenderer`, `WeaponRenderer` (Flying Raijin kunai arrows) and `GolemRenderer`.
+- Messages are plain sentence case above the hotbar. The `vanilla_messages` rule turned the old chat spam into overlay
+  messages; story, quest and letter text stays in chat.
+
+### Keys (defaults)
+
+| Key | What it does |
+|---|---|
+| V | Dojutsu |
+| B | Susanoo |
+| G | Chakra Control |
+| Left Alt | Dash |
+| X | Jutsu wheel |
+| I | Info card |
+
+## Testing in the dev client
+
+```
+cd neoforge && JAVA_HOME=~/.jdks/jdk-25.0.4.1+1/Contents/Home ./gradlew runClient -PdevTest -PdevScreens -PquickPlay=devtest -PdevOnly=<mode>
+```
+
+Screenshots are saved to `run/screenshots/screen_*.png`, and `DEVTEST …` lines appear in the log. The modes
+(`client/DevTest.java`) are:
+
+- `jutsu`: casts every jutsu and logs the chakra each one spent. `-PdevJutsu=fire,water` limits it to those.
+- `models`: summons entities. `-PdevModels=<ids>`; passing every `entityKey` id checks that nothing crashes.
+- `batch5`: runs on a glass platform at y 220. It covers the wings, Akamaru's forms and sitting pose, the eye wheel,
+  phasing through a wall, thrown weapons, gliding, Tenseigan, clones and their release, a Flying Raijin jump, the
+  Inuzuka and Flying Raijin wheels, and water and wall walking.
+- `eyes`, `weapons`, `akimichi`, `economy`.
+- No `-PdevOnly`: shows every GUI screen.
+
+Test code can call server code with `onServer(mc, p -> …)`. Use `raijin(p, option)` to cast a Flying Raijin option.
+
+## NeoForge 26.3 gotchas learned the hard way
+
+- ModelPart coordinates are already in blocks/16. **Never scale the pose by 1/16 again**; models end up tiny.
+- `Player.tick` resets `noPhysics` right after `PlayerTickEvent.Pre`. For no-clip, set it in `MovementInputUpdateEvent`
+  on the client and `PlayerTickEvent.Post` on the server.
+- Player velocity must be sent with `syncVelocity = true`.
+- For attachments that must follow every pose, add a `RenderLayer` via `EntityRenderersEvent.AddLayers` and call
+  `getParentModel().body.translateAndRotate(pose)`. Look the entity up with `level.getEntity(state.id)`.
+- NeoForge doesn't deliver a cancelled `RenderLivingEvent.Pre` to later listeners, and `Post` never fires for it.
+- `SoundEvents.WOLF_*` only exist as `WOLF_*_BABY` or variant sounds.
+- The shaded MC sources are in `neoforge/build/moddev/artifacts/minecraft-patched-*-sources.jar` (unzip into the
+  scratchpad to grep them).
+
+## Open ideas and unchecked items
+
+- Some old techniques still run their MCreator procedures: Nara, Shadow Clone's story-exam branch, the Custom Jutsu and
+  the Mangekyou scrolls.
+- The Susanoo itself is still the old model swap. It now follows the body when gliding.
+- Checked in the dev client but still waiting on the user's feedback: Flying Raijin, the Inuzuka jutsu, Chakra Control
+  and the message panel.
