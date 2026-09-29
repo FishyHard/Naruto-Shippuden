@@ -1425,7 +1425,9 @@ def shadow_clones(path, text):
 # ---------------------------------------------------------------- Flying Raijin (core/jutsu/FlyingRaijin)
 @func
 def flying_raijin(path, text):
-    """The Flying Thunder God kunai becomes Flying Raijin: its item hooks and the thrown kunai's landing go to core/jutsu/FlyingRaijin."""
-    text = text.replace('FlyingThunderGodKunaiRightclickedProcedure.executeProcedure(', 'net.mcreator.narutoshippudenmod.core.jutsu.FlyingRaijin.use(')
-    text = text.replace('FlyingThunderGodKunaiEntitySwingsItemProcedure.executeProcedure(', 'net.mcreator.narutoshippudenmod.core.jutsu.FlyingRaijin.swing(')
+    """The Flying Thunder God kunai becomes Flying Raijin, a technique with a wheel (core/jutsu/FlyingRaijin); the thrown kunai's landing leaves a formula."""
+    # right-click casts from the kunai's wheel (core/jutsu/Jutsus); left-click is a plain attack
+    for hook in ('FlyingThunderGodKunaiRightclickedProcedure.executeProcedure(', 'FlyingThunderGodKunaiEntitySwingsItemProcedure.executeProcedure(',
+                 'net.mcreator.narutoshippudenmod.core.jutsu.FlyingRaijin.use(', 'net.mcreator.narutoshippudenmod.core.jutsu.FlyingRaijin.swing('):
+        text = text.replace(hook, 'net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(')
     return text.replace('FlyingThunderGodKunaiBulletProjectileHitsBlockProcedure.executeProcedure(', 'net.mcreator.narutoshippudenmod.core.jutsu.FlyingRaijin.landed(this, ')

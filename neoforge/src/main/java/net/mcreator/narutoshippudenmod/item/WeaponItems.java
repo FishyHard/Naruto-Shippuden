@@ -230,7 +230,7 @@ public final class WeaponItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				net.mcreator.narutoshippudenmod.core.jutsu.FlyingRaijin.use(Stream
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
 								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity),
 								new AbstractMap.SimpleEntry<>("itemstack", itemstack))
@@ -246,7 +246,7 @@ public final class WeaponItems {
 				double z = entity.getZ();
 				Level world = entity.level();
 
-				net.mcreator.narutoshippudenmod.core.jutsu.FlyingRaijin.swing(Stream
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
 								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity),
 								new AbstractMap.SimpleEntry<>("itemstack", itemstack))

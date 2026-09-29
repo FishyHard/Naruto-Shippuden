@@ -1,7 +1,6 @@
 package net.mcreator.narutoshippudenmod.core.jutsu;
 
 import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables;
-import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables.PlayerVariables;
 import net.mcreator.narutoshippudenmod.compat.Compat;
 import net.mcreator.narutoshippudenmod.entity.JutsuEntities.FlyingThunderGodKunaiEntityEntity;
 import net.mcreator.narutoshippudenmod.item.ProjectileItems.FlyingThunderGodKunaiBulletItem;
@@ -38,19 +37,21 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * The Flying Raijin (Flying Thunder God) Technique, Minato's space-time jutsu: the user marks places and people with a formula
- * and moves to a mark in an instant.
- * <ul>
- * <li>Right-click throws a marked kunai: where it lands a formula stays; a creature it hits carries the formula for a minute.</li>
- * <li>Sneak and right-click writes the formula on the ground where you stand.</li>
- * <li>Left-click moves you to the mark you look towards (or the newest one), behind a marked creature, facing it. Sneak while you
- * go to take whoever is touching you with you.</li>
- * </ul>
+ * and moves to a mark in an instant. The Flying Raijin Kunai is a technique item: its wheel chooses what right-click does.
+ * <ol>
+ * <li>Throw Marked Kunai: where it lands a formula stays; a creature it hits carries the formula for a minute.</li>
+ * <li>Write Formula: the formula on the ground where you stand.</li>
+ * <li>Marking Strike: the creature in front of you, and for ten seconds every creature you hit, carries the formula.</li>
+ * <li>Flying Raijin: move to the mark you look towards (or the newest), behind a marked creature, facing it.</li>
+ * <li>Flying Raijin: Level Two: the same, taking everyone who touches you along.</li>
+ * <li>Release Formulae: erase every formula you have written.</li>
+ * </ol>
  * Up to three formulae stay on the ground (the oldest fades for a new one); only you see them, as a golden glimmer while you
  * hold the kunai.
  */
 @EventBusSubscriber(modid = "naruto_shippuden")
 public final class FlyingRaijin {
-	private static final String MARKS = "naruto_shippuden:raijin_marks", READY = "naruto_shippuden:raijin_ready";
+	private static final String MARKS = "naruto_shippuden:raijin_marks";
 	private static final int MAX_MARKS = 3, MARKED_FOR = 1200;
 	private static final double THROW_COST = 10, SEAL_COST = 20, JUMP_COST = 30;
 	private static final DustParticleOptions GOLD = new DustParticleOptions(0xFFD84A, 1.1F);
@@ -60,42 +61,44 @@ public final class FlyingRaijin {
 	private FlyingRaijin() {
 	}
 
-	private static @Nullable ServerPlayer player(Map<String, Object> deps) {
-		return deps.get("entity") instanceof ServerPlayer p ? p : null;
+	private static final String STRIKING = "naruto_shippuden:raijin_strike";
+
+	/** The kunai's wheel. */
+	static void register() {
+		String[] names = { "Throw Marked Kunai", "Write Formula", "Marking Strike", "Flying Raijin", "Flying Raijin: Level Two", "Release Formulae" };
+		double[] chakra = { THROW_COST, SEAL_COST, 20, JUMP_COST, 60, 0 };
+		Jutsus.JutsuSpec[] specs = new Jutsus.JutsuSpec[names.length];
+		for (int i = 0; i < names.length; i++)
+			specs[i] = Jutsus.jutsu(names[i], v -> names.length, i + 1, "Shurikenjutsu", v -> v.shurikenjutsu, i == 4 ? 35 : 25, chakra[i],
+					i == 4 ? new int[] { 60, 50, 40, 30, 20 } : new int[] { 10, 10, 10, 10, 10 });
+		Jutsus.technique("flying_thunder_god_kunai", v -> v.flyingthundergodkunaiteleportselect, (v, i) -> v.flyingthundergodkunaiteleportselect = i,
+				v -> v.ninjutsu >= 10, deps -> {
+					if (deps.get("entity") instanceof ServerPlayer p)
+						cast(p, (int) NarutoShippudenModVariables.get(p).flyingthundergodkunaiteleportselect, chakra);
+				}, specs);
+		Jutsus.TECHNIQUES.get(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", "flying_thunder_god_kunai")).requirementMessage =
+				"Needs 10 Ninjutsu";
 	}
 
-	private static boolean able(ServerPlayer p, double chakra) {
-		PlayerVariables v = NarutoShippudenModVariables.get(p);
-		if (v.shurikenjutsu < 25 || v.ninjutsu < 10) {
-			p.sendOverlayMessage(Component.literal("Needs 25 Shurikenjutsu and 10 Ninjutsu"));
-			return false;
-		}
-		if (v.ChakraAmount < chakra) {
-			p.sendOverlayMessage(Component.literal("Not enough chakra"));
-			return false;
-		}
+	private static void cast(ServerPlayer p, int option, double[] chakra) {
 		NarutoShippudenModVariables.ifPresent(p, vars -> {
-			vars.ChakraAmount -= chakra;
+			vars.ChakraAmount -= chakra[Math.max(0, Math.min(option, chakra.length - 1))];
 			vars.syncPlayerVariables(p);
 		});
-		return true;
-	}
-
-	// ------------------------------------------------------------------ marking
-	/** Right-click: throw a marked kunai, or (sneaking) write the formula at your feet. */
-	public static void use(Map<String, Object> deps) {
-		ServerPlayer p = player(deps);
-		if (p == null)
-			return;
-		if (p.isShiftKeyDown()) {
-			if (able(p, SEAL_COST)) {
+		switch (option) {
+			case 1 -> {
 				addMark(p, p.position());
 				p.sendOverlayMessage(Component.literal("Formula written (" + marks(p).size() + "/" + MAX_MARKS + ")"));
 			}
-			return;
+			case 2 -> strike(p);
+			case 3 -> jump(p, false);
+			case 4 -> jump(p, true);
+			case 5 -> release(p);
+			default -> throwKunai(p);
 		}
-		if (p.getCooldowns().isOnCooldown(new net.minecraft.world.item.ItemStack(FlyingThunderGodKunaiItem.block)) || !able(p, THROW_COST))
-			return;
+	}
+
+	private static void throwKunai(ServerPlayer p) {
 		FlyingThunderGodKunaiBulletItem.ArrowCustomEntity kunai = new FlyingThunderGodKunaiBulletItem.ArrowCustomEntity(FlyingThunderGodKunaiBulletItem.arrow,
 				p, p.level());
 		kunai.setOwner(p);
@@ -105,7 +108,41 @@ public final class FlyingRaijin {
 		kunai.setPos(p.getX(), p.getEyeY() - 0.1, p.getZ());
 		kunai.shoot(p.getLookAngle().x, p.getLookAngle().y, p.getLookAngle().z, 3, 0);
 		p.level().addFreshEntity(kunai);
-		p.getCooldowns().addCooldown(new net.minecraft.world.item.ItemStack(FlyingThunderGodKunaiItem.block), 10);
+	}
+
+	private static void mark(ServerPlayer p, LivingEntity target) {
+		MARKED.computeIfAbsent(p.getUUID(), u -> new HashMap<>()).put(target.getUUID(), p.level().getGameTime() + MARKED_FOR);
+		target.addEffect(new MobEffectInstance(MobEffects.GLOWING, 40, 0, false, false));
+		((ServerLevel) p.level()).sendParticles(GOLD, target.getX(), target.getY() + target.getBbHeight() / 2, target.getZ(), 16, 0.3, 0.4, 0.3, 0);
+		p.sendOverlayMessage(Component.literal("Formula on " + target.getDisplayName().getString()));
+	}
+
+	/** Marking Strike: a touch marks the creature in front of you, and your hits mark for ten seconds. */
+	private static void strike(ServerPlayer p) {
+		p.getPersistentData().putLong(STRIKING, p.level().getGameTime() + 200);
+		LivingEntity target = ClanJutsu.target(p, 4);
+		if (target != null)
+			mark(p, target);
+		else
+			p.sendOverlayMessage(Component.literal("Your hits mark for 10 seconds"));
+	}
+
+	@SubscribeEvent
+	public static void hitMarks(net.neoforged.neoforge.event.entity.living.LivingDamageEvent.Post event) {
+		if (event.getSource().getDirectEntity() instanceof ServerPlayer p && event.getEntity() != p
+				&& p.level().getGameTime() < p.getPersistentData().getLongOr(STRIKING, 0))
+			mark(p, event.getEntity());
+	}
+
+	/** Release Formulae: every formula written fades. */
+	private static void release(ServerPlayer p) {
+		ListTag list = marks(p).copy();
+		int count = list.size() + MARKED.getOrDefault(p.getUUID(), Map.of()).size();
+		while (!list.isEmpty())
+			removeSeal(p, list.getCompoundOrEmpty(0), list, 0);
+		p.getPersistentData().put(MARKS, list);
+		MARKED.remove(p.getUUID());
+		p.sendOverlayMessage(Component.literal(count == 0 ? "No formulae to release" : "Released " + count + " formula" + (count == 1 ? "" : "e")));
 	}
 
 	/** A thrown kunai landed: the formula stays where it stuck. */
@@ -117,12 +154,9 @@ public final class FlyingRaijin {
 	/** A thrown kunai hit a creature: it carries the formula for a minute. */
 	@SubscribeEvent
 	public static void hit(ProjectileImpactEvent event) {
-		if (event.getProjectile().getType() != FlyingThunderGodKunaiBulletItem.arrow || !(event.getRayTraceResult() instanceof EntityHitResult hit)
-				|| !(hit.getEntity() instanceof LivingEntity target) || !(event.getProjectile().getOwner() instanceof ServerPlayer p) || target == p)
-			return;
-		MARKED.computeIfAbsent(p.getUUID(), u -> new HashMap<>()).put(target.getUUID(), p.level().getGameTime() + MARKED_FOR);
-		target.addEffect(new MobEffectInstance(MobEffects.GLOWING, 40, 0, false, false));
-		p.sendOverlayMessage(Component.literal("Formula on " + target.getDisplayName().getString()));
+		if (event.getProjectile().getType() == FlyingThunderGodKunaiBulletItem.arrow && event.getRayTraceResult() instanceof EntityHitResult hit
+				&& hit.getEntity() instanceof LivingEntity target && event.getProjectile().getOwner() instanceof ServerPlayer p && target != p)
+			mark(p, target);
 	}
 
 	private static ListTag marks(ServerPlayer p) {
@@ -184,14 +218,13 @@ public final class FlyingRaijin {
 		return targets;
 	}
 
-	/** Left-click: move to the mark looked towards (within 25 degrees), else the newest. */
-	public static void swing(Map<String, Object> deps) {
-		ServerPlayer p = player(deps);
-		if (p == null || p.level().getGameTime() < p.getPersistentData().getLongOr(READY, 0))
-			return;
+	/** Move to the mark looked towards (within 25 degrees), else the newest; at Level Two whoever touches you comes along. */
+	private static void jump(ServerPlayer p, boolean levelTwo) {
 		List<Target> targets = targets(p);
-		if (targets.isEmpty())
+		if (targets.isEmpty()) {
+			p.sendOverlayMessage(Component.literal("No formula to move to"));
 			return;
+		}
 		Vec3 eye = p.getEyePosition(), look = p.getLookAngle();
 		Target best = null;
 		double bestDot = Math.cos(Math.toRadians(25));
@@ -203,12 +236,10 @@ public final class FlyingRaijin {
 			}
 		}
 		Target to = best != null ? best : targets.getLast();
-		if (to.at().distanceTo(p.position()) < 1.5 || !able(p, JUMP_COST))
+		if (to.at().distanceTo(p.position()) < 1.5)
 			return;
-		p.getPersistentData().putLong(READY, p.level().getGameTime() + 8);
 		ServerLevel level = (ServerLevel) p.level();
-		// sneaking: whoever touches you comes along
-		List<LivingEntity> along = p.isShiftKeyDown()
+		List<LivingEntity> along = levelTwo
 				? level.getEntitiesOfClass(LivingEntity.class, p.getBoundingBox().inflate(1.5), e -> e != p && e.isAlive() && e != to.creature())
 				: List.of();
 		flash(level, p.position());

@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 /**
  * Messages above the hotbar (not enough chakra, a jutsu chosen, an eye opened) shown as a small dark panel with an icon, like the
  * item notices of vanilla-style mods: the icon is what the message is about (the technique in hand, an experience bottle for XP
- * and JP, an eye for dojutsu), a "Label: value" message has a grey label, and anything in brackets is grey too. It fades out after
+ * and JP, the eye itself for dojutsu, the player's own Mangekyou for the Susanoo), a "Label: value" message has a grey label, and anything in brackets is grey too. It fades out after
  * a couple of seconds, and a new message replaces it.
  */
 @EventBusSubscriber(modid = "naruto_shippuden", value = Dist.CLIENT)
@@ -59,11 +59,36 @@ public final class MessageToast {
 			return new ItemStack(Items.EXPERIENCE_BOTTLE);
 		if (STAT.matcher(text).matches())
 			return new ItemStack(Items.BOOK);
-		if (DOJUTSU.matcher(text).matches())
-			return new ItemStack(Items.ENDER_EYE);
+		ItemStack eye = eyeIcon(text.toLowerCase(java.util.Locale.ROOT));
+		if (!eye.isEmpty())
+			return eye;
 		var player = Minecraft.getInstance().player;
 		ItemStack held = player.getMainHandItem().isEmpty() ? player.getOffhandItem() : player.getMainHandItem();
 		return held.copy();
+	}
+
+	private static final String[][] EYES = { { "sharingan", "sharingan_release" }, { "byakugan", "byakugan_release" },
+			{ "rinnegan", "rinnegan_release" }, { "tenseigan", "tenseigan_release" }, { "ketsuryugan", "ketsuryugan_release" },
+			{ "kokugan", "isshiki_dojutsu_release" } };
+
+	/** A dojutsu message shows that eye; the Mangekyou and the Susanoo show the player's own Mangekyou. */
+	private static ItemStack eyeIcon(String text) {
+		if (!DOJUTSU.matcher(text).matches())
+			return ItemStack.EMPTY;
+		if (text.contains("mangekyou") || text.contains("susanoo")) {
+			var v = net.mcreator.narutoshippudenmod.NarutoShippudenModVariables.get(Minecraft.getInstance().player);
+			String whose = v.MangekyouSharinganItachi ? "itachi" : v.MangekyouSharinganSasuke ? "sasuke" : v.MangekyouSharinganMadara ? "madara"
+					: v.MangekyouSharinganObito ? "obito" : v.MangekyouSharinganShisui ? "shisui" : v.MangekyouSharinganKakashi ? "kakashi" : null;
+			return whose == null ? item("sharingan_release") : item("mangekyou_sharingan_" + whose + "_release");
+		}
+		for (String[] eye : EYES)
+			if (text.contains(eye[0]))
+				return item(eye[1]);
+		return new ItemStack(Items.ENDER_EYE);
+	}
+
+	private static ItemStack item(String id) {
+		return new ItemStack(net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("naruto_shippuden", id)));
 	}
 
 	/** A message the server already styled keeps its colours; a plain one gets a grey label and grey brackets. */

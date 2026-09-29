@@ -216,21 +216,26 @@ public final class DevTest {
 		}));
 		STEPS.add(() -> {
 			command(mc, "kill @e[type=naruto_shippuden:shadow_clone]");
-			onServer(mc, p -> {
-				p.setShiftKeyDown(true);
-				net.mcreator.narutoshippudenmod.core.jutsu.FlyingRaijin.use(NarutoActions.dependencies(p));
-				p.setShiftKeyDown(false);
-			});
+			onServer(mc, p -> raijin(p, 1));
 			command(mc, "tp @s 0.5 220 8.5 180 20");
 		});
 		STEPS.add(() -> {
 			NarutoShippudenMod.LOGGER.info("DEVTEST raijin before z={}", mc.player.getZ());
-			onServer(mc, p -> net.mcreator.narutoshippudenmod.core.jutsu.FlyingRaijin.swing(NarutoActions.dependencies(p)));
+			onServer(mc, p -> raijin(p, 3));
 		});
 		STEPS.add(() -> NarutoShippudenMod.LOGGER.info("DEVTEST raijin after z={}", mc.player.getZ()));
 		STEPS.add(() -> mc.gui.setScreen(new JutsuClient.WheelScreen(net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.TECHNIQUES
 				.get(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", "inuzuka_release_technique")))));
 		STEPS.add(() -> shot(mc, "b6_inuzuka_wheel"));
+		STEPS.add(() -> mc.gui.setScreen(new JutsuClient.WheelScreen(net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.TECHNIQUES
+				.get(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", "flying_thunder_god_kunai")))));
+		STEPS.add(() -> shot(mc, "b6_raijin_wheel"));
+		STEPS.add(() -> {
+			mc.gui.setScreen(null);
+			onServer(mc, p -> p.sendOverlayMessage(net.minecraft.network.chat.Component.literal("Byakugan activated")));
+			nextDelay = 10;
+		});
+		STEPS.add(() -> shot(mc, "b6_toast_byakugan"));
 		STEPS.add(() -> mc.gui.setScreen(null));
 		// chakra control: walk out over water, then walk up a wall
 		STEPS.add(() -> {
@@ -253,6 +258,18 @@ public final class DevTest {
 			mc.options.keyUp.setDown(false);
 			command(mc, "gamemode creative");
 		});
+	}
+
+	/** Casts a Flying Raijin option from the kunai's wheel, the way a right-click does. */
+	private static void raijin(net.minecraft.server.level.ServerPlayer p, int option) {
+		p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,
+				new net.minecraft.world.item.ItemStack(net.mcreator.narutoshippudenmod.item.WeaponItems.FlyingThunderGodKunaiItem.block));
+		NarutoShippudenModVariables.ifPresent(p, v -> {
+			v.flyingthundergodkunaiteleportselect = option;
+			v.shurikenjutsu = Math.max(v.shurikenjutsu, 40);
+		});
+		p.getCooldowns().removeCooldown(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", "flying_thunder_god_kunai/" + option));
+		net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.cast(p, net.minecraft.world.InteractionHand.MAIN_HAND);
 	}
 
 	private static void onServer(Minecraft mc, java.util.function.Consumer<net.minecraft.server.level.ServerPlayer> task) {

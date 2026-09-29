@@ -72,6 +72,7 @@ public final class ClanJutsu {
 
 	static void register() {
 		Jutsus.TECHNIQUES.get(Identifier.fromNamespaceAndPath("naruto_shippuden", "shadow_clone_technique")).onSneak = ShadowClones::release;
+		FlyingRaijin.register();
 		nature("aburame", "Aburame Clan", v -> v.aburamereleaselogic, v -> v.aburametechnique, (v, i) -> v.aburametechnique = i, v -> v.aburamelearn,
 				(v, i) -> v.aburamelearn = i, v -> v.aburame_release, (v, i) -> v.aburame_release = i,
 				new Def("Parasitic Insect Cloud", JutsuRank.C, ClanJutsu::insectCloud),

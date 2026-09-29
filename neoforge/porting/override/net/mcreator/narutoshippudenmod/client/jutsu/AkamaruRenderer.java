@@ -90,7 +90,7 @@ public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, Aka
 
 	public static class Model extends EntityModel<State> {
 		private final ModelPart bone, body, head, tail, leftFront, rightFront, leftRear, rightRear;
-		private final float boneY, rearY, rearZ;
+		private final float boneY, rearY, rearZ, headY, headZ;
 
 		Model() {
 			super(ModelAkamaru_Young.createBodyLayer().bakeRoot());
@@ -105,6 +105,8 @@ public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, Aka
 			boneY = bone.y;
 			rearY = leftRear.y;
 			rearZ = leftRear.z;
+			headY = head.y;
+			headZ = head.z;
 		}
 
 		@Override
@@ -126,6 +128,8 @@ public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, Aka
 			leftRear.y = rightRear.y = rearY;
 			leftRear.z = rightRear.z = rearZ;
 			leftRear.yScale = rightRear.yScale = 1;
+			head.y = headY;
+			head.z = headZ;
 			if (state.sitting) {
 				// like a sitting wolf: tipped back 35 degrees round the front paws (front legs straight down), rump on the ground and
 				// the hind legs lying forward under him, the tail curled up
@@ -136,7 +140,10 @@ public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, Aka
 				leftRear.z = rightRear.z = 7.5F;
 				leftRear.xRot = rightRear.xRot = -0.95F;
 				leftRear.yScale = rightRear.yScale = 0.7F;
-				head.xRot += 0.45F;
+				// the head settles onto the raised chest, so the neck doesn't show a gap
+				head.xRot += 0.35F;
+				head.y = headY + 1.3F;
+				head.z = headZ + 0.8F;
 				tail.xRot = 0.9F;
 				tail.yRot = Mth.sin(age * 0.15F) * 0.2F;
 				return;
