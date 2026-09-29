@@ -84,98 +84,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	public static class BlackIceDragonRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, BlackIceDragonItem.arrow, Modelblack_ice_dragon.LAYER, Modelblack_ice_dragon::new, Identifier.parse("naruto_shippuden:textures/entities/black_ice_dragon.png"));
-		}
-
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(Modelblack_ice_dragon.LAYER, Modelblack_ice_dragon::createBodyLayer);
-		}
-
-		public static class Modelblack_ice_dragon extends EntityModel<EntityRenderState> {
-		public static final ModelLayerLocation LAYER = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "projectilerenderers_blackicedragon_modelblack_ice_dragon"), "main");
-		public final ModelPart bone;
-		public final ModelPart cube_r1;
-		public final ModelPart cube_r2;
-		public final ModelPart cube_r3;
-		public final ModelPart cube_r4;
-		public final ModelPart cube_r5;
-		public final ModelPart cube_r6;
-		public final ModelPart cube_r7;
-		public final ModelPart cube_r8;
-		public final ModelPart cube_r9;
-		public final ModelPart cube_r10;
-		public final ModelPart cube_r11;
-		public final ModelPart cube_r12;
-		public final ModelPart cube_r13;
-		public final ModelPart cube_r14;
-		public final ModelPart cube_r15;
-		public final ModelPart cube_r16;
-		
-		public Modelblack_ice_dragon(ModelPart root) {
-			super(root);
-			this.bone = root.getChild("transform0").getChild("bone");
-			this.cube_r1 = root.getChild("transform0").getChild("bone").getChild("cube_r1");
-			this.cube_r2 = root.getChild("transform0").getChild("bone").getChild("cube_r2");
-			this.cube_r3 = root.getChild("transform0").getChild("bone").getChild("cube_r3");
-			this.cube_r4 = root.getChild("transform0").getChild("bone").getChild("cube_r4");
-			this.cube_r5 = root.getChild("transform0").getChild("bone").getChild("cube_r5");
-			this.cube_r6 = root.getChild("transform0").getChild("bone").getChild("cube_r6");
-			this.cube_r7 = root.getChild("transform0").getChild("bone").getChild("cube_r7");
-			this.cube_r8 = root.getChild("transform0").getChild("bone").getChild("cube_r8");
-			this.cube_r9 = root.getChild("transform0").getChild("bone").getChild("cube_r9");
-			this.cube_r10 = root.getChild("transform0").getChild("bone").getChild("cube_r10");
-			this.cube_r11 = root.getChild("transform0").getChild("bone").getChild("cube_r11");
-			this.cube_r12 = root.getChild("transform0").getChild("bone").getChild("cube_r12");
-			this.cube_r13 = root.getChild("transform0").getChild("bone").getChild("cube_r13");
-			this.cube_r14 = root.getChild("transform0").getChild("bone").getChild("cube_r14");
-			this.cube_r15 = root.getChild("transform0").getChild("bone").getChild("cube_r15");
-			this.cube_r16 = root.getChild("transform0").getChild("bone").getChild("cube_r16");
-		}
-		
-		public static LayerDefinition createBodyLayer() {
-			MeshDefinition mesh = new MeshDefinition();
-			PartDefinition root = mesh.getRoot();
-			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), new PartPose(0.0F, -7.199999999999999F, 0.0F, 0.0F, 0.0F, 0.0F, 1.5F, 1.5F, 1.5F));
-			PartDefinition p1 = transform0.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-12.0F, -20.0F, -40.0F, 20.0F, 20.0F, 20.0F).texOffs(0, 0).addBox(-13.0F, -20.0F, -54.0F, 22.0F, 20.0F, 14.0F).texOffs(0, 0).addBox(-13.0F, -6.0F, -71.0F, 22.0F, 6.0F, 17.0F).texOffs(0, 0).addBox(-8.4078F, -6.0F, -82.0866F, 7.0F, 6.0F, 11.0F).mirror(true).texOffs(0, 0).addBox(-2.5922F, -6.0F, -82.0866F, 7.0F, 6.0F, 11.0F).mirror(false).texOffs(0, 0).addBox(-9.0F, -16.2589F, -75.7175F, 14.0F, 1.0F, 6.0F).texOffs(0, 0).addBox(-8.4078F, -15.6589F, -81.804F, 7.0F, 8.0F, 11.0F).texOffs(94, 123).addBox(-8.6466F, -8.4589F, -82.0112F, 13.0F, 1.0F, 4.0F).texOffs(94, 123).addBox(-8.6466F, -6.4589F, -82.0112F, 13.0F, 1.0F, 4.0F).mirror(true).texOffs(0, 0).addBox(-2.5922F, -15.6589F, -81.804F, 7.0F, 8.0F, 11.0F).mirror(false).texOffs(0, 0).addBox(-7.0F, -16.0589F, -81.7175F, 10.0F, 1.0F, 6.0F).texOffs(40, 51).addBox(-11.0F, -19.0F, -20.0F, 18.0F, 18.0F, 16.0F).texOffs(0, 0).addBox(-11.0F, -18.0F, -4.0F, 17.0F, 17.0F, 18.0F).texOffs(0, 0).addBox(-10.0F, -17.0F, 14.0F, 15.0F, 15.0F, 22.0F).texOffs(0, 0).addBox(-9.0F, -16.0F, 36.0F, 13.0F, 13.0F, 19.0F), PartPose.offsetAndRotation(-5.0F, 71.0F, -2.6F, 0.0F, 1.5708F, 1.5708F));
-			PartDefinition p2 = p1.addOrReplaceChild("cube_r1", CubeListBuilder.create().mirror(true).texOffs(63, 67).addBox(-8.6F, -39.5F, -46.9F, 6.0F, 6.0F, 12.0F).texOffs(63, 67).addBox(-8.1F, -39.1F, -34.9F, 5.0F, 5.0F, 4.0F).texOffs(63, 67).addBox(-7.6F, -38.7F, -30.9F, 4.0F, 4.0F, 4.0F).texOffs(63, 67).addBox(-7.0F, -38.3F, -26.9F, 3.0F, 3.0F, 3.0F).mirror(false).texOffs(63, 67).addBox(8.0F, -38.3F, -26.9F, 3.0F, 3.0F, 3.0F).texOffs(63, 67).addBox(7.6F, -38.7F, -30.9F, 4.0F, 4.0F, 4.0F).texOffs(63, 67).addBox(7.1F, -39.1F, -34.9F, 5.0F, 5.0F, 4.0F).texOffs(63, 67).addBox(6.6F, -39.5F, -46.9F, 6.0F, 6.0F, 12.0F), PartPose.offsetAndRotation(-4.0F, 0.0F, 0.0F, 0.3927F, 0.0F, 0.0F));
-			PartDefinition p3 = p1.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 0).addBox(-13.0F, -21.0F, -47.0F, 22.0F, 9.0F, 0.0F).texOffs(0, 112).addBox(-13.0F, -21.0F, -47.0F, 22.0F, 9.0F, 7.0F).texOffs(86, 116).addBox(-13.2F, -12.9F, -48.1F, 11.0F, 1.0F, 7.0F).texOffs(86, 116).addBox(-13.2F, -10.9F, -48.1F, 11.0F, 1.0F, 7.0F).texOffs(84, 119).addBox(-2.9F, -12.9F, -48.1F, 12.0F, 1.0F, 7.0F).texOffs(84, 119).addBox(-2.9F, -10.9F, -48.1F, 12.0F, 1.0F, 7.0F), PartPose.offsetAndRotation(0.0F, 0.2029F, -21.9376F, 0.0873F, 0.0F, 0.0F));
-			PartDefinition p4 = p1.addOrReplaceChild("cube_r3", CubeListBuilder.create().mirror(true).texOffs(0, 0).addBox(13.4F, -16.2F, -17.2F, 2.0F, 2.0F, 10.0F), PartPose.offsetAndRotation(14.4299F, 3.3411F, -43.6776F, 0.0F, 0.829F, 0.0F));
-			PartDefinition p5 = p1.addOrReplaceChild("cube_r4", CubeListBuilder.create().mirror(true).texOffs(0, 0).addBox(13.4F, -16.2F, -17.2F, 2.0F, 2.0F, 12.0F), PartPose.offsetAndRotation(10.9371F, 3.3411F, -38.4661F, 0.0F, 0.3491F, 0.0F));
-			PartDefinition p6 = p1.addOrReplaceChild("cube_r5", CubeListBuilder.create().mirror(true).texOffs(0, 0).addBox(13.4F, -16.2F, -17.2F, 2.0F, 2.0F, 12.0F), PartPose.offsetAndRotation(17.8066F, 3.3411F, -26.4915F, 0.0F, 0.48F, 0.0F));
-			PartDefinition p7 = p1.addOrReplaceChild("cube_r6", CubeListBuilder.create().mirror(true).texOffs(0, 0).addBox(13.4F, -16.2F, -38.2F, 2.0F, 2.0F, 12.0F), PartPose.offsetAndRotation(12.2969F, 3.3411F, -35.7874F, 0.0F, 0.5236F, 0.0F));
-			PartDefinition p8 = p1.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(0, 0).addBox(-15.4F, -16.2F, -17.2F, 2.0F, 2.0F, 12.0F), PartPose.offsetAndRotation(-21.8066F, 3.3411F, -26.4915F, 0.0F, -0.48F, 0.0F));
-			PartDefinition p9 = p1.addOrReplaceChild("cube_r8", CubeListBuilder.create().texOffs(0, 0).addBox(-15.4F, -16.2F, -17.2F, 2.0F, 2.0F, 12.0F), PartPose.offsetAndRotation(-14.9371F, 3.3411F, -38.4661F, 0.0F, -0.3491F, 0.0F));
-			PartDefinition p10 = p1.addOrReplaceChild("cube_r9", CubeListBuilder.create().texOffs(0, 0).addBox(-15.4F, -16.2F, -17.2F, 2.0F, 2.0F, 10.0F), PartPose.offsetAndRotation(-18.4299F, 3.3411F, -43.6776F, 0.0F, -0.829F, 0.0F));
-			PartDefinition p11 = p1.addOrReplaceChild("cube_r10", CubeListBuilder.create().texOffs(0, 0).addBox(-15.4F, -16.2F, -38.2F, 2.0F, 2.0F, 12.0F), PartPose.offsetAndRotation(-16.2969F, 3.3411F, -35.7874F, 0.0F, -0.5236F, 0.0F));
-			PartDefinition p12 = p1.addOrReplaceChild("cube_r11", CubeListBuilder.create().mirror(true).texOffs(0, 0).addBox(5.0F, -20.0F, -52.0F, 8.0F, 8.0F, 12.0F).texOffs(80, 115).addBox(1.1F, -12.9F, -52.1F, 12.0F, 1.0F, 12.0F).texOffs(80, 115).addBox(1.1F, -10.9F, -52.1F, 12.0F, 1.0F, 12.0F), PartPose.offsetAndRotation(12.2969F, 4.3411F, -28.7874F, 0.0F, 0.3927F, 0.0F));
-			PartDefinition p13 = p1.addOrReplaceChild("cube_r12", CubeListBuilder.create().texOffs(0, 108).addBox(-13.0F, -20.0F, -52.0F, 8.0F, 8.0F, 12.0F).texOffs(76, 114).addBox(-13.3F, -12.8F, -52.1F, 11.0F, 1.0F, 12.0F).texOffs(76, 114).addBox(-13.3F, -10.8F, -52.1F, 11.0F, 1.0F, 12.0F), PartPose.offsetAndRotation(-16.2969F, 4.3411F, -28.7874F, 0.0F, -0.3927F, 0.0F));
-			PartDefinition p14 = p1.addOrReplaceChild("cube_r13", CubeListBuilder.create().mirror(true).texOffs(0, 0).addBox(6.0F, -6.0F, -69.0F, 7.0F, 6.0F, 12.0F), PartPose.offsetAndRotation(18.8025F, 0.0F, -13.364F, 0.0F, 0.3927F, 0.0F));
-			PartDefinition p15 = p1.addOrReplaceChild("cube_r14", CubeListBuilder.create().texOffs(0, 0).addBox(-13.0F, -6.0F, -69.0F, 7.0F, 6.0F, 12.0F), PartPose.offsetAndRotation(-22.8025F, 0.0F, -13.364F, 0.0F, -0.3927F, 0.0F));
-			PartDefinition p16 = p1.addOrReplaceChild("cube_r15", CubeListBuilder.create().texOffs(0, 0).addBox(-13.0F, -18.8F, -48.0F, 22.0F, 5.0F, 12.0F), PartPose.offsetAndRotation(0.0F, 0.0F, -14.0F, 0.2618F, 0.0F, 0.0F));
-			PartDefinition p17 = p1.addOrReplaceChild("cube_r16", CubeListBuilder.create().texOffs(60, 80).addBox(-13.0F, -21.0F, -52.0F, 22.0F, 9.0F, 12.0F).texOffs(68, 115).addBox(-13.2F, -12.9F, -52.9F, 15.0F, 1.0F, 12.0F).texOffs(68, 115).addBox(-13.2F, -10.9F, -53.3F, 15.0F, 1.0F, 12.0F).texOffs(80, 115).addBox(-2.8F, -10.9F, -53.4F, 12.0F, 1.0F, 12.0F).texOffs(80, 115).addBox(-2.8F, -12.9F, -52.9F, 12.0F, 1.0F, 12.0F), PartPose.offsetAndRotation(0.0F, -10.1024F, -9.6689F, 0.2618F, 0.0F, 0.0F));
-			return LayerDefinition.create(mesh, 128, 128);
-		}
-		
-		@Override
-		public void setupAnim(EntityRenderState state) {
-			super.setupAnim(state);
-			setupAnimCompat(state);
-		}
-		
-		private void setupAnimCompat(EntityRenderState state) {
-			float f = 0, f1 = 0, f2 = state.ageInTicks, f3 = 0, f4 = 0;
-			if (state instanceof LivingEntityRenderState living) {
-				f = living.walkAnimationPos;
-				f1 = living.walkAnimationSpeed;
-				f3 = living.yRot;
-				f4 = living.xRot;
-			}
-		
-		}
-		}
-	}
 
 	public static class ChidoriSenbonRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -279,50 +187,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	public static class DemonicIllusionShacklingStakesTechniqueRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, DemonicIllusionShacklingStakesTechniqueItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
-		}
-
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::createBodyLayer);
-		}
-
-		public static class Modelphoenix_flower_jutsu extends EntityModel<EntityRenderState> {
-		public static final ModelLayerLocation LAYER = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "projectilerenderers_demonicillusionshacklingstakestechnique_modelphoenix_flower_jutsu"), "main");
-		public final ModelPart bb_main;
-		
-		public Modelphoenix_flower_jutsu(ModelPart root) {
-			super(root);
-			this.bb_main = root.getChild("transform0").getChild("bb_main");
-		}
-		
-		public static LayerDefinition createBodyLayer() {
-			MeshDefinition mesh = new MeshDefinition();
-			PartDefinition root = mesh.getRoot();
-			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
-			PartDefinition p1 = transform0.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(18, 47).addBox(-2.0F, -9.0F, -2.0F, 4.0F, 8.0F, 4.0F).texOffs(22, 24).addBox(-3.0F, -8.0F, -3.0F, 6.0F, 6.0F, 6.0F).texOffs(28, 14).addBox(-4.0F, -7.0F, -2.0F, 8.0F, 4.0F, 4.0F).texOffs(4, 18).addBox(-2.0F, -7.0F, -4.0F, 4.0F, 4.0F, 8.0F).texOffs(16, 36).addBox(-1.0F, -8.0F, -4.0F, 2.0F, 1.0F, 8.0F).texOffs(4, 30).addBox(-1.0F, -3.0F, -4.0F, 2.0F, 1.0F, 8.0F).texOffs(4, 39).addBox(2.0F, -6.0F, -4.0F, 1.0F, 2.0F, 8.0F).texOffs(28, 37).addBox(-3.0F, -6.0F, -4.0F, 1.0F, 2.0F, 8.0F).texOffs(30, 47).addBox(-4.0F, -8.0F, -1.0F, 8.0F, 1.0F, 2.0F).texOffs(26, 10).addBox(-4.0F, -3.0F, -1.0F, 8.0F, 1.0F, 2.0F).texOffs(4, 10).addBox(-4.0F, -6.0F, -3.0F, 8.0F, 2.0F, 6.0F).texOffs(34, 50).addBox(-3.0F, -9.0F, -1.0F, 6.0F, 1.0F, 2.0F).texOffs(40, 22).addBox(-1.0F, -9.0F, -3.0F, 2.0F, 1.0F, 6.0F).texOffs(44, 11).addBox(-3.0F, -2.0F, -1.0F, 6.0F, 1.0F, 2.0F).texOffs(38, 36).addBox(-1.0F, -2.0F, -3.0F, 2.0F, 1.0F, 6.0F), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-			return LayerDefinition.create(mesh, 64, 64);
-		}
-		
-		@Override
-		public void setupAnim(EntityRenderState state) {
-			super.setupAnim(state);
-			setupAnimCompat(state);
-		}
-		
-		private void setupAnimCompat(EntityRenderState state) {
-			float f = 0, f1 = 0, f2 = state.ageInTicks, f3 = 0, f4 = 0;
-			if (state instanceof LivingEntityRenderState living) {
-				f = living.walkAnimationPos;
-				f1 = living.walkAnimationSpeed;
-				f3 = living.yRot;
-				f4 = living.xRot;
-			}
-		
-		}
-		}
-	}
 
 	public static class DrowningWaterBlobTechniqueRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -371,7 +235,7 @@ public final class ProjectileRenderers {
 
 	public static class EarthBallRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, EarthBallItem.arrow, Modelgreat_fireball.LAYER, Modelgreat_fireball::new, Identifier.parse("naruto_shippuden:textures/custom_earth_jutsu.png"));
+			ModRenderers.projectile(event, EarthBallItem.arrow, Modelgreat_fireball.LAYER, Modelgreat_fireball::new, Identifier.parse("naruto_shippuden:textures/entities/custom_earth_jutsu.png"));
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -464,7 +328,7 @@ public final class ProjectileRenderers {
 
 	public static class EarthDiskRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, EarthDiskItem.arrow, ModelJutsu_Disk.LAYER, ModelJutsu_Disk::new, Identifier.parse("naruto_shippuden:textures/custom_earth_jutsu.png"));
+			ModRenderers.projectile(event, EarthDiskItem.arrow, ModelJutsu_Disk.LAYER, ModelJutsu_Disk::new, Identifier.parse("naruto_shippuden:textures/entities/custom_earth_jutsu.png"));
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -677,7 +541,7 @@ public final class ProjectileRenderers {
 
 	public static class FireBallRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, FireBallItem.arrow, Modelgreat_fireball.LAYER, Modelgreat_fireball::new, Identifier.parse("naruto_shippuden:textures/fireball.png"));
+			ModRenderers.projectile(event, FireBallItem.arrow, Modelgreat_fireball.LAYER, Modelgreat_fireball::new, Identifier.parse("naruto_shippuden:textures/entities/fireball.png"));
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -770,7 +634,7 @@ public final class ProjectileRenderers {
 
 	public static class FireDiskRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, FireDiskItem.arrow, ModelJutsu_Disk.LAYER, ModelJutsu_Disk::new, Identifier.parse("naruto_shippuden:textures/custom_fire_jutsu.png"));
+			ModRenderers.projectile(event, FireDiskItem.arrow, ModelJutsu_Disk.LAYER, ModelJutsu_Disk::new, Identifier.parse("naruto_shippuden:textures/entities/custom_fire_jutsu.png"));
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -843,123 +707,10 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	public static class FireDragonFlameBulletRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, FireDragonFlameBulletItem.arrow, ModelFire_Dragon_Flame_Bullet.LAYER, ModelFire_Dragon_Flame_Bullet::new, Identifier.parse("naruto_shippuden:textures/entities/fireball.png"));
-		}
-
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(ModelFire_Dragon_Flame_Bullet.LAYER, ModelFire_Dragon_Flame_Bullet::createBodyLayer);
-		}
-
-		public static class ModelFire_Dragon_Flame_Bullet extends EntityModel<EntityRenderState> {
-		public static final ModelLayerLocation LAYER = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "projectilerenderers_firedragonflamebullet_modelfire_dragon_flame_bullet"), "main");
-		public final ModelPart bb_main;
-		public final ModelPart cube_r1;
-		public final ModelPart cube_r2;
-		public final ModelPart cube_r3;
-		public final ModelPart cube_r4;
-		public final ModelPart cube_r5;
-		public final ModelPart cube_r6;
-		public final ModelPart cube_r7;
-		public final ModelPart cube_r8;
-		public final ModelPart cube_r9;
-		public final ModelPart cube_r10;
-		public final ModelPart cube_r11;
-		public final ModelPart cube_r12;
-		public final ModelPart cube_r13;
-		public final ModelPart cube_r14;
-		public final ModelPart cube_r15;
-		public final ModelPart cube_r16;
-		public final ModelPart cube_r17;
-		public final ModelPart cube_r18;
-		public final ModelPart cube_r19;
-		public final ModelPart cube_r20;
-		public final ModelPart cube_r21;
-		public final ModelPart cube_r22;
-		public final ModelPart cube_r23;
-		
-		public ModelFire_Dragon_Flame_Bullet(ModelPart root) {
-			super(root);
-			this.bb_main = root.getChild("transform0").getChild("bb_main");
-			this.cube_r1 = root.getChild("transform0").getChild("bb_main").getChild("cube_r1");
-			this.cube_r2 = root.getChild("transform0").getChild("bb_main").getChild("cube_r2");
-			this.cube_r3 = root.getChild("transform0").getChild("bb_main").getChild("cube_r3");
-			this.cube_r4 = root.getChild("transform0").getChild("bb_main").getChild("cube_r4");
-			this.cube_r5 = root.getChild("transform0").getChild("bb_main").getChild("cube_r5");
-			this.cube_r6 = root.getChild("transform0").getChild("bb_main").getChild("cube_r6");
-			this.cube_r7 = root.getChild("transform0").getChild("bb_main").getChild("cube_r7");
-			this.cube_r8 = root.getChild("transform0").getChild("bb_main").getChild("cube_r8");
-			this.cube_r9 = root.getChild("transform0").getChild("bb_main").getChild("cube_r9");
-			this.cube_r10 = root.getChild("transform0").getChild("bb_main").getChild("cube_r10");
-			this.cube_r11 = root.getChild("transform0").getChild("bb_main").getChild("cube_r11");
-			this.cube_r12 = root.getChild("transform0").getChild("bb_main").getChild("cube_r12");
-			this.cube_r13 = root.getChild("transform0").getChild("bb_main").getChild("cube_r13");
-			this.cube_r14 = root.getChild("transform0").getChild("bb_main").getChild("cube_r14");
-			this.cube_r15 = root.getChild("transform0").getChild("bb_main").getChild("cube_r15");
-			this.cube_r16 = root.getChild("transform0").getChild("bb_main").getChild("cube_r16");
-			this.cube_r17 = root.getChild("transform0").getChild("bb_main").getChild("cube_r17");
-			this.cube_r18 = root.getChild("transform0").getChild("bb_main").getChild("cube_r18");
-			this.cube_r19 = root.getChild("transform0").getChild("bb_main").getChild("cube_r19");
-			this.cube_r20 = root.getChild("transform0").getChild("bb_main").getChild("cube_r20");
-			this.cube_r21 = root.getChild("transform0").getChild("bb_main").getChild("cube_r21");
-			this.cube_r22 = root.getChild("transform0").getChild("bb_main").getChild("cube_r22");
-			this.cube_r23 = root.getChild("transform0").getChild("bb_main").getChild("cube_r23");
-		}
-		
-		public static LayerDefinition createBodyLayer() {
-			MeshDefinition mesh = new MeshDefinition();
-			PartDefinition root = mesh.getRoot();
-			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), new PartPose(0.0F, -7.199999999999999F, 0.0F, 0.0F, 0.0F, 0.0F, 1.5F, 1.5F, 1.5F));
-			PartDefinition p1 = transform0.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(-12.5F, -22.0F, -10.0F, 25.0F, 22.0F, 20.0F).texOffs(0, 0).addBox(-1.0F, -14.1F, 10.0F, 11.0F, 11.0F, 51.0F).texOffs(0, 0).addBox(-10.0F, -14.1F, 61.0F, 11.0F, 11.0F, 51.0F).texOffs(0, 0).addBox(-10.0F, -14.1F, 10.0F, 11.0F, 11.0F, 51.0F).texOffs(0, 0).addBox(-1.0F, -14.1F, 61.0F, 11.0F, 11.0F, 51.0F).texOffs(0, 0).addBox(-12.5F, -7.0F, -26.0F, 25.0F, 7.0F, 16.0F).texOffs(0, 0).addBox(-7.5F, -7.0F, -32.0F, 15.0F, 7.0F, 6.0F), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, 1.5708F, 1.5708F));
-			PartDefinition p2 = p1.addOrReplaceChild("cube_r1", CubeListBuilder.create().mirror(true).texOffs(-1, 66).addBox(-4.0F, -22.0F, 2.0F, 2.0F, 0.0F, 12.0F).texOffs(-1, 66).addBox(-8.0F, -22.0F, 2.0F, 2.0F, 0.0F, 23.0F).texOffs(-1, 66).addBox(-6.0F, -22.0F, 2.2F, 2.0F, 0.0F, 17.0F).texOffs(-1, 66).addBox(-6.0F, -43.9F, 2.0F, 2.0F, 0.0F, 17.0F).texOffs(-1, 66).addBox(-4.0F, -43.9F, 2.0F, 2.0F, 0.0F, 12.0F).texOffs(-1, 66).addBox(-2.0F, -43.9F, 2.3F, 2.0F, 0.0F, 6.0F).texOffs(-1, 66).addBox(-8.0F, -43.9F, 2.0F, 2.0F, 0.0F, 23.0F), PartPose.offsetAndRotation(3.5312F, 21.901F, 1.4412F, 0.0F, 0.1745F, 0.0F));
-			PartDefinition p3 = p1.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(-1, 66).addBox(2.0F, -22.0F, 2.0F, 2.0F, 0.0F, 12.0F).texOffs(-1, 66).addBox(0.0F, -22.0F, 2.3F, 2.0F, 0.0F, 6.0F).texOffs(-1, 66).addBox(6.0F, -22.0F, 2.0F, 2.0F, 0.0F, 23.0F).texOffs(-1, 66).addBox(4.0F, -22.0F, 2.0F, 2.0F, 0.0F, 17.0F).texOffs(-1, 66).addBox(2.0F, -22.0F, 2.0F, 2.0F, 0.0F, 12.0F).texOffs(-1, 66).addBox(0.0F, -43.9F, 2.3F, 2.0F, 0.0F, 6.0F).texOffs(-1, 66).addBox(2.0F, -43.9F, 2.0F, 2.0F, 0.0F, 12.0F).texOffs(-1, 66).addBox(4.0F, -43.9F, 2.0F, 2.0F, 0.0F, 17.0F).texOffs(-1, 66).addBox(6.0F, -43.9F, 2.0F, 2.0F, 0.0F, 23.0F), PartPose.offsetAndRotation(4.9688F, 21.901F, 6.6412F, 0.0F, -0.1745F, 0.0F));
-			PartDefinition p4 = p1.addOrReplaceChild("cube_r3", CubeListBuilder.create().mirror(true).texOffs(0, 0).addBox(17.0F, -20.0F, 2.0F, 0.0F, 2.0F, 21.0F).texOffs(0, 0).addBox(17.0F, -18.0F, 2.0F, 0.0F, 2.0F, 16.0F).texOffs(0, 0).addBox(17.0F, -16.0F, 2.0F, 0.0F, 2.0F, 11.0F).texOffs(0, 0).addBox(17.0F, -14.0F, 1.2F, 0.0F, 2.0F, 7.0F).mirror(false).texOffs(0, 0).addBox(-7.598F, -20.0F, 2.0F, 0.0F, 2.0F, 21.0F).texOffs(0, 0).addBox(-7.598F, -18.0F, 2.0F, 0.0F, 2.0F, 16.0F).texOffs(0, 0).addBox(-7.598F, -16.0F, 2.0F, 0.0F, 2.0F, 11.0F).texOffs(0, 0).addBox(-7.598F, -14.0F, 1.2F, 0.0F, 2.0F, 7.0F), PartPose.offsetAndRotation(-4.701F, 8.5009F, -1.4082F, -0.2618F, 0.0F, 0.0F));
-			PartDefinition p5 = p1.addOrReplaceChild("cube_r4", CubeListBuilder.create().mirror(true).texOffs(0, 0).addBox(17.0F, -20.0F, 2.0F, 0.0F, 2.0F, 21.0F).mirror(false).texOffs(0, 0).addBox(-7.598F, -20.0F, 2.0F, 0.0F, 2.0F, 21.0F), PartPose.offsetAndRotation(-4.701F, 17.9152F, 5.013F, 0.1309F, 0.0F, 0.0F));
-			PartDefinition p6 = p1.addOrReplaceChild("cube_r5", CubeListBuilder.create().mirror(true).texOffs(0, 0).addBox(17.0F, -20.0F, 2.0F, 0.0F, 2.0F, 21.0F).texOffs(0, 0).addBox(17.0F, -16.0F, 2.0F, 0.0F, 2.0F, 11.0F).texOffs(0, 0).addBox(17.0F, -18.0F, 2.0F, 0.0F, 2.0F, 16.0F).mirror(false).texOffs(0, 0).addBox(-7.398F, -20.0F, 2.0F, 0.0F, 2.0F, 21.0F).texOffs(0, 0).addBox(-7.398F, -18.0F, 2.0F, 0.0F, 2.0F, 16.0F).texOffs(0, 0).addBox(-7.398F, -16.0F, 2.0F, 0.0F, 2.0F, 11.0F).texOffs(0, 0).addBox(-7.398F, -14.0F, 1.2F, 0.0F, 2.0F, 7.0F), PartPose.offsetAndRotation(-4.801F, 3.3009F, -3.3082F, -0.2618F, 0.0F, 0.0F));
-			PartDefinition p7 = p1.addOrReplaceChild("cube_r6", CubeListBuilder.create().mirror(true).texOffs(0, 0).addBox(17.0F, -20.0F, 2.0F, 0.0F, 2.0F, 21.0F).mirror(false).texOffs(0, 0).addBox(-7.398F, -20.0F, 2.0F, 0.0F, 2.0F, 21.0F), PartPose.offsetAndRotation(-4.801F, 12.7152F, 3.113F, 0.1309F, 0.0F, 0.0F));
-			PartDefinition p8 = p1.addOrReplaceChild("cube_r7", CubeListBuilder.create().mirror(true).texOffs(0, 0).addBox(17.0F, -20.0F, 2.0F, 0.0F, 2.0F, 21.0F).mirror(false).texOffs(0, 0).addBox(-7.998F, -20.0F, 2.0F, 0.0F, 2.0F, 21.0F), PartPose.offsetAndRotation(-4.501F, 6.2152F, 9.313F, 0.1309F, 0.0F, 0.0F));
-			PartDefinition p9 = p1.addOrReplaceChild("cube_r8", CubeListBuilder.create().mirror(true).texOffs(0, 0).addBox(17.0F, -18.0F, 2.0F, 0.0F, 2.0F, 16.0F).texOffs(0, 0).addBox(17.0F, -16.0F, 2.0F, 0.0F, 2.0F, 11.0F).texOffs(0, 0).addBox(17.0F, -14.0F, 1.2F, 0.0F, 2.0F, 7.0F).texOffs(0, 0).addBox(17.0F, -20.0F, 2.0F, 0.0F, 2.0F, 21.0F).mirror(false).texOffs(0, 0).addBox(-7.998F, -14.0F, 1.2F, 0.0F, 2.0F, 7.0F).texOffs(0, 0).addBox(-7.998F, -16.0F, 2.0F, 0.0F, 2.0F, 11.0F).texOffs(0, 0).addBox(-7.998F, -18.0F, 2.0F, 0.0F, 2.0F, 16.0F).texOffs(0, 0).addBox(-7.998F, -20.0F, 2.0F, 0.0F, 2.0F, 21.0F), PartPose.offsetAndRotation(-4.501F, -3.1991F, 2.8918F, -0.2618F, 0.0F, 0.0F));
-			PartDefinition p10 = p1.addOrReplaceChild("cube_r9", CubeListBuilder.create().texOffs(-1, 66).addBox(4.0F, -22.0F, 2.0F, 2.0F, 0.0F, 17.0F).texOffs(-1, 66).addBox(2.0F, -22.0F, 2.0F, 2.0F, 0.0F, 12.0F).texOffs(-1, 66).addBox(0.0F, -22.0F, 2.3F, 2.0F, 0.0F, 6.0F).texOffs(-1, 66).addBox(6.0F, -22.0F, 2.0F, 2.0F, 0.0F, 23.0F).texOffs(-1, 66).addBox(4.0F, -43.9F, 2.0F, 2.0F, 0.0F, 17.0F).texOffs(-1, 66).addBox(2.0F, -43.9F, 2.0F, 2.0F, 0.0F, 12.0F).texOffs(-1, 66).addBox(0.0F, -43.9F, 2.3F, 2.0F, 0.0F, 6.0F).texOffs(-1, 66).addBox(6.0F, -43.9F, 2.0F, 2.0F, 0.0F, 23.0F), PartPose.offsetAndRotation(-10.0312F, 21.901F, 3.4412F, 0.0F, -0.1745F, 0.0F));
-			PartDefinition p11 = p1.addOrReplaceChild("cube_r10", CubeListBuilder.create().texOffs(-1, 66).addBox(6.0F, -22.0F, 2.0F, 2.0F, 0.0F, 23.0F).texOffs(-1, 66).addBox(6.0F, -43.9F, 2.0F, 2.0F, 0.0F, 23.0F), PartPose.offsetAndRotation(-18.7136F, 21.901F, 5.525F, 0.0F, 0.1745F, 0.0F));
-			PartDefinition p12 = p1.addOrReplaceChild("cube_r11", CubeListBuilder.create().mirror(true).texOffs(-1, 66).addBox(-8.0F, -22.0F, 2.0F, 2.0F, 0.0F, 23.0F).texOffs(-1, 66).addBox(-8.0F, -43.9F, 2.0F, 2.0F, 0.0F, 23.0F), PartPose.offsetAndRotation(12.2136F, 21.901F, 3.525F, 0.0F, -0.1745F, 0.0F));
-			PartDefinition p13 = p1.addOrReplaceChild("cube_r12", CubeListBuilder.create().texOffs(-1, 66).addBox(6.0F, -22.0F, 2.0F, 2.0F, 0.0F, 23.0F).texOffs(-1, 66).addBox(6.0F, -43.9F, 2.0F, 2.0F, 0.0F, 23.0F), PartPose.offsetAndRotation(-3.7136F, 21.901F, 8.725F, 0.0F, 0.1745F, 0.0F));
-			PartDefinition p14 = p1.addOrReplaceChild("cube_r13", CubeListBuilder.create().mirror(true).texOffs(0, 0).addBox(4.6F, -17.8F, -48.8F, 1.0F, 1.0F, 1.0F).texOffs(0, 0).addBox(6.9F, -17.8F, -48.8F, 1.0F, 1.0F, 1.0F).mirror(false).texOffs(0, 0).addBox(2.5F, -17.8F, -48.8F, 1.0F, 1.0F, 1.0F).texOffs(0, 0).addBox(0.2F, -17.8F, -48.8F, 1.0F, 1.0F, 1.0F), PartPose.offsetAndRotation(-4.1F, 4.8743F, 18.1048F, 0.0873F, 0.0F, 0.0F));
-			PartDefinition p15 = p1.addOrReplaceChild("cube_r14", CubeListBuilder.create().mirror(true).texOffs(0, 0).addBox(4.6F, -18.8F, -40.9F, 2.0F, 2.0F, 2.0F).texOffs(0, 0).addBox(6.9F, -18.8F, -40.9F, 2.0F, 2.0F, 2.0F).mirror(false).texOffs(0, 0).addBox(2.5F, -18.8F, -40.9F, 2.0F, 2.0F, 2.0F).texOffs(0, 0).addBox(0.2F, -18.8F, -40.9F, 2.0F, 2.0F, 2.0F), PartPose.offsetAndRotation(-4.6F, 0.0F, 12.0F, 0.2618F, 0.0F, 0.0F));
-			PartDefinition p16 = p1.addOrReplaceChild("cube_r15", CubeListBuilder.create().mirror(true).texOffs(0, 0).addBox(2.3F, -24.5F, -27.3F, 2.0F, 2.0F, 2.0F).texOffs(0, 0).addBox(2.8F, -24.1F, -28.3F, 1.0F, 1.0F, 1.0F).texOffs(0, 0).addBox(0.1F, -24.2F, -27.3F, 2.0F, 2.0F, 2.0F).texOffs(0, 0).addBox(0.6F, -23.8F, -28.3F, 1.0F, 1.0F, 1.0F).mirror(false).texOffs(0, 0).addBox(4.7F, -24.5F, -27.3F, 2.0F, 2.0F, 2.0F).texOffs(0, 0).addBox(5.2F, -24.1F, -28.3F, 1.0F, 1.0F, 1.0F).texOffs(0, 0).addBox(9.0F, -24.7F, -28.0F, 2.0F, 2.0F, 2.0F).texOffs(0, 0).addBox(9.5F, -24.3F, -29.0F, 1.0F, 1.0F, 1.0F).mirror(true).texOffs(0, 0).addBox(-2.0F, -24.7F, -28.0F, 2.0F, 2.0F, 2.0F).texOffs(0, 0).addBox(-1.5F, -24.3F, -29.0F, 1.0F, 1.0F, 1.0F).mirror(false).texOffs(0, 0).addBox(7.4F, -23.8F, -28.3F, 1.0F, 1.0F, 1.0F).texOffs(0, 0).addBox(6.9F, -24.2F, -27.3F, 2.0F, 2.0F, 2.0F).texOffs(0, 0).addBox(-8.0F, -25.0F, -26.0F, 25.0F, 8.0F, 8.0F), PartPose.offsetAndRotation(-4.5F, -28.842F, 0.3361F, 1.309F, 0.0F, 0.0F));
-			PartDefinition p17 = p1.addOrReplaceChild("cube_r16", CubeListBuilder.create().mirror(true).texOffs(0, 0).addBox(9.3F, -27.8F, -37.6F, 2.0F, 7.0F, 2.0F).mirror(false).texOffs(33, 35).addBox(-8.2798F, -27.8F, -37.6F, 2.0F, 7.0F, 2.0F), PartPose.offsetAndRotation(-1.5101F, 0.6121F, 8.8748F, 0.2618F, 0.0F, 0.0F));
-			PartDefinition p18 = p1.addOrReplaceChild("cube_r17", CubeListBuilder.create().mirror(true).texOffs(0, 0).addBox(8.7F, -27.8F, -38.1F, 3.0F, 7.0F, 3.0F), PartPose.offsetAndRotation(-4.5F, 0.0F, 12.0F, 0.3491F, 0.0F, 0.2618F));
-			PartDefinition p19 = p1.addOrReplaceChild("cube_r18", CubeListBuilder.create().texOffs(33, 35).addBox(-11.7F, -27.8F, -38.1F, 3.0F, 7.0F, 3.0F), PartPose.offsetAndRotation(4.5F, 0.0F, 12.0F, 0.3491F, 0.0F, -0.2618F));
-			PartDefinition p20 = p1.addOrReplaceChild("cube_r19", CubeListBuilder.create().mirror(true).texOffs(0, 0).addBox(4.0F, -7.0F, -44.0F, 8.0F, 7.0F, 6.0F), PartPose.offsetAndRotation(18.4925F, 0.0F, 5.4752F, 0.0F, 0.8727F, 0.0F));
-			PartDefinition p21 = p1.addOrReplaceChild("cube_r20", CubeListBuilder.create().texOffs(0, 0).addBox(-12.0F, -7.0F, -44.0F, 8.0F, 7.0F, 6.0F), PartPose.offsetAndRotation(-18.4925F, 0.0F, 5.4752F, 0.0F, -0.8727F, 0.0F));
-			PartDefinition p22 = p1.addOrReplaceChild("cube_r21", CubeListBuilder.create().texOffs(0, 0).addBox(-17.0F, -25.0F, -31.0F, 25.0F, 8.0F, 15.0F), PartPose.offsetAndRotation(4.5F, 6.1056F, 9.5497F, 0.0873F, 0.0F, 0.0F));
-			PartDefinition p23 = p1.addOrReplaceChild("cube_r22", CubeListBuilder.create().texOffs(0, 0).addBox(-17.0F, -25.0F, -25.0F, 25.0F, 8.0F, 7.0F), PartPose.offsetAndRotation(4.5F, 3.5971F, -0.4215F, 0.1309F, 0.0F, 0.0F));
-			PartDefinition p24 = p1.addOrReplaceChild("cube_r23", CubeListBuilder.create().texOffs(2, 34).addBox(-17.0F, -25.0F, -31.0F, 25.0F, 8.0F, 13.0F), PartPose.offsetAndRotation(4.5F, -2.5106F, 13.8571F, 0.2618F, 0.0F, 0.0F));
-			return LayerDefinition.create(mesh, 128, 128);
-		}
-		
-		@Override
-		public void setupAnim(EntityRenderState state) {
-			super.setupAnim(state);
-			setupAnimCompat(state);
-		}
-		
-		private void setupAnimCompat(EntityRenderState state) {
-			float f = 0, f1 = 0, f2 = state.ageInTicks, f3 = 0, f4 = 0;
-			if (state instanceof LivingEntityRenderState living) {
-				f = living.walkAnimationPos;
-				f1 = living.walkAnimationSpeed;
-				f3 = living.yRot;
-				f4 = living.xRot;
-			}
-		
-		}
-		}
-	}
 
 	public static class FireWaveRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, FireWaveItem.arrow, ModelJutsu_Wave.LAYER, ModelJutsu_Wave::new, Identifier.parse("naruto_shippuden:textures/custom_fire_jutsu_wave.png"));
+			ModRenderers.projectile(event, FireWaveItem.arrow, ModelJutsu_Wave.LAYER, ModelJutsu_Wave::new, Identifier.parse("naruto_shippuden:textures/entities/custom_fire_jutsu_wave.png"));
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -1020,75 +771,8 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	public static class FumaShurikenClanRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.sprite(event, FumaShurikenClanItem.arrow);
-		}
-
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-		}
-	}
 
 
-	public static class FurykickRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, FurykickItem.arrow, Modelfurykick.LAYER, Modelfurykick::new, Identifier.parse("naruto_shippuden:textures/entities/passing_fang.png"));
-		}
-
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(Modelfurykick.LAYER, Modelfurykick::createBodyLayer);
-		}
-
-		public static class Modelfurykick extends EntityModel<EntityRenderState> {
-		public static final ModelLayerLocation LAYER = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "projectilerenderers_furykick_modelfurykick"), "main");
-		public final ModelPart kick1;
-		public final ModelPart cube_r1;
-		public final ModelPart cube_r2;
-		public final ModelPart kick2;
-		public final ModelPart cube_r3;
-		public final ModelPart cube_r4;
-		
-		public Modelfurykick(ModelPart root) {
-			super(root);
-			this.kick1 = root.getChild("transform0").getChild("kick1");
-			this.cube_r1 = root.getChild("transform0").getChild("kick1").getChild("cube_r1");
-			this.cube_r2 = root.getChild("transform0").getChild("kick1").getChild("cube_r2");
-			this.kick2 = root.getChild("transform0").getChild("kick2");
-			this.cube_r3 = root.getChild("transform0").getChild("kick2").getChild("cube_r3");
-			this.cube_r4 = root.getChild("transform0").getChild("kick2").getChild("cube_r4");
-		}
-		
-		public static LayerDefinition createBodyLayer() {
-			MeshDefinition mesh = new MeshDefinition();
-			PartDefinition root = mesh.getRoot();
-			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
-			PartDefinition p1 = transform0.addOrReplaceChild("kick1", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -1.0F, -4.0F, 1.0F, 2.0F, 7.0F, new CubeDeformation(-0.25F)), PartPose.offsetAndRotation(0.0F, 19.0F, 1.0F, 0.0F, 0.0F, 0.0F));
-			PartDefinition p2 = p1.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -6.0F, -2.0F, 1.0F, 2.0F, 4.0F, new CubeDeformation(-0.25F)), PartPose.offsetAndRotation(0.0F, 5.2009F, -2.906F, 0.4363F, 0.0F, 0.0F));
-			PartDefinition p3 = p1.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -6.0F, -2.0F, 1.0F, 2.0F, 4.0F, new CubeDeformation(-0.25F)), PartPose.offsetAndRotation(0.0F, 5.2009F, 1.906F, -0.4363F, 0.0F, 0.0F));
-			PartDefinition p4 = transform0.addOrReplaceChild("kick2", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -5.0F, -6.0F, 1.0F, 2.0F, 11.0F, new CubeDeformation(-0.25F)), PartPose.offsetAndRotation(0.0F, 19.0F, 1.0F, 0.0F, 0.0F, 0.0F));
-			PartDefinition p5 = p4.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -6.0F, -5.0F, 1.0F, 2.0F, 4.0F, new CubeDeformation(-0.25F)), PartPose.offsetAndRotation(0.0F, -0.067F, -2.1871F, 0.4363F, 0.0F, 0.0F));
-			PartDefinition p6 = p4.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -6.0F, 1.0F, 1.0F, 2.0F, 4.0F, new CubeDeformation(-0.25F)), PartPose.offsetAndRotation(0.0F, -0.067F, 1.1871F, -0.4363F, 0.0F, 0.0F));
-			return LayerDefinition.create(mesh, 64, 64);
-		}
-		
-		@Override
-		public void setupAnim(EntityRenderState state) {
-			super.setupAnim(state);
-			setupAnimCompat(state);
-		}
-		
-		private void setupAnimCompat(EntityRenderState state) {
-			float f = 0, f1 = 0, f2 = state.ageInTicks, f3 = 0, f4 = 0;
-			if (state instanceof LivingEntityRenderState living) {
-				f = living.walkAnimationPos;
-				f1 = living.walkAnimationSpeed;
-				f3 = living.yRot;
-				f4 = living.xRot;
-			}
-		
-		}
-		}
-	}
 
 	public static class GreatFireDragonRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -1297,143 +981,7 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	public static class InsectBogRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, InsectBogItem.arrow, Modelgreat_fireball.LAYER, Modelgreat_fireball::new, Identifier.parse("naruto_shippuden:textures/entities/bugs.png"));
-		}
 
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(Modelgreat_fireball.LAYER, Modelgreat_fireball::createBodyLayer);
-		}
-
-		public static class Modelgreat_fireball extends EntityModel<EntityRenderState> {
-		public static final ModelLayerLocation LAYER = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "projectilerenderers_insectbog_modelgreat_fireball"), "main");
-		public final ModelPart bb_main;
-		public final ModelPart cube_r1;
-		public final ModelPart cube_r2;
-		public final ModelPart cube_r3;
-		public final ModelPart cube_r4;
-		public final ModelPart cube_r5;
-		public final ModelPart cube_r6;
-		public final ModelPart cube_r7;
-		public final ModelPart cube_r8;
-		public final ModelPart cube_r9;
-		public final ModelPart cube_r10;
-		public final ModelPart cube_r11;
-		public final ModelPart cube_r12;
-		public final ModelPart cube_r13;
-		public final ModelPart cube_r14;
-		public final ModelPart cube_r15;
-		public final ModelPart cube_r16;
-		
-		public Modelgreat_fireball(ModelPart root) {
-			super(root);
-			this.bb_main = root.getChild("transform0").getChild("bb_main");
-			this.cube_r1 = root.getChild("transform0").getChild("bb_main").getChild("cube_r1");
-			this.cube_r2 = root.getChild("transform0").getChild("bb_main").getChild("cube_r2");
-			this.cube_r3 = root.getChild("transform0").getChild("bb_main").getChild("cube_r3");
-			this.cube_r4 = root.getChild("transform0").getChild("bb_main").getChild("cube_r4");
-			this.cube_r5 = root.getChild("transform0").getChild("bb_main").getChild("cube_r5");
-			this.cube_r6 = root.getChild("transform0").getChild("bb_main").getChild("cube_r6");
-			this.cube_r7 = root.getChild("transform0").getChild("bb_main").getChild("cube_r7");
-			this.cube_r8 = root.getChild("transform0").getChild("bb_main").getChild("cube_r8");
-			this.cube_r9 = root.getChild("transform0").getChild("bb_main").getChild("cube_r9");
-			this.cube_r10 = root.getChild("transform0").getChild("bb_main").getChild("cube_r10");
-			this.cube_r11 = root.getChild("transform0").getChild("bb_main").getChild("cube_r11");
-			this.cube_r12 = root.getChild("transform0").getChild("bb_main").getChild("cube_r12");
-			this.cube_r13 = root.getChild("transform0").getChild("bb_main").getChild("cube_r13");
-			this.cube_r14 = root.getChild("transform0").getChild("bb_main").getChild("cube_r14");
-			this.cube_r15 = root.getChild("transform0").getChild("bb_main").getChild("cube_r15");
-			this.cube_r16 = root.getChild("transform0").getChild("bb_main").getChild("cube_r16");
-		}
-		
-		public static LayerDefinition createBodyLayer() {
-			MeshDefinition mesh = new MeshDefinition();
-			PartDefinition root = mesh.getRoot();
-			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), new PartPose(28.799999999999997F, -12.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.5F, 1.5F, 1.5F));
-			PartDefinition p1 = transform0.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 12).addBox(-13.5F, -27.0F, -15.5F, 27.0F, 27.0F, 31.0F).texOffs(0, 0).addBox(-15.5F, -27.0F, -13.5F, 31.0F, 27.0F, 27.0F).texOffs(2, 19).addBox(-13.5F, -29.0F, -13.5F, 27.0F, 31.0F, 27.0F), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-			PartDefinition p2 = p1.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 0).addBox(-24.6F, -3.0F, -8.0F, 2.0F, 31.0F, 27.0F), PartPose.offsetAndRotation(22.2796F, -1.8184F, -5.5F, 0.0F, 0.0F, 0.7854F));
-			PartDefinition p3 = p1.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 0).addBox(-27.0F, -3.0F, -8.0F, 2.0F, 31.0F, 27.0F), PartPose.offsetAndRotation(23.3909F, -0.7071F, -5.5F, 0.0F, 0.0F, 0.7854F));
-			PartDefinition p4 = p1.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(0, 0).addBox(25.0F, -3.0F, -8.0F, 2.0F, 31.0F, 27.0F), PartPose.offsetAndRotation(-23.3909F, -0.7071F, -5.5F, 0.0F, 0.0F, -0.7854F));
-			PartDefinition p5 = p1.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(0, 0).addBox(22.6F, -3.0F, -8.0F, 2.0F, 31.0F, 27.0F), PartPose.offsetAndRotation(-22.2796F, -1.8184F, -5.5F, 0.0F, 0.0F, -0.7854F));
-			PartDefinition p6 = p1.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, -24.6F, -8.0F, 31.0F, 2.0F, 27.0F), PartPose.offsetAndRotation(11.6816F, 8.7796F, -5.5F, 0.0F, 0.0F, -0.7854F));
-			PartDefinition p7 = p1.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, -27.0F, -8.0F, 31.0F, 2.0F, 27.0F), PartPose.offsetAndRotation(12.7929F, 9.8909F, -5.5F, 0.0F, 0.0F, -0.7854F));
-			PartDefinition p8 = p1.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(0, 0).addBox(-28.0F, -24.6F, -8.0F, 31.0F, 2.0F, 27.0F), PartPose.offsetAndRotation(-11.6816F, 8.7796F, -5.5F, 0.0F, 0.0F, 0.7854F));
-			PartDefinition p9 = p1.addOrReplaceChild("cube_r8", CubeListBuilder.create().texOffs(0, 0).addBox(-28.0F, -27.0F, -8.0F, 31.0F, 2.0F, 27.0F), PartPose.offsetAndRotation(-12.7929F, 9.8909F, -5.5F, 0.0F, 0.0F, 0.7854F));
-			PartDefinition p10 = p1.addOrReplaceChild("cube_r9", CubeListBuilder.create().texOffs(0, 0).addBox(-19.0F, -3.0F, -24.6F, 27.0F, 31.0F, 2.0F), PartPose.offsetAndRotation(5.5F, -1.8184F, 22.2796F, -0.7854F, 0.0F, 0.0F));
-			PartDefinition p11 = p1.addOrReplaceChild("cube_r10", CubeListBuilder.create().texOffs(0, 0).addBox(-19.0F, -3.0F, -27.0F, 27.0F, 31.0F, 2.0F), PartPose.offsetAndRotation(5.5F, -0.7071F, 23.3909F, -0.7854F, 0.0F, 0.0F));
-			PartDefinition p12 = p1.addOrReplaceChild("cube_r11", CubeListBuilder.create().texOffs(0, 0).addBox(-19.0F, -3.0F, 25.0F, 27.0F, 31.0F, 2.0F), PartPose.offsetAndRotation(5.5F, -0.7071F, -23.3909F, 0.7854F, 0.0F, 0.0F));
-			PartDefinition p13 = p1.addOrReplaceChild("cube_r12", CubeListBuilder.create().texOffs(0, 0).addBox(-19.0F, -3.0F, 22.6F, 27.0F, 31.0F, 2.0F), PartPose.offsetAndRotation(5.5F, -1.8184F, -22.2796F, 0.7854F, 0.0F, 0.0F));
-			PartDefinition p14 = p1.addOrReplaceChild("cube_r13", CubeListBuilder.create().texOffs(0, 0).addBox(-19.0F, -27.0F, -3.0F, 27.0F, 2.0F, 31.0F), PartPose.offsetAndRotation(5.5F, 9.8909F, 12.7929F, 0.7854F, 0.0F, 0.0F));
-			PartDefinition p15 = p1.addOrReplaceChild("cube_r14", CubeListBuilder.create().texOffs(0, 0).addBox(-19.0F, -24.6F, -3.0F, 27.0F, 2.0F, 31.0F), PartPose.offsetAndRotation(5.5F, 8.7796F, 11.6816F, 0.7854F, 0.0F, 0.0F));
-			PartDefinition p16 = p1.addOrReplaceChild("cube_r15", CubeListBuilder.create().texOffs(0, 0).addBox(-19.0F, -24.6F, -28.0F, 27.0F, 2.0F, 31.0F), PartPose.offsetAndRotation(5.5F, 8.7796F, -11.6816F, -0.7854F, 0.0F, 0.0F));
-			PartDefinition p17 = p1.addOrReplaceChild("cube_r16", CubeListBuilder.create().texOffs(0, 0).addBox(-19.0F, -27.0F, -28.0F, 27.0F, 2.0F, 31.0F), PartPose.offsetAndRotation(5.5F, 9.8909F, -12.7929F, -0.7854F, 0.0F, 0.0F));
-			return LayerDefinition.create(mesh, 115, 115);
-		}
-		
-		@Override
-		public void setupAnim(EntityRenderState state) {
-			super.setupAnim(state);
-			setupAnimCompat(state);
-		}
-		
-		private void setupAnimCompat(EntityRenderState state) {
-			float f = 0, f1 = 0, f2 = state.ageInTicks, f3 = 0, f4 = 0;
-			if (state instanceof LivingEntityRenderState living) {
-				f = living.walkAnimationPos;
-				f1 = living.walkAnimationSpeed;
-				f3 = living.yRot;
-				f4 = living.xRot;
-			}
-		
-		}
-		}
-	}
-
-	public static class IronSandBulletRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, IronSandBulletItem.arrow, ModelSand_Iron_Bullets.LAYER, ModelSand_Iron_Bullets::new, Identifier.parse("naruto_shippuden:textures/entities/iron_sand.png"));
-		}
-
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(ModelSand_Iron_Bullets.LAYER, ModelSand_Iron_Bullets::createBodyLayer);
-		}
-
-		public static class ModelSand_Iron_Bullets extends EntityModel<EntityRenderState> {
-		public static final ModelLayerLocation LAYER = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "projectilerenderers_ironsandbullet_modelsand_iron_bullets"), "main");
-		public final ModelPart bone;
-		
-		public ModelSand_Iron_Bullets(ModelPart root) {
-			super(root);
-			this.bone = root.getChild("transform0").getChild("bone");
-		}
-		
-		public static LayerDefinition createBodyLayer() {
-			MeshDefinition mesh = new MeshDefinition();
-			PartDefinition root = mesh.getRoot();
-			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
-			PartDefinition p1 = transform0.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -6.0F, 0.0F, 1.0F, 6.0F, 1.0F, new CubeDeformation(-0.3F)), PartPose.offsetAndRotation(0.0F, 19.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-			return LayerDefinition.create(mesh, 16, 16);
-		}
-		
-		@Override
-		public void setupAnim(EntityRenderState state) {
-			super.setupAnim(state);
-			setupAnimCompat(state);
-		}
-		
-		private void setupAnimCompat(EntityRenderState state) {
-			float f = 0, f1 = 0, f2 = state.ageInTicks, f3 = 0, f4 = 0;
-			if (state instanceof LivingEntityRenderState living) {
-				f = living.walkAnimationPos;
-				f1 = living.walkAnimationSpeed;
-				f3 = living.yRot;
-				f4 = living.xRot;
-			}
-		
-		}
-		}
-	}
 
 	public static class KunaiBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -1530,7 +1078,7 @@ public final class ProjectileRenderers {
 
 	public static class LightningBallCustomRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, LightningBallCustomItem.arrow, Modelgreat_fireball.LAYER, Modelgreat_fireball::new, Identifier.parse("naruto_shippuden:textures/custom_lightning_jutsu.png"));
+			ModRenderers.projectile(event, LightningBallCustomItem.arrow, Modelgreat_fireball.LAYER, Modelgreat_fireball::new, Identifier.parse("naruto_shippuden:textures/entities/custom_lightning_jutsu.png"));
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -1722,7 +1270,7 @@ public final class ProjectileRenderers {
 
 	public static class LightningDiskRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, LightningDiskItem.arrow, ModelJutsu_Disk.LAYER, ModelJutsu_Disk::new, Identifier.parse("naruto_shippuden:textures/custom_lightning_jutsu.png"));
+			ModRenderers.projectile(event, LightningDiskItem.arrow, ModelJutsu_Disk.LAYER, ModelJutsu_Disk::new, Identifier.parse("naruto_shippuden:textures/entities/custom_lightning_jutsu.png"));
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -1840,107 +1388,7 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	public static class MirrorRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, MirrorItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
-		}
 
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::createBodyLayer);
-		}
-
-		public static class Modelphoenix_flower_jutsu extends EntityModel<EntityRenderState> {
-		public static final ModelLayerLocation LAYER = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "projectilerenderers_mirror_modelphoenix_flower_jutsu"), "main");
-		public final ModelPart bb_main;
-		
-		public Modelphoenix_flower_jutsu(ModelPart root) {
-			super(root);
-			this.bb_main = root.getChild("transform0").getChild("bb_main");
-		}
-		
-		public static LayerDefinition createBodyLayer() {
-			MeshDefinition mesh = new MeshDefinition();
-			PartDefinition root = mesh.getRoot();
-			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
-			PartDefinition p1 = transform0.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(18, 47).addBox(-2.0F, -9.0F, -2.0F, 4.0F, 8.0F, 4.0F).texOffs(22, 24).addBox(-3.0F, -8.0F, -3.0F, 6.0F, 6.0F, 6.0F).texOffs(28, 14).addBox(-4.0F, -7.0F, -2.0F, 8.0F, 4.0F, 4.0F).texOffs(4, 18).addBox(-2.0F, -7.0F, -4.0F, 4.0F, 4.0F, 8.0F).texOffs(16, 36).addBox(-1.0F, -8.0F, -4.0F, 2.0F, 1.0F, 8.0F).texOffs(4, 30).addBox(-1.0F, -3.0F, -4.0F, 2.0F, 1.0F, 8.0F).texOffs(4, 39).addBox(2.0F, -6.0F, -4.0F, 1.0F, 2.0F, 8.0F).texOffs(28, 37).addBox(-3.0F, -6.0F, -4.0F, 1.0F, 2.0F, 8.0F).texOffs(30, 47).addBox(-4.0F, -8.0F, -1.0F, 8.0F, 1.0F, 2.0F).texOffs(26, 10).addBox(-4.0F, -3.0F, -1.0F, 8.0F, 1.0F, 2.0F).texOffs(4, 10).addBox(-4.0F, -6.0F, -3.0F, 8.0F, 2.0F, 6.0F).texOffs(34, 50).addBox(-3.0F, -9.0F, -1.0F, 6.0F, 1.0F, 2.0F).texOffs(40, 22).addBox(-1.0F, -9.0F, -3.0F, 2.0F, 1.0F, 6.0F).texOffs(44, 11).addBox(-3.0F, -2.0F, -1.0F, 6.0F, 1.0F, 2.0F).texOffs(38, 36).addBox(-1.0F, -2.0F, -3.0F, 2.0F, 1.0F, 6.0F), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-			return LayerDefinition.create(mesh, 64, 64);
-		}
-		
-		@Override
-		public void setupAnim(EntityRenderState state) {
-			super.setupAnim(state);
-			setupAnimCompat(state);
-		}
-		
-		private void setupAnimCompat(EntityRenderState state) {
-			float f = 0, f1 = 0, f2 = state.ageInTicks, f3 = 0, f4 = 0;
-			if (state instanceof LivingEntityRenderState living) {
-				f = living.walkAnimationPos;
-				f1 = living.walkAnimationSpeed;
-				f3 = living.yRot;
-				f4 = living.xRot;
-			}
-		
-		}
-		}
-	}
-
-	public static class NeedleSenbonRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, NeedleSenbonItem.arrow, Modelchidorisenbon.LAYER, Modelchidorisenbon::new, Identifier.parse("naruto_shippuden:textures/entities/passing_fang.png"));
-		}
-
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(Modelchidorisenbon.LAYER, Modelchidorisenbon::createBodyLayer);
-		}
-
-		public static class Modelchidorisenbon extends EntityModel<EntityRenderState> {
-		public static final ModelLayerLocation LAYER = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "projectilerenderers_needlesenbon_modelchidorisenbon"), "main");
-		public final ModelPart bone5;
-		public final ModelPart bone;
-		public final ModelPart bone2;
-		public final ModelPart bone3;
-		public final ModelPart bone4;
-		
-		public Modelchidorisenbon(ModelPart root) {
-			super(root);
-			this.bone5 = root.getChild("transform0").getChild("bone5");
-			this.bone = root.getChild("transform0").getChild("bone5").getChild("bone");
-			this.bone2 = root.getChild("transform0").getChild("bone5").getChild("bone2");
-			this.bone3 = root.getChild("transform0").getChild("bone5").getChild("bone3");
-			this.bone4 = root.getChild("transform0").getChild("bone5").getChild("bone4");
-		}
-		
-		public static LayerDefinition createBodyLayer() {
-			MeshDefinition mesh = new MeshDefinition();
-			PartDefinition root = mesh.getRoot();
-			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), new PartPose(0.0F, -160.0F, 0.0F, 0.0F, 0.0F, 0.0F, 5.0F, 5.0F, 5.0F));
-			PartDefinition p1 = transform0.addOrReplaceChild("bone5", CubeListBuilder.create(), PartPose.offsetAndRotation(3.0F, 24.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-			PartDefinition p2 = p1.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -5.0F, -2.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(3, 1).addBox(-1.0F, -5.0F, -2.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(2, 0).addBox(-1.0F, -5.0F, 3.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(3, 1).addBox(-3.0F, -8.0F, -2.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(0, 0).addBox(-3.0F, -8.0F, -2.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(2, 0).addBox(-3.0F, -8.0F, 3.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(3, 1).addBox(2.0F, -7.0F, -4.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(0, 0).addBox(2.0F, -7.0F, -4.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(2, 0).addBox(2.0F, -7.0F, 1.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(2, 0).addBox(0.0F, -10.0F, 5.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(0, 0).addBox(0.0F, -10.0F, 0.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(3, 1).addBox(0.0F, -10.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(2, 0).addBox(4.0F, -5.5F, 3.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(0, 0).addBox(4.0F, -5.5F, -2.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(3, 1).addBox(4.0F, -5.5F, -2.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)), PartPose.offsetAndRotation(0.5F, -6.5F, -2.0F, -1.5708F, 0.0F, 0.0F));
-			PartDefinition p3 = p1.addOrReplaceChild("bone2", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -5.0F, -2.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(3, 1).addBox(-1.0F, -5.0F, -2.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(2, 0).addBox(-1.0F, -5.0F, 3.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(3, 1).addBox(-3.0F, -8.0F, -2.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(0, 0).addBox(-3.0F, -8.0F, -2.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(2, 0).addBox(-3.0F, -8.0F, 3.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(3, 1).addBox(2.0F, -7.0F, -4.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(0, 0).addBox(2.0F, -7.0F, -4.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(2, 0).addBox(2.0F, -7.0F, 1.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(2, 0).addBox(0.0F, -10.0F, 5.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(0, 0).addBox(0.0F, -10.0F, 0.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(3, 1).addBox(0.0F, -10.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(2, 0).addBox(4.0F, -5.5F, 3.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(0, 0).addBox(4.0F, -5.5F, -2.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(3, 1).addBox(4.0F, -5.5F, -2.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)), PartPose.offsetAndRotation(-7.5F, -12.5F, -5.0F, -1.5708F, 0.0F, 0.0F));
-			PartDefinition p4 = p1.addOrReplaceChild("bone3", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, 5.0F, -2.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(3, 1).addBox(-1.0F, 5.0F, -2.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(2, 0).addBox(-1.0F, 5.0F, 3.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(3, 1).addBox(-3.0F, 2.0F, -2.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(0, 0).addBox(-3.0F, 2.0F, -2.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(2, 0).addBox(-3.0F, 2.0F, 3.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(3, 1).addBox(2.0F, 3.0F, -4.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(0, 0).addBox(2.0F, 3.0F, -4.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(2, 0).addBox(2.0F, 3.0F, 1.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(2, 0).addBox(0.0F, 0.0F, 5.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(0, 0).addBox(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(3, 1).addBox(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(2, 0).addBox(4.0F, 4.5F, 3.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(0, 0).addBox(4.0F, 4.5F, -2.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(3, 1).addBox(4.0F, 4.5F, -2.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)), PartPose.offsetAndRotation(0.5F, -9.5F, -2.0F, -1.5708F, 0.0F, 0.0F));
-			PartDefinition p5 = p1.addOrReplaceChild("bone4", CubeListBuilder.create().texOffs(0, 0).addBox(-9.0F, 6.0F, -2.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(3, 1).addBox(-9.0F, 6.0F, -2.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(2, 0).addBox(-9.0F, 6.0F, 3.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(3, 1).addBox(-11.0F, 3.0F, -2.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(0, 0).addBox(-11.0F, 3.0F, -2.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(2, 0).addBox(-11.0F, 3.0F, 3.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(3, 1).addBox(-6.0F, 4.0F, -4.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(0, 0).addBox(-6.0F, 4.0F, -4.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(2, 0).addBox(-6.0F, 4.0F, 1.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(2, 0).addBox(-8.0F, 1.0F, 5.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(0, 0).addBox(-8.0F, 1.0F, 0.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(3, 1).addBox(-8.0F, 1.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(2, 0).addBox(-4.0F, 5.5F, 3.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)).texOffs(0, 0).addBox(-4.0F, 5.5F, -2.0F, 1.0F, 1.0F, 5.0F, new CubeDeformation(-0.3F)).texOffs(3, 1).addBox(-4.0F, 5.5F, -2.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(-0.4F)), PartPose.offsetAndRotation(0.5F, -7.5F, -2.0F, -1.5708F, 0.0F, 0.0F));
-			return LayerDefinition.create(mesh, 16, 16);
-		}
-		
-		@Override
-		public void setupAnim(EntityRenderState state) {
-			super.setupAnim(state);
-			setupAnimCompat(state);
-		}
-		
-		private void setupAnimCompat(EntityRenderState state) {
-			float f = 0, f1 = 0, f2 = state.ageInTicks, f3 = 0, f4 = 0;
-			if (state instanceof LivingEntityRenderState living) {
-				f = living.walkAnimationPos;
-				f1 = living.walkAnimationSpeed;
-				f3 = living.yRot;
-				f4 = living.xRot;
-			}
-		
-		}
-		}
-	}
 
 	public static class NuibariBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -2456,140 +1904,8 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	public static class ShurikenClanRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, ShurikenClanItem.arrow, Modelshuriken_projectile.LAYER, Modelshuriken_projectile::new, Identifier.parse("naruto_shippuden:textures/entities/shuriken.png"));
-		}
 
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(Modelshuriken_projectile.LAYER, Modelshuriken_projectile::createBodyLayer);
-		}
 
-		public static class Modelshuriken_projectile extends EntityModel<EntityRenderState> {
-		public static final ModelLayerLocation LAYER = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "projectilerenderers_shurikenclan_modelshuriken_projectile"), "main");
-		public final ModelPart bb_main;
-		
-		public Modelshuriken_projectile(ModelPart root) {
-			super(root);
-			this.bb_main = root.getChild("transform0").getChild("bb_main");
-		}
-		
-		public static LayerDefinition createBodyLayer() {
-			MeshDefinition mesh = new MeshDefinition();
-			PartDefinition root = mesh.getRoot();
-			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
-			PartDefinition p1 = transform0.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, -8).addBox(0.0F, -26.0F, -5.0F, 0.0F, 8.0F, 8.0F), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-			return LayerDefinition.create(mesh, 8, 8);
-		}
-		
-		@Override
-		public void setupAnim(EntityRenderState state) {
-			super.setupAnim(state);
-			setupAnimCompat(state);
-		}
-		
-		private void setupAnimCompat(EntityRenderState state) {
-			float f = 0, f1 = 0, f2 = state.ageInTicks, f3 = 0, f4 = 0;
-			if (state instanceof LivingEntityRenderState living) {
-				f = living.walkAnimationPos;
-				f1 = living.walkAnimationSpeed;
-				f3 = living.yRot;
-				f4 = living.xRot;
-			}
-		
-		}
-		}
-	}
-
-	public static class SmokeGunRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, SmokeGunItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
-		}
-
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::createBodyLayer);
-		}
-
-		public static class Modelphoenix_flower_jutsu extends EntityModel<EntityRenderState> {
-		public static final ModelLayerLocation LAYER = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "projectilerenderers_smokegun_modelphoenix_flower_jutsu"), "main");
-		public final ModelPart bb_main;
-		
-		public Modelphoenix_flower_jutsu(ModelPart root) {
-			super(root);
-			this.bb_main = root.getChild("transform0").getChild("bb_main");
-		}
-		
-		public static LayerDefinition createBodyLayer() {
-			MeshDefinition mesh = new MeshDefinition();
-			PartDefinition root = mesh.getRoot();
-			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
-			PartDefinition p1 = transform0.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(18, 47).addBox(-2.0F, -9.0F, -2.0F, 4.0F, 8.0F, 4.0F).texOffs(22, 24).addBox(-3.0F, -8.0F, -3.0F, 6.0F, 6.0F, 6.0F).texOffs(28, 14).addBox(-4.0F, -7.0F, -2.0F, 8.0F, 4.0F, 4.0F).texOffs(4, 18).addBox(-2.0F, -7.0F, -4.0F, 4.0F, 4.0F, 8.0F).texOffs(16, 36).addBox(-1.0F, -8.0F, -4.0F, 2.0F, 1.0F, 8.0F).texOffs(4, 30).addBox(-1.0F, -3.0F, -4.0F, 2.0F, 1.0F, 8.0F).texOffs(4, 39).addBox(2.0F, -6.0F, -4.0F, 1.0F, 2.0F, 8.0F).texOffs(28, 37).addBox(-3.0F, -6.0F, -4.0F, 1.0F, 2.0F, 8.0F).texOffs(30, 47).addBox(-4.0F, -8.0F, -1.0F, 8.0F, 1.0F, 2.0F).texOffs(26, 10).addBox(-4.0F, -3.0F, -1.0F, 8.0F, 1.0F, 2.0F).texOffs(4, 10).addBox(-4.0F, -6.0F, -3.0F, 8.0F, 2.0F, 6.0F).texOffs(34, 50).addBox(-3.0F, -9.0F, -1.0F, 6.0F, 1.0F, 2.0F).texOffs(40, 22).addBox(-1.0F, -9.0F, -3.0F, 2.0F, 1.0F, 6.0F).texOffs(44, 11).addBox(-3.0F, -2.0F, -1.0F, 6.0F, 1.0F, 2.0F).texOffs(38, 36).addBox(-1.0F, -2.0F, -3.0F, 2.0F, 1.0F, 6.0F), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-			return LayerDefinition.create(mesh, 64, 64);
-		}
-		
-		@Override
-		public void setupAnim(EntityRenderState state) {
-			super.setupAnim(state);
-			setupAnimCompat(state);
-		}
-		
-		private void setupAnimCompat(EntityRenderState state) {
-			float f = 0, f1 = 0, f2 = state.ageInTicks, f3 = 0, f4 = 0;
-			if (state instanceof LivingEntityRenderState living) {
-				f = living.walkAnimationPos;
-				f1 = living.walkAnimationSpeed;
-				f3 = living.yRot;
-				f4 = living.xRot;
-			}
-		
-		}
-		}
-	}
-
-	public static class SteelProjectileRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, SteelProjectileItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/steel_projectile.png"));
-		}
-
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::createBodyLayer);
-		}
-
-		public static class Modelphoenix_flower_jutsu extends EntityModel<EntityRenderState> {
-		public static final ModelLayerLocation LAYER = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "projectilerenderers_steelprojectile_modelphoenix_flower_jutsu"), "main");
-		public final ModelPart bb_main;
-		
-		public Modelphoenix_flower_jutsu(ModelPart root) {
-			super(root);
-			this.bb_main = root.getChild("transform0").getChild("bb_main");
-		}
-		
-		public static LayerDefinition createBodyLayer() {
-			MeshDefinition mesh = new MeshDefinition();
-			PartDefinition root = mesh.getRoot();
-			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), PartPose.offset(0.0F, -4.8F, 0.0F));
-			PartDefinition p1 = transform0.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(18, 47).addBox(-2.0F, -9.0F, -2.0F, 4.0F, 8.0F, 4.0F).texOffs(22, 24).addBox(-3.0F, -8.0F, -3.0F, 6.0F, 6.0F, 6.0F).texOffs(28, 14).addBox(-4.0F, -7.0F, -2.0F, 8.0F, 4.0F, 4.0F).texOffs(4, 18).addBox(-2.0F, -7.0F, -4.0F, 4.0F, 4.0F, 8.0F).texOffs(16, 36).addBox(-1.0F, -8.0F, -4.0F, 2.0F, 1.0F, 8.0F).texOffs(4, 30).addBox(-1.0F, -3.0F, -4.0F, 2.0F, 1.0F, 8.0F).texOffs(4, 39).addBox(2.0F, -6.0F, -4.0F, 1.0F, 2.0F, 8.0F).texOffs(28, 37).addBox(-3.0F, -6.0F, -4.0F, 1.0F, 2.0F, 8.0F).texOffs(30, 47).addBox(-4.0F, -8.0F, -1.0F, 8.0F, 1.0F, 2.0F).texOffs(26, 10).addBox(-4.0F, -3.0F, -1.0F, 8.0F, 1.0F, 2.0F).texOffs(4, 10).addBox(-4.0F, -6.0F, -3.0F, 8.0F, 2.0F, 6.0F).texOffs(34, 50).addBox(-3.0F, -9.0F, -1.0F, 6.0F, 1.0F, 2.0F).texOffs(40, 22).addBox(-1.0F, -9.0F, -3.0F, 2.0F, 1.0F, 6.0F).texOffs(44, 11).addBox(-3.0F, -2.0F, -1.0F, 6.0F, 1.0F, 2.0F).texOffs(38, 36).addBox(-1.0F, -2.0F, -3.0F, 2.0F, 1.0F, 6.0F), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-			return LayerDefinition.create(mesh, 64, 64);
-		}
-		
-		@Override
-		public void setupAnim(EntityRenderState state) {
-			super.setupAnim(state);
-			setupAnimCompat(state);
-		}
-		
-		private void setupAnimCompat(EntityRenderState state) {
-			float f = 0, f1 = 0, f2 = state.ageInTicks, f3 = 0, f4 = 0;
-			if (state instanceof LivingEntityRenderState living) {
-				f = living.walkAnimationPos;
-				f1 = living.walkAnimationSpeed;
-				f3 = living.yRot;
-				f4 = living.xRot;
-			}
-		
-		}
-		}
-	}
 
 	public static class TailedBeastBombRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -2651,59 +1967,7 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	public static class ToroiUniqueFumaShurikenClanRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.sprite(event, ToroiUniqueFumaShurikenClanItem.arrow);
-		}
 
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-		}
-	}
-
-	public static class TreeBindRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, TreeBindItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
-		}
-
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::createBodyLayer);
-		}
-
-		public static class Modelphoenix_flower_jutsu extends EntityModel<EntityRenderState> {
-		public static final ModelLayerLocation LAYER = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "projectilerenderers_treebind_modelphoenix_flower_jutsu"), "main");
-		public final ModelPart bb_main;
-		
-		public Modelphoenix_flower_jutsu(ModelPart root) {
-			super(root);
-			this.bb_main = root.getChild("transform0").getChild("bb_main");
-		}
-		
-		public static LayerDefinition createBodyLayer() {
-			MeshDefinition mesh = new MeshDefinition();
-			PartDefinition root = mesh.getRoot();
-			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
-			PartDefinition p1 = transform0.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(18, 47).addBox(-2.0F, -9.0F, -2.0F, 4.0F, 8.0F, 4.0F).texOffs(22, 24).addBox(-3.0F, -8.0F, -3.0F, 6.0F, 6.0F, 6.0F).texOffs(28, 14).addBox(-4.0F, -7.0F, -2.0F, 8.0F, 4.0F, 4.0F).texOffs(4, 18).addBox(-2.0F, -7.0F, -4.0F, 4.0F, 4.0F, 8.0F).texOffs(16, 36).addBox(-1.0F, -8.0F, -4.0F, 2.0F, 1.0F, 8.0F).texOffs(4, 30).addBox(-1.0F, -3.0F, -4.0F, 2.0F, 1.0F, 8.0F).texOffs(4, 39).addBox(2.0F, -6.0F, -4.0F, 1.0F, 2.0F, 8.0F).texOffs(28, 37).addBox(-3.0F, -6.0F, -4.0F, 1.0F, 2.0F, 8.0F).texOffs(30, 47).addBox(-4.0F, -8.0F, -1.0F, 8.0F, 1.0F, 2.0F).texOffs(26, 10).addBox(-4.0F, -3.0F, -1.0F, 8.0F, 1.0F, 2.0F).texOffs(4, 10).addBox(-4.0F, -6.0F, -3.0F, 8.0F, 2.0F, 6.0F).texOffs(34, 50).addBox(-3.0F, -9.0F, -1.0F, 6.0F, 1.0F, 2.0F).texOffs(40, 22).addBox(-1.0F, -9.0F, -3.0F, 2.0F, 1.0F, 6.0F).texOffs(44, 11).addBox(-3.0F, -2.0F, -1.0F, 6.0F, 1.0F, 2.0F).texOffs(38, 36).addBox(-1.0F, -2.0F, -3.0F, 2.0F, 1.0F, 6.0F), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-			return LayerDefinition.create(mesh, 64, 64);
-		}
-		
-		@Override
-		public void setupAnim(EntityRenderState state) {
-			super.setupAnim(state);
-			setupAnimCompat(state);
-		}
-		
-		private void setupAnimCompat(EntityRenderState state) {
-			float f = 0, f1 = 0, f2 = state.ageInTicks, f3 = 0, f4 = 0;
-			if (state instanceof LivingEntityRenderState living) {
-				f = living.walkAnimationPos;
-				f1 = living.walkAnimationSpeed;
-				f3 = living.yRot;
-				f4 = living.xRot;
-			}
-		
-		}
-		}
-	}
 
 	public static class UzumakiChainRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -2797,7 +2061,7 @@ public final class ProjectileRenderers {
 
 	public static class WaterBallRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, WaterBallItem.arrow, Modelgreat_fireball.LAYER, Modelgreat_fireball::new, Identifier.parse("naruto_shippuden:textures/custom_water_jutsu.png"));
+			ModRenderers.projectile(event, WaterBallItem.arrow, Modelgreat_fireball.LAYER, Modelgreat_fireball::new, Identifier.parse("naruto_shippuden:textures/entities/custom_water_jutsu.png"));
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -2890,7 +2154,7 @@ public final class ProjectileRenderers {
 
 	public static class WaterDiskRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, WaterDiskItem.arrow, ModelJutsu_Disk.LAYER, ModelJutsu_Disk::new, Identifier.parse("naruto_shippuden:textures/custom_water_jutsu.png"));
+			ModRenderers.projectile(event, WaterDiskItem.arrow, ModelJutsu_Disk.LAYER, ModelJutsu_Disk::new, Identifier.parse("naruto_shippuden:textures/entities/custom_water_jutsu.png"));
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -3217,7 +2481,7 @@ public final class ProjectileRenderers {
 
 	public static class WindBallRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, WindBallItem.arrow, Modelgreat_fireball.LAYER, Modelgreat_fireball::new, Identifier.parse("naruto_shippuden:textures/custom_wind_jutsu.png"));
+			ModRenderers.projectile(event, WindBallItem.arrow, Modelgreat_fireball.LAYER, Modelgreat_fireball::new, Identifier.parse("naruto_shippuden:textures/entities/custom_wind_jutsu.png"));
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -3310,7 +2574,7 @@ public final class ProjectileRenderers {
 
 	public static class WindDiskRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, WindDiskItem.arrow, ModelJutsu_Disk.LAYER, ModelJutsu_Disk::new, Identifier.parse("naruto_shippuden:textures/custom_wind_jutsu.png"));
+			ModRenderers.projectile(event, WindDiskItem.arrow, ModelJutsu_Disk.LAYER, ModelJutsu_Disk::new, Identifier.parse("naruto_shippuden:textures/entities/custom_wind_jutsu.png"));
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -3428,66 +2692,4 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	public static class WoodDragonRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, WoodDragonItem.arrow, Modelwood_dragon.LAYER, Modelwood_dragon::new, Identifier.parse("naruto_shippuden:textures/entities/wood_dragon.png"));
-		}
-
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(Modelwood_dragon.LAYER, Modelwood_dragon::createBodyLayer);
-		}
-
-		public static class Modelwood_dragon extends EntityModel<EntityRenderState> {
-		public static final ModelLayerLocation LAYER = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "projectilerenderers_wooddragon_modelwood_dragon"), "main");
-		public final ModelPart bb_main;
-		public final ModelPart cube_r1;
-		public final ModelPart cube_r2;
-		public final ModelPart cube_r3;
-		public final ModelPart cube_r4;
-		public final ModelPart cube_r5;
-		public final ModelPart cube_r6;
-		
-		public Modelwood_dragon(ModelPart root) {
-			super(root);
-			this.bb_main = root.getChild("transform0").getChild("bb_main");
-			this.cube_r1 = root.getChild("transform0").getChild("bb_main").getChild("cube_r1");
-			this.cube_r2 = root.getChild("transform0").getChild("bb_main").getChild("cube_r2");
-			this.cube_r3 = root.getChild("transform0").getChild("bb_main").getChild("cube_r3");
-			this.cube_r4 = root.getChild("transform0").getChild("bb_main").getChild("cube_r4");
-			this.cube_r5 = root.getChild("transform0").getChild("bb_main").getChild("cube_r5");
-			this.cube_r6 = root.getChild("transform0").getChild("bb_main").getChild("cube_r6");
-		}
-		
-		public static LayerDefinition createBodyLayer() {
-			MeshDefinition mesh = new MeshDefinition();
-			PartDefinition root = mesh.getRoot();
-			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), new PartPose(0.0F, -7.199999999999999F, 0.0F, 0.0F, 0.0F, 0.0F, 1.5F, 1.5F, 1.5F));
-			PartDefinition p1 = transform0.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 6).addBox(-5.0F, -21.0F, -4.0F, 10.0F, 9.0F, 49.0F).texOffs(0, 2).addBox(-5.0F, -21.0F, -23.0F, 10.0F, 9.0F, 4.0F).texOffs(0, 13).addBox(-6.5F, -22.0F, -19.0F, 13.0F, 10.0F, 15.0F).texOffs(0, 3).addBox(-4.0F, -20.0F, -28.0F, 8.0F, 7.0F, 5.0F).texOffs(0, 6).addBox(-5.0F, -21.0F, 45.0F, 2.0F, 2.0F, 8.0F).texOffs(0, 5).addBox(-3.0F, -18.0F, 45.0F, 2.0F, 2.0F, 7.0F).texOffs(0, 6).addBox(0.6F, -19.0F, 45.0F, 2.0F, 2.0F, 8.0F).texOffs(0, 4).addBox(-2.0F, -21.0F, 45.0F, 2.0F, 2.0F, 6.0F).texOffs(0, 6).addBox(0.0F, -16.0F, 45.0F, 2.0F, 2.0F, 8.0F).texOffs(0, 6).addBox(3.0F, -21.0F, 45.0F, 2.0F, 2.0F, 8.0F).texOffs(0, 1).addBox(3.0F, -14.9F, 45.0F, 2.0F, 2.0F, 3.0F).texOffs(121, 121).addBox(-4.2F, -20.9F, -23.3F, 2.0F, 1.0F, 1.0F).texOffs(121, 121).addBox(2.2F, -20.9F, -23.3F, 2.0F, 1.0F, 1.0F), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 2.2025F, 1.557F, -2.5215F));
-			PartDefinition p2 = p1.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 1).addBox(11.0F, -33.4F, 24.5F, 2.0F, 9.0F, 3.0F).texOffs(0, 0).addBox(11.0F, -30.4F, 15.5F, 2.0F, 9.0F, 3.0F).texOffs(0, 1).addBox(11.0F, -27.4F, 6.5F, 2.0F, 9.0F, 3.0F).texOffs(0, 1).addBox(11.0F, -25.4F, -0.5F, 2.0F, 9.0F, 3.0F), PartPose.offsetAndRotation(-12.0F, 0.0F, 0.0F, -0.3491F, 0.0F, 0.0F));
-			PartDefinition p3 = p1.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 8).addBox(11.0F, -23.5F, -5.9F, 2.0F, 1.0F, 10.0F).texOffs(0, 8).addBox(0.0F, -23.5F, -5.9F, 2.0F, 1.0F, 10.0F).texOffs(0, 7).addBox(3.0F, -23.5F, -5.9F, 2.0F, 1.0F, 9.0F).texOffs(0, 7).addBox(6.0F, -23.5F, -5.9F, 2.0F, 1.0F, 9.0F).texOffs(0, 5).addBox(8.6F, -23.5F, -5.9F, 2.0F, 1.0F, 7.0F), PartPose.offsetAndRotation(-6.5F, -0.7103F, 2.8374F, 0.2618F, 0.0F, 0.0F));
-			PartDefinition p4 = p1.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(0, 8).addBox(11.0F, -22.0F, -5.8F, 2.0F, 1.0F, 10.0F).texOffs(0, 5).addBox(8.6F, -22.0F, -5.8F, 2.0F, 1.0F, 7.0F).texOffs(0, 7).addBox(6.0F, -22.0F, -5.8F, 2.0F, 1.0F, 9.0F).texOffs(0, 7).addBox(3.0F, -22.0F, -5.8F, 2.0F, 1.0F, 9.0F).texOffs(0, 8).addBox(0.0F, -22.0F, -5.8F, 2.0F, 1.0F, 10.0F), PartPose.offsetAndRotation(-6.5F, -0.7103F, 2.8374F, 0.1309F, 0.0F, 0.0F));
-			PartDefinition p5 = p1.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(2, -1).addBox(-1.0F, -19.3F, -21.8F, 0.0F, 6.0F, 1.0F).texOffs(0, -1).addBox(-12.8F, -19.3F, -21.8F, 0.0F, 6.0F, 1.0F).texOffs(0, 0).addBox(-12.0F, -13.1F, -24.1F, 11.0F, 2.0F, 2.0F).texOffs(0, 14).addBox(-12.8F, -13.1F, -22.1F, 12.0F, 2.0F, 18.0F), PartPose.offsetAndRotation(6.5F, -2.0206F, 2.1881F, 0.2182F, 0.0F, 0.0F));
-			PartDefinition p6 = p1.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(0, 3).addBox(5.0F, -18.0F, -33.0F, 4.0F, 3.0F, 5.0F), PartPose.offsetAndRotation(-7.0F, -27.2054F, -0.8962F, 0.9163F, 0.0F, 0.0F));
-			PartDefinition p7 = p1.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(0, 4).addBox(4.0F, -19.0F, -28.0F, 6.0F, 5.0F, 6.0F), PartPose.offsetAndRotation(-7.0F, -11.1714F, 0.3911F, 0.4363F, 0.0F, 0.0F));
-			return LayerDefinition.create(mesh, 128, 128);
-		}
-		
-		@Override
-		public void setupAnim(EntityRenderState state) {
-			super.setupAnim(state);
-			setupAnimCompat(state);
-		}
-		
-		private void setupAnimCompat(EntityRenderState state) {
-			float f = 0, f1 = 0, f2 = state.ageInTicks, f3 = 0, f4 = 0;
-			if (state instanceof LivingEntityRenderState living) {
-				f = living.walkAnimationPos;
-				f1 = living.walkAnimationSpeed;
-				f3 = living.yRot;
-				f4 = living.xRot;
-			}
-		
-		}
-		}
-	}
 }

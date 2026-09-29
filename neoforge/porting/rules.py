@@ -1446,3 +1446,84 @@ def stat_caps(path, text):
         text = re.sub(r'NarutoShippudenModVariables\.get\(entity\)\.%s >= \d+\) \{' % stat,
                       'NarutoShippudenModVariables.get(entity).%s >= %d) {' % (stat, cap + 1), text, count=1)
     return text
+
+
+# ---------------------------------------------------------------- items the jutsu engine owns (core/jutsu/Jutsus cancels their right-click)
+_ENGINE_ITEMS = None
+
+
+def engine_items():
+    """Every technique and release item registered in core/jutsu (JutsuTable and the jutsu classes)."""
+    global _ENGINE_ITEMS
+    if _ENGINE_ITEMS is not None:
+        return _ENGINE_ITEMS
+    ids = set()
+    folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'override', 'net', 'mcreator', 'narutoshippudenmod', 'core', 'jutsu')
+    for name in os.listdir(folder):
+        if not name.endswith('.java'):
+            continue
+        t = open(os.path.join(folder, name)).read()
+        ids |= set(re.findall(r'\b(?:technique|release|mangekyou|Jutsus\.technique|Jutsus\.release)\("([a-z_]+)"', t))
+        for n in re.findall(r'\bnature\("([a-z_]+)"', t):
+            ids |= {n + '_release_technique', n + '_release'}
+    _ENGINE_ITEMS = ids
+    return ids
+
+
+@func
+def engine_item_hooks(path, text):
+    """A technique or release item never runs its own use(): the engine casts (or opens the jutsu scroll) and cancels the click.
+    Pointing those dead calls at ClanJutsu.unused lets the old right-click procedures go."""
+    if '/item/' not in path.replace('\\', '/'):
+        return text
+    ids = engine_items()
+    for m in reversed(list(re.finditer(r'public static class \w+ extends NarutoShippudenModElements\.ModElement \{\s*public static Item block;\s*static \{\s*'
+                                       r'Registration\.holder\(Registries\.ITEM, "(\w+)"', text))):
+        if m.group(1) not in ids:
+            continue
+        end = find_block(text, m.start())
+        cls = text[m.start():end]
+        u = cls.find('public InteractionResult use(')
+        if u < 0:
+            continue
+        use_end = find_block(cls, u)
+        body = re.sub(r'\b\w+Procedure\s*\.executeProcedure\(', 'net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(', cls[u:use_end])
+        text = text[:m.start()] + cls[:u] + body + cls[use_end:] + text[end:]
+    return text
+
+
+# ---------------------------------------------------------------- dead code: old procedures, projectiles and renderers nothing calls
+DEAD_CLASSES = set(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'dead_classes.txt')).read().split())
+
+
+def dead_code(path, text):
+    """Removes the member classes dead_code.py found unreachable (the MCreator jutsu the new engine replaced, the projectiles and
+    summons only they spawned, and their renderers), with their imports and renderer registrations."""
+    if not DEAD_CLASSES:
+        return text
+    names = '|'.join(sorted(DEAD_CLASSES))
+    text = re.sub(r'\nimport [\w.]*\.(?:%s)(?:\.\w+)*;' % names, '', text)
+    for name in DEAD_CLASSES:
+        if re.search(r'public static class %s\b' % name, text):
+            text = remove_class(text, name)
+    return re.sub(r'\n\t*[\w.]*\b(?:%s)\.register\w*\(event\);' % names, '', text)
+
+
+RULES.append(dead_code)
+
+
+@func
+def shadow_imitation_guard(path, text):
+    """A Shadow Imitation entity reads its rider and owner every tick; one left without them (saved mid-jutsu, or summoned) crashed the
+    server on load. It now just disappears."""
+    if not path.replace('\\', '/').endswith('ClanProcedures.java'):
+        return text
+    return re.sub(r'(public static class ShadowImitationEntity\w*OnEntityTickUpdateProcedure \{.*?Entity entity = \(Entity\) dependencies\.get\("entity"\);)',
+                  r'\1\n\t\t\tif (entity.getVehicle() == null || !(entity instanceof TamableAnimal _tamed && _tamed.getOwner() != null)) {'
+                  r'\n\t\t\t\tif (!entity.level().isClientSide())\n\t\t\t\t\tentity.discard();\n\t\t\t\treturn;\n\t\t\t}', text, flags=re.S)
+
+
+@func
+def custom_jutsu_textures(path, text):
+    """The Custom Jutsu projectiles (and a fireball) pointed at textures/<name>.png; the files are in textures/entities/."""
+    return re.sub(r'"naruto_shippuden:textures/((?:custom_\w+_jutsu(?:_wave)?|fireball)(?:\.png)?)"', r'"naruto_shippuden:textures/entities/\1"', text)

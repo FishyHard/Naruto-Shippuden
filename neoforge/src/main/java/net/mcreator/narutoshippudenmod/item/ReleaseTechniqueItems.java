@@ -16,23 +16,7 @@ import net.mcreator.narutoshippudenmod.procedures.CustomJutsuProcedures.CustomLi
 import net.mcreator.narutoshippudenmod.procedures.CustomJutsuProcedures.CustomWaterReleaseTechniqueRightClickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.CustomJutsuProcedures.CustomWindReleaseTechniqueRightClickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.BoilReleaseTechniqueLivingEntityIsHitWithItemProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.BoilReleaseTechniqueRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.BoneReleaseTechniqueRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.DustReleaseTechniqueRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.IceReleaseTechniqueRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.MagnetReleaseTechniqueRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.SmokeReleaseTechniqueLivingEntityIsHitWithItemProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.SmokeReleaseTechniqueRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.SteelReleaseTechniqueRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.StormReleaseTechniqueRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.SwiftReleaseTechniqueRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.TyphoonReleaseTechniqueRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.WoodReleaseTechniqueRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.NatureReleaseProcedures.EarthReleaseTechniqueRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.NatureReleaseProcedures.FireReleaseTechniqueRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.NatureReleaseProcedures.LightningReleaseTechniqueRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.NatureReleaseProcedures.WaterReleaseTechniqueRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.NatureReleaseProcedures.WindReleaseTechniqueRightclickedProcedure;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.entity.LivingEntity;
@@ -92,7 +76,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				BoilReleaseTechniqueRightclickedProcedure.executeProcedure(Stream
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
 								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
@@ -155,7 +139,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				BoneReleaseTechniqueRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -202,7 +186,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				CustomEarthReleaseTechniqueRightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -249,7 +233,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				CustomFireReleaseTechniqueRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -296,7 +280,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				CustomLightningReleaseTechniqueRightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -343,7 +327,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				CustomWaterReleaseTechniqueRightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -390,7 +374,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				CustomWindReleaseTechniqueRightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -437,7 +421,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				DustReleaseTechniqueRightclickedProcedure.executeProcedure(Stream
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
 								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
@@ -486,7 +470,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				EarthReleaseTechniqueRightclickedProcedure.executeProcedure(Stream
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
 								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
@@ -535,7 +519,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				FireReleaseTechniqueRightclickedProcedure.executeProcedure(Stream
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
 								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
@@ -584,8 +568,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				IceReleaseTechniqueRightclickedProcedure
-						.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("entity", entity))
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("entity", entity))
 								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -632,7 +615,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				LightningReleaseTechniqueRightclickedProcedure.executeProcedure(Stream
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
 								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
@@ -681,8 +664,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				MagnetReleaseTechniqueRightclickedProcedure
-						.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("entity", entity))
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("entity", entity))
 								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -729,7 +711,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				SmokeReleaseTechniqueRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -790,7 +772,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				SteelReleaseTechniqueRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -837,7 +819,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				StormReleaseTechniqueRightclickedProcedure.executeProcedure(Stream
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
 								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
@@ -886,7 +868,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				SwiftReleaseTechniqueRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -933,7 +915,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				TyphoonReleaseTechniqueRightclickedProcedure.executeProcedure(Stream
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
 								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
@@ -982,7 +964,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				WaterReleaseTechniqueRightclickedProcedure.executeProcedure(Stream
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
 								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
@@ -1031,7 +1013,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				WindReleaseTechniqueRightclickedProcedure.executeProcedure(Stream
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
 								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
@@ -1080,7 +1062,7 @@ public final class ReleaseTechniqueItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				WoodReleaseTechniqueRightclickedProcedure.executeProcedure(Stream
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
 								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));

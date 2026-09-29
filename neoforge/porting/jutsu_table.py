@@ -1,3 +1,6 @@
+"""Retired: wrote core/jutsu/JutsuTable.java from the MCreator procedures, most of which were removed once the new jutsu classes
+replaced them. JutsuTable.java is kept by hand now; this script stays as a record of how the table was first made."""
+raise SystemExit('JutsuTable.java is maintained by hand; see the docstring')
 import re,glob,json,os
 ROOT=__import__('os').path.join(__import__('os').path.dirname(__file__), '..', 'src/main/java/net/mcreator/narutoshippudenmod/') + '/'
 HERE=os.path.dirname(os.path.abspath(__file__))

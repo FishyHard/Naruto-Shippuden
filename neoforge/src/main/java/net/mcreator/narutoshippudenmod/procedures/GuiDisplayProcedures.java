@@ -9,117 +9,12 @@ public final class GuiDisplayProcedures {
 	private GuiDisplayProcedures() {
 	}
 
-	public static class ChakraDisplayLength1Procedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure ChakraDisplayLength1!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if ((new java.text.DecimalFormat("##.##").format(NarutoShippudenModVariables.get(entity).ChakraMax)).length() == 1) {
-				return true;
-			}
-			return false;
-		}
-	}
 
-	public static class ChakraDisplayLength2Procedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure ChakraDisplayLength2!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if ((new java.text.DecimalFormat("##.##").format(NarutoShippudenModVariables.get(entity).ChakraMax)).length() == 2) {
-				return true;
-			}
-			return false;
-		}
-	}
 
-	public static class ChakraDisplayLength3Procedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure ChakraDisplayLength3!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if ((new java.text.DecimalFormat("##.##").format(NarutoShippudenModVariables.get(entity).ChakraMax)).length() == 3) {
-				return true;
-			}
-			return false;
-		}
-	}
 
-	public static class ChakraDisplayLength4Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure ChakraDisplayLength4!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if ((new java.text.DecimalFormat("##.##").format(NarutoShippudenModVariables.get(entity).ChakraMax)).length() == 4) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class ChakraDisplayLength5Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure ChakraDisplayLength5!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if ((new java.text.DecimalFormat("##.##").format(NarutoShippudenModVariables.get(entity).ChakraMax)).length() == 5) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class ChakraDisplayLength6Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure ChakraDisplayLength6!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if ((new java.text.DecimalFormat("##.##").format(NarutoShippudenModVariables.get(entity).ChakraMax)).length() == 6) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class ChakraDisplayLength7Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure ChakraDisplayLength7!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if ((new java.text.DecimalFormat("##.##").format(NarutoShippudenModVariables.get(entity).ChakraMax)).length() == 7) {
-				return true;
-			}
-			return false;
-		}
-	}
 
 	public static class DiplayFumaSelectProcedure {
 
@@ -3505,35 +3400,5 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-	public static class HealthDisplayLength1Procedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure HealthDisplayLength1!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if ((new java.text.DecimalFormat("##.##").format(NarutoShippudenModVariables.get(entity).HealthMax)).length() == 2) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class HealthDisplayLength2Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure HealthDisplayLength2!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if ((new java.text.DecimalFormat("##.##").format(NarutoShippudenModVariables.get(entity).HealthMax)).length() == 3) {
-				return true;
-			}
-			return false;
-		}
-	}
 }

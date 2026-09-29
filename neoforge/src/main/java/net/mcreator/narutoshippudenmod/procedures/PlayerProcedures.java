@@ -36,9 +36,6 @@ import net.mcreator.narutoshippudenmod.block.ModBlocks.NaraShadowBlock;
 import net.mcreator.narutoshippudenmod.core.EntityScale;
 import net.mcreator.narutoshippudenmod.core.ModelSwapRenderers;
 import net.mcreator.narutoshippudenmod.entity.JutsuEntities.ShadowImitationEntityEntity;
-import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.ButterflyModeRenderer;
-import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.CatChakraModeRenderer;
-import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.CatChakraModeSneakRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.DanceOfTheLarchRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.DanceoftheLarchSneakRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.DeadDemonConsumingSealRenderer;
@@ -46,7 +43,6 @@ import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.DrowningWa
 import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.DrowningWaterBlobTechniqueEntitySneakRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.EightTrigramsPalmsRevolvingHeavenRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.FangRenderer;
-import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.HumanBulletTankRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.IceMirrorRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.InsectJarTechniqueRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.MagnetCoatRenderer;
@@ -54,9 +50,6 @@ import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.MagnetCoat
 import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.MagnetHandsRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.MagnetHandsSneakRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.MagnetWingsRenderer;
-import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.SpikedHumanBulletTankRenderer;
-import net.mcreator.narutoshippudenmod.entity.renderer.SummonRenderers.MonsterCatRenderer;
-import net.mcreator.narutoshippudenmod.entity.renderer.SummonRenderers.WolfRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.SusanoRenderers.ArmoredSusanoMadaraRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.SusanoRenderers.ArmoredSusanoSasukeRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.SusanoRenderers.ArmoredSusanoShisuiRenderer;

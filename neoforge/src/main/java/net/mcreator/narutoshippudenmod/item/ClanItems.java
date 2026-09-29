@@ -13,28 +13,15 @@ import java.util.Map;
 import java.util.Random;
 import java.util.stream.Stream;
 import net.mcreator.narutoshippudenmod.NarutoShippudenModElements;
-import net.mcreator.narutoshippudenmod.entity.renderer.ProjectileRenderers.FumaShurikenClanRenderer;
-import net.mcreator.narutoshippudenmod.entity.renderer.ProjectileRenderers.ShurikenClanRenderer;
-import net.mcreator.narutoshippudenmod.entity.renderer.ProjectileRenderers.ToroiUniqueFumaShurikenClanRenderer;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.FumaShurikenItem;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.ToroiUniqueFumaShurikenItem;
 import net.mcreator.narutoshippudenmod.itemgroup.ModItemGroups.ClansItemGroup;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.AburameReleaseRightclickProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.AkimichiReleaseRightclickProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.ClanResetRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.DanceOfTheCamelliaLivingEntityIsHitWithItemProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.DanceOfTheClematisFlowerLivingEntityIsHitWithItemProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.EightTrigramsTwinLionsCrumblingAttackLivingEntityIsHitWithItemProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.FumaReleaseRightclickProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.GentleStepTwinLionFistsLivingEntityIsHitWithItemProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.HozukiReleaseRightclickProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.HyugaReleaseRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.IburiReleaseRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.InuzukaReleaseRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.LeeReleaseRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.SarutobiReleaseRightclickProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.TsuchigumoReleaseRightclickProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.UzumakiReleaseRightclickedProcedure;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.entity.Entity;
@@ -111,7 +98,7 @@ public final class ClanItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				AburameReleaseRightclickProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -158,7 +145,7 @@ public final class ClanItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				AkimichiReleaseRightclickProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -426,7 +413,7 @@ public final class ClanItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				FumaReleaseRightclickProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -660,7 +647,7 @@ public final class ClanItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				HozukiReleaseRightclickProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -707,7 +694,7 @@ public final class ClanItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				HyugaReleaseRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -754,7 +741,7 @@ public final class ClanItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				IburiReleaseRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -801,7 +788,7 @@ public final class ClanItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				InuzukaReleaseRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -852,7 +839,7 @@ public final class ClanItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				LeeReleaseRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -934,7 +921,7 @@ public final class ClanItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				SarutobiReleaseRightclickProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -1260,7 +1247,7 @@ public final class ClanItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				TsuchigumoReleaseRightclickProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}
@@ -1340,7 +1327,7 @@ public final class ClanItems {
 				double y = entity.getY();
 				double z = entity.getZ();
 
-				UzumakiReleaseRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return ar;
 			}

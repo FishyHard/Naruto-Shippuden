@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import net.mcreator.narutoshippudenmod.NarutoShippudenMod;
 import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables;
-import net.mcreator.narutoshippudenmod.entity.JutsuEntities.RunningFireEntity;
 import net.mcreator.narutoshippudenmod.entity.JutsuEntities.ShadowCloneEntity;
 import net.mcreator.narutoshippudenmod.entity.NpcEntities.AsumaEntity;
 import net.mcreator.narutoshippudenmod.entity.NpcEntities.EarthGolemShinobiEntity;
@@ -1065,68 +1064,7 @@ public final class EntityProcedures {
 		}
 	}
 
-	public static class DisruptionCubeEntityFallsProcedure {
 
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("world") == null) {
-				if (!dependencies.containsKey("world"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure DisruptionCubeEntityFalls!");
-				return;
-			}
-			if (dependencies.get("x") == null) {
-				if (!dependencies.containsKey("x"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency x for procedure DisruptionCubeEntityFalls!");
-				return;
-			}
-			if (dependencies.get("y") == null) {
-				if (!dependencies.containsKey("y"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency y for procedure DisruptionCubeEntityFalls!");
-				return;
-			}
-			if (dependencies.get("z") == null) {
-				if (!dependencies.containsKey("z"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency z for procedure DisruptionCubeEntityFalls!");
-				return;
-			}
-			LevelAccessor world = (LevelAccessor) dependencies.get("world");
-			double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
-			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
-			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
-			{
-				List<Entity> _entfound = world
-						.getEntitiesOfClass(Entity.class,
-								new AABB(x - (15 / 2d), y - (15 / 2d), z - (15 / 2d), x + (15 / 2d), y + (15 / 2d), z + (15 / 2d)), e -> true)
-						.stream().sorted(new Object() {
-							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
-								return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
-							}
-						}.compareDistOf(x, y, z)).collect(Collectors.toList());
-				for (Entity entityiterator : _entfound) {
-					entityiterator.hurt(Compat.damage().generic(), (float) 25);
-					{
-						double _setval = (NarutoShippudenModVariables.get(entityiterator).ChakraAmount / 2);
-						NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-							capability.ChakraAmount = _setval;
-							capability.syncPlayerVariables(entityiterator);
-						});
-					}
-				}
-			}
-		}
-	}
-
-	public static class DisruptionCubePlayerCollidesWithThisEntityProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisruptionCubePlayerCollidesWithThisEntity!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			entity.hurt(Compat.damage().generic(), (float) 4);
-		}
-	}
 
 	public static class EarthGolemOnInitialEntitySpawnProcedure {
 
@@ -3189,69 +3127,6 @@ public final class EntityProcedures {
 		}
 	}
 
-	public static class RunningFirePlayerCollidesWithThisEntityProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("world") == null) {
-				if (!dependencies.containsKey("world"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure RunningFirePlayerCollidesWithThisEntity!");
-				return;
-			}
-			if (dependencies.get("x") == null) {
-				if (!dependencies.containsKey("x"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency x for procedure RunningFirePlayerCollidesWithThisEntity!");
-				return;
-			}
-			if (dependencies.get("y") == null) {
-				if (!dependencies.containsKey("y"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency y for procedure RunningFirePlayerCollidesWithThisEntity!");
-				return;
-			}
-			if (dependencies.get("z") == null) {
-				if (!dependencies.containsKey("z"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency z for procedure RunningFirePlayerCollidesWithThisEntity!");
-				return;
-			}
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure RunningFirePlayerCollidesWithThisEntity!");
-				return;
-			}
-			LevelAccessor world = (LevelAccessor) dependencies.get("world");
-			double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
-			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
-			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
-			Entity entity = (Entity) dependencies.get("entity");
-			{
-				List<Entity> _entfound = world
-						.getEntitiesOfClass(Entity.class,
-								new AABB(x - (4 / 2d), y - (4 / 2d), z - (4 / 2d), x + (4 / 2d), y + (4 / 2d), z + (4 / 2d)), e -> true)
-						.stream().sorted(new Object() {
-							Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
-								return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
-							}
-						}.compareDistOf(x, y, z)).collect(Collectors.toList());
-				for (Entity entityiterator : _entfound) {
-					if (!(entityiterator instanceof RunningFireEntity.CustomEntity)) {
-						if (!(new Object() {
-							boolean check(Entity _entity) {
-								if (_entity instanceof LivingEntity) {
-									Collection<MobEffectInstance> effects = ((LivingEntity) _entity).getActiveEffects();
-									for (MobEffectInstance effect : effects) {
-										if (effect.getEffect() == MobEffects.FIRE_RESISTANCE)
-											return true;
-									}
-								}
-								return false;
-							}
-						}.check(entity))) {
-							entityiterator.hurt(Compat.damage().onFire(), (float) 3);
-						}
-					}
-				}
-			}
-		}
-	}
 
 	public static class ShikamaruRightClickedOnEntityProcedure {
 
