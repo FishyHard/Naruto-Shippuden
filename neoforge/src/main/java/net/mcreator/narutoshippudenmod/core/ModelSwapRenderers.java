@@ -73,12 +73,41 @@ public final class ModelSwapRenderers {
 
 	/** Draws the player model again with an overlay texture, used for dojutsu eyes (was InternalPlayerRenderer). */
 	public static void renderDojutsu(RenderLivingEvent<?, ?, ?> event, String texture) {
-		if (!(event.getRenderState() instanceof AvatarRenderState))
+		if (!(event.getRenderState() instanceof AvatarRenderState state) || state.isInvisible || swapped(entity(event)))
 			return;
 		if (overlayModel == null)
 			overlayModel = new PlayerModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER), false);
 		// the eyes lie exactly on the skin, so they need the decal render type (depth offset) to show on top of it
 		draw(event, overlayModel, RenderTypes.entityCutoutZOffset(Identifier.parse(texture)), 0.9375F);
+	}
+
+	/** Whether the player is drawn as something else just now (Passing Fang's drill, a Human Bullet Tank), so their eyes are hidden. */
+	private static boolean swapped(@org.jspecify.annotations.Nullable LivingEntity entity) {
+		if (entity == null)
+			return false;
+		var v = net.mcreator.narutoshippudenmod.NarutoShippudenModVariables.get(entity);
+		return v.PassingFang || v.HumanBulletTank || v.SpikedHumanBulletTank;
+	}
+
+	/**
+	 * The body's turn, as the player's own renderer does it: facing, and lying along the flight when gliding or swimming, so
+	 * eyes and Susanoo stay on the body in every pose.
+	 */
+	private static void rotations(LivingEntityRenderState state, PoseStack pose) {
+		if (!state.hasPose(Pose.SLEEPING))
+			pose.rotateDegrees(Axis.YP, 180.0F - state.bodyRot);
+		if (!(state instanceof AvatarRenderState avatar))
+			return;
+		if (avatar.isFallFlying) {
+			if (!avatar.isAutoSpinAttack)
+				pose.rotateDegrees(Axis.XP, avatar.fallFlyingScale() * (-90.0F - avatar.xRot));
+			if (avatar.shouldApplyFlyingYRot)
+				pose.rotate(Axis.YP, avatar.flyingYRot);
+		} else if (avatar.swimAmount > 0) {
+			pose.rotateDegrees(Axis.XP, net.minecraft.util.Mth.lerp(avatar.swimAmount, 0.0F, avatar.isInWater ? -90.0F - avatar.xRot : -90.0F));
+			if (avatar.isVisuallySwimming)
+				pose.translate(0.0F, -1.0F, 0.3F);
+		}
 	}
 
 	/** Same transforms LivingEntityRenderer applies before drawing its own model. */
@@ -87,8 +116,7 @@ public final class ModelSwapRenderers {
 		PoseStack pose = event.getPoseStack();
 		pose.pushPose();
 		pose.scale(state.scale, state.scale, state.scale);
-		if (!state.hasPose(Pose.SLEEPING))
-			pose.rotateDegrees(Axis.YP, 180.0F - state.bodyRot);
+		rotations(state, pose);
 		pose.scale(-1.0F, -1.0F, 1.0F);
 		pose.scale(modelScale, modelScale, modelScale);
 		pose.translate(0.0F, -1.501F, 0.0F);

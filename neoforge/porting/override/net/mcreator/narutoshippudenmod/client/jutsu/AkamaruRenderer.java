@@ -90,7 +90,7 @@ public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, Aka
 
 	public static class Model extends EntityModel<State> {
 		private final ModelPart bone, body, head, tail, leftFront, rightFront, leftRear, rightRear;
-		private final float boneY;
+		private final float boneY, rearY, rearZ;
 
 		Model() {
 			super(ModelAkamaru_Young.createBodyLayer().bakeRoot());
@@ -103,6 +103,8 @@ public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, Aka
 			leftRear = bone.getChild("LeftRearLeg");
 			rightRear = bone.getChild("RightRearLeg");
 			boneY = bone.y;
+			rearY = leftRear.y;
+			rearZ = leftRear.z;
 		}
 
 		@Override
@@ -121,15 +123,21 @@ public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, Aka
 			bone.zRot = state.wet && !state.sitting ? Mth.sin(age * 1.4F) * 0.12F : 0;
 			body.xRot = 0;
 
+			leftRear.y = rightRear.y = rearY;
+			leftRear.z = rightRear.z = rearZ;
+			leftRear.yScale = rightRear.yScale = 1;
 			if (state.sitting) {
-				// tipped back onto his haunches round the front paws: front legs straight down, hind legs folded forward under him
-				bone.xRot = -0.38F;
-				bone.y = boneY - 0.5F;
-				leftFront.xRot = rightFront.xRot = 0.38F;
-				leftRear.xRot = rightRear.xRot = -0.6F;
-				head.xRot += 0.3F;
-				// the tail lies on the ground behind him
-				tail.xRot = -0.7F;
+				// like a sitting wolf: tipped back 35 degrees round the front paws (front legs straight down), rump on the ground and
+				// the hind legs lying forward under him, the tail flat behind
+				bone.xRot = -0.62F;
+				bone.y = boneY - 1.14F;
+				leftFront.xRot = rightFront.xRot = 0.62F;
+				leftRear.y = rightRear.y = -3.3F;
+				leftRear.z = rightRear.z = 7.5F;
+				leftRear.xRot = rightRear.xRot = -0.95F;
+				leftRear.yScale = rightRear.yScale = 0.7F;
+				head.xRot += 0.45F;
+				tail.xRot = -0.8F;
 				tail.yRot = Mth.sin(age * 0.15F) * 0.2F;
 				return;
 			}

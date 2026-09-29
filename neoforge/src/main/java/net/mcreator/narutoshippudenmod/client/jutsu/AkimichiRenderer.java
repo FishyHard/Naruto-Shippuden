@@ -49,11 +49,6 @@ import java.util.function.Consumer;
 public final class AkimichiRenderer {
 	private static final Identifier TANK = Identifier.fromNamespaceAndPath("naruto_shippuden", "textures/entities/jutsu/akimichi_tank.png");
 	private static final Identifier CHAKRA = Identifier.fromNamespaceAndPath("naruto_shippuden", "textures/entities/jutsu/chakra.png");
-	/** Every colour an Akimichi's wings can be (each is born with one, see ClanJutsu.WING_COLOURS). */
-	public static final Map<String, Integer> WING_COLORS = Map.ofEntries(Map.entry("Blue", 0x5AB4FF), Map.entry("Green", 0x6BFF7A),
-			Map.entry("Orange", 0xFF9A3C), Map.entry("Pink", 0xFF7AD0), Map.entry("Purple", 0xB070FF), Map.entry("Red", 0xFF4A4A),
-			Map.entry("Yellow", 0xFFE24A), Map.entry("Cyan", 0x4AF0FF), Map.entry("White", 0xF4F4FF), Map.entry("Gold", 0xFFC640),
-			Map.entry("Lime", 0xB6FF4A), Map.entry("Crimson", 0xC8143C), Map.entry("Violet", 0x8A4AFF), Map.entry("Teal", 0x2AC8A8));
 
 	private static PartModel ball, spikes, wing;
 
@@ -190,7 +185,7 @@ public final class AkimichiRenderer {
 				return;
 			if (wing == null)
 				wing = wing();
-			int rgb = WING_COLORS.getOrDefault(vars(player).ButterFlyModeColor, 0x5AB4FF);
+			int rgb = net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.WING_COLOURS.getOrDefault(vars(player).ButterFlyModeColor, 0x5AB4FF);
 			// gliding: swept back and still; otherwise a slow flap
 			float spread = state.isFallFlying ? 0.25F : 0.55F + 0.35F * Mth.sin(state.ageInTicks * 0.18F);
 			pose.pushPose();

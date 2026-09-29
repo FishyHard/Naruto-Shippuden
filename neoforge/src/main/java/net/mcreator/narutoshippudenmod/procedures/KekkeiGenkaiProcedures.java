@@ -773,7 +773,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Steam Dash"));
+							((Player) entity).sendOverlayMessage(Component.literal("Steam Dash"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).boiltechnique == 1) {
 						{
@@ -784,7 +784,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Unrivalled Strength"));
+							((Player) entity).sendOverlayMessage(Component.literal("Unrivalled Strength"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).boiltechnique == 2) {
 						{
@@ -795,7 +795,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Skilled Mist Technique"));
+							((Player) entity).sendOverlayMessage(Component.literal("Skilled Mist Technique"));
 						}
 					}
 				}
@@ -1180,7 +1180,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Dance of the Clematis: Flower"));
+							((Player) entity).sendOverlayMessage(Component.literal("Dance of the Clematis: Flower"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).bonetechnique == 1) {
 						{
@@ -1191,7 +1191,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Dance of the Larch"));
+							((Player) entity).sendOverlayMessage(Component.literal("Dance of the Larch"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).bonetechnique == 2) {
 						{
@@ -1202,7 +1202,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Dance of the Camellia"));
+							((Player) entity).sendOverlayMessage(Component.literal("Dance of the Camellia"));
 						}
 					}
 				}
@@ -1984,7 +1984,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (entity.isShiftKeyDown()) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Detachment of the Primitive Level Technique"));
+						((Player) entity).sendOverlayMessage(Component.literal("Detachment of the Primitive Level Technique"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).dustreleaselogic == false) {
@@ -2517,7 +2517,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Demonic Mirroring Ice Crystals"));
+							((Player) entity).sendOverlayMessage(Component.literal("Demonic Mirroring Ice Crystals"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).icetechnique == 1) {
 						{
@@ -2528,7 +2528,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Black Dragon Blizzard"));
+							((Player) entity).sendOverlayMessage(Component.literal("Black Dragon Blizzard"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).icetechnique == 2) {
 						{
@@ -2539,7 +2539,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Certain-Kill Ice Spears"));
+							((Player) entity).sendOverlayMessage(Component.literal("Certain-Kill Ice Spears"));
 						}
 					}
 				}
@@ -3262,7 +3262,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Iron Sand Drizzle"));
+							((Player) entity).sendOverlayMessage(Component.literal("Iron Sand Drizzle"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).magnettechnique == 1) {
 						{
@@ -3273,7 +3273,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Black Iron Fists"));
+							((Player) entity).sendOverlayMessage(Component.literal("Black Iron Fists"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).magnettechnique == 2) {
 						{
@@ -3284,7 +3284,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Black Iron Wings"));
+							((Player) entity).sendOverlayMessage(Component.literal("Black Iron Wings"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).magnettechnique == 3) {
 						{
@@ -3295,7 +3295,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Iron Sand Coat"));
+							((Player) entity).sendOverlayMessage(Component.literal("Iron Sand Coat"));
 						}
 					}
 				}
@@ -4131,7 +4131,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Smoke Fist"));
+							((Player) entity).sendOverlayMessage(Component.literal("Smoke Fist"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).smoketechnique == 1) {
 						{
@@ -4142,7 +4142,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Smoke Gun"));
+							((Player) entity).sendOverlayMessage(Component.literal("Smoke Gun"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).smoketechnique == 2) {
 						{
@@ -4153,7 +4153,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Smoke Form"));
+							((Player) entity).sendOverlayMessage(Component.literal("Smoke Form"));
 						}
 					}
 				}
@@ -4498,7 +4498,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Steel Projectile"));
+							((Player) entity).sendOverlayMessage(Component.literal("Steel Projectile"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).steeltechnique == 1) {
 						{
@@ -4509,7 +4509,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Impervious Armour"));
+							((Player) entity).sendOverlayMessage(Component.literal("Impervious Armour"));
 						}
 					}
 				}
@@ -4931,7 +4931,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Thunder Cloud Inner Wave"));
+							((Player) entity).sendOverlayMessage(Component.literal("Thunder Cloud Inner Wave"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).stormtechnique == 1) {
 						{
@@ -4942,7 +4942,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Laser Circus"));
+							((Player) entity).sendOverlayMessage(Component.literal("Laser Circus"));
 						}
 					}
 				}
@@ -5198,7 +5198,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (entity.isShiftKeyDown()) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Shadowless Flight"));
+						((Player) entity).sendOverlayMessage(Component.literal("Shadowless Flight"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).swiftreleaselogic == false) {
@@ -5926,7 +5926,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Great Consecutive Bursting Extreme Winds "));
+							((Player) entity).sendOverlayMessage(Component.literal("Great Consecutive Bursting Extreme Winds "));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).typhoontechnique == 1) {
 						{
@@ -5937,7 +5937,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Great Consecutive Bursting Strong Winds "));
+							((Player) entity).sendOverlayMessage(Component.literal("Great Consecutive Bursting Strong Winds "));
 						}
 					}
 				}
@@ -6569,7 +6569,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Tree Bind Flourishing Burial"));
+							((Player) entity).sendOverlayMessage(Component.literal("Tree Bind Flourishing Burial"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).woodtechnique == 1) {
 						{
@@ -6580,7 +6580,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Wood Human Technique"));
+							((Player) entity).sendOverlayMessage(Component.literal("Wood Human Technique"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).woodtechnique == 2) {
 						{
@@ -6591,7 +6591,7 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Wood Dragon Technique"));
+							((Player) entity).sendOverlayMessage(Component.literal("Wood Dragon Technique"));
 						}
 					}
 				}

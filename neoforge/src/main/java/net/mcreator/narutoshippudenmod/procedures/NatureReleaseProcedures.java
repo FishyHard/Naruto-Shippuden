@@ -1024,7 +1024,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Golem Technique"));
+							((Player) entity).sendOverlayMessage(Component.literal("Golem Technique"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).earth_technique == 1) {
 						{
@@ -1035,7 +1035,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Earth-Style Wall"));
+							((Player) entity).sendOverlayMessage(Component.literal("Earth-Style Wall"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).earth_technique == 2) {
 						{
@@ -1046,7 +1046,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Earth Spear"));
+							((Player) entity).sendOverlayMessage(Component.literal("Earth Spear"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).earth_technique == 3) {
 						{
@@ -1057,7 +1057,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Fist Rock Technique"));
+							((Player) entity).sendOverlayMessage(Component.literal("Fist Rock Technique"));
 						}
 					}
 				}
@@ -4569,7 +4569,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Great Fireball Technique"));
+							((Player) entity).sendOverlayMessage(Component.literal("Great Fireball Technique"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).firetechnique == 1) {
 						{
@@ -4580,7 +4580,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Great Dragon Fire Technique"));
+							((Player) entity).sendOverlayMessage(Component.literal("Great Dragon Fire Technique"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).firetechnique == 2) {
 						{
@@ -4591,7 +4591,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Phoenix Flower Jutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Phoenix Flower Jutsu"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).firetechnique == 3) {
 						{
@@ -4602,7 +4602,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Running Fire"));
+							((Player) entity).sendOverlayMessage(Component.literal("Running Fire"));
 						}
 					}
 				}
@@ -5681,7 +5681,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Chidori Senbon"));
+							((Player) entity).sendOverlayMessage(Component.literal("Chidori Senbon"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lightning_technique == 1) {
 						{
@@ -5692,7 +5692,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Lariat"));
+							((Player) entity).sendOverlayMessage(Component.literal("Lariat"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lightning_technique == 2) {
 						{
@@ -5703,7 +5703,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Kirin"));
+							((Player) entity).sendOverlayMessage(Component.literal("Kirin"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lightning_technique == 3) {
 						{
@@ -5714,7 +5714,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Lightning Ball Technique"));
+							((Player) entity).sendOverlayMessage(Component.literal("Lightning Ball Technique"));
 						}
 					}
 				}
@@ -8183,7 +8183,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Water Gun"));
+							((Player) entity).sendOverlayMessage(Component.literal("Water Gun"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).water_technique == 1) {
 						{
@@ -8194,7 +8194,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Water Shark Bullet Technique "));
+							((Player) entity).sendOverlayMessage(Component.literal("Water Shark Bullet Technique "));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).water_technique == 2) {
 						{
@@ -8205,7 +8205,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Water Dragon Bullet Technique"));
+							((Player) entity).sendOverlayMessage(Component.literal("Water Dragon Bullet Technique"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).water_technique == 3) {
 						{
@@ -8216,7 +8216,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Water Formation Wall "));
+							((Player) entity).sendOverlayMessage(Component.literal("Water Formation Wall "));
 						}
 					}
 				}
@@ -9431,7 +9431,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Vacuum Sphere"));
+							((Player) entity).sendOverlayMessage(Component.literal("Vacuum Sphere"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).wind_technique == 1) {
 						{
@@ -9442,7 +9442,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Wind Mode"));
+							((Player) entity).sendOverlayMessage(Component.literal("Wind Mode"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).wind_technique == 2) {
 						{
@@ -9453,7 +9453,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Rasenshuriken"));
+							((Player) entity).sendOverlayMessage(Component.literal("Rasenshuriken"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).wind_technique == 3) {
 						{
@@ -9464,7 +9464,7 @@ public final class NatureReleaseProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Boruto Stream"));
+							((Player) entity).sendOverlayMessage(Component.literal("Boruto Stream"));
 						}
 					}
 				}

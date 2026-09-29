@@ -65,6 +65,9 @@ public class JutsuProjectileRenderer extends EntityRenderer<JutsuProjectile, Jut
 	private final ModelPart rod = bake(JutsuProjectileRenderer::rod);
 	private final ModelPart frames = bake(JutsuProjectileRenderer::frames);
 	private final ModelPart vortex = bake(JutsuProjectileRenderer::vortex);
+	private final ModelPart kunai = bake(JutsuProjectileRenderer::kunaiBlade);
+	private final ModelPart kunaiHandle = bake(JutsuProjectileRenderer::kunaiHandle);
+	private final ModelPart kunaiTag = bake(root -> box(root, "tag", PartPose.rotation(0.3F, 0, 0), -1.4F, -4, -5, 2.8F, 4, 0.2F));
 
 	public JutsuProjectileRenderer(EntityRendererProvider.Context context) {
 		super(context);
@@ -88,6 +91,29 @@ public class JutsuProjectileRenderer extends EntityRenderer<JutsuProjectile, Jut
 
 	static PartDefinition box(PartDefinition parent, String name, PartPose pose, float x, float y, float z, float w, float h, float d) {
 		return parent.addOrReplaceChild(name, CubeListBuilder.create().addBox(x, y, z, w, h, d), pose);
+	}
+
+	/** A kunai's leaf blade, point towards +Z, with a diamond cross-section. */
+	static void kunaiBlade(PartDefinition root) {
+		float[][] steps = { { 2.6F, 2.2F }, { 2.4F, 2 }, { 1.9F, 1.8F }, { 1.3F, 1.5F }, { 0.7F, 1.2F } };
+		float z = 0;
+		for (int i = 0; i < steps.length; i++) {
+			float w = steps[i][0], len = steps[i][1];
+			box(root, "b" + i, PartPose.rotation(0, 0, 0.785F), -w / 2, -w / 2, z, w, w, len);
+			z += len;
+		}
+		box(root, "flat", 0, -0.2F, 0, 0.1F, 0.4F, z);
+	}
+
+	/** A kunai's wrapped grip, guard and ring. */
+	static void kunaiHandle(PartDefinition root) {
+		box(root, "grip", -0.5F, -0.5F, -5, 1, 1, 5);
+		box(root, "guard", PartPose.rotation(0, 0, 0.785F), -0.8F, -0.8F, -0.4F, 1.6F, 1.6F, 0.6F);
+		box(root, "ringT", -1.3F, 1, -7.5F, 2.6F, 0.5F, 0.5F);
+		box(root, "ringB", -1.3F, -1.5F, -7.5F, 2.6F, 0.5F, 0.5F);
+		box(root, "ringL", 0.8F, -1.5F, -7.5F, 0.5F, 3, 0.5F);
+		box(root, "ringR", -1.3F, -1.5F, -7.5F, 0.5F, 3, 0.5F);
+		box(root, "neck", -0.3F, -0.3F, -7, 0.6F, 0.6F, 2);
 	}
 
 	/** A round ball of radius 8 from overlapping and turned cubes. */
@@ -421,6 +447,15 @@ public class JutsuProjectileRenderer extends EntityRenderer<JutsuProjectile, Jut
 						0x90000000 | state.element.color & 0xFFFFFF);
 				pose.scale(0.25F, 0.25F, 0.25F);
 				collector.submitModelPart(orb, pose, RenderTypes.entityTranslucent(CHAKRA), LIGHT, OverlayTexture.NO_OVERLAY, null, 0xF0000000);
+			}
+			case KUNAI -> {
+				face(pose, state.yRot, state.xRot);
+				pose.scale(s, s, s);
+				boolean tagged = state.element == Element.FIRE;
+				glow(collector, kunai, pose, tagged ? Element.STEEL : state.element, age, 0, state.lightCoords);
+				collector.submitModelPart(kunaiHandle, pose, RenderTypes.entityTranslucent(CHAKRA), state.lightCoords, OverlayTexture.NO_OVERLAY, null, 0xF22B2B33);
+				if (tagged)
+					collector.submitModelPart(kunaiTag, pose, RenderTypes.entityTranslucent(CHAKRA), state.lightCoords, OverlayTexture.NO_OVERLAY, null, 0xF2EDE3C8);
 			}
 			case NONE -> {
 			}

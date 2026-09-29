@@ -82,6 +82,7 @@ public final class DevTest {
 				dog.setYBodyRot(0);
 				dog.setYHeadRot(0);
 				dog.setInSittingPose(true);
+				dog.setNoAi(true);
 				dog.tame(p);
 				dog.setOrderedToSit(true);
 				p.level().addFreshEntity(dog);
@@ -116,6 +117,59 @@ public final class DevTest {
 			NarutoShippudenMod.LOGGER.info("DEVTEST phasing to z={}", mc.player.getZ());
 			onServer(mc, p -> NarutoShippudenModVariables.ifPresent(p, v -> {
 				v.KamuiPhantomPhase = false;
+				v.syncPlayerVariables(p);
+			}));
+			command(mc, "gamemode creative");
+		});
+		// thrown weapons fly as jutsu projectiles
+		STEPS.add(() -> {
+			command(mc, "gamemode creative");
+			command(mc, "fill -6 220 -6 6 226 12 air");
+			command(mc, "tp @s 0.5 220 0.5 0 -5");
+			mc.options.setCameraType(CameraType.FIRST_PERSON);
+		});
+		STEPS.add(() -> {
+			onServer(mc, p -> {
+				net.minecraft.world.entity.EntityType<?>[] types = { net.mcreator.narutoshippudenmod.item.ProjectileItems.ShurikenBulletItem.arrow,
+						net.mcreator.narutoshippudenmod.item.ProjectileItems.KunaiBulletItem.arrow,
+						net.mcreator.narutoshippudenmod.item.ProjectileItems.FumaShurikenBulletItem.arrow,
+						net.mcreator.narutoshippudenmod.item.ProjectileItems.ExplosiveKunaiBulletItem.arrow };
+				for (int i = 0; i < types.length; i++) {
+					var arrow = (net.mcreator.narutoshippudenmod.compat.ModArrow) types[i].create(p.level(), net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
+					arrow.setOwner(p);
+					arrow.setPos(p.getX() + (i - 1.5) * 0.8, p.getEyeY() - 0.2, p.getZ() + 1);
+					arrow.shoot(0, 0.02, 1, 0.35F, 0);
+					p.level().addFreshEntity(arrow);
+				}
+			});
+			nextDelay = 12;
+		});
+		STEPS.add(() -> shot(mc, "b5_thrown"));
+		// gliding with the Sharingan open and butterfly wings: eyes and wings stay on the body
+		STEPS.add(() -> {
+			command(mc, "gamemode survival");
+			command(mc, "tp @s 0.5 260 0.5 0 20");
+			command(mc, "item replace entity @s armor.chest with elytra");
+			onServer(mc, p -> NarutoShippudenModVariables.ifPresent(p, v -> {
+				v.sharingan = true;
+				v.sharinganactivate = true;
+				v.ButterflyMode = true;
+				v.syncPlayerVariables(p);
+			}));
+			mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
+		});
+		STEPS.add(() -> {
+			mc.player.startFallFlying();
+			mc.player.connection.send(new net.minecraft.network.protocol.game.ServerboundPlayerCommandPacket(mc.player,
+					net.minecraft.network.protocol.game.ServerboundPlayerCommandPacket.Action.START_FALL_FLYING));
+			nextDelay = 20;
+		});
+		STEPS.add(() -> shot(mc, "b5_glide"));
+		STEPS.add(() -> {
+			command(mc, "item replace entity @s armor.chest with air");
+			onServer(mc, p -> NarutoShippudenModVariables.ifPresent(p, v -> {
+				v.sharinganactivate = false;
+				v.ButterflyMode = false;
 				v.syncPlayerVariables(p);
 			}));
 			command(mc, "gamemode creative");

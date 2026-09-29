@@ -240,6 +240,8 @@ public class JutsuProjectile extends Projectile {
 		/** A Daikokuten cube: black with glowing red squares on each face. */
 		DAIKOKUTEN,
 		/** Kamui's spiralling hole in space, always facing the camera. */
-		VORTEX
+		VORTEX,
+		/** A thrown kunai, point first (steel; poisoned with INSECT, a burning paper tag with FIRE). */
+		KUNAI
 	}
 }

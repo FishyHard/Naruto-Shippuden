@@ -421,9 +421,26 @@ public final class ClanJutsu {
 	}
 
 	private static final Identifier BUTTERFLY_WINGS = Identifier.fromNamespaceAndPath("naruto_shippuden", "butterfly_wings");
-	/** Butterfly Mode's wing colours (client/jutsu/AkimichiRenderer draws them): every Akimichi is born with one of them. */
-	static final List<String> WING_COLOURS = List.of("Blue", "Green", "Orange", "Pink", "Purple", "Red", "Yellow", "Cyan", "White", "Gold", "Lime",
-			"Crimson", "Violet", "Teal");
+	/** Butterfly Mode's wing colours (client/jutsu/AkimichiRenderer draws the wings): every Akimichi is born with one of them. */
+	public static final Map<String, Integer> WING_COLOURS = new java.util.LinkedHashMap<>();
+	static {
+		String[] names = { "Blue", "Green", "Orange", "Pink", "Purple", "Red", "Yellow", "Cyan", "White", "Gold", "Lime", "Crimson", "Violet", "Teal" };
+		int[] rgb = { 0x5AB4FF, 0x6BFF7A, 0xFF9A3C, 0xFF7AD0, 0xB070FF, 0xFF4A4A, 0xFFE24A, 0x4AF0FF, 0xF4F4FF, 0xFFC640, 0xB6FF4A, 0xC8143C, 0x8A4AFF,
+				0x2AC8A8 };
+		for (int i = 0; i < names.length; i++)
+			WING_COLOURS.put(names[i], rgb[i]);
+	}
+
+	private static String randomWings(ServerPlayer p) {
+		List<String> names = List.copyOf(WING_COLOURS.keySet());
+		return names.get(p.getRandom().nextInt(names.size()));
+	}
+
+	/** Chakra dust in the caster's wing colour. */
+	private static net.minecraft.core.particles.DustParticleOptions wingDust(ServerPlayer p, float size) {
+		return new net.minecraft.core.particles.DustParticleOptions(WING_COLOURS.getOrDefault(NarutoShippudenModVariables.get(p).ButterFlyModeColor, 0x5AB4FF), size);
+	}
+
 	private static final String WINGS_GIVEN = "naruto_shippuden:wings_given";
 
 	/** An Akimichi gets their wing colour once, at random, when they become one (players from before get theirs too). */
@@ -432,7 +449,7 @@ public final class ClanJutsu {
 		if (!(event.getEntity() instanceof ServerPlayer p) || p.tickCount % 40 != 0 || p.getPersistentData().getBooleanOr(WINGS_GIVEN, false)
 				|| !NarutoShippudenModVariables.get(p).akimichireleaselogic)
 			return;
-		String colour = WING_COLOURS.get(p.getRandom().nextInt(WING_COLOURS.size()));
+		String colour = randomWings(p);
 		set(p, v -> v.ButterFlyModeColor = colour);
 		p.getPersistentData().putBoolean(WINGS_GIVEN, true);
 	}
@@ -440,14 +457,14 @@ public final class ClanJutsu {
 	/** Burns fat into chakra: glowing butterfly wings and thirty seconds of overwhelming strength. */
 	private static void butterfly(ServerPlayer p) {
 		ServerLevel level = level(p);
-		puff(level, p.position().add(0, 1, 0), Element.CHAKRA, 3);
-		level.sendParticles(ParticleTypes.END_ROD, p.getX(), p.getY() + 1, p.getZ(), 60, 0.5, 1, 0.5, 0.25);
+		level.sendParticles(wingDust(p, 2), p.getX(), p.getY() + 1, p.getZ(), 60, 1.2, 1, 1.2, 0.1);
+		level.sendParticles(wingDust(p, 1), p.getX(), p.getY() + 1, p.getZ(), 60, 0.5, 1, 0.5, 0.25);
 		sound(level, p.position(), SoundEvents.BEACON_POWER_SELECT, 1.5F, 0.6F);
 		net.minecraft.world.entity.ai.attributes.AttributeInstance glide = p.getAttribute(net.neoforged.neoforge.common.NeoForgeMod.GLIDING_FLIGHT);
 		mode(p, 600, 1, v -> {
 			v.ButterflyMode = true;
-			if (!WING_COLOURS.contains(v.ButterFlyModeColor))
-				v.ButterFlyModeColor = WING_COLOURS.get(p.getRandom().nextInt(WING_COLOURS.size()));
+			if (!WING_COLOURS.containsKey(v.ButterFlyModeColor))
+				v.ButterFlyModeColor = randomWings(p);
 			// the wings glide like an elytra (jump in mid-air to spread them)
 			if (glide != null && !glide.hasModifier(BUTTERFLY_WINGS))
 				glide.addTransientModifier(new net.minecraft.world.entity.ai.attributes.AttributeModifier(BUTTERFLY_WINGS, 1,
@@ -471,7 +488,7 @@ public final class ClanJutsu {
 				p.syncVelocity = true;
 			}
 			if (t % 3 == 0)
-				level.sendParticles(Element.CHAKRA.trail, p.getX(), p.getY() + 1.3, p.getZ(), 3, 0.9, 0.5, 0.9, 0.01);
+				level.sendParticles(wingDust(p, 1), p.getX(), p.getY() + 1.3, p.getZ(), 3, 0.9, 0.5, 0.9, 0.01);
 		});
 	}
 

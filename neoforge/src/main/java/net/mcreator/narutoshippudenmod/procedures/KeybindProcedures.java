@@ -184,7 +184,7 @@ public final class KeybindProcedures {
 								SoundSource.NEUTRAL, (float) 1, (float) 1, false);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Byakugan!"));
+						((Player) entity).sendOverlayMessage(Component.literal("Byakugan activated"));
 					}
 					{
 						boolean _setval = (true);
@@ -507,7 +507,7 @@ public final class KeybindProcedures {
 			if (NarutoShippudenModVariables.get(entity).isshikidojutsu == true) {
 				if (NarutoShippudenModVariables.get(entity).isshikidojutsuactivate == false) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Kokugan!"));
+						((Player) entity).sendOverlayMessage(Component.literal("Kokugan activated"));
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) 999999, (int) 3, (false), (false)));
@@ -705,7 +705,7 @@ public final class KeybindProcedures {
 			if (NarutoShippudenModVariables.get(entity).ketsuryugan == true) {
 				if (NarutoShippudenModVariables.get(entity).ketsuryuganactivate == false) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Ketsuryugan!"));
+						((Player) entity).sendOverlayMessage(Component.literal("Ketsuryugan activated"));
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) 999999, (int) 1, (false), (false)));
@@ -876,7 +876,7 @@ public final class KeybindProcedures {
 					|| NarutoShippudenModVariables.get(entity).MangekyouSharinganKakashi == true) {
 				if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == false) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Mangekyou Sharingan!"));
+						((Player) entity).sendOverlayMessage(Component.literal("Mangekyou Sharingan activated"));
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) 999999, (int) 1, (false), (false)));
@@ -1058,7 +1058,7 @@ public final class KeybindProcedures {
 			if (NarutoShippudenModVariables.get(entity).rinnegan == true) {
 				if (NarutoShippudenModVariables.get(entity).rinneganactivate == false) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Rinnegan!"));
+						((Player) entity).sendOverlayMessage(Component.literal("Rinnegan activated"));
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) 999999, (int) 3, (false), (false)));
@@ -1135,7 +1135,7 @@ public final class KeybindProcedures {
 					|| NarutoShippudenModVariables.get(entity).SharinganKakashi == true) {
 				if (NarutoShippudenModVariables.get(entity).sharinganactivate == false) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Sharingan!"));
+						((Player) entity).sendOverlayMessage(Component.literal("Sharingan activated"));
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) 999999, (int) 0, (false), (false)));
@@ -1170,7 +1170,7 @@ public final class KeybindProcedures {
 			} else if (NarutoShippudenModVariables.get(entity).SharinganShimura == true) {
 				if (NarutoShippudenModVariables.get(entity).shimura_active == false) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Sharingan!"));
+						((Player) entity).sendOverlayMessage(Component.literal("Sharingan activated"));
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) 999999, (int) 0, (false), (false)));
@@ -1943,7 +1943,7 @@ public final class KeybindProcedures {
 								SoundSource.NEUTRAL, (float) 1, (float) 1, false);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Tenseigan!"));
+						((Player) entity).sendOverlayMessage(Component.literal("Tenseigan activated"));
 					}
 					{
 						boolean _setval = (true);

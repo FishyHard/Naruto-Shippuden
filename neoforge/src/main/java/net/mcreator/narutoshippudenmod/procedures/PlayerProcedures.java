@@ -462,16 +462,12 @@ public final class PlayerProcedures {
 			} else if (entity.isShiftKeyDown()) {
 				if (!(NarutoShippudenModVariables.get(entity).ChakraAmount >= NarutoShippudenModVariables.get(entity).ChakraMax)) {
 					{
-						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount + 0.5);
+						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount + 0.25);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
 							capability.ChakraAmount = _setval;
 							capability.syncPlayerVariables(entity);
 						});
 					}
-					ChakraChargingParticlesProcedure.executeProcedure(Stream
-							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x),
-									new AbstractMap.SimpleEntry<>("y", y), new AbstractMap.SimpleEntry<>("z", z))
-							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}
 			}
 			if (entity.tickCount % 40 == 0 && !world.isClientSide()) {

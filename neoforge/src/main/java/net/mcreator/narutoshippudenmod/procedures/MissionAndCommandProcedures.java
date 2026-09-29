@@ -428,7 +428,7 @@ public final class MissionAndCommandProcedures {
 
 					private void run() {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("The Sharingan!"));
+							((Player) entity).sendOverlayMessage(Component.literal("Sharingan activated"));
 						}
 						NeoForge.EVENT_BUS.unregister(this);
 					}

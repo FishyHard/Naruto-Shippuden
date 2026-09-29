@@ -1358,8 +1358,11 @@ def vanilla_text(t):
     t = re.sub(r'^Activate Gate Of (\w+)$', r'Open the Gate of \1 first', t)
     t = re.sub(r"^You've already unlocked (.+?)\.?$", lambda m: "You've already unlocked " + DOJUTSU_NAMES.get(m.group(1), m.group(1)), t)
     t = t.replace('succesfully', 'successfully').replace('LvL XP', 'XP').replace('Susano"', 'Susanoo"')
+    # a jutsu or eye chosen shows just its name, like the held item's name above the hotbar
+    t = re.sub(r'^Selected: ', '', t)
+    t = re.sub(r'^(?:The )?(Sharingan|Byakugan|Rinnegan|Tenseigan|Ketsuryugan|Kokugan|Mangekyou Sharingan)!$', r'\1 activated', t)
     t = {'Wait For Newer Updates': 'Not available yet', 'Find Flat Place': 'Find a flat place', 'Susano': 'Susanoo',
-         'You haven\'t unlocked Susano': 'You haven\'t unlocked Susanoo', 'Selected: Susano': 'Selected: Susanoo'}.get(t, t)
+         'You haven\'t unlocked Susano': 'You haven\'t unlocked Susanoo'}.get(t, t)
     if t.endswith('.') and not t.endswith('..'):
         t = t[:-1]
     return t
@@ -1376,3 +1379,13 @@ def vanilla_messages(path, text):
 
     text = re.sub(r'sendSystemMessage\(Component\.literal\("([^"\\]*(?:\\.[^"\\]*)*)"\)', system, text)
     return re.sub(r'sendOverlayMessage\(Component\.literal\("([^"\\]*(?:\\.[^"\\]*)*)"\)', lambda m: 'sendOverlayMessage(Component.literal("%s")' % vanilla_text(m.group(1)), text)
+
+
+@func
+def sneak_charge(path, text):
+    """Sneaking no longer charges chakra with a cloud of blue particles: Chakra Control's focus (sneak and stand still) does that."""
+    if not path.replace('\\', '/').endswith('PlayerProcedures.java'):
+        return text
+    text = re.sub(r'\n\t*ChakraChargingParticlesProcedure\.executeProcedure\(Stream[^;]*;', '', text)
+    return text.replace('double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount + 0.5);',
+                        'double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount + 0.25);')

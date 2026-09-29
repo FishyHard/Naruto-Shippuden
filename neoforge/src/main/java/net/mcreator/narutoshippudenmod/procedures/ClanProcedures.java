@@ -616,7 +616,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Insect Jar Technique"));
+							((Player) entity).sendOverlayMessage(Component.literal("Insect Jar Technique"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).aburametechnique == 1) {
 						{
@@ -627,7 +627,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Insect Bog"));
+							((Player) entity).sendOverlayMessage(Component.literal("Insect Bog"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).aburametechnique == 2) {
 						{
@@ -638,7 +638,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Poison Cloud Technique"));
+							((Player) entity).sendOverlayMessage(Component.literal("Poison Cloud Technique"));
 						}
 					}
 				}
@@ -1416,7 +1416,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Human Bullet Tank"));
+							((Player) entity).sendOverlayMessage(Component.literal("Human Bullet Tank"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).akimichitechnique == 1) {
 						{
@@ -1427,7 +1427,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Spiked Human Bullet Tank"));
+							((Player) entity).sendOverlayMessage(Component.literal("Spiked Human Bullet Tank"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).akimichitechnique == 2) {
 						{
@@ -1438,7 +1438,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Butterfly Mode"));
+							((Player) entity).sendOverlayMessage(Component.literal("Butterfly Mode"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).akimichitechnique == 3) {
 						{
@@ -1449,7 +1449,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Calorie Control"));
+							((Player) entity).sendOverlayMessage(Component.literal("Calorie Control"));
 						}
 					}
 				}
@@ -3604,7 +3604,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Fuma Shuriken"));
+							((Player) entity).sendOverlayMessage(Component.literal("Fuma Shuriken"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).fumatechnique == 1) {
 						{
@@ -3615,7 +3615,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Toroi Unique Fuma Shuriken"));
+							((Player) entity).sendOverlayMessage(Component.literal("Toroi Unique Fuma Shuriken"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).fumatechnique == 2) {
 						{
@@ -3626,7 +3626,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Shuriken"));
+							((Player) entity).sendOverlayMessage(Component.literal("Shuriken"));
 						}
 					}
 				}
@@ -4397,7 +4397,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Water Gun Technique"));
+							((Player) entity).sendOverlayMessage(Component.literal("Water Gun Technique"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).hozukitechnique == 1) {
 						{
@@ -4408,7 +4408,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Great Water Arm Technique"));
+							((Player) entity).sendOverlayMessage(Component.literal("Great Water Arm Technique"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).hozukitechnique == 2) {
 						{
@@ -4419,7 +4419,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Drowning Water Blob Technique"));
+							((Player) entity).sendOverlayMessage(Component.literal("Drowning Water Blob Technique"));
 						}
 					}
 				}
@@ -5185,7 +5185,7 @@ public final class ClanProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendOverlayMessage(Component.literal("Selected: Gentle Step Twin Lion Fists"));
+								((Player) entity).sendOverlayMessage(Component.literal("Gentle Step Twin Lion Fists"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).hyugatechnique == 1) {
 							{
@@ -5196,7 +5196,7 @@ public final class ClanProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendOverlayMessage(Component.literal("Selected: Eight Trigrams Twin Lions Crumbling Attack"));
+								((Player) entity).sendOverlayMessage(Component.literal("Eight Trigrams Twin Lions Crumbling Attack"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).hyugatechnique == 2) {
 							{
@@ -5207,7 +5207,7 @@ public final class ClanProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendOverlayMessage(Component.literal("Selected: Eight Trigrams Palms Revolving Heaven"));
+								((Player) entity).sendOverlayMessage(Component.literal("Eight Trigrams Palms Revolving Heaven"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).hyugatechnique == 3) {
 							{
@@ -5218,7 +5218,7 @@ public final class ClanProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendOverlayMessage(Component.literal("Selected: Eight Trigrams Sixty-Four Palms"));
+								((Player) entity).sendOverlayMessage(Component.literal("Eight Trigrams Sixty-Four Palms"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).hyugatechnique == 4) {
 							{
@@ -5229,7 +5229,7 @@ public final class ClanProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendOverlayMessage(Component.literal("Selected: Gentle Fist"));
+								((Player) entity).sendOverlayMessage(Component.literal("Gentle Fist"));
 							}
 						}
 					}
@@ -5963,7 +5963,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Passing Fang"));
+							((Player) entity).sendOverlayMessage(Component.literal("Passing Fang"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).inuzukatechnique == 1) {
 						{
@@ -5998,7 +5998,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Akamaru"));
+							((Player) entity).sendOverlayMessage(Component.literal("Akamaru"));
 						}
 					}
 				}
@@ -7214,7 +7214,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Gate of Healing"));
+							((Player) entity).sendOverlayMessage(Component.literal("Gate of Healing"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lee_technique == 1) {
 						{
@@ -7225,7 +7225,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Gate of Life"));
+							((Player) entity).sendOverlayMessage(Component.literal("Gate of Life"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lee_technique == 2) {
 						{
@@ -7236,7 +7236,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Gate of Pain"));
+							((Player) entity).sendOverlayMessage(Component.literal("Gate of Pain"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lee_technique == 3) {
 						{
@@ -7247,7 +7247,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Gate of Limit"));
+							((Player) entity).sendOverlayMessage(Component.literal("Gate of Limit"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lee_technique == 4) {
 						{
@@ -7258,7 +7258,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Gate of View"));
+							((Player) entity).sendOverlayMessage(Component.literal("Gate of View"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lee_technique == 5) {
 						{
@@ -7269,7 +7269,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected:  Gate of Wonder"));
+							((Player) entity).sendOverlayMessage(Component.literal(" Gate of Wonder"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lee_technique == 6) {
 						{
@@ -7280,7 +7280,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected:  Gate of Death"));
+							((Player) entity).sendOverlayMessage(Component.literal(" Gate of Death"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lee_technique == 7) {
 						{
@@ -7291,7 +7291,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Gate of Opening"));
+							((Player) entity).sendOverlayMessage(Component.literal("Gate of Opening"));
 						}
 					}
 				}
@@ -7475,7 +7475,7 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Otsutsuki Axe"));
+						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Axe"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 1) {
 					{
@@ -7486,7 +7486,7 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Otsutsuki Bat"));
+						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Bat"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 2) {
 					{
@@ -7497,7 +7497,7 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Otsutsuki Blade"));
+						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Blade"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 3) {
 					{
@@ -7508,7 +7508,7 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Otsutsuki Chopping Sword"));
+						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Chopping Sword"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 4) {
 					{
@@ -7519,7 +7519,7 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Otsutsuki Hammer"));
+						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Hammer"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 5) {
 					{
@@ -7530,7 +7530,7 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Otsutsuki Katana"));
+						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Katana"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 6) {
 					{
@@ -7541,7 +7541,7 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Otsutsuki Spear"));
+						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Spear"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 7) {
 					{
@@ -7552,7 +7552,7 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Otsutsuki Sword"));
+						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Sword"));
 					}
 				}
 			} else if (!entity.isShiftKeyDown()) {
@@ -8060,7 +8060,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Fire Dragon Flame Bullet"));
+							((Player) entity).sendOverlayMessage(Component.literal("Fire Dragon Flame Bullet"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).sarutobitechnique == 1) {
 						{
@@ -8071,7 +8071,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Ash Pile Burning"));
+							((Player) entity).sendOverlayMessage(Component.literal("Ash Pile Burning"));
 						}
 					}
 				}
@@ -11525,7 +11525,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Heal Bite"));
+							((Player) entity).sendOverlayMessage(Component.literal("Heal Bite"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).uzumakitechnique == 1) {
 						{
@@ -11536,7 +11536,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Dead Demon Consuming Seal"));
+							((Player) entity).sendOverlayMessage(Component.literal("Dead Demon Consuming Seal"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).uzumakitechnique == 2) {
 						{
@@ -11547,7 +11547,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Adamantine Sealing Chains"));
+							((Player) entity).sendOverlayMessage(Component.literal("Adamantine Sealing Chains"));
 						}
 					}
 				}

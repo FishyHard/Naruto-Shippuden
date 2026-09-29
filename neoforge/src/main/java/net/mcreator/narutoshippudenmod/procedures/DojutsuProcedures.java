@@ -1238,7 +1238,7 @@ public final class DojutsuProcedures {
 									});
 								}
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendOverlayMessage(Component.literal("Selected: Disruption Cube"));
+									((Player) entity).sendOverlayMessage(Component.literal("Disruption Cube"));
 								}
 							} else if (NarutoShippudenModVariables.get(entity).isshikidojutsutechnique == 1) {
 								{
@@ -1249,7 +1249,7 @@ public final class DojutsuProcedures {
 									});
 								}
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendOverlayMessage(Component.literal("Selected: Sukunahikona"));
+									((Player) entity).sendOverlayMessage(Component.literal("Sukunahikona"));
 								}
 							}
 						}
@@ -1970,7 +1970,7 @@ public final class DojutsuProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Susanoo"));
+						((Player) entity).sendOverlayMessage(Component.literal("Susanoo"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganRelease == 1) {
 					{
@@ -1981,7 +1981,7 @@ public final class DojutsuProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Amaterasu"));
+						((Player) entity).sendOverlayMessage(Component.literal("Amaterasu"));
 					}
 				}
 			}
@@ -2097,7 +2097,7 @@ public final class DojutsuProcedures {
 					}
 				} else if (entity.isShiftKeyDown()) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Amaterasu"));
+						((Player) entity).sendOverlayMessage(Component.literal("Amaterasu"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganItachi == false) {
@@ -2150,7 +2150,7 @@ public final class DojutsuProcedures {
 				}
 			} else if (entity.isShiftKeyDown()) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Selected: Kamui"));
+					((Player) entity).sendOverlayMessage(Component.literal("Kamui"));
 				}
 			}
 		}
@@ -2935,7 +2935,7 @@ public final class DojutsuProcedures {
 					}
 				} else if (entity.isShiftKeyDown()) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Kamui Long-Range"));
+						((Player) entity).sendOverlayMessage(Component.literal("Kamui Long-Range"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganKakashi == false) {
@@ -3083,7 +3083,7 @@ public final class DojutsuProcedures {
 				}
 			} else if (entity.isShiftKeyDown()) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Selected: Susanoo"));
+					((Player) entity).sendOverlayMessage(Component.literal("Susanoo"));
 				}
 			}
 		}
@@ -4130,7 +4130,7 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Kamui Short-Range"));
+							((Player) entity).sendOverlayMessage(Component.literal("Kamui Short-Range"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganobitokamuitechnique == 1) {
 						{
@@ -4141,7 +4141,7 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Kamui Phantom Phasing"));
+							((Player) entity).sendOverlayMessage(Component.literal("Kamui Phantom Phasing"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganobitokamuitechnique == 2) {
 						{
@@ -4152,7 +4152,7 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Kamui Self-Teleportation"));
+							((Player) entity).sendOverlayMessage(Component.literal("Kamui Self-Teleportation"));
 						}
 					}
 				}
@@ -4382,7 +4382,7 @@ public final class DojutsuProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Susanoo"));
+						((Player) entity).sendOverlayMessage(Component.literal("Susanoo"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganRelease == 1) {
 					{
@@ -4393,7 +4393,7 @@ public final class DojutsuProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Kamui"));
+						((Player) entity).sendOverlayMessage(Component.literal("Kamui"));
 					}
 				}
 			}
@@ -4664,7 +4664,7 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Blaze Release: Kagutsuchi"));
+							((Player) entity).sendOverlayMessage(Component.literal("Blaze Release: Kagutsuchi"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukeamaterasutechnique == 1) {
 						{
@@ -4675,7 +4675,7 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Blaze Release: Honoikazuchi"));
+							((Player) entity).sendOverlayMessage(Component.literal("Blaze Release: Honoikazuchi"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukeamaterasutechnique == 2) {
 						{
@@ -4686,7 +4686,7 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Amaterasu: Flame Wrapping Fire"));
+							((Player) entity).sendOverlayMessage(Component.literal("Amaterasu: Flame Wrapping Fire"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukeamaterasutechnique == 3) {
 						{
@@ -4697,7 +4697,7 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Amaterasu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Amaterasu"));
 						}
 					}
 				}
@@ -4993,7 +4993,7 @@ public final class DojutsuProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Susanoo"));
+						((Player) entity).sendOverlayMessage(Component.literal("Susanoo"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganRelease == 1) {
 					{
@@ -5004,7 +5004,7 @@ public final class DojutsuProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Amaterasu"));
+						((Player) entity).sendOverlayMessage(Component.literal("Amaterasu"));
 					}
 				}
 			}
@@ -5148,7 +5148,7 @@ public final class DojutsuProcedures {
 				}
 			} else if (entity.isShiftKeyDown()) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Selected: Susanoo"));
+					((Player) entity).sendOverlayMessage(Component.literal("Susanoo"));
 				}
 			}
 		}
@@ -6004,7 +6004,7 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Demonic Illusion: Mirage Crow"));
+							((Player) entity).sendOverlayMessage(Component.literal("Demonic Illusion: Mirage Crow"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).sharingantechnique == 1) {
 						{
@@ -6015,7 +6015,7 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Demonic Illusion: Shackling Stakes Technique"));
+							((Player) entity).sendOverlayMessage(Component.literal("Demonic Illusion: Shackling Stakes Technique"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).sharingantechnique == 2) {
 						{
@@ -6026,7 +6026,7 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Coercion Sharingan"));
+							((Player) entity).sendOverlayMessage(Component.literal("Coercion Sharingan"));
 						}
 					}
 				}
