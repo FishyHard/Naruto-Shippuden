@@ -335,6 +335,9 @@ public class NarutoShippudenModVariables {
 		public double sarutobitechnique = 0;
 		public double sarutobilearn = 0;
 		public double sarutobirelease = 0;
+		public double naratechnique = 0;
+		public double naralearn = 0;
+		public double nararelease = 0;
 		public double hozukitechnique = 0;
 		public double hozukilearn = 0;
 		public double hozukirelease = 0;
@@ -722,6 +725,9 @@ public class NarutoShippudenModVariables {
 			out.putDouble("sarutobitechnique", sarutobitechnique);
 			out.putDouble("sarutobilearn", sarutobilearn);
 			out.putDouble("sarutobirelease", sarutobirelease);
+			out.putDouble("naratechnique", naratechnique);
+			out.putDouble("naralearn", naralearn);
+			out.putDouble("nararelease", nararelease);
 			out.putDouble("hozukitechnique", hozukitechnique);
 			out.putDouble("hozukilearn", hozukilearn);
 			out.putDouble("hozukirelease", hozukirelease);
@@ -1110,6 +1116,9 @@ public class NarutoShippudenModVariables {
 			sarutobitechnique = in.getDoubleOr("sarutobitechnique", 0);
 			sarutobilearn = in.getDoubleOr("sarutobilearn", 0);
 			sarutobirelease = in.getDoubleOr("sarutobirelease", 0);
+			naratechnique = in.getDoubleOr("naratechnique", 0);
+			naralearn = in.getDoubleOr("naralearn", 0);
+			nararelease = in.getDoubleOr("nararelease", 0);
 			hozukitechnique = in.getDoubleOr("hozukitechnique", 0);
 			hozukilearn = in.getDoubleOr("hozukilearn", 0);
 			hozukirelease = in.getDoubleOr("hozukirelease", 0);

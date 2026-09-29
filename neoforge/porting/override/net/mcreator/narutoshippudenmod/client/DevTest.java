@@ -503,7 +503,7 @@ public final class DevTest {
 
 	private static void jutsuSteps(Minecraft mc) {
 		String[] natures = { "fire", "water", "wind", "earth", "lightning", "boil", "bone", "dust", "ice", "magnet", "smoke", "steel", "storm", "swift",
-				"typhoon", "wood", "aburame", "akimichi", "fuma", "hozuki", "hyuga", "inuzuka", "lee", "sarutobi", "uzumaki",
+				"typhoon", "wood", "aburame", "akimichi", "fuma", "hozuki", "hyuga", "inuzuka", "lee", "nara", "sarutobi", "uzumaki",
 				"tsuchigumo", "sharingan", "isshiki_dojutsu", "mangekyou_sharingan_itachi_release_technique",
 				"mangekyou_sharingan_kakashi_release_technique", "mangekyou_sharingan_obito_release_technique", "mangekyou_sharingan_sasuke_release_technique" };
 		String only = System.getProperty("naruto.devtest.jutsu", "");
@@ -533,10 +533,10 @@ public final class DevTest {
 				v.boillearn = v.bonelearn = v.dustlearn = v.icelearn = v.magnetlearn = v.smokelearn = v.steellearn = v.stormlearn = v.swiftlearn = 4;
 				v.typhoonlearn = v.woodlearn = 4;
 				v.aburamereleaselogic = v.akimichireleaselogic = v.fumareleaselogic = v.hozukireleaselogic = v.hyugareleaselogic = true;
-				v.inuzukareleaselogic = v.leereleaselogic = v.sarutobireleaselogic = true;
+				v.inuzukareleaselogic = v.leereleaselogic = v.narareleaselogic = v.sarutobireleaselogic = true;
 				v.uzumakireleaselogic = v.tsuchigumoreleaselogic = true;
 				v.aburamelearn = v.akimichilearn = v.fumalearn = v.hozukilearn = v.hyugalearn = v.inuzukalearn = v.leelearn = 9;
-				v.sarutobilearn = v.uzumakilearn = v.tsuchigumolearn = 9;
+				v.naralearn = v.sarutobilearn = v.uzumakilearn = v.tsuchigumolearn = 9;
 				v.taijutsu = v.summoning = 60;
 				v.sharingan = v.sharinganactivate = v.isshikidojutsu = v.isshikidojutsuactivate = v.MangekyouSharinganActivate = true;
 				v.sharinganlearn = v.isshikidojutsulearn = v.mangekyoushrainganitachiamaterasulearn = 9;
@@ -606,6 +606,24 @@ public final class DevTest {
 					NarutoShippudenMod.LOGGER.info("DEVTEST cast {} {}: chakra {}", nature, i, NarutoShippudenModVariables.get(mc.player).ChakraAmount);
 					nextDelay = 60;
 				});
+				if (nature.equals("nara") && i == 1)
+					// Shadow Imitation: the caught husk copies the caster's steps
+					for (int step = 0; step <= 6; step++) {
+						int n = step;
+						STEPS.add(() -> {
+							onServer(mc, player -> {
+								net.minecraft.world.entity.LivingEntity husk = player.level().getEntitiesOfClass(net.minecraft.world.entity.monster.zombie.Husk.class,
+										player.getBoundingBox().inflate(30)).stream().min(java.util.Comparator.comparingDouble(h -> Math.abs(h.getX() - player.getX()))).orElse(null);
+								NarutoShippudenMod.LOGGER.info("DEVTEST nara mimic {}: caster x {} husk x {}", n, String.format("%.2f", player.getX()),
+										husk == null ? "none" : String.format("%.2f", husk.getX()));
+							});
+							if (n < 6)
+								command(mc, "tp @s ~0.5 ~ ~");
+							if (n == 6)
+								shot(mc, "jutsu_nara_mimic");
+							nextDelay = 3;
+						});
+					}
 			}
 		}
 	}

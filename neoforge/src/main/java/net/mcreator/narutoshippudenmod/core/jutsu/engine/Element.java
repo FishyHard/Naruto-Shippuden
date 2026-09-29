@@ -46,6 +46,9 @@ public enum Element {
 	/** Aburame destruction bugs. */
 	INSECT(0xFF2A2B22, 0xFF6B7A3C, false, new DustParticleOptions(0x1C1C16, 1.0F), new DustParticleOptions(0x3B4128, 1.1F),
 			SoundEvents.BEEHIVE_WORK, SoundEvents.SILVERFISH_HURT),
+	/** Nara shadows: flat black on the ground, ink where they rise. */
+	SHADOW(0xFF0C0C10, 0xFF26262E, false, new DustParticleOptions(0x0E0E12, 1.2F), ParticleTypes.SQUID_INK, SoundEvents.SCULK_CATALYST_BLOOM,
+			SoundEvents.SCULK_BLOCK_SPREAD),
 	/** The Eight Gates' green aura and steam. */
 	GATE(0xFF5CFF86, 0xFFE8FFEC, true, new DustParticleOptions(0x6CFF94, 1.3F), ParticleTypes.CLOUD, SoundEvents.WARDEN_HEARTBEAT,
 			SoundEvents.GENERIC_EXPLODE.value()),

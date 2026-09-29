@@ -15,8 +15,6 @@ import net.mcreator.narutoshippudenmod.procedures.CustomJutsuProcedures.CustomFi
 import net.mcreator.narutoshippudenmod.procedures.CustomJutsuProcedures.CustomLightningReleaseTechniqueRightClickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.CustomJutsuProcedures.CustomWaterReleaseTechniqueRightClickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.CustomJutsuProcedures.CustomWindReleaseTechniqueRightClickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.BoilReleaseTechniqueLivingEntityIsHitWithItemProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.SmokeReleaseTechniqueLivingEntityIsHitWithItemProcedure;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.entity.LivingEntity;
@@ -83,19 +81,6 @@ public final class ReleaseTechniqueItems {
 				return ar;
 			}
 
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				BoilReleaseTechniqueLivingEntityIsHitWithItemProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 
@@ -716,19 +701,6 @@ public final class ReleaseTechniqueItems {
 				return ar;
 			}
 
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				SmokeReleaseTechniqueLivingEntityIsHitWithItemProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 

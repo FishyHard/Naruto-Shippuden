@@ -1492,6 +1492,27 @@ def engine_item_hooks(path, text):
     return text
 
 
+@func
+def engine_item_hit_hooks(path, text):
+    """Hitting something with a technique item ran the old jutsu's hit procedure (Boil Release, Smoke Release) next to the new jutsu:
+    technique and release items lose their hurtEnemy."""
+    if '/item/' not in path.replace('\\', '/'):
+        return text
+    ids = engine_items()
+    for m in reversed(list(re.finditer(r'public static class \w+ extends NarutoShippudenModElements\.ModElement \{\s*public static Item block;\s*static \{\s*'
+                                       r'Registration\.holder\(Registries\.ITEM, "(\w+)"', text))):
+        if m.group(1) not in ids:
+            continue
+        end = find_block(text, m.start())
+        cls = text[m.start():end]
+        h = re.search(r'\n\t*@Override\s*public void hurtEnemy\(', cls)
+        if not h:
+            continue
+        cls = cls[:h.start()] + cls[find_block(cls, h.end()):]
+        text = text[:m.start()] + cls + text[end:]
+    return text
+
+
 # ---------------------------------------------------------------- dead code: old procedures, projectiles and renderers nothing calls
 DEAD_CLASSES = set(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'dead_classes.txt')).read().split())
 

@@ -24,8 +24,6 @@ import net.mcreator.narutoshippudenmod.block.ModBlocks.DustBlockView2Block;
 import net.mcreator.narutoshippudenmod.block.ModBlocks.DustBlockView3Block;
 import net.mcreator.narutoshippudenmod.block.ModBlocks.DustBlockViewBlock;
 import net.mcreator.narutoshippudenmod.entity.SummonEntities.WoodGolemEntity;
-import net.mcreator.narutoshippudenmod.item.ClanItems.DanceOfTheCamelliaItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.DanceOfTheClematisFlowerItem;
 import net.mcreator.narutoshippudenmod.item.DnaItems.BoilDNAReleaseItem;
 import net.mcreator.narutoshippudenmod.item.DnaItems.BoneDNAReleaseItem;
 import net.mcreator.narutoshippudenmod.item.DnaItems.DustDNAReleaseItem;
@@ -223,91 +221,6 @@ public final class KekkeiGenkaiProcedures {
 	}
 
 
-	public static class BoilReleaseTechniqueLivingEntityIsHitWithItemProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure BoilReleaseTechniqueLivingEntityIsHitWithItem!");
-				return;
-			}
-			if (dependencies.get("sourceentity") == null) {
-				if (!dependencies.containsKey("sourceentity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency sourceentity for procedure BoilReleaseTechniqueLivingEntityIsHitWithItem!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			Entity sourceentity = (Entity) dependencies.get("sourceentity");
-			boolean isNegative = false;
-			double yaw = 0;
-			if (NarutoShippudenModVariables.get(sourceentity).UnrivaledStrength == true) {
-				if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount >= 400) {
-					if (sourceentity.getYRot() < 0) {
-						yaw = Math.abs(sourceentity.getYRot());
-						isNegative = (true);
-					} else {
-						isNegative = (false);
-						yaw = (sourceentity.getYRot());
-					}
-					if (yaw % 360 >= 0 && yaw % 360 < 22.5) {
-						entity.setDeltaMovement(0, 1.5, (6 + Math.sin(yaw)));
-					} else if (yaw % 360 >= 22.5 && yaw % 360 < 80) {
-						if (isNegative == true) {
-							entity.setDeltaMovement((6 + Math.cos(yaw)), 1.5, (6 + Math.sin(yaw)));
-						} else {
-							entity.setDeltaMovement(((-6) - Math.cos(yaw)), 1.5, (6 + Math.sin(yaw)));
-						}
-					} else if (yaw % 360 >= 80 && yaw % 360 < 112.5) {
-						if (isNegative == true) {
-							entity.setDeltaMovement((6 + Math.cos(yaw)), 1.5, 0);
-						} else {
-							entity.setDeltaMovement(((-6) - Math.cos(yaw)), 1.5, 0);
-						}
-					} else if (yaw % 360 >= 112.5 && yaw % 360 <= 157.5) {
-						if (isNegative == true) {
-							entity.setDeltaMovement((6 + Math.cos(yaw)), 1.5, ((-6) - Math.sin(yaw)));
-						} else {
-							entity.setDeltaMovement(((-6) - Math.cos(yaw)), 1.5, ((-6) - Math.sin(yaw)));
-						}
-					} else if (yaw % 360 >= 157.5 && yaw % 360 < 202.5) {
-						entity.setDeltaMovement(0, 1.5, ((-6) - Math.sin(yaw)));
-					} else if (yaw % 360 >= 202.5 && yaw % 360 < 247.5) {
-						if (isNegative == true) {
-							entity.setDeltaMovement(((-6) - Math.cos(yaw)), 1.5, ((-6) - Math.sin(yaw)));
-						} else {
-							entity.setDeltaMovement((6 + Math.cos(yaw)), 1.5, ((-6) - Math.sin(yaw)));
-						}
-					} else if (yaw % 360 >= 247.5 && yaw % 360 < 292.5) {
-						if (isNegative == true) {
-							entity.setDeltaMovement(((-6) - Math.cos(yaw)), 1.5, 0);
-						} else {
-							entity.setDeltaMovement((6 + Math.cos(yaw)), 1.5, 0);
-						}
-					} else if (yaw % 360 >= 292.5 && yaw % 360 < 337.5) {
-						if (isNegative == true) {
-							entity.setDeltaMovement(((-6) - Math.cos(yaw)), 1.5, (6 + Math.sin(yaw)));
-						} else {
-							entity.setDeltaMovement((6 + Math.cos(yaw)), 1.5, (6 + Math.sin(yaw)));
-						}
-					} else if (yaw % 360 >= 337.5 && yaw % 360 <= 360) {
-						entity.setDeltaMovement(0, 1.5, (6 + Math.sin(yaw)));
-					}
-					entity.hurt(Compat.damage().generic(), (float) 25);
-					{
-						double _setval = (NarutoShippudenModVariables.get(sourceentity).ChakraAmount - 400);
-						NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-							capability.ChakraAmount = _setval;
-							capability.syncPlayerVariables(sourceentity);
-						});
-					}
-				} else if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount <= 399) {
-					if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-						((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough chakra"));
-					}
-				}
-			}
-		}
-	}
 
 
 	public static class BoneDNAImplantMobProcedure {
@@ -1158,64 +1071,6 @@ public final class KekkeiGenkaiProcedures {
 
 
 
-	public static class SmokeReleaseTechniqueLivingEntityIsHitWithItemProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure SmokeReleaseTechniqueLivingEntityIsHitWithItem!");
-				return;
-			}
-			if (dependencies.get("sourceentity") == null) {
-				if (!dependencies.containsKey("sourceentity"))
-					NarutoShippudenMod.LOGGER
-							.warn("Failed to load dependency sourceentity for procedure SmokeReleaseTechniqueLivingEntityIsHitWithItem!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			Entity sourceentity = (Entity) dependencies.get("sourceentity");
-			if (NarutoShippudenModVariables.get(sourceentity).ninjutsu >= 35) {
-				if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount >= 750) {
-					if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 0) {
-						entity.hurt(Compat.damage().generic(), (float) 35);
-					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 1) {
-						entity.hurt(Compat.damage().generic(), (float) 36);
-					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 2) {
-						entity.hurt(Compat.damage().generic(), (float) 37);
-					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 3) {
-						entity.hurt(Compat.damage().generic(), (float) 38);
-					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 4) {
-						entity.hurt(Compat.damage().generic(), (float) 39);
-					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 5) {
-						entity.hurt(Compat.damage().generic(), (float) 40);
-					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 6) {
-						entity.hurt(Compat.damage().generic(), (float) 41);
-					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 7) {
-						entity.hurt(Compat.damage().generic(), (float) 42);
-					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 8) {
-						entity.hurt(Compat.damage().generic(), (float) 43);
-					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 9) {
-						entity.hurt(Compat.damage().generic(), (float) 44);
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(sourceentity).ChakraAmount - 750);
-						NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-							capability.ChakraAmount = _setval;
-							capability.syncPlayerVariables(sourceentity);
-						});
-					}
-				} else if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount <= 749) {
-					if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-						((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough chakra"));
-					}
-				}
-			} else if (NarutoShippudenModVariables.get(sourceentity).ninjutsu <= 34) {
-				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
-				}
-			}
-		}
-	}
 
 
 	public static class SteelDNAImplantMobProcedure {

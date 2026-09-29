@@ -285,19 +285,6 @@ public final class TechniqueItems {
 				return ar;
 			}
 
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 
@@ -989,19 +976,6 @@ public final class TechniqueItems {
 				return ar;
 			}
 
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 }

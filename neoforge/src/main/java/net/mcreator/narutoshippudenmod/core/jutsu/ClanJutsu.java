@@ -20,6 +20,7 @@ import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables;
 import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables.PlayerVariables;
 import net.mcreator.narutoshippudenmod.core.EntityScale;
 import net.mcreator.narutoshippudenmod.core.jutsu.NatureJutsu.Def;
+import net.mcreator.narutoshippudenmod.core.jutsu.engine.Displays;
 import net.mcreator.narutoshippudenmod.core.jutsu.engine.Element;
 import net.mcreator.narutoshippudenmod.core.jutsu.engine.JutsuEngine;
 import net.mcreator.narutoshippudenmod.core.jutsu.engine.JutsuProjectile;
@@ -44,6 +45,9 @@ import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.Display;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -60,6 +64,7 @@ import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 
 import org.jspecify.annotations.Nullable;
+import org.joml.Matrix4f;
 
 /**
  * The clans' techniques on the jutsu engine. Transformations (the Akimichi tank and butterfly, Passing Fang) keep their player models, switched on by the old flags for a set time; the Eight Gates are timed modes that
@@ -121,6 +126,14 @@ public final class ClanJutsu {
 				new Def("Gate of View: Morning Peacock", JutsuRank.B, p -> gate(p, 6), "Taijutsu"),
 				new Def("Gate of Wonder: Daytime Tiger", JutsuRank.A, p -> gate(p, 7), "Taijutsu"),
 				new Def("Gate of Death: Night Guy", JutsuRank.S, p -> gate(p, 8), "Taijutsu"));
+		nature("nara", "Nara Clan", v -> v.narareleaselogic, v -> v.naratechnique, (v, i) -> v.naratechnique = i, v -> v.naralearn,
+				(v, i) -> v.naralearn = i, v -> v.nararelease, (v, i) -> v.nararelease = i,
+				new Def("Shadow Imitation Shuriken Technique", JutsuRank.D, ClanJutsu::shadowShuriken),
+				new Def("Shadow Imitation Technique", JutsuRank.C, ClanJutsu::shadowImitation),
+				new Def("Shadow Neck Binding Technique", JutsuRank.B, ClanJutsu::neckBinding),
+				new Def("Shadow Sewing Technique", JutsuRank.A, ClanJutsu::shadowSewing),
+				new Def("Shadow Gathering Technique", JutsuRank.S, ClanJutsu::shadowGathering));
+		Jutsus.TECHNIQUES.get(Identifier.fromNamespaceAndPath("naruto_shippuden", "nara_release_technique")).onSneak = ClanJutsu::releaseShadow;
 		nature("sarutobi", "Sarutobi Clan", v -> v.sarutobireleaselogic, v -> v.sarutobitechnique, (v, i) -> v.sarutobitechnique = i,
 				v -> v.sarutobilearn, (v, i) -> v.sarutobilearn = i, v -> v.sarutobirelease, (v, i) -> v.sarutobirelease = i,
 				new Def("Ash Pile Burning", JutsuRank.C, ClanJutsu::ashPile),
@@ -242,6 +255,7 @@ public final class ClanJutsu {
 	/** Ends the caster's transformation or stance at once. */
 	public static void stop(ServerPlayer p) {
 		endMode(p);
+		letGo(p);
 		DRUNK.remove(p.getUUID());
 		set(p, ClanJutsu::clearFlags);
 	}
@@ -264,14 +278,17 @@ public final class ClanJutsu {
 
 	@SubscribeEvent
 	public static void loggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
-		if (event.getEntity() instanceof ServerPlayer player)
+		if (event.getEntity() instanceof ServerPlayer player) {
 			endMode(player);
+			letGo(player);
+		}
 	}
 
 	@SubscribeEvent
 	public static void died(LivingDeathEvent event) {
 		if (event.getEntity() instanceof ServerPlayer player) {
 			endMode(player);
+			letGo(player);
 			set(player, ClanJutsu::clearFlags);
 		}
 	}
@@ -1085,6 +1102,324 @@ public final class ClanJutsu {
 			p.setDeltaMovement(look.x * 1.5, Math.max(0.02, p.getDeltaMovement().y), look.z * 1.5);
 			p.syncVelocity = true;
 			p.fallDistance = 0;
+		});
+	}
+
+	// ------------------------------------------------------------------ nara
+	private static final BlockState SHADE = Blocks.CONCRETE.pick(net.minecraft.world.item.DyeColor.BLACK).defaultBlockState();
+
+	/** A Nara's shadow hold: who it holds and where, the shadow drawn on the ground, and how far the caster has walked it since it caught. */
+	private static final class Hold {
+		final Map<LivingEntity, Vec3> held = new java.util.LinkedHashMap<>();
+		final List<Display.BlockDisplay> drawn = new ArrayList<>();
+		final List<Matrix4f> shapes = new ArrayList<>();
+		Vec3 offset = Vec3.ZERO;
+		boolean caught, ended;
+	}
+
+	/** Each Nara's current shadow (one at a time: a new shadow jutsu lets go of the last). */
+	private static final Map<UUID, Hold> HOLDS = new HashMap<>();
+
+	private static Hold newHold(ServerPlayer p) {
+		letGo(p);
+		Hold hold = new Hold();
+		HOLDS.put(p.getUUID(), hold);
+		return hold;
+	}
+
+	/** The shadow draws back and lets go. */
+	private static void endHold(ServerPlayer p, Hold hold) {
+		if (hold.ended)
+			return;
+		hold.ended = true;
+		HOLDS.remove(p.getUUID(), hold);
+		for (Display.BlockDisplay piece : hold.drawn)
+			Displays.remove(piece, 6);
+	}
+
+	private static void letGo(ServerPlayer p) {
+		Hold hold = HOLDS.get(p.getUUID());
+		if (hold != null)
+			endHold(p, hold);
+	}
+
+	/** Sneak + right-click: lets go of whoever the shadow holds (with nothing held, the jutsu is cast as usual). */
+	private static void releaseShadow(ServerPlayer p) {
+		Hold hold = HOLDS.get(p.getUUID());
+		if (hold != null) {
+			endHold(p, hold);
+			tell(p, "Shadow released");
+			return;
+		}
+		net.minecraft.world.InteractionHand hand = Jutsus.technique(p.getMainHandItem()) != null ? net.minecraft.world.InteractionHand.MAIN_HAND
+				: net.minecraft.world.InteractionHand.OFF_HAND;
+		p.setShiftKeyDown(false);
+		try {
+			Jutsus.cast(p, hand);
+		} finally {
+			p.setShiftKeyDown(true);
+		}
+	}
+
+	/** The top of the ground under a point (looking a little above and below it), or the point's own height over a drop. */
+	private static double ground(ServerLevel level, double x, double y, double z) {
+		net.minecraft.core.BlockPos.MutableBlockPos pos = net.minecraft.core.BlockPos.containing(x, y + 1.5, z).mutable();
+		for (int i = 0; i < 6; i++, pos.move(0, -1, 0)) {
+			net.minecraft.world.phys.shapes.VoxelShape shape = level.getBlockState(pos).getCollisionShape(level, pos);
+			if (!shape.isEmpty() && pos.getY() + shape.max(net.minecraft.core.Direction.Axis.Y) <= y + 1.6)
+				return pos.getY() + shape.max(net.minecraft.core.Direction.Axis.Y);
+		}
+		return y;
+	}
+
+	/** A piece of shadow laid flat on the ground, turned by yaw. */
+	private static void lay(ServerLevel level, Hold hold, Vec3 at, float yaw, float width, float length, int life) {
+		Matrix4f shape = Displays.box(yaw, 0, width, 0.02F, length);
+		hold.drawn.add(Displays.grow(level, new Vec3(at.x, ground(level, at.x, at.y, at.z) + 0.015, at.z), SHADE, shape, 2, life, false));
+		hold.shapes.add(shape);
+	}
+
+	/** A round pool of shadow under someone caught. */
+	private static void pool(ServerLevel level, Hold hold, LivingEntity target, int life) {
+		float size = target.getBbWidth() + 0.9F;
+		for (int i = 0; i < 2; i++)
+			lay(level, hold, target.position(), (float) (i * Math.PI / 4), size, size, life);
+	}
+
+	/**
+	 * The caster's shadow stretches over the ground towards the target (following it as it runs) and catches it on reaching its
+	 * feet. It gives up after range blocks, or if the target gets away or dies. The pieces live for life ticks unless let go.
+	 */
+	private static void creep(ServerPlayer p, LivingEntity target, double range, int life, Consumer<Hold> caught) {
+		ServerLevel level = level(p);
+		Hold hold = newHold(p);
+		Vec3[] tip = { p.position() };
+		double[] run = { 0 };
+		sound(level, p.position(), Element.SHADOW.cast, 1.2F, 0.7F);
+		channel(p, (int) (range / 0.9) + 4, 1, t -> {
+			if (hold.ended || hold.caught)
+				return;
+			if (!target.isAlive() || target.level() != p.level()) {
+				endHold(p, hold);
+				return;
+			}
+			Vec3 to = target.position().subtract(tip[0]), flat = new Vec3(to.x, 0, to.z);
+			if (flat.length() < 0.9 && Math.abs(to.y) < 2.5) {
+				hold.caught = true;
+				hold.held.put(target, target.position());
+				pool(level, hold, target, life);
+				sound(level, target.position(), Element.SHADOW.impact, 1.5F, 0.6F);
+				caught.accept(hold);
+				return;
+			}
+			if (run[0] >= range) {
+				tell(p, "The shadow can't reach that far");
+				endHold(p, hold);
+				return;
+			}
+			Vec3 step = flat.normalize().scale(Math.min(0.9, flat.length())), from = tip[0];
+			Vec3 next = from.add(step);
+			tip[0] = new Vec3(next.x, ground(level, next.x, from.y, next.z), next.z);
+			run[0] += step.length();
+			Vec3 middle = from.add(tip[0]).scale(0.5);
+			lay(level, hold, new Vec3(middle.x, Math.max(from.y, tip[0].y), middle.z), (float) Math.atan2(step.x, step.z), 0.7F, (float) step.length() + 0.2F, life);
+			level.sendParticles(Element.SHADOW.trail, tip[0].x, tip[0].y + 0.1, tip[0].z, 3, 0.2, 0.02, 0.2, 0);
+		});
+	}
+
+	/**
+	 * Holds whoever the shadow has caught for ticks: they can't move by themselves, and (mimic) copy every step and turn the caster
+	 * makes, while the shadow on the ground moves along. each runs every tick. The hold ends early when everyone held is gone
+	 * (after the first grace ticks, while the shadow may still be catching).
+	 */
+	private static void bind(ServerPlayer p, Hold hold, int ticks, int grace, boolean mimic, IntConsumer each) {
+		ServerLevel level = level(p);
+		Vec3[] last = { p.position() };
+		channel(p, ticks, 1, t -> {
+			if (hold.ended)
+				return;
+			hold.held.keySet().removeIf(e -> !e.isAlive() || e.level() != p.level());
+			if (hold.held.isEmpty() && t >= grace || t == ticks - 1) {
+				endHold(p, hold);
+				return;
+			}
+			Vec3 step = p.position().subtract(last[0]);
+			last[0] = p.position();
+			boolean moved = mimic && step.lengthSqr() > 1.0E-6 && step.lengthSqr() < 4;
+			for (Map.Entry<LivingEntity, Vec3> entry : hold.held.entrySet()) {
+				LivingEntity e = entry.getKey();
+				hold(e);
+				e.fallDistance = 0;
+				if (e instanceof ServerPlayer victim)
+					victim.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 10, 9, false, false));
+				Vec3 spot = entry.getValue();
+				if (moved) {
+					e.setPos(spot);
+					e.move(net.minecraft.world.entity.MoverType.SELF, step);
+					spot = e.position();
+					entry.setValue(spot);
+				}
+				if (moved && e instanceof ServerPlayer || e.position().distanceToSqr(spot) > 0.04)
+					e.teleportTo(spot.x, spot.y, spot.z);
+				if (mimic && !(e instanceof Player)) {
+					e.setYRot(p.getYRot());
+					e.setYHeadRot(p.getYHeadRot());
+					e.setYBodyRot(p.yBodyRot);
+				}
+			}
+			if (moved)
+				hold.offset = hold.offset.add(step);
+			if (moved && t >= grace)
+				for (int i = 0; i < hold.drawn.size(); i++)
+					Displays.animate(hold.drawn.get(i), new Matrix4f().translation((float) hold.offset.x, 0, (float) hold.offset.z).mul(hold.shapes.get(i)), 1);
+			if (t % 4 == 0)
+				for (LivingEntity e : hold.held.keySet())
+					level.sendParticles(Element.SHADOW.trail, e.getX(), e.getY() + 0.1, e.getZ(), 2, e.getBbWidth() * 0.4, 0.02, e.getBbWidth() * 0.4, 0);
+			each.accept(t);
+		});
+	}
+
+	/** A shuriken thrown along the caster's shadow: whoever it hits is pinned where they stand for three seconds. */
+	private static void shadowShuriken(ServerPlayer p) {
+		JutsuProjectile star = shoot(p, Element.SHADOW, Shape.SHURIKEN, 0.6F, 1.6F, 5);
+		star.life = 30;
+		star.knockback = 0;
+		star.onHit = (s, target) -> {
+			ServerLevel level = level(p);
+			Hold hold = newHold(p);
+			hold.held.put(target, target.position());
+			pool(level, hold, target, 70);
+			bind(p, hold, 60, 0, false, t -> {
+			});
+			sound(level, target.position(), Element.SHADOW.impact, 1.2F, 0.8F);
+		};
+		sound(level(p), p.getEyePosition(), SoundEvents.PLAYER_ATTACK_SWEEP, 1, 1.6F);
+	}
+
+	/** The shadow creeps to the enemy being looked at and catches it: for ten seconds it copies every move the caster makes. */
+	private static void shadowImitation(ServerPlayer p) {
+		LivingEntity target = target(p, 20);
+		if (target == null) {
+			tell(p, "Look at an enemy to catch");
+			return;
+		}
+		creep(p, target, 20, 240, hold -> {
+			tell(p, "Shadow Imitation complete");
+			bind(p, hold, 200, 0, true, t -> {
+			});
+		});
+	}
+
+	/** Shadow Imitation, then hands of shadow climb the caught enemy's body and choke them for six seconds. */
+	private static void neckBinding(ServerPlayer p) {
+		LivingEntity target = target(p, 20);
+		if (target == null) {
+			tell(p, "Look at an enemy to catch");
+			return;
+		}
+		creep(p, target, 20, 160, hold -> {
+			ServerLevel level = level(p);
+			bind(p, hold, 120, 0, true, t -> {
+				if (!target.isAlive())
+					return;
+				// the hands climb up to the neck over the first second
+				double reach = Math.min(1, t / 20.0) * target.getBbHeight() * 0.85;
+				for (int i = 0; i < 3; i++) {
+					double a = t * 0.4 + i * Math.PI * 2 / 3, r = target.getBbWidth() * 0.55;
+					level.sendParticles(Element.SHADOW.trail, target.getX() + Math.cos(a) * r, target.getY() + reach * (0.4 + 0.2 * i), target.getZ() + Math.sin(a) * r,
+							1, 0, 0, 0, 0);
+				}
+				if (t < 20)
+					return;
+				level.sendParticles(ParticleTypes.SQUID_INK, target.getX(), target.getY() + reach, target.getZ(), 2, target.getBbWidth() * 0.3, 0.1,
+						target.getBbWidth() * 0.3, 0);
+				target.setAirSupply(Math.max(-20, target.getAirSupply() - 10));
+				if (t % 10 == 0) {
+					damage(p, target, 3, Element.SHADOW);
+					sound(level, target.position(), SoundEvents.PLAYER_HURT_DROWN, 0.8F, 0.7F);
+				}
+			});
+		});
+	}
+
+	/** Threads of shadow shoot out at up to five enemies nearby, pierce them and pin them for four seconds. */
+	private static void shadowSewing(ServerPlayer p) {
+		ServerLevel level = level(p);
+		List<LivingEntity> near = new ArrayList<>(enemies(level, p, p.getBoundingBox().inflate(16), e -> e.distanceToSqr(p) < 16 * 16 && p.hasLineOfSight(e)));
+		near.sort((a, b) -> Double.compare(a.distanceToSqr(p), b.distanceToSqr(p)));
+		Hold hold = newHold(p);
+		Vec3 feet = p.position().add(0, 0.2, 0);
+		int threads = Math.max(1, Math.min(5, near.size()));
+		for (int i = 0; i < threads; i++) {
+			LivingEntity aim = i < near.size() ? near.get(i) : null;
+			Vec3 velocity = aim == null ? p.getLookAngle().scale(1.5) : aim.getBoundingBox().getCenter().subtract(feet).normalize().scale(1.5);
+			JutsuProjectile thread = spawn(p, Element.SHADOW, Shape.NEEDLE, 0.35F, feet, velocity, 9);
+			thread.homing = 0.4F;
+			thread.life = 30;
+			thread.knockback = 0;
+			channel(p, 30, 1, t -> {
+				if (thread.isAlive())
+					line(level, Element.SHADOW.trail, feet, thread.getBoundingBox().getCenter(), 0.35);
+			});
+			thread.onHit = (s, target) -> {
+				if (hold.ended || hold.held.containsKey(target))
+					return;
+				boolean first = hold.held.isEmpty();
+				hold.held.put(target, target.position());
+				if (first)
+					bind(p, hold, 80, 0, false, t -> {
+						if (t % 2 == 0)
+							for (LivingEntity e : hold.held.keySet())
+								line(level, Element.SHADOW.trail, p.position().add(0, 0.2, 0), e.getBoundingBox().getCenter(), 0.45);
+					});
+			};
+		}
+		sound(level, p.position(), Element.SHADOW.cast, 1.5F, 1.2F);
+		sound(level, p.position(), SoundEvents.PLAYER_ATTACK_SWEEP, 1, 0.6F);
+	}
+
+	/**
+	 * The shadows all around are gathered into the caster's: a pool spreads over the ground to fourteen blocks, and every enemy it
+	 * reaches is caught and copies the caster's moves for eight seconds.
+	 */
+	private static void shadowGathering(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Hold hold = newHold(p);
+		Vec3 c = p.position();
+		double y = ground(level, c.x, c.y, c.z) + 0.015;
+		int spread = 30, ticks = spread + 160;
+		float radius = 14, row = 1.4F;
+		// a round pool made of strips across it, growing out from the caster's feet
+		for (float z = -radius + row / 2; z < radius; z += row) {
+			float chord = 2 * (float) Math.sqrt(radius * radius - z * z);
+			Matrix4f shape = new Matrix4f().translate(0, 0, z).scale(chord, 0.02F, row + 0.02F).translate(-0.5F, 0, -0.5F);
+			Display.BlockDisplay strip = Displays.grow(level, new Vec3(c.x, y, c.z), SHADE, new Matrix4f().scale(0.03F, 1, 0.03F).mul(shape), 1, ticks + 10, false);
+			hold.drawn.add(strip);
+			hold.shapes.add(shape);
+			after(level, 3, () -> Displays.animate(strip, shape, spread));
+		}
+		sound(level, c, Element.SHADOW.cast, 2, 0.5F);
+		sound(level, c, SoundEvents.SCULK_SHRIEKER_SHRIEK, 0.8F, 0.6F);
+		int[] caught = { 0 };
+		bind(p, hold, ticks, spread + 4, true, t -> {
+			double r = radius * Math.min(1, (t + 1) / (double) (spread + 3));
+			Vec3 at = c.add(hold.offset.x, 0, hold.offset.z);
+			if (t <= spread + 3) {
+				// the caster stands still while the shadows gather
+				hold(p);
+				for (int i = 0; i < 24; i++) {
+					double a = level.getRandom().nextDouble() * Math.PI * 2;
+					level.sendParticles(Element.SHADOW.trail, at.x + Math.cos(a) * r, y + 0.1, at.z + Math.sin(a) * r, 1, 0, 0.02, 0, 0);
+				}
+				for (LivingEntity e : enemies(level, p, new AABB(at, at).inflate(r, 3, r),
+						e -> !hold.held.containsKey(e) && e.position().subtract(at).horizontalDistanceSqr() <= r * r && Math.abs(e.getY() - y) < 3)) {
+					hold.held.put(e, e.position());
+					caught[0]++;
+					sound(level, e.position(), Element.SHADOW.impact, 1, 0.6F);
+				}
+			}
+			if (t == spread + 3)
+				tell(p, caught[0] == 0 ? "No one was caught" : "Shadow Gathering caught " + caught[0]);
 		});
 	}
 

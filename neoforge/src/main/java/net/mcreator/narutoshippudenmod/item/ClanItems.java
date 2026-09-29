@@ -17,10 +17,6 @@ import net.mcreator.narutoshippudenmod.item.WeaponItems.FumaShurikenItem;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.ToroiUniqueFumaShurikenItem;
 import net.mcreator.narutoshippudenmod.itemgroup.ModItemGroups.ClansItemGroup;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.ClanResetRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.DanceOfTheCamelliaLivingEntityIsHitWithItemProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.DanceOfTheClematisFlowerLivingEntityIsHitWithItemProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.EightTrigramsTwinLionsCrumblingAttackLivingEntityIsHitWithItemProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.GentleStepTwinLionFistsLivingEntityIsHitWithItemProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.IburiReleaseRightclickedProcedure;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.TooltipFlag;
@@ -232,146 +228,8 @@ public final class ClanItems {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class DanceOfTheCamelliaItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "dance_of_the_camellia", v -> block = (Item) v);
-		}
 
-		public DanceOfTheCamelliaItem(NarutoShippudenModElements instance) {
-			super(instance, 956);
-		}
 
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("dance_of_the_camellia", null).stacksTo(1).rarity(Rarity.COMMON));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				DanceOfTheCamelliaLivingEntityIsHitWithItemProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class DanceOfTheClematisFlowerItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "dance_of_the_clematis_flower", v -> block = (Item) v);
-		}
-
-		public DanceOfTheClematisFlowerItem(NarutoShippudenModElements instance) {
-			super(instance, 958);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("dance_of_the_clematis_flower", null).stacksTo(1).rarity(Rarity.COMMON));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				DanceOfTheClematisFlowerLivingEntityIsHitWithItemProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class EightTrigramsTwinLionsCrumblingAttackItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "eight_trigrams_twin_lions_crumbling_attack", v -> block = (Item) v);
-		}
-
-		public EightTrigramsTwinLionsCrumblingAttackItem(NarutoShippudenModElements instance) {
-			super(instance, 456);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("eight_trigrams_twin_lions_crumbling_attack", null).stacksTo(1).rarity(Rarity.COMMON));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				EightTrigramsTwinLionsCrumblingAttackLivingEntityIsHitWithItemProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
-		}
-	}
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class FumaReleaseItem extends NarutoShippudenModElements.ModElement {
@@ -558,52 +416,6 @@ public final class ClanItems {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class GentleStepTwinLionFistsItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "gentle_step_twin_lion_fists", v -> block = (Item) v);
-		}
-
-		public GentleStepTwinLionFistsItem(NarutoShippudenModElements instance) {
-			super(instance, 454);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("gentle_step_twin_lion_fists", null).stacksTo(1).rarity(Rarity.COMMON));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				GentleStepTwinLionFistsLivingEntityIsHitWithItemProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
-		}
-	}
 
 
 

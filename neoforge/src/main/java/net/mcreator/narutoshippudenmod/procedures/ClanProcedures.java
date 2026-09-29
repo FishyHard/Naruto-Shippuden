@@ -25,12 +25,8 @@ import net.mcreator.narutoshippudenmod.item.ClanItems.AburameReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.AkimichiReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.ChinoikeReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.ClanResetStatItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.DanceOfTheCamelliaItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.DanceOfTheClematisFlowerItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.EightTrigramsTwinLionsCrumblingAttackItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.FumaReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.FumaShurikenClanItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.GentleStepTwinLionFistsItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.HozukiReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.HyugaReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.IburiReleaseItem;
@@ -1580,92 +1576,7 @@ public final class ClanProcedures {
 		}
 	}
 
-	public static class DanceOfTheCamelliaLivingEntityIsHitWithItemProcedure {
 
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DanceOfTheCamelliaLivingEntityIsHitWithItem!");
-				return;
-			}
-			if (dependencies.get("sourceentity") == null) {
-				if (!dependencies.containsKey("sourceentity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency sourceentity for procedure DanceOfTheCamelliaLivingEntityIsHitWithItem!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			Entity sourceentity = (Entity) dependencies.get("sourceentity");
-			if (NarutoShippudenModVariables.get(sourceentity).ninjutsu >= 15) {
-				if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount >= 200) {
-					entity.hurt(Compat.damage().generic(), (float) 20);
-					if (sourceentity instanceof Player) {
-						ItemStack _stktoremove = new ItemStack(DanceOfTheCamelliaItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
-								((Player) sourceentity).inventoryMenu.getCraftSlots());
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(sourceentity).ChakraAmount - 200);
-						NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-							capability.ChakraAmount = _setval;
-							capability.syncPlayerVariables(sourceentity);
-						});
-					}
-				} else if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount <= 199) {
-					if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-						((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough chakra"));
-					}
-				}
-			} else if (NarutoShippudenModVariables.get(sourceentity).ninjutsu <= 14) {
-				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
-				}
-			}
-		}
-	}
-
-	public static class DanceOfTheClematisFlowerLivingEntityIsHitWithItemProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DanceOfTheClematisFlowerLivingEntityIsHitWithItem!");
-				return;
-			}
-			if (dependencies.get("sourceentity") == null) {
-				if (!dependencies.containsKey("sourceentity"))
-					NarutoShippudenMod.LOGGER
-							.warn("Failed to load dependency sourceentity for procedure DanceOfTheClematisFlowerLivingEntityIsHitWithItem!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			Entity sourceentity = (Entity) dependencies.get("sourceentity");
-			if (NarutoShippudenModVariables.get(sourceentity).ninjutsu >= 20) {
-				if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount >= 350) {
-					entity.hurt(Compat.damage().generic(), (float) 35);
-					if (sourceentity instanceof Player) {
-						ItemStack _stktoremove = new ItemStack(DanceOfTheClematisFlowerItem.block);
-						((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
-								((Player) sourceentity).inventoryMenu.getCraftSlots());
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(sourceentity).ChakraAmount - 350);
-						NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-							capability.ChakraAmount = _setval;
-							capability.syncPlayerVariables(sourceentity);
-						});
-					}
-				} else if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount <= 349) {
-					if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-						((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough chakra"));
-					}
-				}
-			} else if (NarutoShippudenModVariables.get(sourceentity).ninjutsu <= 19) {
-				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
-				}
-			}
-		}
-	}
 
 
 	public static class DrowningEffectExpiresProcedure {
@@ -1755,51 +1666,6 @@ public final class ClanProcedures {
 	}
 
 
-	public static class EightTrigramsTwinLionsCrumblingAttackLivingEntityIsHitWithItemProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER
-							.warn("Failed to load dependency entity for procedure EightTrigramsTwinLionsCrumblingAttackLivingEntityIsHitWithItem!");
-				return;
-			}
-			if (dependencies.get("sourceentity") == null) {
-				if (!dependencies.containsKey("sourceentity"))
-					NarutoShippudenMod.LOGGER
-							.warn("Failed to load dependency sourceentity for procedure EightTrigramsTwinLionsCrumblingAttackLivingEntityIsHitWithItem!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			Entity sourceentity = (Entity) dependencies.get("sourceentity");
-			if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 0) {
-				entity.hurt(Compat.damage().generic(), (float) 20);
-			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 1) {
-				entity.hurt(Compat.damage().generic(), (float) 21);
-			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 2) {
-				entity.hurt(Compat.damage().generic(), (float) 22);
-			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 3) {
-				entity.hurt(Compat.damage().generic(), (float) 23);
-			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 4) {
-				entity.hurt(Compat.damage().generic(), (float) 24);
-			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 5) {
-				entity.hurt(Compat.damage().generic(), (float) 25);
-			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 6) {
-				entity.hurt(Compat.damage().generic(), (float) 26);
-			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 7) {
-				entity.hurt(Compat.damage().generic(), (float) 27);
-			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 8) {
-				entity.hurt(Compat.damage().generic(), (float) 28);
-			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 9) {
-				entity.hurt(Compat.damage().generic(), (float) 29);
-			}
-			if (sourceentity instanceof Player) {
-				ItemStack _stktoremove = new ItemStack(EightTrigramsTwinLionsCrumblingAttackItem.block);
-				((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 2,
-						((Player) sourceentity).inventoryMenu.getCraftSlots());
-			}
-		}
-	}
 
 
 
@@ -2121,50 +1987,6 @@ public final class ClanProcedures {
 		}
 	}
 
-	public static class GentleStepTwinLionFistsLivingEntityIsHitWithItemProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GentleStepTwinLionFistsLivingEntityIsHitWithItem!");
-				return;
-			}
-			if (dependencies.get("sourceentity") == null) {
-				if (!dependencies.containsKey("sourceentity"))
-					NarutoShippudenMod.LOGGER
-							.warn("Failed to load dependency sourceentity for procedure GentleStepTwinLionFistsLivingEntityIsHitWithItem!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			Entity sourceentity = (Entity) dependencies.get("sourceentity");
-			if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 0) {
-				entity.hurt(Compat.damage().generic(), (float) 15);
-			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 1) {
-				entity.hurt(Compat.damage().generic(), (float) 16);
-			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 2) {
-				entity.hurt(Compat.damage().generic(), (float) 17);
-			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 3) {
-				entity.hurt(Compat.damage().generic(), (float) 18);
-			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 4) {
-				entity.hurt(Compat.damage().generic(), (float) 19);
-			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 5) {
-				entity.hurt(Compat.damage().generic(), (float) 20);
-			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 6) {
-				entity.hurt(Compat.damage().generic(), (float) 21);
-			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 7) {
-				entity.hurt(Compat.damage().generic(), (float) 22);
-			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 8) {
-				entity.hurt(Compat.damage().generic(), (float) 23);
-			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 9) {
-				entity.hurt(Compat.damage().generic(), (float) 24);
-			}
-			if (sourceentity instanceof Player) {
-				ItemStack _stktoremove = new ItemStack(GentleStepTwinLionFistsItem.block);
-				((Player) sourceentity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 2,
-						((Player) sourceentity).inventoryMenu.getCraftSlots());
-			}
-		}
-	}
 
 
 

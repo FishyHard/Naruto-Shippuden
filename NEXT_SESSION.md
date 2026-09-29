@@ -107,6 +107,9 @@ for p in glob.glob('../src/main/java/**/*.java', recursive=True):
   - `DojutsuJutsu`: Sharingan, Kokugan (ids still say `isshiki_dojutsu`), and the Mangekyou (Amaterasu, Kamui with its
     wormhole and phasing, and more).
   - They reuse the old save variables: `…technique`, `…learn` and `…release`.
+- **Nara:** Shadow Imitation Shuriken, Shadow Imitation, Shadow Neck Binding, Shadow Sewing, Shadow Gathering. A `Hold`
+  (one per caster) keeps who the shadow holds; with mimic they copy the caster's steps. The shadow on the ground is flat black
+  block displays that move with those steps. Sneak + right-click lets go. Save variables: `naratechnique`, `naralearn`, `nararelease`.
 - **Inuzuka:** Akamaru, Four Legs, Dynamic Marking, Passing Fang, Man Beast Clone, Fang Over Fang, Tunneling Fang.
   Akamaru's form (normal, clone or drill) is a synced value set by the `akamaru` rule.
 - `FlyingRaijin` is a technique with a wheel on the Flying Raijin Kunai (ids still say `flying_thunder_god_kunai`):
@@ -195,7 +198,7 @@ Test code can call server code with `onServer(mc, p -> …)`. Use `raijin(p, opt
 
 ## Open ideas and unchecked items
 
-- Some old techniques still run their MCreator procedures: Nara, Shadow Clone's story-exam branch, the Custom Jutsu and
+- Some old techniques still run their MCreator procedures: Shadow Clone's story-exam branch, the Custom Jutsu and
   the Mangekyou scrolls.
 - The Susanoo itself is still the old model swap. It now follows the body when gliding.
 - Checked in the dev client but still waiting on the user's feedback: Flying Raijin, the Inuzuka jutsu, Chakra Control

@@ -10,25 +10,15 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 import net.mcreator.narutoshippudenmod.NarutoShippudenMod;
 import net.mcreator.narutoshippudenmod.NarutoShippudenModElements;
-import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.BackDashOnKeyPressedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.ByakuganOnKeyPressedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.ChakraControlOnKeyPressedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.ChakraControlOnKeyReleasedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.ForwardDashOnKeyPressedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.ForwardDashOnKeyReleasedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.InfoCardOpenOnKeyPressedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.IsshikiDojutsuOnKeyPressedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.JutsuPowerOnKeyPressedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.KetsuryuganOnKeyPressedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.LeftDashOnKeyPressedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.MangekyouSharinganOnKeyPressedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.RightDashOnKeyPressedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.RinneganOnKeyPressedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.SharinganOnKeyPressedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.SusanoOnKeyPressedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.TenseiganOnKeyPressedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.UpDashOnKeyPressedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.UpDashOnKeyReleasedProcedure;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.world.entity.player.Player;
@@ -47,57 +37,6 @@ public final class ModKeyBindings {
 	private ModKeyBindings() {
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class BackDashKeyBinding extends NarutoShippudenModElements.ModElement {
-
-		public BackDashKeyBinding(NarutoShippudenModElements instance) {
-			super(instance, 1173);
-			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
-					KeyBindingPressedMessage::handler);
-		}
-
-		public static class KeyBindingPressedMessage {
-			int type, pressedms;
-
-			public KeyBindingPressedMessage(int type, int pressedms) {
-				this.type = type;
-				this.pressedms = pressedms;
-			}
-
-			public KeyBindingPressedMessage(FriendlyByteBuf buffer) {
-				this.type = buffer.readInt();
-				this.pressedms = buffer.readInt();
-			}
-
-			public static void buffer(KeyBindingPressedMessage message, FriendlyByteBuf buffer) {
-				buffer.writeInt(message.type);
-				buffer.writeInt(message.pressedms);
-			}
-
-			public static void handler(KeyBindingPressedMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
-				NetworkEvent.Context context = contextSupplier.get();
-				context.enqueueWork(() -> {
-					pressAction(context.getSender(), message.type, message.pressedms);
-				});
-				context.setPacketHandled(true);
-			}
-		}
-
-		public static void pressAction(Player entity, int type, int pressedms) {
-			Level world = entity.level();
-			double x = entity.getX();
-			double y = entity.getY();
-			double z = entity.getZ();
-			// security measure to prevent arbitrary chunk generation
-			if (!world.hasChunkAt(BlockPos.containing(x, y, z)))
-				return;
-			if (type == 0) {
-
-				BackDashOnKeyPressedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-		}
-	}
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class ByakuganKeyBinding extends NarutoShippudenModElements.ModElement {
@@ -153,120 +92,8 @@ public final class ModKeyBindings {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class ChakraControlKeyBinding extends NarutoShippudenModElements.ModElement {
-
-		public ChakraControlKeyBinding(NarutoShippudenModElements instance) {
-			super(instance, 472);
-			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
-					KeyBindingPressedMessage::handler);
-		}
-
-		public static class KeyBindingPressedMessage {
-			int type, pressedms;
-
-			public KeyBindingPressedMessage(int type, int pressedms) {
-				this.type = type;
-				this.pressedms = pressedms;
-			}
-
-			public KeyBindingPressedMessage(FriendlyByteBuf buffer) {
-				this.type = buffer.readInt();
-				this.pressedms = buffer.readInt();
-			}
-
-			public static void buffer(KeyBindingPressedMessage message, FriendlyByteBuf buffer) {
-				buffer.writeInt(message.type);
-				buffer.writeInt(message.pressedms);
-			}
-
-			public static void handler(KeyBindingPressedMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
-				NetworkEvent.Context context = contextSupplier.get();
-				context.enqueueWork(() -> {
-					pressAction(context.getSender(), message.type, message.pressedms);
-				});
-				context.setPacketHandled(true);
-			}
-		}
-
-		public static void pressAction(Player entity, int type, int pressedms) {
-			Level world = entity.level();
-			double x = entity.getX();
-			double y = entity.getY();
-			double z = entity.getZ();
-			// security measure to prevent arbitrary chunk generation
-			if (!world.hasChunkAt(BlockPos.containing(x, y, z)))
-				return;
-			if (type == 0) {
-
-				ChakraControlOnKeyPressedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (type == 1) {
-
-				ChakraControlOnKeyReleasedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-		}
-	}
 
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class ForwardDashKeyBinding extends NarutoShippudenModElements.ModElement {
-
-		public ForwardDashKeyBinding(NarutoShippudenModElements instance) {
-			super(instance, 1170);
-			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
-					KeyBindingPressedMessage::handler);
-		}
-
-		public static class KeyBindingPressedMessage {
-			int type, pressedms;
-
-			public KeyBindingPressedMessage(int type, int pressedms) {
-				this.type = type;
-				this.pressedms = pressedms;
-			}
-
-			public KeyBindingPressedMessage(FriendlyByteBuf buffer) {
-				this.type = buffer.readInt();
-				this.pressedms = buffer.readInt();
-			}
-
-			public static void buffer(KeyBindingPressedMessage message, FriendlyByteBuf buffer) {
-				buffer.writeInt(message.type);
-				buffer.writeInt(message.pressedms);
-			}
-
-			public static void handler(KeyBindingPressedMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
-				NetworkEvent.Context context = contextSupplier.get();
-				context.enqueueWork(() -> {
-					pressAction(context.getSender(), message.type, message.pressedms);
-				});
-				context.setPacketHandled(true);
-			}
-		}
-
-		public static void pressAction(Player entity, int type, int pressedms) {
-			Level world = entity.level();
-			double x = entity.getX();
-			double y = entity.getY();
-			double z = entity.getZ();
-			// security measure to prevent arbitrary chunk generation
-			if (!world.hasChunkAt(BlockPos.containing(x, y, z)))
-				return;
-			if (type == 0) {
-
-				ForwardDashOnKeyPressedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (type == 1) {
-
-				ForwardDashOnKeyReleasedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-		}
-	}
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class InfoCardOpenKeyBinding extends NarutoShippudenModElements.ModElement {
@@ -376,57 +203,6 @@ public final class ModKeyBindings {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class JutsuPowerKeyBinding extends NarutoShippudenModElements.ModElement {
-
-		public JutsuPowerKeyBinding(NarutoShippudenModElements instance) {
-			super(instance, 150);
-			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
-					KeyBindingPressedMessage::handler);
-		}
-
-		public static class KeyBindingPressedMessage {
-			int type, pressedms;
-
-			public KeyBindingPressedMessage(int type, int pressedms) {
-				this.type = type;
-				this.pressedms = pressedms;
-			}
-
-			public KeyBindingPressedMessage(FriendlyByteBuf buffer) {
-				this.type = buffer.readInt();
-				this.pressedms = buffer.readInt();
-			}
-
-			public static void buffer(KeyBindingPressedMessage message, FriendlyByteBuf buffer) {
-				buffer.writeInt(message.type);
-				buffer.writeInt(message.pressedms);
-			}
-
-			public static void handler(KeyBindingPressedMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
-				NetworkEvent.Context context = contextSupplier.get();
-				context.enqueueWork(() -> {
-					pressAction(context.getSender(), message.type, message.pressedms);
-				});
-				context.setPacketHandled(true);
-			}
-		}
-
-		public static void pressAction(Player entity, int type, int pressedms) {
-			Level world = entity.level();
-			double x = entity.getX();
-			double y = entity.getY();
-			double z = entity.getZ();
-			// security measure to prevent arbitrary chunk generation
-			if (!world.hasChunkAt(BlockPos.containing(x, y, z)))
-				return;
-			if (type == 0) {
-
-				JutsuPowerOnKeyPressedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-		}
-	}
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class KetsuryuganKeyBinding extends NarutoShippudenModElements.ModElement {
@@ -480,57 +256,6 @@ public final class ModKeyBindings {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class LeftDashKeyBinding extends NarutoShippudenModElements.ModElement {
-
-		public LeftDashKeyBinding(NarutoShippudenModElements instance) {
-			super(instance, 1171);
-			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
-					KeyBindingPressedMessage::handler);
-		}
-
-		public static class KeyBindingPressedMessage {
-			int type, pressedms;
-
-			public KeyBindingPressedMessage(int type, int pressedms) {
-				this.type = type;
-				this.pressedms = pressedms;
-			}
-
-			public KeyBindingPressedMessage(FriendlyByteBuf buffer) {
-				this.type = buffer.readInt();
-				this.pressedms = buffer.readInt();
-			}
-
-			public static void buffer(KeyBindingPressedMessage message, FriendlyByteBuf buffer) {
-				buffer.writeInt(message.type);
-				buffer.writeInt(message.pressedms);
-			}
-
-			public static void handler(KeyBindingPressedMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
-				NetworkEvent.Context context = contextSupplier.get();
-				context.enqueueWork(() -> {
-					pressAction(context.getSender(), message.type, message.pressedms);
-				});
-				context.setPacketHandled(true);
-			}
-		}
-
-		public static void pressAction(Player entity, int type, int pressedms) {
-			Level world = entity.level();
-			double x = entity.getX();
-			double y = entity.getY();
-			double z = entity.getZ();
-			// security measure to prevent arbitrary chunk generation
-			if (!world.hasChunkAt(BlockPos.containing(x, y, z)))
-				return;
-			if (type == 0) {
-
-				LeftDashOnKeyPressedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-		}
-	}
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class MangekyouSharinganKeyBinding extends NarutoShippudenModElements.ModElement {
@@ -586,57 +311,6 @@ public final class ModKeyBindings {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class RightDashKeyBinding extends NarutoShippudenModElements.ModElement {
-
-		public RightDashKeyBinding(NarutoShippudenModElements instance) {
-			super(instance, 1172);
-			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
-					KeyBindingPressedMessage::handler);
-		}
-
-		public static class KeyBindingPressedMessage {
-			int type, pressedms;
-
-			public KeyBindingPressedMessage(int type, int pressedms) {
-				this.type = type;
-				this.pressedms = pressedms;
-			}
-
-			public KeyBindingPressedMessage(FriendlyByteBuf buffer) {
-				this.type = buffer.readInt();
-				this.pressedms = buffer.readInt();
-			}
-
-			public static void buffer(KeyBindingPressedMessage message, FriendlyByteBuf buffer) {
-				buffer.writeInt(message.type);
-				buffer.writeInt(message.pressedms);
-			}
-
-			public static void handler(KeyBindingPressedMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
-				NetworkEvent.Context context = contextSupplier.get();
-				context.enqueueWork(() -> {
-					pressAction(context.getSender(), message.type, message.pressedms);
-				});
-				context.setPacketHandled(true);
-			}
-		}
-
-		public static void pressAction(Player entity, int type, int pressedms) {
-			Level world = entity.level();
-			double x = entity.getX();
-			double y = entity.getY();
-			double z = entity.getZ();
-			// security measure to prevent arbitrary chunk generation
-			if (!world.hasChunkAt(BlockPos.containing(x, y, z)))
-				return;
-			if (type == 0) {
-
-				RightDashOnKeyPressedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-		}
-	}
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class RinneganKeyBinding extends NarutoShippudenModElements.ModElement {
@@ -852,60 +526,4 @@ public final class ModKeyBindings {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class UpDashKeyBinding extends NarutoShippudenModElements.ModElement {
-
-		public UpDashKeyBinding(NarutoShippudenModElements instance) {
-			super(instance, 1175);
-			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
-					KeyBindingPressedMessage::handler);
-		}
-
-		public static class KeyBindingPressedMessage {
-			int type, pressedms;
-
-			public KeyBindingPressedMessage(int type, int pressedms) {
-				this.type = type;
-				this.pressedms = pressedms;
-			}
-
-			public KeyBindingPressedMessage(FriendlyByteBuf buffer) {
-				this.type = buffer.readInt();
-				this.pressedms = buffer.readInt();
-			}
-
-			public static void buffer(KeyBindingPressedMessage message, FriendlyByteBuf buffer) {
-				buffer.writeInt(message.type);
-				buffer.writeInt(message.pressedms);
-			}
-
-			public static void handler(KeyBindingPressedMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
-				NetworkEvent.Context context = contextSupplier.get();
-				context.enqueueWork(() -> {
-					pressAction(context.getSender(), message.type, message.pressedms);
-				});
-				context.setPacketHandled(true);
-			}
-		}
-
-		public static void pressAction(Player entity, int type, int pressedms) {
-			Level world = entity.level();
-			double x = entity.getX();
-			double y = entity.getY();
-			double z = entity.getZ();
-			// security measure to prevent arbitrary chunk generation
-			if (!world.hasChunkAt(BlockPos.containing(x, y, z)))
-				return;
-			if (type == 0) {
-
-				UpDashOnKeyPressedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (type == 1) {
-
-				UpDashOnKeyReleasedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-		}
-	}
 }
