@@ -1222,7 +1222,7 @@ public final class PlayerProcedures {
 					((Player) entity).sendOverlayMessage(Component.literal("Your Kenjutsu is maxed"));
 				}
 			}
-			if (NarutoShippudenModVariables.get(entity).shurikenjutsu >= 26) {
+			if (NarutoShippudenModVariables.get(entity).shurikenjutsu >= 41) {
 				{
 					double _setval = (NarutoShippudenModVariables.get(entity).shurikenjutsu - 1);
 					NarutoShippudenModVariables.ifPresent(entity, capability -> {

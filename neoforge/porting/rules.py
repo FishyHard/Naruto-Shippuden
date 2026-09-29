@@ -1431,3 +1431,18 @@ def flying_raijin(path, text):
                  'net.mcreator.narutoshippudenmod.core.jutsu.FlyingRaijin.use(', 'net.mcreator.narutoshippudenmod.core.jutsu.FlyingRaijin.swing('):
         text = text.replace(hook, 'net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(')
     return text.replace('FlyingThunderGodKunaiBulletProjectileHitsBlockProcedure.executeProcedure(', 'net.mcreator.narutoshippudenmod.core.jutsu.FlyingRaijin.landed(this, ')
+
+
+# the highest each stat can be raised to with SP (the check fires one above it)
+STAT_CAPS = {'shurikenjutsu': 40}
+
+
+@func
+def stat_caps(path, text):
+    """Shurikenjutsu goes to 40 (it stopped at 25, which every weapon needed, leaving nothing to grow into)."""
+    if not path.replace('\\', '/').endswith('PlayerProcedures.java'):
+        return text
+    for stat, cap in STAT_CAPS.items():
+        text = re.sub(r'NarutoShippudenModVariables\.get\(entity\)\.%s >= \d+\) \{' % stat,
+                      'NarutoShippudenModVariables.get(entity).%s >= %d) {' % (stat, cap + 1), text, count=1)
+    return text
