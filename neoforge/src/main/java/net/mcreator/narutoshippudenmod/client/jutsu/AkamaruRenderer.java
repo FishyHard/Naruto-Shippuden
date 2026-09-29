@@ -2,7 +2,6 @@ package net.mcreator.narutoshippudenmod.client.jutsu;
 
 import net.mcreator.narutoshippudenmod.entity.SummonEntities.AkamaruEntity;
 import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.FangRenderer.Modelfang;
-import net.mcreator.narutoshippudenmod.entity.renderer.SummonRenderers.AkamaruRenderer.ModelAkamaru_Young;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -10,6 +9,12 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -93,7 +98,7 @@ public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, Aka
 		private final float boneY, rearY, rearZ, headY, headZ;
 
 		Model() {
-			super(ModelAkamaru_Young.createBodyLayer().bakeRoot());
+			super(layer().bakeRoot());
 			bone = root.getChild("transform0").getChild("bone");
 			body = bone.getChild("Body");
 			head = bone.getChild("Head");
@@ -109,15 +114,57 @@ public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, Aka
 			headZ = head.z;
 		}
 
-		/** The head's bottom back edge, from its pivot (which sits in the middle of the head). */
-		private static final float NECK_Y = 2.0F, NECK_Z = 0.7F;
+		/** Where the neck meets the head, from the middle of the head: the head turns here. */
+		private static final float NECK_TOP_Y = 1.5F, NECK_TOP_Z = 0.5F;
 
-		/** Tips the head by an angle as if it turned round the neck, by moving its pivot so the neck point stays put. */
-		private void tiltAboutNeck(float angle) {
-			float cos = Mth.cos(angle), sin = Mth.sin(angle);
-			head.xRot += angle;
-			head.y += NECK_Y - (NECK_Y * cos - NECK_Z * sin);
-			head.z += NECK_Z - (NECK_Y * sin + NECK_Z * cos);
+		/**
+		 * Akamaru's own model (ModelAkamaru_Young: same cubes and texture), with the neck taken out of the head: the neck stays on
+		 * the body and the head turns on top of it, so looking around or tipping the head never opens a gap at the neck.
+		 */
+		static LayerDefinition layer() {
+			MeshDefinition mesh = new MeshDefinition();
+			PartDefinition root = mesh.getRoot();
+			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
+			PartDefinition p1 = transform0.addOrReplaceChild("bone", CubeListBuilder.create(), PartPose.offsetAndRotation(1.5568F, 22.6465F, -1.7667F, 0.0F, 0.0F, 0.0F));
+			PartDefinition p2 = p1.addOrReplaceChild("Body", CubeListBuilder.create().texOffs(0, 10).addBox(-2.5F, -9.3037F, -11.2578F, 5.0F, 4.0F, 5.0F, new CubeDeformation(-0.2F)).texOffs(1, 0).addBox(-2.5F, -9.1793F, -8.6164F, 5.0F, 4.0F, 6.0F, new CubeDeformation(-0.35F)), PartPose.offsetAndRotation(-1.5568F, 1.5572F, 9.0245F, 0.0F, 0.0F, 0.0F));
+			PartDefinition p3 = p2.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(23, 0).addBox(-2.0F, -8.5F, -1.0F, 4.0F, 3.0F, 0.0F, new CubeDeformation(-0.3F)).texOffs(16, 15).addBox(-2.5F, -9.0F, -4.6F, 5.0F, 4.0F, 4.0F, new CubeDeformation(-0.3F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.0436F, 0.0F, 0.0F));
+			PartDefinition p4 = p1.addOrReplaceChild("LeftFrontLeg", CubeListBuilder.create().texOffs(12, 19).addBox(-0.1F, 7.2F, -0.8F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.2F)).texOffs(10, 19).addBox(-0.1F, 6.9F, -0.8F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.18F)), PartPose.offsetAndRotation(0.3432F, -5.9391F, 0.4411F, 0.0F, 0.0F, 0.0F));
+			PartDefinition p5 = p4.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 31).addBox(2.4F, -8.6F, -4.6F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.1F)), PartPose.offsetAndRotation(-2.5F, 8.9146F, 6.9136F, 0.3927F, 0.0F, 0.0F));
+			PartDefinition p6 = p4.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(4, 31).addBox(2.4F, -8.6F, -4.6F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.1F)), PartPose.offsetAndRotation(-2.5F, 13.5F, 4.4F, -0.0436F, 0.0F, 0.0F));
+			PartDefinition p7 = p4.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(9, 31).addBox(2.4F, -8.6F, -4.6F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.1F)), PartPose.offsetAndRotation(-2.5F, 10.9968F, 5.063F, 0.0436F, 0.0F, 0.0F));
+			PartDefinition p8 = p4.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(6, 26).addBox(2.4F, -8.2F, -5.3F, 1.0F, 3.0F, 2.0F, new CubeDeformation(0.2F)), PartPose.offsetAndRotation(-2.5F, 7.2926F, 5.3257F, 0.1309F, 0.0F, 0.0F));
+			PartDefinition p9 = p1.addOrReplaceChild("RightFrontLeg", CubeListBuilder.create().texOffs(8, 19).addBox(-0.9F, 7.0074F, -0.5257F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.18F)).texOffs(0, 19).addBox(-0.9F, 7.3074F, -0.5257F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.2F)), PartPose.offsetAndRotation(-3.4568F, -6.0465F, 0.1667F, 0.0F, 0.0F, 0.0F));
+			PartDefinition p10 = p9.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(0, 26).addBox(-3.4F, -8.2F, -5.3F, 1.0F, 3.0F, 2.0F, new CubeDeformation(0.2F)), PartPose.offsetAndRotation(2.5F, 7.4F, 5.6F, 0.1309F, 0.0F, 0.0F));
+			PartDefinition p11 = p9.addOrReplaceChild("cube_r7", CubeListBuilder.create().texOffs(30, 2).addBox(-3.4F, -8.6F, -4.6F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.1F)), PartPose.offsetAndRotation(2.5F, 11.1042F, 5.3373F, 0.0436F, 0.0F, 0.0F));
+			PartDefinition p12 = p9.addOrReplaceChild("cube_r8", CubeListBuilder.create().texOffs(30, 5).addBox(-3.4F, -8.6F, -4.6F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.1F)), PartPose.offsetAndRotation(2.5F, 13.6074F, 4.6743F, -0.0436F, 0.0F, 0.0F));
+			PartDefinition p13 = p9.addOrReplaceChild("cube_r9", CubeListBuilder.create().texOffs(30, 14).addBox(-3.4F, -8.6F, -4.6F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.1F)), PartPose.offsetAndRotation(2.5F, 9.022F, 7.188F, 0.3927F, 0.0F, 0.0F));
+			PartDefinition p14 = p1.addOrReplaceChild("RightRearLeg", CubeListBuilder.create().texOffs(14, 0).addBox(-0.8F, 6.9032F, -0.863F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.18F)).texOffs(13, 12).addBox(-0.8F, 7.2032F, -0.863F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.2F)), PartPose.offsetAndRotation(-3.2568F, -5.9423F, 6.5041F, 0.0F, 0.0F, 0.0F));
+			PartDefinition p15 = p14.addOrReplaceChild("cube_r10", CubeListBuilder.create().texOffs(20, 28).addBox(-3.4F, -8.6F, -4.6F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.1F)), PartPose.offsetAndRotation(2.6F, 11.0F, 5.0F, 0.0436F, 0.0F, 0.0F));
+			PartDefinition p16 = p14.addOrReplaceChild("cube_r11", CubeListBuilder.create().texOffs(25, 23).addBox(-3.4F, -8.2F, -5.3F, 1.0F, 3.0F, 2.0F, new CubeDeformation(0.2F)), PartPose.offsetAndRotation(2.6F, 7.2958F, 5.2627F, 0.1309F, 0.0F, 0.0F));
+			PartDefinition p17 = p14.addOrReplaceChild("cube_r12", CubeListBuilder.create().texOffs(24, 28).addBox(-3.4F, -8.6F, -4.6F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.1F)), PartPose.offsetAndRotation(2.6F, 13.5032F, 4.337F, -0.0436F, 0.0F, 0.0F));
+			PartDefinition p18 = p14.addOrReplaceChild("cube_r13", CubeListBuilder.create().texOffs(28, 28).addBox(-3.4F, -8.6F, -4.6F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.1F)), PartPose.offsetAndRotation(2.6F, 8.9178F, 6.8506F, 0.3927F, 0.0F, 0.0F));
+			PartDefinition p19 = p1.addOrReplaceChild("LeftRearLeg", CubeListBuilder.create().texOffs(13, 10).addBox(-0.2F, 6.9074F, -0.8257F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.18F)).texOffs(2, 0).addBox(-0.2F, 7.2074F, -0.8257F, 1.0F, 0.0F, 2.0F, new CubeDeformation(0.2F)), PartPose.offsetAndRotation(0.1432F, -5.9465F, 6.4667F, 0.0F, 0.0F, 0.0F));
+			PartDefinition p20 = p19.addOrReplaceChild("cube_r14", CubeListBuilder.create().texOffs(0, 0).addBox(2.4F, -8.2F, -5.3F, 1.0F, 3.0F, 2.0F, new CubeDeformation(0.2F)), PartPose.offsetAndRotation(-2.6F, 7.3F, 5.3F, 0.1309F, 0.0F, 0.0F));
+			PartDefinition p21 = p19.addOrReplaceChild("cube_r15", CubeListBuilder.create().texOffs(26, 3).addBox(2.4F, -8.6F, -4.6F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.1F)), PartPose.offsetAndRotation(-2.6F, 11.0042F, 5.0373F, 0.0436F, 0.0F, 0.0F));
+			PartDefinition p22 = p19.addOrReplaceChild("cube_r16", CubeListBuilder.create().texOffs(12, 28).addBox(2.4F, -8.6F, -4.6F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.1F)), PartPose.offsetAndRotation(-2.6F, 13.5074F, 4.3743F, -0.0436F, 0.0F, 0.0F));
+			PartDefinition p23 = p19.addOrReplaceChild("cube_r17", CubeListBuilder.create().texOffs(16, 28).addBox(2.4F, -8.6F, -4.6F, 1.0F, 2.0F, 1.0F, new CubeDeformation(0.1F)), PartPose.offsetAndRotation(-2.6F, 8.922F, 6.888F, 0.3927F, 0.0F, 0.0F));
+			PartDefinition p24 = p1.addOrReplaceChild("Tail", CubeListBuilder.create(), PartPose.offsetAndRotation(-1.5568F, -6.0274F, 8.5648F, 0.0F, 0.0F, 0.0F));
+			PartDefinition p25 = p24.addOrReplaceChild("cube_r18", CubeListBuilder.create().texOffs(9, 4).addBox(0.0F, -7.5F, 10.8F, 0.0F, 0.0F, 2.0F, new CubeDeformation(-0.4F)), PartPose.offsetAndRotation(0.0F, 7.5F, 11.0F, 1.4835F, 0.0F, 0.0F));
+			PartDefinition p26 = p24.addOrReplaceChild("cube_r19", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -7.5F, 10.8F, 0.0F, 0.0F, 3.0F, new CubeDeformation(-0.5F)), PartPose.offsetAndRotation(0.0F, 10.4223F, 7.6881F, 1.2654F, 0.0F, 0.0F));
+			PartDefinition p27 = p24.addOrReplaceChild("cube_r20", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -7.5F, 8.5F, 0.0F, 0.0F, 3.0F, new CubeDeformation(-0.6F)), PartPose.offsetAndRotation(0.0F, 10.3615F, 3.9357F, 0.9599F, 0.0F, 0.0F));
+			PartDefinition p28 = p24.addOrReplaceChild("cube_r21", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -7.5F, 6.0F, 0.0F, 0.0F, 3.0F, new CubeDeformation(-0.6F)), PartPose.offsetAndRotation(0.0F, 9.5372F, 1.0394F, 0.6545F, 0.0F, 0.0F));
+			PartDefinition p29 = p24.addOrReplaceChild("cube_r22", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -7.5F, 3.3F, 0.0F, 0.0F, 2.0F, new CubeDeformation(-0.4F)), PartPose.offsetAndRotation(0.0F, 8.2705F, 0.6717F, 0.4363F, 0.0F, 0.0F));
+			PartDefinition p30 = p24.addOrReplaceChild("cube_r23", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -7.5F, 0.1F, 0.0F, 0.0F, 2.0F, new CubeDeformation(-0.3F)), PartPose.offsetAndRotation(0.0F, 7.5846F, 0.4598F, 0.1745F, 0.0F, 0.0F));
+			// the head turns on the top of the neck; its cubes sit in "skull", moved back by the same amount
+			PartDefinition head = p1.addOrReplaceChild("Head", CubeListBuilder.create(), PartPose.offset(-1.5F, -7.3F + NECK_TOP_Y, -3.0F + NECK_TOP_Z));
+			PartDefinition p31 = head.addOrReplaceChild("skull", CubeListBuilder.create().texOffs(18, 6).addBox(-2.0568F, -1.9676F, -3.3F, 4.0F, 4.0F, 4.0F, new CubeDeformation(-0.2F)).texOffs(11, 23).addBox(-1.0568F, -0.0676F, -4.9F, 2.0F, 2.0F, 3.0F, new CubeDeformation(-0.2F)).texOffs(0, 0).addBox(-0.5568F, 0.2324F, -4.6F, 1.0F, 0.0F, 0.0F, new CubeDeformation(-0.2F)).texOffs(0, 0).addBox(-0.0568F, 0.5324F, -4.7F, 0.0F, 0.0F, 0.0F, new CubeDeformation(-0.1F)), PartPose.offset(0, -NECK_TOP_Y, -NECK_TOP_Z));
+			// the neck stays on the body and never turns with the head
+			PartDefinition neck = p1.addOrReplaceChild("Neck", CubeListBuilder.create(), PartPose.offset(-1.5F, -7.3F, -3.0F));
+			PartDefinition p32 = p31.addOrReplaceChild("cube_r24", CubeListBuilder.create().texOffs(0, 8).addBox(1.9F, -9.0F, -5.0F, 0.0F, 5.0F, 2.0F, new CubeDeformation(-0.2F)), PartPose.offsetAndRotation(1.5F, 7.3F, 3.0F, 0.0F, 0.0F, -0.2182F));
+			PartDefinition p33 = p31.addOrReplaceChild("cube_r25", CubeListBuilder.create().texOffs(21, 21).addBox(-1.9F, -9.0F, -5.0F, 0.0F, 5.0F, 2.0F, new CubeDeformation(-0.2F)), PartPose.offsetAndRotation(-1.6136F, 7.3F, 3.0F, 0.0F, 0.0F, 0.2182F));
+			PartDefinition p34 = p31.addOrReplaceChild("cube_r26", CubeListBuilder.create().texOffs(16, 0).addBox(-1.0F, -10.7F, -1.8F, 2.0F, 2.0F, 3.0F, new CubeDeformation(-0.2F)), PartPose.offsetAndRotation(-0.0568F, 7.0324F, 4.3F, 0.7418F, 0.0F, 0.0F));
+			PartDefinition p35 = neck.addOrReplaceChild("cube_r27", CubeListBuilder.create().texOffs(0, 19).addBox(-2.0F, -8.2F, -7.7F, 3.0F, 3.0F, 4.0F, new CubeDeformation(-0.2F)), PartPose.offsetAndRotation(0.4432F, 9.8093F, 2.427F, -0.5672F, 0.0F, 0.0F));
+			return LayerDefinition.create(mesh, 64, 64);
 		}
 
 		@Override
@@ -151,9 +198,8 @@ public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, Aka
 				leftRear.z = rightRear.z = 7.5F;
 				leftRear.xRot = rightRear.xRot = -0.95F;
 				leftRear.yScale = rightRear.yScale = 0.7F;
-				// the head tips back down a little, turning round the neck (the bottom back of the head) rather than its own middle,
-				// so it stays joined to the chest
-				tiltAboutNeck(0.3F);
+				// the head tips back down a little on its neck
+				head.xRot += 0.3F;
 				tail.xRot = 0.9F;
 				tail.yRot = Mth.sin(age * 0.15F) * 0.2F;
 				return;

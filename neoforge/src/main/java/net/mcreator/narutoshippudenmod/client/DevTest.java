@@ -81,7 +81,8 @@ public final class DevTest {
 						net.mcreator.narutoshippudenmod.entity.SummonEntities.AkamaruEntity.entity, p.level());
 				dog.snapTo(p.getX() + 1.6, p.getY(), p.getZ(), 0, 0);
 				dog.setYBodyRot(0);
-				dog.setYHeadRot(0);
+				// looking round at the camera, where the neck used to come apart
+				dog.setYHeadRot(-45);
 				dog.setInSittingPose(true);
 				dog.setNoAi(true);
 				dog.tame(p);
