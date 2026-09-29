@@ -1024,3 +1024,21 @@ def remove_youtuber_dojutsu(path, text):
     if path.replace('\\', '/').endswith('NarutoShippudenModVariables.java'):
         text = re.sub(r'\n[^\n]*\b(?:%s)\b[^\n]*(?=\n)' % '|'.join(YT_VARS), '', text)
     return text
+
+
+EYE_KEYS = ['Byakugan', 'IsshikiDojutsu', 'Ketsuryugan', 'MangekyouSharingan', 'Rinnegan', 'Sharingan', 'Susano', 'Tenseigan']
+
+
+@func
+def eye_keys(path, text):
+    """One Dojutsu key and a hold-to-grow Susanoo key (client/EyeKeys) replace the eight eye keys; every key moves to the mod's
+    own Controls section."""
+    if not path.replace('\\', '/').endswith('ModKeyMappings.java'):
+        return text
+    for name in EYE_KEYS:
+        text = re.sub(r'\n[^\n]*\b%sKEYBINDING\b[^\n]*;(?=\n)' % name.upper(), '', text)
+        text = re.sub(r'\n[^\n]*\bon%sKeyBinding\(event\);(?=\n)' % name, '', text)
+        m = re.search(r'\n\tprivate static void on%sKeyBinding\(' % name, text)
+        if m:
+            text = text[:m.start()] + text[find_block(text, m.end()):]
+    return text.replace('KeyMapping.Category.MISC', 'EyeKeys.CATEGORY')

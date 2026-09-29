@@ -92,6 +92,11 @@ public final class DevTest {
 			STEPS.add(mc::stop);
 			return;
 		}
+		if (System.getProperty("naruto.devtest.only", "").equals("eyes")) {
+			eyeSteps(mc);
+			STEPS.add(mc::stop);
+			return;
+		}
 		if (System.getProperty("naruto.devtest.only", "").equals("economy")) {
 			economySteps(mc);
 			STEPS.add(mc::stop);
@@ -327,6 +332,43 @@ public final class DevTest {
 				});
 			}
 		}
+	}
+
+	/** The Dojutsu key (open, step up to the Mangekyou, the wheel, close all) and the Susanoo growing stage by stage. */
+	private static void eyeSteps(Minecraft mc) {
+		STEPS.add(() -> {
+			mc.gui.setScreen(null);
+			mc.options.pauseOnLostFocus = false;
+			mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
+			command(mc, "execute in minecraft:overworld run tp @s 0 ~ 0");
+			command(mc, "time set day");
+			onServer(mc, player -> NarutoShippudenModVariables.ifPresent(player, v -> {
+				v.sharingan = v.MangekyouSharinganItachi = v.byakugan = true;
+				v.sharinganactivate = v.MangekyouSharinganActivate = v.byakuganactivate = false;
+				v.mangekyousharingansusanostage = 0;
+				v.mangekyoushrainganitachisusanolearn = 3;
+				v.ChakraMax = v.ChakraAmount = 5000;
+				v.syncPlayerVariables(player);
+			}));
+		});
+		java.util.function.Consumer<java.util.function.Consumer<net.minecraft.server.level.ServerPlayer>> server = task -> onServer(mc, task);
+		String[] log = { "" };
+		java.util.function.Consumer<String> state = label -> NarutoShippudenMod.LOGGER.info("DEVTEST eyes {}: sharingan {} mangekyou {} byakugan {} susanoo {}", label,
+				NarutoShippudenModVariables.get(mc.player).sharinganactivate, NarutoShippudenModVariables.get(mc.player).MangekyouSharinganActivate,
+				NarutoShippudenModVariables.get(mc.player).byakuganactivate, NarutoShippudenModVariables.get(mc.player).mangekyousharingansusanostage);
+		STEPS.add(() -> server.accept(p -> net.mcreator.narutoshippudenmod.core.Eyes.select(p, "sharingan")));
+		STEPS.add(() -> { state.accept("select sharingan"); shot(mc, "eyes_sharingan"); });
+		STEPS.add(() -> server.accept(p -> net.mcreator.narutoshippudenmod.core.Eyes.tap(p, false)));
+		STEPS.add(() -> { state.accept("tap again"); shot(mc, "eyes_mangekyou"); });
+		for (int i = 0; i < 3; i++)
+			STEPS.add(() -> server.accept(net.mcreator.narutoshippudenmod.core.Eyes::growSusanoo));
+		STEPS.add(() -> { state.accept("susanoo x3"); shot(mc, "eyes_susanoo"); });
+		STEPS.add(() -> mc.gui.setScreen(new EyeKeys.EyeWheel(net.mcreator.narutoshippudenmod.core.Eyes.owned(NarutoShippudenModVariables.get(mc.player)))));
+		STEPS.add(() -> shot(mc, "eyes_wheel"));
+		STEPS.add(() -> { mc.gui.setScreen(null); server.accept(p -> net.mcreator.narutoshippudenmod.core.Eyes.select(p, "byakugan")); });
+		STEPS.add(() -> { state.accept("select byakugan"); shot(mc, "eyes_byakugan"); });
+		STEPS.add(() -> server.accept(p -> net.mcreator.narutoshippudenmod.core.Eyes.tap(p, true)));
+		STEPS.add(() -> { state.accept("sneak tap"); NarutoShippudenMod.LOGGER.info("DEVTEST eyes key category {}", EyeKeys.DOJUTSU.getCategory().label().getString()); });
 	}
 
 	/** Jutsu models side by side, frozen in the air in front of the camera. */

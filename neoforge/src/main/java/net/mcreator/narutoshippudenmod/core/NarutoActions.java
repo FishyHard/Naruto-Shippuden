@@ -256,7 +256,8 @@ public final class NarutoActions {
 			if (!(context.player() instanceof ServerPlayer player))
 				return;
 			boolean open = action.kind().equals("page") && !action.key().equals("select")
-					|| action.kind().equals("set") && action.key().equals(SP_PER_CLICK) || action.kind().equals("jutsu") || action.kind().equals("learn");
+					|| action.kind().equals("set") && action.key().equals(SP_PER_CLICK) || action.kind().equals("jutsu") || action.kind().equals("learn")
+					|| action.kind().equals("eye") || action.kind().equals("susanoo");
 			if (!open && !canCheat(player)) {
 				player.sendSystemMessage(Component.literal("Cheats need creative mode or operator rights."));
 				return;
@@ -285,6 +286,18 @@ public final class NarutoActions {
 					Identifier item = Identifier.tryParse(action.key());
 					if (item != null)
 						net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.learn(player, item, (int) action.amount());
+				}
+				case "eye" -> {
+					if (action.key().equals("tap"))
+						Eyes.tap(player, action.amount() > 0);
+					else
+						Eyes.select(player, action.key());
+				}
+				case "susanoo" -> {
+					if (action.key().equals("grow"))
+						Eyes.growSusanoo(player);
+					else
+						Eyes.dismissSusanoo(player);
 				}
 				default -> {
 				}

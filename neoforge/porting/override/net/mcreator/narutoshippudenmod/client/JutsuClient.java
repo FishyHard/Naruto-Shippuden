@@ -45,7 +45,7 @@ import org.jspecify.annotations.Nullable;
 /** Client half of {@link Jutsus}: the jutsu wheel (hold X), the jutsu scroll screen (tooltips are in ItemDescriptions). */
 @EventBusSubscriber(modid = "naruto_shippuden", value = Dist.CLIENT)
 public final class JutsuClient {
-	public static final KeyMapping WHEEL = new KeyMapping("key.naruto_shippuden.jutsu_wheel", InputConstants.KEY_X, KeyMapping.Category.MISC);
+	public static final KeyMapping WHEEL = new KeyMapping("key.naruto_shippuden.jutsu_wheel", InputConstants.KEY_X, EyeKeys.CATEGORY);
 	static final Identifier PANEL = Identifier.fromNamespaceAndPath("naruto_shippuden", "panel");
 	static final Identifier INSET = Identifier.fromNamespaceAndPath("naruto_shippuden", "inset");
 	static final Identifier CHECKMARK = Identifier.withDefaultNamespace("icon/checkmark");
