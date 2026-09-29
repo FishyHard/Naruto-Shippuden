@@ -79,7 +79,7 @@ public final class DevTest {
 			onServer(mc, p -> {
 				var dog = new net.mcreator.narutoshippudenmod.entity.SummonEntities.AkamaruEntity.CustomEntity(
 						net.mcreator.narutoshippudenmod.entity.SummonEntities.AkamaruEntity.entity, p.level());
-				dog.snapTo(p.getX() + 2.5, p.getY(), p.getZ(), 0, 0);
+				dog.snapTo(p.getX() + 1.6, p.getY(), p.getZ(), 0, 0);
 				dog.setYBodyRot(0);
 				dog.setYHeadRot(0);
 				dog.setInSittingPose(true);

@@ -109,6 +109,17 @@ public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, Aka
 			headZ = head.z;
 		}
 
+		/** The head's bottom back edge, from its pivot (which sits in the middle of the head). */
+		private static final float NECK_Y = 2.0F, NECK_Z = 0.7F;
+
+		/** Tips the head by an angle as if it turned round the neck, by moving its pivot so the neck point stays put. */
+		private void tiltAboutNeck(float angle) {
+			float cos = Mth.cos(angle), sin = Mth.sin(angle);
+			head.xRot += angle;
+			head.y += NECK_Y - (NECK_Y * cos - NECK_Z * sin);
+			head.z += NECK_Z - (NECK_Y * sin + NECK_Z * cos);
+		}
+
 		@Override
 		public void setupAnim(State state) {
 			super.setupAnim(state);
@@ -140,10 +151,9 @@ public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, Aka
 				leftRear.z = rightRear.z = 7.5F;
 				leftRear.xRot = rightRear.xRot = -0.95F;
 				leftRear.yScale = rightRear.yScale = 0.7F;
-				// the head settles onto the raised chest, so the neck doesn't show a gap
-				head.xRot += 0.35F;
-				head.y = headY + 1.3F;
-				head.z = headZ + 0.8F;
+				// the head tips back down a little, turning round the neck (the bottom back of the head) rather than its own middle,
+				// so it stays joined to the chest
+				tiltAboutNeck(0.3F);
 				tail.xRot = 0.9F;
 				tail.yRot = Mth.sin(age * 0.15F) * 0.2F;
 				return;
