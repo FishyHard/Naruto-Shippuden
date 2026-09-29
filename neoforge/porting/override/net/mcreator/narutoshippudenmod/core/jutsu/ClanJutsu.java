@@ -155,7 +155,7 @@ public final class ClanJutsu {
 	}
 
 	// ------------------------------------------------------------------ helpers
-	private static void set(ServerPlayer p, Consumer<PlayerVariables> change) {
+	static void set(ServerPlayer p, Consumer<PlayerVariables> change) {
 		NarutoShippudenModVariables.ifPresent(p, v -> {
 			change.accept(v);
 			v.syncPlayerVariables(p);
@@ -163,7 +163,7 @@ public final class ClanJutsu {
 	}
 
 	/** Keeps an effect on while re-applied every 10 ticks (no particles, shown on the HUD). */
-	private static void keep(LivingEntity entity, Holder<MobEffect> effect, int amplifier) {
+	static void keep(LivingEntity entity, Holder<MobEffect> effect, int amplifier) {
 		if (amplifier >= 0)
 			entity.addEffect(new MobEffectInstance(effect, effect == MobEffects.NIGHT_VISION ? 260 : 25, amplifier, false, false, true));
 	}
@@ -173,7 +173,7 @@ public final class ClanJutsu {
 	}
 
 	/** The enemy the caster is looking at (closest to the crosshair, in sight), within range. */
-	private static @Nullable LivingEntity target(ServerPlayer p, double range) {
+	static @Nullable LivingEntity target(ServerPlayer p, double range) {
 		Vec3 eye = p.getEyePosition(), look = p.getLookAngle();
 		LivingEntity best = null;
 		double bestScore = 0.9;
@@ -189,7 +189,7 @@ public final class ClanJutsu {
 	}
 
 	/** A projectile that starts somewhere other than the caster's eyes. */
-	private static JutsuProjectile spawn(ServerPlayer p, Element element, Shape shape, float size, Vec3 at, Vec3 velocity, float damage) {
+	static JutsuProjectile spawn(ServerPlayer p, Element element, Shape shape, float size, Vec3 at, Vec3 velocity, float damage) {
 		JutsuProjectile projectile = new JutsuProjectile(JutsuEngine.PROJECTILE, level(p));
 		projectile.look(element, shape, size);
 		projectile.setOwner(p);
@@ -201,7 +201,7 @@ public final class ClanJutsu {
 	}
 
 	/** A see-through sphere around an entity (or standing at a point) for a while: Rotation, water prisons, insect jars. */
-	private static JutsuProjectile shell(ServerPlayer p, @Nullable Entity on, Vec3 at, Element element, float size, int ticks) {
+	static JutsuProjectile shell(ServerPlayer p, @Nullable Entity on, Vec3 at, Element element, float size, int ticks) {
 		JutsuProjectile shell = spawn(p, element, Shape.SHELL, size, at.subtract(0, size / 2, 0), Vec3.ZERO, 0);
 		shell.pierce = -1;
 		shell.knockback = 0;
@@ -215,7 +215,7 @@ public final class ClanJutsu {
 	}
 
 	/** Turns a flag on for a while (a model such as Passing Fang's drill), without ending the caster's mode. */
-	private static void flag(ServerPlayer p, int ticks, Consumer<PlayerVariables> on, Consumer<PlayerVariables> off) {
+	static void flag(ServerPlayer p, int ticks, Consumer<PlayerVariables> on, Consumer<PlayerVariables> off) {
 		set(p, on);
 		after(level(p), ticks, () -> set(p, off));
 	}
@@ -228,7 +228,7 @@ public final class ClanJutsu {
 	 * A timed transformation or stance: on sets its flags (and the model), each runs every tick, and off (plus the size going
 	 * back to normal) runs when it ends, when another mode starts, or when the caster dies or leaves.
 	 */
-	private static void mode(ServerPlayer p, int ticks, float scale, Consumer<PlayerVariables> on, Consumer<PlayerVariables> off, IntConsumer each) {
+	static void mode(ServerPlayer p, int ticks, float scale, Consumer<PlayerVariables> on, Consumer<PlayerVariables> off, IntConsumer each) {
 		endMode(p);
 		int generation = MODE.merge(p.getUUID(), 1, Integer::sum);
 		set(p, on);
@@ -262,12 +262,13 @@ public final class ClanJutsu {
 	}
 
 	/** Flags left on by a crash or an old save would keep the model forever. */
-	private static void clearFlags(PlayerVariables v) {
+	static void clearFlags(PlayerVariables v) {
 		v.HumanBulletTank = v.SpikedHumanBulletTank = v.ButterflyMode = false;
 		v.tenromode = v.izunochakramode = v.izunocat = v.PassingFang = v.deathgod = v.Gate8 = false;
 		v.EightTrigramsPalmsRevolvingHeaven = v.InsectJarTechnique = false;
 		v.inuzuka_mode = 0;
 		v.gateslee = 0;
+		v.magnet_coat = 0;
 	}
 
 	@SubscribeEvent

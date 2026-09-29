@@ -954,3 +954,12 @@ def clan_item_hooks(path, text):
     """The clan technique items' hit and swing hooks belong to the old jutsu (Lee's gates, the Death God seal, the Gentle Fist)."""
     return re.sub(r'\b(?:Hyuga|Lee|Uzumaki)ReleaseTechniqueLivingEntityIsHitWithItemProcedure\.executeProcedure\(|\bAkimichiReleaseTechniqueEntitySwingsItemProcedure\.executeProcedure\(',
                   'net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(', text)
+
+
+@func
+def magnet_coat_ticks(path, text):
+    """KekkeiGenkaiJutsu times the iron sand coat and wings itself; the old tick drained chakra and forced flight on and off."""
+    if not path.replace('\\', '/').endswith('PlayerProcedures.java'):
+        return text
+    rx = re.compile(r'\((NarutoShippudenModVariables\.get\(entity\)\.magnet_coat == \d\)) \{(?=\s*\n\s*if \(NarutoShippudenModVariables\.get\(entity\)\.ChakraAmount)')
+    return rx.sub(r'(false && \1 {', text)

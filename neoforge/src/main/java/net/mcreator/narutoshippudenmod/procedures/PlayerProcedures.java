@@ -932,7 +932,7 @@ public final class PlayerProcedures {
 					}
 				}
 			}
-			if (NarutoShippudenModVariables.get(entity).magnet_coat == 1) {
+			if (false && NarutoShippudenModVariables.get(entity).magnet_coat == 1) {
 				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 5) {
 					{
 						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 5);
@@ -968,7 +968,7 @@ public final class PlayerProcedures {
 							((Player) entity).getCooldowns().addCooldown(new ItemStack(MagnetReleaseTechniqueItem.block), (int) 100);
 					}
 				}
-			} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 2) {
+			} else if (false && NarutoShippudenModVariables.get(entity).magnet_coat == 2) {
 				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 7) {
 					{
 						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 7);
@@ -1004,7 +1004,7 @@ public final class PlayerProcedures {
 							((Player) entity).getCooldowns().addCooldown(new ItemStack(MagnetReleaseTechniqueItem.block), (int) 100);
 					}
 				}
-			} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 3) {
+			} else if (false && NarutoShippudenModVariables.get(entity).magnet_coat == 3) {
 				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 6) {
 					{
 						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 6);
