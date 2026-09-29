@@ -126,50 +126,25 @@ public final class EyeKeys {
 			graphics.fillGradient(0, 0, width, height, 0x60000000, 0x80000000);
 		}
 
-		private int bottom;
-
-		/** Whether any two buttons (w by 20, round an oval) would overlap. */
-		private boolean crowded(int n, int w, int rx, int ry) {
-			for (int i = 0; i < n; i++)
-				for (int j = i + 1; j < n; j++) {
-					float dx = (Mth.cos(angle(i)) - Mth.cos(angle(j))) * rx, dy = (Mth.sin(angle(i)) - Mth.sin(angle(j))) * ry;
-					if (Math.abs(dx) < w + 6 && Math.abs(dy) < 24)
-						return true;
-				}
-			return false;
-		}
-
-		private float angle(int i) {
-			return (float) (-Math.PI / 2 + i * 2 * Math.PI / eyes.size());
-		}
-
 		@Override
 		public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
 			super.extractRenderState(graphics, mouseX, mouseY, a);
 			PlayerVariables variables = NarutoShippudenModVariables.get(minecraft.player);
-			double dx = mouseX - width / 2.0, dy = mouseY - height / 2.0;
-			hovered = dx * dx + dy * dy > 18 * 18
-					? Math.floorMod((int) Math.round((Math.atan2(dy, dx) + Math.PI / 2) / (2 * Math.PI) * eyes.size()), eyes.size())
-					: -1;
 			int w = 0;
 			for (Eye eye : eyes)
 				w = Math.max(w, font.width(eye.name()) + 12);
 			w = Mth.clamp(w, 80, 150);
-			// an oval wide and tall enough that no two buttons touch
-			int n = eyes.size(), rx = w / 2 + 24, ry = 44;
-			for (int tries = 0; tries < 80 && crowded(n, w, rx, ry); tries++) {
-				rx += 4;
-				ry += 2;
-			}
-			for (int i = 0; i < n; i++) {
+			WheelLayout layout = WheelLayout.of(eyes.size(), w);
+			hovered = layout.hovered(mouseX, mouseY, width, height);
+			for (int i = 0; i < eyes.size(); i++) {
 				Eye eye = eyes.get(i);
-				int x = width / 2 + Math.round(Mth.cos(angle(i)) * rx) - w / 2, y = height / 2 + Math.round(Mth.sin(angle(i)) * ry) - 10;
+				int x = layout.x(i, width), y = layout.y(i, height);
 				graphics.blitSprite(RenderPipelines.GUI_TEXTURED, i == hovered ? JutsuClient.PANEL : JutsuClient.INSET, x, y, w, 20);
 				boolean open = eye.active().test(variables);
 				int color = i == hovered ? JutsuClient.TEXT : open ? 0xFFFFFF55 : 0xFFFFFFFF;
 				graphics.text(font, eye.name(), x + w / 2 - font.width(eye.name()) / 2, y + 6, color, i != hovered);
 			}
-			bottom = height / 2 + ry + 22;
+			int bottom = layout.bottom(height);
 			graphics.centeredText(font, Component.literal(hovered >= 0 ? eyes.get(hovered).name() : "Choose a dojutsu").withStyle(ChatFormatting.YELLOW),
 					width / 2, bottom, -1);
 			graphics.centeredText(font, "Tap to open or close, sneak and tap to close all", width / 2, bottom + 12, 0xFFE0E0E0);

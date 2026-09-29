@@ -153,16 +153,8 @@ public final class JutsuClient {
 			return Mth.clamp(widest + 12, 90, 170);
 		}
 
-		private int boxX(int i) {
-			return width / 2 + (int) (Mth.cos(angle(i)) * (boxWidth() / 2 + (count() <= 4 ? 18 : 40))) - boxWidth() / 2;
-		}
-
-		private int boxY(int i) {
-			return height / 2 + (int) (Mth.sin(angle(i)) * (count() <= 4 ? 52 : 66)) - 10;
-		}
-
-		private float angle(int i) {
-			return (float) (-Math.PI / 2 + i * 2 * Math.PI / count());
+		private WheelLayout layout() {
+			return WheelLayout.of(count(), boxWidth());
 		}
 
 		@Override
@@ -170,17 +162,12 @@ public final class JutsuClient {
 			super.extractRenderState(graphics, mouseX, mouseY, a);
 			LocalPlayer player = minecraft.player;
 			PlayerVariables variables = NarutoShippudenModVariables.get(player);
-			double dx = mouseX - width / 2.0, dy = mouseY - height / 2.0;
-			if (dx * dx + dy * dy > 18 * 18) {
-				double mouseAngle = Math.atan2(dy, dx) + Math.PI / 2;
-				hovered = Math.floorMod((int) Math.round(mouseAngle / (2 * Math.PI) * count()), count());
-			} else {
-				hovered = -1;
-			}
+			WheelLayout layout = layout();
+			hovered = layout.hovered(mouseX, mouseY, width, height);
 			int selected = technique.selected(variables).index();
 			for (int i = 0; i < count(); i++) {
 				Jutsu jutsu = technique.jutsu.get(i);
-				int x = boxX(i), y = boxY(i);
+				int x = layout.x(i, width), y = layout.y(i, height);
 				boolean learned = jutsu.isLearned(variables);
 				int w = boxWidth();
 				graphics.blitSprite(RenderPipelines.GUI_TEXTURED, i == hovered ? PANEL : INSET, x, y, w, 20);
@@ -195,8 +182,8 @@ public final class JutsuClient {
 			graphics.item(new ItemStack(BuiltInRegistries.ITEM.getValue(technique.item)), width / 2 - 8, height / 2 - 8);
 			Jutsu focus = technique.jutsu.get(hovered >= 0 ? hovered : selected);
 			String line = focus.isLearned(variables) ? details(focus, variables) : "Learn it from the jutsu scroll";
-			graphics.centeredText(font, Component.literal(focus.name()).withStyle(ChatFormatting.YELLOW), width / 2, height / 2 + 96, -1);
-			graphics.centeredText(font, line, width / 2, height / 2 + 108, focus.meetsStat(variables) ? 0xFFE0E0E0 : 0xFFFF6060);
+			graphics.centeredText(font, Component.literal(focus.name()).withStyle(ChatFormatting.YELLOW), width / 2, layout.bottom(height), -1);
+			graphics.centeredText(font, line, width / 2, layout.bottom(height) + 12, focus.meetsStat(variables) ? 0xFFE0E0E0 : 0xFFFF6060);
 		}
 
 		private void choose() {

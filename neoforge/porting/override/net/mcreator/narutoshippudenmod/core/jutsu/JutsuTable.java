@@ -154,8 +154,6 @@ final class JutsuTable {
 				jutsu("Shadow Clone Technique", v -> 1, 1, "Ninjutsu", v -> v.ninjutsu, 5, 30, 25, 25, 25, 25, 25));
 		technique("tsuchigumo_release_technique", v -> 0, (v, i) -> {}, null, ClanProcedures.TsuchigumoReleaseFuryRightclickedProcedure::executeProcedure,
 				jutsu("Fury", v -> v.tsuchigumolearn, 1, "Ninjutsu", v -> v.ninjutsu, 20, 300, 200, 160, 120, 80, 40));
-		technique("lee_release_drunken_fist", v -> 0, (v, i) -> {}, null, ClanProcedures.LeeReleaseDrunkenFistRightclickedProcedure::executeProcedure,
-				jutsu("Drunken Fist", v -> v.leelearn, 1, null, v -> v.ninjutsu, 0, 0, 3000, 2500, 2200, 2000, 1800));
 		technique("custom_fire_release_technique", v -> 0, (v, i) -> {}, null, CustomJutsuProcedures.CustomFireReleaseTechniqueRightclickedProcedure::executeProcedure,
 				jutsu("Custom Jutsu", v -> 1, 1, "Ninjutsu", v -> v.ninjutsu, 5, 0, 60, 50, 40, 30, 20));
 		technique("custom_earth_release_technique", v -> 0, (v, i) -> {}, null, CustomJutsuProcedures.CustomEarthReleaseTechniqueRightClickedProcedure::executeProcedure,
@@ -211,7 +209,7 @@ final class JutsuTable {
 					tier(25, 1, "isshiki_dojutsu_release_technique"), tier(40, 2, null)));
 		release("lee_release", ClanProcedures.LeeReleaseRightclickedProcedure::executeProcedure,
 				track("", v -> v.lee_release, -1, "lee_release_technique", v -> v.leelearn,
-					tier(10, 1, "lee_release_drunken_fist"), tier(20, 2, "lee_release_technique"), tier(25, 3, null), tier(30, 4, null), tier(35, 5, null), tier(40, 6, null), tier(45, 7, null), tier(50, 8, null), tier(55, 9, null)));
+					tier(10, 1, null), tier(20, 2, "lee_release_technique"), tier(25, 3, null), tier(30, 4, null), tier(35, 5, null), tier(40, 6, null), tier(45, 7, null), tier(50, 8, null), tier(55, 9, null)));
 		release("lightning_release", NatureReleaseProcedures.LightningReleaseRightClickedProcedure::executeProcedure,
 				track("", v -> v.lightning_release, -1, "lightning_release_technique", v -> v.lightninglearn,
 					tier(5, 1, "lightning_release_technique"), tier(10, 2, null), tier(15, 3, null), tier(20, 4, null)));

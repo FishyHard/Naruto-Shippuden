@@ -37,7 +37,6 @@ for t in d['tech']:
 CD=lambda *t: ', '.join(map(str,t))
 EXTRA=[('shadow_clone_technique','ClanProcedures','ShadowCloneTechniqueRightclicked','jutsu("Shadow Clone Technique", v -> 1, 1, "Ninjutsu", v -> v.ninjutsu, 5, 30, %s)'%CD(25,25,25,25,25)),
 	('tsuchigumo_release_technique','ClanProcedures','TsuchigumoReleaseFuryRightclicked','jutsu("Fury", v -> v.tsuchigumolearn, 1, "Ninjutsu", v -> v.ninjutsu, 20, 300, %s)'%CD(200,160,120,80,40)),
-	('lee_release_drunken_fist','ClanProcedures','LeeReleaseDrunkenFistRightclicked','jutsu("Drunken Fist", v -> v.leelearn, 1, null, v -> v.ninjutsu, 0, 0, %s)'%CD(3000,2500,2200,2000,1800))]
 for element in ('Fire','Earth','Water','Wind','Lightning'):
 	# the chakra cost is chosen when the jutsu is created, so the procedure checks it
 	EXTRA.append(('custom_%s_release_technique'%element.lower(),'CustomJutsuProcedures','Custom%sReleaseTechniqueRight%sedProcedure'%(element,'click' if element=='Fire' else 'Click'),

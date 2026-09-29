@@ -19,7 +19,6 @@ import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.HozukiReleaseTe
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.HyugaReleaseTechniqueLivingEntityIsHitWithItemProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.HyugaReleaseTechniqueRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.InuzukaReleaseTechniqueRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.LeeReleaseDrunkenFistRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.LeeReleaseTechniqueLivingEntityIsHitWithItemProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.LeeReleaseTechniqueRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.NaraReleaseTechniqueRightclickedProcedure;
@@ -436,74 +435,6 @@ public final class TechniqueItems {
 	}
 
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class LeeReleaseDrunkenFistItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "lee_release_drunken_fist", v -> block = (Item) v);
-		}
-
-		public LeeReleaseDrunkenFistItem(NarutoShippudenModElements instance) {
-			super(instance, 706);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("lee_release_drunken_fist", "TechniquesItemGroup").stacksTo(1).rarity(Rarity.COMMON)
-						.food((new FoodProperties.Builder()).nutrition(0).saturationModifier(0f).alwaysEdible().build()));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.DRINK;
-			}
-
-			@Override
-			public int getUseDuration(ItemStack itemstack, LivingEntity user) {
-				return 140;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				LeeReleaseDrunkenFistRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public ItemStack finishUsingItem(ItemStack itemstack, Level world, LivingEntity entity) {
-				ItemStack retval = new ItemStack(LeeReleaseDrunkenFistItem.block);
-				super.finishUsingItem(itemstack, world, entity);
-				if (itemstack.isEmpty()) {
-					return retval;
-				} else {
-					if (entity instanceof Player) {
-						Player player = (Player) entity;
-						if (!player.isCreative() && !player.getInventory().add(retval))
-							player.drop(retval, false, net.minecraft.util.Prediction.SERVER_ONLY);
-					}
-					return itemstack;
-				}
-			}
-		}
-	}
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class LeeReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
@@ -921,7 +852,7 @@ public final class TechniqueItems {
 
 			@Override
 			public ItemStack finishUsingItem(ItemStack itemstack, Level world, LivingEntity entity) {
-				ItemStack retval = new ItemStack(LeeReleaseDrunkenFistItem.block);
+				ItemStack retval = ItemStack.EMPTY;
 				super.finishUsingItem(itemstack, world, entity);
 				if (itemstack.isEmpty()) {
 					return retval;

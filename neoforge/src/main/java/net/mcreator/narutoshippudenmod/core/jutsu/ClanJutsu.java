@@ -119,18 +119,6 @@ public final class ClanJutsu {
 				new Def("Gate of View: Morning Peacock", JutsuRank.B, p -> gate(p, 6), "Taijutsu"),
 				new Def("Gate of Wonder: Daytime Tiger", JutsuRank.A, p -> gate(p, 7), "Taijutsu"),
 				new Def("Gate of Death: Night Guy", JutsuRank.S, p -> gate(p, 8), "Taijutsu"));
-		// the old separate Drunken Fist item still works for those who have one
-		JutsuRank d = JutsuRank.D;
-		Jutsus.technique("lee_release_drunken_fist", v -> 0, (v, i) -> {
-		}, v -> v.leereleaselogic, deps -> {
-			if (deps.get("entity") instanceof ServerPlayer player) {
-				NarutoShippudenModVariables.ifPresent(player, vars -> {
-					vars.ChakraAmount -= d.chakra;
-					vars.syncPlayerVariables(player);
-				});
-				drunkenFist(player);
-			}
-		}, Jutsus.jutsu("Drunken Fist", v -> v.leelearn, 1, "Taijutsu", v -> v.taijutsu, d.ninjutsu, d.chakra, d.cooldowns()));
 		nature("sarutobi", "Sarutobi Clan", v -> v.sarutobireleaselogic, v -> v.sarutobitechnique, (v, i) -> v.sarutobitechnique = i,
 				v -> v.sarutobilearn, (v, i) -> v.sarutobilearn = i, v -> v.sarutobirelease, (v, i) -> v.sarutobirelease = i,
 				new Def("Ash Pile Burning", JutsuRank.C, ClanJutsu::ashPile),

@@ -49,7 +49,6 @@ public final class ModClient {
 		JutsuRenderers.MagnetHandsSneakRenderer.registerRenderers(event);
 		JutsuRenderers.MagnetWingsRenderer.registerRenderers(event);
 		JutsuRenderers.RunningFireRenderer.registerRenderers(event);
-		JutsuRenderers.ShadowCloneRenderer.registerRenderers(event);
 		JutsuRenderers.ShadowImitationEntity2Renderer.registerRenderers(event);
 		JutsuRenderers.ShadowImitationEntityRenderer.registerRenderers(event);
 		JutsuRenderers.ShadowImitationFieldTechniqueRenderer.registerRenderers(event);

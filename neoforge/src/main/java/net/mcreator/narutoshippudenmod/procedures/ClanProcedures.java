@@ -71,7 +71,6 @@ import net.mcreator.narutoshippudenmod.item.TechniqueItems.FumaReleaseTechniqueI
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.HozukiReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.HyugaReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.InuzukaReleaseTechniqueItem;
-import net.mcreator.narutoshippudenmod.item.TechniqueItems.LeeReleaseDrunkenFistItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.LeeReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.SarutobiReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.ShadowCloneTechniqueItem;
@@ -6014,53 +6013,6 @@ public final class ClanProcedures {
 
 
 
-	public static class LeeReleaseDrunkenFistRightclickedProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure LeeReleaseDrunkenFistRightclicked!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).leereleaselogic == true) {
-				if (NarutoShippudenModVariables.get(entity).leelearn >= 1) {
-					if (entity instanceof LivingEntity)
-						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.NAUSEA, (int) 1800, (int) 2, (false), (false)));
-					if (entity instanceof LivingEntity)
-						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) 1800, (int) 1, (false), (false)));
-					if (entity instanceof LivingEntity)
-						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.RESISTANCE, (int) 1800, (int) 1, (false), (false)));
-					if (entity instanceof LivingEntity)
-						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.SPEED, (int) 1800, (int) 0, (false), (false)));
-					if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
-						if (entity instanceof Player)
-							((Player) entity).getCooldowns().addCooldown(new ItemStack(LeeReleaseDrunkenFistItem.block), (int) 3000);
-					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
-						if (entity instanceof Player)
-							((Player) entity).getCooldowns().addCooldown(new ItemStack(LeeReleaseDrunkenFistItem.block), (int) 2500);
-					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
-						if (entity instanceof Player)
-							((Player) entity).getCooldowns().addCooldown(new ItemStack(LeeReleaseDrunkenFistItem.block), (int) 2200);
-					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
-						if (entity instanceof Player)
-							((Player) entity).getCooldowns().addCooldown(new ItemStack(LeeReleaseDrunkenFistItem.block), (int) 2000);
-					} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
-						if (entity instanceof Player)
-							((Player) entity).getCooldowns().addCooldown(new ItemStack(LeeReleaseDrunkenFistItem.block), (int) 1800);
-					}
-				} else if (!(NarutoShippudenModVariables.get(entity).leelearn >= 1)) {
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
-					}
-				}
-			} else if (NarutoShippudenModVariables.get(entity).leereleaselogic == false) {
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
-				}
-			}
-		}
-	}
 
 	public static class LeeReleaseRightclickedProcedure {
 
@@ -6074,7 +6026,7 @@ public final class ClanProcedures {
 			if (NarutoShippudenModVariables.get(entity).lee_release == 0) {
 				if (NarutoShippudenModVariables.get(entity).jp >= 10) {
 					if (entity instanceof Player) {
-						ItemStack _setstack = new ItemStack(LeeReleaseDrunkenFistItem.block);
+						ItemStack _setstack = ItemStack.EMPTY;
 						_setstack.setCount((int) 1);
 						Compat.giveItemToPlayer(((Player) entity), _setstack);
 					}
@@ -8403,8 +8355,9 @@ public final class ClanProcedures {
 			double storyrandomclones = 0;
 			if (NarutoShippudenModVariables.get(entity).ninjutsu >= 5) {
 				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 30) {
-					if (!(NarutoShippudenModVariables.get(entity).storymode == 14)
-							&& !(NarutoShippudenModVariables.get(entity).storymode == 5)) {
+					if (!(NarutoShippudenModVariables.get(entity).storymode == 14) && !(NarutoShippudenModVariables.get(entity).storymode == 5)) {
+						net.mcreator.narutoshippudenmod.core.jutsu.ShadowClones.cast(entity);
+					} else if (false) {
 						clonecount = (Mth.nextInt(RandomSource.create(), 1, 6));
 						if ((entity.getDirection()) == Direction.SOUTH) {
 							if (clonecount == 1) {

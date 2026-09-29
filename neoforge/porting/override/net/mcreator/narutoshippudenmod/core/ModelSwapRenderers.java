@@ -61,6 +61,9 @@ public final class ModelSwapRenderers {
 	/** Draws the player with a custom model and texture (was KleidersPlayerRenderer). */
 	public static void renderPlayerAs(RenderLivingEvent<?, ?, ?> event, String texture, ModelLayerLocation layer,
 			Function<ModelPart, ? extends EntityModel<?>> factory) {
+		// an invisible player (Tunneling Fang, a potion) shows no jutsu form either
+		if (event.getRenderState().isInvisible)
+			return;
 		draw(event, MODELS.computeIfAbsent(layer, l -> factory.apply(Minecraft.getInstance().getEntityModels().bakeLayer(l))),
 				RenderTypes.entityTranslucent(Identifier.parse(texture)), 1.0F);
 	}
@@ -71,22 +74,40 @@ public final class ModelSwapRenderers {
 		renderPlayerAs(event, texture, layer, factory);
 	}
 
-	/** Draws the player model again with an overlay texture, used for dojutsu eyes (was InternalPlayerRenderer). */
-	public static void renderDojutsu(RenderLivingEvent<?, ?, ?> event, String texture) {
-		if (!(event.getRenderState() instanceof AvatarRenderState state) || state.isInvisible || swapped(entity(event)))
+	/** Eye textures asked for in this frame's Pre event, drawn in Post (which never comes when a transformation replaces the model). */
+	private static final Map<LivingEntityRenderState, java.util.List<String>> EYES = new java.util.IdentityHashMap<>();
+
+	@SubscribeEvent(priority = net.neoforged.bus.api.EventPriority.HIGHEST)
+	public static void forgetEyes(RenderLivingEvent.Pre<?, ?, ?> event) {
+		EYES.remove(event.getRenderState());
+	}
+
+	@SubscribeEvent
+	public static void drawEyes(RenderLivingEvent.Post<?, ?, ?> event) {
+		java.util.List<String> textures = EYES.remove(event.getRenderState());
+		if (textures == null)
 			return;
 		if (overlayModel == null)
 			overlayModel = new PlayerModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER), false);
 		// the eyes lie exactly on the skin, so they need the decal render type (depth offset) to show on top of it
-		draw(event, overlayModel, RenderTypes.entityCutoutZOffset(Identifier.parse(texture)), 0.9375F);
+		for (String texture : textures)
+			draw(event, overlayModel, RenderTypes.entityCutoutZOffset(Identifier.parse(texture)), 0.9375F);
 	}
 
-	/** Whether the player is drawn as something else just now (Passing Fang's drill, a Human Bullet Tank), so their eyes are hidden. */
-	private static boolean swapped(@org.jspecify.annotations.Nullable LivingEntity entity) {
-		if (entity == null)
-			return false;
-		var v = net.mcreator.narutoshippudenmod.NarutoShippudenModVariables.get(entity);
-		return v.PassingFang || v.HumanBulletTank || v.SpikedHumanBulletTank;
+	/**
+	 * Draws the player model again with an eye texture (was InternalPlayerRenderer), once the player is drawn. Not while invisible
+	 * or turned into something else, and a closed eye's look (the resting Byakugan) gives way to any open dojutsu.
+	 */
+	public static void renderDojutsu(RenderLivingEvent<?, ?, ?> event, String texture) {
+		if (!(event.getRenderState() instanceof AvatarRenderState state) || state.isInvisible)
+			return;
+		LivingEntity entity = entity(event);
+		if (texture.contains("_not_active") && entity != null) {
+			var vars = net.mcreator.narutoshippudenmod.NarutoShippudenModVariables.get(entity);
+			if (Eyes.EYES.stream().anyMatch(eye -> eye.active().test(vars)))
+				return;
+		}
+		EYES.computeIfAbsent(state, s -> new java.util.ArrayList<>()).add(texture);
 	}
 
 	/**

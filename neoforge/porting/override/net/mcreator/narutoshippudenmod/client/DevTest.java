@@ -2,6 +2,7 @@ package net.mcreator.narutoshippudenmod.client;
 
 import net.mcreator.narutoshippudenmod.NarutoShippudenMod;
 import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables;
+import net.mcreator.narutoshippudenmod.core.NarutoActions;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
@@ -174,6 +175,55 @@ public final class DevTest {
 			}));
 			command(mc, "gamemode creative");
 		});
+		// batch 6: the resting Byakugan gives way to an open Tenseigan, the message panel, shadow clones, Flying Raijin, the Inuzuka wheel
+		STEPS.add(() -> {
+			command(mc, "gamemode creative");
+			command(mc, "fill -6 220 -6 6 226 12 air");
+			command(mc, "tp @s 0.5 220 0.5 0 0");
+			mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
+			onServer(mc, p -> NarutoShippudenModVariables.ifPresent(p, v -> {
+				v.byakugan = true;
+				v.byakuganactivate = false;
+				v.tenseigan = true;
+				v.tenseiganactivate = true;
+				v.syncPlayerVariables(p);
+			}));
+		});
+		STEPS.add(() -> shot(mc, "b6_tenseigan"));
+		STEPS.add(() -> {
+			onServer(mc, p -> {
+				NarutoShippudenModVariables.ifPresent(p, v -> {
+					v.tenseiganactivate = false;
+					v.ninjutsu = 100;
+					v.ChakraAmount = v.ChakraMax;
+					v.syncPlayerVariables(p);
+				});
+				p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,
+						new net.minecraft.world.item.ItemStack(net.mcreator.narutoshippudenmod.item.WeaponItems.FlyingThunderGodKunaiItem.block));
+				net.mcreator.narutoshippudenmod.core.jutsu.ShadowClones.cast(p);
+			});
+			mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
+			nextDelay = 20;
+		});
+		STEPS.add(() -> shot(mc, "b6_clones_toast"));
+		STEPS.add(() -> {
+			command(mc, "kill @e[type=naruto_shippuden:shadow_clone]");
+			onServer(mc, p -> {
+				p.setShiftKeyDown(true);
+				net.mcreator.narutoshippudenmod.core.jutsu.FlyingRaijin.use(NarutoActions.dependencies(p));
+				p.setShiftKeyDown(false);
+			});
+			command(mc, "tp @s 0.5 220 8.5 180 20");
+		});
+		STEPS.add(() -> {
+			NarutoShippudenMod.LOGGER.info("DEVTEST raijin before z={}", mc.player.getZ());
+			onServer(mc, p -> net.mcreator.narutoshippudenmod.core.jutsu.FlyingRaijin.swing(NarutoActions.dependencies(p)));
+		});
+		STEPS.add(() -> NarutoShippudenMod.LOGGER.info("DEVTEST raijin after z={}", mc.player.getZ()));
+		STEPS.add(() -> mc.gui.setScreen(new JutsuClient.WheelScreen(net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.TECHNIQUES
+				.get(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", "inuzuka_release_technique")))));
+		STEPS.add(() -> shot(mc, "b6_inuzuka_wheel"));
+		STEPS.add(() -> mc.gui.setScreen(null));
 		// chakra control: walk out over water, then walk up a wall
 		STEPS.add(() -> {
 			command(mc, "gamemode survival");

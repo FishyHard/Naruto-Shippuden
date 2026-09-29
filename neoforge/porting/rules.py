@@ -1389,3 +1389,43 @@ def sneak_charge(path, text):
     text = re.sub(r'\n\t*ChakraChargingParticlesProcedure\.executeProcedure\(Stream[^;]*;', '', text)
     return text.replace('double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount + 0.5);',
                         'double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount + 0.25);')
+
+
+# ---------------------------------------------------------------- the separate Drunken Fist item (the jutsu is the first on the Lee wheel)
+@func
+def drunken_fist_item(path, text):
+    """Remove Lee Release: Drunken Fist, the item: Drunken Fist is cast from the Lee technique like the Eight Gates."""
+    if 'LeeReleaseDrunkenFist' not in text:
+        return text
+    text = remove_class(text, 'LeeReleaseDrunkenFistItem')
+    text = remove_class(text, 'LeeReleaseDrunkenFistRightclickedProcedure')
+    return text.replace('new ItemStack(LeeReleaseDrunkenFistItem.block)', 'ItemStack.EMPTY')
+
+
+# ---------------------------------------------------------------- shadow clones (core/jutsu/ShadowClones, client/jutsu/ShadowCloneRenderer)
+@func
+def shadow_clones(path, text):
+    """The Shadow Clone Technique casts core/jutsu/ShadowClones (outside the story mode's exam), and clones wear their maker's skin."""
+    p = path.replace('\\\\', '/')
+    if p.endswith('ModClient.java'):
+        return re.sub(r'\n\t*JutsuRenderers\.ShadowCloneRenderer\.registerRenderers\(event\);', '', text)
+    if not p.endswith('ClanProcedures.java'):
+        return text
+    m = re.search(r'public static class ShadowCloneTechniqueRightclickedProcedure\b', text)
+    if not m:
+        return text
+    end = find_block(text, m.end())
+    body = text[m.start():end]
+    body = re.sub(r'if \(!\(NarutoShippudenModVariables\.get\(entity\)\.storymode == 14\)\s*&& !\(NarutoShippudenModVariables\.get\(entity\)\.storymode == 5\)\) \{',
+                  'if (!(NarutoShippudenModVariables.get(entity).storymode == 14) && !(NarutoShippudenModVariables.get(entity).storymode == 5)) {\n'
+                  '\t\t\t\t\t\tnet.mcreator.narutoshippudenmod.core.jutsu.ShadowClones.cast(entity);\n\t\t\t\t\t} else if (false) {', body, count=1)
+    return text[:m.start()] + body + text[end:]
+
+
+# ---------------------------------------------------------------- Flying Raijin (core/jutsu/FlyingRaijin)
+@func
+def flying_raijin(path, text):
+    """The Flying Thunder God kunai becomes Flying Raijin: its item hooks and the thrown kunai's landing go to core/jutsu/FlyingRaijin."""
+    text = text.replace('FlyingThunderGodKunaiRightclickedProcedure.executeProcedure(', 'net.mcreator.narutoshippudenmod.core.jutsu.FlyingRaijin.use(')
+    text = text.replace('FlyingThunderGodKunaiEntitySwingsItemProcedure.executeProcedure(', 'net.mcreator.narutoshippudenmod.core.jutsu.FlyingRaijin.swing(')
+    return text.replace('FlyingThunderGodKunaiBulletProjectileHitsBlockProcedure.executeProcedure(', 'net.mcreator.narutoshippudenmod.core.jutsu.FlyingRaijin.landed(this, ')

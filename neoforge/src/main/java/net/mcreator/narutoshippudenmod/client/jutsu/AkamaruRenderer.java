@@ -128,7 +128,7 @@ public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, Aka
 			leftRear.yScale = rightRear.yScale = 1;
 			if (state.sitting) {
 				// like a sitting wolf: tipped back 35 degrees round the front paws (front legs straight down), rump on the ground and
-				// the hind legs lying forward under him, the tail flat behind
+				// the hind legs lying forward under him, the tail curled up
 				bone.xRot = -0.62F;
 				bone.y = boneY - 1.14F;
 				leftFront.xRot = rightFront.xRot = 0.62F;
@@ -137,7 +137,7 @@ public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, Aka
 				leftRear.xRot = rightRear.xRot = -0.95F;
 				leftRear.yScale = rightRear.yScale = 0.7F;
 				head.xRot += 0.45F;
-				tail.xRot = -0.8F;
+				tail.xRot = 0.9F;
 				tail.yRot = Mth.sin(age * 0.15F) * 0.2F;
 				return;
 			}
