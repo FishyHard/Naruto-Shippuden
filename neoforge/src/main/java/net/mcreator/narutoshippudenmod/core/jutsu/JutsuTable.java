@@ -78,9 +78,6 @@ final class JutsuTable {
 		technique("isshiki_dojutsu_release_technique", v -> v.isshikidojutsutechnique, (v, i) -> v.isshikidojutsutechnique = i, null, DojutsuProcedures.IsshikiDojutsuReleaseTechniqueRightclickedProcedure::executeProcedure,
 				jutsu("Sukunahikona", v -> v.isshikidojutsulearn, 1, "Ninjutsu", v -> v.ninjutsu, 25, 500, 200, 160, 120, 80, 40),
 				jutsu("Disruption Cube", v -> v.isshikidojutsulearn, 2, "Ninjutsu", v -> v.ninjutsu, 35, 1000, 200, 160, 120, 80, 40));
-		technique("izuno_release_technique", v -> v.izunotechnique, (v, i) -> v.izunotechnique = i, null, ClanProcedures.IzunoReleaseTechniqueRightclickedProcedure::executeProcedure,
-				jutsu("Cat Covering", v -> v.izunolearn, 1, "Ninjutsu", v -> v.ninjutsu, 20, 0, 750, 500, 300, 200, 100),
-				jutsu("Monster Cat Beckoning Technique", v -> v.izunolearn, 2, "Ninjutsu", v -> v.ninjutsu, 25, 0, 1500, 1250, 1000, 750, 500));
 		technique("lee_release_technique", v -> v.lee_technique, (v, i) -> v.lee_technique = i, null, ClanProcedures.LeeReleaseTechniqueRightclickedProcedure::executeProcedure,
 				jutsu("Gate of Opening", v -> v.leelearn, 1, null, v -> v.ninjutsu, 0, 0, 0, 0, 0, 0, 0),
 				jutsu("Gate of Healing", v -> v.leelearn, 2, "Taijutsu", v -> v.taijutsu, 30, 0, 0, 0, 0, 0, 0),
@@ -132,10 +129,6 @@ final class JutsuTable {
 				jutsu("Thunder Cloud Inner Wave", v -> v.stormlearn, 2, "Ninjutsu", v -> v.ninjutsu, 30, 500, 1000, 800, 600, 400, 150));
 		technique("swift_release_technique", v -> 0, (v, i) -> {}, null, KekkeiGenkaiProcedures.SwiftReleaseTechniqueRightclickedProcedure::executeProcedure,
 				jutsu("Shadowless Flight", v -> v.swiftlearn, 1, "Ninjutsu", v -> v.ninjutsu, 30, 0, 200, 160, 120, 80, 40));
-		technique("tenro_release_technique", v -> v.tenrotechnique, (v, i) -> v.tenrotechnique = i, null, ClanProcedures.TenroReleaseTechniqueRightclickedProcedure::executeProcedure,
-				jutsu("Beast-Human Fury Kicks", v -> v.tenrolearn, 1, "Ninjutsu", v -> v.ninjutsu, 15, 50, 20, 15, 10, 5, 3),
-				jutsu("Beast-Human Transformation Technique", v -> v.tenrolearn, 2, "Ninjutsu", v -> v.ninjutsu, 20, 0, 1500, 1250, 1000, 750, 500),
-				jutsu("Beast-Human Needle Senbon", v -> v.tenrolearn, 3, "Ninjutsu", v -> v.ninjutsu, 25, 300, 500, 400, 300, 200, 100));
 		technique("typhoon_release_technique", v -> v.typhoontechnique, (v, i) -> v.typhoontechnique = i, null, KekkeiGenkaiProcedures.TyphoonReleaseTechniqueRightclickedProcedure::executeProcedure,
 				jutsu("Great Consecutive Bursting Strong Winds", v -> v.typhoonlearn, 1, "Ninjutsu", v -> v.ninjutsu, 20, 300, 200, 160, 120, 80, 40),
 				jutsu("Great Consecutive Bursting Extreme Winds", v -> v.typhoonlearn, 2, "Ninjutsu", v -> v.ninjutsu, 25, 450, 200, 160, 120, 80, 40));
@@ -198,12 +191,6 @@ final class JutsuTable {
 		release("fuma_release", ClanProcedures.FumaReleaseRightclickProcedure::executeProcedure,
 				track("", v -> v.fumarelease, -1, "fuma_release_technique", v -> v.fumalearn,
 					tier(10, 1, "fuma_release_technique"), tier(15, 2, null), tier(20, 3, null)));
-		release("hatake_release", ClanProcedures.HatakeReleaseRightclickedProcedure::executeProcedure,
-				track("", v -> v.hatakelearn, -1, null, null,
-					tier(5, 0, "white_light_chakra_sabre")));
-		release("hoshigaki_release", ClanProcedures.HoshigakiReleaseRightclickedProcedure::executeProcedure,
-				track("", v -> v.hoshigaki_release, -1, null, null,
-					tier(5, 0, "hoshigaki_release_technique")));
 		release("hozuki_release", ClanProcedures.HozukiReleaseRightclickProcedure::executeProcedure,
 				track("", v -> v.hozukirelease, -1, "hozuki_release_technique", v -> v.hozukilearn,
 					tier(10, 1, "hozuki_release_technique"), tier(15, 2, null), tier(20, 3, null)));
@@ -222,15 +209,6 @@ final class JutsuTable {
 		release("isshiki_dojutsu_release", DojutsuProcedures.IsshikiDojutsuReleaseRightclickedProcedure::executeProcedure,
 				track("", v -> v.isshikidojutsurelease, -1, "isshiki_dojutsu_release_technique", v -> v.isshikidojutsulearn,
 					tier(25, 1, "isshiki_dojutsu_release_technique"), tier(40, 2, null)));
-		release("izuno_release", ClanProcedures.IzunoReleaseRightclickedProcedure::executeProcedure,
-				track("", v -> v.izuno_release, -1, "izuno_release_technique", v -> v.izunolearn,
-					tier(25, 1, "izuno_release_technique"), tier(30, 2, null)));
-		release("kaguya_release", ClanProcedures.KaguyaReleaseRightclickedProcedure::executeProcedure,
-				track("", v -> v.kaguya_release, -1, null, null,
-					tier(5, 0, "bone_release")));
-		release("kazekage_release", ClanProcedures.KazekageReleaseRightclickedProcedure::executeProcedure,
-				track("", v -> v.kazekage_release, -1, null, null,
-					tier(5, 0, "magnet_release")));
 		release("lee_release", ClanProcedures.LeeReleaseRightclickedProcedure::executeProcedure,
 				track("", v -> v.lee_release, -1, "lee_release_technique", v -> v.leelearn,
 					tier(10, 1, "lee_release_drunken_fist"), tier(20, 2, "lee_release_technique"), tier(25, 3, null), tier(30, 4, null), tier(35, 5, null), tier(40, 6, null), tier(45, 7, null), tier(50, 8, null), tier(55, 9, null)));
@@ -264,18 +242,9 @@ final class JutsuTable {
 		release("mangekyou_sharingan_shisui_release", DojutsuProcedures.MangekyouSharinganShisuiReleaseRightclickedProcedure::executeProcedure,
 				track("Susanoo", v -> v.mangekyousharinganshisuisusanorelease, -1, null, v -> v.mangekyousharinganshisuisusanolearn,
 					tier(10, 1, null), tier(20, 2, null), tier(30, 3, null), tier(40, 4, null)));
-		release("namikaze_release", ClanProcedures.NamikazeReleaseRightclickedProcedure::executeProcedure,
-				track("", v -> v.namikaze_release, -1, null, null,
-					tier(5, 0, "storm_release"), tier(10, 0, "flying_thunder_god_kunai")));
-		release("otsutsuki_release", ClanProcedures.OtsutsukiReleaseRightclickedProcedure::executeProcedure,
-				track("", v -> v.otsutsuki_release, -1, null, null,
-					tier(30, 0, "otsutsuki_sword")));
 		release("sarutobi_release", ClanProcedures.SarutobiReleaseRightclickProcedure::executeProcedure,
 				track("", v -> v.sarutobirelease, -1, "sarutobi_release_technique", v -> v.sarutobilearn,
 					tier(10, 1, "sarutobi_release_technique"), tier(15, 2, null)));
-		release("senju_release", ClanProcedures.SenjuReleaseRightclickedProcedure::executeProcedure,
-				track("", v -> v.senju_release, -1, null, null,
-					tier(5, 0, "wood_release")));
 		release("sharingan_release", DojutsuProcedures.SharinganReleaseRightclickedProcedure::executeProcedure,
 				track("", v -> v.sharinganrelease, -1, "sharingan_release_technique", v -> v.sharinganlearn,
 					tier(15, 1, "sharingan_release_technique"), tier(20, 2, null), tier(25, 3, null), tier(30, 4, null)));
@@ -291,9 +260,6 @@ final class JutsuTable {
 		release("swift_release", KekkeiGenkaiProcedures.SwiftReleaseRightClickedProcedure::executeProcedure,
 				track("", v -> v.swiftrelease, -1, "swift_release_technique", v -> v.swiftlearn,
 					tier(35, 1, "swift_release_technique")));
-		release("tenro_release", ClanProcedures.TenroReleaseRightclickedProcedure::executeProcedure,
-				track("", v -> v.tenro_release, -1, "tenro_release_technique", v -> v.tenrolearn,
-					tier(15, 1, "tenro_release_technique"), tier(20, 2, null), tier(25, 3, "tenro_release")));
 		release("tsuchigumo_release", ClanProcedures.TsuchigumoReleaseRightclickProcedure::executeProcedure,
 				track("", v -> v.tsuchigumorelease, -1, null, v -> v.tsuchigumolearn,
 					tier(20, 1, "tsuchigumo_release_technique")));
@@ -312,8 +278,5 @@ final class JutsuTable {
 		release("wood_release", KekkeiGenkaiProcedures.WoodReleaseRightclickedProcedure::executeProcedure,
 				track("", v -> v.wood_release, -1, "wood_release_technique", v -> v.woodlearn,
 					tier(20, 1, "wood_release_technique"), tier(25, 2, null), tier(30, 3, null)));
-		release("yuki_release", ClanProcedures.YukiReleaseRightclickedProcedure::executeProcedure,
-				track("", v -> v.yuki_release, -1, null, null,
-					tier(5, 0, "ice_release")));
 	}
 }

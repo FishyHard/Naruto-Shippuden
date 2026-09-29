@@ -60,8 +60,7 @@ import java.util.function.IntConsumer;
 import org.jspecify.annotations.Nullable;
 
 /**
- * The clans' techniques on the jutsu engine. Transformations (the Akimichi tank and butterfly, the Inuzuka wolves, the Izuno cat,
- * the Tenro beast) keep their player models, switched on by the old flags for a set time; the Eight Gates are timed modes that
+ * The clans' techniques on the jutsu engine. Transformations (the Akimichi tank and butterfly, the Inuzuka wolves, ) keep their player models, switched on by the old flags for a set time; the Eight Gates are timed modes that
  * cost health. Like the natures, each clan keeps its old save variables and prices every jutsu by its {@link JutsuRank}.
  */
 @EventBusSubscriber(modid = "naruto_shippuden")
@@ -104,10 +103,6 @@ public final class ClanJutsu {
 				new Def("Passing Fang", JutsuRank.C, ClanJutsu::passingFang, "Taijutsu"),
 				new Def("Human Beast Combination Transformation: Double-Headed Wolf", JutsuRank.B, p -> wolf(p, 1)),
 				new Def("Human Beast Mixture Transformation: Three-Headed Wolf", JutsuRank.A, p -> wolf(p, 2)));
-		nature("izuno", "Izuno Clan", v -> v.izunoreleaselogic, v -> v.izunotechnique, (v, i) -> v.izunotechnique = i, v -> v.izunolearn,
-				(v, i) -> v.izunolearn = i, v -> v.izuno_release, (v, i) -> v.izuno_release = i,
-				new Def("Cat Covering", JutsuRank.B, ClanJutsu::catCovering),
-				new Def("Monster Cat Beckoning Technique", JutsuRank.A, ClanJutsu::monsterCat));
 		nature("lee", "Lee Clan", v -> v.leereleaselogic, v -> v.lee_technique, (v, i) -> v.lee_technique = i, v -> v.leelearn,
 				(v, i) -> v.leelearn = i, v -> v.lee_release, (v, i) -> v.lee_release = i,
 				new Def("Drunken Fist", JutsuRank.D, ClanJutsu::drunkenFist, "Taijutsu"),
@@ -135,11 +130,6 @@ public final class ClanJutsu {
 				v -> v.sarutobilearn, (v, i) -> v.sarutobilearn = i, v -> v.sarutobirelease, (v, i) -> v.sarutobirelease = i,
 				new Def("Ash Pile Burning", JutsuRank.C, ClanJutsu::ashPile),
 				new Def("Fire Dragon Flame Bullet", JutsuRank.B, ClanJutsu::flameBullet));
-		nature("tenro", "Tenro Clan", v -> v.tenroreleaselogic, v -> v.tenrotechnique, (v, i) -> v.tenrotechnique = i, v -> v.tenrolearn,
-				(v, i) -> v.tenrolearn = i, v -> v.tenro_release, (v, i) -> v.tenro_release = i,
-				new Def("Beast-Human Fury Kicks", JutsuRank.D, ClanJutsu::furyKicks, "Taijutsu"),
-				new Def("Beast-Human Needle Senbon", JutsuRank.C, ClanJutsu::needleSenbon),
-				new Def("Beast-Human Transformation Technique", JutsuRank.B, ClanJutsu::beastHuman));
 		nature("uzumaki", "Uzumaki Clan", v -> v.uzumakireleaselogic, v -> v.uzumakitechnique, (v, i) -> v.uzumakitechnique = i,
 				v -> v.uzumakilearn, (v, i) -> v.uzumakilearn = i, v -> v.uzumakirelease, (v, i) -> v.uzumakirelease = i,
 				new Def("Heal Bite", JutsuRank.D, ClanJutsu::healBite),
@@ -718,48 +708,6 @@ public final class ClanJutsu {
 		Techniques.dash(p, 10, 10 + stage * 4, Element.BEAST);
 	}
 
-	// ------------------------------------------------------------------ izuno
-	/** Cat chakra covers the body: forty seconds of speed, great leaps, night sight and soft landings. */
-	private static void catCovering(ServerPlayer p) {
-		ServerLevel level = level(p);
-		puff(level, p.position().add(0, 1, 0), Element.CHAKRA, 1.5F);
-		sound(level, p.position(), SoundEvents.BREEZE_JUMP, 1, 1.4F);
-		mode(p, 800, 1, v -> v.izunochakramode = true, v -> v.izunochakramode = false, t -> {
-			if (t % 10 == 0) {
-				keep(p, MobEffects.SPEED, 2);
-				keep(p, MobEffects.JUMP_BOOST, 1);
-				keep(p, MobEffects.STRENGTH, 0);
-				if (t % 200 == 0)
-					keep(p, MobEffects.NIGHT_VISION, 0);
-			}
-			p.fallDistance = 0;
-			if (t % 3 == 0)
-				level.sendParticles(Element.CHAKRA.trail, p.getX(), p.getY() + 1, p.getZ(), 2, 0.4, 0.6, 0.4, 0.01);
-		});
-	}
-
-	/** Becomes a giant monster cat that pounces, then fights as the beast for thirty seconds. */
-	private static void monsterCat(ServerPlayer p) {
-		ServerLevel level = level(p);
-		level.sendParticles(ParticleTypes.POOF, p.getX(), p.getY() + 1, p.getZ(), 60, 1.5, 1.5, 1.5, 0.05);
-		sound(level, p.position(), SoundEvents.RAVAGER_ROAR, 1.5F, 1.4F);
-		mode(p, 600, 2.5F, v -> v.izunocat = true, v -> v.izunocat = false, t -> {
-			if (t % 10 == 0) {
-				keep(p, MobEffects.STRENGTH, 2);
-				keep(p, MobEffects.RESISTANCE, 1);
-				keep(p, MobEffects.SPEED, 0);
-			}
-			p.fallDistance = 0;
-		});
-		Vec3 look = p.getLookAngle().multiply(1, 0, 1).normalize();
-		p.setDeltaMovement(look.x * 1.3, 0.9, look.z * 1.3);
-		p.syncVelocity = true;
-		after(level, 14, () -> {
-			if (p.isAlive())
-				burst(level, p.position(), 4.5F, 14, 1.5F, Element.BEAST, p);
-		});
-	}
-
 	// ------------------------------------------------------------------ lee
 	private static final Map<UUID, Integer> DRUNK = new HashMap<>();
 
@@ -962,51 +910,6 @@ public final class ClanJutsu {
 					});
 		});
 		sound(level, p.getEyePosition(), SoundEvents.BLAZE_SHOOT, 1.5F, 0.6F);
-	}
-
-	// ------------------------------------------------------------------ tenro
-	/** Three quick kicks; the last one launches. */
-	private static void furyKicks(ServerPlayer p) {
-		ServerLevel level = level(p);
-		channel(p, 12, 4, t -> {
-			boolean last = t == 8;
-			Vec3 look = p.getLookAngle().multiply(1, 0, 1).normalize();
-			p.setDeltaMovement(look.x * 0.4, last ? 0.4 : 0.1, look.z * 0.4);
-			p.syncVelocity = true;
-			for (LivingEntity target : cone(p, 3.5, 50)) {
-				damage(p, target, 4, Element.BEAST);
-				target.push(look.x * (last ? 1.5 : 0.4), last ? 0.7 : 0.1, look.z * (last ? 1.5 : 0.4));
-				target.syncVelocity = true;
-			}
-			Vec3 at = p.getEyePosition().add(look.scale(1.8)).subtract(0, 0.6, 0);
-			level.sendParticles(ParticleTypes.SWEEP_ATTACK, at.x, at.y, at.z, 1, 0, 0, 0, 0);
-			sound(level, p.position(), SoundEvents.PLAYER_ATTACK_SWEEP, 1, 1.2F + t * 0.05F);
-		});
-	}
-
-	/** Nine poisoned senbon in a fan. */
-	private static void needleSenbon(ServerPlayer p) {
-		for (int i = -4; i <= 4; i++) {
-			JutsuProjectile needle = shoot(p, Element.STEEL, Shape.NEEDLE, 0.18F, turned(p, i * 4, (p.getRandom().nextFloat() - 0.5F) * 2).scale(2.4), 3);
-			needle.life = 25;
-			needle.knockback = 0.05F;
-			needle.onHit = (n, target) -> target.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 1, false, true));
-		}
-		sound(level(p), p.getEyePosition(), SoundEvents.PLAYER_ATTACK_SWEEP, 0.8F, 2);
-	}
-
-	/** Becomes a wolf-like beast for forty seconds: fast, strong and a high jumper. */
-	private static void beastHuman(ServerPlayer p) {
-		ServerLevel level = level(p);
-		level.sendParticles(ParticleTypes.POOF, p.getX(), p.getY() + 1, p.getZ(), 40, 0.6, 1, 0.6, 0.05);
-		sound(level, p.position(), SoundEvents.RAVAGER_ROAR, 1, 1.5F);
-		mode(p, 800, 1, v -> v.tenromode = true, v -> v.tenromode = false, t -> {
-			if (t % 10 == 0) {
-				keep(p, MobEffects.SPEED, 1);
-				keep(p, MobEffects.STRENGTH, 1);
-				keep(p, MobEffects.JUMP_BOOST, 1);
-			}
-		});
 	}
 
 	// ------------------------------------------------------------------ uzumaki

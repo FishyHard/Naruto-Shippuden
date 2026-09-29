@@ -1042,3 +1042,101 @@ def eye_keys(path, text):
         if m:
             text = text[:m.start()] + text[find_block(text, m.end()):]
     return text.replace('KeyMapping.Category.MISC', 'EyeKeys.CATEGORY')
+
+
+# ---------------------------------------------------------------- clans the user removed (their logo textures stay in the assets)
+GONE_CLANS = ['Izuno', 'Kurama', 'Shimura', 'Namikaze', 'Kazekage', 'Hatake', 'Otsutsuki', 'Senju', 'Tenro', 'Yuki', 'Hoshigaki', 'Kaguya']
+GONE_CLAN_CLASSES = [c + suffix for c in GONE_CLANS for suffix in ('ReleaseItem', 'ReleaseRightclickedProcedure', 'ReleaseTechniqueItem',
+                                                                   'ReleaseTechniqueRightclickedProcedure', 'InfoProcedure', 'SelectProcedure')]
+GONE_CLAN_CLASSES += ['Diplay%sSelectProcedure' % c for c in GONE_CLANS] + ['Display%sInfoProcedure' % c for c in GONE_CLANS] \
+    + ['Display%sSelectProcedure' % c for c in GONE_CLANS]
+GONE_CLAN_LOGIC = [c.lower() + 'releaselogic' for c in GONE_CLANS]
+
+
+def clan_paper(text):
+    """The clan paper rolls 1..N, one branch per clan: drop the removed clans' branches and number the rest again."""
+    m = re.search(r'clanpaperrandom = \(Mth\.nextInt\(RandomSource\.create\(\), 1, (\d+)\)\);', text)
+    if not m:
+        return text
+    rx = re.compile(r'(?:\}\s*else\s+)?if \(clanpaperrandom == (\d+)\) \{')
+    branches, pos = [], m.end()
+    while True:
+        b = rx.search(text, pos)
+        if not b:
+            break
+        end = find_block(text, b.end() - 1)
+        branches.append((b.start(), end, text[b.start():end]))
+        pos = end
+    if not branches:
+        return text
+    kept = [body for _, _, body in branches if not any(logic in body for logic in GONE_CLAN_LOGIC)]
+    chain = ''
+    for i, body in enumerate(kept):
+        body = re.sub(r'^(?:\}\s*else\s+)?if \(clanpaperrandom == \d+\) \{', ('if' if i == 0 else ' else if') + ' (clanpaperrandom == %d) {' % (i + 1), body)
+        chain += body
+    text = text[:branches[0][0]] + chain + text[branches[-1][1]:]
+    return text.replace(m.group(0), 'clanpaperrandom = (Mth.nextInt(RandomSource.create(), 1, %d));' % len(kept))
+
+
+# the clan-select screen's numbers (0..25) for the clans that stay, renumbered 0..13 in the same order
+CLAN_SELECT = {0: 0, 1: 1, 2: 2, 3: 3, 6: 4, 7: 5, 9: 6, 10: 7, 11: 8, 12: 9, 13: 10, 21: 11, 22: 12, 24: 13}
+
+
+def clan_select(path, text):
+    v = r'NarutoShippudenModVariables\.get\(entity\)\.selectclanrelease'
+    if path.replace('\\', '/').endswith('GuiProcedures.java'):
+        # the chain that applies the chosen clan: drop the removed clans, number the rest again
+        rx = re.compile(r'(?:\}\s*else\s+)?if \(%s == (\d+)\) \{' % v)
+        first = rx.search(text)
+        while first and 'releaselogic' not in text[first.end():find_block(text, first.end() - 1)]:
+            first = rx.search(text, find_block(text, first.end() - 1))
+        if first:
+            branches, pos = [], first.start()
+            while True:
+                b = rx.match(text, pos) if pos == first.start() else re.compile(r'\s*\}?\s*else\s+if \(%s == (\d+)\) \{' % v).match(text, pos - 1)
+                if not b:
+                    break
+                end = find_block(text, b.end() - 1)
+                branches.append((int(b.group(1)), text[b.start():end]))
+                pos = end
+            chain = ''
+            for n, body in branches:
+                if n not in CLAN_SELECT:
+                    continue
+                body = re.sub(r'^\s*\}?\s*(?:else\s+)?if \(%s == \d+\) \{' % v,
+                              ('if' if not chain else ' else if') + ' (NarutoShippudenModVariables.get(entity).selectclanrelease == %d) {' % CLAN_SELECT[n], body)
+                chain += body
+            text = text[:first.start()] + chain + text[pos:]
+        # the arrows wrap at the last clan
+        top = max(CLAN_SELECT.values())
+        text = text.replace(v.replace('\\', '') + ' == 25', v.replace('\\', '') + ' == %d' % top)
+        m = re.search(r'class ClanReleaseMinusProcedure', text)
+        if m:
+            text = text[:m.end()] + text[m.end():].replace('double _setval = 25;', 'double _setval = %d;' % top, 1)
+    elif path.replace('\\', '/').endswith('GuiDisplayProcedures.java'):
+        text = re.sub(r'(%s == )(\d+)\)' % v, lambda m: m.group(1) + str(CLAN_SELECT.get(int(m.group(2)), 99)) + ')', text)
+    return text
+
+
+@func
+def remove_clans(path, text):
+    """Izuno, Kurama, Shimura (its Sharingan stays), Namikaze, Kazekage, Hatake, Otsutsuki, Senju, Tenro, Yuki, Hoshigaki and Kaguya
+    are no longer clans: no scroll, techniques, clan paper roll or info card entry. Their weapons and eyes stay."""
+    if not re.search('|'.join(GONE_CLANS), text):
+        return text
+    for name in GONE_CLAN_CLASSES:
+        text = remove_class(text, name)
+    text = clan_paper(text)
+    text = clan_select(path, text)
+    # the Tenro beast and Izuno cat modes: their per-tick blocks and player model swaps
+    v = r'(?:false && )?NarutoShippudenModVariables\.get\(entity\)\.'
+    text = remove_if_blocks(text, v + r'(?:tenromode|izunochakramode|izunocat|hoshigakireleaselogic) == true')
+    names = '|'.join(GONE_CLAN_CLASSES)
+    # the last entry of an array: keep its closing brace
+    while True:
+        cut = re.sub(r',(\s*\n[^\n]*\b(?:%s)\b[^\n]*\))\s*\};' % names, '};', text)
+        if cut == text:
+            break
+        text = cut
+    text = re.sub(r'\n[^\n]*\b(?:%s)\b[^\n]*(?:;|\),)(?=\n)' % names, '', text)
+    return text

@@ -130,28 +130,13 @@ public final class GuiDisplayProcedures {
 				return false;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 22) {
+			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 12) {
 				return true;
 			}
 			return false;
 		}
 	}
 
-	public static class DiplayHoshigakiSelectProcedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DiplayHoshigakiSelect!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 23) {
-				return true;
-			}
-			return false;
-		}
-	}
 
 	public static class DiplayHozukiSelectProcedure {
 
@@ -162,44 +147,14 @@ public final class GuiDisplayProcedures {
 				return false;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 24) {
+			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 13) {
 				return true;
 			}
 			return false;
 		}
 	}
 
-	public static class DiplayIzunoSelectProcedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DiplayIzunoSelect!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 18) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class DiplayKaguyaSelectProcedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DiplayKaguyaSelect!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 25) {
-				return true;
-			}
-			return false;
-		}
-	}
 
 	public static class DiplaySarutobiSelectProcedure {
 
@@ -210,7 +165,7 @@ public final class GuiDisplayProcedures {
 				return false;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 21) {
+			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 11) {
 				return true;
 			}
 			return false;
@@ -1010,7 +965,7 @@ public final class GuiDisplayProcedures {
 				return false;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 9) {
+			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 6) {
 				return true;
 			}
 			return false;
@@ -1042,7 +997,7 @@ public final class GuiDisplayProcedures {
 				return false;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 6) {
+			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 4) {
 				return true;
 			}
 			return false;
@@ -1232,7 +1187,7 @@ public final class GuiDisplayProcedures {
 				return false;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 13) {
+			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 10) {
 				return true;
 			}
 			return false;
@@ -1351,53 +1306,8 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-	public static class DisplayHatakeInfoProcedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayHatakeInfo!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).hatakereleaselogic == true) {
-				return true;
-			}
-			return false;
-		}
-	}
 
-	public static class DisplayHatakeSelectProcedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayHatakeSelect!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 5) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class DisplayHoshigakiInfoProcedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayHoshigakiInfo!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).hoshigakireleaselogic == true) {
-				return true;
-			}
-			return false;
-		}
-	}
 
 	public static class DisplayHozukiInfoProcedure {
 
@@ -1472,7 +1382,7 @@ public final class GuiDisplayProcedures {
 				return false;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 12) {
+			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 9) {
 				return true;
 			}
 			return false;
@@ -1520,7 +1430,7 @@ public final class GuiDisplayProcedures {
 				return false;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 10) {
+			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 7) {
 				return true;
 			}
 			return false;
@@ -1695,37 +1605,7 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-	public static class DisplayIzunoInfoProcedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayIzunoInfo!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).izunoreleaselogic == true) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class DisplayKaguyaInfoProcedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayKaguyaInfo!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).kaguyareleaselogic == true) {
-				return true;
-			}
-			return false;
-		}
-	}
 
 	public static class DisplayKakashi1Dojutsu2x1Pupils1x1Procedure {
 
@@ -1883,37 +1763,7 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-	public static class DisplayKazekageInfoProcedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayKazekageInfo!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).kazekagereleaselogic == true) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class DisplayKazekageSelectProcedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayKazekageSelect!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 15) {
-				return true;
-			}
-			return false;
-		}
-	}
 
 	public static class DisplayKetsuryugan2x1Pupils1x1Procedure {
 
@@ -2019,37 +1869,7 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-	public static class DisplayKuramaInfoProcedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayKuramaInfo!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).kuramareleaselogic == true) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class DisplayKuramaSelectProcedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayKuramaSelect!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 20) {
-				return true;
-			}
-			return false;
-		}
-	}
 
 	public static class DisplayLearnCustomJutsu1Procedure {
 
@@ -2346,37 +2166,7 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-	public static class DisplayNamikazeInfoProcedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayNamikazeInfo!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).namikazereleaselogic == true) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class DisplayNamikazeSelectProcedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayNamikazeSelect!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 8) {
-				return true;
-			}
-			return false;
-		}
-	}
 
 	public static class DisplayNaraInfoProcedure {
 
@@ -2403,7 +2193,7 @@ public final class GuiDisplayProcedures {
 				return false;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 7) {
+			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 5) {
 				return true;
 			}
 			return false;
@@ -2490,37 +2280,7 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-	public static class DisplayOtsutsukiInfoProcedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayOtsutsukiInfo!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).otsutsukireleaselogic == true) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class DisplayOtsutsukiSelectProcedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayOtsutsukiSelect!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 4) {
-				return true;
-			}
-			return false;
-		}
-	}
 
 	public static class DisplayRinnegan2x1Pupils1x1Procedure {
 
@@ -2739,37 +2499,7 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-	public static class DisplaySenjuInfoProcedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplaySenjuInfo!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).senjureleaselogic == true) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class DisplaySenjuSelectProcedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplaySenjuSelect!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 19) {
-				return true;
-			}
-			return false;
-		}
-	}
 
 	public static class DisplaySharingan2x1Pupils1x1Procedure {
 
@@ -2861,37 +2591,7 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-	public static class DisplayShimuraInfoProcedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayShimuraInfo!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).shimurareleaselogic == true) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class DisplayShimuraSelectProcedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayShimuraSelect!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 17) {
-				return true;
-			}
-			return false;
-		}
-	}
 
 	public static class DisplayShisuiDojutsu2x1Pupils1x1Procedure {
 
@@ -3053,37 +2753,7 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-	public static class DisplayTenroInfoProcedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayTenroInfo!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).tenroreleaselogic == true) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class DisplayTenroSelectProcedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayTenroSelect!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 16) {
-				return true;
-			}
-			return false;
-		}
-	}
 
 	public static class DisplayTenseigan2x1Pupils1x1Procedure {
 
@@ -3198,7 +2868,7 @@ public final class GuiDisplayProcedures {
 				return false;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 11) {
+			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 8) {
 				return true;
 			}
 			return false;
@@ -3385,37 +3055,7 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-	public static class DisplayYukiInfoProcedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayYukiInfo!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).yukireleaselogic == true) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class DisplayYukiSelectProcedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayYukiSelect!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).selectclanrelease == 14) {
-				return true;
-			}
-			return false;
-		}
-	}
 
 	public static class GiftOpenDisplay10Procedure {
 

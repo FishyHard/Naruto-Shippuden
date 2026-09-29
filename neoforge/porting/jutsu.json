@@ -1046,62 +1046,6 @@
    ]
   },
   {
-   "proc": "IzunoReleaseTechniqueRightclicked",
-   "cls": "ClanProcedures",
-   "item": [
-    "IzunoReleaseTechniqueItem",
-    "izuno_release_technique"
-   ],
-   "tvar": "izunotechnique",
-   "ms": false,
-   "itemcd": [
-    "IzunoReleaseTechniqueItem",
-    "1500"
-   ],
-   "jutsu": [
-    {
-     "index": 0,
-     "name": "Cat Covering",
-     "learn": [
-      "izunolearn",
-      "1"
-     ],
-     "stat": [
-      "ninjutsu",
-      "20"
-     ],
-     "chakra": 0,
-     "cd": [
-      750,
-      500,
-      300,
-      200,
-      100
-     ]
-    },
-    {
-     "index": 1,
-     "name": "Monster Cat Beckoning Technique",
-     "learn": [
-      "izunolearn",
-      "2"
-     ],
-     "stat": [
-      "ninjutsu",
-      "25"
-     ],
-     "chakra": 0,
-     "cd": [
-      1500,
-      1250,
-      1000,
-      750,
-      500
-     ]
-    }
-   ]
-  },
-  {
    "proc": "LeeReleaseTechniqueRightclicked",
    "cls": "ClanProcedures",
    "item": [
@@ -2049,82 +1993,6 @@
    ]
   },
   {
-   "proc": "TenroReleaseTechniqueRightclicked",
-   "cls": "ClanProcedures",
-   "item": [
-    "TenroReleaseTechniqueItem",
-    "tenro_release_technique"
-   ],
-   "tvar": "tenrotechnique",
-   "ms": false,
-   "itemcd": [
-    "TenroReleaseTechniqueItem",
-    "500"
-   ],
-   "jutsu": [
-    {
-     "index": 0,
-     "name": "Beast-Human Fury Kicks",
-     "learn": [
-      "tenrolearn",
-      "1"
-     ],
-     "stat": [
-      "ninjutsu",
-      "15"
-     ],
-     "chakra": 50,
-     "cd": [
-      20,
-      15,
-      10,
-      5,
-      3
-     ]
-    },
-    {
-     "index": 1,
-     "name": "Beast-Human Transformation Technique",
-     "learn": [
-      "tenrolearn",
-      "2"
-     ],
-     "stat": [
-      "ninjutsu",
-      "20"
-     ],
-     "chakra": 0,
-     "cd": [
-      1500,
-      1250,
-      1000,
-      750,
-      500
-     ]
-    },
-    {
-     "index": 2,
-     "name": "Beast-Human Needle Senbon",
-     "learn": [
-      "tenrolearn",
-      "3"
-     ],
-     "stat": [
-      "ninjutsu",
-      "25"
-     ],
-     "chakra": 300,
-     "cd": [
-      500,
-      400,
-      300,
-      200,
-      100
-     ]
-    }
-   ]
-  },
-  {
    "proc": "TyphoonReleaseTechniqueRightclicked",
    "cls": "KekkeiGenkaiProcedures",
    "item": [
@@ -2868,40 +2736,6 @@
    ]
   },
   {
-   "proc": "HatakeReleaseRightclicked",
-   "item": [
-    "HatakeReleaseItem",
-    "hatake_release"
-   ],
-   "tiers": [
-    {
-     "counter": "hatakelearn",
-     "sneak": -1,
-     "tier": 0,
-     "cost": 5,
-     "learn": null,
-     "give": "WhiteLightChakraSabreItem"
-    }
-   ]
-  },
-  {
-   "proc": "HoshigakiReleaseRightclicked",
-   "item": [
-    "HoshigakiReleaseItem",
-    "hoshigaki_release"
-   ],
-   "tiers": [
-    {
-     "counter": "hoshigaki_release",
-     "sneak": -1,
-     "tier": 0,
-     "cost": 5,
-     "learn": null,
-     "give": "HoshigakiReleaseTechniqueItem"
-    }
-   ]
-  },
-  {
    "proc": "HozukiReleaseRightclick",
    "item": [
     "HozukiReleaseItem",
@@ -3147,71 +2981,6 @@
       "isshikidojutsulearn"
      ],
      "give": null
-    }
-   ]
-  },
-  {
-   "proc": "IzunoReleaseRightclicked",
-   "item": [
-    "IzunoReleaseItem",
-    "izuno_release"
-   ],
-   "tiers": [
-    {
-     "counter": "izuno_release",
-     "sneak": -1,
-     "tier": 0,
-     "cost": 25,
-     "learn": [
-      "1",
-      "izunolearn"
-     ],
-     "give": "IzunoReleaseTechniqueItem"
-    },
-    {
-     "counter": "izuno_release",
-     "sneak": -1,
-     "tier": 1,
-     "cost": 30,
-     "learn": [
-      "2",
-      "izunolearn"
-     ],
-     "give": null
-    }
-   ]
-  },
-  {
-   "proc": "KaguyaReleaseRightclicked",
-   "item": [
-    "KaguyaReleaseItem",
-    "kaguya_release"
-   ],
-   "tiers": [
-    {
-     "counter": "kaguya_release",
-     "sneak": -1,
-     "tier": 0,
-     "cost": 5,
-     "learn": null,
-     "give": "BoneReleaseItem"
-    }
-   ]
-  },
-  {
-   "proc": "KazekageReleaseRightclicked",
-   "item": [
-    "KazekageReleaseItem",
-    "kazekage_release"
-   ],
-   "tiers": [
-    {
-     "counter": "kazekage_release",
-     "sneak": -1,
-     "tier": 0,
-     "cost": 5,
-     "learn": null,
-     "give": "MagnetReleaseItem"
     }
    ]
   },
@@ -3781,48 +3550,6 @@
    ]
   },
   {
-   "proc": "NamikazeReleaseRightclicked",
-   "item": [
-    "NamikazeReleaseItem",
-    "namikaze_release"
-   ],
-   "tiers": [
-    {
-     "counter": "namikaze_release",
-     "sneak": -1,
-     "tier": 0,
-     "cost": 5,
-     "learn": null,
-     "give": "StormReleaseItem"
-    },
-    {
-     "counter": "namikaze_release",
-     "sneak": -1,
-     "tier": 1,
-     "cost": 10,
-     "learn": null,
-     "give": "FlyingThunderGodKunaiItem"
-    }
-   ]
-  },
-  {
-   "proc": "OtsutsukiReleaseRightclicked",
-   "item": [
-    "OtsutsukiReleaseItem",
-    "otsutsuki_release"
-   ],
-   "tiers": [
-    {
-     "counter": "otsutsuki_release",
-     "sneak": -1,
-     "tier": 0,
-     "cost": 30,
-     "learn": null,
-     "give": "OtsutsukiSwordItem"
-    }
-   ]
-  },
-  {
    "proc": "SarutobiReleaseRightclick",
    "item": [
     "SarutobiReleaseItem",
@@ -3850,23 +3577,6 @@
       "sarutobilearn"
      ],
      "give": null
-    }
-   ]
-  },
-  {
-   "proc": "SenjuReleaseRightclicked",
-   "item": [
-    "SenjuReleaseItem",
-    "senju_release"
-   ],
-   "tiers": [
-    {
-     "counter": "senju_release",
-     "sneak": -1,
-     "tier": 0,
-     "cost": 5,
-     "learn": null,
-     "give": "WoodReleaseItem"
     }
    ]
   },
@@ -4044,48 +3754,6 @@
       "swiftlearn"
      ],
      "give": "SwiftReleaseTechniqueItem"
-    }
-   ]
-  },
-  {
-   "proc": "TenroReleaseRightclicked",
-   "item": [
-    "TenroReleaseItem",
-    "tenro_release"
-   ],
-   "tiers": [
-    {
-     "counter": "tenro_release",
-     "sneak": -1,
-     "tier": 0,
-     "cost": 15,
-     "learn": [
-      "1",
-      "tenrolearn"
-     ],
-     "give": "TenroReleaseTechniqueItem"
-    },
-    {
-     "counter": "tenro_release",
-     "sneak": -1,
-     "tier": 1,
-     "cost": 20,
-     "learn": [
-      "2",
-      "tenrolearn"
-     ],
-     "give": null
-    },
-    {
-     "counter": "tenro_release",
-     "sneak": -1,
-     "tier": 2,
-     "cost": 25,
-     "learn": [
-      "3",
-      "tenrolearn"
-     ],
-     "give": "TenroReleaseItem"
     }
    ]
   },
@@ -4327,23 +3995,6 @@
       "woodlearn"
      ],
      "give": null
-    }
-   ]
-  },
-  {
-   "proc": "YukiReleaseRightclicked",
-   "item": [
-    "YukiReleaseItem",
-    "yuki_release"
-   ],
-   "tiers": [
-    {
-     "counter": "yuki_release",
-     "sneak": -1,
-     "tier": 0,
-     "cost": 5,
-     "learn": null,
-     "give": "IceReleaseItem"
     }
    ]
   }

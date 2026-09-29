@@ -98,9 +98,7 @@ import net.mcreator.narutoshippudenmod.item.StuffItems.ChakraPaperItem;
 import net.mcreator.narutoshippudenmod.item.StuffItems.ClanPaperItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.AkimichiReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.HozukiReleaseTechniqueItem;
-import net.mcreator.narutoshippudenmod.item.TechniqueItems.IzunoReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.LeeReleaseTechniqueItem;
-import net.mcreator.narutoshippudenmod.item.TechniqueItems.TenroReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.UzumakiReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.GunbaiBlockItem;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.HiramekareiItem;
@@ -749,49 +747,7 @@ public final class PlayerProcedures {
 					}
 				}
 			}
-			if (false && NarutoShippudenModVariables.get(entity).tenromode == true) {
-				if (NarutoShippudenModVariables.get(entity).ninjutsu >= 20) {
-					if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 2) {
-						{
-							double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 2);
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.ChakraAmount = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						if (entity instanceof LivingEntity)
-							((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.JUMP_BOOST, (int) 10, (int) 0, (false), (false)));
-						if (entity instanceof LivingEntity)
-							((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.SPEED, (int) 10, (int) 1, (false), (false)));
-						if (entity instanceof LivingEntity)
-							((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) 10, (int) 1, (false), (false)));
-					} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 1.9) {
-						{
-							boolean _setval = (false);
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.tenromode = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
-							if (entity instanceof Player)
-								((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 1500);
-						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
-							if (entity instanceof Player)
-								((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 1250);
-						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
-							if (entity instanceof Player)
-								((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 1000);
-						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
-							if (entity instanceof Player)
-								((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 750);
-						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
-							if (entity instanceof Player)
-								((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 500);
-						}
-					}
-				}
-			}
+			
 			if (NarutoShippudenModVariables.get(entity).swiftmode == true) {
 				if (NarutoShippudenModVariables.get(entity).ninjutsu >= 30) {
 					if (NarutoShippudenModVariables.get(entity).taijutsu >= 20) {
@@ -844,20 +800,7 @@ public final class PlayerProcedures {
 					}
 				}
 			}
-			if (NarutoShippudenModVariables.get(entity).hoshigakireleaselogic == true) {
-				if (entity instanceof LivingEntity)
-					((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.RESISTANCE, (int) 10, (int) 0, (false), (false)));
-				if (entity instanceof LivingEntity)
-					((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, (int) 10, (int) 99, (false), (false)));
-				if (entity instanceof LivingEntity)
-					((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.SPEED, (int) 10, (int) 0, (false), (false)));
-				if (entity instanceof LivingEntity)
-					((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) 10, (int) 0, (false), (false)));
-				if (entity instanceof LivingEntity)
-					((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.CONDUIT_POWER, (int) 10, (int) 3, (false), (false)));
-				if (entity instanceof LivingEntity)
-					((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.DOLPHINS_GRACE, (int) 10, (int) 3, (false), (false)));
-			}
+			
 			if (NarutoShippudenModVariables.get(entity).DanceOfTheLarch == true) {
 				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 4) {
 					{
@@ -1087,47 +1030,7 @@ public final class PlayerProcedures {
 					}
 				}
 			}
-			if (false && NarutoShippudenModVariables.get(entity).izunochakramode == true) {
-				if (NarutoShippudenModVariables.get(entity).ninjutsu >= 20) {
-					if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1) {
-						{
-							double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 1);
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.ChakraAmount = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						if (entity instanceof LivingEntity)
-							((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.SPEED, (int) 10, (int) 1, (false), (false)));
-						if (entity instanceof LivingEntity)
-							((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) 10, (int) 1, (false), (false)));
-					} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 0.9) {
-						{
-							boolean _setval = (false);
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.izunochakramode = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
-							if (entity instanceof Player)
-								((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 750);
-						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
-							if (entity instanceof Player)
-								((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 500);
-						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
-							if (entity instanceof Player)
-								((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 300);
-						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
-							if (entity instanceof Player)
-								((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 200);
-						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
-							if (entity instanceof Player)
-								((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 100);
-						}
-					}
-				}
-			}
+			
 			if (false && NarutoShippudenModVariables.get(entity).HumanBulletTank == true) {
 				if (NarutoShippudenModVariables.get(entity).ninjutsu >= 25) {
 					if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 2) {
@@ -1286,63 +1189,7 @@ public final class PlayerProcedures {
 					}
 				}
 			}
-			if (false && NarutoShippudenModVariables.get(entity).izunocat == true) {
-				if (NarutoShippudenModVariables.get(entity).ninjutsu >= 25) {
-					if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 3) {
-						{
-							double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 3);
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.ChakraAmount = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						if (entity instanceof LivingEntity)
-							((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) 10, (int) 3, (false), (false)));
-					} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 2.9) {
-						{
-							boolean _setval = (false);
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.izunocat = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						{
-							Entity _ent = entity;
-							if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-								EntityScale.set(_ent, EntityScale.HITBOX_HEIGHT, 1);
-							}
-						}
-						{
-							Entity _ent = entity;
-							if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-								EntityScale.set(_ent, EntityScale.HITBOX_WIDTH, 1);
-							}
-						}
-						{
-							Entity _ent = entity;
-							if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-								EntityScale.set(_ent, EntityScale.EYE_HEIGHT, 1);
-							}
-						}
-						if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
-							if (entity instanceof Player)
-								((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 1500);
-						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
-							if (entity instanceof Player)
-								((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 1250);
-						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
-							if (entity instanceof Player)
-								((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 1000);
-						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
-							if (entity instanceof Player)
-								((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 750);
-						} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
-							if (entity instanceof Player)
-								((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 500);
-						}
-					}
-				}
-			}
+			
 			if (NarutoShippudenModVariables.get(entity).taijutsu >= 121) {
 				{
 					double _setval = (NarutoShippudenModVariables.get(entity).taijutsu - 1);
@@ -3534,39 +3381,9 @@ public final class PlayerProcedures {
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/passing_fang.png", FangRenderer.Modelfang.LAYER, FangRenderer.Modelfang::new);
 				}
 			}
-			if (NarutoShippudenModVariables.get(entity).tenromode == true) {
-				if (_evt.getRenderer() instanceof AvatarRenderer) {
-					if (_evt instanceof RenderLivingEvent.Pre _cancelable) {
-						_cancelable.setCanceled(true);
-					}
-					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/wolf.png", WolfRenderer.Modelwolf.LAYER, WolfRenderer.Modelwolf::new);
-				}
-			}
-			if (NarutoShippudenModVariables.get(entity).izunochakramode == true) {
-				if (entity.isShiftKeyDown()) {
-					if (_evt.getRenderer() instanceof AvatarRenderer) {
-						if (_evt instanceof RenderLivingEvent.Pre) {
-							//  _evt.setCanceled(true); 
-						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/catchakramode.png", CatChakraModeSneakRenderer.Modelcatchakramodesneak.LAYER, CatChakraModeSneakRenderer.Modelcatchakramodesneak::new);
-					}
-				} else if (!entity.isShiftKeyDown()) {
-					if (_evt.getRenderer() instanceof AvatarRenderer) {
-						if (_evt instanceof RenderLivingEvent.Pre) {
-							//  _evt.setCanceled(true); 
-						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/catchakramode.png", CatChakraModeRenderer.Modelcatchakramode.LAYER, CatChakraModeRenderer.Modelcatchakramode::new);
-					}
-				}
-			}
-			if (NarutoShippudenModVariables.get(entity).izunocat == true) {
-				if (_evt.getRenderer() instanceof AvatarRenderer) {
-					if (_evt instanceof RenderLivingEvent.Pre _cancelable) {
-						_cancelable.setCanceled(true);
-					}
-					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/monstercat.png", MonsterCatRenderer.Modelmonstercat.LAYER, MonsterCatRenderer.Modelmonstercat::new);
-				}
-			}
+			
+			
+			
 			if (entity.getPersistentData().getBooleanOr("mirror", false) == true) {
 				if (!ModelSwapRenderers.isOwnRenderer(_evt.getRenderer())) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
@@ -3625,14 +3442,7 @@ public final class PlayerProcedures {
 					}
 				}
 			}
-			if (NarutoShippudenModVariables.get(entity).hoshigakireleaselogic == true) {
-				if (_evt.getRenderer() instanceof AvatarRenderer) {
-					if (_evt instanceof RenderLivingEvent.Pre) {
-						//  _evt.setCanceled(true); 
-					}
-					ModelSwapRenderers.renderDojutsu(_evt, "naruto_shippuden:textures/face_paint/hoshigaki.png");
-				}
-			}
+			
 			if (NarutoShippudenModVariables.get(entity).magnet_coat == 1) {
 				if (entity.isShiftKeyDown()) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {

@@ -32,30 +32,18 @@ import net.mcreator.narutoshippudenmod.item.ClanItems.EightTrigramsTwinLionsCrum
 import net.mcreator.narutoshippudenmod.item.ClanItems.FumaReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.FumaShurikenClanItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.GentleStepTwinLionFistsItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.HatakeReleaseItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.HoshigakiReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.HozukiReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.HyugaReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.IburiReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.InuzukaReleaseItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.IzunoReleaseItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.KaguyaReleaseItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.KazekageReleaseItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.KuramaReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.LeeReleaseItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.NamikazeReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.NaraReleaseItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.OtsutsukiReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.SarutobiReleaseItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.SenjuReleaseItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.ShimuraReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.ShurikenClanItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.TenroReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.ToroiUniqueFumaShurikenClanItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.TsuchigumoReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.UchihaReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.UzumakiReleaseItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.YukiReleaseItem;
 import net.mcreator.narutoshippudenmod.item.JutsuProjectileItems.DrowningWaterBlobTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.JutsuProjectileItems.FistRockItem;
 import net.mcreator.narutoshippudenmod.item.JutsuProjectileItems.FurykickItem;
@@ -80,17 +68,14 @@ import net.mcreator.narutoshippudenmod.item.StuffItems.ClanPaperItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.AburameReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.AkimichiReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.FumaReleaseTechniqueItem;
-import net.mcreator.narutoshippudenmod.item.TechniqueItems.HoshigakiReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.HozukiReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.HyugaReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.InuzukaReleaseTechniqueItem;
-import net.mcreator.narutoshippudenmod.item.TechniqueItems.IzunoReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.LeeReleaseDrunkenFistItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.LeeReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.SarutobiReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.ShadowCloneTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.SharinganReleaseTechniqueItem;
-import net.mcreator.narutoshippudenmod.item.TechniqueItems.TenroReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.TsuchigumoReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.UzumakiReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.FlyingThunderGodKunaiItem;
@@ -2080,7 +2065,7 @@ public final class ClanProcedures {
 			}
 			Entity entity = (Entity) dependencies.get("entity");
 			double clanpaperrandom = 0;
-			clanpaperrandom = (Mth.nextInt(RandomSource.create(), 1, 26));
+			clanpaperrandom = (Mth.nextInt(RandomSource.create(), 1, 14));
 			if (clanpaperrandom == 1) {
 				if (entity instanceof Player) {
 					ItemStack _setstack = new ItemStack(UchihaReleaseItem.block);
@@ -2223,46 +2208,6 @@ public final class ClanProcedures {
 				}
 			} else if (clanpaperrandom == 4) {
 				if (entity instanceof Player) {
-					ItemStack _setstack = new ItemStack(HatakeReleaseItem.block);
-					_setstack.setCount((int) 1);
-					Compat.giveItemToPlayer(((Player) entity), _setstack);
-				}
-				{
-					boolean _setval = (true);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.hatakereleaselogic = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 15);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ninjutsu = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).IQ + 115);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.IQ = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 150);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ChakraMax = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+15 Ninjutsu"));
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+115 IQ"));
-				}
-			} else if (clanpaperrandom == 5) {
-				if (entity instanceof Player) {
 					ItemStack _setstack = new ItemStack(IburiReleaseItem.block);
 					_setstack.setCount((int) 1);
 					Compat.giveItemToPlayer(((Player) entity), _setstack);
@@ -2301,7 +2246,7 @@ public final class ClanProcedures {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
 					((Player) entity).sendSystemMessage(Component.literal("+90 IQ"));
 				}
-			} else if (clanpaperrandom == 6) {
+			} else if (clanpaperrandom == 5) {
 				if (entity instanceof Player) {
 					ItemStack _setstack = new ItemStack(InuzukaReleaseItem.block);
 					_setstack.setCount((int) 1);
@@ -2351,47 +2296,7 @@ public final class ClanProcedures {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
 					((Player) entity).sendSystemMessage(Component.literal("+85 IQ"));
 				}
-			} else if (clanpaperrandom == 7) {
-				if (entity instanceof Player) {
-					ItemStack _setstack = new ItemStack(KazekageReleaseItem.block);
-					_setstack.setCount((int) 1);
-					Compat.giveItemToPlayer(((Player) entity), _setstack);
-				}
-				{
-					boolean _setval = (true);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.kazekagereleaselogic = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 5);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ninjutsu = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).IQ + 100);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.IQ = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 50);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ChakraMax = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+5 Ninjutsu"));
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+100 IQ"));
-				}
-			} else if (clanpaperrandom == 8) {
+			} else if (clanpaperrandom == 6) {
 				if (entity instanceof Player) {
 					ItemStack _setstack = new ItemStack(LeeReleaseItem.block);
 					_setstack.setCount((int) 1);
@@ -2424,57 +2329,7 @@ public final class ClanProcedures {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
 					((Player) entity).sendSystemMessage(Component.literal("+115 IQ"));
 				}
-			} else if (clanpaperrandom == 9) {
-				if (entity instanceof Player) {
-					ItemStack _setstack = new ItemStack(NamikazeReleaseItem.block);
-					_setstack.setCount((int) 1);
-					Compat.giveItemToPlayer(((Player) entity), _setstack);
-				}
-				{
-					boolean _setval = (true);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.namikazereleaselogic = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 10);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ninjutsu = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).shurikenjutsu + 10);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.shurikenjutsu = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).IQ + 115);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.IQ = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 100);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ChakraMax = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Shurikenjutsu"));
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+115 IQ"));
-				}
-			} else if (clanpaperrandom == 10) {
+			} else if (clanpaperrandom == 7) {
 				if (entity instanceof Player) {
 					ItemStack _setstack = new ItemStack(NaraReleaseItem.block);
 					_setstack.setCount((int) 1);
@@ -2514,167 +2369,7 @@ public final class ClanProcedures {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
 					((Player) entity).sendSystemMessage(Component.literal("+210 IQ"));
 				}
-			} else if (clanpaperrandom == 11) {
-				if (entity instanceof Player) {
-					ItemStack _setstack = new ItemStack(OtsutsukiReleaseItem.block);
-					_setstack.setCount((int) 1);
-					Compat.giveItemToPlayer(((Player) entity), _setstack);
-				}
-				{
-					boolean _setval = (true);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.otsutsukireleaselogic = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 20);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ninjutsu = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).IQ + 125);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.IQ = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 200);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ChakraMax = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (Mth.nextInt(RandomSource.create(), 1, 3));
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.otsutsuki_path = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+20 Ninjutsu"));
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+125 IQ"));
-				}
-			} else if (clanpaperrandom == 12) {
-				if (entity instanceof Player) {
-					ItemStack _setstack = new ItemStack(SenjuReleaseItem.block);
-					_setstack.setCount((int) 1);
-					Compat.giveItemToPlayer(((Player) entity), _setstack);
-				}
-				{
-					boolean _setval = (true);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.senjureleaselogic = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 10);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ninjutsu = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).senjutsu + 5);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.senjutsu = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).IQ + 125);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.IQ = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 100);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ChakraMax = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+5 Senjutsu"));
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+125 IQ"));
-				}
-			} else if (clanpaperrandom == 13) {
-				if (entity instanceof Player) {
-					ItemStack _setstack = new ItemStack(ShimuraReleaseItem.block);
-					_setstack.setCount((int) 1);
-					Compat.giveItemToPlayer(((Player) entity), _setstack);
-				}
-				{
-					boolean _setval = (true);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.shimurareleaselogic = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).IQ + 110);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.IQ = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+110 IQ"));
-				}
-			} else if (clanpaperrandom == 14) {
-				if (entity instanceof Player) {
-					ItemStack _setstack = new ItemStack(TenroReleaseItem.block);
-					_setstack.setCount((int) 1);
-					Compat.giveItemToPlayer(((Player) entity), _setstack);
-				}
-				{
-					boolean _setval = (true);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.tenroreleaselogic = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 5);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ninjutsu = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).IQ + 80);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.IQ = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 50);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ChakraMax = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+5 Ninjutsu"));
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+80 IQ"));
-				}
-			} else if (clanpaperrandom == 15) {
+			} else if (clanpaperrandom == 8) {
 				if (entity instanceof Player) {
 					ItemStack _setstack = new ItemStack(TsuchigumoReleaseItem.block);
 					_setstack.setCount((int) 1);
@@ -2714,87 +2409,7 @@ public final class ClanProcedures {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
 					((Player) entity).sendSystemMessage(Component.literal("+90 IQ"));
 				}
-			} else if (clanpaperrandom == 16) {
-				if (entity instanceof Player) {
-					ItemStack _setstack = new ItemStack(IzunoReleaseItem.block);
-					_setstack.setCount((int) 1);
-					Compat.giveItemToPlayer(((Player) entity), _setstack);
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 15);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ninjutsu = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).IQ + 100);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.IQ = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 150);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ChakraMax = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					boolean _setval = (true);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.izunoreleaselogic = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+15 Ninjutsu"));
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+100 IQ"));
-				}
-			} else if (clanpaperrandom == 17) {
-				if (entity instanceof Player) {
-					ItemStack _setstack = new ItemStack(YukiReleaseItem.block);
-					_setstack.setCount((int) 1);
-					Compat.giveItemToPlayer(((Player) entity), _setstack);
-				}
-				{
-					boolean _setval = (true);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.yukireleaselogic = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 5);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ninjutsu = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).IQ + 95);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.IQ = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 50);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ChakraMax = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+5 Ninjutsu"));
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+95 IQ"));
-				}
-			} else if (clanpaperrandom == 18) {
+			} else if (clanpaperrandom == 9) {
 				if (entity instanceof Player) {
 					ItemStack _setstack = new ItemStack(AburameReleaseItem.block);
 					_setstack.setCount((int) 1);
@@ -2844,7 +2459,7 @@ public final class ClanProcedures {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
 					((Player) entity).sendSystemMessage(Component.literal("+105 IQ"));
 				}
-			} else if (clanpaperrandom == 19) {
+			} else if (clanpaperrandom == 10) {
 				if (entity instanceof Player) {
 					ItemStack _setstack = new ItemStack(AkimichiReleaseItem.block);
 					_setstack.setCount((int) 1);
@@ -2884,7 +2499,7 @@ public final class ClanProcedures {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
 					((Player) entity).sendSystemMessage(Component.literal("+100 IQ"));
 				}
-			} else if (clanpaperrandom == 20) {
+			} else if (clanpaperrandom == 11) {
 				if (entity instanceof Player) {
 					ItemStack _setstack = new ItemStack(ChinoikeReleaseItem.block);
 					_setstack.setCount((int) 1);
@@ -2934,47 +2549,7 @@ public final class ClanProcedures {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
 					((Player) entity).sendSystemMessage(Component.literal("+95 IQ"));
 				}
-			} else if (clanpaperrandom == 21) {
-				if (entity instanceof Player) {
-					ItemStack _setstack = new ItemStack(KuramaReleaseItem.block);
-					_setstack.setCount((int) 1);
-					Compat.giveItemToPlayer(((Player) entity), _setstack);
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 10);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ninjutsu = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).IQ + 90);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.IQ = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					boolean _setval = (true);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.kuramareleaselogic = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 100);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ChakraMax = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+90 IQ"));
-				}
-			} else if (clanpaperrandom == 22) {
+			} else if (clanpaperrandom == 12) {
 				if (entity instanceof Player) {
 					ItemStack _setstack = new ItemStack(SarutobiReleaseItem.block);
 					_setstack.setCount((int) 1);
@@ -3014,7 +2589,7 @@ public final class ClanProcedures {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
 					((Player) entity).sendSystemMessage(Component.literal("+105 IQ"));
 				}
-			} else if (clanpaperrandom == 23) {
+			} else if (clanpaperrandom == 13) {
 				if (entity instanceof Player) {
 					ItemStack _setstack = new ItemStack(FumaReleaseItem.block);
 					_setstack.setCount((int) 1);
@@ -3054,47 +2629,7 @@ public final class ClanProcedures {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
 					((Player) entity).sendSystemMessage(Component.literal("+90 IQ"));
 				}
-			} else if (clanpaperrandom == 24) {
-				if (entity instanceof Player) {
-					ItemStack _setstack = new ItemStack(HoshigakiReleaseItem.block);
-					_setstack.setCount((int) 1);
-					Compat.giveItemToPlayer(((Player) entity), _setstack);
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 25);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ninjutsu = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).IQ + 90);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.IQ = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 250);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ChakraMax = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					boolean _setval = (true);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.hoshigakireleaselogic = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+25 Ninjutsu"));
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+90 IQ"));
-				}
-			} else if (clanpaperrandom == 25) {
+			} else if (clanpaperrandom == 14) {
 				if (entity instanceof Player) {
 					ItemStack _setstack = new ItemStack(HozukiReleaseItem.block);
 					_setstack.setCount((int) 1);
@@ -3133,46 +2668,6 @@ public final class ClanProcedures {
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
 					((Player) entity).sendSystemMessage(Component.literal("+90 IQ"));
-				}
-			} else if (clanpaperrandom == 26) {
-				if (entity instanceof Player) {
-					ItemStack _setstack = new ItemStack(KaguyaReleaseItem.block);
-					_setstack.setCount((int) 1);
-					Compat.giveItemToPlayer(((Player) entity), _setstack);
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 10);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ninjutsu = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).IQ + 85);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.IQ = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 100);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.ChakraMax = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					boolean _setval = (true);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.kaguyareleaselogic = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
-				}
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+85 IQ"));
 				}
 			}
 			if (entity instanceof Player) {
@@ -4504,123 +3999,7 @@ public final class ClanProcedures {
 		}
 	}
 
-	public static class HatakeReleaseRightclickedProcedure {
 
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure HatakeReleaseRightclicked!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).hatakelearn == 0) {
-				if (NarutoShippudenModVariables.get(entity).jp >= 5) {
-					if (entity instanceof Player) {
-						ItemStack _setstack = new ItemStack(WhiteLightChakraSabreItem.block);
-						_setstack.setCount((int) 1);
-						Compat.giveItemToPlayer(((Player) entity), _setstack);
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).jp - 5);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.jp = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).hatakelearn + 1);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.hatakelearn = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-				} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
-					}
-				}
-			}
-		}
-	}
-
-	public static class HoshigakiReleaseRightclickedProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure HoshigakiReleaseRightclicked!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).hoshigaki_release == 0) {
-				if (NarutoShippudenModVariables.get(entity).jp >= 5) {
-					if (NarutoShippudenModVariables.get(entity).waterreleaselogic == true) {
-						if (entity instanceof Player) {
-							ItemStack _setstack = new ItemStack(HoshigakiReleaseTechniqueItem.block);
-							_setstack.setCount((int) 1);
-							Compat.giveItemToPlayer(((Player) entity), _setstack);
-						}
-						{
-							double _setval = (NarutoShippudenModVariables.get(entity).jp - 5);
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.jp = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						{
-							double _setval = (NarutoShippudenModVariables.get(entity).hoshigaki_release + 1);
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.hoshigaki_release = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
-						}
-					} else if (NarutoShippudenModVariables.get(entity).waterreleaselogic == false) {
-						if (entity instanceof Player) {
-							ItemStack _setstack = new ItemStack(HoshigakiReleaseTechniqueItem.block);
-							_setstack.setCount((int) 1);
-							Compat.giveItemToPlayer(((Player) entity), _setstack);
-						}
-						if (entity instanceof Player) {
-							ItemStack _setstack = new ItemStack(WaterReleaseItem.block);
-							_setstack.setCount((int) 1);
-							Compat.giveItemToPlayer(((Player) entity), _setstack);
-						}
-						{
-							double _setval = (NarutoShippudenModVariables.get(entity).jp - 5);
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.jp = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						{
-							double _setval = (NarutoShippudenModVariables.get(entity).hoshigaki_release + 1);
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.hoshigaki_release = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
-						}
-						{
-							boolean _setval = (true);
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.waterreleaselogic = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-					}
-				} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
-					}
-				}
-			}
-		}
-	}
 
 	public static class HozukiReleaseRightclickProcedure {
 
@@ -6631,386 +6010,9 @@ public final class ClanProcedures {
 		}
 	}
 
-	public static class IzunoReleaseRightclickedProcedure {
 
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure IzunoReleaseRightclicked!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).izuno_release == 0) {
-				if (NarutoShippudenModVariables.get(entity).jp >= 25) {
-					if (entity instanceof Player) {
-						ItemStack _setstack = new ItemStack(IzunoReleaseTechniqueItem.block);
-						_setstack.setCount((int) 1);
-						Compat.giveItemToPlayer(((Player) entity), _setstack);
-					}
-					{
-						double _setval = 1;
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.izunolearn = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).jp - 25);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.jp = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).izuno_release + 1);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.izuno_release = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-25 JP"));
-					}
-				} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
-					}
-				}
-			} else if (NarutoShippudenModVariables.get(entity).izuno_release == 1) {
-				if (NarutoShippudenModVariables.get(entity).jp >= 30) {
-					{
-						double _setval = 2;
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.izunolearn = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).jp - 30);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.jp = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).izuno_release + 1);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.izuno_release = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-30 JP"));
-					}
-				} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
-					}
-				}
-			} else if (NarutoShippudenModVariables.get(entity).izuno_release == 2) {
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
-				}
-			}
-		}
-	}
 
-	public static class IzunoReleaseTechniqueRightclickedProcedure {
 
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure IzunoReleaseTechniqueRightclicked!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).izunoreleaselogic == true) {
-				if (!entity.isShiftKeyDown()) {
-					if (NarutoShippudenModVariables.get(entity).izunotechnique == 0) {
-						if (NarutoShippudenModVariables.get(entity).izunolearn >= 1) {
-							if (NarutoShippudenModVariables.get(entity).ninjutsu >= 20) {
-								if (!entity.isShiftKeyDown()) {
-									if (NarutoShippudenModVariables.get(entity).izunocat == false) {
-										if (NarutoShippudenModVariables.get(entity).izunochakramode == false) {
-											{
-												boolean _setval = (true);
-												NarutoShippudenModVariables.ifPresent(entity, capability -> {
-															capability.izunochakramode = _setval;
-															capability.syncPlayerVariables(entity);
-														});
-											}
-										} else if (NarutoShippudenModVariables.get(entity).izunochakramode == true) {
-											{
-												boolean _setval = (false);
-												NarutoShippudenModVariables.ifPresent(entity, capability -> {
-															capability.izunochakramode = _setval;
-															capability.syncPlayerVariables(entity);
-														});
-											}
-											if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
-												if (entity instanceof Player)
-													((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 750);
-											} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
-												if (entity instanceof Player)
-													((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 500);
-											} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
-												if (entity instanceof Player)
-													((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 300);
-											} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
-												if (entity instanceof Player)
-													((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 200);
-											} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
-												if (entity instanceof Player)
-													((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 100);
-											}
-										}
-									} else {
-										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity)
-													.sendSystemMessage(Component.literal("You can't use both cat modes at the same time"));
-										}
-									}
-								}
-							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
-								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
-								}
-							}
-						} else if (!(NarutoShippudenModVariables.get(entity).izunolearn >= 1)) {
-							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
-							}
-						}
-					} else if (NarutoShippudenModVariables.get(entity).izunotechnique == 1) {
-						if (NarutoShippudenModVariables.get(entity).izunolearn >= 2) {
-							if (NarutoShippudenModVariables.get(entity).ninjutsu >= 25) {
-								if (NarutoShippudenModVariables.get(entity).izunochakramode == false) {
-									if (NarutoShippudenModVariables.get(entity).izunocat == false) {
-										{
-											boolean _setval = (true);
-											NarutoShippudenModVariables.ifPresent(entity, capability -> {
-												capability.izunocat = _setval;
-												capability.syncPlayerVariables(entity);
-											});
-										}
-										{
-											Entity _ent = entity;
-											if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-												EntityScale.set(_ent, EntityScale.HITBOX_HEIGHT, 2.5);
-											}
-										}
-										{
-											Entity _ent = entity;
-											if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-												EntityScale.set(_ent, EntityScale.HITBOX_WIDTH, 4);
-											}
-										}
-										{
-											Entity _ent = entity;
-											if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-												EntityScale.set(_ent, EntityScale.EYE_HEIGHT, 4);
-											}
-										}
-									} else if (NarutoShippudenModVariables.get(entity).izunocat == true) {
-										{
-											boolean _setval = (false);
-											NarutoShippudenModVariables.ifPresent(entity, capability -> {
-												capability.izunocat = _setval;
-												capability.syncPlayerVariables(entity);
-											});
-										}
-										{
-											Entity _ent = entity;
-											if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-												EntityScale.set(_ent, EntityScale.HITBOX_HEIGHT, 1);
-											}
-										}
-										{
-											Entity _ent = entity;
-											if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-												EntityScale.set(_ent, EntityScale.HITBOX_WIDTH, 1);
-											}
-										}
-										{
-											Entity _ent = entity;
-											if (!_ent.level().isClientSide() && _ent.level().getServer() != null) {
-												EntityScale.set(_ent, EntityScale.EYE_HEIGHT, 1);
-											}
-										}
-										if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
-											if (entity instanceof Player)
-												((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 1500);
-										} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
-											if (entity instanceof Player)
-												((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 1250);
-										} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
-											if (entity instanceof Player)
-												((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 1000);
-										} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
-											if (entity instanceof Player)
-												((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 750);
-										} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
-											if (entity instanceof Player)
-												((Player) entity).getCooldowns().addCooldown(new ItemStack(IzunoReleaseTechniqueItem.block), (int) 500);
-										}
-									}
-								} else {
-									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity)
-												.sendSystemMessage(Component.literal("You can't use both cat modes at the same time"));
-									}
-								}
-							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
-								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
-								}
-							}
-						} else if (!(NarutoShippudenModVariables.get(entity).izunolearn >= 3)) {
-							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
-							}
-						}
-					}
-				} else if (entity.isShiftKeyDown()) {
-					if (NarutoShippudenModVariables.get(entity).izunotechnique == 0) {
-						{
-							double _setval = 1;
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.izunotechnique = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Monster Cat Beckoning Technique"));
-						}
-					} else if (NarutoShippudenModVariables.get(entity).izunotechnique == 1) {
-						{
-							double _setval = 0;
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.izunotechnique = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Cat Covering"));
-						}
-					}
-				}
-			} else if (NarutoShippudenModVariables.get(entity).izunoreleaselogic == false) {
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
-				}
-			}
-		}
-	}
-
-	public static class KaguyaReleaseRightclickedProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure KaguyaReleaseRightclicked!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).kaguya_release == 0) {
-				if (NarutoShippudenModVariables.get(entity).jp >= 5) {
-					if (entity instanceof Player) {
-						ItemStack _setstack = new ItemStack(BoneReleaseItem.block);
-						_setstack.setCount((int) 1);
-						Compat.giveItemToPlayer(((Player) entity), _setstack);
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).jp - 5);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.jp = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).kaguya_release + 1);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.kaguya_release = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-5 JP"));
-					}
-					{
-						boolean _setval = (true);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.bonereleaselogic = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player) {
-						ItemStack _stktoremove = new ItemStack(KaguyaReleaseItem.block);
-						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
-								((Player) entity).inventoryMenu.getCraftSlots());
-					}
-				} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
-					}
-				}
-			}
-		}
-	}
-
-	public static class KazekageReleaseRightclickedProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure KazekageReleaseRightclicked!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).kazekage_release == 0) {
-				if (NarutoShippudenModVariables.get(entity).jp >= 5) {
-					if (entity instanceof Player) {
-						ItemStack _setstack = new ItemStack(MagnetReleaseItem.block);
-						_setstack.setCount((int) 1);
-						Compat.giveItemToPlayer(((Player) entity), _setstack);
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).jp - 5);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.jp = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).kazekage_release + 1);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.kazekage_release = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-5 JP"));
-					}
-					{
-						boolean _setval = (true);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.magnetreleaselogic = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player) {
-						ItemStack _stktoremove = new ItemStack(KazekageReleaseItem.block);
-						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
-								((Player) entity).inventoryMenu.getCraftSlots());
-					}
-				} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
-					}
-				}
-			}
-		}
-	}
 
 	public static class LeeReleaseDrunkenFistRightclickedProcedure {
 
@@ -8329,83 +7331,6 @@ public final class ClanProcedures {
 		}
 	}
 
-	public static class NamikazeReleaseRightclickedProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure NamikazeReleaseRightclicked!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).namikaze_release == 0) {
-				if (NarutoShippudenModVariables.get(entity).jp >= 5) {
-					if (entity instanceof Player) {
-						ItemStack _setstack = new ItemStack(StormReleaseItem.block);
-						_setstack.setCount((int) 1);
-						Compat.giveItemToPlayer(((Player) entity), _setstack);
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).jp - 5);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.jp = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).namikaze_release + 1);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.namikaze_release = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-5 JP"));
-					}
-					{
-						boolean _setval = (true);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.stormreleaselogic = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-				} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
-					}
-				}
-			} else if (NarutoShippudenModVariables.get(entity).namikaze_release == 1) {
-				if (NarutoShippudenModVariables.get(entity).jp >= 10) {
-					if (entity instanceof Player) {
-						ItemStack _setstack = new ItemStack(FlyingThunderGodKunaiItem.block);
-						_setstack.setCount((int) 1);
-						Compat.giveItemToPlayer(((Player) entity), _setstack);
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).jp - 10);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.jp = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).namikaze_release + 1);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.namikaze_release = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
-					}
-				} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
-					}
-				}
-			}
-		}
-	}
 
 	public static class NaraReleaseTechniqueRightclickedProcedure {
 
@@ -8522,53 +7447,6 @@ public final class ClanProcedures {
 		}
 	}
 
-	public static class OtsutsukiReleaseRightclickedProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure OtsutsukiReleaseRightclicked!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			double Random = 0;
-			Random = Math.random();
-			if (NarutoShippudenModVariables.get(entity).otsutsuki_release == 0) {
-				if (NarutoShippudenModVariables.get(entity).jp >= 30) {
-					if (entity instanceof Player) {
-						ItemStack _setstack = new ItemStack(OtsutsukiSwordItem.block);
-						_setstack.setCount((int) 1);
-						Compat.giveItemToPlayer(((Player) entity), _setstack);
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).jp - 30);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.jp = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).otsutsuki_release + 1);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.otsutsuki_release = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-30 JP"));
-					}
-				} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
-					}
-				}
-			} else if (NarutoShippudenModVariables.get(entity).otsutsuki_release == 1) {
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
-				}
-			}
-		}
-	}
 
 	public static class OtsutsukiToolsSwitchProcedure {
 
@@ -9205,54 +8083,6 @@ public final class ClanProcedures {
 		}
 	}
 
-	public static class SenjuReleaseRightclickedProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure SenjuReleaseRightclicked!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).senju_release == 0) {
-				if (NarutoShippudenModVariables.get(entity).jp >= 5) {
-					if (entity instanceof Player) {
-						ItemStack _setstack = new ItemStack(WoodReleaseItem.block);
-						_setstack.setCount((int) 1);
-						Compat.giveItemToPlayer(((Player) entity), _setstack);
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).jp - 5);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.jp = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).senju_release + 1);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.senju_release = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-5 JP"));
-					}
-					{
-						boolean _setval = (true);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.woodreleaselogic = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-				} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
-					}
-				}
-			}
-		}
-	}
 
 	public static class ShadowCloneEntityDiesProcedure {
 
@@ -12151,360 +10981,7 @@ public final class ClanProcedures {
 		}
 	}
 
-	public static class TenroReleaseRightclickedProcedure {
 
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure TenroReleaseRightclicked!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).tenro_release == 0) {
-				if (NarutoShippudenModVariables.get(entity).jp >= 15) {
-					if (entity instanceof Player) {
-						ItemStack _setstack = new ItemStack(TenroReleaseTechniqueItem.block);
-						_setstack.setCount((int) 1);
-						Compat.giveItemToPlayer(((Player) entity), _setstack);
-					}
-					{
-						double _setval = 1;
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.tenrolearn = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).jp - 15);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.jp = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).tenro_release + 1);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.tenro_release = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-15 JP"));
-					}
-				} else if (NarutoShippudenModVariables.get(entity).jp <= 14) {
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
-					}
-				}
-			} else if (NarutoShippudenModVariables.get(entity).tenro_release == 1) {
-				if (NarutoShippudenModVariables.get(entity).jp >= 20) {
-					{
-						double _setval = 2;
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.tenrolearn = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).jp - 20);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.jp = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).tenro_release + 1);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.tenro_release = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
-					}
-				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
-					}
-				}
-			} else if (NarutoShippudenModVariables.get(entity).tenro_release == 2) {
-				if (NarutoShippudenModVariables.get(entity).jp >= 25) {
-					{
-						double _setval = 3;
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.tenrolearn = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).jp - 25);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.jp = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).tenro_release + 1);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.tenro_release = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-25 JP"));
-					}
-					if (entity instanceof Player) {
-						ItemStack _stktoremove = new ItemStack(TenroReleaseItem.block);
-						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
-								((Player) entity).inventoryMenu.getCraftSlots());
-					}
-				} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
-					}
-				}
-			}
-		}
-	}
-
-	public static class TenroReleaseTechniqueRightclickedProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure TenroReleaseTechniqueRightclicked!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).tenroreleaselogic == true) {
-				if (!entity.isShiftKeyDown()) {
-					if (NarutoShippudenModVariables.get(entity).tenrotechnique == 0) {
-						if (NarutoShippudenModVariables.get(entity).tenrolearn >= 1) {
-							if (NarutoShippudenModVariables.get(entity).ninjutsu >= 15) {
-								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 50) {
-									{
-										Entity _shootFrom = entity;
-										Level projectileLevel = _shootFrom.level();
-										if (!projectileLevel.isClientSide()) {
-											Projectile _entityToSpawn = new Object() {
-												public Projectile getArrow(Level world, float damage, int knockback) {
-													ModArrow entityToSpawn = new FurykickItem.ArrowCustomEntity(FurykickItem.arrow, world);
-
-													entityToSpawn.setBaseDamage(damage);
-													Compat.setKnockback(entityToSpawn, knockback);
-													entityToSpawn.setSilent(true);
-
-													return entityToSpawn;
-												}
-											}.getArrow(projectileLevel, 3, 1);
-											_entityToSpawn.setPos(_shootFrom.getX(), _shootFrom.getEyeY() - 0.1, _shootFrom.getZ());
-											_entityToSpawn.shoot(_shootFrom.getLookAngle().x, _shootFrom.getLookAngle().y, _shootFrom.getLookAngle().z, 1, 0);
-											projectileLevel.addFreshEntity(_entityToSpawn);
-										}
-									}
-									{
-										double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 50);
-										NarutoShippudenModVariables.ifPresent(entity, capability -> {
-											capability.ChakraAmount = _setval;
-											capability.syncPlayerVariables(entity);
-										});
-									}
-									if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
-										if (entity instanceof Player)
-											((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 20);
-									} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
-										if (entity instanceof Player)
-											((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 15);
-									} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
-										if (entity instanceof Player)
-											((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 10);
-									} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
-										if (entity instanceof Player)
-											((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 5);
-									} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
-										if (entity instanceof Player)
-											((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 3);
-									}
-								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 49) {
-									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
-									}
-								}
-							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 14) {
-								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
-								}
-							}
-						} else if (!(NarutoShippudenModVariables.get(entity).tenrolearn >= 1)) {
-							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
-							}
-						}
-					} else if (NarutoShippudenModVariables.get(entity).tenrotechnique == 1) {
-						if (NarutoShippudenModVariables.get(entity).tenrolearn >= 2) {
-							if (NarutoShippudenModVariables.get(entity).ninjutsu >= 20) {
-								if (!entity.isShiftKeyDown()) {
-									if (NarutoShippudenModVariables.get(entity).tenromode == false) {
-										{
-											boolean _setval = (true);
-											NarutoShippudenModVariables.ifPresent(entity, capability -> {
-												capability.tenromode = _setval;
-												capability.syncPlayerVariables(entity);
-											});
-										}
-									} else if (NarutoShippudenModVariables.get(entity).tenromode == true) {
-										{
-											boolean _setval = (false);
-											NarutoShippudenModVariables.ifPresent(entity, capability -> {
-												capability.tenromode = _setval;
-												capability.syncPlayerVariables(entity);
-											});
-										}
-										if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
-											if (entity instanceof Player)
-												((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 1500);
-										} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
-											if (entity instanceof Player)
-												((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 1250);
-										} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
-											if (entity instanceof Player)
-												((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 1000);
-										} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
-											if (entity instanceof Player)
-												((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 750);
-										} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
-											if (entity instanceof Player)
-												((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 500);
-										}
-									}
-								}
-							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
-								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
-								}
-							}
-						} else if (!(NarutoShippudenModVariables.get(entity).tenrolearn >= 2)) {
-							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
-							}
-						}
-					} else if (NarutoShippudenModVariables.get(entity).tenrotechnique == 2) {
-						if (NarutoShippudenModVariables.get(entity).tenrolearn >= 3) {
-							if (NarutoShippudenModVariables.get(entity).ninjutsu >= 25) {
-								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 300) {
-									if (NarutoShippudenModVariables.get(entity).tenromode == true) {
-										if (NarutoShippudenModVariables.get(entity).tenromode == true) {
-											{
-												Entity _shootFrom = entity;
-												Level projectileLevel = _shootFrom.level();
-												if (!projectileLevel.isClientSide()) {
-													Projectile _entityToSpawn = new Object() {
-														public Projectile getArrow(Level world, float damage, int knockback) {
-															ModArrow entityToSpawn = new NeedleSenbonItem.ArrowCustomEntity(
-																	NeedleSenbonItem.arrow, world);
-
-															entityToSpawn.setBaseDamage(damage);
-															Compat.setKnockback(entityToSpawn, knockback);
-															entityToSpawn.setSilent(true);
-
-															return entityToSpawn;
-														}
-													}.getArrow(projectileLevel, 13, 3);
-													_entityToSpawn.setPos(_shootFrom.getX(), _shootFrom.getEyeY() - 0.1, _shootFrom.getZ());
-													_entityToSpawn.shoot(_shootFrom.getLookAngle().x, _shootFrom.getLookAngle().y, _shootFrom.getLookAngle().z,
-															1, 0);
-													projectileLevel.addFreshEntity(_entityToSpawn);
-												}
-											}
-											{
-												double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 300);
-												NarutoShippudenModVariables.ifPresent(entity, capability -> {
-															capability.ChakraAmount = _setval;
-															capability.syncPlayerVariables(entity);
-														});
-											}
-											if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
-												if (entity instanceof Player)
-													((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 500);
-											} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Genin")) {
-												if (entity instanceof Player)
-													((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 400);
-											} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Chunin")) {
-												if (entity instanceof Player)
-													((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 300);
-											} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Jonin")) {
-												if (entity instanceof Player)
-													((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 200);
-											} else if ((NarutoShippudenModVariables.get(entity).rank).equals("Kage")) {
-												if (entity instanceof Player)
-													((Player) entity).getCooldowns().addCooldown(new ItemStack(TenroReleaseTechniqueItem.block), (int) 100);
-											}
-										} else if (NarutoShippudenModVariables.get(entity).tenromode == false) {
-											if (entity instanceof Player && !entity.level().isClientSide()) {
-												((Player) entity).sendSystemMessage(
-														Component.literal("Activate Beast-Human Transformation Technique "));
-											}
-										}
-									}
-								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 299) {
-									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
-									}
-								}
-							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
-								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
-								}
-							}
-						} else if (!(NarutoShippudenModVariables.get(entity).tenrolearn >= 3)) {
-							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
-							}
-						}
-					}
-				} else if (entity.isShiftKeyDown()) {
-					if (NarutoShippudenModVariables.get(entity).tenrotechnique == 0) {
-						{
-							double _setval = 1;
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.tenrotechnique = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Beast-Human Transformation Technique"));
-						}
-					} else if (NarutoShippudenModVariables.get(entity).tenrotechnique == 1) {
-						{
-							double _setval = 2;
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.tenrotechnique = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Beast-Human Needle Senbon"));
-						}
-					} else if (NarutoShippudenModVariables.get(entity).tenrotechnique == 2) {
-						{
-							double _setval = 0;
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.tenrotechnique = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Selected: Beast-Human Fury Kicks"));
-						}
-					}
-				}
-			} else if (NarutoShippudenModVariables.get(entity).tenroreleaselogic == false) {
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
-				}
-			}
-		}
-	}
 
 	public static class TsuchigumoReleaseFuryRightclickedProcedure {
 
@@ -13082,57 +11559,4 @@ public final class ClanProcedures {
 		}
 	}
 
-	public static class YukiReleaseRightclickedProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure YukiReleaseRightclicked!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).yuki_release == 0) {
-				if (NarutoShippudenModVariables.get(entity).jp >= 5) {
-					if (entity instanceof Player) {
-						ItemStack _setstack = new ItemStack(IceReleaseItem.block);
-						_setstack.setCount((int) 1);
-						Compat.giveItemToPlayer(((Player) entity), _setstack);
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).jp - 5);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.jp = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).yuki_release + 1);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.yuki_release = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-5 JP"));
-					}
-					if (entity instanceof Player) {
-						ItemStack _stktoremove = new ItemStack(YukiReleaseItem.block);
-						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
-								((Player) entity).inventoryMenu.getCraftSlots());
-					}
-					{
-						boolean _setval = (true);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.icereleaselogic = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-				} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
-					}
-				}
-			}
-		}
-	}
 }

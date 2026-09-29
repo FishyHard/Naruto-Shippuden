@@ -233,7 +233,7 @@ public final class DevTest {
 
 	private static void jutsuSteps(Minecraft mc) {
 		String[] natures = { "fire", "water", "wind", "earth", "lightning", "boil", "bone", "dust", "ice", "magnet", "smoke", "steel", "storm", "swift",
-				"typhoon", "wood", "aburame", "akimichi", "fuma", "hozuki", "hyuga", "inuzuka", "izuno", "lee", "sarutobi", "tenro", "uzumaki",
+				"typhoon", "wood", "aburame", "akimichi", "fuma", "hozuki", "hyuga", "inuzuka", "lee", "sarutobi", "uzumaki",
 				"tsuchigumo", "sharingan", "isshiki_dojutsu", "mangekyou_sharingan_itachi_release_technique",
 				"mangekyou_sharingan_kakashi_release_technique", "mangekyou_sharingan_obito_release_technique", "mangekyou_sharingan_sasuke_release_technique" };
 		String only = System.getProperty("naruto.devtest.jutsu", "");
@@ -262,10 +262,10 @@ public final class DevTest {
 				v.boillearn = v.bonelearn = v.dustlearn = v.icelearn = v.magnetlearn = v.smokelearn = v.steellearn = v.stormlearn = v.swiftlearn = 4;
 				v.typhoonlearn = v.woodlearn = 4;
 				v.aburamereleaselogic = v.akimichireleaselogic = v.fumareleaselogic = v.hozukireleaselogic = v.hyugareleaselogic = true;
-				v.inuzukareleaselogic = v.izunoreleaselogic = v.leereleaselogic = v.sarutobireleaselogic = v.tenroreleaselogic = true;
+				v.inuzukareleaselogic = v.leereleaselogic = v.sarutobireleaselogic = true;
 				v.uzumakireleaselogic = v.tsuchigumoreleaselogic = true;
-				v.aburamelearn = v.akimichilearn = v.fumalearn = v.hozukilearn = v.hyugalearn = v.inuzukalearn = v.izunolearn = v.leelearn = 9;
-				v.sarutobilearn = v.tenrolearn = v.uzumakilearn = v.tsuchigumolearn = 9;
+				v.aburamelearn = v.akimichilearn = v.fumalearn = v.hozukilearn = v.hyugalearn = v.inuzukalearn = v.leelearn = 9;
+				v.sarutobilearn = v.uzumakilearn = v.tsuchigumolearn = 9;
 				v.taijutsu = v.summoning = 60;
 				v.sharingan = v.sharinganactivate = v.isshikidojutsu = v.isshikidojutsuactivate = v.MangekyouSharinganActivate = true;
 				v.sharinganlearn = v.isshikidojutsulearn = v.mangekyoushrainganitachiamaterasulearn = 9;

@@ -19,14 +19,12 @@ import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.HozukiReleaseTe
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.HyugaReleaseTechniqueLivingEntityIsHitWithItemProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.HyugaReleaseTechniqueRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.InuzukaReleaseTechniqueRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.IzunoReleaseTechniqueRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.LeeReleaseDrunkenFistRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.LeeReleaseTechniqueLivingEntityIsHitWithItemProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.LeeReleaseTechniqueRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.NaraReleaseTechniqueRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.SarutobiReleaseTechniqueRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.ShadowCloneTechniqueRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.TenroReleaseTechniqueRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.TsuchigumoReleaseFuryRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.UzumakiReleaseTechniqueLivingEntityIsHitWithItemProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.UzumakiReleaseTechniqueRightclickedProcedure;
@@ -214,38 +212,6 @@ public final class TechniqueItems {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class HoshigakiReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "hoshigaki_release_technique", v -> block = (Item) v);
-		}
-
-		public HoshigakiReleaseTechniqueItem(NarutoShippudenModElements instance) {
-			super(instance, 962);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("hoshigaki_release_technique", "TechniquesItemGroup").stacksTo(1).rarity(Rarity.COMMON));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-		}
-	}
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class HozukiReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
@@ -469,52 +435,6 @@ public final class TechniqueItems {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class IzunoReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "izuno_release_technique", v -> block = (Item) v);
-		}
-
-		public IzunoReleaseTechniqueItem(NarutoShippudenModElements instance) {
-			super(instance, 838);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("izuno_release_technique", "TechniquesItemGroup").stacksTo(1).rarity(Rarity.COMMON));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				IzunoReleaseTechniqueRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-		}
-	}
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class LeeReleaseDrunkenFistItem extends NarutoShippudenModElements.ModElement {
@@ -1066,52 +986,6 @@ public final class TechniqueItems {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class TenroReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "tenro_release_technique", v -> block = (Item) v);
-		}
-
-		public TenroReleaseTechniqueItem(NarutoShippudenModElements instance) {
-			super(instance, 833);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("tenro_release_technique", "TechniquesItemGroup").stacksTo(1).rarity(Rarity.COMMON));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				TenroReleaseTechniqueRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-		}
-	}
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class TsuchigumoReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {

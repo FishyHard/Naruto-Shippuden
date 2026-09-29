@@ -27,24 +27,14 @@ import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.DanceOfTheClema
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.EightTrigramsTwinLionsCrumblingAttackLivingEntityIsHitWithItemProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.FumaReleaseRightclickProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.GentleStepTwinLionFistsLivingEntityIsHitWithItemProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.HatakeReleaseRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.HoshigakiReleaseRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.HozukiReleaseRightclickProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.HyugaReleaseRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.IburiReleaseRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.InuzukaReleaseRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.IzunoReleaseRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.KaguyaReleaseRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.KazekageReleaseRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.LeeReleaseRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.NamikazeReleaseRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.OtsutsukiReleaseRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.SarutobiReleaseRightclickProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.SenjuReleaseRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.TenroReleaseRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.TsuchigumoReleaseRightclickProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.UzumakiReleaseRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.YukiReleaseRightclickedProcedure;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.entity.Entity;
@@ -628,99 +618,7 @@ public final class ClanItems {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class HatakeReleaseItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "hatake_release", v -> block = (Item) v);
-		}
 
-		public HatakeReleaseItem(NarutoShippudenModElements instance) {
-			super(instance, 104);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("hatake_release", "ClansItemGroup").stacksTo(1).rarity(Rarity.EPIC));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				HatakeReleaseRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class HoshigakiReleaseItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "hoshigaki_release", v -> block = (Item) v);
-		}
-
-		public HoshigakiReleaseItem(NarutoShippudenModElements instance) {
-			super(instance, 407);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("hoshigaki_release", "ClansItemGroup").stacksTo(1).rarity(Rarity.EPIC));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				HoshigakiReleaseRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-		}
-	}
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class HozukiReleaseItem extends NarutoShippudenModElements.ModElement {
@@ -910,179 +808,9 @@ public final class ClanItems {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class IzunoReleaseItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "izuno_release", v -> block = (Item) v);
-		}
-
-		public IzunoReleaseItem(NarutoShippudenModElements instance) {
-			super(instance, 411);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("izuno_release", "ClansItemGroup").stacksTo(1).rarity(Rarity.EPIC));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
 
 
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
 
-				IzunoReleaseRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class KaguyaReleaseItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "kaguya_release", v -> block = (Item) v);
-		}
-
-		public KaguyaReleaseItem(NarutoShippudenModElements instance) {
-			super(instance, 409);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("kaguya_release", "ClansItemGroup").stacksTo(1).rarity(Rarity.EPIC));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				KaguyaReleaseRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class KazekageReleaseItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "kazekage_release", v -> block = (Item) v);
-		}
-
-		public KazekageReleaseItem(NarutoShippudenModElements instance) {
-			super(instance, 107);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("kazekage_release", "ClansItemGroup").stacksTo(1).rarity(Rarity.EPIC));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				KazekageReleaseRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class KuramaReleaseItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "kurama_release", v -> block = (Item) v);
-		}
-
-		public KuramaReleaseItem(NarutoShippudenModElements instance) {
-			super(instance, 402);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("kurama_release", "ClansItemGroup").stacksTo(1).rarity(Rarity.EPIC));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-		}
-	}
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class LeeReleaseItem extends NarutoShippudenModElements.ModElement {
@@ -1131,52 +859,6 @@ public final class ClanItems {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class NamikazeReleaseItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "namikaze_release", v -> block = (Item) v);
-		}
-
-		public NamikazeReleaseItem(NarutoShippudenModElements instance) {
-			super(instance, 109);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("namikaze_release", "ClansItemGroup").stacksTo(1).rarity(Rarity.EPIC));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				NamikazeReleaseRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-		}
-	}
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class NaraReleaseItem extends NarutoShippudenModElements.ModElement {
@@ -1211,52 +893,6 @@ public final class ClanItems {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class OtsutsukiReleaseItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "otsutsuki_release", v -> block = (Item) v);
-		}
-
-		public OtsutsukiReleaseItem(NarutoShippudenModElements instance) {
-			super(instance, 111);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("otsutsuki_release", "ClansItemGroup").stacksTo(1).rarity(Rarity.EPIC));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				OtsutsukiReleaseRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-		}
-	}
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class SarutobiReleaseItem extends NarutoShippudenModElements.ModElement {
@@ -1305,85 +941,7 @@ public final class ClanItems {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class SenjuReleaseItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "senju_release", v -> block = (Item) v);
-		}
 
-		public SenjuReleaseItem(NarutoShippudenModElements instance) {
-			super(instance, 112);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("senju_release", "ClansItemGroup").stacksTo(1).rarity(Rarity.EPIC));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				SenjuReleaseRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class ShimuraReleaseItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "shimura_release", v -> block = (Item) v);
-		}
-
-		public ShimuraReleaseItem(NarutoShippudenModElements instance) {
-			super(instance, 113);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("shimura_release", "ClansItemGroup").stacksTo(1).rarity(Rarity.EPIC));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-		}
-	}
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class ShurikenClanItem extends NarutoShippudenModElements.ModElement {
@@ -1523,52 +1081,6 @@ public final class ClanItems {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class TenroReleaseItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "tenro_release", v -> block = (Item) v);
-		}
-
-		public TenroReleaseItem(NarutoShippudenModElements instance) {
-			super(instance, 114);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("tenro_release", "ClansItemGroup").stacksTo(1).rarity(Rarity.EPIC));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				TenroReleaseRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-		}
-	}
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class ToroiUniqueFumaShurikenClanItem extends NarutoShippudenModElements.ModElement {
@@ -1835,50 +1347,4 @@ public final class ClanItems {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class YukiReleaseItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "yuki_release", v -> block = (Item) v);
-		}
-
-		public YukiReleaseItem(NarutoShippudenModElements instance) {
-			super(instance, 117);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("yuki_release", "ClansItemGroup").stacksTo(1).rarity(Rarity.EPIC));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				YukiReleaseRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-		}
-	}
 }
