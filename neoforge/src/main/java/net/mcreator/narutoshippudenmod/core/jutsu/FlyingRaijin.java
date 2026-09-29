@@ -44,9 +44,9 @@ import org.jspecify.annotations.Nullable;
  * <li>Marking Strike: the creature in front of you, and for ten seconds every creature you hit, carries the formula.</li>
  * <li>Flying Raijin: move to the mark you look towards (or the newest), behind a marked creature, facing it.</li>
  * <li>Flying Raijin: Level Two: the same, taking everyone who touches you along.</li>
- * <li>Release Formulae: erase every formula you have written.</li>
+ * <li>Release Formulas: erase every formula you have written.</li>
  * </ol>
- * Up to three formulae stay on the ground (the oldest fades for a new one); only you see them, as a golden glimmer while you
+ * Up to three formulas stay on the ground (the oldest fades for a new one); only you see them, as a golden glimmer while you
  * hold the kunai.
  */
 @EventBusSubscriber(modid = "naruto_shippuden")
@@ -65,7 +65,7 @@ public final class FlyingRaijin {
 
 	/** The kunai's wheel. */
 	static void register() {
-		String[] names = { "Throw Marked Kunai", "Write Formula", "Marking Strike", "Flying Raijin", "Flying Raijin: Level Two", "Release Formulae" };
+		String[] names = { "Throw Marked Kunai", "Write Formula", "Marking Strike", "Flying Raijin", "Flying Raijin: Level Two", "Release Formulas" };
 		double[] chakra = { THROW_COST, SEAL_COST, 20, JUMP_COST, 60, 0 };
 		Jutsus.JutsuSpec[] specs = new Jutsus.JutsuSpec[names.length];
 		for (int i = 0; i < names.length; i++)
@@ -134,7 +134,7 @@ public final class FlyingRaijin {
 			mark(p, event.getEntity());
 	}
 
-	/** Release Formulae: every formula written fades. */
+	/** Release Formulas: every formula written fades. */
 	private static void release(ServerPlayer p) {
 		ListTag list = marks(p).copy();
 		int count = list.size() + MARKED.getOrDefault(p.getUUID(), Map.of()).size();
@@ -142,7 +142,7 @@ public final class FlyingRaijin {
 			removeSeal(p, list.getCompoundOrEmpty(0), list, 0);
 		p.getPersistentData().put(MARKS, list);
 		MARKED.remove(p.getUUID());
-		p.sendOverlayMessage(Component.literal(count == 0 ? "No formulae to release" : "Released " + count + " formula" + (count == 1 ? "" : "e")));
+		p.sendOverlayMessage(Component.literal(count == 0 ? "No formulas to release" : "Released " + count + " formula" + (count == 1 ? "" : "s")));
 	}
 
 	/** A thrown kunai landed: the formula stays where it stuck. */
@@ -261,7 +261,7 @@ public final class FlyingRaijin {
 		level.playSound(null, at.x, at.y, at.z, Compat.sound("naruto_shippuden:flying_thunder_god_sound"), SoundSource.PLAYERS, 1, 1);
 	}
 
-	/** Holding the kunai, you see your formulae glimmer. */
+	/** Holding the kunai, you see your formulas glimmer. */
 	@SubscribeEvent
 	public static void glimmer(PlayerTickEvent.Post event) {
 		if (!(event.getEntity() instanceof ServerPlayer p) || p.tickCount % 10 != 0 || !p.getMainHandItem().is(FlyingThunderGodKunaiItem.block))
