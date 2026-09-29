@@ -1,13 +1,22 @@
 package net.mcreator.narutoshippudenmod.client.jutsu;
 
 import net.mcreator.narutoshippudenmod.entity.SummonEntities.AkamaruEntity;
+import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.FangRenderer.Modelfang;
 import net.mcreator.narutoshippudenmod.entity.renderer.SummonRenderers.AkamaruRenderer.ModelAkamaru_Young;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
@@ -18,14 +27,21 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 /**
  * Akamaru with his own model and texture, animated like a vanilla wolf: a proper walking gait, a tail that wags (faster when he
  * runs, raised when he is angry), a sitting pose, breathing, a head that follows his gaze, snaps when he bites and tilts when he
- * begs, and a shake when he is wet.
+ * begs, and a shake when he is wet. As the Man Beast Clone he looks like his partner (their skin on a player's body), and in Fang
+ * Over Fang he is a spinning fang.
  */
 @EventBusSubscriber(modid = "naruto_shippuden", value = Dist.CLIENT)
-public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, AkamaruRenderer.State, AkamaruRenderer.Model> {
+public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, AkamaruRenderer.State, EntityModel<AkamaruRenderer.State>> {
 	private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath("naruto_shippuden", "textures/entities/akamaru_young.png");
+	private static final Identifier FANG = Identifier.fromNamespaceAndPath("naruto_shippuden", "textures/entities/passing_fang.png");
+	private final EntityModel<State> dog, clone, fang;
 
+	@SuppressWarnings("unchecked")
 	public AkamaruRenderer(EntityRendererProvider.Context context) {
 		super(context, new Model(), 0.15F);
+		dog = model;
+		clone = new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER));
+		fang = (EntityModel<State>) (EntityModel<?>) new Modelfang(context.bakeLayer(Modelfang.LAYER));
 	}
 
 	@SubscribeEvent
@@ -33,9 +49,11 @@ public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, Aka
 		event.registerEntityRenderer(AkamaruEntity.entity, AkamaruRenderer::new);
 	}
 
-	public static class State extends LivingEntityRenderState {
+	public static class State extends HumanoidRenderState {
 		boolean sitting, angry, wet, begging;
 		float attack;
+		int form;
+		Identifier skin = TEXTURE;
 	}
 
 	@Override
@@ -53,11 +71,21 @@ public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, Aka
 		// begging: the owner close by, holding meat
 		net.minecraft.world.entity.LivingEntity owner = dog.getOwner();
 		state.begging = owner != null && owner.distanceToSqr(dog) < 16 && dog.isFood(owner.getMainHandItem());
+		state.form = dog.form();
+		state.skin = owner instanceof AbstractClientPlayer player ? player.getSkin().body().texturePath()
+				: DefaultPlayerSkin.get(dog.getUUID()).body().texturePath();
+	}
+
+	@Override
+	public void submit(State state, PoseStack pose, SubmitNodeCollector collector, CameraRenderState camera) {
+		model = state.form == 1 ? clone : state.form == 2 ? fang : dog;
+		super.submit(state, pose, collector, camera);
+		model = dog;
 	}
 
 	@Override
 	public Identifier getTextureLocation(State state) {
-		return TEXTURE;
+		return state.form == 1 ? state.skin : state.form == 2 ? FANG : TEXTURE;
 	}
 
 	public static class Model extends EntityModel<State> {
@@ -89,17 +117,20 @@ public class AkamaruRenderer extends MobRenderer<AkamaruEntity.CustomEntity, Aka
 
 			// breathing, and a quick shake when wet
 			bone.y = boneY + Mth.sin(age * 0.12F) * 0.08F;
+			bone.xRot = 0;
 			bone.zRot = state.wet && !state.sitting ? Mth.sin(age * 1.4F) * 0.12F : 0;
 			body.xRot = 0;
 
 			if (state.sitting) {
-				// haunches down, front legs straight, chest up
-				bone.y = boneY + 2.2F;
-				body.xRot = -0.35F;
-				leftRear.xRot = rightRear.xRot = -1.35F;
-				leftFront.xRot = rightFront.xRot = -0.25F;
-				tail.xRot = 0.5F;
-				tail.yRot = Mth.sin(age * 0.15F) * 0.15F;
+				// tipped back onto his haunches round the front paws: front legs straight down, hind legs folded forward under him
+				bone.xRot = -0.38F;
+				bone.y = boneY - 0.5F;
+				leftFront.xRot = rightFront.xRot = 0.38F;
+				leftRear.xRot = rightRear.xRot = -0.6F;
+				head.xRot += 0.3F;
+				// the tail lies on the ground behind him
+				tail.xRot = -0.7F;
+				tail.yRot = Mth.sin(age * 0.15F) * 0.2F;
 				return;
 			}
 			// the wolf's trot: diagonal legs together

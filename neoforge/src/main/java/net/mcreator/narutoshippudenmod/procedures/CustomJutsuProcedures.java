@@ -3054,12 +3054,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 4) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (5 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (5 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 200) {
@@ -3263,12 +3263,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 14) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (15 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (15 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 300) {
@@ -3479,12 +3479,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 299) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (25 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (25 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 400) {
@@ -3695,12 +3695,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 399) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (30 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (30 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 500) {
@@ -3911,12 +3911,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 34) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (35 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (35 needed)"));
 						}
 					}
 				}
@@ -4158,12 +4158,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 4) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (5 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (5 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 200) {
@@ -4374,12 +4374,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 14) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (15 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (15 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 300) {
@@ -4590,12 +4590,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 299) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (25 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (25 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 400) {
@@ -4806,12 +4806,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 399) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (30 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (30 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 500) {
@@ -5022,12 +5022,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 34) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (35 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (35 needed)"));
 						}
 					}
 				}
@@ -5638,12 +5638,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 4) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (5 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (5 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 200) {
@@ -5863,12 +5863,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 14) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (15 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (15 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 300) {
@@ -6088,12 +6088,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 299) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (25 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (25 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 400) {
@@ -6313,12 +6313,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 399) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (30 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (30 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 500) {
@@ -6538,12 +6538,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 34) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (35 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (35 needed)"));
 						}
 					}
 				}
@@ -6785,12 +6785,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 4) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (5 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (5 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 200) {
@@ -6994,12 +6994,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 14) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (15 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (15 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 300) {
@@ -7210,12 +7210,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 299) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (25 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (25 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 400) {
@@ -7426,12 +7426,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 399) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (30 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (30 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 500) {
@@ -7642,12 +7642,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 34) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (35 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (35 needed)"));
 						}
 					}
 				}
@@ -7889,12 +7889,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 4) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (5 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (5 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 200) {
@@ -8105,12 +8105,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 14) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (15 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (15 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 300) {
@@ -8321,12 +8321,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 299) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (25 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (25 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 400) {
@@ -8537,12 +8537,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 399) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (30 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (30 needed)"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).customjutsuchakra1save == 500) {
@@ -8753,12 +8753,12 @@ public final class CustomJutsuProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 34) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu (35 Required)"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu (35 needed)"));
 						}
 					}
 				}
@@ -10818,7 +10818,7 @@ public final class CustomJutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Press Learn button again"));
+							((Player) entity).sendOverlayMessage(Component.literal("Press Learn button again"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).customjutsujpreadybuy == true) {
 						if (NarutoShippudenModVariables.get(entity).jp >= NarutoShippudenModVariables.get(entity).customjutsujpcost) {
@@ -10935,7 +10935,7 @@ public final class CustomJutsuProcedures {
 								((Player) entity).closeContainer();
 						} else if (NarutoShippudenModVariables.get(entity).jp <= NarutoShippudenModVariables.get(entity).customjutsujpcost - 1) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 							{
 								boolean _setval = (false);
@@ -10956,12 +10956,12 @@ public final class CustomJutsuProcedures {
 					}
 				}.getText()).equals("")) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Name your jutsu"));
+						((Player) entity).sendOverlayMessage(Component.literal("Name your jutsu"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).customjutsucheckpricelogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Check price first of all"));
+					((Player) entity).sendOverlayMessage(Component.literal("Check price first of all"));
 				}
 			}
 		}
@@ -11138,7 +11138,7 @@ public final class CustomJutsuProcedures {
 							? ((Player) entity).getInventory().contains(new ItemStack(CustomFireReleaseTechniqueItem.block))
 							: false)) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Take your custom jutsu in inventory"));
+					((Player) entity).sendOverlayMessage(Component.literal("Take your custom jutsu in inventory"));
 				}
 			}
 		}

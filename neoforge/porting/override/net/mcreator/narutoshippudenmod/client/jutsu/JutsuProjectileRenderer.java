@@ -43,7 +43,7 @@ import java.util.function.Consumer;
  */
 @EventBusSubscriber(modid = "naruto_shippuden", value = Dist.CLIENT)
 public class JutsuProjectileRenderer extends EntityRenderer<JutsuProjectile, JutsuProjectileRenderer.State> {
-	private static final Identifier CHAKRA = Identifier.fromNamespaceAndPath("naruto_shippuden", "textures/entities/jutsu/chakra.png");
+	static final Identifier CHAKRA =Identifier.fromNamespaceAndPath("naruto_shippuden", "textures/entities/jutsu/chakra.png");
 	private static final Identifier SWIRL = Identifier.fromNamespaceAndPath("naruto_shippuden", "textures/entities/jutsu/swirl.png");
 	private static final int LIGHT = LightCoordsUtil.FULL_BRIGHT;
 	private static final int SEGMENTS = 22;
@@ -273,7 +273,7 @@ public class JutsuProjectileRenderer extends EntityRenderer<JutsuProjectile, Jut
 
 	// ------------------------------------------------------------------ drawing
 	/** Bright solid core, element-coloured glowing body, soft halo; solid elements (bone, iron sand, wood) are simply lit. */
-	private static void glow(SubmitNodeCollector collector, ModelPart part, PoseStack pose, Element element, float age, float halo, int light) {
+	static void glow(SubmitNodeCollector collector, ModelPart part, PoseStack pose, Element element, float age, float halo, int light) {
 		if (!element.glows) {
 			collector.submitModelPart(part, pose, RenderTypes.entityTranslucent(CHAKRA), light, OverlayTexture.NO_OVERLAY, null,
 					0xF2000000 | element.color & 0xFFFFFF);

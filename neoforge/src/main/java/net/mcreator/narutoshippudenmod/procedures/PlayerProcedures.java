@@ -56,8 +56,6 @@ import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.MagnetHand
 import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.MagnetWingsRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.SpikedHumanBulletTankRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.SummonRenderers.MonsterCatRenderer;
-import net.mcreator.narutoshippudenmod.entity.renderer.SummonRenderers.ThreeHeadAkamaruRenderer;
-import net.mcreator.narutoshippudenmod.entity.renderer.SummonRenderers.TwoHeadAkamaruRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.SummonRenderers.WolfRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.SusanoRenderers.ArmoredSusanoMadaraRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.SusanoRenderers.ArmoredSusanoSasukeRenderer;
@@ -1206,7 +1204,7 @@ public final class PlayerProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Your Taijutsu is maxed."));
+					((Player) entity).sendOverlayMessage(Component.literal("Your Taijutsu is maxed"));
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).kenjutsu >= 101) {
@@ -1225,7 +1223,7 @@ public final class PlayerProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Your Kenjutsu is maxed."));
+					((Player) entity).sendOverlayMessage(Component.literal("Your Kenjutsu is maxed"));
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).shurikenjutsu >= 26) {
@@ -1244,7 +1242,7 @@ public final class PlayerProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Your Shurikenjutsu is maxed."));
+					((Player) entity).sendOverlayMessage(Component.literal("Your Shurikenjutsu is maxed"));
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).summoning >= 61) {
@@ -1263,7 +1261,7 @@ public final class PlayerProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Your Summoning is maxed."));
+					((Player) entity).sendOverlayMessage(Component.literal("Your Summoning is maxed"));
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).kinjutsu >= 101) {
@@ -1282,7 +1280,7 @@ public final class PlayerProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Your Kinjutsu is maxed."));
+					((Player) entity).sendOverlayMessage(Component.literal("Your Kinjutsu is maxed"));
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).medicine >= 301) {
@@ -1312,7 +1310,7 @@ public final class PlayerProcedures {
 									+ NarutoShippudenModVariables.get(entity).maxhealth));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Your Medicine is maxed."));
+					((Player) entity).sendOverlayMessage(Component.literal("Your Medicine is maxed"));
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).speed >= 11) {
@@ -1342,7 +1340,7 @@ public final class PlayerProcedures {
 									+ NarutoShippudenModVariables.get(entity).maxspeed));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Your Speed is maxed."));
+					((Player) entity).sendOverlayMessage(Component.literal("Your Speed is maxed"));
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 11) {
@@ -1361,7 +1359,7 @@ public final class PlayerProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Your Jutsu Power is maxed."));
+					((Player) entity).sendOverlayMessage(Component.literal("Your Jutsu Power is maxed"));
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).genjutsu >= 71) {
@@ -1380,7 +1378,7 @@ public final class PlayerProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Your Genjutsu is maxed."));
+					((Player) entity).sendOverlayMessage(Component.literal("Your Genjutsu is maxed"));
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).IQ >= 221) {
@@ -1399,7 +1397,7 @@ public final class PlayerProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Your IQ is maxed."));
+					((Player) entity).sendOverlayMessage(Component.literal("Your IQ is maxed"));
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).SmokeForm == true) {
@@ -2260,7 +2258,7 @@ public final class PlayerProcedures {
 						StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY))
 								.putBoolean("HiramekareiSharp", (false));
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Hiramekarei Sharp: Off"));
+							((Player) entity).sendOverlayMessage(Component.literal("Hiramekarei Sharp off"));
 						}
 					}
 				} else {
@@ -2286,7 +2284,7 @@ public final class PlayerProcedures {
 						StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY))
 								.putBoolean("HiramekareiSharp", (false));
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Hiramekarei Sharp: Off"));
+							((Player) entity).sendOverlayMessage(Component.literal("Hiramekarei Sharp off"));
 						}
 					}
 				} else {
@@ -2453,7 +2451,7 @@ public final class PlayerProcedures {
 					}
 				}
 			}
-			if (NarutoShippudenModVariables.get(entity).Chakra_Control == true) {
+			if (false) {
 				if (NarutoShippudenModVariables.get(entity).WallClimb == false) {
 					if (Blocks.WATER == (world.getFluidState(BlockPos.containing(entity.getX(), entity.getY() - 1, entity.getZ())).createLegacyBlock())
 							.getBlock()
@@ -3080,7 +3078,7 @@ public final class PlayerProcedures {
 							Random = (Mth.nextInt(RandomSource.create(), 1, 1000));
 							if (Random <= mainjsonobject.get("kekkei_genkai_spawn_chance").getAsDouble() * 10) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendOverlayMessage(Component.literal("Looks like you were borned with Kekkei Genkai."));
+									((Player) entity).sendOverlayMessage(Component.literal("Looks like you were borned with Kekkei Genkai"));
 								}
 								randomkkg = (Mth.nextInt(RandomSource.create(), 1, 11));
 								if (randomkkg == 1) {
@@ -3357,22 +3355,8 @@ public final class PlayerProcedures {
 			// Enter the FTL code here
 			Object _obj = dependencies.get("event");
 			RenderLivingEvent _evt = (RenderLivingEvent) _obj;
-			if (NarutoShippudenModVariables.get(entity).inuzuka_mode == 1) {
-				if (_evt.getRenderer() instanceof AvatarRenderer) {
-					if (_evt instanceof RenderLivingEvent.Pre _cancelable) {
-						_cancelable.setCanceled(true);
-					}
-					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/two_head_akamaru.png", TwoHeadAkamaruRenderer.ModelTwo_Head_Akamaru.LAYER, TwoHeadAkamaruRenderer.ModelTwo_Head_Akamaru::new);
-				}
-			}
-			if (NarutoShippudenModVariables.get(entity).inuzuka_mode == 2) {
-				if (_evt.getRenderer() instanceof AvatarRenderer) {
-					if (_evt instanceof RenderLivingEvent.Pre _cancelable) {
-						_cancelable.setCanceled(true);
-					}
-					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/two_head_akamaru.png", ThreeHeadAkamaruRenderer.ModelThree_Head_Akamaru.LAYER, ThreeHeadAkamaruRenderer.ModelThree_Head_Akamaru::new);
-				}
-			}
+			
+			
 			if (NarutoShippudenModVariables.get(entity).PassingFang == true) {
 				if (_evt.getRenderer() instanceof AvatarRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre _cancelable) {

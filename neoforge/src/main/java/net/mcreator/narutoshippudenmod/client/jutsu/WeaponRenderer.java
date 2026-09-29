@@ -1,6 +1,7 @@
 package net.mcreator.narutoshippudenmod.client.jutsu;
 
 import net.mcreator.narutoshippudenmod.compat.ModArrow;
+import net.mcreator.narutoshippudenmod.core.jutsu.engine.Element;
 import net.mcreator.narutoshippudenmod.item.ClanItems.FumaShurikenClanItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.ShurikenClanItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.ToroiUniqueFumaShurikenClanItem;
@@ -37,14 +38,14 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import java.util.function.Consumer;
 
 /**
- * Thrown shuriken and kunai drawn like the jutsu ones: real steel shapes from cubes instead of flat sprites. Shuriken spin in
+ * Thrown shuriken and kunai drawn exactly like the Fuma clan's shuriken jutsu (same model, size and chakra-steel material)
+ * instead of flat sprites. Shuriken spin in
  * flight; kunai fly point first (poison kunai have a purple blade, explosive kunai a paper tag, the Flying Thunder God kunai its
  * three prongs).
  */
 @EventBusSubscriber(modid = "naruto_shippuden", value = Dist.CLIENT)
 public class WeaponRenderer extends EntityRenderer<ModArrow, WeaponRenderer.State> {
-	private static final Identifier METAL = Identifier.fromNamespaceAndPath("naruto_shippuden", "textures/entities/jutsu/steel.png");
-	private static final int STEEL = 0xFFB9C1CA, HANDLE = 0xFF2B2B33, POISON = 0xFF9C6FC4, PAPER = 0xFFEDE3C8, DARK = 0xFF3A3F47;
+	private static final int HANDLE = 0xFF2B2B33, POISON = 0xFF9C6FC4, PAPER = 0xFFEDE3C8;
 
 	enum Kind {
 		SHURIKEN, FUMA, TOROI, KUNAI, POISON_KUNAI, EXPLOSIVE_KUNAI, THUNDER_GOD_KUNAI
@@ -134,8 +135,10 @@ public class WeaponRenderer extends EntityRenderer<ModArrow, WeaponRenderer.Stat
 		state.stuck = arrow.getDeltaMovement().lengthSqr() < 1.0E-4;
 	}
 
+	/** The same chakra-steel look as the Fuma clan's shuriken jutsu. */
 	private static void draw(SubmitNodeCollector collector, ModelPart part, PoseStack pose, int light, int color) {
-		collector.submitModelPart(part, pose, RenderTypes.entityCutout(METAL), light, OverlayTexture.NO_OVERLAY, null, color);
+		collector.submitModelPart(part, pose, RenderTypes.entityTranslucent(JutsuProjectileRenderer.CHAKRA), light, OverlayTexture.NO_OVERLAY, null,
+				0xF2000000 | color & 0xFFFFFF);
 	}
 
 	@Override
@@ -143,25 +146,27 @@ public class WeaponRenderer extends EntityRenderer<ModArrow, WeaponRenderer.Stat
 		models();
 		pose.pushPose();
 		pose.rotateDegrees(Axis.YP, state.yRot);
-		pose.rotateDegrees(Axis.XP, -state.xRot);
 		int light = state.lightCoords;
 		switch (kind) {
 			case SHURIKEN, FUMA, TOROI -> {
-				float scale = kind == Kind.SHURIKEN ? 0.16F : kind == Kind.FUMA ? 0.9F : 1.2F;
-				pose.scale(scale, scale, scale);
+				// sized like the jutsu ones (Shuriken Barrage, Fuma Shuriken, Toroi's), flat and spinning
+				float size = kind == Kind.SHURIKEN ? 0.5F : kind == Kind.FUMA ? 1.3F : 1.6F;
+				pose.rotateDegrees(Axis.XP, -state.xRot * 0.3F);
+				pose.scale(size * 0.9F, size * 0.9F, size * 0.9F);
 				if (!state.stuck)
 					pose.rotateDegrees(Axis.YP, -state.ageInTicks * 50);
-				draw(collector, shuriken, pose, light, kind == Kind.TOROI ? DARK : STEEL);
+				JutsuProjectileRenderer.glow(collector, shuriken, pose, kind == Kind.TOROI ? Element.MAGNET : Element.STEEL, state.ageInTicks, 0, light);
 			}
 			default -> {
+				pose.rotateDegrees(Axis.XP, -state.xRot);
 				pose.scale(0.6F, 0.6F, 0.6F);
 				pose.translate(0, 0, -2 / 16F);
-				draw(collector, blade, pose, light, kind == Kind.POISON_KUNAI ? POISON : STEEL);
+				draw(collector, blade, pose, light, kind == Kind.POISON_KUNAI ? POISON : Element.STEEL.color);
 				draw(collector, handle, pose, light, HANDLE);
 				if (kind == Kind.EXPLOSIVE_KUNAI)
 					draw(collector, tag, pose, light, PAPER);
 				if (kind == Kind.THUNDER_GOD_KUNAI)
-					draw(collector, prongs, pose, light, STEEL);
+					draw(collector, prongs, pose, light, Element.STEEL.color);
 			}
 		}
 		pose.popPose();

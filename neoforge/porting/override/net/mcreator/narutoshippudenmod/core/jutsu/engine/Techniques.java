@@ -83,6 +83,11 @@ public final class Techniques {
 		return 1;
 	}
 
+	/** The old jutsu's power tier (0 to 9), which grows with Ninjutsu (it used to be chosen with its own key and stat). */
+	public static double jutsuPower(Entity entity) {
+		return Math.min(9, Math.floor(NarutoShippudenModVariables.get(entity).ninjutsu / 10));
+	}
+
 	/** Hurts a target with a jutsu (direct = the projectile or the caster), adding the element's side effect. */
 	public static void damage(Entity direct, LivingEntity target, float amount, Element element) {
 		if (amount <= 0 || !(target.level() instanceof ServerLevel level))

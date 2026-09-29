@@ -116,8 +116,6 @@ public final class ModClient {
 		SummonRenderers.KirinRenderer.registerRenderers(event);
 		SummonRenderers.KuramaRenderer.registerRenderers(event);
 		SummonRenderers.MonsterCatRenderer.registerRenderers(event);
-		SummonRenderers.ThreeHeadAkamaruRenderer.registerRenderers(event);
-		SummonRenderers.TwoHeadAkamaruRenderer.registerRenderers(event);
 		SummonRenderers.WolfRenderer.registerRenderers(event);
 		SummonRenderers.WoodGolemRenderer.registerRenderers(event);
 		SusanoRenderers.ArmoredSusanoMadaraRenderer.registerRenderers(event);
@@ -238,8 +236,6 @@ public final class ModClient {
 		SummonRenderers.KirinRenderer.registerLayers(event);
 		SummonRenderers.KuramaRenderer.registerLayers(event);
 		SummonRenderers.MonsterCatRenderer.registerLayers(event);
-		SummonRenderers.ThreeHeadAkamaruRenderer.registerLayers(event);
-		SummonRenderers.TwoHeadAkamaruRenderer.registerLayers(event);
 		SummonRenderers.WolfRenderer.registerLayers(event);
 		SummonRenderers.WoodGolemRenderer.registerLayers(event);
 		SusanoRenderers.ArmoredSusanoMadaraRenderer.registerLayers(event);

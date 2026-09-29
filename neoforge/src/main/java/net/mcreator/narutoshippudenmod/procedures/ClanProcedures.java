@@ -202,11 +202,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).aburame_release == 1) {
@@ -233,11 +233,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-15 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-15 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 14) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).aburame_release == 2) {
@@ -264,16 +264,16 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).aburame_release == 3) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -424,17 +424,17 @@ public final class ClanProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).aburamelearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).aburametechnique == 1) {
@@ -530,17 +530,17 @@ public final class ClanProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).aburamelearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).aburametechnique == 2) {
@@ -576,17 +576,17 @@ public final class ClanProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 649) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).aburamelearn >= 3)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -644,7 +644,7 @@ public final class ClanProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).aburamereleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -939,11 +939,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-15 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-15 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 14) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).akimichirelease == 1) {
@@ -970,11 +970,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).akimichirelease == 2) {
@@ -1001,11 +1001,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-25 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-25 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).akimichirelease == 3) {
@@ -1090,16 +1090,16 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-30 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-30 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).akimichirelease == 4) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -1221,17 +1221,17 @@ public final class ClanProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 299) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).akimichilearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).akimichitechnique == 1) {
@@ -1283,12 +1283,12 @@ public final class ClanProcedures {
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).akimichilearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).akimichitechnique == 2) {
@@ -1340,12 +1340,12 @@ public final class ClanProcedures {
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).akimichilearn >= 3)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).akimichitechnique == 3) {
@@ -1397,12 +1397,12 @@ public final class ClanProcedures {
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 34) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).akimichilearn >= 4)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -1455,7 +1455,7 @@ public final class ClanProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).akimichireleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -2108,13 +2108,13 @@ public final class ClanProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+25 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+25 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+15 Genjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+15 Genjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+120 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+120 IQ"));
 				}
 			} else if (clanpaperrandom == 2) {
 				if (entity instanceof Player) {
@@ -2158,13 +2158,13 @@ public final class ClanProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+25 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+25 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+25 Kinjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+25 Kinjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+120 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+120 IQ"));
 				}
 			} else if (clanpaperrandom == 3) {
 				if (entity instanceof Player) {
@@ -2201,10 +2201,10 @@ public final class ClanProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+15 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+15 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+115 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+115 IQ"));
 				}
 			} else if (clanpaperrandom == 4) {
 				if (entity instanceof Player) {
@@ -2241,10 +2241,10 @@ public final class ClanProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+90 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+90 IQ"));
 				}
 			} else if (clanpaperrandom == 5) {
 				if (entity instanceof Player) {
@@ -2288,13 +2288,13 @@ public final class ClanProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Summoning"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Summoning"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+85 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+85 IQ"));
 				}
 			} else if (clanpaperrandom == 6) {
 				if (entity instanceof Player) {
@@ -2324,10 +2324,10 @@ public final class ClanProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+25 Taijutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+25 Taijutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+115 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+115 IQ"));
 				}
 			} else if (clanpaperrandom == 7) {
 				if (entity instanceof Player) {
@@ -2364,10 +2364,10 @@ public final class ClanProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+210 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+210 IQ"));
 				}
 			} else if (clanpaperrandom == 8) {
 				if (entity instanceof Player) {
@@ -2404,10 +2404,10 @@ public final class ClanProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+90 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+90 IQ"));
 				}
 			} else if (clanpaperrandom == 9) {
 				if (entity instanceof Player) {
@@ -2451,13 +2451,13 @@ public final class ClanProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Summoning"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Summoning"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+105 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+105 IQ"));
 				}
 			} else if (clanpaperrandom == 10) {
 				if (entity instanceof Player) {
@@ -2494,10 +2494,10 @@ public final class ClanProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+15 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+15 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+100 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+100 IQ"));
 				}
 			} else if (clanpaperrandom == 11) {
 				if (entity instanceof Player) {
@@ -2541,13 +2541,13 @@ public final class ClanProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+5 Genjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+5 Genjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+95 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+95 IQ"));
 				}
 			} else if (clanpaperrandom == 12) {
 				if (entity instanceof Player) {
@@ -2584,10 +2584,10 @@ public final class ClanProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+15 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+15 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+105 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+105 IQ"));
 				}
 			} else if (clanpaperrandom == 13) {
 				if (entity instanceof Player) {
@@ -2624,10 +2624,10 @@ public final class ClanProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+90 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+90 IQ"));
 				}
 			} else if (clanpaperrandom == 14) {
 				if (entity instanceof Player) {
@@ -2664,10 +2664,10 @@ public final class ClanProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+90 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+90 IQ"));
 				}
 			}
 			if (entity instanceof Player) {
@@ -2909,12 +2909,12 @@ public final class ClanProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount <= 199) {
 					if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-						((Player) sourceentity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+						((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(sourceentity).ninjutsu <= 14) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 				}
 			}
 		}
@@ -2953,12 +2953,12 @@ public final class ClanProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount <= 349) {
 					if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-						((Player) sourceentity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+						((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(sourceentity).ninjutsu <= 19) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 				}
 			}
 		}
@@ -3146,25 +3146,25 @@ public final class ClanProcedures {
 			}
 			Entity entity = (Entity) dependencies.get("entity");
 			Entity sourceentity = (Entity) dependencies.get("sourceentity");
-			if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 0) {
+			if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 0) {
 				entity.hurt(Compat.damage().generic(), (float) 20);
-			} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 1) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 1) {
 				entity.hurt(Compat.damage().generic(), (float) 21);
-			} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 2) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 2) {
 				entity.hurt(Compat.damage().generic(), (float) 22);
-			} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 3) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 3) {
 				entity.hurt(Compat.damage().generic(), (float) 23);
-			} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 4) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 4) {
 				entity.hurt(Compat.damage().generic(), (float) 24);
-			} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 5) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 5) {
 				entity.hurt(Compat.damage().generic(), (float) 25);
-			} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 6) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 6) {
 				entity.hurt(Compat.damage().generic(), (float) 26);
-			} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 7) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 7) {
 				entity.hurt(Compat.damage().generic(), (float) 27);
-			} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 8) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 8) {
 				entity.hurt(Compat.damage().generic(), (float) 28);
-			} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 9) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 9) {
 				entity.hurt(Compat.damage().generic(), (float) 29);
 			}
 			if (sourceentity instanceof Player) {
@@ -3192,25 +3192,25 @@ public final class ClanProcedures {
 			Entity sourceentity = (Entity) dependencies.get("sourceentity");
 			if (NarutoShippudenModVariables.get(sourceentity).ninjutsu >= 5) {
 				if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount >= 20) {
-					if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 0) {
+					if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 0) {
 						entity.hurt(Compat.damage().generic(), (float) 5);
-					} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 1) {
+					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 1) {
 						entity.hurt(Compat.damage().generic(), (float) 6);
-					} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 2) {
+					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 2) {
 						entity.hurt(Compat.damage().generic(), (float) 7);
-					} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 3) {
+					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 3) {
 						entity.hurt(Compat.damage().generic(), (float) 8);
-					} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 4) {
+					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 4) {
 						entity.hurt(Compat.damage().generic(), (float) 9);
-					} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 5) {
+					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 5) {
 						entity.hurt(Compat.damage().generic(), (float) 10);
-					} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 6) {
+					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 6) {
 						entity.hurt(Compat.damage().generic(), (float) 11);
-					} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 7) {
+					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 7) {
 						entity.hurt(Compat.damage().generic(), (float) 12);
-					} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 8) {
+					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 8) {
 						entity.hurt(Compat.damage().generic(), (float) 13);
-					} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 9) {
+					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 9) {
 						entity.hurt(Compat.damage().generic(), (float) 14);
 					}
 					if (sourceentity instanceof Player) {
@@ -3227,12 +3227,12 @@ public final class ClanProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount <= 19) {
 					if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-						((Player) sourceentity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+						((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(sourceentity).ninjutsu <= 4) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 				}
 			}
 		}
@@ -3327,11 +3327,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).fumarelease == 1) {
@@ -3358,11 +3358,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-15 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-15 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 14) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).fumarelease == 2) {
@@ -3389,16 +3389,16 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).fumarelease == 3) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -3451,22 +3451,22 @@ public final class ClanProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 29) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 4) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Shurikenjutsu"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough Shurikenjutsu"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 14) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).fumalearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).fumatechnique == 1) {
@@ -3505,22 +3505,22 @@ public final class ClanProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 49) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 19) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Shurikenjutsu"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough Shurikenjutsu"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).fumalearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).fumatechnique == 2) {
@@ -3559,22 +3559,22 @@ public final class ClanProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 79) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 24) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Shurikenjutsu"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough Shurikenjutsu"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).fumalearn >= 3)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -3632,7 +3632,7 @@ public final class ClanProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).fumareleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -3970,25 +3970,25 @@ public final class ClanProcedures {
 			}
 			Entity entity = (Entity) dependencies.get("entity");
 			Entity sourceentity = (Entity) dependencies.get("sourceentity");
-			if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 0) {
+			if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 0) {
 				entity.hurt(Compat.damage().generic(), (float) 15);
-			} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 1) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 1) {
 				entity.hurt(Compat.damage().generic(), (float) 16);
-			} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 2) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 2) {
 				entity.hurt(Compat.damage().generic(), (float) 17);
-			} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 3) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 3) {
 				entity.hurt(Compat.damage().generic(), (float) 18);
-			} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 4) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 4) {
 				entity.hurt(Compat.damage().generic(), (float) 19);
-			} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 5) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 5) {
 				entity.hurt(Compat.damage().generic(), (float) 20);
-			} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 6) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 6) {
 				entity.hurt(Compat.damage().generic(), (float) 21);
-			} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 7) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 7) {
 				entity.hurt(Compat.damage().generic(), (float) 22);
-			} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 8) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 8) {
 				entity.hurt(Compat.damage().generic(), (float) 23);
-			} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 9) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 9) {
 				entity.hurt(Compat.damage().generic(), (float) 24);
 			}
 			if (sourceentity instanceof Player) {
@@ -4039,11 +4039,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).hozukirelease == 1) {
@@ -4070,11 +4070,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-15 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-15 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 14) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).hozukirelease == 2) {
@@ -4101,16 +4101,16 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).hozukirelease == 3) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -4167,17 +4167,17 @@ public final class ClanProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 14) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).hozukilearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).hozukitechnique == 1) {
@@ -4305,17 +4305,17 @@ public final class ClanProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 299) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).hozukilearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).hozukitechnique == 2) {
@@ -4330,7 +4330,7 @@ public final class ClanProcedures {
 										});
 									}
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Great Water Arm Technique: On"));
+										((Player) entity).sendOverlayMessage(Component.literal("Great Water Arm Technique on"));
 									}
 								} else if (NarutoShippudenModVariables.get(entity).Great_Water_Arm == true) {
 									{
@@ -4341,7 +4341,7 @@ public final class ClanProcedures {
 										});
 									}
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Great Water Arm Technique: Off"));
+										((Player) entity).sendOverlayMessage(Component.literal("Great Water Arm Technique off"));
 									}
 									if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
 										if (entity instanceof Player)
@@ -4362,12 +4362,12 @@ public final class ClanProcedures {
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).hozukilearn >= 3)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -4425,7 +4425,7 @@ public final class ClanProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).hozukireleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -4495,11 +4495,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-15 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-15 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 14) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).hyugarelease == 1) {
@@ -4526,11 +4526,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).hyugarelease == 2) {
@@ -4557,11 +4557,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-25 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-25 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).hyugarelease == 3) {
@@ -4588,11 +4588,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-30 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-30 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).hyugarelease == 4) {
@@ -4619,16 +4619,16 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-35 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-35 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).hyugarelease == 5) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -4653,25 +4653,25 @@ public final class ClanProcedures {
 			if (NarutoShippudenModVariables.get(sourceentity).gentlefist == true) {
 				if (NarutoShippudenModVariables.get(sourceentity).ninjutsu >= 10) {
 					if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount >= 200) {
-						if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 0) {
+						if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 0) {
 							entity.hurt(Compat.damage().generic(), (float) 10);
-						} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 1) {
+						} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 1) {
 							entity.hurt(Compat.damage().generic(), (float) 11);
-						} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 2) {
+						} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 2) {
 							entity.hurt(Compat.damage().generic(), (float) 12);
-						} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 3) {
+						} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 3) {
 							entity.hurt(Compat.damage().generic(), (float) 13);
-						} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 4) {
+						} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 4) {
 							entity.hurt(Compat.damage().generic(), (float) 14);
-						} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 5) {
+						} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 5) {
 							entity.hurt(Compat.damage().generic(), (float) 15);
-						} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 6) {
+						} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 6) {
 							entity.hurt(Compat.damage().generic(), (float) 16);
-						} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 7) {
+						} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 7) {
 							entity.hurt(Compat.damage().generic(), (float) 17);
-						} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 8) {
+						} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 8) {
 							entity.hurt(Compat.damage().generic(), (float) 18);
-						} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 9) {
+						} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 9) {
 							entity.hurt(Compat.damage().generic(), (float) 19);
 						}
 						{
@@ -4683,12 +4683,12 @@ public final class ClanProcedures {
 						}
 					} else if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount <= 199) {
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough chakra"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(sourceentity).ninjutsu <= 9) {
 					if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-						((Player) sourceentity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+						((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 					}
 				}
 			}
@@ -4743,7 +4743,7 @@ public final class ClanProcedures {
 											});
 										}
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Gentle Fist: On"));
+											((Player) entity).sendOverlayMessage(Component.literal("Gentle Fist on"));
 										}
 									} else if (NarutoShippudenModVariables.get(entity).gentlefist == true) {
 										{
@@ -4754,12 +4754,12 @@ public final class ClanProcedures {
 											});
 										}
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Gentle Fist: Off"));
+											((Player) entity).sendOverlayMessage(Component.literal("Gentle Fist off"));
 										}
 									}
 								} else if (!(NarutoShippudenModVariables.get(entity).hyugalearn >= 1)) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+										((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).hyugatechnique == 1) {
@@ -4820,12 +4820,12 @@ public final class ClanProcedures {
 															} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 349) {
 																if (entity instanceof Player && !entity.level().isClientSide()) {
 																	((Player) entity)
-																			.sendSystemMessage(Component.literal("Not Enough Chakra"));
+																			.sendOverlayMessage(Component.literal("Not enough chakra"));
 																}
 															}
 														} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 															if (entity instanceof Player && !entity.level().isClientSide()) {
-																((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+																((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 															}
 														}
 													} else {
@@ -4839,17 +4839,17 @@ public final class ClanProcedures {
 											}.start(world, (int) 40);
 										} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 349) {
 											if (entity instanceof Player && !entity.level().isClientSide()) {
-												((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+												((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 											}
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 										}
 									}
 								} else if (!(NarutoShippudenModVariables.get(entity).hyugalearn >= 2)) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+										((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).hyugatechnique == 2) {
@@ -4910,12 +4910,12 @@ public final class ClanProcedures {
 															} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 																if (entity instanceof Player && !entity.level().isClientSide()) {
 																	((Player) entity)
-																			.sendSystemMessage(Component.literal("Not Enough Chakra"));
+																			.sendOverlayMessage(Component.literal("Not enough chakra"));
 																}
 															}
 														} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 															if (entity instanceof Player && !entity.level().isClientSide()) {
-																((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+																((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 															}
 														}
 													} else {
@@ -4929,17 +4929,17 @@ public final class ClanProcedures {
 											}.start(world, (int) 40);
 										} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 											if (entity instanceof Player && !entity.level().isClientSide()) {
-												((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+												((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 											}
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 										}
 									}
 								} else if (!(NarutoShippudenModVariables.get(entity).hyugalearn >= 3)) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+										((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).hyugatechnique == 3) {
@@ -5033,17 +5033,17 @@ public final class ClanProcedures {
 											}
 										} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 649) {
 											if (entity instanceof Player && !entity.level().isClientSide()) {
-												((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+												((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 											}
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 39) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 										}
 									}
 								} else if (!(NarutoShippudenModVariables.get(entity).hyugalearn >= 4)) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+										((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).hyugatechnique == 4) {
@@ -5140,17 +5140,17 @@ public final class ClanProcedures {
 											}
 										} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 899) {
 											if (entity instanceof Player && !entity.level().isClientSide()) {
-												((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+												((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 											}
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 44) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 										}
 									}
 								} else if (!(NarutoShippudenModVariables.get(entity).hyugalearn >= 5)) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+										((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 									}
 								}
 							}
@@ -5240,7 +5240,7 @@ public final class ClanProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).hyugareleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -5277,7 +5277,7 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-5 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-5 JP"));
 					}
 					{
 						boolean _setval = (true);
@@ -5293,7 +5293,7 @@ public final class ClanProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			}
@@ -5378,11 +5378,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-5 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-5 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).inuzuka_release == 1) {
@@ -5409,11 +5409,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).inuzuka_release == 2) {
@@ -5440,11 +5440,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-15 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-15 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 14) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).inuzuka_release == 3) {
@@ -5471,16 +5471,16 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).inuzuka_release == 4) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -5581,22 +5581,22 @@ public final class ClanProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								} else if (NarutoShippudenModVariables.get(entity).summoning <= 9) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Summoning"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough Summoning"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 9) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).inuzukalearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).inuzukatechnique == 1) {
@@ -5650,22 +5650,22 @@ public final class ClanProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 349) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 9) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 									}
 								}
 							} else {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("You can use this only in survival."));
+									((Player) entity).sendOverlayMessage(Component.literal("You can use this only in survival"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).inuzukalearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).inuzukatechnique == 2) {
@@ -5768,22 +5768,22 @@ public final class ClanProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								} else if (NarutoShippudenModVariables.get(entity).summoning <= 19) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Summoning"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough Summoning"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).inuzukalearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).inuzukatechnique == 3) {
@@ -5934,22 +5934,22 @@ public final class ClanProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 749) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								} else if (NarutoShippudenModVariables.get(entity).summoning <= 24) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Summoning"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough Summoning"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).inuzukalearn >= 4)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -6004,7 +6004,7 @@ public final class ClanProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).inuzukareleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -6051,12 +6051,12 @@ public final class ClanProcedures {
 					}
 				} else if (!(NarutoShippudenModVariables.get(entity).leelearn >= 1)) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+						((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).leereleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -6100,11 +6100,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).lee_release == 1) {
@@ -6136,11 +6136,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).lee_release == 2) {
@@ -6167,11 +6167,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-25 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-25 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).lee_release == 3) {
@@ -6198,11 +6198,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-30 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-30 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).lee_release == 4) {
@@ -6229,11 +6229,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-35 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-35 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 34) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).lee_release == 5) {
@@ -6260,11 +6260,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-40 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-40 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 39) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).lee_release == 6) {
@@ -6291,11 +6291,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-45 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-45 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 44) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).lee_release == 7) {
@@ -6322,11 +6322,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-50 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-50 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 49) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).lee_release == 8) {
@@ -6353,16 +6353,16 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-55 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-55 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 54) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).lee_release == 9) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -6764,12 +6764,12 @@ public final class ClanProcedures {
 							} else if (NarutoShippudenModVariables.get(entity).taijutsu <= 14
 									&& NarutoShippudenModVariables.get(entity).Gate8 == false) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Taijutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Taijutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).leelearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lee_technique == 1) {
@@ -6817,17 +6817,17 @@ public final class ClanProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).gateslee < 1) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Activate Gate Of Opening"));
+										((Player) entity).sendOverlayMessage(Component.literal("Open the Gate of Opening first"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).taijutsu <= 29) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Taijutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Taijutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).leelearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lee_technique == 2) {
@@ -6878,17 +6878,17 @@ public final class ClanProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).gateslee < 2) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Activate Gate Of Healing"));
+										((Player) entity).sendOverlayMessage(Component.literal("Open the Gate of Healing first"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).taijutsu <= 44) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Taijutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Taijutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).leelearn >= 3)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lee_technique == 3) {
@@ -6939,17 +6939,17 @@ public final class ClanProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).gateslee < 3) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Activate Gate Of Life"));
+										((Player) entity).sendOverlayMessage(Component.literal("Open the Gate of Life first"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).taijutsu <= 59) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Taijutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Taijutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).leelearn >= 4)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lee_technique == 4) {
@@ -7000,17 +7000,17 @@ public final class ClanProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).gateslee < 4) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Activate Gate Of Pain"));
+										((Player) entity).sendOverlayMessage(Component.literal("Open the Gate of Pain first"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).taijutsu <= 74) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Taijutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Taijutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).leelearn >= 5)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lee_technique == 5) {
@@ -7061,17 +7061,17 @@ public final class ClanProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).gateslee < 5) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Activate Gate Of Limit"));
+										((Player) entity).sendOverlayMessage(Component.literal("Open the Gate of Limit first"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).taijutsu <= 89) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Taijutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Taijutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).leelearn >= 6)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lee_technique == 6) {
@@ -7122,17 +7122,17 @@ public final class ClanProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).gateslee < 6) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Activate Gate Of View"));
+										((Player) entity).sendOverlayMessage(Component.literal("Open the Gate of View first"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).taijutsu <= 104) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Taijutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Taijutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).leelearn >= 7)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lee_technique == 7) {
@@ -7190,17 +7190,17 @@ public final class ClanProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).gateslee < 7) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Activate Gate Of Wonder"));
+										((Player) entity).sendOverlayMessage(Component.literal("Open the Gate of Wonder first"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).taijutsu <= 104) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Taijutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Taijutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).leelearn >= 8)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -7297,7 +7297,7 @@ public final class ClanProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).leereleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -7666,7 +7666,7 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).firereleaselogic == false) {
 						if (entity instanceof Player) {
@@ -7708,12 +7708,12 @@ public final class ClanProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).sarutobirelease == 1) {
@@ -7740,16 +7740,16 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-15 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-15 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 14) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).sarutobirelease == 2) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -7925,17 +7925,17 @@ public final class ClanProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).sarutobilearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).sarutobitechnique == 1) {
@@ -8020,17 +8020,17 @@ public final class ClanProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 349) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).sarutobilearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -8077,7 +8077,7 @@ public final class ClanProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).sarutobireleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -9785,7 +9785,7 @@ public final class ClanProcedures {
 									}
 								}
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendOverlayMessage(Component.literal("Shadow Clone Techique: \u00A72Succesful"));
+									((Player) entity).sendOverlayMessage(Component.literal("Shadow Clone Techique: Succesful"));
 								}
 								{
 									double _setval = 15;
@@ -9796,7 +9796,7 @@ public final class ClanProcedures {
 								}
 							} else if (storyrandomclones == 2) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendOverlayMessage(Component.literal("Shadow Clone Techique: \u00A74Unsuccessful"));
+									((Player) entity).sendOverlayMessage(Component.literal("Shadow Clone Techique: Unsuccessful"));
 								}
 							}
 							if (entity instanceof Player)
@@ -10809,12 +10809,12 @@ public final class ClanProcedures {
 						((Player) entity).getCooldowns().addCooldown(new ItemStack(ShadowCloneTechniqueItem.block), (int) 25);
 				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 29) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 4) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 				}
 			}
 		}
@@ -11047,12 +11047,12 @@ public final class ClanProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 299) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 						}
 					}
 					if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
@@ -11074,7 +11074,7 @@ public final class ClanProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).tsuchigumoreleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -11118,16 +11118,16 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).tsuchigumorelease == 1) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -11230,11 +11230,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-15 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-15 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 14) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).uzumakirelease == 1) {
@@ -11261,11 +11261,11 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).uzumakirelease == 2) {
@@ -11292,16 +11292,16 @@ public final class ClanProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-25 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-25 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).fire_release == 3) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -11341,12 +11341,12 @@ public final class ClanProcedures {
 						}
 					} else if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount <= 349) {
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough chakra"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(sourceentity).ninjutsu <= 19) {
 					if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-						((Player) sourceentity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+						((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 					}
 				}
 			}
@@ -11400,7 +11400,7 @@ public final class ClanProcedures {
 									});
 								}
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Adamantine Sealing Chains: On"));
+									((Player) entity).sendOverlayMessage(Component.literal("Adamantine Sealing Chains on"));
 								}
 							} else if (NarutoShippudenModVariables.get(entity).uzumakichains == true) {
 								{
@@ -11411,12 +11411,12 @@ public final class ClanProcedures {
 									});
 								}
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Adamantine Sealing Chains: Off"));
+									((Player) entity).sendOverlayMessage(Component.literal("Adamantine Sealing Chains off"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).uzumakilearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).uzumakitechnique == 1) {
@@ -11430,7 +11430,7 @@ public final class ClanProcedures {
 									});
 								}
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Heal Bite: On"));
+									((Player) entity).sendOverlayMessage(Component.literal("Heal Bite on"));
 								}
 							} else if (NarutoShippudenModVariables.get(entity).healbite == true) {
 								{
@@ -11441,12 +11441,12 @@ public final class ClanProcedures {
 									});
 								}
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Heal Bite: Off"));
+									((Player) entity).sendOverlayMessage(Component.literal("Heal Bite off"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).uzumakilearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).uzumakitechnique == 2) {
@@ -11462,7 +11462,7 @@ public final class ClanProcedures {
 											});
 										}
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Dead Demon Consuming Seal: Off"));
+											((Player) entity).sendOverlayMessage(Component.literal("Dead Demon Consuming Seal off"));
 										}
 									} else if (NarutoShippudenModVariables.get(entity).deathgod == false) {
 										{
@@ -11473,22 +11473,22 @@ public final class ClanProcedures {
 											});
 										}
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Dead Demon Consuming Seal: On"));
+											((Player) entity).sendOverlayMessage(Component.literal("Dead Demon Consuming Seal on"));
 										}
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).uzumakilearn >= 3)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -11553,7 +11553,7 @@ public final class ClanProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).uzumakireleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}

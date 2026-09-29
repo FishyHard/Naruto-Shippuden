@@ -428,7 +428,7 @@ public final class MissionAndCommandProcedures {
 
 					private void run() {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("The Sharingan!"));
+							((Player) entity).sendOverlayMessage(Component.literal("The Sharingan!"));
 						}
 						NeoForge.EVENT_BUS.unregister(this);
 					}
@@ -1462,10 +1462,10 @@ public final class MissionAndCommandProcedures {
 											"\u00A78With the title of genin, the player celebrates with their friends, knowing that this is just the beginning of their journey as a shinobi."));
 								}
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("\u00A7e+25 LvL XP"));
+									((Player) entity).sendOverlayMessage(Component.literal("+25 XP"));
 								}
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("\u00A7b+5 Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("+5 Ninjutsu"));
 								}
 								if (entity instanceof Player && !entity.level().isClientSide()) {
 									((Player) entity).sendSystemMessage(Component.literal("\u00A78End of Act 2 - Genin Exam"));
@@ -1557,13 +1557,13 @@ public final class MissionAndCommandProcedures {
 						randomgenjutsu = (Mth.nextInt(RandomSource.create(), 1, 10));
 						if (randomgenjutsu <= 5) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendOverlayMessage(Component.literal("Genjutsu Dispel: \u00A74Unsuccessful"));
+								((Player) entity).sendOverlayMessage(Component.literal("Genjutsu Dispel: Unsuccessful"));
 							}
 							if (entity instanceof Player)
 								((Player) entity).getCooldowns().addCooldown(new ItemStack(StoryModeItem.block), (int) 300);
 						} else if (randomgenjutsu >= 6) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendOverlayMessage(Component.literal("Genjutsu Dispel: \u00A72Succesful"));
+								((Player) entity).sendOverlayMessage(Component.literal("Genjutsu Dispel: Succesful"));
 							}
 							if (entity instanceof LivingEntity) {
 								((LivingEntity) entity).removeEffect(MobEffects.BLINDNESS);
@@ -1814,7 +1814,7 @@ public final class MissionAndCommandProcedures {
 											+ entity.getDisplayName().getString() + ". You've definitely improved.")));
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("\u00A72Victory"));
+							((Player) entity).sendOverlayMessage(Component.literal("Victory"));
 						}
 						{
 							String _setval = " ";
@@ -1832,7 +1832,7 @@ public final class MissionAndCommandProcedures {
 						}
 					} else if ((NarutoShippudenModVariables.get(entity).StoryModeGeninFight).equals("Defeat")) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("\u00A74Defeat"));
+							((Player) entity).sendOverlayMessage(Component.literal("Defeat"));
 						}
 						{
 							double _setval = 16;
@@ -3105,7 +3105,7 @@ public final class MissionAndCommandProcedures {
 						}
 					} else if (NarutoShippudenModVariables.get(entity).LEVELSTAT <= 14) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("\u00A78You have to be Level 15 to continue Story Mode."));
+							((Player) entity).sendOverlayMessage(Component.literal("You have to be Level 15 to continue Story Mode"));
 						}
 					}
 				}
@@ -3259,7 +3259,7 @@ public final class MissionAndCommandProcedures {
 												+ ": (feeling motivated) I'm grateful to be part of this team. Together, we'll conquer any challenge!")));
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("\u00A7e+25 LvL XP"));
+								((Player) entity).sendOverlayMessage(Component.literal("+25 XP"));
 							}
 							{
 								double _setval = (NarutoShippudenModVariables.get(entity).LEVEL + 25);
@@ -3316,13 +3316,13 @@ public final class MissionAndCommandProcedures {
 						randomgenjutsu = (Mth.nextInt(RandomSource.create(), 1, 10));
 						if (randomgenjutsu >= 6) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendOverlayMessage(Component.literal("Genjutsu Dispel: \u00A72Succesful"));
+								((Player) entity).sendOverlayMessage(Component.literal("Genjutsu Dispel: Succesful"));
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("\u00A7e+10 LvL XP"));
+								((Player) entity).sendOverlayMessage(Component.literal("+10 XP"));
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("\u00A74+5 Genjutsu"));
+								((Player) entity).sendOverlayMessage(Component.literal("+5 Genjutsu"));
 							}
 							{
 								double _setval = (NarutoShippudenModVariables.get(entity).LEVEL + 10);
@@ -3353,7 +3353,7 @@ public final class MissionAndCommandProcedures {
 							}
 						} else if (randomgenjutsu <= 5) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendOverlayMessage(Component.literal("Genjutsu Dispel: \u00A74Unsuccessful"));
+								((Player) entity).sendOverlayMessage(Component.literal("Genjutsu Dispel: Unsuccessful"));
 							}
 							if (entity instanceof Player)
 								((Player) entity).getCooldowns().addCooldown(new ItemStack(StoryModeItem.block), (int) 150);
@@ -3540,10 +3540,10 @@ public final class MissionAndCommandProcedures {
 			if (NarutoShippudenModVariables.get(entity).storymode == 8) {
 				if (NarutoShippudenModVariables.get(entity).TrainingDummyHits >= 100) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("\u00A7e+10 LvL XP"));
+						((Player) entity).sendOverlayMessage(Component.literal("+10 XP"));
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("\u00A7a+5 Taijutsu"));
+						((Player) entity).sendOverlayMessage(Component.literal("+5 Taijutsu"));
 					}
 					{
 						double _setval = (NarutoShippudenModVariables.get(entity).LEVEL + 10);
@@ -4253,7 +4253,7 @@ public final class MissionAndCommandProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).LEVELSTAT <= 4) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("\u00A78You have to be Level 5 to continue Story Mode."));
+						((Player) entity).sendOverlayMessage(Component.literal("You have to be Level 5 to continue Story Mode"));
 					}
 				}
 			}
@@ -4263,7 +4263,7 @@ public final class MissionAndCommandProcedures {
 						((Player) entity).sendSystemMessage(Component.literal("\u00A78You have been deafeted by nine tail fox."));
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("\u00A7e+10 LvL XP"));
+						((Player) entity).sendOverlayMessage(Component.literal("+10 XP"));
 					}
 					{
 						double _setval = (NarutoShippudenModVariables.get(entity).LEVEL + 10);
@@ -4286,7 +4286,7 @@ public final class MissionAndCommandProcedures {
 				} else if ((entity.level().dimension()) == (ResourceKey.create(Registries.DIMENSION,
 						Identifier.parse("naruto_shippuden:story_mode_dimension")))) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("\u00A78You have to fight nine tail fox."));
+						((Player) entity).sendOverlayMessage(Component.literal("You have to fight nine tail fox"));
 					}
 				}
 			}

@@ -62,7 +62,7 @@ import java.util.function.IntConsumer;
 import org.jspecify.annotations.Nullable;
 
 /**
- * The clans' techniques on the jutsu engine. Transformations (the Akimichi tank and butterfly, the Inuzuka wolves, ) keep their player models, switched on by the old flags for a set time; the Eight Gates are timed modes that
+ * The clans' techniques on the jutsu engine. Transformations (the Akimichi tank and butterfly, Passing Fang) keep their player models, switched on by the old flags for a set time; the Eight Gates are timed modes that
  * cost health. Like the natures, each clan keeps its old save variables and prices every jutsu by its {@link JutsuRank}.
  */
 @EventBusSubscriber(modid = "naruto_shippuden")
@@ -102,9 +102,12 @@ public final class ClanJutsu {
 		nature("inuzuka", "Inuzuka Clan", v -> v.inuzukareleaselogic, v -> v.inuzukatechnique, (v, i) -> v.inuzukatechnique = i,
 				v -> v.inuzukalearn, (v, i) -> v.inuzukalearn = i, v -> v.inuzuka_release, (v, i) -> v.inuzuka_release = i,
 				new Def("Akamaru", JutsuRank.D, ClanJutsu::akamaru, "Summoning"),
+				new Def("Four Legs Technique", JutsuRank.D, ClanJutsu::fourLegs, "Taijutsu"),
+				new Def("Dynamic Marking", JutsuRank.D, ClanJutsu::dynamicMarking),
 				new Def("Passing Fang", JutsuRank.C, ClanJutsu::passingFang, "Taijutsu"),
-				new Def("Human Beast Combination Transformation: Double-Headed Wolf", JutsuRank.B, p -> wolf(p, 1)),
-				new Def("Human Beast Mixture Transformation: Three-Headed Wolf", JutsuRank.A, p -> wolf(p, 2)));
+				new Def("Man Beast Clone", JutsuRank.C, ClanJutsu::manBeastClone),
+				new Def("Fang Over Fang", JutsuRank.B, ClanJutsu::fangOverFang, "Taijutsu"),
+				new Def("Tunneling Fang", JutsuRank.A, ClanJutsu::tunnelingFang, "Taijutsu"));
 		nature("lee", "Lee Clan", v -> v.leereleaselogic, v -> v.lee_technique, (v, i) -> v.lee_technique = i, v -> v.leelearn,
 				(v, i) -> v.leelearn = i, v -> v.lee_release, (v, i) -> v.lee_release = i,
 				new Def("Drunken Fist", JutsuRank.D, ClanJutsu::drunkenFist, "Taijutsu"),
@@ -418,7 +421,21 @@ public final class ClanJutsu {
 	}
 
 	private static final Identifier BUTTERFLY_WINGS = Identifier.fromNamespaceAndPath("naruto_shippuden", "butterfly_wings");
-	private static final List<String> BUTTERFLY = List.of("Blue", "Green", "Orange", "Pink", "Purple", "Red");
+	/** Butterfly Mode's wing colours (client/jutsu/AkimichiRenderer draws them): every Akimichi is born with one of them. */
+	static final List<String> WING_COLOURS = List.of("Blue", "Green", "Orange", "Pink", "Purple", "Red", "Yellow", "Cyan", "White", "Gold", "Lime",
+			"Crimson", "Violet", "Teal");
+	private static final String WINGS_GIVEN = "naruto_shippuden:wings_given";
+
+	/** An Akimichi gets their wing colour once, at random, when they become one (players from before get theirs too). */
+	@SubscribeEvent
+	public static void wingColour(net.neoforged.neoforge.event.tick.PlayerTickEvent.Post event) {
+		if (!(event.getEntity() instanceof ServerPlayer p) || p.tickCount % 40 != 0 || p.getPersistentData().getBooleanOr(WINGS_GIVEN, false)
+				|| !NarutoShippudenModVariables.get(p).akimichireleaselogic)
+			return;
+		String colour = WING_COLOURS.get(p.getRandom().nextInt(WING_COLOURS.size()));
+		set(p, v -> v.ButterFlyModeColor = colour);
+		p.getPersistentData().putBoolean(WINGS_GIVEN, true);
+	}
 
 	/** Burns fat into chakra: glowing butterfly wings and thirty seconds of overwhelming strength. */
 	private static void butterfly(ServerPlayer p) {
@@ -429,8 +446,8 @@ public final class ClanJutsu {
 		net.minecraft.world.entity.ai.attributes.AttributeInstance glide = p.getAttribute(net.neoforged.neoforge.common.NeoForgeMod.GLIDING_FLIGHT);
 		mode(p, 600, 1, v -> {
 			v.ButterflyMode = true;
-			if (!BUTTERFLY.contains(v.ButterFlyModeColor))
-				v.ButterFlyModeColor = "Blue";
+			if (!WING_COLOURS.contains(v.ButterFlyModeColor))
+				v.ButterFlyModeColor = WING_COLOURS.get(p.getRandom().nextInt(WING_COLOURS.size()));
 			// the wings glide like an elytra (jump in mid-air to spread them)
 			if (glide != null && !glide.hasModifier(BUTTERFLY_WINGS))
 				glide.addTransientModifier(new net.minecraft.world.entity.ai.attributes.AttributeModifier(BUTTERFLY_WINGS, 1,
@@ -705,54 +722,209 @@ public final class ClanJutsu {
 		sound(level, at, SoundEvents.WOLF_SHAKE, 1, 1);
 	}
 
-	/** Spins into a grey drill and tears through everything in a line. */
-	private static void passingFang(ServerPlayer p) {
-		flag(p, 14, v -> v.PassingFang = true, v -> v.PassingFang = false);
-		Techniques.dash(p, 13, 12, Element.BEAST);
-		channel(p, 12, 1, t -> level(p).sendParticles(ParticleTypes.SWEEP_ATTACK, p.getX(), p.getY() + 0.8, p.getZ(), 1, 0.4, 0.4, 0.4, 0));
+	/** Akamaru within range for a jutsu that needs him; if he isn't there, the chakra and the cooldown are given back. */
+	private static AkamaruEntity.@Nullable CustomEntity needAkamaru(ServerPlayer p, double range, JutsuRank rank, int index) {
+		AkamaruEntity.CustomEntity dog = akamaruOf(p, range);
+		if (dog == null) {
+			tell(p, "Akamaru has to be close");
+			set(p, v -> v.ChakraAmount += rank.chakra);
+			after(level(p), 1, () -> p.getCooldowns().removeCooldown(Identifier.fromNamespaceAndPath("naruto_shippuden", "inuzuka_release_technique/" + index)));
+		}
+		return dog;
 	}
 
-	/**
-	 * Merges with Akamaru into a giant wolf (three heads at the second stage): Akamaru has to be close; he vanishes into the caster
-	 * for thirty seconds as the beast (after a charge) and comes back out when it ends.
-	 */
-	private static void wolf(ServerPlayer p, int stage) {
-		ServerLevel level = level(p);
-		AkamaruEntity.CustomEntity dog = akamaruOf(p, 12);
-		if (dog == null) {
-			tell(p, "Akamaru has to be close to merge with him");
-			// the chakra and cooldown are not wasted
-			set(p, v -> v.ChakraAmount += stage == 1 ? JutsuRank.B.chakra : JutsuRank.A.chakra);
-			after(level, 1, () -> p.getCooldowns().removeCooldown(Identifier.fromNamespaceAndPath("naruto_shippuden", "inuzuka_release_technique/" + (stage + 1))));
-			return;
+	/** The enemy each Inuzuka has marked with Dynamic Marking (while it still glows). */
+	private static final Map<UUID, LivingEntity> MARKED = new HashMap<>();
+
+	private static @Nullable LivingEntity marked(ServerPlayer p) {
+		LivingEntity target = MARKED.get(p.getUUID());
+		if (target == null || !target.isAlive() || target.level() != p.level() || !target.hasEffect(MobEffects.GLOWING) || target.distanceToSqr(p) > 32 * 32) {
+			MARKED.remove(p.getUUID());
+			return null;
 		}
-		float health = dog.getHealth();
-		level.sendParticles(ParticleTypes.POOF, dog.getX(), dog.getY() + 0.5, dog.getZ(), 30, 0.5, 0.5, 0.5, 0.05);
-		dog.discard();
-		level.sendParticles(ParticleTypes.POOF, p.getX(), p.getY() + 1, p.getZ(), 40, 0.8, 1, 0.8, 0.05);
-		sound(level, p.position(), SoundEvents.RAVAGER_ROAR, 1.5F, 1.1F - stage * 0.15F);
-		mode(p, 600, 1, v -> v.inuzuka_mode = stage, v -> {
-			v.inuzuka_mode = 0;
-			// Akamaru comes back out
-			if (p.isAlive()) {
-				AkamaruEntity.CustomEntity back = new AkamaruEntity.CustomEntity(AkamaruEntity.entity, level(p));
-				back.snapTo(p.getX() + 1, p.getY(), p.getZ(), p.getYRot(), 0);
-				back.tame(p);
-				back.setHealth(Math.max(1, health));
-				level(p).addFreshEntity(back);
-				level(p).sendParticles(ParticleTypes.POOF, back.getX(), back.getY() + 0.5, back.getZ(), 30, 0.5, 0.5, 0.5, 0.05);
+		return target;
+	}
+
+	/** Who the fangs go for: the marked enemy (the nose finds it anywhere near), else the one looked at. */
+	private static @Nullable LivingEntity prey(ServerPlayer p, double range) {
+		LivingEntity target = marked(p);
+		return target != null ? target : target(p, range);
+	}
+
+	private static Vec3 towards(Entity from, @Nullable LivingEntity to, Vec3 otherwise) {
+		if (to == null)
+			return otherwise;
+		Vec3 d = to.position().subtract(from.position()).multiply(1, 0, 1);
+		return d.lengthSqr() < 1.0E-4 ? otherwise : d.normalize();
+	}
+
+	/** A spinning charge along a direction that tears through everything it meets (Passing Fang's drill). */
+	private static void fang(ServerPlayer p, Vec3 dir, int ticks, float damage) {
+		List<Entity> struck = new ArrayList<>();
+		sound(level(p), p.position(), SoundEvents.TRIDENT_RIPTIDE_1.value(), 1, 1.2F);
+		channel(p, ticks + 3, 1, t -> {
+			ServerLevel level = level(p);
+			p.fallDistance = 0;
+			if (t < ticks) {
+				p.setDeltaMovement(dir.x * 1.4, Math.max(p.getDeltaMovement().y, 0.05), dir.z * 1.4);
+				p.syncVelocity = true;
 			}
+			level.sendParticles(ParticleTypes.SWEEP_ATTACK, p.getX(), p.getY() + 0.8, p.getZ(), 1, 0.4, 0.4, 0.4, 0);
+			level.sendParticles(Element.BEAST.trail, p.getX(), p.getY() + 0.8, p.getZ(), 3, 0.4, 0.5, 0.4, 0.02);
+			for (LivingEntity target : enemies(level, p, p.getBoundingBox().inflate(1.2), e -> !struck.contains(e) && !(e instanceof AkamaruEntity.CustomEntity))) {
+				struck.add(target);
+				damage(p, target, damage, Element.BEAST);
+				target.push(dir.x * 1.1, 0.5, dir.z * 1.1);
+				target.syncVelocity = true;
+			}
+		});
+	}
+
+	/** Beast Mimicry: down on all fours, fast and savage, for thirty seconds (Akamaru, if near, too). */
+	private static void fourLegs(ServerPlayer p) {
+		ServerLevel level = level(p);
+		sound(level, p.position(), SoundEvents.WOLF_GROWL_BABY.value(), 1.2F, 0.55F);
+		level.sendParticles(ParticleTypes.POOF, p.getX(), p.getY() + 0.8, p.getZ(), 20, 0.4, 0.5, 0.4, 0.04);
+		AkamaruEntity.CustomEntity dog = akamaruOf(p, 16);
+		mode(p, 600, 1, v -> {
+		}, v -> {
 		}, t -> {
 			if (t % 10 == 0) {
-				keep(p, MobEffects.STRENGTH, stage);
-				keep(p, MobEffects.SPEED, 1);
-				keep(p, MobEffects.RESISTANCE, stage - 1);
+				keep(p, MobEffects.SPEED, 2);
+				keep(p, MobEffects.STRENGTH, 0);
 				keep(p, MobEffects.JUMP_BOOST, 1);
+				if (dog != null && dog.isAlive()) {
+					keep(dog, MobEffects.SPEED, 1);
+					keep(dog, MobEffects.STRENGTH, 1);
+				}
 			}
-			if (t % 4 == 0)
-				level.sendParticles(Element.BEAST.trail, p.getX(), p.getY() + 0.8, p.getZ(), 2, 0.6, 0.5, 0.6, 0.01);
+			if (t % 3 == 0 && p.getDeltaMovement().horizontalDistanceSqr() > 0.01)
+				level.sendParticles(Element.BEAST.trail, p.getX(), p.getY() + 0.2, p.getZ(), 1, 0.3, 0.1, 0.3, 0.01);
 		});
-		Techniques.dash(p, 10, 10 + stage * 4, Element.BEAST);
+	}
+
+	/** Akamaru marks an enemy with his scent: it glows for a minute, he goes for it, and the fangs find it. */
+	private static void dynamicMarking(ServerPlayer p) {
+		AkamaruEntity.CustomEntity dog = needAkamaru(p, 16, JutsuRank.D, 2);
+		if (dog == null)
+			return;
+		LivingEntity target = target(p, 24);
+		if (target == null) {
+			tell(p, "Look at an enemy to mark");
+			return;
+		}
+		ServerLevel level = level(p);
+		target.addEffect(new MobEffectInstance(MobEffects.GLOWING, 1200, 0, false, false));
+		MARKED.put(p.getUUID(), target);
+		dog.setOrderedToSit(false);
+		dog.setTarget(target);
+		sound(level, dog.position(), SoundEvents.WOLF_AMBIENT_BABY.value(), 1.2F, 0.8F);
+		level.sendParticles(Element.BEAST.puff, target.getX(), target.getY() + target.getBbHeight() * 0.6, target.getZ(), 16, 0.3, 0.4, 0.3, 0.02);
+	}
+
+	/** Spins into a grey drill and tears through everything in a line (at the marked enemy, if there is one). */
+	private static void passingFang(ServerPlayer p) {
+		flag(p, 14, v -> v.PassingFang = true, v -> v.PassingFang = false);
+		fang(p, towards(p, marked(p), p.getLookAngle().multiply(1, 0, 1).normalize()), 11, 12);
+	}
+
+	/** Akamaru turns into his partner's double for thirty seconds and fights at full strength. */
+	private static void manBeastClone(ServerPlayer p) {
+		AkamaruEntity.CustomEntity dog = needAkamaru(p, 16, JutsuRank.C, 4);
+		if (dog == null)
+			return;
+		ServerLevel level = level(p);
+		dog.setForm(1);
+		level.sendParticles(ParticleTypes.POOF, dog.getX(), dog.getY() + 0.8, dog.getZ(), 30, 0.4, 0.6, 0.4, 0.05);
+		sound(level, dog.position(), SoundEvents.ILLUSIONER_MIRROR_MOVE, 1, 1);
+		channel(p, 600, 10, t -> {
+			if (dog.isAlive() && dog.form() == 1) {
+				keep(dog, MobEffects.STRENGTH, 1);
+				keep(dog, MobEffects.SPEED, 1);
+			}
+		});
+		after(level, 600, () -> {
+			if (dog.isAlive() && dog.form() == 1) {
+				dog.setForm(0);
+				level.sendParticles(ParticleTypes.POOF, dog.getX(), dog.getY() + 0.5, dog.getZ(), 30, 0.4, 0.5, 0.4, 0.05);
+			}
+		});
+	}
+
+	/** Partner and Akamaru both spin into fangs and hit the enemy again and again from both sides. */
+	private static void fangOverFang(ServerPlayer p) {
+		AkamaruEntity.CustomEntity dog = needAkamaru(p, 16, JutsuRank.B, 5);
+		if (dog == null)
+			return;
+		ServerLevel level = level(p);
+		int before = dog.form();
+		dog.setForm(2);
+		dog.setOrderedToSit(false);
+		flag(p, 44, v -> v.PassingFang = true, v -> v.PassingFang = false);
+		for (int i = 0; i < 3; i++)
+			after(level, i * 14, () -> fang(p, towards(p, prey(p, 20), p.getLookAngle().multiply(1, 0, 1).normalize()), 9, 10));
+		List<Entity> struck = new ArrayList<>();
+		channel(p, 42, 1, t -> {
+			if (!dog.isAlive())
+				return;
+			LivingEntity target = prey(p, 20);
+			Vec3 dir = towards(dog, target, dog.getLookAngle().multiply(1, 0, 1).normalize());
+			dog.setDeltaMovement(dir.x * 1.3, Math.max(dog.getDeltaMovement().y, 0.05), dir.z * 1.3);
+			dog.fallDistance = 0;
+			if (t % 14 == 0)
+				struck.clear();
+			level.sendParticles(Element.BEAST.trail, dog.getX(), dog.getY() + 0.4, dog.getZ(), 3, 0.3, 0.3, 0.3, 0.02);
+			for (LivingEntity hit : enemies(level, p, dog.getBoundingBox().inflate(1), e -> e != dog && !struck.contains(e))) {
+				struck.add(hit);
+				damage(p, hit, 9, Element.BEAST);
+				hit.push(dir.x, 0.4, dir.z);
+				hit.syncVelocity = true;
+			}
+		});
+		after(level, 44, () -> {
+			if (dog.isAlive() && dog.form() == 2)
+				dog.setForm(before == 1 ? 1 : 0);
+		});
+	}
+
+	/** Spins down into the earth, digs under the enemy and bursts up beneath it. */
+	private static void tunnelingFang(ServerPlayer p) {
+		LivingEntity target = prey(p, 24);
+		if (target == null) {
+			tell(p, "Nothing to dig towards");
+			return;
+		}
+		ServerLevel level = level(p);
+		Vec3 from = p.position();
+		int ticks = 20;
+		p.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, ticks + 2, 0, false, false));
+		flag(p, ticks + 12, v -> v.PassingFang = true, v -> v.PassingFang = false);
+		channel(p, ticks, 1, t -> {
+			if (!target.isAlive())
+				return;
+			Vec3 at = from.lerp(target.position(), (t + 1) / (double) ticks);
+			p.teleportTo(at.x, at.y, at.z);
+			p.fallDistance = 0;
+			net.minecraft.world.level.block.state.BlockState ground = level.getBlockState(net.minecraft.core.BlockPos.containing(at.x, at.y - 0.5, at.z));
+			if (!ground.isAir())
+				level.sendParticles(new net.minecraft.core.particles.BlockParticleOption(ParticleTypes.BLOCK, ground), at.x, at.y + 0.1, at.z, 12, 0.4, 0.1, 0.4, 0.1);
+			if (t % 4 == 0)
+				sound(level, at, SoundEvents.ROOTED_DIRT_BREAK, 1, 0.6F);
+		});
+		after(level, ticks, () -> {
+			p.removeEffect(MobEffects.INVISIBILITY);
+			p.setDeltaMovement(0, 0.9, 0);
+			p.syncVelocity = true;
+			sound(level, p.position(), SoundEvents.GENERIC_EXPLODE.value(), 0.7F, 1.4F);
+			net.minecraft.world.level.block.state.BlockState ground = level.getBlockState(p.blockPosition().below());
+			if (!ground.isAir())
+				level.sendParticles(new net.minecraft.core.particles.BlockParticleOption(ParticleTypes.BLOCK, ground), p.getX(), p.getY() + 0.3, p.getZ(), 60, 0.8, 0.4, 0.8, 0.2);
+			for (LivingEntity hit : enemies(level, p, p.getBoundingBox().inflate(2), e -> !(e instanceof AkamaruEntity.CustomEntity))) {
+				damage(p, hit, 22, Element.BEAST);
+				hit.push(0, 1.2, 0);
+				hit.syncVelocity = true;
+			}
+		});
 	}
 
 	// ------------------------------------------------------------------ lee

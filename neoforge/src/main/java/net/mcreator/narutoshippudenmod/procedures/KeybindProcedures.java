@@ -184,7 +184,7 @@ public final class KeybindProcedures {
 								SoundSource.NEUTRAL, (float) 1, (float) 1, false);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Byakugan!"));
+						((Player) entity).sendOverlayMessage(Component.literal("Byakugan!"));
 					}
 					{
 						boolean _setval = (true);
@@ -219,7 +219,7 @@ public final class KeybindProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).byakugan == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked Byakugan"));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked Byakugan"));
 				}
 			}
 		}
@@ -243,7 +243,7 @@ public final class KeybindProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("\u00A7bChakra Control: On"));
+					((Player) entity).sendOverlayMessage(Component.literal("Chakra Control on"));
 				}
 			} else if (NarutoShippudenModVariables.get(entity).Chakra_Control == true) {
 				{
@@ -255,7 +255,7 @@ public final class KeybindProcedures {
 				}
 				entity.setNoGravity((false));
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("\u00A7bChakra Control: Off"));
+					((Player) entity).sendOverlayMessage(Component.literal("Chakra Control off"));
 				}
 			}
 		}
@@ -507,7 +507,7 @@ public final class KeybindProcedures {
 			if (NarutoShippudenModVariables.get(entity).isshikidojutsu == true) {
 				if (NarutoShippudenModVariables.get(entity).isshikidojutsuactivate == false) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("\u00A76Kokugan!"));
+						((Player) entity).sendOverlayMessage(Component.literal("Kokugan!"));
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) 999999, (int) 3, (false), (false)));
@@ -544,7 +544,7 @@ public final class KeybindProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).isshikidojutsu == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked Kokugan"));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked Kokugan"));
 				}
 			}
 		}
@@ -559,7 +559,7 @@ public final class KeybindProcedures {
 				return;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).jutsupower == 0) {
+			if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 0) {
 				if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 1) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
 						((Player) entity).sendOverlayMessage(Component.literal("Jutsu Power: 2"));
@@ -572,7 +572,7 @@ public final class KeybindProcedures {
 						});
 					}
 				}
-			} else if (NarutoShippudenModVariables.get(entity).jutsupower == 1) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 1) {
 				if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 2) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
 						((Player) entity).sendOverlayMessage(Component.literal("Jutsu Power: 3"));
@@ -585,7 +585,7 @@ public final class KeybindProcedures {
 						});
 					}
 				}
-			} else if (NarutoShippudenModVariables.get(entity).jutsupower == 2) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 2) {
 				if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 3) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
 						((Player) entity).sendOverlayMessage(Component.literal("Jutsu Power: 4"));
@@ -598,7 +598,7 @@ public final class KeybindProcedures {
 						});
 					}
 				}
-			} else if (NarutoShippudenModVariables.get(entity).jutsupower == 3) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 3) {
 				if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 4) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
 						((Player) entity).sendOverlayMessage(Component.literal("Jutsu Power: 5"));
@@ -611,7 +611,7 @@ public final class KeybindProcedures {
 						});
 					}
 				}
-			} else if (NarutoShippudenModVariables.get(entity).jutsupower == 4) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 4) {
 				if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 5) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
 						((Player) entity).sendOverlayMessage(Component.literal("Jutsu Power: 6"));
@@ -624,7 +624,7 @@ public final class KeybindProcedures {
 						});
 					}
 				}
-			} else if (NarutoShippudenModVariables.get(entity).jutsupower == 5) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 5) {
 				if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 6) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
 						((Player) entity).sendOverlayMessage(Component.literal("Jutsu Power: 7"));
@@ -637,7 +637,7 @@ public final class KeybindProcedures {
 						});
 					}
 				}
-			} else if (NarutoShippudenModVariables.get(entity).jutsupower == 6) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 6) {
 				if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 7) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
 						((Player) entity).sendOverlayMessage(Component.literal("Jutsu Power: 8"));
@@ -650,7 +650,7 @@ public final class KeybindProcedures {
 						});
 					}
 				}
-			} else if (NarutoShippudenModVariables.get(entity).jutsupower == 7) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 7) {
 				if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 8) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
 						((Player) entity).sendOverlayMessage(Component.literal("Jutsu Power: 9"));
@@ -663,7 +663,7 @@ public final class KeybindProcedures {
 						});
 					}
 				}
-			} else if (NarutoShippudenModVariables.get(entity).jutsupower == 8) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 8) {
 				if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 9) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
 						((Player) entity).sendOverlayMessage(Component.literal("Jutsu Power: 10"));
@@ -676,7 +676,7 @@ public final class KeybindProcedures {
 						});
 					}
 				}
-			} else if (NarutoShippudenModVariables.get(entity).jutsupower == 9) {
+			} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 9) {
 				if (NarutoShippudenModVariables.get(entity).jutsupowerstat >= 0) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
 						((Player) entity).sendOverlayMessage(Component.literal("Jutsu Power: 1"));
@@ -705,7 +705,7 @@ public final class KeybindProcedures {
 			if (NarutoShippudenModVariables.get(entity).ketsuryugan == true) {
 				if (NarutoShippudenModVariables.get(entity).ketsuryuganactivate == false) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("\u00A7cKetsuryugan!"));
+						((Player) entity).sendOverlayMessage(Component.literal("Ketsuryugan!"));
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) 999999, (int) 1, (false), (false)));
@@ -730,7 +730,7 @@ public final class KeybindProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).ketsuryugan == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked Ketsuryugan"));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked Ketsuryugan"));
 				}
 			}
 		}
@@ -876,7 +876,7 @@ public final class KeybindProcedures {
 					|| NarutoShippudenModVariables.get(entity).MangekyouSharinganKakashi == true) {
 				if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == false) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("\u00A7cMangekyou Sharingan!"));
+						((Player) entity).sendOverlayMessage(Component.literal("Mangekyou Sharingan!"));
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) 999999, (int) 1, (false), (false)));
@@ -917,7 +917,7 @@ public final class KeybindProcedures {
 					|| NarutoShippudenModVariables.get(entity).MangekyouSharinganShisui == false
 					|| NarutoShippudenModVariables.get(entity).MangekyouSharinganKakashi == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked Mangekyou Sharingan"));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked Mangekyou Sharingan"));
 				}
 			}
 		}
@@ -1058,7 +1058,7 @@ public final class KeybindProcedures {
 			if (NarutoShippudenModVariables.get(entity).rinnegan == true) {
 				if (NarutoShippudenModVariables.get(entity).rinneganactivate == false) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("\u00A7dRinnegan!"));
+						((Player) entity).sendOverlayMessage(Component.literal("Rinnegan!"));
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) 999999, (int) 3, (false), (false)));
@@ -1092,7 +1092,7 @@ public final class KeybindProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).rinnegan == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked Rinnegan"));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked Rinnegan"));
 				}
 			}
 		}
@@ -1135,7 +1135,7 @@ public final class KeybindProcedures {
 					|| NarutoShippudenModVariables.get(entity).SharinganKakashi == true) {
 				if (NarutoShippudenModVariables.get(entity).sharinganactivate == false) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("\u00A7cSharingan!"));
+						((Player) entity).sendOverlayMessage(Component.literal("Sharingan!"));
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) 999999, (int) 0, (false), (false)));
@@ -1170,7 +1170,7 @@ public final class KeybindProcedures {
 			} else if (NarutoShippudenModVariables.get(entity).SharinganShimura == true) {
 				if (NarutoShippudenModVariables.get(entity).shimura_active == false) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("\u00A7cSharingan!"));
+						((Player) entity).sendOverlayMessage(Component.literal("Sharingan!"));
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) 999999, (int) 0, (false), (false)));
@@ -1206,7 +1206,7 @@ public final class KeybindProcedures {
 					|| NarutoShippudenModVariables.get(entity).SharinganKakashi == false
 					|| NarutoShippudenModVariables.get(entity).SharinganShimura == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked Sharingan"));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked Sharingan"));
 				}
 			}
 		}
@@ -1228,7 +1228,7 @@ public final class KeybindProcedures {
 						&& NarutoShippudenModVariables.get(entity).mangekyousharinganmadarasusanolearn == 0
 						&& NarutoShippudenModVariables.get(entity).mangekyousharinganshisuisusanolearn == 0) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked Susano"));
+						((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked Susanoo"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukesusanolearn >= 1) {
 					if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == true) {
@@ -1355,7 +1355,7 @@ public final class KeybindProcedures {
 						}
 					} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == false) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("You haven't activated Mangekyou Sharingan"));
+							((Player) entity).sendOverlayMessage(Component.literal("You haven't activated Mangekyou Sharingan"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).mangekyoushrainganitachisusanolearn >= 1) {
@@ -1483,7 +1483,7 @@ public final class KeybindProcedures {
 						}
 					} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == false) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("You haven't activated Mangekyou Sharingan"));
+							((Player) entity).sendOverlayMessage(Component.literal("You haven't activated Mangekyou Sharingan"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganobitosusanolearn >= 1) {
@@ -1611,7 +1611,7 @@ public final class KeybindProcedures {
 						}
 					} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == false) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("You haven't activated Mangekyou Sharingan"));
+							((Player) entity).sendOverlayMessage(Component.literal("You haven't activated Mangekyou Sharingan"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganmadarasusanolearn >= 1) {
@@ -1739,7 +1739,7 @@ public final class KeybindProcedures {
 						}
 					} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == false) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("You haven't activated Mangekyou Sharingan"));
+							((Player) entity).sendOverlayMessage(Component.literal("You haven't activated Mangekyou Sharingan"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganshisuisusanolearn >= 1) {
@@ -1867,13 +1867,13 @@ public final class KeybindProcedures {
 						}
 					} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganActivate == false) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("You haven't activated Mangekyou Sharingan"));
+							((Player) entity).sendOverlayMessage(Component.literal("You haven't activated Mangekyou Sharingan"));
 						}
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).Mangekyou_Sharingan == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked Mangekyou Sharingan"));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked Mangekyou Sharingan"));
 				}
 			}
 		}
@@ -1943,7 +1943,7 @@ public final class KeybindProcedures {
 								SoundSource.NEUTRAL, (float) 1, (float) 1, false);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("\u00A7bTenseigan!"));
+						((Player) entity).sendOverlayMessage(Component.literal("Tenseigan!"));
 					}
 					{
 						boolean _setval = (true);
@@ -1984,7 +1984,7 @@ public final class KeybindProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).tenseigan == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked Tenseigan"));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked Tenseigan"));
 				}
 			}
 		}

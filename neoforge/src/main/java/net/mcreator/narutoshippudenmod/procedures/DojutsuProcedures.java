@@ -154,7 +154,7 @@ public final class DojutsuProcedures {
 				}.start(world, (int) 200);
 			} else if (NarutoShippudenModVariables.get(entity).byakugan == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You've already unlocked byakugan."));
+					((Player) entity).sendOverlayMessage(Component.literal("You've already unlocked the Byakugan"));
 				}
 			}
 		}
@@ -850,7 +850,7 @@ public final class DojutsuProcedures {
 				}.start(world, (int) 200);
 			} else if (NarutoShippudenModVariables.get(entity).isshikidojutsu == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You've already unlocked isshiki dojutsu."));
+					((Player) entity).sendOverlayMessage(Component.literal("You've already unlocked the Kokugan"));
 				}
 			}
 		}
@@ -925,7 +925,7 @@ public final class DojutsuProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-25 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-25 JP"));
 					}
 					{
 						double _setval = (NarutoShippudenModVariables.get(entity).isshikidojutsurelease + 1);
@@ -936,7 +936,7 @@ public final class DojutsuProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).isshikidojutsurelease == 1) {
@@ -963,16 +963,16 @@ public final class DojutsuProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-40 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-40 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 39) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).isshikidojutsurelease == 2) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -1147,17 +1147,17 @@ public final class DojutsuProcedures {
 											}
 										} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 											if (entity instanceof Player && !entity.level().isClientSide()) {
-												((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+												((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 											}
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 										}
 									}
 								} else if (!(NarutoShippudenModVariables.get(entity).isshikidojutsulearn >= 1)) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+										((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).isshikidojutsutechnique == 1) {
@@ -1198,17 +1198,17 @@ public final class DojutsuProcedures {
 											}
 										} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 999) {
 											if (entity instanceof Player && !entity.level().isClientSide()) {
-												((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+												((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 											}
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 34) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 										}
 									}
 								} else if (!(NarutoShippudenModVariables.get(entity).isshikidojutsulearn >= 2)) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+										((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 									}
 								}
 							}
@@ -1255,12 +1255,12 @@ public final class DojutsuProcedures {
 						}
 					} else if (NarutoShippudenModVariables.get(entity).isshikidojutsuactivate == false) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Activate Kokugan"));
+							((Player) entity).sendOverlayMessage(Component.literal("Activate Kokugan"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).isshikidojutsu == false) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+						((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 					}
 				}
 			}
@@ -1388,7 +1388,7 @@ public final class DojutsuProcedures {
 				}.start(world, (int) 200);
 			} else if (NarutoShippudenModVariables.get(entity).SharinganKakashi == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You've already unlocked sharingan."));
+					((Player) entity).sendOverlayMessage(Component.literal("You've already unlocked the Sharingan"));
 				}
 			}
 		}
@@ -1649,7 +1649,7 @@ public final class DojutsuProcedures {
 				}.start(world, (int) 200);
 			} else if (NarutoShippudenModVariables.get(entity).ketsuryugan == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You've already unlocked ketsuryugan."));
+					((Player) entity).sendOverlayMessage(Component.literal("You've already unlocked the Ketsuryugan"));
 				}
 			}
 		}
@@ -1856,11 +1856,11 @@ public final class DojutsuProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 						}
 					}
@@ -1889,11 +1889,11 @@ public final class DojutsuProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).mangekyoushrainganitachisusanorelease == 1) {
@@ -1920,11 +1920,11 @@ public final class DojutsuProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).mangekyoushrainganitachisusanorelease == 2) {
@@ -1951,11 +1951,11 @@ public final class DojutsuProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("-30 JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("-30 JP"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 						}
 					}
@@ -1970,7 +1970,7 @@ public final class DojutsuProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Susano"));
+						((Player) entity).sendOverlayMessage(Component.literal("Selected: Susanoo"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganRelease == 1) {
 					{
@@ -2061,17 +2061,17 @@ public final class DojutsuProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 349) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).mangekyoushrainganitachiamaterasulearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 						if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
@@ -2102,7 +2102,7 @@ public final class DojutsuProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganItachi == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -2140,11 +2140,11 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("-35 JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("-35 JP"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).jp <= 34) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 						}
 					}
 				}
@@ -2899,17 +2899,17 @@ public final class DojutsuProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 349) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).mangekyousharingankakashikamuilearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 						if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
@@ -2940,7 +2940,7 @@ public final class DojutsuProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganKakashi == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -2980,11 +2980,11 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganmadarasusanorelease == 1) {
@@ -3011,11 +3011,11 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganmadarasusanorelease == 2) {
@@ -3042,11 +3042,11 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("-30 JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("-30 JP"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganmadarasusanorelease == 3) {
@@ -3073,17 +3073,17 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("-40 JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("-40 JP"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).jp <= 39) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 						}
 					}
 				}
 			} else if (entity.isShiftKeyDown()) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Selected: Susano"));
+					((Player) entity).sendOverlayMessage(Component.literal("Selected: Susanoo"));
 				}
 			}
 		}
@@ -3176,17 +3176,17 @@ public final class DojutsuProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 349) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 									}
 								}
 							} else if (!(NarutoShippudenModVariables.get(entity).mangekyousharinganobitokamuilearn >= 1)) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+									((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 								}
 							}
 						} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganobitokamuitechnique == 1) {
@@ -4004,17 +4004,17 @@ public final class DojutsuProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 349) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 									}
 								}
 							} else if (!(NarutoShippudenModVariables.get(entity).mangekyousharinganobitokamuilearn >= 2)) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+									((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 								}
 							}
 						} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganobitokamuitechnique == 2) {
@@ -4085,17 +4085,17 @@ public final class DojutsuProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 									}
 								}
 							} else if (!(NarutoShippudenModVariables.get(entity).mangekyousharinganobitokamuilearn >= 3)) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+									((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 								}
 							}
 						}
@@ -4158,7 +4158,7 @@ public final class DojutsuProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganObito == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -4206,11 +4206,11 @@ public final class DojutsuProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganobitokamuirelease == 1) {
@@ -4237,11 +4237,11 @@ public final class DojutsuProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("-30 JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("-30 JP"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganobitokamuirelease == 2) {
@@ -4268,11 +4268,11 @@ public final class DojutsuProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("-35 JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("-35 JP"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).jp <= 34) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 						}
 					}
@@ -4301,11 +4301,11 @@ public final class DojutsuProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganobitosusanorelease == 1) {
@@ -4332,11 +4332,11 @@ public final class DojutsuProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganobitosusanorelease == 2) {
@@ -4363,11 +4363,11 @@ public final class DojutsuProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("-30 JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("-30 JP"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 						}
 					}
@@ -4382,7 +4382,7 @@ public final class DojutsuProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Susano"));
+						((Player) entity).sendOverlayMessage(Component.literal("Selected: Susanoo"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganRelease == 1) {
 					{
@@ -4478,17 +4478,17 @@ public final class DojutsuProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 349) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 									}
 								}
 							} else if (!(NarutoShippudenModVariables.get(entity).mangekyousharingansasukeamaterasulearn >= 1)) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+									((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 								}
 							}
 						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukeamaterasutechnique == 1) {
@@ -4520,12 +4520,12 @@ public final class DojutsuProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 									}
 								}
 							} else if (!(NarutoShippudenModVariables.get(entity).mangekyousharingansasukeamaterasulearn >= 2)) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+									((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 								}
 							}
 						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukeamaterasutechnique == 2) {
@@ -4582,17 +4582,17 @@ public final class DojutsuProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 									}
 								}
 							} else if (!(NarutoShippudenModVariables.get(entity).mangekyousharingansasukeamaterasulearn >= 3)) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+									((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 								}
 							}
 						} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukeamaterasutechnique == 3) {
@@ -4624,12 +4624,12 @@ public final class DojutsuProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 34) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 									}
 								}
 							} else if (!(NarutoShippudenModVariables.get(entity).mangekyousharingansasukeamaterasulearn >= 4)) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+									((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 								}
 							}
 						}
@@ -4703,7 +4703,7 @@ public final class DojutsuProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganSasuke == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -4751,11 +4751,11 @@ public final class DojutsuProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukeamaterasurelease == 1) {
@@ -4782,11 +4782,11 @@ public final class DojutsuProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("-15 JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("-15 JP"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).jp <= 14) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukeamaterasurelease == 2) {
@@ -4813,11 +4813,11 @@ public final class DojutsuProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukeamaterasurelease == 3) {
@@ -4844,16 +4844,16 @@ public final class DojutsuProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("-25 JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("-25 JP"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukeamaterasurelease == 4) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganRelease == 1) {
@@ -4881,11 +4881,11 @@ public final class DojutsuProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukesusanorelease == 1) {
@@ -4912,11 +4912,11 @@ public final class DojutsuProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukesusanorelease == 2) {
@@ -4943,11 +4943,11 @@ public final class DojutsuProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("-30 JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("-30 JP"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukesusanorelease == 3) {
@@ -4974,11 +4974,11 @@ public final class DojutsuProcedures {
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("-40 JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("-40 JP"));
 							}
 						} else if (NarutoShippudenModVariables.get(entity).jp <= 39) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 							}
 						}
 					}
@@ -4993,7 +4993,7 @@ public final class DojutsuProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Selected: Susano"));
+						((Player) entity).sendOverlayMessage(Component.literal("Selected: Susanoo"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).MangekyouSharinganRelease == 1) {
 					{
@@ -5045,11 +5045,11 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganshisuisusanorelease == 1) {
@@ -5076,11 +5076,11 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganshisuisusanorelease == 2) {
@@ -5107,11 +5107,11 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("-30 JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("-30 JP"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).mangekyousharinganshisuisusanorelease == 3) {
@@ -5138,17 +5138,17 @@ public final class DojutsuProcedures {
 							});
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("-40 JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("-40 JP"));
 						}
 					} else if (NarutoShippudenModVariables.get(entity).jp <= 39) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 						}
 					}
 				}
 			} else if (entity.isShiftKeyDown()) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Selected: Susano"));
+					((Player) entity).sendOverlayMessage(Component.literal("Selected: Susanoo"));
 				}
 			}
 		}
@@ -5289,7 +5289,7 @@ public final class DojutsuProcedures {
 				}.start(world, (int) 200);
 			} else if (NarutoShippudenModVariables.get(entity).sharingan == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You've already unlocked sharingan."));
+					((Player) entity).sendOverlayMessage(Component.literal("You've already unlocked the Sharingan"));
 				}
 			}
 		}
@@ -5372,11 +5372,11 @@ public final class DojutsuProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-15 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-15 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 14) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).sharinganrelease == 1) {
@@ -5403,11 +5403,11 @@ public final class DojutsuProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).sharinganrelease == 2) {
@@ -5434,11 +5434,11 @@ public final class DojutsuProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-25 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-25 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).sharinganrelease == 3) {
@@ -5472,16 +5472,16 @@ public final class DojutsuProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-30 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-30 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).sharinganrelease == 4) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -5559,22 +5559,22 @@ public final class DojutsuProcedures {
 											}
 										} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 											if (entity instanceof Player && !entity.level().isClientSide()) {
-												((Player) entity).sendSystemMessage(Component.literal("Not Enough Genjutsu"));
+												((Player) entity).sendOverlayMessage(Component.literal("Not enough Genjutsu"));
 											}
 										}
 									} else if (NarutoShippudenModVariables.get(entity).genjutsu <= 4) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 										}
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 9) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 									}
 								}
 							} else if (!(NarutoShippudenModVariables.get(entity).sharinganlearn >= 1)) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+									((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 								}
 							}
 						} else if (NarutoShippudenModVariables.get(entity).sharingantechnique == 1) {
@@ -5900,22 +5900,22 @@ public final class DojutsuProcedures {
 											}
 										} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 349) {
 											if (entity instanceof Player && !entity.level().isClientSide()) {
-												((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+												((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 											}
 										}
 									} else if (NarutoShippudenModVariables.get(entity).genjutsu <= 9) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Genjutsu"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough Genjutsu"));
 										}
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 									}
 								}
 							} else if (!(NarutoShippudenModVariables.get(entity).sharinganlearn >= 2)) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+									((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 								}
 							}
 						} else if (NarutoShippudenModVariables.get(entity).sharingantechnique == 2) {
@@ -5954,22 +5954,22 @@ public final class DojutsuProcedures {
 											}
 										} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 											if (entity instanceof Player && !entity.level().isClientSide()) {
-												((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+												((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 											}
 										}
 									} else if (NarutoShippudenModVariables.get(entity).genjutsu <= 14) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Genjutsu"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough Genjutsu"));
 										}
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 									}
 								}
 							} else if (!(NarutoShippudenModVariables.get(entity).sharinganlearn >= 3)) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+									((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 								}
 							}
 						}
@@ -5991,7 +5991,7 @@ public final class DojutsuProcedures {
 						}
 					} else if (NarutoShippudenModVariables.get(entity).sharinganactivate == false) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Activate your Sharingan"));
+							((Player) entity).sendOverlayMessage(Component.literal("Activate your Sharingan"));
 						}
 					}
 				} else if (entity.isShiftKeyDown()) {
@@ -6107,7 +6107,7 @@ public final class DojutsuProcedures {
 				}.start(world, (int) 200);
 			} else if (NarutoShippudenModVariables.get(entity).SharinganShimura == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You've already unlocked sharingan."));
+					((Player) entity).sendOverlayMessage(Component.literal("You've already unlocked the Sharingan"));
 				}
 			}
 		}
@@ -6216,7 +6216,7 @@ public final class DojutsuProcedures {
 				}.start(world, (int) 200);
 			} else if (NarutoShippudenModVariables.get(entity).tenseigan == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You've already unlocked tenseigan."));
+					((Player) entity).sendOverlayMessage(Component.literal("You've already unlocked the Tenseigan"));
 				}
 			}
 		}

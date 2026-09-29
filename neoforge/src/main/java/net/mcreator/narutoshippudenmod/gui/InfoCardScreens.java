@@ -227,7 +227,7 @@ public final class InfoCardScreens {
 		static final Stat[] STATS = {new Stat("Ninjutsu", 4, v -> v.ninjutsu), new Stat("Taijutsu", 5, v -> v.taijutsu), new Stat("Kenjutsu", 6, v -> v.kenjutsu),
 				new Stat("Shurikenjutsu", 7, v -> v.shurikenjutsu), new Stat("Summoning", 8, v -> v.summoning), new Stat("Kinjutsu", 9, v -> v.kinjutsu),
 				new Stat("Senjutsu", 10, v -> v.senjutsu), new Stat("Medicine", 11, v -> v.medicine), new Stat("Speed", 12, v -> v.speed),
-				new Stat("Jutsu Power", 13, v -> v.jutsupowerstat), new Stat("Genjutsu", 14, v -> v.genjutsu), new Stat("IQ", 15, v -> v.IQ)};
+				new Stat("Genjutsu", 14, v -> v.genjutsu), new Stat("IQ", 15, v -> v.IQ)};
 
 		private EditBox perClick;
 

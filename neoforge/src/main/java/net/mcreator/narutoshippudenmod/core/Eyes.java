@@ -9,9 +9,14 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.ToDoubleFunction;
@@ -23,6 +28,7 @@ import org.jspecify.annotations.Nullable;
  * (or close it), sneak and tap to close every eye, hold to choose between eyes on a wheel. The Susanoo key: hold to build the
  * Susanoo up stage by stage, tap to dismiss it. Opening and closing still run each eye's own procedure (messages, effects).
  */
+@EventBusSubscriber(modid = "naruto_shippuden")
 public final class Eyes {
 	private Eyes() {
 	}
@@ -112,6 +118,48 @@ public final class Eyes {
 		if (eye == MANGEKYOU && SHARINGAN.has().test(NarutoShippudenModVariables.get(player)))
 			toggle(player, SHARINGAN);
 		toggle(player, eye);
+	}
+
+	// ------------------------------------------------------------------ one mangekyou
+	private record Mangekyou(String id, String name, Predicate<PlayerVariables> has, BiConsumer<PlayerVariables, Boolean> set) {
+	}
+
+	private static final List<Mangekyou> MANGEKYOU_KINDS = List.of(
+			new Mangekyou("itachi", "Itachi", v -> v.MangekyouSharinganItachi, (v, b) -> v.MangekyouSharinganItachi = b),
+			new Mangekyou("sasuke", "Sasuke", v -> v.MangekyouSharinganSasuke, (v, b) -> v.MangekyouSharinganSasuke = b),
+			new Mangekyou("madara", "Madara", v -> v.MangekyouSharinganMadara, (v, b) -> v.MangekyouSharinganMadara = b),
+			new Mangekyou("obito", "Obito", v -> v.MangekyouSharinganObito, (v, b) -> v.MangekyouSharinganObito = b),
+			new Mangekyou("shisui", "Shisui", v -> v.MangekyouSharinganShisui, (v, b) -> v.MangekyouSharinganShisui = b),
+			new Mangekyou("kakashi", "Kakashi", v -> v.MangekyouSharinganKakashi, (v, b) -> v.MangekyouSharinganKakashi = b));
+	private static final String MANGEKYOU_KEPT = "naruto_shippuden:mangekyou";
+
+	/**
+	 * A player has one Mangekyou Sharingan. Awakening (or cheating in) another replaces the one they had, so their eyes and
+	 * techniques never mix.
+	 */
+	@SubscribeEvent
+	public static void oneMangekyou(PlayerTickEvent.Post event) {
+		if (!(event.getEntity() instanceof ServerPlayer player) || player.tickCount % 10 != 0)
+			return;
+		PlayerVariables v = NarutoShippudenModVariables.get(player);
+		List<Mangekyou> owned = MANGEKYOU_KINDS.stream().filter(m -> m.has().test(v)).toList();
+		String kept = player.getPersistentData().getStringOr(MANGEKYOU_KEPT, "");
+		if (owned.size() <= 1) {
+			if (owned.size() == 1 && !owned.getFirst().id().equals(kept))
+				player.getPersistentData().putString(MANGEKYOU_KEPT, owned.getFirst().id());
+			return;
+		}
+		// the newest one stays (the last one that isn't the one they had)
+		Mangekyou keep = owned.stream().filter(m -> !m.id().equals(kept)).reduce((a, b) -> b).orElse(owned.getFirst());
+		NarutoShippudenModVariables.ifPresent(player, vars -> {
+			for (Mangekyou m : owned)
+				if (m != keep)
+					m.set().accept(vars, false);
+			vars.mangekyousharingansusanostage = 0;
+			vars.syncPlayerVariables(player);
+		});
+		player.getPersistentData().putString(MANGEKYOU_KEPT, keep.id());
+		player.sendOverlayMessage(Component.literal("Your Mangekyou Sharingan is now " + keep.name() + "'s"));
 	}
 
 	// ------------------------------------------------------------------ susanoo

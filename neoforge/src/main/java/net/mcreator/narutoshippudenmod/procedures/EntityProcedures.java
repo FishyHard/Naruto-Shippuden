@@ -383,7 +383,7 @@ public final class EntityProcedures {
 									entity.getPersistentData().putDouble("ChakraAmount", (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 350));
 								} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 349) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							}
@@ -521,7 +521,7 @@ public final class EntityProcedures {
 					entity.getPersistentData().putDouble("ChakraAmount", (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 600));
 				} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 599) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 				}
 			}
@@ -882,7 +882,7 @@ public final class EntityProcedures {
 				if (entity instanceof LivingEntity)
 					((LivingEntity) entity).setHealth((float) 20);
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("\u00A7cIzanagi!"));
+					((Player) entity).sendOverlayMessage(Component.literal("Izanagi!"));
 				}
 				if (world instanceof Level && !world.isClientSide()) {
 					((Level) world).playSound(null, BlockPos.containing(x, y, z),
@@ -1439,7 +1439,7 @@ public final class EntityProcedures {
 												(entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 150));
 									} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								} else if (entity.getPersistentData().getDoubleOr("chance", 0) == 2) {
@@ -1473,7 +1473,7 @@ public final class EntityProcedures {
 												(entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 100));
 									} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 99) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								}
@@ -1522,7 +1522,7 @@ public final class EntityProcedures {
 					entity.getPersistentData().putDouble("ChakraAmount", (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 450));
 				} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 449) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 				}
 			}
@@ -1556,7 +1556,7 @@ public final class EntityProcedures {
 					entity.getPersistentData().putDouble("ChakraAmount", (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 500));
 				} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 499) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 				}
 			}
@@ -1681,7 +1681,7 @@ public final class EntityProcedures {
 										}
 									} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								} else if (entity.getPersistentData().getDoubleOr("chance", 0) == 2) {
@@ -1715,7 +1715,7 @@ public final class EntityProcedures {
 										}
 									} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								} else if (entity.getPersistentData().getDoubleOr("chance", 0) == 3) {
@@ -1749,7 +1749,7 @@ public final class EntityProcedures {
 										}
 									} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 99) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								}
@@ -1767,7 +1767,7 @@ public final class EntityProcedures {
 					entity.getPersistentData().putDouble("ChakraAmount", (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 200));
 				} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 199) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 				}
 			}
@@ -1794,7 +1794,7 @@ public final class EntityProcedures {
 					entity.getPersistentData().putDouble("ChakraAmount", (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 350));
 				} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 349) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 				}
 			}
@@ -1921,7 +1921,7 @@ public final class EntityProcedures {
 										}
 									} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								} else if (entity.getPersistentData().getDoubleOr("chance", 0) == 2) {
@@ -1955,7 +1955,7 @@ public final class EntityProcedures {
 										}
 									} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								} else if (entity.getPersistentData().getDoubleOr("chance", 0) == 3) {
@@ -1988,7 +1988,7 @@ public final class EntityProcedures {
 										}
 									} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								}
@@ -2006,7 +2006,7 @@ public final class EntityProcedures {
 					entity.getPersistentData().putDouble("ChakraAmount", (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 200));
 				} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 199) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 				}
 			}
@@ -2063,7 +2063,7 @@ public final class EntityProcedures {
 									entity.getPersistentData().putDouble("ChakraAmount", (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 350));
 								} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 349) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							}
@@ -2204,7 +2204,7 @@ public final class EntityProcedures {
 												(entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 250));
 									} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								} else if (entity.getPersistentData().getDoubleOr("chance", 0) == 2) {
@@ -2238,7 +2238,7 @@ public final class EntityProcedures {
 												(entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 150));
 									} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								}
@@ -2256,7 +2256,7 @@ public final class EntityProcedures {
 					entity.getPersistentData().putDouble("ChakraAmount", (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 200));
 				} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 199) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 				}
 			}
@@ -2379,7 +2379,7 @@ public final class EntityProcedures {
 					entity.getPersistentData().putDouble("ChakraAmount", (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 450));
 				} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 449) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 				}
 			}
@@ -2849,7 +2849,7 @@ public final class EntityProcedures {
 									entity.getPersistentData().putDouble("ChakraAmount", (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 250));
 								} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 249) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							}
@@ -2866,7 +2866,7 @@ public final class EntityProcedures {
 					entity.getPersistentData().putDouble("ChakraAmount", (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 200));
 				} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 199) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 				}
 			}
@@ -2886,7 +2886,7 @@ public final class EntityProcedures {
 					entity.getPersistentData().putDouble("ChakraAmount", (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) - 150));
 				} else if (entity.getPersistentData().getDoubleOr("ChakraAmount", 0) <= 149) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 				}
 			}

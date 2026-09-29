@@ -35,6 +35,12 @@ def find_block(text, start):
                 i += 1
             elif c == in_str:
                 in_str = None
+        elif c == '/' and text.startswith('//', i):
+            i = text.find('\n', i)
+            continue
+        elif c == '/' and text.startswith('/*', i):
+            i = text.find('*/', i) + 2
+            continue
         elif c in '"\'':
             in_str = c
         elif c == '{':
@@ -952,7 +958,7 @@ def clan_mode_ticks(path, text):
 @func
 def clan_item_hooks(path, text):
     """The clan technique items' hit and swing hooks belong to the old jutsu (Lee's gates, the Death God seal, the Gentle Fist)."""
-    return re.sub(r'\b(?:Hyuga|Lee|Uzumaki)ReleaseTechniqueLivingEntityIsHitWithItemProcedure\.executeProcedure\(|\bAkimichiReleaseTechniqueEntitySwingsItemProcedure\.executeProcedure\(',
+    return re.sub(r'\b(?:Hyuga|Lee|Uzumaki)ReleaseTechniqueLivingEntityIsHitWithItemProcedure\.executeProcedure\(|\b(?:AkimichiReleaseTechnique|IsshikiDojutsuReleaseTechnique)EntitySwingsItemProcedure\.executeProcedure\(',
                   'net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(', text)
 
 
@@ -1157,6 +1163,26 @@ AKAMARU_GOALS = '''protected void registerGoals() {
 				this.targetSelector.addGoal(3, new net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal(this));
 			}'''
 
+# Akamaru's form, seen by the client: 0 himself, 1 the Man Beast Clone (the owner's double), 2 a spinning fang (Fang Over Fang)
+AKAMARU_FORM = '''public static final net.minecraft.network.syncher.EntityDataAccessor<Integer> FORM = net.minecraft.network.syncher.SynchedEntityData
+					.defineId(CustomEntity.class, net.minecraft.network.syncher.EntityDataSerializers.INT);
+
+			@Override
+			protected void defineSynchedData(net.minecraft.network.syncher.SynchedEntityData.Builder builder) {
+				super.defineSynchedData(builder);
+				builder.define(FORM, 0);
+			}
+
+			public int form() {
+				return this.entityData.get(FORM);
+			}
+
+			public void setForm(int form) {
+				this.entityData.set(FORM, form);
+			}
+
+			'''
+
 AKAMARU_INTERACT = '''public InteractionResult mobInteract(Player player, InteractionHand hand) {
 				ItemStack stack = player.getItemInHand(hand);
 				if (!this.isTame() || !this.isOwnedBy(player))
@@ -1194,6 +1220,9 @@ def akamaru(path, text):
             if i >= 0:
                 cls = cls[:i] + new + cls[find_block(cls, i):]
         cls = re.sub(r'public boolean isFood\(ItemStack stack\) \{.*?\n\t\t\t\}', 'public boolean isFood(ItemStack stack) {\n\t\t\t\treturn stack != null && stack.is(net.minecraft.tags.ItemTags.MEAT);\n\t\t\t}', cls, flags=re.S)
+        if 'EntityDataAccessor<Integer> FORM' not in cls:
+            i = cls.rfind('@Override', 0, cls.find('protected void registerGoals()'))
+            cls = cls[:i] + AKAMARU_FORM + cls[i:]
         cls = re.sub(r'\n\t*AkamaruOnInitialEntitySpawnProcedure\.executeProcedure\([^;]*;', '', cls)
         text = text[:start] + cls + text[end:]
     if 'SummonRenderers.java' in path:
@@ -1257,3 +1286,93 @@ def weapon_skill(path, text):
         body = re.sub(r'shurikenjutsu <= \d+\)', 'shurikenjutsu <= %d)' % (need - 1), body)
         text = text[:m.start()] + body + text[end:]
     return text
+
+
+# ---------------------------------------------------------------- chakra control, dashes and jutsu power (core/ChakraControl)
+OLD_KEYS = ['BackDash', 'ForwardDash', 'LeftDash', 'RightDash', 'UpDash', 'ChakraControl', 'JutsuPower']
+
+
+@func
+def old_keys(path, text):
+    """The five double-tap dash keys (bound over WASD and Space), the old Chakra Control key and the Jutsu Power key go: client/EyeKeys
+    has Chakra Control and one Dash key, and jutsu power follows Ninjutsu."""
+    if not path.replace('\\', '/').endswith('ModKeyMappings.java'):
+        return text
+    for name in OLD_KEYS:
+        text = re.sub(r'\n[^\n]*\b%sKEYBINDING\b[^\n]*;(?=\n)' % name.upper(), '', text)
+        text = re.sub(r'\n[^\n]*\b%sKeyBinding_lastpress\b[^\n]*;(?=\n)' % name, '', text)
+        text = re.sub(r'\n[^\n]*\bon%sKeyBinding\(event\);(?=\n)' % name, '', text)
+        m = re.search(r'\n\tprivate static void on%sKeyBinding\(' % name, text)
+        if m:
+            text = text[:m.start()] + text[find_block(text, m.end()):]
+    return text
+
+
+@func
+def chakra_control_tick(path, text):
+    """core/ChakraControl does the water and wall walking; the old tick switched gravity off on water and flew the player up walls."""
+    if not path.replace('\\', '/').endswith('PlayerProcedures.java'):
+        return text
+    return re.sub(r'if \(NarutoShippudenModVariables\.get\(entity\)\.Chakra_Control == true\) \{(?=\s*\n\s*if \(NarutoShippudenModVariables\.get\(entity\)\.WallClimb == false\))',
+                  'if (false) {', text)
+
+
+@func
+def jutsu_power(path, text):
+    """The old jutsu read a chosen power tier (0-9, raised with its own stat and key); it now follows Ninjutsu."""
+    return re.sub(r'NarutoShippudenModVariables\.get\((\w+)\)\.jutsupower\b', r'net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(\1)', text)
+
+
+# ---------------------------------------------------------------- the Inuzuka wolf transformations are gone (Inuzuka has new jutsu)
+WOLF_CLASSES = ['TwoHeadAkamaruEntity', 'ThreeHeadAkamaruEntity', 'TwoHeadAkamaruRenderer', 'ThreeHeadAkamaruRenderer']
+
+
+@func
+def inuzuka_wolves(path, text):
+    """Remove the Double- and Three-Headed Wolf mobs, their models and the player model swaps."""
+    if not re.search(r'TwoHeadAkamaru|ThreeHeadAkamaru', text):
+        return text
+    for name in WOLF_CLASSES:
+        text = remove_class(text, name)
+    text = re.sub(r'\n[^\n]*\b(?:%s)\b[^\n]*;(?=\n)' % '|'.join(WOLF_CLASSES), '', text)
+    return remove_if_blocks(text, r'NarutoShippudenModVariables\.get\(entity\)\.inuzuka_mode == [12]')
+
+
+# ---------------------------------------------------------------- messages the vanilla way
+# short feedback goes above the hotbar (like "You can sleep only at night"), in plain sentence case; story, quests and letters stay in chat
+FEEDBACK = re.compile(r"^(?:Not Enough|[-+]\d+ |You(?: haven't| have to| already| can only| can use| failed| succesfully|'ve already)|.* implanted |.*: (?:On|Off)$"
+                      r"|Activate|Deactivate|(?:The )?(?:Sharingan|Byakugan|Rinnegan|Tenseigan|Ketsuryugan|Kokugan|Mangekyou Sharingan)!$|Wait For Newer"
+                      r"|Find Flat|Check price|Press Learn|Take your custom|Name your jutsu|Chakra Control|Selected)")
+DOJUTSU_NAMES = {'sharingan': 'the Sharingan', 'byakugan': 'the Byakugan', 'tenseigan': 'the Tenseigan', 'ketsuryugan': 'the Ketsuryugan',
+                 'isshiki dojutsu': 'the Kokugan', 'rinnegan': 'the Rinnegan'}
+
+
+def vanilla_text(t):
+    t = re.sub(r'\\u00A7.', '', t)
+    t = re.sub(r'^Not Enough (\w+) \((\d+) Required\)$', r'Not enough \1 (\2 needed)', t)
+    t = re.sub(r'^Not Enough ', 'Not enough ', t).replace('Not enough Chakra', 'Not enough chakra')
+    t = re.sub(r'^(.+): On$', r'\1 on', t)
+    t = re.sub(r'^(.+): Off$', r'\1 off', t)
+    t = re.sub(r'^(\w+ Release) implanted succesfully$', r'\1 implanted', t)
+    t = re.sub(r'^(\w+ Release) implanted failed$', r'Implanting \1 failed', t)
+    t = re.sub(r'^Activate Gate Of (\w+)$', r'Open the Gate of \1 first', t)
+    t = re.sub(r"^You've already unlocked (.+?)\.?$", lambda m: "You've already unlocked " + DOJUTSU_NAMES.get(m.group(1), m.group(1)), t)
+    t = t.replace('succesfully', 'successfully').replace('LvL XP', 'XP').replace('Susano"', 'Susanoo"')
+    t = {'Wait For Newer Updates': 'Not available yet', 'Find Flat Place': 'Find a flat place', 'Susano': 'Susanoo',
+         'You haven\'t unlocked Susano': 'You haven\'t unlocked Susanoo', 'Selected: Susano': 'Selected: Susanoo'}.get(t, t)
+    if t.endswith('.') and not t.endswith('..'):
+        t = t[:-1]
+    return t
+
+
+@func
+def vanilla_messages(path, text):
+    def system(m):
+        t = m.group(1)
+        plain = re.sub(r'\\u00A7.', '', t)
+        if not FEEDBACK.match(plain) or 'awakened' in plain:
+            return m.group(0)
+        return 'sendOverlayMessage(Component.literal("%s")' % vanilla_text(t)
+
+    text = re.sub(r'sendSystemMessage\(Component\.literal\("([^"\\]*(?:\\.[^"\\]*)*)"\)', system, text)
+    return re.sub(r'sendOverlayMessage\(Component\.literal\("([^"\\]*(?:\\.[^"\\]*)*)"\)', lambda m: 'sendOverlayMessage(Component.literal("%s")' % vanilla_text(m.group(1)), text)

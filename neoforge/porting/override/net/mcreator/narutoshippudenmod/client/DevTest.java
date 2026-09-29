@@ -41,6 +41,108 @@ public final class DevTest {
 				msg -> NarutoShippudenMod.LOGGER.info("DEVTEST {}", msg.getString()));
 	}
 
+	/** Wings on a sneaking player, Akamaru sitting / as the Man Beast Clone / as a fang, the eye wheel, and phasing through a wall. */
+	private static void batch5Steps(Minecraft mc) {
+		java.util.function.Consumer<Integer> form = f -> onServer(mc, p -> {
+			for (var dog : p.level().getEntitiesOfClass(net.mcreator.narutoshippudenmod.entity.SummonEntities.AkamaruEntity.CustomEntity.class,
+					p.getBoundingBox().inflate(8), d -> true))
+				dog.setForm(f);
+		});
+		STEPS.add(() -> {
+			mc.gui.setScreen(null);
+			mc.options.pauseOnLostFocus = false;
+			command(mc, "execute in minecraft:overworld run tp @s 0.5 220 0.5 0 10");
+			command(mc, "fill -6 219 -6 6 219 12 glass");
+			command(mc, "fill -6 220 -6 6 224 12 air");
+			command(mc, "effect clear @s");
+			command(mc, "effect give @s instant_health 1 10");
+			command(mc, "time set day");
+			command(mc, "gamemode survival");
+			mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
+			onServer(mc, p -> NarutoShippudenModVariables.ifPresent(p, v -> {
+				v.ButterflyMode = true;
+				v.ButterFlyModeColor = "Gold";
+				v.syncPlayerVariables(p);
+			}));
+		});
+		STEPS.add(() -> mc.options.keyShift.setDown(true));
+		STEPS.add(() -> shot(mc, "b5_wings_sneak"));
+		STEPS.add(() -> {
+			mc.options.keyShift.setDown(false);
+			onServer(mc, p -> NarutoShippudenModVariables.ifPresent(p, v -> {
+				v.ButterflyMode = false;
+				v.syncPlayerVariables(p);
+			}));
+			command(mc, "tp @s 0.5 220 0.5 -90 15");
+			mc.options.setCameraType(CameraType.FIRST_PERSON);
+			onServer(mc, p -> {
+				var dog = new net.mcreator.narutoshippudenmod.entity.SummonEntities.AkamaruEntity.CustomEntity(
+						net.mcreator.narutoshippudenmod.entity.SummonEntities.AkamaruEntity.entity, p.level());
+				dog.snapTo(p.getX() + 2.5, p.getY(), p.getZ(), 0, 0);
+				dog.setYBodyRot(0);
+				dog.setYHeadRot(0);
+				dog.setInSittingPose(true);
+				dog.tame(p);
+				dog.setOrderedToSit(true);
+				p.level().addFreshEntity(dog);
+			});
+		});
+		STEPS.add(() -> shot(mc, "b5_akamaru_sit"));
+		STEPS.add(() -> form.accept(1));
+		STEPS.add(() -> shot(mc, "b5_akamaru_clone"));
+		STEPS.add(() -> form.accept(2));
+		STEPS.add(() -> shot(mc, "b5_akamaru_fang"));
+		STEPS.add(() -> {
+			form.accept(0);
+			command(mc, "kill @e[type=naruto_shippuden:akamaru]");
+			mc.gui.setScreen(new EyeKeys.EyeWheel(net.mcreator.narutoshippudenmod.core.Eyes.EYES));
+		});
+		STEPS.add(() -> shot(mc, "b5_eye_wheel"));
+		STEPS.add(() -> {
+			mc.gui.setScreen(null);
+			command(mc, "tp @s 0.5 220 0.5 0 0");
+			command(mc, "fill -2 220 3 2 222 4 stone");
+			onServer(mc, p -> NarutoShippudenModVariables.ifPresent(p, v -> {
+				v.KamuiPhantomPhase = true;
+				v.syncPlayerVariables(p);
+			}));
+		});
+		STEPS.add(() -> {
+			NarutoShippudenMod.LOGGER.info("DEVTEST phasing from z={}", mc.player.getZ());
+			mc.options.keyUp.setDown(true);
+		});
+		STEPS.add(() -> {
+			mc.options.keyUp.setDown(false);
+			NarutoShippudenMod.LOGGER.info("DEVTEST phasing to z={}", mc.player.getZ());
+			onServer(mc, p -> NarutoShippudenModVariables.ifPresent(p, v -> {
+				v.KamuiPhantomPhase = false;
+				v.syncPlayerVariables(p);
+			}));
+			command(mc, "gamemode creative");
+		});
+		// chakra control: walk out over water, then walk up a wall
+		STEPS.add(() -> {
+			command(mc, "gamemode survival");
+			command(mc, "weather clear");
+			command(mc, "fill -6 220 -6 6 224 12 air");
+			command(mc, "fill -3 219 2 3 219 10 water");
+			command(mc, "fill -3 220 11 3 226 11 stone");
+			command(mc, "tp @s 0.5 220 0.5 0 0");
+			onServer(mc, p -> NarutoShippudenModVariables.ifPresent(p, v -> {
+				v.Chakra_Control = true;
+				v.ChakraAmount = v.ChakraMax;
+				v.syncPlayerVariables(p);
+			}));
+		});
+		STEPS.add(() -> mc.options.keyUp.setDown(true));
+		STEPS.add(() -> NarutoShippudenMod.LOGGER.info("DEVTEST chakra control after 3s: y={} z={}", mc.player.getY(), mc.player.getZ()));
+		STEPS.add(() -> {
+			NarutoShippudenMod.LOGGER.info("DEVTEST chakra control after 6s: y={} z={}", mc.player.getY(), mc.player.getZ());
+			mc.options.keyUp.setDown(false);
+			command(mc, "gamemode creative");
+		});
+	}
+
 	private static void onServer(Minecraft mc, java.util.function.Consumer<net.minecraft.server.level.ServerPlayer> task) {
 		var server = mc.getSingleplayerServer();
 		server.execute(() -> task.accept(server.getPlayerList().getPlayer(mc.player.getUUID())));
@@ -122,6 +224,11 @@ public final class DevTest {
 				v.ButterflyMode = false;
 				v.syncPlayerVariables(p);
 			})));
+			STEPS.add(mc::stop);
+			return;
+		}
+		if (System.getProperty("naruto.devtest.only", "").equals("batch5")) {
+			batch5Steps(mc);
 			STEPS.add(mc::stop);
 			return;
 		}

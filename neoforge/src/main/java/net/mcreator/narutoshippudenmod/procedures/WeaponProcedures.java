@@ -115,7 +115,7 @@ public final class WeaponProcedures {
 					StackTag.of(itemstack).putDouble("FlyingSwallowSharp", 9);
 				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 0.9) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Not Enough Chakra"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 					StackTag.of(itemstack).putBoolean("FlyingSwallow", (false));
 					StackTag.of(itemstack).putDouble("FlyingSwallowSharp", 0);
@@ -130,7 +130,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 19) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -144,7 +144,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 19) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -180,13 +180,13 @@ public final class WeaponProcedures {
 				if (StackTag.of(itemstack).getBooleanOr("FlyingSwallow", false) == true) {
 					StackTag.of(itemstack).putBoolean("FlyingSwallow", (false));
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Flying Swallow: Off"));
+						((Player) entity).sendOverlayMessage(Component.literal("Flying Swallow off"));
 					}
 				} else if (StackTag.of(itemstack).getBooleanOr("FlyingSwallow", false) == false) {
 					StackTag.of(itemstack).putBoolean("FlyingSwallow", (true));
 					StackTag.of(itemstack).putDouble("FlyingSwallowSharp", 0);
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Flying Swallow: On"));
+						((Player) entity).sendOverlayMessage(Component.literal("Flying Swallow on"));
 					}
 				}
 			} else {
@@ -267,7 +267,7 @@ public final class WeaponProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 9) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Not Enough Shurikenjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not enough Shurikenjutsu"));
 				}
 			}
 		}
@@ -634,17 +634,17 @@ public final class WeaponProcedures {
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 49) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 9) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 24) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Not Enough Shurikenjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not enough Shurikenjutsu"));
 				}
 			}
 		}
@@ -1078,17 +1078,17 @@ public final class WeaponProcedures {
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 49) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 9) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 24) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Not Enough Shurikenjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not enough Shurikenjutsu"));
 				}
 			}
 		}
@@ -1166,7 +1166,7 @@ public final class WeaponProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 14) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Not Enough Shurikenjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not enough Shurikenjutsu"));
 				}
 			}
 		}
@@ -1194,7 +1194,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 24) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -1208,7 +1208,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 24) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -1289,7 +1289,7 @@ public final class WeaponProcedures {
 									StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY))
 											.putBoolean("defense", (true));
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendOverlayMessage(Component.literal("Defense: On"));
+										((Player) entity).sendOverlayMessage(Component.literal("Defense on"));
 									}
 								}
 							} else if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY)
@@ -1321,7 +1321,7 @@ public final class WeaponProcedures {
 									StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY))
 											.putBoolean("defense", (true));
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendOverlayMessage(Component.literal("Defense: On"));
+										((Player) entity).sendOverlayMessage(Component.literal("Defense on"));
 									}
 								}
 							}
@@ -1562,7 +1562,7 @@ public final class WeaponProcedures {
 					StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY))
 							.putBoolean("defense", (false));
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Defense: Off"));
+						((Player) entity).sendOverlayMessage(Component.literal("Defense off"));
 					}
 					if (entity instanceof Player)
 						((Player) entity).getCooldowns().addCooldown(
@@ -1589,7 +1589,7 @@ public final class WeaponProcedures {
 					StackTag.of(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getOffhandItem() : ItemStack.EMPTY))
 							.putBoolean("defense", (false));
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Defense: Off"));
+						((Player) entity).sendOverlayMessage(Component.literal("Defense off"));
 					}
 					if (entity instanceof Player)
 						((Player) entity).getCooldowns().addCooldown(
@@ -1621,7 +1621,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 24) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -1635,7 +1635,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 24) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -1672,7 +1672,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 29) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -1686,7 +1686,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 29) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -1773,12 +1773,12 @@ public final class WeaponProcedures {
 					if (StackTag.of(itemstack).getBooleanOr("ChakraStoring", false) == true) {
 						StackTag.of(itemstack).putBoolean("ChakraStoring", (false));
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Chakra Storing: Off"));
+							((Player) entity).sendOverlayMessage(Component.literal("Chakra Storing off"));
 						}
 					} else if (StackTag.of(itemstack).getBooleanOr("ChakraStoring", false) == false) {
 						StackTag.of(itemstack).putBoolean("ChakraStoring", (true));
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Chakra Storing: On"));
+							((Player) entity).sendOverlayMessage(Component.literal("Chakra Storing on"));
 						}
 					}
 				} else if (StackTag.of(itemstack).getDoubleOr("HiramekareiMode", 0) == 1) {
@@ -1786,13 +1786,13 @@ public final class WeaponProcedures {
 						StackTag.of(itemstack).putBoolean("HiramekareiSharp", (false));
 						StackTag.of(itemstack).putDouble("HiramekareiSharp", 0);
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Hiramekarei Sharp: Off"));
+							((Player) entity).sendOverlayMessage(Component.literal("Hiramekarei Sharp off"));
 						}
 					} else if (StackTag.of(itemstack).getBooleanOr("HiramekareiSharp", false) == false) {
 						StackTag.of(itemstack).putBoolean("HiramekareiSharp", (true));
 						StackTag.of(itemstack).putDouble("HiramekareiSharp", 1);
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Hiramekarei Sharp: On"));
+							((Player) entity).sendOverlayMessage(Component.literal("Hiramekarei Sharp on"));
 						}
 					}
 				} else if (StackTag.of(itemstack).getDoubleOr("HiramekareiMode", 0) == 2) {
@@ -1800,13 +1800,13 @@ public final class WeaponProcedures {
 						StackTag.of(itemstack).putBoolean("HiramekareiSharp", (false));
 						StackTag.of(itemstack).putDouble("HiramekareiSharp", 0);
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Hiramekarei Sharp: Off"));
+							((Player) entity).sendOverlayMessage(Component.literal("Hiramekarei Sharp off"));
 						}
 					} else if (StackTag.of(itemstack).getBooleanOr("HiramekareiSharp", false) == false) {
 						StackTag.of(itemstack).putBoolean("HiramekareiSharp", (true));
 						StackTag.of(itemstack).putDouble("HiramekareiSharp", 1);
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Hiramekarei Sharp: On"));
+							((Player) entity).sendOverlayMessage(Component.literal("Hiramekarei Sharp on"));
 						}
 					}
 				} else if (StackTag.of(itemstack).getDoubleOr("HiramekareiMode", 0) == 3) {
@@ -2039,7 +2039,7 @@ public final class WeaponProcedures {
 						StackTag.of(itemstack).putDouble("Chakra", (StackTag.of(itemstack).getDoubleOr("Chakra", 0) - 300));
 					} else if (StackTag.of(itemstack).getDoubleOr("Chakra", 0) <= 299) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Chakra"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 						}
 					}
 				}
@@ -2173,7 +2173,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 44) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -2187,7 +2187,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 44) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -2459,7 +2459,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 44) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -2473,7 +2473,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 44) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -2510,7 +2510,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 14) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -2524,7 +2524,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 14) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -2620,12 +2620,12 @@ public final class WeaponProcedures {
 									((Player) entity).getCooldowns().addCooldown(itemstack, (int) 150);
 							} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendOverlayMessage(Component.literal("Not Enough Chakra"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 								}
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 4) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendOverlayMessage(Component.literal("Not Enough Ninjutsu"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 							}
 						}
 					} else if (StackTag.of(itemstack).getDoubleOr("KibaSwordMode", 0) == 1) {
@@ -2855,12 +2855,12 @@ public final class WeaponProcedures {
 									((Player) entity).getCooldowns().addCooldown(itemstack, (int) 200);
 							} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendOverlayMessage(Component.literal("Not Enough Chakra"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 								}
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 9) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendOverlayMessage(Component.literal("Not Enough Ninjutsu"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 							}
 						}
 					} else if (StackTag.of(itemstack).getDoubleOr("KibaSwordMode", 0) == 2) {
@@ -2896,12 +2896,12 @@ public final class WeaponProcedures {
 									((Player) entity).getCooldowns().addCooldown(itemstack, (int) 250);
 							} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendOverlayMessage(Component.literal("Not Enough Chakra"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 								}
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 14) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendOverlayMessage(Component.literal("Not Enough Ninjutsu"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 							}
 						}
 					}
@@ -2956,7 +2956,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 44) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -2970,7 +2970,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 44) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -3007,7 +3007,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 44) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -3021,7 +3021,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 44) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -3108,7 +3108,7 @@ public final class WeaponProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= -1) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Not Enough Shurikenjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not enough Shurikenjutsu"));
 				}
 			}
 		}
@@ -3156,12 +3156,12 @@ public final class WeaponProcedures {
 				StackTag.of(itemstack).putDouble("KusanagiSharp", 0);
 				StackTag.of(itemstack).putDouble("KusanagiReach", 0);
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Channel Lightning Chakra on Sword: Off"));
+					((Player) entity).sendOverlayMessage(Component.literal("Channel Lightning Chakra on Sword off"));
 				}
 			} else if (StackTag.of(itemstack).getBooleanOr("KusanagiLightning", false) == false) {
 				StackTag.of(itemstack).putBoolean("KusanagiLightning", (true));
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Channel Lightning Chakra on Sword: On"));
+					((Player) entity).sendOverlayMessage(Component.literal("Channel Lightning Chakra on Sword on"));
 				}
 			}
 		}
@@ -3195,7 +3195,7 @@ public final class WeaponProcedures {
 					StackTag.of(itemstack).putDouble("KusanagiReach", 3);
 				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 0.9) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Not Enough Chakra"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 					StackTag.of(itemstack).putBoolean("KusanagiLightning", (false));
 					StackTag.of(itemstack).putDouble("KusanagiSharp", 0);
@@ -3209,7 +3209,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 24) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -3223,7 +3223,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 24) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -3848,7 +3848,7 @@ public final class WeaponProcedures {
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Chakra"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 						}
 					}
 				}
@@ -3890,7 +3890,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 44) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -3904,7 +3904,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 44) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -4039,7 +4039,7 @@ public final class WeaponProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 4) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Not Enough Shurikenjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not enough Shurikenjutsu"));
 				}
 			}
 		}
@@ -4218,7 +4218,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 44) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -4232,7 +4232,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 44) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -4422,31 +4422,31 @@ public final class WeaponProcedures {
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 349) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 						}
 					}
 				} else if (StackTag.of(itemstack).getDoubleOr("ShibukiMode", 0) == 1) {
 					if (StackTag.of(itemstack).getBooleanOr("ShibukiExplosion", false) == true) {
 						StackTag.of(itemstack).putBoolean("ShibukiExplosion", (false));
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Shibuki Explosion: Off"));
+							((Player) entity).sendOverlayMessage(Component.literal("Shibuki Explosion off"));
 						}
 					} else if (StackTag.of(itemstack).getBooleanOr("ShibukiExplosion", false) == false) {
 						StackTag.of(itemstack).putBoolean("ShibukiExplosion", (true));
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Shibuki Explosion: On"));
+							((Player) entity).sendOverlayMessage(Component.literal("Shibuki Explosion on"));
 						}
 					}
 				} else if (StackTag.of(itemstack).getDoubleOr("ShibukiMode", 0) == 2) {
 					if (StackTag.of(itemstack).getBooleanOr("ShibukiExplosionTrail", false) == true) {
 						StackTag.of(itemstack).putBoolean("ShibukiExplosionTrail", (false));
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Shibuki Explosion Trail: Off"));
+							((Player) entity).sendOverlayMessage(Component.literal("Shibuki Explosion Trail off"));
 						}
 					} else if (StackTag.of(itemstack).getBooleanOr("ShibukiExplosionTrail", false) == false) {
 						StackTag.of(itemstack).putBoolean("ShibukiExplosionTrail", (true));
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Shibuki Explosion Trail: On"));
+							((Player) entity).sendOverlayMessage(Component.literal("Shibuki Explosion Trail on"));
 						}
 					}
 				}
@@ -4493,7 +4493,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 44) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -4507,7 +4507,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 44) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -4554,7 +4554,7 @@ public final class WeaponProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 0.9) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Not Enough Chakra"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 					StackTag.of(itemstack).putBoolean("ShibukiExplosion", (false));
 				}
@@ -4587,7 +4587,7 @@ public final class WeaponProcedures {
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 4.9) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Chakra"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 						}
 						StackTag.of(itemstack).putBoolean("ShibukiExplosionTrail", (false));
 					}
@@ -4621,7 +4621,7 @@ public final class WeaponProcedures {
 						}
 					} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 4.9) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Chakra"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 						}
 						StackTag.of(itemstack).putBoolean("ShibukiExplosionTrail", (false));
 					}
@@ -4652,7 +4652,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 34) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -4666,7 +4666,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 34) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -4753,7 +4753,7 @@ public final class WeaponProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= -1) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Not Enough Shurikenjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not enough Shurikenjutsu"));
 				}
 			}
 		}
@@ -4781,7 +4781,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 4) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -4795,7 +4795,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 4) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -4913,7 +4913,7 @@ public final class WeaponProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 24) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Not Enough Shurikenjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not enough Shurikenjutsu"));
 				}
 			}
 		}
@@ -5038,13 +5038,13 @@ public final class WeaponProcedures {
 			if (StackTag.of(itemstack).getBooleanOr("WhiteLightChakraSabreMode", false) == true) {
 				StackTag.of(itemstack).putBoolean("WhiteLightChakraSabreMode", (false));
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("White Light Chakra Sabre: Off"));
+					((Player) entity).sendOverlayMessage(Component.literal("White Light Chakra Sabre off"));
 				}
 			} else if (StackTag.of(itemstack).getBooleanOr("WhiteLightChakraSabreMode", false) == false) {
 				StackTag.of(itemstack).putBoolean("WhiteLightChakraSabreMode", (true));
 				StackTag.of(itemstack).putDouble("WhiteLightChakraSabreSharp", 0);
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("White Light Chakra Sabre: On"));
+					((Player) entity).sendOverlayMessage(Component.literal("White Light Chakra Sabre on"));
 				}
 			}
 		}
@@ -5077,7 +5077,7 @@ public final class WeaponProcedures {
 					StackTag.of(itemstack).putDouble("WhiteLightChakraSabreSharp", 5);
 				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 0.9) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Not Enough Chakra"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 					StackTag.of(itemstack).putBoolean("WhiteLightChakraSabreMode", (false));
 					StackTag.of(itemstack).putDouble("WhiteLightChakraSabreSharp", 0);
@@ -5092,7 +5092,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 9) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;
@@ -5106,7 +5106,7 @@ public final class WeaponProcedures {
 						.getItem()) {
 					if (NarutoShippudenModVariables.get(entity).kenjutsu <= 9) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not Enough Kenjutsu"));
+							((Player) entity).sendOverlayMessage(Component.literal("Not enough Kenjutsu"));
 						}
 						if (entity instanceof Player) {
 							Player _player_ = (Player) entity;

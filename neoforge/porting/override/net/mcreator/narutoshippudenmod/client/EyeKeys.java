@@ -2,6 +2,7 @@ package net.mcreator.narutoshippudenmod.client;
 
 import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables;
 import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables.PlayerVariables;
+import net.mcreator.narutoshippudenmod.core.ChakraControl;
 import net.mcreator.narutoshippudenmod.core.Eyes;
 import net.mcreator.narutoshippudenmod.core.Eyes.Eye;
 import net.mcreator.narutoshippudenmod.core.NarutoActions;
@@ -29,14 +30,17 @@ import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import java.util.List;
 
 /**
- * The Dojutsu key (tap: open, step up to the Mangekyou or close; sneak + tap: close all; hold: choose an eye on a wheel) and the
- * Susanoo key (hold: build it up a stage at a time; tap: dismiss). All the mod's keys sit in their own Controls section.
+ * The Dojutsu key (tap: open, step up to the Mangekyou or close; sneak + tap: close all; hold: choose an eye on a wheel), the
+ * Susanoo key (hold: build it up a stage at a time; tap: dismiss), Chakra Control (on and off) and Dash (a Body Flicker the way
+ * the player is walking; see core/ChakraControl). All the mod's keys sit in their own Controls section.
  */
 @EventBusSubscriber(modid = "naruto_shippuden", value = Dist.CLIENT)
 public final class EyeKeys {
 	public static final KeyMapping.Category CATEGORY = new KeyMapping.Category(Identifier.fromNamespaceAndPath("naruto_shippuden", "keys"));
 	public static final KeyMapping DOJUTSU = new KeyMapping("key.naruto_shippuden.dojutsu", InputConstants.KEY_V, CATEGORY);
-	public static final KeyMapping SUSANOO = new KeyMapping("key.naruto_shippuden.susano", InputConstants.KEY_J, CATEGORY);
+	public static final KeyMapping SUSANOO = new KeyMapping("key.naruto_shippuden.susanoo", InputConstants.KEY_B, CATEGORY);
+	public static final KeyMapping CHAKRA_CONTROL = new KeyMapping("key.naruto_shippuden.chakra_control", InputConstants.KEY_G, CATEGORY);
+	public static final KeyMapping DASH = new KeyMapping("key.naruto_shippuden.dash", InputConstants.KEY_LALT, CATEGORY);
 	/** Ticks held before a press counts as a hold. */
 	private static final int HOLD = 7;
 	private static int dojutsuHeld, susanooHeld;
@@ -49,6 +53,8 @@ public final class EyeKeys {
 		event.registerCategory(CATEGORY);
 		event.register(DOJUTSU);
 		event.register(SUSANOO);
+		event.register(CHAKRA_CONTROL);
+		event.register(DASH);
 	}
 
 	private static void send(String kind, String key, double amount) {
@@ -63,7 +69,18 @@ public final class EyeKeys {
 		}
 		if (minecraft.player == null || minecraft.gui.screen() != null) {
 			dojutsuHeld = susanooHeld = 0;
+			while (CHAKRA_CONTROL.consumeClick() || DASH.consumeClick()) {
+			}
 			return;
+		}
+		while (CHAKRA_CONTROL.consumeClick())
+			send("chakra", "toggle", 0);
+		while (DASH.consumeClick()) {
+			var options = minecraft.options;
+			int keys = (options.keyUp.isDown() ? ChakraControl.FORWARD : 0) | (options.keyDown.isDown() ? ChakraControl.BACK : 0)
+					| (options.keyLeft.isDown() ? ChakraControl.LEFT : 0) | (options.keyRight.isDown() ? ChakraControl.RIGHT : 0)
+					| (options.keyJump.isDown() ? ChakraControl.UP : 0);
+			send("chakra", "dash", keys);
 		}
 		PlayerVariables variables = NarutoShippudenModVariables.get(minecraft.player);
 
@@ -109,6 +126,19 @@ public final class EyeKeys {
 			graphics.fillGradient(0, 0, width, height, 0x60000000, 0x80000000);
 		}
 
+		private int bottom;
+
+		/** Whether any two buttons (w by 20, round an oval) would overlap. */
+		private boolean crowded(int n, int w, int rx, int ry) {
+			for (int i = 0; i < n; i++)
+				for (int j = i + 1; j < n; j++) {
+					float dx = (Mth.cos(angle(i)) - Mth.cos(angle(j))) * rx, dy = (Mth.sin(angle(i)) - Mth.sin(angle(j))) * ry;
+					if (Math.abs(dx) < w + 6 && Math.abs(dy) < 24)
+						return true;
+				}
+			return false;
+		}
+
 		private float angle(int i) {
 			return (float) (-Math.PI / 2 + i * 2 * Math.PI / eyes.size());
 		}
@@ -125,17 +155,24 @@ public final class EyeKeys {
 			for (Eye eye : eyes)
 				w = Math.max(w, font.width(eye.name()) + 12);
 			w = Mth.clamp(w, 80, 150);
-			for (int i = 0; i < eyes.size(); i++) {
+			// an oval wide and tall enough that no two buttons touch
+			int n = eyes.size(), rx = w / 2 + 24, ry = 44;
+			for (int tries = 0; tries < 80 && crowded(n, w, rx, ry); tries++) {
+				rx += 4;
+				ry += 2;
+			}
+			for (int i = 0; i < n; i++) {
 				Eye eye = eyes.get(i);
-				int x = width / 2 + (int) (Mth.cos(angle(i)) * (w / 2 + 24)) - w / 2, y = height / 2 + (int) (Mth.sin(angle(i)) * 56) - 10;
+				int x = width / 2 + Math.round(Mth.cos(angle(i)) * rx) - w / 2, y = height / 2 + Math.round(Mth.sin(angle(i)) * ry) - 10;
 				graphics.blitSprite(RenderPipelines.GUI_TEXTURED, i == hovered ? JutsuClient.PANEL : JutsuClient.INSET, x, y, w, 20);
 				boolean open = eye.active().test(variables);
 				int color = i == hovered ? JutsuClient.TEXT : open ? 0xFFFFFF55 : 0xFFFFFFFF;
 				graphics.text(font, eye.name(), x + w / 2 - font.width(eye.name()) / 2, y + 6, color, i != hovered);
 			}
+			bottom = height / 2 + ry + 22;
 			graphics.centeredText(font, Component.literal(hovered >= 0 ? eyes.get(hovered).name() : "Choose a dojutsu").withStyle(ChatFormatting.YELLOW),
-					width / 2, height / 2 + 90, -1);
-			graphics.centeredText(font, "Tap to open or close, sneak and tap to close all", width / 2, height / 2 + 102, 0xFFE0E0E0);
+					width / 2, bottom, -1);
+			graphics.centeredText(font, "Tap to open or close, sneak and tap to close all", width / 2, bottom + 12, 0xFFE0E0E0);
 		}
 
 		private void choose() {

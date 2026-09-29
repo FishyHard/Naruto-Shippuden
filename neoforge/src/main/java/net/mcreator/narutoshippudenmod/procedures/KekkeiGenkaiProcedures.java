@@ -166,17 +166,17 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Boil Release implanted succesfully"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Boil Release implanted"));
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Boil Release implanted succesfully"));
+							((Player) entity).sendOverlayMessage(Component.literal("Boil Release implanted"));
 						}
 					} else if (random >= 51) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Boil Release implanted failed"));
+							((Player) entity).sendOverlayMessage(Component.literal("Implanting Boil Release failed"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Boil Release implanted failed"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Implanting Boil Release failed"));
 						}
 					}
 					if (sourceentity instanceof Player) {
@@ -186,12 +186,12 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).boilreleaselogic == true) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("You already have Boil Release"));
+						((Player) entity).sendOverlayMessage(Component.literal("You already have Boil Release"));
 					}
 				}
 			} else if (!(entity instanceof Player)) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("You can only implant DNA in player"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("You can only implant DNA in player"));
 				}
 			}
 		}
@@ -216,7 +216,7 @@ public final class KekkeiGenkaiProcedures {
 						Compat.giveItemToPlayer(((Player) entity), _setstack);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Boil Release implanted succesfully"));
+						((Player) entity).sendOverlayMessage(Component.literal("Boil Release implanted"));
 					}
 					{
 						boolean _setval = (true);
@@ -227,7 +227,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (random >= 51) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Boil Release implanted failed"));
+						((Player) entity).sendOverlayMessage(Component.literal("Implanting Boil Release failed"));
 					}
 				}
 				if (entity instanceof Player) {
@@ -237,7 +237,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).boilreleaselogic == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You already have Boil Release"));
+					((Player) entity).sendOverlayMessage(Component.literal("You already have Boil Release"));
 				}
 			}
 		}
@@ -281,11 +281,11 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).boilrelease == 1) {
@@ -312,11 +312,11 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-25 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-25 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).boilrelease == 2) {
@@ -343,16 +343,16 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-30 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-30 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).boilrelease == 3) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -437,7 +437,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount <= 399) {
 					if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-						((Player) sourceentity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+						((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 				}
 			}
@@ -555,17 +555,17 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).boillearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).boiltechnique == 1) {
@@ -687,17 +687,17 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 349) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).boilrelease >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).boiltechnique == 2) {
@@ -738,12 +738,12 @@ public final class KekkeiGenkaiProcedures {
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 34) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).boilrelease >= 3)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -801,7 +801,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).boilreleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -840,17 +840,17 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Bone Release implanted succesfully"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Bone Release implanted"));
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Bone Release implanted succesfully"));
+							((Player) entity).sendOverlayMessage(Component.literal("Bone Release implanted"));
 						}
 					} else if (random >= 51) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Bone Release implanted failed"));
+							((Player) entity).sendOverlayMessage(Component.literal("Implanting Bone Release failed"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Bone Release implanted failed"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Implanting Bone Release failed"));
 						}
 					}
 					if (sourceentity instanceof Player) {
@@ -860,12 +860,12 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).bonereleaselogic == true) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("You already have Bone Release"));
+						((Player) entity).sendOverlayMessage(Component.literal("You already have Bone Release"));
 					}
 				}
 			} else if (!(entity instanceof Player)) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("You can only implant DNA in player"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("You can only implant DNA in player"));
 				}
 			}
 		}
@@ -890,7 +890,7 @@ public final class KekkeiGenkaiProcedures {
 						Compat.giveItemToPlayer(((Player) entity), _setstack);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Bone Release implanted succesfully"));
+						((Player) entity).sendOverlayMessage(Component.literal("Bone Release implanted"));
 					}
 					{
 						boolean _setval = (true);
@@ -901,7 +901,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (random >= 51) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Bone Release implanted failed"));
+						((Player) entity).sendOverlayMessage(Component.literal("Implanting Bone Release failed"));
 					}
 				}
 				if (entity instanceof Player) {
@@ -911,7 +911,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).bonereleaselogic == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You already have Bone Release"));
+					((Player) entity).sendOverlayMessage(Component.literal("You already have Bone Release"));
 				}
 			}
 		}
@@ -955,11 +955,11 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-15 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-15 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 14) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).bone_release == 1) {
@@ -986,11 +986,11 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).bone_release == 2) {
@@ -1017,16 +1017,16 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-25 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-25 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).bone_release == 3) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -1070,17 +1070,17 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).bonelearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).bonetechnique == 1) {
@@ -1110,17 +1110,17 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 349) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).bonelearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).bonetechnique == 2) {
@@ -1161,12 +1161,12 @@ public final class KekkeiGenkaiProcedures {
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).bonelearn >= 3)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -1208,7 +1208,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).bonereleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -1462,17 +1462,17 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Dust Release implanted succesfully"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Dust Release implanted"));
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Dust Release implanted succesfully"));
+							((Player) entity).sendOverlayMessage(Component.literal("Dust Release implanted"));
 						}
 					} else if (random >= 51) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Dust Release implanted failed"));
+							((Player) entity).sendOverlayMessage(Component.literal("Implanting Dust Release failed"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Dust Release implanted failed"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Implanting Dust Release failed"));
 						}
 					}
 					if (sourceentity instanceof Player) {
@@ -1482,12 +1482,12 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).dustreleaselogic == true) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("You already have Dust Release"));
+						((Player) entity).sendOverlayMessage(Component.literal("You already have Dust Release"));
 					}
 				}
 			} else if (!(entity instanceof Player)) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("You can only implant DNA in player"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("You can only implant DNA in player"));
 				}
 			}
 		}
@@ -1512,7 +1512,7 @@ public final class KekkeiGenkaiProcedures {
 						Compat.giveItemToPlayer(((Player) entity), _setstack);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Dust Release implanted succesfully"));
+						((Player) entity).sendOverlayMessage(Component.literal("Dust Release implanted"));
 					}
 					{
 						boolean _setval = (true);
@@ -1523,7 +1523,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (random >= 51) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Dust Release implanted failed"));
+						((Player) entity).sendOverlayMessage(Component.literal("Implanting Dust Release failed"));
 					}
 				}
 				if (entity instanceof Player) {
@@ -1533,7 +1533,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).dustreleaselogic == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You already have Dust Release"));
+					((Player) entity).sendOverlayMessage(Component.literal("You already have Dust Release"));
 				}
 			}
 		}
@@ -1577,16 +1577,16 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-100 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-100 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 99) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).dustrelease == 1) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -1952,17 +1952,17 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 4999) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 69) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).dustlearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -1989,7 +1989,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).dustreleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -2021,10 +2021,10 @@ public final class KekkeiGenkaiProcedures {
 							Compat.giveItemToPlayer(((Player) entity), _setstack);
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Ice Release implanted succesfully"));
+							((Player) entity).sendOverlayMessage(Component.literal("Ice Release implanted"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Ice Release implanted succesfully"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Ice Release implanted"));
 						}
 						{
 							boolean _setval = (true);
@@ -2035,10 +2035,10 @@ public final class KekkeiGenkaiProcedures {
 						}
 					} else if (random >= 51) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Ice Release implanted failed"));
+							((Player) entity).sendOverlayMessage(Component.literal("Implanting Ice Release failed"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Ice Release implanted failed"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Implanting Ice Release failed"));
 						}
 					}
 					if (sourceentity instanceof Player) {
@@ -2048,12 +2048,12 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).icereleaselogic == true) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("You already have Ice Release"));
+						((Player) entity).sendOverlayMessage(Component.literal("You already have Ice Release"));
 					}
 				}
 			} else if (!(entity instanceof Player)) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("You can only implant DNA in player"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("You can only implant DNA in player"));
 				}
 			}
 		}
@@ -2078,7 +2078,7 @@ public final class KekkeiGenkaiProcedures {
 						Compat.giveItemToPlayer(((Player) entity), _setstack);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Ice Release implanted succesfully"));
+						((Player) entity).sendOverlayMessage(Component.literal("Ice Release implanted"));
 					}
 					{
 						boolean _setval = (true);
@@ -2089,7 +2089,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (random >= 51) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Ice Release implanted failed"));
+						((Player) entity).sendOverlayMessage(Component.literal("Implanting Ice Release failed"));
 					}
 				}
 				if (entity instanceof Player) {
@@ -2099,7 +2099,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).icereleaselogic == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You already have Ice Release"));
+					((Player) entity).sendOverlayMessage(Component.literal("You already have Ice Release"));
 				}
 			}
 		}
@@ -2180,11 +2180,11 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-15 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-15 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 14) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).ice_release == 1) {
@@ -2211,11 +2211,11 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).ice_release == 2) {
@@ -2242,16 +2242,16 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-25 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-25 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).ice_release == 3) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -2368,17 +2368,17 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 299) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).icelearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).icetechnique == 1) {
@@ -2430,17 +2430,17 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).icelearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).icetechnique == 2) {
@@ -2493,17 +2493,17 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 749) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 34) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).icelearn >= 3)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -2545,7 +2545,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).icereleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -2734,17 +2734,17 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Magnet Release implanted succesfully"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Magnet Release implanted"));
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Magnet Release implanted succesfully"));
+							((Player) entity).sendOverlayMessage(Component.literal("Magnet Release implanted"));
 						}
 					} else if (random >= 51) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Magnet Release implanted failed"));
+							((Player) entity).sendOverlayMessage(Component.literal("Implanting Magnet Release failed"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Magnet Release implanted failed"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Implanting Magnet Release failed"));
 						}
 					}
 					if (sourceentity instanceof Player) {
@@ -2754,12 +2754,12 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).magnetreleaselogic == true) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("You already have Magnet Release"));
+						((Player) entity).sendOverlayMessage(Component.literal("You already have Magnet Release"));
 					}
 				}
 			} else if (!(entity instanceof Player)) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("You can only implant DNA in player"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("You can only implant DNA in player"));
 				}
 			}
 		}
@@ -2784,7 +2784,7 @@ public final class KekkeiGenkaiProcedures {
 						Compat.giveItemToPlayer(((Player) entity), _setstack);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Magnet Release implanted succesfully"));
+						((Player) entity).sendOverlayMessage(Component.literal("Magnet Release implanted"));
 					}
 					{
 						boolean _setval = (true);
@@ -2795,7 +2795,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (random >= 51) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Magnet Release implanted failed"));
+						((Player) entity).sendOverlayMessage(Component.literal("Implanting Magnet Release failed"));
 					}
 				}
 				if (entity instanceof Player) {
@@ -2805,7 +2805,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).magnetreleaselogic == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You already have Magnet Release"));
+					((Player) entity).sendOverlayMessage(Component.literal("You already have Magnet Release"));
 				}
 			}
 		}
@@ -2849,11 +2849,11 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-25 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-25 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).magnet_release == 1) {
@@ -2880,11 +2880,11 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-30 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-30 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).magnet_release == 2) {
@@ -2911,11 +2911,11 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-35 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-35 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 34) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).magnet_release == 3) {
@@ -2942,16 +2942,16 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-40 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-40 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 39) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).magnet_release == 4) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -2996,17 +2996,17 @@ public final class KekkeiGenkaiProcedures {
 								} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 2
 										|| NarutoShippudenModVariables.get(entity).magnet_coat == 3) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("You've already activated Black Iron Armor"));
+										((Player) entity).sendOverlayMessage(Component.literal("You've already activated Black Iron Armor"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).magnetlearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).magnettechnique == 1) {
@@ -3141,22 +3141,22 @@ public final class KekkeiGenkaiProcedures {
 										}
 									} else {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("You have to use Iron Sand Coat first"));
+											((Player) entity).sendOverlayMessage(Component.literal("You have to use Iron Sand Coat first"));
 										}
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).magnetlearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).magnettechnique == 2) {
@@ -3172,7 +3172,7 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 0) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("You have to use Iron Sand Coat first"));
+										((Player) entity).sendOverlayMessage(Component.literal("You have to use Iron Sand Coat first"));
 									}
 								} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 2) {
 									{
@@ -3184,17 +3184,17 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 3) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("You've already activated Black Iron Armor"));
+										((Player) entity).sendOverlayMessage(Component.literal("You've already activated Black Iron Armor"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 34) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).magnetlearn >= 3)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).magnettechnique == 3) {
@@ -3210,7 +3210,7 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 0) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("You have to use Iron Sand Coat first"));
+										((Player) entity).sendOverlayMessage(Component.literal("You have to use Iron Sand Coat first"));
 									}
 								} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 3) {
 									{
@@ -3222,17 +3222,17 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 2) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("You've already activated Black Iron Armor"));
+										((Player) entity).sendOverlayMessage(Component.literal("You've already activated Black Iron Armor"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 39) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).magnetlearn >= 4)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -3301,7 +3301,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).magnetreleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -3340,17 +3340,17 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Smoke Release implanted succesfully"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Smoke Release implanted"));
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Smoke Release implanted succesfully"));
+							((Player) entity).sendOverlayMessage(Component.literal("Smoke Release implanted"));
 						}
 					} else if (random >= 51) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Smoke Release implanted failed"));
+							((Player) entity).sendOverlayMessage(Component.literal("Implanting Smoke Release failed"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Smoke Release implanted failed"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Implanting Smoke Release failed"));
 						}
 					}
 					if (sourceentity instanceof Player) {
@@ -3360,12 +3360,12 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).smokereleaselogic == true) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("You already have Smoke Release"));
+						((Player) entity).sendOverlayMessage(Component.literal("You already have Smoke Release"));
 					}
 				}
 			} else if (!(entity instanceof Player)) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("You can only implant DNA in player"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("You can only implant DNA in player"));
 				}
 			}
 		}
@@ -3390,7 +3390,7 @@ public final class KekkeiGenkaiProcedures {
 						Compat.giveItemToPlayer(((Player) entity), _setstack);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Smoke Release implanted succesfully"));
+						((Player) entity).sendOverlayMessage(Component.literal("Smoke Release implanted"));
 					}
 					{
 						boolean _setval = (true);
@@ -3401,7 +3401,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (random >= 51) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Smoke Release implanted failed"));
+						((Player) entity).sendOverlayMessage(Component.literal("Implanting Smoke Release failed"));
 					}
 				}
 				if (entity instanceof Player) {
@@ -3411,7 +3411,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).smokereleaselogic == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You already have Smoke Release"));
+					((Player) entity).sendOverlayMessage(Component.literal("You already have Smoke Release"));
 				}
 			}
 		}
@@ -3523,11 +3523,11 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-25 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-25 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).smokerelease == 1) {
@@ -3547,7 +3547,7 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-30 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-30 JP"));
 					}
 					{
 						double _setval = (NarutoShippudenModVariables.get(entity).smokerelease + 1);
@@ -3558,7 +3558,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).smokerelease == 2) {
@@ -3585,16 +3585,16 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-35 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-35 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 34) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).smokerelease == 3) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -3618,25 +3618,25 @@ public final class KekkeiGenkaiProcedures {
 			Entity sourceentity = (Entity) dependencies.get("sourceentity");
 			if (NarutoShippudenModVariables.get(sourceentity).ninjutsu >= 35) {
 				if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount >= 750) {
-					if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 0) {
+					if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 0) {
 						entity.hurt(Compat.damage().generic(), (float) 35);
-					} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 1) {
+					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 1) {
 						entity.hurt(Compat.damage().generic(), (float) 36);
-					} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 2) {
+					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 2) {
 						entity.hurt(Compat.damage().generic(), (float) 37);
-					} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 3) {
+					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 3) {
 						entity.hurt(Compat.damage().generic(), (float) 38);
-					} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 4) {
+					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 4) {
 						entity.hurt(Compat.damage().generic(), (float) 39);
-					} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 5) {
+					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 5) {
 						entity.hurt(Compat.damage().generic(), (float) 40);
-					} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 6) {
+					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 6) {
 						entity.hurt(Compat.damage().generic(), (float) 41);
-					} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 7) {
+					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 7) {
 						entity.hurt(Compat.damage().generic(), (float) 42);
-					} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 8) {
+					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 8) {
 						entity.hurt(Compat.damage().generic(), (float) 43);
-					} else if (NarutoShippudenModVariables.get(sourceentity).jutsupower == 9) {
+					} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(sourceentity) == 9) {
 						entity.hurt(Compat.damage().generic(), (float) 44);
 					}
 					{
@@ -3648,12 +3648,12 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(sourceentity).ChakraAmount <= 749) {
 					if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-						((Player) sourceentity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+						((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough chakra"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(sourceentity).ninjutsu <= 34) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 				}
 			}
 		}
@@ -3707,7 +3707,7 @@ public final class KekkeiGenkaiProcedures {
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).smoketechnique == 1) {
@@ -3721,7 +3721,7 @@ public final class KekkeiGenkaiProcedures {
 									});
 								}
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Smoke Fist: On"));
+									((Player) entity).sendOverlayMessage(Component.literal("Smoke Fist on"));
 								}
 							} else if (NarutoShippudenModVariables.get(entity).smokefist == true) {
 								{
@@ -3732,18 +3732,18 @@ public final class KekkeiGenkaiProcedures {
 									});
 								}
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Smoke Fist: Off"));
+									((Player) entity).sendOverlayMessage(Component.literal("Smoke Fist off"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).smokelearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).smoketechnique == 2) {
 						if (NarutoShippudenModVariables.get(entity).smokelearn >= 3) {
 							if (NarutoShippudenModVariables.get(entity).ninjutsu >= 50) {
-								if (NarutoShippudenModVariables.get(entity).jutsupower == 0) {
+								if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 0) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1000) {
 										{
 											Entity _shootFrom = entity;
@@ -3775,10 +3775,10 @@ public final class KekkeiGenkaiProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 999) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 1) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 1) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1000) {
 										{
 											Entity _shootFrom = entity;
@@ -3810,10 +3810,10 @@ public final class KekkeiGenkaiProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 999) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 2) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 2) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1000) {
 										{
 											Entity _shootFrom = entity;
@@ -3845,10 +3845,10 @@ public final class KekkeiGenkaiProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 999) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 3) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 3) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1000) {
 										{
 											Entity _shootFrom = entity;
@@ -3880,10 +3880,10 @@ public final class KekkeiGenkaiProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 999) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 4) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 4) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1000) {
 										{
 											Entity _shootFrom = entity;
@@ -3915,10 +3915,10 @@ public final class KekkeiGenkaiProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 999) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 5) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 5) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1000) {
 										{
 											Entity _shootFrom = entity;
@@ -3950,10 +3950,10 @@ public final class KekkeiGenkaiProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 999) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 6) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 6) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1000) {
 										{
 											Entity _shootFrom = entity;
@@ -3985,10 +3985,10 @@ public final class KekkeiGenkaiProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 999) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 7) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 7) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1000) {
 										{
 											Entity _shootFrom = entity;
@@ -4020,10 +4020,10 @@ public final class KekkeiGenkaiProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 999) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 8) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 8) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1000) {
 										{
 											Entity _shootFrom = entity;
@@ -4055,10 +4055,10 @@ public final class KekkeiGenkaiProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 999) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 9) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 9) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 1000) {
 										{
 											Entity _shootFrom = entity;
@@ -4090,18 +4090,18 @@ public final class KekkeiGenkaiProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 999) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 49) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).smokelearn >= 3)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -4159,7 +4159,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).smokereleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -4198,17 +4198,17 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Steel Release implanted succesfully"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Steel Release implanted"));
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Steel Release implanted succesfully"));
+							((Player) entity).sendOverlayMessage(Component.literal("Steel Release implanted"));
 						}
 					} else if (random >= 51) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Steel Release implanted failed"));
+							((Player) entity).sendOverlayMessage(Component.literal("Implanting Steel Release failed"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Steel Release implanted failed"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Implanting Steel Release failed"));
 						}
 					}
 					if (sourceentity instanceof Player) {
@@ -4218,12 +4218,12 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).steelreleaselogic == true) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("You already have Steel Release"));
+						((Player) entity).sendOverlayMessage(Component.literal("You already have Steel Release"));
 					}
 				}
 			} else if (!(entity instanceof Player)) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("You can only implant DNA in player"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("You can only implant DNA in player"));
 				}
 			}
 		}
@@ -4248,7 +4248,7 @@ public final class KekkeiGenkaiProcedures {
 						Compat.giveItemToPlayer(((Player) entity), _setstack);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Steel Release implanted succesfully"));
+						((Player) entity).sendOverlayMessage(Component.literal("Steel Release implanted"));
 					}
 					{
 						boolean _setval = (true);
@@ -4259,7 +4259,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (random >= 51) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Steel Release implanted failed"));
+						((Player) entity).sendOverlayMessage(Component.literal("Implanting Steel Release failed"));
 					}
 				}
 				if (entity instanceof Player) {
@@ -4269,7 +4269,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).steelreleaselogic == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You already have Steel Release"));
+					((Player) entity).sendOverlayMessage(Component.literal("You already have Steel Release"));
 				}
 			}
 		}
@@ -4313,11 +4313,11 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-25 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-25 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).steelrelease == 1) {
@@ -4344,16 +4344,16 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-30 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-30 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).steelrelease == 2) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -4415,12 +4415,12 @@ public final class KekkeiGenkaiProcedures {
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).steellearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).steeltechnique == 1) {
@@ -4458,17 +4458,17 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 449) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).steellearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -4515,7 +4515,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).steelreleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -4554,17 +4554,17 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Storm Release implanted succesfully"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Storm Release implanted"));
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Storm Release implanted succesfully"));
+							((Player) entity).sendOverlayMessage(Component.literal("Storm Release implanted"));
 						}
 					} else if (random >= 51) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Storm Release implanted failed"));
+							((Player) entity).sendOverlayMessage(Component.literal("Implanting Storm Release failed"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Storm Release implanted failed"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Implanting Storm Release failed"));
 						}
 					}
 					if (sourceentity instanceof Player) {
@@ -4574,12 +4574,12 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).stormreleaselogic == true) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("You already have Storm Release"));
+						((Player) entity).sendOverlayMessage(Component.literal("You already have Storm Release"));
 					}
 				}
 			} else if (!(entity instanceof Player)) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("You can only implant DNA in player"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("You can only implant DNA in player"));
 				}
 			}
 		}
@@ -4604,7 +4604,7 @@ public final class KekkeiGenkaiProcedures {
 						Compat.giveItemToPlayer(((Player) entity), _setstack);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Storm Release implanted succesfully"));
+						((Player) entity).sendOverlayMessage(Component.literal("Storm Release implanted"));
 					}
 					{
 						boolean _setval = (true);
@@ -4615,7 +4615,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (random >= 51) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Storm Release implanted failed"));
+						((Player) entity).sendOverlayMessage(Component.literal("Implanting Storm Release failed"));
 					}
 				}
 				if (entity instanceof Player) {
@@ -4625,7 +4625,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).stormreleaselogic == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You already have Storm Release"));
+					((Player) entity).sendOverlayMessage(Component.literal("You already have Storm Release"));
 				}
 			}
 		}
@@ -4669,11 +4669,11 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-25 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-25 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).storm_release == 1) {
@@ -4700,16 +4700,16 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-40 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-40 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 39) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).storm_release == 2) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -4761,7 +4761,7 @@ public final class KekkeiGenkaiProcedures {
 									});
 								}
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Laser Circus: On"));
+									((Player) entity).sendOverlayMessage(Component.literal("Laser Circus on"));
 								}
 							} else if (NarutoShippudenModVariables.get(entity).stormlaser == true) {
 								{
@@ -4772,12 +4772,12 @@ public final class KekkeiGenkaiProcedures {
 									});
 								}
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Laser Circus: Off"));
+									((Player) entity).sendOverlayMessage(Component.literal("Laser Circus off"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).stormlearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).stormtechnique == 1) {
@@ -4907,17 +4907,17 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).stormlearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -4948,7 +4948,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).stormreleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -4987,17 +4987,17 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Swift Release implanted succesfully"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Swift Release implanted"));
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Swift Release implanted succesfully"));
+							((Player) entity).sendOverlayMessage(Component.literal("Swift Release implanted"));
 						}
 					} else if (random >= 51) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Swift Release implanted failed"));
+							((Player) entity).sendOverlayMessage(Component.literal("Implanting Swift Release failed"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Swift Release implanted failed"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Implanting Swift Release failed"));
 						}
 					}
 					if (sourceentity instanceof Player) {
@@ -5007,12 +5007,12 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).swiftreleaselogic == true) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("You already have Swift Release"));
+						((Player) entity).sendOverlayMessage(Component.literal("You already have Swift Release"));
 					}
 				}
 			} else if (!(entity instanceof Player)) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("You can only implant DNA in player"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("You can only implant DNA in player"));
 				}
 			}
 		}
@@ -5037,7 +5037,7 @@ public final class KekkeiGenkaiProcedures {
 						Compat.giveItemToPlayer(((Player) entity), _setstack);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Swift Release implanted succesfully"));
+						((Player) entity).sendOverlayMessage(Component.literal("Swift Release implanted"));
 					}
 					{
 						boolean _setval = (true);
@@ -5048,7 +5048,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (random >= 51) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Swift Release implanted failed"));
+						((Player) entity).sendOverlayMessage(Component.literal("Implanting Swift Release failed"));
 					}
 				}
 				if (entity instanceof Player) {
@@ -5058,7 +5058,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).swiftreleaselogic == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You already have Swift Release"));
+					((Player) entity).sendOverlayMessage(Component.literal("You already have Swift Release"));
 				}
 			}
 		}
@@ -5107,11 +5107,11 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-35 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-35 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 34) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			}
@@ -5167,17 +5167,17 @@ public final class KekkeiGenkaiProcedures {
 								}
 							} else if (NarutoShippudenModVariables.get(entity).taijutsu <= 19) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Taijutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Taijutsu"));
 								}
 							}
 						} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+								((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 							}
 						}
 					} else if (!(NarutoShippudenModVariables.get(entity).swiftlearn >= 1)) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+							((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 						}
 					}
 					if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
@@ -5203,7 +5203,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).swiftreleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -5444,17 +5444,17 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Typhoon Release implanted succesfully"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Typhoon Release implanted"));
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Typhoon Release implanted succesfully"));
+							((Player) entity).sendOverlayMessage(Component.literal("Typhoon Release implanted"));
 						}
 					} else if (random >= 51) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Typhoon Release implanted failed"));
+							((Player) entity).sendOverlayMessage(Component.literal("Implanting Typhoon Release failed"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Typhoon Release implanted failed"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Implanting Typhoon Release failed"));
 						}
 					}
 					if (sourceentity instanceof Player) {
@@ -5464,12 +5464,12 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).typhoonreleaslogic == true) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("You already have Typhoon Release"));
+						((Player) entity).sendOverlayMessage(Component.literal("You already have Typhoon Release"));
 					}
 				}
 			} else if (!(entity instanceof Player)) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("You can only implant DNA in player"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("You can only implant DNA in player"));
 				}
 			}
 		}
@@ -5494,7 +5494,7 @@ public final class KekkeiGenkaiProcedures {
 						Compat.giveItemToPlayer(((Player) entity), _setstack);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Typhoon Release implanted succesfully"));
+						((Player) entity).sendOverlayMessage(Component.literal("Typhoon Release implanted"));
 					}
 					{
 						boolean _setval = (true);
@@ -5505,7 +5505,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (random >= 51) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Typhoon Release implanted failed"));
+						((Player) entity).sendOverlayMessage(Component.literal("Implanting Typhoon Release failed"));
 					}
 				}
 				if (entity instanceof Player) {
@@ -5515,7 +5515,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).typhoonreleaslogic == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You already have Typhoon Release"));
+					((Player) entity).sendOverlayMessage(Component.literal("You already have Typhoon Release"));
 				}
 			}
 		}
@@ -5559,11 +5559,11 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-25 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-25 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).typhoonrelease == 1) {
@@ -5595,11 +5595,11 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-30 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-30 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			}
@@ -5747,17 +5747,17 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 299) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).typhoonlearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).typhoontechnique == 1) {
@@ -5886,17 +5886,17 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 449) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).typhoonlearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -5943,7 +5943,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).typhoonreleaslogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -5980,7 +5980,7 @@ public final class KekkeiGenkaiProcedures {
 					randomdna = (Mth.nextInt(RandomSource.create(), 1, 10));
 					if (randomdna <= 5) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("You failed to identify DNA"));
+							((Player) entity).sendOverlayMessage(Component.literal("You failed to identify DNA"));
 						}
 					} else if (randomdna >= 6) {
 						random = (Mth.nextInt(RandomSource.create(), 1, 1000));
@@ -6018,7 +6018,7 @@ public final class KekkeiGenkaiProcedures {
 								}
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You succesfully identified DNA"));
+								((Player) entity).sendOverlayMessage(Component.literal("You successfully identified DNA"));
 							}
 						} else if (random <= mainjsonobject.get("dna_kekkei_genkai_identify").getAsDouble() * 10) {
 							randomkkg = (Mth.nextInt(RandomSource.create(), 1, 11));
@@ -6137,17 +6137,17 @@ public final class KekkeiGenkaiProcedures {
 							});
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Wood Release implanted succesfully"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Wood Release implanted"));
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Wood Release implanted succesfully"));
+							((Player) entity).sendOverlayMessage(Component.literal("Wood Release implanted"));
 						}
 					} else if (random >= 51) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Wood Release implanted failed"));
+							((Player) entity).sendOverlayMessage(Component.literal("Implanting Wood Release failed"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Wood Release implanted failed"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Implanting Wood Release failed"));
 						}
 					}
 					if (sourceentity instanceof Player) {
@@ -6157,12 +6157,12 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).woodreleaselogic == true) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("You already have Wood Release"));
+						((Player) entity).sendOverlayMessage(Component.literal("You already have Wood Release"));
 					}
 				}
 			} else if (!(entity instanceof Player)) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("You can only implant DNA in player"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("You can only implant DNA in player"));
 				}
 			}
 		}
@@ -6187,7 +6187,7 @@ public final class KekkeiGenkaiProcedures {
 						Compat.giveItemToPlayer(((Player) entity), _setstack);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Wood Release implanted succesfully"));
+						((Player) entity).sendOverlayMessage(Component.literal("Wood Release implanted"));
 					}
 					{
 						boolean _setval = (true);
@@ -6198,7 +6198,7 @@ public final class KekkeiGenkaiProcedures {
 					}
 				} else if (random >= 51) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Wood Release implanted failed"));
+						((Player) entity).sendOverlayMessage(Component.literal("Implanting Wood Release failed"));
 					}
 				}
 				if (entity instanceof Player) {
@@ -6208,7 +6208,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).woodreleaselogic == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You already have Wood Release"));
+					((Player) entity).sendOverlayMessage(Component.literal("You already have Wood Release"));
 				}
 			}
 		}
@@ -6252,11 +6252,11 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).wood_release == 1) {
@@ -6283,11 +6283,11 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-25 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-25 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 24) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).wood_release == 2) {
@@ -6314,16 +6314,16 @@ public final class KekkeiGenkaiProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-30 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-30 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 29) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).wood_release == 3) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -6413,17 +6413,17 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 299) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 24) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).woodlearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).woodtechnique == 1) {
@@ -6475,17 +6475,17 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 499) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 29) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).woodlearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).woodtechnique == 2) {
@@ -6545,17 +6545,17 @@ public final class KekkeiGenkaiProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 649) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 34) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).woodlearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -6597,7 +6597,7 @@ public final class KekkeiGenkaiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).woodreleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}

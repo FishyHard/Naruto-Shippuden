@@ -7,7 +7,15 @@ import net.mcreator.narutoshippudenmod.core.ModelSwapRenderers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.player.PlayerModel;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.entity.player.AvatarRenderer;
+import net.minecraft.world.entity.player.PlayerModelType;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
@@ -41,8 +49,11 @@ import java.util.function.Consumer;
 public final class AkimichiRenderer {
 	private static final Identifier TANK = Identifier.fromNamespaceAndPath("naruto_shippuden", "textures/entities/jutsu/akimichi_tank.png");
 	private static final Identifier CHAKRA = Identifier.fromNamespaceAndPath("naruto_shippuden", "textures/entities/jutsu/chakra.png");
-	private static final Map<String, Integer> WING_COLORS = Map.of("Blue", 0x5AB4FF, "Green", 0x6BFF7A, "Orange", 0xFF9A3C, "Pink", 0xFF7AD0, "Purple",
-			0xB070FF, "Red", 0xFF4A4A);
+	/** Every colour an Akimichi's wings can be (each is born with one, see ClanJutsu.WING_COLOURS). */
+	public static final Map<String, Integer> WING_COLORS = Map.ofEntries(Map.entry("Blue", 0x5AB4FF), Map.entry("Green", 0x6BFF7A),
+			Map.entry("Orange", 0xFF9A3C), Map.entry("Pink", 0xFF7AD0), Map.entry("Purple", 0xB070FF), Map.entry("Red", 0xFF4A4A),
+			Map.entry("Yellow", 0xFFE24A), Map.entry("Cyan", 0x4AF0FF), Map.entry("White", 0xF4F4FF), Map.entry("Gold", 0xFFC640),
+			Map.entry("Lime", 0xB6FF4A), Map.entry("Crimson", 0xC8143C), Map.entry("Violet", 0x8A4AFF), Map.entry("Teal", 0x2AC8A8));
 
 	private static PartModel ball, spikes, wing;
 
@@ -155,40 +166,50 @@ public final class AkimichiRenderer {
 	}
 
 	@SubscribeEvent
-	public static void wings(RenderLivingEvent.Pre<?, ?, ?> event) {
-		if (!(event.getRenderState() instanceof AvatarRenderState state))
-			return;
-		LivingEntity player = ModelSwapRenderers.entity(event);
-		if (player == null || !vars(player).ButterflyMode)
-			return;
-		if (wing == null)
-			wing = wing();
-		int rgb = WING_COLORS.getOrDefault(vars(player).ButterFlyModeColor, 0x5AB4FF);
-		boolean gliding = state.isFallFlying;
-		float age = state.ageInTicks, s = state.scale;
-		// gliding: swept back and still; otherwise a slow flap
-		float spread = gliding ? 0.25F : 0.55F + 0.35F * Mth.sin(age * 0.18F);
-		PoseStack pose = event.getPoseStack();
-		SubmitNodeCollector collector = event.getSubmitNodeCollector();
-		pose.pushPose();
-		pose.rotateDegrees(Axis.YP, 180 - state.bodyRot);
-		if (gliding) {
-			// lie along the flight like the player's body does
-			pose.translate(0, 0.4F * s, 0);
-			pose.rotateDegrees(Axis.XP, -state.xRot - 90);
-			pose.translate(0, -0.4F * s, 0);
+	public static void addWings(EntityRenderersEvent.AddLayers event) {
+		for (PlayerModelType skin : event.getSkins()) {
+			AvatarRenderer<AbstractClientPlayer> renderer = event.getPlayerRenderer(skin);
+			if (renderer != null)
+				renderer.addLayer(new Wings(renderer));
 		}
-		pose.translate(0, (state.isCrouching ? 1.1F : 1.35F) * s, 0.18F * s);
-		for (int side = -1; side <= 1; side += 2) {
+	}
+
+	/**
+	 * Butterfly Mode's wings, a layer on the player's body: they sit on the back and move with every pose (sneaking, swimming,
+	 * gliding, attacking) the way a cape or an elytra does.
+	 */
+	static final class Wings extends RenderLayer<AvatarRenderState, PlayerModel> {
+		Wings(RenderLayerParent<AvatarRenderState, PlayerModel> parent) {
+			super(parent);
+		}
+
+		@Override
+		public void submit(PoseStack pose, SubmitNodeCollector collector, int lightCoords, AvatarRenderState state, float yRot, float xRot) {
+			if (state.isInvisible || Minecraft.getInstance().level == null
+					|| !(Minecraft.getInstance().level.getEntity(state.id) instanceof LivingEntity player) || !vars(player).ButterflyMode)
+				return;
+			if (wing == null)
+				wing = wing();
+			int rgb = WING_COLORS.getOrDefault(vars(player).ButterFlyModeColor, 0x5AB4FF);
+			// gliding: swept back and still; otherwise a slow flap
+			float spread = state.isFallFlying ? 0.25F : 0.55F + 0.35F * Mth.sin(state.ageInTicks * 0.18F);
 			pose.pushPose();
-			pose.scale(side * s, s, s);
-			pose.rotate(Axis.YP, -spread);
-			draw(collector, wing, state, pose, RenderTypes.entityTranslucentEmissive(CHAKRA), LightCoordsUtil.FULL_BRIGHT, OverlayTexture.NO_OVERLAY,
-					0xB0000000 | rgb);
-			pose.scale(0.7F, 0.7F, 1.4F);
-			draw(collector, wing, state, pose, RenderTypes.entityTranslucentEmissive(CHAKRA), LightCoordsUtil.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, 0xD0FFFFFF);
+			getParentModel().body.translateAndRotate(pose);
+			// between the shoulder blades, then turned upright (the model's Y points down)
+			pose.translate(0, 0.15F, 0.18F);
+			pose.rotate(Axis.ZP, Mth.PI);
+			for (int side = -1; side <= 1; side += 2) {
+				pose.pushPose();
+				pose.scale(side, 1, 1);
+				pose.rotate(Axis.YP, -spread);
+				draw(collector, wing, state, pose, RenderTypes.entityTranslucentEmissive(CHAKRA), LightCoordsUtil.FULL_BRIGHT, OverlayTexture.NO_OVERLAY,
+						0xB0000000 | rgb);
+				pose.scale(0.7F, 0.7F, 1.4F);
+				draw(collector, wing, state, pose, RenderTypes.entityTranslucentEmissive(CHAKRA), LightCoordsUtil.FULL_BRIGHT, OverlayTexture.NO_OVERLAY,
+						0xD0FFFFFF);
+				pose.popPose();
+			}
 			pose.popPose();
 		}
-		pose.popPose();
 	}
 }

@@ -303,13 +303,13 @@ public final class GuiProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+25 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+25 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+15 Genjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+15 Genjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+120 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+120 IQ"));
 				}
 			} else if (NarutoShippudenModVariables.get(entity).selectclanrelease == 1) {
 				if (entity instanceof Player) {
@@ -353,13 +353,13 @@ public final class GuiProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+25 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+25 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+25 Kinjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+25 Kinjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+120 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+120 IQ"));
 				}
 			} else if (NarutoShippudenModVariables.get(entity).selectclanrelease == 2) {
 				if (entity instanceof Player) {
@@ -396,10 +396,10 @@ public final class GuiProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+15 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+15 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+115 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+115 IQ"));
 				}
 			} else if (NarutoShippudenModVariables.get(entity).selectclanrelease == 3) {
 				if (entity instanceof Player) {
@@ -429,10 +429,10 @@ public final class GuiProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+25 Taijutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+25 Taijutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+115 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+115 IQ"));
 				}
 			} else if (NarutoShippudenModVariables.get(entity).selectclanrelease == 4) {
 				if (entity instanceof Player) {
@@ -469,10 +469,10 @@ public final class GuiProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+15 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+15 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+100 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+100 IQ"));
 				}
 			} else if (NarutoShippudenModVariables.get(entity).selectclanrelease == 5) {
 				if (entity instanceof Player) {
@@ -509,10 +509,10 @@ public final class GuiProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+210 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+210 IQ"));
 				}
 			} else if (NarutoShippudenModVariables.get(entity).selectclanrelease == 6) {
 				if (entity instanceof Player) {
@@ -556,13 +556,13 @@ public final class GuiProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Summoning"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Summoning"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+105 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+105 IQ"));
 				}
 			} else if (NarutoShippudenModVariables.get(entity).selectclanrelease == 7) {
 				if (entity instanceof Player) {
@@ -606,13 +606,13 @@ public final class GuiProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Summoning"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Summoning"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+85 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+85 IQ"));
 				}
 			} else if (NarutoShippudenModVariables.get(entity).selectclanrelease == 8) {
 				if (entity instanceof Player) {
@@ -649,10 +649,10 @@ public final class GuiProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+90 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+90 IQ"));
 				}
 			} else if (NarutoShippudenModVariables.get(entity).selectclanrelease == 9) {
 				if (entity instanceof Player) {
@@ -689,10 +689,10 @@ public final class GuiProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+90 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+90 IQ"));
 				}
 			} else if (NarutoShippudenModVariables.get(entity).selectclanrelease == 10) {
 				if (entity instanceof Player) {
@@ -736,13 +736,13 @@ public final class GuiProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+5 Genjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+5 Genjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+95 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+95 IQ"));
 				}
 			} else if (NarutoShippudenModVariables.get(entity).selectclanrelease == 11) {
 				if (entity instanceof Player) {
@@ -779,10 +779,10 @@ public final class GuiProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+15 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+15 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+105 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+105 IQ"));
 				}
 			} else if (NarutoShippudenModVariables.get(entity).selectclanrelease == 12) {
 				if (entity instanceof Player) {
@@ -819,10 +819,10 @@ public final class GuiProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+90 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+90 IQ"));
 				}
 			} else if (NarutoShippudenModVariables.get(entity).selectclanrelease == 13) {
 				if (entity instanceof Player) {
@@ -859,10 +859,10 @@ public final class GuiProcedures {
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+10 Ninjutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("+10 Ninjutsu"));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("+90 IQ"));
+					((Player) entity).sendOverlayMessage(Component.literal("+90 IQ"));
 				}
 			}
 			if (NarutoShippudenModVariables.get(entity).selectnaturerelease == 0) {
@@ -987,7 +987,7 @@ public final class GuiProcedures {
 					random = (Mth.nextInt(RandomSource.create(), 1, 1000));
 					if (random <= mainjsonobject.get("kekkei_genkai_spawn_chance").getAsDouble() * 10) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Looks like you were borned with Kekkei Genkai."));
+							((Player) entity).sendOverlayMessage(Component.literal("Looks like you were borned with Kekkei Genkai"));
 						}
 						randomkkg = (Mth.nextInt(RandomSource.create(), 1, 11));
 						if (randomkkg == 1) {
@@ -2884,7 +2884,7 @@ public final class GuiProcedures {
 				}
 			} else {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Deactivate all dojutsu"));
+					((Player) entity).sendOverlayMessage(Component.literal("Deactivate all dojutsu"));
 				}
 			}
 		}

@@ -87,7 +87,6 @@ public final class NarutoActions {
 		value("senjutsu", "Senjutsu", v -> v.senjutsu, (v, n) -> v.senjutsu = n);
 		value("medicine", "Medicine", v -> v.medicine, (v, n) -> v.medicine = n);
 		value("speed", "Speed", v -> v.speed, (v, n) -> v.speed = n);
-		value("jutsu_power", "Jutsu Power", v -> v.jutsupowerstat, (v, n) -> v.jutsupowerstat = n);
 		value("genjutsu", "Genjutsu", v -> v.genjutsu, (v, n) -> v.genjutsu = n);
 		value("iq", "IQ", v -> v.IQ, (v, n) -> v.IQ = n);
 		value(SP_PER_CLICK, "SP per click", v -> v.spusecount, (v, n) -> v.spusecount = Math.max(1, Math.min(1000, Math.floor(n))));
@@ -257,7 +256,7 @@ public final class NarutoActions {
 				return;
 			boolean open = action.kind().equals("page") && !action.key().equals("select")
 					|| action.kind().equals("set") && action.key().equals(SP_PER_CLICK) || action.kind().equals("jutsu") || action.kind().equals("learn")
-					|| action.kind().equals("eye") || action.kind().equals("susanoo");
+					|| action.kind().equals("eye") || action.kind().equals("susanoo") || action.kind().equals("chakra");
 			if (!open && !canCheat(player)) {
 				player.sendSystemMessage(Component.literal("Cheats need creative mode or operator rights."));
 				return;
@@ -298,6 +297,12 @@ public final class NarutoActions {
 						Eyes.growSusanoo(player);
 					else
 						Eyes.dismissSusanoo(player);
+				}
+				case "chakra" -> {
+					if (action.key().equals("toggle"))
+						ChakraControl.toggle(player);
+					else if (action.key().equals("dash"))
+						ChakraControl.dash(player, (int) action.amount());
 				}
 				default -> {
 				}

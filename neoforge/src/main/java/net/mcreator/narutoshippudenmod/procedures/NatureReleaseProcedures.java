@@ -109,10 +109,10 @@ public final class NatureReleaseProcedures {
 							Compat.giveItemToPlayer(((Player) entity), _setstack);
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Earth Release implanted succesfully"));
+							((Player) entity).sendOverlayMessage(Component.literal("Earth Release implanted"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Earth Release implanted succesfully"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Earth Release implanted"));
 						}
 						{
 							boolean _setval = (true);
@@ -123,10 +123,10 @@ public final class NatureReleaseProcedures {
 						}
 					} else if (randomearth >= 71) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Earth Release implanted failed"));
+							((Player) entity).sendOverlayMessage(Component.literal("Implanting Earth Release failed"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Earth Release implanted failed"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Implanting Earth Release failed"));
 						}
 					}
 					if (sourceentity instanceof Player) {
@@ -136,12 +136,12 @@ public final class NatureReleaseProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).earthreleaselogic == true) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("You already have Earth Release"));
+						((Player) entity).sendOverlayMessage(Component.literal("You already have Earth Release"));
 					}
 				}
 			} else if (!(entity instanceof Player)) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("You can only implant DNA in player"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("You can only implant DNA in player"));
 				}
 			}
 		}
@@ -166,7 +166,7 @@ public final class NatureReleaseProcedures {
 						Compat.giveItemToPlayer(((Player) entity), _setstack);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Earth Release implanted succesfully"));
+						((Player) entity).sendOverlayMessage(Component.literal("Earth Release implanted"));
 					}
 					{
 						boolean _setval = (true);
@@ -177,7 +177,7 @@ public final class NatureReleaseProcedures {
 					}
 				} else if (randomearth >= 71) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Earth Release implanted failed"));
+						((Player) entity).sendOverlayMessage(Component.literal("Implanting Earth Release failed"));
 					}
 				}
 				if (entity instanceof Player) {
@@ -187,7 +187,7 @@ public final class NatureReleaseProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).earthreleaselogic == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You already have Earth Release"));
+					((Player) entity).sendOverlayMessage(Component.literal("You already have Earth Release"));
 				}
 			}
 		}
@@ -231,11 +231,11 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-5 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-5 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).earth_release == 1) {
@@ -262,11 +262,11 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).earth_release == 2) {
@@ -293,11 +293,11 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-15 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-15 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 14) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).earth_release == 3) {
@@ -324,16 +324,16 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).earth_release == 4) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -385,17 +385,17 @@ public final class NatureReleaseProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 4) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).earthlearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).earth_technique == 1) {
@@ -439,17 +439,17 @@ public final class NatureReleaseProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 9) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).earthlearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).earth_technique == 2) {
@@ -489,7 +489,7 @@ public final class NatureReleaseProcedures {
 											world.setBlock(BlockPos.containing(x - 1, y + 2, z - 1), EarthWallBlock.block.defaultBlockState(), 3);
 										} else if (true) {
 											if (entity instanceof Player && !entity.level().isClientSide()) {
-												((Player) entity).sendSystemMessage(Component.literal("Find Flat Place"));
+												((Player) entity).sendOverlayMessage(Component.literal("Find a flat place"));
 											}
 										}
 									} else if ((entity.getDirection()) == Direction.SOUTH) {
@@ -525,7 +525,7 @@ public final class NatureReleaseProcedures {
 											world.setBlock(BlockPos.containing(x - 1, y + 2, z + 1), EarthWallBlock.block.defaultBlockState(), 3);
 										} else if (true) {
 											if (entity instanceof Player && !entity.level().isClientSide()) {
-												((Player) entity).sendSystemMessage(Component.literal("Find Flat Place"));
+												((Player) entity).sendOverlayMessage(Component.literal("Find a flat place"));
 											}
 										}
 									} else if ((entity.getDirection()) == Direction.WEST) {
@@ -561,7 +561,7 @@ public final class NatureReleaseProcedures {
 											world.setBlock(BlockPos.containing(x - 1, y + 2, z - 1), EarthWallBlock.block.defaultBlockState(), 3);
 										} else if (true) {
 											if (entity instanceof Player && !entity.level().isClientSide()) {
-												((Player) entity).sendSystemMessage(Component.literal("Find Flat Place"));
+												((Player) entity).sendOverlayMessage(Component.literal("Find a flat place"));
 											}
 										}
 									} else if ((entity.getDirection()) == Direction.EAST) {
@@ -597,7 +597,7 @@ public final class NatureReleaseProcedures {
 											world.setBlock(BlockPos.containing(x + 1, y + 2, z + 1), EarthWallBlock.block.defaultBlockState(), 3);
 										} else if (true) {
 											if (entity instanceof Player && !entity.level().isClientSide()) {
-												((Player) entity).sendSystemMessage(Component.literal("Find Flat Place"));
+												((Player) entity).sendOverlayMessage(Component.literal("Find a flat place"));
 											}
 										}
 									}
@@ -610,23 +610,23 @@ public final class NatureReleaseProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 14) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).earthlearn >= 3)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).earth_technique == 3) {
 						if (NarutoShippudenModVariables.get(entity).earthlearn >= 4) {
 							if (NarutoShippudenModVariables.get(entity).ninjutsu >= 20) {
-								if (NarutoShippudenModVariables.get(entity).jutsupower == 0) {
+								if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 0) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -659,10 +659,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 1) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 1) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -695,10 +695,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 2) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 2) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -731,10 +731,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 3) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 3) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -767,10 +767,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 4) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 4) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -803,10 +803,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 5) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 5) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -839,10 +839,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 6) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 6) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -875,10 +875,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 7) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 7) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -911,10 +911,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 8) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 8) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -947,10 +947,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 9) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 9) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -983,18 +983,18 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).earthlearn >= 4)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -1063,7 +1063,7 @@ public final class NatureReleaseProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).earthreleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -1095,10 +1095,10 @@ public final class NatureReleaseProcedures {
 							Compat.giveItemToPlayer(((Player) entity), _setstack);
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Fire Release implanted succesfully"));
+							((Player) entity).sendOverlayMessage(Component.literal("Fire Release implanted"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Fire Release implanted succesfully"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Fire Release implanted"));
 						}
 						{
 							boolean _setval = (true);
@@ -1109,10 +1109,10 @@ public final class NatureReleaseProcedures {
 						}
 					} else if (randomfire >= 71) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Fire Release implanted failed"));
+							((Player) entity).sendOverlayMessage(Component.literal("Implanting Fire Release failed"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Fire Release implanted failed"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Implanting Fire Release failed"));
 						}
 					}
 					if (sourceentity instanceof Player) {
@@ -1122,12 +1122,12 @@ public final class NatureReleaseProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).firereleaselogic == true) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("You already have Fire Release"));
+						((Player) entity).sendOverlayMessage(Component.literal("You already have Fire Release"));
 					}
 				}
 			} else if (!(entity instanceof Player)) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("You can only implant DNA in player"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("You can only implant DNA in player"));
 				}
 			}
 		}
@@ -1152,7 +1152,7 @@ public final class NatureReleaseProcedures {
 						Compat.giveItemToPlayer(((Player) entity), _setstack);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Fire Release implanted succesfully"));
+						((Player) entity).sendOverlayMessage(Component.literal("Fire Release implanted"));
 					}
 					{
 						boolean _setval = (true);
@@ -1163,7 +1163,7 @@ public final class NatureReleaseProcedures {
 					}
 				} else if (randomfire >= 71) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Fire Release implanted failed"));
+						((Player) entity).sendOverlayMessage(Component.literal("Implanting Fire Release failed"));
 					}
 				}
 				if (entity instanceof Player) {
@@ -1173,7 +1173,7 @@ public final class NatureReleaseProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).firereleaselogic == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You already have Fire Release"));
+					((Player) entity).sendOverlayMessage(Component.literal("You already have Fire Release"));
 				}
 			}
 		}
@@ -1217,11 +1217,11 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-5 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-5 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).fire_release == 1) {
@@ -1248,11 +1248,11 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).fire_release == 2) {
@@ -1279,11 +1279,11 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-15 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-15 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 14) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).fire_release == 3) {
@@ -1310,16 +1310,16 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).fire_release == 4) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -1387,23 +1387,23 @@ public final class NatureReleaseProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 4) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).firelearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).firetechnique == 1) {
 						if (NarutoShippudenModVariables.get(entity).firelearn >= 2) {
 							if (NarutoShippudenModVariables.get(entity).ninjutsu >= 10) {
-								if (NarutoShippudenModVariables.get(entity).jutsupower == 0) {
+								if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 0) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -1438,10 +1438,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 1) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 1) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -1476,10 +1476,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 2) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 2) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -1514,10 +1514,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 3) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 3) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -1552,10 +1552,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 4) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 4) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -1590,10 +1590,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 5) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 5) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -1628,10 +1628,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 6) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 6) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -1666,10 +1666,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 7) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 7) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -1704,10 +1704,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 8) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 8) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -1742,10 +1742,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 9) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 9) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -1780,24 +1780,24 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 9) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).firelearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).firetechnique == 2) {
 						if (NarutoShippudenModVariables.get(entity).firelearn >= 3) {
 							if (NarutoShippudenModVariables.get(entity).ninjutsu >= 15) {
-								if (NarutoShippudenModVariables.get(entity).jutsupower == 0) {
+								if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 0) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -1832,10 +1832,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 1) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 1) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -1870,10 +1870,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 2) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 2) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -1908,10 +1908,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 3) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 3) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -1946,10 +1946,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 4) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 4) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -1984,10 +1984,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 5) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 5) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -2022,10 +2022,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 6) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 6) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -2060,10 +2060,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 7) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 7) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -2098,10 +2098,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 8) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 8) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -2136,10 +2136,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 9) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 9) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -2174,24 +2174,24 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 14) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).firelearn >= 3)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).firetechnique == 3) {
 						if (NarutoShippudenModVariables.get(entity).firelearn >= 4) {
 							if (NarutoShippudenModVariables.get(entity).ninjutsu >= 20) {
-								if (NarutoShippudenModVariables.get(entity).jutsupower == 0) {
+								if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 0) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -2422,10 +2422,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 1) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 1) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -2656,10 +2656,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 2) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 2) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -2890,10 +2890,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 3) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 3) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -3124,10 +3124,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 4) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 4) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -3358,10 +3358,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 5) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 5) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -3592,10 +3592,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 6) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 6) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -3826,10 +3826,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 7) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 7) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -4060,10 +4060,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 8) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 8) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -4294,10 +4294,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 9) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 9) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -4528,18 +4528,18 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).firelearn >= 4)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -4608,7 +4608,7 @@ public final class NatureReleaseProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).firereleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -4640,10 +4640,10 @@ public final class NatureReleaseProcedures {
 							Compat.giveItemToPlayer(((Player) entity), _setstack);
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Lightning Release implanted succesfully"));
+							((Player) entity).sendOverlayMessage(Component.literal("Lightning Release implanted"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Lightning Release implanted succesfully"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Lightning Release implanted"));
 						}
 						{
 							boolean _setval = (true);
@@ -4654,10 +4654,10 @@ public final class NatureReleaseProcedures {
 						}
 					} else if (randomlightning >= 71) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Lightning Release implanted failed"));
+							((Player) entity).sendOverlayMessage(Component.literal("Implanting Lightning Release failed"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Lightning Release implanted failed"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Implanting Lightning Release failed"));
 						}
 					}
 					if (sourceentity instanceof Player) {
@@ -4667,12 +4667,12 @@ public final class NatureReleaseProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).lightningreleaselogic == true) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("You already have Lightning Release"));
+						((Player) entity).sendOverlayMessage(Component.literal("You already have Lightning Release"));
 					}
 				}
 			} else if (!(entity instanceof Player)) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("You can only implant DNA in player"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("You can only implant DNA in player"));
 				}
 			}
 		}
@@ -4697,7 +4697,7 @@ public final class NatureReleaseProcedures {
 						Compat.giveItemToPlayer(((Player) entity), _setstack);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Lightning Release implanted succesfully"));
+						((Player) entity).sendOverlayMessage(Component.literal("Lightning Release implanted"));
 					}
 					{
 						boolean _setval = (true);
@@ -4708,7 +4708,7 @@ public final class NatureReleaseProcedures {
 					}
 				} else if (randomlightning >= 71) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Lightning Release implanted failed"));
+						((Player) entity).sendOverlayMessage(Component.literal("Implanting Lightning Release failed"));
 					}
 				}
 				if (entity instanceof Player) {
@@ -4718,7 +4718,7 @@ public final class NatureReleaseProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).lightningreleaselogic == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You already have Lightning Release"));
+					((Player) entity).sendOverlayMessage(Component.literal("You already have Lightning Release"));
 				}
 			}
 		}
@@ -4762,11 +4762,11 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-5 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-5 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).lightning_release == 1) {
@@ -4793,11 +4793,11 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).lightning_release == 2) {
@@ -4824,11 +4824,11 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-15 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-15 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 14) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).lightning_release == 3) {
@@ -4855,16 +4855,16 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).lightning_release == 4) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -4909,7 +4909,7 @@ public final class NatureReleaseProcedures {
 						if (NarutoShippudenModVariables.get(entity).lightninglearn >= 1) {
 							if (NarutoShippudenModVariables.get(entity).ninjutsu >= 5) {
 								if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 100) {
-									if (NarutoShippudenModVariables.get(entity).jutsupower == 0) {
+									if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 0) {
 										{
 											Entity _shootFrom = entity;
 											Level projectileLevel = _shootFrom.level();
@@ -4934,7 +4934,7 @@ public final class NatureReleaseProcedures {
 												projectileLevel.addFreshEntity(_entityToSpawn);
 											}
 										}
-									} else if (NarutoShippudenModVariables.get(entity).jutsupower == 1) {
+									} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 1) {
 										{
 											Entity _shootFrom = entity;
 											Level projectileLevel = _shootFrom.level();
@@ -4959,7 +4959,7 @@ public final class NatureReleaseProcedures {
 												projectileLevel.addFreshEntity(_entityToSpawn);
 											}
 										}
-									} else if (NarutoShippudenModVariables.get(entity).jutsupower == 2) {
+									} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 2) {
 										{
 											Entity _shootFrom = entity;
 											Level projectileLevel = _shootFrom.level();
@@ -4984,7 +4984,7 @@ public final class NatureReleaseProcedures {
 												projectileLevel.addFreshEntity(_entityToSpawn);
 											}
 										}
-									} else if (NarutoShippudenModVariables.get(entity).jutsupower == 3) {
+									} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 3) {
 										{
 											Entity _shootFrom = entity;
 											Level projectileLevel = _shootFrom.level();
@@ -5009,7 +5009,7 @@ public final class NatureReleaseProcedures {
 												projectileLevel.addFreshEntity(_entityToSpawn);
 											}
 										}
-									} else if (NarutoShippudenModVariables.get(entity).jutsupower == 4) {
+									} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 4) {
 										{
 											Entity _shootFrom = entity;
 											Level projectileLevel = _shootFrom.level();
@@ -5034,7 +5034,7 @@ public final class NatureReleaseProcedures {
 												projectileLevel.addFreshEntity(_entityToSpawn);
 											}
 										}
-									} else if (NarutoShippudenModVariables.get(entity).jutsupower == 5) {
+									} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 5) {
 										{
 											Entity _shootFrom = entity;
 											Level projectileLevel = _shootFrom.level();
@@ -5059,7 +5059,7 @@ public final class NatureReleaseProcedures {
 												projectileLevel.addFreshEntity(_entityToSpawn);
 											}
 										}
-									} else if (NarutoShippudenModVariables.get(entity).jutsupower == 6) {
+									} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 6) {
 										{
 											Entity _shootFrom = entity;
 											Level projectileLevel = _shootFrom.level();
@@ -5084,7 +5084,7 @@ public final class NatureReleaseProcedures {
 												projectileLevel.addFreshEntity(_entityToSpawn);
 											}
 										}
-									} else if (NarutoShippudenModVariables.get(entity).jutsupower == 7) {
+									} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 7) {
 										{
 											Entity _shootFrom = entity;
 											Level projectileLevel = _shootFrom.level();
@@ -5109,7 +5109,7 @@ public final class NatureReleaseProcedures {
 												projectileLevel.addFreshEntity(_entityToSpawn);
 											}
 										}
-									} else if (NarutoShippudenModVariables.get(entity).jutsupower == 8) {
+									} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 8) {
 										{
 											Entity _shootFrom = entity;
 											Level projectileLevel = _shootFrom.level();
@@ -5134,7 +5134,7 @@ public final class NatureReleaseProcedures {
 												projectileLevel.addFreshEntity(_entityToSpawn);
 											}
 										}
-									} else if (NarutoShippudenModVariables.get(entity).jutsupower == 9) {
+									} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 9) {
 										{
 											Entity _shootFrom = entity;
 											Level projectileLevel = _shootFrom.level();
@@ -5169,23 +5169,23 @@ public final class NatureReleaseProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 4) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).lightninglearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lightning_technique == 1) {
 						if (NarutoShippudenModVariables.get(entity).lightninglearn >= 2) {
 							if (NarutoShippudenModVariables.get(entity).ninjutsu >= 10) {
-								if (NarutoShippudenModVariables.get(entity).jutsupower == 0) {
+								if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 0) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -5218,10 +5218,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 1) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 1) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -5254,10 +5254,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 2) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 2) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -5290,10 +5290,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 3) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 3) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -5326,10 +5326,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 4) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 4) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -5362,10 +5362,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 5) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 5) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -5398,10 +5398,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 6) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 6) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -5434,10 +5434,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 7) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 7) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -5470,10 +5470,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 8) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 8) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -5506,10 +5506,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 9) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 9) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -5542,18 +5542,18 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 9) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).lightninglearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lightning_technique == 2) {
@@ -5590,17 +5590,17 @@ public final class NatureReleaseProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 14) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).lightninglearn >= 3)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).lightning_technique == 3) {
@@ -5641,17 +5641,17 @@ public final class NatureReleaseProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).lightninglearn >= 4)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -5720,7 +5720,7 @@ public final class NatureReleaseProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).lightningreleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -5752,10 +5752,10 @@ public final class NatureReleaseProcedures {
 							Compat.giveItemToPlayer(((Player) entity), _setstack);
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Water Release implanted succesfully"));
+							((Player) entity).sendOverlayMessage(Component.literal("Water Release implanted"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Water Release implanted succesfully"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Water Release implanted"));
 						}
 						{
 							boolean _setval = (true);
@@ -5766,10 +5766,10 @@ public final class NatureReleaseProcedures {
 						}
 					} else if (randomwater >= 71) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Water Release implanted failed"));
+							((Player) entity).sendOverlayMessage(Component.literal("Implanting Water Release failed"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Water Release implanted failed"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Implanting Water Release failed"));
 						}
 					}
 					if (sourceentity instanceof Player) {
@@ -5779,12 +5779,12 @@ public final class NatureReleaseProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).waterreleaselogic == true) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("You already have Water Release"));
+						((Player) entity).sendOverlayMessage(Component.literal("You already have Water Release"));
 					}
 				}
 			} else if (!(entity instanceof Player)) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("You can only implant DNA in player"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("You can only implant DNA in player"));
 				}
 			}
 		}
@@ -5809,7 +5809,7 @@ public final class NatureReleaseProcedures {
 						Compat.giveItemToPlayer(((Player) entity), _setstack);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Water Release implanted succesfully"));
+						((Player) entity).sendOverlayMessage(Component.literal("Water Release implanted"));
 					}
 					{
 						boolean _setval = (true);
@@ -5820,7 +5820,7 @@ public final class NatureReleaseProcedures {
 					}
 				} else if (randomwater >= 71) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Water Release implanted failed"));
+						((Player) entity).sendOverlayMessage(Component.literal("Implanting Water Release failed"));
 					}
 				}
 				if (entity instanceof Player) {
@@ -5830,7 +5830,7 @@ public final class NatureReleaseProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).waterreleaselogic == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You already have Water Release"));
+					((Player) entity).sendOverlayMessage(Component.literal("You already have Water Release"));
 				}
 			}
 		}
@@ -5874,11 +5874,11 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-5 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-5 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).water_release == 1) {
@@ -5905,11 +5905,11 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).water_release == 2) {
@@ -5936,11 +5936,11 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-15 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-15 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 14) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).water_release == 3) {
@@ -5967,16 +5967,16 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).water_release == 4) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -6054,7 +6054,7 @@ public final class NatureReleaseProcedures {
 											world.setBlock(BlockPos.containing(x - 1, y + 2, z - 1), WaterwallBlock.block.defaultBlockState(), 3);
 										} else if (true) {
 											if (entity instanceof Player && !entity.level().isClientSide()) {
-												((Player) entity).sendSystemMessage(Component.literal("Find Flat Place"));
+												((Player) entity).sendOverlayMessage(Component.literal("Find a flat place"));
 											}
 										}
 									} else if ((entity.getDirection()) == Direction.SOUTH) {
@@ -6090,7 +6090,7 @@ public final class NatureReleaseProcedures {
 											world.setBlock(BlockPos.containing(x - 1, y + 2, z + 1), WaterwallBlock.block.defaultBlockState(), 3);
 										} else if (true) {
 											if (entity instanceof Player && !entity.level().isClientSide()) {
-												((Player) entity).sendSystemMessage(Component.literal("Find Flat Place"));
+												((Player) entity).sendOverlayMessage(Component.literal("Find a flat place"));
 											}
 										}
 									} else if ((entity.getDirection()) == Direction.WEST) {
@@ -6126,7 +6126,7 @@ public final class NatureReleaseProcedures {
 											world.setBlock(BlockPos.containing(x - 1, y + 2, z - 1), WaterwallBlock.block.defaultBlockState(), 3);
 										} else if (true) {
 											if (entity instanceof Player && !entity.level().isClientSide()) {
-												((Player) entity).sendSystemMessage(Component.literal("Find Flat Place"));
+												((Player) entity).sendOverlayMessage(Component.literal("Find a flat place"));
 											}
 										}
 									} else if ((entity.getDirection()) == Direction.EAST) {
@@ -6148,7 +6148,7 @@ public final class NatureReleaseProcedures {
 											world.setBlock(BlockPos.containing(x + 1, y + 2, z + 1), WaterwallBlock.block.defaultBlockState(), 3);
 										} else if (true) {
 											if (entity instanceof Player && !entity.level().isClientSide()) {
-												((Player) entity).sendSystemMessage(Component.literal("Find Flat Place"));
+												((Player) entity).sendOverlayMessage(Component.literal("Find a flat place"));
 											}
 										}
 									}
@@ -6161,23 +6161,23 @@ public final class NatureReleaseProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 4) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).waterlearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).water_technique == 1) {
 						if (NarutoShippudenModVariables.get(entity).waterlearn >= 2) {
 							if (NarutoShippudenModVariables.get(entity).ninjutsu >= 10) {
-								if (NarutoShippudenModVariables.get(entity).jutsupower == 0) {
+								if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 0) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -6303,10 +6303,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 1) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 1) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -6432,10 +6432,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 2) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 2) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -6561,10 +6561,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 3) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 3) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -6690,10 +6690,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 4) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 4) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -6819,10 +6819,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 5) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 5) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -6948,10 +6948,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 6) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 6) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -7077,10 +7077,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 7) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 7) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -7206,10 +7206,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 8) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 8) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -7335,10 +7335,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 9) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 9) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -7464,24 +7464,24 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 9) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).waterlearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).water_technique == 2) {
 						if (NarutoShippudenModVariables.get(entity).waterlearn >= 3) {
 							if (NarutoShippudenModVariables.get(entity).ninjutsu >= 15) {
-								if (NarutoShippudenModVariables.get(entity).jutsupower == 0) {
+								if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 0) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -7514,10 +7514,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 1) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 1) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -7550,10 +7550,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 2) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 2) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -7586,10 +7586,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 3) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 3) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -7622,10 +7622,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 4) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 4) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -7658,10 +7658,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 5) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 5) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -7694,10 +7694,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 6) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 6) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -7730,10 +7730,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 7) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 7) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -7766,10 +7766,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 8) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 8) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -7802,10 +7802,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 9) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 9) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 200) {
 										{
 											Entity _shootFrom = entity;
@@ -7838,24 +7838,24 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 199) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 14) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).waterlearn >= 3)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).water_technique == 3) {
 						if (NarutoShippudenModVariables.get(entity).waterlearn >= 4) {
 							if (NarutoShippudenModVariables.get(entity).ninjutsu >= 20) {
-								if (NarutoShippudenModVariables.get(entity).jutsupower == 0) {
+								if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 0) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -7881,10 +7881,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 1) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 1) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -7910,10 +7910,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 2) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 2) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -7939,10 +7939,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 3) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 3) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -7968,10 +7968,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 4) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 4) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -7997,10 +7997,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 5) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 5) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -8026,10 +8026,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 6) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 6) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -8055,10 +8055,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 7) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 7) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -8084,10 +8084,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 8) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 8) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -8113,10 +8113,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 9) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 9) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -8142,18 +8142,18 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 249) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 19) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).waterlearn >= 4)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -8222,7 +8222,7 @@ public final class NatureReleaseProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).waterreleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}
@@ -8254,10 +8254,10 @@ public final class NatureReleaseProcedures {
 							Compat.giveItemToPlayer(((Player) entity), _setstack);
 						}
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Wind Release implanted succesfully"));
+							((Player) entity).sendOverlayMessage(Component.literal("Wind Release implanted"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Wind Release implanted succesfully"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Wind Release implanted"));
 						}
 						{
 							boolean _setval = (true);
@@ -8268,10 +8268,10 @@ public final class NatureReleaseProcedures {
 						}
 					} else if (randomwind >= 71) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Wind Release implanted failed"));
+							((Player) entity).sendOverlayMessage(Component.literal("Implanting Wind Release failed"));
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity).sendSystemMessage(Component.literal("Wind Release implanted failed"));
+							((Player) sourceentity).sendOverlayMessage(Component.literal("Implanting Wind Release failed"));
 						}
 					}
 					if (sourceentity instanceof Player) {
@@ -8281,12 +8281,12 @@ public final class NatureReleaseProcedures {
 					}
 				} else if (NarutoShippudenModVariables.get(entity).windreleaselogic == true) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("You already have Wind Release"));
+						((Player) entity).sendOverlayMessage(Component.literal("You already have Wind Release"));
 					}
 				}
 			} else if (!(entity instanceof Player)) {
 				if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-					((Player) sourceentity).sendSystemMessage(Component.literal("You can only implant DNA in player"));
+					((Player) sourceentity).sendOverlayMessage(Component.literal("You can only implant DNA in player"));
 				}
 			}
 		}
@@ -8311,7 +8311,7 @@ public final class NatureReleaseProcedures {
 						Compat.giveItemToPlayer(((Player) entity), _setstack);
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Wind Release implanted succesfully"));
+						((Player) entity).sendOverlayMessage(Component.literal("Wind Release implanted"));
 					}
 					{
 						boolean _setval = (true);
@@ -8322,7 +8322,7 @@ public final class NatureReleaseProcedures {
 					}
 				} else if (randomwind >= 71) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Wind Release implanted failed"));
+						((Player) entity).sendOverlayMessage(Component.literal("Implanting Wind Release failed"));
 					}
 				}
 				if (entity instanceof Player) {
@@ -8332,7 +8332,7 @@ public final class NatureReleaseProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).windreleaselogic == true) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You already have Wind Release"));
+					((Player) entity).sendOverlayMessage(Component.literal("You already have Wind Release"));
 				}
 			}
 		}
@@ -8376,11 +8376,11 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-5 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-5 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).wind_release == 1) {
@@ -8407,11 +8407,11 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-10 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-10 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 9) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).wind_release == 2) {
@@ -8438,11 +8438,11 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-15 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-15 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 14) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).wind_release == 3) {
@@ -8469,16 +8469,16 @@ public final class NatureReleaseProcedures {
 						});
 					}
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("-20 JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("-20 JP"));
 					}
 				} else if (NarutoShippudenModVariables.get(entity).jp <= 19) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("Not Enough JP"));
+						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
 					}
 				}
 			} else if (NarutoShippudenModVariables.get(entity).wind_release == 4) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("Wait For Newer Updates"));
+					((Player) entity).sendOverlayMessage(Component.literal("Not available yet"));
 				}
 			}
 		}
@@ -8597,23 +8597,23 @@ public final class NatureReleaseProcedures {
 									}
 								} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 99) {
 									if (entity instanceof Player && !entity.level().isClientSide()) {
-										((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+										((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 4) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).windlearn >= 1)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).wind_technique == 1) {
 						if (NarutoShippudenModVariables.get(entity).windlearn >= 2) {
 							if (NarutoShippudenModVariables.get(entity).ninjutsu >= 10) {
-								if (NarutoShippudenModVariables.get(entity).jutsupower == 0) {
+								if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 0) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -8646,10 +8646,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 1) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 1) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -8682,10 +8682,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 2) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 2) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -8718,10 +8718,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 3) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 3) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -8754,10 +8754,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 4) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 4) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -8790,10 +8790,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 5) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 5) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -8826,10 +8826,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 6) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 6) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -8862,10 +8862,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 7) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 7) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -8898,10 +8898,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 8) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 8) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -8934,10 +8934,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 9) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 9) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 150) {
 										{
 											Entity _shootFrom = entity;
@@ -8970,18 +8970,18 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 9) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).windlearn >= 2)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).wind_technique == 2) {
@@ -9022,18 +9022,18 @@ public final class NatureReleaseProcedures {
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 9) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).windlearn >= 3)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					} else if (NarutoShippudenModVariables.get(entity).wind_technique == 3) {
 						if (NarutoShippudenModVariables.get(entity).windlearn >= 4) {
 							if (NarutoShippudenModVariables.get(entity).ninjutsu >= 10) {
-								if (NarutoShippudenModVariables.get(entity).jutsupower == 0) {
+								if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 0) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -9066,10 +9066,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 1) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 1) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -9102,10 +9102,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 2) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 2) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -9138,10 +9138,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 3) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 3) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -9174,10 +9174,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 4) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 4) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -9210,10 +9210,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 5) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 5) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -9246,10 +9246,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 6) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 6) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -9282,10 +9282,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 7) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 7) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -9318,10 +9318,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 8) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 8) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -9354,10 +9354,10 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
-								} else if (NarutoShippudenModVariables.get(entity).jutsupower == 9) {
+								} else if (net.mcreator.narutoshippudenmod.core.jutsu.engine.Techniques.jutsuPower(entity) == 9) {
 									if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 250) {
 										{
 											Entity _shootFrom = entity;
@@ -9390,18 +9390,18 @@ public final class NatureReleaseProcedures {
 										}
 									} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 149) {
 										if (entity instanceof Player && !entity.level().isClientSide()) {
-											((Player) entity).sendSystemMessage(Component.literal("Not Enough Chakra"));
+											((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
 										}
 									}
 								}
 							} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 9) {
 								if (entity instanceof Player && !entity.level().isClientSide()) {
-									((Player) entity).sendSystemMessage(Component.literal("Not Enough Ninjutsu"));
+									((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
 								}
 							}
 						} else if (!(NarutoShippudenModVariables.get(entity).windlearn >= 4)) {
 							if (entity instanceof Player && !entity.level().isClientSide()) {
-								((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked this technique."));
+								((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this technique"));
 							}
 						}
 					}
@@ -9470,7 +9470,7 @@ public final class NatureReleaseProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).windreleaselogic == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release."));
+					((Player) entity).sendOverlayMessage(Component.literal("You haven't unlocked this release"));
 				}
 			}
 		}

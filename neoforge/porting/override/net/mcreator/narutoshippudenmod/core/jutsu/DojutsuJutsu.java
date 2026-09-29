@@ -94,16 +94,17 @@ public final class DojutsuJutsu {
 		requires("isshiki_dojutsu_release_technique", v -> v.isshikidojutsu && v.isshikidojutsuactivate, "Activate the Kokugan first");
 
 		// the Mangekyou: only the jutsu (their scrolls also sell the Susanoo stages)
-		mangekyou("mangekyou_sharingan_itachi_release_technique", v -> 0, (v, i) -> {
+		mangekyou("mangekyou_sharingan_itachi_release_technique", "Itachi", v -> v.MangekyouSharinganItachi, v -> 0, (v, i) -> {
 		}, v -> v.mangekyoushrainganitachiamaterasulearn, new Def("Amaterasu", JutsuRank.A, DojutsuJutsu::amaterasu));
-		mangekyou("mangekyou_sharingan_kakashi_release_technique", v -> 0, (v, i) -> {
+		mangekyou("mangekyou_sharingan_kakashi_release_technique", "Kakashi", v -> v.MangekyouSharinganKakashi, v -> 0, (v, i) -> {
 		}, v -> v.mangekyousharingankakashikamuilearn, new Def("Kamui Long-Range", JutsuRank.A, p -> kamui(p, 30, 30)));
-		mangekyou("mangekyou_sharingan_obito_release_technique", v -> v.mangekyousharinganobitokamuitechnique,
+		mangekyou("mangekyou_sharingan_obito_release_technique", "Obito", v -> v.MangekyouSharinganObito, v -> v.mangekyousharinganobitokamuitechnique,
 				(v, i) -> v.mangekyousharinganobitokamuitechnique = i, v -> v.mangekyousharinganobitokamuilearn,
 				new Def("Kamui Self-Teleportation", JutsuRank.B, DojutsuJutsu::kamuiTeleport),
 				new Def("Kamui Short-Range", JutsuRank.A, p -> kamui(p, 5, 12)),
 				new Def("Kamui Phantom Phasing", JutsuRank.A, DojutsuJutsu::phantomPhasing));
-		mangekyou("mangekyou_sharingan_sasuke_release_technique", v -> v.mangekyousharingansasukeamaterasutechnique,
+		mangekyou("mangekyou_sharingan_sasuke_release_technique", "Sasuke", v -> v.MangekyouSharinganSasuke,
+				v -> v.mangekyousharingansasukeamaterasutechnique,
 				(v, i) -> v.mangekyousharingansasukeamaterasutechnique = i, v -> v.mangekyousharingansasukeamaterasulearn,
 				new Def("Amaterasu", JutsuRank.A, DojutsuJutsu::amaterasu),
 				new Def("Blaze Release: Kagutsuchi", JutsuRank.A, DojutsuJutsu::kagutsuchi),
@@ -118,14 +119,14 @@ public final class DojutsuJutsu {
 	}
 
 	/** A Mangekyou technique item: its jutsu priced by rank, cast only with the Mangekyou active; the scroll is unchanged. */
-	private static void mangekyou(String item, ToDoubleFunction<PlayerVariables> selected, ObjDoubleConsumer<PlayerVariables> select,
-			ToDoubleFunction<PlayerVariables> learned, Def... defs) {
+	private static void mangekyou(String item, String whose, Predicate<PlayerVariables> has, ToDoubleFunction<PlayerVariables> selected,
+			ObjDoubleConsumer<PlayerVariables> select, ToDoubleFunction<PlayerVariables> learned, Def... defs) {
 		Jutsus.JutsuSpec[] specs = new Jutsus.JutsuSpec[defs.length];
 		for (int i = 0; i < defs.length; i++) {
 			JutsuRank rank = defs[i].rank();
 			specs[i] = Jutsus.jutsu(defs[i].name(), learned, i + 1, "Ninjutsu", v -> v.ninjutsu, rank.ninjutsu, rank.chakra, rank.cooldowns());
 		}
-		Jutsus.technique(item, selected, select, v -> v.MangekyouSharinganActivate, deps -> {
+		Jutsus.technique(item, selected, select, v -> v.MangekyouSharinganActivate && has.test(v), deps -> {
 			if (!(deps.get("entity") instanceof ServerPlayer player))
 				return;
 			Def def = defs[Mth.clamp((int) selected.applyAsDouble(NarutoShippudenModVariables.get(player)), 0, defs.length - 1)];
@@ -135,6 +136,7 @@ public final class DojutsuJutsu {
 			});
 			def.cast().accept(player);
 		}, specs);
+		requires(item, v -> v.MangekyouSharinganActivate && has.test(v), "Needs " + whose + "'s Mangekyou Sharingan, active");
 	}
 
 	private static void tell(ServerPlayer p, String message) {
@@ -352,8 +354,8 @@ public final class DojutsuJutsu {
 	private static final String KAMUI_RETURN = "naruto_shippuden:kamui_return";
 
 	/**
-	 * Kamui: space twists round the enemy looked at. A lesser creature is carried off into the Kamui dimension; anything stronger is
-	 * torn at.
+	 * Kamui: space twists round the one looked at and swallows them into the Kamui dimension. Players come back after fifteen
+	 * seconds; bosses are too big to take and are torn at instead.
 	 */
 	private static void kamui(ServerPlayer p, double range, int ticks) {
 		ServerLevel level = level(p);
@@ -379,11 +381,43 @@ public final class DojutsuJutsu {
 			EntityScale.set(target, EntityScale.BASE, 1);
 			level.sendParticles(ParticleTypes.REVERSE_PORTAL, centre.x, centre.y, centre.z, 40, 0.3, 0.6, 0.3, 0.2);
 			sound(level, target.position(), SoundEvents.ENDERMAN_TELEPORT, 1.5F, 0.5F);
-			if (!(target instanceof Player) && target.getMaxHealth() <= 60)
+			boolean boss = target instanceof net.minecraft.world.entity.boss.enderdragon.EnderDragon
+					|| target instanceof net.minecraft.world.entity.boss.wither.WitherBoss || target.getMaxHealth() > 300;
+			if (boss) {
+				damage(p, target, 40, Element.KAMUI);
+				return;
+			}
+			if (level.dimension().identifier().getPath().equals("kamui_dimension")) {
+				// already inside: Kamui throws them back out
+				Compat.runCommand(target, "/execute in minecraft:overworld run tp ~ 100 ~");
+				return;
+			}
+			if (target instanceof ServerPlayer victim) {
+				net.minecraft.nbt.CompoundTag back = returnPoint(victim);
+				Compat.runCommand(victim, "/execute in naruto_shippuden:kamui_dimension run tp @s ~ 71 ~");
+				victim.sendOverlayMessage(Component.literal("You were taken into the Kamui dimension"));
+				net.mcreator.narutoshippudenmod.core.NarutoActions.later(victim, 300, them -> {
+					if (them.level().dimension().identifier().getPath().equals("kamui_dimension"))
+						goBack(them, back);
+				});
+			} else
 				Compat.runCommand(target, "/execute in naruto_shippuden:kamui_dimension run tp ~ 71 ~");
-			else
-				damage(p, target, 25, Element.KAMUI);
 		});
+	}
+
+	private static net.minecraft.nbt.CompoundTag returnPoint(ServerPlayer p) {
+		net.minecraft.nbt.CompoundTag back = new net.minecraft.nbt.CompoundTag();
+		back.putString("dimension", p.level().dimension().identifier().toString());
+		back.putDouble("x", p.getX());
+		back.putDouble("y", p.getY());
+		back.putDouble("z", p.getZ());
+		return back;
+	}
+
+	private static void goBack(ServerPlayer p, net.minecraft.nbt.CompoundTag back) {
+		String dimension = back.getStringOr("dimension", "minecraft:overworld");
+		Compat.runCommand(p, String.format(java.util.Locale.ROOT, "/execute in %s run tp @s %.2f %.2f %.2f", dimension, back.getDoubleOr("x", p.getX()),
+				back.getDoubleOr("y", 100), back.getDoubleOr("z", p.getZ())));
 	}
 
 	/** Kamui's swirling hole in space around an entity, following it. */
@@ -411,18 +445,10 @@ public final class DojutsuJutsu {
 			if (!p.isAlive())
 				return;
 			sound(level, p.position(), SoundEvents.ENDERMAN_TELEPORT, 1, 0.6F);
-			if (inKamui) {
-				net.minecraft.nbt.CompoundTag back = p.getPersistentData().getCompoundOrEmpty(KAMUI_RETURN);
-				String dimension = back.getStringOr("dimension", "minecraft:overworld");
-				Compat.runCommand(p, String.format(java.util.Locale.ROOT, "/execute in %s run tp @s %.2f %.2f %.2f", dimension, back.getDoubleOr("x", p.getX()),
-						back.getDoubleOr("y", 100), back.getDoubleOr("z", p.getZ())));
-			} else {
-				net.minecraft.nbt.CompoundTag back = new net.minecraft.nbt.CompoundTag();
-				back.putString("dimension", level.dimension().identifier().toString());
-				back.putDouble("x", p.getX());
-				back.putDouble("y", p.getY());
-				back.putDouble("z", p.getZ());
-				p.getPersistentData().put(KAMUI_RETURN, back);
+			if (inKamui)
+				goBack(p, p.getPersistentData().getCompoundOrEmpty(KAMUI_RETURN));
+			else {
+				p.getPersistentData().put(KAMUI_RETURN, returnPoint(p));
 				Compat.runCommand(p, "/execute in naruto_shippuden:kamui_dimension run tp @s ~ 71 ~");
 			}
 		});
@@ -454,31 +480,24 @@ public final class DojutsuJutsu {
 	}
 
 	/**
-	 * While phasing, blocks don't stop the caster: collisions are off whenever they walk into a wall or stand inside one, and they
-	 * hover instead of sinking. The client moves the player, so it decides; the server just lets it happen.
+	 * While phasing, blocks don't stop the caster. Vanilla turns collisions back on at the start of every player tick, so the
+	 * client (which moves the player) turns them off again once the input is read (client/jutsu/KamuiClient), and the server
+	 * leaves them off after its tick, which is when it checks the moves the client sends.
 	 */
 	@SubscribeEvent
-	public static void phaseThroughWalls(net.neoforged.neoforge.event.tick.PlayerTickEvent.Pre event) {
-		Player player = event.getEntity();
+	public static void phaseThroughWalls(net.neoforged.neoforge.event.tick.PlayerTickEvent.Post event) {
+		if (!(event.getEntity() instanceof ServerPlayer player))
+			return;
 		if (!NarutoShippudenModVariables.get(player).KamuiPhantomPhase) {
-			if (player.noPhysics && !player.isSpectator() && player.getPersistentData().getBooleanOr(PHASED, false)) {
-				player.noPhysics = false;
+			if (player.getPersistentData().getBooleanOr(PHASED, false)) {
+				player.noPhysics = player.isSpectator();
 				player.getPersistentData().remove(PHASED);
 			}
 			return;
 		}
 		player.getPersistentData().putBoolean(PHASED, true);
-		if (!player.level().isClientSide()) {
-			player.noPhysics = true;
-			player.fallDistance = 0;
-			return;
-		}
-		Vec3 move = player.getDeltaMovement();
-		boolean inside = !player.level().noCollision(player, player.getBoundingBox().deflate(0.05));
-		boolean walling = !player.level().noCollision(player, player.getBoundingBox().move(move.x * 3, 0.05, move.z * 3).deflate(0.05, 0, 0.05));
-		player.noPhysics = inside || walling;
-		if (player.noPhysics)
-			player.setDeltaMovement(move.x, player.isShiftKeyDown() ? -0.15 : Math.max(0, move.y), move.z);
+		player.noPhysics = true;
+		player.fallDistance = 0;
 	}
 
 	private static final String PHASED = "naruto_shippuden:phased";
