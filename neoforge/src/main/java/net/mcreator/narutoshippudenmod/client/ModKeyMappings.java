@@ -21,7 +21,6 @@ public final class ModKeyMappings {
 	static final KeyMapping BYAKUGANKEYBINDING = new KeyMapping("key.naruto_shippuden.byakugan", InputConstants.KEY_B, KeyMapping.Category.MISC);
 	static final KeyMapping CHAKRACONTROLKEYBINDING = new KeyMapping("key.naruto_shippuden.chakra_control", InputConstants.KEY_G, KeyMapping.Category.MISC);
 	private static long ChakraControlKeyBinding_lastpress = 0;
-	static final KeyMapping CUSTOMDOJUTSUKEYBINDING = new KeyMapping("key.naruto_shippuden.custom_dojutsu", InputConstants.KEY_R, KeyMapping.Category.MISC);
 	static final KeyMapping FORWARDDASHKEYBINDING = new KeyMapping("key.naruto_shippuden.forwarddash", InputConstants.KEY_W, KeyMapping.Category.MISC);
 	private static long ForwardDashKeyBinding_lastpress = 0;
 	static final KeyMapping INFOCARDOPENKEYBINDING = new KeyMapping("key.naruto_shippuden.info_card_open", InputConstants.KEY_I, KeyMapping.Category.MISC);
@@ -43,7 +42,6 @@ public final class ModKeyMappings {
 		event.register(BACKDASHKEYBINDING);
 		event.register(BYAKUGANKEYBINDING);
 		event.register(CHAKRACONTROLKEYBINDING);
-		event.register(CUSTOMDOJUTSUKEYBINDING);
 		event.register(FORWARDDASHKEYBINDING);
 		event.register(INFOCARDOPENKEYBINDING);
 		event.register(ISSHIKIDOJUTSUKEYBINDING);
@@ -64,7 +62,6 @@ public final class ModKeyMappings {
 		onBackDashKeyBinding(event);
 		onByakuganKeyBinding(event);
 		onChakraControlKeyBinding(event);
-		onCustomDojutsuKeyBinding(event);
 		onForwardDashKeyBinding(event);
 		onInfoCardOpenKeyBinding(event);
 		onIsshikiDojutsuKeyBinding(event);
@@ -121,17 +118,6 @@ public final class ModKeyMappings {
 			}
 	}
 
-	private static void onCustomDojutsuKeyBinding(InputEvent.Key event) {
-
-			if (Minecraft.getInstance().gui.screen() == null) {
-				if (event.getKey() == CUSTOMDOJUTSUKEYBINDING.getKey().getValue()) {
-					if (event.getAction() == InputConstants.PRESS) {
-						NarutoShippudenMod.PACKET_HANDLER.sendToServer(new CustomDojutsuKeyBinding.KeyBindingPressedMessage(0, 0));
-						CustomDojutsuKeyBinding.pressAction(Minecraft.getInstance().player, 0, 0);
-					}
-				}
-			}
-	}
 
 	private static void onForwardDashKeyBinding(InputEvent.Key event) {
 

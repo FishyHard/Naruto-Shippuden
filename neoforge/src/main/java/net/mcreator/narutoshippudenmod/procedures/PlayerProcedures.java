@@ -1646,23 +1646,7 @@ public final class PlayerProcedures {
 					}
 				}
 			}
-			if (NarutoShippudenModVariables.get(entity).VolticThomasCannonDamage == true) {
-				{
-					List<Entity> _entfound = world
-							.getEntitiesOfClass(Entity.class,
-									new AABB(x - (3 / 2d), y - (3 / 2d), z - (3 / 2d), x + (3 / 2d), y + (3 / 2d), z + (3 / 2d)), e -> true)
-							.stream().sorted(new Object() {
-								Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
-									return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
-								}
-							}.compareDistOf(x, y, z)).collect(Collectors.toList());
-					for (Entity entityiterator : _entfound) {
-						if (!(entityiterator == entity)) {
-							entityiterator.hurt(Compat.damage().generic(), (float) 55);
-						}
-					}
-				}
-			}
+			
 			if (false && NarutoShippudenModVariables.get(entity).PassingFang == true) {
 				{
 					List<Entity> _entfound = world
@@ -3437,38 +3421,8 @@ public final class PlayerProcedures {
 							((ServerLevel) world).getGameRules().set(net.minecraft.world.level.gamerules.GameRules.FALL_DAMAGE, false, ((ServerLevel) world).getServer());
 						}
 					}
-					if ((entity.getDisplayName().getString()).equals("BoxDeity")) {
-						{
-							boolean _setval = (true);
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.BoxDeity = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						{
-							String _setval = "Voltic Mode";
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.DojutsuSelectResize = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-					}
-					if ((entity.getDisplayName().getString()).equals("TheSirMarcus")) {
-						{
-							boolean _setval = (true);
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.TheSirMarcus = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						{
-							String _setval = "Furamingogan";
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.DojutsuSelectResize = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-					}
+					
+					
 
 				} catch (IOException e) {
 					e.printStackTrace();

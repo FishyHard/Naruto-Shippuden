@@ -629,82 +629,6 @@
    ]
   },
   {
-   "proc": "FuramingoganTechniqueRightclicked",
-   "cls": "DojutsuProcedures",
-   "item": [
-    "FuramingoganTechniqueItem",
-    "furamingogan_technique"
-   ],
-   "tvar": "furamingogan_technique",
-   "ms": false,
-   "itemcd": [
-    "FuramingoganTechniqueItem",
-    "2500"
-   ],
-   "jutsu": [
-    {
-     "index": 0,
-     "name": "Furamingogan Secret Ritual",
-     "learn": [
-      "furamingoganlearn",
-      "1"
-     ],
-     "stat": [
-      "ninjutsu",
-      "15"
-     ],
-     "chakra": 150,
-     "cd": [
-      750,
-      500,
-      400,
-      300,
-      200
-     ]
-    },
-    {
-     "index": 1,
-     "name": "Furamingogan Beam",
-     "learn": [
-      "furamingoganlearn",
-      "2"
-     ],
-     "stat": [
-      "ninjutsu",
-      "20"
-     ],
-     "chakra": 350,
-     "cd": [
-      1500,
-      1000,
-      750,
-      500,
-      250
-     ]
-    },
-    {
-     "index": 2,
-     "name": "Furamingogan Jump",
-     "learn": [
-      "furamingoganlearn",
-      "3"
-     ],
-     "stat": [
-      "ninjutsu",
-      "25"
-     ],
-     "chakra": 500,
-     "cd": [
-      2500,
-      2000,
-      1500,
-      1000,
-      500
-     ]
-    }
-   ]
-  },
-  {
    "proc": "HozukiReleaseTechniqueRightclicked",
    "cls": "ClanProcedures",
    "item": [
@@ -2327,82 +2251,6 @@
    ]
   },
   {
-   "proc": "VolticModeTechniqueRightclicked",
-   "cls": "DojutsuProcedures",
-   "item": [
-    "VolticModeTechniqueItem",
-    "voltic_mode_technique"
-   ],
-   "tvar": "voltic_technique",
-   "ms": false,
-   "itemcd": [
-    "VolticModeTechniqueItem",
-    "3500"
-   ],
-   "jutsu": [
-    {
-     "index": 0,
-     "name": "Voltic Hammer",
-     "learn": [
-      "volticlearn",
-      "1"
-     ],
-     "stat": [
-      "ninjutsu",
-      "15"
-     ],
-     "chakra": 100,
-     "cd": [
-      200,
-      160,
-      120,
-      80,
-      40
-     ]
-    },
-    {
-     "index": 1,
-     "name": "Voltic Execution",
-     "learn": [
-      "volticlearn",
-      "2"
-     ],
-     "stat": [
-      "ninjutsu",
-      "20"
-     ],
-     "chakra": 450,
-     "cd": [
-      3000,
-      2500,
-      2000,
-      1500,
-      1000
-     ]
-    },
-    {
-     "index": 2,
-     "name": "Voltic Thomas Cannon",
-     "learn": [
-      "volticlearn",
-      "3"
-     ],
-     "stat": [
-      "ninjutsu",
-      "25"
-     ],
-     "chakra": 500,
-     "cd": [
-      3500,
-      3000,
-      2500,
-      2000,
-      1500
-     ]
-    }
-   ]
-  },
-  {
    "proc": "WaterReleaseTechniqueRightclicked",
    "cls": "NatureReleaseProcedures",
    "item": [
@@ -3014,48 +2862,6 @@
      "learn": [
       "3",
       "fumalearn"
-     ],
-     "give": null
-    }
-   ]
-  },
-  {
-   "proc": "FuramingoganReleaseRightclicked",
-   "item": [
-    "FuramingoganReleaseItem",
-    "furamingogan_release"
-   ],
-   "tiers": [
-    {
-     "counter": "furamingoganrelease",
-     "sneak": -1,
-     "tier": 0,
-     "cost": 15,
-     "learn": [
-      "1",
-      "furamingoganlearn"
-     ],
-     "give": "FuramingoganTechniqueItem"
-    },
-    {
-     "counter": "furamingoganrelease",
-     "sneak": -1,
-     "tier": 1,
-     "cost": 20,
-     "learn": [
-      "2",
-      "furamingoganlearn"
-     ],
-     "give": null
-    },
-    {
-     "counter": "furamingoganrelease",
-     "sneak": -1,
-     "tier": 2,
-     "cost": 25,
-     "learn": [
-      "3",
-      "furamingoganlearn"
      ],
      "give": null
     }
@@ -4371,48 +4177,6 @@
      "learn": [
       "3",
       "uzumakilearn"
-     ],
-     "give": null
-    }
-   ]
-  },
-  {
-   "proc": "VolticModeReleaseRightclicked",
-   "item": [
-    "VolticModeReleaseItem",
-    "voltic_mode_release"
-   ],
-   "tiers": [
-    {
-     "counter": "volticrelease",
-     "sneak": -1,
-     "tier": 0,
-     "cost": 25,
-     "learn": [
-      "1",
-      "volticlearn"
-     ],
-     "give": "VolticModeTechniqueItem"
-    },
-    {
-     "counter": "volticrelease",
-     "sneak": -1,
-     "tier": 1,
-     "cost": 35,
-     "learn": [
-      "2",
-      "volticlearn"
-     ],
-     "give": null
-    },
-    {
-     "counter": "volticrelease",
-     "sneak": -1,
-     "tier": 2,
-     "cost": 50,
-     "learn": [
-      "3",
-      "volticlearn"
      ],
      "give": null
     }

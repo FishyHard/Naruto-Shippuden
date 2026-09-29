@@ -2308,77 +2308,9 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-	public static class DisplayMarcus2x1Pupils1x1Procedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayMarcus2x1Pupils1x1!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
-					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1
-					&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Furamingogan")) {
-				return true;
-			}
-			return false;
-		}
-	}
 
-	public static class DisplayMarcus2x1Pupils2x1Procedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayMarcus2x1Pupils2x1!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
-					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1
-					&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Furamingogan")) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class DisplayMarcus2x2Pupils1x1Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayMarcus2x2Pupils1x1!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
-					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2
-					&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Furamingogan")) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class DisplayMarcus2x2Pupils2x1Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayMarcus2x2Pupils2x1!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
-					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2
-					&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Furamingogan")) {
-				return true;
-			}
-			return false;
-		}
-	}
 
 	public static class DisplayMinus2SelectProcedure {
 
@@ -3369,77 +3301,9 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-	public static class DisplayVoltic2x1Pupils1x1Procedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayVoltic2x1Pupils1x1!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
-					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1
-					&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Voltic Mode")) {
-				return true;
-			}
-			return false;
-		}
-	}
 
-	public static class DisplayVoltic2x1Pupils2x1Procedure {
 
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayVoltic2x1Pupils2x1!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
-					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1
-					&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Voltic Mode")) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class DisplayVoltic2x2Pupils1x1Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayVoltic2x2Pupils1x1!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
-					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2
-					&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Voltic Mode")) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class DisplayVoltic2x2Pupils2x1Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayVoltic2x2Pupils2x1!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
-					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2
-					&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Voltic Mode")) {
-				return true;
-			}
-			return false;
-		}
-	}
 
 	public static class DisplayWaterInfoProcedure {
 

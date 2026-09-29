@@ -66,10 +66,8 @@ public enum Element {
 	KAMUI(0xFF7A62A8, 0xFFE6DDFF, true, ParticleTypes.PORTAL, ParticleTypes.REVERSE_PORTAL, SoundEvents.ENDERMAN_TELEPORT, SoundEvents.ENDERMAN_TELEPORT),
 	/** Sharingan genjutsu: red and black. */
 	GENJUTSU(0xFFD4142A, 0xFFFFD0D0, true, new DustParticleOptions(0xD4142A, 1.0F), ParticleTypes.SQUID_INK, SoundEvents.ENDERMAN_STARE,
-			SoundEvents.PHANTOM_BITE),
-	/** The Furamingogan's pink chakra. */
-	FLAMINGO(0xFFFF6FB5, 0xFFFFE6F2, true, new DustParticleOptions(0xFF7AC0, 1.2F), ParticleTypes.END_ROD, SoundEvents.AMETHYST_BLOCK_RESONATE,
-			SoundEvents.AMETHYST_BLOCK_BREAK);
+			SoundEvents.PHANTOM_BITE);
+
 
 	/** ARGB colour of the outer body and of the bright core. */
 	public final int color, core;

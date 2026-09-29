@@ -229,7 +229,7 @@ public final class DevTest {
 	private static void jutsuSteps(Minecraft mc) {
 		String[] natures = { "fire", "water", "wind", "earth", "lightning", "boil", "bone", "dust", "ice", "magnet", "smoke", "steel", "storm", "swift",
 				"typhoon", "wood", "aburame", "akimichi", "fuma", "hozuki", "hyuga", "inuzuka", "izuno", "lee", "sarutobi", "tenro", "uzumaki",
-				"tsuchigumo", "sharingan", "furamingogan_technique", "isshiki_dojutsu", "voltic_mode_technique", "mangekyou_sharingan_itachi_release_technique",
+				"tsuchigumo", "sharingan", "isshiki_dojutsu", "mangekyou_sharingan_itachi_release_technique",
 				"mangekyou_sharingan_kakashi_release_technique", "mangekyou_sharingan_obito_release_technique", "mangekyou_sharingan_sasuke_release_technique" };
 		String only = System.getProperty("naruto.devtest.jutsu", "");
 		STEPS.add(() -> {
@@ -262,8 +262,8 @@ public final class DevTest {
 				v.aburamelearn = v.akimichilearn = v.fumalearn = v.hozukilearn = v.hyugalearn = v.inuzukalearn = v.izunolearn = v.leelearn = 9;
 				v.sarutobilearn = v.tenrolearn = v.uzumakilearn = v.tsuchigumolearn = 9;
 				v.taijutsu = v.summoning = 60;
-				v.sharingan = v.sharinganactivate = v.TheSirMarcus = v.BoxDeity = v.isshikidojutsu = v.isshikidojutsuactivate = v.MangekyouSharinganActivate = true;
-				v.sharinganlearn = v.furamingoganlearn = v.isshikidojutsulearn = v.volticlearn = v.mangekyoushrainganitachiamaterasulearn = 9;
+				v.sharingan = v.sharinganactivate = v.isshikidojutsu = v.isshikidojutsuactivate = v.MangekyouSharinganActivate = true;
+				v.sharinganlearn = v.isshikidojutsulearn = v.mangekyoushrainganitachiamaterasulearn = 9;
 				v.mangekyousharingankakashikamuilearn = v.mangekyousharinganobitokamuilearn = v.mangekyousharingansasukeamaterasulearn = 9;
 				v.ninjutsu = 60;
 				v.byakuganactivate = false;

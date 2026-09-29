@@ -963,3 +963,64 @@ def magnet_coat_ticks(path, text):
         return text
     rx = re.compile(r'\((NarutoShippudenModVariables\.get\(entity\)\.magnet_coat == \d\)) \{(?=\s*\n\s*if \(NarutoShippudenModVariables\.get\(entity\)\.ChakraAmount)')
     return rx.sub(r'(false && \1 {', text)
+
+
+# ---------------------------------------------------------------- the YouTuber dojutsu (Voltic Mode, Furamingogan) are removed
+YT_CLASSES = ['FuramingoganTechniqueItem', 'FuramingoganReleaseItem', 'FuramingoganBeamItem', 'VolticModeTechniqueItem', 'VolticModeReleaseItem',
+              'FuramingoganBeamProjectileHitsLivingEntityProcedure', 'FuramingoganReleaseRightclickedProcedure',
+              'FuramingoganTechniqueRightclickedProcedure', 'VolticModeReleaseRightclickedProcedure', 'VolticModeTechniqueRightclickedProcedure',
+              'FuramingoganBeamRenderer', 'FuramingoganParticleParticle', 'VolticParticleParticle', 'CustomDojutsuOnKeyPressedProcedure',
+              'CustomDojutsuKeyBinding'] + ['Display%s2x%dPupils%dx1Procedure' % (who, a, b) for who in ('Voltic', 'Marcus') for a in (1, 2) for b in (1, 2)]
+YT_VARS = ['BoxDeity', 'TheSirMarcus', 'TheSirMarcusDojutsuSelect', 'VolticMode', 'VolticThomasCannonDamage', 'Furamingogan', 'furamingogan_jump',
+           'furamingogan_technique', 'furamingoganlearn', 'furamingoganrelease', 'voltic_technique', 'volticlearn', 'volticrelease']
+
+
+def remove_class(text, name):
+    m = re.search(r'\n[ \t]*(?:@[\w.]+(?:\([^)]*\))?\s*)*(?:public |private |protected )?(?:static )?(?:final )?class %s\b' % name, text)
+    if not m:
+        return text
+    return text[:m.start()] + text[find_block(text, m.end()):]
+
+
+def remove_if_blocks(text, cond):
+    """Removes each `if (cond) {...}` (cond is a regex matching the whole condition), fixing up else-if chains."""
+    rx = re.compile(r'(\}\s*else\s+)?if \((%s)\) \{' % cond)
+    while True:
+        m = rx.search(text)
+        if not m:
+            return text
+        end = find_block(text, m.end() - 1)
+        rest = text[end:]
+        if m.group(1):
+            # "} else if (cond) {...}" -> "}"
+            text = text[:m.start()] + '}' + rest
+        else:
+            tail = re.match(r'\s*else\s+(if \(|\{)', rest)
+            if tail:
+                # "if (cond) {...} else if (x) {" -> "if (x) {";  "if (cond) {...} else {" -> "{"
+                text = text[:m.start()] + tail.group(1) + rest[tail.end():]
+            else:
+                text = text[:m.start()] + rest
+    return text
+
+
+@func
+def remove_youtuber_dojutsu(path, text):
+    """Voltic Mode and the Furamingogan were made for two YouTubers (given by player name); they and Custom Dojutsu are gone."""
+    if not re.search(r'Voltic|Furamingogan|BoxDeity|TheSirMarcus|CustomDojutsu|CUSTOMDOJUTSU|DisplayMarcus', text):
+        return text
+    for name in YT_CLASSES:
+        text = remove_class(text, name)
+    v = r'NarutoShippudenModVariables\.get\(entity\)\.'
+    text = remove_if_blocks(text, r'\(entity\.getDisplayName\(\)\.getString\(\)\)\.equals\("(?:BoxDeity|TheSirMarcus)"\)')
+    text = remove_if_blocks(text, v + r'(?:BoxDeity|TheSirMarcus|VolticThomasCannonDamage|furamingogan_jump|VolticMode|Furamingogan) == true')
+    text = re.sub(v + r'BoxDeity == false\s*&&\s*' + v + r'TheSirMarcus == false', 'true', text)
+    # statements, list entries and imports that name what was removed
+    names = '|'.join(YT_CLASSES + ['CUSTOMDOJUTSUKEYBINDING', 'onCustomDojutsuKeyBinding'])
+    text = re.sub(r'\n[^\n]*\b(?:%s)\b[^\n]*(?:;|\),)(?=\n)' % names, '', text)
+    m = re.search(r'\n\tprivate static void onCustomDojutsuKeyBinding\(', text)
+    if m:
+        text = text[:m.start()] + text[find_block(text, m.end()):]
+    if path.replace('\\', '/').endswith('NarutoShippudenModVariables.java'):
+        text = re.sub(r'\n[^\n]*\b(?:%s)\b[^\n]*(?=\n)' % '|'.join(YT_VARS), '', text)
+    return text

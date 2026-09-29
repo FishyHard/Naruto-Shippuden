@@ -1029,50 +1029,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-	public static class FuramingoganBeamRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, FuramingoganBeamItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
-		}
-
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::createBodyLayer);
-		}
-
-		public static class Modelphoenix_flower_jutsu extends EntityModel<EntityRenderState> {
-		public static final ModelLayerLocation LAYER = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "projectilerenderers_furamingoganbeam_modelphoenix_flower_jutsu"), "main");
-		public final ModelPart bb_main;
-		
-		public Modelphoenix_flower_jutsu(ModelPart root) {
-			super(root);
-			this.bb_main = root.getChild("transform0").getChild("bb_main");
-		}
-		
-		public static LayerDefinition createBodyLayer() {
-			MeshDefinition mesh = new MeshDefinition();
-			PartDefinition root = mesh.getRoot();
-			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
-			PartDefinition p1 = transform0.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(18, 47).addBox(-2.0F, -9.0F, -2.0F, 4.0F, 8.0F, 4.0F).texOffs(22, 24).addBox(-3.0F, -8.0F, -3.0F, 6.0F, 6.0F, 6.0F).texOffs(28, 14).addBox(-4.0F, -7.0F, -2.0F, 8.0F, 4.0F, 4.0F).texOffs(4, 18).addBox(-2.0F, -7.0F, -4.0F, 4.0F, 4.0F, 8.0F).texOffs(16, 36).addBox(-1.0F, -8.0F, -4.0F, 2.0F, 1.0F, 8.0F).texOffs(4, 30).addBox(-1.0F, -3.0F, -4.0F, 2.0F, 1.0F, 8.0F).texOffs(4, 39).addBox(2.0F, -6.0F, -4.0F, 1.0F, 2.0F, 8.0F).texOffs(28, 37).addBox(-3.0F, -6.0F, -4.0F, 1.0F, 2.0F, 8.0F).texOffs(30, 47).addBox(-4.0F, -8.0F, -1.0F, 8.0F, 1.0F, 2.0F).texOffs(26, 10).addBox(-4.0F, -3.0F, -1.0F, 8.0F, 1.0F, 2.0F).texOffs(4, 10).addBox(-4.0F, -6.0F, -3.0F, 8.0F, 2.0F, 6.0F).texOffs(34, 50).addBox(-3.0F, -9.0F, -1.0F, 6.0F, 1.0F, 2.0F).texOffs(40, 22).addBox(-1.0F, -9.0F, -3.0F, 2.0F, 1.0F, 6.0F).texOffs(44, 11).addBox(-3.0F, -2.0F, -1.0F, 6.0F, 1.0F, 2.0F).texOffs(38, 36).addBox(-1.0F, -2.0F, -3.0F, 2.0F, 1.0F, 6.0F), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-			return LayerDefinition.create(mesh, 64, 64);
-		}
-		
-		@Override
-		public void setupAnim(EntityRenderState state) {
-			super.setupAnim(state);
-			setupAnimCompat(state);
-		}
-		
-		private void setupAnimCompat(EntityRenderState state) {
-			float f = 0, f1 = 0, f2 = state.ageInTicks, f3 = 0, f4 = 0;
-			if (state instanceof LivingEntityRenderState living) {
-				f = living.walkAnimationPos;
-				f1 = living.walkAnimationSpeed;
-				f3 = living.yRot;
-				f4 = living.xRot;
-			}
-		
-		}
-		}
-	}
 
 	public static class FurykickRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {

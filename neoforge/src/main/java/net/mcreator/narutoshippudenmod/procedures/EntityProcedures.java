@@ -62,7 +62,6 @@ import net.mcreator.narutoshippudenmod.item.WeaponItems.ChakraBladeItem;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.KubikiribochoItem;
 import net.mcreator.narutoshippudenmod.particle.ModParticles.AshParticle;
 import net.mcreator.narutoshippudenmod.particle.ModParticles.FlameParticle;
-import net.mcreator.narutoshippudenmod.particle.ModParticles.FuramingoganParticleParticle;
 import net.mcreator.narutoshippudenmod.particle.ModParticles.SmokeParticle;
 import net.mcreator.narutoshippudenmod.particle.ModParticles.StormParticle;
 import net.mcreator.narutoshippudenmod.potion.ModEffects.DespawnPotionEffect;
@@ -1216,42 +1215,8 @@ public final class EntityProcedures {
 			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 			Entity entity = (Entity) dependencies.get("entity");
 			if (entity instanceof Player) {
-				if (NarutoShippudenModVariables.get(entity).furamingogan_jump == true) {
-					{
-						boolean _setval = (false);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.furamingogan_jump = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (world instanceof ServerLevel) {
-						((ServerLevel) world).sendParticles(FuramingoganParticleParticle.particle, x, y, z, (int) 150, 0, (-0.1), 0, 1);
-					}
-					{
-						List<Entity> _entfound = world
-								.getEntitiesOfClass(Entity.class,
-										new AABB(x - (15 / 2d), y - (15 / 2d), z - (15 / 2d), x + (15 / 2d), y + (15 / 2d), z + (15 / 2d)), e -> true)
-								.stream().sorted(new Object() {
-									Comparator<Entity> compareDistOf(double _x, double _y, double _z) {
-										return Comparator.comparing((Function<Entity, Double>) (_entcnd -> _entcnd.distanceToSqr(_x, _y, _z)));
-									}
-								}.compareDistOf(x, y, z)).collect(Collectors.toList());
-						for (Entity entityiterator : _entfound) {
-							if (!(entity == entityiterator)) {
-								entityiterator.hurt(Compat.damage().generic(), (float) 40);
-							}
-						}
-					}
-				}
-				if (NarutoShippudenModVariables.get(entity).VolticThomasCannonDamage == true) {
-					{
-						boolean _setval = (false);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.VolticThomasCannonDamage = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-				}
+				
+				
 				if (NarutoShippudenModVariables.get(entity).PassingFang == true) {
 					{
 						boolean _setval = (false);

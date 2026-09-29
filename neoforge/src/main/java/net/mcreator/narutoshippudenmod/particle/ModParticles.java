@@ -14,7 +14,6 @@ public final class ModParticles {
 		BlueSteamParticle.register();
 		ChakraParticle.register();
 		FlameParticle.register();
-		FuramingoganParticleParticle.register();
 		GreenSteamParticle.register();
 		KamuiParticleParticle.register();
 		LightningParticle.register();
@@ -23,7 +22,6 @@ public final class ModParticles {
 		StormParticle.register();
 		TailedBeastBombParticleBlueParticle.register();
 		TailedBeastBombParticleRedParticle.register();
-		VolticParticleParticle.register();
 	}
 
 	public static class AmaterasuFireParticle {
@@ -66,13 +64,6 @@ public final class ModParticles {
 		}
 	}
 
-	public static class FuramingoganParticleParticle {
-		public static SimpleParticleType particle;
-
-		static void register() {
-			Registration.add(Registries.PARTICLE_TYPE, "furamingogan_particle", () -> new SimpleParticleType(false), h -> particle = (SimpleParticleType) h.value());
-		}
-	}
 
 	public static class GreenSteamParticle {
 		public static SimpleParticleType particle;
@@ -138,11 +129,4 @@ public final class ModParticles {
 		}
 	}
 
-	public static class VolticParticleParticle {
-		public static SimpleParticleType particle;
-
-		static void register() {
-			Registration.add(Registries.PARTICLE_TYPE, "voltic_particle", () -> new SimpleParticleType(false), h -> particle = (SimpleParticleType) h.value());
-		}
-	}
 }

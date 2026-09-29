@@ -56,10 +56,6 @@ final class JutsuTable {
 				jutsu("Shuriken", v -> v.fumalearn, 1, "Ninjutsu", v -> v.ninjutsu, 15, 30, 140, 100, 60, 40, 20),
 				jutsu("Fuma Shuriken", v -> v.fumalearn, 2, "Ninjutsu", v -> v.ninjutsu, 20, 50, 140, 100, 60, 40, 20),
 				jutsu("Toroi Unique Fuma Shuriken", v -> v.fumalearn, 3, "Ninjutsu", v -> v.ninjutsu, 25, 80, 140, 100, 60, 40, 20));
-		technique("furamingogan_technique", v -> v.furamingogan_technique, (v, i) -> v.furamingogan_technique = i, null, DojutsuProcedures.FuramingoganTechniqueRightclickedProcedure::executeProcedure,
-				jutsu("Furamingogan Secret Ritual", v -> v.furamingoganlearn, 1, "Ninjutsu", v -> v.ninjutsu, 15, 150, 750, 500, 400, 300, 200),
-				jutsu("Furamingogan Beam", v -> v.furamingoganlearn, 2, "Ninjutsu", v -> v.ninjutsu, 20, 350, 1500, 1000, 750, 500, 250),
-				jutsu("Furamingogan Jump", v -> v.furamingoganlearn, 3, "Ninjutsu", v -> v.ninjutsu, 25, 500, 2500, 2000, 1500, 1000, 500));
 		technique("hozuki_release_technique", v -> v.hozukitechnique, (v, i) -> v.hozukitechnique = i, null, ClanProcedures.HozukiReleaseTechniqueRightclickedProcedure::executeProcedure,
 				jutsu("Drowning Water Blob Technique", v -> v.hozukilearn, 1, "Ninjutsu", v -> v.ninjutsu, 15, 200, 200, 160, 120, 80, 40),
 				jutsu("Water Gun Technique", v -> v.hozukilearn, 2, "Ninjutsu", v -> v.ninjutsu, 20, 300, 200, 160, 120, 80, 40),
@@ -147,10 +143,6 @@ final class JutsuTable {
 				jutsu("Adamantine Sealing Chains", v -> v.uzumakilearn, 1, null, v -> v.ninjutsu, 0, 0, 200, 160, 120, 80, 40),
 				jutsu("Heal Bite", v -> v.uzumakilearn, 2, null, v -> v.ninjutsu, 0, 0, 200, 160, 120, 80, 40),
 				jutsu("Dead Demon Consuming Seal", v -> v.uzumakilearn, 3, "Ninjutsu", v -> v.ninjutsu, 30, 500, 200, 160, 120, 80, 40));
-		technique("voltic_mode_technique", v -> v.voltic_technique, (v, i) -> v.voltic_technique = i, null, DojutsuProcedures.VolticModeTechniqueRightclickedProcedure::executeProcedure,
-				jutsu("Voltic Hammer", v -> v.volticlearn, 1, "Ninjutsu", v -> v.ninjutsu, 15, 100, 200, 160, 120, 80, 40),
-				jutsu("Voltic Execution", v -> v.volticlearn, 2, "Ninjutsu", v -> v.ninjutsu, 20, 450, 3000, 2500, 2000, 1500, 1000),
-				jutsu("Voltic Thomas Cannon", v -> v.volticlearn, 3, "Ninjutsu", v -> v.ninjutsu, 25, 500, 3500, 3000, 2500, 2000, 1500));
 		technique("water_release_technique", v -> v.water_technique, (v, i) -> v.water_technique = i, null, NatureReleaseProcedures.WaterReleaseTechniqueRightclickedProcedure::executeProcedure,
 				jutsu("Water Formation Wall", v -> v.waterlearn, 1, "Ninjutsu", v -> v.ninjutsu, 5, 100, 200, 160, 120, 80, 40),
 				jutsu("Water Gun", v -> v.waterlearn, 2, "Ninjutsu", v -> v.ninjutsu, 10, 150, 200, 160, 120, 80, 40),
@@ -206,9 +198,6 @@ final class JutsuTable {
 		release("fuma_release", ClanProcedures.FumaReleaseRightclickProcedure::executeProcedure,
 				track("", v -> v.fumarelease, -1, "fuma_release_technique", v -> v.fumalearn,
 					tier(10, 1, "fuma_release_technique"), tier(15, 2, null), tier(20, 3, null)));
-		release("furamingogan_release", DojutsuProcedures.FuramingoganReleaseRightclickedProcedure::executeProcedure,
-				track("", v -> v.furamingoganrelease, -1, "furamingogan_technique", v -> v.furamingoganlearn,
-					tier(15, 1, "furamingogan_technique"), tier(20, 2, null), tier(25, 3, null)));
 		release("hatake_release", ClanProcedures.HatakeReleaseRightclickedProcedure::executeProcedure,
 				track("", v -> v.hatakelearn, -1, null, null,
 					tier(5, 0, "white_light_chakra_sabre")));
@@ -314,9 +303,6 @@ final class JutsuTable {
 		release("uzumaki_release", ClanProcedures.UzumakiReleaseRightclickedProcedure::executeProcedure,
 				track("", v -> v.uzumakirelease, -1, "uzumaki_release_technique", v -> v.uzumakilearn,
 					tier(15, 1, "uzumaki_release_technique"), tier(20, 2, null), tier(25, 3, null)));
-		release("voltic_mode_release", DojutsuProcedures.VolticModeReleaseRightclickedProcedure::executeProcedure,
-				track("", v -> v.volticrelease, -1, "voltic_mode_technique", v -> v.volticlearn,
-					tier(25, 1, "voltic_mode_technique"), tier(35, 2, null), tier(50, 3, null)));
 		release("water_release", NatureReleaseProcedures.WaterReleaseRightClickedProcedure::executeProcedure,
 				track("", v -> v.water_release, -1, "water_release_technique", v -> v.waterlearn,
 					tier(5, 1, "water_release_technique"), tier(10, 2, null), tier(15, 3, null), tier(20, 4, null)));

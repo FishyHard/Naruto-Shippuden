@@ -83,7 +83,6 @@ public final class ModClient {
 		ProjectileRenderers.FlyingThunderGodKunaiBulletRenderer.registerRenderers(event);
 		ProjectileRenderers.FumaShurikenBulletRenderer.registerRenderers(event);
 		ProjectileRenderers.FumaShurikenClanRenderer.registerRenderers(event);
-		ProjectileRenderers.FuramingoganBeamRenderer.registerRenderers(event);
 		ProjectileRenderers.FurykickRenderer.registerRenderers(event);
 		ProjectileRenderers.GreatFireDragonRenderer.registerRenderers(event);
 		ProjectileRenderers.GreatFireballRenderer.registerRenderers(event);
@@ -206,7 +205,6 @@ public final class ModClient {
 		ProjectileRenderers.FlyingThunderGodKunaiBulletRenderer.registerLayers(event);
 		ProjectileRenderers.FumaShurikenBulletRenderer.registerLayers(event);
 		ProjectileRenderers.FumaShurikenClanRenderer.registerLayers(event);
-		ProjectileRenderers.FuramingoganBeamRenderer.registerLayers(event);
 		ProjectileRenderers.FurykickRenderer.registerLayers(event);
 		ProjectileRenderers.GreatFireDragonRenderer.registerLayers(event);
 		ProjectileRenderers.GreatFireballRenderer.registerLayers(event);

@@ -14,7 +14,6 @@ import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.BackDashOnKe
 import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.ByakuganOnKeyPressedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.ChakraControlOnKeyPressedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.ChakraControlOnKeyReleasedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.CustomDojutsuOnKeyPressedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.ForwardDashOnKeyPressedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.ForwardDashOnKeyReleasedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.InfoCardOpenOnKeyPressedProcedure;
@@ -211,57 +210,6 @@ public final class ModKeyBindings {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class CustomDojutsuKeyBinding extends NarutoShippudenModElements.ModElement {
-
-		public CustomDojutsuKeyBinding(NarutoShippudenModElements instance) {
-			super(instance, 673);
-			elements.addNetworkMessage(KeyBindingPressedMessage.class, KeyBindingPressedMessage::buffer, KeyBindingPressedMessage::new,
-					KeyBindingPressedMessage::handler);
-		}
-
-		public static class KeyBindingPressedMessage {
-			int type, pressedms;
-
-			public KeyBindingPressedMessage(int type, int pressedms) {
-				this.type = type;
-				this.pressedms = pressedms;
-			}
-
-			public KeyBindingPressedMessage(FriendlyByteBuf buffer) {
-				this.type = buffer.readInt();
-				this.pressedms = buffer.readInt();
-			}
-
-			public static void buffer(KeyBindingPressedMessage message, FriendlyByteBuf buffer) {
-				buffer.writeInt(message.type);
-				buffer.writeInt(message.pressedms);
-			}
-
-			public static void handler(KeyBindingPressedMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
-				NetworkEvent.Context context = contextSupplier.get();
-				context.enqueueWork(() -> {
-					pressAction(context.getSender(), message.type, message.pressedms);
-				});
-				context.setPacketHandled(true);
-			}
-		}
-
-		public static void pressAction(Player entity, int type, int pressedms) {
-			Level world = entity.level();
-			double x = entity.getX();
-			double y = entity.getY();
-			double z = entity.getZ();
-			// security measure to prevent arbitrary chunk generation
-			if (!world.hasChunkAt(BlockPos.containing(x, y, z)))
-				return;
-			if (type == 0) {
-
-				CustomDojutsuOnKeyPressedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-		}
-	}
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class ForwardDashKeyBinding extends NarutoShippudenModElements.ModElement {
