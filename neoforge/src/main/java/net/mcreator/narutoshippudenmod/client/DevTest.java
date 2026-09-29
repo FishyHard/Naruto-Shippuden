@@ -92,6 +92,39 @@ public final class DevTest {
 			STEPS.add(mc::stop);
 			return;
 		}
+		if (System.getProperty("naruto.devtest.only", "").equals("weapons")) {
+			weaponSteps(mc);
+			STEPS.add(mc::stop);
+			return;
+		}
+		if (System.getProperty("naruto.devtest.only", "").equals("akimichi")) {
+			STEPS.add(() -> {
+				mc.gui.setScreen(null);
+				mc.options.pauseOnLostFocus = false;
+				command(mc, "execute in minecraft:overworld run spreadplayers 0 0 0 1 false @s");
+				command(mc, "time set day");
+				mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
+				onServer(mc, p -> NarutoShippudenModVariables.ifPresent(p, v -> {
+					v.HumanBulletTank = true;
+					v.syncPlayerVariables(p);
+				}));
+			});
+			STEPS.add(() -> shot(mc, "aki_tank"));
+			STEPS.add(() -> onServer(mc, p -> NarutoShippudenModVariables.ifPresent(p, v -> {
+				v.HumanBulletTank = false;
+				v.ButterflyMode = true;
+				v.syncPlayerVariables(p);
+			})));
+			STEPS.add(() -> shot(mc, "aki_wings"));
+			STEPS.add(() -> mc.options.setCameraType(CameraType.THIRD_PERSON_BACK));
+			STEPS.add(() -> shot(mc, "aki_wings_back"));
+			STEPS.add(() -> onServer(mc, p -> NarutoShippudenModVariables.ifPresent(p, v -> {
+				v.ButterflyMode = false;
+				v.syncPlayerVariables(p);
+			})));
+			STEPS.add(mc::stop);
+			return;
+		}
 		if (System.getProperty("naruto.devtest.only", "").equals("eyes")) {
 			eyeSteps(mc);
 			STEPS.add(mc::stop);
@@ -240,7 +273,8 @@ public final class DevTest {
 		STEPS.add(() -> {
 			mc.gui.setScreen(null);
 			mc.options.pauseOnLostFocus = false;
-			arena[0] = mc.player.position();
+			// back to the overworld surface (a Kamui test may have left the player in its dimension)
+			command(mc, "execute in minecraft:overworld run spreadplayers 0 0 0 1 false @s");
 			mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
 			command(mc, "kill @e[type=!player]");
 			command(mc, "time set day");
@@ -289,6 +323,8 @@ public final class DevTest {
 				int freeze = nature.equals("lightning") && i == 3 ? 19 : nature.equals("lightning") && i == 2 ? 13 : FREEZE_AT[Math.min(i, 3)];
 				STEPS.add(() -> {
 					command(mc, "item replace entity @s weapon.mainhand with naruto_shippuden:" + item(nature));
+					if (arena[0] == null)
+						arena[0] = mc.player.position();
 					// transformations and dashes carry the player off: end them and go back to the arena
 					command(mc, String.format(java.util.Locale.ROOT, "tp @s %.2f %.2f %.2f 0 5", arena[0].x, arena[0].y, arena[0].z));
 					onServer(mc, player -> {
@@ -313,8 +349,11 @@ public final class DevTest {
 				STEPS.add(() -> {
 					command(mc, "tick freeze");
 					// Kirin comes from the sky: look up at its dive
+					// jutsu that land on the target: frame the training targets instead of the caster
+					boolean onTarget = nature.startsWith("isshiki") || nature.startsWith("mangekyou");
+					boolean onCaster = nature.equals("akimichi");
 					command(mc, nature.equals("lightning") && i == 3 ? "execute at @s rotated ~ 0 run tp @s ^-14 ^3 ^4 facing ^ ^12 ^14"
-							: "execute at @s rotated ~ 0 run tp @s ^-8 ^2.5 ^7 facing ^ ^1 ^7");
+							: onCaster ? "execute at @s rotated ~ 0 run tp @s ^-3 ^2 ^-4 facing ^ ^1.2 ^" : onTarget ? "execute at @s rotated ~ 0 run tp @s ^-11 ^4 ^12 facing ^ ^1.5 ^16" : "execute at @s rotated ~ 0 run tp @s ^-8 ^2.5 ^7 facing ^ ^1 ^7");
 					mc.options.setCameraType(CameraType.FIRST_PERSON);
 					nextDelay = 6;
 				});
@@ -371,22 +410,66 @@ public final class DevTest {
 		STEPS.add(() -> { state.accept("sneak tap"); NarutoShippudenMod.LOGGER.info("DEVTEST eyes key category {}", EyeKeys.DOJUTSU.getCategory().label().getString()); });
 	}
 
+	/** The thrown weapons in a row in front of the camera, held still, from the front and the side. */
+	private static void weaponSteps(Minecraft mc) {
+		STEPS.add(() -> {
+			mc.gui.setScreen(null);
+			mc.options.pauseOnLostFocus = false;
+			mc.options.setCameraType(CameraType.FIRST_PERSON);
+			command(mc, "execute in minecraft:overworld run spreadplayers 0 0 0 1 false @s");
+			command(mc, "time set day");
+			command(mc, "kill @e[type=!player]");
+			command(mc, "fill ~-12 ~ ~-4 ~12 ~12 ~16 air");
+			command(mc, "tp @s ~ ~ ~ 0 10");
+		});
+		STEPS.add(() -> {
+			command(mc, "tick freeze");
+			onServer(mc, player -> {
+				net.minecraft.world.entity.EntityType<?>[] types = { net.mcreator.narutoshippudenmod.item.ProjectileItems.ShurikenBulletItem.arrow,
+						net.mcreator.narutoshippudenmod.item.ProjectileItems.KunaiBulletItem.arrow,
+						net.mcreator.narutoshippudenmod.item.ProjectileItems.PoisonKunaiBulletItem.arrow,
+						net.mcreator.narutoshippudenmod.item.ProjectileItems.ExplosiveKunaiBulletItem.arrow,
+						net.mcreator.narutoshippudenmod.item.ProjectileItems.FlyingThunderGodKunaiBulletItem.arrow,
+						net.mcreator.narutoshippudenmod.item.ProjectileItems.FumaShurikenBulletItem.arrow };
+				for (int i = 0; i < types.length; i++) {
+					net.minecraft.world.entity.Entity e = types[i].create(player.level(), net.minecraft.world.entity.EntitySpawnReason.COMMAND);
+					e.snapTo(player.getX() + (i - 2.5) * 0.9, player.getEyeY() - 0.4, player.getZ() + 3, 90, 0);
+					e.setNoGravity(true);
+					player.level().addFreshEntity(e);
+				}
+			});
+			nextDelay = 10;
+		});
+		STEPS.add(() -> shot(mc, "weapons"));
+		STEPS.add(() -> {
+			command(mc, "execute at @s run tp @s ~3 ~ ~3 90 10");
+			nextDelay = 10;
+		});
+		STEPS.add(() -> shot(mc, "weapons_side"));
+		STEPS.add(() -> command(mc, "tick unfreeze"));
+	}
+
 	/** Jutsu models side by side, frozen in the air in front of the camera. */
 	private static void modelSteps(Minecraft mc) {
 		STEPS.add(() -> {
 			mc.gui.setScreen(null);
 			mc.options.setCameraType(CameraType.FIRST_PERSON);
+			command(mc, "execute in minecraft:overworld run spreadplayers 0 0 0 1 false @s");
 			command(mc, "kill @e[type=!player]");
 			command(mc, "time set day");
 			command(mc, "tp @s ~ ~ ~ 0 0");
+			command(mc, "fill ~-12 ~ ~-4 ~12 ~12 ~16 air");
 			String[] ids = System.getProperty("naruto.devtest.models", "kirin,projectile_great_fire_dragon,projectile_great_fireball,projectile_lightning_ball,projectile_rasenshuriken")
 					.split(",");
 			for (int i = 0; i < ids.length; i++)
 				command(mc, "summon naruto_shippuden:" + ids[i] + " ~" + (i - ids.length / 2) * 3 + " ~1.5 ~8 {NoAI:1b,NoGravity:1b,Motion:[0d,0d,0d],Rotation:[180f,0f]}");
+			// thrown weapons vanish once they stop: hold everything still
+			command(mc, "tick freeze");
 		});
 		STEPS.add(() -> shot(mc, "models"));
 		STEPS.add(() -> command(mc, "tp @s ~ ~ ~ 60 0"));
 		STEPS.add(() -> shot(mc, "models_side"));
+		STEPS.add(() -> command(mc, "tick unfreeze"));
 	}
 
 	/** The Shinobi Merchant's shop, and a kill made by a jutsu summon counting for the player. */

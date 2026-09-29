@@ -41,7 +41,7 @@ public final class SummonRenderers {
 
 	public static class AkamaruRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.mob(event, AkamaruEntity.entity, ModelAkamaru_Young.LAYER, ModelAkamaru_Young::new, 0.15F, Identifier.parse("naruto_shippuden:textures/entities/akamaru_young.png"));
+			// drawn by client.jutsu.AkamaruRenderer
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {

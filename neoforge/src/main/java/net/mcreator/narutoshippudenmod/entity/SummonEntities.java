@@ -142,99 +142,18 @@ public final class SummonEntities {
 
 			@Override
 			protected void registerGoals() {
-				super.registerGoals();
-				this.goalSelector.addGoal(1, new FollowOwnerGoal(this, 1, (float) 6, (float) 32) {
-					@Override
-					public boolean canUse() {
-						double x = CustomEntity.this.getX();
-						double y = CustomEntity.this.getY();
-						double z = CustomEntity.this.getZ();
-						Entity entity = CustomEntity.this;
-						return super.canUse() && FollowAkamaruProcedure.executeProcedure(
-								Stream.of(new AbstractMap.SimpleEntry<>("world", level()), new AbstractMap.SimpleEntry<>("entity", entity))
-										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-					}
-				});
-				this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2, false) {
-					@Override
-					protected boolean canPerformAttack(LivingEntity entity) {
-						return this.isTimeToAttack() && this.mob.distanceToSqr(entity) <= ((double) (4.0 + entity.getBbWidth() * entity.getBbWidth())) && this.mob.getSensing().hasLineOfSight(entity);
-					}
-
-					@Override
-					public boolean canUse() {
-						double x = CustomEntity.this.getX();
-						double y = CustomEntity.this.getY();
-						double z = CustomEntity.this.getZ();
-						Entity entity = CustomEntity.this;
-						return super.canUse() && FollowAkamaruProcedure.executeProcedure(
-								Stream.of(new AbstractMap.SimpleEntry<>("world", level()), new AbstractMap.SimpleEntry<>("entity", entity))
-										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-					}
-
-				});
-				this.goalSelector.addGoal(3, new OwnerHurtByTargetGoal(this) {
-					@Override
-					public boolean canUse() {
-						double x = CustomEntity.this.getX();
-						double y = CustomEntity.this.getY();
-						double z = CustomEntity.this.getZ();
-						Entity entity = CustomEntity.this;
-						return super.canUse() && FollowAkamaruProcedure.executeProcedure(
-								Stream.of(new AbstractMap.SimpleEntry<>("world", level()), new AbstractMap.SimpleEntry<>("entity", entity))
-										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-					}
-				});
-				this.goalSelector.addGoal(4, new OwnerHurtTargetGoal(this) {
-					@Override
-					public boolean canUse() {
-						double x = CustomEntity.this.getX();
-						double y = CustomEntity.this.getY();
-						double z = CustomEntity.this.getZ();
-						Entity entity = CustomEntity.this;
-						return super.canUse() && FollowAkamaruProcedure.executeProcedure(
-								Stream.of(new AbstractMap.SimpleEntry<>("world", level()), new AbstractMap.SimpleEntry<>("entity", entity))
-										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-					}
-				});
-				this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, (float) 6));
-				this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, ServerPlayer.class, (float) 6));
-				this.goalSelector.addGoal(7, new RandomLookAroundGoal(this) {
-					@Override
-					public boolean canUse() {
-						double x = CustomEntity.this.getX();
-						double y = CustomEntity.this.getY();
-						double z = CustomEntity.this.getZ();
-						Entity entity = CustomEntity.this;
-						return super.canUse() && NotFollowAkamaruProcedure.executeProcedure(
-								Stream.of(new AbstractMap.SimpleEntry<>("world", level()), new AbstractMap.SimpleEntry<>("entity", entity))
-										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-					}
-				});
-				this.goalSelector.addGoal(8, new FloatGoal(this) {
-					@Override
-					public boolean canUse() {
-						double x = CustomEntity.this.getX();
-						double y = CustomEntity.this.getY();
-						double z = CustomEntity.this.getZ();
-						Entity entity = CustomEntity.this;
-						return super.canUse() && NotFollowAkamaruProcedure.executeProcedure(
-								Stream.of(new AbstractMap.SimpleEntry<>("world", level()), new AbstractMap.SimpleEntry<>("entity", entity))
-										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-					}
-				});
-				this.goalSelector.addGoal(9, new RandomStrollGoal(this, 1) {
-					@Override
-					public boolean canUse() {
-						double x = CustomEntity.this.getX();
-						double y = CustomEntity.this.getY();
-						double z = CustomEntity.this.getZ();
-						Entity entity = CustomEntity.this;
-						return super.canUse() && NotFollowAkamaruProcedure.executeProcedure(
-								Stream.of(new AbstractMap.SimpleEntry<>("world", level()), new AbstractMap.SimpleEntry<>("entity", entity))
-										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-					}
-				});
+				// a tamed wolf's mind: sits when told, follows, leaps and bites, defends its owner
+				this.goalSelector.addGoal(1, new FloatGoal(this));
+				this.goalSelector.addGoal(2, new net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal(this));
+				this.goalSelector.addGoal(3, new net.minecraft.world.entity.ai.goal.LeapAtTargetGoal(this, 0.4F));
+				this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.2, true));
+				this.goalSelector.addGoal(5, new FollowOwnerGoal(this, 1.1, 8F, 3F));
+				this.goalSelector.addGoal(7, new net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal(this, 1));
+				this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8F));
+				this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
+				this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
+				this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
+				this.targetSelector.addGoal(3, new net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal(this));
 			}
 
 			@Override
@@ -279,62 +198,30 @@ public final class SummonEntities {
 				double z = this.getZ();
 				Entity entity = this;
 
-				AkamaruOnInitialEntitySpawnProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				return retval;
 			}
 
 			@Override
-			public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
-				ItemStack itemstack = sourceentity.getItemInHand(hand);
-				InteractionResult retval = InteractionResult.SUCCESS;
-				Item item = itemstack.getItem();
-				if (itemstack.getItem() instanceof SpawnEggItem) {
-					retval = super.mobInteract(sourceentity, hand);
-				} else if (this.level().isClientSide()) {
-					retval = (this.isTame() && this.isOwnedBy(sourceentity) || this.isFood(itemstack))
-							? InteractionResult.SUCCESS
-							: InteractionResult.PASS;
-				} else {
-					if (this.isTame()) {
-						if (this.isOwnedBy(sourceentity)) {
-							if (item.components().has(net.minecraft.core.component.DataComponents.FOOD) && this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem((Player) sourceentity, hand, itemstack);
-								this.heal((float) itemstack.get(net.minecraft.core.component.DataComponents.FOOD).nutrition());
-								retval = InteractionResult.SUCCESS;
-							} else if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
-								this.usePlayerItem((Player) sourceentity, hand, itemstack);
-								this.heal(4);
-								retval = InteractionResult.SUCCESS;
-							} else {
-								retval = super.mobInteract(sourceentity, hand);
-							}
-						}
-					} else if (this.isFood(itemstack)) {
-						this.usePlayerItem((Player) sourceentity, hand, itemstack);
-						if (this.random.nextInt(3) == 0 && !net.neoforged.neoforge.event.EventHooks.onAnimalTame(this, sourceentity)) {
-							this.tame(sourceentity);
-							this.level().broadcastEntityEvent(this, (byte) 7);
-						} else {
-							this.level().broadcastEntityEvent(this, (byte) 6);
-						}
-						this.setPersistenceRequired();
-						retval = InteractionResult.SUCCESS;
-					} else {
-						retval = super.mobInteract(sourceentity, hand);
-						if (retval == InteractionResult.SUCCESS || retval == InteractionResult.CONSUME)
-							this.setPersistenceRequired();
+			public InteractionResult mobInteract(Player player, InteractionHand hand) {
+				ItemStack stack = player.getItemInHand(hand);
+				if (!this.isTame() || !this.isOwnedBy(player))
+					return super.mobInteract(player, hand);
+				if (this.isFood(stack) && this.getHealth() < this.getMaxHealth()) {
+					if (!this.level().isClientSide()) {
+						this.usePlayerItem(player, hand, stack);
+						this.heal(8);
+						this.level().broadcastEntityEvent(this, (byte) 7);
 					}
+					return InteractionResult.SUCCESS;
 				}
-				double x = this.getX();
-				double y = this.getY();
-				double z = this.getZ();
-				Entity entity = this;
-
-				AkamaruRightClickedOnEntityProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return retval;
+				// right-click: sit / stand
+				if (!this.level().isClientSide()) {
+					this.setOrderedToSit(!this.isOrderedToSit());
+					this.jumping = false;
+					this.navigation.stop();
+					this.setTarget(null);
+				}
+				return InteractionResult.SUCCESS;
 			}
 
 			@Override
@@ -346,9 +233,7 @@ public final class SummonEntities {
 
 			@Override
 			public boolean isFood(ItemStack stack) {
-				if (stack == null)
-					return false;
-				return false;
+				return stack != null && stack.is(net.minecraft.tags.ItemTags.MEAT);
 			}
 		}
 	}

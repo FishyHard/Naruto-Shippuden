@@ -1448,7 +1448,7 @@ public final class GuiDisplayProcedures {
 			Entity entity = (Entity) dependencies.get("entity");
 			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
 					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1
-					&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Isshiki Dojutsu")) {
+					&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Kokugan")) {
 				return true;
 			}
 			return false;
@@ -1466,7 +1466,7 @@ public final class GuiDisplayProcedures {
 			Entity entity = (Entity) dependencies.get("entity");
 			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
 					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1
-					&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Isshiki Dojutsu")) {
+					&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Kokugan")) {
 				return true;
 			}
 			return false;
@@ -1484,7 +1484,7 @@ public final class GuiDisplayProcedures {
 			Entity entity = (Entity) dependencies.get("entity");
 			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
 					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2
-					&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Isshiki Dojutsu")) {
+					&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Kokugan")) {
 				return true;
 			}
 			return false;
@@ -1502,7 +1502,7 @@ public final class GuiDisplayProcedures {
 			Entity entity = (Entity) dependencies.get("entity");
 			if (NarutoShippudenModVariables.get(entity).Pupils_Height == 2
 					&& NarutoShippudenModVariables.get(entity).Eyes_Height == 2
-					&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Isshiki Dojutsu")) {
+					&& (NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Kokugan")) {
 				return true;
 			}
 			return false;

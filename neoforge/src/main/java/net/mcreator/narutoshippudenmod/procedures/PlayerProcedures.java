@@ -375,10 +375,10 @@ public final class PlayerProcedures {
 						return false;
 					}
 				}.checkGamemode(entity))) {
-					if (NarutoShippudenModVariables.get(entity).KamuiPhantomPhase == true) {
+					if (false) {
 						entity.noPhysics = true;
 						entity.setDeltaMovement((entity.getLookAngle().x * 0.25), (entity.getLookAngle().y * 0.25), (entity.getLookAngle().z * 0.25));
-					} else if (NarutoShippudenModVariables.get(entity).KamuiPhantomPhase == false) {
+					} else if (false) {
 						entity.noPhysics = false;
 					}
 				}
@@ -3507,74 +3507,9 @@ public final class PlayerProcedures {
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/bugs.png", InsectJarTechniqueRenderer.Modeleight_trigrams_palms_revolving_heaven.LAYER, InsectJarTechniqueRenderer.Modeleight_trigrams_palms_revolving_heaven::new);
 				}
 			}
-			if (NarutoShippudenModVariables.get(entity).HumanBulletTank == true) {
-				if (_evt.getRenderer() instanceof AvatarRenderer) {
-					if (_evt instanceof RenderLivingEvent.Pre _cancelable) {
-						_cancelable.setCanceled(true);
-					}
-					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/human_bullet_tank.png", HumanBulletTankRenderer.ModelHuman_Bullet_Tank.LAYER, HumanBulletTankRenderer.ModelHuman_Bullet_Tank::new);
-				}
-			}
-			if (NarutoShippudenModVariables.get(entity).SpikedHumanBulletTank == true) {
-				if (_evt.getRenderer() instanceof AvatarRenderer) {
-					if (_evt instanceof RenderLivingEvent.Pre _cancelable) {
-						_cancelable.setCanceled(true);
-					}
-					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/spiked_human_bullet_tank.png", SpikedHumanBulletTankRenderer.Modelspiked_human_bullet_tank.LAYER, SpikedHumanBulletTankRenderer.Modelspiked_human_bullet_tank::new);
-				}
-			}
-			if (NarutoShippudenModVariables.get(entity).ButterflyMode == true) {
-				if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Blue")) {
-					if (_evt.getRenderer() instanceof AvatarRenderer) {
-						if (_evt instanceof RenderLivingEvent.Pre) {
-							//  _evt.setCanceled(true); 
-						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_blue.png", ButterflyModeRenderer.ModelButterflyMode.LAYER, ButterflyModeRenderer.ModelButterflyMode::new);
-					}
-				} else if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Green")) {
-					if (_evt.getRenderer() instanceof AvatarRenderer) {
-						if (_evt instanceof RenderLivingEvent.Pre) {
-							//  _evt.setCanceled(true); 
-						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_green.png", ButterflyModeRenderer.ModelButterflyMode.LAYER, ButterflyModeRenderer.ModelButterflyMode::new);
-					}
-				} else if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Orange")) {
-					if (_evt.getRenderer() instanceof AvatarRenderer) {
-						if (_evt instanceof RenderLivingEvent.Pre) {
-							//  _evt.setCanceled(true); 
-						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_orange.png", ButterflyModeRenderer.ModelButterflyMode.LAYER, ButterflyModeRenderer.ModelButterflyMode::new);
-					}
-				} else if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Pink")) {
-					if (_evt.getRenderer() instanceof AvatarRenderer) {
-						if (_evt instanceof RenderLivingEvent.Pre) {
-							//  _evt.setCanceled(true); 
-						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_pink.png", ButterflyModeRenderer.ModelButterflyMode.LAYER, ButterflyModeRenderer.ModelButterflyMode::new);
-					}
-				} else if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Purple")) {
-					if (_evt.getRenderer() instanceof AvatarRenderer) {
-						if (_evt instanceof RenderLivingEvent.Pre) {
-							//  _evt.setCanceled(true); 
-						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_purple.png", ButterflyModeRenderer.ModelButterflyMode.LAYER, ButterflyModeRenderer.ModelButterflyMode::new);
-					}
-				} else if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Red")) {
-					if (_evt.getRenderer() instanceof AvatarRenderer) {
-						if (_evt instanceof RenderLivingEvent.Pre) {
-							//  _evt.setCanceled(true); 
-						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_red.png", ButterflyModeRenderer.ModelButterflyMode.LAYER, ButterflyModeRenderer.ModelButterflyMode::new);
-					}
-				} else if ((NarutoShippudenModVariables.get(entity).ButterFlyModeColor).equals("Yellow")) {
-					if (_evt.getRenderer() instanceof AvatarRenderer) {
-						if (_evt instanceof RenderLivingEvent.Pre) {
-							//  _evt.setCanceled(true); 
-						}
-						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/akimichi_butterfly_yellow.png", ButterflyModeRenderer.ModelButterflyMode.LAYER, ButterflyModeRenderer.ModelButterflyMode::new);
-					}
-				}
-			}
+			
+			
+			
 			if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 				if (NarutoShippudenModVariables.get(entity).MangekyouSharinganSasuke == true) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {

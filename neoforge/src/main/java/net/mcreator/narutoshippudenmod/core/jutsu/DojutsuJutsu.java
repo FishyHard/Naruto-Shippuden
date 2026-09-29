@@ -82,11 +82,16 @@ public final class DojutsuJutsu {
 				new Def("Demonic Illusion: Mirage Crow", JutsuRank.B, DojutsuJutsu::mirageCrow),
 				new Def("Demonic Illusion: Shackling Stakes Technique", JutsuRank.A, DojutsuJutsu::shacklingStakes));
 		requires("sharingan_release_technique", v -> v.sharingan && v.sharinganactivate, "Activate your Sharingan first");
-		nature("isshiki_dojutsu", "Isshiki's Dojutsu", v -> v.isshikidojutsu, v -> v.isshikidojutsutechnique, (v, i) -> v.isshikidojutsutechnique = i,
+		// the Kokugan (the items keep their old "isshiki_dojutsu" ids)
+		nature("isshiki_dojutsu", "the Kokugan", v -> v.isshikidojutsu, v -> v.isshikidojutsutechnique, (v, i) -> v.isshikidojutsutechnique = i,
 				v -> v.isshikidojutsulearn, (v, i) -> v.isshikidojutsulearn = i, v -> v.isshikidojutsurelease, (v, i) -> v.isshikidojutsurelease = i,
-				new Def("Sukunahikona", JutsuRank.A, DojutsuJutsu::sukunahikona),
-				new Def("Daikokuten: Disruption Cube", JutsuRank.S, DojutsuJutsu::disruptionCube));
-		requires("isshiki_dojutsu_release_technique", v -> v.isshikidojutsu && v.isshikidojutsuactivate, "Activate Isshiki's Dojutsu first");
+				new Def("Sukunahikona", JutsuRank.B, DojutsuJutsu::sukunahikona),
+				new Def("Sukunahikona: Rapid Succession", JutsuRank.B, DojutsuJutsu::rapidSuccession),
+				new Def("Lacquer Bloom", JutsuRank.A, DojutsuJutsu::lacquerBloom),
+				new Def("Black Holy Hammer", JutsuRank.A, DojutsuJutsu::blackHolyHammer),
+				new Def("Daikokuten: Daihakoten", JutsuRank.A, DojutsuJutsu::daihakoten),
+				new Def("Daikokuten: Falling Star", JutsuRank.S, DojutsuJutsu::fallingStar));
+		requires("isshiki_dojutsu_release_technique", v -> v.isshikidojutsu && v.isshikidojutsuactivate, "Activate the Kokugan first");
 
 		// the Mangekyou: only the jutsu (their scrolls also sell the Susanoo stages)
 		mangekyou("mangekyou_sharingan_itachi_release_technique", v -> 0, (v, i) -> {
@@ -357,42 +362,55 @@ public final class DojutsuJutsu {
 			tell(p, "Nothing to take");
 			return;
 		}
-		float size = Math.max(target.getBbWidth(), target.getBbHeight()) + 1;
-		shell(p, target, target.getBoundingBox().getCenter(), Element.KAMUI, size, ticks);
+		float size = Math.max(target.getBbWidth(), target.getBbHeight()) * 1.6F + 1;
+		Vec3 centre = target.getBoundingBox().getCenter();
+		wormhole(p, target, size, ticks + 6);
 		sound(level, target.position(), SoundEvents.PORTAL_TRIGGER, 0.6F, 1.6F);
-		channel(p, ticks, 1, t -> {
+		channel(p, ticks, 2, t -> {
 			if (!target.isAlive())
 				return;
 			hold(target);
-			Vec3 c = target.getBoundingBox().getCenter();
-			double r = size * (1 - t / (double) ticks);
-			for (int i = 0; i < 4; i++) {
-				double a = t * 0.6 + i * Math.PI / 2;
-				level.sendParticles(ParticleTypes.PORTAL, c.x + Math.cos(a) * r, c.y + (i - 1.5) * 0.3, c.z + Math.sin(a) * r, 1, 0, 0, 0, 0);
-			}
+			// sucked into the swirl: the target shrinks towards its centre
+			EntityScale.set(target, EntityScale.BASE, Math.max(0.1, 1 - 0.9 * t / (double) ticks));
 		});
 		after(level, ticks, () -> {
-			if (!target.isAlive() || !p.isAlive())
+			if (!target.isAlive())
 				return;
-			level.sendParticles(ParticleTypes.REVERSE_PORTAL, target.getX(), target.getY() + 1, target.getZ(), 40, 0.3, 0.6, 0.3, 0.2);
+			EntityScale.set(target, EntityScale.BASE, 1);
+			level.sendParticles(ParticleTypes.REVERSE_PORTAL, centre.x, centre.y, centre.z, 40, 0.3, 0.6, 0.3, 0.2);
 			sound(level, target.position(), SoundEvents.ENDERMAN_TELEPORT, 1.5F, 0.5F);
-			if (!(target instanceof Player) && target.getMaxHealth() <= 60) {
-				target.getPersistentData().putString(KAMUI_RETURN, "gone");
+			if (!(target instanceof Player) && target.getMaxHealth() <= 60)
 				Compat.runCommand(target, "/execute in naruto_shippuden:kamui_dimension run tp ~ 71 ~");
-			} else
+			else
 				damage(p, target, 25, Element.KAMUI);
+		});
+	}
+
+	/** Kamui's swirling hole in space around an entity, following it. */
+	private static void wormhole(ServerPlayer p, LivingEntity on, float size, int ticks) {
+		JutsuProjectile hole = spawn(p, Element.KAMUI, Shape.VORTEX, size, on.getBoundingBox().getCenter().subtract(0, size / 2, 0), Vec3.ZERO, 0);
+		hole.pierce = -1;
+		hole.knockback = 0;
+		hole.life = ticks;
+		channel(p, ticks, 1, t -> {
+			if (on.isAlive() && hole.isAlive())
+				hole.setPos(on.getBoundingBox().getCenter().subtract(0, size / 2, 0));
 		});
 	}
 
 	/** Kamui to the caster's own dimension, or back to where they left from. */
 	private static void kamuiTeleport(ServerPlayer p) {
 		ServerLevel level = level(p);
-		level.sendParticles(ParticleTypes.PORTAL, p.getX(), p.getY() + 1, p.getZ(), 60, 0.4, 0.8, 0.4, 0.5);
-		sound(level, p.position(), SoundEvents.ENDERMAN_TELEPORT, 1, 0.6F);
+		wormhole(p, p, 3.4F, 18);
+		sound(level, p.position(), SoundEvents.PORTAL_TRIGGER, 0.5F, 1.8F);
+		// swirled away into the hole
+		channel(p, 16, 2, t -> EntityScale.set(p, EntityScale.BASE, Math.max(0.1, 1 - t / 16.0)));
 		boolean inKamui = level.dimension().identifier().getPath().equals("kamui_dimension");
-		after(level, 10, () -> {
+		after(level, 16, () -> {
+			EntityScale.set(p, EntityScale.BASE, 1);
 			if (!p.isAlive())
 				return;
+			sound(level, p.position(), SoundEvents.ENDERMAN_TELEPORT, 1, 0.6F);
 			if (inKamui) {
 				net.minecraft.nbt.CompoundTag back = p.getPersistentData().getCompoundOrEmpty(KAMUI_RETURN);
 				String dimension = back.getStringOr("dimension", "minecraft:overworld");
@@ -412,18 +430,68 @@ public final class DojutsuJutsu {
 
 	private static final Map<UUID, Long> PHASING = new HashMap<>();
 
-	/** Five seconds partly in the Kamui dimension: attacks pass through, and so does the caster through walls. */
+	/**
+	 * Five seconds partly in the Kamui dimension: attacks and projectiles pass through, enemies lose track of the caster, and the
+	 * caster walks through walls (see {@link #phaseThroughWalls}).
+	 */
 	private static void phantomPhasing(ServerPlayer p) {
 		ServerLevel level = level(p);
 		PHASING.put(p.getUUID(), level.getGameTime() + 100);
 		flag(p, 100, v -> v.KamuiPhantomPhase = true, v -> v.KamuiPhantomPhase = false);
-		sound(level, p.position(), SoundEvents.ENDERMAN_TELEPORT, 1, 1.4F);
-		channel(p, 100, 2, t -> level.sendParticles(ParticleTypes.PORTAL, p.getX(), p.getY() + 1, p.getZ(), 6, 0.4, 0.8, 0.4, 0.3));
+		wormhole(p, p, 2.6F, 100);
+		sound(level, p.position(), SoundEvents.PORTAL_TRIGGER, 0.5F, 1.8F);
+		channel(p, 100, 2, t -> {
+			level.sendParticles(ParticleTypes.PORTAL, p.getX(), p.getY() + 1, p.getZ(), 4, 0.4, 0.8, 0.4, 0.3);
+			for (Mob mob : level.getEntitiesOfClass(Mob.class, p.getBoundingBox().inflate(24), m -> m.getTarget() == p))
+				mob.setTarget(null);
+		});
 		after(level, 102, () -> {
 			// never leave the caster stuck inside a wall
+			p.noPhysics = false;
 			for (int i = 0; i < 12 && p.isAlive() && !level.noCollision(p); i++)
 				p.teleportTo(p.getX(), p.getY() + 1, p.getZ());
 		});
+	}
+
+	/**
+	 * While phasing, blocks don't stop the caster: collisions are off whenever they walk into a wall or stand inside one, and they
+	 * hover instead of sinking. The client moves the player, so it decides; the server just lets it happen.
+	 */
+	@SubscribeEvent
+	public static void phaseThroughWalls(net.neoforged.neoforge.event.tick.PlayerTickEvent.Pre event) {
+		Player player = event.getEntity();
+		if (!NarutoShippudenModVariables.get(player).KamuiPhantomPhase) {
+			if (player.noPhysics && !player.isSpectator() && player.getPersistentData().getBooleanOr(PHASED, false)) {
+				player.noPhysics = false;
+				player.getPersistentData().remove(PHASED);
+			}
+			return;
+		}
+		player.getPersistentData().putBoolean(PHASED, true);
+		if (!player.level().isClientSide()) {
+			player.noPhysics = true;
+			player.fallDistance = 0;
+			return;
+		}
+		Vec3 move = player.getDeltaMovement();
+		boolean inside = !player.level().noCollision(player, player.getBoundingBox().deflate(0.05));
+		boolean walling = !player.level().noCollision(player, player.getBoundingBox().move(move.x * 3, 0.05, move.z * 3).deflate(0.05, 0, 0.05));
+		player.noPhysics = inside || walling;
+		if (player.noPhysics)
+			player.setDeltaMovement(move.x, player.isShiftKeyDown() ? -0.15 : Math.max(0, move.y), move.z);
+	}
+
+	private static final String PHASED = "naruto_shippuden:phased";
+
+	@SubscribeEvent
+	public static void phasedProjectile(net.neoforged.neoforge.event.entity.ProjectileImpactEvent event) {
+		if (event.getRayTraceResult() instanceof net.minecraft.world.phys.EntityHitResult hit && isPhasing(hit.getEntity()))
+			event.setCanceled(true);
+	}
+
+	private static boolean isPhasing(net.minecraft.world.entity.Entity entity) {
+		Long until = PHASING.get(entity.getUUID());
+		return until != null && entity.level().getGameTime() <= until;
 	}
 
 	@SubscribeEvent
@@ -443,43 +511,136 @@ public final class DojutsuJutsu {
 		}
 	}
 
-	// ------------------------------------------------------------------ isshiki
-	/** Sukunahikona: the enemy looked at shrinks to a third of their size for ten seconds, weak and nearly harmless. */
+	// ------------------------------------------------------------------ kokugan
+	/** A black rod that appears tiny and snaps to full size (Sukunahikona undone), pointed along the given direction. */
+	private static JutsuProjectile rod(ServerPlayer p, Vec3 at, Vec3 velocity, Vec3 facing, float size, float damage, int growAfter) {
+		JutsuProjectile rod = spawn(p, Element.KOKUGAN, Shape.ROD, 0.12F, at, velocity, damage);
+		rod.setYRot((float) (Mth.atan2(facing.x, facing.z) * Mth.RAD_TO_DEG));
+		rod.setXRot((float) (Mth.atan2(facing.y, facing.horizontalDistance()) * Mth.RAD_TO_DEG));
+		rod.knockback = 0.3F;
+		after(level(p), growAfter, () -> {
+			if (rod.isAlive()) {
+				rod.look(Element.KOKUGAN, Shape.ROD, size);
+				level(p).sendParticles(Element.KOKUGAN.puff, rod.getX(), rod.getY() + size / 2, rod.getZ(), 6, 0.2, 0.2, 0.2, 0.02);
+			}
+		});
+		return rod;
+	}
+
+	/** Sukunahikona: the caster shrinks to a speck for three seconds; attacks miss them and enemies lose sight of them. */
 	private static void sukunahikona(ServerPlayer p) {
 		ServerLevel level = level(p);
-		LivingEntity target = target(p, 20);
-		if (target == null) {
-			tell(p, "No one to shrink");
-			return;
+		level.sendParticles(Element.KOKUGAN.trail, p.getX(), p.getY() + 1, p.getZ(), 20, 0.3, 0.6, 0.3, 0.05);
+		sound(level, p.position(), SoundEvents.ILLUSIONER_MIRROR_MOVE, 1, 1.6F);
+		PHASING.put(p.getUUID(), level.getGameTime() + 60);
+		mode(p, 60, 0.12F, v -> {
+		}, v -> {
+		}, t -> {
+			if (t % 10 == 0)
+				keep(p, MobEffects.SPEED, 2);
+			for (Mob mob : level.getEntitiesOfClass(Mob.class, p.getBoundingBox().inflate(24), m -> m.getTarget() == p))
+				mob.setTarget(null);
+			if (t == 59)
+				level.sendParticles(Element.KOKUGAN.trail, p.getX(), p.getY() + 1, p.getZ(), 20, 0.3, 0.6, 0.3, 0.05);
+		});
+	}
+
+	/** Sukunahikona: Rapid Succession: shrunken rods flicked out that snap to full size in flight. */
+	private static void rapidSuccession(ServerPlayer p) {
+		channel(p, 10, 2, t -> {
+			Vec3 dir = turned(p, (p.getRandom().nextFloat() - 0.5F) * 6, (p.getRandom().nextFloat() - 0.5F) * 4);
+			JutsuProjectile rod = rod(p, p.getEyePosition().add(dir.scale(0.8)).subtract(0, 0.2, 0), dir.scale(2.4), dir, 0.9F, 6, 3);
+			rod.life = 25;
+			rod.pierce = 1;
+			sound(level(p), p.getEyePosition(), SoundEvents.ILLUSIONER_MIRROR_MOVE, 0.6F, 1.8F);
+		});
+	}
+
+	/** Lacquer Bloom: shrunken rods under the enemy burst to full size, impaling and pinning them for three seconds. */
+	private static void lacquerBloom(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity target = target(p, 24);
+		Vec3 feet = target != null ? target.position() : lookPoint(p, 24);
+		Vec3 centre = target != null ? target.getBoundingBox().getCenter() : feet.add(0, 1, 0);
+		for (int i = 0; i < 6; i++) {
+			double a = i * Math.PI / 3 + 0.3;
+			Vec3 base = feet.add(Math.cos(a) * 1.6, 0, Math.sin(a) * 1.6), toward = centre.subtract(base).normalize();
+			JutsuProjectile rod = rod(p, base.add(toward.scale(0.9)).subtract(0, 0.8, 0), Vec3.ZERO, toward, 1.6F, 0, 4 + i);
+			rod.life = 70;
+			rod.pierce = -1;
+			rod.knockback = 0;
 		}
-		EntityScale.set(target, EntityScale.BASE, 0.35);
-		target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200, 3, false, true));
-		damage(p, target, 6, Element.MAGNET);
-		level.sendParticles(ParticleTypes.REVERSE_PORTAL, target.getX(), target.getY() + 0.5, target.getZ(), 30, 0.4, 0.4, 0.4, 0.1);
-		sound(level, target.position(), SoundEvents.ILLUSIONER_MIRROR_MOVE, 1.2F, 1.5F);
-		after(level, 200, () -> {
-			if (target.isAlive()) {
-				EntityScale.set(target, EntityScale.BASE, 1);
-				level.sendParticles(ParticleTypes.POOF, target.getX(), target.getY() + 0.5, target.getZ(), 12, 0.3, 0.3, 0.3, 0.05);
+		sound(level, feet, SoundEvents.ILLUSIONER_MIRROR_MOVE, 1.5F, 1.2F);
+		after(level, 6, () -> {
+			sound(level, feet, SoundEvents.TRIDENT_HIT, 1.5F, 0.6F);
+			for (LivingEntity hit : enemies(level, p, new AABB(feet, feet).inflate(2.2, 3, 2.2), e -> true)) {
+				damage(p, hit, 14, Element.KOKUGAN);
+				channel(p, 60, 1, t -> {
+					if (hit.isAlive())
+						hold(hit);
+				});
 			}
 		});
 	}
 
-	/** Daikokuten: a giant black cube, pulled out of time, drops onto the enemy. */
-	private static void disruptionCube(ServerPlayer p) {
+	/** Black Holy Hammer: one enormous rod drops from above and nails the enemy to the ground. */
+	private static void blackHolyHammer(ServerPlayer p) {
 		ServerLevel level = level(p);
-		LivingEntity target = target(p, 30);
-		Vec3 at = target != null ? target.position() : lookPoint(p, 30);
-		JutsuProjectile cube = spawn(p, Element.MAGNET, Shape.CUBE, 3.2F, at.add(0, 14, 0), new Vec3(0, -1.3, 0), 30);
+		LivingEntity target = target(p, 28);
+		Vec3 at = target != null ? target.position() : lookPoint(p, 28);
+		JutsuProjectile hammer = rod(p, at.add(0, 10, 0), new Vec3(0, -1.6, 0), new Vec3(0, -1, 0), 3.2F, 22, 1);
+		hammer.life = 20;
+		hammer.pierce = -1;
+		hammer.knockback = 0;
+		hammer.onHit = (h, hit) -> channel(p, 80, 1, t -> {
+			if (hit.isAlive())
+				hold(hit);
+		});
+		hammer.onImpact = h -> {
+			burst(level, h.position(), 3, 8, 0.5F, Element.KOKUGAN, h);
+			puff(level, h.position(), Element.EARTH, 2.5F);
+			sound(level, h.position(), SoundEvents.ANVIL_LAND, 1.5F, 0.5F);
+		};
+		sound(level, at, SoundEvents.ILLUSIONER_MIRROR_MOVE, 1.5F, 0.6F);
+	}
+
+	/** A Daikokuten cube dropped from above; after landing it stays a moment before it is taken back. */
+	private static void cube(ServerPlayer p, Vec3 over, float size, float damage) {
+		ServerLevel level = level(p);
+		JutsuProjectile cube = spawn(p, Element.KOKUGAN, Shape.DAIKOKUTEN, size, over, new Vec3(0, -1.3, 0), damage);
+		cube.setYRot(p.getRandom().nextFloat() * 90);
 		cube.pierce = -1;
-		cube.life = 30;
+		cube.life = 40;
 		cube.knockback = 0;
 		cube.onImpact = c -> {
-			burst(level, c.position(), 4.5F, 20, 1.2F, Element.MAGNET, c);
-			puff(level, c.position(), Element.EARTH, 4);
+			burst(level, c.position(), size + 1, damage * 0.6F, 1.2F, Element.KOKUGAN, c);
+			puff(level, c.position(), Element.EARTH, size + 1);
 			sound(level, c.position(), SoundEvents.ANVIL_LAND, 2, 0.4F);
+			JutsuProjectile resting = spawn(p, Element.KOKUGAN, Shape.DAIKOKUTEN, size, c.position(), Vec3.ZERO, 0);
+			resting.setYRot(c.getYRot());
+			resting.pierce = -1;
+			resting.knockback = 0;
+			resting.life = 60;
+			resting.onImpact = r -> level.sendParticles(Element.KOKUGAN.puff, r.getX(), r.getY() + size / 2, r.getZ(), 30, size / 2, size / 2, size / 2, 0.02);
 		};
-		level.sendParticles(ParticleTypes.REVERSE_PORTAL, at.x, at.y + 14, at.z, 60, 1.6, 1.6, 1.6, 0.1);
-		sound(level, at, SoundEvents.ILLUSIONER_MIRROR_MOVE, 2, 0.5F);
+		level.sendParticles(Element.KOKUGAN.puff, over.x, over.y + size / 2, over.z, 30, size / 2, size / 2, size / 2, 0.02);
+	}
+
+	/** Daikokuten: Daihakoten: a huge black cube, taken out of a dimension where time does not flow, drops onto the enemy. */
+	private static void daihakoten(ServerPlayer p) {
+		LivingEntity target = target(p, 30);
+		Vec3 at = target != null ? target.position() : lookPoint(p, 30);
+		cube(p, at.add(0, 12, 0), 3.5F, 28);
+		sound(level(p), at, SoundEvents.ILLUSIONER_MIRROR_MOVE, 2, 0.5F);
+	}
+
+	/** Daikokuten: Falling Star: a rain of cubes over the area looked at. */
+	private static void fallingStar(ServerPlayer p) {
+		Vec3 at = lookPoint(p, 30);
+		sound(level(p), at, SoundEvents.ILLUSIONER_MIRROR_MOVE, 2, 0.4F);
+		channel(p, 32, 4, t -> {
+			double a = p.getRandom().nextDouble() * Math.PI * 2, r = p.getRandom().nextDouble() * 6;
+			cube(p, at.add(Math.cos(a) * r, 14 + p.getRandom().nextDouble() * 4, Math.sin(a) * r), 2.4F + p.getRandom().nextFloat(), 18);
+		});
 	}
 }

@@ -1215,7 +1215,7 @@ public final class GuiProcedures {
 			if (true) {
 				if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Sharingan")) {
 					{
-						String _setval = "Isshiki Dojutsu";
+						String _setval = "Kokugan";
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
 							capability.DojutsuSelectResize = _setval;
 							capability.syncPlayerVariables(entity);
@@ -1303,7 +1303,7 @@ public final class GuiProcedures {
 							capability.syncPlayerVariables(entity);
 						});
 					}
-				} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Isshiki Dojutsu")) {
+				} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Kokugan")) {
 					{
 						String _setval = "Tenseigan";
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
@@ -1403,13 +1403,13 @@ public final class GuiProcedures {
 					}
 				} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Tenseigan")) {
 					{
-						String _setval = "Isshiki Dojutsu";
+						String _setval = "Kokugan";
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
 							capability.DojutsuSelectResize = _setval;
 							capability.syncPlayerVariables(entity);
 						});
 					}
-				} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Isshiki Dojutsu")) {
+				} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Kokugan")) {
 					{
 						String _setval = "Sharingan";
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
@@ -3858,7 +3858,7 @@ public final class GuiProcedures {
 						});
 					}
 				}
-			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Isshiki Dojutsu")) {
+			} else if ((NarutoShippudenModVariables.get(entity).DojutsuSelectResize).equals("Kokugan")) {
 				if (NarutoShippudenModVariables.get(entity).Pupils_Height == 1
 						&& NarutoShippudenModVariables.get(entity).Eyes_Height == 1) {
 					{

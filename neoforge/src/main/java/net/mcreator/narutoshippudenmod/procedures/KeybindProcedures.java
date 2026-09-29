@@ -507,7 +507,7 @@ public final class KeybindProcedures {
 			if (NarutoShippudenModVariables.get(entity).isshikidojutsu == true) {
 				if (NarutoShippudenModVariables.get(entity).isshikidojutsuactivate == false) {
 					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendSystemMessage(Component.literal("\u00A76Isshiki Dojutsu!"));
+						((Player) entity).sendSystemMessage(Component.literal("\u00A76Kokugan!"));
 					}
 					if (entity instanceof LivingEntity)
 						((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.STRENGTH, (int) 999999, (int) 3, (false), (false)));
@@ -544,7 +544,7 @@ public final class KeybindProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).isshikidojutsu == false) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked Isshiki Dojutsu"));
+					((Player) entity).sendSystemMessage(Component.literal("You haven't unlocked Kokugan"));
 				}
 			}
 		}

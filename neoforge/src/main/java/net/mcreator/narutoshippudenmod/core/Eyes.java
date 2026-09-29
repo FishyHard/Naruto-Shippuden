@@ -41,7 +41,7 @@ public final class Eyes {
 			new Eye("tenseigan", "Tenseigan", v -> v.tenseigan, v -> v.tenseiganactivate, KeybindProcedures.TenseiganOnKeyPressedProcedure::executeProcedure),
 			new Eye("ketsuryugan", "Ketsuryugan", v -> v.ketsuryugan, v -> v.ketsuryuganactivate,
 					KeybindProcedures.KetsuryuganOnKeyPressedProcedure::executeProcedure),
-			new Eye("isshiki", "Isshiki's Dojutsu", v -> v.isshikidojutsu, v -> v.isshikidojutsuactivate,
+			new Eye("isshiki", "Kokugan", v -> v.isshikidojutsu, v -> v.isshikidojutsuactivate,
 					KeybindProcedures.IsshikiDojutsuOnKeyPressedProcedure::executeProcedure));
 	private static final String PREFERRED = "naruto_shippuden:preferred_eye";
 

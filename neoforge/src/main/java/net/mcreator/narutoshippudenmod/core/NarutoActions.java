@@ -102,7 +102,7 @@ public final class NarutoActions {
 				DojutsuProcedures.RinneganAwakeProcedure::executeProcedure);
 		dojutsu("tenseigan", "Tenseigan", CheatProcedures.CheatDojutsuButtonTenseiganProcedure::executeProcedure,
 				DojutsuProcedures.TenseiganAwakeProcedure::executeProcedure);
-		dojutsu("isshiki_dojutsu", "Isshiki Dojutsu", CheatProcedures.CheatDojutsuButtonIsshikiDojutsuProcedure::executeProcedure,
+		dojutsu("isshiki_dojutsu", "Kokugan", CheatProcedures.CheatDojutsuButtonIsshikiDojutsuProcedure::executeProcedure,
 				DojutsuProcedures.IsshikiDojutsuAwakeProcedure::executeProcedure);
 		dojutsu("kakashi_sharingan", "Kakashi Sharingan", CheatProcedures.KakashiSharinganCheatProcedure::executeProcedure,
 				DojutsuProcedures.KakashiSharinganAwakeProcedure::executeProcedure);

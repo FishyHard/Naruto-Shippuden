@@ -820,7 +820,7 @@ public final class DojutsuProcedures {
 
 					private void run() {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("You've awakened Isshiki Dojutsu!"));
+							((Player) entity).sendSystemMessage(Component.literal("You've awakened Kokugan!"));
 						}
 						{
 							boolean _setval = (true);
@@ -866,7 +866,7 @@ public final class DojutsuProcedures {
 			}
 			Entity entity = (Entity) dependencies.get("entity");
 			if (entity instanceof Player && !entity.level().isClientSide()) {
-				((Player) entity).sendSystemMessage(Component.literal("You've awakened Isshiki Dojutsu!"));
+				((Player) entity).sendSystemMessage(Component.literal("You've awakened Kokugan!"));
 			}
 			{
 				boolean _setval = (true);
@@ -1255,7 +1255,7 @@ public final class DojutsuProcedures {
 						}
 					} else if (NarutoShippudenModVariables.get(entity).isshikidojutsuactivate == false) {
 						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendSystemMessage(Component.literal("Activate Isshiki Dojutsu"));
+							((Player) entity).sendSystemMessage(Component.literal("Activate Kokugan"));
 						}
 					}
 				} else if (NarutoShippudenModVariables.get(entity).isshikidojutsu == false) {

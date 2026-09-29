@@ -41,7 +41,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.OwnableEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -132,8 +134,8 @@ public final class ClanJutsu {
 				new Def("Fire Dragon Flame Bullet", JutsuRank.B, ClanJutsu::flameBullet));
 		nature("uzumaki", "Uzumaki Clan", v -> v.uzumakireleaselogic, v -> v.uzumakitechnique, (v, i) -> v.uzumakitechnique = i,
 				v -> v.uzumakilearn, (v, i) -> v.uzumakilearn = i, v -> v.uzumakirelease, (v, i) -> v.uzumakirelease = i,
-				new Def("Heal Bite", JutsuRank.D, ClanJutsu::healBite),
 				new Def("Adamantine Sealing Chains", JutsuRank.C, ClanJutsu::sealingChains),
+				new Def("Heal Bite", JutsuRank.B, ClanJutsu::healBite),
 				new Def("Dead Demon Consuming Seal", JutsuRank.S, ClanJutsu::deadDemon));
 		nature("tsuchigumo", "Tsuchigumo Clan", v -> v.tsuchigumoreleaselogic, v -> 0, (v, i) -> {
 		}, v -> v.tsuchigumolearn, (v, i) -> v.tsuchigumolearn = i, v -> v.tsuchigumorelease, (v, i) -> v.tsuchigumorelease = i,
@@ -415,6 +417,7 @@ public final class ClanJutsu {
 		});
 	}
 
+	private static final Identifier BUTTERFLY_WINGS = Identifier.fromNamespaceAndPath("naruto_shippuden", "butterfly_wings");
 	private static final List<String> BUTTERFLY = List.of("Blue", "Green", "Orange", "Pink", "Purple", "Red");
 
 	/** Burns fat into chakra: glowing butterfly wings and thirty seconds of overwhelming strength. */
@@ -423,16 +426,32 @@ public final class ClanJutsu {
 		puff(level, p.position().add(0, 1, 0), Element.CHAKRA, 3);
 		level.sendParticles(ParticleTypes.END_ROD, p.getX(), p.getY() + 1, p.getZ(), 60, 0.5, 1, 0.5, 0.25);
 		sound(level, p.position(), SoundEvents.BEACON_POWER_SELECT, 1.5F, 0.6F);
+		net.minecraft.world.entity.ai.attributes.AttributeInstance glide = p.getAttribute(net.neoforged.neoforge.common.NeoForgeMod.GLIDING_FLIGHT);
 		mode(p, 600, 1, v -> {
 			v.ButterflyMode = true;
 			if (!BUTTERFLY.contains(v.ButterFlyModeColor))
 				v.ButterFlyModeColor = "Blue";
-		}, v -> v.ButterflyMode = false, t -> {
+			// the wings glide like an elytra (jump in mid-air to spread them)
+			if (glide != null && !glide.hasModifier(BUTTERFLY_WINGS))
+				glide.addTransientModifier(new net.minecraft.world.entity.ai.attributes.AttributeModifier(BUTTERFLY_WINGS, 1,
+						net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_VALUE));
+		}, v -> {
+			v.ButterflyMode = false;
+			if (glide != null)
+				glide.removeModifier(BUTTERFLY_WINGS);
+		}, t -> {
 			if (t % 10 == 0) {
 				keep(p, MobEffects.STRENGTH, 3);
 				keep(p, MobEffects.SPEED, 1);
 				keep(p, MobEffects.RESISTANCE, 1);
 				keep(p, MobEffects.JUMP_BOOST, 1);
+			}
+			// the wings beat: while gliding they carry the caster along their look (climbing too), like a steady rocket
+			if (p.isFallFlying() && t % 2 == 0) {
+				Vec3 look = p.getLookAngle(), motion = p.getDeltaMovement();
+				Vec3 pushed = motion.add(look.scale(0.1)).add(look.scale(1.2).subtract(motion).scale(0.08));
+				p.setDeltaMovement(pushed.length() > 1.6 ? pushed.normalize().scale(1.6) : pushed);
+				p.syncVelocity = true;
 			}
 			if (t % 3 == 0)
 				level.sendParticles(Element.CHAKRA.trail, p.getX(), p.getY() + 1.3, p.getZ(), 3, 0.9, 0.5, 0.9, 0.01);
@@ -660,27 +679,30 @@ public final class ClanJutsu {
 	}
 
 	// ------------------------------------------------------------------ inuzuka
-	/** Calls Akamaru (again, if he is already out) to fight alongside for a minute. */
+	/** The caster's Akamaru within range, if any. */
+	private static AkamaruEntity.@Nullable CustomEntity akamaruOf(ServerPlayer p, double range) {
+		return level(p).getEntitiesOfClass(AkamaruEntity.CustomEntity.class, p.getBoundingBox().inflate(range), d -> d.isOwnedBy(p)).stream().findFirst()
+				.orElse(null);
+	}
+
+	/** Akamaru to the caster's side: called over (and healed) if he is around, otherwise summoned. He stays, like a tamed wolf. */
 	private static void akamaru(ServerPlayer p) {
 		ServerLevel level = level(p);
-		for (AkamaruEntity.CustomEntity old : level.getEntitiesOfClass(AkamaruEntity.CustomEntity.class, p.getBoundingBox().inflate(64), d -> d.isOwnedBy(p))) {
-			puff(level, old.position().add(0, 0.4, 0), Element.BEAST, 0.8F);
-			old.discard();
-		}
 		Vec3 at = p.position().add(p.getLookAngle().multiply(1, 0, 1).normalize().scale(2));
-		AkamaruEntity.CustomEntity dog = new AkamaruEntity.CustomEntity(AkamaruEntity.entity, level);
-		dog.snapTo(at.x, p.getY(), at.z, p.getYRot(), 0);
-		dog.finalizeSpawn(level, level.getCurrentDifficultyAt(dog.blockPosition()), EntitySpawnReason.MOB_SUMMONED, null);
-		dog.tame(p);
-		level.addFreshEntity(dog);
+		AkamaruEntity.CustomEntity dog = akamaruOf(p, 96);
+		if (dog != null) {
+			dog.setOrderedToSit(false);
+			dog.teleportTo(at.x, p.getY(), at.z);
+			dog.heal(dog.getMaxHealth());
+		} else {
+			dog = new AkamaruEntity.CustomEntity(AkamaruEntity.entity, level);
+			dog.snapTo(at.x, p.getY(), at.z, p.getYRot(), 0);
+			dog.finalizeSpawn(level, level.getCurrentDifficultyAt(dog.blockPosition()), EntitySpawnReason.MOB_SUMMONED, null);
+			dog.tame(p);
+			level.addFreshEntity(dog);
+		}
 		level.sendParticles(ParticleTypes.POOF, at.x, at.y + 0.4, at.z, 20, 0.4, 0.4, 0.4, 0.05);
-		sound(level, at, SoundEvents.EVOKER_FANGS_ATTACK, 1, 1.4F);
-		after(level, 1200, () -> {
-			if (dog.isAlive()) {
-				level.sendParticles(ParticleTypes.POOF, dog.getX(), dog.getY() + 0.4, dog.getZ(), 20, 0.4, 0.4, 0.4, 0.05);
-				dog.discard();
-			}
-		});
+		sound(level, at, SoundEvents.WOLF_SHAKE, 1, 1);
 	}
 
 	/** Spins into a grey drill and tears through everything in a line. */
@@ -690,12 +712,37 @@ public final class ClanJutsu {
 		channel(p, 12, 1, t -> level(p).sendParticles(ParticleTypes.SWEEP_ATTACK, p.getX(), p.getY() + 0.8, p.getZ(), 1, 0.4, 0.4, 0.4, 0));
 	}
 
-	/** Merges with Akamaru into a giant wolf (three heads at the second stage): a charge, then thirty seconds as the beast. */
+	/**
+	 * Merges with Akamaru into a giant wolf (three heads at the second stage): Akamaru has to be close; he vanishes into the caster
+	 * for thirty seconds as the beast (after a charge) and comes back out when it ends.
+	 */
 	private static void wolf(ServerPlayer p, int stage) {
 		ServerLevel level = level(p);
+		AkamaruEntity.CustomEntity dog = akamaruOf(p, 12);
+		if (dog == null) {
+			tell(p, "Akamaru has to be close to merge with him");
+			// the chakra and cooldown are not wasted
+			set(p, v -> v.ChakraAmount += stage == 1 ? JutsuRank.B.chakra : JutsuRank.A.chakra);
+			after(level, 1, () -> p.getCooldowns().removeCooldown(Identifier.fromNamespaceAndPath("naruto_shippuden", "inuzuka_release_technique/" + (stage + 1))));
+			return;
+		}
+		float health = dog.getHealth();
+		level.sendParticles(ParticleTypes.POOF, dog.getX(), dog.getY() + 0.5, dog.getZ(), 30, 0.5, 0.5, 0.5, 0.05);
+		dog.discard();
 		level.sendParticles(ParticleTypes.POOF, p.getX(), p.getY() + 1, p.getZ(), 40, 0.8, 1, 0.8, 0.05);
 		sound(level, p.position(), SoundEvents.RAVAGER_ROAR, 1.5F, 1.1F - stage * 0.15F);
-		mode(p, 600, 1, v -> v.inuzuka_mode = stage, v -> v.inuzuka_mode = 0, t -> {
+		mode(p, 600, 1, v -> v.inuzuka_mode = stage, v -> {
+			v.inuzuka_mode = 0;
+			// Akamaru comes back out
+			if (p.isAlive()) {
+				AkamaruEntity.CustomEntity back = new AkamaruEntity.CustomEntity(AkamaruEntity.entity, level(p));
+				back.snapTo(p.getX() + 1, p.getY(), p.getZ(), p.getYRot(), 0);
+				back.tame(p);
+				back.setHealth(Math.max(1, health));
+				level(p).addFreshEntity(back);
+				level(p).sendParticles(ParticleTypes.POOF, back.getX(), back.getY() + 0.5, back.getZ(), 30, 0.5, 0.5, 0.5, 0.05);
+			}
+		}, t -> {
 			if (t % 10 == 0) {
 				keep(p, MobEffects.STRENGTH, stage);
 				keep(p, MobEffects.SPEED, 1);
@@ -913,20 +960,38 @@ public final class ClanJutsu {
 	}
 
 	// ------------------------------------------------------------------ uzumaki
-	/** Heals by letting chakra be drawn from a bite: health back at the cost of some hunger; tamed allies nearby heal too. */
+	/**
+	 * Heal Bite: the ally looked at (a player or the caster's own creature; the caster if no one) bites the caster and draws their
+	 * chakra, healing even deadly wounds and restoring their stamina. It drains the caster hard: a third of their chakra on top of
+	 * the jutsu's price, and what is missing comes out of their own health.
+	 */
 	private static void healBite(ServerPlayer p) {
 		ServerLevel level = level(p);
-		p.heal(8);
-		p.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1));
-		p.getFoodData().setFoodLevel(Math.max(0, p.getFoodData().getFoodLevel() - 3));
-		for (LivingEntity ally : level.getEntitiesOfClass(LivingEntity.class, p.getBoundingBox().inflate(6),
-				e -> e instanceof OwnableEntity own && own.getOwner() == p)) {
-			ally.heal(6);
-			level.sendParticles(ParticleTypes.HEART, ally.getX(), ally.getY() + ally.getBbHeight(), ally.getZ(), 3, 0.3, 0.2, 0.3, 0);
+		Vec3 eye = p.getEyePosition(), look = p.getLookAngle();
+		LivingEntity ally = level.getEntitiesOfClass(LivingEntity.class, p.getBoundingBox().inflate(5),
+				e -> e != p && e.isAlive() && (e instanceof Player || e instanceof OwnableEntity own && own.getOwner() == p)
+						&& e.getBoundingBox().getCenter().subtract(eye).normalize().dot(look) > 0.85)
+				.stream().min((a, b) -> Double.compare(a.distanceToSqr(p), b.distanceToSqr(p))).orElse(p);
+		ally.setHealth(ally.getMaxHealth());
+		ally.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1));
+		if (ally instanceof ServerPlayer bitten) {
+			bitten.getFoodData().eat(10, 0.6F);
+			if (bitten != p)
+				set(bitten, v -> v.ChakraAmount = Math.min(v.ChakraMax, v.ChakraAmount + v.ChakraMax * 0.4));
 		}
-		puff(level, p.position().add(0, 1, 0), Element.SEAL, 0.8F);
-		level.sendParticles(ParticleTypes.HEART, p.getX(), p.getY() + 2, p.getZ(), 5, 0.4, 0.2, 0.4, 0);
+		// the price: a third of the caster's chakra, and health for what is not there
+		PlayerVariables vars = NarutoShippudenModVariables.get(p);
+		double drain = vars.ChakraMax / 3, missing = Math.max(0, drain - vars.ChakraAmount);
+		set(p, v -> v.ChakraAmount = Math.max(0, v.ChakraAmount - drain));
+		if (missing > 0)
+			p.setHealth(Math.max(1, p.getHealth() - (float) (missing / vars.ChakraMax * 20)));
+		p.getFoodData().setFoodLevel(Math.max(0, p.getFoodData().getFoodLevel() - 4));
+		if (ally != p)
+			line(level, ParticleTypes.HEART, p.getBoundingBox().getCenter(), ally.getBoundingBox().getCenter(), 0.8);
+		puff(level, ally.position().add(0, 1, 0), Element.SEAL, 0.8F);
+		level.sendParticles(ParticleTypes.HEART, ally.getX(), ally.getY() + ally.getBbHeight() + 0.3, ally.getZ(), 6, 0.4, 0.2, 0.4, 0);
 		sound(level, p.position(), SoundEvents.GENERIC_EAT.value(), 1, 0.8F);
+		tell(p, ally == p ? "You bite your own arm to heal" : "Your chakra heals " + ally.getDisplayName().getString());
 	}
 
 	/** Golden chakra chains shoot from the back, seek enemies and bind them in place for four seconds. */
@@ -957,34 +1022,73 @@ public final class ClanJutsu {
 		sound(level, p.position(), SoundEvents.CHAIN_PLACE, 1.5F, 0.8F);
 	}
 
-	/** The Death God appears behind the caster and tears out the soul of the enemy looked at, at the cost of half the caster's life. */
+	/**
+	 * Dead Demon Consuming Seal. The caster's soul is drawn half out and the Shinigami appears behind them; its arm reaches through
+	 * them and grabs the soul of the enemy close in front, who is held fast, stripped of their jutsu and then sealed away. A soul
+	 * too strong to pull out whole loses its arms instead (it can barely fight for a minute). Either way the Shinigami then
+	 * consumes the caster's own soul: they have ten seconds left.
+	 */
 	private static void deadDemon(ServerPlayer p) {
 		ServerLevel level = level(p);
-		LivingEntity target = target(p, 10);
+		LivingEntity target = target(p, 6);
 		if (target == null) {
-			tell(p, "The Death God finds no one to seal");
+			tell(p, "The Shinigami needs a soul within reach");
 			return;
 		}
-		flag(p, 50, v -> v.deathgod = true, v -> v.deathgod = false);
+		flag(p, 90, v -> v.deathgod = true, v -> v.deathgod = false);
 		sound(level, p.position(), SoundEvents.WITHER_SPAWN, 1, 0.6F);
-		channel(p, 40, 2, t -> {
+		tell(p, "The Shinigami reaches through your soul...");
+		channel(p, 60, 1, t -> {
 			if (!target.isAlive())
 				return;
-			target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 6, false, false));
-			line(level, ParticleTypes.SOUL, target.getBoundingBox().getCenter(), p.getBoundingBox().getCenter(), 0.6);
-			level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, p.getX(), p.getY() + 2.5, p.getZ(), 3, 0.6, 0.6, 0.6, 0.01);
+			hold(target);
+			hold(p);
+			if (target instanceof ServerPlayer victim && t == 20) {
+				// the grabbed soul can't keep any jutsu going
+				stop(victim);
+				victim.removeAllEffects();
+			}
+			if (t >= 20 && t % 2 == 0)
+				line(level, ParticleTypes.SOUL, p.getBoundingBox().getCenter(), target.getBoundingBox().getCenter(), 0.5);
+			if (t % 4 == 0)
+				level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, p.getX(), p.getY() + 2.4, p.getZ(), 3, 0.5, 0.5, 0.5, 0.01);
 		});
-		after(level, 40, () -> {
-			if (!target.isAlive() || !p.isAlive())
+		after(level, 60, () -> {
+			if (!p.isAlive())
 				return;
-			damage(p, target, 50, Element.SEAL);
-			puff(level, target.getBoundingBox().getCenter(), Element.SEAL, 1.5F);
-			level.sendParticles(ParticleTypes.SCULK_SOUL, target.getX(), target.getY() + 1, target.getZ(), 15, 0.4, 0.6, 0.4, 0.05);
-			p.setHealth(Math.max(1, p.getHealth() / 2));
-			p.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 1200, 1));
-			p.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 600, 0));
-			sound(level, target.position(), SoundEvents.WITHER_DEATH, 0.8F, 1.2F);
+			if (target.isAlive()) {
+				boolean whole = target instanceof Player || target.getMaxHealth() <= 200;
+				level.sendParticles(ParticleTypes.SCULK_SOUL, target.getX(), target.getY() + 1, target.getZ(), 25, 0.4, 0.6, 0.4, 0.05);
+				puff(level, target.getBoundingBox().getCenter(), Element.SEAL, 1.5F);
+				sound(level, target.position(), SoundEvents.WITHER_DEATH, 0.8F, 1.2F);
+				if (whole)
+					damage(p, target, 10000, Element.SEAL);
+				else {
+					// only the arms of the soul come away
+					damage(p, target, 30, Element.SEAL);
+					target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 1200, 9));
+					target.addEffect(new MobEffectInstance(MobEffects.MINING_FATIGUE, 1200, 4));
+				}
+			}
+			tell(p, "The Shinigami is consuming your soul");
+			p.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 200, 2));
+			p.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200, 2));
+			channel(p, 200, 10, t -> level.sendParticles(ParticleTypes.SOUL, p.getX(), p.getY() + 1, p.getZ(), 3, 0.3, 0.5, 0.3, 0.02));
+			after(level, 200, () -> {
+				if (p.isAlive())
+					p.hurtServer(level, p.damageSources().magic(), Float.MAX_VALUE);
+			});
 		});
+	}
+
+	/** Freezes an entity in place. */
+	private static void hold(LivingEntity target) {
+		target.setDeltaMovement(0, Math.min(0, target.getDeltaMovement().y), 0);
+		target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 9, false, false));
+		if (target instanceof net.minecraft.world.entity.Mob mob) {
+			mob.getNavigation().stop();
+			mob.setTarget(null);
+		}
 	}
 
 	// ------------------------------------------------------------------ tsuchigumo

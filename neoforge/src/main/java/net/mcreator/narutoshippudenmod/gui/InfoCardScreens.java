@@ -76,7 +76,7 @@ public final class InfoCardScreens {
 				icon(GuiDisplayProcedures.DisplayMSShisuiInfoProcedure::executeProcedure, "mangekyou_sharingan_shisui", "Mangekyou Sharingan (Shisui)"),
 				icon(GuiDisplayProcedures.DisplayTenseiganInfoProcedure::executeProcedure, "tenseigan", "Tenseigan"),
 				icon(GuiDisplayProcedures.DisplayRinneganInfoProcedure::executeProcedure, "rinnegan", "Rinnegan"),
-				icon(GuiDisplayProcedures.DisplayIsshikiDojutsuInfoProcedure::executeProcedure, "isshiki_dojutsu", "Isshiki Dojutsu")};
+				icon(GuiDisplayProcedures.DisplayIsshikiDojutsuInfoProcedure::executeProcedure, "isshiki_dojutsu", "Kokugan")};
 		static final ModScreen.Icon[] SELECT_CLANS = {
 				icon(GuiDisplayProcedures.DisplayUchihaSelectProcedure::executeProcedure, "uchiha", "Uchiha"),
 				icon(GuiDisplayProcedures.DisplayUzumakiSelectProcedure::executeProcedure, "uzumaki", "Uzumaki"),

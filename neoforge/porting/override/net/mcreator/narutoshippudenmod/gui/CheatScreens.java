@@ -229,12 +229,12 @@ public final class CheatScreens {
 		@Override
 		protected void init() {
 			super.init();
-			String[] give = {"Sharingan", "Byakugan", "Ketsuryugan", "Mangekyou Sharingan", "Rinnegan", "Tenseigan", "Isshiki Dojutsu", "Kakashi Sharingan",
+			String[] give = {"Sharingan", "Byakugan", "Ketsuryugan", "Mangekyou Sharingan", "Rinnegan", "Tenseigan", "Kokugan", "Kakashi Sharingan",
 					"Shimura Sharingan"};
 			int[] giveIds = {0, 1, 2, 9, 11, 12, 8, 10, 15};
 			for (int i = 0; i < give.length; i++)
 				button(give[i], giveIds[i], 8 + i / 5 * 116, 30 + i % 5 * 21, 112);
-			String[] awaken = {"Sharingan", "Byakugan", "Ketsuryugan", "Tenseigan", "Isshiki Dojutsu", "Kakashi Sharingan", "Shimura Sharingan"};
+			String[] awaken = {"Sharingan", "Byakugan", "Ketsuryugan", "Tenseigan", "Kokugan", "Kakashi Sharingan", "Shimura Sharingan"};
 			int[] awakenIds = {4, 5, 6, 13, 14, 16, 17};
 			for (int i = 0; i < awaken.length; i++)
 				button(awaken[i], awakenIds[i], 248, 30 + i * 21, 112);

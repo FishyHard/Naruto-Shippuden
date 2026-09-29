@@ -239,7 +239,7 @@ public final class WeaponProcedures {
 				return;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).shurikenjutsu >= 20) {
+			if (NarutoShippudenModVariables.get(entity).shurikenjutsu >= 10) {
 				{
 					Entity _shootFrom = entity;
 					Level projectileLevel = _shootFrom.level();
@@ -265,7 +265,7 @@ public final class WeaponProcedures {
 					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
-			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 19) {
+			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 9) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
 					((Player) entity).sendOverlayMessage(Component.literal("Not Enough Shurikenjutsu"));
 				}
@@ -1138,7 +1138,7 @@ public final class WeaponProcedures {
 				return;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).shurikenjutsu >= 20) {
+			if (NarutoShippudenModVariables.get(entity).shurikenjutsu >= 15) {
 				{
 					Entity _shootFrom = entity;
 					Level projectileLevel = _shootFrom.level();
@@ -1164,7 +1164,7 @@ public final class WeaponProcedures {
 					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
-			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 19) {
+			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 14) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
 					((Player) entity).sendSystemMessage(Component.literal("Not Enough Shurikenjutsu"));
 				}
@@ -3080,7 +3080,7 @@ public final class WeaponProcedures {
 				return;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).shurikenjutsu >= 10) {
+			if (NarutoShippudenModVariables.get(entity).shurikenjutsu >= 0) {
 				{
 					Entity _shootFrom = entity;
 					Level projectileLevel = _shootFrom.level();
@@ -3106,7 +3106,7 @@ public final class WeaponProcedures {
 					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
-			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 9) {
+			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= -1) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
 					((Player) entity).sendOverlayMessage(Component.literal("Not Enough Shurikenjutsu"));
 				}
@@ -4011,7 +4011,7 @@ public final class WeaponProcedures {
 				return;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).shurikenjutsu >= 15) {
+			if (NarutoShippudenModVariables.get(entity).shurikenjutsu >= 5) {
 				{
 					Entity _shootFrom = entity;
 					Level projectileLevel = _shootFrom.level();
@@ -4037,7 +4037,7 @@ public final class WeaponProcedures {
 					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
-			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 14) {
+			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 4) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
 					((Player) entity).sendOverlayMessage(Component.literal("Not Enough Shurikenjutsu"));
 				}
@@ -4725,7 +4725,7 @@ public final class WeaponProcedures {
 				return;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).shurikenjutsu >= 5) {
+			if (NarutoShippudenModVariables.get(entity).shurikenjutsu >= 0) {
 				{
 					Entity _shootFrom = entity;
 					Level projectileLevel = _shootFrom.level();
@@ -4751,7 +4751,7 @@ public final class WeaponProcedures {
 					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
 				}
-			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= 4) {
+			} else if (NarutoShippudenModVariables.get(entity).shurikenjutsu <= -1) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
 					((Player) entity).sendOverlayMessage(Component.literal("Not Enough Shurikenjutsu"));
 				}

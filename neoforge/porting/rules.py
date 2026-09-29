@@ -1140,3 +1140,120 @@ def remove_clans(path, text):
         text = cut
     text = re.sub(r'\n[^\n]*\b(?:%s)\b[^\n]*(?:;|\),)(?=\n)' % names, '', text)
     return text
+
+
+AKAMARU_GOALS = '''protected void registerGoals() {
+				// a tamed wolf's mind: sits when told, follows, leaps and bites, defends its owner
+				this.goalSelector.addGoal(1, new FloatGoal(this));
+				this.goalSelector.addGoal(2, new net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal(this));
+				this.goalSelector.addGoal(3, new net.minecraft.world.entity.ai.goal.LeapAtTargetGoal(this, 0.4F));
+				this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.2, true));
+				this.goalSelector.addGoal(5, new FollowOwnerGoal(this, 1.1, 8F, 3F));
+				this.goalSelector.addGoal(7, new net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal(this, 1));
+				this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8F));
+				this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
+				this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
+				this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
+				this.targetSelector.addGoal(3, new net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal(this));
+			}'''
+
+AKAMARU_INTERACT = '''public InteractionResult mobInteract(Player player, InteractionHand hand) {
+				ItemStack stack = player.getItemInHand(hand);
+				if (!this.isTame() || !this.isOwnedBy(player))
+					return super.mobInteract(player, hand);
+				if (this.isFood(stack) && this.getHealth() < this.getMaxHealth()) {
+					if (!this.level().isClientSide()) {
+						this.usePlayerItem(player, hand, stack);
+						this.heal(8);
+						this.level().broadcastEntityEvent(this, (byte) 7);
+					}
+					return InteractionResult.SUCCESS;
+				}
+				// right-click: sit / stand
+				if (!this.level().isClientSide()) {
+					this.setOrderedToSit(!this.isOrderedToSit());
+					this.jumping = false;
+					this.navigation.stop();
+					this.setTarget(null);
+				}
+				return InteractionResult.SUCCESS;
+			}'''
+
+
+@func
+def akamaru(path, text):
+    """Akamaru thinks like a tamed wolf (client/jutsu/AkamaruRenderer animates his own model to match)."""
+    if 'SummonEntities.java' in path:
+        start = text.find('public static class AkamaruEntity')
+        if start < 0:
+            return text
+        end = find_block(text, start)
+        cls = text[start:end]
+        for head, new in (('protected void registerGoals()', AKAMARU_GOALS), ('public InteractionResult mobInteract(', AKAMARU_INTERACT)):
+            i = cls.find(head)
+            if i >= 0:
+                cls = cls[:i] + new + cls[find_block(cls, i):]
+        cls = re.sub(r'public boolean isFood\(ItemStack stack\) \{.*?\n\t\t\t\}', 'public boolean isFood(ItemStack stack) {\n\t\t\t\treturn stack != null && stack.is(net.minecraft.tags.ItemTags.MEAT);\n\t\t\t}', cls, flags=re.S)
+        cls = re.sub(r'\n\t*AkamaruOnInitialEntitySpawnProcedure\.executeProcedure\([^;]*;', '', cls)
+        text = text[:start] + cls + text[end:]
+    if 'SummonRenderers.java' in path:
+        text = re.sub(r'\n\t*ModRenderers\.mob\(event, AkamaruEntity\.entity,[^\n]*', '\n\t\t\t// drawn by client.jutsu.AkamaruRenderer', text)
+    return text
+
+
+@func
+def kamui_phasing_tick(path, text):
+    """core/jutsu/DojutsuJutsu phases the player through walls itself (client-side, where the player moves); the old tick flew the
+    player along their look on the server and turned collisions back on every tick."""
+    if not path.replace('\\', '/').endswith('PlayerProcedures.java'):
+        return text
+    text = text.replace('if (NarutoShippudenModVariables.get(entity).KamuiPhantomPhase == true) {', 'if (false) {')
+    return text.replace('} else if (NarutoShippudenModVariables.get(entity).KamuiPhantomPhase == false) {', '} else if (false) {')
+
+
+@func
+def kokugan_name(path, text):
+    """Isshiki's dojutsu is called by its real name, the Kokugan (the ids keep "isshiki_dojutsu")."""
+    return text.replace("Isshiki's Dojutsu", 'Kokugan').replace('Isshiki Dojutsu', 'Kokugan')
+
+
+@func
+def akimichi_swaps(path, text):
+    """client/jutsu/AkimichiRenderer draws the Human Bullet Tanks and Butterfly Mode's wings; drop the old player model swaps."""
+    if not path.replace('\\', '/').endswith('PlayerProcedures.java'):
+        return text
+    return remove_if_blocks(text, r'NarutoShippudenModVariables\.get\(entity\)\.(?:HumanBulletTank|SpikedHumanBulletTank|ButterflyMode) == true')
+
+
+WEAPON_RENDERERS = ['ShurikenBullet', 'ShurikenClan', 'FumaShurikenBullet', 'FumaShurikenClan', 'ToroiUniqueFumaShurikenBullet', 'ToroiUniqueFumaShurikenClan',
+                    'KunaiBullet', 'PoisonKunaiBullet', 'ExplosiveKunaiBullet', 'FlyingThunderGodKunaiBullet']
+
+
+@func
+def weapon_renderers(path, text):
+    """Thrown shuriken and kunai are drawn by client/jutsu/WeaponRenderer (steel models like the Fuma shuriken jutsu)."""
+    if not path.replace('\\', '/').endswith('ModClient.java'):
+        return text
+    return re.sub(r'\n\t*ProjectileRenderers\.(?:%s)Renderer\.registerRenderers\(event\);' % '|'.join(WEAPON_RENDERERS), '', text)
+
+
+# the Shurikenjutsu each thrown weapon needs: the basic shuriken and kunai need none (a new ninja starts at 0)
+WEAPON_SKILL = {'ShurikenRightclickedProcedure': 0, 'KunaiRightclickedProcedure': 0, 'PoisonKunaiRightclickedProcedure': 5,
+                'ExplosiveKunaiRightclickedProcedure': 10, 'FumaShurikenRightclickedProcedure': 15}
+
+
+@func
+def weapon_skill(path, text):
+    """Lower the Shurikenjutsu needed to throw the basic weapons."""
+    if not path.replace('\\', '/').endswith('WeaponProcedures.java'):
+        return text
+    for name, need in WEAPON_SKILL.items():
+        m = re.search(r'public static class %s\b' % name, text)
+        if not m:
+            continue
+        end = find_block(text, m.end())
+        body = text[m.start():end]
+        body = re.sub(r'shurikenjutsu >= \d+\)', 'shurikenjutsu >= %d)' % need, body)
+        body = re.sub(r'shurikenjutsu <= \d+\)', 'shurikenjutsu <= %d)' % (need - 1), body)
+        text = text[:m.start()] + body + text[end:]
+    return text

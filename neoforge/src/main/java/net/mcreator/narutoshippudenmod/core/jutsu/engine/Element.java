@@ -66,7 +66,10 @@ public enum Element {
 	KAMUI(0xFF7A62A8, 0xFFE6DDFF, true, ParticleTypes.PORTAL, ParticleTypes.REVERSE_PORTAL, SoundEvents.ENDERMAN_TELEPORT, SoundEvents.ENDERMAN_TELEPORT),
 	/** Sharingan genjutsu: red and black. */
 	GENJUTSU(0xFFD4142A, 0xFFFFD0D0, true, new DustParticleOptions(0xD4142A, 1.0F), ParticleTypes.SQUID_INK, SoundEvents.ENDERMAN_STARE,
-			SoundEvents.PHANTOM_BITE);
+			SoundEvents.PHANTOM_BITE),
+	/** The Kokugan: Isshiki's black rods and cubes, red light and dark dust. */
+	KOKUGAN(0xFF1C1A22, 0xFFFF4A4A, false, new DustParticleOptions(0x16141C, 1.1F), new DustParticleOptions(0xFF3C3C, 0.8F),
+			SoundEvents.ILLUSIONER_MIRROR_MOVE, SoundEvents.ANVIL_LAND);
 
 
 	/** ARGB colour of the outer body and of the bright core. */

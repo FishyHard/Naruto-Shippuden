@@ -62,6 +62,9 @@ public class JutsuProjectileRenderer extends EntityRenderer<JutsuProjectile, Jut
 	private final ModelPart needle = bake(root -> box(root, "needle", -0.4F, -0.4F, -7, 0.8F, 0.8F, 14));
 	private final ModelPart shuriken = bake(JutsuProjectileRenderer::shuriken);
 	private final ModelPart lion = bake(JutsuProjectileRenderer::lion);
+	private final ModelPart rod = bake(JutsuProjectileRenderer::rod);
+	private final ModelPart frames = bake(JutsuProjectileRenderer::frames);
+	private final ModelPart vortex = bake(JutsuProjectileRenderer::vortex);
 
 	public JutsuProjectileRenderer(EntityRendererProvider.Context context) {
 		super(context);
@@ -79,11 +82,11 @@ public class JutsuProjectileRenderer extends EntityRenderer<JutsuProjectile, Jut
 		return LayerDefinition.create(mesh, 128, 128).bakeRoot();
 	}
 
-	private static PartDefinition box(PartDefinition parent, String name, float x, float y, float z, float w, float h, float d) {
+	static PartDefinition box(PartDefinition parent, String name, float x, float y, float z, float w, float h, float d) {
 		return parent.addOrReplaceChild(name, CubeListBuilder.create().addBox(x, y, z, w, h, d), PartPose.ZERO);
 	}
 
-	private static PartDefinition box(PartDefinition parent, String name, PartPose pose, float x, float y, float z, float w, float h, float d) {
+	static PartDefinition box(PartDefinition parent, String name, PartPose pose, float x, float y, float z, float w, float h, float d) {
 		return parent.addOrReplaceChild(name, CubeListBuilder.create().addBox(x, y, z, w, h, d), pose);
 	}
 
@@ -152,7 +155,7 @@ public class JutsuProjectileRenderer extends EntityRenderer<JutsuProjectile, Jut
 	}
 
 	/** A Fuma shuriken: a ringed hub and four long swept blades, flat in the XZ plane (radius 16). */
-	private static void shuriken(PartDefinition root) {
+	static void shuriken(PartDefinition root) {
 		box(root, "hub", -3, -0.8F, -3, 6, 1.6F, 6);
 		box(root, "hub2", PartPose.rotation(0, 0.785F, 0), -2.6F, -1, -2.6F, 5.2F, 2, 5.2F);
 		for (int i = 0; i < 4; i++) {
@@ -179,6 +182,37 @@ public class JutsuProjectileRenderer extends EntityRenderer<JutsuProjectile, Jut
 		// the mane: flames of chakra fanned round the head
 		for (int i = 0; i < 10; i++)
 			box(root, "mane" + i, PartPose.offsetAndRotation(0, 0.5F, -2.5F, -0.35F, 0, i * Mth.TWO_PI / 10), -2, 3.5F, -1.5F, 4, 6.5F - (i % 2) * 2, 3);
+	}
+
+	/** Isshiki's black rod: a square shaft turned on its edge, a stepped point at the front (+Z), 24 long. */
+	private static void rod(PartDefinition root) {
+		box(root, "shaft", PartPose.rotation(0, 0, 0.785F), -1, -1, -12, 2, 2, 22);
+		box(root, "butt", PartPose.rotation(0, 0, 0.785F), -1.3F, -1.3F, -13, 2.6F, 2.6F, 1.5F);
+		box(root, "tip1", PartPose.rotation(0, 0, 0.785F), -0.75F, -0.75F, 10, 1.5F, 1.5F, 1.5F);
+		box(root, "tip2", PartPose.rotation(0, 0, 0.785F), -0.45F, -0.45F, 11.5F, 0.9F, 0.9F, 1.2F);
+		box(root, "tip3", PartPose.rotation(0, 0, 0.785F), -0.2F, -0.2F, 12.7F, 0.4F, 0.4F, 0.8F);
+	}
+
+	/** The glowing red squares on one face of a Daikokuten cube (the +Z face of a 16 cube; drawn once per face). */
+	private static void frames(PartDefinition root) {
+		float[] half = { 7.4F, 5.2F, 3 };
+		for (int i = 0; i < half.length; i++) {
+			float h = half[i], t = i == 0 ? 0.35F : 0.3F;
+			box(root, "t" + i, -h, h - t, 8, 2 * h, t, 0.15F);
+			box(root, "b" + i, -h, -h, 8, 2 * h, t, 0.15F);
+			box(root, "l" + i, -h, -h, 8, t, 2 * h, 0.15F);
+			box(root, "r" + i, h - t, -h, 8, t, 2 * h, 0.15F);
+		}
+	}
+
+	/** Kamui's swirl: four bands spiralling in towards the centre, in the XY plane (radius about 16). */
+	private static void vortex(PartDefinition root) {
+		for (int arm = 0; arm < 4; arm++)
+			for (int k = 0; k < 14; k++) {
+				float angle = arm * Mth.HALF_PI + k * 0.42F, r = 2.5F + k * 1.05F, len = 1.4F + r * 0.42F, thick = 0.6F + k * 0.1F;
+				box(root, "a" + arm + "_" + k, PartPose.offsetAndRotation(Mth.cos(angle) * r, Mth.sin(angle) * r, -k * 0.08F, 0, 0, angle + Mth.HALF_PI),
+						-len / 2, -thick / 2, -0.25F, len, thick, 0.5F);
+			}
 	}
 
 	// ------------------------------------------------------------------ render state
@@ -343,6 +377,50 @@ public class JutsuProjectileRenderer extends EntityRenderer<JutsuProjectile, Jut
 				pose.scale(1.04F, 1.04F, 1.04F);
 				collector.submitModelPart(orb, pose, RenderTypes.energySwirl(SWIRL, scroll, scroll), LIGHT, OverlayTexture.NO_OVERLAY, null,
 						0xFF000000 | scale(state.element.glows ? state.element.color : state.element.core, 0.7F));
+			}
+			case ROD -> {
+				face(pose, state.yRot, state.xRot);
+				pose.scale(s, s, s);
+				pose.rotate(Axis.ZP, age * 0.05F);
+				collector.submitModelPart(rod, pose, RenderTypes.entityTranslucent(CHAKRA), state.lightCoords, OverlayTexture.NO_OVERLAY, null, 0xFF1C1A22);
+			}
+			case DAIKOKUTEN -> {
+				pose.scale(s, s, s);
+				pose.rotateDegrees(Axis.YP, state.yRot);
+				collector.submitModelPart(cube, pose, RenderTypes.entityTranslucent(CHAKRA), state.lightCoords, OverlayTexture.NO_OVERLAY, null, 0xFF0A0A0C);
+				float pulse = 0.75F + 0.25F * Mth.sin(age * 0.2F);
+				int red = 0xFF000000 | (int) (255 * pulse) << 16 | (int) (60 * pulse) << 8 | (int) (60 * pulse);
+				for (int f = 0; f < 6; f++) {
+					pose.pushPose();
+					if (f < 4)
+						pose.rotate(Axis.YP, f * Mth.HALF_PI);
+					else
+						pose.rotate(Axis.XP, f == 4 ? Mth.HALF_PI : -Mth.HALF_PI);
+					collector.submitModelPart(frames, pose, RenderTypes.entityTranslucentEmissive(CHAKRA), LIGHT, OverlayTexture.NO_OVERLAY, null, red);
+					pose.popPose();
+				}
+			}
+			case VORTEX -> {
+				// not from inside it (the caster's own swirl would cover the screen)
+				if (camera.pos.distanceTo(new Vec3(state.x, state.y + s / 2, state.z)) < s * 0.6) {
+					pose.popPose();
+					super.submit(state, pose, collector, camera);
+					return;
+				}
+				// always faces the camera, like a hole in space
+				pose.mulPose(new org.joml.Matrix4f().rotation(camera.orientation));
+				pose.scale(s / 2, s / 2, s / 2);
+				pose.pushPose();
+				pose.rotate(Axis.ZP, -age * 0.35F);
+				collector.submitModelPart(vortex, pose, RenderTypes.entityTranslucent(CHAKRA), LIGHT, OverlayTexture.NO_OVERLAY, null, 0xD8202026);
+				pose.popPose();
+				pose.rotate(Axis.ZP, -age * 0.55F + 0.4F);
+				pose.scale(0.7F, 0.7F, 0.7F);
+				pose.translate(0, 0, 0.05F);
+				collector.submitModelPart(vortex, pose, RenderTypes.entityTranslucent(CHAKRA), LIGHT, OverlayTexture.NO_OVERLAY, null,
+						0x90000000 | state.element.color & 0xFFFFFF);
+				pose.scale(0.25F, 0.25F, 0.25F);
+				collector.submitModelPart(orb, pose, RenderTypes.entityTranslucent(CHAKRA), LIGHT, OverlayTexture.NO_OVERLAY, null, 0xF0000000);
 			}
 			case NONE -> {
 			}

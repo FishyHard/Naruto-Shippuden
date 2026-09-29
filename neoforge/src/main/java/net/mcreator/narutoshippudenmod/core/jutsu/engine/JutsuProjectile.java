@@ -234,6 +234,12 @@ public class JutsuProjectile extends Projectile {
 		/** A chakra lion's head (Twin Lion Fists). */
 		LION,
 		/** A see-through sphere of swirling chakra, water or insects around someone (Rotation, Water Prison, Insect Jar). */
-		SHELL
+		SHELL,
+		/** Isshiki's black rod. */
+		ROD,
+		/** A Daikokuten cube: black with glowing red squares on each face. */
+		DAIKOKUTEN,
+		/** Kamui's spiralling hole in space, always facing the camera. */
+		VORTEX
 	}
 }
