@@ -57,7 +57,19 @@ public enum Element {
 			SoundEvents.AMETHYST_BLOCK_BREAK),
 	/** Beast chakra (Inuzuka, Tenro, Izuno): grey fangs and claws. */
 	BEAST(0xFFB8B0A4, 0xFFFFFFFF, false, new DustParticleOptions(0xA8A198, 1.2F), ParticleTypes.POOF, SoundEvents.EVOKER_FANGS_ATTACK,
-			SoundEvents.PLAYER_ATTACK_SWEEP);
+			SoundEvents.PLAYER_ATTACK_SWEEP),
+	// dojutsu
+	/** Amaterasu's black flames, which nothing puts out. */
+	AMATERASU(0xFF120E16, 0xFF3A1250, false, new DustParticleOptions(0x0C0A10, 1.5F), ParticleTypes.LARGE_SMOKE, SoundEvents.FIRECHARGE_USE,
+			SoundEvents.FIRE_AMBIENT),
+	/** Kamui's space-time swirl. */
+	KAMUI(0xFF7A62A8, 0xFFE6DDFF, true, ParticleTypes.PORTAL, ParticleTypes.REVERSE_PORTAL, SoundEvents.ENDERMAN_TELEPORT, SoundEvents.ENDERMAN_TELEPORT),
+	/** Sharingan genjutsu: red and black. */
+	GENJUTSU(0xFFD4142A, 0xFFFFD0D0, true, new DustParticleOptions(0xD4142A, 1.0F), ParticleTypes.SQUID_INK, SoundEvents.ENDERMAN_STARE,
+			SoundEvents.PHANTOM_BITE),
+	/** The Furamingogan's pink chakra. */
+	FLAMINGO(0xFFFF6FB5, 0xFFFFE6F2, true, new DustParticleOptions(0xFF7AC0, 1.2F), ParticleTypes.END_ROD, SoundEvents.AMETHYST_BLOCK_RESONATE,
+			SoundEvents.AMETHYST_BLOCK_BREAK);
 
 	/** ARGB colour of the outer body and of the bright core. */
 	public final int color, core;

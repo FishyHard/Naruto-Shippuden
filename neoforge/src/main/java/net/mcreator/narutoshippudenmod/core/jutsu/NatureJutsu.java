@@ -162,6 +162,8 @@ final class NatureJutsu {
 
 	/** "You don't have the Fire nature" / "You haven't unlocked Ice Release" / "You aren't of the Hyuga Clan". */
 	private static String missing(String title) {
+		if (title.startsWith("the "))
+			return "You don't have " + title;
 		if (title.endsWith("Clan"))
 			return "You aren't of the " + title;
 		return title.endsWith("Release") ? "You haven't unlocked " + title : "You don't have the " + title + " nature";

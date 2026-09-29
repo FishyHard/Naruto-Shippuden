@@ -58,7 +58,7 @@ public final class Jutsus {
 		final ObjDoubleConsumer<PlayerVariables> select;
 		final Consumer<Map<String, Object>> cast;
 		/** Extra condition of every jutsu on this item (the Mangekyou Sharingan being active), or null. */
-		final @Nullable Predicate<PlayerVariables> requirement;
+		@Nullable Predicate<PlayerVariables> requirement;
 		/** Shown when the requirement is not met. */
 		String requirementMessage = "Activate the Mangekyou Sharingan first";
 		public final List<Jutsu> jutsu = new ArrayList<>();
@@ -186,6 +186,7 @@ public final class Jutsus {
 		NatureJutsu.register();
 		KekkeiGenkaiJutsu.register();
 		ClanJutsu.register();
+		DojutsuJutsu.register();
 	}
 
 	public static @Nullable Technique technique(ItemStack stack) {

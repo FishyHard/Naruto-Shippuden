@@ -222,10 +222,15 @@ public final class DevTest {
 	private static final net.minecraft.world.phys.Vec3[] home = new net.minecraft.world.phys.Vec3[1];
 	private static final net.minecraft.world.phys.Vec3[] arena = new net.minecraft.world.phys.Vec3[1];
 
+	private static String item(String nature) {
+		return nature.endsWith("technique") ? nature : nature + "_release_technique";
+	}
+
 	private static void jutsuSteps(Minecraft mc) {
 		String[] natures = { "fire", "water", "wind", "earth", "lightning", "boil", "bone", "dust", "ice", "magnet", "smoke", "steel", "storm", "swift",
 				"typhoon", "wood", "aburame", "akimichi", "fuma", "hozuki", "hyuga", "inuzuka", "izuno", "lee", "sarutobi", "tenro", "uzumaki",
-				"tsuchigumo" };
+				"tsuchigumo", "sharingan", "furamingogan_technique", "isshiki_dojutsu", "voltic_mode_technique", "mangekyou_sharingan_itachi_release_technique",
+				"mangekyou_sharingan_kakashi_release_technique", "mangekyou_sharingan_obito_release_technique", "mangekyou_sharingan_sasuke_release_technique" };
 		String only = System.getProperty("naruto.devtest.jutsu", "");
 		STEPS.add(() -> {
 			mc.gui.setScreen(null);
@@ -257,6 +262,9 @@ public final class DevTest {
 				v.aburamelearn = v.akimichilearn = v.fumalearn = v.hozukilearn = v.hyugalearn = v.inuzukalearn = v.izunolearn = v.leelearn = 9;
 				v.sarutobilearn = v.tenrolearn = v.uzumakilearn = v.tsuchigumolearn = 9;
 				v.taijutsu = v.summoning = 60;
+				v.sharingan = v.sharinganactivate = v.TheSirMarcus = v.BoxDeity = v.isshikidojutsu = v.isshikidojutsuactivate = v.MangekyouSharinganActivate = true;
+				v.sharinganlearn = v.furamingoganlearn = v.isshikidojutsulearn = v.volticlearn = v.mangekyoushrainganitachiamaterasulearn = 9;
+				v.mangekyousharingankakashikamuilearn = v.mangekyousharinganobitokamuilearn = v.mangekyousharingansasukeamaterasulearn = 9;
 				v.ninjutsu = 60;
 				v.byakuganactivate = false;
 				v.ChakraMax = 5000;
@@ -270,12 +278,12 @@ public final class DevTest {
 			if (!only.isEmpty() && !java.util.List.of(only.split(",")).contains(nature))
 				continue;
 			int count = net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.TECHNIQUES
-					.get(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", nature + "_release_technique")).jutsu.size();
+					.get(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", item(nature))).jutsu.size();
 			for (int index = 0; index < count; index++) {
 				int i = index;
 				int freeze = nature.equals("lightning") && i == 3 ? 19 : nature.equals("lightning") && i == 2 ? 13 : FREEZE_AT[Math.min(i, 3)];
 				STEPS.add(() -> {
-					command(mc, "item replace entity @s weapon.mainhand with naruto_shippuden:" + nature + "_release_technique");
+					command(mc, "item replace entity @s weapon.mainhand with naruto_shippuden:" + item(nature));
 					// transformations and dashes carry the player off: end them and go back to the arena
 					command(mc, String.format(java.util.Locale.ROOT, "tp @s %.2f %.2f %.2f 0 5", arena[0].x, arena[0].y, arena[0].z));
 					onServer(mc, player -> {
@@ -284,10 +292,10 @@ public final class DevTest {
 							v.ChakraAmount = 5000;
 							v.syncPlayerVariables(player);
 						});
-						player.getCooldowns().removeCooldown(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", nature + "_release_technique/" + i));
+						player.getCooldowns().removeCooldown(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", item(nature) + "/" + i));
 						player.removeAllEffects();
 						net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.select(player,
-								net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", nature + "_release_technique"), i);
+								net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", item(nature)), i);
 					});
 					nextDelay = 5;
 				});

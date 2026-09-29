@@ -102,6 +102,10 @@ public final class Techniques {
 			// the Gentle Fist closes chakra points
 			case CHAKRA -> target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 1, false, false));
 			case SEAL -> target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 40, 4, false, false));
+			case GENJUTSU -> {
+				target.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 100, 0, false, false));
+				target.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 60, 0, false, false));
+			}
 			default -> {
 			}
 		}
