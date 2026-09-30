@@ -49,6 +49,8 @@ public final class IronSandRenderer {
 	private static final Identifier SAND = Identifier.fromNamespaceAndPath("naruto_shippuden", "textures/entities/jutsu/iron_sand.png");
 	private static final Identifier CLOAK = Identifier.fromNamespaceAndPath("naruto_shippuden", "textures/entities/jutsu/iron_sand_cloak.png");
 	private static AkimichiRenderer.PartModel rightHand, leftHand;
+	/** A layer of iron sand fitted to the body, arms and legs under the coat, so no skin or clothes show through its gaps. */
+	private static AkimichiRenderer.PartModel underBody, underRightArm, underLeftArm, underLeg;
 	/** The original iron sand coat and wings (JutsuRenderers' Blockbench models), split into the parts that ride the player's body and arms. */
 	private static Worn coat, wings;
 
@@ -98,6 +100,14 @@ public final class IronSandRenderer {
 		mirror = true;
 		leftHand = hand();
 		mirror = false;
+		underBody = bake(64, root -> root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(16, 16).addBox(-4, 0, -2, 8, 12, 4, new CubeDeformation(0.3F)),
+				PartPose.ZERO));
+		underRightArm = bake(64, root -> root.addOrReplaceChild("arm", CubeListBuilder.create().texOffs(40, 16).addBox(-3, -2, -2, 4, 12, 4, new CubeDeformation(0.35F)),
+				PartPose.ZERO));
+		underLeftArm = bake(64, root -> root.addOrReplaceChild("arm", CubeListBuilder.create().texOffs(40, 16).addBox(-1, -2, -2, 4, 12, 4, new CubeDeformation(0.35F)),
+				PartPose.ZERO));
+		underLeg = bake(64, root -> root.addOrReplaceChild("leg", CubeListBuilder.create().texOffs(0, 16).addBox(-2, 0, -2, 4, 12, 4, new CubeDeformation(0.3F)),
+				PartPose.ZERO));
 		coat = worn(net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.MagnetCoatRenderer.ModelBlack_Iron_Sand_Coat.createBodyLayer());
 		wings = worn(net.mcreator.narutoshippudenmod.entity.renderer.JutsuRenderers.MagnetWingsRenderer.ModelBlack_Iron_Sand_Wings.createBodyLayer());
 	}
@@ -163,11 +173,24 @@ public final class IronSandRenderer {
 				if (worn.rightWing() != null)
 					worn.rightWing().yRot -= beat;
 			}
+			// under the coat: sand over every bit of the body but the head
+			under(model.body, underBody, pose, collector, state, light);
+			under(model.rightArm, underRightArm, pose, collector, state, light);
+			under(model.leftArm, underLeftArm, pose, collector, state, light);
+			under(model.rightLeg, underLeg, pose, collector, state, light);
+			under(model.leftLeg, underLeg, pose, collector, state, light);
 			wear(model.body, worn.body(), pose, collector, state, light);
 			wear(model.rightArm, worn.rightArm(), pose, collector, state, light);
 			wear(model.leftArm, worn.leftArm(), pose, collector, state, light);
 			if (form == 2)
 				hands(pose, collector, state, light, model);
+		}
+
+		private static void under(ModelPart part, AkimichiRenderer.PartModel model, PoseStack pose, SubmitNodeCollector collector, AvatarRenderState state, int light) {
+			pose.pushPose();
+			part.translateAndRotate(pose);
+			draw(model, SAND, pose, collector, state, light);
+			pose.popPose();
 		}
 
 		private static void wear(ModelPart part, AkimichiRenderer.PartModel model, PoseStack pose, SubmitNodeCollector collector, AvatarRenderState state, int light) {
