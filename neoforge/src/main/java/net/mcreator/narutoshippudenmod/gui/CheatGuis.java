@@ -18,7 +18,6 @@ import net.mcreator.narutoshippudenmod.procedures.CheatProcedures.CheatDojutsuBu
 import net.mcreator.narutoshippudenmod.procedures.CheatProcedures.CheatDojutsuButtonByakuganProcedure;
 import net.mcreator.narutoshippudenmod.procedures.CheatProcedures.CheatDojutsuButtonIsshikiDojutsuProcedure;
 import net.mcreator.narutoshippudenmod.procedures.CheatProcedures.CheatDojutsuButtonKetsuryuganProcedure;
-import net.mcreator.narutoshippudenmod.procedures.CheatProcedures.CheatDojutsuButtonProcedure;
 import net.mcreator.narutoshippudenmod.procedures.CheatProcedures.CheatDojutsuButtonRinneganProcedure;
 import net.mcreator.narutoshippudenmod.procedures.CheatProcedures.CheatDojutsuButtonSharinganProcedure;
 import net.mcreator.narutoshippudenmod.procedures.CheatProcedures.CheatDojutsuButtonTenseiganProcedure;
@@ -27,7 +26,6 @@ import net.mcreator.narutoshippudenmod.procedures.CheatProcedures.CheatKekkeiGen
 import net.mcreator.narutoshippudenmod.procedures.CheatProcedures.CheatKekkeiGenkaiButtonDustReleaseProcedure;
 import net.mcreator.narutoshippudenmod.procedures.CheatProcedures.CheatKekkeiGenkaiButtonIceReleaseProcedure;
 import net.mcreator.narutoshippudenmod.procedures.CheatProcedures.CheatKekkeiGenkaiButtonMagnetReleaseProcedure;
-import net.mcreator.narutoshippudenmod.procedures.CheatProcedures.CheatKekkeiGenkaiButtonProcedure;
 import net.mcreator.narutoshippudenmod.procedures.CheatProcedures.CheatKekkeiGenkaiButtonSmokeReleaseProcedure;
 import net.mcreator.narutoshippudenmod.procedures.CheatProcedures.CheatKekkeiGenkaiButtonSteelReleaseProcedure;
 import net.mcreator.narutoshippudenmod.procedures.CheatProcedures.CheatKekkeiGenkaiButtonStormReleaseProcedure;
@@ -49,11 +47,6 @@ import net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.KetsuryuganA
 import net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.SharinganAwake10SecondsProcedure;
 import net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.ShimuraSharinganAwake10SecondsProcedure;
 import net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.TenseiganAwake10SecondsProcedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.JPADD100Procedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.JPADD10Procedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.JPMINUS100Procedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.JPMINUS10Procedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.LevelXPAdd100Procedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.LoginButtonProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.RankSetAcademyStudentProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.RankSetChuninProcedure;
@@ -64,12 +57,7 @@ import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.ResetDojutsuProc
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.ResetInfoStatsProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.ResetLevelJPandSPProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.ResetUpgradeStatsProcedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.SPADD100Procedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.SPADD10Procedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.SPMINUS100Procedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.SPMINUS10Procedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.SelectMenuProcedure;
-import net.mcreator.narutoshippudenmod.procedures.PlayerProcedures.ADDMAXCHAKRAProcedure;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
@@ -83,7 +71,6 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 import net.neoforged.bus.api.SubscribeEvent;
-
 
 import net.neoforged.neoforge.network.IContainerFactory;
 import net.mcreator.narutoshippudenmod.compat.NetworkEvent;
@@ -682,117 +669,6 @@ public final class CheatGuis {
 			// security measure to prevent arbitrary chunk generation
 			if (!world.hasChunkAt(BlockPos.containing(x, y, z)))
 				return;
-			if (buttonID == 0) {
-
-				JPADD100Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 1) {
-
-				JPADD10Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 2) {
-
-				SPADD100Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 3) {
-
-				SPADD10Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 4) {
-
-				JPMINUS100Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 5) {
-
-				ADDMAXCHAKRAProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 6) {
-
-				JPMINUS10Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 7) {
-
-				SPMINUS100Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 8) {
-
-				SPMINUS10Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 9) {
-
-				RankSetGeninProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 10) {
-
-				RankSetAcademyStudentProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 11) {
-
-				RankSetChuninProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 12) {
-
-				RankSetJoninProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 13) {
-
-				RankSetKageProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 14) {
-
-				CheatDojutsuButtonProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 15) {
-
-				CheatKekkeiGenkaiButtonProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 16) {
-
-				ResetUpgradeStatsProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 17) {
-
-				ResetInfoStatsProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 18) {
-
-				SelectMenuProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 19) {
-
-				ResetLevelJPandSPProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 20) {
-
-				LevelXPAdd100Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
 		}
 
 		private static void handleSlotAction(Player entity, int slotID, int changeType, int meta, int x, int y, int z) {

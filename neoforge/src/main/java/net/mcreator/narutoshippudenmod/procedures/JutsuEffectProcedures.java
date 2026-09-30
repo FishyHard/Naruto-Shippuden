@@ -18,8 +18,6 @@ import net.mcreator.narutoshippudenmod.NarutoShippudenMod;
 import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables;
 import net.mcreator.narutoshippudenmod.block.ModBlocks.AmaterasuBlock;
 import net.mcreator.narutoshippudenmod.block.ModBlocks.AmaterasuSpreadBlock;
-import net.mcreator.narutoshippudenmod.particle.ModParticles.TailedBeastBombParticleBlueParticle;
-import net.mcreator.narutoshippudenmod.particle.ModParticles.TailedBeastBombParticleRedParticle;
 import net.mcreator.narutoshippudenmod.potion.ModEffects.CoercionSharinganEffectPotionEffect;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -122,83 +120,6 @@ public final class JutsuEffectProcedures {
 							((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.WITHER, (int) 999999, (int) 3, (false), (false)));
 						entity.hurt(Compat.damage().wither(), (float) 5);
 					}
-				}
-			}
-		}
-	}
-
-	public static class AmaterasuFlameProjectileHitsBlockProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("world") == null) {
-				if (!dependencies.containsKey("world"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure AmaterasuFlameProjectileHitsBlock!");
-				return;
-			}
-			if (dependencies.get("x") == null) {
-				if (!dependencies.containsKey("x"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency x for procedure AmaterasuFlameProjectileHitsBlock!");
-				return;
-			}
-			if (dependencies.get("y") == null) {
-				if (!dependencies.containsKey("y"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency y for procedure AmaterasuFlameProjectileHitsBlock!");
-				return;
-			}
-			if (dependencies.get("z") == null) {
-				if (!dependencies.containsKey("z"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency z for procedure AmaterasuFlameProjectileHitsBlock!");
-				return;
-			}
-			LevelAccessor world = (LevelAccessor) dependencies.get("world");
-			double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
-			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
-			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
-			if (world.isEmptyBlock(BlockPos.containing(x, y + 1, z))) {
-				world.setBlock(BlockPos.containing(x, y + 1, z), AmaterasuBlock.block.defaultBlockState(), 3);
-			} else if (!world.isEmptyBlock(BlockPos.containing(x, y + 1, z))) {
-				if (!world.getBlockState(BlockPos.containing(x, y + 1, z)).canOcclude()) {
-					world.setBlock(BlockPos.containing(x, y + 1, z), AmaterasuBlock.block.defaultBlockState(), 3);
-				}
-			}
-		}
-	}
-
-	public static class AmaterasuFlameProjectileHitsLivingEntityProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("world") == null) {
-				if (!dependencies.containsKey("world"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure AmaterasuFlameProjectileHitsLivingEntity!");
-				return;
-			}
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure AmaterasuFlameProjectileHitsLivingEntity!");
-				return;
-			}
-			LevelAccessor world = (LevelAccessor) dependencies.get("world");
-			Entity entity = (Entity) dependencies.get("entity");
-			if (entity instanceof Player) {
-				if (NarutoShippudenModVariables.get(entity).mangekyousharingansasukeamaterasulearn == 0) {
-					if (NarutoShippudenModVariables.get(entity).MangekyouSharinganSasuke == false
-							&& NarutoShippudenModVariables.get(entity).MangekyouSharinganItachi == false) {
-						entity.getPersistentData().putBoolean("Amaterasu", (true));
-						if (entity instanceof LivingEntity)
-							((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.WITHER, (int) 999999, (int) 3, (false), (false)));
-						entity.hurt(Compat.damage().wither(), (float) 5);
-					}
-				}
-			} else if (!(entity instanceof Player)) {
-				if (entity instanceof LivingEntity)
-					((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.WITHER, (int) 999999, (int) 3, (false), (false)));
-				entity.hurt(Compat.damage().wither(), (float) 5);
-			}
-			if (world.isEmptyBlock(BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()))) {
-				world.setBlock(BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), AmaterasuBlock.block.defaultBlockState(), 3);
-			} else if (!world.isEmptyBlock(BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()))) {
-				if (!world.getBlockState(BlockPos.containing(entity.getX(), entity.getY(), entity.getZ())).canOcclude()) {
-					world.setBlock(BlockPos.containing(entity.getX(), entity.getY(), entity.getZ()), AmaterasuBlock.block.defaultBlockState(), 3);
 				}
 			}
 		}
@@ -938,7 +859,6 @@ public final class JutsuEffectProcedures {
 		}
 	}
 
-
 	public static class ShadersProcedure {
 		@EventBusSubscriber(modid = "naruto_shippuden")
 		private static class GlobalTrigger {
@@ -1025,121 +945,6 @@ public final class JutsuEffectProcedures {
 			}
 		}
 	}
-
-	public static class TailedBeastBombProjectileHitsBlockProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("world") == null) {
-				if (!dependencies.containsKey("world"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure TailedBeastBombProjectileHitsBlock!");
-				return;
-			}
-			if (dependencies.get("x") == null) {
-				if (!dependencies.containsKey("x"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency x for procedure TailedBeastBombProjectileHitsBlock!");
-				return;
-			}
-			if (dependencies.get("y") == null) {
-				if (!dependencies.containsKey("y"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency y for procedure TailedBeastBombProjectileHitsBlock!");
-				return;
-			}
-			if (dependencies.get("z") == null) {
-				if (!dependencies.containsKey("z"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency z for procedure TailedBeastBombProjectileHitsBlock!");
-				return;
-			}
-			LevelAccessor world = (LevelAccessor) dependencies.get("world");
-			double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
-			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
-			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
-			if (world instanceof Level && !((Level) world).isClientSide()) {
-				((Level) world).explode(null, x, y, z, (float) 4, Level.ExplosionInteraction.NONE);
-			}
-			if (world instanceof Level && !((Level) world).isClientSide()) {
-				((Level) world).explode(null, x, y, z, (float) 4, Level.ExplosionInteraction.NONE);
-			}
-			if (world instanceof Level && !((Level) world).isClientSide()) {
-				((Level) world).explode(null, x, y, z, (float) 4, Level.ExplosionInteraction.NONE);
-			}
-			if (world instanceof Level && !((Level) world).isClientSide()) {
-				((Level) world).explode(null, x, y, z, (float) 4, Level.ExplosionInteraction.NONE);
-			}
-			if (world instanceof Level && !((Level) world).isClientSide()) {
-				((Level) world).explode(null, x, y, z, (float) 4, Level.ExplosionInteraction.NONE);
-			}
-		}
-	}
-
-	public static class TailedBeastBombWhileProjectileFlyingTickProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("world") == null) {
-				if (!dependencies.containsKey("world"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure TailedBeastBombWhileProjectileFlyingTick!");
-				return;
-			}
-			if (dependencies.get("x") == null) {
-				if (!dependencies.containsKey("x"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency x for procedure TailedBeastBombWhileProjectileFlyingTick!");
-				return;
-			}
-			if (dependencies.get("y") == null) {
-				if (!dependencies.containsKey("y"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency y for procedure TailedBeastBombWhileProjectileFlyingTick!");
-				return;
-			}
-			if (dependencies.get("z") == null) {
-				if (!dependencies.containsKey("z"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency z for procedure TailedBeastBombWhileProjectileFlyingTick!");
-				return;
-			}
-			if (dependencies.get("immediatesourceentity") == null) {
-				if (!dependencies.containsKey("immediatesourceentity"))
-					NarutoShippudenMod.LOGGER
-							.warn("Failed to load dependency immediatesourceentity for procedure TailedBeastBombWhileProjectileFlyingTick!");
-				return;
-			}
-			LevelAccessor world = (LevelAccessor) dependencies.get("world");
-			double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
-			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
-			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
-			Entity immediatesourceentity = (Entity) dependencies.get("immediatesourceentity");
-			if (world instanceof ServerLevel) {
-				((ServerLevel) world).sendParticles(TailedBeastBombParticleBlueParticle.particle, x, y, z, (int) 5, 3, 3, 3, 1);
-			}
-			if (world instanceof ServerLevel) {
-				((ServerLevel) world).sendParticles(TailedBeastBombParticleRedParticle.particle, x, y, z, (int) 5, 3, 3, 3, 1);
-			}
-			new Object() {
-				private int ticks = 0;
-				private float waitTicks;
-				private LevelAccessor world;
-
-				public void start(LevelAccessor world, int waitTicks) {
-					this.waitTicks = waitTicks;
-					Registration.listen(NeoForge.EVENT_BUS, this);
-					this.world = world;
-				}
-
-				@SubscribeEvent
-				public void tick(ServerTickEvent.Post event) {
-					if (true) {
-						this.ticks += 1;
-						if (this.ticks >= this.waitTicks)
-							run();
-					}
-				}
-
-				private void run() {
-					if (!immediatesourceentity.level().isClientSide())
-						immediatesourceentity.discard();
-					NeoForge.EVENT_BUS.unregister(this);
-				}
-			}.start(world, (int) 200);
-		}
-	}
-
 
 	public static class WaterwallEntityCollidesInTheBlockProcedure {
 

@@ -64,8 +64,6 @@ import net.mcreator.narutoshippudenmod.item.ReleaseTechniqueItems.StormReleaseTe
 import net.mcreator.narutoshippudenmod.item.ReleaseTechniqueItems.SwiftReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.ReleaseTechniqueItems.TyphoonReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.ReleaseTechniqueItems.WoodReleaseTechniqueItem;
-import net.mcreator.narutoshippudenmod.particle.ModParticles.SmokeParticle;
-import net.mcreator.narutoshippudenmod.particle.ModParticles.StormParticle;
 import net.mcreator.narutoshippudenmod.potion.ModEffects.TreeBindFlourishingBurialPotionEffect;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.commands.CommandSourceStack;
@@ -108,7 +106,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 public final class KekkeiGenkaiProcedures {
 	private KekkeiGenkaiProcedures() {
 	}
-
 
 	public static class BoilDNAImplantMobProcedure {
 
@@ -220,9 +217,6 @@ public final class KekkeiGenkaiProcedures {
 		}
 	}
 
-
-
-
 	public static class BoneDNAImplantMobProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {
@@ -332,8 +326,6 @@ public final class KekkeiGenkaiProcedures {
 			}
 		}
 	}
-
-
 
 	public static class DustBlockBlockAddedProcedure {
 
@@ -660,8 +652,6 @@ public final class KekkeiGenkaiProcedures {
 		}
 	}
 
-
-
 	public static class IceDNAImplantMobProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {
@@ -809,10 +799,6 @@ public final class KekkeiGenkaiProcedures {
 		}
 	}
 
-
-
-
-
 	public static class IronDefenseRightclickedProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {
@@ -957,8 +943,6 @@ public final class KekkeiGenkaiProcedures {
 		}
 	}
 
-
-
 	public static class SmokeDNAImplantMobProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {
@@ -1068,10 +1052,6 @@ public final class KekkeiGenkaiProcedures {
 			}
 		}
 	}
-
-
-
-
 
 	public static class SteelDNAImplantMobProcedure {
 
@@ -1183,8 +1163,6 @@ public final class KekkeiGenkaiProcedures {
 		}
 	}
 
-
-
 	public static class StormDNAImplantMobProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {
@@ -1295,8 +1273,6 @@ public final class KekkeiGenkaiProcedures {
 		}
 	}
 
-
-
 	public static class SwiftDNAImplantMobProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {
@@ -1406,8 +1382,6 @@ public final class KekkeiGenkaiProcedures {
 			}
 		}
 	}
-
-
 
 	public static class TreeBindFlourishingBurialEffectExpiresProcedure {
 
@@ -1594,7 +1568,6 @@ public final class KekkeiGenkaiProcedures {
 		}
 	}
 
-
 	public static class TyphoonDNAImplantMobProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {
@@ -1704,8 +1677,6 @@ public final class KekkeiGenkaiProcedures {
 			}
 		}
 	}
-
-
 
 	public static class UndefinedDNARightclickedProcedure {
 
@@ -1971,6 +1942,5 @@ public final class KekkeiGenkaiProcedures {
 			}
 		}
 	}
-
 
 }

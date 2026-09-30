@@ -17,7 +17,6 @@ import net.mcreator.narutoshippudenmod.entity.renderer.SummonRenderers.AkamaruRe
 import net.mcreator.narutoshippudenmod.entity.renderer.SummonRenderers.CrowRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.SummonRenderers.EarthGolemRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.SummonRenderers.KuramaRenderer;
-import net.mcreator.narutoshippudenmod.item.JutsuProjectileItems.TailedBeastBombItem;
 import net.mcreator.narutoshippudenmod.itemgroup.ModItemGroups.SpawnEggsItemGroup;
 import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.CrowOnInitialEntitySpawnProcedure;
 import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.EarthGolemOnInitialEntitySpawnProcedure;
@@ -78,8 +77,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-
-
 
 import net.minecraft.core.registries.BuiltInRegistries;
 
@@ -509,7 +506,6 @@ public final class SummonEntities {
 		}
 	}
 
-
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class KuramaEntity extends NarutoShippudenModElements.ModElement {
 		public static final int ROAR_TICKS = 30;
@@ -545,7 +541,7 @@ public final class SummonEntities {
 			}
 		}
 
-		public static class CustomEntity extends Monster implements RangedAttackMob {
+		public static class CustomEntity extends Monster {
 
 			private final net.mcreator.narutoshippudenmod.core.MultipartHitbox hitbox = net.mcreator.narutoshippudenmod.core.MultipartHitbox.kurama(this);
 
@@ -653,11 +649,6 @@ public final class SummonEntities {
 				net.mcreator.narutoshippudenmod.core.jutsu.Kurama.tick(this);
 			}
 
-			public void performRangedAttack(LivingEntity target, float flval) {
-				this.level().broadcastEntityEvent(this, (byte) 100);
-				TailedBeastBombItem.shoot(this, target);
-			}
-
 			@Override
 			public boolean canUsePortal(boolean allowPassengers) {
 				return false;
@@ -684,10 +675,6 @@ public final class SummonEntities {
 			}
 		}
 	}
-
-
-
-
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class WoodGolemEntity extends NarutoShippudenModElements.ModElement {

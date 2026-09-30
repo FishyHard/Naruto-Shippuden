@@ -24,7 +24,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 
-
 public final class ReleaseTechniqueItems {
 	private ReleaseTechniqueItems() {
 	}
@@ -59,7 +58,6 @@ public final class ReleaseTechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -110,242 +108,6 @@ public final class ReleaseTechniqueItems {
 				return 1F;
 			}
 
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class CustomEarthReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "custom_earth_release_technique", v -> block = (Item) v);
-		}
-
-		public CustomEarthReleaseTechniqueItem(NarutoShippudenModElements instance) {
-			super(instance, 516);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("custom_earth_release_technique", null).stacksTo(1).rarity(Rarity.COMMON));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class CustomFireReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "custom_fire_release_technique", v -> block = (Item) v);
-		}
-
-		public CustomFireReleaseTechniqueItem(NarutoShippudenModElements instance) {
-			super(instance, 493);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("custom_fire_release_technique", null).stacksTo(1).rarity(Rarity.COMMON));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class CustomLightningReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "custom_lightning_release_technique", v -> block = (Item) v);
-		}
-
-		public CustomLightningReleaseTechniqueItem(NarutoShippudenModElements instance) {
-			super(instance, 510);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("custom_lightning_release_technique", null).stacksTo(1).rarity(Rarity.COMMON));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class CustomWaterReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "custom_water_release_technique", v -> block = (Item) v);
-		}
-
-		public CustomWaterReleaseTechniqueItem(NarutoShippudenModElements instance) {
-			super(instance, 514);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("custom_water_release_technique", null).stacksTo(1).rarity(Rarity.COMMON));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class CustomWindReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "custom_wind_release_technique", v -> block = (Item) v);
-		}
-
-		public CustomWindReleaseTechniqueItem(NarutoShippudenModElements instance) {
-			super(instance, 512);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("custom_wind_release_technique", null).stacksTo(1).rarity(Rarity.COMMON));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -391,7 +153,6 @@ public final class ReleaseTechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -441,7 +202,6 @@ public final class ReleaseTechniqueItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -489,7 +249,6 @@ public final class ReleaseTechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -539,7 +298,6 @@ public final class ReleaseTechniqueItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -585,7 +343,6 @@ public final class ReleaseTechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -635,7 +392,6 @@ public final class ReleaseTechniqueItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -681,7 +437,6 @@ public final class ReleaseTechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -730,7 +485,6 @@ public final class ReleaseTechniqueItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -776,7 +530,6 @@ public final class ReleaseTechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -826,7 +579,6 @@ public final class ReleaseTechniqueItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -872,7 +624,6 @@ public final class ReleaseTechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -922,7 +673,6 @@ public final class ReleaseTechniqueItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -971,7 +721,6 @@ public final class ReleaseTechniqueItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -1019,7 +768,6 @@ public final class ReleaseTechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {

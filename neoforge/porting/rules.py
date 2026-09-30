@@ -1522,12 +1522,29 @@ def dead_code(path, text):
     summons only they spawned, and their renderers), with their imports and renderer registrations."""
     if not DEAD_CLASSES:
         return text
+    before = text
+    text = _dead_code(path, text)
+    # the gaps the removed classes leave
+    return re.sub(r'\n(?:[ \t]*\n){2,}', '\n\n', text) if text != before else text
+
+
+def _dead_code(path, text):
     names = '|'.join(sorted(DEAD_CLASSES))
-    text = re.sub(r'\nimport [\w.]*\.(?:%s)(?:\.\w+)*;' % names, '', text)
+    text = re.sub(r'\nimport [\w.]*\.(?:%s)(?:Window)?(?:\.\w+)*;' % names, '', text)
+    p = path.replace('\\', '/')
+    providers = p.endswith('client/ModParticleProviders.java')
     for name in DEAD_CLASSES:
-        if re.search(r'public static class %s\b' % name, text):
+        if re.search(r'public static class %s\b' % name, text) or providers and re.search(r'\n\tstatic class %s\b' % name, text):
             text = remove_class(text, name)
-    return re.sub(r'\n\t*[\w.]*\b(?:%s)\.register\w*\(event\);' % names, '', text)
+    if p.endswith('particle/ModParticles.java') or p.endswith('potion/ModEffects.java'):
+        text = re.sub(r'\n\t*(?:%s)\.register\(\);' % names, '', text)
+    if providers:
+        text = re.sub(r'\n\t*event\.registerSpriteSet\(ModParticles\.(?:%s)\.particle, [^\n]*;' % names, '', text)
+    text = re.sub(r'\n\t*[\w.]*\b(?:%s)\.register\w*\(event\);' % names, '', text)
+    if path.replace('\\', '/').endswith('client/ModClient.java'):
+        # a removed GUI's screen registration: event.register(XGui.containerType, XGuiWindow::new);
+        text = re.sub(r'\n\t*event\.register\((?:%s)\.containerType, \w+::new\);' % names, '', text)
+    return text
 
 
 RULES.append(dead_code)
@@ -1671,6 +1688,11 @@ def kurama_ai(path, text):
     if g >= 0 and k not in cls[g:find_block(cls, g)]:
         cls = cls[:g] + 'protected void registerGoals() {\n\t\t\t\tsuper.registerGoals();\n\t\t\t\t%s.goals(this, this.goalSelector, this.targetSelector);\n\t\t\t}' % k + cls[find_block(cls, g):]
     cls = re.sub(r'KuramaOnInitialEntitySpawnProcedure\s*\.executeProcedure\(Stream.*?Map::putAll\)\);', k + '.tick(this);', cls, flags=re.S)
+    # no goal fires the old ranged attack (the Tailed Beast Bomb item) any more
+    cls = cls.replace(' extends Monster implements RangedAttackMob {', ' extends Monster {')
+    r = cls.find('public void performRangedAttack(')
+    if r >= 0:
+        cls = cls[:cls.rfind('\n', 0, r)] + cls[find_block(cls, r):]
     return text[:i] + cls + text[end:]
 
 
@@ -1680,3 +1702,49 @@ def old_stat_attributes(path, text):
     which no longer exist (so the stats did nothing). core/Stats applies them as attribute modifiers instead."""
     return re.sub(r'\n\t*Compat\.runCommandAt\(world, x, y, z, \("/attribute " \+ entity\.getDisplayName\(\)\.getString\(\)\s*\+ " minecraft:generic\.(?:max_health|movement_speed) base set "[^;]*;',
                   '', text)
+
+
+# The buttons each hand-written screen (gui/*Screens) still sends to its generated GUI's handleButtonAction; the other branches are
+# old MCreator buttons nobody can press any more (the Jutsu page has none: it works through core/NarutoActions). Not listed: the
+# advent calendar and the mini-game, which use all theirs.
+GUI_BUTTONS = {
+    'NarutoShippudenCheatGUIGui': set(),
+    'NarutoShippudenCheatDojutsuGUIGui': {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17},
+    'NarutoShippudenCheatKekkeiGenkaiGUIGui': set(range(16)),
+    'MangekyouSharinganCheatGui': set(range(6)),
+    'PasswordGUIDojutsuGui': {0},
+    'GeninHeadbandSelectGui': {0, 1, 2},
+    'PatreonKitGui': {0},
+    'InfoCardGui': set(),
+    'InfoCardUpgradeGui': set(),
+    'InfoCardMissionsGui': set(),
+    'InfoCardDojutsuGui': set(range(1, 10)),
+    'StatSelectGui': {0, 1, 2, 3, 4, 5, 6},
+    'CreateJutsuGUIGui': set(),
+    'CreateJutsuGUI2Gui': set(),
+}
+
+
+@func
+def unused_gui_buttons(path, text):
+    """Drops the handleButtonAction branches of buttons the new screens no longer have (see GUI_BUTTONS), so the old procedures
+    they called can go as dead code."""
+    if not re.search(r'gui/\w+Guis\.java$', path.replace('\\', '/')):
+        return text
+    for name, used in GUI_BUTTONS.items():
+        m = re.search(r'public static class %s extends' % name, text)
+        if not m:
+            continue
+        end = find_block(text, m.start())
+        h = text.find('static void handleButtonAction(', m.start(), end)
+        if h < 0:
+            continue
+        hend = find_block(text, h)
+        body = text[h:hend]
+        while True:
+            b = next((x for x in re.finditer(r'\n\t*if \(buttonID == (\d+)\) \{', body) if int(x.group(1)) not in used), None)
+            if not b:
+                break
+            body = body[:b.start()] + body[find_block(body, b.end() - 1):]
+        text = text[:h] + body + text[hend:]
+    return text

@@ -9,13 +9,6 @@ public final class GuiDisplayProcedures {
 	private GuiDisplayProcedures() {
 	}
 
-
-
-
-
-
-
-
 	public static class DiplayFumaSelectProcedure {
 
 		public static boolean executeProcedure(Map<String, Object> dependencies) {
@@ -32,7 +25,6 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-
 	public static class DiplayHozukiSelectProcedure {
 
 		public static boolean executeProcedure(Map<String, Object> dependencies) {
@@ -48,8 +40,6 @@ public final class GuiDisplayProcedures {
 			return false;
 		}
 	}
-
-
 
 	public static class DiplaySarutobiSelectProcedure {
 
@@ -1201,9 +1191,6 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-
-
-
 	public static class DisplayHozukiInfoProcedure {
 
 		public static boolean executeProcedure(Map<String, Object> dependencies) {
@@ -1500,8 +1487,6 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-
-
 	public static class DisplayKakashi1Dojutsu2x1Pupils1x1Procedure {
 
 		public static boolean executeProcedure(Map<String, Object> dependencies) {
@@ -1658,8 +1643,6 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-
-
 	public static class DisplayKetsuryugan2x1Pupils1x1Procedure {
 
 		public static boolean executeProcedure(Map<String, Object> dependencies) {
@@ -1763,9 +1746,6 @@ public final class GuiDisplayProcedures {
 			return false;
 		}
 	}
-
-
-
 
 	public static class DisplayLeeInfoProcedure {
 
@@ -2008,10 +1988,6 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-
-
-
-
 	public static class DisplayMinus2SelectProcedure {
 
 		public static boolean executeProcedure(Map<String, Object> dependencies) {
@@ -2045,8 +2021,6 @@ public final class GuiDisplayProcedures {
 			return false;
 		}
 	}
-
-
 
 	public static class DisplayNaraInfoProcedure {
 
@@ -2159,8 +2133,6 @@ public final class GuiDisplayProcedures {
 			return false;
 		}
 	}
-
-
 
 	public static class DisplayRinnegan2x1Pupils1x1Procedure {
 
@@ -2379,8 +2351,6 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-
-
 	public static class DisplaySharingan2x1Pupils1x1Procedure {
 
 		public static boolean executeProcedure(Map<String, Object> dependencies) {
@@ -2470,8 +2440,6 @@ public final class GuiDisplayProcedures {
 			return false;
 		}
 	}
-
-
 
 	public static class DisplayShisuiDojutsu2x1Pupils1x1Procedure {
 
@@ -2632,8 +2600,6 @@ public final class GuiDisplayProcedures {
 			return false;
 		}
 	}
-
-
 
 	public static class DisplayTenseigan2x1Pupils1x1Procedure {
 
@@ -2803,7 +2769,6 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-
 	public static class DisplayUzumakiInfoProcedure {
 
 		public static boolean executeProcedure(Map<String, Object> dependencies) {
@@ -2835,10 +2800,6 @@ public final class GuiDisplayProcedures {
 			return false;
 		}
 	}
-
-
-
-
 
 	public static class DisplayWaterInfoProcedure {
 
@@ -2920,408 +2881,6 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-
-
-	public static class GiftOpenDisplay10Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay10!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 10) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay11Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay11!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 11) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay12Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay12!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 12) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay13Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay13!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 13) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay14Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay14!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 14) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay15Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay15!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 15) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay16Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay16!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 16) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay17Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay17!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 17) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay18Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay18!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 18) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay19Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay19!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 19) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay1Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay1!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 1) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay20Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay20!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 20) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay21Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay21!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 21) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay22Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay22!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 22) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay23Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay23!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 23) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay24Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay24!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 24) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay25Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay25!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 25) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay2Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay2!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 2) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay3Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay3!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 3) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay4Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay4!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 4) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay5Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay5!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 5) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay6Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay6!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 6) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay7Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay7!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 7) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay8Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay8!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 8) {
-				return true;
-			}
-			return false;
-		}
-	}
-
-	public static class GiftOpenDisplay9Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure GiftOpenDisplay9!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).giftcount >= 9) {
-				return true;
-			}
-			return false;
-		}
-	}
-
 	public static class Headband1DisplayProcedure {
 
 		public static boolean executeProcedure(Map<String, Object> dependencies) {
@@ -3369,6 +2928,5 @@ public final class GuiDisplayProcedures {
 			return false;
 		}
 	}
-
 
 }

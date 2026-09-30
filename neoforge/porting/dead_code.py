@@ -1,19 +1,20 @@
-"""Finds the member classes of the big generated files (procedures, entities, renderers, projectile items, effects, particles) that
-nothing live refers to, walking references from everything else (items, GUIs, core, event listeners, spawn eggs); an entity keeps its
-renderer. Run after porting: python3 dead_code.py dead_classes.txt, then the dead_code rule removes them."""
+"""Finds the member classes of the big generated files (procedures, entities, renderers, items, GUIs, effects, particles) that
+nothing live refers to, walking references from everything else (core, the hand-written screens, event listeners, spawn eggs); an entity
+keeps its renderer. An item is a root when players can get it: its id is in a creative tab (itemgroup/ModItemGroups), a data file
+(recipes, loot, trades, advancements) or a string in the code. Run after porting: python3 dead_code.py dead_classes.txt, then the dead_code rule removes them."""
 import os, re, sys, glob, collections
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from rules import find_block
 ROOT = os.path.join(HERE, '..', 'src', 'main', 'java', 'net', 'mcreator', 'narutoshippudenmod') + '/'
 CANDIDATE_FILES = glob.glob(ROOT + 'procedures/*.java') + glob.glob(ROOT + 'entity/*.java') + glob.glob(ROOT + 'entity/renderer/*.java') \
-    + [ROOT + 'item/ProjectileItems.java', ROOT + 'item/JutsuProjectileItems.java', ROOT + 'potion/ModEffects.java'] + glob.glob(ROOT + 'particle/*.java')
-REGISTRY = [ROOT + 'client/ModClient.java']   # registration lines, removable with the class they register
+    + glob.glob(ROOT + 'item/*.java') + glob.glob(ROOT + 'gui/*Guis.java') + [ROOT + 'potion/ModEffects.java'] + glob.glob(ROOT + 'particle/*.java')
+REGISTRY = [ROOT + 'client/ModClient.java', ROOT + 'client/ModParticleProviders.java']   # registration lines, removable with the class they register
 
 units = {}      # name -> (file, start, end)
 def strip_imports(t):
     # an import of a nested class still counts (code uses its short name); imports of the member classes themselves don't
-    return re.sub(r'^import [\w.]*\.(?:\w*Procedures|\w*Entities|\w*Renderers|\w*Items|ModEffects|\w*Particle)\.\w+;$', '', t, flags=re.M)
+    return re.sub(r'^import [\w.]*\.(?:\w*Procedures|\w*Entities|\w*Renderers|\w*Items|\w*Guis|ModEffects|ModParticles|\w*Particle)\.\w+;$', '', t, flags=re.M)
 for f in CANDIDATE_FILES:
     t = open(f).read()
     for m in re.finditer(r'\n\t(?:@[\w.]+(?:\([^)]*\))?\s*)*public static class (\w+)', t):
@@ -21,14 +22,22 @@ for f in CANDIDATE_FILES:
         units[m.group(1)] = (f, m.start(), end)
 names = set(units)
 # nested classes (a renderer's model, an entity's CustomEntity) stand for the member class around them
-alias = {n: n for n in names}
+alias = collections.defaultdict(set)
+for n in names:
+    alias[n].add(n)
 for n, (f, s0, e0) in units.items():
     for inner in re.findall(r'\bclass (\w+)', open(f).read()[s0:e0]):
-        if inner not in names and inner not in ('CustomEntity', 'ItemCustom', 'ArrowCustomEntity', 'GlobalTrigger', 'EntityAttributesRegisterHandler'):
-            alias.setdefault(inner, n)
+        # the names every item, GUI and entity uses for its parts (ItemCustom, GuiContainerMod, CustomEntity…) stand for none of them;
+        # a model defined in two renderers stands for both
+        if inner not in names and inner not in ('CustomEntity', 'ItemCustom', 'ArrowCustomEntity', 'GlobalTrigger', 'EntityAttributesRegisterHandler',
+                                                'GuiContainerMod', 'GuiContainerModFactory', 'ButtonPressedMessage', 'GUISlotChangedMessage'):
+            alias[inner].add(n)
+for inner in [w for w, owners in alias.items() if w not in names and len(owners) > 1 and not w.startswith('Model')]:
+    # a part name many classes repeat (ItemRanged…) stands for none of them
+    del alias[inner]
 tok = re.compile(r'\b[A-Z]\w+\b')
 def refs(text):
-    return {alias[w] for w in tok.findall(text) if w in alias}
+    return {n for w in tok.findall(text) if w in alias for n in alias[w]}
 
 root_refs = set()
 for f in glob.glob(ROOT + '**/*.java', recursive=True):
@@ -42,7 +51,8 @@ for f in glob.glob(ROOT + '**/*.java', recursive=True):
         for s, e in spans:
             rest.append(t[pos:s]); pos = e
         rest.append(t[pos:])
-        root_refs |= refs(strip_imports(''.join(rest)))
+        # ModParticles' register() calls are registration lines too
+        root_refs |= refs(re.sub(r'\n\t*\w+\.register\(\);', '', strip_imports(''.join(rest))))
     else:
         root_refs |= refs(strip_imports(t))
 
@@ -53,9 +63,37 @@ def mark(n):
     if n not in live:
         live.add(n); todo.append(n)
 for n in root_refs: mark(n)
+# items players can get
+def obtainable():
+    groups = open(ROOT + 'itemgroup/ModItemGroups.java').read()
+    words = set(re.findall(r'"([a-z0-9_]+)"', groups))
+    ids = set(words)
+    for w in words:
+        ids |= {w + s for s in ('_release', '_release_technique', '_dna_release', '_dna')}
+        ids |= {'mangekyou_sharingan_%s_release' % w, 'mangekyou_sharingan_%s_release_technique' % w}
+        for c in ('', '_black', '_red'):
+            ids.add('genin_%s%s_helmet' % (w, c))
+    data = ''.join(open(f).read() for f in glob.glob(os.path.join(HERE, '..', 'src', 'main', 'resources', 'data', '**', '*.json'), recursive=True))
+    ids |= set(re.findall(r'naruto_shippuden:([a-z0-9_]+)', data))
+    return ids
+OBTAINABLE = obtainable()
+# ids named in a string by code outside the item itself and the renderers (whose model layer names repeat them): a /give, a lookup
+CODE_STRINGS = collections.Counter()
+for f in glob.glob(ROOT + '**/*.java', recursive=True):
+    if '/entity/renderer/' not in f:
+        CODE_STRINGS.update(re.findall(r'"(?:naruto_shippuden:)?([a-z0-9_]+)"', open(f).read()))
+def named_elsewhere(i, own):
+    return CODE_STRINGS[i] > len(re.findall(r'"(?:naruto_shippuden:)?%s"' % i, own))
+# kept though nothing gives them now: the Otsutsuki weapons stay in the game, hidden (only /give), as the user asked
+KEEP = {'OtsutsukiAxeItem', 'OtsutsukiBatItem', 'OtsutsukiBladeItem', 'OtsutsukiChoppingSwordItem', 'OtsutsukiHammerItem', 'OtsutsukiKatanaItem',
+        'OtsutsukiSpearItem', 'OtsutsukiSwordItem'}
+for n in KEEP & names: mark(n)
 for n, t in texts.items():
     # event listeners, and things players can get (spawn eggs)
     if re.search(r'@SubscribeEvent\s+public static', t) or 'spawn_egg' in t or 'SpawnEgg' in t:
+        mark(n)
+    ids = set(re.findall(r'Registration\.holder\(Registries\.ITEM, "([a-z0-9_]+)"', t))
+    if ids & OBTAINABLE or any(named_elsewhere(i, t) for i in ids):
         mark(n)
 renderers = {n for n in names if '/entity/renderer/' in units[n][0]}
 def spread():

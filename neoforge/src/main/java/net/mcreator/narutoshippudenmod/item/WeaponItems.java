@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.stream.Stream;
 import net.mcreator.narutoshippudenmod.NarutoShippudenModElements;
 import net.mcreator.narutoshippudenmod.itemgroup.ModItemGroups.WeaponsItemGroup;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.OtsutsukiToolsSwitchProcedure;
 import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ExplosiveKunaiRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.FumaShurikenRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KunaiRightclickedProcedure;
@@ -43,6 +42,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 
+import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.OtsutsukiToolsSwitchProcedure;
 
 public final class WeaponItems {
 	private WeaponItems() {
@@ -126,7 +126,6 @@ public final class WeaponItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -185,7 +184,6 @@ public final class WeaponItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -251,7 +249,6 @@ public final class WeaponItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -780,7 +777,6 @@ public final class WeaponItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -897,6 +893,459 @@ public final class WeaponItems {
 							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("entity", entity),
 									new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class PoisonKunaiItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder(Registries.ITEM, "poison_kunai", v -> block = (Item) v);
+		}
+
+		public PoisonKunaiItem(NarutoShippudenModElements instance) {
+			super(instance, 1324);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new ItemCustom());
+		}
+
+		public static class ItemCustom extends Item {
+			public ItemCustom() {
+				super(Registration.itemProps("poison_kunai", "WeaponsItemGroup").stacksTo(16).rarity(Rarity.COMMON));
+			}
+
+			@Override
+			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
+				return ItemUseAnimation.EAT;
+			}
+
+			@Override
+			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
+				return 1F;
+			}
+
+			@Override
+			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+				InteractionResult ar = super.use(world, entity, hand);
+				ItemStack itemstack = entity.getItemInHand(hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+
+				PoisonKunaiRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return ar;
+			}
+
+			@Override
+			public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, InteractionHand hand) {
+				boolean retval = super.onEntitySwing(itemstack, entity, hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+				Level world = entity.level();
+
+				ToolsDamageProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("itemstack", itemstack)).collect(HashMap::new,
+						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return retval;
+			}
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class SamehadaItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder(Registries.ITEM, "samehada", v -> block = (Item) v);
+		}
+
+		public SamehadaItem(NarutoShippudenModElements instance) {
+			super(instance, 207);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("samehada", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 18f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.8f)) {
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = entity.getItemInHand(hand);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
+							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
+					super.hurtEnemy(itemstack, entity, sourceentity);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					Level world = entity.level();
+
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
+							.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity),
+									new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return;
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class ShibukiItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder(Registries.ITEM, "shibuki", v -> block = (Item) v);
+		}
+
+		public ShibukiItem(NarutoShippudenModElements instance) {
+			super(instance, 213);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("shibuki", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 16f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.2f)) {
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = entity.getItemInHand(hand);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
+							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("y", y),
+									new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return retval;
+				}
+
+				@Override
+				public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
+					super.hurtEnemy(itemstack, entity, sourceentity);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					Level world = entity.level();
+
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
+							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("entity", entity),
+									new AbstractMap.SimpleEntry<>("sourceentity", sourceentity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+					return;
+				}
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
+							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("entity", entity),
+									new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class ShichiseikenItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder(Registries.ITEM, "shichiseiken", v -> block = (Item) v);
+		}
+
+		public ShichiseikenItem(NarutoShippudenModElements instance) {
+			super(instance, 1278);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("shichiseiken", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 17f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3f)) {
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class ShurikenItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder(Registries.ITEM, "shuriken", v -> block = (Item) v);
+		}
+
+		public ShurikenItem(NarutoShippudenModElements instance) {
+			super(instance, 315);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new ItemCustom());
+		}
+
+		public static class ItemCustom extends Item {
+			public ItemCustom() {
+				super(Registration.itemProps("shuriken", "WeaponsItemGroup").stacksTo(16).rarity(Rarity.COMMON));
+			}
+
+			@Override
+			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
+				return ItemUseAnimation.EAT;
+			}
+
+			@Override
+			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
+				return 1F;
+			}
+
+			@Override
+			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+				InteractionResult ar = super.use(world, entity, hand);
+				ItemStack itemstack = entity.getItemInHand(hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+
+				ShurikenRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return ar;
+			}
+
+			@Override
+			public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, InteractionHand hand) {
+				boolean retval = super.onEntitySwing(itemstack, entity, hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+				Level world = entity.level();
+
+				ToolsDamageProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("itemstack", itemstack)).collect(HashMap::new,
+						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return retval;
+			}
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class TantoItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder(Registries.ITEM, "tanto", v -> block = (Item) v);
+		}
+
+		public TantoItem(NarutoShippudenModElements instance) {
+			super(instance, 205);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("tanto", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 5f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.7f)) {
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class ToroiUniqueFumaShurikenItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder(Registries.ITEM, "toroi_unique_fuma_shuriken", v -> block = (Item) v);
+		}
+
+		public ToroiUniqueFumaShurikenItem(NarutoShippudenModElements instance) {
+			super(instance, 974);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new ItemCustom());
+		}
+
+		public static class ItemCustom extends Item {
+			public ItemCustom() {
+				super(Registration.itemProps("toroi_unique_fuma_shuriken", "WeaponsItemGroup").stacksTo(16).rarity(Rarity.COMMON));
+			}
+
+			@Override
+			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
+				return ItemUseAnimation.EAT;
+			}
+
+			@Override
+			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
+				return 1F;
+			}
+
+			@Override
+			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+				InteractionResult ar = super.use(world, entity, hand);
+				ItemStack itemstack = entity.getItemInHand(hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+
+				ToroiUniqueFumaShurikenRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
+						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return ar;
+			}
+
+			@Override
+			public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, InteractionHand hand) {
+				boolean retval = super.onEntitySwing(itemstack, entity, hand);
+				double x = entity.getX();
+				double y = entity.getY();
+				double z = entity.getZ();
+				Level world = entity.level();
+
+				ToolsDamageProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("itemstack", itemstack)).collect(HashMap::new,
+						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				return retval;
+			}
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class TripleBladeScytheItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder(Registries.ITEM, "triple_blade_scythe", v -> block = (Item) v);
+		}
+
+		public TripleBladeScytheItem(NarutoShippudenModElements instance) {
+			super(instance, 1316);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("triple_blade_scythe", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 13f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3f)) {
+
+				@Override
+				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
+				int slot = 0;
+				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
+					super.inventoryTick(itemstack, world, entity, equipmentSlot);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+					if (selected)
+
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
+								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				}
+			});
+		}
+	}
+
+	@NarutoShippudenModElements.ModElement.Tag
+	public static class WhiteLightChakraSabreItem extends NarutoShippudenModElements.ModElement {
+				public static Item block;
+		static {
+			Registration.holder(Registries.ITEM, "white_light_chakra_sabre", v -> block = (Item) v);
+		}
+
+		public WhiteLightChakraSabreItem(NarutoShippudenModElements instance) {
+			super(instance, 1301);
+		}
+
+		@Override
+		public void initElements() {
+			elements.items.add(() -> new Item(Registration.itemProps("white_light_chakra_sabre", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 6f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.6f)) {
+
+				@Override
+				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
+					InteractionResult retval = super.use(world, entity, hand);
+					ItemStack itemstack = entity.getItemInHand(hand);
+					double x = entity.getX();
+					double y = entity.getY();
+					double z = entity.getZ();
+
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
+							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
+									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 					return retval;
 				}
 
@@ -1169,462 +1618,6 @@ public final class WeaponItems {
 							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 					return retval;
-				}
-			});
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class PoisonKunaiItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "poison_kunai", v -> block = (Item) v);
-		}
-
-		public PoisonKunaiItem(NarutoShippudenModElements instance) {
-			super(instance, 1324);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("poison_kunai", "WeaponsItemGroup").stacksTo(16).rarity(Rarity.COMMON));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				PoisonKunaiRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, InteractionHand hand) {
-				boolean retval = super.onEntitySwing(itemstack, entity, hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				ToolsDamageProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("itemstack", itemstack)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return retval;
-			}
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class SamehadaItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "samehada", v -> block = (Item) v);
-		}
-
-		public SamehadaItem(NarutoShippudenModElements instance) {
-			super(instance, 207);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new Item(Registration.itemProps("samehada", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 18f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.8f)) {
-
-				@Override
-				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = entity.getItemInHand(hand);
-					double x = entity.getX();
-					double y = entity.getY();
-					double z = entity.getZ();
-
-					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
-							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
-									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-					return retval;
-				}
-
-				@Override
-				public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-					super.hurtEnemy(itemstack, entity, sourceentity);
-					double x = entity.getX();
-					double y = entity.getY();
-					double z = entity.getZ();
-					Level world = entity.level();
-
-					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
-							.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity),
-									new AbstractMap.SimpleEntry<>("itemstack", itemstack))
-							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-					return;
-				}
-
-				@Override
-				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
-				int slot = 0;
-				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
-					super.inventoryTick(itemstack, world, entity, equipmentSlot);
-					double x = entity.getX();
-					double y = entity.getY();
-					double z = entity.getZ();
-					if (selected)
-
-						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
-								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
-										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				}
-			});
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class ShibukiItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "shibuki", v -> block = (Item) v);
-		}
-
-		public ShibukiItem(NarutoShippudenModElements instance) {
-			super(instance, 213);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new Item(Registration.itemProps("shibuki", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 16f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3.2f)) {
-
-				@Override
-				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = entity.getItemInHand(hand);
-					double x = entity.getX();
-					double y = entity.getY();
-					double z = entity.getZ();
-
-					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
-							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("y", y),
-									new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
-							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-					return retval;
-				}
-
-				@Override
-				public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-					super.hurtEnemy(itemstack, entity, sourceentity);
-					double x = entity.getX();
-					double y = entity.getY();
-					double z = entity.getZ();
-					Level world = entity.level();
-
-					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
-							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("entity", entity),
-									new AbstractMap.SimpleEntry<>("sourceentity", sourceentity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
-							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-					return;
-				}
-
-				@Override
-				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
-				int slot = 0;
-				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
-					super.inventoryTick(itemstack, world, entity, equipmentSlot);
-					double x = entity.getX();
-					double y = entity.getY();
-					double z = entity.getZ();
-					if (selected)
-
-						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
-								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
-										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-
-					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
-							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("entity", entity),
-									new AbstractMap.SimpleEntry<>("itemstack", itemstack))
-							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				}
-			});
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class ShichiseikenItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "shichiseiken", v -> block = (Item) v);
-		}
-
-		public ShichiseikenItem(NarutoShippudenModElements instance) {
-			super(instance, 1278);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new Item(Registration.itemProps("shichiseiken", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 17f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3f)) {
-
-				@Override
-				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
-				int slot = 0;
-				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
-					super.inventoryTick(itemstack, world, entity, equipmentSlot);
-					double x = entity.getX();
-					double y = entity.getY();
-					double z = entity.getZ();
-					if (selected)
-
-						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
-								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
-										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				}
-			});
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class ShurikenItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "shuriken", v -> block = (Item) v);
-		}
-
-		public ShurikenItem(NarutoShippudenModElements instance) {
-			super(instance, 315);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("shuriken", "WeaponsItemGroup").stacksTo(16).rarity(Rarity.COMMON));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				ShurikenRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, InteractionHand hand) {
-				boolean retval = super.onEntitySwing(itemstack, entity, hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				ToolsDamageProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("itemstack", itemstack)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return retval;
-			}
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class TantoItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "tanto", v -> block = (Item) v);
-		}
-
-		public TantoItem(NarutoShippudenModElements instance) {
-			super(instance, 205);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new Item(Registration.itemProps("tanto", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 5f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.7f)) {
-
-				@Override
-				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
-				int slot = 0;
-				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
-					super.inventoryTick(itemstack, world, entity, equipmentSlot);
-					double x = entity.getX();
-					double y = entity.getY();
-					double z = entity.getZ();
-					if (selected)
-
-						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
-								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
-										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				}
-			});
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class ToroiUniqueFumaShurikenItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "toroi_unique_fuma_shuriken", v -> block = (Item) v);
-		}
-
-		public ToroiUniqueFumaShurikenItem(NarutoShippudenModElements instance) {
-			super(instance, 974);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("toroi_unique_fuma_shuriken", "WeaponsItemGroup").stacksTo(16).rarity(Rarity.COMMON));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				ToroiUniqueFumaShurikenRightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public boolean onEntitySwing(ItemStack itemstack, LivingEntity entity, InteractionHand hand) {
-				boolean retval = super.onEntitySwing(itemstack, entity, hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				ToolsDamageProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("itemstack", itemstack)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return retval;
-			}
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class TripleBladeScytheItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "triple_blade_scythe", v -> block = (Item) v);
-		}
-
-		public TripleBladeScytheItem(NarutoShippudenModElements instance) {
-			super(instance, 1316);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new Item(Registration.itemProps("triple_blade_scythe", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 13f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -3f)) {
-
-				@Override
-				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
-				int slot = 0;
-				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
-					super.inventoryTick(itemstack, world, entity, equipmentSlot);
-					double x = entity.getX();
-					double y = entity.getY();
-					double z = entity.getZ();
-					if (selected)
-
-						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
-								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
-										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				}
-			});
-		}
-	}
-
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class WhiteLightChakraSabreItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "white_light_chakra_sabre", v -> block = (Item) v);
-		}
-
-		public WhiteLightChakraSabreItem(NarutoShippudenModElements instance) {
-			super(instance, 1301);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new Item(Registration.itemProps("white_light_chakra_sabre", "WeaponsItemGroup").sword(new ToolMaterial(net.minecraft.tags.BlockTags.INCORRECT_FOR_WOODEN_TOOL, 10000, 0f, 6f, 30, net.minecraft.tags.ItemTags.WOODEN_TOOL_MATERIALS), 3, -2.6f)) {
-
-				@Override
-				public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-					InteractionResult retval = super.use(world, entity, hand);
-					ItemStack itemstack = entity.getItemInHand(hand);
-					double x = entity.getX();
-					double y = entity.getY();
-					double z = entity.getZ();
-
-					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
-							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
-									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-					return retval;
-				}
-
-				@Override
-				public void inventoryTick(ItemStack itemstack, ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot equipmentSlot) {
-				int slot = 0;
-				boolean selected = equipmentSlot == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
-					super.inventoryTick(itemstack, world, entity, equipmentSlot);
-					double x = entity.getX();
-					double y = entity.getY();
-					double z = entity.getZ();
-					if (selected)
-
-						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
-								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
-										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}
 			});
 		}

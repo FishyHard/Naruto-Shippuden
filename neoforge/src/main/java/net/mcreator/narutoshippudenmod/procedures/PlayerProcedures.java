@@ -166,28 +166,8 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLPaths;
 
-
 public final class PlayerProcedures {
 	private PlayerProcedures() {
-	}
-
-	public static class ADDMAXCHAKRAProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure ADDMAXCHAKRA!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			{
-				double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax);
-				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.ChakraAmount = _setval;
-					capability.syncPlayerVariables(entity);
-				});
-			}
-		}
 	}
 
 	public static class ChakraChargingParticlesProcedure {
@@ -3251,8 +3231,6 @@ public final class PlayerProcedures {
 							((ServerLevel) world).getGameRules().set(net.minecraft.world.level.gamerules.GameRules.FALL_DAMAGE, false, ((ServerLevel) world).getServer());
 						}
 					}
-					
-					
 
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -3340,8 +3318,7 @@ public final class PlayerProcedures {
 			// Enter the FTL code here
 			Object _obj = dependencies.get("event");
 			RenderLivingEvent _evt = (RenderLivingEvent) _obj;
-			
-			
+
 			if (NarutoShippudenModVariables.get(entity).PassingFang == true) {
 				if (_evt.getRenderer() instanceof AvatarRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre _cancelable) {
@@ -3350,9 +3327,7 @@ public final class PlayerProcedures {
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/passing_fang.png", FangRenderer.Modelfang.LAYER, FangRenderer.Modelfang::new);
 				}
 			}
-			
-			
-			
+
 			if (entity.getPersistentData().getBooleanOr("mirror", false) == true) {
 				if (!ModelSwapRenderers.isOwnRenderer(_evt.getRenderer())) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
@@ -3476,9 +3451,7 @@ public final class PlayerProcedures {
 					ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/bugs.png", InsectJarTechniqueRenderer.Modeleight_trigrams_palms_revolving_heaven.LAYER, InsectJarTechniqueRenderer.Modeleight_trigrams_palms_revolving_heaven::new);
 				}
 			}
-			
-			
-			
+
 			if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 				if (NarutoShippudenModVariables.get(entity).MangekyouSharinganSasuke == true) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
@@ -3861,72 +3834,4 @@ public final class PlayerProcedures {
 		}
 	}
 
-	public static class SpeedProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("world") == null) {
-				if (!dependencies.containsKey("world"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure Speed!");
-				return;
-			}
-			if (dependencies.get("x") == null) {
-				if (!dependencies.containsKey("x"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency x for procedure Speed!");
-				return;
-			}
-			if (dependencies.get("y") == null) {
-				if (!dependencies.containsKey("y"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency y for procedure Speed!");
-				return;
-			}
-			if (dependencies.get("z") == null) {
-				if (!dependencies.containsKey("z"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency z for procedure Speed!");
-				return;
-			}
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure Speed!");
-				return;
-			}
-			LevelAccessor world = (LevelAccessor) dependencies.get("world");
-			double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
-			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
-			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).sp >= NarutoShippudenModVariables.get(entity).spusecount) {
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).sp
-							- NarutoShippudenModVariables.get(entity).spusecount);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.sp = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).speed
-							+ NarutoShippudenModVariables.get(entity).spusecount);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.speed = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				{
-					double _setval = (NarutoShippudenModVariables.get(entity).maxspeed
-							+ NarutoShippudenModVariables.get(entity).spusecount * 0.005);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.maxspeed = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				if (world instanceof ServerLevel) {
-				}
-			} else if (NarutoShippudenModVariables.get(entity).sp <= NarutoShippudenModVariables.get(entity).spusecount) {
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal(
-							("Not Enough SP Use Selected: " + NarutoShippudenModVariables.get(entity).spusecount)));
-				}
-			}
-		}
-	}
 }

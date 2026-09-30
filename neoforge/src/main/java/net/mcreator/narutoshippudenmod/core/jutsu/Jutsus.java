@@ -43,7 +43,8 @@ import org.jspecify.annotations.Nullable;
  * <li>Learning: right-clicking a release opens the jutsu scroll (client); Learn buys the next tier with the original
  * procedure.</li>
  * </ul>
- * The numbers are in {@link JutsuTable}.
+ * Each jutsu class registers its own techniques and scrolls (priced by {@link engine.JutsuRank}); {@link JutsuTable} keeps the few
+ * still cast by an MCreator procedure.
  */
 @EventBusSubscriber(modid = "naruto_shippuden")
 public final class Jutsus {

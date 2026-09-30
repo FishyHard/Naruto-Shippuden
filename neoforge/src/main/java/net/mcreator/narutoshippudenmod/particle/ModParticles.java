@@ -15,13 +15,7 @@ public final class ModParticles {
 		ChakraParticle.register();
 		FlameParticle.register();
 		GreenSteamParticle.register();
-		KamuiParticleParticle.register();
-		LightningParticle.register();
 		RedSteamParticle.register();
-		SmokeParticle.register();
-		StormParticle.register();
-		TailedBeastBombParticleBlueParticle.register();
-		TailedBeastBombParticleRedParticle.register();
 	}
 
 	public static class AmaterasuFireParticle {
@@ -64,7 +58,6 @@ public final class ModParticles {
 		}
 	}
 
-
 	public static class GreenSteamParticle {
 		public static SimpleParticleType particle;
 
@@ -73,59 +66,11 @@ public final class ModParticles {
 		}
 	}
 
-	public static class KamuiParticleParticle {
-		public static SimpleParticleType particle;
-
-		static void register() {
-			Registration.add(Registries.PARTICLE_TYPE, "kamui_particle", () -> new SimpleParticleType(false), h -> particle = (SimpleParticleType) h.value());
-		}
-	}
-
-	public static class LightningParticle {
-		public static SimpleParticleType particle;
-
-		static void register() {
-			Registration.add(Registries.PARTICLE_TYPE, "lightning", () -> new SimpleParticleType(false), h -> particle = (SimpleParticleType) h.value());
-		}
-	}
-
 	public static class RedSteamParticle {
 		public static SimpleParticleType particle;
 
 		static void register() {
 			Registration.add(Registries.PARTICLE_TYPE, "red_steam", () -> new SimpleParticleType(false), h -> particle = (SimpleParticleType) h.value());
-		}
-	}
-
-	public static class SmokeParticle {
-		public static SimpleParticleType particle;
-
-		static void register() {
-			Registration.add(Registries.PARTICLE_TYPE, "smoke", () -> new SimpleParticleType(false), h -> particle = (SimpleParticleType) h.value());
-		}
-	}
-
-	public static class StormParticle {
-		public static SimpleParticleType particle;
-
-		static void register() {
-			Registration.add(Registries.PARTICLE_TYPE, "storm", () -> new SimpleParticleType(false), h -> particle = (SimpleParticleType) h.value());
-		}
-	}
-
-	public static class TailedBeastBombParticleBlueParticle {
-		public static SimpleParticleType particle;
-
-		static void register() {
-			Registration.add(Registries.PARTICLE_TYPE, "tailed_beast_bomb_particle_blue", () -> new SimpleParticleType(false), h -> particle = (SimpleParticleType) h.value());
-		}
-	}
-
-	public static class TailedBeastBombParticleRedParticle {
-		public static SimpleParticleType particle;
-
-		static void register() {
-			Registration.add(Registries.PARTICLE_TYPE, "tailed_beast_bomb_particle_red", () -> new SimpleParticleType(false), h -> particle = (SimpleParticleType) h.value());
 		}
 	}
 

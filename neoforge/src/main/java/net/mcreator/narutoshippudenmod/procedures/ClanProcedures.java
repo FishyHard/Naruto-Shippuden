@@ -66,21 +66,12 @@ import net.mcreator.narutoshippudenmod.item.TechniqueItems.SharinganReleaseTechn
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.TsuchigumoReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.UzumakiReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.FlyingThunderGodKunaiItem;
-import net.mcreator.narutoshippudenmod.item.WeaponItems.OtsutsukiAxeItem;
-import net.mcreator.narutoshippudenmod.item.WeaponItems.OtsutsukiBatItem;
-import net.mcreator.narutoshippudenmod.item.WeaponItems.OtsutsukiBladeItem;
-import net.mcreator.narutoshippudenmod.item.WeaponItems.OtsutsukiChoppingSwordItem;
-import net.mcreator.narutoshippudenmod.item.WeaponItems.OtsutsukiHammerItem;
-import net.mcreator.narutoshippudenmod.item.WeaponItems.OtsutsukiKatanaItem;
-import net.mcreator.narutoshippudenmod.item.WeaponItems.OtsutsukiSpearItem;
-import net.mcreator.narutoshippudenmod.item.WeaponItems.OtsutsukiSwordItem;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.WhiteLightChakraSabreItem;
 import net.mcreator.narutoshippudenmod.particle.ModParticles.AshParticle;
 import net.mcreator.narutoshippudenmod.particle.ModParticles.BlueSteamParticle;
 import net.mcreator.narutoshippudenmod.particle.ModParticles.FlameParticle;
 import net.mcreator.narutoshippudenmod.particle.ModParticles.GreenSteamParticle;
 import net.mcreator.narutoshippudenmod.particle.ModParticles.RedSteamParticle;
-import net.mcreator.narutoshippudenmod.particle.ModParticles.SmokeParticle;
 import net.mcreator.narutoshippudenmod.potion.ModEffects.CoercionSharinganEffectPotionEffect;
 import net.mcreator.narutoshippudenmod.potion.ModEffects.DespawnPotionEffect;
 import net.mcreator.narutoshippudenmod.potion.ModEffects.DrowningPotionEffect;
@@ -147,16 +138,18 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.minecraft.core.registries.BuiltInRegistries;
 
+import net.mcreator.narutoshippudenmod.item.WeaponItems.OtsutsukiChoppingSwordItem;
+import net.mcreator.narutoshippudenmod.item.WeaponItems.OtsutsukiBatItem;
+import net.mcreator.narutoshippudenmod.item.WeaponItems.OtsutsukiSwordItem;
+import net.mcreator.narutoshippudenmod.item.WeaponItems.OtsutsukiAxeItem;
+import net.mcreator.narutoshippudenmod.item.WeaponItems.OtsutsukiSpearItem;
+import net.mcreator.narutoshippudenmod.item.WeaponItems.OtsutsukiKatanaItem;
+import net.mcreator.narutoshippudenmod.item.WeaponItems.OtsutsukiHammerItem;
+import net.mcreator.narutoshippudenmod.item.WeaponItems.OtsutsukiBladeItem;
+
 public final class ClanProcedures {
 	private ClanProcedures() {
 	}
-
-
-
-
-
-
-
 
 	public static class ChakraNatureResetRightclickedProcedure {
 
@@ -1574,9 +1567,6 @@ public final class ClanProcedures {
 		}
 	}
 
-
-
-
 	public static class DrowningEffectExpiresProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {
@@ -1620,13 +1610,6 @@ public final class ClanProcedures {
 			entity.hurt(Compat.damage().drown(), (float) 1);
 		}
 	}
-
-
-
-
-
-
-
 
 	public static class GatesBlueOnEffectActiveTickProcedure {
 
@@ -1944,11 +1927,6 @@ public final class ClanProcedures {
 		}
 	}
 
-
-
-
-
-
 	public static class HyugaEffectExpiresProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {
@@ -1975,11 +1953,6 @@ public final class ClanProcedures {
 		}
 	}
 
-
-
-
-
-
 	public static class InuzukaAkamaruEffectExpiresProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {
@@ -2005,18 +1978,6 @@ public final class ClanProcedures {
 			}
 		}
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 
 	public static class NaraReleaseTechniqueRightclickedProcedure {
 
@@ -2081,190 +2042,6 @@ public final class ClanProcedures {
 			}.start(world, (int) 5);
 		}
 	}
-
-
-
-	public static class OtsutsukiToolsSwitchProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure OtsutsukiToolsSwitch!");
-				return;
-			}
-			if (dependencies.get("itemstack") == null) {
-				if (!dependencies.containsKey("itemstack"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency itemstack for procedure OtsutsukiToolsSwitch!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			ItemStack itemstack = (ItemStack) dependencies.get("itemstack");
-			ItemStack tool = ItemStack.EMPTY;
-			tool = itemstack;
-			if (entity.isShiftKeyDown()) {
-				if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 0) {
-					{
-						double _setval = 1;
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.otsutsuki_tool = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Axe"));
-					}
-				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 1) {
-					{
-						double _setval = 2;
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.otsutsuki_tool = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Bat"));
-					}
-				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 2) {
-					{
-						double _setval = 3;
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.otsutsuki_tool = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Blade"));
-					}
-				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 3) {
-					{
-						double _setval = 4;
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.otsutsuki_tool = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Chopping Sword"));
-					}
-				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 4) {
-					{
-						double _setval = 5;
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.otsutsuki_tool = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Hammer"));
-					}
-				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 5) {
-					{
-						double _setval = 6;
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.otsutsuki_tool = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Katana"));
-					}
-				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 6) {
-					{
-						double _setval = 7;
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.otsutsuki_tool = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Spear"));
-					}
-				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 7) {
-					{
-						double _setval = 0;
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.otsutsuki_tool = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Sword"));
-					}
-				}
-			} else if (!entity.isShiftKeyDown()) {
-				if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY).getItem() == (tool).getItem()) {
-					if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 0) {
-						if (entity instanceof LivingEntity) {
-							ItemStack _setstack = new ItemStack(OtsutsukiSwordItem.block);
-							_setstack.setCount((int) 1);
-							((LivingEntity) entity).setItemInHand(InteractionHand.MAIN_HAND, _setstack);
-							if (entity instanceof ServerPlayer)
-								((ServerPlayer) entity).getInventory().setChanged();
-						}
-					} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 1) {
-						if (entity instanceof LivingEntity) {
-							ItemStack _setstack = new ItemStack(OtsutsukiAxeItem.block);
-							_setstack.setCount((int) 1);
-							((LivingEntity) entity).setItemInHand(InteractionHand.MAIN_HAND, _setstack);
-							if (entity instanceof ServerPlayer)
-								((ServerPlayer) entity).getInventory().setChanged();
-						}
-					} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 2) {
-						if (entity instanceof LivingEntity) {
-							ItemStack _setstack = new ItemStack(OtsutsukiBatItem.block);
-							_setstack.setCount((int) 1);
-							((LivingEntity) entity).setItemInHand(InteractionHand.MAIN_HAND, _setstack);
-							if (entity instanceof ServerPlayer)
-								((ServerPlayer) entity).getInventory().setChanged();
-						}
-					} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 3) {
-						if (entity instanceof LivingEntity) {
-							ItemStack _setstack = new ItemStack(OtsutsukiBladeItem.block);
-							_setstack.setCount((int) 1);
-							((LivingEntity) entity).setItemInHand(InteractionHand.MAIN_HAND, _setstack);
-							if (entity instanceof ServerPlayer)
-								((ServerPlayer) entity).getInventory().setChanged();
-						}
-					} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 4) {
-						if (entity instanceof LivingEntity) {
-							ItemStack _setstack = new ItemStack(OtsutsukiChoppingSwordItem.block);
-							_setstack.setCount((int) 1);
-							((LivingEntity) entity).setItemInHand(InteractionHand.MAIN_HAND, _setstack);
-							if (entity instanceof ServerPlayer)
-								((ServerPlayer) entity).getInventory().setChanged();
-						}
-					} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 5) {
-						if (entity instanceof LivingEntity) {
-							ItemStack _setstack = new ItemStack(OtsutsukiHammerItem.block);
-							_setstack.setCount((int) 1);
-							((LivingEntity) entity).setItemInHand(InteractionHand.MAIN_HAND, _setstack);
-							if (entity instanceof ServerPlayer)
-								((ServerPlayer) entity).getInventory().setChanged();
-						}
-					} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 6) {
-						if (entity instanceof LivingEntity) {
-							ItemStack _setstack = new ItemStack(OtsutsukiKatanaItem.block);
-							_setstack.setCount((int) 1);
-							((LivingEntity) entity).setItemInHand(InteractionHand.MAIN_HAND, _setstack);
-							if (entity instanceof ServerPlayer)
-								((ServerPlayer) entity).getInventory().setChanged();
-						}
-					} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 7) {
-						if (entity instanceof LivingEntity) {
-							ItemStack _setstack = new ItemStack(OtsutsukiSpearItem.block);
-							_setstack.setCount((int) 1);
-							((LivingEntity) entity).setItemInHand(InteractionHand.MAIN_HAND, _setstack);
-							if (entity instanceof ServerPlayer)
-								((ServerPlayer) entity).getInventory().setChanged();
-						}
-					}
-				}
-			}
-		}
-	}
-
-
-
 
 	public static class ShadowCloneEntityDiesProcedure {
 
@@ -5102,12 +4879,6 @@ public final class ClanProcedures {
 		}
 	}
 
-
-
-
-
-
-
 	public static class UzumakiChainProjectileHitsLivingEntityProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {
@@ -5167,7 +4938,182 @@ public final class ClanProcedures {
 		}
 	}
 
+	public static class OtsutsukiToolsSwitchProcedure {
 
-
-
+		public static void executeProcedure(Map<String, Object> dependencies) {
+			if (dependencies.get("entity") == null) {
+				if (!dependencies.containsKey("entity"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure OtsutsukiToolsSwitch!");
+				return;
+			}
+			if (dependencies.get("itemstack") == null) {
+				if (!dependencies.containsKey("itemstack"))
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency itemstack for procedure OtsutsukiToolsSwitch!");
+				return;
+			}
+			Entity entity = (Entity) dependencies.get("entity");
+			ItemStack itemstack = (ItemStack) dependencies.get("itemstack");
+			ItemStack tool = ItemStack.EMPTY;
+			tool = itemstack;
+			if (entity.isShiftKeyDown()) {
+				if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 0) {
+					{
+						double _setval = 1;
+						NarutoShippudenModVariables.ifPresent(entity, capability -> {
+							capability.otsutsuki_tool = _setval;
+							capability.syncPlayerVariables(entity);
+						});
+					}
+					if (entity instanceof Player && !entity.level().isClientSide()) {
+						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Axe"));
+					}
+				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 1) {
+					{
+						double _setval = 2;
+						NarutoShippudenModVariables.ifPresent(entity, capability -> {
+							capability.otsutsuki_tool = _setval;
+							capability.syncPlayerVariables(entity);
+						});
+					}
+					if (entity instanceof Player && !entity.level().isClientSide()) {
+						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Bat"));
+					}
+				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 2) {
+					{
+						double _setval = 3;
+						NarutoShippudenModVariables.ifPresent(entity, capability -> {
+							capability.otsutsuki_tool = _setval;
+							capability.syncPlayerVariables(entity);
+						});
+					}
+					if (entity instanceof Player && !entity.level().isClientSide()) {
+						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Blade"));
+					}
+				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 3) {
+					{
+						double _setval = 4;
+						NarutoShippudenModVariables.ifPresent(entity, capability -> {
+							capability.otsutsuki_tool = _setval;
+							capability.syncPlayerVariables(entity);
+						});
+					}
+					if (entity instanceof Player && !entity.level().isClientSide()) {
+						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Chopping Sword"));
+					}
+				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 4) {
+					{
+						double _setval = 5;
+						NarutoShippudenModVariables.ifPresent(entity, capability -> {
+							capability.otsutsuki_tool = _setval;
+							capability.syncPlayerVariables(entity);
+						});
+					}
+					if (entity instanceof Player && !entity.level().isClientSide()) {
+						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Hammer"));
+					}
+				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 5) {
+					{
+						double _setval = 6;
+						NarutoShippudenModVariables.ifPresent(entity, capability -> {
+							capability.otsutsuki_tool = _setval;
+							capability.syncPlayerVariables(entity);
+						});
+					}
+					if (entity instanceof Player && !entity.level().isClientSide()) {
+						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Katana"));
+					}
+				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 6) {
+					{
+						double _setval = 7;
+						NarutoShippudenModVariables.ifPresent(entity, capability -> {
+							capability.otsutsuki_tool = _setval;
+							capability.syncPlayerVariables(entity);
+						});
+					}
+					if (entity instanceof Player && !entity.level().isClientSide()) {
+						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Spear"));
+					}
+				} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 7) {
+					{
+						double _setval = 0;
+						NarutoShippudenModVariables.ifPresent(entity, capability -> {
+							capability.otsutsuki_tool = _setval;
+							capability.syncPlayerVariables(entity);
+						});
+					}
+					if (entity instanceof Player && !entity.level().isClientSide()) {
+						((Player) entity).sendOverlayMessage(Component.literal("Otsutsuki Sword"));
+					}
+				}
+			} else if (!entity.isShiftKeyDown()) {
+				if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMainHandItem() : ItemStack.EMPTY).getItem() == (tool).getItem()) {
+					if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 0) {
+						if (entity instanceof LivingEntity) {
+							ItemStack _setstack = new ItemStack(OtsutsukiSwordItem.block);
+							_setstack.setCount((int) 1);
+							((LivingEntity) entity).setItemInHand(InteractionHand.MAIN_HAND, _setstack);
+							if (entity instanceof ServerPlayer)
+								((ServerPlayer) entity).getInventory().setChanged();
+						}
+					} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 1) {
+						if (entity instanceof LivingEntity) {
+							ItemStack _setstack = new ItemStack(OtsutsukiAxeItem.block);
+							_setstack.setCount((int) 1);
+							((LivingEntity) entity).setItemInHand(InteractionHand.MAIN_HAND, _setstack);
+							if (entity instanceof ServerPlayer)
+								((ServerPlayer) entity).getInventory().setChanged();
+						}
+					} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 2) {
+						if (entity instanceof LivingEntity) {
+							ItemStack _setstack = new ItemStack(OtsutsukiBatItem.block);
+							_setstack.setCount((int) 1);
+							((LivingEntity) entity).setItemInHand(InteractionHand.MAIN_HAND, _setstack);
+							if (entity instanceof ServerPlayer)
+								((ServerPlayer) entity).getInventory().setChanged();
+						}
+					} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 3) {
+						if (entity instanceof LivingEntity) {
+							ItemStack _setstack = new ItemStack(OtsutsukiBladeItem.block);
+							_setstack.setCount((int) 1);
+							((LivingEntity) entity).setItemInHand(InteractionHand.MAIN_HAND, _setstack);
+							if (entity instanceof ServerPlayer)
+								((ServerPlayer) entity).getInventory().setChanged();
+						}
+					} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 4) {
+						if (entity instanceof LivingEntity) {
+							ItemStack _setstack = new ItemStack(OtsutsukiChoppingSwordItem.block);
+							_setstack.setCount((int) 1);
+							((LivingEntity) entity).setItemInHand(InteractionHand.MAIN_HAND, _setstack);
+							if (entity instanceof ServerPlayer)
+								((ServerPlayer) entity).getInventory().setChanged();
+						}
+					} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 5) {
+						if (entity instanceof LivingEntity) {
+							ItemStack _setstack = new ItemStack(OtsutsukiHammerItem.block);
+							_setstack.setCount((int) 1);
+							((LivingEntity) entity).setItemInHand(InteractionHand.MAIN_HAND, _setstack);
+							if (entity instanceof ServerPlayer)
+								((ServerPlayer) entity).getInventory().setChanged();
+						}
+					} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 6) {
+						if (entity instanceof LivingEntity) {
+							ItemStack _setstack = new ItemStack(OtsutsukiKatanaItem.block);
+							_setstack.setCount((int) 1);
+							((LivingEntity) entity).setItemInHand(InteractionHand.MAIN_HAND, _setstack);
+							if (entity instanceof ServerPlayer)
+								((ServerPlayer) entity).getInventory().setChanged();
+						}
+					} else if (NarutoShippudenModVariables.get(entity).otsutsuki_tool == 7) {
+						if (entity instanceof LivingEntity) {
+							ItemStack _setstack = new ItemStack(OtsutsukiSpearItem.block);
+							_setstack.setCount((int) 1);
+							((LivingEntity) entity).setItemInHand(InteractionHand.MAIN_HAND, _setstack);
+							if (entity instanceof ServerPlayer)
+								((ServerPlayer) entity).getInventory().setChanged();
+						}
+					}
+				}
+			}
+		}
+	}
 }

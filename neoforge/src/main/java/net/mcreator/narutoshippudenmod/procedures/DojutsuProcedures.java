@@ -22,7 +22,6 @@ import net.mcreator.narutoshippudenmod.core.EntityScale;
 import net.mcreator.narutoshippudenmod.core.ModelSwapRenderers;
 import net.mcreator.narutoshippudenmod.entity.SummonEntities.CrowEntity;
 import net.mcreator.narutoshippudenmod.item.DojutsuItems.ByakuganReleaseItem;
-import net.mcreator.narutoshippudenmod.item.DojutsuItems.CoercionSharinganItem;
 import net.mcreator.narutoshippudenmod.item.DojutsuItems.IsshikiDojutsuReleaseItem;
 import net.mcreator.narutoshippudenmod.item.DojutsuItems.KetsuryuganReleaseItem;
 import net.mcreator.narutoshippudenmod.item.DojutsuItems.MangekyouSharinganItachiReleaseItem;
@@ -34,7 +33,6 @@ import net.mcreator.narutoshippudenmod.item.DojutsuItems.MangekyouSharinganShisu
 import net.mcreator.narutoshippudenmod.item.DojutsuItems.RinneganReleaseItem;
 import net.mcreator.narutoshippudenmod.item.DojutsuItems.SharinganReleaseItem;
 import net.mcreator.narutoshippudenmod.item.DojutsuItems.TenseiganReleaseItem;
-import net.mcreator.narutoshippudenmod.item.JutsuProjectileItems.AmaterasuFlameItem;
 import net.mcreator.narutoshippudenmod.item.MissionItems.LetterFromBrotherItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.IsshikiDojutsuReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.MangekyouSharinganItachiReleaseTechniqueItem;
@@ -43,7 +41,6 @@ import net.mcreator.narutoshippudenmod.item.TechniqueItems.MangekyouSharinganObi
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.MangekyouSharinganSasukeReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.item.TechniqueItems.SharinganReleaseTechniqueItem;
 import net.mcreator.narutoshippudenmod.particle.ModParticles.AmaterasuFireParticle;
-import net.mcreator.narutoshippudenmod.particle.ModParticles.KamuiParticleParticle;
 import net.mcreator.narutoshippudenmod.potion.ModEffects.CoercionSharinganEffectPotionEffect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -188,61 +185,6 @@ public final class DojutsuProcedures {
 					capability.byakugan = _setval;
 					capability.syncPlayerVariables(entity);
 				});
-			}
-		}
-	}
-
-	public static class CoercionSharinganProjectileHitsLivingEntityProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("world") == null) {
-				if (!dependencies.containsKey("world"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure CoercionSharinganProjectileHitsLivingEntity!");
-				return;
-			}
-			if (dependencies.get("x") == null) {
-				if (!dependencies.containsKey("x"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency x for procedure CoercionSharinganProjectileHitsLivingEntity!");
-				return;
-			}
-			if (dependencies.get("y") == null) {
-				if (!dependencies.containsKey("y"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency y for procedure CoercionSharinganProjectileHitsLivingEntity!");
-				return;
-			}
-			if (dependencies.get("z") == null) {
-				if (!dependencies.containsKey("z"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency z for procedure CoercionSharinganProjectileHitsLivingEntity!");
-				return;
-			}
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CoercionSharinganProjectileHitsLivingEntity!");
-				return;
-			}
-			LevelAccessor world = (LevelAccessor) dependencies.get("world");
-			double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
-			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
-			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
-			Entity entity = (Entity) dependencies.get("entity");
-			if (entity instanceof LivingEntity)
-				((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.BLINDNESS, (int) 100, (int) 3, (false), (false)));
-			if (entity instanceof LivingEntity)
-				((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.SLOWNESS, (int) 100, (int) 1, (false), (false)));
-			if (entity instanceof LivingEntity)
-				((LivingEntity) entity)
-						.addEffect(new MobEffectInstance(CoercionSharinganEffectPotionEffect.potion, (int) 100, (int) 1, (false), (false)));
-			if (world instanceof Level && !world.isClientSide()) {
-				((Level) world).playSound(null, BlockPos.containing(x, y, z),
-						Compat.sound("naruto_shippuden:sharingan"),
-						SoundSource.NEUTRAL, (float) 1, (float) 1);
-			} else {
-				((Level) world).playLocalSound(x, y, z,
-						Compat.sound("naruto_shippuden:sharingan"),
-						SoundSource.NEUTRAL, (float) 1, (float) 1, false);
-			}
-			if (world.isClientSide()) {
-				Minecraft.getInstance().player.displayItemActivation(new ItemStack(SharinganReleaseTechniqueItem.block));
 			}
 		}
 	}
@@ -776,9 +718,6 @@ public final class DojutsuProcedures {
 		}
 	}
 
-
-
-
 	public static class IsshikiDojutsuAwake10SecondsProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {
@@ -890,9 +829,6 @@ public final class DojutsuProcedures {
 			}
 		}
 	}
-
-
-
 
 	public static class KakashiMSharinganAwakeProcedure {
 
@@ -1635,56 +1571,6 @@ public final class DojutsuProcedures {
 		}
 	}
 
-
-	public static class MangekyouSharinganKakashiReleaseRightclickedProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure MangekyouSharinganKakashiReleaseRightclicked!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (!entity.isShiftKeyDown()) {
-				if (NarutoShippudenModVariables.get(entity).mangekyousharingankakashikamuilearn == 0) {
-					if (NarutoShippudenModVariables.get(entity).jp >= 35) {
-						if (entity instanceof Player) {
-							ItemStack _setstack = new ItemStack(MangekyouSharinganKakashiReleaseTechniqueItem.block);
-							_setstack.setCount((int) 1);
-							Compat.giveItemToPlayer(((Player) entity), _setstack);
-						}
-						{
-							double _setval = 1;
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.mangekyousharingankakashikamuilearn = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						{
-							double _setval = (NarutoShippudenModVariables.get(entity).jp - 35);
-							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.jp = _setval;
-								capability.syncPlayerVariables(entity);
-							});
-						}
-						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("-35 JP"));
-						}
-					} else if (NarutoShippudenModVariables.get(entity).jp <= 34) {
-						if (entity instanceof Player && !entity.level().isClientSide()) {
-							((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
-						}
-					}
-				}
-			} else if (entity.isShiftKeyDown()) {
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Kamui"));
-				}
-			}
-		}
-	}
-
-
 	public static class MangekyouSharinganMadaraReleaseRightclickedProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {
@@ -1827,7 +1713,6 @@ public final class DojutsuProcedures {
 			}
 		}
 	}
-
 
 	public static class MangekyouSharinganObitoReleaseRightclickedProcedure {
 
@@ -2064,7 +1949,6 @@ public final class DojutsuProcedures {
 			}
 		}
 	}
-
 
 	public static class MangekyouSharinganSasukeReleaseRightclickedProcedure {
 
@@ -2691,8 +2575,6 @@ public final class DojutsuProcedures {
 		}
 	}
 
-
-
 	public static class ShimuraSharinganAwake10SecondsProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {
@@ -2910,6 +2792,5 @@ public final class DojutsuProcedures {
 			}
 		}
 	}
-
 
 }

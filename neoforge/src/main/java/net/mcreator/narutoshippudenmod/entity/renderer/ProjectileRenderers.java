@@ -39,104 +39,6 @@ public final class ProjectileRenderers {
 	private ProjectileRenderers() {
 	}
 
-	public static class AmaterasuFlameRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, AmaterasuFlameItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
-		}
-
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::createBodyLayer);
-		}
-
-		public static class Modelphoenix_flower_jutsu extends EntityModel<EntityRenderState> {
-		public static final ModelLayerLocation LAYER = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "projectilerenderers_amaterasuflame_modelphoenix_flower_jutsu"), "main");
-		public final ModelPart bb_main;
-		
-		public Modelphoenix_flower_jutsu(ModelPart root) {
-			super(root);
-			this.bb_main = root.getChild("transform0").getChild("bb_main");
-		}
-		
-		public static LayerDefinition createBodyLayer() {
-			MeshDefinition mesh = new MeshDefinition();
-			PartDefinition root = mesh.getRoot();
-			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
-			PartDefinition p1 = transform0.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(18, 47).addBox(-2.0F, -9.0F, -2.0F, 4.0F, 8.0F, 4.0F).texOffs(22, 24).addBox(-3.0F, -8.0F, -3.0F, 6.0F, 6.0F, 6.0F).texOffs(28, 14).addBox(-4.0F, -7.0F, -2.0F, 8.0F, 4.0F, 4.0F).texOffs(4, 18).addBox(-2.0F, -7.0F, -4.0F, 4.0F, 4.0F, 8.0F).texOffs(16, 36).addBox(-1.0F, -8.0F, -4.0F, 2.0F, 1.0F, 8.0F).texOffs(4, 30).addBox(-1.0F, -3.0F, -4.0F, 2.0F, 1.0F, 8.0F).texOffs(4, 39).addBox(2.0F, -6.0F, -4.0F, 1.0F, 2.0F, 8.0F).texOffs(28, 37).addBox(-3.0F, -6.0F, -4.0F, 1.0F, 2.0F, 8.0F).texOffs(30, 47).addBox(-4.0F, -8.0F, -1.0F, 8.0F, 1.0F, 2.0F).texOffs(26, 10).addBox(-4.0F, -3.0F, -1.0F, 8.0F, 1.0F, 2.0F).texOffs(4, 10).addBox(-4.0F, -6.0F, -3.0F, 8.0F, 2.0F, 6.0F).texOffs(34, 50).addBox(-3.0F, -9.0F, -1.0F, 6.0F, 1.0F, 2.0F).texOffs(40, 22).addBox(-1.0F, -9.0F, -3.0F, 2.0F, 1.0F, 6.0F).texOffs(44, 11).addBox(-3.0F, -2.0F, -1.0F, 6.0F, 1.0F, 2.0F).texOffs(38, 36).addBox(-1.0F, -2.0F, -3.0F, 2.0F, 1.0F, 6.0F), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-			return LayerDefinition.create(mesh, 64, 64);
-		}
-		
-		@Override
-		public void setupAnim(EntityRenderState state) {
-			super.setupAnim(state);
-			setupAnimCompat(state);
-		}
-		
-		private void setupAnimCompat(EntityRenderState state) {
-			float f = 0, f1 = 0, f2 = state.ageInTicks, f3 = 0, f4 = 0;
-			if (state instanceof LivingEntityRenderState living) {
-				f = living.walkAnimationPos;
-				f1 = living.walkAnimationSpeed;
-				f3 = living.yRot;
-				f4 = living.xRot;
-			}
-		
-		}
-		}
-	}
-
-
-
-	public static class CoercionSharinganRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, CoercionSharinganItem.arrow, Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::new, Identifier.parse("naruto_shippuden:textures/entities/none.png"));
-		}
-
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(Modelphoenix_flower_jutsu.LAYER, Modelphoenix_flower_jutsu::createBodyLayer);
-		}
-
-		public static class Modelphoenix_flower_jutsu extends EntityModel<EntityRenderState> {
-		public static final ModelLayerLocation LAYER = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "projectilerenderers_coercionsharingan_modelphoenix_flower_jutsu"), "main");
-		public final ModelPart bb_main;
-		
-		public Modelphoenix_flower_jutsu(ModelPart root) {
-			super(root);
-			this.bb_main = root.getChild("transform0").getChild("bb_main");
-		}
-		
-		public static LayerDefinition createBodyLayer() {
-			MeshDefinition mesh = new MeshDefinition();
-			PartDefinition root = mesh.getRoot();
-			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
-			PartDefinition p1 = transform0.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(18, 47).addBox(-2.0F, -9.0F, -2.0F, 4.0F, 8.0F, 4.0F).texOffs(22, 24).addBox(-3.0F, -8.0F, -3.0F, 6.0F, 6.0F, 6.0F).texOffs(28, 14).addBox(-4.0F, -7.0F, -2.0F, 8.0F, 4.0F, 4.0F).texOffs(4, 18).addBox(-2.0F, -7.0F, -4.0F, 4.0F, 4.0F, 8.0F).texOffs(16, 36).addBox(-1.0F, -8.0F, -4.0F, 2.0F, 1.0F, 8.0F).texOffs(4, 30).addBox(-1.0F, -3.0F, -4.0F, 2.0F, 1.0F, 8.0F).texOffs(4, 39).addBox(2.0F, -6.0F, -4.0F, 1.0F, 2.0F, 8.0F).texOffs(28, 37).addBox(-3.0F, -6.0F, -4.0F, 1.0F, 2.0F, 8.0F).texOffs(30, 47).addBox(-4.0F, -8.0F, -1.0F, 8.0F, 1.0F, 2.0F).texOffs(26, 10).addBox(-4.0F, -3.0F, -1.0F, 8.0F, 1.0F, 2.0F).texOffs(4, 10).addBox(-4.0F, -6.0F, -3.0F, 8.0F, 2.0F, 6.0F).texOffs(34, 50).addBox(-3.0F, -9.0F, -1.0F, 6.0F, 1.0F, 2.0F).texOffs(40, 22).addBox(-1.0F, -9.0F, -3.0F, 2.0F, 1.0F, 6.0F).texOffs(44, 11).addBox(-3.0F, -2.0F, -1.0F, 6.0F, 1.0F, 2.0F).texOffs(38, 36).addBox(-1.0F, -2.0F, -3.0F, 2.0F, 1.0F, 6.0F), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-			return LayerDefinition.create(mesh, 64, 64);
-		}
-		
-		@Override
-		public void setupAnim(EntityRenderState state) {
-			super.setupAnim(state);
-			setupAnimCompat(state);
-		}
-		
-		private void setupAnimCompat(EntityRenderState state) {
-			float f = 0, f1 = 0, f2 = state.ageInTicks, f3 = 0, f4 = 0;
-			if (state instanceof LivingEntityRenderState living) {
-				f = living.walkAnimationPos;
-				f1 = living.walkAnimationSpeed;
-				f3 = living.yRot;
-				f4 = living.xRot;
-			}
-		
-		}
-		}
-	}
-
-
-
-
-
-
-
 	public static class ExplosiveKunaiBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, ExplosiveKunaiBulletItem.arrow, Modelexplosive_kunai_projectile.LAYER, Modelexplosive_kunai_projectile::new, Identifier.parse("naruto_shippuden:textures/entities/explosive_kunai.png"));
@@ -185,10 +87,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-
-
-
-
 	public static class FlyingThunderGodKunaiBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.sprite(event, FlyingThunderGodKunaiBulletItem.arrow);
@@ -206,9 +104,6 @@ public final class ProjectileRenderers {
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		}
 	}
-
-
-
 
 	public static class GreatFireDragonRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -324,9 +219,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-
-
-
 	public static class KunaiBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, KunaiBulletItem.arrow, Modelkunai_projectile.LAYER, Modelkunai_projectile::new, Identifier.parse("naruto_shippuden:textures/entities/kunai.png"));
@@ -420,14 +312,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-
-
-
-
-
-
-
-
 	public static class PoisonKunaiBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, PoisonKunaiBulletItem.arrow, Modelkunai_projectile.LAYER, Modelkunai_projectile::new, Identifier.parse("naruto_shippuden:textures/entities/poison_kunai.png"));
@@ -476,7 +360,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-
 	public static class ShurikenBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.projectile(event, ShurikenBulletItem.arrow, Modelshuriken_projectile.LAYER, Modelshuriken_projectile::new, Identifier.parse("naruto_shippuden:textures/entities/shuriken.png"));
@@ -522,60 +405,6 @@ public final class ProjectileRenderers {
 		}
 	}
 
-
-
-
-	public static class TailedBeastBombRenderer {
-		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.projectile(event, TailedBeastBombItem.arrow, Modeltailed_beast_bomb.LAYER, Modeltailed_beast_bomb::new, Identifier.parse("naruto_shippuden:textures/entities/tailed_beast_bomb.png"));
-		}
-
-		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(Modeltailed_beast_bomb.LAYER, Modeltailed_beast_bomb::createBodyLayer);
-		}
-
-		public static class Modeltailed_beast_bomb extends EntityModel<EntityRenderState> {
-		public static final ModelLayerLocation LAYER = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "projectilerenderers_tailedbeastbomb_modeltailed_beast_bomb"), "main");
-		public final ModelPart bb_main;
-		public final ModelPart cube_r1;
-		public final ModelPart cube_r2;
-		
-		public Modeltailed_beast_bomb(ModelPart root) {
-			super(root);
-			this.bb_main = root.getChild("transform0").getChild("bb_main");
-			this.cube_r1 = root.getChild("transform0").getChild("bb_main").getChild("cube_r1");
-			this.cube_r2 = root.getChild("transform0").getChild("bb_main").getChild("cube_r2");
-		}
-		
-		public static LayerDefinition createBodyLayer() {
-			MeshDefinition mesh = new MeshDefinition();
-			PartDefinition root = mesh.getRoot();
-			PartDefinition transform0 = root.addOrReplaceChild("transform0", CubeListBuilder.create(), new PartPose(28.799999999999997F, -12.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.5F, 1.5F, 1.5F));
-			PartDefinition p1 = transform0.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 64).addBox(-16.0F, -32.0F, -16.0F, 32.0F, 32.0F, 32.0F), PartPose.offsetAndRotation(0.0F, 24.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-			PartDefinition p2 = p1.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 64).addBox(-16.0F, -27.0F, -4.0F, 32.0F, 32.0F, 32.0F), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.7854F, 0.0F, 0.0F));
-			PartDefinition p3 = p1.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 64).addBox(-4.0F, -27.0F, -16.0F, 32.0F, 32.0F, 32.0F), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.7854F));
-			return LayerDefinition.create(mesh, 128, 128);
-		}
-		
-		@Override
-		public void setupAnim(EntityRenderState state) {
-			super.setupAnim(state);
-			setupAnimCompat(state);
-		}
-		
-		private void setupAnimCompat(EntityRenderState state) {
-			float f = 0, f1 = 0, f2 = state.ageInTicks, f3 = 0, f4 = 0;
-			if (state instanceof LivingEntityRenderState living) {
-				f = living.walkAnimationPos;
-				f1 = living.walkAnimationSpeed;
-				f3 = living.yRot;
-				f4 = living.xRot;
-			}
-		
-		}
-		}
-	}
-
 	public static class ToroiUniqueFumaShurikenBulletRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
 			ModRenderers.sprite(event, ToroiUniqueFumaShurikenBulletItem.arrow);
@@ -584,8 +413,6 @@ public final class ProjectileRenderers {
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		}
 	}
-
-
 
 	public static class UzumakiChainRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
@@ -631,15 +458,5 @@ public final class ProjectileRenderers {
 		}
 		}
 	}
-
-
-
-
-
-
-
-
-
-
 
 }

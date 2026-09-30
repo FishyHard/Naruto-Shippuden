@@ -28,7 +28,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.LevelAccessor;
 
-
 public final class CheatProcedures {
 	private CheatProcedures() {
 	}
@@ -187,60 +186,6 @@ public final class CheatProcedures {
 					capability.dojutsuketsuryugan = _setval;
 					capability.syncPlayerVariables(entity);
 				});
-			}
-		}
-	}
-
-	public static class CheatDojutsuButtonProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("world") == null) {
-				if (!dependencies.containsKey("world"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure CheatDojutsuButton!");
-				return;
-			}
-			if (dependencies.get("x") == null) {
-				if (!dependencies.containsKey("x"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency x for procedure CheatDojutsuButton!");
-				return;
-			}
-			if (dependencies.get("y") == null) {
-				if (!dependencies.containsKey("y"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency y for procedure CheatDojutsuButton!");
-				return;
-			}
-			if (dependencies.get("z") == null) {
-				if (!dependencies.containsKey("z"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency z for procedure CheatDojutsuButton!");
-				return;
-			}
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatDojutsuButton!");
-				return;
-			}
-			LevelAccessor world = (LevelAccessor) dependencies.get("world");
-			double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
-			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
-			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
-			Entity entity = (Entity) dependencies.get("entity");
-			{
-				Entity _ent = entity;
-				if (_ent instanceof ServerPlayer) {
-					BlockPos _bpos = BlockPos.containing(x, y, z);
-					((ServerPlayer) _ent).openMenu(new MenuProvider() {
-						@Override
-						public Component getDisplayName() {
-							return Component.literal("NarutoShippudenCheatDojutsuGUI");
-						}
-
-						@Override
-						public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-							return new NarutoShippudenCheatDojutsuGUIGui.GuiContainerMod(id, inventory,
-									new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(_bpos));
-						}
-					}, _buf -> _buf.writeBlockPos(_bpos));
-				}
 			}
 		}
 	}
@@ -496,60 +441,6 @@ public final class CheatProcedures {
 					capability.magnetreleaselogic = _setval;
 					capability.syncPlayerVariables(entity);
 				});
-			}
-		}
-	}
-
-	public static class CheatKekkeiGenkaiButtonProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("world") == null) {
-				if (!dependencies.containsKey("world"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure CheatKekkeiGenkaiButton!");
-				return;
-			}
-			if (dependencies.get("x") == null) {
-				if (!dependencies.containsKey("x"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency x for procedure CheatKekkeiGenkaiButton!");
-				return;
-			}
-			if (dependencies.get("y") == null) {
-				if (!dependencies.containsKey("y"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency y for procedure CheatKekkeiGenkaiButton!");
-				return;
-			}
-			if (dependencies.get("z") == null) {
-				if (!dependencies.containsKey("z"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency z for procedure CheatKekkeiGenkaiButton!");
-				return;
-			}
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure CheatKekkeiGenkaiButton!");
-				return;
-			}
-			LevelAccessor world = (LevelAccessor) dependencies.get("world");
-			double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
-			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
-			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
-			Entity entity = (Entity) dependencies.get("entity");
-			{
-				Entity _ent = entity;
-				if (_ent instanceof ServerPlayer) {
-					BlockPos _bpos = BlockPos.containing(x, y, z);
-					((ServerPlayer) _ent).openMenu(new MenuProvider() {
-						@Override
-						public Component getDisplayName() {
-							return Component.literal("NarutoShippudenCheatKekkeiGenkaiGUI");
-						}
-
-						@Override
-						public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-							return new NarutoShippudenCheatKekkeiGenkaiGUIGui.GuiContainerMod(id, inventory,
-									new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(_bpos));
-						}
-					}, _buf -> _buf.writeBlockPos(_bpos));
-				}
 			}
 		}
 	}

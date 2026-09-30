@@ -44,8 +44,6 @@ import net.mcreator.narutoshippudenmod.item.WeaponItems.SamehadaItem;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.ShurikenItem;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.ToroiUniqueFumaShurikenItem;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.WhiteLightChakraSabreItem;
-import net.mcreator.narutoshippudenmod.particle.ModParticles.LightningParticle;
-import net.mcreator.narutoshippudenmod.potion.ModEffects.NuibariStringPotionEffect;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.SpawnGroupData;
@@ -85,8 +83,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 public final class WeaponProcedures {
 	private WeaponProcedures() {
 	}
-
-
 
 	public static class ExplosiveKunaiBulletProjectileHitsBlockProcedure {
 
@@ -163,9 +159,6 @@ public final class WeaponProcedures {
 			}
 		}
 	}
-
-
-
 
 	public static class FumaShurikenBulletProjectileHitsBlockProcedure {
 
@@ -245,21 +238,6 @@ public final class WeaponProcedures {
 		}
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	public static class KunaiBulletProjectileHitsBlockProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {
@@ -337,12 +315,6 @@ public final class WeaponProcedures {
 			}
 		}
 	}
-
-
-
-
-
-
 
 	public static class PaperBombEntityWalksOnTheBlockProcedure {
 
@@ -470,14 +442,6 @@ public final class WeaponProcedures {
 		}
 	}
 
-
-
-
-
-
-
-
-
 	public static class ShurikenBulletProjectileHitsBlockProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {
@@ -555,7 +519,6 @@ public final class WeaponProcedures {
 			}
 		}
 	}
-
 
 	public static class ToolsDamageProcedure {
 
@@ -766,6 +729,5 @@ public final class WeaponProcedures {
 			}
 		}
 	}
-
 
 }

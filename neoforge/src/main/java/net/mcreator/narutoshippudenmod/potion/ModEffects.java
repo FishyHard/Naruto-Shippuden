@@ -75,15 +75,9 @@ public final class ModEffects {
 
 		InuzukaAkamaruPotionEffect.register();
 
-		NuibariStringPotionEffect.register();
-
-		RidingPotionEffect.register();
-
 		TreeBindFlourishingBurialPotionEffect.register();
 
 	}
-
-
 
 	private static void onEnd(MobEffectInstance instance, LivingEntity entity) {
 
@@ -741,48 +735,6 @@ public final class ModEffects {
 
 				InuzukaAkamaruEffectExpiresProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-		}
-	}
-
-	public static class NuibariStringPotionEffect {
-		public static Holder<MobEffect> potion;
-		public static final boolean HIDDEN = true;
-
-		static void register() {
-			Registration.add(Registries.MOB_EFFECT, "nuibari_string", EffectCustom::new, h -> potion = h);
-		}
-
-		public static class EffectCustom extends MobEffect {
-			public EffectCustom() {
-				super(MobEffectCategory.HARMFUL, -1);
-			}
-
-			@Override
-			public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-
-				return true;
-			}
-		}
-	}
-
-	public static class RidingPotionEffect {
-		public static Holder<MobEffect> potion;
-		public static final boolean HIDDEN = true;
-
-		static void register() {
-			Registration.add(Registries.MOB_EFFECT, "riding", EffectCustom::new, h -> potion = h);
-		}
-
-		public static class EffectCustom extends MobEffect {
-			public EffectCustom() {
-				super(MobEffectCategory.NEUTRAL, -1);
-			}
-
-			@Override
-			public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-
-				return true;
-			}
 		}
 	}
 

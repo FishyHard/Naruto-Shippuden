@@ -84,14 +84,24 @@ for p in glob.glob('../src/main/java/**/*.java', recursive=True):
    Useful helpers in `rules.py`: `find_block(text, i)` (the end of the `{…}` block starting at `i`, aware of strings and
    comments), `remove_class(text, name)` and `remove_if_blocks(text, cond_regex)`.
 3. **Dead code:** `python3 porting/dead_code.py porting/dead_classes.txt` adds member classes nothing live reaches
-   (procedures, entities, renderers, projectile items, effects, particles) to the list; the `dead_code` rule then removes them
-   with their imports and renderer registrations. The list only ever grows. Run it after removing callers, then apply
-   `dead_code` to whole files (not through the body-only runner), or the imports stay.
+   (procedures, entities, renderers, items, GUIs, effects, particles) to the list; the `dead_code` rule then removes them with
+   their imports, renderer/screen/particle/effect registrations, and the blank gaps. The list only ever grows. Run it after
+   removing callers, then apply `dead_code` to whole files (not through the body-only runner), or the imports stay. Repeat
+   until a round finds nothing.
+   - An **item** is a root when players can get it: its id is in a creative tab (`ModItemGroups`, expanded like the tabs are),
+     a data file (recipes, loot, trades, advancements) or a string in code outside the item itself. `KEEP` in `dead_code.py`
+     holds items kept on purpose though nothing gives them (the Otsutsuki weapons: the user wants them in the game, hidden).
+   - A nested class name several units repeat (`ItemRanged`, `GuiContainerMod`…) stands for none of them; a `Model…` defined
+     in two renderers stands for both.
+   - The generated GUIs' `handleButtonAction` branches the hand-written screens never send are cut by the `unused_gui_buttons`
+     rule (table `GUI_BUTTONS` in `rules.py`: update it when a screen gains a button).
+   - A generated file the rule empties completely is deleted by hand (`CustomJutsuProcedures.java` was); the pipeline would
+     make it again as an empty class.
 4. **New items** (technique items the old mod never had) are registered in `core/jutsu/JutsuItems` with
    `Registration.add`, called from the mod constructor. Give them an `items/*.json`, a `models/item/*.json` and a lang entry in
    both resource trees.
-5. `JutsuTable.java` is **maintained by hand**. Entries that the jutsu classes register again point at the `NEW_ENGINE` no-op;
-   a later `Jutsus.technique` or `Jutsus.release` call with the same id replaces the table's.
+5. `JutsuTable.java` now only holds `shadow_clone_technique` (still cast by its MCreator procedure). Every other technique and
+   scroll is registered by the jutsu classes.
 
 ### Porting rules added recently
 
@@ -193,6 +203,18 @@ for p in glob.glob('../src/main/java/**/*.java', recursive=True):
 - Creating needs the release and at least one jutsu learned from its scroll. Forget refunds half. The old one-slot designs
   migrate on login and the old `custom_*_release_technique` items are removed.
 - Actions: `custom_jutsu` (key = the design), `forget_jutsu` (amount = slot).
+
+### Learned jutsu (`Jutsus`)
+
+- Release jutsu are learned **by id**: the synced string `learned_jutsu` (comma separated, e.g.
+  `fire_release_technique/great_fireball_technique`; `Jutsu.key()` makes it from the technique id and the jutsu's name).
+  `Jutsus.TRACKED` is every jutsu some scroll sells; those use the set, the rest (weapon arts, custom jutsu, Flying Raijin,
+  Shadow Clone) keep their own rule.
+- `Track.owned` is the number of leading tiers whose jutsu are all learned (the Susanoo stages still use their bought count).
+  The buy code (`NatureJutsu.nature`, `DojutsuJutsu.mangekyouScroll`) calls `track.learnTier` and still writes the old counts.
+- **Renaming a jutsu changes its key**: a save then loses it. Rename with a migration, or keep the old name's key.
+- Migration: on login, if `learned_jutsu_migrated` is false, the old counts fill the set (count *n* = the first *n* jutsu, in
+  today's order). `Jutsus.migrate(v, true)` does it again, adding: the dev test uses it after setting counts directly.
 
 ### Jutsu that cast themselves
 
@@ -326,6 +348,8 @@ Screenshots are saved to `run/screenshots/screen_*.png`, and `DEVTEST …` lines
     nine test custom jutsu (one per form) on the five nature wheels.
 - `shinobi` (a Jonin of each village against a husk, 14 shots each), `kurama` (Kurama against a husk), `customscreen` (the Jutsu
   page, editor and wheel), `stats` (capped upgrading and the info card), `tabs` (each creative tab).
+- `learned`: an old-style save (`firelearn = 3`) migrated, buying on, order independence, the Obito and Sasuke scrolls (names,
+  prices, screenshots, the Susanoo track) and one Mangekyou at a time. Log lines `DEVTEST learned …` (`11100` = which jutsu are learned).
 - `eyes`, `weapons`, `akimichi`, `economy`. No `-PdevOnly`: shows every GUI screen.
 
 Test code can call server code with `onServer(mc, p -> …)`. A full `jutsu` run takes about 15 minutes. Run it in the
@@ -377,9 +401,9 @@ Apply new `@func` rules with the body-only runner under "How to change code".
 
 - Mind Body Switch control (camera, keys, look) can't be checked by the automated test: it was fixed from the user's report and
   is waiting on their feedback.
-- Changing jutsu lists shifts what old saves have unlocked: a save stores *how many* jutsu of a release were learned, not which.
-- Some old techniques still run their MCreator procedures: Shadow Clone's story-exam branch and the Mangekyou scrolls of
-  Obito and Sasuke (see `NEXT_TASK.md`).
+- Shadow Clone still runs its MCreator procedure (including the story-exam branch); it's the last entry in `JutsuTable`.
+- The Mangekyou scrolls' Susanoo tracks still buy through the old procedures (the Susanoo itself is the old model swap).
+- Otsutsuki weapons: registered, in no tab (only `/give`), switching forms with the old `OtsutsukiToolsSwitchProcedure`.
 - The Susanoo is still the old model swap.
 - Checked in the dev client but still waiting on the user's feedback: Flying Raijin, Chakra Control, the message panel, and
   most of the new wiki jutsu.

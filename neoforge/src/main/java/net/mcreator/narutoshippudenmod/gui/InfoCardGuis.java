@@ -24,36 +24,21 @@ import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.ClanReleasePlusP
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.DojutsuButtonMinusProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.DojutsuButtonPlusProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.EyesHeightButtonMinusProcedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.GenjutsuButtonProcedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.IQButtonProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.InfoCardMiniGameThisGUIIsClosedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.InfoCardMiniGameWhileThisGUIIsOpenTickProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.InfoCardNextPageProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.JutsuCreateGUIOpenProcedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.JutsuPowerButtonProcedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.KenjutsuButtonProcedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.KinjutsuButtonProcedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.MedicalButtonProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.MiniGameGUIOpenProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.NatureReleaseMinusProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.NatureReleasePlusProcedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.NinjutsuButtonProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.OpenDojutsuInfoCardProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.PressButtonMiniProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.PupilsHeightButtonMinusProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.QuestGUIOpenProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.SelectDojutsuInfoProcedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.SenjutsuButtonProcedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.ShurikenjutsuButtonProcedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.Spuse10Procedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.Spuse1Procedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.Spuse5Procedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.SummoningButtonProcedure;
-import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.TaijutsuButtonProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.VIllageSelectPlusProcedure;
 import net.mcreator.narutoshippudenmod.procedures.GuiProcedures.VillageSelectMinusProcedure;
 import net.mcreator.narutoshippudenmod.procedures.KeybindProcedures.InfoCardOpenOnKeyPressedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.PlayerProcedures.SpeedProcedure;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
@@ -68,7 +53,6 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.NeoForge;
 
 import net.neoforged.bus.api.SubscribeEvent;
-
 
 import net.neoforged.neoforge.network.IContainerFactory;
 import net.mcreator.narutoshippudenmod.compat.NetworkEvent;
@@ -225,13 +209,6 @@ public final class InfoCardGuis {
 			// security measure to prevent arbitrary chunk generation
 			if (!world.hasChunkAt(BlockPos.containing(x, y, z)))
 				return;
-			if (buttonID == 0) {
-
-				InfoCardOpenOnKeyPressedProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
 			if (buttonID == 1) {
 
 				DojutsuButtonMinusProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
@@ -432,41 +409,6 @@ public final class InfoCardGuis {
 			// security measure to prevent arbitrary chunk generation
 			if (!world.hasChunkAt(BlockPos.containing(x, y, z)))
 				return;
-			if (buttonID == 0) {
-
-				InfoCardNextPageProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 1) {
-
-				QuestGUIOpenProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 2) {
-
-				MiniGameGUIOpenProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 3) {
-
-				OpenDojutsuInfoCardProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 4) {
-
-				JutsuCreateGUIOpenProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
 		}
 
 		private static void handleSlotAction(Player entity, int slotID, int changeType, int meta, int x, int y, int z) {
@@ -1047,13 +989,6 @@ public final class InfoCardGuis {
 			// security measure to prevent arbitrary chunk generation
 			if (!world.hasChunkAt(BlockPos.containing(x, y, z)))
 				return;
-			if (buttonID == 0) {
-
-				InfoCardOpenOnKeyPressedProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
 		}
 
 		private static void handleSlotAction(Player entity, int slotID, int changeType, int meta, int x, int y, int z) {
@@ -1209,92 +1144,6 @@ public final class InfoCardGuis {
 			// security measure to prevent arbitrary chunk generation
 			if (!world.hasChunkAt(BlockPos.containing(x, y, z)))
 				return;
-			if (buttonID == 0) {
-
-				InfoCardOpenOnKeyPressedProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 1) {
-
-				Spuse1Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 2) {
-
-				Spuse5Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 3) {
-
-				Spuse10Procedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 4) {
-
-				NinjutsuButtonProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 5) {
-
-				TaijutsuButtonProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 6) {
-
-				KenjutsuButtonProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 7) {
-
-				ShurikenjutsuButtonProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 8) {
-
-				SummoningButtonProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 9) {
-
-				KinjutsuButtonProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 10) {
-
-				SenjutsuButtonProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 11) {
-
-				MedicalButtonProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 12) {
-
-				SpeedProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 13) {
-
-				JutsuPowerButtonProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 14) {
-
-				GenjutsuButtonProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-			if (buttonID == 15) {
-
-				IQButtonProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
 		}
 
 		private static void handleSlotAction(Player entity, int slotID, int changeType, int meta, int x, int y, int z) {

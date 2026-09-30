@@ -6,7 +6,6 @@ import net.mcreator.narutoshippudenmod.core.jutsu.CustomJutsu;
 import net.mcreator.narutoshippudenmod.core.jutsu.CustomJutsu.Design;
 import net.mcreator.narutoshippudenmod.core.jutsu.CustomJutsu.Form;
 import net.mcreator.narutoshippudenmod.core.jutsu.engine.JutsuRank;
-import net.mcreator.narutoshippudenmod.gui.JutsuCreationGuis.CreateJutsuGUI2Gui;
 import net.mcreator.narutoshippudenmod.gui.JutsuCreationGuis.CreateJutsuGUIGui;
 
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -233,29 +232,6 @@ public final class JutsuCreationScreens {
 
 		private static String seconds(int ticks) {
 			return ticks % 20 == 0 ? ticks / 20 + "s" : String.format("%.1fs", ticks / 20.0);
-		}
-	}
-
-	/** The old second page (opened by the old Create button); it shows the same editor now. */
-	public static class CreateJutsuGUI2GuiWindow extends ModScreen<CreateJutsuGUI2Gui.GuiContainerMod> {
-		public CreateJutsuGUI2GuiWindow(CreateJutsuGUI2Gui.GuiContainerMod container, Inventory inventory, Component text) {
-			super(container, inventory, Component.literal("Custom Jutsu"), 300, 196, container.entity, container.x, container.y, container.z);
-		}
-
-		@Override
-		protected void send(int id) {
-			NarutoShippudenMod.PACKET_HANDLER.sendToServer(new CreateJutsuGUI2Gui.ButtonPressedMessage(id, x, y, z));
-		}
-
-		@Override
-		protected void init() {
-			super.init();
-			pageTabs("");
-		}
-
-		@Override
-		protected void labels(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
-			text(graphics, "Open the Jutsu tab to make a jutsu.", 8, 46);
 		}
 	}
 }

@@ -54,11 +54,8 @@ public final class ModClient {
 		NpcRenderers.IrukaSenseiRenderer.registerRenderers(event);
 		NpcRenderers.ShikamaruRenderer.registerRenderers(event);
 		NpcRenderers.TrainingDummyRenderer.registerRenderers(event);
-		ProjectileRenderers.AmaterasuFlameRenderer.registerRenderers(event);
-		ProjectileRenderers.CoercionSharinganRenderer.registerRenderers(event);
 		ProjectileRenderers.GreatFireDragonRenderer.registerRenderers(event);
 		ProjectileRenderers.LaserCircusRenderer.registerRenderers(event);
-		ProjectileRenderers.TailedBeastBombRenderer.registerRenderers(event);
 		ProjectileRenderers.UzumakiChainRenderer.registerRenderers(event);
 		SummonRenderers.AkamaruRenderer.registerRenderers(event);
 		SummonRenderers.CrowRenderer.registerRenderers(event);
@@ -111,8 +108,6 @@ public final class ModClient {
 		NpcRenderers.IrukaSenseiRenderer.registerLayers(event);
 		NpcRenderers.ShikamaruRenderer.registerLayers(event);
 		NpcRenderers.TrainingDummyRenderer.registerLayers(event);
-		ProjectileRenderers.AmaterasuFlameRenderer.registerLayers(event);
-		ProjectileRenderers.CoercionSharinganRenderer.registerLayers(event);
 		ProjectileRenderers.ExplosiveKunaiBulletRenderer.registerLayers(event);
 		ProjectileRenderers.FlyingThunderGodKunaiBulletRenderer.registerLayers(event);
 		ProjectileRenderers.FumaShurikenBulletRenderer.registerLayers(event);
@@ -121,7 +116,6 @@ public final class ModClient {
 		ProjectileRenderers.LaserCircusRenderer.registerLayers(event);
 		ProjectileRenderers.PoisonKunaiBulletRenderer.registerLayers(event);
 		ProjectileRenderers.ShurikenBulletRenderer.registerLayers(event);
-		ProjectileRenderers.TailedBeastBombRenderer.registerLayers(event);
 		ProjectileRenderers.ToroiUniqueFumaShurikenBulletRenderer.registerLayers(event);
 		ProjectileRenderers.UzumakiChainRenderer.registerLayers(event);
 		SummonRenderers.AkamaruRenderer.registerLayers(event);
@@ -158,14 +152,12 @@ public final class ModClient {
 		event.register(InfoCardMissionsGui.containerType, InfoCardMissionsGuiWindow::new);
 		event.register(InfoCardUpgradeGui.containerType, InfoCardUpgradeGuiWindow::new);
 		event.register(StatSelectGui.containerType, StatSelectGuiWindow::new);
-		event.register(CreateJutsuGUI2Gui.containerType, CreateJutsuGUI2GuiWindow::new);
 		event.register(CreateJutsuGUIGui.containerType, CreateJutsuGUIGuiWindow::new);
 		event.register(MangekyouSharinganCheatGui.containerType, MangekyouSharinganCheatGuiWindow::new);
 		event.register(NarutoShippudenCheatDojutsuGUIGui.containerType, NarutoShippudenCheatDojutsuGUIGuiWindow::new);
 		event.register(NarutoShippudenCheatGUIGui.containerType, NarutoShippudenCheatGUIGuiWindow::new);
 		event.register(NarutoShippudenCheatKekkeiGenkaiGUIGui.containerType, NarutoShippudenCheatKekkeiGenkaiGUIGuiWindow::new);
 		event.register(PasswordGUIDojutsuGui.containerType, PasswordGUIDojutsuGuiWindow::new);
-		event.register(AdventCalendarGUIGui.containerType, AdventCalendarGUIGuiWindow::new);
 		event.register(GeninHeadbandSelectGui.containerType, GeninHeadbandSelectGuiWindow::new);
 		event.register(PatreonKitGui.containerType, PatreonKitGuiWindow::new);
 	}

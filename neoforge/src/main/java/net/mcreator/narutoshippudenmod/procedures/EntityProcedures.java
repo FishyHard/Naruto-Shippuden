@@ -49,8 +49,6 @@ import net.mcreator.narutoshippudenmod.item.WeaponItems.ChakraBladeItem;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.KubikiribochoItem;
 import net.mcreator.narutoshippudenmod.particle.ModParticles.AshParticle;
 import net.mcreator.narutoshippudenmod.particle.ModParticles.FlameParticle;
-import net.mcreator.narutoshippudenmod.particle.ModParticles.SmokeParticle;
-import net.mcreator.narutoshippudenmod.particle.ModParticles.StormParticle;
 import net.mcreator.narutoshippudenmod.potion.ModEffects.DespawnPotionEffect;
 import net.mcreator.narutoshippudenmod.procedures.PlayerProcedures.ChakraChargingParticlesProcedure;
 import net.minecraft.world.entity.Entity;
@@ -1052,8 +1050,6 @@ public final class EntityProcedures {
 		}
 	}
 
-
-
 	public static class EarthGolemOnInitialEntitySpawnProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {
@@ -1141,8 +1137,7 @@ public final class EntityProcedures {
 			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 			Entity entity = (Entity) dependencies.get("entity");
 			if (entity instanceof Player) {
-				
-				
+
 				if (NarutoShippudenModVariables.get(entity).PassingFang == true) {
 					{
 						boolean _setval = (false);
@@ -1256,10 +1251,6 @@ public final class EntityProcedures {
 			}.start(world, (int) 100);
 		}
 	}
-
-
-
-
 
 	public static class HiddenShinobiEntityDiesProcedure {
 
@@ -1611,7 +1602,6 @@ public final class EntityProcedures {
 		}
 	}
 
-
 	public static class IrukaSenseiCloneOnInitialEntitySpawnProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {
@@ -1734,8 +1724,6 @@ public final class EntityProcedures {
 		}
 	}
 
-
-
 	public static class NPCModelChangeProcedure {
 		@EventBusSubscriber(modid = "naruto_shippuden", value = net.neoforged.api.distmarker.Dist.CLIENT)
 		private static class GlobalTrigger {
@@ -1800,8 +1788,6 @@ public final class EntityProcedures {
 			}
 		}
 	}
-
-
 
 	public static class ShikamaruRightClickedOnEntityProcedure {
 

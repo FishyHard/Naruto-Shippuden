@@ -14,9 +14,7 @@ import java.util.Random;
 import java.util.stream.Stream;
 import net.mcreator.narutoshippudenmod.NarutoShippudenModElements;
 import net.mcreator.narutoshippudenmod.itemgroup.ModItemGroups.DojutsuItemGroup;
-import net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.CoercionSharinganProjectileHitsLivingEntityProcedure;
 import net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.MangekyouSharinganItachiReleaseRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.MangekyouSharinganKakashiReleaseRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.MangekyouSharinganMadaraReleaseRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.MangekyouSharinganObitoReleaseRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.MangekyouSharinganSasukeReleaseRightclickedProcedure;
@@ -50,10 +48,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
-
-
 import net.minecraft.core.registries.BuiltInRegistries;
-
 
 public final class DojutsuItems {
 	private DojutsuItems() {
@@ -93,168 +88,6 @@ public final class DojutsuItems {
 	}
 
 	@NarutoShippudenModElements.ModElement.Tag
-	public static class CoercionSharinganItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "coercion_sharingan", v -> block = (Item) v);
-		}
-		public static EntityType<ArrowCustomEntity> arrow;
-
-		public CoercionSharinganItem(NarutoShippudenModElements instance) {
-			super(instance, 436);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemRanged());
-			elements.entities.add(() -> arrow = (EntityType.Builder.<ArrowCustomEntity>of(ArrowCustomEntity::new, MobCategory.MISC) .setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(1) .sized(0.5f, 0.5f)).build(Registration.entityKey("projectile_coercion_sharingan")));
-		}
-
-		public static class ItemRanged extends Item {
-			public ItemRanged() {
-				super(Registration.itemProps("coercion_sharingan", null).stacksTo(1));
-			}
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				entity.startUsingItem(hand);
-				return InteractionResult.SUCCESS;
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.NONE;
-			}
-
-			@Override
-			public int getUseDuration(ItemStack itemstack, LivingEntity user) {
-				return 72000;
-			}
-
-			@Override
-			public boolean releaseUsing(ItemStack itemstack, Level world, LivingEntity entityLiving, int timeLeft) {
-				if (!world.isClientSide() && entityLiving instanceof ServerPlayer) {
-					ServerPlayer entity = (ServerPlayer) entityLiving;
-					double x = entity.getX();
-					double y = entity.getY();
-					double z = entity.getZ();
-					if (true) {
-						ArrowCustomEntity entityarrow = shoot(world, entity, world.getRandom(), 12f, 1, 0);
-						itemstack.hurtAndBreak(1, entity, entity.getUsedItemHand());
-						entityarrow.pickup = AbstractArrow.Pickup.DISALLOWED;
-					}
-				}
-				return true;
-			}
-		}
-
-		public static class ArrowCustomEntity extends ModArrow implements ItemSupplier {
-
-			public ArrowCustomEntity(EntityType<? extends ArrowCustomEntity> type, Level world) {
-				super(type, world);
-			}
-
-			public ArrowCustomEntity(EntityType<? extends ArrowCustomEntity> type, double x, double y, double z, Level world) {
-				super(type, x, y, z, world);
-			}
-
-			public ArrowCustomEntity(EntityType<? extends ArrowCustomEntity> type, LivingEntity entity, Level world) {
-				super(type, entity, world);
-			}
-
-			@Override
-			public ItemStack getItem() {
-				return ItemStack.EMPTY;
-			}
-
-			@Override
-			protected ItemStack getPickupItem() {
-				return ItemStack.EMPTY;
-			}
-
-			@Override
-			protected void doPostHurtEffects(LivingEntity entity) {
-				super.doPostHurtEffects(entity);
-				entity.setArrowCount(entity.getArrowCount() - 1);
-			}
-
-			@Override
-			public void onHitEntity(EntityHitResult entityRayTraceResult) {
-				super.onHitEntity(entityRayTraceResult);
-				Entity entity = entityRayTraceResult.getEntity();
-				Entity sourceentity = this.getOwner();
-				Entity immediatesourceentity = this;
-				double x = this.getX();
-				double y = this.getY();
-				double z = this.getZ();
-				Level world = this.level();
-
-				CoercionSharinganProjectileHitsLivingEntityProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-			}
-
-			@Override
-			public void tick() {
-				super.tick();
-				double x = this.getX();
-				double y = this.getY();
-				double z = this.getZ();
-				Level world = this.level();
-				Entity entity = this.getOwner();
-				Entity immediatesourceentity = this;
-
-				GreatFireballWhileProjectileFlyingTickProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("immediatesourceentity", immediatesourceentity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				if (this.isInGround())
-					this.discard();
-			}
-		}
-
-		public static ArrowCustomEntity shoot(Level world, LivingEntity entity, RandomSource random, float power, double damage, int knockback) {
-			ArrowCustomEntity entityarrow = new ArrowCustomEntity(arrow, entity, world);
-			entityarrow.shoot(entity.getViewVector(1).x, entity.getViewVector(1).y, entity.getViewVector(1).z, power * 2, 0);
-			entityarrow.setSilent(true);
-			entityarrow.setCritArrow(false);
-			entityarrow.setBaseDamage(damage);
-			Compat.setKnockback(entityarrow, knockback);
-			world.addFreshEntity(entityarrow);
-			double x = entity.getX();
-			double y = entity.getY();
-			double z = entity.getZ();
-			world.playSound((Player) null, (double) x, (double) y, (double) z,
-					Compat.sound(""), SoundSource.PLAYERS, 1,
-					1f / (random.nextFloat() * 0.5f + 1) + (power / 2));
-			return entityarrow;
-		}
-
-		public static ArrowCustomEntity shoot(LivingEntity entity, LivingEntity target) {
-			ArrowCustomEntity entityarrow = new ArrowCustomEntity(arrow, entity, entity.level());
-			double d0 = target.getY() + (double) target.getEyeHeight() - 1.1;
-			double d1 = target.getX() - entity.getX();
-			double d3 = target.getZ() - entity.getZ();
-			entityarrow.shoot(d1, d0 - entityarrow.getY() + (double) (float) Math.sqrt(d1 * d1 + d3 * d3) * 0.2F, d3, 12f * 2, 12.0F);
-			entityarrow.setSilent(true);
-			entityarrow.setBaseDamage(1);
-			Compat.setKnockback(entityarrow, 0);
-			entityarrow.setCritArrow(false);
-			entity.level().addFreshEntity(entityarrow);
-			double x = entity.getX();
-			double y = entity.getY();
-			double z = entity.getZ();
-			entity.level().playSound((Player) null, (double) x, (double) y, (double) z,
-					Compat.sound(""), SoundSource.PLAYERS, 1,
-					1f / (RandomSource.create().nextFloat() * 0.5f + 1));
-			return entityarrow;
-		}
-	}
-
-
-
-
-	@NarutoShippudenModElements.ModElement.Tag
 	public static class IsshikiDojutsuReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
@@ -284,7 +117,6 @@ public final class DojutsuItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -365,7 +197,6 @@ public final class DojutsuItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -411,7 +242,6 @@ public final class DojutsuItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -459,7 +289,6 @@ public final class DojutsuItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -505,7 +334,6 @@ public final class DojutsuItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -553,7 +381,6 @@ public final class DojutsuItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -599,7 +426,6 @@ public final class DojutsuItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -680,7 +506,6 @@ public final class DojutsuItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -728,6 +553,5 @@ public final class DojutsuItems {
 			}
 		}
 	}
-
 
 }
