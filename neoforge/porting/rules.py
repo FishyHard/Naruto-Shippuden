@@ -1563,3 +1563,13 @@ def iburi_is_yamanaka(path, text):
 
 
 RULES.append(iburi_is_yamanaka)
+
+
+@func
+def old_magnet_models(path, text):
+    """The iron sand coat, arms and wings are drawn by client/jutsu/IronSandRenderer (a vanilla-style layer); the old model swaps
+    drew their own on top."""
+    if not path.replace('\\', '/').endswith('PlayerProcedures.java'):
+        return text
+    return re.sub(r'(?<!false && )(NarutoShippudenModVariables\.get\(entity\)\.magnet_coat == [123]\) \{\s*(?:if \(entity\.isShiftKeyDown\(\)\) \{\s*)?if \(_evt\.getRenderer\(\))',
+                  r'false && \1', text)

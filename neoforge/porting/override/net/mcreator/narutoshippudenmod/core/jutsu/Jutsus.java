@@ -257,6 +257,8 @@ public final class Jutsus {
 			tell(player, "You haven't learned " + jutsu.name() + " yet");
 			return;
 		}
+		if (ClanJutsu.restrained(player) || variables.possessing > 0)
+			return;
 		if (ClanJutsu.sealed(player)) {
 			tell(player, "Your chakra is sealed");
 			return;

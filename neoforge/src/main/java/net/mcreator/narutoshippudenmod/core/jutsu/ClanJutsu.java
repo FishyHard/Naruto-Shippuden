@@ -283,6 +283,7 @@ public final class ClanJutsu {
 	public static void stop(ServerPlayer p) {
 		endMode(p);
 		letGo(p);
+		returnMind(p);
 		DRUNK.remove(p.getUUID());
 		set(p, ClanJutsu::clearFlags);
 	}
@@ -295,6 +296,8 @@ public final class ClanJutsu {
 		v.inuzuka_mode = 0;
 		v.gateslee = 0;
 		v.magnet_coat = 0;
+		v.restrained = false;
+		v.possessing = 0;
 	}
 
 	@SubscribeEvent
@@ -308,6 +311,8 @@ public final class ClanJutsu {
 		if (event.getEntity() instanceof ServerPlayer player) {
 			endMode(player);
 			letGo(player);
+			returnMind(player);
+			RESTRAINED.remove(player.getUUID());
 		}
 	}
 
@@ -316,6 +321,8 @@ public final class ClanJutsu {
 		if (event.getEntity() instanceof ServerPlayer player) {
 			endMode(player);
 			letGo(player);
+			returnMind(player);
+			RESTRAINED.remove(player.getUUID());
 			set(player, ClanJutsu::clearFlags);
 		}
 	}
@@ -1530,8 +1537,11 @@ public final class ClanJutsu {
 			targets.removeIf(e -> !e.isAlive() || e.level() != p.level());
 			if (targets.isEmpty() || p.getHealth() < health - 0.5F || t == ticks - 1) {
 				over[0] = true;
-				for (LivingEntity e : targets)
+				for (LivingEntity e : targets) {
 					e.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 60, 0, false, false));
+					if (e instanceof ServerPlayer victim)
+						restrain(victim, false);
+				}
 				tell(p, "Your mind returns to your body");
 				sound(level, p.position(), Element.MIND.impact, 1, 1.4F);
 				return;
@@ -1546,9 +1556,10 @@ public final class ClanJutsu {
 				}
 				if (e instanceof net.minecraft.world.entity.Mob mob) {
 					LivingEntity prey = mob.getTarget();
-					if (prey == null || !prey.isAlive() || prey == p || prey == mob || !Techniques.isEnemy(p, prey)) {
+					if (prey == null || !prey.isAlive() || prey == p || targets.contains(prey) || !Techniques.isEnemy(p, prey)) {
 						prey = level.getEntitiesOfClass(LivingEntity.class, mob.getBoundingBox().inflate(16),
-								x -> x != mob && x != p && x.isAlive() && Techniques.isEnemy(p, x) && !(x instanceof net.minecraft.world.entity.decoration.ArmorStand)).stream()
+								x -> !targets.contains(x) && x != p && x.isAlive() && Techniques.isEnemy(p, x) && !(x instanceof net.minecraft.world.entity.decoration.ArmorStand)
+										&& !(x instanceof ServerPlayer sp && sp.getUUID().equals(p.getUUID()))).stream()
 								.min((a, b) -> Double.compare(a.distanceToSqr(mob), b.distanceToSqr(mob))).orElse(null);
 						mob.setTarget(prey);
 					}
@@ -1557,6 +1568,8 @@ public final class ClanJutsu {
 				} else {
 					hold(e);
 					e.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 10, 9, false, false));
+					if (e instanceof ServerPlayer victim)
+						restrain(victim, true);
 				}
 			}
 		});
@@ -1579,15 +1592,142 @@ public final class ClanJutsu {
 		tell(p, found.isEmpty() ? "You sense no one nearby" : "You sense " + found.size() + " minds nearby");
 	}
 
-	/** Mind Body Switch Technique: the caster's mind jumps into the enemy looked at and takes over their body for twelve seconds. */
+	/**
+	 * Mind Body Switch Technique: the caster's mind jumps into the creature looked at and controls it for fifteen seconds (see
+	 * {@link #takeOver}); a player's body is taken and held helpless for five.
+	 */
 	private static void mindSwitch(ServerPlayer p) {
 		LivingEntity target = target(p, 16);
 		if (target == null) {
 			Jutsus.miss(p, "Look at an enemy to take over");
 			return;
 		}
-		possess(p, new ArrayList<>(List.of(target)), target instanceof Player ? 100 : 240);
+		if (target instanceof net.minecraft.world.entity.Mob mob)
+			takeOver(p, mob, 300);
+		else
+			possess(p, new ArrayList<>(List.of(target)), 100);
 	}
+
+	private static final Identifier MIND_LOCK = Identifier.fromNamespaceAndPath("naruto_shippuden", "mind_body_switch");
+	/** The creature each Yamanaka is inside (Mind Body Switch), steered by their own movement keys and look. */
+	private static final Map<UUID, net.minecraft.world.entity.Mob> PUPPETS = new HashMap<>();
+	/** How to give each possessing Yamanaka their body back. */
+	private static final Map<UUID, Runnable> RETURN = new HashMap<>();
+
+	/** Ends a Mind Body Switch at once (death, logout, another jutsu ending everything). */
+	private static void returnMind(ServerPlayer p) {
+		Runnable back = RETURN.remove(p.getUUID());
+		if (back != null)
+			back.run();
+	}
+
+	private static void lock(LivingEntity e, net.minecraft.core.Holder<net.minecraft.world.entity.ai.attributes.Attribute> attribute, boolean on) {
+		net.minecraft.world.entity.ai.attributes.AttributeInstance instance = e.getAttribute(attribute);
+		if (instance == null)
+			return;
+		instance.removeModifier(MIND_LOCK);
+		if (on)
+			instance.addTransientModifier(new net.minecraft.world.entity.ai.attributes.AttributeModifier(MIND_LOCK, -1,
+					net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+	}
+
+	/**
+	 * The caster's mind goes into a creature and takes it over for ticks: they see through its eyes (client/Restrained moves the
+	 * camera), it walks and jumps with their movement keys and turns with their look, and it strikes whatever is in front of it
+	 * when they attack. Their own body lies limp; it ends when the time is up, when they sneak, when the creature dies, or at once if
+	 * their empty body is hurt.
+	 */
+	private static void takeOver(ServerPlayer p, net.minecraft.world.entity.Mob mob, int ticks) {
+		ServerLevel level = level(p);
+		float health = p.getHealth();
+		boolean[] over = { false };
+		PUPPETS.put(p.getUUID(), mob);
+		set(p, v -> v.possessing = mob.getId() + 1);
+		lock(mob, net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED, true);
+		lock(p, net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED, true);
+		lock(p, net.minecraft.world.entity.ai.attributes.Attributes.JUMP_STRENGTH, true);
+		double speed = mob.getAttributeBaseValue(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED);
+		Runnable end = () -> {
+			if (over[0])
+				return;
+			over[0] = true;
+			RETURN.remove(p.getUUID());
+			PUPPETS.remove(p.getUUID(), mob);
+			set(p, v -> v.possessing = 0);
+			lock(mob, net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED, false);
+			lock(p, net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED, false);
+			lock(p, net.minecraft.world.entity.ai.attributes.Attributes.JUMP_STRENGTH, false);
+			mob.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 60, 0, false, false));
+			tell(p, "Your mind returns to your body");
+			sound(level, p.position(), Element.MIND.impact, 1, 1.4F);
+		};
+		RETURN.put(p.getUUID(), end);
+		puff(level, mob.getBoundingBox().getCenter(), Element.MIND, 0.8F);
+		sound(level, p.position(), Element.MIND.cast, 1.5F, 1.2F);
+		tell(p, "You are inside " + mob.getDisplayName().getString() + " (sneak to return)");
+		channel(p, ticks, 1, t -> {
+			if (over[0])
+				return;
+			net.minecraft.world.entity.player.Input in = p.getLastClientInput();
+			if (!mob.isAlive() || mob.level() != p.level() || p.getHealth() < health - 0.5F || in.shift() && t > 10 || t == ticks - 1) {
+				end.run();
+				return;
+			}
+			// the body left behind
+			hold(p);
+			if (t % 3 == 0)
+				level.sendParticles(Element.MIND.trail, p.getX(), p.getEyeY() + 0.3, p.getZ(), 1, 0.2, 0.1, 0.2, 0);
+			// the creature is the caster's now
+			mob.getNavigation().stop();
+			mob.setTarget(null);
+			float yaw = p.getYRot();
+			mob.setYRot(yaw);
+			mob.setYHeadRot(yaw);
+			mob.setYBodyRot(yaw);
+			mob.setXRot(p.getXRot());
+			double forward = (in.forward() ? 1 : 0) - (in.backward() ? 1 : 0), strafe = (in.left() ? 1 : 0) - (in.right() ? 1 : 0);
+			double rad = Math.toRadians(yaw), pace = Math.max(0.12, speed) * (in.sprint() ? 1.3 : 1) * 0.9;
+			double x = strafe * Math.cos(rad) - forward * Math.sin(rad), z = forward * Math.cos(rad) + strafe * Math.sin(rad);
+			double len = Math.sqrt(x * x + z * z);
+			if (len > 1) {
+				x /= len;
+				z /= len;
+			}
+			mob.move(net.minecraft.world.entity.MoverType.SELF, new Vec3(x * pace, 0, z * pace));
+			double y = mob.getDeltaMovement().y;
+			if (in.jump() && mob.onGround())
+				y = 0.45;
+			else if (mob.isNoAi())
+				// no AI, no physics of its own: fall like anything else
+				y = mob.onGround() ? 0 : Math.max(-3, (y - 0.08) * 0.98);
+			if (mob.isNoAi())
+				mob.move(net.minecraft.world.entity.MoverType.SELF, new Vec3(0, y, 0));
+			mob.setDeltaMovement(0, y, 0);
+			mob.syncVelocity = true;
+			mob.fallDistance = 0;
+		});
+	}
+
+	/** The possessed creature strikes whatever is in front of it (the caster attacked; sent by client/Restrained). */
+	public static void puppetAttack(ServerPlayer p) {
+		net.minecraft.world.entity.Mob mob = PUPPETS.get(p.getUUID());
+		if (mob == null || !mob.isAlive())
+			return;
+		ServerLevel level = level(p);
+		Vec3 eye = mob.getEyePosition(), look = mob.getLookAngle();
+		LivingEntity victim = level.getEntitiesOfClass(LivingEntity.class, mob.getBoundingBox().inflate(3.5), e -> e != mob && e != p && e.isAlive()).stream()
+				.filter(e -> e.getBoundingBox().getCenter().subtract(eye).normalize().dot(look) > 0.5)
+				.min((a, b) -> Double.compare(a.distanceToSqr(mob), b.distanceToSqr(mob))).orElse(null);
+		mob.swing(net.minecraft.world.InteractionHand.MAIN_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
+		if (victim == null)
+			return;
+		if (mob.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE) != null)
+			mob.doHurtTarget(level, victim);
+		else
+			victim.hurtServer(level, mob.damageSources().mobAttack(mob), 2);
+	}
+
+
 
 	/** Mind Body Disturbance Technique: the enemy's nerves are thrown into confusion for six seconds: they stagger and lash out blindly. */
 	private static void mindDisturbance(ServerPlayer p) {
@@ -1651,6 +1791,73 @@ public final class ClanJutsu {
 		possess(p, new ArrayList<>(targets.subList(0, Math.min(5, targets.size()))), 200);
 	}
 
+	// ------------------------------------------------------------------ restraint (caught in a shadow, a mind taken over)
+	/** The hotbar slot each restrained player had when caught: they can't change it. */
+	private static final Map<UUID, Integer> RESTRAINED = new HashMap<>();
+
+	/**
+	 * A restrained player can do nothing at all: no jutsu, no weapon or item, no attack, no hotbar change. The client
+	 * (client/Restrained) also stops them swinging or pressing any of the mod's keys.
+	 */
+	static void restrain(ServerPlayer victim, boolean on) {
+		if (on == RESTRAINED.containsKey(victim.getUUID()))
+			return;
+		if (on)
+			RESTRAINED.put(victim.getUUID(), victim.getInventory().getSelectedSlot());
+		else
+			RESTRAINED.remove(victim.getUUID());
+		set(victim, v -> v.restrained = on);
+	}
+
+	public static boolean restrained(ServerPlayer p) {
+		return RESTRAINED.containsKey(p.getUUID());
+	}
+
+	private static boolean restrained(net.minecraft.world.entity.player.Player p) {
+		return p instanceof ServerPlayer sp && restrained(sp);
+	}
+
+	@SubscribeEvent
+	public static void restrainedItem(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickItem event) {
+		if (restrained(event.getEntity()))
+			event.setCanceled(true);
+	}
+
+	@SubscribeEvent
+	public static void restrainedBlock(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock event) {
+		if (restrained(event.getEntity()))
+			event.setCanceled(true);
+	}
+
+	@SubscribeEvent
+	public static void restrainedBreak(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.LeftClickBlock event) {
+		if (restrained(event.getEntity()))
+			event.setCanceled(true);
+	}
+
+	@SubscribeEvent
+	public static void restrainedInteract(net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.EntityInteract event) {
+		if (restrained(event.getEntity()))
+			event.setCanceled(true);
+	}
+
+	@SubscribeEvent
+	public static void restrainedAttack(net.neoforged.neoforge.event.entity.player.AttackEntityEvent event) {
+		if (restrained(event.getEntity()))
+			event.setCanceled(true);
+	}
+
+	@SubscribeEvent
+	public static void restrainedSlot(net.neoforged.neoforge.event.tick.PlayerTickEvent.Post event) {
+		if (!(event.getEntity() instanceof ServerPlayer p))
+			return;
+		Integer slot = RESTRAINED.get(p.getUUID());
+		if (slot != null && p.getInventory().getSelectedSlot() != slot) {
+			p.getInventory().setSelectedSlot(slot);
+			p.connection.send(new net.minecraft.network.protocol.game.ClientboundSetHeldSlotPacket(slot));
+		}
+	}
+
 	// ------------------------------------------------------------------ nara
 	private static final BlockState SHADE = Blocks.CONCRETE.pick(net.minecraft.world.item.DyeColor.BLACK).defaultBlockState();
 
@@ -1660,10 +1867,15 @@ public final class ClanJutsu {
 		final float yawOffset;
 		final List<Display.BlockDisplay> link;
 		final List<Display.BlockDisplay> pool = new ArrayList<>();
+		final List<Float> poolTurn = new ArrayList<>();
+		float poolSize;
 		Vec3 linkedFrom = Vec3.ZERO, linkedTo = Vec3.ZERO;
+		/** How far and which way this shadow bends (each one its own). */
+		final float bow;
 
 		Caught(LivingEntity e, ServerPlayer p, List<Display.BlockDisplay> link) {
 			spot = e.position();
+			bow = (e.getRandom().nextBoolean() ? 1 : -1) * (0.1F + e.getRandom().nextFloat() * 0.22F);
 			yawOffset = Mth.wrapDegrees(e.getYRot() - p.getYRot());
 			this.link = link;
 		}
@@ -1695,6 +1907,9 @@ public final class ClanJutsu {
 			return;
 		hold.ended = true;
 		HOLDS.remove(p.getUUID(), hold);
+		for (LivingEntity e : hold.held.keySet())
+			if (e instanceof ServerPlayer victim)
+				restrain(victim, false);
 		for (Display.BlockDisplay piece : hold.drawn)
 			Displays.remove(piece, 6);
 	}
@@ -1750,22 +1965,40 @@ public final class ClanJutsu {
 	/** A round pool of shadow under someone caught (it moves with them). */
 	private static void pool(ServerLevel level, Hold hold, Caught caught, LivingEntity target, int life) {
 		float size = target.getBbWidth() + 0.9F;
-		for (int i = 0; i < 2; i++)
+		caught.poolSize = size;
+		for (int i = 0; i < 2; i++) {
 			caught.pool.add(lay(level, hold, target.position(), (float) (i * Math.PI / 4), size, size, life));
+			caught.poolTurn.add((float) (i * Math.PI / 4));
+		}
 	}
 
-	/** Lays the pieces of a shadow evenly along the ground from one point to another. */
-	private static void relink(ServerLevel level, List<Display.BlockDisplay> link, Vec3 from, Vec3 to) {
+	/** Moves a piece of shadow smoothly (over two ticks) to lie flat at a point, shaped by box. */
+	private static void slide(ServerLevel level, Display.BlockDisplay piece, Vec3 at, double groundFrom, Matrix4f box) {
+		Vec3 origin = piece.position();
+		double y = ground(level, at.x, groundFrom, at.z) + 0.015;
+		Displays.animate(piece, new Matrix4f().translation((float) (at.x - origin.x), (float) (y - origin.y), (float) (at.z - origin.z)).mul(box), 2);
+	}
+
+	/** A point on the curve from a to b bent through c (a quadratic Bezier). */
+	private static Vec3 bend(Vec3 a, Vec3 c, Vec3 b, double t) {
+		return a.scale((1 - t) * (1 - t)).add(c.scale(2 * (1 - t) * t)).add(b.scale(t * t));
+	}
+
+	/**
+	 * Lays the pieces of a shadow along the ground from one point to another in a gentle curve (like a shadow stretched round
+	 * the light), each gliding into place.
+	 */
+	private static void relink(ServerLevel level, List<Display.BlockDisplay> link, Vec3 from, Vec3 to, double bend) {
 		Vec3 d = new Vec3(to.x - from.x, 0, to.z - from.z);
 		int n = link.size();
 		if (n == 0 || d.lengthSqr() < 1.0E-4)
 			return;
-		float yaw = (float) Math.atan2(d.x, d.z), length = (float) (d.length() / n) + 0.2F;
+		Vec3 bow = new Vec3(-d.z, 0, d.x).normalize().scale(d.length() * bend);
+		Vec3 a = new Vec3(from.x, 0, from.z), b = new Vec3(to.x, 0, to.z), c = a.add(d.scale(0.5)).add(bow);
+		double top = Math.max(from.y, to.y);
 		for (int i = 0; i < n; i++) {
-			Vec3 at = from.add(d.scale((i + 0.5) / n));
-			Display.BlockDisplay piece = link.get(i);
-			piece.setPos(at.x, ground(level, at.x, Math.max(from.y, to.y), at.z) + 0.015, at.z);
-			Displays.animate(piece, Displays.box(yaw, 0, 0.7F, 0.02F, length), 1);
+			Vec3 p0 = bend(a, c, b, i / (double) n), p1 = bend(a, c, b, (i + 1) / (double) n), seg = p1.subtract(p0);
+			slide(level, link.get(i), p0.add(p1).scale(0.5), top, Displays.box((float) Math.atan2(seg.x, seg.z), 0, 0.7F, 0.02F, (float) seg.length() + 0.25F));
 		}
 	}
 
@@ -1853,8 +2086,10 @@ public final class ClanJutsu {
 				Caught c = entry.getValue();
 				hold(e);
 				e.fallDistance = 0;
-				if (e instanceof ServerPlayer victim)
+				if (e instanceof ServerPlayer victim) {
 					victim.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 10, 9, false, false));
+					restrain(victim, true);
+				}
 				if (moved) {
 					e.setPos(c.spot);
 					e.move(net.minecraft.world.entity.MoverType.SELF, step.yRot((float) -Math.toRadians(c.yawOffset)));
@@ -1877,14 +2112,15 @@ public final class ClanJutsu {
 				if (swing)
 					e.swing(net.minecraft.world.InteractionHand.MAIN_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 				// the shadow stays joined to both of them
-				if (!c.link.isEmpty() && (c.linkedFrom.distanceToSqr(p.position()) > 1.0E-4 || c.linkedTo.distanceToSqr(e.position()) > 1.0E-4)) {
+				// (and sways a little, like a real shadow in shifting light)
+				if (!c.link.isEmpty() && (t % 3 == 0 || c.linkedFrom.distanceToSqr(p.position()) > 1.0E-4 || c.linkedTo.distanceToSqr(e.position()) > 1.0E-4)) {
 					c.linkedFrom = p.position();
 					c.linkedTo = e.position();
-					relink(level, c.link, p.position(), e.position());
+					relink(level, c.link, p.position(), e.position(), c.bow * (1 + 0.3 * Math.sin(t * 0.12 + c.bow * 20)));
 				}
-				for (Display.BlockDisplay piece : c.pool)
-					if (piece.position().distanceToSqr(e.position()) > 1.0E-4)
-						piece.setPos(e.getX(), ground(level, e.getX(), e.getY(), e.getZ()) + 0.015, e.getZ());
+				if (c.linkedTo.distanceToSqr(e.position()) > 1.0E-4 || c.link.isEmpty())
+					for (int i = 0; i < c.pool.size(); i++)
+						slide(level, c.pool.get(i), e.position(), e.getY(), Displays.box(c.poolTurn.get(i), 0, c.poolSize, 0.02F, c.poolSize));
 			}
 			if (t % 4 == 0)
 				for (LivingEntity e : hold.held.keySet())
@@ -2033,7 +2269,7 @@ public final class ClanJutsu {
 
 	/**
 	 * Shadow Imitation Field: the caster's shadow spreads into a great pool on the ground around them (it stays where it spread), and
-	 * everyone it reaches is caught and copies the caster's moves for eight seconds.
+	 * everyone it reaches is caught fast for eight seconds, unable to move or do anything, while the caster walks free.
 	 */
 	private static void imitationField(ServerPlayer p) {
 		ServerLevel level = level(p);
@@ -2054,7 +2290,7 @@ public final class ClanJutsu {
 		sound(level, c, SoundEvents.SCULK_SHRIEKER_SHRIEK, 0.8F, 0.6F);
 		int[] caught = { 0 };
 		hold.creeping++;
-		bind(p, hold, ticks, true, t -> {
+		bind(p, hold, ticks, false, t -> {
 			double r = radius * Math.min(1, (t + 1) / (double) (spread + 3));
 			if (t <= spread + 3) {
 				// the caster stands still while the shadow spreads

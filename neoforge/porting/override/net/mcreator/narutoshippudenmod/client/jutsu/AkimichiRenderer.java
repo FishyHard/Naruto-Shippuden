@@ -59,7 +59,7 @@ public final class AkimichiRenderer {
 		}
 	}
 
-	private static void draw(SubmitNodeCollector collector, PartModel model, LivingEntityRenderState state, PoseStack pose,
+	static void draw(SubmitNodeCollector collector, PartModel model, LivingEntityRenderState state, PoseStack pose,
 			net.minecraft.client.renderer.rendertype.RenderType type, int light, int overlay, int color) {
 		collector.submitModel(model, state, pose, type, light, overlay, color, null, state.outlineColor);
 	}

@@ -111,6 +111,12 @@ for p in glob.glob('../src/main/java/**/*.java', recursive=True):
   (spikes out of the ground), Shadow Imitation Field. A `Hold` per caster keeps who is caught (`Caught`: spot, yaw offset, the
   shadow link). With mimic the caught copy the caster's steps, turns, look and swings in their own facing. Links re-lay every tick.
   Sneak + right-click lets go.
+- **Restraint** (`ClanJutsu.restrain`, synced `restrained`): a player caught in a shadow or whose mind is taken can do nothing; the
+  server cancels interactions/attacks/jutsu and pins the hotbar slot, `client/Restrained` cancels swings, scroll and mod keys.
+- **Mind Body Switch** on a creature (`ClanJutsu.takeOver`): synced `possessing` = entity id + 1; `client/Restrained` moves the camera
+  into it; the server drives it from `getLastClientInput()` and the player's look; attacks come in as the "mind" action.
+- Nara shadow links are a Bezier curve; pieces move by their display transform (interpolated), not by position.
+- Jutsu built from blocks use `Techniques.place` (real blocks, restored), not stretched block displays.
 - **Uchiha** and **Yamanaka** clans have technique items (`JutsuItems` registers them, with the new eye and Shisui/Madara Mangekyou
   items). Yamanaka took Iburi's place everywhere (rule `iburi_is_yamanaka`; old saves' Iburi flag loads as Yamanaka).
 - **Eyes:** Byakugan, Ketsuryugan, Rinnegan and Tenseigan are releases now (their old eye items are the scrolls), each needs its eye

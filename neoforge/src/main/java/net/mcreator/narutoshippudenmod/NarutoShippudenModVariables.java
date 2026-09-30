@@ -337,6 +337,8 @@ public class NarutoShippudenModVariables {
 		public double naratechnique = 0;
 		public double naralearn = 0;
 		public double nararelease = 0;
+		public boolean restrained = false;
+		public double possessing = 0;
 		public double mangekyousharinganitachitechnique = 0;
 		public double mangekyousharingankakashitechnique = 0;
 		public double yamanakatechnique = 0;
@@ -752,6 +754,8 @@ public class NarutoShippudenModVariables {
 			out.putDouble("naratechnique", naratechnique);
 			out.putDouble("naralearn", naralearn);
 			out.putDouble("nararelease", nararelease);
+			out.putBoolean("restrained", restrained);
+			out.putDouble("possessing", possessing);
 			out.putDouble("mangekyousharinganitachitechnique", mangekyousharinganitachitechnique);
 			out.putDouble("mangekyousharingankakashitechnique", mangekyousharingankakashitechnique);
 			out.putDouble("yamanakatechnique", yamanakatechnique);
@@ -1168,6 +1172,8 @@ public class NarutoShippudenModVariables {
 			naratechnique = in.getDoubleOr("naratechnique", 0);
 			naralearn = in.getDoubleOr("naralearn", 0);
 			nararelease = in.getDoubleOr("nararelease", 0);
+			restrained = in.getBooleanOr("restrained", false);
+			possessing = in.getDoubleOr("possessing", 0);
 			mangekyousharinganitachitechnique = in.getDoubleOr("mangekyousharinganitachitechnique", 0);
 			mangekyousharingankakashitechnique = in.getDoubleOr("mangekyousharingankakashitechnique", 0);
 			yamanakatechnique = in.getDoubleOr("yamanakatechnique", 0);

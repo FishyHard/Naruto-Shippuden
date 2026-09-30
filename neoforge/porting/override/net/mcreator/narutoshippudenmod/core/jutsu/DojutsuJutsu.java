@@ -823,8 +823,9 @@ public final class DojutsuJutsu {
 	}
 
 	/**
-	 * Izanami: the enemy looked at is caught in a loop: for eight seconds they are sent back, again and again, to the moment and place
-	 * they were in when the caster's eye met theirs.
+	 * Izanami: the enemy looked at is caught in a loop. For eight seconds they live the same moment again and again: every two
+	 * seconds they are sent back to the place and facing they had when the caster's eye met theirs, forget what they were doing, and
+	 * (a player) can do nothing in between. Like Izanagi, it costs the eye: the Sharingan closes when the loop ends.
 	 */
 	private static void izanami(ServerPlayer p) {
 		ServerLevel level = level(p);
@@ -840,8 +841,12 @@ public final class DojutsuJutsu {
 			if (!target.isAlive())
 				return;
 			target.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 30, 0, false, false));
+			if (target instanceof ServerPlayer victim)
+				ClanJutsu.restrain(victim, t < 159);
 			if (t % 40 != 39)
 				return;
+			if (target instanceof ServerPlayer victim)
+				victim.sendOverlayMessage(Component.literal("The same moment, again..."));
 			if (target instanceof ServerPlayer victim)
 				victim.teleportTo(level, spot.x, spot.y, spot.z, java.util.Set.of(), yaw, pitch, false);
 			else {
@@ -853,6 +858,14 @@ public final class DojutsuJutsu {
 			damage(p, target, 4, Element.GENJUTSU);
 			level.sendParticles(Element.GENJUTSU.puff, spot.x, spot.y + 1, spot.z, 20, 0.4, 0.7, 0.4, 0.05);
 			sound(level, spot, SoundEvents.ILLUSIONER_MIRROR_MOVE, 1, 0.6F);
+		});
+		after(level, 160, () -> {
+			if (target instanceof ServerPlayer victim)
+				ClanJutsu.restrain(victim, false);
+			if (p.isAlive()) {
+				net.mcreator.narutoshippudenmod.core.Eyes.closeAll(p);
+				tell(p, "Izanami ends; the eye that cast it goes dark");
+			}
 		});
 	}
 

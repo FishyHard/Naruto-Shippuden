@@ -709,11 +709,12 @@ final class NatureJutsu {
 			if (!target.isAlive())
 				return;
 			p.removeEffect(MobEffects.INVISIBILITY);
-			float w = target.getBbWidth() + 0.5F, h = target.getBbHeight() * 0.6F;
 			BlockState soil = level.getBlockState(target.blockPosition().below());
 			BlockState mound = soil.isAir() || !soil.isSolid() ? Blocks.DIRT.defaultBlockState() : soil;
-			net.minecraft.world.entity.Display.BlockDisplay pit = net.mcreator.narutoshippudenmod.core.jutsu.engine.Displays.grow(level, target.position(), mound,
-					net.mcreator.narutoshippudenmod.core.jutsu.engine.Displays.box(0, 0, w, h, w), 3, 60, false);
+			for (int dx = -1; dx <= 1; dx++)
+				for (int dz = -1; dz <= 1; dz++)
+					if (dx != 0 || dz != 0)
+						place(level, target.blockPosition().offset(dx, 0, dz), mound, 60, OPEN);
 			damage(p, target, 6, Element.EARTH);
 			sound(level, target.position(), SoundEvents.ROOTED_DIRT_BREAK, 1.5F, 0.6F);
 			Vec3 spot = target.position();
@@ -795,15 +796,16 @@ final class NatureJutsu {
 		ServerLevel level = level(p);
 		LivingEntity aimed = ClanJutsu.target(p, 20);
 		Vec3 c = aimed != null ? aimed.position() : lookPoint(p, 20);
-		double floor = ClanJutsu.ground(level, c.x, c.y, c.z);
 		List<Vec3> tops = new ArrayList<>();
 		for (int i = 0; i < 4; i++) {
-			double a = Math.PI / 4 + i * Math.PI / 2;
-			Vec3 base = new Vec3(c.x + Math.cos(a) * 2.2, floor, c.z + Math.sin(a) * 2.2);
-			net.mcreator.narutoshippudenmod.core.jutsu.engine.Displays.grow(level, base, Blocks.STONE_BRICKS.defaultBlockState(),
-					net.mcreator.narutoshippudenmod.core.jutsu.engine.Displays.box(0, 0, 0.7F, 3.2F, 0.7F), 6, 90, false);
-			tops.add(base.add(0, 3, 0));
+			int dx = i % 2 == 0 ? -2 : 2, dz = i < 2 ? -2 : 2;
+			BlockPos base = ground(level, c.x + dx, c.y, c.z + dz);
+			for (int h = 0; h < 3; h++)
+				place(level, base.above(h), Blocks.STONE_BRICKS.defaultBlockState(), 90, OPEN);
+			tops.add(Vec3.atCenterOf(base.above(3)));
 		}
+		// round the square, not across it
+		java.util.Collections.swap(tops, 2, 3);
 		sound(level, c, SoundEvents.STONE_PLACE, 1.5F, 0.6F);
 		channel(p, 86, 2, t -> {
 			if (t < 6)

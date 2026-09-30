@@ -3416,7 +3416,7 @@ public final class PlayerProcedures {
 				}
 			}
 			
-			if (NarutoShippudenModVariables.get(entity).magnet_coat == 1) {
+			if (false && NarutoShippudenModVariables.get(entity).magnet_coat == 1) {
 				if (entity.isShiftKeyDown()) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
@@ -3432,7 +3432,7 @@ public final class PlayerProcedures {
 						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/iron_sand.png", MagnetCoatRenderer.ModelBlack_Iron_Sand_Coat.LAYER, MagnetCoatRenderer.ModelBlack_Iron_Sand_Coat::new);
 					}
 				}
-			} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 2) {
+			} else if (false && NarutoShippudenModVariables.get(entity).magnet_coat == 2) {
 				if (entity.isShiftKeyDown()) {
 					if (_evt.getRenderer() instanceof AvatarRenderer) {
 						if (_evt instanceof RenderLivingEvent.Pre) {
@@ -3448,7 +3448,7 @@ public final class PlayerProcedures {
 						ModelSwapRenderers.renderPlayerAs(_evt, "naruto_shippuden:textures/entities/iron_sand.png", MagnetHandsRenderer.ModelBlack_Iron_Sand_Hand.LAYER, MagnetHandsRenderer.ModelBlack_Iron_Sand_Hand::new);
 					}
 				}
-			} else if (NarutoShippudenModVariables.get(entity).magnet_coat == 3) {
+			} else if (false && NarutoShippudenModVariables.get(entity).magnet_coat == 3) {
 				if (_evt.getRenderer() instanceof AvatarRenderer) {
 					if (_evt instanceof RenderLivingEvent.Pre) {
 						//  _evt.setCanceled(true); 

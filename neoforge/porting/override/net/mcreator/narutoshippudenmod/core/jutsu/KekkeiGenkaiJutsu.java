@@ -359,32 +359,42 @@ final class KekkeiGenkaiJutsu {
 		sound(level, at, SoundEvents.SAND_FALL, 2, 0.5F);
 	}
 
-	/** Wings of iron sand: ten seconds of real flight, then a slow glide down. */
+	private static final net.minecraft.resources.Identifier IRON_WINGS = net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden",
+			"iron_sand_wings");
+
+	/**
+	 * Iron Sand: Black Iron Wings: wings of iron sand for twenty seconds. They glide like an elytra (jump in mid-air to spread them)
+	 * and beat to carry the caster along their look, like Butterfly Mode's.
+	 */
 	private static void ironWings(ServerPlayer p) {
 		Vec3 look = p.getLookAngle().multiply(1, 0, 1).normalize();
-		p.setDeltaMovement(look.x * 0.6, 1.0, look.z * 0.6);
+		p.setDeltaMovement(look.x * 0.5, 0.9, look.z * 0.5);
 		p.syncVelocity = true;
 		sound(level(p), p.position(), SoundEvents.PHANTOM_FLAP, 1.5F, 0.6F);
-		ClanJutsu.mode(p, 200, 1, v -> v.magnet_coat = 3, v -> {
+		net.minecraft.world.entity.ai.attributes.AttributeInstance glide = p.getAttribute(net.neoforged.neoforge.common.NeoForgeMod.GLIDING_FLIGHT);
+		ClanJutsu.mode(p, 400, 1, v -> {
+			v.magnet_coat = 3;
+			if (glide != null && !glide.hasModifier(IRON_WINGS))
+				glide.addTransientModifier(new net.minecraft.world.entity.ai.attributes.AttributeModifier(IRON_WINGS, 1,
+						net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_VALUE));
+		}, v -> {
 			v.magnet_coat = 0;
-			if (!p.isCreative() && !p.isSpectator()) {
-				p.getAbilities().mayfly = false;
-				p.getAbilities().flying = false;
-				p.onUpdateAbilities();
-				p.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 100, 0, false, false, true));
-			}
+			if (glide != null)
+				glide.removeModifier(IRON_WINGS);
 		}, t -> {
-			if (!p.getAbilities().mayfly) {
-				p.getAbilities().mayfly = true;
-				p.getAbilities().flying = true;
-				p.onUpdateAbilities();
-			}
-			p.fallDistance = 0;
 			if (t % 10 == 0)
 				ClanJutsu.keep(p, MobEffects.RESISTANCE, 1);
-			if (t % 2 == 0)
-				level(p).sendParticles(Element.MAGNET.trail, p.getX(), p.getY() + 1.2, p.getZ(), 4, 1.2, 0.2, 1.2, 0.01);
+			// the wings beat: while gliding they carry the caster along their look (climbing too)
+			if (p.isFallFlying() && t % 2 == 0) {
+				Vec3 dir = p.getLookAngle(), motion = p.getDeltaMovement();
+				Vec3 pushed = motion.add(dir.scale(0.09)).add(dir.scale(1.1).subtract(motion).scale(0.07));
+				p.setDeltaMovement(pushed.length() > 1.5 ? pushed.normalize().scale(1.5) : pushed);
+				p.syncVelocity = true;
+			}
+			if (t % 3 == 0)
+				level(p).sendParticles(Element.MAGNET.trail, p.getX(), p.getY() + 1.2, p.getZ(), 2, 1, 0.2, 1, 0.01);
 		});
+		p.sendOverlayMessage(net.minecraft.network.chat.Component.literal("Jump in mid-air to spread your wings"));
 	}
 
 	// ------------------------------------------------------------------ smoke
@@ -784,17 +794,19 @@ final class KekkeiGenkaiJutsu {
 		Vec3 look = aimed != null ? aimed.position() : lookPoint(p, 20);
 		Vec3 c = new Vec3(look.x, ground(level, look.x, look.y, look.z).getY(), look.z);
 		int life = 120;
-		BlockState ice = Blocks.PACKED_ICE.defaultBlockState();
-		double[][] rows = { { 12, 3.3, 0, 0.15 }, { 10, 2.8, 1.9, 0.6 }, { 6, 1.6, 3.2, 1.1 } };
-		int delay = 0;
-		for (double[] row : rows)
-			for (int i = 0; i < (int) row[0]; i++) {
-				double a = i * Math.PI * 2 / row[0];
-				Vec3 at = c.add(Math.cos(a) * row[1], row[2], Math.sin(a) * row[1]);
-				float yaw = (float) (Math.PI / 2 - a), lean = (float) -row[3];
-				int wait = delay++ / 3;
-				after(level, wait, () -> Displays.grow(level, at, ice, Displays.box(yaw, lean, 1.9F, 2.1F, 0.3F), 6, life - wait, false));
-			}
+		BlockPos centre = BlockPos.containing(c);
+		// a dome of packed ice, built up from the ground
+		for (int layer = 0; layer <= 4; layer++) {
+			int y = layer;
+			after(level, layer * 2, () -> {
+				for (int dx = -4; dx <= 4; dx++)
+					for (int dz = -4; dz <= 4; dz++) {
+						double d = Math.sqrt(dx * dx + y * y * 1.1 + dz * dz);
+						if (d >= 2.9 && d < 3.9)
+							place(level, centre.offset(dx, y, dz), Blocks.PACKED_ICE.defaultBlockState(), life - y * 2, OPEN);
+					}
+			});
+		}
 		sound(level, c, SoundEvents.GLASS_PLACE, 2, 0.5F);
 		channel(p, life, 2, t -> {
 			for (LivingEntity target : enemies(level, p, new AABB(c, c).inflate(3.4, 4, 3.4), e -> e.position().subtract(c).horizontalDistance() < 3.4)) {
@@ -938,23 +950,14 @@ final class KekkeiGenkaiJutsu {
 	/** Steel Shield Technique: a wall of steel rises in front of the caster for eight seconds and stops everything thrown at it. */
 	private static void steelShield(ServerPlayer p) {
 		ServerLevel level = level(p);
-		Vec3 dir = p.getLookAngle().multiply(1, 0, 1).normalize(), at = p.position().add(dir.scale(1.6));
-		float yaw = (float) Math.atan2(dir.x, dir.z);
-		Displays.grow(level, new Vec3(at.x, ground(level, at.x, p.getY(), at.z).getY(), at.z), Blocks.IRON_BLOCK.defaultBlockState(), Displays.box(yaw, 0, 3.2F, 3, 0.25F),
-				5, 160, false);
+		Vec3 dir = p.getLookAngle().multiply(1, 0, 1).normalize(), side = new Vec3(-dir.z, 0, dir.x), at = p.position().add(dir.scale(2));
+		for (int s = -1; s <= 1; s++) {
+			Vec3 column = at.add(side.scale(s));
+			BlockPos base = ground(level, column.x, p.getY(), column.z);
+			for (int h = 0; h < 3; h++)
+				place(level, base.above(h), Blocks.IRON_BLOCK.defaultBlockState(), 160, OPEN);
+		}
 		sound(level, at, SoundEvents.ANVIL_PLACE, 1.2F, 0.7F);
-		channel(p, 160, 1, t -> {
-			for (net.minecraft.world.entity.projectile.Projectile shot : level.getEntitiesOfClass(net.minecraft.world.entity.projectile.Projectile.class,
-					new AABB(at, at).inflate(1.9, 3, 1.9), e -> e.getOwner() != p)) {
-				level.sendParticles(ParticleTypes.CRIT, shot.getX(), shot.getY(), shot.getZ(), 6, 0.2, 0.2, 0.2, 0.2);
-				sound(level, shot.position(), SoundEvents.ANVIL_LAND, 0.4F, 1.8F);
-				shot.discard();
-			}
-			for (LivingEntity target : enemies(level, p, new AABB(at, at).inflate(1.7, 3, 1.7), e -> true)) {
-				target.push(dir.x * 0.5, 0, dir.z * 0.5);
-				target.syncVelocity = true;
-			}
-		});
 	}
 
 	/** Storm Release: Black Hunting: dark storm light strikes down on every enemy round the spot looked at. */
@@ -979,21 +982,28 @@ final class KekkeiGenkaiJutsu {
 	/** Wood Release: Wood Spikes Ring: a ring of sharpened wooden stakes bursts out of the ground round the caster. */
 	private static void woodSpikesRing(ServerPlayer p) {
 		ServerLevel level = level(p);
-		List<LivingEntity> struck = new ArrayList<>();
 		sound(level, p.position(), SoundEvents.WOOD_BREAK, 2, 0.5F);
-		for (int ring = 0; ring < 2; ring++) {
-			double r = 2.5 + ring * 1.5;
-			int n = 10 + ring * 6;
+		BlockPos c = p.blockPosition();
+		java.util.Set<BlockPos> ring = new java.util.LinkedHashSet<>();
+		// separate stakes, not a wall: ten close in, fourteen further out between them
+		for (int ring2 = 0; ring2 < 2; ring2++) {
+			int n = ring2 == 0 ? 10 : 14;
+			double r = ring2 == 0 ? 3 : 5;
 			for (int i = 0; i < n; i++) {
-				double a = i * Math.PI * 2 / n + ring * 0.2;
-				double x = p.getX() + Math.cos(a) * r, z = p.getZ() + Math.sin(a) * r;
-				Vec3 base = new Vec3(x, ground(level, x, p.getY(), z).getY(), z);
-				float lean = (float) -0.35;
-				Displays.grow(level, base, Blocks.OAK_LOG.defaultBlockState(), Displays.box((float) (Math.PI / 2 - a), lean, 0.35F, 2.4F + ring * 0.6F, 0.35F), 4, 80, false);
+				double a = (i + ring2 * 0.5) * Math.PI * 2 / n;
+				ring.add(BlockPos.containing(c.getX() + 0.5 + Math.cos(a) * r, p.getY(), c.getZ() + 0.5 + Math.sin(a) * r));
 			}
 		}
-		for (LivingEntity target : enemies(level, p, p.getBoundingBox().inflate(5, 2, 5), e -> e.distanceToSqr(p) < 30)) {
-			struck.add(target);
+		for (BlockPos column : ring) {
+			BlockPos base = ground(level, column.getX() + 0.5, p.getY(), column.getZ() + 0.5);
+			int height = 1 + level.getRandom().nextInt(2);
+			for (int h = 0; h < height; h++)
+				place(level, base.above(h), Blocks.OAK_LOG.defaultBlockState(), 80, OPEN);
+			// a sharpened point on top
+			place(level, base.above(height), Blocks.OAK_FENCE.defaultBlockState(), 80, OPEN);
+			level.sendParticles(Element.WOOD.puff, base.getX() + 0.5, base.getY() + 1, base.getZ() + 0.5, 3, 0.3, 0.5, 0.3, 0.05);
+		}
+		for (LivingEntity target : enemies(level, p, p.getBoundingBox().inflate(5.5, 2, 5.5), e -> e.distanceToSqr(p) < 36)) {
 			damage(p, target, 10, Element.WOOD);
 			target.push(0, 0.6, 0);
 			target.syncVelocity = true;
@@ -1005,30 +1015,23 @@ final class KekkeiGenkaiJutsu {
 		ServerLevel level = level(p);
 		LivingEntity aimed = ClanJutsu.target(p, 24);
 		Vec3 look = aimed != null ? aimed.position() : lookPoint(p, 24);
-		Vec3 c = new Vec3(look.x, ground(level, look.x, look.y, look.z).getY(), look.z);
+		BlockPos c = ground(level, look.x, look.y, look.z);
 		int life = 160;
-		BlockState log = Blocks.SPRUCE_LOG.defaultBlockState();
-		for (int i = 0; i < 12; i++) {
-			double a = i * Math.PI / 6;
-			Vec3 at = c.add(Math.cos(a) * 2.2, 0, Math.sin(a) * 2.2);
-			Displays.grow(level, at, log, Displays.box(0, 0, 0.35F, 4, 0.35F), 8, life, false);
-		}
-		for (int i = 0; i < 4; i++)
-			Displays.grow(level, c.add(0, 4, 0), log, Displays.box((float) (i * Math.PI / 4), 0, 4.8F, 0.35F, 0.35F), 10, life, false);
-		sound(level, c, SoundEvents.WOOD_PLACE, 2, 0.5F);
-		channel(p, life, 1, t -> {
-			for (LivingEntity target : enemies(level, p, new AABB(c, c).inflate(2.6, 4, 2.6), e -> e.position().subtract(c).horizontalDistance() < 2.6)) {
-				Vec3 from = target.position().subtract(c).multiply(1, 0, 1);
-				if (from.length() > 1.7) {
-					Vec3 in = from.normalize().scale(-0.3);
-					target.setDeltaMovement(in.x, Math.min(0, target.getDeltaMovement().y), in.z);
-					target.syncVelocity = true;
+		sound(level, Vec3.atCenterOf(c), SoundEvents.WOOD_PLACE, 2, 0.5F);
+		// grows up a layer at a time: pillars at the corners and the middle of each side, bars between, and a roof
+		channel(p, 5, 1, h -> {
+			for (int dx = -2; dx <= 2; dx++)
+				for (int dz = -2; dz <= 2; dz++) {
+					BlockPos pos = c.offset(dx, h, dz);
+					boolean edge = Math.abs(dx) == 2 || Math.abs(dz) == 2;
+					if (h == 4)
+						place(level, pos, Blocks.SPRUCE_PLANKS.defaultBlockState(), life - h, OPEN);
+					else if (edge)
+						place(level, pos, (dx == 0 || dz == 0 || Math.abs(dx) == Math.abs(dz)) ? Blocks.SPRUCE_LOG.defaultBlockState() : Blocks.SPRUCE_FENCE.defaultBlockState(),
+								life - h, OPEN);
 				}
-				if (target.getY() > c.y + 2.5) {
-					target.setDeltaMovement(target.getDeltaMovement().x, -0.3, target.getDeltaMovement().z);
-					target.syncVelocity = true;
-				}
-			}
+			sound(level, Vec3.atCenterOf(c.above(h)), SoundEvents.WOOD_PLACE, 1.2F, 0.7F + h * 0.1F);
 		});
+	
 	}
 }
