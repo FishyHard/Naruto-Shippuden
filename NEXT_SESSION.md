@@ -182,6 +182,66 @@ for p in glob.glob('../src/main/java/**/*.java', recursive=True):
   their owner's skin. The Aburame Insect Clone reuses the clone entity.
 - `ThrownWeapons`: thrown shuriken and kunai arrows become `JutsuProjectile`s. Flying Raijin kunai stay arrows.
 
+### Custom jutsu (`core/jutsu/CustomJutsu`, `gui/JutsuCreationScreens`)
+
+- The Jutsu tab of the info card: 4 slots and an editor. A design is a name, a release the player has (natures and kekkei
+  genkai), a `Form` (Bullets, Sphere, Shuriken, Beast, Dragon, Wave, Stream, Burst, Rain), a size, a speed and a power 1–5.
+  Its `JutsuRank` comes from those choices and sets the JP price (rank.jp × 1.5 + 10), chakra, cooldown and Ninjutsu.
+- Designs are stored one per line in the synced variable `custom_jutsu` (`name|release|FORM|size|speed|power`). They are not
+  items: `Jutsus.EXTRA` adds them to that release's technique wheel after its own jutsu (`Technique.jutsu(variables)` is the
+  per-player list; `technique.jutsu` alone is only the fixed ones).
+- Creating needs the release and at least one jutsu learned from its scroll. Forget refunds half. The old one-slot designs
+  migrate on login and the old `custom_*_release_technique` items are removed.
+- Actions: `custom_jutsu` (key = the design), `forget_jutsu` (amount = slot).
+
+### Jutsu that cast themselves
+
+`Jutsus.Jutsu` has an `own` cast (`Consumer<ServerPlayer>`). When set, `Jutsus.cast` runs it instead of the technique's procedure
+and takes the chakra and cooldown itself (unless the jutsu called `Jutsus.miss`). Weapon arts and custom jutsu use it.
+
+### Weapons (`core/jutsu/Weapons`)
+
+- Each weapon with abilities is a technique registered by `weapon(item, kenjutsu, forms...)`; its arts are `art(...)` with a
+  `JutsuRank` and a Kenjutsu minimum. The selected art is in the synced string `weapon_arts` (`item=index,...`). Art damage
+  scales with Kenjutsu (`Weapons.hurt`), not Ninjutsu.
+- Building blocks: `flow` (chakra through the blade for a while: bonus damage, reach modifier, on-hit effect, particles along
+  the blade), `fly` (the real item thrown as an item display moved by its interpolated transform; `Flight.FLAT_YZ` for
+  Kubikiribocho, `FLAT_XY` for the scythe, `POINT` for Nuibari, which never spins), guards (Uchiha Return), rituals (Jashin),
+  marks (blood, curse), Hiramekarei's stored chakra (`StoredChakra` tag) and forms (item swap with `FormUntil`).
+- Passives: Samehada eats chakra (`Absorbed` tag), Kubikiribocho mends on hit and kill, the scythe draws blood.
+- Too little Kenjutsu halves melee hits (it used to drop the weapon). `KENJUTSU` and `PASSIVES` feed the tooltips.
+- Rules `weapon_old_procedures` and `weapon_old_sharpness` switched the old MCreator weapon code off.
+
+### Village shinobi (`core/jutsu/ShinobiAI`, `client/ShinobiRenderer`)
+
+- Genin/Chunin/Jonin (`ShinobiRank` 0–2, `JutsuPower` for `Techniques.power`), stats, a name, a kunai or tanto. Summon a rank with
+  `/summon naruto_shippuden:hidden_cloud_shinobi ~ ~ ~ {NeoForgeData:{ShinobiRank:2}}`.
+- `Combat` goal: footwork at the village's range with strafing, hand signs (entity event 71, the client poses the arms) before
+  the village's nature jutsu (the same `NatureJutsu` methods players use, which now take any `LivingEntity`), kunai and shuriken,
+  melee, Body Flicker, retreat when low. Substitution (a real log for 2 s) in a damage event.
+- Targets: whoever hurt them (comrades are alerted), whatever hurts or is hit by a player of their village, monsters.
+  `Techniques.ALLIES` keeps their jutsu off their own side.
+- Rules `shinobi_ai` and `shinobi_renderer`. The renderer wraps their own model (pose on top of its walk) and draws the held item.
+
+### Kurama (`core/jutsu/Kurama`)
+
+- Claw swipe, tail sweep, roar (with the roar animation, entity event 100), Tailed Beast Ball (charges in the mouth for 2 s,
+  element `BIJU`), a volley of small ones, a leap with a landing shockwave. Faster below half health. Heals slowly (the old
+  procedure gave Instant Health every tick). Nothing breaks blocks. Rule `kurama_ai`. Model, hitboxes and animation untouched.
+
+### Stats (`core/Stats`)
+
+- Applied as saved attribute modifiers: Medicine +6 max health per 10 (200 at 300) and healing, Speed +3.5% a point, Taijutsu
+  +1 fist damage per 15. (The old `/attribute` commands named `generic.*` attributes that no longer exist; rule
+  `old_stat_attributes` removed them.)
+- `Stats.upgrade` (action `stat`) spends up to SP-per-click, never past the cap, and refuses a maxed stat. Caps: Taijutsu 120,
+  Kenjutsu 100, Shurikenjutsu 40, Summoning 60, Kinjutsu 100, Medicine 300, Speed 10, Genjutsu 70, IQ 220; Ninjutsu and Senjutsu
+  have none (they add 10 max chakra / 15 senjutsu chakra a point; Ninjutsu stops adding damage at 150).
+
+### Creative tabs (`itemgroup/ModItemGroups`, hand-written)
+
+Nature Releases, Kekkei Genkai, DNA, Clans, Dojutsu, Shinobi Weapons, Headbands, Shinobi Items; spawn eggs in the vanilla tab.
+
 ### Magnet Release iron sand (`client/jutsu/IronSandRenderer`)
 
 - A layer on the player, chosen by the synced `magnet_coat`: 1 = Iron Sand Wall, 2 = Black Iron Fist (the form lasts 5 s),
@@ -262,10 +322,25 @@ Screenshots are saved to `run/screenshots/screen_*.png`, and `DEVTEST …` lines
 - `models`: summons entities. `-PdevModels=<ids>`.
 - `batch5`: wings, Akamaru's forms, the eye wheel, phasing, thrown weapons, gliding, Tenseigan, clones, a Flying Raijin jump,
   the Inuzuka and Flying Raijin wheels, water and wall walking.
+  - The jutsu list also takes the weapon ids (`-PdevJutsu=kubikiribocho,nuibari`; the player stands closer for weapons) and gives
+    nine test custom jutsu (one per form) on the five nature wheels.
+- `shinobi` (a Jonin of each village against a husk, 14 shots each), `kurama` (Kurama against a husk), `customscreen` (the Jutsu
+  page, editor and wheel), `stats` (capped upgrading and the info card), `tabs` (each creative tab).
 - `eyes`, `weapons`, `akimichi`, `economy`. No `-PdevOnly`: shows every GUI screen.
 
 Test code can call server code with `onServer(mc, p -> …)`. A full `jutsu` run takes about 15 minutes. Run it in the
 background and watch the log for `Exception|Caused by`.
+
+## Porting rules added recently (continued)
+
+| Rule | What it does |
+|---|---|
+| `weapon_old_procedures`, `weapon_old_sharpness` | The weapons' old procedures and NBT sharpness bonuses are off. |
+| `shinobi_ai`, `shinobi_renderer` | Village shinobi use ShinobiAI and ShinobiRenderer. |
+| `kurama_ai` | Kurama uses core/jutsu/Kurama; no per-tick Instant Health. |
+| `old_stat_attributes` | The broken `/attribute generic.*` commands are gone. |
+
+Apply new `@func` rules with the body-only runner under "How to change code".
 
 ## NeoForge 26.3 gotchas learned the hard way
 
@@ -292,6 +367,10 @@ background and watch the log for `Exception|Caused by`.
 - The shaded MC sources are in `neoforge/build/moddev/artifacts/minecraft-patched-*-sources.jar` and NeoForge's in
   `~/.gradle/caches/modules-2/files-2.1/net.neoforged/neoforge/26.3.0.26-beta/*/neoforge-*-sources.jar`: unzip into the
   scratchpad to grep them.
+- `LivingEntity.swing` takes `(hand, SwingAnimation.DEFAULT, true)`; `PoseStack.rotateDegrees(Axis, deg)`, not `mulPose`.
+- Item displays: `display.getSlot(0).set(stack)` sets the item; their position setter for interpolation is private, so move them
+  by their transform. Mob persistent data is saved as `NeoForgeData`.
+- Attribute ids have no `generic.` prefix any more (`minecraft:max_health`).
 - Image work needs Pillow: make a venv in the scratchpad (`python3 -m venv venv && ./venv/bin/pip install pillow`).
 
 ## Open items
@@ -299,8 +378,8 @@ background and watch the log for `Exception|Caused by`.
 - Mind Body Switch control (camera, keys, look) can't be checked by the automated test: it was fixed from the user's report and
   is waiting on their feedback.
 - Changing jutsu lists shifts what old saves have unlocked: a save stores *how many* jutsu of a release were learned, not which.
-- Some old techniques still run their MCreator procedures: Shadow Clone's story-exam branch, the Custom Jutsu, and the
-  Mangekyou scrolls of Obito and Sasuke.
+- Some old techniques still run their MCreator procedures: Shadow Clone's story-exam branch and the Mangekyou scrolls of
+  Obito and Sasuke (see `NEXT_TASK.md`).
 - The Susanoo is still the old model swap.
 - Checked in the dev client but still waiting on the user's feedback: Flying Raijin, Chakra Control, the message panel, and
   most of the new wiki jutsu.
