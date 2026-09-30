@@ -1150,6 +1150,14 @@ public final class DevTest {
 			NarutoShippudenMod.LOGGER.info("DEVTEST learned one mangekyou: obito {} sasuke {}", v.MangekyouSharinganObito, v.MangekyouSharinganSasuke);
 			net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.learn(player, release.apply("mangekyou_sharingan_sasuke_release").item(), 0);
 			report.accept("sasuke", player);
+			// every Susanoo stage, and one more that must do nothing
+			for (int i = 0; i < 5; i++) {
+				double jp = NarutoShippudenModVariables.get(player).jp;
+				net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.learn(player, release.apply("mangekyou_sharingan_sasuke_release").item(), 1);
+				NarutoShippudenModVariables.PlayerVariables after = NarutoShippudenModVariables.get(player);
+				NarutoShippudenMod.LOGGER.info("DEVTEST learned susanoo buy {}: stage {} bought {} cost {} jutsu {}", i, after.mangekyousharingansasukesusanolearn,
+						after.mangekyousharingansasukesusanorelease, jp - after.jp, after.mangekyousharingansasukeamaterasulearn);
+			}
 		}));
 		STEPS.add(() -> mc.gui.setScreen(new JutsuClient.ScrollScreen(release.apply("mangekyou_sharingan_sasuke_release"),
 				net.minecraft.network.chat.Component.literal("Mangekyou Sharingan (Sasuke)"))));

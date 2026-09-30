@@ -184,8 +184,9 @@ for p in glob.glob('../src/main/java/**/*.java', recursive=True):
   closes).
 - **Mangekyou:** Itachi (Amaterasu, Tsukuyomi), Kakashi (Kamui, Kamui Lightning Cutter, Kamui Shuriken), Obito (the three
   Kamui), Sasuke (Amaterasu and Blaze Release), Shisui (Kotoamatsukami), Madara (Genjutsu: Sharingan, Susanoo: Fist). For
-  Itachi, Kakashi, Shisui and Madara, `DojutsuJutsu.mangekyouScroll` sells the jutsu track and hands the Susanoo track to the
-  old procedure. Only one Mangekyou is kept per player (`Eyes.oneMangekyou`).
+  every eye, `DojutsuJutsu.mangekyouScroll` sells the jutsu track and the Susanoo stages (Ribcage, Skeleton, Armoured, Complete,
+  priced C, B, A, S; Itachi and Obito sell three), all on the engine. The stages still count in the old `…susanorelease` and
+  `…susanolearn` variables, which the Susanoo key reads. Only one Mangekyou is kept per player (`Eyes.oneMangekyou`).
 - `FlyingRaijin` is a technique with a wheel on the Flying Raijin Kunai (ids say `flying_thunder_god_kunai`): Throw Marked
   Kunai, Write Formula, Marking Strike, Flying Raijin, Level Two, Release Formulas.
 - `ShadowClones`: the clone limit grows with Ninjutsu (1 + Ninjutsu/15, at most 8); 25 chakra and 60 s each; clones render with
@@ -402,7 +403,7 @@ Apply new `@func` rules with the body-only runner under "How to change code".
 - Mind Body Switch control (camera, keys, look) can't be checked by the automated test: it was fixed from the user's report and
   is waiting on their feedback.
 - Shadow Clone still runs its MCreator procedure (including the story-exam branch); it's the last entry in `JutsuTable`.
-- The Mangekyou scrolls' Susanoo tracks still buy through the old procedures (the Susanoo itself is the old model swap).
+- The Susanoo itself is still the old model swap (`KeybindProcedures` reads the stage counts).
 - Otsutsuki weapons: registered, in no tab (only `/give`), switching forms with the old `OtsutsukiToolsSwitchProcedure`.
 - The Susanoo is still the old model swap.
 - Checked in the dev client but still waiting on the user's feedback: Flying Raijin, Chakra Control, the message panel, and

@@ -134,30 +134,32 @@ public final class DojutsuJutsu {
 				(v, i) -> v.mangekyousharinganitachitechnique = i, v -> v.mangekyoushrainganitachiamaterasulearn,
 				new Def("Amaterasu", JutsuRank.A, DojutsuJutsu::amaterasu),
 				new Def("Tsukuyomi", JutsuRank.S, DojutsuJutsu::tsukuyomi));
-		mangekyouScroll("itachi", net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.MangekyouSharinganItachiReleaseRightclickedProcedure::executeProcedure,
-				v -> v.mangekyoushrainganitachiamaterasulearn, (v, i) -> v.mangekyoushrainganitachiamaterasulearn = i, new JutsuRank[] { JutsuRank.A, JutsuRank.S },
-				susanoo(v -> v.mangekyoushrainganitachisusanorelease, v -> v.mangekyoushrainganitachisusanolearn, 3));
+		mangekyouScroll("itachi", v -> v.mangekyoushrainganitachiamaterasulearn, (v, i) -> v.mangekyoushrainganitachiamaterasulearn = i,
+				new JutsuRank[] { JutsuRank.A, JutsuRank.S },
+				susanoo(v -> v.mangekyoushrainganitachisusanorelease, (v, i) -> v.mangekyoushrainganitachisusanorelease = i,
+						v -> v.mangekyoushrainganitachisusanolearn, (v, i) -> v.mangekyoushrainganitachisusanolearn = i, 3));
 		mangekyou("mangekyou_sharingan_kakashi_release_technique", "Kakashi", v -> v.MangekyouSharinganKakashi, v -> v.mangekyousharingankakashitechnique,
 				(v, i) -> v.mangekyousharingankakashitechnique = i, v -> v.mangekyousharingankakashikamuilearn,
 				new Def("Kamui Long-Range", JutsuRank.A, p -> kamui(p, 30, 30)),
 				new Def("Kamui Lightning Cutter", JutsuRank.A, DojutsuJutsu::kamuiLightningCutter),
 				new Def("Kamui Shuriken", JutsuRank.S, DojutsuJutsu::kamuiShuriken));
-		mangekyouScroll("kakashi", deps -> {
-		}, v -> v.mangekyousharingankakashikamuilearn, (v, i) -> v.mangekyousharingankakashikamuilearn = i,
+		mangekyouScroll("kakashi", v -> v.mangekyousharingankakashikamuilearn, (v, i) -> v.mangekyousharingankakashikamuilearn = i,
 				new JutsuRank[] { JutsuRank.A, JutsuRank.A, JutsuRank.S }, null);
 		mangekyou("mangekyou_sharingan_shisui_release_technique", "Shisui", v -> v.MangekyouSharinganShisui, v -> v.mangekyousharinganshisuitechnique,
 				(v, i) -> v.mangekyousharinganshisuitechnique = i, v -> v.mangekyousharinganshisuilearn,
 				new Def("Kotoamatsukami", JutsuRank.S, DojutsuJutsu::kotoamatsukami));
-		mangekyouScroll("shisui", net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.MangekyouSharinganShisuiReleaseRightclickedProcedure::executeProcedure,
-				v -> v.mangekyousharinganshisuilearn, (v, i) -> v.mangekyousharinganshisuilearn = i, new JutsuRank[] { JutsuRank.S },
-				susanoo(v -> v.mangekyousharinganshisuisusanorelease, v -> v.mangekyousharinganshisuisusanolearn, 4));
+		mangekyouScroll("shisui", v -> v.mangekyousharinganshisuilearn, (v, i) -> v.mangekyousharinganshisuilearn = i,
+				new JutsuRank[] { JutsuRank.S },
+				susanoo(v -> v.mangekyousharinganshisuisusanorelease, (v, i) -> v.mangekyousharinganshisuisusanorelease = i,
+						v -> v.mangekyousharinganshisuisusanolearn, (v, i) -> v.mangekyousharinganshisuisusanolearn = i, 4));
 		mangekyou("mangekyou_sharingan_madara_release_technique", "Madara", v -> v.MangekyouSharinganMadara, v -> v.mangekyousharinganmadaratechnique,
 				(v, i) -> v.mangekyousharinganmadaratechnique = i, v -> v.mangekyousharinganmadaralearn,
 				new Def("Genjutsu: Sharingan", JutsuRank.A, DojutsuJutsu::madaraGenjutsu),
 				new Def("Susanoo: Fist", JutsuRank.S, DojutsuJutsu::susanooFist));
-		mangekyouScroll("madara", net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.MangekyouSharinganMadaraReleaseRightclickedProcedure::executeProcedure,
-				v -> v.mangekyousharinganmadaralearn, (v, i) -> v.mangekyousharinganmadaralearn = i, new JutsuRank[] { JutsuRank.A, JutsuRank.S },
-				susanoo(v -> v.mangekyousharinganmadarasusanorelease, v -> v.mangekyousharinganmadarasusanolearn, 4));
+		mangekyouScroll("madara", v -> v.mangekyousharinganmadaralearn, (v, i) -> v.mangekyousharinganmadaralearn = i,
+				new JutsuRank[] { JutsuRank.A, JutsuRank.S },
+				susanoo(v -> v.mangekyousharinganmadarasusanorelease, (v, i) -> v.mangekyousharinganmadarasusanorelease = i,
+						v -> v.mangekyousharinganmadarasusanolearn, (v, i) -> v.mangekyousharinganmadarasusanolearn = i, 4));
 		mangekyou("mangekyou_sharingan_obito_release_technique", "Obito", v -> v.MangekyouSharinganObito, v -> v.mangekyousharinganobitokamuitechnique,
 				(v, i) -> v.mangekyousharinganobitokamuitechnique = i, v -> v.mangekyousharinganobitokamuilearn,
 				new Def("Kamui Self-Teleportation", JutsuRank.B, DojutsuJutsu::kamuiTeleport),
@@ -171,18 +173,18 @@ public final class DojutsuJutsu {
 				new Def("Blaze Release: Honoikazuchi", JutsuRank.S, DojutsuJutsu::honoikazuchi),
 				new Def("Amaterasu: Flame Wrapping Fire", JutsuRank.S, DojutsuJutsu::flameWrapping));
 		// Obito and Sasuke also kept a bought count of their jutsu (…release): it's kept in step for old saves
-		mangekyouScroll("obito", net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.MangekyouSharinganObitoReleaseRightclickedProcedure::executeProcedure,
-				v -> v.mangekyousharinganobitokamuilearn, (v, i) -> {
+		mangekyouScroll("obito", v -> v.mangekyousharinganobitokamuilearn, (v, i) -> {
 					v.mangekyousharinganobitokamuilearn = i;
 					v.mangekyousharinganobitokamuirelease = i;
 				}, new JutsuRank[] { JutsuRank.B, JutsuRank.A, JutsuRank.A },
-				susanoo(v -> v.mangekyousharinganobitosusanorelease, v -> v.mangekyousharinganobitosusanolearn, 3));
-		mangekyouScroll("sasuke", net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.MangekyouSharinganSasukeReleaseRightclickedProcedure::executeProcedure,
-				v -> v.mangekyousharingansasukeamaterasulearn, (v, i) -> {
+				susanoo(v -> v.mangekyousharinganobitosusanorelease, (v, i) -> v.mangekyousharinganobitosusanorelease = i,
+						v -> v.mangekyousharinganobitosusanolearn, (v, i) -> v.mangekyousharinganobitosusanolearn = i, 3));
+		mangekyouScroll("sasuke", v -> v.mangekyousharingansasukeamaterasulearn, (v, i) -> {
 					v.mangekyousharingansasukeamaterasulearn = i;
 					v.mangekyousharingansasukeamaterasurelease = i;
 				}, new JutsuRank[] { JutsuRank.A, JutsuRank.A, JutsuRank.S, JutsuRank.S },
-				susanoo(v -> v.mangekyousharingansasukesusanorelease, v -> v.mangekyousharingansasukesusanolearn, 4));
+				susanoo(v -> v.mangekyousharingansasukesusanorelease, (v, i) -> v.mangekyousharingansasukesusanorelease = i,
+						v -> v.mangekyousharingansasukesusanolearn, (v, i) -> v.mangekyousharingansasukesusanolearn = i, 4));
 	}
 
 	private static void requires(String item, Predicate<PlayerVariables> requirement, String message) {
@@ -742,12 +744,9 @@ public final class DojutsuJutsu {
 	}
 
 	// ------------------------------------------------------------------ mangekyou scrolls
-	/**
-	 * A Mangekyou scroll whose jutsu track is bought here (the old procedures only knew each eye's first jutsu); its Susanoo track, if
-	 * it has one, is still bought by the old procedure.
-	 */
-	private static void mangekyouScroll(String eye, java.util.function.Consumer<Map<String, Object>> oldBuy, ToDoubleFunction<PlayerVariables> learned,
-			ObjDoubleConsumer<PlayerVariables> setLearned, JutsuRank[] ranks, Jutsus.@org.jspecify.annotations.Nullable Track susanoo) {
+	/** A Mangekyou scroll: its jutsu, and its Susanoo stages if it has them, both bought in order with JP priced by rank. */
+	private static void mangekyouScroll(String eye, ToDoubleFunction<PlayerVariables> learned, ObjDoubleConsumer<PlayerVariables> setLearned, JutsuRank[] ranks,
+			@org.jspecify.annotations.Nullable Susanoo susanoo) {
 		String item = "mangekyou_sharingan_" + eye + "_release", technique = item + "_technique";
 		Jutsus.Tier[] tiers = new Jutsus.Tier[ranks.length];
 		for (int i = 0; i < ranks.length; i++)
@@ -759,8 +758,9 @@ public final class DojutsuJutsu {
 			if (!(deps.get("entity") instanceof ServerPlayer player))
 				return;
 			PlayerVariables v = NarutoShippudenModVariables.get(player);
+			// Jutsus.learn says which track was clicked
 			if (susanoo != null && v.MangekyouSharinganRelease != 0) {
-				oldBuy.accept(deps);
+				susanoo.buy(player, v);
 				return;
 			}
 			int next = jutsu.owned(v);
@@ -775,14 +775,37 @@ public final class DojutsuJutsu {
 			if (next == 0)
 				Compat.giveItemToPlayer(player,
 						new net.minecraft.world.item.ItemStack(net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("naruto_shippuden", technique))));
-		}, susanoo == null ? new Jutsus.Track[] { jutsu } : new Jutsus.Track[] { jutsu, susanoo });
+		}, susanoo == null ? new Jutsus.Track[] { jutsu } : new Jutsus.Track[] { jutsu, susanoo.track() });
 	}
 
-	private static Jutsus.Track susanoo(ToDoubleFunction<PlayerVariables> bought, ToDoubleFunction<PlayerVariables> learned, int stages) {
+	/** The Susanoo stages in order, and the rank that prices each (the scrolls sell the first three or all four). */
+	private static final String[] SUSANOO_STAGES = { "Ribcage", "Skeleton", "Armoured", "Complete" };
+	private static final JutsuRank[] SUSANOO_RANKS = { JutsuRank.C, JutsuRank.B, JutsuRank.A, JutsuRank.S };
+
+	/**
+	 * A scroll's Susanoo stages. They are counted in the eye's old stage variables (the bought count and the stage the Susanoo key
+	 * grows to), which are kept as they were so saves carry over.
+	 */
+	private record Susanoo(Jutsus.Track track, ObjDoubleConsumer<PlayerVariables> setBought, ObjDoubleConsumer<PlayerVariables> setLearned) {
+		void buy(ServerPlayer player, PlayerVariables v) {
+			int next = track.owned(v);
+			if (next >= track.tiers().size() || v.jp < track.tiers().get(next).cost())
+				return;
+			NarutoShippudenModVariables.ifPresent(player, vars -> {
+				vars.jp -= track.tiers().get(next).cost();
+				setBought.accept(vars, next + 1);
+				setLearned.accept(vars, next + 1);
+				vars.syncPlayerVariables(player);
+			});
+		}
+	}
+
+	private static Susanoo susanoo(ToDoubleFunction<PlayerVariables> bought, ObjDoubleConsumer<PlayerVariables> setBought, ToDoubleFunction<PlayerVariables> learned,
+			ObjDoubleConsumer<PlayerVariables> setLearned, int stages) {
 		Jutsus.Tier[] tiers = new Jutsus.Tier[stages];
 		for (int i = 0; i < stages; i++)
-			tiers[i] = Jutsus.tier(10 * (i + 1), i + 1, null);
-		return Jutsus.track("Susanoo", bought, 1, null, learned, tiers);
+			tiers[i] = Jutsus.named(SUSANOO_RANKS[i].jp, i + 1, SUSANOO_STAGES[i]);
+		return new Susanoo(Jutsus.track("Susanoo", bought, 1, null, learned, tiers), setBought, setLearned);
 	}
 
 	// ------------------------------------------------------------------ sharingan (added from the wiki)

@@ -133,8 +133,8 @@ public final class Jutsus {
 		}
 	}
 
-	/** A learnable tier of a release: JP price, the learn value it sets (0 = none) and the item it gives, if any. */
-	public record Tier(int cost, double learn, @Nullable Identifier gives) {
+	/** A learnable tier of a release: JP price, the learn value it sets (0 = none), the item it gives, if any, and its own name, if any. */
+	public record Tier(int cost, double learn, @Nullable Identifier gives, @Nullable String name) {
 	}
 
 	/** A release scroll: one or more tracks (a Mangekyou scroll has its jutsu and its Susanoo), bought by one procedure. */
@@ -177,6 +177,8 @@ public final class Jutsus {
 			List<Jutsu> unlocks = unlocks(tiers.get(tier));
 			if (!unlocks.isEmpty())
 				return unlocks.getFirst().name();
+			if (tiers.get(tier).name() != null)
+				return label.isEmpty() ? tiers.get(tier).name() : label + ": " + tiers.get(tier).name();
 			if (!label.isEmpty())
 				return label + " Stage " + (tier + 1);
 			Identifier gives = tiers.get(tier).gives();
@@ -217,7 +219,12 @@ public final class Jutsus {
 	}
 
 	static Tier tier(int cost, double learn, @Nullable String gives) {
-		return new Tier(cost, learn, gives == null ? null : id(gives));
+		return new Tier(cost, learn, gives == null ? null : id(gives), null);
+	}
+
+	/** A tier that unlocks no jutsu but has a name of its own (a Susanoo stage). */
+	static Tier named(int cost, double learn, String name) {
+		return new Tier(cost, learn, null, name);
 	}
 
 	static Track track(String label, ToDoubleFunction<PlayerVariables> bought, int selector, @Nullable String technique,
