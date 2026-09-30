@@ -213,7 +213,6 @@ public final class InfoCardScreens {
 			textRight(graphics, number(vars.LEVEL) + " / " + number(vars.LEVELMAX) + " XP", 252, 78);
 			text(graphics, "JP: " + number(vars.jp), 70, 100);
 			text(graphics, "SP: " + number(vars.sp), 120, 100);
-			text(graphics, "Chakra: " + number(vars.ChakraAmount) + " / " + number(vars.ChakraMax), 170, 100);
 			text(graphics, "Kekkei Genkai & Dojutsu", 8, 120);
 			text(graphics, "Nature", 202, 120);
 		}
@@ -231,6 +230,11 @@ public final class InfoCardScreens {
 
 		private EditBox perClick;
 
+		private static int cap(Stat stat) {
+			net.mcreator.narutoshippudenmod.core.Stats.Stat info = net.mcreator.narutoshippudenmod.core.Stats.STATS.get(stat.name());
+			return info == null ? 0 : info.cap();
+		}
+
 		public InfoCardUpgradeGuiWindow(InfoCardUpgradeGui.GuiContainerMod container, Inventory inventory, Component text) {
 			super(container, inventory, Component.literal("Stats"), 300, 200, container.entity, container.x, container.y, container.z);
 		}
@@ -246,8 +250,19 @@ public final class InfoCardScreens {
 			super.init();
 			pageTabs("stats");
 			for (int i = 0; i < STATS.length; i++) {
-				Button plus = button("+", STATS[i].id(), 8 + i / 6 * 144 + 120, 40 + i % 6 * 21, 20);
-				onRefresh(() -> plus.active = vars().sp >= Math.max(1, vars().spusecount));
+				Stat stat = STATS[i];
+				int cap = cap(stat);
+				// the server spends what fits under the cap and keeps the rest (core/Stats)
+				Button plus = Button.builder(Component.literal("+"), b -> action("stat", stat.name(), 0))
+						.bounds(leftPos + 8 + i / 6 * 144 + 120, topPos + 40 + i % 6 * 21, 20, 20).build();
+				addRenderableWidget(plus);
+				onRefresh(() -> {
+					boolean maxed = cap > 0 && stat.value().applyAsDouble(vars()) >= cap;
+					plus.active = !maxed && vars().sp >= 1;
+					plus.setTooltip(Tooltip.create(Component.literal(maxed ? stat.name() + " is maxed" : vars().sp < 1 ? "No SP"
+							: "+" + (int) Math.min(Math.min(Math.max(1, vars().spusecount), vars().sp), cap > 0 ? cap - stat.value().applyAsDouble(vars()) : 1e9)
+									+ " " + stat.name())));
+				});
 			}
 			perClick = numberField(84, 172, 40, vars().spusecount);
 			addRenderableWidget(Button.builder(Component.literal("Set"), b -> setPerClick(parse(perClick, 1))).bounds(leftPos + 126, topPos + 172, 32, 20).build());
@@ -286,8 +301,10 @@ public final class InfoCardScreens {
 			for (int i = 0; i < STATS.length; i++) {
 				int sx = 8 + i / 6 * 144, sy = 40 + i % 6 * 21;
 				graphics.text(font, STATS[i].name(), sx + 5, sy + 6, 0xFFFFFFFF, true);
-				String value = number(STATS[i].value().applyAsDouble(vars));
-				graphics.text(font, value, sx + 114 - font.width(value), sy + 6, 0xFFFFFF55, true);
+				int cap = cap(STATS[i]);
+				double current = STATS[i].value().applyAsDouble(vars);
+				String value = number(current) + (cap > 0 ? "/" + cap : "");
+				graphics.text(font, value, sx + 114 - font.width(value), sy + 6, cap > 0 && current >= cap ? 0xFF55FF55 : 0xFFFFFF55, true);
 			}
 			text(graphics, "SP per click", 8, 178);
 		}

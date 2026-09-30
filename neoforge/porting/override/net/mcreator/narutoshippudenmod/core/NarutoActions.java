@@ -258,7 +258,7 @@ public final class NarutoActions {
 			boolean open = action.kind().equals("page") && !action.key().equals("select")
 					|| action.kind().equals("set") && action.key().equals(SP_PER_CLICK) || action.kind().equals("jutsu") || action.kind().equals("learn")
 					|| action.kind().equals("eye") || action.kind().equals("susanoo") || action.kind().equals("chakra")
-					|| action.kind().equals("custom_jutsu") || action.kind().equals("forget_jutsu");
+					|| action.kind().equals("custom_jutsu") || action.kind().equals("forget_jutsu") || action.kind().equals("stat");
 			if (!open && !canCheat(player)) {
 				player.sendSystemMessage(Component.literal("Cheats need creative mode or operator rights."));
 				return;
@@ -288,6 +288,7 @@ public final class NarutoActions {
 					if (item != null)
 						net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.learn(player, item, (int) action.amount());
 				}
+				case "stat" -> Stats.upgrade(player, action.key());
 				case "custom_jutsu" -> net.mcreator.narutoshippudenmod.core.jutsu.CustomJutsu.create(player, action.key());
 				case "forget_jutsu" -> net.mcreator.narutoshippudenmod.core.jutsu.CustomJutsu.forget(player, (int) action.amount());
 				case "eye" -> {

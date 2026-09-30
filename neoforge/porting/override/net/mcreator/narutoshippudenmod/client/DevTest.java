@@ -377,6 +377,46 @@ public final class DevTest {
 			STEPS.add(mc::stop);
 			return;
 		}
+		if (System.getProperty("naruto.devtest.only", "").equals("stats")) {
+			// capped upgrading: 292 Medicine with 10 SP per click goes to 300 and keeps 2 SP; then the info card
+			STEPS.add(() -> {
+				setupFight(mc);
+				onServer(mc, player -> NarutoShippudenModVariables.ifPresent(player, v -> {
+					v.medicine = 292;
+					v.speed = 10;
+					v.sp = 10;
+					v.spusecount = 10;
+					v.syncPlayerVariables(player);
+				}));
+				nextDelay = 20;
+			});
+			STEPS.add(() -> {
+				onServer(mc, player -> {
+					net.mcreator.narutoshippudenmod.core.Stats.upgrade(player, "Medicine");
+					net.mcreator.narutoshippudenmod.core.Stats.upgrade(player, "Speed");
+				});
+				nextDelay = 20;
+			});
+			STEPS.add(() -> {
+				onServer(mc, player -> NarutoShippudenMod.LOGGER.info("DEVTEST stats: medicine {} sp {} max health {} speed {}",
+						NarutoShippudenModVariables.get(player).medicine, NarutoShippudenModVariables.get(player).sp, player.getMaxHealth(),
+						player.getAttributeValue(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED)));
+				open(mc, "InfoCardGuis$InfoCardUpgradeGui");
+				nextDelay = 20;
+			});
+			STEPS.add(() -> {
+				shot(mc, "stats_page");
+				open(mc, "InfoCardGuis$InfoCardGui");
+				nextDelay = 20;
+			});
+			STEPS.add(() -> {
+				shot(mc, "stats_card");
+				mc.player.closeContainer();
+				nextDelay = 5;
+			});
+			STEPS.add(mc::stop);
+			return;
+		}
 		if (System.getProperty("naruto.devtest.only", "").equals("customscreen")) {
 			customScreenSteps(mc);
 			STEPS.add(mc::stop);
