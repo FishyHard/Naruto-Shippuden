@@ -330,7 +330,7 @@ final class KekkeiGenkaiJutsu {
 	private static void ironFist(ServerPlayer p) {
 		// the iron sand arms (their model) for a second, unless a coat or wings are on
 		if (NarutoShippudenModVariables.get(p).magnet_coat == 0)
-			ClanJutsu.flag(p, 60, v -> v.magnet_coat = 2, v -> {
+			ClanJutsu.flag(p, 100, v -> v.magnet_coat = 2, v -> {
 				if (v.magnet_coat == 2)
 					v.magnet_coat = 0;
 			});
@@ -391,8 +391,14 @@ final class KekkeiGenkaiJutsu {
 				p.setDeltaMovement(pushed.length() > 1.5 ? pushed.normalize().scale(1.5) : pushed);
 				p.syncVelocity = true;
 			}
-			if (t % 3 == 0)
-				level(p).sendParticles(Element.MAGNET.trail, p.getX(), p.getY() + 1.2, p.getZ(), 2, 1, 0.2, 1, 0.01);
+			// feathers of iron sand drifting down from the wings
+			if (t % 2 == 0) {
+				Vec3 side = new Vec3(-Math.cos(Math.toRadians(p.getYRot())), 0, -Math.sin(Math.toRadians(p.getYRot())));
+				for (int k = -1; k <= 1; k += 2) {
+					Vec3 at = p.position().add(side.scale(k * (1.5 + p.getRandom().nextDouble() * 2.5)));
+					level(p).sendParticles(Element.MAGNET.trail, at.x, at.y + 0.5 + p.getRandom().nextDouble() * 1.5, at.z, 2, 0.4, 0.3, 0.4, 0.01);
+				}
+			}
 		});
 		p.sendOverlayMessage(net.minecraft.network.chat.Component.literal("Jump in mid-air to spread your wings"));
 	}

@@ -623,6 +623,22 @@ public final class DevTest {
 					NarutoShippudenMod.LOGGER.info("DEVTEST cast {} {}: chakra {}", nature, i, NarutoShippudenModVariables.get(mc.player).ChakraAmount);
 					nextDelay = 60;
 				});
+				if (nature.equals("magnet") && (i == 0 || i == 4))
+					// the iron sand from the front: the open hood, the hands' palms, the wings
+					{
+						STEPS.add(() -> {
+							mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
+							nextDelay = 4;
+						});
+						STEPS.add(() -> {
+							shot(mc, "jutsu_magnet_" + i + "_front");
+							nextDelay = 4;
+						});
+						STEPS.add(() -> {
+							mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
+							nextDelay = 2;
+						});
+					}
 				if (nature.equals("nara") && i == 1)
 					// Shadow Imitation: the caught husk copies the caster's steps
 					for (int step = 0; step <= 6; step++) {
