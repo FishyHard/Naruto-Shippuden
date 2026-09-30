@@ -208,6 +208,12 @@ public final class CustomJutsu {
 		return list;
 	}
 
+	/** Whether the player has learned a jutsu of this release from its scroll (and so has its technique item to cast from). */
+	public static boolean learned(PlayerVariables variables, String release) {
+		Technique technique = Jutsus.TECHNIQUES.get(techniqueOf(release));
+		return technique != null && !technique.jutsu.isEmpty() && technique.jutsu.getFirst().isLearned(variables);
+	}
+
 	// ------------------------------------------------------------------ on the wheel
 	static void register() {
 		Jutsus.EXTRA = (technique, variables) -> {
@@ -237,6 +243,7 @@ public final class CustomJutsu {
 		String problem = design.name().isEmpty() ? "Give the jutsu a name"
 				: designs.size() >= SLOTS ? "All " + SLOTS + " slots are used: forget a jutsu first"
 						: !releases(variables).contains(design.release()) ? "You don't have " + design.releaseTitle()
+								: !learned(variables, design.release()) ? "Learn a jutsu from the " + design.releaseTitle() + " scroll first"
 								: designs.stream().anyMatch(d -> d.name().equalsIgnoreCase(design.name())) ? "You already have a jutsu called that"
 										: variables.jp < design.price() ? "Not enough JP (" + design.price() + " needed)" : null;
 		if (problem != null) {

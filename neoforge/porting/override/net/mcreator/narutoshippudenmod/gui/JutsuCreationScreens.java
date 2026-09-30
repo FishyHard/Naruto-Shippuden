@@ -131,6 +131,8 @@ public final class JutsuCreationScreens {
 			Design design = design();
 			if (design == null)
 				return "You need a chakra nature first";
+			if (!CustomJutsu.learned(vars(), design.release()))
+				return "Learn a jutsu from the " + design.releaseTitle() + " scroll first";
 			if (design.name().isEmpty())
 				return "Give the jutsu a name";
 			if (designs().size() >= CustomJutsu.SLOTS)
@@ -211,7 +213,9 @@ public final class JutsuCreationScreens {
 			for (int row = 0; row < names.length; row++) {
 				int y = 64 + row * 20;
 				text(graphics, names[row], 8, y + 5);
-				textCentered(graphics, values[row], 122, y + 5, TEXT);
+				// a release not learned from its scroll yet is shown in red (Create says why)
+				boolean unlearned = row == 0 && design != null && !CustomJutsu.learned(vars(), design.release());
+				textCentered(graphics, values[row], 122, y + 5, unlearned ? 0xFFB02020 : TEXT);
 			}
 			if (design == null)
 				return;
