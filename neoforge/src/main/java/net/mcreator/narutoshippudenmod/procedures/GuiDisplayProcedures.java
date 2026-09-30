@@ -1766,21 +1766,6 @@ public final class GuiDisplayProcedures {
 
 
 
-	public static class DisplayLearnCustomJutsu1Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayLearnCustomJutsu1!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).customjutsu1learn == false) {
-				return true;
-			}
-			return false;
-		}
-	}
 
 	public static class DisplayLeeInfoProcedure {
 
@@ -2818,21 +2803,6 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-	public static class DisplayUnlearnCustomJutsu1Procedure {
-
-		public static boolean executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayUnlearnCustomJutsu1!");
-				return false;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).customjutsu1learn == true) {
-				return true;
-			}
-			return false;
-		}
-	}
 
 	public static class DisplayUzumakiInfoProcedure {
 

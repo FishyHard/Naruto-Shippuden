@@ -29,13 +29,8 @@ import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.AsumaEntityIs
 import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.AsumaOnEntityTickUpdateProcedure;
 import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.AsumaRightClickedOnEntityProcedure;
 import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.EarthGolemShinobiOnInitialEntitySpawnProcedure;
-import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.HiddenCloudShinobiOnEntityTickUpdateProcedure;
-import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.HiddenLeafShinobiOnEntityTickUpdateProcedure;
-import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.HiddenMistShinobiOnEntityTickUpdateProcedure;
-import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.HiddenSandShinobiOnEntityTickUpdateProcedure;
 import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.HiddenShinobiEntityDiesProcedure;
 import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.HiddenShinobiKillsEntityProcedure;
-import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.HiddenStoneShinobiOnEntityTickUpdateProcedure;
 import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.IrukaSenseiCloneOnInitialEntitySpawnProcedure;
 import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.IrukaSenseiOnEntityTickUpdateProcedure;
 import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.NarutoShippudenEntityChakraProcedure;
@@ -370,16 +365,13 @@ public final class NpcEntities {
 			@Override
 			protected void registerGoals() {
 				super.registerGoals();
-				this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.5, true) {
-					@Override
-					protected boolean canPerformAttack(LivingEntity entity) {
-						return this.isTimeToAttack() && this.mob.distanceToSqr(entity) <= ((double) (4.0 + entity.getBbWidth() * entity.getBbWidth())) && this.mob.getSensing().hasLineOfSight(entity);
-					}
-				});
-				this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8));
-				this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
-				this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-				this.goalSelector.addGoal(5, new FloatGoal(this));
+				net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.goals(this, this.goalSelector, this.targetSelector);
+			}
+
+			@Override
+			public void handleEntityEvent(byte id) {
+				if (!net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.clientEvent(this, id))
+					super.handleEntityEvent(id);
 			}
 
 			@Override
@@ -427,6 +419,7 @@ public final class NpcEntities {
 
 				NarutoShippudenEntityChakraProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.spawned(this);
 				return retval;
 			}
 
@@ -451,10 +444,7 @@ public final class NpcEntities {
 				double z = this.getZ();
 				Entity entity = this;
 
-				HiddenCloudShinobiOnEntityTickUpdateProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", level()), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.tick(this);
 			}
 		}
 	}
@@ -506,16 +496,13 @@ public final class NpcEntities {
 			@Override
 			protected void registerGoals() {
 				super.registerGoals();
-				this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.5, true) {
-					@Override
-					protected boolean canPerformAttack(LivingEntity entity) {
-						return this.isTimeToAttack() && this.mob.distanceToSqr(entity) <= ((double) (4.0 + entity.getBbWidth() * entity.getBbWidth())) && this.mob.getSensing().hasLineOfSight(entity);
-					}
-				});
-				this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8));
-				this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
-				this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-				this.goalSelector.addGoal(5, new FloatGoal(this));
+				net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.goals(this, this.goalSelector, this.targetSelector);
+			}
+
+			@Override
+			public void handleEntityEvent(byte id) {
+				if (!net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.clientEvent(this, id))
+					super.handleEntityEvent(id);
 			}
 
 			@Override
@@ -563,6 +550,7 @@ public final class NpcEntities {
 
 				NarutoShippudenEntityChakraProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.spawned(this);
 				return retval;
 			}
 
@@ -587,10 +575,7 @@ public final class NpcEntities {
 				double z = this.getZ();
 				Entity entity = this;
 
-				HiddenLeafShinobiOnEntityTickUpdateProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", level()), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.tick(this);
 			}
 		}
 	}
@@ -642,16 +627,13 @@ public final class NpcEntities {
 			@Override
 			protected void registerGoals() {
 				super.registerGoals();
-				this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.5, true) {
-					@Override
-					protected boolean canPerformAttack(LivingEntity entity) {
-						return this.isTimeToAttack() && this.mob.distanceToSqr(entity) <= ((double) (4.0 + entity.getBbWidth() * entity.getBbWidth())) && this.mob.getSensing().hasLineOfSight(entity);
-					}
-				});
-				this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8));
-				this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
-				this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-				this.goalSelector.addGoal(5, new FloatGoal(this));
+				net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.goals(this, this.goalSelector, this.targetSelector);
+			}
+
+			@Override
+			public void handleEntityEvent(byte id) {
+				if (!net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.clientEvent(this, id))
+					super.handleEntityEvent(id);
 			}
 
 			@Override
@@ -699,6 +681,7 @@ public final class NpcEntities {
 
 				NarutoShippudenEntityChakraProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.spawned(this);
 				return retval;
 			}
 
@@ -723,10 +706,7 @@ public final class NpcEntities {
 				double z = this.getZ();
 				Entity entity = this;
 
-				HiddenMistShinobiOnEntityTickUpdateProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", level()), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.tick(this);
 			}
 		}
 	}
@@ -778,16 +758,13 @@ public final class NpcEntities {
 			@Override
 			protected void registerGoals() {
 				super.registerGoals();
-				this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.5, true) {
-					@Override
-					protected boolean canPerformAttack(LivingEntity entity) {
-						return this.isTimeToAttack() && this.mob.distanceToSqr(entity) <= ((double) (4.0 + entity.getBbWidth() * entity.getBbWidth())) && this.mob.getSensing().hasLineOfSight(entity);
-					}
-				});
-				this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8));
-				this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
-				this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-				this.goalSelector.addGoal(5, new FloatGoal(this));
+				net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.goals(this, this.goalSelector, this.targetSelector);
+			}
+
+			@Override
+			public void handleEntityEvent(byte id) {
+				if (!net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.clientEvent(this, id))
+					super.handleEntityEvent(id);
 			}
 
 			@Override
@@ -835,6 +812,7 @@ public final class NpcEntities {
 
 				NarutoShippudenEntityChakraProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.spawned(this);
 				return retval;
 			}
 
@@ -859,10 +837,7 @@ public final class NpcEntities {
 				double z = this.getZ();
 				Entity entity = this;
 
-				HiddenSandShinobiOnEntityTickUpdateProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", level()), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.tick(this);
 			}
 		}
 	}
@@ -914,16 +889,13 @@ public final class NpcEntities {
 			@Override
 			protected void registerGoals() {
 				super.registerGoals();
-				this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.5, true) {
-					@Override
-					protected boolean canPerformAttack(LivingEntity entity) {
-						return this.isTimeToAttack() && this.mob.distanceToSqr(entity) <= ((double) (4.0 + entity.getBbWidth() * entity.getBbWidth())) && this.mob.getSensing().hasLineOfSight(entity);
-					}
-				});
-				this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8));
-				this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
-				this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-				this.goalSelector.addGoal(5, new FloatGoal(this));
+				net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.goals(this, this.goalSelector, this.targetSelector);
+			}
+
+			@Override
+			public void handleEntityEvent(byte id) {
+				if (!net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.clientEvent(this, id))
+					super.handleEntityEvent(id);
 			}
 
 			@Override
@@ -971,6 +943,7 @@ public final class NpcEntities {
 
 				NarutoShippudenEntityChakraProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.spawned(this);
 				return retval;
 			}
 
@@ -995,10 +968,7 @@ public final class NpcEntities {
 				double z = this.getZ();
 				Entity entity = this;
 
-				HiddenStoneShinobiOnEntityTickUpdateProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", level()), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.tick(this);
 			}
 		}
 	}

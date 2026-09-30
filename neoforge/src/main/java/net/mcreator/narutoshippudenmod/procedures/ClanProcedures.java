@@ -39,8 +39,6 @@ import net.mcreator.narutoshippudenmod.item.ClanItems.ToroiUniqueFumaShurikenCla
 import net.mcreator.narutoshippudenmod.item.ClanItems.TsuchigumoReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.UchihaReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.UzumakiReleaseItem;
-import net.mcreator.narutoshippudenmod.item.JutsuProjectileItems.DrowningWaterBlobTechniqueItem;
-import net.mcreator.narutoshippudenmod.item.JutsuProjectileItems.WaterGunItem;
 import net.mcreator.narutoshippudenmod.item.ReleaseItems.BoneReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ReleaseItems.ChakraNatureResetItem;
 import net.mcreator.narutoshippudenmod.item.ReleaseItems.EarthReleaseItem;
@@ -1623,47 +1621,6 @@ public final class ClanProcedures {
 		}
 	}
 
-	public static class DrowningWaterBlobTechniqueProjectileHitsLivingEntityProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER
-							.warn("Failed to load dependency entity for procedure DrowningWaterBlobTechniqueProjectileHitsLivingEntity!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (entity instanceof AsumaEntity.CustomEntity || entity instanceof ShikamaruEntity.CustomEntity || entity instanceof Creeper
-					|| entity instanceof Husk || entity instanceof Illusioner || entity instanceof Piglin
-					|| entity instanceof PiglinBrute || entity instanceof Pillager || entity instanceof Skeleton
-					|| entity instanceof Villager || entity instanceof Vindicator || entity instanceof Witch
-					|| entity instanceof Zombie || entity instanceof ZombieVillager || entity instanceof ZombifiedPiglin) {
-				entity.getPersistentData().putBoolean("waterblob", (true));
-				if (entity instanceof LivingEntity)
-					((LivingEntity) entity).addEffect(new MobEffectInstance(DrowningPotionEffect.potion, (int) 300, (int) 1, (false), (false)));
-			}
-			if (!(entity instanceof AsumaEntity.CustomEntity || entity instanceof ShikamaruEntity.CustomEntity || entity instanceof Creeper
-					|| entity instanceof Husk || entity instanceof Illusioner || entity instanceof Piglin
-					|| entity instanceof PiglinBrute || entity instanceof Pillager || entity instanceof Skeleton
-					|| entity instanceof Villager || entity instanceof Vindicator || entity instanceof Witch
-					|| entity instanceof Zombie || entity instanceof ZombieVillager || entity instanceof ZombifiedPiglin
-					|| entity instanceof Player)) {
-				if (entity instanceof LivingEntity)
-					((LivingEntity) entity).addEffect(new MobEffectInstance(DrowningPotionEffect.potion, (int) 300, (int) 1, (false), (false)));
-			}
-			if (entity instanceof Player) {
-				{
-					boolean _setval = (true);
-					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.waterblob = _setval;
-						capability.syncPlayerVariables(entity);
-					});
-				}
-				if (entity instanceof LivingEntity)
-					((LivingEntity) entity).addEffect(new MobEffectInstance(DrowningPotionEffect.potion, (int) 300, (int) 1, (false), (false)));
-			}
-		}
-	}
 
 
 

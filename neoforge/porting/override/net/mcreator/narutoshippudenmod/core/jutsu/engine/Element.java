@@ -78,7 +78,11 @@ public enum Element {
 			SoundEvents.PHANTOM_BITE),
 	/** The Kokugan: Isshiki's black rods and cubes, red light and dark dust. */
 	KOKUGAN(0xFF1C1A22, 0xFFFF4A4A, false, new DustParticleOptions(0x16141C, 1.1F), new DustParticleOptions(0xFF3C3C, 0.8F),
-			SoundEvents.ILLUSIONER_MIRROR_MOVE, SoundEvents.ANVIL_LAND);
+			SoundEvents.ILLUSIONER_MIRROR_MOVE, SoundEvents.ANVIL_LAND),
+	/** Tailed beast chakra: the Tailed Beast Ball's black core in a violet haze, Kurama's red-orange cloak. */
+	BIJU(0xFF1A0F2A, 0xFF9A6BFF, true, new DustParticleOptions(0x24103A, 1.6F), ParticleTypes.REVERSE_PORTAL, SoundEvents.WARDEN_SONIC_CHARGE,
+			SoundEvents.GENERIC_EXPLODE.value()),
+	KURAMA(0xFFFF5A1A, 0xFFFFD27A, true, new DustParticleOptions(0xFF5A1A, 1.4F), ParticleTypes.FLAME, SoundEvents.RAVAGER_ROAR, SoundEvents.RAVAGER_ATTACK);
 
 
 	/** ARGB colour of the outer body and of the bright core. */

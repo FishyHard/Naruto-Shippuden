@@ -14,46 +14,13 @@ import java.util.stream.Stream;
 import net.mcreator.narutoshippudenmod.NarutoShippudenModElements;
 import net.mcreator.narutoshippudenmod.itemgroup.ModItemGroups.WeaponsItemGroup;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.OtsutsukiToolsSwitchProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.AsumaChakraBladeToolInHandTickProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ChakraBladeRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ExplosiveKunaiRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.FumaShurikenRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.GunbaiBlockToolInHandTickProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.GunbaiRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.GunbaiSItemInInventoryTickProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.GunbaiShieldOnPlayerStoppedUsingProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.GunbaiToolInHandTickProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.HidanTripleBladeScytheToolInHandTickProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.HiramekareiEntitySwingsItemProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.HiramekareiRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.HiramekareiToolInHandTickProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KabutowariRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KabutowariToolInHandTickProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KatanaToolInHandTickProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KibaSwordRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KibaSwordToolInHandTickProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KubikiribochoToolInHandTickProcedure;
 import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KunaiRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KusanagiSasukeLivingEntityIsHitWithToolProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KusanagiSasukeRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.KusanagiSasukeToolInHandTickProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.NuibariRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.NuibariToolInHandTickProcedure;
 import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.PoisonKunaiRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.SamehadaLivingEntityIsHitWithToolProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.SamehadaRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.SamehadaToolInInventoryTickProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ShibukiLivingEntityIsHitWithToolProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ShibukiRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ShibukiToolInHandTickProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ShibukiToolInInventoryTickProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ShichiseikenToolInHandTickProcedure;
 import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ShurikenRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.TantoToolInHandTickProcedure;
 import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ToolsDamageProcedure;
 import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.ToroiUniqueFumaShurikenRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.WhiteLightChakraSabreRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.WeaponProcedures.WhiteLightChakraSabreToolInHandTickProcedure;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.entity.Entity;
@@ -104,7 +71,7 @@ public final class WeaponItems {
 					double y = entity.getY();
 					double z = entity.getZ();
 
-					ChakraBladeRightclickedProcedure.executeProcedure(
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 					return retval;
@@ -120,7 +87,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					if (selected)
 
-						AsumaChakraBladeToolInHandTickProcedure.executeProcedure(
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}
@@ -337,7 +304,7 @@ public final class WeaponItems {
 					double y = entity.getY();
 					double z = entity.getZ();
 
-					GunbaiShieldOnPlayerStoppedUsingProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity))
 							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 					return retval;
 				}
@@ -352,11 +319,11 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					if (selected)
 
-						GunbaiBlockToolInHandTickProcedure.executeProcedure(
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 
-					GunbaiSItemInInventoryTickProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 							(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}
 			});
@@ -386,7 +353,7 @@ public final class WeaponItems {
 					double y = entity.getY();
 					double z = entity.getZ();
 
-					GunbaiRightclickedProcedure.executeProcedure(Stream
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("y", y),
 									new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
@@ -403,7 +370,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					if (selected)
 
-						GunbaiToolInHandTickProcedure.executeProcedure(
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}
@@ -434,7 +401,7 @@ public final class WeaponItems {
 					double y = entity.getY();
 					double z = entity.getZ();
 
-					HiramekareiRightclickedProcedure.executeProcedure(Stream
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x),
 									new AbstractMap.SimpleEntry<>("y", y), new AbstractMap.SimpleEntry<>("z", z),
 									new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
@@ -450,7 +417,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					Level world = entity.level();
 
-					HiramekareiEntitySwingsItemProcedure.executeProcedure(
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 					return retval;
@@ -466,7 +433,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					if (selected)
 
-						HiramekareiToolInHandTickProcedure.executeProcedure(
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}
@@ -497,7 +464,7 @@ public final class WeaponItems {
 					double y = entity.getY();
 					double z = entity.getZ();
 
-					HiramekareiRightclickedProcedure.executeProcedure(Stream
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x),
 									new AbstractMap.SimpleEntry<>("y", y), new AbstractMap.SimpleEntry<>("z", z),
 									new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
@@ -513,7 +480,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					Level world = entity.level();
 
-					HiramekareiEntitySwingsItemProcedure.executeProcedure(
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 					return retval;
@@ -529,7 +496,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					if (selected)
 
-						HiramekareiToolInHandTickProcedure.executeProcedure(
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}
@@ -560,7 +527,7 @@ public final class WeaponItems {
 					double y = entity.getY();
 					double z = entity.getZ();
 
-					HiramekareiRightclickedProcedure.executeProcedure(Stream
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x),
 									new AbstractMap.SimpleEntry<>("y", y), new AbstractMap.SimpleEntry<>("z", z),
 									new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
@@ -576,7 +543,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					Level world = entity.level();
 
-					HiramekareiEntitySwingsItemProcedure.executeProcedure(
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 					return retval;
@@ -592,7 +559,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					if (selected)
 
-						HiramekareiToolInHandTickProcedure.executeProcedure(
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}
@@ -623,7 +590,7 @@ public final class WeaponItems {
 					double y = entity.getY();
 					double z = entity.getZ();
 
-					KabutowariRightclickedProcedure.executeProcedure(Stream
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x),
 									new AbstractMap.SimpleEntry<>("y", y), new AbstractMap.SimpleEntry<>("z", z),
 									new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
@@ -641,7 +608,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					if (selected)
 
-						KabutowariToolInHandTickProcedure.executeProcedure(
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}
@@ -674,7 +641,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					if (selected)
 
-						KatanaToolInHandTickProcedure.executeProcedure(
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}
@@ -723,7 +690,7 @@ public final class WeaponItems {
 					double y = entity.getY();
 					double z = entity.getZ();
 
-					KibaSwordRightclickedProcedure.executeProcedure(Stream
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x),
 									new AbstractMap.SimpleEntry<>("y", y), new AbstractMap.SimpleEntry<>("z", z),
 									new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
@@ -741,7 +708,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					if (selected)
 
-						KibaSwordToolInHandTickProcedure.executeProcedure(
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}
@@ -774,7 +741,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					if (selected)
 
-						KubikiribochoToolInHandTickProcedure.executeProcedure(
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}
@@ -865,7 +832,7 @@ public final class WeaponItems {
 					double y = entity.getY();
 					double z = entity.getZ();
 
-					KusanagiSasukeRightclickedProcedure.executeProcedure(
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 					return retval;
@@ -879,7 +846,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					Level world = entity.level();
 
-					KusanagiSasukeLivingEntityIsHitWithToolProcedure.executeProcedure(
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 					return;
@@ -895,7 +862,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					if (selected)
 
-						KusanagiSasukeToolInHandTickProcedure.executeProcedure(
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}
@@ -926,7 +893,7 @@ public final class WeaponItems {
 					double y = entity.getY();
 					double z = entity.getZ();
 
-					NuibariRightclickedProcedure.executeProcedure(Stream
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("entity", entity),
 									new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
@@ -943,7 +910,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					if (selected)
 
-						NuibariToolInHandTickProcedure.executeProcedure(
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}
@@ -1290,7 +1257,7 @@ public final class WeaponItems {
 					double y = entity.getY();
 					double z = entity.getZ();
 
-					SamehadaRightclickedProcedure.executeProcedure(
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 					return retval;
@@ -1304,7 +1271,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					Level world = entity.level();
 
-					SamehadaLivingEntityIsHitWithToolProcedure.executeProcedure(Stream
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 							.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity),
 									new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
@@ -1321,7 +1288,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					if (selected)
 
-						SamehadaToolInInventoryTickProcedure.executeProcedure(
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}
@@ -1352,7 +1319,7 @@ public final class WeaponItems {
 					double y = entity.getY();
 					double z = entity.getZ();
 
-					ShibukiRightclickedProcedure.executeProcedure(Stream
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("y", y),
 									new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
@@ -1367,7 +1334,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					Level world = entity.level();
 
-					ShibukiLivingEntityIsHitWithToolProcedure.executeProcedure(Stream
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("entity", entity),
 									new AbstractMap.SimpleEntry<>("sourceentity", sourceentity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
@@ -1384,11 +1351,11 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					if (selected)
 
-						ShibukiToolInHandTickProcedure.executeProcedure(
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 
-					ShibukiToolInInventoryTickProcedure.executeProcedure(Stream
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(Stream
 							.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("entity", entity),
 									new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 							.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
@@ -1422,7 +1389,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					if (selected)
 
-						ShichiseikenToolInHandTickProcedure.executeProcedure(
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}
@@ -1515,7 +1482,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					if (selected)
 
-						TantoToolInHandTickProcedure.executeProcedure(
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}
@@ -1608,7 +1575,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					if (selected)
 
-						HidanTripleBladeScytheToolInHandTickProcedure.executeProcedure(
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}
@@ -1639,7 +1606,7 @@ public final class WeaponItems {
 					double y = entity.getY();
 					double z = entity.getZ();
 
-					WhiteLightChakraSabreRightclickedProcedure.executeProcedure(
+					net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 							Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 									.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 					return retval;
@@ -1655,7 +1622,7 @@ public final class WeaponItems {
 					double z = entity.getZ();
 					if (selected)
 
-						WhiteLightChakraSabreToolInHandTickProcedure.executeProcedure(
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(
 								Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("itemstack", itemstack))
 										.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 				}

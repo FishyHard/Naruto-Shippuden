@@ -74,13 +74,28 @@ public final class Jutsus {
 			this.cast = cast;
 		}
 
+		/** The jutsu this player sees on the item: the fixed ones, then any custom jutsu they made for this release. */
+		public List<Jutsu> jutsu(PlayerVariables variables) {
+			List<Jutsu> extra = EXTRA.apply(this, variables);
+			if (extra.isEmpty())
+				return jutsu;
+			List<Jutsu> all = new ArrayList<>(jutsu);
+			all.addAll(extra);
+			return all;
+		}
+
 		public Jutsu selected(PlayerVariables variables) {
-			return jutsu.get(index(selected.applyAsDouble(variables), jutsu.size()));
+			List<Jutsu> all = jutsu(variables);
+			return all.get(index(selected.applyAsDouble(variables), all.size()));
 		}
 	}
 
+	/**
+	 * A jutsu on a technique item. {@code own} is set for jutsu that cast themselves (weapon arts, custom jutsu): they don't go
+	 * through the technique's procedure, and the engine takes their chakra.
+	 */
 	public record Jutsu(Technique technique, int index, String name, ToDoubleFunction<PlayerVariables> learned, double tier, @Nullable String statName,
-			ToDoubleFunction<PlayerVariables> stat, double statMin, double chakra, int[] cooldowns) {
+			ToDoubleFunction<PlayerVariables> stat, double statMin, double chakra, int[] cooldowns, @Nullable Consumer<ServerPlayer> own) {
 		public Identifier cooldownGroup() {
 			return technique.item.withSuffix("/" + index);
 		}
@@ -161,7 +176,7 @@ public final class Jutsus {
 		Technique technique = new Technique(id(item), selected, select, requirement, cast);
 		for (JutsuSpec s : specs)
 			technique.jutsu.add(new Jutsu(technique, technique.jutsu.size(), s.name(), s.learned(), s.tier(), s.statName(), s.stat(), s.statMin(), s.chakra(),
-					s.cooldowns()));
+					s.cooldowns(), null));
 		TECHNIQUES.put(technique.item, technique);
 	}
 
@@ -182,12 +197,17 @@ public final class Jutsus {
 		return Identifier.fromNamespaceAndPath("naruto_shippuden", path);
 	}
 
+	/** Extra jutsu a player has on a technique (their custom jutsu); set by {@link CustomJutsu}. */
+	static java.util.function.BiFunction<Technique, PlayerVariables, List<Jutsu>> EXTRA = (technique, variables) -> List.of();
+
 	static {
 		JutsuTable.register();
 		NatureJutsu.register();
 		KekkeiGenkaiJutsu.register();
 		ClanJutsu.register();
 		DojutsuJutsu.register();
+		Weapons.register();
+		CustomJutsu.register();
 	}
 
 	public static @Nullable Technique technique(ItemStack stack) {
@@ -227,8 +247,9 @@ public final class Jutsus {
 	static boolean missed;
 
 	/** A jutsu that can't be done right now (nothing in reach): says why, and the cast costs nothing. */
-	static void miss(ServerPlayer player, String message) {
-		tell(player, message);
+	static void miss(net.minecraft.world.entity.LivingEntity caster, String message) {
+		if (caster instanceof Player player)
+			tell(player, message);
 		missed = true;
 	}
 
@@ -277,6 +298,10 @@ public final class Jutsus {
 		}
 		if (player.getCooldowns().isOnCooldown(stack))
 			return;
+		if (jutsu.own() != null) {
+			castOwn(player, jutsu, variables);
+			return;
+		}
 		// the procedures pick the jutsu from the technique variable and cycle it instead while sneaking
 		boolean sneaking = player.isShiftKeyDown();
 		if (sneaking)
@@ -299,11 +324,31 @@ public final class Jutsus {
 			player.getCooldowns().addCooldown(jutsu.cooldownGroup(), cooldown);
 	}
 
+	/** A jutsu that casts itself: it runs, then (unless it found nothing to act on) takes its chakra and starts its cooldown. */
+	private static void castOwn(ServerPlayer player, Jutsu jutsu, PlayerVariables variables) {
+		missed = false;
+		net.mcreator.narutoshippudenmod.core.Progression.casting(player, () -> jutsu.own().accept(player));
+		if (missed) {
+			missed = false;
+			return;
+		}
+		NarutoShippudenModVariables.ifPresent(player, vars -> {
+			vars.ChakraAmount = Math.max(0, vars.ChakraAmount - jutsu.chakra());
+			vars.syncPlayerVariables(player);
+		});
+		int cooldown = jutsu.cooldown(variables);
+		if (cooldown > 0)
+			player.getCooldowns().addCooldown(jutsu.cooldownGroup(), cooldown);
+	}
+
 	public static void select(ServerPlayer player, Identifier item, int index) {
 		Technique technique = TECHNIQUES.get(item);
-		if (technique == null || index < 0 || index >= technique.jutsu.size())
+		if (technique == null)
 			return;
-		Jutsu jutsu = technique.jutsu.get(index);
+		List<Jutsu> all = technique.jutsu(NarutoShippudenModVariables.get(player));
+		if (index < 0 || index >= all.size())
+			return;
+		Jutsu jutsu = all.get(index);
 		NarutoShippudenModVariables.ifPresent(player, variables -> {
 			technique.select.accept(variables, index);
 			variables.syncPlayerVariables(player);

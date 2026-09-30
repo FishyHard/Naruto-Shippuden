@@ -95,25 +95,6 @@ public final class ItemDescriptions {
 
 		add("tanto", kenjutsu(5));
 		add("katana", kenjutsu(15));
-		add("triple_blade_scythe", kenjutsu(30));
-		add("shichiseiken", kenjutsu(35));
-		add("white_light_chakra_sabre", blue("Chakra Flow: 20 Chakra/s"), kenjutsu(10));
-		add("chakra_blade", blue("Flying Swallow: 20 Chakra/s"), kenjutsu(20));
-		add("kusanagi_sasuke", blue("Lightning Chakra: 20 Chakra/s"), kenjutsu(25));
-		add("gunbai gunbai_block", blue("Block: stops any attack"), blue("Wind Push: knocks enemies back"), kenjutsu(25),
-				hint("Sneak and right-click to switch"));
-		add("kabutowari", blue("Launches enemies into the air"), kenjutsu(45));
-		add("kubikiribocho", blue("Repairs 15 durability per kill"), kenjutsu(45));
-		add("samehada", blue("Chakra Steal: 5% of the target's chakra"), blue("Chakra Heal: 0.2% of the target's health"),
-				gray("Uses 10 Chakra/s"), kenjutsu(45), hint("Sneak and right-click to switch"));
-		add("hiramekarei hiramekarei_hammer_form hiramekarei_splitted", blue("Chakra Storing: 20 Chakra/s"),
-				blue("Long-Sword Form: 20 stored Chakra/s"), blue("Twinsword Form: 20 stored Chakra/s"), blue("Hammer Form: 300 stored Chakra"),
-				kenjutsu(45), hint("Sneak and right-click to switch"));
-		add("kiba_sword", blue("Lightning Ball: 100 Chakra"), blue("Lightning: 150 Chakra"), blue("Lightning Wave: 200 Chakra"), kenjutsu(45),
-				hint("Hold one in each hand"), hint("Sneak and right-click to switch"));
-		add("nuibari", blue("Throw Needle"), blue("Pull Needle"), kenjutsu(45), hint("Sneak and right-click to switch"));
-		add("shibuki", blue("Paper Bomb Trap: 350 Chakra"), blue("Explosion: 20 Chakra/s"), blue("Explosion Trail: 100 Chakra/s"), kenjutsu(45),
-				hint("Sneak and right-click to switch"));
 		add("otsutsuki_axe otsutsuki_bat otsutsuki_blade otsutsuki_chopping_sword otsutsuki_hammer otsutsuki_katana otsutsuki_spear otsutsuki_sword",
 				gray("Right-click to transform"), hint("Sneak and right-click to pick a form"));
 	}
@@ -165,8 +146,22 @@ public final class ItemDescriptions {
 			if (jutsu.statName() != null)
 				lines.add(requirement(jutsu.statName(), jutsu.stat().applyAsDouble(variables), jutsu.statMin()));
 		}
-		if (technique.jutsu.size() > 1)
-			lines.add(Component.literal("Hold ").append(JutsuClient.WHEEL.getTranslatedKeyMessage()).append(" to choose a jutsu")
+		// weapons: what they need to be wielded well, their passive and what they hold
+		String path = BuiltInRegistries.ITEM.getKey(stack.getItem()).getPath();
+		Integer wield = net.mcreator.narutoshippudenmod.core.jutsu.Weapons.KENJUTSU.get(path);
+		if (wield != null && (jutsu.statMin() != wield || !jutsu.isLearned(variables)))
+			lines.add(Component.literal("Requires " + wield + " Kenjutsu to wield").withStyle(variables.kenjutsu >= wield ? ChatFormatting.GRAY : ChatFormatting.RED));
+		String passive = net.mcreator.narutoshippudenmod.core.jutsu.Weapons.PASSIVES.get(path.startsWith("hiramekarei") ? "hiramekarei" : path);
+		if (passive != null)
+			lines.add(Component.literal(passive).withStyle(ChatFormatting.DARK_AQUA));
+		net.minecraft.nbt.CompoundTag data = stack.getOrDefault(net.minecraft.core.component.DataComponents.CUSTOM_DATA,
+				net.minecraft.world.item.component.CustomData.EMPTY).copyTag();
+		if (data.getDoubleOr("StoredChakra", 0) > 0)
+			lines.add(Component.literal((int) data.getDoubleOr("StoredChakra", 0) + " chakra stored").withStyle(ChatFormatting.AQUA));
+		if (data.getDoubleOr("Absorbed", 0) > 0)
+			lines.add(Component.literal((int) data.getDoubleOr("Absorbed", 0) + " chakra eaten").withStyle(ChatFormatting.AQUA));
+		if (technique.jutsu(variables).size() > 1)
+			lines.add(Component.literal("Hold ").append(JutsuClient.WHEEL.getTranslatedKeyMessage()).append(wield != null ? " to choose an art" : " to choose a jutsu")
 					.withStyle(ChatFormatting.DARK_GRAY));
 	}
 

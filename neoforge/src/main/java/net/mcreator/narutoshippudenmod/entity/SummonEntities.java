@@ -16,15 +16,11 @@ import net.mcreator.narutoshippudenmod.NarutoShippudenModElements;
 import net.mcreator.narutoshippudenmod.entity.renderer.SummonRenderers.AkamaruRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.SummonRenderers.CrowRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.SummonRenderers.EarthGolemRenderer;
-import net.mcreator.narutoshippudenmod.entity.renderer.SummonRenderers.KirinRenderer;
 import net.mcreator.narutoshippudenmod.entity.renderer.SummonRenderers.KuramaRenderer;
 import net.mcreator.narutoshippudenmod.item.JutsuProjectileItems.TailedBeastBombItem;
 import net.mcreator.narutoshippudenmod.itemgroup.ModItemGroups.SpawnEggsItemGroup;
 import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.CrowOnInitialEntitySpawnProcedure;
 import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.EarthGolemOnInitialEntitySpawnProcedure;
-import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.KirinEntityFallsProcedure;
-import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.KuramaOnInitialEntitySpawnProcedure;
-import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.RunningFireOnInitialEntitySpawnProcedure;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.AreaEffectCloud;
@@ -513,139 +509,6 @@ public final class SummonEntities {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class KirinEntity extends NarutoShippudenModElements.ModElement {
-		public static EntityType<CustomEntity> entity;
-
-		public KirinEntity(NarutoShippudenModElements instance) {
-			super(instance, 75);
-			Registration.listen(NarutoShippudenMod.MOD_BUS, new EntityAttributesRegisterHandler());
-		}
-
-		@Override
-		public void initElements() {
-			elements.entities.add(() -> entity = (EntityType.Builder.<CustomEntity>of(CustomEntity::new, MobCategory.MONSTER) .setShouldReceiveVelocityUpdates(true).setTrackingRange(64).setUpdateInterval(3).fireImmune() .sized(3f, 3f)).build(Registration.entityKey("kirin")));
-		}
-
-		@Override
-		public void init(FMLCommonSetupEvent event) {
-		}
-
-		public static class EntityAttributesRegisterHandler {
-			@SubscribeEvent
-			public void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
-				AttributeSupplier.Builder ammma = Mob.createMobAttributes();
-				ammma = ammma.add(Attributes.MOVEMENT_SPEED, 0.3);
-				ammma = ammma.add(Attributes.MAX_HEALTH, 1000);
-				ammma = ammma.add(Attributes.ARMOR, 0);
-				ammma = ammma.add(Attributes.ATTACK_DAMAGE, 0);
-				ammma = ammma.add(Attributes.FOLLOW_RANGE, 16);
-				event.put(entity, ammma.build());
-			}
-		}
-
-		public static class CustomEntity extends PathfinderMob {
-
-			public CustomEntity(EntityType<CustomEntity> type, Level world) {
-				super(type, world);
-				xpReward = 0;
-				setNoAi(false);
-				setPersistenceRequired();
-			}
-
-			@Override
-			protected void registerGoals() {
-				super.registerGoals();
-
-			}
-
-			@Override
-			public boolean removeWhenFarAway(double distanceToClosestPlayer) {
-				return false;
-			}
-
-			@Override
-			public net.minecraft.sounds.SoundEvent getHurtSound(DamageSource ds) {
-				return Compat.sound("");
-			}
-
-			@Override
-			public net.minecraft.sounds.SoundEvent getDeathSound() {
-				return Compat.sound("");
-			}
-
-			@Override
-			public boolean causeFallDamage(double l, float d, DamageSource damageSource) {
-				double x = this.getX();
-				double y = this.getY();
-				double z = this.getZ();
-				Entity entity = this;
-
-				KirinEntityFallsProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", level()), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return super.causeFallDamage(l, d, damageSource);
-			}
-
-			@Override
-			public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
-				if (source.getDirectEntity() instanceof AbstractArrow)
-					return false;
-				if (source.getDirectEntity() instanceof Player)
-					return false;
-				if (source.getDirectEntity() instanceof ThrownSplashPotion || source.getDirectEntity() instanceof AreaEffectCloud)
-					return false;
-				if (source.is(net.minecraft.world.damagesource.DamageTypes.FALL))
-					return false;
-				if (source.is(net.minecraft.world.damagesource.DamageTypes.CACTUS))
-					return false;
-				if (source.is(net.minecraft.world.damagesource.DamageTypes.DROWN))
-					return false;
-				if (source.is(net.minecraft.world.damagesource.DamageTypes.LIGHTNING_BOLT))
-					return false;
-				if (source.is(net.minecraft.tags.DamageTypeTags.IS_EXPLOSION))
-					return false;
-				if (source.getMsgId().equals("trident"))
-					return false;
-				if (source.is(net.minecraft.world.damagesource.DamageTypes.FALLING_ANVIL))
-					return false;
-				if (source.is(net.minecraft.world.damagesource.DamageTypes.DRAGON_BREATH))
-					return false;
-				if (source.is(net.minecraft.world.damagesource.DamageTypes.WITHER))
-					return false;
-				if (source.getMsgId().equals("witherSkull"))
-					return false;
-				return super.hurtServer(level, source, amount);
-			}
-
-			@Override
-			public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, EntitySpawnReason reason, SpawnGroupData livingdata) {
-				SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata);
-				double x = this.getX();
-				double y = this.getY();
-				double z = this.getZ();
-				Entity entity = this;
-
-				RunningFireOnInitialEntitySpawnProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return retval;
-			}
-
-			@Override
-			public boolean isPushable() {
-				return false;
-			}
-
-			@Override
-			protected void doPush(Entity entityIn) {
-			}
-
-			@Override
-			protected void pushEntities() {
-			}
-		}
-	}
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class KuramaEntity extends NarutoShippudenModElements.ModElement {
@@ -734,18 +597,7 @@ public final class SummonEntities {
 			@Override
 			protected void registerGoals() {
 				super.registerGoals();
-				this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-				this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, Player.class, false, false));
-				this.targetSelector.addGoal(3, new NearestAttackableTargetGoal(this, ServerPlayer.class, false, false));
-				this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, (float) 0.2));
-				this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
-				this.goalSelector.addGoal(6, new FloatGoal(this));
-				this.goalSelector.addGoal(1, new RangedAttackGoal(this, 1.25, 20, 10) {
-					@Override
-					public boolean canContinueToUse() {
-						return this.canUse();
-					}
-				});
+				net.mcreator.narutoshippudenmod.core.jutsu.Kurama.goals(this, this.goalSelector, this.targetSelector);
 			}
 
 			@Override
@@ -798,8 +650,7 @@ public final class SummonEntities {
 				double z = this.getZ();
 				Entity entity = this;
 
-				KuramaOnInitialEntitySpawnProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
+				net.mcreator.narutoshippudenmod.core.jutsu.Kurama.tick(this);
 			}
 
 			public void performRangedAttack(LivingEntity target, float flval) {

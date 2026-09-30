@@ -367,6 +367,21 @@ public final class DevTest {
 			STEPS.add(mc::stop);
 			return;
 		}
+		if (System.getProperty("naruto.devtest.only", "").equals("shinobi")) {
+			shinobiSteps(mc);
+			STEPS.add(mc::stop);
+			return;
+		}
+		if (System.getProperty("naruto.devtest.only", "").equals("kurama")) {
+			kuramaSteps(mc);
+			STEPS.add(mc::stop);
+			return;
+		}
+		if (System.getProperty("naruto.devtest.only", "").equals("customscreen")) {
+			customScreenSteps(mc);
+			STEPS.add(mc::stop);
+			return;
+		}
 		if (System.getProperty("naruto.devtest.only", "").equals("tabs")) {
 			// each of the mod's creative tabs, opened in the creative inventory
 			STEPS.add(() -> command(mc, "gamemode creative"));
@@ -522,15 +537,27 @@ public final class DevTest {
 	private static final net.minecraft.world.phys.Vec3[] arena = new net.minecraft.world.phys.Vec3[1];
 
 	private static String item(String nature) {
-		return nature.endsWith("technique") ? nature : nature + "_release_technique";
+		return nature.endsWith("technique") || net.mcreator.narutoshippudenmod.core.jutsu.Weapons.KENJUTSU.containsKey(nature) ? nature
+				: nature + "_release_technique";
 	}
+
+	private static boolean weapon(String nature) {
+		return net.mcreator.narutoshippudenmod.core.jutsu.Weapons.KENJUTSU.containsKey(nature);
+	}
+
+	/** Custom jutsu the jutsu test gives the player: one of each form, over the five natures. */
+	private static final String TEST_CUSTOM = String.join("\n", "Test Bullets|fire|BULLETS|1|2|3", "Test Sphere|fire|SPHERE|2|1|5",
+			"Test Rain|fire|RAIN|1|1|4", "Test Shuriken|water|SHURIKEN|1|2|3", "Test Stream|water|STREAM|2|1|3", "Test Beast|lightning|BEAST|1|1|4",
+			"Test Dragon|earth|DRAGON|2|1|5", "Test Wave|wind|WAVE|1|1|3", "Test Burst|wind|BURST|2|1|4");
 
 	private static void jutsuSteps(Minecraft mc) {
 		String[] natures = { "fire", "water", "wind", "earth", "lightning", "boil", "bone", "dust", "ice", "magnet", "smoke", "steel", "storm", "swift",
 				"typhoon", "wood", "aburame", "akimichi", "fuma", "hozuki", "hyuga", "inuzuka", "lee", "nara", "sarutobi", "uzumaki",
 				"tsuchigumo", "uchiha", "yamanaka", "sharingan", "byakugan", "ketsuryugan", "rinnegan", "tenseigan", "isshiki_dojutsu", "mangekyou_sharingan_itachi_release_technique",
 				"mangekyou_sharingan_kakashi_release_technique", "mangekyou_sharingan_obito_release_technique", "mangekyou_sharingan_sasuke_release_technique",
-				"mangekyou_sharingan_shisui_release_technique", "mangekyou_sharingan_madara_release_technique" };
+				"mangekyou_sharingan_shisui_release_technique", "mangekyou_sharingan_madara_release_technique", "white_light_chakra_sabre", "chakra_blade",
+				"kusanagi_sasuke", "gunbai", "triple_blade_scythe", "shichiseiken", "samehada", "kubikiribocho", "hiramekarei", "kabutowari", "kiba_sword",
+				"nuibari", "shibuki" };
 		String only = System.getProperty("naruto.devtest.jutsu", "");
 		STEPS.add(() -> {
 			mc.gui.setScreen(null);
@@ -573,6 +600,8 @@ public final class DevTest {
 				v.sharinganlearn = v.isshikidojutsulearn = v.mangekyoushrainganitachiamaterasulearn = 9;
 				v.mangekyousharingankakashikamuilearn = v.mangekyousharinganobitokamuilearn = v.mangekyousharingansasukeamaterasulearn = 9;
 				v.ninjutsu = 60;
+				v.kenjutsu = 100;
+				v.custom_jutsu = TEST_CUSTOM;
 				v.byakuganactivate = false;
 				v.ChakraMax = 5000;
 				v.ChakraAmount = 5000;
@@ -584,8 +613,10 @@ public final class DevTest {
 		for (String nature : natures) {
 			if (!only.isEmpty() && !java.util.List.of(only.split(",")).contains(nature))
 				continue;
+			NarutoShippudenModVariables.PlayerVariables withCustom = new NarutoShippudenModVariables.PlayerVariables();
+			withCustom.custom_jutsu = TEST_CUSTOM;
 			int count = net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.TECHNIQUES
-					.get(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", item(nature))).jutsu.size();
+					.get(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", item(nature))).jutsu(withCustom).size();
 			for (int index = 0; index < count; index++) {
 				int i = index;
 				int freeze = nature.equals("lightning") && i == 3 ? 19 : nature.equals("lightning") && i == 2 ? 13 : FREEZE_AT[Math.min(i, 3)];
@@ -593,8 +624,8 @@ public final class DevTest {
 					command(mc, "item replace entity @s weapon.mainhand with naruto_shippuden:" + item(nature));
 					if (arena[0] == null)
 						arena[0] = mc.player.position();
-					// transformations and dashes carry the player off: end them and go back to the arena
-					command(mc, String.format(java.util.Locale.ROOT, "tp @s %.2f %.2f %.2f 0 5", arena[0].x, arena[0].y, arena[0].z));
+					// transformations and dashes carry the player off: end them and go back to the arena (weapons: closer, most arts are short)
+					command(mc, String.format(java.util.Locale.ROOT, "tp @s %.2f %.2f %.2f 0 5", arena[0].x, arena[0].y, arena[0].z + (weapon(nature) ? 9 : 0)));
 					onServer(mc, player -> {
 						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.stop(player);
 						NarutoShippudenModVariables.ifPresent(player, v -> {
@@ -613,6 +644,10 @@ public final class DevTest {
 						});
 						player.getCooldowns().removeCooldown(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", item(nature) + "/" + i));
 						player.removeAllEffects();
+						if (nature.equals("hiramekarei"))
+							net.mcreator.narutoshippudenmod.compat.StackTag.of(player.getMainHandItem()).putDouble("StoredChakra", 1000);
+						if (nature.equals("chakra_blade"))
+							player.setItemInHand(net.minecraft.world.InteractionHand.OFF_HAND, player.getMainHandItem().copy());
 						net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.select(player,
 								net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", item(nature)), i);
 					});
@@ -683,6 +718,175 @@ public final class DevTest {
 					}
 			}
 		}
+	}
+
+	/** Clears a flat open arena around the player: w wide, from z0 to z1 ahead. */
+	private static void arena(Minecraft mc, int w, int z0, int z1) {
+		for (int z = z0; z < z1; z += 8)
+			for (int x = -w; x < w; x += 16) {
+				String box = "~" + x + " %s ~" + z + " ~" + (x + 15) + " %s ~" + Math.min(z1, z + 7);
+				command(mc, "fill " + String.format(box, "~", "~24") + " air");
+				command(mc, "fill " + String.format(box, "~-1", "~-1") + " grass_block");
+				command(mc, "fill " + String.format(box, "~-3", "~-2") + " dirt");
+			}
+	}
+
+	private static void setupFight(Minecraft mc) {
+		mc.gui.setScreen(null);
+		mc.options.pauseOnLostFocus = false;
+		command(mc, "execute in minecraft:overworld run spreadplayers 0 0 0 1 false @s");
+		command(mc, "kill @e[type=!player]");
+		command(mc, "time set day");
+		command(mc, "weather clear");
+		command(mc, "gamemode creative");
+		command(mc, "clear @s");
+		command(mc, "tp @s ~ ~ ~ 0 5");
+	}
+
+	/** A Jonin of each village against a training husk: footwork, kunai, signs and jutsu, then a blow it answers with Substitution. */
+	private static void shinobiSteps(Minecraft mc) {
+		STEPS.add(() -> {
+			setupFight(mc);
+			arena(mc, 24, -8, 40);
+			nextDelay = 40;
+		});
+		for (String village : new String[] { "leaf", "mist", "sand", "stone", "cloud" }) {
+			STEPS.add(() -> {
+				command(mc, "kill @e[type=!player]");
+				command(mc, "summon minecraft:husk ~ ~ ~20 {NoAI:1b,PersistenceRequired:1b,attributes:[{id:\"minecraft:max_health\",base:1000}],Health:1000f}");
+				command(mc, "summon naruto_shippuden:hidden_" + village + "_shinobi ~ ~ ~8");
+				nextDelay = 5;
+			});
+			STEPS.add(() -> {
+				onServer(mc, player -> {
+					var level = player.level();
+					var box = player.getBoundingBox().inflate(40);
+					var shinobi = level.getEntitiesOfClass(net.minecraft.world.entity.PathfinderMob.class, box,
+							e -> e.getPersistentData().contains("ShinobiRank")).stream().findFirst().orElse(null);
+					var husk = level.getEntitiesOfClass(net.minecraft.world.entity.monster.zombie.Husk.class, box).stream().findFirst().orElse(null);
+					if (shinobi != null && husk != null) {
+						net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.spawned(shinobi, 2);
+						shinobi.setTarget(husk);
+					}
+					NarutoShippudenMod.LOGGER.info("DEVTEST shinobi {}: {} vs {}", village, shinobi == null ? "none" : shinobi.getName().getString(), husk);
+				});
+				command(mc, "tp @s ~-13 ~4 ~13 facing ~ ~1 ~13");
+				nextDelay = 10;
+			});
+			for (int shot = 0; shot < 14; shot++) {
+				int n = shot;
+				STEPS.add(() -> {
+					shot(mc, "shinobi_" + village + "_" + n);
+					onServer(mc, player -> {
+						var box = player.getBoundingBox().inflate(40);
+						player.level().getEntitiesOfClass(net.minecraft.world.entity.PathfinderMob.class, box, e -> e.getPersistentData().contains("ShinobiRank"))
+								.forEach(e -> NarutoShippudenMod.LOGGER.info("DEVTEST shinobi {} {}: chakra {} hp {}", village, n,
+										(int) e.getPersistentData().getDoubleOr("ChakraAmount", 0), e.getHealth()));
+						player.level().getEntitiesOfClass(net.minecraft.world.entity.monster.zombie.Husk.class, box)
+								.forEach(h -> NarutoShippudenMod.LOGGER.info("DEVTEST shinobi {} {}: husk hp {}", village, n, h.getHealth()));
+					});
+					if (n == 10)
+						command(mc, "damage @e[type=naruto_shippuden:hidden_" + village + "_shinobi,limit=1] 6 minecraft:player_attack by @s");
+					nextDelay = n == 10 ? 2 : 16;
+				});
+			}
+		}
+	}
+
+	/** Kurama against a training husk, seen from the side: claws, tails, roar, Tailed Beast Balls, the leap. */
+	private static void kuramaSteps(Minecraft mc) {
+		STEPS.add(() -> {
+			setupFight(mc);
+			arena(mc, 48, -16, 72);
+			nextDelay = 60;
+		});
+		STEPS.add(() -> {
+			command(mc, "summon minecraft:husk ~ ~ ~6 {NoAI:1b,PersistenceRequired:1b,attributes:[{id:\"minecraft:max_health\",base:5000}],Health:5000f}");
+			command(mc, "summon naruto_shippuden:kurama ~ ~ ~40");
+			nextDelay = 5;
+		});
+		String[] positions = { "~-40 ~12 ~24 facing ~ ~6 ~24", "~0 ~18 ~-18 facing ~ ~6 ~24" };
+		for (int shot = 0; shot < 40; shot++) {
+			int n = shot;
+			STEPS.add(() -> {
+				onServer(mc, player -> {
+					var box = player.getBoundingBox().inflate(80);
+					var kurama = player.level().getEntitiesOfClass(net.minecraft.world.entity.Mob.class, box,
+							e -> e instanceof net.mcreator.narutoshippudenmod.entity.SummonEntities.KuramaEntity.CustomEntity).stream().findFirst().orElse(null);
+					var husk = player.level().getEntitiesOfClass(net.minecraft.world.entity.monster.zombie.Husk.class, box).stream().findFirst().orElse(null);
+					if (kurama != null && husk != null) {
+						if (kurama.getTarget() != husk)
+							kurama.setTarget(husk);
+						NarutoShippudenMod.LOGGER.info("DEVTEST kurama {}: hp {} at {} husk hp {} at {}", n, kurama.getHealth(), kurama.blockPosition(), husk.getHealth(),
+								husk.blockPosition());
+					}
+				});
+				if (n == 0)
+					command(mc, "tp @s " + positions[0]);
+				if (n == 22) {
+					// move the husk far away: the leap and the Tailed Beast Ball
+					command(mc, "tp @e[type=minecraft:husk] ~ ~ ~-10");
+					command(mc, "tp @s " + positions[1]);
+				}
+				shot(mc, "kurama_" + n);
+				nextDelay = 12;
+			});
+		}
+	}
+
+	/** The Jutsu page: the list, the editor with a name typed in, the made jutsu in the list and on the Fire Release wheel. */
+	private static void customScreenSteps(Minecraft mc) {
+		STEPS.add(() -> {
+			setupFight(mc);
+			onServer(mc, player -> NarutoShippudenModVariables.ifPresent(player, v -> {
+				v.firereleaselogic = v.windreleaselogic = true;
+				v.firelearn = 5;
+				v.jp = 300;
+				v.custom_jutsu = "Hidden Flame Bullets|fire|BULLETS|1|2|2";
+				v.syncPlayerVariables(player);
+			}));
+			command(mc, "item replace entity @s weapon.mainhand with naruto_shippuden:fire_release_technique");
+			nextDelay = 20;
+		});
+		STEPS.add(() -> {
+			open(mc, "JutsuCreationGuis$CreateJutsuGUIGui");
+			nextDelay = 20;
+		});
+		STEPS.add(() -> {
+			shot(mc, "custom_list");
+			click(mc, "Create Jutsu");
+			nextDelay = 10;
+		});
+		STEPS.add(() -> {
+			if (mc.gui.screen() != null)
+				for (var child : mc.gui.screen().children())
+					if (child instanceof net.minecraft.client.gui.components.EditBox box)
+						box.setValue("Blazing Dragon Fang");
+			click(mc, ">");
+			nextDelay = 5;
+		});
+		STEPS.add(() -> {
+			shot(mc, "custom_editor");
+			click(mc, "Create");
+			nextDelay = 20;
+		});
+		STEPS.add(() -> {
+			shot(mc, "custom_made");
+			NarutoShippudenMod.LOGGER.info("DEVTEST custom: {} / jp {}", NarutoShippudenModVariables.get(mc.player).custom_jutsu.replace("\n", " ; "),
+					NarutoShippudenModVariables.get(mc.player).jp);
+			mc.player.closeContainer();
+			nextDelay = 10;
+		});
+		STEPS.add(() -> {
+			mc.gui.setScreen(new JutsuClient.WheelScreen(net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.TECHNIQUES
+					.get(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", "fire_release_technique"))));
+			nextDelay = 10;
+		});
+		STEPS.add(() -> {
+			shot(mc, "custom_wheel");
+			mc.gui.setScreen(null);
+			nextDelay = 5;
+		});
 	}
 
 	/** The Dojutsu key (open, step up to the Mangekyou, the wheel, close all) and the Susanoo growing stage by stage. */

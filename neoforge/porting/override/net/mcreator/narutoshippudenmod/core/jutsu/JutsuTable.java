@@ -1,7 +1,6 @@
 package net.mcreator.narutoshippudenmod.core.jutsu;
 
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures;
-import net.mcreator.narutoshippudenmod.procedures.CustomJutsuProcedures;
 import net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures;
 
 import java.util.Map;
@@ -163,16 +162,6 @@ final class JutsuTable {
 				jutsu("Shadow Clone Technique", v -> 1, 1, "Ninjutsu", v -> v.ninjutsu, 5, 30, 25, 25, 25, 25, 25));
 		technique("tsuchigumo_release_technique", v -> 0, (v, i) -> {}, null, NEW_ENGINE,
 				jutsu("Fury", v -> v.tsuchigumolearn, 1, "Ninjutsu", v -> v.ninjutsu, 20, 300, 200, 160, 120, 80, 40));
-		technique("custom_fire_release_technique", v -> 0, (v, i) -> {}, null, CustomJutsuProcedures.CustomFireReleaseTechniqueRightclickedProcedure::executeProcedure,
-				jutsu("Custom Jutsu", v -> 1, 1, "Ninjutsu", v -> v.ninjutsu, 5, 0, 60, 50, 40, 30, 20));
-		technique("custom_earth_release_technique", v -> 0, (v, i) -> {}, null, CustomJutsuProcedures.CustomEarthReleaseTechniqueRightClickedProcedure::executeProcedure,
-				jutsu("Custom Jutsu", v -> 1, 1, "Ninjutsu", v -> v.ninjutsu, 5, 0, 60, 50, 40, 30, 20));
-		technique("custom_water_release_technique", v -> 0, (v, i) -> {}, null, CustomJutsuProcedures.CustomWaterReleaseTechniqueRightClickedProcedure::executeProcedure,
-				jutsu("Custom Jutsu", v -> 1, 1, "Ninjutsu", v -> v.ninjutsu, 5, 0, 60, 50, 40, 30, 20));
-		technique("custom_wind_release_technique", v -> 0, (v, i) -> {}, null, CustomJutsuProcedures.CustomWindReleaseTechniqueRightClickedProcedure::executeProcedure,
-				jutsu("Custom Jutsu", v -> 1, 1, "Ninjutsu", v -> v.ninjutsu, 5, 0, 60, 50, 40, 30, 20));
-		technique("custom_lightning_release_technique", v -> 0, (v, i) -> {}, null, CustomJutsuProcedures.CustomLightningReleaseTechniqueRightClickedProcedure::executeProcedure,
-				jutsu("Custom Jutsu", v -> 1, 1, "Ninjutsu", v -> v.ninjutsu, 5, 0, 60, 50, 40, 30, 20));
 
 		release("aburame_release", NEW_ENGINE,
 				track("", v -> v.aburame_release, -1, "aburame_release_technique", v -> v.aburamelearn,

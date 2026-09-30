@@ -198,11 +198,11 @@ public final class ClanJutsu {
 	}
 
 	/** The enemy the caster is looking at (closest to the crosshair, in sight), within range. */
-	static @Nullable LivingEntity target(ServerPlayer p, double range) {
+	static @Nullable LivingEntity target(LivingEntity p, double range) {
 		Vec3 eye = p.getEyePosition(), look = p.getLookAngle();
 		LivingEntity best = null;
 		double bestScore = 0.9;
-		for (LivingEntity e : enemies(level(p), p, p.getBoundingBox().inflate(range), e -> true)) {
+		for (LivingEntity e : enemies((ServerLevel) p.level(), p, p.getBoundingBox().inflate(range), e -> true)) {
 			Vec3 to = e.getBoundingBox().getCenter().subtract(eye);
 			double distance = to.length(), score = to.normalize().dot(look) - distance / (range * 20);
 			if (distance <= range && score > bestScore && p.hasLineOfSight(e)) {
@@ -214,19 +214,19 @@ public final class ClanJutsu {
 	}
 
 	/** A projectile that starts somewhere other than the caster's eyes. */
-	static JutsuProjectile spawn(ServerPlayer p, Element element, Shape shape, float size, Vec3 at, Vec3 velocity, float damage) {
-		JutsuProjectile projectile = new JutsuProjectile(JutsuEngine.PROJECTILE, level(p));
+	static JutsuProjectile spawn(LivingEntity p, Element element, Shape shape, float size, Vec3 at, Vec3 velocity, float damage) {
+		JutsuProjectile projectile = new JutsuProjectile(JutsuEngine.PROJECTILE, p.level());
 		projectile.look(element, shape, size);
 		projectile.setOwner(p);
 		projectile.setPos(at);
 		projectile.setDeltaMovement(velocity);
 		projectile.damage = damage;
-		level(p).addFreshEntity(projectile);
+		p.level().addFreshEntity(projectile);
 		return projectile;
 	}
 
 	/** A see-through sphere around an entity (or standing at a point) for a while: Rotation, water prisons, insect jars. */
-	static JutsuProjectile shell(ServerPlayer p, @Nullable Entity on, Vec3 at, Element element, float size, int ticks) {
+	static JutsuProjectile shell(LivingEntity p, @Nullable Entity on, Vec3 at, Element element, float size, int ticks) {
 		JutsuProjectile shell = spawn(p, element, Shape.SHELL, size, at.subtract(0, size / 2, 0), Vec3.ZERO, 0);
 		shell.pierce = -1;
 		shell.knockback = 0;

@@ -182,13 +182,13 @@ final class NatureJutsu {
 		return title.endsWith("Release") ? "You haven't unlocked " + title : "You don't have the " + title + " nature";
 	}
 
-	static ServerLevel level(ServerPlayer player) {
-		return (ServerLevel) player.level();
+	static ServerLevel level(LivingEntity caster) {
+		return (ServerLevel) caster.level();
 	}
 
 	// ------------------------------------------------------------------ fire
 	/** Five small fireballs in a fan. */
-	private static void phoenixSageFire(ServerPlayer p) {
+	static void phoenixSageFire(LivingEntity p) {
 		for (int i = -2; i <= 2; i++) {
 			JutsuProjectile fire = shoot(p, Element.FIRE, Shape.ORB, 0.45F, turned(p, i * 7, -2).scale(1.3), 4);
 			fire.gravity = 0.012F;
@@ -199,7 +199,7 @@ final class NatureJutsu {
 	}
 
 	/** A great ball of fire that bursts into flames. */
-	private static void greatFireball(ServerPlayer p) {
+	static void greatFireball(LivingEntity p) {
 		JutsuProjectile ball = shoot(p, Element.FIRE, Shape.ORB, 2.2F, 0.9F, 12);
 		ball.life = 45;
 		ball.knockback = 1;
@@ -208,7 +208,7 @@ final class NatureJutsu {
 	}
 
 	/** Breathes a stream of fire for two seconds. */
-	static void greatFlame(ServerPlayer p) {
+	static void greatFlame(LivingEntity p) {
 		ServerLevel level = level(p);
 		sound(level, p.getEyePosition(), SoundEvents.FIRECHARGE_USE, 1.2F, 0.7F);
 		channel(p, 40, 1, t -> {
@@ -234,7 +234,7 @@ final class NatureJutsu {
 
 	// ------------------------------------------------------------------ water
 	/** Three quick water bullets. */
-	private static void waterGun(ServerPlayer p) {
+	static void waterGun(LivingEntity p) {
 		channel(p, 9, 3, t -> {
 			JutsuProjectile bullet = shoot(p, Element.WATER, Shape.ORB, 0.3F, 2.2F, 5);
 			bullet.onImpact = b -> puff(level(p), b.position(), Element.WATER, 0.5F);
@@ -243,7 +243,7 @@ final class NatureJutsu {
 	}
 
 	/** A spinning wall of water around the caster for five seconds: pushes enemies out and stops projectiles. */
-	private static void waterWall(ServerPlayer p) {
+	static void waterWall(LivingEntity p) {
 		ServerLevel level = level(p);
 		sound(level, p.position(), SoundEvents.PLAYER_SPLASH_HIGH_SPEED, 1.5F, 0.7F);
 		p.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 100, 1, false, false));
@@ -269,7 +269,7 @@ final class NatureJutsu {
 	}
 
 	/** A shark of water that hunts the nearest enemy. */
-	private static void waterShark(ServerPlayer p) {
+	static void waterShark(LivingEntity p) {
 		JutsuProjectile shark = shoot(p, Element.WATER, Shape.SHARK, 1.4F, 1.0F, 14);
 		shark.homing = 0.12F;
 		shark.life = 80;
@@ -279,7 +279,7 @@ final class NatureJutsu {
 	}
 
 	/** A dragon of fire or water that passes through everything in its way. */
-	private static void dragon(ServerPlayer p, Element element, float damage, float radius, float knockback) {
+	static void dragon(LivingEntity p, Element element, float damage, float radius, float knockback) {
 		JutsuProjectile dragon = shoot(p, element, Shape.DRAGON, 1.6F, 0.95F, damage);
 		dragon.pierce = -1;
 		dragon.life = 55;
@@ -290,7 +290,7 @@ final class NatureJutsu {
 
 	// ------------------------------------------------------------------ wind
 	/** A blast of wind from the palm that throws everything in front back. */
-	private static void galePalm(ServerPlayer p) {
+	static void galePalm(LivingEntity p) {
 		ServerLevel level = level(p);
 		Vec3 look = p.getLookAngle();
 		for (LivingEntity target : cone(p, 8, 35)) {
@@ -306,7 +306,7 @@ final class NatureJutsu {
 	}
 
 	/** Five rapid bullets of compressed air. */
-	private static void vacuumSphere(ServerPlayer p) {
+	static void vacuumSphere(LivingEntity p) {
 		channel(p, 15, 3, t -> {
 			JutsuProjectile bullet = shoot(p, Element.WIND, Shape.ORB, 0.35F, 2.4F, 4);
 			bullet.pierce = 1;
@@ -316,7 +316,7 @@ final class NatureJutsu {
 	}
 
 	/** Thrown Rasenshuriken: on impact a storm of wind blades pulls enemies in and cuts them for three seconds. */
-	private static void rasenshuriken(ServerPlayer p) {
+	static void rasenshuriken(LivingEntity p) {
 		JutsuProjectile shuriken = shoot(p, Element.WIND, Shape.RASENSHURIKEN, 1.8F, 1.1F, 8);
 		shuriken.life = 60;
 		shuriken.onImpact = s -> {
@@ -357,7 +357,7 @@ final class NatureJutsu {
 	}
 
 	/** Stone spikes burst out of the ground in a line, launching whatever stands there. */
-	private static void earthSpikes(ServerPlayer p) {
+	static void earthSpikes(LivingEntity p) {
 		ServerLevel level = level(p);
 		Vec3 dir = p.getLookAngle().multiply(1, 0, 1).normalize();
 		List<LivingEntity> struck = new ArrayList<>();
@@ -379,7 +379,7 @@ final class NatureJutsu {
 	}
 
 	/** Raises a wall of earth in front of the caster that crumbles back after 12 seconds. */
-	private static void earthWall(ServerPlayer p) {
+	static void earthWall(LivingEntity p) {
 		ServerLevel level = level(p);
 		Vec3 dir = p.getLookAngle().multiply(1, 0, 1).normalize(), side = new Vec3(-dir.z, 0, dir.x);
 		Vec3 centre = p.position().add(dir.scale(3));
@@ -401,13 +401,14 @@ final class NatureJutsu {
 	}
 
 	/** Summons an earth golem that fights for the caster for 30 seconds. */
-	private static void earthGolem(ServerPlayer p) {
+	static void earthGolem(LivingEntity p) {
 		ServerLevel level = level(p);
 		Vec3 at = p.position().add(p.getLookAngle().multiply(1, 0, 1).normalize().scale(2));
 		EarthGolemEntity.CustomEntity golem = new EarthGolemEntity.CustomEntity(EarthGolemEntity.entity, level);
 		golem.snapTo(at.x, p.getY(), at.z, p.getYRot(), 0);
 		golem.finalizeSpawn(level, level.getCurrentDifficultyAt(golem.blockPosition()), EntitySpawnReason.MOB_SUMMONED, null);
-		golem.tame(p);
+		if (p instanceof net.minecraft.world.entity.player.Player player)
+			golem.tame(player);
 		level.addFreshEntity(golem);
 		puff(level, at.add(0, 1, 0), Element.EARTH, 1.5F);
 		sound(level, at, SoundEvents.IRON_GOLEM_REPAIR, 1, 0.6F);
@@ -420,7 +421,7 @@ final class NatureJutsu {
 	}
 
 	/** Turns the ground where the caster looks into deep mud for eight seconds: enemies sink, slow down and choke. */
-	private static void swamp(ServerPlayer p) {
+	static void swamp(LivingEntity p) {
 		ServerLevel level = level(p);
 		Vec3 c = lookPoint(p, 24);
 		BlockPos centre = BlockPos.containing(c);
@@ -444,7 +445,7 @@ final class NatureJutsu {
 
 	// ------------------------------------------------------------------ lightning
 	/** Five needles of lightning in a fan; each numbs what it hits. */
-	private static void chidoriSenbon(ServerPlayer p) {
+	static void chidoriSenbon(LivingEntity p) {
 		for (int i = -2; i <= 2; i++) {
 			JutsuProjectile needle = shoot(p, Element.LIGHTNING, Shape.NEEDLE, 0.25F, turned(p, i * 5, 0).scale(2.6), 3);
 			needle.life = 25;
@@ -454,7 +455,7 @@ final class NatureJutsu {
 	}
 
 	/** Lightning Beast Tracking Fang: a beast of lightning that hunts the enemy; its shock jumps to three more enemies nearby. */
-	private static void lightningBall(ServerPlayer p) {
+	static void lightningBall(LivingEntity p) {
 		JutsuProjectile ball = shoot(p, Element.LIGHTNING, Shape.LION, 0.9F, 1.4F, 10);
 		ball.homing = 0.2F;
 		ball.life = 50;
@@ -482,7 +483,7 @@ final class NatureJutsu {
 	 * Lightning Lariat: the caster charges up in crackling lightning armor, then charges forward (steering with their look) and
 	 * clotheslines the first enemy in the way, launching it with a shockwave. Running into a wall ends the charge in a shockwave too.
 	 */
-	private static void lariat(ServerPlayer p) {
+	static void lariat(LivingEntity p) {
 		ServerLevel level = level(p);
 		sound(level, p.position(), SoundEvents.BEACON_POWER_SELECT, 1.2F, 0.6F);
 		p.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 40, 2, false, false));
@@ -524,7 +525,7 @@ final class NatureJutsu {
 	}
 
 	/** Kirin: thunderclouds gather over the target, then a huge dragon of lightning dives onto it, followed by a storm of bolts. */
-	private static void kirin(ServerPlayer p) {
+	static void kirin(LivingEntity p) {
 		ServerLevel level = level(p);
 		Vec3 target = lookPoint(p, 40);
 		Vec3 sky = target.add(p.getLookAngle().multiply(-1, 0, -1).normalize().scale(10)).add(0, 26, 0);
@@ -556,7 +557,7 @@ final class NatureJutsu {
 
 	// ------------------------------------------------------------------ added from the wiki
 	/** Great Fire Annihilation: a sea of flame pours out in a wide front and burns everything across a great distance. */
-	private static void greatFireAnnihilation(ServerPlayer p) {
+	static void greatFireAnnihilation(LivingEntity p) {
 		ServerLevel level = level(p);
 		sound(level, p.getEyePosition(), SoundEvents.BLAZE_SHOOT, 2, 0.4F);
 		sound(level, p.getEyePosition(), SoundEvents.FIRECHARGE_USE, 2, 0.5F);
@@ -580,7 +581,7 @@ final class NatureJutsu {
 	 * Water Prison: a sphere of water closes round the enemy looked at. As long as the caster keeps their hand in it (stays where they
 	 * stand) the enemy is trapped and drowns; walking away bursts the prison.
 	 */
-	private static void waterPrison(ServerPlayer p) {
+	static void waterPrison(LivingEntity p) {
 		ServerLevel level = level(p);
 		LivingEntity target = ClanJutsu.target(p, 10);
 		if (target == null) {
@@ -612,7 +613,7 @@ final class NatureJutsu {
 	}
 
 	/** Great Waterfall Technique: a torrent of water rises in front of the caster and crashes forward, sweeping everything away. */
-	private static void greatWaterfall(ServerPlayer p) {
+	static void greatWaterfall(LivingEntity p) {
 		ServerLevel level = level(p);
 		Vec3 dir = p.getLookAngle().multiply(1, 0, 1).normalize(), side = new Vec3(-dir.z, 0, dir.x), origin = p.position();
 		List<LivingEntity> struck = new ArrayList<>();
@@ -651,7 +652,7 @@ final class NatureJutsu {
 	}
 
 	/** Great Breakthrough: a gale from the mouth that blasts everything in front far away and blows projectiles out of the air. */
-	private static void greatBreakthrough(ServerPlayer p) {
+	static void greatBreakthrough(LivingEntity p) {
 		ServerLevel level = level(p);
 		Vec3 look = p.getLookAngle();
 		for (LivingEntity target : cone(p, 14, 45)) {
@@ -675,7 +676,7 @@ final class NatureJutsu {
 	}
 
 	/** Vacuum Great Sphere: three great balls of compressed air, each bursting where it lands. */
-	private static void vacuumGreatSphere(ServerPlayer p) {
+	static void vacuumGreatSphere(LivingEntity p) {
 		channel(p, 18, 6, t -> {
 			JutsuProjectile sphere = shoot(p, Element.WIND, Shape.ORB, 1.3F, 2.0F, 10);
 			sphere.life = 30;
@@ -688,7 +689,7 @@ final class NatureJutsu {
 	 * Double Suicide Decapitation Technique: the caster sinks into the ground, burrows under the enemy looked at and drags them down
 	 * into the earth up to their chest, stuck there for three seconds.
 	 */
-	private static void doubleSuicide(ServerPlayer p) {
+	static void doubleSuicide(LivingEntity p) {
 		ServerLevel level = level(p);
 		LivingEntity target = ClanJutsu.target(p, 12);
 		if (target == null) {
@@ -729,7 +730,7 @@ final class NatureJutsu {
 	}
 
 	/** Earth Dragon Bullet: a dragon of mud that rams through everything and spits balls of mud at enemies near its path. */
-	private static void earthDragonBullet(ServerPlayer p) {
+	static void earthDragonBullet(LivingEntity p) {
 		ServerLevel level = level(p);
 		JutsuProjectile dragon = shoot(p, Element.EARTH, Shape.DRAGON, 1.5F, 0.9F, 12);
 		dragon.pierce = -1;
@@ -751,7 +752,7 @@ final class NatureJutsu {
 	}
 
 	/** Chidori: lightning gathers in the hand with the chirping of a thousand birds, then the caster lunges and runs the enemy through. */
-	private static void chidori(ServerPlayer p) {
+	static void chidori(LivingEntity p) {
 		ServerLevel level = level(p);
 		boolean[] done = { false };
 		channel(p, 30, 1, t -> {
@@ -792,7 +793,7 @@ final class NatureJutsu {
 	 * Four Pillar Bind: four stone pillars rise round the enemy looked at and lightning arcs between them, pinning and shocking
 	 * everything inside for four seconds.
 	 */
-	private static void fourPillarBind(ServerPlayer p) {
+	static void fourPillarBind(LivingEntity p) {
 		ServerLevel level = level(p);
 		LivingEntity aimed = ClanJutsu.target(p, 20);
 		Vec3 c = aimed != null ? aimed.position() : lookPoint(p, 20);

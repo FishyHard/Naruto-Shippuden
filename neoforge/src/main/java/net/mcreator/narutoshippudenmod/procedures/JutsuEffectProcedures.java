@@ -938,40 +938,6 @@ public final class JutsuEffectProcedures {
 		}
 	}
 
-	public static class RasenshurikenProjectileHitsBlockProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("world") == null) {
-				if (!dependencies.containsKey("world"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure RasenshurikenProjectileHitsBlock!");
-				return;
-			}
-			if (dependencies.get("x") == null) {
-				if (!dependencies.containsKey("x"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency x for procedure RasenshurikenProjectileHitsBlock!");
-				return;
-			}
-			if (dependencies.get("y") == null) {
-				if (!dependencies.containsKey("y"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency y for procedure RasenshurikenProjectileHitsBlock!");
-				return;
-			}
-			if (dependencies.get("z") == null) {
-				if (!dependencies.containsKey("z"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency z for procedure RasenshurikenProjectileHitsBlock!");
-				return;
-			}
-			LevelAccessor world = (LevelAccessor) dependencies.get("world");
-			double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
-			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
-			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
-			com.google.gson.JsonObject mainjsonobject = new com.google.gson.JsonObject();
-			File NarutoShippuden = new File("");
-			if (world instanceof Level && !((Level) world).isClientSide()) {
-				((Level) world).explode(null, x, y, z, (float) 7, Level.ExplosionInteraction.NONE);
-			}
-		}
-	}
 
 	public static class ShadersProcedure {
 		@EventBusSubscriber(modid = "naruto_shippuden")
@@ -1174,74 +1140,6 @@ public final class JutsuEffectProcedures {
 		}
 	}
 
-	public static class VacuumSphereWhileProjectileFlyingTickProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("world") == null) {
-				if (!dependencies.containsKey("world"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure VacuumSphereWhileProjectileFlyingTick!");
-				return;
-			}
-			if (dependencies.get("x") == null) {
-				if (!dependencies.containsKey("x"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency x for procedure VacuumSphereWhileProjectileFlyingTick!");
-				return;
-			}
-			if (dependencies.get("y") == null) {
-				if (!dependencies.containsKey("y"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency y for procedure VacuumSphereWhileProjectileFlyingTick!");
-				return;
-			}
-			if (dependencies.get("z") == null) {
-				if (!dependencies.containsKey("z"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency z for procedure VacuumSphereWhileProjectileFlyingTick!");
-				return;
-			}
-			if (dependencies.get("immediatesourceentity") == null) {
-				if (!dependencies.containsKey("immediatesourceentity"))
-					NarutoShippudenMod.LOGGER
-							.warn("Failed to load dependency immediatesourceentity for procedure VacuumSphereWhileProjectileFlyingTick!");
-				return;
-			}
-			LevelAccessor world = (LevelAccessor) dependencies.get("world");
-			double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
-			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
-			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
-			Entity immediatesourceentity = (Entity) dependencies.get("immediatesourceentity");
-			if (!((immediatesourceentity instanceof LivingEntity) ? (immediatesourceentity.isNoGravity()) : false)) {
-				immediatesourceentity.setNoGravity((true));
-			}
-			new Object() {
-				private int ticks = 0;
-				private float waitTicks;
-				private LevelAccessor world;
-
-				public void start(LevelAccessor world, int waitTicks) {
-					this.waitTicks = waitTicks;
-					Registration.listen(NeoForge.EVENT_BUS, this);
-					this.world = world;
-				}
-
-				@SubscribeEvent
-				public void tick(ServerTickEvent.Post event) {
-					if (true) {
-						this.ticks += 1;
-						if (this.ticks >= this.waitTicks)
-							run();
-					}
-				}
-
-				private void run() {
-					if (!immediatesourceentity.level().isClientSide())
-						immediatesourceentity.discard();
-					NeoForge.EVENT_BUS.unregister(this);
-				}
-			}.start(world, (int) 200);
-			if (world instanceof ServerLevel) {
-				((ServerLevel) world).sendParticles(ParticleTypes.CLOUD, x, y, z, (int) 5, 0, 0, 0, 0);
-			}
-		}
-	}
 
 	public static class WaterwallEntityCollidesInTheBlockProcedure {
 

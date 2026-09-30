@@ -33,7 +33,6 @@ import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.ShadowCloneOnEn
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.ShadowCloneOnInitialEntitySpawnProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.ShadowImitationEntityOnEntityTickUpdateProcedure;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.ShadowImitationEntityOnInitialEntitySpawnProcedure;
-import net.mcreator.narutoshippudenmod.procedures.EntityProcedures.RunningFireOnInitialEntitySpawnProcedure;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.AreaEffectCloud;

@@ -488,6 +488,10 @@ public class NarutoShippudenModVariables {
 		public ItemStack gunbaicopy = ItemStack.EMPTY;
 		public double LevelStatMaxChange = 100.0;
 		public double inuzuka_mode = 0;
+		/** Custom jutsu made in the Jutsu Creation screen, one per line (see core/jutsu/CustomJutsu). */
+		public String custom_jutsu = "";
+		/** The art selected on each weapon: "item=index" pairs separated by commas (see core/jutsu/Weapons). */
+		public String weapon_arts = "";
 
 		public void write(ValueOutput out) {
 			out.putDouble("A_Mission", A_Mission);
@@ -905,6 +909,8 @@ public class NarutoShippudenModVariables {
 			out.store("gunbaicopy", ItemStack.OPTIONAL_CODEC, gunbaicopy);
 			out.putDouble("LevelStatMaxChange", LevelStatMaxChange);
 			out.putDouble("inuzuka_mode", inuzuka_mode);
+			out.putString("custom_jutsu", custom_jutsu);
+			out.putString("weapon_arts", weapon_arts);
 		}
 
 		public void read(ValueInput in) {
@@ -1323,6 +1329,8 @@ public class NarutoShippudenModVariables {
 			gunbaicopy = in.read("gunbaicopy", ItemStack.OPTIONAL_CODEC).orElse(ItemStack.EMPTY);
 			LevelStatMaxChange = in.getDoubleOr("LevelStatMaxChange", 100.0);
 			inuzuka_mode = in.getDoubleOr("inuzuka_mode", 0);
+			custom_jutsu = in.getStringOr("custom_jutsu", "");
+			weapon_arts = in.getStringOr("weapon_arts", "");
 		}
 
 		/** Queues a sync to the owning client; sent once at the end of the current server tick. */

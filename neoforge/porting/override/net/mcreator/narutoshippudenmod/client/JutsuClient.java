@@ -122,13 +122,16 @@ public final class JutsuClient {
 	/** Hold the key, point at a jutsu, let go (or click). */
 	static class WheelScreen extends Screen {
 		private final Technique technique;
+		/** The item's jutsu for this player: its own, then their custom jutsu of that release. */
+		private final List<Jutsu> list;
 		private final ItemStack[] probes;
 		private int hovered = -1;
 
 		WheelScreen(Technique technique) {
 			super(Component.literal("Jutsu Wheel"));
 			this.technique = technique;
-			this.probes = technique.jutsu.stream().map(JutsuClient::cooldownProbe).toArray(ItemStack[]::new);
+			this.list = technique.jutsu(NarutoShippudenModVariables.get(Minecraft.getInstance().player));
+			this.probes = list.stream().map(JutsuClient::cooldownProbe).toArray(ItemStack[]::new);
 		}
 
 		@Override
@@ -142,13 +145,13 @@ public final class JutsuClient {
 		}
 
 		private int count() {
-			return technique.jutsu.size();
+			return list.size();
 		}
 
 		/** Box width: wide enough for the longest name (up to 170), so names are not cut. */
 		private int boxWidth() {
 			int widest = 0;
-			for (Jutsu jutsu : technique.jutsu)
+			for (Jutsu jutsu : list)
 				widest = Math.max(widest, font.width(jutsu.name()));
 			return Mth.clamp(widest + 12, 90, 170);
 		}
@@ -166,7 +169,7 @@ public final class JutsuClient {
 			hovered = layout.hovered(mouseX, mouseY, width, height);
 			int selected = technique.selected(variables).index();
 			for (int i = 0; i < count(); i++) {
-				Jutsu jutsu = technique.jutsu.get(i);
+				Jutsu jutsu = list.get(i);
 				int x = layout.x(i, width), y = layout.y(i, height);
 				boolean learned = jutsu.isLearned(variables);
 				int w = boxWidth();
@@ -180,7 +183,7 @@ public final class JutsuClient {
 			}
 			// the middle: the item and what the pointed-at jutsu needs
 			graphics.item(new ItemStack(BuiltInRegistries.ITEM.getValue(technique.item)), width / 2 - 8, height / 2 - 8);
-			Jutsu focus = technique.jutsu.get(hovered >= 0 ? hovered : selected);
+			Jutsu focus = list.get(hovered >= 0 ? hovered : selected);
 			String line = focus.isLearned(variables) ? details(focus, variables) : "Learn it from the jutsu scroll";
 			graphics.centeredText(font, Component.literal(focus.name()).withStyle(ChatFormatting.YELLOW), width / 2, layout.bottom(height), -1);
 			graphics.centeredText(font, line, width / 2, layout.bottom(height) + 12, focus.meetsStat(variables) ? 0xFFE0E0E0 : 0xFFFF6060);

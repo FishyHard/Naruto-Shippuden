@@ -1573,3 +1573,102 @@ def old_magnet_models(path, text):
         return text
     return re.sub(r'(?<!false && )(NarutoShippudenModVariables\.get\(entity\)\.magnet_coat == [123]\) \{\s*(?:if \(entity\.isShiftKeyDown\(\)\) \{\s*)?if \(_evt\.getRenderer\(\))',
                   r'false && \1', text)
+
+
+# ---------------------------------------------------------------- weapons: core/jutsu/Weapons does their arts, flows and passives
+WEAPON_ITEMS = {'chakra_blade', 'white_light_chakra_sabre', 'kusanagi_sasuke', 'gunbai', 'gunbai_block', 'triple_blade_scythe', 'samehada',
+                'kubikiribocho', 'hiramekarei', 'hiramekarei_splitted', 'hiramekarei_hammer_form', 'kabutowari', 'kiba_sword', 'nuibari', 'shibuki',
+                'shichiseiken', 'tanto', 'katana'}
+
+
+@func
+def weapon_old_procedures(path, text):
+    """The weapons' old procedures (dropping the weapon without enough Kenjutsu, chakra drains, the sneak-toggled modes, on-hit and
+    on-swing effects) are replaced by core/jutsu/Weapons: every procedure call in their item classes points at ClanJutsu.unused."""
+    if '/item/' not in path.replace('\\', '/'):
+        return text
+    for m in reversed(list(re.finditer(r'public static class \w+ extends NarutoShippudenModElements\.ModElement \{\s*public static Item block;\s*static \{\s*'
+                                       r'Registration\.holder\(Registries\.ITEM, "(\w+)"', text))):
+        if m.group(1) not in WEAPON_ITEMS:
+            continue
+        end = find_block(text, m.start())
+        cls = re.sub(r'\b\w+Procedure\s*\.executeProcedure\(', 'net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(', text[m.start():end])
+        text = text[:m.start()] + cls + text[end:]
+    return text
+
+
+@func
+def weapon_old_sharpness(path, text):
+    """The old modes left sharpness tags on the swords (FlyingSwallowSharp, KusanagiSharp...) that the attribute procedure turned into
+    permanent bonus damage and reach; the flows in core/jutsu/Weapons add theirs only while they last."""
+    if not path.replace('\\', '/').endswith('WeaponProcedures.java'):
+        return text
+    i = text.find('public static class WeaponDamageModifierProcedure')
+    if i < 0:
+        return text
+    end = find_block(text, i)
+    cls = re.sub(r'(?<!false && )(itemstack\.getItem\(\) == (?:HiramekareiItem|KusanagiSasukeItem|WhiteLightChakraSabreItem|ChakraBladeItem)\.block)',
+                 r'false && \1', text[i:end])
+    return text[:i] + cls + text[end:]
+
+
+# ---------------------------------------------------------------- the hidden village shinobi fight with core/jutsu/ShinobiAI
+SHINOBI = ('HiddenLeafShinobiEntity', 'HiddenMistShinobiEntity', 'HiddenSandShinobiEntity', 'HiddenStoneShinobiEntity', 'HiddenCloudShinobiEntity')
+
+
+@func
+def shinobi_ai(path, text):
+    """The village shinobi's goals (melee only) and tick procedure (jutsu fired on a timer) are replaced by ShinobiAI: ranks, footwork,
+    hand signs, kunai, Substitution and Body Flicker, and the same jutsu players use. Their client learns when signs are woven."""
+    if not path.replace('\\', '/').endswith('entity/NpcEntities.java'):
+        return text
+    ai = 'net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI'
+    for name in SHINOBI:
+        i = text.find('public static class %s ' % name)
+        if i < 0:
+            continue
+        end = find_block(text, i)
+        cls = text[i:end]
+        g = cls.find('protected void registerGoals()')
+        if g >= 0 and ai not in cls[g:find_block(cls, g)]:
+            ge = find_block(cls, g)
+            cls = cls[:g] + 'protected void registerGoals() {\n\t\t\t\tsuper.registerGoals();\n\t\t\t\t%s.goals(this, this.goalSelector, this.targetSelector);\n\t\t\t}' % ai + cls[ge:]
+        cls = re.sub(r'Hidden\w+ShinobiOnEntityTickUpdateProcedure\s*\.executeProcedure\(Stream.*?Map::putAll\)\);', ai + '.tick(this);', cls, flags=re.S)
+        cls = re.sub(r'(NarutoShippudenEntityChakraProcedure\.executeProcedure\(Stream.*?Map::putAll\)\);)(\s*return retval;)',
+                     r'\1\n\t\t\t\t%s.spawned(this);\2' % ai, cls, count=1, flags=re.S) if ai + '.spawned' not in cls else cls
+        if 'handleEntityEvent' not in cls:
+            cls = cls.replace('\t\t\t@Override\n\t\t\tpublic net.minecraft.sounds.SoundEvent getHurtSound(',
+                              '\t\t\t@Override\n\t\t\tpublic void handleEntityEvent(byte id) {\n\t\t\t\tif (!%s.clientEvent(this, id))\n\t\t\t\t\tsuper.handleEntityEvent(id);\n\t\t\t}\n\n'
+                              '\t\t\t@Override\n\t\t\tpublic net.minecraft.sounds.SoundEvent getHurtSound(' % ai, 1)
+        text = text[:i] + cls + text[end:]
+    return text
+
+
+@func
+def shinobi_renderer(path, text):
+    """The village shinobi are drawn by client/ShinobiRenderer: their own model and skin, plus arm poses (hand signs, strikes, throws)
+    and the kunai in their hand."""
+    if not path.replace('\\', '/').endswith('renderer/NpcRenderers.java'):
+        return text
+    return re.sub(r'ModRenderers\.mob\(event, (Hidden\w+ShinobiEntity)\.entity, ModelPlayer_Model\.LAYER, ModelPlayer_Model::new, 0\.5F, ',
+                  r'net.mcreator.narutoshippudenmod.client.ShinobiRenderer.register(event, \1.entity, ModelPlayer_Model.LAYER, ModelPlayer_Model::new, '
+                  r'm -> new net.minecraft.client.model.geom.ModelPart[] { m.root().getChild("transform0"), m.Head, m.Body, m.RightArm, m.LeftArm }, ', text)
+
+
+@func
+def kurama_ai(path, text):
+    """Kurama's goals (a ranged attack goal firing the old Tailed Beast Bomb, a leap) and its every-tick Instant Health (which made it
+    unkillable) are replaced by core/jutsu/Kurama. Its model, hitboxes and roar animation stay."""
+    if not path.replace('\\', '/').endswith('entity/SummonEntities.java'):
+        return text
+    i = text.find('public static class KuramaEntity ')
+    if i < 0:
+        return text
+    end = find_block(text, i)
+    cls = text[i:end]
+    k = 'net.mcreator.narutoshippudenmod.core.jutsu.Kurama'
+    g = cls.find('protected void registerGoals()')
+    if g >= 0 and k not in cls[g:find_block(cls, g)]:
+        cls = cls[:g] + 'protected void registerGoals() {\n\t\t\t\tsuper.registerGoals();\n\t\t\t\t%s.goals(this, this.goalSelector, this.targetSelector);\n\t\t\t}' % k + cls[find_block(cls, g):]
+    cls = re.sub(r'KuramaOnInitialEntitySpawnProcedure\s*\.executeProcedure\(Stream.*?Map::putAll\)\);', k + '.tick(this);', cls, flags=re.S)
+    return text[:i] + cls + text[end:]

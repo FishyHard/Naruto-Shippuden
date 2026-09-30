@@ -232,7 +232,8 @@ public final class NarutoActions {
 	// ------------------------------------------------------------------ network: the menus' requests
 	/**
 	 * kind: set (key = value id, amount), dojutsu (key = dojutsu id, amount = seconds, below 0 = give now), kekkei_genkai,
-	 * rank, reset, page (key = id), jutsu (key = technique item id, amount = jutsu index), learn (key = release item id).
+	 * rank, reset, page (key = id), jutsu (key = technique item id, amount = jutsu index), learn (key = release item id),
+	 * custom_jutsu (key = the design, see CustomJutsu), forget_jutsu (amount = slot).
 	 */
 	public record Action(String kind, String key, double amount) implements CustomPacketPayload {
 		public static final Type<Action> TYPE = new Type<>(Identifier.fromNamespaceAndPath("naruto_shippuden", "action"));
@@ -256,7 +257,8 @@ public final class NarutoActions {
 				return;
 			boolean open = action.kind().equals("page") && !action.key().equals("select")
 					|| action.kind().equals("set") && action.key().equals(SP_PER_CLICK) || action.kind().equals("jutsu") || action.kind().equals("learn")
-					|| action.kind().equals("eye") || action.kind().equals("susanoo") || action.kind().equals("chakra");
+					|| action.kind().equals("eye") || action.kind().equals("susanoo") || action.kind().equals("chakra")
+					|| action.kind().equals("custom_jutsu") || action.kind().equals("forget_jutsu");
 			if (!open && !canCheat(player)) {
 				player.sendSystemMessage(Component.literal("Cheats need creative mode or operator rights."));
 				return;
@@ -286,6 +288,8 @@ public final class NarutoActions {
 					if (item != null)
 						net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.learn(player, item, (int) action.amount());
 				}
+				case "custom_jutsu" -> net.mcreator.narutoshippudenmod.core.jutsu.CustomJutsu.create(player, action.key());
+				case "forget_jutsu" -> net.mcreator.narutoshippudenmod.core.jutsu.CustomJutsu.forget(player, (int) action.amount());
 				case "eye" -> {
 					if (action.key().equals("tap"))
 						Eyes.tap(player, action.amount() > 0);

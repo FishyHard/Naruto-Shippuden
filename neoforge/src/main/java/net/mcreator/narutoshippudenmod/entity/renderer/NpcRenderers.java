@@ -161,7 +161,7 @@ public final class NpcRenderers {
 
 	public static class HiddenCloudShinobiRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.mob(event, HiddenCloudShinobiEntity.entity, ModelPlayer_Model.LAYER, ModelPlayer_Model::new, 0.5F, Identifier.parse("naruto_shippuden:textures/entities/hidden_cloud_shinobi.png"));
+			net.mcreator.narutoshippudenmod.client.ShinobiRenderer.register(event, HiddenCloudShinobiEntity.entity, ModelPlayer_Model.LAYER, ModelPlayer_Model::new, m -> new net.minecraft.client.model.geom.ModelPart[] { m.root().getChild("transform0"), m.Head, m.Body, m.RightArm, m.LeftArm }, Identifier.parse("naruto_shippuden:textures/entities/hidden_cloud_shinobi.png"));
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -227,7 +227,7 @@ public final class NpcRenderers {
 
 	public static class HiddenLeafShinobiRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.mob(event, HiddenLeafShinobiEntity.entity, ModelPlayer_Model.LAYER, ModelPlayer_Model::new, 0.5F, Identifier.parse("naruto_shippuden:textures/entities/hidden_leaf_shinobi.png"));
+			net.mcreator.narutoshippudenmod.client.ShinobiRenderer.register(event, HiddenLeafShinobiEntity.entity, ModelPlayer_Model.LAYER, ModelPlayer_Model::new, m -> new net.minecraft.client.model.geom.ModelPart[] { m.root().getChild("transform0"), m.Head, m.Body, m.RightArm, m.LeftArm }, Identifier.parse("naruto_shippuden:textures/entities/hidden_leaf_shinobi.png"));
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -293,7 +293,7 @@ public final class NpcRenderers {
 
 	public static class HiddenMistShinobiRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.mob(event, HiddenMistShinobiEntity.entity, ModelPlayer_Model.LAYER, ModelPlayer_Model::new, 0.5F, Identifier.parse("naruto_shippuden:textures/entities/hidden_mist_shinobi.png"));
+			net.mcreator.narutoshippudenmod.client.ShinobiRenderer.register(event, HiddenMistShinobiEntity.entity, ModelPlayer_Model.LAYER, ModelPlayer_Model::new, m -> new net.minecraft.client.model.geom.ModelPart[] { m.root().getChild("transform0"), m.Head, m.Body, m.RightArm, m.LeftArm }, Identifier.parse("naruto_shippuden:textures/entities/hidden_mist_shinobi.png"));
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -359,7 +359,7 @@ public final class NpcRenderers {
 
 	public static class HiddenSandShinobiRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.mob(event, HiddenSandShinobiEntity.entity, ModelPlayer_Model.LAYER, ModelPlayer_Model::new, 0.5F, Identifier.parse("naruto_shippuden:textures/entities/hidden_sand_shinobi.png"));
+			net.mcreator.narutoshippudenmod.client.ShinobiRenderer.register(event, HiddenSandShinobiEntity.entity, ModelPlayer_Model.LAYER, ModelPlayer_Model::new, m -> new net.minecraft.client.model.geom.ModelPart[] { m.root().getChild("transform0"), m.Head, m.Body, m.RightArm, m.LeftArm }, Identifier.parse("naruto_shippuden:textures/entities/hidden_sand_shinobi.png"));
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
@@ -425,7 +425,7 @@ public final class NpcRenderers {
 
 	public static class HiddenStoneShinobiRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.mob(event, HiddenStoneShinobiEntity.entity, ModelPlayer_Model.LAYER, ModelPlayer_Model::new, 0.5F, Identifier.parse("naruto_shippuden:textures/entities/hidden_stone_shinobi.png"));
+			net.mcreator.narutoshippudenmod.client.ShinobiRenderer.register(event, HiddenStoneShinobiEntity.entity, ModelPlayer_Model.LAYER, ModelPlayer_Model::new, m -> new net.minecraft.client.model.geom.ModelPart[] { m.root().getChild("transform0"), m.Head, m.Body, m.RightArm, m.LeftArm }, Identifier.parse("naruto_shippuden:textures/entities/hidden_stone_shinobi.png"));
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {

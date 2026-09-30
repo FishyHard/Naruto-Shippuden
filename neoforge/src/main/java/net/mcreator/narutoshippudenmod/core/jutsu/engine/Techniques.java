@@ -66,8 +66,14 @@ public final class Techniques {
 	public static float power(@Nullable Entity caster) {
 		if (caster instanceof ServerPlayer player)
 			return 1 + Math.min(1.5F, (float) NarutoShippudenModVariables.get(player).ninjutsu / 100F);
+		// shinobi NPCs: set by their rank
+		if (caster != null && caster.getPersistentData().contains("JutsuPower"))
+			return caster.getPersistentData().getFloatOr("JutsuPower", 1);
 		return 1;
 	}
+
+	/** Who a caster must not hit even though they aren't its summons (a shinobi's own village); set by ShinobiAI. */
+	public static java.util.function.BiPredicate<Entity, Entity> ALLIES = (caster, target) -> false;
 
 	/** The old jutsu's power tier (0 to 9), which grows with Ninjutsu (it used to be chosen with its own key and stat). */
 	public static double jutsuPower(Entity entity) {
@@ -108,6 +114,8 @@ public final class Techniques {
 	/** Whether a jutsu cast by caster may hit this: not the caster, their summons and clones, or armor stands. */
 	public static boolean isEnemy(@Nullable Entity caster, Entity target) {
 		if (target == caster || target instanceof ArmorStand || !target.isAlive())
+			return false;
+		if (caster != null && ALLIES.test(caster, target))
 			return false;
 		return caster == null || Progression.owner(target) != caster;
 	}
