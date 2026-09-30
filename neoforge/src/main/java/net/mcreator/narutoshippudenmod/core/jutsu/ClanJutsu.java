@@ -1869,7 +1869,7 @@ public final class ClanJutsu {
 		final List<Display.BlockDisplay> pool = new ArrayList<>();
 		final List<Float> poolTurn = new ArrayList<>();
 		float poolSize;
-		Vec3 linkedFrom = Vec3.ZERO, linkedTo = Vec3.ZERO;
+		Vec3 linkedFrom = Vec3.ZERO, linkedTo = Vec3.ZERO, pooledAt = Vec3.ZERO;
 		/** How far and which way this shadow bends (each one its own). */
 		final float bow;
 
@@ -2118,9 +2118,11 @@ public final class ClanJutsu {
 					c.linkedTo = e.position();
 					relink(level, c.link, p.position(), e.position(), c.bow * (1 + 0.3 * Math.sin(t * 0.12 + c.bow * 20)));
 				}
-				if (c.linkedTo.distanceToSqr(e.position()) > 1.0E-4 || c.link.isEmpty())
+				if (c.pooledAt.distanceToSqr(e.position()) > 1.0E-4) {
+					c.pooledAt = e.position();
 					for (int i = 0; i < c.pool.size(); i++)
 						slide(level, c.pool.get(i), e.position(), e.getY(), Displays.box(c.poolTurn.get(i), 0, c.poolSize, 0.02F, c.poolSize));
+				}
 			}
 			if (t % 4 == 0)
 				for (LivingEntity e : hold.held.keySet())

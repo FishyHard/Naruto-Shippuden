@@ -330,7 +330,7 @@ final class KekkeiGenkaiJutsu {
 	private static void ironFist(ServerPlayer p) {
 		// the iron sand arms (their model) for a second, unless a coat or wings are on
 		if (NarutoShippudenModVariables.get(p).magnet_coat == 0)
-			ClanJutsu.flag(p, 20, v -> v.magnet_coat = 2, v -> {
+			ClanJutsu.flag(p, 60, v -> v.magnet_coat = 2, v -> {
 				if (v.magnet_coat == 2)
 					v.magnet_coat = 0;
 			});
