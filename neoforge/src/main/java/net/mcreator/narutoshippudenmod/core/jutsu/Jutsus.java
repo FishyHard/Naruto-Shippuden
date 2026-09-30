@@ -75,8 +75,7 @@ public final class Jutsus {
 		}
 
 		public Jutsu selected(PlayerVariables variables) {
-			int index = (int) selected.applyAsDouble(variables);
-			return jutsu.get(index >= 0 && index < jutsu.size() ? index : 0);
+			return jutsu.get(index(selected.applyAsDouble(variables), jutsu.size()));
 		}
 	}
 
@@ -215,6 +214,24 @@ public final class Jutsus {
 		player.sendOverlayMessage(Component.literal(message));
 	}
 
+	/**
+	 * The jutsu a technique variable selects: an index out of range (old saves stored some of them differently) means the first. The
+	 * checks and the cast both read it through here, so a jutsu is never cast without passing its own checks.
+	 */
+	static int index(double selected, int count) {
+		int index = (int) selected;
+		return index >= 0 && index < count ? index : 0;
+	}
+
+	/** Set by a jutsu that found nothing to act on (no target in reach): it gives its chakra back and starts no cooldown. */
+	static boolean missed;
+
+	/** A jutsu that can't be done right now (nothing in reach): says why, and the cast costs nothing. */
+	static void miss(ServerPlayer player, String message) {
+		tell(player, message);
+		missed = true;
+	}
+
 	/** Gives the stack the selected jutsu's cooldown group, so the vanilla overlay shows that jutsu's cooldown. */
 	// seconds must be positive (the item codec rejects 0, which kicked creative players and dropped the item on save); never applied
 
@@ -240,6 +257,10 @@ public final class Jutsus {
 			tell(player, "You haven't learned " + jutsu.name() + " yet");
 			return;
 		}
+		if (ClanJutsu.sealed(player)) {
+			tell(player, "Your chakra is sealed");
+			return;
+		}
 		if (technique.requirement != null && !technique.requirement.test(variables)) {
 			tell(player, technique.requirementMessage);
 			return;
@@ -258,6 +279,7 @@ public final class Jutsus {
 		boolean sneaking = player.isShiftKeyDown();
 		if (sneaking)
 			player.setShiftKeyDown(false);
+		missed = false;
 		try {
 			net.mcreator.narutoshippudenmod.core.Progression.casting(player, () -> technique.cast.accept(dependencies(player, stack)));
 		} finally {
@@ -266,6 +288,10 @@ public final class Jutsus {
 		}
 		// they also put one shared cooldown on the item: replace it with this jutsu's own
 		player.getCooldowns().removeCooldown(technique.item);
+		if (missed) {
+			missed = false;
+			return;
+		}
 		int cooldown = jutsu.cooldown(variables);
 		if (cooldown > 0)
 			player.getCooldowns().addCooldown(jutsu.cooldownGroup(), cooldown);

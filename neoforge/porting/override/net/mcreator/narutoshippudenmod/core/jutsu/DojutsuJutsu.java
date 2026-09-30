@@ -78,9 +78,12 @@ public final class DojutsuJutsu {
 	static void register() {
 		nature("sharingan", "the Sharingan", v -> v.sharingan, v -> v.sharingantechnique, (v, i) -> v.sharingantechnique = i, v -> v.sharinganlearn,
 				(v, i) -> v.sharinganlearn = i, v -> v.sharinganrelease, (v, i) -> v.sharinganrelease = i,
+				new Def("Genjutsu: Sharingan", JutsuRank.D, DojutsuJutsu::genjutsuSharingan),
 				new Def("Coercion Sharingan", JutsuRank.C, DojutsuJutsu::coercion),
 				new Def("Demonic Illusion: Mirage Crow", JutsuRank.B, DojutsuJutsu::mirageCrow),
-				new Def("Demonic Illusion: Shackling Stakes Technique", JutsuRank.A, DojutsuJutsu::shacklingStakes));
+				new Def("Demonic Illusion: Shackling Stakes Technique", JutsuRank.A, DojutsuJutsu::shacklingStakes),
+				new Def("Izanagi", JutsuRank.S, DojutsuJutsu::izanagi),
+				new Def("Izanami", JutsuRank.S, DojutsuJutsu::izanami));
 		requires("sharingan_release_technique", v -> v.sharingan && v.sharinganactivate, "Activate your Sharingan first");
 		// the Kokugan (the items keep their old "isshiki_dojutsu" ids)
 		nature("isshiki_dojutsu", "the Kokugan", v -> v.isshikidojutsu, v -> v.isshikidojutsutechnique, (v, i) -> v.isshikidojutsutechnique = i,
@@ -89,15 +92,72 @@ public final class DojutsuJutsu {
 				new Def("Sukunahikona: Rapid Succession", JutsuRank.B, DojutsuJutsu::rapidSuccession),
 				new Def("Lacquer Bloom", JutsuRank.A, DojutsuJutsu::lacquerBloom),
 				new Def("Black Holy Hammer", JutsuRank.A, DojutsuJutsu::blackHolyHammer),
-				new Def("Daikokuten: Daihakoten", JutsuRank.A, DojutsuJutsu::daihakoten),
+				new Def("Daihakoten", JutsuRank.A, DojutsuJutsu::daihakoten),
 				new Def("Daikokuten: Falling Star", JutsuRank.S, DojutsuJutsu::fallingStar));
 		requires("isshiki_dojutsu_release_technique", v -> v.isshikidojutsu && v.isshikidojutsuactivate, "Activate the Kokugan first");
+		nature("byakugan", "the Byakugan", v -> v.byakugan, v -> v.byakugantechnique, (v, i) -> v.byakugantechnique = i, v -> v.byakuganlearn,
+				(v, i) -> v.byakuganlearn = i, v -> v.byakuganrelease, (v, i) -> v.byakuganrelease = i,
+				new Def("Palm Bottom", JutsuRank.D, DojutsuJutsu::palmBottom, "Taijutsu"),
+				new Def("Eight Trigrams Vacuum Palm", JutsuRank.C, DojutsuJutsu::vacuumPalm),
+				new Def("Eight Trigrams Vacuum Wall Palm", JutsuRank.B, DojutsuJutsu::vacuumWallPalm),
+				new Def("Rabbit Hair Needle", JutsuRank.A, DojutsuJutsu::rabbitHairNeedle),
+				new Def("Eight Trigrams One Hundred Twenty-Eight Palms", JutsuRank.S, DojutsuJutsu::hundredTwentyEightPalms, "Taijutsu"));
+		requires("byakugan_release_technique", v -> v.byakugan && v.byakuganactivate, "Activate your Byakugan first");
+		nature("ketsuryugan", "the Ketsuryugan", v -> v.ketsuryugan, v -> v.ketsuryugantechnique, (v, i) -> v.ketsuryugantechnique = i, v -> v.ketsuryuganlearn,
+				(v, i) -> v.ketsuryuganlearn = i, v -> v.ketsuryuganrelease, (v, i) -> v.ketsuryuganrelease = i,
+				new Def("Genjutsu: Ketsuryugan", JutsuRank.C, DojutsuJutsu::ketsuryuganGenjutsu),
+				new Def("Blood Transformation Technique", JutsuRank.B, DojutsuJutsu::bloodTransformation),
+				new Def("Blood Dragon Ascension", JutsuRank.A, DojutsuJutsu::bloodDragon),
+				new Def("Exploding Human Technique", JutsuRank.S, DojutsuJutsu::explodingHuman));
+		requires("ketsuryugan_release_technique", v -> v.ketsuryugan && v.ketsuryuganactivate, "Activate your Ketsuryugan first");
+		nature("rinnegan", "the Rinnegan", v -> v.rinnegan, v -> v.rinnegantechnique, (v, i) -> v.rinnegantechnique = i, v -> v.rinneganlearn,
+				(v, i) -> v.rinneganlearn = i, v -> v.rinneganrelease, (v, i) -> v.rinneganrelease = i,
+				new Def("Bansho Ten'in", JutsuRank.C, DojutsuJutsu::banshoTenin),
+				new Def("Shinra Tensei", JutsuRank.B, DojutsuJutsu::shinraTensei),
+				new Def("Asura Attack", JutsuRank.B, DojutsuJutsu::asuraAttack),
+				new Def("Blocking Technique Absorption Seal", JutsuRank.B, DojutsuJutsu::absorptionSeal),
+				new Def("Human Path", JutsuRank.A, DojutsuJutsu::humanPath),
+				new Def("Amenotejikara", JutsuRank.A, DojutsuJutsu::amenotejikara),
+				new Def("Chibaku Tensei", JutsuRank.S, DojutsuJutsu::chibakuTensei),
+				new Def("Tengai Shinsei", JutsuRank.S, DojutsuJutsu::tengaiShinsei));
+		requires("rinnegan_release_technique", v -> v.rinnegan && v.rinneganactivate, "Activate your Rinnegan first");
+		nature("tenseigan", "the Tenseigan", v -> v.tenseigan, v -> v.tenseigantechnique, (v, i) -> v.tenseigantechnique = i, v -> v.tenseiganlearn,
+				(v, i) -> v.tenseiganlearn = i, v -> v.tenseiganrelease, (v, i) -> v.tenseiganrelease = i,
+				new Def("Silver Wheel Reincarnation Explosion", JutsuRank.B, DojutsuJutsu::silverWheel),
+				new Def("Golden Wheel Reincarnation Explosion", JutsuRank.A, DojutsuJutsu::goldenWheel),
+				new Def("Localised Reincarnation Explosion", JutsuRank.A, DojutsuJutsu::localisedExplosion),
+				new Def("Tenseigan Chakra Mode", JutsuRank.S, DojutsuJutsu::tenseiganMode));
+		requires("tenseigan_release_technique", v -> v.tenseigan && v.tenseiganactivate, "Activate your Tenseigan first");
 
 		// the Mangekyou: only the jutsu (their scrolls also sell the Susanoo stages)
-		mangekyou("mangekyou_sharingan_itachi_release_technique", "Itachi", v -> v.MangekyouSharinganItachi, v -> 0, (v, i) -> {
-		}, v -> v.mangekyoushrainganitachiamaterasulearn, new Def("Amaterasu", JutsuRank.A, DojutsuJutsu::amaterasu));
-		mangekyou("mangekyou_sharingan_kakashi_release_technique", "Kakashi", v -> v.MangekyouSharinganKakashi, v -> 0, (v, i) -> {
-		}, v -> v.mangekyousharingankakashikamuilearn, new Def("Kamui Long-Range", JutsuRank.A, p -> kamui(p, 30, 30)));
+		mangekyou("mangekyou_sharingan_itachi_release_technique", "Itachi", v -> v.MangekyouSharinganItachi, v -> v.mangekyousharinganitachitechnique,
+				(v, i) -> v.mangekyousharinganitachitechnique = i, v -> v.mangekyoushrainganitachiamaterasulearn,
+				new Def("Amaterasu", JutsuRank.A, DojutsuJutsu::amaterasu),
+				new Def("Tsukuyomi", JutsuRank.S, DojutsuJutsu::tsukuyomi));
+		mangekyouScroll("itachi", net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.MangekyouSharinganItachiReleaseRightclickedProcedure::executeProcedure,
+				v -> v.mangekyoushrainganitachiamaterasulearn, (v, i) -> v.mangekyoushrainganitachiamaterasulearn = i, new JutsuRank[] { JutsuRank.A, JutsuRank.S },
+				susanoo(v -> v.mangekyoushrainganitachisusanorelease, v -> v.mangekyoushrainganitachisusanolearn, 3));
+		mangekyou("mangekyou_sharingan_kakashi_release_technique", "Kakashi", v -> v.MangekyouSharinganKakashi, v -> v.mangekyousharingankakashitechnique,
+				(v, i) -> v.mangekyousharingankakashitechnique = i, v -> v.mangekyousharingankakashikamuilearn,
+				new Def("Kamui Long-Range", JutsuRank.A, p -> kamui(p, 30, 30)),
+				new Def("Kamui Lightning Cutter", JutsuRank.A, DojutsuJutsu::kamuiLightningCutter),
+				new Def("Kamui Shuriken", JutsuRank.S, DojutsuJutsu::kamuiShuriken));
+		mangekyouScroll("kakashi", deps -> {
+		}, v -> v.mangekyousharingankakashikamuilearn, (v, i) -> v.mangekyousharingankakashikamuilearn = i,
+				new JutsuRank[] { JutsuRank.A, JutsuRank.A, JutsuRank.S }, null);
+		mangekyou("mangekyou_sharingan_shisui_release_technique", "Shisui", v -> v.MangekyouSharinganShisui, v -> v.mangekyousharinganshisuitechnique,
+				(v, i) -> v.mangekyousharinganshisuitechnique = i, v -> v.mangekyousharinganshisuilearn,
+				new Def("Kotoamatsukami", JutsuRank.S, DojutsuJutsu::kotoamatsukami));
+		mangekyouScroll("shisui", net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.MangekyouSharinganShisuiReleaseRightclickedProcedure::executeProcedure,
+				v -> v.mangekyousharinganshisuilearn, (v, i) -> v.mangekyousharinganshisuilearn = i, new JutsuRank[] { JutsuRank.S },
+				susanoo(v -> v.mangekyousharinganshisuisusanorelease, v -> v.mangekyousharinganshisuisusanolearn, 4));
+		mangekyou("mangekyou_sharingan_madara_release_technique", "Madara", v -> v.MangekyouSharinganMadara, v -> v.mangekyousharinganmadaratechnique,
+				(v, i) -> v.mangekyousharinganmadaratechnique = i, v -> v.mangekyousharinganmadaralearn,
+				new Def("Genjutsu: Sharingan", JutsuRank.A, DojutsuJutsu::madaraGenjutsu),
+				new Def("Susanoo: Fist", JutsuRank.S, DojutsuJutsu::susanooFist));
+		mangekyouScroll("madara", net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.MangekyouSharinganMadaraReleaseRightclickedProcedure::executeProcedure,
+				v -> v.mangekyousharinganmadaralearn, (v, i) -> v.mangekyousharinganmadaralearn = i, new JutsuRank[] { JutsuRank.A, JutsuRank.S },
+				susanoo(v -> v.mangekyousharinganmadarasusanorelease, v -> v.mangekyousharinganmadarasusanolearn, 4));
 		mangekyou("mangekyou_sharingan_obito_release_technique", "Obito", v -> v.MangekyouSharinganObito, v -> v.mangekyousharinganobitokamuitechnique,
 				(v, i) -> v.mangekyousharinganobitokamuitechnique = i, v -> v.mangekyousharinganobitokamuilearn,
 				new Def("Kamui Self-Teleportation", JutsuRank.B, DojutsuJutsu::kamuiTeleport),
@@ -129,12 +189,17 @@ public final class DojutsuJutsu {
 		Jutsus.technique(item, selected, select, v -> v.MangekyouSharinganActivate && has.test(v), deps -> {
 			if (!(deps.get("entity") instanceof ServerPlayer player))
 				return;
-			Def def = defs[Mth.clamp((int) selected.applyAsDouble(NarutoShippudenModVariables.get(player)), 0, defs.length - 1)];
+			Def def = defs[Jutsus.index(selected.applyAsDouble(NarutoShippudenModVariables.get(player)), defs.length)];
 			NarutoShippudenModVariables.ifPresent(player, vars -> {
 				vars.ChakraAmount -= def.rank().chakra;
 				vars.syncPlayerVariables(player);
 			});
 			def.cast().accept(player);
+			if (Jutsus.missed)
+				NarutoShippudenModVariables.ifPresent(player, vars -> {
+					vars.ChakraAmount += def.rank().chakra;
+					vars.syncPlayerVariables(player);
+				});
 		}, specs);
 		requires(item, v -> v.MangekyouSharinganActivate && has.test(v), "Needs " + whose + "'s Mangekyou Sharingan, active");
 	}
@@ -153,7 +218,7 @@ public final class DojutsuJutsu {
 		ServerLevel level = level(p);
 		LivingEntity target = target(p, 16);
 		if (target == null) {
-			tell(p, "No one meets your gaze");
+			Jutsus.miss(p, "No one meets your gaze");
 			return;
 		}
 		damage(p, target, 4, Element.GENJUTSU);
@@ -361,7 +426,7 @@ public final class DojutsuJutsu {
 		ServerLevel level = level(p);
 		LivingEntity target = target(p, range);
 		if (target == null) {
-			tell(p, "Nothing to take");
+			Jutsus.miss(p, "Nothing to take");
 			return;
 		}
 		float size = Math.max(target.getBbWidth(), target.getBbHeight()) * 1.6F + 1;
@@ -661,5 +726,688 @@ public final class DojutsuJutsu {
 			double a = p.getRandom().nextDouble() * Math.PI * 2, r = p.getRandom().nextDouble() * 6;
 			cube(p, at.add(Math.cos(a) * r, 14 + p.getRandom().nextDouble() * 4, Math.sin(a) * r), 2.4F + p.getRandom().nextFloat(), 18);
 		});
+	}
+
+	// ------------------------------------------------------------------ mangekyou scrolls
+	/**
+	 * A Mangekyou scroll whose jutsu track is bought here (the old procedures only knew each eye's first jutsu); its Susanoo track, if
+	 * it has one, is still bought by the old procedure.
+	 */
+	private static void mangekyouScroll(String eye, java.util.function.Consumer<Map<String, Object>> oldBuy, ToDoubleFunction<PlayerVariables> learned,
+			ObjDoubleConsumer<PlayerVariables> setLearned, JutsuRank[] ranks, Jutsus.@org.jspecify.annotations.Nullable Track susanoo) {
+		String item = "mangekyou_sharingan_" + eye + "_release", technique = item + "_technique";
+		Jutsus.Tier[] tiers = new Jutsus.Tier[ranks.length];
+		for (int i = 0; i < ranks.length; i++)
+			tiers[i] = Jutsus.tier(ranks[i].jp, i + 1, i == 0 ? technique : null);
+		Jutsus.Track jutsu = Jutsus.track("", learned, susanoo == null ? -1 : 0, technique, learned, tiers);
+		Jutsus.release(item, deps -> {
+			if (!(deps.get("entity") instanceof ServerPlayer player))
+				return;
+			PlayerVariables v = NarutoShippudenModVariables.get(player);
+			if (susanoo != null && v.MangekyouSharinganRelease != 0) {
+				oldBuy.accept(deps);
+				return;
+			}
+			int next = (int) learned.applyAsDouble(v);
+			if (next >= ranks.length || v.jp < ranks[next].jp)
+				return;
+			NarutoShippudenModVariables.ifPresent(player, vars -> {
+				vars.jp -= ranks[next].jp;
+				setLearned.accept(vars, next + 1);
+				vars.syncPlayerVariables(player);
+			});
+			if (next == 0)
+				Compat.giveItemToPlayer(player,
+						new net.minecraft.world.item.ItemStack(net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("naruto_shippuden", technique))));
+		}, susanoo == null ? new Jutsus.Track[] { jutsu } : new Jutsus.Track[] { jutsu, susanoo });
+	}
+
+	private static Jutsus.Track susanoo(ToDoubleFunction<PlayerVariables> bought, ToDoubleFunction<PlayerVariables> learned, int stages) {
+		Jutsus.Tier[] tiers = new Jutsus.Tier[stages];
+		for (int i = 0; i < stages; i++)
+			tiers[i] = Jutsus.tier(10 * (i + 1), i + 1, null);
+		return Jutsus.track("Susanoo", bought, 1, null, learned, tiers);
+	}
+
+	// ------------------------------------------------------------------ sharingan (added from the wiki)
+	/** Genjutsu: Sharingan: one look and the enemy's senses are thrown off for five seconds: they reel and strike at anything. */
+	private static void genjutsuSharingan(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity target = target(p, 12);
+		if (target == null) {
+			Jutsus.miss(p, "No one meets your gaze");
+			return;
+		}
+		damage(p, target, 2, Element.GENJUTSU);
+		sound(level, target.position(), SoundEvents.ENDERMAN_STARE, 0.8F, 1.5F);
+		channel(p, 100, 5, t -> {
+			if (!target.isAlive())
+				return;
+			target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 1, false, false));
+			target.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 30, 0, false, false));
+			if (target instanceof Mob mob && t % 20 == 0)
+				mob.setTarget(level.getEntitiesOfClass(LivingEntity.class, mob.getBoundingBox().inflate(10), x -> x != mob && x != p && x.isAlive()).stream().findAny()
+						.orElse(null));
+			level.sendParticles(Element.GENJUTSU.trail, target.getX(), target.getEyeY() + 0.3, target.getZ(), 2, 0.3, 0.1, 0.3, 0);
+		});
+	}
+
+	/** Until when each caster's reality is being rewritten (Izanagi). */
+	private static final Map<UUID, Long> IZANAGI = new HashMap<>();
+
+	/**
+	 * Izanagi: for ten seconds the caster rewrites reality: every wound they take is undone as if it never happened. When it ends,
+	 * the eye that cast it goes dark: the Sharingan closes.
+	 */
+	private static void izanagi(ServerPlayer p) {
+		ServerLevel level = level(p);
+		IZANAGI.put(p.getUUID(), level.getGameTime() + 200);
+		sound(level, p.position(), SoundEvents.ENDERMAN_STARE, 1.2F, 0.6F);
+		channel(p, 200, 4, t -> level.sendParticles(Element.GENJUTSU.trail, p.getX(), p.getY() + 1, p.getZ(), 2, 0.4, 0.7, 0.4, 0));
+		after(level, 200, () -> {
+			if (!p.isAlive())
+				return;
+			net.mcreator.narutoshippudenmod.core.Eyes.closeAll(p);
+			p.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 100, 0, false, false));
+			tell(p, "Izanagi ends; the eye that cast it goes dark");
+		});
+	}
+
+	@SubscribeEvent
+	public static void rewrittenReality(LivingIncomingDamageEvent event) {
+		if (!(event.getEntity() instanceof ServerPlayer p) || IZANAGI.getOrDefault(p.getUUID(), 0L) <= p.level().getGameTime()
+				|| event.getSource().is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY))
+			return;
+		event.setCanceled(true);
+		level(p).sendParticles(Element.GENJUTSU.puff, p.getX(), p.getY() + 1, p.getZ(), 12, 0.4, 0.7, 0.4, 0.05);
+	}
+
+	/**
+	 * Izanami: the enemy looked at is caught in a loop: for eight seconds they are sent back, again and again, to the moment and place
+	 * they were in when the caster's eye met theirs.
+	 */
+	private static void izanami(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity target = target(p, 12);
+		if (target == null) {
+			Jutsus.miss(p, "No one meets your gaze");
+			return;
+		}
+		Vec3 spot = target.position();
+		float yaw = target.getYRot(), pitch = target.getXRot();
+		sound(level, target.position(), SoundEvents.ENDERMAN_STARE, 1.2F, 0.5F);
+		channel(p, 160, 1, t -> {
+			if (!target.isAlive())
+				return;
+			target.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 30, 0, false, false));
+			if (t % 40 != 39)
+				return;
+			if (target instanceof ServerPlayer victim)
+				victim.teleportTo(level, spot.x, spot.y, spot.z, java.util.Set.of(), yaw, pitch, false);
+			else {
+				target.teleportTo(spot.x, spot.y, spot.z);
+				target.setYRot(yaw);
+				if (target instanceof Mob mob)
+					mob.setTarget(null);
+			}
+			damage(p, target, 4, Element.GENJUTSU);
+			level.sendParticles(Element.GENJUTSU.puff, spot.x, spot.y + 1, spot.z, 20, 0.4, 0.7, 0.4, 0.05);
+			sound(level, spot, SoundEvents.ILLUSIONER_MIRROR_MOVE, 1, 0.6F);
+		});
+	}
+
+	// ------------------------------------------------------------------ byakugan
+	/** Palm Bottom: a sharp palm strike that knocks the enemy back. */
+	private static void palmBottom(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 look = p.getLookAngle();
+		for (LivingEntity target : cone(p, 3.8, 30)) {
+			damage(p, target, 7, Element.CHAKRA);
+			target.push(look.x * 2, 0.4, look.z * 2);
+			target.syncVelocity = true;
+		}
+		Vec3 palm = p.getEyePosition().add(look.scale(1.5)).subtract(0, 0.3, 0);
+		level.sendParticles(ParticleTypes.END_ROD, palm.x, palm.y, palm.z, 8, 0.15, 0.15, 0.15, 0.1);
+		sound(level, p.position(), SoundEvents.PLAYER_ATTACK_STRONG, 1, 1.4F);
+	}
+
+	/** Eight Trigrams Vacuum Palm: a blast of chakra from the palm strikes an enemy from afar. */
+	private static void vacuumPalm(ServerPlayer p) {
+		JutsuProjectile palm = shoot(p, Element.CHAKRA, Shape.ORB, 0.7F, 2.2F, 10);
+		palm.life = 20;
+		palm.knockback = 2.2F;
+		palm.onImpact = b -> puff(level(p), b.position(), Element.CHAKRA, 0.8F);
+		sound(level(p), p.getEyePosition(), SoundEvents.BREEZE_SHOOT, 1.2F, 1.2F);
+	}
+
+	/** Eight Trigrams Vacuum Wall Palm: a wall of chakra pressure hurled from both palms that flattens everything in front. */
+	private static void vacuumWallPalm(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 look = p.getLookAngle();
+		for (LivingEntity target : cone(p, 11, 45)) {
+			damage(p, target, 13, Element.CHAKRA);
+			target.push(look.x * 3, 0.5, look.z * 3);
+			target.syncVelocity = true;
+		}
+		for (int i = 1; i <= 10; i += 2) {
+			Vec3 at = p.getEyePosition().add(look.scale(i));
+			level.sendParticles(Element.CHAKRA.trail, at.x, at.y, at.z, 12, i * 0.15, i * 0.12, i * 0.15, 0);
+		}
+		sound(level, p.getEyePosition(), SoundEvents.BREEZE_WIND_CHARGE_BURST.value(), 1.5F, 0.9F);
+	}
+
+	/** Rabbit Hair Needle: a volley of chakra-hardened needles that seek out enemies. */
+	private static void rabbitHairNeedle(ServerPlayer p) {
+		for (int i = 0; i < 8; i++) {
+			JutsuProjectile needle = shoot(p, Element.CHAKRA, Shape.NEEDLE, 0.25F, turned(p, (i - 3.5F) * 7, -4).scale(1.8), 5);
+			needle.homing = 0.3F;
+			needle.life = 35;
+			needle.knockback = 0.1F;
+		}
+		sound(level(p), p.getEyePosition(), SoundEvents.TRIDENT_THROW.value(), 1, 1.8F);
+	}
+
+	private static final String[] PALMS = { "Two palms!", "Four palms!", "Eight palms!", "Sixteen palms!", "Thirty-two palms!", "Sixty-four palms!",
+			"One hundred twenty-eight palms!" };
+
+	/** Eight Trigrams One Hundred Twenty-Eight Palms: twice the sixty-four, faster, with a final blow that sends everyone flying. */
+	private static void hundredTwentyEightPalms(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 feet = p.position();
+		channel(p, 64, 1, t -> {
+			p.setDeltaMovement(0, Math.min(0, p.getDeltaMovement().y), 0);
+			p.syncVelocity = true;
+			if (t % 4 == 0)
+				for (int i = 0; i < 40; i++) {
+					double a = i * Math.PI / 20;
+					level.sendParticles(Element.CHAKRA.trail, feet.x + Math.cos(a) * 3.5, feet.y + 0.1, feet.z + Math.sin(a) * 3.5, 1, 0, 0, 0, 0);
+				}
+			if (Integer.bitCount(t + 1) == 1 || t == 63)
+				tell(p, PALMS[Math.min(6, Integer.numberOfTrailingZeros(Integer.highestOneBit(t + 1)))]);
+			for (LivingEntity target : cone(p, 4.5, 50)) {
+				target.setDeltaMovement(0, Math.min(0, target.getDeltaMovement().y), 0);
+				damage(p, target, 0.6F, Element.CHAKRA);
+				if (t == 63) {
+					Vec3 away = target.position().subtract(p.position()).multiply(1, 0, 1).normalize();
+					damage(p, target, 16, Element.CHAKRA);
+					target.push(away.x * 2.5, 0.7, away.z * 2.5);
+					target.syncVelocity = true;
+				}
+			}
+			if (t % 2 == 0)
+				sound(level, p.position(), SoundEvents.PLAYER_ATTACK_WEAK, 0.7F, 1.3F + t * 0.01F);
+		});
+	}
+
+	// ------------------------------------------------------------------ ketsuryugan
+	/** Genjutsu: Ketsuryugan: the blood-red eyes hypnotise the enemy looked at for six seconds: they stand still, their will gone. */
+	private static void ketsuryuganGenjutsu(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity target = target(p, 14);
+		if (target == null) {
+			Jutsus.miss(p, "No one meets your gaze");
+			return;
+		}
+		sound(level, target.position(), SoundEvents.ENDERMAN_STARE, 1, 0.8F);
+		channel(p, 120, 1, t -> {
+			if (!target.isAlive())
+				return;
+			hold(target);
+			target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 10, 4, false, false));
+			if (t % 6 == 0)
+				level.sendParticles(Element.BLOOD.trail, target.getX(), target.getEyeY() + 0.3, target.getZ(), 2, 0.3, 0.1, 0.3, 0);
+		});
+	}
+
+	/** Until when each caster's body is blood (Blood Transformation). */
+	private static final Map<UUID, Long> BLOOD_FORM = new HashMap<>();
+
+	/** Blood Transformation Technique: the body dissolves into blood for three seconds: nothing can hurt it and it moves like a flood. */
+	private static void bloodTransformation(ServerPlayer p) {
+		ServerLevel level = level(p);
+		BLOOD_FORM.put(p.getUUID(), level.getGameTime() + 60);
+		p.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 60, 0, false, false));
+		p.addEffect(new MobEffectInstance(MobEffects.SPEED, 60, 3, false, false));
+		sound(level, p.position(), SoundEvents.SLIME_SQUISH, 1.5F, 0.6F);
+		channel(p, 60, 1, t -> level.sendParticles(Element.BLOOD.puff, p.getX(), p.getY() + 0.3, p.getZ(), 6, 0.4, 0.2, 0.4, 0.02));
+		after(level, 60, () -> puff(level, p.position().add(0, 1, 0), Element.BLOOD, 1));
+	}
+
+	@SubscribeEvent
+	public static void bloodBody(LivingIncomingDamageEvent event) {
+		if (event.getEntity() instanceof ServerPlayer p && BLOOD_FORM.getOrDefault(p.getUUID(), 0L) > p.level().getGameTime()
+				&& !event.getSource().is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY))
+			event.setCanceled(true);
+	}
+
+	/** Blood Dragon Ascension: a dragon of blood surges out and tears through everything in its path. */
+	private static void bloodDragon(ServerPlayer p) {
+		JutsuProjectile dragon = shoot(p, Element.BLOOD, Shape.DRAGON, 1.5F, 1.0F, 16);
+		dragon.pierce = -1;
+		dragon.life = 50;
+		dragon.knockback = 1.2F;
+		dragon.onImpact = d -> Techniques.burst(level(p), d.position(), 3.5F, 10, 1, Element.BLOOD, d);
+		sound(level(p), p.getEyePosition(), SoundEvents.ENDER_DRAGON_GROWL, 0.8F, 1.2F);
+	}
+
+	/**
+	 * Exploding Human Technique: the caster's chakra seeps into the enemy's blood; for three seconds it boils, then the enemy bursts,
+	 * hurting everyone around them too.
+	 */
+	private static void explodingHuman(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity target = target(p, 10);
+		if (target == null) {
+			Jutsus.miss(p, "Look at an enemy");
+			return;
+		}
+		sound(level, target.position(), SoundEvents.WARDEN_HEARTBEAT, 2, 1);
+		channel(p, 60, 1, t -> {
+			if (!target.isAlive())
+				return;
+			hold(target);
+			level.sendParticles(Element.BLOOD.puff, target.getX(), target.getY() + target.getBbHeight() / 2, target.getZ(), 1 + t / 10, target.getBbWidth() * 0.4,
+					target.getBbHeight() * 0.3, target.getBbWidth() * 0.4, 0.02);
+			if (t % 15 == 0)
+				sound(level, target.position(), SoundEvents.WARDEN_HEARTBEAT, 2, 1 + t / 60F);
+		});
+		after(level, 60, () -> {
+			if (!target.isAlive())
+				return;
+			Vec3 c = target.getBoundingBox().getCenter();
+			damage(p, target, 30, Element.BLOOD);
+			Techniques.burst(level, c, 4, 12, 1.5F, Element.BLOOD, p);
+			level.sendParticles(Element.BLOOD.puff, c.x, c.y, c.z, 80, 1, 1, 1, 0.2);
+			sound(level, c, SoundEvents.GENERIC_EXPLODE.value(), 1.5F, 1.3F);
+		});
+	}
+
+	// ------------------------------------------------------------------ rinnegan
+	/** Banshō Ten'in: the enemy looked at is pulled through the air straight to the caster. */
+	private static void banshoTenin(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity target = target(p, 30);
+		if (target == null) {
+			Jutsus.miss(p, "Look at what to pull");
+			return;
+		}
+		sound(level, p.position(), SoundEvents.BREEZE_INHALE, 1.5F, 0.6F);
+		channel(p, 14, 1, t -> {
+			if (!target.isAlive())
+				return;
+			Vec3 pull = p.getEyePosition().subtract(target.getBoundingBox().getCenter());
+			if (pull.length() < 2) {
+				if (t < 13) {
+					damage(p, target, 6, Element.KOKUGAN);
+					target.setDeltaMovement(Vec3.ZERO);
+				}
+				return;
+			}
+			target.setDeltaMovement(pull.normalize().scale(1.6));
+			target.syncVelocity = true;
+			line(level, Element.KAMUI.trail, p.getEyePosition(), target.getBoundingBox().getCenter(), 1.5);
+		});
+	}
+
+	/** Shinra Tensei: a repulsive force bursts out of the caster and flings everything around away, turning projectiles aside. */
+	private static void shinraTensei(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 c = p.getBoundingBox().getCenter();
+		for (LivingEntity target : enemies(level, p, p.getBoundingBox().inflate(8), e -> e.distanceToSqr(c) < 64)) {
+			Vec3 away = target.getBoundingBox().getCenter().subtract(c).normalize();
+			damage(p, target, 12, Element.KAMUI);
+			target.push(away.x * 3.5, 0.8, away.z * 3.5);
+			target.syncVelocity = true;
+		}
+		for (net.minecraft.world.entity.projectile.Projectile shot : level.getEntitiesOfClass(net.minecraft.world.entity.projectile.Projectile.class,
+				p.getBoundingBox().inflate(8), e -> e.getOwner() != p))
+			shot.setDeltaMovement(shot.position().subtract(c).normalize().scale(1.5));
+		channel(p, 8, 1, t -> {
+			for (int i = 0; i < 32; i++) {
+				double a = i * Math.PI / 16;
+				level.sendParticles(ParticleTypes.CLOUD, c.x + Math.cos(a) * t, c.y - 0.8, c.z + Math.sin(a) * t, 1, 0, 0.05, 0, 0);
+			}
+		});
+		sound(level, c, SoundEvents.WARDEN_SONIC_BOOM, 1.5F, 0.7F);
+	}
+
+	/** Asura Attack: the arm splits open and fires a volley of missiles that seek enemies and explode. */
+	private static void asuraAttack(ServerPlayer p) {
+		channel(p, 18, 3, t -> {
+			JutsuProjectile missile = shoot(p, Element.STEEL, Shape.ROD, 0.4F, turned(p, (level(p).getRandom().nextFloat() - 0.5F) * 30, -8).scale(1.3), 4);
+			missile.homing = 0.3F;
+			missile.life = 45;
+			missile.onImpact = m -> Techniques.burst(level(p), m.position(), 2.5F, 6, 0.8F, Element.FIRE, m);
+			sound(level(p), p.getEyePosition(), SoundEvents.FIREWORK_ROCKET_LAUNCH, 1, 0.8F);
+		});
+	}
+
+	/** Blocking Technique Absorption Seal: for eight seconds every jutsu that reaches the caster is drunk in as chakra. */
+	private static void absorptionSeal(ServerPlayer p) {
+		ServerLevel level = level(p);
+		shell(p, p, p.getBoundingBox().getCenter(), Element.KAMUI, 3, 160);
+		sound(level, p.position(), SoundEvents.BEACON_ACTIVATE, 1, 1.4F);
+		channel(p, 160, 1, t -> {
+			for (JutsuProjectile shot : level.getEntitiesOfClass(JutsuProjectile.class, p.getBoundingBox().inflate(2.2), e -> e.getOwner() != p)) {
+				NarutoShippudenModVariables.ifPresent(p, v -> {
+					v.ChakraAmount = Math.min(v.ChakraMax, v.ChakraAmount + 40);
+					v.syncPlayerVariables(p);
+				});
+				puff(level, shot.position(), Element.KAMUI, 0.6F);
+				shot.discard();
+			}
+		});
+	}
+
+	/** Human Path: the caster grips the enemy and pulls their soul out of their body. */
+	private static void humanPath(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity target = target(p, 4);
+		if (target == null) {
+			Jutsus.miss(p, "Get hold of an enemy first");
+			return;
+		}
+		sound(level, target.position(), SoundEvents.SOUL_ESCAPE.value(), 2, 0.6F);
+		channel(p, 30, 1, t -> {
+			if (!target.isAlive())
+				return;
+			hold(target);
+			hold(p);
+			line(level, ParticleTypes.SOUL, target.getBoundingBox().getCenter(), p.getEyePosition(), 0.5);
+		});
+		after(level, 30, () -> {
+			if (!target.isAlive())
+				return;
+			damage(p, target, 20, Element.KOKUGAN);
+			target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 200, 2));
+			level.sendParticles(ParticleTypes.SCULK_SOUL, target.getX(), target.getY() + 1, target.getZ(), 20, 0.3, 0.5, 0.3, 0.05);
+		});
+	}
+
+	/** Amenotejikara: the caster and the one looked at instantly swap places. */
+	private static void amenotejikara(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity target = target(p, 30);
+		if (target == null) {
+			Jutsus.miss(p, "Look at who to swap with");
+			return;
+		}
+		Vec3 mine = p.position(), theirs = target.position();
+		level.sendParticles(ParticleTypes.REVERSE_PORTAL, mine.x, mine.y + 1, mine.z, 30, 0.3, 0.6, 0.3, 0.1);
+		level.sendParticles(ParticleTypes.REVERSE_PORTAL, theirs.x, theirs.y + 1, theirs.z, 30, 0.3, 0.6, 0.3, 0.1);
+		p.teleportTo(theirs.x, theirs.y, theirs.z);
+		target.teleportTo(mine.x, mine.y, mine.z);
+		sound(level, mine, SoundEvents.ENDERMAN_TELEPORT, 1, 1.4F);
+		sound(level, theirs, SoundEvents.ENDERMAN_TELEPORT, 1, 1.4F);
+	}
+
+	/** Chibaku Tensei: a black core rises above the spot looked at and drags every enemy around up into it, crushing them. */
+	private static void chibakuTensei(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 core = lookPoint(p, 30).add(0, 9, 0);
+		JutsuProjectile ball = spawn(p, Element.KOKUGAN, Shape.ORB, 1.2F, core.subtract(0, 0.6, 0), Vec3.ZERO, 0);
+		ball.pierce = -1;
+		ball.knockback = 0;
+		ball.life = 130;
+		sound(level, core, SoundEvents.BEACON_ACTIVATE, 2, 0.4F);
+		channel(p, 120, 1, t -> {
+			float size = Math.min(5, 1.2F + t * 0.05F);
+			ball.look(Element.KOKUGAN, Shape.ORB, size);
+			ball.setPos(core.subtract(0, size / 2, 0));
+			level.sendParticles(Element.EARTH.trail, core.x, core.y, core.z, 6, size, size, size, 0.05);
+			for (LivingEntity target : enemies(level, p, new AABB(core, core).inflate(16, 14, 16), e -> e.distanceToSqr(core) < 18 * 18)) {
+				Vec3 pull = core.subtract(target.getBoundingBox().getCenter());
+				target.setDeltaMovement(pull.length() > size ? pull.normalize().scale(0.8) : Vec3.ZERO);
+				target.syncVelocity = true;
+				target.fallDistance = 0;
+				if (t % 10 == 0 && pull.length() < size + 1.5)
+					damage(p, target, 4, Element.EARTH);
+			}
+		});
+		after(level, 120, () -> {
+			Techniques.burst(level, core, 6, 20, 1, Element.EARTH, ball);
+			ball.discard();
+			level.sendParticles(Element.EARTH.puff, core.x, core.y, core.z, 80, 3, 3, 3, 0.1);
+		});
+	}
+
+	/** Tengai Shinsei: a huge meteorite falls out of the sky onto the spot looked at. */
+	private static void tengaiShinsei(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 at = lookPoint(p, 40);
+		Vec3 from = at.add(p.getLookAngle().multiply(-1, 0, -1).normalize().scale(12)).add(0, 36, 0);
+		JutsuProjectile rock = spawn(p, Element.EARTH, Shape.CUBE, 6, from, at.subtract(from).normalize().scale(1.3), 30);
+		rock.pierce = -1;
+		rock.life = 60;
+		rock.knockback = 2;
+		rock.onImpact = r -> {
+			Techniques.burst(level, r.position(), 9, 40, 2.5F, Element.EARTH, r);
+			level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, r.getX(), r.getY(), r.getZ(), 3, 3, 1, 3, 0);
+			level.sendParticles(Element.EARTH.puff, r.getX(), r.getY(), r.getZ(), 150, 5, 2, 5, 0.2);
+			sound(level, r.position(), SoundEvents.GENERIC_EXPLODE.value(), 4, 0.5F);
+		};
+		sound(level, at, SoundEvents.WITHER_SPAWN, 2, 0.5F);
+	}
+
+	// ------------------------------------------------------------------ tenseigan
+	/** Silver Wheel Reincarnation Explosion: spheres of chakra fly out and blow apart where they hit. */
+	private static void silverWheel(ServerPlayer p) {
+		for (int i = -2; i <= 2; i++) {
+			JutsuProjectile sphere = shoot(p, Element.CHAKRA, Shape.ORB, 0.8F, turned(p, i * 12, -5).scale(1.4), 6);
+			sphere.homing = 0.1F;
+			sphere.life = 40;
+			sphere.onImpact = s -> Techniques.burst(level(p), s.position(), 3, 8, 1, Element.CHAKRA, s);
+		}
+		sound(level(p), p.getEyePosition(), SoundEvents.BEACON_POWER_SELECT, 1.2F, 1.4F);
+	}
+
+	/** Golden Wheel Reincarnation Explosion: gravity draws everything round the spot looked at into one point, then it explodes. */
+	private static void goldenWheel(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 c = lookPoint(p, 30).add(0, 1.5, 0);
+		JutsuProjectile core = spawn(p, Element.CHAKRA, Shape.ORB, 0.6F, c, Vec3.ZERO, 0);
+		core.pierce = -1;
+		core.knockback = 0;
+		core.life = 50;
+		sound(level, c, SoundEvents.BEACON_ACTIVATE, 2, 0.6F);
+		channel(p, 40, 1, t -> {
+			level.sendParticles(ParticleTypes.END_ROD, c.x, c.y, c.z, 6, 4, 2, 4, -0.2);
+			for (LivingEntity target : enemies(level, p, new AABB(c, c).inflate(9), e -> e.distanceToSqr(c) < 81)) {
+				Vec3 pull = c.subtract(target.getBoundingBox().getCenter());
+				target.setDeltaMovement(pull.normalize().scale(Math.min(0.7, pull.length() * 0.3)));
+				target.syncVelocity = true;
+			}
+		});
+		after(level, 40, () -> {
+			Techniques.burst(level, c, 7, 26, 2, Element.CHAKRA, core);
+			core.discard();
+			level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, c.x, c.y, c.z, 1, 0, 0, 0, 0);
+			sound(level, c, SoundEvents.GENERIC_EXPLODE.value(), 2.5F, 0.9F);
+		});
+	}
+
+	/** Localised Reincarnation Explosion: a burst of repelling force round the caster that blasts every enemy near away. */
+	private static void localisedExplosion(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 c = p.getBoundingBox().getCenter();
+		Techniques.burst(level, c, 5.5F, 18, 3, Element.CHAKRA, p);
+		level.sendParticles(ParticleTypes.END_ROD, c.x, c.y, c.z, 80, 2.5, 1.5, 2.5, 0.3);
+		sound(level, c, SoundEvents.GENERIC_EXPLODE.value(), 1.5F, 1.2F);
+	}
+
+	/**
+	 * Tenseigan Chakra Mode: thirty seconds cloaked in blazing chakra: flight, great strength and speed, and truth-seeking balls
+	 * circling the caster.
+	 */
+	private static void tenseiganMode(ServerPlayer p) {
+		ServerLevel level = level(p);
+		puff(level, p.position().add(0, 1, 0), Element.CHAKRA, 2);
+		sound(level, p.position(), SoundEvents.BEACON_ACTIVATE, 1.5F, 1.2F);
+		mode(p, 600, 1, v -> {
+		}, v -> {
+			if (!p.isCreative() && !p.isSpectator()) {
+				p.getAbilities().mayfly = false;
+				p.getAbilities().flying = false;
+				p.onUpdateAbilities();
+				p.addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 100, 0, false, false, true));
+			}
+		}, t -> {
+			if (!p.getAbilities().mayfly) {
+				p.getAbilities().mayfly = true;
+				p.onUpdateAbilities();
+			}
+			p.fallDistance = 0;
+			if (t % 10 == 0) {
+				keep(p, MobEffects.STRENGTH, 2);
+				keep(p, MobEffects.SPEED, 1);
+				keep(p, MobEffects.RESISTANCE, 1);
+			}
+			if (t % 2 == 0)
+				for (int i = 0; i < 6; i++) {
+					double a = t * 0.12 + i * Math.PI / 3;
+					level.sendParticles(Element.KOKUGAN.trail, p.getX() + Math.cos(a) * 1.1, p.getY() + 1.6, p.getZ() + Math.sin(a) * 1.1, 1, 0, 0, 0, 0);
+				}
+			if (t % 3 == 0)
+				level.sendParticles(Element.CHAKRA.trail, p.getX(), p.getY() + 1, p.getZ(), 3, 0.4, 0.8, 0.4, 0.02);
+		});
+	}
+
+	// ------------------------------------------------------------------ mangekyou (added from the wiki)
+	/** Tsukuyomi: the enemy is pulled into Itachi's world of illusion and tortured there; outside, they stand broken for five seconds. */
+	private static void tsukuyomi(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity target = target(p, 12);
+		if (target == null) {
+			Jutsus.miss(p, "No one meets your gaze");
+			return;
+		}
+		sound(level, target.position(), SoundEvents.ENDERMAN_STARE, 1.5F, 0.4F);
+		channel(p, 100, 1, t -> {
+			if (!target.isAlive())
+				return;
+			hold(target);
+			target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 30, 0, false, false));
+			target.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 120, 0, false, false));
+			if (t % 20 == 0)
+				damage(p, target, 5, Element.GENJUTSU);
+			if (t % 4 == 0)
+				level.sendParticles(Element.GENJUTSU.trail, target.getX(), target.getY() + 1, target.getZ(), 4, 0.5, 0.8, 0.5, 0);
+		});
+		p.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 0, false, false, true));
+	}
+
+	/** Kamui Lightning Cutter: a Lightning Cutter driven through the enemy with Kamui wrapped round it, tearing space where it strikes. */
+	private static void kamuiLightningCutter(ServerPlayer p) {
+		ServerLevel level = level(p);
+		boolean[] done = { false };
+		channel(p, 24, 1, t -> {
+			Vec3 look = p.getLookAngle().multiply(1, 0, 1).normalize();
+			Vec3 hand = p.position().add(0, 1, 0).add(look.scale(0.6));
+			level.sendParticles(t % 2 == 0 ? ParticleTypes.ELECTRIC_SPARK : Element.KAMUI.trail, hand.x, hand.y, hand.z, 6, 0.15, 0.15, 0.15, 0.2);
+			if (done[0] || t < 10) {
+				if (t < 10 && t % 3 == 0)
+					sound(level, hand, SoundEvents.AMETHYST_BLOCK_CHIME, 0.8F, 1.7F);
+				return;
+			}
+			p.setDeltaMovement(look.x * 1.8, Math.min(p.getDeltaMovement().y, 0.05), look.z * 1.8);
+			p.syncVelocity = true;
+			LivingEntity hit = enemies(level, p, p.getBoundingBox().inflate(0.8).move(look.scale(0.9)), e -> true).stream().findFirst().orElse(null);
+			if (hit == null)
+				return;
+			done[0] = true;
+			damage(p, hit, 20, Element.LIGHTNING);
+			wormhole(p, hit, Math.max(hit.getBbWidth(), hit.getBbHeight()) + 1, 20);
+			after(level, 20, () -> {
+				if (hit.isAlive())
+					damage(p, hit, 12, Element.KAMUI);
+			});
+			sound(level, hit.position(), SoundEvents.LIGHTNING_BOLT_IMPACT, 1.2F, 1.6F);
+			p.setDeltaMovement(Vec3.ZERO);
+			p.syncVelocity = true;
+		});
+	}
+
+	/** Kamui Shuriken: the Susanoo's great shuriken, each warping away whatever it cuts. */
+	private static void kamuiShuriken(ServerPlayer p) {
+		for (int i = -1; i <= 1; i += 2) {
+			JutsuProjectile star = shoot(p, Element.KAMUI, Shape.SHURIKEN, 1.8F, turned(p, i * 8, 0).scale(1.3), 14);
+			star.homing = 0.12F;
+			star.life = 40;
+			star.onHit = (s, target) -> {
+				wormhole(p, target, Math.max(target.getBbWidth(), target.getBbHeight()) + 1, 16);
+				after(level(p), 16, () -> {
+					if (target.isAlive())
+						damage(p, target, 10, Element.KAMUI);
+				});
+			};
+		}
+		sound(level(p), p.getEyePosition(), SoundEvents.PLAYER_ATTACK_SWEEP, 1.5F, 0.6F);
+	}
+
+	/**
+	 * Takes over a creature's will for a while: it fights the caster's enemies and never the caster. A player is held still with their
+	 * blows against the caster turned aside.
+	 */
+	private static final Map<UUID, UUID> CONTROLLED = new HashMap<>();
+
+	private static void control(ServerPlayer p, LivingEntity target, int ticks, Element element) {
+		ServerLevel level = level(p);
+		CONTROLLED.put(target.getUUID(), p.getUUID());
+		channel(p, ticks, 1, t -> {
+			if (!target.isAlive())
+				return;
+			if (t % 8 == 0)
+				level.sendParticles(element.trail, target.getX(), target.getEyeY() + 0.4, target.getZ(), 3, 0.3, 0.1, 0.3, 0);
+			if (target instanceof Mob mob) {
+				LivingEntity prey = mob.getTarget();
+				if (prey == null || !prey.isAlive() || prey == p || !Techniques.isEnemy(p, prey))
+					mob.setTarget(level.getEntitiesOfClass(LivingEntity.class, mob.getBoundingBox().inflate(20),
+							x -> x != mob && x != p && x.isAlive() && Techniques.isEnemy(p, x) && !(x instanceof net.minecraft.world.entity.decoration.ArmorStand))
+							.stream().min((a, b) -> Double.compare(a.distanceToSqr(mob), b.distanceToSqr(mob))).orElse(null));
+			} else if (t < 80)
+				hold(target);
+		});
+		after(level, ticks, () -> CONTROLLED.remove(target.getUUID(), p.getUUID()));
+	}
+
+	@SubscribeEvent
+	public static void controlledBlow(LivingIncomingDamageEvent event) {
+		net.minecraft.world.entity.Entity attacker = event.getSource().getEntity();
+		if (attacker != null && event.getEntity().getUUID().equals(CONTROLLED.get(attacker.getUUID())))
+			event.setCanceled(true);
+	}
+
+	/** Kotoamatsukami: Shisui's genjutsu rewrites the enemy's will so perfectly they never know: for a minute they fight for the caster. */
+	private static void kotoamatsukami(ServerPlayer p) {
+		LivingEntity target = target(p, 20);
+		if (target == null) {
+			Jutsus.miss(p, "No one meets your gaze");
+			return;
+		}
+		sound(level(p), target.position(), SoundEvents.ILLUSIONER_CAST_SPELL, 1.5F, 0.6F);
+		puff(level(p), target.getBoundingBox().getCenter(), Element.GENJUTSU, 1);
+		control(p, target, target instanceof Player ? 400 : 1200, Element.GENJUTSU);
+		tell(p, target.getDisplayName().getString() + " is yours to command");
+	}
+
+	/** Genjutsu: Sharingan: Madara's eyes bend even a great beast to his will; for forty seconds it fights for him. */
+	private static void madaraGenjutsu(ServerPlayer p) {
+		LivingEntity target = target(p, 20);
+		if (target == null) {
+			Jutsus.miss(p, "No one meets your gaze");
+			return;
+		}
+		sound(level(p), target.position(), SoundEvents.ENDERMAN_STARE, 1.5F, 0.5F);
+		control(p, target, target instanceof Player ? 100 : 800, Element.GENJUTSU);
+	}
+
+	/** Susanoo: Fist: a giant fist of the Susanoo's chakra smashes forward through everything in its way. */
+	private static void susanooFist(ServerPlayer p) {
+		JutsuProjectile fist = shoot(p, Element.KAMUI, Shape.ORB, 3.2F, 1.3F, 24);
+		fist.pierce = -1;
+		fist.life = 16;
+		fist.knockback = 3;
+		fist.onImpact = f -> Techniques.burst(level(p), f.position(), 4, 12, 2, Element.KAMUI, f);
+		sound(level(p), p.getEyePosition(), SoundEvents.WARDEN_SONIC_BOOM, 1.2F, 0.6F);
 	}
 }

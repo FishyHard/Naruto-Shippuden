@@ -1252,28 +1252,28 @@ public final class GuiDisplayProcedures {
 		}
 	}
 
-	public static class DisplayIburiInfoProcedure {
+	public static class DisplayYamanakaInfoProcedure {
 
 		public static boolean executeProcedure(Map<String, Object> dependencies) {
 			if (dependencies.get("entity") == null) {
 				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayIburiInfo!");
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayYamanakaInfo!");
 				return false;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).iburireleaselogic == true) {
+			if (NarutoShippudenModVariables.get(entity).yamanakareleaselogic == true) {
 				return true;
 			}
 			return false;
 		}
 	}
 
-	public static class DisplayIburiSelectProcedure {
+	public static class DisplayYamanakaSelectProcedure {
 
 		public static boolean executeProcedure(Map<String, Object> dependencies) {
 			if (dependencies.get("entity") == null) {
 				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayIburiSelect!");
+					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure DisplayYamanakaSelect!");
 				return false;
 			}
 			Entity entity = (Entity) dependencies.get("entity");

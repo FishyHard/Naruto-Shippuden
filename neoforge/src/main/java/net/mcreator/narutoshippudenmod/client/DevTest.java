@@ -504,8 +504,9 @@ public final class DevTest {
 	private static void jutsuSteps(Minecraft mc) {
 		String[] natures = { "fire", "water", "wind", "earth", "lightning", "boil", "bone", "dust", "ice", "magnet", "smoke", "steel", "storm", "swift",
 				"typhoon", "wood", "aburame", "akimichi", "fuma", "hozuki", "hyuga", "inuzuka", "lee", "nara", "sarutobi", "uzumaki",
-				"tsuchigumo", "sharingan", "isshiki_dojutsu", "mangekyou_sharingan_itachi_release_technique",
-				"mangekyou_sharingan_kakashi_release_technique", "mangekyou_sharingan_obito_release_technique", "mangekyou_sharingan_sasuke_release_technique" };
+				"tsuchigumo", "uchiha", "yamanaka", "sharingan", "byakugan", "ketsuryugan", "rinnegan", "tenseigan", "isshiki_dojutsu", "mangekyou_sharingan_itachi_release_technique",
+				"mangekyou_sharingan_kakashi_release_technique", "mangekyou_sharingan_obito_release_technique", "mangekyou_sharingan_sasuke_release_technique",
+				"mangekyou_sharingan_shisui_release_technique", "mangekyou_sharingan_madara_release_technique" };
 		String only = System.getProperty("naruto.devtest.jutsu", "");
 		STEPS.add(() -> {
 			mc.gui.setScreen(null);
@@ -527,16 +528,22 @@ public final class DevTest {
 			}
 			onServer(mc, player -> NarutoShippudenModVariables.ifPresent(player, v -> {
 				v.firereleaselogic = v.waterreleaselogic = v.windreleaselogic = v.earthreleaselogic = v.lightningreleaselogic = true;
-				v.firelearn = v.waterlearn = v.windlearn = v.earthlearn = v.lightninglearn = 4;
+				v.firelearn = v.waterlearn = v.windlearn = v.earthlearn = v.lightninglearn = 9;
 				v.boilreleaselogic = v.bonereleaselogic = v.dustreleaselogic = v.icereleaselogic = v.magnetreleaselogic = v.smokereleaselogic = true;
 				v.steelreleaselogic = v.stormreleaselogic = v.swiftreleaselogic = v.typhoonreleaslogic = v.woodreleaselogic = true;
-				v.boillearn = v.bonelearn = v.dustlearn = v.icelearn = v.magnetlearn = v.smokelearn = v.steellearn = v.stormlearn = v.swiftlearn = 4;
-				v.typhoonlearn = v.woodlearn = 4;
+				v.boillearn = v.bonelearn = v.dustlearn = v.icelearn = v.magnetlearn = v.smokelearn = v.steellearn = v.stormlearn = v.swiftlearn = 9;
+				v.typhoonlearn = v.woodlearn = 9;
 				v.aburamereleaselogic = v.akimichireleaselogic = v.fumareleaselogic = v.hozukireleaselogic = v.hyugareleaselogic = true;
 				v.inuzukareleaselogic = v.leereleaselogic = v.narareleaselogic = v.sarutobireleaselogic = true;
 				v.uzumakireleaselogic = v.tsuchigumoreleaselogic = true;
 				v.aburamelearn = v.akimichilearn = v.fumalearn = v.hozukilearn = v.hyugalearn = v.inuzukalearn = v.leelearn = 9;
 				v.naralearn = v.sarutobilearn = v.uzumakilearn = v.tsuchigumolearn = 9;
+				v.uchihareleaselogic = v.yamanakareleaselogic = true;
+				v.uchihalearn = v.yamanakalearn = 9;
+				v.byakugan = v.ketsuryugan = v.rinnegan = v.tenseigan = true;
+				v.ketsuryuganactivate = v.rinneganactivate = v.tenseiganactivate = true;
+				v.byakuganlearn = v.ketsuryuganlearn = v.rinneganlearn = v.tenseiganlearn = 9;
+				v.mangekyousharinganshisuilearn = v.mangekyousharinganmadaralearn = 9;
 				v.taijutsu = v.summoning = 60;
 				v.sharingan = v.sharinganactivate = v.isshikidojutsu = v.isshikidojutsuactivate = v.MangekyouSharinganActivate = true;
 				v.sharinganlearn = v.isshikidojutsulearn = v.mangekyoushrainganitachiamaterasulearn = 9;
@@ -568,6 +575,16 @@ public final class DevTest {
 						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.stop(player);
 						NarutoShippudenModVariables.ifPresent(player, v -> {
 							v.ChakraAmount = 5000;
+							// the eye this technique needs (Izanagi closes them; only one Mangekyou at a time)
+							v.sharinganactivate = v.MangekyouSharinganActivate = true;
+							v.byakuganactivate = nature.equals("byakugan");
+							v.ketsuryuganactivate = v.rinneganactivate = v.tenseiganactivate = true;
+							v.MangekyouSharinganItachi = nature.contains("itachi");
+							v.MangekyouSharinganKakashi = nature.contains("kakashi");
+							v.MangekyouSharinganObito = nature.contains("obito");
+							v.MangekyouSharinganSasuke = nature.contains("sasuke");
+							v.MangekyouSharinganShisui = nature.contains("shisui");
+							v.MangekyouSharinganMadara = nature.contains("madara");
 							v.syncPlayerVariables(player);
 						});
 						player.getCooldowns().removeCooldown(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", item(nature) + "/" + i));

@@ -107,9 +107,17 @@ for p in glob.glob('../src/main/java/**/*.java', recursive=True):
   - `DojutsuJutsu`: Sharingan, Kokugan (ids still say `isshiki_dojutsu`), and the Mangekyou (Amaterasu, Kamui with its
     wormhole and phasing, and more).
   - They reuse the old save variables: `…technique`, `…learn` and `…release`.
-- **Nara:** Shadow Imitation Shuriken, Shadow Imitation, Shadow Neck Binding, Shadow Sewing, Shadow Gathering. A `Hold`
-  (one per caster) keeps who the shadow holds; with mimic they copy the caster's steps. The shadow on the ground is flat black
-  block displays that move with those steps. Sneak + right-click lets go. Save variables: `naratechnique`, `naralearn`, `nararelease`.
+- **Nara:** Shadow Imitation Shuriken, Shadow Imitation, Shadow Gathering (30 s: double reach), Shadow–Neck Binding, Shadow Sewing
+  (spikes out of the ground), Shadow Imitation Field. A `Hold` per caster keeps who is caught (`Caught`: spot, yaw offset, the
+  shadow link). With mimic the caught copy the caster's steps, turns, look and swings in their own facing. Links re-lay every tick.
+  Sneak + right-click lets go.
+- **Uchiha** and **Yamanaka** clans have technique items (`JutsuItems` registers them, with the new eye and Shisui/Madara Mangekyou
+  items). Yamanaka took Iburi's place everywhere (rule `iburi_is_yamanaka`; old saves' Iburi flag loads as Yamanaka).
+- **Eyes:** Byakugan, Ketsuryugan, Rinnegan and Tenseigan are releases now (their old eye items are the scrolls), each needs its eye
+  open. Mangekyou scrolls for Itachi, Kakashi, Shisui and Madara buy their jutsu track in `DojutsuJutsu.mangekyouScroll`; the Susanoo
+  track still goes to the old procedure.
+- Jutsu names follow the wiki (checked with the wiki's SMW `action=ask` API; its pages are behind Cloudflare, the API isn't). Release
+  prefixes ("Fire Release:") are left off since the item already says which release.
 - **Inuzuka:** Akamaru, Four Legs, Dynamic Marking, Passing Fang, Man Beast Clone, Fang Over Fang, Tunneling Fang.
   Akamaru's form (normal, clone or drill) is a synced value set by the `akamaru` rule.
 - `FlyingRaijin` is a technique with a wheel on the Flying Raijin Kunai (ids still say `flying_thunder_god_kunai`):

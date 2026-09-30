@@ -46,6 +46,12 @@ public enum Element {
 	/** Aburame destruction bugs. */
 	INSECT(0xFF2A2B22, 0xFF6B7A3C, false, new DustParticleOptions(0x1C1C16, 1.0F), new DustParticleOptions(0x3B4128, 1.1F),
 			SoundEvents.BEEHIVE_WORK, SoundEvents.SILVERFISH_HURT),
+	/** Yamanaka mind techniques: a violet glow between minds. */
+	MIND(0xFFB27CFF, 0xFFF3E6FF, true, new DustParticleOptions(0xC08CFF, 0.9F), ParticleTypes.ENCHANT, SoundEvents.ILLUSIONER_CAST_SPELL,
+			SoundEvents.ILLUSIONER_MIRROR_MOVE),
+	/** Chinoike blood: dark red. */
+	BLOOD(0xFF9A0F1E, 0xFFFF5A5A, false, new DustParticleOptions(0x8C0A14, 1.1F), new DustParticleOptions(0xC21A28, 1.4F), SoundEvents.SLIME_SQUISH,
+			SoundEvents.PLAYER_HURT_SWEET_BERRY_BUSH),
 	/** Nara shadows: flat black on the ground, ink where they rise. */
 	SHADOW(0xFF0C0C10, 0xFF26262E, false, new DustParticleOptions(0x0E0E12, 1.2F), ParticleTypes.SQUID_INK, SoundEvents.SCULK_CATALYST_BLOOM,
 			SoundEvents.SCULK_BLOCK_SPREAD),

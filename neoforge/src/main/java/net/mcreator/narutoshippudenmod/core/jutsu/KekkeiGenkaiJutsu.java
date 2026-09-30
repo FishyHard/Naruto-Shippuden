@@ -61,51 +61,69 @@ final class KekkeiGenkaiJutsu {
 				(v, i) -> v.boillearn = i, v -> v.boilrelease, (v, i) -> v.boilrelease = i,
 				new Def("Skilled Mist Technique", JutsuRank.C, KekkeiGenkaiJutsu::skilledMist),
 				new Def("Steam Dash", JutsuRank.B, p -> Techniques.dash(p, 12, 11, Element.BOIL)),
+				new Def("Erupting Propulsion Fist", JutsuRank.B, KekkeiGenkaiJutsu::eruptingFist, "Taijutsu"),
+				new Def("Steam Explosion", JutsuRank.A, KekkeiGenkaiJutsu::steamExplosion),
 				new Def("Unrivalled Strength", JutsuRank.A, KekkeiGenkaiJutsu::unrivalledStrength));
 		nature("bone", "Bone Release", v -> v.bonereleaselogic, v -> v.bonetechnique, (v, i) -> v.bonetechnique = i, v -> v.bonelearn,
 				(v, i) -> v.bonelearn = i, v -> v.bone_release, (v, i) -> v.bone_release = i,
-				new Def("Finger Drill Bullets", JutsuRank.D, KekkeiGenkaiJutsu::fingerBullets),
-				new Def("Dance of the Camellia", JutsuRank.C, KekkeiGenkaiJutsu::camellia),
-				new Def("Dance of the Clematis: Flower", JutsuRank.B, KekkeiGenkaiJutsu::clematis),
-				new Def("Dance of the Seedling Fern", JutsuRank.A, KekkeiGenkaiJutsu::seedlingFern));
+				new Def("Ten-Finger Drilling Bullets", JutsuRank.D, KekkeiGenkaiJutsu::fingerBullets),
+				new Def("Dance of the Camellia", JutsuRank.C, KekkeiGenkaiJutsu::camellia, "Taijutsu"),
+				new Def("Dance of the Willow", JutsuRank.C, KekkeiGenkaiJutsu::willow, "Taijutsu"),
+				new Def("Dance of the Larch", JutsuRank.B, KekkeiGenkaiJutsu::larch),
+				new Def("Dance of the Clematis: Vine", JutsuRank.B, KekkeiGenkaiJutsu::clematisVine),
+				new Def("Dance of the Clematis: Flower", JutsuRank.A, KekkeiGenkaiJutsu::clematis),
+				new Def("Dance of the Seedling Fern", JutsuRank.S, KekkeiGenkaiJutsu::seedlingFern));
 		nature("dust", "Dust Release", v -> v.dustreleaselogic, v -> v.dusttechnique, (v, i) -> v.dusttechnique = i, v -> v.dustlearn,
 				(v, i) -> v.dustlearn = i, v -> v.dustrelease, (v, i) -> v.dustrelease = i,
-				new Def("Dust Prism", JutsuRank.A, p -> dust(p, 0.8F, 1.8F, 14, 2.5F)),
-				new Def("Detachment of the Primitive World", JutsuRank.S, p -> dust(p, 2.2F, 0.7F, 30, 6)));
+				new Def("Split Detachment of the Primitive World Technique", JutsuRank.A, KekkeiGenkaiJutsu::splitDust),
+				new Def("Detachment of the Primitive World Technique", JutsuRank.A, p -> dust(p, 1.6F, 1.0F, 26, 5)),
+				new Def("Detachment of the Primitive World Technique Area", JutsuRank.S, KekkeiGenkaiJutsu::dustArea));
 		nature("ice", "Ice Release", v -> v.icereleaselogic, v -> v.icetechnique, (v, i) -> v.icetechnique = i, v -> v.icelearn,
 				(v, i) -> v.icelearn = i, v -> v.ice_release, (v, i) -> v.ice_release = i,
 				new Def("Certain-Kill Ice Spears", JutsuRank.C, KekkeiGenkaiJutsu::iceSpears),
+				new Def("Swallow Snow Storm", JutsuRank.C, KekkeiGenkaiJutsu::snowSwallows),
 				new Def("Demonic Mirroring Ice Crystals", JutsuRank.B, KekkeiGenkaiJutsu::iceMirrors),
+				new Def("Ice Rock Dome of Magnificent Nothingness", JutsuRank.A, KekkeiGenkaiJutsu::iceDome),
 				new Def("Black Dragon Blizzard", JutsuRank.A, KekkeiGenkaiJutsu::blizzard));
 		nature("magnet", "Magnet Release", v -> v.magnetreleaselogic, v -> v.magnettechnique, (v, i) -> v.magnettechnique = i, v -> v.magnetlearn,
 				(v, i) -> v.magnetlearn = i, v -> v.magnet_release, (v, i) -> v.magnet_release = i,
 				new Def("Black Iron Fist", JutsuRank.C, KekkeiGenkaiJutsu::ironFist),
 				new Def("Iron Sand Drizzle", JutsuRank.B, KekkeiGenkaiJutsu::drizzle),
-				new Def("Iron Sand Coat", JutsuRank.B, KekkeiGenkaiJutsu::ironSandCoat),
-				new Def("Black Iron Wings", JutsuRank.A, KekkeiGenkaiJutsu::ironWings));
+				new Def("Iron Sand Wall", JutsuRank.B, KekkeiGenkaiJutsu::ironSandWall),
+				new Def("Iron Sand Gathering Assault", JutsuRank.B, KekkeiGenkaiJutsu::gatheringAssault),
+				new Def("Iron Sand: Black Iron Wings", JutsuRank.A, KekkeiGenkaiJutsu::ironWings),
+				new Def("Iron Sand World Method", JutsuRank.S, KekkeiGenkaiJutsu::worldMethod));
 		nature("smoke", "Smoke Release", v -> v.smokereleaselogic, v -> v.smoketechnique, (v, i) -> v.smoketechnique = i, v -> v.smokelearn,
 				(v, i) -> v.smokelearn = i, v -> v.smokerelease, (v, i) -> v.smokerelease = i,
-				new Def("Smoke Gun", JutsuRank.C, KekkeiGenkaiJutsu::smokeGun),
-				new Def("Smoke Fist", JutsuRank.B, KekkeiGenkaiJutsu::smokeFist),
-				new Def("Smoke Form", JutsuRank.A, KekkeiGenkaiJutsu::smokeForm));
+				new Def("Dark Spike Bullet", JutsuRank.C, KekkeiGenkaiJutsu::smokeGun),
+				new Def("Vapor Blade", JutsuRank.C, KekkeiGenkaiJutsu::vaporBlade),
+				new Def("Black Burst", JutsuRank.B, KekkeiGenkaiJutsu::smokeFist),
+				new Def("Erupting Smoke", JutsuRank.B, KekkeiGenkaiJutsu::eruptingSmoke),
+				new Def("Demonic Illusion: Drowning in Smoke", JutsuRank.A, KekkeiGenkaiJutsu::drowningInSmoke),
+				new Def("Hiding with Smoke Technique", JutsuRank.A, KekkeiGenkaiJutsu::smokeForm));
 		nature("steel", "Steel Release", v -> v.steelreleaselogic, v -> v.steeltechnique, (v, i) -> v.steeltechnique = i, v -> v.steellearn,
 				(v, i) -> v.steellearn = i, v -> v.steelrelease, (v, i) -> v.steelrelease = i,
 				new Def("Steel Projectile", JutsuRank.C, KekkeiGenkaiJutsu::steelProjectile),
+				new Def("Steel Blades Technique", JutsuRank.B, KekkeiGenkaiJutsu::steelBlades, "Taijutsu"),
+				new Def("Steel Shield Technique", JutsuRank.B, KekkeiGenkaiJutsu::steelShield),
 				new Def("Impervious Armour", JutsuRank.A, p -> armor(p, Element.STEEL, 200, 3)));
 		nature("storm", "Storm Release", v -> v.stormreleaselogic, v -> v.stormtechnique, (v, i) -> v.stormtechnique = i, v -> v.stormlearn,
 				(v, i) -> v.stormlearn = i, v -> v.storm_release, (v, i) -> v.storm_release = i,
 				new Def("Laser Circus", JutsuRank.B, KekkeiGenkaiJutsu::laserCircus),
+				new Def("Black Hunting", JutsuRank.B, KekkeiGenkaiJutsu::blackHunting),
 				new Def("Thunder Cloud Inner Wave", JutsuRank.A, KekkeiGenkaiJutsu::thunderCloud));
 		nature("swift", "Swift Release", v -> v.swiftreleaselogic, v -> 0, (v, i) -> {
 		}, v -> v.swiftlearn, (v, i) -> v.swiftlearn = i, v -> v.swiftrelease, (v, i) -> v.swiftrelease = i,
 				new Def("Shadowless Flight", JutsuRank.A, KekkeiGenkaiJutsu::shadowlessFlight));
 		nature("typhoon", "Typhoon Release", v -> v.typhoonreleaslogic, v -> v.typhoontechnique, (v, i) -> v.typhoontechnique = i,
 				v -> v.typhoonlearn, (v, i) -> v.typhoonlearn = i, v -> v.typhoonrelease, (v, i) -> v.typhoonrelease = i,
-				new Def("Great Consecutive Bursting Strong Winds", JutsuRank.B, KekkeiGenkaiJutsu::burstingWinds),
+				new Def("Consecutive Bursting Strong Winds", JutsuRank.B, KekkeiGenkaiJutsu::burstingWinds),
 				new Def("Great Consecutive Bursting Extreme Winds", JutsuRank.A, KekkeiGenkaiJutsu::tornado));
 		nature("wood", "Wood Release", v -> v.woodreleaselogic, v -> v.woodtechnique, (v, i) -> v.woodtechnique = i, v -> v.woodlearn,
 				(v, i) -> v.woodlearn = i, v -> v.wood_release, (v, i) -> v.wood_release = i,
+				new Def("Wood Spikes Ring", JutsuRank.C, KekkeiGenkaiJutsu::woodSpikesRing),
 				new Def("Tree Bind Flourishing Burial", JutsuRank.B, KekkeiGenkaiJutsu::treeBind),
+				new Def("Four-Pillar Prison Technique", JutsuRank.A, KekkeiGenkaiJutsu::fourPillarPrison),
 				new Def("Wood Dragon Technique", JutsuRank.A, KekkeiGenkaiJutsu::woodDragon),
 				new Def("Wood Human Technique", JutsuRank.S, KekkeiGenkaiJutsu::woodHuman));
 	}
@@ -369,22 +387,10 @@ final class KekkeiGenkaiJutsu {
 		});
 	}
 
-	/** A coat of iron sand over the whole body for fifteen seconds: very hard to hurt. */
-	private static void ironSandCoat(ServerPlayer p) {
-		sound(level(p), p.position(), SoundEvents.SAND_PLACE, 1.5F, 0.5F);
-		puff(level(p), p.position().add(0, 1, 0), Element.MAGNET, 1.2F);
-		ClanJutsu.mode(p, 300, 1, v -> v.magnet_coat = 1, v -> v.magnet_coat = 0, t -> {
-			if (t % 10 == 0)
-				ClanJutsu.keep(p, MobEffects.RESISTANCE, 2);
-			if (t % 5 == 0)
-				level(p).sendParticles(Element.MAGNET.puff, p.getX(), p.getY() + 1, p.getZ(), 2, 0.4, 0.7, 0.4, 0.02);
-		});
-	}
-
 	// ------------------------------------------------------------------ smoke
-	/** A shell of smoke that bursts into a blinding cloud. */
+	/** Smoke Release: Dark Spike Bullet: a spike of hardened smoke that bursts into a blinding cloud. */
 	private static void smokeGun(ServerPlayer p) {
-		JutsuProjectile shell = shoot(p, Element.SMOKE, Shape.ORB, 0.7F, 1.5F, 7);
+		JutsuProjectile shell = shoot(p, Element.SMOKE, Shape.NEEDLE, 0.5F, 1.8F, 8);
 		shell.onImpact = s -> {
 			burst(level(p), s.position(), 3, 5, 0.3F, Element.SMOKE, s);
 			level(p).sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, s.getX(), s.getY(), s.getZ(), 30, 1.5, 1, 1.5, 0.01);
@@ -392,7 +398,7 @@ final class KekkeiGenkaiJutsu {
 		sound(level(p), p.getEyePosition(), SoundEvents.FIRECHARGE_USE, 1, 0.6F);
 	}
 
-	/** A heavy fist of smoke that sends enemies flying. */
+	/** Smoke Release: Black Burst: a heavy fist of black smoke that sends enemies flying. */
 	private static void smokeFist(ServerPlayer p) {
 		JutsuProjectile fist = shoot(p, Element.SMOKE, Shape.ORB, 1.6F, 1.2F, 13);
 		fist.life = 16;
@@ -401,7 +407,7 @@ final class KekkeiGenkaiJutsu {
 		sound(level(p), p.getEyePosition(), SoundEvents.FIRECHARGE_USE, 1.5F, 0.5F);
 	}
 
-	/** The caster's body turns to smoke for ten seconds: invisible, fast, and hard to hit. */
+	/** Hiding with Smoke Technique: the caster's body turns to smoke for ten seconds: invisible, fast, and hard to hit. */
 	private static void smokeForm(ServerPlayer p) {
 		p.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 200, 0, false, false, true));
 		p.addEffect(new MobEffectInstance(MobEffects.SPEED, 200, 1, false, false, true));
@@ -617,6 +623,411 @@ final class KekkeiGenkaiJutsu {
 			if (golem.isAlive()) {
 				puff(level, golem.position().add(0, 2, 0), Element.WOOD, 3);
 				golem.discard();
+			}
+		});
+	}
+
+	// ------------------------------------------------------------------ added from the wiki
+	/** Erupting Propulsion Fist: steam bursts from the elbow and drives a punch that sends everything in front flying. */
+	private static void eruptingFist(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 look = p.getLookAngle().multiply(1, 0, 1).normalize();
+		p.setDeltaMovement(look.x * 1.2, 0.1, look.z * 1.2);
+		p.syncVelocity = true;
+		after(level, 4, () -> {
+			for (LivingEntity target : cone(p, 4.5, 40)) {
+				damage(p, target, 16, Element.BOIL);
+				target.push(look.x * 3, 0.7, look.z * 3);
+				target.syncVelocity = true;
+			}
+			Vec3 at = p.getEyePosition().add(look.scale(1.5));
+			level.sendParticles(ParticleTypes.WHITE_SMOKE, at.x, at.y, at.z, 40, 0.6, 0.6, 0.6, 0.15);
+			level.sendParticles(ParticleTypes.EXPLOSION, at.x, at.y, at.z, 1, 0, 0, 0, 0);
+			sound(level, at, SoundEvents.GENERIC_EXPLODE.value(), 1, 1.4F);
+		});
+		sound(level, p.position(), SoundEvents.LAVA_EXTINGUISH, 1.5F, 0.7F);
+	}
+
+	/** Steam Explosion: the steam built up in the body bursts out all at once, scalding and blasting everything around. */
+	private static void steamExplosion(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 c = p.position().add(0, 1, 0);
+		sound(level, c, SoundEvents.LAVA_EXTINGUISH, 2, 0.5F);
+		after(level, 8, () -> {
+			burst(level, c, 5.5F, 14, 2, Element.BOIL, p);
+			level.sendParticles(ParticleTypes.WHITE_SMOKE, c.x, c.y, c.z, 150, 2.5, 1.5, 2.5, 0.2);
+			level.sendParticles(ParticleTypes.CLOUD, c.x, c.y, c.z, 60, 2, 1, 2, 0.3);
+			field(p, p.position(), 5, 80, 5, Element.BOIL, (target, t) -> {
+				if (t % 20 == 0)
+					damage(p, target, 2, Element.BOIL);
+			});
+		});
+		channel(p, 8, 1, t -> level.sendParticles(ParticleTypes.WHITE_SMOKE, c.x, c.y, c.z, 6, 0.4, 0.8, 0.4, 0.05));
+	}
+
+	/** Dance of the Willow: bones burst out of the arms and shoulders and slash everything around the caster. */
+	private static void willow(ServerPlayer p) {
+		ServerLevel level = level(p);
+		for (LivingEntity target : enemies(level, p, p.getBoundingBox().inflate(3.5), e -> e.distanceToSqr(p) < 3.5 * 3.5)) {
+			damage(p, target, 10, Element.BONE);
+			Vec3 away = target.position().subtract(p.position()).multiply(1, 0, 1).normalize();
+			target.push(away.x * 0.8, 0.3, away.z * 0.8);
+			target.syncVelocity = true;
+		}
+		for (int i = 0; i < 12; i++) {
+			double a = i * Math.PI / 6;
+			level.sendParticles(ParticleTypes.SWEEP_ATTACK, p.getX() + Math.cos(a) * 2, p.getY() + 1, p.getZ() + Math.sin(a) * 2, 1, 0, 0, 0, 0);
+		}
+		level.sendParticles(Element.BONE.puff, p.getX(), p.getY() + 1, p.getZ(), 20, 0.6, 0.6, 0.6, 0.1);
+		sound(level, p.position(), SoundEvents.BONE_BLOCK_BREAK, 1.5F, 0.8F);
+		sound(level, p.position(), SoundEvents.PLAYER_ATTACK_SWEEP, 1.2F, 0.7F);
+	}
+
+	/** Dance of the Larch: spikes of bone jut out all over the body for eight seconds; whoever comes close is impaled. */
+	private static void larch(ServerPlayer p) {
+		ServerLevel level = level(p);
+		sound(level, p.position(), SoundEvents.BONE_BLOCK_BREAK, 2, 0.6F);
+		java.util.Map<LivingEntity, Integer> last = new java.util.HashMap<>();
+		channel(p, 160, 2, t -> {
+			if (t % 10 == 0)
+				p.addEffect(new MobEffectInstance(MobEffects.RESISTANCE, 12, 2, false, false, true));
+			level.sendParticles(Element.BONE.trail, p.getX(), p.getY() + 1, p.getZ(), 3, 0.5, 0.8, 0.5, 0.02);
+			for (LivingEntity target : enemies(level, p, p.getBoundingBox().inflate(1.6), e -> last.getOrDefault(e, -99) + 10 <= t)) {
+				last.put(target, t);
+				damage(p, target, 5, Element.BONE);
+				level.sendParticles(Element.BONE.puff, target.getX(), target.getY() + 1, target.getZ(), 8, 0.3, 0.4, 0.3, 0.05);
+			}
+		});
+	}
+
+	/** Dance of the Clematis: Vine: a whip of spine lashes out, wraps the first enemy in reach and drags them in. */
+	private static void clematisVine(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity target = ClanJutsu.target(p, 12);
+		Vec3 hand = p.getEyePosition().subtract(0, 0.4, 0);
+		sound(level, hand, SoundEvents.SKELETON_SHOOT, 1.2F, 0.5F);
+		if (target == null) {
+			Techniques.line(level, Element.BONE.puff, hand, lookPoint(p, 12), 0.4);
+			return;
+		}
+		damage(p, target, 9, Element.BONE);
+		channel(p, 10, 1, t -> {
+			if (!target.isAlive())
+				return;
+			Vec3 pull = hand.subtract(target.getBoundingBox().getCenter());
+			if (pull.length() > 1.8) {
+				target.setDeltaMovement(pull.normalize().scale(0.9));
+				target.syncVelocity = true;
+			}
+			Techniques.line(level, Element.BONE.puff, hand, target.getBoundingBox().getCenter(), 0.35);
+		});
+	}
+
+	/** Split Detachment of the Primitive World: five small cubes fanned out, each erasing what it touches. */
+	private static void splitDust(ServerPlayer p) {
+		for (int i = -2; i <= 2; i++) {
+			JutsuProjectile cube = shoot(p, Element.DUST, Shape.CUBE, 0.6F, turned(p, i * 9, 0).scale(1.6), 9);
+			cube.life = 50;
+			cube.onImpact = c -> {
+				ServerLevel level = level(p);
+				burst(level, c.position(), 2.2F, 9, 0.3F, Element.DUST, c);
+				level.sendParticles(ParticleTypes.END_ROD, c.getX(), c.getY(), c.getZ(), 40, 1, 1, 1, 0.1);
+			};
+		}
+		sound(level(p), p.getEyePosition(), SoundEvents.BEACON_ACTIVATE, 1.5F, 1.8F);
+	}
+
+	/** Detachment of the Primitive World Technique Area: a cube of dust swells over the whole area looked at and erases it. */
+	private static void dustArea(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 at = lookPoint(p, 30).add(0, 1, 0);
+		JutsuProjectile cube = ClanJutsu.spawn(p, Element.DUST, Shape.CUBE, 0.5F, at, Vec3.ZERO, 0);
+		cube.pierce = -1;
+		cube.knockback = 0;
+		cube.life = 50;
+		sound(level, at, SoundEvents.BEACON_ACTIVATE, 2, 0.8F);
+		channel(p, 30, 1, t -> {
+			float size = 0.5F + t * 0.45F;
+			cube.look(Element.DUST, Shape.CUBE, size);
+			cube.setPos(at.subtract(0, size / 2, 0));
+			for (LivingEntity target : enemies(level, p, new AABB(at, at).inflate(size / 2), e -> true))
+				target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 4, false, false));
+		});
+		after(level, 30, () -> {
+			burst(level, at, 7.5F, 40, 0.3F, Element.DUST, cube);
+			cube.discard();
+			level.sendParticles(ParticleTypes.END_ROD, at.x, at.y, at.z, 300, 3.5, 3.5, 3.5, 0.2);
+			level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, at.x, at.y, at.z, 1, 0, 0, 0, 0);
+			sound(level, at, SoundEvents.GENERIC_EXPLODE.value(), 2.5F, 1.6F);
+		});
+	}
+
+	/** Swallow Snow Storm: a flock of ice swallows darts out and hunts down enemies, freezing them. */
+	private static void snowSwallows(ServerPlayer p) {
+		channel(p, 20, 2, t -> {
+			JutsuProjectile swallow = shoot(p, Element.ICE, Shape.NEEDLE, 0.3F,
+					turned(p, (level(p).getRandom().nextFloat() - 0.5F) * 50, (level(p).getRandom().nextFloat() - 0.2F) * 25).scale(1.3), 4);
+			swallow.homing = 0.3F;
+			swallow.life = 50;
+			swallow.knockback = 0.1F;
+			sound(level(p), p.getEyePosition(), SoundEvents.POWDER_SNOW_STEP, 0.8F, 1.8F);
+		});
+	}
+
+	/**
+	 * Ice Rock Dome of Magnificent Nothingness: a dome of thick ice closes over the enemy looked at: nobody inside gets out, and they
+	 * freeze slowly for six seconds.
+	 */
+	private static void iceDome(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity aimed = ClanJutsu.target(p, 20);
+		Vec3 look = aimed != null ? aimed.position() : lookPoint(p, 20);
+		Vec3 c = new Vec3(look.x, ground(level, look.x, look.y, look.z).getY(), look.z);
+		int life = 120;
+		BlockState ice = Blocks.PACKED_ICE.defaultBlockState();
+		double[][] rows = { { 12, 3.3, 0, 0.15 }, { 10, 2.8, 1.9, 0.6 }, { 6, 1.6, 3.2, 1.1 } };
+		int delay = 0;
+		for (double[] row : rows)
+			for (int i = 0; i < (int) row[0]; i++) {
+				double a = i * Math.PI * 2 / row[0];
+				Vec3 at = c.add(Math.cos(a) * row[1], row[2], Math.sin(a) * row[1]);
+				float yaw = (float) (Math.PI / 2 - a), lean = (float) -row[3];
+				int wait = delay++ / 3;
+				after(level, wait, () -> Displays.grow(level, at, ice, Displays.box(yaw, lean, 1.9F, 2.1F, 0.3F), 6, life - wait, false));
+			}
+		sound(level, c, SoundEvents.GLASS_PLACE, 2, 0.5F);
+		channel(p, life, 2, t -> {
+			for (LivingEntity target : enemies(level, p, new AABB(c, c).inflate(3.4, 4, 3.4), e -> e.position().subtract(c).horizontalDistance() < 3.4)) {
+				target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 3, false, false));
+				target.setTicksFrozen(Math.min(target.getTicksRequiredToFreeze() + 20, target.getTicksFrozen() + 6));
+				Vec3 from = target.position().subtract(c).multiply(1, 0, 1);
+				if (from.length() > 2.4) {
+					Vec3 in = from.normalize().scale(-0.3);
+					target.setDeltaMovement(in.x, target.getDeltaMovement().y, in.z);
+					target.syncVelocity = true;
+				}
+				if (t % 20 == 0)
+					damage(p, target, 3, Element.ICE);
+			}
+		});
+		after(level, life, () -> {
+			sound(level, c, SoundEvents.GLASS_BREAK, 2, 0.6F);
+			level.sendParticles(Element.ICE.puff, c.x, c.y + 2, c.z, 60, 2.5, 1.5, 2.5, 0.1);
+		});
+	}
+
+	/** Iron Sand Wall: iron sand sweeps up round the caster into a barrier for eight seconds that stops projectiles and blows. */
+	private static void ironSandWall(ServerPlayer p) {
+		ServerLevel level = level(p);
+		sound(level, p.position(), SoundEvents.SAND_PLACE, 1.5F, 0.5F);
+		ClanJutsu.shell(p, p, p.getBoundingBox().getCenter(), Element.MAGNET, 4.2F, 160);
+		ClanJutsu.mode(p, 160, 1, v -> v.magnet_coat = 1, v -> v.magnet_coat = 0, t -> {
+			if (t % 10 == 0)
+				ClanJutsu.keep(p, MobEffects.RESISTANCE, 3);
+			for (net.minecraft.world.entity.projectile.Projectile shot : level.getEntitiesOfClass(net.minecraft.world.entity.projectile.Projectile.class,
+					p.getBoundingBox().inflate(2.6), e -> e.getOwner() != p)) {
+				puff(level, shot.position(), Element.MAGNET, 0.5F);
+				shot.discard();
+			}
+			if (t % 4 == 0)
+				level.sendParticles(Element.MAGNET.trail, p.getX(), p.getY() + 1, p.getZ(), 6, 1.5, 1, 1.5, 0.02);
+		});
+	}
+
+	/** Iron Sand Gathering Assault: a great mass of iron sand shoots forward and bursts into spikes where it strikes. */
+	private static void gatheringAssault(ServerPlayer p) {
+		ServerLevel level = level(p);
+		JutsuProjectile mass = shoot(p, Element.MAGNET, Shape.ORB, 1.8F, 1.3F, 14);
+		mass.life = 30;
+		mass.knockback = 1.5F;
+		mass.onImpact = m -> {
+			burst(level, m.position(), 3, 8, 1, Element.MAGNET, m);
+			for (int i = 0; i < 10; i++) {
+				Vec3 dir = new Vec3(level.getRandom().nextGaussian(), Math.abs(level.getRandom().nextGaussian()) * 0.6, level.getRandom().nextGaussian()).normalize();
+				JutsuProjectile spike = ClanJutsu.spawn(p, Element.MAGNET, Shape.NEEDLE, 0.3F, m.position().add(0, 0.5, 0), dir.scale(1.2), 4);
+				spike.life = 8;
+			}
+			sound(level, m.position(), SoundEvents.CHAIN_BREAK, 1.5F, 0.5F);
+		};
+		sound(level, p.getEyePosition(), SoundEvents.SAND_FALL, 2, 0.6F);
+	}
+
+	/** Iron Sand World Method: iron sand spreads out from the caster in a web of spikes in every direction ahead. */
+	private static void worldMethod(ServerPlayer p) {
+		ServerLevel level = level(p);
+		sound(level, p.position(), SoundEvents.CHAIN_PLACE, 2, 0.4F);
+		channel(p, 12, 2, t -> {
+			for (int i = 0; i < 8; i++) {
+				JutsuProjectile spike = shoot(p, Element.MAGNET, Shape.NEEDLE, 0.35F,
+						turned(p, (level.getRandom().nextFloat() - 0.5F) * 110, (level.getRandom().nextFloat() - 0.5F) * 60).scale(1.8), 7);
+				spike.pierce = 2;
+				spike.life = 16;
+				spike.knockback = 0.2F;
+			}
+			if (t % 4 == 0)
+				sound(level, p.getEyePosition(), SoundEvents.SAND_FALL, 1.5F, 0.8F);
+		});
+	}
+
+	/** Smoke Release: Vapor Blade: a wide blade of smoke sweeps the front, cutting and blinding. */
+	private static void vaporBlade(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 look = p.getLookAngle();
+		for (LivingEntity target : cone(p, 6.5, 55)) {
+			damage(p, target, 9, Element.SMOKE);
+			target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 60, 0, false, false));
+		}
+		for (int i = -4; i <= 4; i++) {
+			Vec3 at = p.getEyePosition().add(turned(p, i * 12, 0).scale(3.5)).subtract(0, 0.3, 0);
+			level.sendParticles(ParticleTypes.SWEEP_ATTACK, at.x, at.y, at.z, 1, 0, 0, 0, 0);
+			level.sendParticles(ParticleTypes.LARGE_SMOKE, at.x, at.y, at.z, 4, 0.2, 0.2, 0.2, 0.02);
+		}
+		sound(level, p.position(), SoundEvents.PLAYER_ATTACK_SWEEP, 1.2F, 0.6F);
+	}
+
+	/** Smoke Release: Erupting Smoke: smoke erupts from the ground where the caster looks, throwing enemies up and choking them. */
+	private static void eruptingSmoke(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 at = lookPoint(p, 20);
+		sound(level, at, SoundEvents.FIRE_EXTINGUISH, 2, 0.4F);
+		channel(p, 20, 2, t -> level.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, at.x, at.y, at.z, 10, 2.5, 0.2, 2.5, 0.06));
+		for (LivingEntity target : enemies(level, p, new AABB(at, at).inflate(4, 3, 4), e -> e.distanceToSqr(at) < 20)) {
+			damage(p, target, 11, Element.SMOKE);
+			target.push(0, 1.1, 0);
+			target.syncVelocity = true;
+		}
+	}
+
+	/** Demonic Illusion: Drowning in Smoke: the enemy looked at breathes in smoke and believes they are drowning in it. */
+	private static void drowningInSmoke(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity target = ClanJutsu.target(p, 16);
+		if (target == null) {
+			Jutsus.miss(p, "Look at an enemy");
+			return;
+		}
+		sound(level, target.position(), SoundEvents.FIRE_EXTINGUISH, 1.5F, 0.5F);
+		channel(p, 120, 2, t -> {
+			if (!target.isAlive())
+				return;
+			ClanJutsu.hold(target);
+			target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 20, 0, false, false));
+			target.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 60, 0, false, false));
+			target.setAirSupply(Math.max(-20, target.getAirSupply() - 8));
+			level.sendParticles(ParticleTypes.LARGE_SMOKE, target.getX(), target.getEyeY(), target.getZ(), 4, 0.3, 0.3, 0.3, 0.01);
+			if (t % 20 == 0)
+				damage(p, target, 3, Element.SMOKE);
+		});
+	}
+
+	/** Steel Blades Technique: the arms harden into blades of steel for twenty seconds; the first swing cuts everything in front. */
+	private static void steelBlades(ServerPlayer p) {
+		ServerLevel level = level(p);
+		for (LivingEntity target : cone(p, 4.5, 60))
+			damage(p, target, 11, Element.STEEL);
+		Vec3 look = p.getLookAngle();
+		for (int i = -2; i <= 2; i++) {
+			Vec3 at = p.getEyePosition().add(turned(p, i * 18, 0).scale(2.5)).subtract(0, 0.3, 0);
+			level.sendParticles(ParticleTypes.SWEEP_ATTACK, at.x, at.y, at.z, 1, 0, 0, 0, 0);
+		}
+		p.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 400, 2, false, false, true));
+		channel(p, 400, 6, t -> level.sendParticles(Element.STEEL.trail, p.getX(), p.getY() + 1, p.getZ(), 2, 0.5, 0.4, 0.5, 0.05));
+		sound(level, p.position(), SoundEvents.ANVIL_USE, 1, 1.4F);
+	}
+
+	/** Steel Shield Technique: a wall of steel rises in front of the caster for eight seconds and stops everything thrown at it. */
+	private static void steelShield(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 dir = p.getLookAngle().multiply(1, 0, 1).normalize(), at = p.position().add(dir.scale(1.6));
+		float yaw = (float) Math.atan2(dir.x, dir.z);
+		Displays.grow(level, new Vec3(at.x, ground(level, at.x, p.getY(), at.z).getY(), at.z), Blocks.IRON_BLOCK.defaultBlockState(), Displays.box(yaw, 0, 3.2F, 3, 0.25F),
+				5, 160, false);
+		sound(level, at, SoundEvents.ANVIL_PLACE, 1.2F, 0.7F);
+		channel(p, 160, 1, t -> {
+			for (net.minecraft.world.entity.projectile.Projectile shot : level.getEntitiesOfClass(net.minecraft.world.entity.projectile.Projectile.class,
+					new AABB(at, at).inflate(1.9, 3, 1.9), e -> e.getOwner() != p)) {
+				level.sendParticles(ParticleTypes.CRIT, shot.getX(), shot.getY(), shot.getZ(), 6, 0.2, 0.2, 0.2, 0.2);
+				sound(level, shot.position(), SoundEvents.ANVIL_LAND, 0.4F, 1.8F);
+				shot.discard();
+			}
+			for (LivingEntity target : enemies(level, p, new AABB(at, at).inflate(1.7, 3, 1.7), e -> true)) {
+				target.push(dir.x * 0.5, 0, dir.z * 0.5);
+				target.syncVelocity = true;
+			}
+		});
+	}
+
+	/** Storm Release: Black Hunting: dark storm light strikes down on every enemy round the spot looked at. */
+	private static void blackHunting(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 at = lookPoint(p, 30);
+		List<LivingEntity> prey = enemies(level, p, new AABB(at, at).inflate(9, 6, 9), e -> true);
+		sound(level, at, SoundEvents.BEACON_DEACTIVATE, 2, 0.6F);
+		for (int i = 0; i < 8; i++) {
+			int n = i;
+			after(level, i * 3, () -> {
+				Vec3 hit = prey.isEmpty() || !prey.get(n % prey.size()).isAlive()
+						? at.add((level.getRandom().nextDouble() - 0.5) * 12, 0, (level.getRandom().nextDouble() - 0.5) * 12)
+						: prey.get(n % prey.size()).getBoundingBox().getCenter();
+				JutsuProjectile beam = ClanJutsu.spawn(p, Element.STORM, Shape.NEEDLE, 0.4F, hit.add(0, 12, 0), new Vec3(0, -2.4, 0), 7);
+				beam.life = 10;
+				beam.onImpact = b -> puff(level, b.position(), Element.STORM, 0.8F);
+			});
+		}
+	}
+
+	/** Wood Release: Wood Spikes Ring: a ring of sharpened wooden stakes bursts out of the ground round the caster. */
+	private static void woodSpikesRing(ServerPlayer p) {
+		ServerLevel level = level(p);
+		List<LivingEntity> struck = new ArrayList<>();
+		sound(level, p.position(), SoundEvents.WOOD_BREAK, 2, 0.5F);
+		for (int ring = 0; ring < 2; ring++) {
+			double r = 2.5 + ring * 1.5;
+			int n = 10 + ring * 6;
+			for (int i = 0; i < n; i++) {
+				double a = i * Math.PI * 2 / n + ring * 0.2;
+				double x = p.getX() + Math.cos(a) * r, z = p.getZ() + Math.sin(a) * r;
+				Vec3 base = new Vec3(x, ground(level, x, p.getY(), z).getY(), z);
+				float lean = (float) -0.35;
+				Displays.grow(level, base, Blocks.OAK_LOG.defaultBlockState(), Displays.box((float) (Math.PI / 2 - a), lean, 0.35F, 2.4F + ring * 0.6F, 0.35F), 4, 80, false);
+			}
+		}
+		for (LivingEntity target : enemies(level, p, p.getBoundingBox().inflate(5, 2, 5), e -> e.distanceToSqr(p) < 30)) {
+			struck.add(target);
+			damage(p, target, 10, Element.WOOD);
+			target.push(0, 0.6, 0);
+			target.syncVelocity = true;
+		}
+	}
+
+	/** Wood Release: Four-Pillar Prison Technique: a cage of thick wooden bars grows up round the enemy looked at, trapping them. */
+	private static void fourPillarPrison(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity aimed = ClanJutsu.target(p, 24);
+		Vec3 look = aimed != null ? aimed.position() : lookPoint(p, 24);
+		Vec3 c = new Vec3(look.x, ground(level, look.x, look.y, look.z).getY(), look.z);
+		int life = 160;
+		BlockState log = Blocks.SPRUCE_LOG.defaultBlockState();
+		for (int i = 0; i < 12; i++) {
+			double a = i * Math.PI / 6;
+			Vec3 at = c.add(Math.cos(a) * 2.2, 0, Math.sin(a) * 2.2);
+			Displays.grow(level, at, log, Displays.box(0, 0, 0.35F, 4, 0.35F), 8, life, false);
+		}
+		for (int i = 0; i < 4; i++)
+			Displays.grow(level, c.add(0, 4, 0), log, Displays.box((float) (i * Math.PI / 4), 0, 4.8F, 0.35F, 0.35F), 10, life, false);
+		sound(level, c, SoundEvents.WOOD_PLACE, 2, 0.5F);
+		channel(p, life, 1, t -> {
+			for (LivingEntity target : enemies(level, p, new AABB(c, c).inflate(2.6, 4, 2.6), e -> e.position().subtract(c).horizontalDistance() < 2.6)) {
+				Vec3 from = target.position().subtract(c).multiply(1, 0, 1);
+				if (from.length() > 1.7) {
+					Vec3 in = from.normalize().scale(-0.3);
+					target.setDeltaMovement(in.x, Math.min(0, target.getDeltaMovement().y), in.z);
+					target.syncVelocity = true;
+				}
+				if (target.getY() > c.y + 2.5) {
+					target.setDeltaMovement(target.getDeltaMovement().x, -0.3, target.getDeltaMovement().z);
+					target.syncVelocity = true;
+				}
 			}
 		});
 	}

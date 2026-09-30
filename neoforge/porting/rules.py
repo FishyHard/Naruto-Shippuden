@@ -1548,3 +1548,18 @@ def shadow_imitation_guard(path, text):
 def custom_jutsu_textures(path, text):
     """The Custom Jutsu projectiles (and a fireball) pointed at textures/<name>.png; the files are in textures/entities/."""
     return re.sub(r'"naruto_shippuden:textures/((?:custom_\w+_jutsu(?:_wave)?|fireball)(?:\.png)?)"', r'"naruto_shippuden:textures/entities/\1"', text)
+
+
+# ---------------------------------------------------------------- Iburi is gone; its place (clan roll, select screen, info card) is the Yamanaka clan's
+def iburi_is_yamanaka(path, text):
+    """The Iburi clan was removed and the Yamanaka clan added in its slot: its paper roll, select entry and info icon now give the
+    Yamanaka scroll (core/jutsu/ClanJutsu registers its jutsu). The Iburi scroll's own procedure (it sold Smoke Release) goes."""
+    if 'iburi' not in text.lower():
+        return text
+    text = remove_class(text, 'IburiReleaseRightclickedProcedure')
+    text = re.sub(r'\nimport [\w.]*\.IburiReleaseRightclickedProcedure;', '', text)
+    text = re.sub(r'\bIburiReleaseRightclickedProcedure\s*\.executeProcedure\(', 'net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.unused(', text)
+    return text.replace('Iburi', 'Yamanaka').replace('iburi_release', 'yamanaka_release').replace('iburireleaselogic', 'yamanakareleaselogic')
+
+
+RULES.append(iburi_is_yamanaka)

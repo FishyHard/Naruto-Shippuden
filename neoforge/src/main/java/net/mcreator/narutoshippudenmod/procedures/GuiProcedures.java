@@ -43,7 +43,7 @@ import net.mcreator.narutoshippudenmod.item.ClanItems.ChinoikeReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.FumaReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.HozukiReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.HyugaReleaseItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.IburiReleaseItem;
+import net.mcreator.narutoshippudenmod.item.ClanItems.YamanakaReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.InuzukaReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.LeeReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.NaraReleaseItem;
@@ -656,7 +656,7 @@ public final class GuiProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).selectclanrelease == 9) {
 				if (entity instanceof Player) {
-					ItemStack _setstack = new ItemStack(IburiReleaseItem.block);
+					ItemStack _setstack = new ItemStack(YamanakaReleaseItem.block);
 					_setstack.setCount((int) 1);
 					Compat.giveItemToPlayer(((Player) entity), _setstack);
 				}
@@ -684,7 +684,7 @@ public final class GuiProcedures {
 				{
 					boolean _setval = (true);
 					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.iburireleaselogic = _setval;
+						capability.yamanakareleaselogic = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
@@ -3021,7 +3021,7 @@ public final class GuiProcedures {
 			{
 				boolean _setval = (false);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.iburireleaselogic = _setval;
+					capability.yamanakareleaselogic = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}

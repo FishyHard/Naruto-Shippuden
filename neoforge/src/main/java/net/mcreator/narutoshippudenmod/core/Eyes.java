@@ -69,7 +69,7 @@ public final class Eyes {
 		eye.toggle().accept(dependencies(player));
 	}
 
-	private static void closeAll(ServerPlayer player) {
+	public static void closeAll(ServerPlayer player) {
 		// the Mangekyou (and its Susanoo) close before the Sharingan under them
 		if (NarutoShippudenModVariables.get(player).mangekyousharingansusanostage > 0)
 			setStage(player, 0);

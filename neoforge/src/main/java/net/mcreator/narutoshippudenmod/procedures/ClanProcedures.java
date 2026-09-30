@@ -29,7 +29,7 @@ import net.mcreator.narutoshippudenmod.item.ClanItems.FumaReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.FumaShurikenClanItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.HozukiReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.HyugaReleaseItem;
-import net.mcreator.narutoshippudenmod.item.ClanItems.IburiReleaseItem;
+import net.mcreator.narutoshippudenmod.item.ClanItems.YamanakaReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.InuzukaReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.LeeReleaseItem;
 import net.mcreator.narutoshippudenmod.item.ClanItems.NaraReleaseItem;
@@ -907,14 +907,14 @@ public final class ClanProcedures {
 				}
 			} else if (clanpaperrandom == 4) {
 				if (entity instanceof Player) {
-					ItemStack _setstack = new ItemStack(IburiReleaseItem.block);
+					ItemStack _setstack = new ItemStack(YamanakaReleaseItem.block);
 					_setstack.setCount((int) 1);
 					Compat.giveItemToPlayer(((Player) entity), _setstack);
 				}
 				{
 					boolean _setval = (true);
 					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.iburireleaselogic = _setval;
+						capability.yamanakareleaselogic = _setval;
 						capability.syncPlayerVariables(entity);
 					});
 				}
@@ -1473,7 +1473,7 @@ public final class ClanProcedures {
 			{
 				boolean _setval = (false);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.iburireleaselogic = _setval;
+					capability.yamanakareleaselogic = _setval;
 					capability.syncPlayerVariables(entity);
 				});
 			}
@@ -2021,59 +2021,6 @@ public final class ClanProcedures {
 
 
 
-	public static class IburiReleaseRightclickedProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure IburiReleaseRightclicked!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (NarutoShippudenModVariables.get(entity).iburi_release == 0) {
-				if (NarutoShippudenModVariables.get(entity).jp >= 5) {
-					if (entity instanceof Player) {
-						ItemStack _setstack = new ItemStack(SmokeReleaseItem.block);
-						_setstack.setCount((int) 1);
-						Compat.giveItemToPlayer(((Player) entity), _setstack);
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).jp - 5);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.jp = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).iburi_release + 1);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.iburi_release = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("-5 JP"));
-					}
-					{
-						boolean _setval = (true);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.smokereleaselogic = _setval;
-							capability.syncPlayerVariables(entity);
-						});
-					}
-					if (entity instanceof Player) {
-						ItemStack _stktoremove = new ItemStack(IburiReleaseItem.block);
-						((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
-								((Player) entity).inventoryMenu.getCraftSlots());
-					}
-				} else if (NarutoShippudenModVariables.get(entity).jp <= 4) {
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Not enough JP"));
-					}
-				}
-			}
-		}
-	}
 
 
 	public static class InuzukaAkamaruEffectExpiresProcedure {

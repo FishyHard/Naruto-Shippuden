@@ -35,6 +35,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -80,15 +81,20 @@ public final class ClanJutsu {
 		FlyingRaijin.register();
 		nature("aburame", "Aburame Clan", v -> v.aburamereleaselogic, v -> v.aburametechnique, (v, i) -> v.aburametechnique = i, v -> v.aburamelearn,
 				(v, i) -> v.aburamelearn = i, v -> v.aburame_release, (v, i) -> v.aburame_release = i,
-				new Def("Parasitic Insect Cloud", JutsuRank.C, ClanJutsu::insectCloud),
+				new Def("Parasitic Destruction Insect Technique", JutsuRank.C, ClanJutsu::insectCloud),
+				new Def("Insect Clone Technique", JutsuRank.C, ClanJutsu::insectClone),
 				new Def("Insect Jar Technique", JutsuRank.B, ClanJutsu::insectJar),
-				new Def("Insect Bog", JutsuRank.A, ClanJutsu::insectBog));
+				new Def("Secret Technique: Insect Bog", JutsuRank.A, ClanJutsu::insectBog),
+				new Def("Secret Technique: Insect Sphere", JutsuRank.S, ClanJutsu::insectSphere));
 		nature("akimichi", "Akimichi Clan", v -> v.akimichireleaselogic, v -> v.akimichitechnique, (v, i) -> v.akimichitechnique = i,
 				v -> v.akimichilearn, (v, i) -> v.akimichilearn = i, v -> v.akimichirelease, (v, i) -> v.akimichirelease = i,
-				new Def("Expansion Technique", JutsuRank.C, ClanJutsu::expansion),
+				new Def("Partial Multi-Size Technique", JutsuRank.D, ClanJutsu::partialMultiSize),
+				new Def("Multi-Size Technique", JutsuRank.C, ClanJutsu::expansion),
 				new Def("Human Bullet Tank", JutsuRank.B, p -> bulletTank(p, false)),
+				new Def("Super Open Hand Slap", JutsuRank.B, ClanJutsu::openHandSlap, "Taijutsu"),
 				new Def("Spiked Human Bullet Tank", JutsuRank.A, p -> bulletTank(p, true)),
-				new Def("Butterfly Mode", JutsuRank.S, ClanJutsu::butterfly));
+				new Def("Butterfly Mode", JutsuRank.S, ClanJutsu::butterfly),
+				new Def("Butterfly Bullet Bombing", JutsuRank.S, ClanJutsu::butterflyBombing, "Taijutsu"));
 		nature("fuma", "Fuma Clan", v -> v.fumareleaselogic, v -> v.fumatechnique, (v, i) -> v.fumatechnique = i, v -> v.fumalearn,
 				(v, i) -> v.fumalearn = i, v -> v.fumarelease, (v, i) -> v.fumarelease = i,
 				new Def("Shuriken Barrage", JutsuRank.D, ClanJutsu::shurikenBarrage),
@@ -97,13 +103,17 @@ public final class ClanJutsu {
 		nature("hozuki", "Hozuki Clan", v -> v.hozukireleaselogic, v -> v.hozukitechnique, (v, i) -> v.hozukitechnique = i, v -> v.hozukilearn,
 				(v, i) -> v.hozukilearn = i, v -> v.hozukirelease, (v, i) -> v.hozukirelease = i,
 				new Def("Water Gun Technique", JutsuRank.D, ClanJutsu::waterPistol),
+				new Def("Water Gun: Two Guns", JutsuRank.D, ClanJutsu::twoGuns),
+				new Def("Hydrification Technique", JutsuRank.C, ClanJutsu::hydrification),
 				new Def("Drowning Water Blob Technique", JutsuRank.C, ClanJutsu::drowningBlob),
-				new Def("Great Water Arm Technique", JutsuRank.B, ClanJutsu::waterArm));
+				new Def("Great Water Arm Technique", JutsuRank.B, ClanJutsu::waterArm),
+				new Def("Tate Eboshi", JutsuRank.A, ClanJutsu::tateEboshi));
 		nature("hyuga", "Hyuga Clan", v -> v.hyugareleaselogic, v -> v.hyugatechnique, (v, i) -> v.hyugatechnique = i, v -> v.hyugalearn,
 				(v, i) -> v.hyugalearn = i, v -> v.hyugarelease, (v, i) -> v.hyugarelease = i,
 				new Def("Gentle Fist", JutsuRank.D, ClanJutsu::gentleFist, "Taijutsu"),
 				new Def("Gentle Step Twin Lion Fists", JutsuRank.C, ClanJutsu::twinLions),
 				new Def("Eight Trigrams Twin Lions Crumbling Attack", JutsuRank.B, ClanJutsu::crumblingAttack),
+				new Def("Gentle Fist Art One Blow Body", JutsuRank.B, ClanJutsu::oneBlowBody, "Taijutsu"),
 				new Def("Eight Trigrams Palms Revolving Heaven", JutsuRank.A, ClanJutsu::rotation),
 				new Def("Eight Trigrams Sixty-Four Palms", JutsuRank.S, ClanJutsu::sixtyFourPalms, "Taijutsu"));
 		nature("inuzuka", "Inuzuka Clan", v -> v.inuzukareleaselogic, v -> v.inuzukatechnique, (v, i) -> v.inuzukatechnique = i,
@@ -112,9 +122,9 @@ public final class ClanJutsu {
 				new Def("Four Legs Technique", JutsuRank.D, ClanJutsu::fourLegs, "Taijutsu"),
 				new Def("Dynamic Marking", JutsuRank.D, ClanJutsu::dynamicMarking),
 				new Def("Passing Fang", JutsuRank.C, ClanJutsu::passingFang, "Taijutsu"),
-				new Def("Man Beast Clone", JutsuRank.C, ClanJutsu::manBeastClone),
-				new Def("Fang Over Fang", JutsuRank.B, ClanJutsu::fangOverFang, "Taijutsu"),
-				new Def("Tunneling Fang", JutsuRank.A, ClanJutsu::tunnelingFang, "Taijutsu"));
+				new Def("Beast Human Clone", JutsuRank.C, ClanJutsu::manBeastClone),
+				new Def("Fang Passing Fang", JutsuRank.B, ClanJutsu::fangOverFang, "Taijutsu"),
+				new Def("Fang Rotating Fang", JutsuRank.A, ClanJutsu::fangRotatingFang, "Taijutsu"));
 		nature("lee", "Lee Clan", v -> v.leereleaselogic, v -> v.lee_technique, (v, i) -> v.lee_technique = i, v -> v.leelearn,
 				(v, i) -> v.leelearn = i, v -> v.lee_release, (v, i) -> v.lee_release = i,
 				new Def("Drunken Fist", JutsuRank.D, ClanJutsu::drunkenFist, "Taijutsu"),
@@ -130,22 +140,39 @@ public final class ClanJutsu {
 				(v, i) -> v.naralearn = i, v -> v.nararelease, (v, i) -> v.nararelease = i,
 				new Def("Shadow Imitation Shuriken Technique", JutsuRank.D, ClanJutsu::shadowShuriken),
 				new Def("Shadow Imitation Technique", JutsuRank.C, ClanJutsu::shadowImitation),
-				new Def("Shadow Neck Binding Technique", JutsuRank.B, ClanJutsu::neckBinding),
+				new Def("Shadow Gathering Technique", JutsuRank.B, ClanJutsu::shadowGathering),
+				new Def("Shadow–Neck Binding Technique", JutsuRank.B, ClanJutsu::neckBinding),
 				new Def("Shadow Sewing Technique", JutsuRank.A, ClanJutsu::shadowSewing),
-				new Def("Shadow Gathering Technique", JutsuRank.S, ClanJutsu::shadowGathering));
+				new Def("Shadow Imitation Field Technique", JutsuRank.S, ClanJutsu::imitationField));
 		Jutsus.TECHNIQUES.get(Identifier.fromNamespaceAndPath("naruto_shippuden", "nara_release_technique")).onSneak = ClanJutsu::releaseShadow;
 		nature("sarutobi", "Sarutobi Clan", v -> v.sarutobireleaselogic, v -> v.sarutobitechnique, (v, i) -> v.sarutobitechnique = i,
 				v -> v.sarutobilearn, (v, i) -> v.sarutobilearn = i, v -> v.sarutobirelease, (v, i) -> v.sarutobirelease = i,
 				new Def("Ash Pile Burning", JutsuRank.C, ClanJutsu::ashPile),
-				new Def("Fire Dragon Flame Bullet", JutsuRank.B, ClanJutsu::flameBullet));
+				new Def("Great Flame Technique", JutsuRank.B, NatureJutsu::greatFlame),
+				new Def("Fire Dragon Flame Bullet", JutsuRank.A, ClanJutsu::flameBullet));
 		nature("uzumaki", "Uzumaki Clan", v -> v.uzumakireleaselogic, v -> v.uzumakitechnique, (v, i) -> v.uzumakitechnique = i,
 				v -> v.uzumakilearn, (v, i) -> v.uzumakilearn = i, v -> v.uzumakirelease, (v, i) -> v.uzumakirelease = i,
 				new Def("Adamantine Sealing Chains", JutsuRank.C, ClanJutsu::sealingChains),
 				new Def("Heal Bite", JutsuRank.B, ClanJutsu::healBite),
+				new Def("Four Symbols Seal", JutsuRank.B, ClanJutsu::fourSymbolsSeal),
+				new Def("Uzumaki Sealing Technique", JutsuRank.A, ClanJutsu::uzumakiSealing),
 				new Def("Dead Demon Consuming Seal", JutsuRank.S, ClanJutsu::deadDemon));
-		nature("tsuchigumo", "Tsuchigumo Clan", v -> v.tsuchigumoreleaselogic, v -> 0, (v, i) -> {
-		}, v -> v.tsuchigumolearn, (v, i) -> v.tsuchigumolearn = i, v -> v.tsuchigumorelease, (v, i) -> v.tsuchigumorelease = i,
-				new Def("Forbidden Technique: Fury", JutsuRank.S, ClanJutsu::fury));
+		nature("tsuchigumo", "Tsuchigumo Clan", v -> v.tsuchigumoreleaselogic, v -> v.tsuchigumotechnique, (v, i) -> v.tsuchigumotechnique = i, v -> v.tsuchigumolearn, (v, i) -> v.tsuchigumolearn = i, v -> v.tsuchigumorelease, (v, i) -> v.tsuchigumorelease = i,
+				new Def("Creation of Heaven and Earth", JutsuRank.A, ClanJutsu::creation),
+				new Def("Fury", JutsuRank.S, ClanJutsu::fury));
+		nature("uchiha", "Uchiha Clan", v -> v.uchihareleaselogic, v -> v.uchihatechnique, (v, i) -> v.uchihatechnique = i, v -> v.uchihalearn,
+				(v, i) -> v.uchihalearn = i, v -> v.uchiharelease, (v, i) -> v.uchiharelease = i,
+				new Def("Manipulating Windmill Triple Blades", JutsuRank.D, ClanJutsu::windmillBlades),
+				new Def("Uchiha Return", JutsuRank.C, ClanJutsu::uchihaReturn),
+				new Def("Uchiha Flame Formation", JutsuRank.A, ClanJutsu::flameFormation),
+				new Def("Great Fire Destruction", JutsuRank.S, ClanJutsu::greatFireDestruction));
+		nature("yamanaka", "Yamanaka Clan", v -> v.yamanakareleaselogic, v -> v.yamanakatechnique, (v, i) -> v.yamanakatechnique = i, v -> v.yamanakalearn,
+				(v, i) -> v.yamanakalearn = i, v -> v.yamanakarelease, (v, i) -> v.yamanakarelease = i,
+				new Def("Mind Body Transmission Technique", JutsuRank.D, ClanJutsu::mindTransmission),
+				new Def("Mind Body Switch Technique", JutsuRank.C, ClanJutsu::mindSwitch),
+				new Def("Mind Body Disturbance Technique", JutsuRank.B, ClanJutsu::mindDisturbance),
+				new Def("Mind Body Transmission Formation", JutsuRank.A, ClanJutsu::mindFormation),
+				new Def("Mind Clone Switch Technique", JutsuRank.S, ClanJutsu::mindCloneSwitch));
 	}
 
 	/** The old item hooks (hit or swing with a clan technique) did the old jutsu's effects; the remade jutsu don't use them. */
@@ -746,14 +773,11 @@ public final class ClanJutsu {
 		sound(level, at, SoundEvents.WOLF_SHAKE, 1, 1);
 	}
 
-	/** Akamaru within range for a jutsu that needs him; if he isn't there, the chakra and the cooldown are given back. */
+	/** Akamaru within range for a jutsu that needs him; if he isn't there, the cast costs nothing. */
 	private static AkamaruEntity.@Nullable CustomEntity needAkamaru(ServerPlayer p, double range, JutsuRank rank, int index) {
 		AkamaruEntity.CustomEntity dog = akamaruOf(p, range);
-		if (dog == null) {
-			tell(p, "Akamaru has to be close");
-			set(p, v -> v.ChakraAmount += rank.chakra);
-			after(level(p), 1, () -> p.getCooldowns().removeCooldown(Identifier.fromNamespaceAndPath("naruto_shippuden", "inuzuka_release_technique/" + index)));
-		}
+		if (dog == null)
+			Jutsus.miss(p, "Akamaru has to be close");
 		return dog;
 	}
 
@@ -834,7 +858,7 @@ public final class ClanJutsu {
 			return;
 		LivingEntity target = target(p, 24);
 		if (target == null) {
-			tell(p, "Look at an enemy to mark");
+			Jutsus.miss(p, "Look at an enemy to mark");
 			return;
 		}
 		ServerLevel level = level(p);
@@ -908,46 +932,6 @@ public final class ClanJutsu {
 		after(level, 44, () -> {
 			if (dog.isAlive() && dog.form() == 2)
 				dog.setForm(before == 1 ? 1 : 0);
-		});
-	}
-
-	/** Spins down into the earth, digs under the enemy and bursts up beneath it. */
-	private static void tunnelingFang(ServerPlayer p) {
-		LivingEntity target = prey(p, 24);
-		if (target == null) {
-			tell(p, "Nothing to dig towards");
-			return;
-		}
-		ServerLevel level = level(p);
-		Vec3 from = p.position();
-		int ticks = 20;
-		p.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, ticks + 2, 0, false, false));
-		flag(p, ticks + 12, v -> v.PassingFang = true, v -> v.PassingFang = false);
-		channel(p, ticks, 1, t -> {
-			if (!target.isAlive())
-				return;
-			Vec3 at = from.lerp(target.position(), (t + 1) / (double) ticks);
-			p.teleportTo(at.x, at.y, at.z);
-			p.fallDistance = 0;
-			net.minecraft.world.level.block.state.BlockState ground = level.getBlockState(net.minecraft.core.BlockPos.containing(at.x, at.y - 0.5, at.z));
-			if (!ground.isAir())
-				level.sendParticles(new net.minecraft.core.particles.BlockParticleOption(ParticleTypes.BLOCK, ground), at.x, at.y + 0.1, at.z, 12, 0.4, 0.1, 0.4, 0.1);
-			if (t % 4 == 0)
-				sound(level, at, SoundEvents.ROOTED_DIRT_BREAK, 1, 0.6F);
-		});
-		after(level, ticks, () -> {
-			p.removeEffect(MobEffects.INVISIBILITY);
-			p.setDeltaMovement(0, 0.9, 0);
-			p.syncVelocity = true;
-			sound(level, p.position(), SoundEvents.GENERIC_EXPLODE.value(), 0.7F, 1.4F);
-			net.minecraft.world.level.block.state.BlockState ground = level.getBlockState(p.blockPosition().below());
-			if (!ground.isAir())
-				level.sendParticles(new net.minecraft.core.particles.BlockParticleOption(ParticleTypes.BLOCK, ground), p.getX(), p.getY() + 0.3, p.getZ(), 60, 0.8, 0.4, 0.8, 0.2);
-			for (LivingEntity hit : enemies(level, p, p.getBoundingBox().inflate(2), e -> !(e instanceof AkamaruEntity.CustomEntity))) {
-				damage(p, hit, 22, Element.BEAST);
-				hit.push(0, 1.2, 0);
-				hit.syncVelocity = true;
-			}
 		});
 	}
 
@@ -1105,20 +1089,598 @@ public final class ClanJutsu {
 		});
 	}
 
+	// ------------------------------------------------------------------ added from the wiki
+	// aburame
+	/** Insect Clone Technique: a double made of insects takes the caster's place while they vanish; when it breaks it swarms. */
+	private static void insectClone(ServerPlayer p) {
+		ServerLevel level = level(p);
+		net.mcreator.narutoshippudenmod.entity.JutsuEntities.ShadowCloneEntity.CustomEntity clone = new net.mcreator.narutoshippudenmod.entity.JutsuEntities.ShadowCloneEntity.CustomEntity(
+				net.mcreator.narutoshippudenmod.entity.JutsuEntities.ShadowCloneEntity.entity, level);
+		clone.snapTo(p.getX(), p.getY(), p.getZ(), p.getYRot(), 0);
+		clone.setYHeadRot(p.getYRot());
+		clone.tame(p);
+		clone.setCustomName(p.getDisplayName());
+		clone.setCustomNameVisible(false);
+		level.addFreshEntity(clone);
+		p.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 80, 0, false, false, true));
+		p.addEffect(new MobEffectInstance(MobEffects.SPEED, 80, 1, false, false, true));
+		level.sendParticles(Element.INSECT.puff, p.getX(), p.getY() + 1, p.getZ(), 40, 0.4, 0.8, 0.4, 0.05);
+		sound(level, p.position(), SoundEvents.BEEHIVE_WORK, 1.5F, 1.3F);
+		Vec3[] last = { clone.position() };
+		boolean[] burst = { false };
+		channel(p, 400, 2, t -> {
+			if (burst[0])
+				return;
+			if (clone.isAlive() && t < 398) {
+				last[0] = clone.position();
+				if (t % 6 == 0)
+					level.sendParticles(Element.INSECT.trail, clone.getX(), clone.getY() + 1, clone.getZ(), 3, 0.3, 0.6, 0.3, 0.02);
+				return;
+			}
+			burst[0] = true;
+			clone.discard();
+			swarm(p, last[0], 3, 80);
+		});
+	}
+
+	/** Secret Technique: Insect Sphere: a great sphere of insects closes round the caster and everything near, eating at their chakra. */
+	private static void insectSphere(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 c = p.getBoundingBox().getCenter();
+		shell(p, null, c, Element.INSECT, 10, 100);
+		sound(level, c, SoundEvents.BEEHIVE_WORK, 2, 0.6F);
+		channel(p, 100, 2, t -> {
+			for (int i = 0; i < 30; i++) {
+				double a = level.getRandom().nextDouble() * Math.PI * 2, b = level.getRandom().nextDouble() * Math.PI - Math.PI / 2;
+				level.sendParticles(Element.INSECT.trail, c.x + Math.cos(a) * Math.cos(b) * 5, c.y + Math.sin(b) * 5, c.z + Math.sin(a) * Math.cos(b) * 5, 1, 0, 0, 0, 0);
+			}
+			for (LivingEntity target : enemies(level, p, new AABB(c, c).inflate(5), e -> e.distanceToSqr(c) < 25)) {
+				hold(target);
+				if (t % 10 == 0) {
+					damage(p, target, 2.5F, Element.INSECT);
+					if (target instanceof ServerPlayer victim)
+						set(victim, v -> v.ChakraAmount = Math.max(0, v.ChakraAmount - 25));
+				}
+			}
+		});
+	}
+
+	// akimichi
+	/** Partial Multi-Size Technique: one arm swells to giant size and swats everything in front away. */
+	private static void partialMultiSize(ServerPlayer p) {
+		JutsuProjectile fist = shoot(p, Element.BEAST, Shape.ORB, 2.2F, 1.3F, 10);
+		fist.life = 9;
+		fist.pierce = 3;
+		fist.knockback = 2.5F;
+		fist.onImpact = f -> puff(level(p), f.position(), Element.BEAST, 1.2F);
+		sound(level(p), p.position(), SoundEvents.RAVAGER_ATTACK, 1.2F, 0.8F);
+	}
+
+	/** Super Open Hand Slap: a giant open hand slaps down everything in front of the caster. */
+	private static void openHandSlap(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 look = p.getLookAngle().multiply(1, 0, 1).normalize();
+		after(level, 5, () -> {
+			for (LivingEntity target : cone(p, 7, 55)) {
+				damage(p, target, 15, Element.BEAST);
+				target.push(look.x * 2.5, 0.5, look.z * 2.5);
+				target.syncVelocity = true;
+			}
+			Vec3 at = p.position().add(look.scale(3.5));
+			level.sendParticles(ParticleTypes.EXPLOSION, at.x, at.y + 1, at.z, 3, 1.5, 0.5, 1.5, 0);
+			level.sendParticles(Element.EARTH.puff, at.x, at.y, at.z, 20, 2, 0.2, 2, 0.05);
+			sound(level, at, SoundEvents.GENERIC_EXPLODE.value(), 1.2F, 0.7F);
+		});
+		sound(level, p.position(), SoundEvents.RAVAGER_ROAR, 1, 1.1F);
+	}
+
+	/** Butterfly Bullet Bombing: in Butterfly Mode, the caster leaps and drives a fist of chakra into the ground below. */
+	private static void butterflyBombing(ServerPlayer p) {
+		if (!NarutoShippudenModVariables.get(p).ButterflyMode) {
+			Jutsus.miss(p, "Needs Butterfly Mode");
+			return;
+		}
+		ServerLevel level = level(p);
+		p.setDeltaMovement(p.getLookAngle().x * 0.5, 1.3, p.getLookAngle().z * 0.5);
+		p.syncVelocity = true;
+		sound(level, p.position(), SoundEvents.BEACON_POWER_SELECT, 1.5F, 0.6F);
+		after(level, 12, () -> {
+			p.setDeltaMovement(0, -2.2, 0);
+			p.syncVelocity = true;
+		});
+		boolean[] done = { false };
+		channel(p, 50, 1, t -> {
+			p.fallDistance = 0;
+			if (done[0] || t < 13 || !p.onGround())
+				return;
+			done[0] = true;
+			burst(level, p.position(), 6.5F, 30, 2.5F, Element.BEAST, p);
+			level.sendParticles(wingDust(p, 2), p.getX(), p.getY() + 0.5, p.getZ(), 120, 3, 0.5, 3, 0.2);
+			level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, p.getX(), p.getY(), p.getZ(), 1, 0, 0, 0, 0);
+			sound(level, p.position(), SoundEvents.GENERIC_EXPLODE.value(), 2.5F, 0.6F);
+		});
+	}
+
+	// hozuki
+	/** Water Gun: Two Guns: water bullets fired from both hands in turn. */
+	private static void twoGuns(ServerPlayer p) {
+		channel(p, 18, 3, t -> {
+			Vec3 side = turned(p, 90, 0).scale((t / 3) % 2 == 0 ? 0.4 : -0.4);
+			JutsuProjectile bullet = shoot(p, Element.WATER, Shape.ORB, 0.35F, 2.4F, 5);
+			bullet.setPos(bullet.position().add(side));
+			bullet.onImpact = b -> puff(level(p), b.position(), Element.WATER, 0.5F);
+			sound(level(p), p.getEyePosition(), SoundEvents.PLAYER_SPLASH_HIGH_SPEED, 0.6F, 1.7F);
+		});
+	}
+
+	/** Until when each Hozuki's body is liquid (Hydrification). */
+	private static final Map<UUID, Long> LIQUID = new HashMap<>();
+
+	/** Hydrification Technique: for ten seconds the body turns to water: blows and weapons pass through it, jutsu do half. */
+	private static void hydrification(ServerPlayer p) {
+		LIQUID.put(p.getUUID(), level(p).getGameTime() + 200);
+		sound(level(p), p.position(), SoundEvents.PLAYER_SPLASH, 1.5F, 1.2F);
+		channel(p, 200, 3, t -> level(p).sendParticles(ParticleTypes.DRIPPING_WATER, p.getX(), p.getY() + 1, p.getZ(), 4, 0.35, 0.7, 0.35, 0));
+	}
+
+	@SubscribeEvent
+	public static void liquidBody(net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent event) {
+		if (!(event.getEntity() instanceof ServerPlayer p) || LIQUID.getOrDefault(p.getUUID(), 0L) <= p.level().getGameTime())
+			return;
+		if (event.getSource().is(Techniques.JUTSU))
+			event.setAmount(event.getAmount() * 0.5F);
+		else if (!event.getSource().is(net.minecraft.tags.DamageTypeTags.BYPASSES_INVULNERABILITY)) {
+			event.setCanceled(true);
+			level(p).sendParticles(ParticleTypes.SPLASH, p.getX(), p.getY() + 1, p.getZ(), 20, 0.3, 0.5, 0.3, 0.1);
+		}
+	}
+
+	/** Water Release: Tate Eboshi: a towering wave rises where the caster looks and comes crashing down. */
+	private static void tateEboshi(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 at = lookPoint(p, 18);
+		channel(p, 14, 1, t -> level.sendParticles(ParticleTypes.SPLASH, at.x, at.y + t * 0.5, at.z, 30, 2.5, 0.3, 2.5, 0.1));
+		sound(level, at, SoundEvents.PLAYER_SPLASH_HIGH_SPEED, 2, 0.4F);
+		after(level, 14, () -> {
+			burst(level, at, 5, 16, 1.6F, Element.WATER, p);
+			level.sendParticles(ParticleTypes.FALLING_WATER, at.x, at.y + 4, at.z, 200, 3, 2, 3, 0);
+			for (LivingEntity target : enemies(level, p, new AABB(at, at).inflate(5), e -> e.distanceToSqr(at) < 25))
+				target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 60, 2, false, false));
+			sound(level, at, SoundEvents.PLAYER_SPLASH, 2.5F, 0.4F);
+		});
+	}
+
+	// hyuga
+	/** Gentle Fist Art One Blow Body: the caster hurls their whole body forward behind a palm full of chakra. */
+	private static void oneBlowBody(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 look = p.getLookAngle().multiply(1, 0, 1).normalize();
+		boolean[] done = { false };
+		sound(level, p.position(), SoundEvents.BREEZE_SHOOT, 1.2F, 0.6F);
+		channel(p, 10, 1, t -> {
+			if (done[0])
+				return;
+			p.setDeltaMovement(look.x * 1.7, Math.min(p.getDeltaMovement().y, 0.05), look.z * 1.7);
+			p.syncVelocity = true;
+			level.sendParticles(Element.CHAKRA.trail, p.getX(), p.getY() + 1, p.getZ(), 6, 0.3, 0.5, 0.3, 0.02);
+			LivingEntity hit = enemies(level, p, p.getBoundingBox().inflate(0.8).move(look.scale(0.8)), e -> true).stream().findFirst().orElse(null);
+			if (hit == null)
+				return;
+			done[0] = true;
+			damage(p, hit, 16, Element.CHAKRA);
+			hit.push(look.x * 3.2, 0.6, look.z * 3.2);
+			hit.syncVelocity = true;
+			puff(level, hit.getBoundingBox().getCenter(), Element.CHAKRA, 1.2F);
+			sound(level, hit.position(), SoundEvents.PLAYER_ATTACK_KNOCKBACK, 1.5F, 0.6F);
+			p.setDeltaMovement(Vec3.ZERO);
+			p.syncVelocity = true;
+		});
+	}
+
+	// inuzuka
+	/** Fang Rotating Fang: partner and Akamaru roll into buzz-saws and circle the enemy, tearing at it from every side. */
+	private static void fangRotatingFang(ServerPlayer p) {
+		AkamaruEntity.CustomEntity dog = needAkamaru(p, 16, JutsuRank.A, 6);
+		if (dog == null)
+			return;
+		LivingEntity target = prey(p, 20);
+		if (target == null) {
+			Jutsus.miss(p, "Look at an enemy");
+			return;
+		}
+		ServerLevel level = level(p);
+		int before = dog.form();
+		dog.setForm(2);
+		dog.setOrderedToSit(false);
+		flag(p, 64, v -> v.PassingFang = true, v -> v.PassingFang = false);
+		sound(level, p.position(), SoundEvents.TRIDENT_RIPTIDE_2.value(), 1, 1);
+		channel(p, 60, 1, t -> {
+			if (!target.isAlive())
+				return;
+			Vec3 c = target.position();
+			for (int k = 0; k < 2; k++) {
+				Entity spinner = k == 0 ? p : dog;
+				if (!spinner.isAlive())
+					continue;
+				double a = t * 0.35 + k * Math.PI, r = 2.2 + target.getBbWidth() / 2;
+				Vec3 want = c.add(Math.cos(a) * r, 0, Math.sin(a) * r);
+				Vec3 v = want.subtract(spinner.position());
+				spinner.setDeltaMovement(v.x * 0.6, Math.max(spinner.getDeltaMovement().y, 0.02), v.z * 0.6);
+				if (spinner instanceof ServerPlayer sp)
+					sp.syncVelocity = true;
+				spinner.fallDistance = 0;
+				level.sendParticles(Element.BEAST.trail, spinner.getX(), spinner.getY() + 0.6, spinner.getZ(), 3, 0.3, 0.3, 0.3, 0.02);
+			}
+			if (t % 4 == 0) {
+				damage(p, target, 3.5F, Element.BEAST);
+				level.sendParticles(ParticleTypes.SWEEP_ATTACK, c.x, c.y + 1, c.z, 1, 0.4, 0.4, 0.4, 0);
+			}
+		});
+		after(level, 62, () -> {
+			if (dog.isAlive() && dog.form() == 2)
+				dog.setForm(before == 1 ? 1 : 0);
+		});
+	}
+
+	// uzumaki
+	/** Until when each player's chakra is sealed (Four Symbols Seal): they can't cast jutsu. */
+	private static final Map<UUID, Long> SEALED = new HashMap<>();
+
+	/** Whether a player's chakra is sealed away and they can't use jutsu. */
+	public static boolean sealed(ServerPlayer p) {
+		return SEALED.getOrDefault(p.getUUID(), 0L) > p.level().getGameTime();
+	}
+
+	/** Four Symbols Seal: a seal pressed on the enemy looked at locks their chakra away for twenty seconds. */
+	private static void fourSymbolsSeal(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity target = target(p, 6);
+		if (target == null) {
+			Jutsus.miss(p, "Get close to an enemy to seal");
+			return;
+		}
+		damage(p, target, 6, Element.SEAL);
+		if (target instanceof ServerPlayer victim) {
+			SEALED.put(victim.getUUID(), level.getGameTime() + 400);
+			stop(victim);
+			tell(victim, "Your chakra has been sealed");
+		} else {
+			target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 400, 2));
+			target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 400, 1));
+		}
+		channel(p, 60, 2, t -> {
+			if (!target.isAlive())
+				return;
+			for (int i = 0; i < 4; i++) {
+				double a = t * 0.3 + i * Math.PI / 2;
+				level.sendParticles(Element.SEAL.trail, target.getX() + Math.cos(a) * 0.7, target.getY() + target.getBbHeight() * 0.55, target.getZ() + Math.sin(a) * 0.7, 1,
+						0, 0, 0, 0);
+			}
+		});
+		sound(level, target.position(), SoundEvents.CHAIN_PLACE, 1.5F, 1.4F);
+	}
+
+	/** Uzumaki Sealing Technique: seal script wraps the enemy looked at; a weakened enemy is sealed away completely. */
+	private static void uzumakiSealing(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity target = target(p, 10);
+		if (target == null) {
+			Jutsus.miss(p, "Look at an enemy to seal");
+			return;
+		}
+		sound(level, target.position(), SoundEvents.CHAIN_PLACE, 1.5F, 0.6F);
+		channel(p, 30, 1, t -> {
+			if (!target.isAlive())
+				return;
+			hold(target);
+			double h = target.getBbHeight() * t / 30.0;
+			for (int i = 0; i < 6; i++) {
+				double a = t * 0.5 + i * Math.PI / 3;
+				level.sendParticles(Element.SEAL.trail, target.getX() + Math.cos(a) * 0.8, target.getY() + h, target.getZ() + Math.sin(a) * 0.8, 1, 0, 0, 0, 0);
+			}
+		});
+		after(level, 30, () -> {
+			if (!target.isAlive())
+				return;
+			puff(level, target.getBoundingBox().getCenter(), Element.SEAL, 1.5F);
+			sound(level, target.position(), SoundEvents.ENDER_EYE_DEATH, 1.5F, 0.6F);
+			boolean weak = target.getHealth() <= target.getMaxHealth() * 0.3F && !(target instanceof Player) && target.getMaxHealth() <= 300;
+			damage(p, target, weak ? 10000 : 20, Element.SEAL);
+		});
+	}
+
+	// tsuchigumo
+	/** Until when each Tsuchigumo's Fury is fed by natural energy (Creation of Heaven and Earth). */
+	private static final Map<UUID, Long> CREATION = new HashMap<>();
+
+	/**
+	 * Creation of Heaven and Earth: the seal on Fury is released and natural energy gathers from the earth and air: for a minute the
+	 * next Fury is far larger.
+	 */
+	private static void creation(ServerPlayer p) {
+		ServerLevel level = level(p);
+		sound(level, p.position(), SoundEvents.BEACON_ACTIVATE, 1.5F, 0.5F);
+		channel(p, 40, 1, t -> {
+			hold(p);
+			double r = 6 * (1 - t / 40.0);
+			for (int i = 0; i < 8; i++) {
+				double a = i * Math.PI / 4 + t * 0.2;
+				level.sendParticles(Element.EARTH.trail, p.getX() + Math.cos(a) * r, p.getY() + 0.2 + t * 0.03, p.getZ() + Math.sin(a) * r, 1, 0, 0, 0, 0);
+				level.sendParticles(ParticleTypes.END_ROD, p.getX() + Math.cos(-a) * r, p.getY() + 3 - t * 0.05, p.getZ() + Math.sin(-a) * r, 1, 0, 0, 0, 0);
+			}
+		});
+		after(level, 40, () -> {
+			CREATION.put(p.getUUID(), level.getGameTime() + 1200);
+			set(p, v -> v.ChakraAmount = Math.min(v.ChakraMax, v.ChakraAmount + v.ChakraMax * 0.3));
+			tell(p, "Natural energy gathers: your next Fury is far stronger");
+			sound(level, p.position(), SoundEvents.BEACON_POWER_SELECT, 1.5F, 0.7F);
+		});
+	}
+
+	// ------------------------------------------------------------------ uchiha
+	/** Manipulating Windmill Triple Blades: three windmill shuriken on wires curve round the enemy and bind them. */
+	private static void windmillBlades(ServerPlayer p) {
+		ServerLevel level = level(p);
+		for (int i = -1; i <= 1; i++) {
+			JutsuProjectile blade = shoot(p, Element.STEEL, Shape.SHURIKEN, 0.9F, turned(p, i * 25, -5).scale(1.4), 5);
+			blade.homing = 0.25F;
+			blade.life = 30;
+			blade.knockback = 0;
+			channel(p, 30, 2, t -> {
+				if (blade.isAlive())
+					line(level, ParticleTypes.CRIT, p.getEyePosition().subtract(0, 0.3, 0), blade.getBoundingBox().getCenter(), 0.7);
+			});
+			blade.onHit = (b, target) -> channel(p, 50, 2, t -> {
+				if (!target.isAlive())
+					return;
+				hold(target);
+				line(level, ParticleTypes.CRIT, p.getEyePosition().subtract(0, 0.3, 0), target.getBoundingBox().getCenter(), 0.6);
+			});
+		}
+		sound(level, p.getEyePosition(), SoundEvents.PLAYER_ATTACK_SWEEP, 1.2F, 1.3F);
+	}
+
+	/** Uchiha Return: the war fan sweeps before the caster for a second and a half and sends every projectile back to its thrower. */
+	private static void uchihaReturn(ServerPlayer p) {
+		ServerLevel level = level(p);
+		sound(level, p.position(), SoundEvents.BREEZE_WIND_CHARGE_BURST.value(), 1.2F, 1.2F);
+		for (LivingEntity target : enemies(level, p, p.getBoundingBox().inflate(2.5), e -> true)) {
+			Vec3 away = target.position().subtract(p.position()).multiply(1, 0, 1).normalize();
+			target.push(away.x * 1.5, 0.4, away.z * 1.5);
+			target.syncVelocity = true;
+		}
+		channel(p, 30, 1, t -> {
+			Vec3 look = p.getLookAngle();
+			for (int i = -3; i <= 3; i++) {
+				Vec3 at = p.getEyePosition().add(turned(p, i * 20, 0).scale(1.6));
+				level.sendParticles(ParticleTypes.CLOUD, at.x, at.y - 0.2, at.z, 1, 0.1, 0.2, 0.1, 0);
+			}
+			for (Projectile shot : level.getEntitiesOfClass(Projectile.class, p.getBoundingBox().inflate(3.5), e -> e.getOwner() != p)) {
+				Entity thrower = shot.getOwner();
+				Vec3 back = thrower != null ? thrower.getBoundingBox().getCenter().subtract(shot.position()).normalize() : look;
+				shot.setDeltaMovement(back.scale(Math.max(1.2, shot.getDeltaMovement().length())));
+				shot.setOwner(p);
+				if (shot instanceof JutsuProjectile jutsu)
+					jutsu.homing = 0.3F;
+				level.sendParticles(ParticleTypes.GUST, shot.getX(), shot.getY(), shot.getZ(), 1, 0, 0, 0, 0);
+				sound(level, shot.position(), SoundEvents.SHIELD_BLOCK.value(), 1, 1.2F);
+			}
+		});
+	}
+
+	/** Uchiha Flame Formation: a ring of fire rises round the caster for ten seconds that burns up projectiles and drives enemies back. */
+	private static void flameFormation(ServerPlayer p) {
+		ServerLevel level = level(p);
+		Vec3 c = p.position();
+		sound(level, c, SoundEvents.BLAZE_SHOOT, 2, 0.5F);
+		channel(p, 200, 1, t -> {
+			for (int i = 0; i < 24; i++) {
+				double a = i * Math.PI / 12 + t * 0.05;
+				level.sendParticles(ParticleTypes.FLAME, c.x + Math.cos(a) * 4, c.y + level.getRandom().nextDouble() * 3, c.z + Math.sin(a) * 4, 1, 0, 0.1, 0, 0.02);
+			}
+			for (Projectile shot : level.getEntitiesOfClass(Projectile.class, new AABB(c, c).inflate(5, 4, 5),
+					e -> e.getOwner() != p && Math.abs(e.position().subtract(c).horizontalDistance() - 4) < 1)) {
+				puff(level, shot.position(), Element.FIRE, 0.5F);
+				shot.discard();
+			}
+			for (LivingEntity target : enemies(level, p, new AABB(c, c).inflate(5, 4, 5), e -> Math.abs(e.position().subtract(c).horizontalDistance() - 4) < 1)) {
+				Vec3 out = target.position().subtract(c).multiply(1, 0, 1).normalize();
+				target.push(out.x * 0.8, 0.2, out.z * 0.8);
+				target.syncVelocity = true;
+				if (t % 10 == 0)
+					damage(p, target, 4, Element.FIRE);
+			}
+			if (t % 20 == 0)
+				sound(level, c, SoundEvents.FIRE_AMBIENT, 1.5F, 0.8F);
+		});
+	}
+
+	/** Great Fire Destruction: a vast sheet of fire spreads out in front of the caster, as wide as a battlefield. */
+	private static void greatFireDestruction(ServerPlayer p) {
+		ServerLevel level = level(p);
+		sound(level, p.getEyePosition(), SoundEvents.BLAZE_SHOOT, 2, 0.4F);
+		channel(p, 36, 2, t -> {
+			for (int i = -5; i <= 5; i++) {
+				JutsuProjectile sheet = shoot(p, Element.FIRE, Shape.ORB, 2.2F, turned(p, i * 12 + (level.getRandom().nextFloat() - 0.5F) * 8, 4 - t * 0.2F).scale(0.7), 7);
+				sheet.pierce = -1;
+				sheet.life = 26;
+				sheet.knockback = 0.3F;
+			}
+			if (t % 8 == 0)
+				sound(level, p.getEyePosition(), SoundEvents.FIRE_AMBIENT, 2, 0.5F);
+		});
+	}
+
+	// ------------------------------------------------------------------ yamanaka
+	/**
+	 * The Yamanaka's mind goes into the targets: the caster's own body lies limp and helpless. A possessed creature turns on the
+	 * caster's enemies (and on the others possessed); a possessed player stands frozen, their hands not their own. It ends after
+	 * ticks, when the targets are gone, or at once if the caster's empty body is hurt.
+	 */
+	private static void possess(ServerPlayer p, List<LivingEntity> targets, int ticks) {
+		ServerLevel level = level(p);
+		float health = p.getHealth();
+		boolean[] over = { false };
+		sound(level, p.position(), Element.MIND.cast, 1.5F, 1.2F);
+		for (LivingEntity e : targets)
+			puff(level, e.getBoundingBox().getCenter(), Element.MIND, 0.8F);
+		channel(p, ticks, 1, t -> {
+			if (over[0])
+				return;
+			targets.removeIf(e -> !e.isAlive() || e.level() != p.level());
+			if (targets.isEmpty() || p.getHealth() < health - 0.5F || t == ticks - 1) {
+				over[0] = true;
+				for (LivingEntity e : targets)
+					e.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 60, 0, false, false));
+				tell(p, "Your mind returns to your body");
+				sound(level, p.position(), Element.MIND.impact, 1, 1.4F);
+				return;
+			}
+			hold(p);
+			if (t % 3 == 0)
+				level.sendParticles(Element.MIND.trail, p.getX(), p.getEyeY() + 0.3, p.getZ(), 1, 0.2, 0.1, 0.2, 0);
+			for (LivingEntity e : targets) {
+				if (t % 5 == 0) {
+					line(level, Element.MIND.trail, p.getEyePosition(), e.getEyePosition(), 1.2);
+					level.sendParticles(Element.MIND.puff, e.getX(), e.getEyeY() + 0.4, e.getZ(), 2, 0.2, 0.1, 0.2, 0.2);
+				}
+				if (e instanceof net.minecraft.world.entity.Mob mob) {
+					LivingEntity prey = mob.getTarget();
+					if (prey == null || !prey.isAlive() || prey == p || prey == mob || !Techniques.isEnemy(p, prey)) {
+						prey = level.getEntitiesOfClass(LivingEntity.class, mob.getBoundingBox().inflate(16),
+								x -> x != mob && x != p && x.isAlive() && Techniques.isEnemy(p, x) && !(x instanceof net.minecraft.world.entity.decoration.ArmorStand)).stream()
+								.min((a, b) -> Double.compare(a.distanceToSqr(mob), b.distanceToSqr(mob))).orElse(null);
+						mob.setTarget(prey);
+					}
+					if (t % 10 == 0)
+						keep(mob, MobEffects.STRENGTH, 1);
+				} else {
+					hold(e);
+					e.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 10, 9, false, false));
+				}
+			}
+		});
+	}
+
+	/** Mind Body Transmission Technique: the caster's mind reaches out to everything alive nearby; for fifteen seconds all of it glows. */
+	private static void mindTransmission(ServerPlayer p) {
+		ServerLevel level = level(p);
+		List<LivingEntity> found = level.getEntitiesOfClass(LivingEntity.class, p.getBoundingBox().inflate(40), e -> e != p && e.isAlive());
+		for (LivingEntity e : found)
+			e.addEffect(new MobEffectInstance(MobEffects.GLOWING, 300, 0, false, false));
+		channel(p, 20, 1, t -> {
+			double r = t * 2;
+			for (int i = 0; i < 24; i++) {
+				double a = i * Math.PI / 12;
+				level.sendParticles(Element.MIND.trail, p.getX() + Math.cos(a) * r, p.getY() + 1, p.getZ() + Math.sin(a) * r, 1, 0, 0, 0, 0);
+			}
+		});
+		sound(level, p.position(), Element.MIND.cast, 1.5F, 1.6F);
+		tell(p, found.isEmpty() ? "You sense no one nearby" : "You sense " + found.size() + " minds nearby");
+	}
+
+	/** Mind Body Switch Technique: the caster's mind jumps into the enemy looked at and takes over their body for twelve seconds. */
+	private static void mindSwitch(ServerPlayer p) {
+		LivingEntity target = target(p, 16);
+		if (target == null) {
+			Jutsus.miss(p, "Look at an enemy to take over");
+			return;
+		}
+		possess(p, new ArrayList<>(List.of(target)), target instanceof Player ? 100 : 240);
+	}
+
+	/** Mind Body Disturbance Technique: the enemy's nerves are thrown into confusion for six seconds: they stagger and lash out blindly. */
+	private static void mindDisturbance(ServerPlayer p) {
+		ServerLevel level = level(p);
+		LivingEntity target = target(p, 16);
+		if (target == null) {
+			Jutsus.miss(p, "Look at an enemy");
+			return;
+		}
+		sound(level, target.position(), Element.MIND.impact, 1.2F, 0.8F);
+		channel(p, 120, 2, t -> {
+			if (!target.isAlive())
+				return;
+			target.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 60, 0, false, false));
+			target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 1, false, false));
+			if (t % 10 == 0) {
+				Vec3 lurch = new Vec3(level.getRandom().nextGaussian(), 0, level.getRandom().nextGaussian()).normalize().scale(0.6);
+				target.push(lurch.x, 0.1, lurch.z);
+				target.syncVelocity = true;
+				target.setYRot(level.getRandom().nextFloat() * 360);
+				if (target instanceof net.minecraft.world.entity.Mob mob)
+					mob.setTarget(level.getEntitiesOfClass(LivingEntity.class, mob.getBoundingBox().inflate(10), x -> x != mob && x != p && x.isAlive()).stream()
+							.findAny().orElse(null));
+				level.sendParticles(Element.MIND.puff, target.getX(), target.getEyeY() + 0.4, target.getZ(), 6, 0.3, 0.1, 0.3, 0.2);
+			}
+			if (t % 20 == 0)
+				damage(p, target, 3, Element.MIND);
+		});
+	}
+
+	/**
+	 * Mind Body Transmission Formation: the caster links the minds of every ally nearby for thirty seconds: they move and strike as
+	 * one (faster and stronger), and every enemy around is laid bare.
+	 */
+	private static void mindFormation(ServerPlayer p) {
+		ServerLevel level = level(p);
+		sound(level, p.position(), Element.MIND.cast, 2, 0.8F);
+		channel(p, 600, 10, t -> {
+			for (Player ally : level.getEntitiesOfClass(Player.class, p.getBoundingBox().inflate(32), x -> x == p || !Techniques.isEnemy(p, x) || x.isAlliedTo(p))) {
+				ally.addEffect(new MobEffectInstance(MobEffects.SPEED, 25, 0, false, false, true));
+				ally.addEffect(new MobEffectInstance(MobEffects.STRENGTH, 25, 0, false, false, true));
+				if (t % 40 == 0)
+					level.sendParticles(Element.MIND.trail, ally.getX(), ally.getEyeY() + 0.5, ally.getZ(), 3, 0.2, 0.1, 0.2, 0);
+			}
+			if (t % 40 == 0)
+				for (LivingEntity enemy : enemies(level, p, p.getBoundingBox().inflate(32), e -> !(e instanceof Player)))
+					enemy.addEffect(new MobEffectInstance(MobEffects.GLOWING, 45, 0, false, false));
+		});
+		tell(p, "Minds linked");
+	}
+
+	/** Mind Clone Switch Technique: the caster's mind splits into up to five enemies in front and takes them all over for ten seconds. */
+	private static void mindCloneSwitch(ServerPlayer p) {
+		List<LivingEntity> targets = new ArrayList<>(cone(p, 24, 50));
+		targets.removeIf(e -> !p.hasLineOfSight(e));
+		if (targets.isEmpty()) {
+			Jutsus.miss(p, "No enemies in view");
+			return;
+		}
+		targets.sort((a, b) -> Double.compare(a.distanceToSqr(p), b.distanceToSqr(p)));
+		possess(p, new ArrayList<>(targets.subList(0, Math.min(5, targets.size()))), 200);
+	}
+
 	// ------------------------------------------------------------------ nara
 	private static final BlockState SHADE = Blocks.CONCRETE.pick(net.minecraft.world.item.DyeColor.BLACK).defaultBlockState();
 
-	/** A Nara's shadow hold: who it holds and where, the shadow drawn on the ground, and how far the caster has walked it since it caught. */
+	/** Someone a Nara's shadow has caught: where they are held, how they are turned from the caster, and the shadow joining them. */
+	private static final class Caught {
+		Vec3 spot;
+		final float yawOffset;
+		final List<Display.BlockDisplay> link;
+		final List<Display.BlockDisplay> pool = new ArrayList<>();
+		Vec3 linkedFrom = Vec3.ZERO, linkedTo = Vec3.ZERO;
+
+		Caught(LivingEntity e, ServerPlayer p, List<Display.BlockDisplay> link) {
+			spot = e.position();
+			yawOffset = Mth.wrapDegrees(e.getYRot() - p.getYRot());
+			this.link = link;
+		}
+	}
+
+	/** A Nara's shadow: who it holds, the shadows still creeping, and every piece drawn on the ground. */
 	private static final class Hold {
-		final Map<LivingEntity, Vec3> held = new java.util.LinkedHashMap<>();
+		final Map<LivingEntity, Caught> held = new java.util.LinkedHashMap<>();
 		final List<Display.BlockDisplay> drawn = new ArrayList<>();
-		final List<Matrix4f> shapes = new ArrayList<>();
-		Vec3 offset = Vec3.ZERO;
-		boolean caught, ended;
+		int creeping;
+		boolean bound, ended;
 	}
 
 	/** Each Nara's current shadow (one at a time: a new shadow jutsu lets go of the last). */
 	private static final Map<UUID, Hold> HOLDS = new HashMap<>();
+	/** Until when (game time) each Nara's shadow is strengthened by Shadow Gathering. */
+	private static final Map<UUID, Long> GATHERED = new HashMap<>();
 
 	private static Hold newHold(ServerPlayer p) {
 		letGo(p);
@@ -1161,8 +1723,13 @@ public final class ClanJutsu {
 		}
 	}
 
+	/** How much further and faster the caster's shadow goes (doubled by Shadow Gathering). */
+	private static double reach(ServerPlayer p) {
+		return GATHERED.getOrDefault(p.getUUID(), 0L) > level(p).getGameTime() ? 2 : 1;
+	}
+
 	/** The top of the ground under a point (looking a little above and below it), or the point's own height over a drop. */
-	private static double ground(ServerLevel level, double x, double y, double z) {
+	static double ground(ServerLevel level, double x, double y, double z) {
 		net.minecraft.core.BlockPos.MutableBlockPos pos = net.minecraft.core.BlockPos.containing(x, y + 1.5, z).mutable();
 		for (int i = 0; i < 6; i++, pos.move(0, -1, 0)) {
 			net.minecraft.world.phys.shapes.VoxelShape shape = level.getBlockState(pos).getCollisionShape(level, pos);
@@ -1173,105 +1740,152 @@ public final class ClanJutsu {
 	}
 
 	/** A piece of shadow laid flat on the ground, turned by yaw. */
-	private static void lay(ServerLevel level, Hold hold, Vec3 at, float yaw, float width, float length, int life) {
-		Matrix4f shape = Displays.box(yaw, 0, width, 0.02F, length);
-		hold.drawn.add(Displays.grow(level, new Vec3(at.x, ground(level, at.x, at.y, at.z) + 0.015, at.z), SHADE, shape, 2, life, false));
-		hold.shapes.add(shape);
+	private static Display.BlockDisplay lay(ServerLevel level, Hold hold, Vec3 at, float yaw, float width, float length, int life) {
+		Display.BlockDisplay piece = Displays.grow(level, new Vec3(at.x, ground(level, at.x, at.y, at.z) + 0.015, at.z), SHADE,
+				Displays.box(yaw, 0, width, 0.02F, length), 2, life, false);
+		hold.drawn.add(piece);
+		return piece;
 	}
 
-	/** A round pool of shadow under someone caught. */
-	private static void pool(ServerLevel level, Hold hold, LivingEntity target, int life) {
+	/** A round pool of shadow under someone caught (it moves with them). */
+	private static void pool(ServerLevel level, Hold hold, Caught caught, LivingEntity target, int life) {
 		float size = target.getBbWidth() + 0.9F;
 		for (int i = 0; i < 2; i++)
-			lay(level, hold, target.position(), (float) (i * Math.PI / 4), size, size, life);
+			caught.pool.add(lay(level, hold, target.position(), (float) (i * Math.PI / 4), size, size, life));
+	}
+
+	/** Lays the pieces of a shadow evenly along the ground from one point to another. */
+	private static void relink(ServerLevel level, List<Display.BlockDisplay> link, Vec3 from, Vec3 to) {
+		Vec3 d = new Vec3(to.x - from.x, 0, to.z - from.z);
+		int n = link.size();
+		if (n == 0 || d.lengthSqr() < 1.0E-4)
+			return;
+		float yaw = (float) Math.atan2(d.x, d.z), length = (float) (d.length() / n) + 0.2F;
+		for (int i = 0; i < n; i++) {
+			Vec3 at = from.add(d.scale((i + 0.5) / n));
+			Display.BlockDisplay piece = link.get(i);
+			piece.setPos(at.x, ground(level, at.x, Math.max(from.y, to.y), at.z) + 0.015, at.z);
+			Displays.animate(piece, Displays.box(yaw, 0, 0.7F, 0.02F, length), 1);
+		}
 	}
 
 	/**
 	 * The caster's shadow stretches over the ground towards the target (following it as it runs) and catches it on reaching its
 	 * feet. It gives up after range blocks, or if the target gets away or dies. The pieces live for life ticks unless let go.
 	 */
-	private static void creep(ServerPlayer p, LivingEntity target, double range, int life, Consumer<Hold> caught) {
+	private static void creep(ServerPlayer p, Hold hold, LivingEntity target, double baseRange, double baseSpeed, int life, Consumer<Caught> onCatch) {
 		ServerLevel level = level(p);
-		Hold hold = newHold(p);
+		double boost = reach(p), range = baseRange * boost, speed = baseSpeed * Math.sqrt(boost);
 		Vec3[] tip = { p.position() };
 		double[] run = { 0 };
+		boolean[] done = { false };
+		List<Display.BlockDisplay> link = new ArrayList<>();
+		hold.creeping++;
 		sound(level, p.position(), Element.SHADOW.cast, 1.2F, 0.7F);
-		channel(p, (int) (range / 0.9) + 4, 1, t -> {
-			if (hold.ended || hold.caught)
+		channel(p, (int) (range / speed) + 4, 1, t -> {
+			if (hold.ended || done[0])
 				return;
-			if (!target.isAlive() || target.level() != p.level()) {
-				endHold(p, hold);
-				return;
-			}
 			Vec3 to = target.position().subtract(tip[0]), flat = new Vec3(to.x, 0, to.z);
-			if (flat.length() < 0.9 && Math.abs(to.y) < 2.5) {
-				hold.caught = true;
-				hold.held.put(target, target.position());
-				pool(level, hold, target, life);
+			boolean lost = !target.isAlive() || target.level() != p.level() || run[0] >= range || t >= (int) (range / speed) + 3;
+			if (!lost && flat.length() < 0.9 && Math.abs(to.y) < 2.5) {
+				done[0] = true;
+				hold.creeping--;
+				Caught caught = new Caught(target, p, link);
+				hold.held.put(target, caught);
+				pool(level, hold, caught, target, life);
 				sound(level, target.position(), Element.SHADOW.impact, 1.5F, 0.6F);
-				caught.accept(hold);
+				onCatch.accept(caught);
 				return;
 			}
-			if (run[0] >= range) {
-				tell(p, "The shadow can't reach that far");
-				endHold(p, hold);
+			if (lost) {
+				done[0] = true;
+				hold.creeping--;
+				if (target.isAlive())
+					tell(p, "The shadow can't reach that far");
+				for (Display.BlockDisplay piece : link)
+					Displays.remove(piece, 6);
+				if (hold.held.isEmpty() && hold.creeping == 0)
+					endHold(p, hold);
 				return;
 			}
-			Vec3 step = flat.normalize().scale(Math.min(0.9, flat.length())), from = tip[0];
+			Vec3 step = flat.normalize().scale(Math.min(speed, flat.length())), from = tip[0];
 			Vec3 next = from.add(step);
 			tip[0] = new Vec3(next.x, ground(level, next.x, from.y, next.z), next.z);
 			run[0] += step.length();
 			Vec3 middle = from.add(tip[0]).scale(0.5);
-			lay(level, hold, new Vec3(middle.x, Math.max(from.y, tip[0].y), middle.z), (float) Math.atan2(step.x, step.z), 0.7F, (float) step.length() + 0.2F, life);
+			link.add(lay(level, hold, new Vec3(middle.x, Math.max(from.y, tip[0].y), middle.z), (float) Math.atan2(step.x, step.z), 0.7F,
+					(float) step.length() + 0.2F, life));
 			level.sendParticles(Element.SHADOW.trail, tip[0].x, tip[0].y + 0.1, tip[0].z, 3, 0.2, 0.02, 0.2, 0);
 		});
 	}
 
 	/**
-	 * Holds whoever the shadow has caught for ticks: they can't move by themselves, and (mimic) copy every step and turn the caster
-	 * makes, while the shadow on the ground moves along. each runs every tick. The hold ends early when everyone held is gone
-	 * (after the first grace ticks, while the shadow may still be catching).
+	 * Holds whoever the shadow has caught for ticks: they can't move by themselves, and (mimic) copy every step, turn, look and swing
+	 * the caster makes, each in their own facing (step forward and they step forward; turn right and they turn right). The shadow
+	 * joining them stays laid between their feet. each runs every tick. The hold ends early once everyone held is gone and nothing
+	 * is still creeping.
 	 */
-	private static void bind(ServerPlayer p, Hold hold, int ticks, int grace, boolean mimic, IntConsumer each) {
+	private static void bind(ServerPlayer p, Hold hold, int ticks, boolean mimic, IntConsumer each) {
 		ServerLevel level = level(p);
+		hold.bound = true;
 		Vec3[] last = { p.position() };
+		float[] lastLook = { p.getYRot(), p.getXRot() };
+		boolean[] swinging = { p.isSwinging() };
 		channel(p, ticks, 1, t -> {
 			if (hold.ended)
 				return;
 			hold.held.keySet().removeIf(e -> !e.isAlive() || e.level() != p.level());
-			if (hold.held.isEmpty() && t >= grace || t == ticks - 1) {
+			if (hold.held.isEmpty() && hold.creeping == 0 || t == ticks - 1) {
 				endHold(p, hold);
 				return;
 			}
 			Vec3 step = p.position().subtract(last[0]);
 			last[0] = p.position();
+			float yaw = p.getYRot(), pitch = p.getXRot();
 			boolean moved = mimic && step.lengthSqr() > 1.0E-6 && step.lengthSqr() < 4;
-			for (Map.Entry<LivingEntity, Vec3> entry : hold.held.entrySet()) {
+			boolean turned = mimic && (yaw != lastLook[0] || pitch != lastLook[1]);
+			lastLook[0] = yaw;
+			lastLook[1] = pitch;
+			boolean swing = mimic && p.isSwinging() && !swinging[0];
+			swinging[0] = p.isSwinging();
+			for (Map.Entry<LivingEntity, Caught> entry : hold.held.entrySet()) {
 				LivingEntity e = entry.getKey();
+				Caught c = entry.getValue();
 				hold(e);
 				e.fallDistance = 0;
 				if (e instanceof ServerPlayer victim)
 					victim.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 10, 9, false, false));
-				Vec3 spot = entry.getValue();
 				if (moved) {
-					e.setPos(spot);
-					e.move(net.minecraft.world.entity.MoverType.SELF, step);
-					spot = e.position();
-					entry.setValue(spot);
+					e.setPos(c.spot);
+					e.move(net.minecraft.world.entity.MoverType.SELF, step.yRot((float) -Math.toRadians(c.yawOffset)));
+					c.spot = e.position();
 				}
-				if (moved && e instanceof ServerPlayer || e.position().distanceToSqr(spot) > 0.04)
-					e.teleportTo(spot.x, spot.y, spot.z);
-				if (mimic && !(e instanceof Player)) {
-					e.setYRot(p.getYRot());
-					e.setYHeadRot(p.getYHeadRot());
-					e.setYBodyRot(p.yBodyRot);
+				float faceYaw = yaw + c.yawOffset;
+				if (e instanceof ServerPlayer victim) {
+					if (moved || turned || victim.position().distanceToSqr(c.spot) > 0.04)
+						victim.teleportTo(level, c.spot.x, c.spot.y, c.spot.z, java.util.Set.of(), mimic ? faceYaw : victim.getYRot(), mimic ? pitch : victim.getXRot(), false);
+				} else {
+					if (e.position().distanceToSqr(c.spot) > 0.04)
+						e.teleportTo(c.spot.x, c.spot.y, c.spot.z);
+					if (mimic) {
+						e.setYRot(faceYaw);
+						e.setXRot(pitch);
+						e.setYHeadRot(faceYaw);
+						e.setYBodyRot(faceYaw);
+					}
 				}
+				if (swing)
+					e.swing(net.minecraft.world.InteractionHand.MAIN_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
+				// the shadow stays joined to both of them
+				if (!c.link.isEmpty() && (c.linkedFrom.distanceToSqr(p.position()) > 1.0E-4 || c.linkedTo.distanceToSqr(e.position()) > 1.0E-4)) {
+					c.linkedFrom = p.position();
+					c.linkedTo = e.position();
+					relink(level, c.link, p.position(), e.position());
+				}
+				for (Display.BlockDisplay piece : c.pool)
+					if (piece.position().distanceToSqr(e.position()) > 1.0E-4)
+						piece.setPos(e.getX(), ground(level, e.getX(), e.getY(), e.getZ()) + 0.015, e.getZ());
 			}
-			if (moved)
-				hold.offset = hold.offset.add(step);
-			if (moved && t >= grace)
-				for (int i = 0; i < hold.drawn.size(); i++)
-					Displays.animate(hold.drawn.get(i), new Matrix4f().translation((float) hold.offset.x, 0, (float) hold.offset.z).mul(hold.shapes.get(i)), 1);
 			if (t % 4 == 0)
 				for (LivingEntity e : hold.held.keySet())
 					level.sendParticles(Element.SHADOW.trail, e.getX(), e.getY() + 0.1, e.getZ(), 2, e.getBbWidth() * 0.4, 0.02, e.getBbWidth() * 0.4, 0);
@@ -1287,9 +1901,10 @@ public final class ClanJutsu {
 		star.onHit = (s, target) -> {
 			ServerLevel level = level(p);
 			Hold hold = newHold(p);
-			hold.held.put(target, target.position());
-			pool(level, hold, target, 70);
-			bind(p, hold, 60, 0, false, t -> {
+			Caught caught = new Caught(target, p, List.of());
+			hold.held.put(target, caught);
+			pool(level, hold, caught, target, 70);
+			bind(p, hold, 60, false, t -> {
 			});
 			sound(level, target.position(), Element.SHADOW.impact, 1.2F, 0.8F);
 		};
@@ -1298,28 +1913,54 @@ public final class ClanJutsu {
 
 	/** The shadow creeps to the enemy being looked at and catches it: for ten seconds it copies every move the caster makes. */
 	private static void shadowImitation(ServerPlayer p) {
-		LivingEntity target = target(p, 20);
+		LivingEntity target = target(p, 20 * reach(p));
 		if (target == null) {
-			tell(p, "Look at an enemy to catch");
+			Jutsus.miss(p, "Look at an enemy to catch");
 			return;
 		}
-		creep(p, target, 20, 240, hold -> {
+		Hold hold = newHold(p);
+		creep(p, hold, target, 20, 0.9, 240, c -> {
 			tell(p, "Shadow Imitation complete");
-			bind(p, hold, 200, 0, true, t -> {
+			bind(p, hold, 200, true, t -> {
 			});
 		});
 	}
 
+	/**
+	 * The shadows of everything around are drawn into the caster's own: for thirty seconds it reaches twice as far and creeps faster.
+	 */
+	private static void shadowGathering(ServerPlayer p) {
+		ServerLevel level = level(p);
+		GATHERED.put(p.getUUID(), level.getGameTime() + 600);
+		Vec3 c = p.position();
+		sound(level, c, Element.SHADOW.cast, 1.5F, 0.5F);
+		channel(p, 30, 1, t -> {
+			double r = 8 * (1 - t / 30.0);
+			for (int i = 0; i < 16; i++) {
+				double a = i * Math.PI / 8 + t * 0.1;
+				double x = p.getX() + Math.cos(a) * r, z = p.getZ() + Math.sin(a) * r;
+				level.sendParticles(Element.SHADOW.trail, x, ground(level, x, p.getY(), z) + 0.1, z, 1, 0.1, 0, 0.1, 0);
+			}
+		});
+		Hold hold = new Hold();
+		for (int i = 0; i < 2; i++) {
+			Display.BlockDisplay piece = lay(level, hold, c, (float) (i * Math.PI / 4), 3, 3, 40);
+			after(level, 30, () -> Displays.remove(piece, 8));
+		}
+		tell(p, "The shadows gather: your shadow reaches twice as far");
+	}
+
 	/** Shadow Imitation, then hands of shadow climb the caught enemy's body and choke them for six seconds. */
 	private static void neckBinding(ServerPlayer p) {
-		LivingEntity target = target(p, 20);
+		LivingEntity target = target(p, 20 * reach(p));
 		if (target == null) {
-			tell(p, "Look at an enemy to catch");
+			Jutsus.miss(p, "Look at an enemy to catch");
 			return;
 		}
-		creep(p, target, 20, 160, hold -> {
+		Hold hold = newHold(p);
+		creep(p, hold, target, 20, 0.9, 160, c -> {
 			ServerLevel level = level(p);
-			bind(p, hold, 120, 0, true, t -> {
+			bind(p, hold, 120, true, t -> {
 				if (!target.isAlive())
 					return;
 				// the hands climb up to the neck over the first second
@@ -1342,84 +1983,97 @@ public final class ClanJutsu {
 		});
 	}
 
-	/** Threads of shadow shoot out at up to five enemies nearby, pierce them and pin them for four seconds. */
+	/** A spike of shadow rising out of the ground at from, through to, and on past it (grows out of the ground). */
+	private static void tendril(ServerLevel level, Hold hold, Vec3 from, Vec3 through, int life) {
+		Vec3 dir = through.subtract(from);
+		float length = (float) dir.length() * 1.8F;
+		dir = dir.normalize();
+		float yaw = (float) Math.atan2(dir.x, dir.z), pitch = (float) Math.asin(dir.y);
+		java.util.function.Function<Float, Matrix4f> shape = l -> new Matrix4f().rotateY(yaw).rotateX(-pitch).scale(0.13F, 0.13F, l).translate(-0.5F, -0.5F, 0);
+		Display.BlockDisplay spike = Displays.grow(level, from, SHADE, shape.apply(0.05F), 1, life, false);
+		hold.drawn.add(spike);
+		after(level, 2, () -> Displays.animate(spike, shape.apply(length), 4));
+	}
+
+	/**
+	 * Shadows creep out to up to five enemies nearby; where one reaches, spikes of shadow burst out of the ground all round it and run
+	 * it through, pinning it for four seconds.
+	 */
 	private static void shadowSewing(ServerPlayer p) {
 		ServerLevel level = level(p);
-		List<LivingEntity> near = new ArrayList<>(enemies(level, p, p.getBoundingBox().inflate(16), e -> e.distanceToSqr(p) < 16 * 16 && p.hasLineOfSight(e)));
+		double range = 16 * reach(p);
+		List<LivingEntity> near = new ArrayList<>(enemies(level, p, p.getBoundingBox().inflate(range), e -> e.distanceToSqr(p) < range * range && p.hasLineOfSight(e)));
+		if (near.isEmpty()) {
+			Jutsus.miss(p, "No one within your shadow's reach");
+			return;
+		}
 		near.sort((a, b) -> Double.compare(a.distanceToSqr(p), b.distanceToSqr(p)));
 		Hold hold = newHold(p);
-		Vec3 feet = p.position().add(0, 0.2, 0);
-		int threads = Math.max(1, Math.min(5, near.size()));
-		for (int i = 0; i < threads; i++) {
-			LivingEntity aim = i < near.size() ? near.get(i) : null;
-			Vec3 velocity = aim == null ? p.getLookAngle().scale(1.5) : aim.getBoundingBox().getCenter().subtract(feet).normalize().scale(1.5);
-			JutsuProjectile thread = spawn(p, Element.SHADOW, Shape.NEEDLE, 0.35F, feet, velocity, 9);
-			thread.homing = 0.4F;
-			thread.life = 30;
-			thread.knockback = 0;
-			channel(p, 30, 1, t -> {
-				if (thread.isAlive())
-					line(level, Element.SHADOW.trail, feet, thread.getBoundingBox().getCenter(), 0.35);
-			});
-			thread.onHit = (s, target) -> {
-				if (hold.ended || hold.held.containsKey(target))
-					return;
-				boolean first = hold.held.isEmpty();
-				hold.held.put(target, target.position());
-				if (first)
-					bind(p, hold, 80, 0, false, t -> {
-						if (t % 2 == 0)
-							for (LivingEntity e : hold.held.keySet())
-								line(level, Element.SHADOW.trail, p.position().add(0, 0.2, 0), e.getBoundingBox().getCenter(), 0.45);
+		for (LivingEntity target : near.subList(0, Math.min(5, near.size())))
+			creep(p, hold, target, 16, 1.4, 150, c -> {
+				Vec3 body = target.getBoundingBox().getCenter();
+				double r = 1.8 + target.getBbWidth();
+				float turn = level.getRandom().nextFloat() * 6.3F;
+				for (int i = 0; i < 7; i++) {
+					double a = turn + i * Math.PI * 2 / 7, rr = r * (0.8 + level.getRandom().nextDouble() * 0.5);
+					double x = target.getX() + Math.cos(a) * rr, z = target.getZ() + Math.sin(a) * rr;
+					Vec3 through = body.add((level.getRandom().nextDouble() - 0.5) * 0.4, (level.getRandom().nextDouble() - 0.3) * target.getBbHeight() * 0.4,
+							(level.getRandom().nextDouble() - 0.5) * 0.4);
+					tendril(level, hold, new Vec3(x, ground(level, x, target.getY(), z), z), through, 90);
+				}
+				damage(p, target, 10, Element.SHADOW);
+				level.sendParticles(ParticleTypes.SQUID_INK, body.x, body.y, body.z, 12, 0.3, 0.4, 0.3, 0.05);
+				sound(level, target.position(), SoundEvents.TRIDENT_HIT, 1.2F, 0.6F);
+				if (!hold.bound)
+					bind(p, hold, 100, false, t -> {
 					});
-			};
-		}
-		sound(level, p.position(), Element.SHADOW.cast, 1.5F, 1.2F);
+			});
 		sound(level, p.position(), SoundEvents.PLAYER_ATTACK_SWEEP, 1, 0.6F);
 	}
 
 	/**
-	 * The shadows all around are gathered into the caster's: a pool spreads over the ground to fourteen blocks, and every enemy it
-	 * reaches is caught and copies the caster's moves for eight seconds.
+	 * Shadow Imitation Field: the caster's shadow spreads into a great pool on the ground around them (it stays where it spread), and
+	 * everyone it reaches is caught and copies the caster's moves for eight seconds.
 	 */
-	private static void shadowGathering(ServerPlayer p) {
+	private static void imitationField(ServerPlayer p) {
 		ServerLevel level = level(p);
 		Hold hold = newHold(p);
 		Vec3 c = p.position();
 		double y = ground(level, c.x, c.y, c.z) + 0.015;
 		int spread = 30, ticks = spread + 160;
-		float radius = 14, row = 1.4F;
+		float radius = (float) (14 * Math.sqrt(reach(p))), row = 1.4F;
 		// a round pool made of strips across it, growing out from the caster's feet
 		for (float z = -radius + row / 2; z < radius; z += row) {
 			float chord = 2 * (float) Math.sqrt(radius * radius - z * z);
 			Matrix4f shape = new Matrix4f().translate(0, 0, z).scale(chord, 0.02F, row + 0.02F).translate(-0.5F, 0, -0.5F);
 			Display.BlockDisplay strip = Displays.grow(level, new Vec3(c.x, y, c.z), SHADE, new Matrix4f().scale(0.03F, 1, 0.03F).mul(shape), 1, ticks + 10, false);
 			hold.drawn.add(strip);
-			hold.shapes.add(shape);
 			after(level, 3, () -> Displays.animate(strip, shape, spread));
 		}
 		sound(level, c, Element.SHADOW.cast, 2, 0.5F);
 		sound(level, c, SoundEvents.SCULK_SHRIEKER_SHRIEK, 0.8F, 0.6F);
 		int[] caught = { 0 };
-		bind(p, hold, ticks, spread + 4, true, t -> {
+		hold.creeping++;
+		bind(p, hold, ticks, true, t -> {
 			double r = radius * Math.min(1, (t + 1) / (double) (spread + 3));
-			Vec3 at = c.add(hold.offset.x, 0, hold.offset.z);
 			if (t <= spread + 3) {
-				// the caster stands still while the shadows gather
+				// the caster stands still while the shadow spreads
 				hold(p);
 				for (int i = 0; i < 24; i++) {
 					double a = level.getRandom().nextDouble() * Math.PI * 2;
-					level.sendParticles(Element.SHADOW.trail, at.x + Math.cos(a) * r, y + 0.1, at.z + Math.sin(a) * r, 1, 0, 0.02, 0, 0);
+					level.sendParticles(Element.SHADOW.trail, c.x + Math.cos(a) * r, y + 0.1, c.z + Math.sin(a) * r, 1, 0, 0.02, 0, 0);
 				}
-				for (LivingEntity e : enemies(level, p, new AABB(at, at).inflate(r, 3, r),
-						e -> !hold.held.containsKey(e) && e.position().subtract(at).horizontalDistanceSqr() <= r * r && Math.abs(e.getY() - y) < 3)) {
-					hold.held.put(e, e.position());
+				for (LivingEntity e : enemies(level, p, new AABB(c, c).inflate(r, 3, r),
+						e -> !hold.held.containsKey(e) && e.position().subtract(c).horizontalDistanceSqr() <= r * r && Math.abs(e.getY() - y) < 3)) {
+					hold.held.put(e, new Caught(e, p, List.of()));
 					caught[0]++;
 					sound(level, e.position(), Element.SHADOW.impact, 1, 0.6F);
 				}
 			}
-			if (t == spread + 3)
-				tell(p, caught[0] == 0 ? "No one was caught" : "Shadow Gathering caught " + caught[0]);
+			if (t == spread + 3) {
+				hold.creeping--;
+				tell(p, caught[0] == 0 ? "No one was caught" : "Shadow Imitation Field caught " + caught[0]);
+			}
 		});
 	}
 
@@ -1546,7 +2200,7 @@ public final class ClanJutsu {
 		ServerLevel level = level(p);
 		LivingEntity target = target(p, 6);
 		if (target == null) {
-			tell(p, "The Shinigami needs a soul within reach");
+			Jutsus.miss(p, "The Shinigami needs a soul within reach");
 			return;
 		}
 		flag(p, 90, v -> v.deathgod = true, v -> v.deathgod = false);
@@ -1596,7 +2250,7 @@ public final class ClanJutsu {
 	}
 
 	/** Freezes an entity in place. */
-	private static void hold(LivingEntity target) {
+	static void hold(LivingEntity target) {
 		target.setDeltaMovement(0, Math.min(0, target.getDeltaMovement().y), 0);
 		target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 10, 9, false, false));
 		if (target instanceof net.minecraft.world.entity.Mob mob) {
@@ -1609,13 +2263,15 @@ public final class ClanJutsu {
 	/** The clan's forbidden technique: a ball of chakra swells where the caster looks and explodes like a small sun. */
 	private static void fury(ServerPlayer p) {
 		ServerLevel level = level(p);
+		float power = CREATION.getOrDefault(p.getUUID(), 0L) > level.getGameTime() ? 1.6F : 1;
+		CREATION.remove(p.getUUID());
 		Vec3 at = lookPoint(p, 30);
 		JutsuProjectile core = spawn(p, Element.FIRE, Shape.ORB, 0.5F, at, Vec3.ZERO, 0);
 		core.pierce = -1;
 		core.knockback = 0;
 		core.life = 40;
 		channel(p, 30, 1, t -> {
-			float size = 0.5F + t * 0.12F;
+			float size = (0.5F + t * 0.12F) * power;
 			core.look(Element.FIRE, Shape.ORB, size);
 			core.setPos(at.subtract(0, size / 2, 0));
 			level.sendParticles(Element.EARTH.trail, at.x, at.y - size / 2, at.z, 6, 2.5, 0.2, 2.5, 0.1);
@@ -1623,7 +2279,7 @@ public final class ClanJutsu {
 				sound(level, at, SoundEvents.BEACON_POWER_SELECT, 1.5F, 0.5F + t * 0.03F);
 		});
 		after(level, 30, () -> {
-			burst(level, at, 8, 35, 2.5F, Element.FIRE, core);
+			burst(level, at, 8 * power, 35 * power, 2.5F, Element.FIRE, core);
 			core.discard();
 			level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, at.x, at.y, at.z, 3, 2, 1, 2, 0);
 			puff(level, at, Element.EARTH, 5);

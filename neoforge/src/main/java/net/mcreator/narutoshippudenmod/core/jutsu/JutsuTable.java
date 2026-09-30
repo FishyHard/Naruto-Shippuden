@@ -204,9 +204,6 @@ final class JutsuTable {
 		release("hyuga_release", NEW_ENGINE,
 				track("", v -> v.hyugarelease, -1, "hyuga_release_technique", v -> v.hyugalearn,
 					tier(15, 1, "hyuga_release_technique"), tier(20, 2, null), tier(25, 3, null), tier(30, 4, null), tier(35, 5, null)));
-		release("iburi_release", ClanProcedures.IburiReleaseRightclickedProcedure::executeProcedure,
-				track("", v -> v.iburi_release, -1, null, null,
-					tier(5, 0, "smoke_release")));
 		release("ice_release", NEW_ENGINE,
 				track("", v -> v.ice_release, -1, "ice_release_technique", v -> v.icelearn,
 					tier(15, 1, "ice_release_technique"), tier(20, 2, null), tier(25, 3, null)));

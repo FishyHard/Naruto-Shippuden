@@ -115,7 +115,8 @@
   "item.naruto_shippuden.iruka_sensei_spawn_egg": "Iruka Sensei Spawn Egg",
   "effect.gates_blue": "Gates",
   "entity.naruto_shippuden.humanoid_susano_madara": "Humanoid Susano Madara",
-  "item.naruto_shippuden.iburi_release": "Iburi Release",
+  "item.naruto_shippuden.yamanaka_release": "Yamanaka Release",
+  "item.naruto_shippuden.yamanaka_release_technique": "Yamanaka Release Technique",
   "item.naruto_shippuden.magnet_release_technique": "Magnet Release Technique",
   "entity.naruto_shippuden.eight_trigrams_palms_revolving_heaven": "Eight Trigrams Palms Revolving Heaven",
   "item.naruto_shippuden.genin_sunagakure_chestplate": "Genin Konohagakure Chestplate",
@@ -426,5 +427,12 @@
   "key.category.naruto_shippuden.keys": "Naruto Shippuden",
   "key.naruto_shippuden.dojutsu": "Dojutsu (tap / hold for wheel)",
   "key.naruto_shippuden.susanoo": "Susanoo (hold to grow, tap to dismiss)",
-  "key.naruto_shippuden.dash": "Dash (needs Chakra Control)"
+  "key.naruto_shippuden.dash": "Dash (needs Chakra Control)",
+  "item.naruto_shippuden.byakugan_release_technique": "Byakugan Release Technique",
+  "item.naruto_shippuden.ketsuryugan_release_technique": "Ketsuryugan Release Technique",
+  "item.naruto_shippuden.rinnegan_release_technique": "Rinnegan Release Technique",
+  "item.naruto_shippuden.tenseigan_release_technique": "Tenseigan Release Technique",
+  "item.naruto_shippuden.uchiha_release_technique": "Uchiha Release Technique",
+  "item.naruto_shippuden.mangekyou_sharingan_shisui_release_technique": "Shisui Mangekyou Sharingan Release Technique",
+  "item.naruto_shippuden.mangekyou_sharingan_madara_release_technique": "Madara Mangekyou Sharingan Release Technique"
 }

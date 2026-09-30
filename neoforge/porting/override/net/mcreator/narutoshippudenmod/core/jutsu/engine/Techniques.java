@@ -58,21 +58,7 @@ public final class Techniques {
 	public static final ResourceKey<DamageType> JUTSU = ResourceKey.create(Registries.DAMAGE_TYPE,
 			Identifier.fromNamespaceAndPath(NarutoShippudenMod.MODID, "jutsu"));
 
-	/** Game time until which a player's melee hits blow enemies away (Wind Cloak). */
-	public static final String WIND_CLOAK = "naruto_shippuden:wind_cloak";
-
 	private Techniques() {
-	}
-
-	@SubscribeEvent
-	public static void windCloakHit(LivingDamageEvent.Post event) {
-		if (event.getSource().getDirectEntity() instanceof ServerPlayer player
-				&& player.getPersistentData().getLongOr(WIND_CLOAK, 0) > player.level().getGameTime()) {
-			Vec3 away = event.getEntity().position().subtract(player.position()).multiply(1, 0, 1).normalize();
-			event.getEntity().push(away.x * 1.4, 0.35, away.z * 1.4);
-			event.getEntity().syncVelocity = true;
-			((ServerLevel) player.level()).sendParticles(ParticleTypes.GUST, event.getEntity().getX(), event.getEntity().getY() + 1, event.getEntity().getZ(), 1, 0, 0, 0, 0);
-		}
 	}
 
 	// ------------------------------------------------------------------ damage and targets
@@ -105,6 +91,8 @@ public final class Techniques {
 			case SMOKE -> target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, false));
 			case INSECT -> target.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 0, false, false));
 			case SHADOW -> target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 40, 2, false, false));
+			case MIND -> target.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 80, 0, false, false));
+			case BLOOD -> target.addEffect(new MobEffectInstance(MobEffects.WITHER, 40, 0, false, false));
 			// the Gentle Fist closes chakra points
 			case CHAKRA -> target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 1, false, false));
 			case SEAL -> target.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 40, 4, false, false));

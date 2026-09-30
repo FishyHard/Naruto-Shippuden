@@ -17,7 +17,6 @@ import net.mcreator.narutoshippudenmod.item.WeaponItems.FumaShurikenItem;
 import net.mcreator.narutoshippudenmod.item.WeaponItems.ToroiUniqueFumaShurikenItem;
 import net.mcreator.narutoshippudenmod.itemgroup.ModItemGroups.ClansItemGroup;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.ClanResetRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.IburiReleaseRightclickedProcedure;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.entity.Entity;
@@ -514,13 +513,13 @@ public final class ClanItems {
 	}
 
 	@NarutoShippudenModElements.ModElement.Tag
-	public static class IburiReleaseItem extends NarutoShippudenModElements.ModElement {
+	public static class YamanakaReleaseItem extends NarutoShippudenModElements.ModElement {
 				public static Item block;
 		static {
-			Registration.holder(Registries.ITEM, "iburi_release", v -> block = (Item) v);
+			Registration.holder(Registries.ITEM, "yamanaka_release", v -> block = (Item) v);
 		}
 
-		public IburiReleaseItem(NarutoShippudenModElements instance) {
+		public YamanakaReleaseItem(NarutoShippudenModElements instance) {
 			super(instance, 105);
 		}
 
@@ -531,7 +530,7 @@ public final class ClanItems {
 
 		public static class ItemCustom extends Item {
 			public ItemCustom() {
-				super(Registration.itemProps("iburi_release", "ClansItemGroup").stacksTo(1).rarity(Rarity.EPIC));
+				super(Registration.itemProps("yamanaka_release", "ClansItemGroup").stacksTo(1).rarity(Rarity.EPIC));
 			}
 
 			@Override
