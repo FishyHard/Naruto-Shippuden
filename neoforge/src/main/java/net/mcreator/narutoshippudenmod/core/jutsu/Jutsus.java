@@ -19,6 +19,9 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,7 +103,19 @@ public final class Jutsus {
 			return technique.item.withSuffix("/" + index);
 		}
 
+		/** The id this jutsu is saved under once learned: "fire_release_technique/great_fireball_technique". */
+		public String key() {
+			return technique.item.getPath() + "/" + name.toLowerCase(java.util.Locale.ROOT).replaceAll("[^a-z0-9]+", "_").replaceAll("^_|_$", "");
+		}
+
+		/**
+		 * Release jutsu are learned by id (the player's learned set), so changing a release's list never shifts what a save has
+		 * unlocked; the old count is only read until the save is migrated. Jutsu no scroll sells (weapon arts, custom jutsu,
+		 * Flying Raijin) keep their own rule.
+		 */
 		public boolean isLearned(PlayerVariables variables) {
+			if (variables.learned_jutsu_migrated && TRACKED.contains(key()))
+				return learnedSet(variables).contains(key());
 			return learned.applyAsDouble(variables) >= tier;
 		}
 
@@ -131,9 +146,29 @@ public final class Jutsus {
 	 */
 	public record Track(String label, ToDoubleFunction<PlayerVariables> bought, int selector, @Nullable Technique technique,
 			@Nullable ToDoubleFunction<PlayerVariables> learnVariable, List<Tier> tiers) {
-		/** How many tiers the player has bought. */
+		/**
+		 * How many tiers the player has bought: for a track of jutsu, the tiers before the first one whose jutsu aren't all learned;
+		 * for the others (the Susanoo stages), the bought count.
+		 */
 		public int owned(PlayerVariables variables) {
-			return (int) bought.applyAsDouble(variables);
+			if (technique == null || !variables.learned_jutsu_migrated)
+				return (int) bought.applyAsDouble(variables);
+			Set<String> learned = learnedSet(variables);
+			int owned = 0;
+			for (Tier tier : tiers) {
+				List<Jutsu> unlocks = unlocks(tier);
+				if (unlocks.isEmpty() || !unlocks.stream().allMatch(j -> learned.contains(j.key())))
+					break;
+				owned++;
+			}
+			return owned;
+		}
+
+		/** Marks the jutsu of a tier learned (the buy code calls this). */
+		public void learnTier(PlayerVariables variables, int tier) {
+			if (tier >= 0 && tier < tiers.size())
+				for (Jutsu jutsu : unlocks(tiers.get(tier)))
+					Jutsus.learn(variables, jutsu);
 		}
 
 		/** What a tier is called: the jutsu it unlocks, the Susanoo stage or the item it gives. */
@@ -197,6 +232,69 @@ public final class Jutsus {
 		return Identifier.fromNamespaceAndPath("naruto_shippuden", path);
 	}
 
+	// ------------------------------------------------------------------ learned jutsu
+	/** The keys of every jutsu some release scroll sells: these are learned by id. */
+	static final Set<String> TRACKED = new HashSet<>();
+
+	private static void track() {
+		for (Release release : RELEASES.values())
+			for (Track track : release.tracks())
+				for (Tier tier : track.tiers())
+					for (Jutsu jutsu : track.unlocks(tier))
+						TRACKED.add(jutsu.key());
+	}
+
+	/** The player's learned set, parsed once per change of the saved string. */
+	public static Set<String> learnedSet(PlayerVariables variables) {
+		String text = variables.learned_jutsu;
+		if (!text.equals(variables.learnedParsedFrom)) {
+			Set<String> set = new LinkedHashSet<>();
+			for (String key : text.split(","))
+				if (!key.isBlank())
+					set.add(key.trim());
+			variables.learnedParsed = set;
+			variables.learnedParsedFrom = text;
+		}
+		return variables.learnedParsed;
+	}
+
+	/** Adds a jutsu to the player's learned set (the caller syncs). */
+	public static void learn(PlayerVariables variables, Jutsu jutsu) {
+		Set<String> set = new LinkedHashSet<>(learnedSet(variables));
+		if (set.add(jutsu.key()))
+			variables.learned_jutsu = String.join(",", set);
+	}
+
+	/**
+	 * Turns the old learned counts into the learned set: the count n means the first n jutsu of that release, in today's order.
+	 * Runs once per save (on login); {@code force} runs it again, adding to what is there (the dev test sets counts directly).
+	 */
+	public static void migrate(PlayerVariables variables, boolean force) {
+		if (variables.learned_jutsu_migrated && !force)
+			return;
+		boolean wasMigrated = variables.learned_jutsu_migrated;
+		variables.learned_jutsu_migrated = false;
+		Set<String> set = new LinkedHashSet<>(wasMigrated ? learnedSet(variables) : Set.of());
+		for (Technique technique : TECHNIQUES.values())
+			for (Jutsu jutsu : technique.jutsu)
+				if (TRACKED.contains(jutsu.key()) && jutsu.learned.applyAsDouble(variables) >= jutsu.tier)
+					set.add(jutsu.key());
+		variables.learned_jutsu = String.join(",", set);
+		variables.learned_jutsu_migrated = true;
+	}
+
+	@SubscribeEvent
+	public static void migrateOnLogin(net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent event) {
+		if (!(event.getEntity() instanceof ServerPlayer player))
+			return;
+		NarutoShippudenModVariables.ifPresent(player, variables -> {
+			if (!variables.learned_jutsu_migrated) {
+				migrate(variables, false);
+				variables.syncPlayerVariables(player);
+			}
+		});
+	}
+
 	/** Extra jutsu a player has on a technique (their custom jutsu); set by {@link CustomJutsu}. */
 	static java.util.function.BiFunction<Technique, PlayerVariables, List<Jutsu>> EXTRA = (technique, variables) -> List.of();
 
@@ -208,6 +306,7 @@ public final class Jutsus {
 		DojutsuJutsu.register();
 		Weapons.register();
 		CustomJutsu.register();
+		track();
 	}
 
 	public static @Nullable Technique technique(ItemStack stack) {

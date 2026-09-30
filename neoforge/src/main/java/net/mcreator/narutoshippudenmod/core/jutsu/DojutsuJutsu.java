@@ -170,6 +170,19 @@ public final class DojutsuJutsu {
 				new Def("Blaze Release: Kagutsuchi", JutsuRank.A, DojutsuJutsu::kagutsuchi),
 				new Def("Blaze Release: Honoikazuchi", JutsuRank.S, DojutsuJutsu::honoikazuchi),
 				new Def("Amaterasu: Flame Wrapping Fire", JutsuRank.S, DojutsuJutsu::flameWrapping));
+		// Obito and Sasuke also kept a bought count of their jutsu (…release): it's kept in step for old saves
+		mangekyouScroll("obito", net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.MangekyouSharinganObitoReleaseRightclickedProcedure::executeProcedure,
+				v -> v.mangekyousharinganobitokamuilearn, (v, i) -> {
+					v.mangekyousharinganobitokamuilearn = i;
+					v.mangekyousharinganobitokamuirelease = i;
+				}, new JutsuRank[] { JutsuRank.B, JutsuRank.A, JutsuRank.A },
+				susanoo(v -> v.mangekyousharinganobitosusanorelease, v -> v.mangekyousharinganobitosusanolearn, 3));
+		mangekyouScroll("sasuke", net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.MangekyouSharinganSasukeReleaseRightclickedProcedure::executeProcedure,
+				v -> v.mangekyousharingansasukeamaterasulearn, (v, i) -> {
+					v.mangekyousharingansasukeamaterasulearn = i;
+					v.mangekyousharingansasukeamaterasurelease = i;
+				}, new JutsuRank[] { JutsuRank.A, JutsuRank.A, JutsuRank.S, JutsuRank.S },
+				susanoo(v -> v.mangekyousharingansasukesusanorelease, v -> v.mangekyousharingansasukesusanolearn, 4));
 	}
 
 	private static void requires(String item, Predicate<PlayerVariables> requirement, String message) {
@@ -740,6 +753,8 @@ public final class DojutsuJutsu {
 		for (int i = 0; i < ranks.length; i++)
 			tiers[i] = Jutsus.tier(ranks[i].jp, i + 1, i == 0 ? technique : null);
 		Jutsus.Track jutsu = Jutsus.track("", learned, susanoo == null ? -1 : 0, technique, learned, tiers);
+		if (jutsu.tiers().size() != jutsu.technique().jutsu.size())
+			throw new IllegalStateException(item + ": " + ranks.length + " tiers for " + jutsu.technique().jutsu.size() + " jutsu");
 		Jutsus.release(item, deps -> {
 			if (!(deps.get("entity") instanceof ServerPlayer player))
 				return;
@@ -748,12 +763,13 @@ public final class DojutsuJutsu {
 				oldBuy.accept(deps);
 				return;
 			}
-			int next = (int) learned.applyAsDouble(v);
+			int next = jutsu.owned(v);
 			if (next >= ranks.length || v.jp < ranks[next].jp)
 				return;
 			NarutoShippudenModVariables.ifPresent(player, vars -> {
 				vars.jp -= ranks[next].jp;
 				setLearned.accept(vars, next + 1);
+				jutsu.learnTier(vars, next);
 				vars.syncPlayerVariables(player);
 			});
 			if (next == 0)

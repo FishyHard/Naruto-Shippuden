@@ -446,6 +446,11 @@ public final class DevTest {
 			STEPS.add(mc::stop);
 			return;
 		}
+		if (System.getProperty("naruto.devtest.only", "").equals("learned")) {
+			learnedSteps(mc);
+			STEPS.add(mc::stop);
+			return;
+		}
 		if (System.getProperty("naruto.devtest.only", "").equals("economy")) {
 			economySteps(mc);
 			STEPS.add(mc::stop);
@@ -642,6 +647,7 @@ public final class DevTest {
 				v.ninjutsu = 60;
 				v.kenjutsu = 100;
 				v.custom_jutsu = TEST_CUSTOM;
+				net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.migrate(v, true);
 				v.byakuganactivate = false;
 				v.ChakraMax = 5000;
 				v.ChakraAmount = 5000;
@@ -881,6 +887,7 @@ public final class DevTest {
 			onServer(mc, player -> NarutoShippudenModVariables.ifPresent(player, v -> {
 				v.firereleaselogic = v.windreleaselogic = true;
 				v.firelearn = 5;
+				net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.migrate(v, true);
 				v.jp = 300;
 				v.custom_jutsu = "Hidden Flame Bullets|fire|BULLETS|1|2|2";
 				v.syncPlayerVariables(player);
@@ -1029,6 +1036,126 @@ public final class DevTest {
 	}
 
 	/** The Shinobi Merchant's shop, and a kill made by a jutsu summon counting for the player. */
+	/** Learned jutsu by id: migrating old counts, buying in order, order independence, and the Obito and Sasuke scrolls. */
+	private static void learnedSteps(Minecraft mc) {
+		java.util.function.Function<String, net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.Technique> technique = id -> net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.TECHNIQUES
+				.get(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", id));
+		java.util.function.Function<String, net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.Release> release = id -> net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.RELEASES
+				.get(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", id));
+		java.util.function.BiConsumer<String, net.minecraft.server.level.ServerPlayer> report = (what, player) -> {
+			NarutoShippudenModVariables.PlayerVariables v = NarutoShippudenModVariables.get(player);
+			for (String id : new String[] { "fire_release", "mangekyou_sharingan_obito_release", "mangekyou_sharingan_sasuke_release" }) {
+				net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.Release r = release.apply(id);
+				StringBuilder line = new StringBuilder();
+				for (net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.Jutsu j : r.tracks().getFirst().technique().jutsu)
+					line.append(j.isLearned(v) ? "1" : "0");
+				StringBuilder owned = new StringBuilder();
+				for (net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.Track t : r.tracks())
+					owned.append(t.owned(v)).append(' ');
+				NarutoShippudenMod.LOGGER.info("DEVTEST learned {} {}: {} owned {}", what, id, line, owned.toString().trim());
+			}
+			NarutoShippudenMod.LOGGER.info("DEVTEST learned {} counts: firelearn {} fire_release {} obito {}/{} susanoo {} sasuke {}/{} jp {} set [{}]", what, v.firelearn,
+					v.fire_release, v.mangekyousharinganobitokamuilearn, v.mangekyousharinganobitokamuirelease, v.mangekyousharinganobitosusanorelease,
+					v.mangekyousharingansasukeamaterasulearn, v.mangekyousharingansasukeamaterasurelease, v.jp, v.learned_jutsu);
+		};
+		STEPS.add(() -> {
+			mc.gui.setScreen(null);
+			command(mc, "clear @s");
+			// an old-style save: three fire jutsu by count, nothing in the set
+			onServer(mc, player -> NarutoShippudenModVariables.ifPresent(player, v -> {
+				v.firereleaselogic = true;
+				v.learned_jutsu = "";
+				v.learned_jutsu_migrated = false;
+				v.firelearn = v.fire_release = 3;
+				v.mangekyousharinganobitokamuilearn = v.mangekyousharinganobitokamuirelease = v.mangekyousharinganobitosusanorelease = 0;
+				v.mangekyousharinganobitosusanolearn = 0;
+				v.mangekyousharingansasukeamaterasulearn = v.mangekyousharingansasukeamaterasurelease = v.mangekyousharingansasukesusanorelease = 0;
+				v.mangekyousharingansasukesusanolearn = 0;
+				v.MangekyouSharinganRelease = 0;
+				report.accept("old", player);
+				net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.migrate(v, false);
+				report.accept("migrated", player);
+				v.jp = 1000;
+				v.syncPlayerVariables(player);
+			}));
+		});
+		STEPS.add(() -> onServer(mc, player -> {
+			net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.learn(player, release.apply("fire_release").item(), 0);
+			report.accept("bought4", player);
+			// order no longer matters: with only the fifth jutsu in the set, it alone is learned and the next tier to buy is the first
+			NarutoShippudenModVariables.ifPresent(player, v -> v.learned_jutsu = technique.apply("fire_release_technique").jutsu.get(4).key());
+			report.accept("onlyfifth", player);
+			net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.learn(player, release.apply("fire_release").item(), 0);
+			report.accept("thenfirst", player);
+			// the migration runs once: clearing the counts changes nothing now
+			NarutoShippudenModVariables.ifPresent(player, v -> {
+				v.firelearn = v.fire_release = 0;
+				net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.migrate(v, false);
+			});
+			report.accept("countscleared", player);
+		}));
+		// the Obito scroll: names and prices of every tier
+		STEPS.add(() -> {
+			for (String id : new String[] { "mangekyou_sharingan_obito_release", "mangekyou_sharingan_sasuke_release" })
+				for (net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.Track t : release.apply(id).tracks())
+					for (int i = 0; i < t.tiers().size(); i++)
+						NarutoShippudenMod.LOGGER.info("DEVTEST scroll {} [{}] {}: {} JP", id, t.label(), t.name(i), t.tiers().get(i).cost());
+			onServer(mc, player -> NarutoShippudenModVariables.ifPresent(player, v -> {
+				v.sharingan = v.MangekyouSharinganObito = true;
+				v.MangekyouSharinganSasuke = false;
+				v.syncPlayerVariables(player);
+			}));
+			command(mc, "give @s naruto_shippuden:mangekyou_sharingan_obito_release");
+		});
+		STEPS.add(() -> mc.gui.setScreen(new JutsuClient.ScrollScreen(release.apply("mangekyou_sharingan_obito_release"),
+				net.minecraft.network.chat.Component.literal("Mangekyou Sharingan (Obito)"))));
+		STEPS.add(() -> shot(mc, "learned_obito_scroll_new"));
+		STEPS.add(() -> {
+			mc.gui.setScreen(null);
+			onServer(mc, player -> {
+				for (int i = 0; i < 2; i++)
+					net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.learn(player, release.apply("mangekyou_sharingan_obito_release").item(), 0);
+				// the Susanoo track still goes through the old procedure
+				net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.learn(player, release.apply("mangekyou_sharingan_obito_release").item(), 1);
+				report.accept("obito", player);
+				NarutoShippudenMod.LOGGER.info("DEVTEST learned obito item given: {}",
+						player.getInventory().contains(new net.minecraft.world.item.ItemStack(net.minecraft.core.registries.BuiltInRegistries.ITEM
+								.getValue(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", "mangekyou_sharingan_obito_release_technique")))));
+			});
+		});
+		STEPS.add(() -> mc.gui.setScreen(new JutsuClient.ScrollScreen(release.apply("mangekyou_sharingan_obito_release"),
+				net.minecraft.network.chat.Component.literal("Mangekyou Sharingan (Obito)"))));
+		STEPS.add(() -> shot(mc, "learned_obito_scroll_bought"));
+		STEPS.add(() -> {
+			mc.gui.setScreen(null);
+			for (int slot = 0; slot < 9; slot++)
+				if (net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.technique(mc.player.getInventory().getItem(slot)) != null)
+					mc.player.getInventory().setSelectedSlot(slot);
+		});
+		STEPS.add(() -> {
+			if (JutsuClient.held(mc.player) != null)
+				mc.gui.setScreen(new JutsuClient.WheelScreen(JutsuClient.held(mc.player)));
+		});
+		STEPS.add(() -> shot(mc, "learned_obito_wheel"));
+		// a second Mangekyou: only the newest one stays; then Sasuke's scroll
+		STEPS.add(() -> {
+			mc.gui.setScreen(null);
+			onServer(mc, player -> NarutoShippudenModVariables.ifPresent(player, v -> {
+				v.MangekyouSharinganSasuke = true;
+				v.syncPlayerVariables(player);
+			}));
+		});
+		STEPS.add(() -> onServer(mc, player -> {
+			NarutoShippudenModVariables.PlayerVariables v = NarutoShippudenModVariables.get(player);
+			NarutoShippudenMod.LOGGER.info("DEVTEST learned one mangekyou: obito {} sasuke {}", v.MangekyouSharinganObito, v.MangekyouSharinganSasuke);
+			net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.learn(player, release.apply("mangekyou_sharingan_sasuke_release").item(), 0);
+			report.accept("sasuke", player);
+		}));
+		STEPS.add(() -> mc.gui.setScreen(new JutsuClient.ScrollScreen(release.apply("mangekyou_sharingan_sasuke_release"),
+				net.minecraft.network.chat.Component.literal("Mangekyou Sharingan (Sasuke)"))));
+		STEPS.add(() -> shot(mc, "learned_sasuke_scroll"));
+	}
+
 	private static void economySteps(Minecraft mc) {
 		STEPS.add(() -> {
 			mc.gui.setScreen(null);

@@ -151,11 +151,12 @@ final class NatureJutsu {
 		Jutsus.Tier[] tiers = new Jutsus.Tier[defs.length];
 		for (int i = 0; i < defs.length; i++)
 			tiers[i] = Jutsus.tier(defs[i].rank.jp, i + 1, i == 0 ? item : null);
+		Jutsus.Track track = Jutsus.track("", bought, -1, item, learned, tiers);
 		Jutsus.release(id + "_release", deps -> {
 			if (!(deps.get("entity") instanceof ServerPlayer player))
 				return;
 			PlayerVariables v = NarutoShippudenModVariables.get(player);
-			int next = (int) bought.applyAsDouble(v);
+			int next = track.owned(v);
 			if (!has.test(v)) {
 				player.sendOverlayMessage(Component.literal(missing(title)));
 				return;
@@ -166,11 +167,12 @@ final class NatureJutsu {
 				vars.jp -= defs[next].rank.jp;
 				setBought.accept(vars, next + 1);
 				setLearned.accept(vars, Math.max(learned.applyAsDouble(vars), next + 1));
+				track.learnTier(vars, next);
 				vars.syncPlayerVariables(player);
 			});
 			if (next == 0)
 				Compat.giveItemToPlayer(player, new ItemStack(BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("naruto_shippuden", item))));
-		}, Jutsus.track("", bought, -1, item, learned, tiers));
+		}, track);
 	}
 
 	/** "You don't have the Fire nature" / "You haven't unlocked Ice Release" / "You aren't of the Hyuga Clan". */

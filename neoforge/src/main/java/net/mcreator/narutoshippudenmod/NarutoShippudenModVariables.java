@@ -492,6 +492,13 @@ public class NarutoShippudenModVariables {
 		public String custom_jutsu = "";
 		/** The art selected on each weapon: "item=index" pairs separated by commas (see core/jutsu/Weapons). */
 		public String weapon_arts = "";
+		/** The release jutsu this player has learned, by id ("fire_release_technique/great_fireball_technique"), comma separated (see core/jutsu/Jutsus). */
+		public String learned_jutsu = "";
+		/** Whether the old learned counts (firelearn, …) were turned into learned_jutsu. */
+		public boolean learned_jutsu_migrated = false;
+		/** learned_jutsu parsed (not saved; see Jutsus.learnedSet). */
+		public java.util.Set<String> learnedParsed = java.util.Set.of();
+		public String learnedParsedFrom = "";
 
 		public void write(ValueOutput out) {
 			out.putDouble("A_Mission", A_Mission);
@@ -911,6 +918,8 @@ public class NarutoShippudenModVariables {
 			out.putDouble("inuzuka_mode", inuzuka_mode);
 			out.putString("custom_jutsu", custom_jutsu);
 			out.putString("weapon_arts", weapon_arts);
+			out.putString("learned_jutsu", learned_jutsu);
+			out.putBoolean("learned_jutsu_migrated", learned_jutsu_migrated);
 		}
 
 		public void read(ValueInput in) {
@@ -1331,6 +1340,8 @@ public class NarutoShippudenModVariables {
 			inuzuka_mode = in.getDoubleOr("inuzuka_mode", 0);
 			custom_jutsu = in.getStringOr("custom_jutsu", "");
 			weapon_arts = in.getStringOr("weapon_arts", "");
+			learned_jutsu = in.getStringOr("learned_jutsu", "");
+			learned_jutsu_migrated = in.getBooleanOr("learned_jutsu_migrated", false);
 		}
 
 		/** Queues a sync to the owning client; sent once at the end of the current server tick. */
