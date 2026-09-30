@@ -180,8 +180,7 @@ public final class IronSandRenderer {
 			under(model.rightLeg, underLeg, pose, collector, state, light);
 			under(model.leftLeg, underLeg, pose, collector, state, light);
 			wear(model.body, worn.body(), pose, collector, state, light);
-			wear(model.rightArm, worn.rightArm(), pose, collector, state, light);
-			wear(model.leftArm, worn.leftArm(), pose, collector, state, light);
+			// (the original models' own arms sat outside the fitted ones: only the fitted arms are drawn)
 			if (form == 2)
 				hands(pose, collector, state, light, model);
 		}
