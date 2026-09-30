@@ -1672,3 +1672,11 @@ def kurama_ai(path, text):
         cls = cls[:g] + 'protected void registerGoals() {\n\t\t\t\tsuper.registerGoals();\n\t\t\t\t%s.goals(this, this.goalSelector, this.targetSelector);\n\t\t\t}' % k + cls[find_block(cls, g):]
     cls = re.sub(r'KuramaOnInitialEntitySpawnProcedure\s*\.executeProcedure\(Stream.*?Map::putAll\)\);', k + '.tick(this);', cls, flags=re.S)
     return text[:i] + cls + text[end:]
+
+
+@func
+def old_stat_attributes(path, text):
+    """Medicine and Speed set max health and speed with /attribute commands naming generic.max_health and generic.movement_speed,
+    which no longer exist (so the stats did nothing). core/Stats applies them as attribute modifiers instead."""
+    return re.sub(r'\n\t*Compat\.runCommandAt\(world, x, y, z, \("/attribute " \+ entity\.getDisplayName\(\)\.getString\(\)\s*\+ " minecraft:generic\.(?:max_health|movement_speed) base set "[^;]*;',
+                  '', text)

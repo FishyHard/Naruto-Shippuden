@@ -180,6 +180,11 @@ public final class ShinobiAI {
 	// ------------------------------------------------------------------ spawning
 	/** Called when the shinobi first spawns: its rank, stats, name and kunai. */
 	public static void spawned(PathfinderMob mob) {
+		// a rank given in the summon command wins
+		if (mob.getPersistentData().contains("ShinobiRank") && !mob.getPersistentData().getBooleanOr("ShinobiReady", false)) {
+			spawned(mob, rank(mob));
+			return;
+		}
 		float roll = mob.getRandom().nextFloat();
 		spawned(mob, roll < 0.6F ? 0 : roll < 0.9F ? 1 : 2);
 	}
@@ -189,6 +194,7 @@ public final class ShinobiAI {
 		if (village == null)
 			return;
 		mob.getPersistentData().putInt("ShinobiRank", rank);
+		mob.getPersistentData().putBoolean("ShinobiReady", true);
 		mob.getPersistentData().putFloat("JutsuPower", new float[] { 0.8F, 1.0F, 1.3F }[rank]);
 		base(mob, Attributes.MAX_HEALTH, new double[] { 40, 60, 90 }[rank]);
 		base(mob, Attributes.ATTACK_DAMAGE, new double[] { 3, 4, 6 }[rank]);
@@ -472,8 +478,13 @@ public final class ShinobiAI {
 		if (mob.level().isClientSide() || village(mob) == null)
 			return;
 		double max = maxChakra(mob);
-		if (!mob.getPersistentData().contains("ShinobiRank") && mob.tickCount > 1)
-			spawned(mob);
+		// summoned with a rank but without spawning ({NeoForgeData:{ShinobiRank:2}}), or from an old save: set it up now
+		if (!mob.getPersistentData().getBooleanOr("ShinobiReady", false) && mob.tickCount > 1) {
+			if (mob.getPersistentData().contains("ShinobiRank"))
+				spawned(mob, rank(mob));
+			else
+				spawned(mob);
+		}
 		mob.getPersistentData().putDouble("ChakraAmount", Math.min(max, chakra(mob) + (mob.getTarget() == null ? 2 : 0.4)));
 	}
 

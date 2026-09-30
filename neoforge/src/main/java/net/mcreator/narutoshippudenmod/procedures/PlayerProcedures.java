@@ -1295,8 +1295,6 @@ public final class PlayerProcedures {
 					});
 				}
 				if (world instanceof ServerLevel) {
-					Compat.runCommandAt(world, x, y, z, ("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.max_health base set "
-									+ NarutoShippudenModVariables.get(entity).maxhealth));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
 					((Player) entity).sendOverlayMessage(Component.literal("Your Medicine is maxed"));
@@ -1325,8 +1323,6 @@ public final class PlayerProcedures {
 					});
 				}
 				if (world instanceof ServerLevel) {
-					Compat.runCommandAt(world, x, y, z, ("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.movement_speed base set "
-									+ NarutoShippudenModVariables.get(entity).maxspeed));
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
 					((Player) entity).sendOverlayMessage(Component.literal("Your Speed is maxed"));
@@ -3760,8 +3756,6 @@ public final class PlayerProcedures {
 			}
 			if (NarutoShippudenModVariables.get(entity).medicine <= 300) {
 				if (world instanceof ServerLevel) {
-					Compat.runCommandAt(world, x, y, z, ("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.max_health base set "
-									+ NarutoShippudenModVariables.get(entity).maxhealth));
 				}
 				if (entity instanceof LivingEntity)
 					((LivingEntity) entity).setHealth((float) ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMaxHealth() : -1));
@@ -3774,7 +3768,6 @@ public final class PlayerProcedures {
 				}
 			} else if (NarutoShippudenModVariables.get(entity).medicine >= 301) {
 				if (world instanceof ServerLevel) {
-					Compat.runCommandAt(world, x, y, z, ("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.max_health base set " + 620));
 				}
 				if (entity instanceof LivingEntity)
 					((LivingEntity) entity).setHealth((float) 620);
@@ -3927,8 +3920,6 @@ public final class PlayerProcedures {
 					});
 				}
 				if (world instanceof ServerLevel) {
-					Compat.runCommandAt(world, x, y, z, ("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.movement_speed base set "
-									+ NarutoShippudenModVariables.get(entity).maxspeed));
 				}
 			} else if (NarutoShippudenModVariables.get(entity).sp <= NarutoShippudenModVariables.get(entity).spusecount) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {

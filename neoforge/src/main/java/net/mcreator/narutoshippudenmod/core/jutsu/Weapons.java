@@ -315,11 +315,19 @@ public final class Weapons {
 	private static final List<Display.ItemDisplay> FLYING = new ArrayList<>();
 
 	/**
+	 * How a thrown weapon's model is turned in flight. The models lie in different planes: Kubikiribocho's blade is in its YZ plane,
+	 * the scythe's in XY; both spin flat (blade level, edge leading round). Nuibari's needle runs along Y and points where it flies.
+	 */
+	enum Flight {
+		FLAT_YZ, FLAT_XY, POINT
+	}
+
+	/**
 	 * Throws the held weapon as its real item: it flies along the look, hitting each enemy in the way once, spins, and (if it
 	 * returns) flies back to the hand when it reaches its range or a wall. {@code cable} draws a line back to the hand (the scythe's
 	 * cable, Nuibari's thread). onHit sees each struck enemy; onEnd the point where it stopped.
 	 */
-	private static void fly(ServerPlayer p, double speed, double range, float damage, boolean returns, boolean cable, Element element,
+	private static void fly(ServerPlayer p, Flight flight, double speed, double range, float damage, boolean returns, boolean cable, Element element,
 			BiConsumer<Vec3, LivingEntity> onHit, @Nullable Consumer<Vec3> onEnd) {
 		ServerLevel level = level(p);
 		ItemStack look = p.getMainHandItem().copyWithCount(1);
@@ -385,11 +393,18 @@ public final class Weapons {
 				line(level, ParticleTypes.WHITE_ASH, hand(p), pos[0], 0.6);
 			if (t % 5 == 0)
 				sound(level, pos[0], SoundEvents.PLAYER_ATTACK_SWEEP, 0.6F, 1.4F);
-			// moved by its interpolated transform (a display snaps when it is moved by position); it spins flat as it flies
+			// moved by its interpolated transform (a display snaps when it is moved by position)
 			Vec3 offset = pos[0].subtract(origin);
 			float spin = t * 1.1F;
-			Matrix4f shape = new Matrix4f().translate((float) offset.x, (float) offset.y, (float) offset.z).rotateY(-p.getYRot() * Mth.DEG_TO_RAD)
-					.rotateX(Mth.HALF_PI).rotateZ(spin).scale(1.4F);
+			Matrix4f shape = new Matrix4f().translate((float) offset.x, (float) offset.y, (float) offset.z);
+			switch (flight) {
+				// laid level (the blade's plane turned horizontal), spinning round in that plane
+				case FLAT_YZ -> shape.rotateY(-p.getYRot() * Mth.DEG_TO_RAD).rotateZ(Mth.HALF_PI).rotateX(spin).scale(1.4F);
+				case FLAT_XY -> shape.rotateY(-p.getYRot() * Mth.DEG_TO_RAD).rotateX(Mth.HALF_PI).rotateZ(spin).scale(1.4F);
+				// the needle (the model's +Y) along its flight, always the same side up, never spinning; centred on its middle
+				case POINT -> shape.rotate(new org.joml.Quaternionf().rotationTo(0, 1, 0, (float) step.x, (float) step.y, (float) step.z)).scale(1.4F)
+						.translate(0, -0.52F, 0);
+			}
 			if (t > 0) {
 				display.setTransformationInterpolationDuration(1);
 				display.setTransformation(new Transformation(shape));
@@ -623,7 +638,7 @@ public final class Weapons {
 
 	/** Scythe Throw: the scythe flies out on its cable, cutting everything in the way and drawing blood, then is reeled back. */
 	private static void scytheThrow(ServerPlayer p) {
-		fly(p, 1.2, 16, 10, true, true, Element.STEEL, (at, target) -> drawBlood(p, target), null);
+		fly(p, Flight.FLAT_XY, 1.2, 16, 10, true, true, Element.STEEL, (at, target) -> drawBlood(p, target), null);
 	}
 
 	private record Ritual(Vec3 centre, long until, UUID target) {
@@ -821,7 +836,7 @@ public final class Weapons {
 	// ------------------------------------------------------------------ Kubikiribocho
 	/** Flying Revolving Sword: the great cleaver is thrown spinning, cuts through everything in its path and comes back. */
 	private static void flyingRevolvingSword(ServerPlayer p) {
-		fly(p, 1.1, 14, 16, true, false, Element.STEEL, (at, target) -> {
+		fly(p, Flight.FLAT_YZ, 1.1, 14, 16, true, false, Element.STEEL, (at, target) -> {
 			target.push(0, 0.3, 0);
 			target.syncVelocity = true;
 		}, null);
@@ -911,12 +926,8 @@ public final class Weapons {
 		Item target = BuiltInRegistries.ITEM.getValue(id(item));
 		ItemStack shaped = p.getMainHandItem().transmuteCopy(target, 1);
 		StackTag.of(shaped).putDouble("FormUntil", now(p) + 400);
+		// the twinsword is already two swords in one: it stays in the main hand
 		p.setItemInHand(InteractionHand.MAIN_HAND, shaped);
-		if (form.equals("Twinsword") && p.getOffhandItem().isEmpty()) {
-			ItemStack twin = new ItemStack(target);
-			StackTag.of(twin).putBoolean("TwinCopy", true);
-			p.setItemInHand(InteractionHand.OFF_HAND, twin);
-		}
 		tell(p, "Hiramekarei: " + form + " (20s)");
 	}
 
@@ -1129,7 +1140,7 @@ public final class Weapons {
 	private static void earthSpiderSewing(ServerPlayer p) {
 		ServerLevel level = level(p);
 		List<LivingEntity> sewn = new ArrayList<>();
-		fly(p, 1.6, 24, 12, false, true, Element.STEEL, (at, target) -> sewn.add(target), end -> {
+		fly(p, Flight.POINT, 1.6, 24, 12, false, true, Element.STEEL, (at, target) -> sewn.add(target), end -> {
 			if (sewn.isEmpty())
 				return;
 			Vec3 knot = sewn.getLast().position();
@@ -1304,18 +1315,18 @@ public final class Weapons {
 			forms(p, time);
 	}
 
-	/** Forms run out; stray twin swords vanish; the old Gunbai block item turns back into the Gunbai. */
+	/** Forms run out; old second twinswords vanish; the old Gunbai block item turns back into the Gunbai. */
 	private static void forms(ServerPlayer p, long time) {
 		ItemStack main = p.getMainHandItem();
 		String held = path(main);
 		if ((held.equals("hiramekarei_splitted") || held.equals("hiramekarei_hammer_form")) && StackTag.of(main).getDoubleOr("FormUntil", 0) < time)
 			revertForm(p);
-		boolean twinHeld = path(p.getMainHandItem()).equals("hiramekarei_splitted") && !StackTag.of(p.getMainHandItem()).getBooleanOr("TwinCopy", false);
 		for (int slot = 0; slot < p.getInventory().getContainerSize(); slot++) {
 			ItemStack stack = p.getInventory().getItem(slot);
 			if (stack.isEmpty())
 				continue;
-			if (StackTag.of(stack).getBooleanOr("TwinCopy", false) && !(twinHeld && stack == p.getOffhandItem()))
+			// the second twinsword an earlier version put in the off hand
+			if (StackTag.of(stack).getBooleanOr("TwinCopy", false))
 				p.getInventory().setItem(slot, ItemStack.EMPTY);
 			else if (path(stack).equals("gunbai_block"))
 				p.getInventory().setItem(slot, stack.transmuteCopy(BuiltInRegistries.ITEM.getValue(id("gunbai")), 1));

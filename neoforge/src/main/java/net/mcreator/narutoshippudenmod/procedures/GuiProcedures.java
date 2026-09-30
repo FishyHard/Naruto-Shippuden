@@ -2295,8 +2295,6 @@ public final class GuiProcedures {
 					});
 				}
 				if (world instanceof ServerLevel) {
-					Compat.runCommandAt(world, x, y, z, ("/attribute " + entity.getDisplayName().getString() + " minecraft:generic.max_health base set "
-									+ NarutoShippudenModVariables.get(entity).maxhealth));
 				}
 			} else if (NarutoShippudenModVariables.get(entity).sp <= NarutoShippudenModVariables.get(entity).spusecount) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
