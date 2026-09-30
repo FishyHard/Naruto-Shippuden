@@ -298,7 +298,12 @@ public final class NarutoActions {
 					else
 						Eyes.dismissSusanoo(player);
 				}
-				case "mind" -> net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.puppetAttack(player);
+				case "mind" -> {
+					if (action.key().equals("attack"))
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.puppetAttack(player);
+					else
+						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.puppetLook(player, action.key(), action.amount());
+				}
 				case "chakra" -> {
 					if (action.key().equals("toggle"))
 						ChakraControl.toggle(player);

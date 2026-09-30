@@ -1708,6 +1708,16 @@ public final class ClanJutsu {
 		});
 	}
 
+	/** The possessing caster's look, sent by client/Restrained: Minecraft stops sending it while the camera is another entity. */
+	public static void puppetLook(ServerPlayer p, String axis, double degrees) {
+		if (!PUPPETS.containsKey(p.getUUID()))
+			return;
+		if (axis.equals("yaw"))
+			p.setYRot((float) degrees);
+		else
+			p.setXRot(Mth.clamp((float) degrees, -90, 90));
+	}
+
 	/** The possessed creature strikes whatever is in front of it (the caster attacked; sent by client/Restrained). */
 	public static void puppetAttack(ServerPlayer p) {
 		net.minecraft.world.entity.Mob mob = PUPPETS.get(p.getUUID());
@@ -2067,7 +2077,19 @@ public final class ClanJutsu {
 		channel(p, ticks, 1, t -> {
 			if (hold.ended)
 				return;
-			hold.held.keySet().removeIf(e -> !e.isAlive() || e.level() != p.level());
+			hold.held.entrySet().removeIf(entry -> {
+				LivingEntity e = entry.getKey();
+				if (e.isAlive() && e.level() == p.level())
+					return false;
+				// the shadow joining them, the pool under them and the spikes through them draw back
+				for (Display.BlockDisplay piece : entry.getValue().link)
+					Displays.remove(piece, 6);
+				for (Display.BlockDisplay piece : entry.getValue().pool)
+					Displays.remove(piece, 6);
+				if (e instanceof ServerPlayer victim)
+					restrain(victim, false);
+				return true;
+			});
 			if (hold.held.isEmpty() && hold.creeping == 0 || t == ticks - 1) {
 				endHold(p, hold);
 				return;
@@ -2120,7 +2142,7 @@ public final class ClanJutsu {
 				}
 				if (c.pooledAt.distanceToSqr(e.position()) > 1.0E-4) {
 					c.pooledAt = e.position();
-					for (int i = 0; i < c.pool.size(); i++)
+					for (int i = 0; i < c.poolTurn.size(); i++)
 						slide(level, c.pool.get(i), e.position(), e.getY(), Displays.box(c.poolTurn.get(i), 0, c.poolSize, 0.02F, c.poolSize));
 				}
 			}
@@ -2222,7 +2244,7 @@ public final class ClanJutsu {
 	}
 
 	/** A spike of shadow rising out of the ground at from, through to, and on past it (grows out of the ground). */
-	private static void tendril(ServerLevel level, Hold hold, Vec3 from, Vec3 through, int life) {
+	private static Display.BlockDisplay tendril(ServerLevel level, Hold hold, Vec3 from, Vec3 through, int life) {
 		Vec3 dir = through.subtract(from);
 		float length = (float) dir.length() * 1.8F;
 		dir = dir.normalize();
@@ -2231,6 +2253,7 @@ public final class ClanJutsu {
 		Display.BlockDisplay spike = Displays.grow(level, from, SHADE, shape.apply(0.05F), 1, life, false);
 		hold.drawn.add(spike);
 		after(level, 2, () -> Displays.animate(spike, shape.apply(length), 4));
+		return spike;
 	}
 
 	/**
@@ -2257,7 +2280,7 @@ public final class ClanJutsu {
 					double x = target.getX() + Math.cos(a) * rr, z = target.getZ() + Math.sin(a) * rr;
 					Vec3 through = body.add((level.getRandom().nextDouble() - 0.5) * 0.4, (level.getRandom().nextDouble() - 0.3) * target.getBbHeight() * 0.4,
 							(level.getRandom().nextDouble() - 0.5) * 0.4);
-					tendril(level, hold, new Vec3(x, ground(level, x, target.getY(), z), z), through, 90);
+					c.pool.add(tendril(level, hold, new Vec3(x, ground(level, x, target.getY(), z), z), through, 90));
 				}
 				damage(p, target, 10, Element.SHADOW);
 				level.sendParticles(ParticleTypes.SQUID_INK, body.x, body.y, body.z, 12, 0.3, 0.4, 0.3, 0.05);

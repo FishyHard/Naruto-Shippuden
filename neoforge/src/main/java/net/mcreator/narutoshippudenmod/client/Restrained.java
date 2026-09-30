@@ -26,6 +26,8 @@ import org.jspecify.annotations.Nullable;
 @EventBusSubscriber(modid = "naruto_shippuden", value = Dist.CLIENT)
 public final class Restrained {
 	private static boolean cameraTaken;
+	/** The look last sent while possessing (only changes are sent). */
+	private static float sentYaw = Float.NaN, sentPitch = Float.NaN;
 
 	private Restrained() {
 	}
@@ -82,8 +84,18 @@ public final class Restrained {
 			inside.setXRot(mc.player.getXRot());
 			inside.setYHeadRot(mc.player.getYRot());
 			cameraTaken = true;
+			// the game sends no look of its own while the camera is the creature: the server steers it by this one
+			if (mc.player.getYRot() != sentYaw) {
+				sentYaw = mc.player.getYRot();
+				ClientPacketDistributor.sendToServer(new NarutoActions.Action("mind", "yaw", sentYaw));
+			}
+			if (mc.player.getXRot() != sentPitch) {
+				sentPitch = mc.player.getXRot();
+				ClientPacketDistributor.sendToServer(new NarutoActions.Action("mind", "pitch", sentPitch));
+			}
 		} else if (cameraTaken) {
 			cameraTaken = false;
+			sentYaw = sentPitch = Float.NaN;
 			mc.setCameraEntity(mc.player);
 		}
 	}
