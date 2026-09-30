@@ -190,7 +190,8 @@ public final class IronSandRenderer {
 				pose.translate(side * 1.6F, -0.7F + bob, -0.5F - forward);
 				pose.rotate(Axis.ZP, side * -0.25F);
 				pose.scale(1.45F, 1.45F, 1.45F);
-				draw(side < 0 ? rightHand : leftHand, SAND, pose, collector, state, light);
+				// the player's right is -X: the hand built with its thumb at +X (the mirrored one) keeps the thumb inward there
+				draw(side < 0 ? leftHand : rightHand, SAND, pose, collector, state, light);
 				pose.popPose();
 			}
 			pose.popPose();
