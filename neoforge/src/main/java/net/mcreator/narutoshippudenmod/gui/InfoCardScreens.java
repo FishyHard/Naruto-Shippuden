@@ -304,7 +304,9 @@ public final class InfoCardScreens {
 				int cap = cap(STATS[i]);
 				double current = STATS[i].value().applyAsDouble(vars);
 				String value = number(current) + (cap > 0 ? "/" + cap : "");
-				graphics.text(font, value, sx + 114 - font.width(value), sy + 6, cap > 0 && current >= cap ? 0xFF55FF55 : 0xFFFFFF55, true);
+				// capped stats are green when maxed; Ninjutsu and Senjutsu have no cap and turn green from 300
+				boolean full = cap > 0 ? current >= cap : current >= 300;
+				graphics.text(font, value, sx + 114 - font.width(value), sy + 6, full ? 0xFF55FF55 : 0xFFFFFF55, true);
 			}
 			text(graphics, "SP per click", 8, 178);
 		}
