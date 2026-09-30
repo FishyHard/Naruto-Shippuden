@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The mod's creative tabs, six of them in a set order: Jutsu (the natures and kekkei genkai), Clans, Dojutsu, Weapons,
- * Headbands and Shinobi Items. Every scroll is followed by the technique it unlocks. Spawn eggs go in the vanilla Spawn Eggs tab.
+ * The mod's creative tabs, in a set order: Nature Releases, Kekkei Genkai, DNA, Clans, Dojutsu, Weapons, Headbands and
+ * Shinobi Items. Every scroll is followed by the technique it unlocks. Spawn eggs go in the vanilla Spawn Eggs tab.
  * (The old MCreator tabs were thirteen, several with only an item or two; items still name their old tab, which is ignored.)
  */
 @EventBusSubscriber(modid = "naruto_shippuden")
@@ -37,33 +37,34 @@ public final class ModItemGroups {
 	private ModItemGroups() {
 	}
 
-	private static List<String> jutsu() {
-		List<String> ids = new ArrayList<>(List.of("shadow_clone_technique"));
-		for (String nature : NATURES)
-			ids.addAll(List.of(nature + "_release", nature + "_release_technique", nature + "_dna_release", nature + "_dna"));
-		ids.add("chakra_nature_reset");
-		for (String kekkeiGenkai : KEKKEI_GENKAI) {
-			ids.addAll(List.of(kekkeiGenkai + "_release", kekkeiGenkai + "_release_technique"));
-			// the DNA items don't all follow one naming
-			for (String dna : new String[] { kekkeiGenkai + "_dna_release", kekkeiGenkai + "_dna" })
-				ids.add(dna);
-		}
-		ids.add("undefined_dna");
+	/** Each release's scroll, then the technique it unlocks. */
+	private static List<String> releases(String[] names) {
+		List<String> ids = new ArrayList<>();
+		for (String name : names)
+			ids.addAll(List.of(name + "_release", name + "_release_technique"));
+		return ids;
+	}
+
+	/** The DNA of every nature and kekkei genkai (in the releases' order), then the resets: two full rows. */
+	private static List<String> dna() {
+		List<String> ids = new ArrayList<>();
+		for (String[] names : new String[][] { NATURES, KEKKEI_GENKAI })
+			for (String name : names)
+				// the DNA items don't all follow one naming; the one that isn't an item is skipped
+				ids.addAll(List.of(name + "_dna_release", name + "_dna"));
+		ids.addAll(List.of("undefined_dna", "chakra_nature_reset"));
 		return ids;
 	}
 
 	private static List<String> clans() {
-		List<String> ids = new ArrayList<>();
-		for (String clan : CLANS)
-			ids.addAll(List.of(clan + "_release", clan + "_release_technique"));
-		ids.addAll(List.of("clan_paper", "clan_reset_stat"));
+		// the clan roll and reset first, then each clan's scroll and technique (Chinoike has only its scroll)
+		List<String> ids = new ArrayList<>(List.of("clan_paper", "clan_reset_stat"));
+		ids.addAll(releases(CLANS));
 		return ids;
 	}
 
 	private static List<String> dojutsu() {
-		List<String> ids = new ArrayList<>();
-		for (String eye : EYES)
-			ids.addAll(List.of(eye + "_release", eye + "_release_technique"));
+		List<String> ids = releases(EYES);
 		for (String whose : MANGEKYOU)
 			ids.addAll(List.of("mangekyou_sharingan_" + whose + "_release", "mangekyou_sharingan_" + whose + "_release_technique"));
 		return ids;
@@ -84,8 +85,9 @@ public final class ModItemGroups {
 	}
 
 	private static List<String> shinobiItems() {
-		return List.of("bronze_ryo", "silver_ryo", "gold_ryo", "chakra_paper", "iron_stick", "sharp_iron", "paper_bomb", "kamui_stone", "ichiraku_ramen", "shogi",
-				"shogiboard", "story_mode", "shikamaru_quest_d", "asuma_quest_c", "iron_defense", "pillage_the_post", "save_the_village");
+		// two full rows: ryo, the shinobi basics and materials; then ramen, shogi, Story Mode and the missions by rank
+		return List.of("bronze_ryo", "silver_ryo", "gold_ryo", "chakra_paper", "shadow_clone_technique", "paper_bomb", "iron_stick", "sharp_iron", "kamui_stone",
+				"ichiraku_ramen", "shogi", "shogiboard", "story_mode", "shikamaru_quest_d", "pillage_the_post", "save_the_village", "asuma_quest_c", "iron_defense");
 	}
 
 	private static Item item(String id) {
@@ -113,7 +115,9 @@ public final class ModItemGroups {
 
 	/** Called from the mod's constructor, before the registries fill (in this order, which is the tabs' order). */
 	public static void register() {
-		tab("jutsu", "fire_release_technique", ModItemGroups::jutsu);
+		tab("nature_releases", "fire_release_technique", () -> releases(NATURES));
+		tab("kekkei_genkai", "wood_release_technique", () -> releases(KEKKEI_GENKAI));
+		tab("dna", "fire_dna_release", ModItemGroups::dna);
 		tab("clans", "uchiha_release", ModItemGroups::clans);
 		tab("dojutsu", "sharingan_release", ModItemGroups::dojutsu);
 		tab("weapons", "kunai", ModItemGroups::weapons);

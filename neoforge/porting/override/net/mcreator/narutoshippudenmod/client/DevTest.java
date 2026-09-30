@@ -370,7 +370,7 @@ public final class DevTest {
 		if (System.getProperty("naruto.devtest.only", "").equals("tabs")) {
 			// each of the mod's creative tabs, opened in the creative inventory
 			STEPS.add(() -> command(mc, "gamemode creative"));
-			for (String tab : new String[] { "jutsu", "clans", "dojutsu", "weapons", "headbands", "shinobi_items" })
+			for (String tab : new String[] { "nature_releases", "kekkei_genkai", "dna", "clans", "dojutsu", "weapons", "headbands", "shinobi_items" }) {
 				STEPS.add(() -> {
 					net.minecraft.world.item.CreativeModeTab creative = net.minecraft.core.registries.BuiltInRegistries.CREATIVE_MODE_TAB
 							.getValue(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", tab));
@@ -386,7 +386,8 @@ public final class DevTest {
 					NarutoShippudenMod.LOGGER.info("DEVTEST tab {}: {} items", tab, creative.getDisplayItems().size());
 					nextDelay = 10;
 				});
-			STEPS.add(() -> shot(mc, "tabs"));
+				STEPS.add(() -> shot(mc, "tab_" + tab));
+			}
 			STEPS.add(mc::stop);
 			return;
 		}
