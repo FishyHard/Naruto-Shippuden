@@ -7,7 +7,7 @@ Templates go to data/naruto_shippuden/structure/<village>/<piece>.nbt in both re
     ./gradlew runClient -PdevTest -PquickPlay=structtest -PdevOnly=structures
 """
 import math, os, sys
-import leaf, leaf_landmarks, leaf_houses
+import leaf, leaf_landmarks, leaf_houses, leaf_buildings
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 NEO = os.path.normpath(os.path.join(HERE, '..', '..'))
@@ -19,6 +19,7 @@ LEAF.update(gate=leaf_landmarks.gate, hokage_tower=leaf_landmarks.hokage_tower, 
             hokage_rock_five=leaf_landmarks.hokage_rock_five,
             water_tower=leaf_landmarks.water_tower)
 LEAF.update(leaf_houses.VARIANTS)
+LEAF.update(leaf_buildings.PIECES)
 VILLAGES = {'leaf': LEAF}
 GROUND = -60          # the flat world's surface (the first air block)
 EXTRA_SHOTS = {
@@ -30,7 +31,11 @@ EXTRA_SHOTS = {
     'leaf/hokage_tower': [('roof', 48, 50, 48, 30, 41, 30), ('landing', 24, 29, 37, 33, 27, 34), ('hall', 30.5, 7, 45, 30.5, 4, 18), ('standby', 20, 6, 28.5, 48, 3, 28),
                           ('council', 30.5, 17, 41, 30.5, 13, 30), ('quarters', 24, 22, 37, 36, 19, 24),
                           ('office', 30.5, 31, 38, 30.5, 28, 24), ('street', 38, 6, 80, 30, 26, 30), ('aerial', 75, 60, 85, 30, 20, 30)],
-    'leaf/academy': [('classroom', 15.5, 12.5, 15.5, 15.5, 9, 2)],
+    'leaf/academy': [('classroom', 12, 11, 15, 12, 8, 5), ('exam', 36, 5, 15, 36, 3, 5), ('library', 12, 17, 15, 12, 14, 5),
+                     ('hall', 21, 4.5, 22, 24, 3, 12), ('crest', 24, 15, 46, 24, 16, 25), ('training', 36, 17, 15, 36, 14, 5)],
+    'leaf/academy_yard': [('swing', 20, 6, 16, 10, 5, 8)],
+    'leaf/ramen_shop': [('street', 12, 4, 16, 6, 4, 8), ('counter', 5, 4, 12, 5, 3, 5)],
+    'leaf/hospital': [('lobby', 22, 5, 19, 22, 3, 13), ('roof', 8, 26, 18, 30, 21, 8), ('ward', 10, 9, 14, 20, 8, 20)],
 }
 
 

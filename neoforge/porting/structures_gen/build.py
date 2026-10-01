@@ -62,6 +62,8 @@ class Mix:
 
 class Build:
     def __init__(self, w, h, d):
+        self.nbt = {}          # block entity data by position (banner patterns, ...)
+        self.entities = []     # (x, y, z, nbt) with x, y, z as doubles inside the template
         self.w, self.h, self.d = w, h, d
         self.blocks = {}
 
@@ -240,6 +242,17 @@ class Build:
                     else:
                         self.set(x0, y0 + n - 1 - r, z0 + c2, state)
 
+    def banner(self, x, y, z, facing, color, patterns=()):
+        """A wall banner with patterns: [(pattern, colour), ...] in vanilla names, e.g. ('stripe_top', 'red')."""
+        self.set(x, y, z, st(color + '_wall_banner', facing=facing))
+        self.nbt[(x, y, z)] = {'id': 'minecraft:banner',
+                               'patterns': [{'pattern': 'minecraft:' + p, 'color': c} for p, c in patterns]}
+
+    def cushion(self, x, y, z, color='brown'):
+        """A vanilla cushion (an entity) resting on the block below (x, y, z)."""
+        self.entities.append((x + 0.5, float(y), z + 0.5, {
+            'id': 'minecraft:cushion', 'color': color, 'block_pos': nbt.IntArray([x, y, z])}))
+
     def lantern(self, x, y, z, hanging=False, kind='lantern'):
         self.set(x, y, z, st(kind, hanging=hanging, waterlogged=False))
 
@@ -261,10 +274,16 @@ class Build:
                 if rest:
                     entry['properties'] = dict(p.split('=') for p in rest[:-1].split(','))
                 palette.append(entry)
-            blocks.append({'pos': [x, y, z], 'state': index[s]})
+            entry = {'pos': [x, y, z], 'state': index[s]}
+            if (x, y, z) in self.nbt:
+                entry['nbt'] = self.nbt[(x, y, z)]
+            blocks.append(entry)
         os.makedirs(os.path.dirname(path), exist_ok=True)
         nbt.write(path, {'DataVersion': DATA_VERSION, 'size': [self.w, self.h, self.d], 'palette': palette,
-                         'blocks': blocks, 'entities': []})
+                         'blocks': blocks, 'entities': [
+                             {'pos': [float(x), float(y), float(z)],
+                              'blockPos': [int(math.floor(x)), int(math.floor(y)), int(math.floor(z))], 'nbt': tag}
+                             for (x, y, z, tag) in self.entities]})
         return len(blocks)
 
 
