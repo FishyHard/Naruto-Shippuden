@@ -46,6 +46,9 @@ public final class DevTest {
 	 * Story structures in a flat world (-PquickPlay=structtest): run/structure_preview.txt, written by porting/structures_gen/gen.py,
 	 * holds "place <template> x y z [rotation]", "cmd <command>", "wait <ticks>" and "shot <name> x y z yaw pitch" lines.
 	 */
+	/** Set by a structure preview's "stay" line: the game stays open at the end. */
+	private static boolean STAY;
+
 	private static void structureSteps(Minecraft mc) {
 		java.util.List<String> lines;
 		try {
@@ -72,8 +75,10 @@ public final class DevTest {
 				case "place" -> {
 					// stand over the spot first, so its chunks are loaded
 					STEPS.add(() -> {
-						command(mc, "tp @s " + a[2] + " " + (Integer.parseInt(a[3]) + 40) + " " + a[4]);
-						nextDelay = 40;
+						// a big piece names its middle (a[6], a[7]): stand there, and give its chunks longer to load
+						boolean big = a.length > 7;
+						command(mc, "tp @s " + (big ? a[6] : a[2]) + " " + (Integer.parseInt(a[3]) + 40) + " " + (big ? a[7] : a[4]));
+						nextDelay = big ? 120 : 40;
 					});
 					STEPS.add(() -> {
 						command(mc, "place template naruto_shippuden:" + a[1] + " " + a[2] + " " + a[3] + " " + a[4] + (a.length > 5 ? " " + a[5] : ""));
@@ -81,6 +86,16 @@ public final class DevTest {
 					});
 				}
 				case "cmd" -> STEPS.add(() -> command(mc, line.trim().substring(4)));
+				case "stay" -> STEPS.add(() -> {
+					// leave the game open to fly round in: creative, the HUD and chat back, standing at a[1..3]
+					STAY = true;
+					if (mc.gui.hud.isHidden())
+						mc.gui.hud.toggle();
+					mc.options.chatVisibility().set(net.minecraft.world.entity.player.ChatVisiblity.FULL);
+					command(mc, "gamemode creative");
+					command(mc, "tp @s " + a[1] + " " + a[2] + " " + a[3] + " " + a[4] + " " + a[5]);
+					NarutoShippudenMod.LOGGER.info("DEVTEST staying open");
+				});
 				case "wait" -> STEPS.add(() -> nextDelay = Integer.parseInt(a[1]));
 				case "shot" -> {
 					STEPS.add(() -> {
@@ -603,7 +618,10 @@ public final class DevTest {
 		}
 		if (System.getProperty("naruto.devtest.only", "").equals("structures")) {
 			structureSteps(mc);
-			STEPS.add(mc::stop);
+			STEPS.add(() -> {
+				if (!STAY)
+					mc.stop();
+			});
 			return;
 		}
 		if (System.getProperty("naruto.devtest.only", "").equals("headband")) {
@@ -755,7 +773,8 @@ public final class DevTest {
 		economySteps(mc);
 		STEPS.add(() -> {
 			NarutoShippudenMod.LOGGER.info("DEVTEST screens done");
-			mc.stop();
+			if (!STAY)
+				mc.stop();
 		});
 	}
 

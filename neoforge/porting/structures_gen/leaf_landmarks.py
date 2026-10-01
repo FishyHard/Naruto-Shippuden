@@ -648,6 +648,37 @@ def gate():
     return b
 
 
+def village_wall(pipes=False):
+    """A 16-long piece of the village wall, the gate's height and look: salmon plaster under green tiles; inside (north)
+    and outside (south) faces alike. `pipes`: the grey pipes that run along the wall east of the gate."""
+    b = Build(16, 40, 6)
+    z1, z2 = 1, 4
+    top = G + 33                    # as the gate's wall
+    for x in range(16):
+        for y in range(0, top + 1):
+            for z in range(z1, z2 + 1):
+                b.set(x, y, z, plaster(x if z == z2 else -x, y, 0 if z == z2 else 5))
+        b.fill(x, 0, z1, x, G - 1, z2, 'stone_bricks')
+        b.set(x, top + 1, z1 - 1, stairs('mossy_stone_brick_stairs', 'south'))
+        b.set(x, top + 1, z2 + 1, stairs('mossy_stone_brick_stairs', 'north'))
+        b.fill(x, top + 1, z1, x, top + 1, z2, 'mossy_stone_bricks')
+        b.set(x, top + 2, z1, stairs('mossy_stone_brick_stairs', 'south'))
+        b.set(x, top + 2, z2, stairs('mossy_stone_brick_stairs', 'north'))
+        b.set(x, top + 2, z1 + 1, slab('mossy_stone_brick_slab', 'double'))
+        b.set(x, top + 2, z1 + 2, slab('mossy_stone_brick_slab', 'double'))
+        b.set(x, top + 3, z1 + 1, slab('mossy_stone_brick_slab'))
+        b.set(x, top + 3, z1 + 2, slab('mossy_stone_brick_slab'))
+        b.set(x, top, z1 - 1, stairs('mossy_stone_brick_stairs', 'south', top=True))
+        b.set(x, top, z2 + 1, stairs('mossy_stone_brick_stairs', 'north', top=True))
+        if pipes:
+            for dy in (0, 1):
+                b.set(x, top - 2 + dy, z2 + 1, 'light_gray_concrete' if x % 9 else 'polished_andesite')
+    if pipes:
+        for y in range(G, top - 2):
+            b.set(7, y, z2 + 1, 'light_gray_concrete' if y % 7 else 'polished_andesite')
+    return b
+
+
 # ---------------------------------------------------------------- the Hokage Rock
 def _cell(x, z, size, salt):
     return _hash(x // size, 0, z // size, salt)

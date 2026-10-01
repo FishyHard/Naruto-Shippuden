@@ -1,0 +1,533 @@
+{
+ "pieces": [
+  {
+   "piece": "leaf/mountain_west",
+   "x": -70,
+   "z": -70,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/mountain_north",
+   "x": 129,
+   "z": -70,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/mountain_east",
+   "x": 273,
+   "z": -70,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/river",
+   "x": -48,
+   "z": 112,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/wall_arc_0",
+   "x": 366,
+   "z": 168,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/wall_arc_1",
+   "x": 310,
+   "z": 281,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/wall_arc_2",
+   "x": 225,
+   "z": 356,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/wall_arc_3",
+   "x": 83,
+   "z": 356,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/wall_arc_4",
+   "x": 24,
+   "z": 281,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/wall_arc_5",
+   "x": 11,
+   "z": 168,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/gate",
+   "x": 169,
+   "z": 388,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/bridge",
+   "x": 196,
+   "z": 342,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/hokage_rock",
+   "x": 113,
+   "z": 8,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/hokage_tower",
+   "x": 170,
+   "z": 92,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/academy",
+   "x": 75,
+   "z": 105,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/academy_yard",
+   "x": 75,
+   "z": 140,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/training_ground",
+   "x": 44,
+   "z": 140,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/exam_stadium",
+   "x": 43,
+   "z": 181,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/hospital",
+   "x": 270,
+   "z": 110,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/water_tower",
+   "x": 140,
+   "z": 120,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/water_tower",
+   "x": 246,
+   "z": 120,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/ramen_shop",
+   "x": 183,
+   "z": 278,
+   "rotation": "counterclockwise_90"
+  },
+  {
+   "piece": "leaf/shop_orange",
+   "x": 179,
+   "z": 188,
+   "rotation": "counterclockwise_90"
+  },
+  {
+   "piece": "leaf/house_orange_hip",
+   "x": 179,
+   "z": 204,
+   "rotation": "counterclockwise_90"
+  },
+  {
+   "piece": "leaf/house_green_dome",
+   "x": 179,
+   "z": 220,
+   "rotation": "counterclockwise_90"
+  },
+  {
+   "piece": "leaf/house_blue_tiered",
+   "x": 179,
+   "z": 253,
+   "rotation": "counterclockwise_90"
+  },
+  {
+   "piece": "leaf/house_brown_tiered",
+   "x": 177,
+   "z": 311,
+   "rotation": "counterclockwise_90"
+  },
+  {
+   "piece": "leaf/house_red_gable",
+   "x": 181,
+   "z": 329,
+   "rotation": "counterclockwise_90"
+  },
+  {
+   "piece": "leaf/house_green_dome",
+   "x": 221,
+   "z": 172,
+   "rotation": "clockwise_90"
+  },
+  {
+   "piece": "leaf/shop_blue",
+   "x": 221,
+   "z": 188,
+   "rotation": "clockwise_90"
+  },
+  {
+   "piece": "leaf/house_flat_tall",
+   "x": 221,
+   "z": 204,
+   "rotation": "clockwise_90"
+  },
+  {
+   "piece": "leaf/house_green_dome",
+   "x": 221,
+   "z": 236,
+   "rotation": "clockwise_90"
+  },
+  {
+   "piece": "leaf/shop_blue",
+   "x": 221,
+   "z": 252,
+   "rotation": "clockwise_90"
+  },
+  {
+   "piece": "leaf/house_flat_tall",
+   "x": 221,
+   "z": 268,
+   "rotation": "clockwise_90"
+  },
+  {
+   "piece": "leaf/house_orange_hip",
+   "x": 221,
+   "z": 297,
+   "rotation": "clockwise_90"
+  },
+  {
+   "piece": "leaf/house_green_dome",
+   "x": 221,
+   "z": 313,
+   "rotation": "clockwise_90"
+  },
+  {
+   "piece": "leaf/house_blue_tiered",
+   "x": 174,
+   "z": 186,
+   "rotation": "180"
+  },
+  {
+   "piece": "leaf/house_flat_wide",
+   "x": 242,
+   "z": 186,
+   "rotation": "180"
+  },
+  {
+   "piece": "leaf/house_red_gable",
+   "x": 158,
+   "z": 214,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/house_brown_tiered",
+   "x": 224,
+   "z": 210,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/house_red_gable",
+   "x": 240,
+   "z": 214,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/house_orange_hip",
+   "x": 267,
+   "z": 212,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/house_green_dome",
+   "x": 283,
+   "z": 212,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/shop_blue",
+   "x": 299,
+   "z": 212,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/house_flat_tall",
+   "x": 315,
+   "z": 212,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/house_flat_wide",
+   "x": 176,
+   "z": 252,
+   "rotation": "180"
+  },
+  {
+   "piece": "leaf/house_brown_tiered",
+   "x": 237,
+   "z": 254,
+   "rotation": "180"
+  },
+  {
+   "piece": "leaf/house_red_gable",
+   "x": 255,
+   "z": 250,
+   "rotation": "180"
+  },
+  {
+   "piece": "leaf/house_orange_hip",
+   "x": 280,
+   "z": 252,
+   "rotation": "180"
+  },
+  {
+   "piece": "leaf/house_green_dome",
+   "x": 296,
+   "z": 252,
+   "rotation": "180"
+  },
+  {
+   "piece": "leaf/house_red_gable",
+   "x": 323,
+   "z": 250,
+   "rotation": "180"
+  },
+  {
+   "piece": "leaf/house_orange_hip",
+   "x": 158,
+   "z": 272,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/house_orange_hip",
+   "x": 225,
+   "z": 272,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/house_green_dome",
+   "x": 241,
+   "z": 272,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/house_red_gable",
+   "x": 266,
+   "z": 274,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/shop_orange",
+   "x": 174,
+   "z": 312,
+   "rotation": "180"
+  },
+  {
+   "piece": "leaf/house_blue_tiered",
+   "x": 240,
+   "z": 312,
+   "rotation": "180"
+  },
+  {
+   "piece": "leaf/shop_orange",
+   "x": 258,
+   "z": 312,
+   "rotation": "180"
+  },
+  {
+   "piece": "leaf/shop_blue",
+   "x": 280,
+   "z": 312,
+   "rotation": "180"
+  },
+  {
+   "piece": "leaf/house_flat_tall",
+   "x": 294,
+   "z": 312,
+   "rotation": "180"
+  },
+  {
+   "piece": "leaf/house_brown_tiered",
+   "x": 310,
+   "z": 314,
+   "rotation": "180"
+  },
+  {
+   "piece": "leaf/house_brown_tiered",
+   "x": 130,
+   "z": 314,
+   "rotation": "counterclockwise_90"
+  },
+  {
+   "piece": "leaf/house_blue_tiered",
+   "x": 172,
+   "z": 189,
+   "rotation": "clockwise_90"
+  },
+  {
+   "piece": "leaf/house_red_gable",
+   "x": 244,
+   "z": 205,
+   "rotation": "counterclockwise_90"
+  },
+  {
+   "piece": "leaf/house_flat_tall",
+   "x": 242,
+   "z": 264,
+   "rotation": "counterclockwise_90"
+  },
+  {
+   "piece": "leaf/house_flat_wide",
+   "x": 282,
+   "z": 147,
+   "rotation": "clockwise_90"
+  },
+  {
+   "piece": "leaf/house_blue_tiered",
+   "x": 282,
+   "z": 167,
+   "rotation": "clockwise_90"
+  },
+  {
+   "piece": "leaf/shop_orange",
+   "x": 282,
+   "z": 185,
+   "rotation": "clockwise_90"
+  },
+  {
+   "piece": "leaf/shop_orange",
+   "x": 282,
+   "z": 254,
+   "rotation": "clockwise_90"
+  },
+  {
+   "piece": "leaf/house_flat_wide",
+   "x": 304,
+   "z": 162,
+   "rotation": "180"
+  },
+  {
+   "piece": "leaf/house_red_gable",
+   "x": 284,
+   "z": 284,
+   "rotation": "counterclockwise_90"
+  },
+  {
+   "piece": "leaf/house_brown_tiered",
+   "x": 323,
+   "z": 253,
+   "rotation": "clockwise_90"
+  },
+  {
+   "piece": "leaf/house_red_gable",
+   "x": 319,
+   "z": 269,
+   "rotation": "clockwise_90"
+  },
+  {
+   "piece": "leaf/shop_orange",
+   "x": 113,
+   "z": 350,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/house_red_gable",
+   "x": 254,
+   "z": 352,
+   "rotation": "none"
+  }
+ ],
+ "roads": [
+  [
+   197,
+   169,
+   203,
+   394,
+   "path"
+  ],
+  [
+   140,
+   156,
+   260,
+   168,
+   "path"
+  ],
+  [
+   155,
+   230,
+   330,
+   234,
+   "path"
+  ],
+  [
+   155,
+   290,
+   312,
+   294,
+   "path"
+  ],
+  [
+   150,
+   141,
+   154,
+   328,
+   "path"
+  ],
+  [
+   78,
+   170,
+   149,
+   173,
+   "path"
+  ],
+  [
+   260,
+   141,
+   264,
+   318,
+   "path"
+  ],
+  [
+   232,
+   141,
+   259,
+   144,
+   "path"
+  ],
+  [
+   265,
+   141,
+   320,
+   144,
+   "path"
+  ],
+  [
+   300,
+   235,
+   303,
+   289,
+   "path"
+  ],
+  [
+   110,
+   368,
+   290,
+   371,
+   "path"
+  ]
+ ]
+}

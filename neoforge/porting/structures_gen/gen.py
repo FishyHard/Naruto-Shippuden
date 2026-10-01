@@ -7,7 +7,8 @@ Templates go to data/naruto_shippuden/structure/<village>/<piece>.nbt in both re
     ./gradlew runClient -PdevTest -PquickPlay=structtest -PdevOnly=structures
 """
 import math, os, sys
-import leaf, leaf_landmarks, leaf_houses, leaf_buildings
+import json
+import leaf, leaf_landmarks, leaf_houses, leaf_buildings, leaf_layout, leaf_ring
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 NEO = os.path.normpath(os.path.join(HERE, '..', '..'))
@@ -20,6 +21,8 @@ LEAF.update(gate=leaf_landmarks.gate, hokage_tower=leaf_landmarks.hokage_tower, 
             water_tower=leaf_landmarks.water_tower)
 LEAF.update(leaf_houses.VARIANTS)
 LEAF.update(leaf_buildings.PIECES)
+LEAF.update(leaf_ring.PIECES)
+LEAF.update(wall=leaf_landmarks.village_wall, wall_pipes=lambda: leaf_landmarks.village_wall(pipes=True))
 VILLAGES = {'leaf': LEAF}
 GROUND = -60          # the flat world's surface (the first air block)
 EXTRA_SHOTS = {
@@ -74,5 +77,61 @@ def main(only):
         f.write('\n'.join(plan) + '\n')
 
 
+VILLAGE_SHOTS = [  # name, camera, target (village coordinates, y from the ground)
+    ('skyline', (200, 70, 450), (200, 25, 160)),
+    ('gate_in', (200, 4, 384), (200, 18, 190)),
+    ('plaza', (200, 4, 178), (200, 40, 60)),
+    ('stadium', (150, 40, 330), (95, 10, 245)),
+    ('stadium_in', (95, 30, 280), (95, 28, 196)),
+    ('ichiraku', (202, 3, 270), (180, 3, 270)),
+    ('river', (240, 8, 372), (200, 2, 350)),
+    ('rock_join', (60, 40, 150), (113, 40, 40)),
+    ('gate_join', (250, 12, 425), (169, 22, 397)),
+    ('aerial', (450, 160, 470), (200, 0, 215)),
+    ('top', (200, 250, 226), (200, 0, 215)),
+]
+STAY = (200, 20, 430, 180, 10)          # where the game is left open to fly round in: x, y above ground, z, yaw, pitch
+
+
+def village():
+    """Builds every Leaf piece, writes the layout to data/naruto_shippuden/village/leaf.json, and a preview plan that
+    places the whole village in the flat world and frames it."""
+    sizes, origins = {}, dict(leaf_ring.ORIGINS)
+    for name, make in LEAF.items():
+        b = make()
+        if hasattr(b, 'origin'):
+            origins[name] = b.origin
+        for tree in TREES:
+            b.save(os.path.join(tree, 'data/naruto_shippuden/structure/leaf/%s.nbt' % name))
+        sizes[name] = (b.w, b.h, b.d)
+    lay = leaf_layout.layout(sizes, origins)
+    for tree in TREES:
+        path = os.path.join(tree, 'data/naruto_shippuden/village/leaf.json')
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        with open(path, 'w') as f:
+            json.dump(lay, f, indent=1)
+    y0 = GROUND - leaf.G
+    plan = ['# written by porting/structures_gen/gen.py --village']
+    for (x1, z1, x2, z2, kind) in lay['roads']:
+        for zz in range(z1, z2 + 1, 64):
+            plan.append('cmd fill %d %d %d %d %d %d dirt_path' % (x1, GROUND - 1, zz, x2, GROUND - 1, min(z2, zz + 63)))
+    for p in lay['pieces']:
+        w, _, d = sizes[p['piece'].split('/')[1]]
+        line = 'place %s %d %d %d %s' % (p['piece'], p['x'], y0, p['z'], p['rotation'])
+        if max(w, d) > 100:
+            line += ' %d %d' % (p['x'] + w // 2, p['z'] + d // 2)     # a big piece: load round its middle
+        plan.append(line)
+    for (name, c, t) in VILLAGE_SHOTS:
+        plan.append('cmd time set 6000')
+        plan.append('shot village_%s %s' % (name, look(c[0], GROUND + c[1], c[2], t[0], GROUND + t[1], t[2])))
+    plan.append('stay %d %d %d %d %d' % (STAY[0], GROUND + STAY[1], STAY[2], STAY[3], STAY[4]))
+    with open(os.path.join(NEO, 'run/structure_preview.txt'), 'w') as f:
+        f.write('\n'.join(plan) + '\n')
+    print(len(lay['pieces']), 'pieces')
+
+
 if __name__ == '__main__':
-    main(set(sys.argv[1:]))
+    if sys.argv[1:] == ['--village']:
+        village()
+    else:
+        main(set(sys.argv[1:]))
