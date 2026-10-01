@@ -331,6 +331,19 @@ Nature Releases, Kekkei Genkai, DNA, Clans, Dojutsu, Shinobi Weapons, Headbands,
   `draw` are reused by other layers), `IronSandRenderer`, `KamuiClient`, `ShadowCloneRenderer`, `WeaponRenderer`,
   `GolemRenderer`.
 
+### Chikyū (the story's dimension), `world/chikyu/`
+- `dimension/chikyu.json` (overworld dimension type, biome `chikyu_forest` = vanilla forest without lava, springs, caves)
+  on `ChikyuChunkGenerator` (`naruto_shippuden:chikyu`): one fixed map, whatever the seed. Flat grass at y 64 round
+  the world centre (circle r 250, the mountains' box, the river's valley), wooded hills past it. No monsters spawn
+  inside the village; no vanilla features or chunk animals there.
+- `LeafVillage` reads `village/leaf.json` and the `structure/leaf/*.nbt` templates once (about 0.8 s, 1.5M blocks in
+  868 chunks), sorts every block into the world chunk it lands in, and `applyBiomeDecoration` sets each chunk's share.
+  Streets first, then the pieces in the file's order (as the flat preview). Village (0, 0) = world (-200, -215).
+  After `gen.py --village`, a new world (or chunks not yet generated) gets the new village.
+- `/naruto chikyu [players]` (op) goes to the street before the Academy; `/naruto chikyu leave` back to the overworld.
+- Still to do: story start sending new players there, the gate to the overworld, no portals/shortcuts, the river
+  beyond the village, the other four villages, procedural mountains.
+
 ### Keys (defaults)
 
 | Key | What it does |

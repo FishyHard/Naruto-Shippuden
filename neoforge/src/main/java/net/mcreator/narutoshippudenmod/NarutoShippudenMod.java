@@ -33,6 +33,7 @@ public class NarutoShippudenMod {
 		net.mcreator.narutoshippudenmod.potion.ModEffects.register();
 		net.mcreator.narutoshippudenmod.particle.ModParticles.register();
 		net.mcreator.narutoshippudenmod.world.structure.KamuiTowerStructures.register();
+		net.mcreator.narutoshippudenmod.world.chikyu.ChikyuChunkGenerator.register();
 		net.mcreator.narutoshippudenmod.core.jutsu.JutsuItems.register();
 		net.mcreator.narutoshippudenmod.itemgroup.ModItemGroups.register();
 		elements = new NarutoShippudenModElements();

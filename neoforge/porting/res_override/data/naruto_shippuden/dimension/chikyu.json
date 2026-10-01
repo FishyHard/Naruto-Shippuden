@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:overworld",
+  "generator": {
+    "type": "naruto_shippuden:chikyu",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "naruto_shippuden:chikyu_forest"
+    }
+  }
+}
