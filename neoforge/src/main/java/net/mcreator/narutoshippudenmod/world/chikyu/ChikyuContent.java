@@ -12,6 +12,11 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
+import net.minecraft.world.level.block.Portal;
+import net.minecraft.world.level.gamerules.GameRules;
+import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -58,8 +63,12 @@ public final class ChikyuContent {
 				h -> RETURN_SCROLL = h.value());
 	}
 
-	/** The torii's light: thin, walk-through, unbreakable, giving off green sparkles. */
-	public static class ToriiPortalBlock extends Block {
+	/**
+	 * The torii's light, a portal as vanilla's nether portal is: stand in it (four seconds in survival, the same game rules
+	 * as the nether portal's delay) while the screen swirls green and the portal hums, and you are taken through; items
+	 * and mobs pass at once. Thin, walk-through, unbreakable.
+	 */
+	public static class ToriiPortalBlock extends Block implements Portal {
 		private static final VoxelShape SHAPE = Block.box(0, 0, 6, 16, 16, 10);
 
 		public ToriiPortalBlock(BlockBehaviour.Properties properties) {
@@ -77,13 +86,35 @@ public final class ChikyuContent {
 		}
 
 		@Override
+		protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effects, boolean precise) {
+			if (entity.canUsePortal(false))
+				entity.setAsInsidePortal(this, pos);
+		}
+
+		@Override
+		public int getPortalTransitionTime(ServerLevel level, Entity entity) {
+			return entity instanceof Player player ? Math.max(0, level.getGameRules().get(player.getAbilities().invulnerable
+					? GameRules.PLAYERS_NETHER_PORTAL_CREATIVE_DELAY : GameRules.PLAYERS_NETHER_PORTAL_DEFAULT_DELAY)) : 0;
+		}
+
+		@Override
+		public TeleportTransition getPortalDestination(ServerLevel level, Entity entity, BlockPos entryPos) {
+			return Chikyu.toriiDestination(level, entity);
+		}
+
+		@Override
+		public Portal.Transition getLocalTransition() {
+			return Portal.Transition.CONFUSION;
+		}
+
+		@Override
 		public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+			if (random.nextInt(100) == 0)
+				level.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.PORTAL_AMBIENT, SoundSource.BLOCKS, 0.5f,
+						random.nextFloat() * 0.4f + 0.8f, false);
 			if (random.nextInt(3) == 0)
 				level.addParticle(ParticleTypes.HAPPY_VILLAGER, pos.getX() + random.nextDouble(), pos.getY() + random.nextDouble(),
 						pos.getZ() + 0.3 + random.nextDouble() * 0.4, 0, 0.02, 0);
-			if (random.nextInt(200) == 0)
-				level.playLocalSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 0.4f,
-						0.6f + random.nextFloat() * 0.3f, false);
 		}
 	}
 
@@ -100,6 +131,7 @@ public final class ChikyuContent {
 				return InteractionResult.FAIL;
 			}
 			player.startUsingItem(hand);
+			level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BOOK_PAGE_TURN, SoundSource.PLAYERS, 1.0f, 1.0f);
 			return InteractionResult.CONSUME;
 		}
 

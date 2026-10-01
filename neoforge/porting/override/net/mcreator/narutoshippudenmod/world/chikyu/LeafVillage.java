@@ -128,14 +128,20 @@ public final class LeafVillage {
 	}
 
 	private static final int MIN_Y = -64;
-	private static volatile Long2ObjectOpenHashMap<ChunkPlan> plans;
+	/** Every chunk not yet built, with its share; a chunk's share is dropped once it is built, so the memory goes as the
+	 * village is explored, and a world whose village is all built never reads the templates again. */
+	private static volatile java.util.concurrent.ConcurrentHashMap<Long, ChunkPlan> plans;
+	/** The world box the village's blocks can fall in (the river's ends, the Rock's back, the torii), with a margin. */
+	private static final int BOX_X1 = -266, BOX_X2 = 296, BOX_Z1 = -226, BOX_Z2 = 246;
 
 	private LeafVillage() {
 	}
 
 	/** Sets the village's blocks and entities that fall in this chunk. */
 	public static void placeChunk(WorldGenLevel level, ChunkPos cp) {
-		ChunkPlan plan = plans(level.getLevel().getServer()).get(cp.pack());
+		if (cp.getMaxBlockX() < BOX_X1 || cp.getMinBlockX() > BOX_X2 || cp.getMaxBlockZ() < BOX_Z1 || cp.getMinBlockZ() > BOX_Z2)
+			return;                                         // the wild land: nothing to read, nothing to place
+		ChunkPlan plan = plans(level.getLevel().getServer()).remove(cp.pack());
 		if (plan == null)
 			return;
 		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
@@ -179,13 +185,21 @@ public final class LeafVillage {
 		}
 	}
 
-	private static Long2ObjectOpenHashMap<ChunkPlan> plans(MinecraftServer server) {
-		Long2ObjectOpenHashMap<ChunkPlan> p = plans;
+	private static java.util.concurrent.ConcurrentHashMap<Long, ChunkPlan> plans(MinecraftServer server) {
+		var p = plans;
 		if (p == null) {
 			synchronized (LeafVillage.class) {
 				p = plans;
-				if (p == null)
-					plans = p = load(server);
+				if (p == null) {
+					Long2ObjectOpenHashMap<ChunkPlan> loaded = load(server);
+					p = new java.util.concurrent.ConcurrentHashMap<>(loaded.size() * 2);
+					for (var e : loaded.long2ObjectEntrySet()) {
+						e.getValue().packed.trim();
+						((ArrayList<BlockState>) e.getValue().states).trimToSize();
+						p.put(e.getLongKey(), e.getValue());
+					}
+					plans = p;
+				}
 			}
 		}
 		return p;
@@ -197,6 +211,8 @@ public final class LeafVillage {
 	}
 
 	private static ChunkPlan at(Long2ObjectOpenHashMap<ChunkPlan> map, int x, int z) {
+		if (x < BOX_X1 || x > BOX_X2 || z < BOX_Z1 || z > BOX_Z2)
+			LOGGER.warn("Leaf village: a block at {} {} is outside the village's box; widen BOX_*", x, z);
 		return map.computeIfAbsent(ChunkPos.pack(x >> 4, z >> 4), k -> new ChunkPlan());
 	}
 

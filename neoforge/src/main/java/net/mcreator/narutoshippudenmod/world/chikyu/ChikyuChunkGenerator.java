@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.RandomState;
@@ -73,9 +74,17 @@ public class ChikyuChunkGenerator extends ChunkGenerator {
 
 	/** How far (x, z) lies outside the village's flat ground, in blocks; 0 inside it. */
 	static double outside(double x, double z) {
+		return outside(x, z, LeafVillage.riverDistance(x, z));
+	}
+
+	private static double outside(double x, double z, double river) {
 		double circle = Math.max(0, Math.sqrt(x * x + z * z) - LeafVillage.FLAT_RADIUS);
-		double river = Math.max(0, LeafVillage.riverDistance(x, z) - 14);
-		return Math.min(circle, river);
+		return Math.min(circle, Math.max(0, river - 14));
+	}
+
+	/** How far (x, z) is from the middle of the round wall's circle: the village proper is within FLAT_RADIUS. */
+	static double fromCentre(double x, double z) {
+		return Math.sqrt(x * x + z * z);
 	}
 
 	// ---------------------------------------------------------------- the mountains round the north
@@ -93,11 +102,11 @@ public class ChikyuChunkGenerator extends ChunkGenerator {
 	}
 
 	/** How high the mountains stand over the flat ground at world (wx, wz), and how deep in them it is (d, for the grass). */
-	private static double[] mountain(int wx, int wz) {
+	private static double[] mountain(int wx, int wz, double river) {
 		int x = wx - LeafVillage.OX, z = wz - LeafVillage.OZ;
 		if (x >= FACES_X1 && x <= FACES_X2 && z >= ROCK_Z0 && z < 120)
 			return null;                                    // the Hokage Rock's own template stands there
-		double bank = LeafVillage.riverDistance(wx + 0.5, wz + 0.5) - LeafVillage.RIVER_W;
+		double bank = river - LeafVillage.RIVER_W;
 		if (bank <= 2)
 			return null;                                    // the river and its banks
 		double px = x + 0.5 - CX, pz = z + 0.5 - CZ;
@@ -132,58 +141,125 @@ public class ChikyuChunkGenerator extends ChunkGenerator {
 		return ROCK[Math.min(7, (int) (hash(x, y, z, 111) * 8))];
 	}
 
-	/** The top solid block of the column at (x, z), with or without mountains. */
-	public static int height(int x, int z) {
-		double[] m = mountain(x, z);
-		return Math.max(hillHeight(x, z), m == null ? SURFACE : SURFACE + (int) m[0]);
+	/** One column of land: its top, whether that is mountain rock, whether its top is grass, and the river in it. */
+	private record Column(int top, boolean rocky, boolean grassTop, boolean water, int bed, double outside) {
 	}
 
-	private static int hillHeight(int x, int z) {
-		double d = outside(x, z);
-		if (d <= 0)
+	private static Column column(int wx, int wz) {
+		double river = LeafVillage.riverDistance(wx + 0.5, wz + 0.5);
+		double out = outside(wx, wz, river);
+		double[] m = mountain(wx, wz, river);
+		int hills = hillHeight(wx, wz, out);
+		int top = Math.max(hills, m == null ? SURFACE : SURFACE + (int) m[0]);
+		boolean rocky = m != null && SURFACE + (int) m[0] > hills;
+		// the river: two deep (three in its middle) over a gravel bed, level with the flat ground
+		boolean water = top == SURFACE && river <= LeafVillage.RIVER_W;
+		int bed = river < LeafVillage.RIVER_W - 1.5 ? SURFACE - 3 : SURFACE - 2;
+		return new Column(top, rocky, !rocky || m[1] > 9, water, bed, out);
+	}
+
+	/** The top solid block of the column at (x, z), with or without mountains. */
+	public static int height(int x, int z) {
+		return column(x, z).top();
+	}
+
+	private static int hillHeight(int x, int z, double out) {
+		if (out <= 0)
 			return SURFACE;
-		double t = Mth.smoothstep((float) Math.min(1.0, d / 90.0));
+		double t = Mth.smoothstep((float) Math.min(1.0, out / 90.0));
 		double hills = 12 + 20 * HILLS.get(x * 0.0045, z * 0.0045) + 6 * DETAIL.get(x * 0.02, z * 0.02);
 		return SURFACE + (int) Math.round(t * Math.max(1.0, hills));
 	}
 
+	private static final BlockState BEDROCK = Blocks.BEDROCK.defaultBlockState(), GRASS = Blocks.GRASS_BLOCK.defaultBlockState(),
+			DIRT = Blocks.DIRT.defaultBlockState(), STONE = Blocks.STONE.defaultBlockState(), DEEPSLATE = Blocks.DEEPSLATE.defaultBlockState(),
+			GRAVEL = Blocks.GRAVEL.defaultBlockState(), WATER = Blocks.WATER.defaultBlockState(), LAVA = Blocks.LAVA.defaultBlockState(),
+			AIR = Blocks.AIR.defaultBlockState();
+
 	private static BlockState stateAt(int y, int top) {
 		if (y == MIN_Y)
-			return Blocks.BEDROCK.defaultBlockState();
+			return BEDROCK;
 		if (y == top)
-			return Blocks.GRASS_BLOCK.defaultBlockState();
+			return GRASS;
 		if (y >= top - 3)
-			return Blocks.DIRT.defaultBlockState();
-		return y < 0 ? Blocks.DEEPSLATE.defaultBlockState() : Blocks.STONE.defaultBlockState();
+			return DIRT;
+		return y < 0 ? DEEPSLATE : STONE;
+	}
+
+	private static BlockState stateAt(Column c, int wx, int y, int wz) {
+		if (c.rocky() && y >= SURFACE)
+			return y == c.top() && c.grassTop() ? GRASS : rock(wx, y, wz);
+		if (c.water() && y >= c.bed())
+			return y == c.bed() ? GRAVEL : WATER;
+		return stateAt(y, c.top());
+	}
+
+	// ---------------------------------------------------------------- caves, in the wild land only
+	// Noodle tunnels where two noises are both near zero, and wider caverns deep down; sampled on a 4-block lattice and
+	// blended between, as vanilla does, so a chunk costs a few thousand noise samples, not a hundred thousand.
+	private static final SimplexNoise CAVE_A = new SimplexNoise(new LegacyRandomSource(0x43415645_41L));
+	private static final SimplexNoise CAVE_B = new SimplexNoise(new LegacyRandomSource(0x43415645_42L));
+	private static final SimplexNoise CAVERN = new SimplexNoise(new LegacyRandomSource(0x43415645_43L));
+	private static final int CELL = 4, LAVA_LEVEL = -55;
+
+	/** Cave density over the chunk's lattice: below zero is open. */
+	private static float[][][] caveLattice(ChunkPos cp) {
+		int ny = DEPTH / CELL + 1;
+		float[][][] d = new float[5][5][ny];
+		for (int i = 0; i < 5; i++)
+			for (int k = 0; k < 5; k++) {
+				double x = cp.getMinBlockX() + i * CELL, z = cp.getMinBlockZ() + k * CELL;
+				for (int j = 0; j < ny; j++) {
+					double y = MIN_Y + j * CELL;
+					double a = CAVE_A.get(x * 0.018, y * 0.03, z * 0.018), b = CAVE_B.get(x * 0.018, y * 0.03, z * 0.018);
+					double noodle = a * a + b * b - 0.012;
+					double cavern = y < 20 ? 0.55 - CAVERN.get(x * 0.011, y * 0.022, z * 0.011) : 1;
+					d[i][k][j] = (float) Math.min(noodle * 8, cavern);
+				}
+			}
+		return d;
+	}
+
+	private static float caveAt(float[][][] d, int x, int y, int z) {
+		int i = x / CELL, k = z / CELL, j = (y - MIN_Y) / CELL;
+		float fx = (x % CELL) / (float) CELL, fz = (z % CELL) / (float) CELL, fy = ((y - MIN_Y) % CELL) / (float) CELL;
+		return Mth.lerp3(fx, fy, fz, d[i][k][j], d[i + 1][k][j], d[i][k][j + 1], d[i + 1][k][j + 1],
+				d[i][k + 1][j], d[i + 1][k + 1][j], d[i][k + 1][j + 1], d[i + 1][k + 1][j + 1]);
 	}
 
 	@Override
 	public CompletableFuture<ChunkAccess> buildTerrain(ChunkAccess chunk, Blender blender, RandomState randomState, StructureManager structureManager,
 			BiomeManager biomeManager, @Nullable WorldGenRegion carverBiomeRegion, Set<Holder<Biome>> possibleBiomes) {
-		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 		Heightmap oceanFloor = chunk.getOrCreateHeightmapUnprimed(Heightmap.Types.OCEAN_FLOOR_WG);
 		Heightmap worldSurface = chunk.getOrCreateHeightmapUnprimed(Heightmap.Types.WORLD_SURFACE_WG);
 		ChunkPos cp = chunk.getPos();
-		for (int x = 0; x < 16; x++)
-			for (int z = 0; z < 16; z++) {
-				int wx = cp.getMinBlockX() + x, wz = cp.getMinBlockZ() + z;
-				double[] m = mountain(wx, wz);
-				int hills = hillHeight(wx, wz);
-				int top = Math.max(hills, m == null ? SURFACE : SURFACE + (int) m[0]);
-				boolean rocky = m != null && SURFACE + (int) m[0] > hills;
-				// the river: two deep (three in its middle) over a gravel bed, level with the flat ground
-				double river = LeafVillage.riverDistance(wx + 0.5, wz + 0.5);
-				boolean water = top == SURFACE && river <= LeafVillage.RIVER_W;
-				int bed = river < LeafVillage.RIVER_W - 1.5 ? SURFACE - 3 : SURFACE - 2;
-				for (int y = MIN_Y; y <= top; y++) {
-					BlockState state = rocky && y >= SURFACE ? (y == top && m[1] > 9 ? Blocks.GRASS_BLOCK.defaultBlockState() : rock(wx, y, wz))
-							: !water || y < bed ? stateAt(y, top)
-							: y == bed ? Blocks.GRAVEL.defaultBlockState() : Blocks.WATER.defaultBlockState();
-					chunk.setBlockState(pos.set(x, y, z), state);
-					oceanFloor.update(x, y, z, state);
-					worldSurface.update(x, y, z, state);
+		// caves only well away from the village and its river valley, so they never open under a street or a house
+		boolean caves = fromCentre(cp.getMiddleBlockX(), cp.getMiddleBlockZ()) > LeafVillage.FLAT_RADIUS + 64;
+		float[][][] lattice = caves ? caveLattice(cp) : null;
+		LevelChunkSection[] sections = chunk.getSections();
+		for (LevelChunkSection section : sections)
+			section.acquire();
+		try {
+			for (int x = 0; x < 16; x++)
+				for (int z = 0; z < 16; z++) {
+					int wx = cp.getMinBlockX() + x, wz = cp.getMinBlockZ() + z;
+					Column c = column(wx, wz);
+					int caveTop = c.water() ? c.bed() - 8 : c.top() - 8;
+					for (int y = MIN_Y; y <= c.top(); y++) {
+						BlockState state = stateAt(c, wx, y, wz);
+						if (lattice != null && y > MIN_Y + 4 && y < caveTop && caveAt(lattice, x, y, z) < 0)
+							state = y <= LAVA_LEVEL ? LAVA : AIR;
+						if (state != AIR)
+							sections[chunk.getSectionIndex(y)].setBlockState(x, y & 15, z, state, false);
+					}
+					BlockState top = stateAt(c, wx, c.top(), wz);
+					worldSurface.update(x, c.top(), z, top);
+					oceanFloor.update(x, c.water() ? c.bed() : c.top(), z, c.water() ? GRAVEL : top);
 				}
-			}
+		} finally {
+			for (LevelChunkSection section : sections)
+				section.release();
+		}
 		return CompletableFuture.completedFuture(chunk);
 	}
 
@@ -194,18 +270,18 @@ public class ChikyuChunkGenerator extends ChunkGenerator {
 
 	@Override
 	public NoiseColumn getBaseColumn(int x, int z, LevelHeightAccessor heightAccessor, RandomState randomState) {
-		int top = height(x, z);
+		Column c = column(x, z);
 		BlockState[] states = new BlockState[DEPTH];
 		for (int i = 0; i < DEPTH; i++)
-			states[i] = MIN_Y + i <= top ? stateAt(MIN_Y + i, top) : Blocks.AIR.defaultBlockState();
+			states[i] = MIN_Y + i <= c.top() ? stateAt(c, x, MIN_Y + i, z) : AIR;
 		return new NoiseColumn(MIN_Y, states);
 	}
 
 	// ---------------------------------------------------------------- the village, the woods, the animals
 
-	/** True when the chunk touches the village's flat ground (or the edge of it), where the woods must not grow. */
+	/** True when the chunk touches the village or the flat ring round its wall, where the woods must not grow. */
 	private static boolean villageChunk(ChunkPos cp) {
-		return outside(cp.getMiddleBlockX(), cp.getMiddleBlockZ()) < 24;
+		return fromCentre(cp.getMiddleBlockX(), cp.getMiddleBlockZ()) < LeafVillage.FLAT_RADIUS + 24;
 	}
 
 	@Override
@@ -238,7 +314,7 @@ public class ChikyuChunkGenerator extends ChunkGenerator {
 	/** No monsters spawn on their own inside the village. */
 	@Override
 	public WeightedList<MobSpawnSettings.SpawnerData> getMobsAt(Level level, StructureManager structureManager, MobCategory mobCategory, BlockPos pos) {
-		if (mobCategory == MobCategory.MONSTER && outside(pos.getX(), pos.getZ()) < 8)
+		if (mobCategory == MobCategory.MONSTER && fromCentre(pos.getX(), pos.getZ()) < LeafVillage.FLAT_RADIUS - 50)
 			return WeightedList.of();
 		return super.getMobsAt(level, structureManager, mobCategory, pos);
 	}

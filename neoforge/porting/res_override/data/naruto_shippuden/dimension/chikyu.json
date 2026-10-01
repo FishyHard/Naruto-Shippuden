@@ -3,8 +3,10 @@
   "generator": {
     "type": "naruto_shippuden:chikyu",
     "biome_source": {
-      "type": "minecraft:fixed",
-      "biome": "naruto_shippuden:chikyu_forest"
+      "type": "naruto_shippuden:chikyu",
+      "woods": "naruto_shippuden:chikyu_forest",
+      "flat": "naruto_shippuden:chikyu_plains",
+      "river": "naruto_shippuden:chikyu_river"
     }
   }
 }

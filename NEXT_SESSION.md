@@ -332,33 +332,38 @@ Nature Releases, Kekkei Genkai, DNA, Clans, Dojutsu, Shinobi Weapons, Headbands,
   `GolemRenderer`.
 
 ### Chikyū (the story's dimension), `world/chikyu/`
-- `dimension/chikyu.json` (overworld dimension type, biome `chikyu_forest` = vanilla forest without lava, springs, caves)
-  on `ChikyuChunkGenerator` (`naruto_shippuden:chikyu`): one fixed map, whatever the seed. Flat grass at y 64 round
-  the world centre (circle r 250) and along the river's valley; wooded hills past it.
-- The mountains are the generator's, not templates: `mountain()` is leaf_ring.mountain()'s height formula block for
-  block (build.py's `_hash` ported bit for bit), without the template's edge fade, so the range runs on north, wraps a
-  little round the outside of the wall, slopes down into the river's valley and sinks into the hills past r 420..650.
-  `LeafVillage` skips the `mountain_*` pieces (they stay in leaf.json for the flat preview).
-- The river runs on from the village both ways (`LeafVillage.RIVER`, a lake at each end), water carved by the generator.
-- No monsters spawn inside the village; no vanilla features or chunk animals there (woods do grow on chunks that are
-  all mountain top).
-- `LeafVillage` reads `village/leaf.json` and the `structure/leaf/*.nbt` templates once (about 0.7 s, 1.5M blocks in
-  ~870 chunks), sorts every block into the world chunk it lands in, and `applyBiomeDecoration` sets each chunk's share.
-  Streets first, then the pieces in the file's order (as the flat preview), then the path out of the gate and the
-  torii. Village (0, 0) = world (-200, -215). After `gen.py --village`, chunks not yet generated get the new village.
+- `dimension/chikyu.json`: overworld dimension type (sky, day/night on the shared clock, sleeping, weather) on
+  `ChikyuChunkGenerator` (`naruto_shippuden:chikyu`) and `ChikyuBiomeSource` (`naruto_shippuden:chikyu`): river
+  biome along the river (fish, squid, sugar cane), plains on the flat ground (the village, the river's valley), forest
+  elsewhere; `chikyu_forest/plains/river` are vanilla's without lava lakes, springs, monster rooms or carvers.
+- One fixed map whatever the seed (trees and ores in the wild land still follow the world seed). Flat grass at y 64
+  round the world centre (r 250) and along the river's valley; wooded hills past it; noodle tunnels and deep caverns
+  (lava below y -55) only in chunks more than r 314 from the centre, on a 4-block noise lattice like vanilla's.
+  Terrain is written straight into the chunk sections; each column's river distance is worked out once.
+- Mountains are the generator's: `mountain()` is leaf_ring.mountain()'s formula block for block (build.py's `_hash`
+  ported bit for bit) without the template's edge fade; the range runs on north, wraps a little round the outside of
+  the wall, slopes down to the river's valley and sinks into the hills past r 420..650. `LeafVillage` skips the
+  `mountain_*` pieces (they stay in leaf.json for the flat preview).
+- `LeafVillage` reads `village/leaf.json` and the `structure/leaf/*.nbt` templates only when a chunk inside its box
+  (BOX_*) is generated (about 0.4 s, 1.0M blocks in 511 chunks), sorts every block into its world chunk, and each
+  chunk's share is set in `applyBiomeDecoration` and then dropped, so the memory goes as the village is explored.
+  Streets first, then the pieces in the file's order, then the path out of the gate and the torii. Village (0, 0) =
+  world (-200, -215). After `gen.py --village`, chunks not yet generated get the new village.
+- No monsters spawn inside the wall (r < 200); no vanilla features or chunk animals within r 274 (woods do grow on
+  chunks that are all mountain top).
 - `Chikyu`: a player's first join (persistent `chikyu_started`, skipped in the dev client unless `-PdevOnly=chikyu`)
-  sends them to the street before the Academy and sets their respawn there (forced). The red torii outside the great
-  gate (world 0, 65, 222) leads to a torii built 6 blocks north of the overworld spawn (found again by its blackstone
-  foot, rebuilt on server start if gone), and that one back. Nether portals don't light in Chikyū; nothing travels from
-  it to the Nether or the End. Each torii's passage is filled with `torii_portal` (`ChikyuContent`: walk-through,
-  unbreakable, light 11, animated green texture, sparkles); the way out gives a `leaf_return_scroll` if the player has
-  none: hold use for 5 s in the overworld (a hit breaks it) to land back at the Leaf's gate, 5 min cooldown.
-  `/naruto chikyu [players]`, `/naruto chikyu leave [players]` for operators.
-- `VillageProtection` (config `chikyu.protect_villages`, default true): inside the Leaf's wall (r 190 round the world
-  centre), its gate and both toriis nobody breaks/places blocks, uses buckets, flint, fire charges, bone meal or tool
-  modifications (stripping, tilling); explosions spare the blocks, fire is put out the next tick (NeighborNotifyEvent),
-  mobs can't grief. Doors, buttons, seats still work. Operators in creative bypass it. Jutsu that set blocks directly
-  are not caught yet.
+  sends them to the street before the Academy and sets their respawn there (forced). Nether portals don't light in
+  Chikyū; nothing travels from it to the Nether or the End. `/naruto chikyu [players]`, `/naruto chikyu leave`.
+- The toriis: the Leaf's outside the great gate (world 0, 65, 222) and one built 6 blocks north of the overworld spawn
+  (found again by its blackstone foot, rebuilt or relit on server start). `ChikyuContent.ToriiPortalBlock` is a vanilla
+  `Portal` like the nether portal: the same delay game rules, the swirl, trigger/travel/ambient sounds, cooldown, and
+  items and mobs pass too; `client/ToriiOverlay` wraps the camera overlays so the swirl is drawn with the torii's green
+  texture instead of vanilla's purple. The way out gives a `leaf_return_scroll` if the player has none: hold use for
+  5 s in the overworld (a hit breaks it) to land back at the gate, 5 min cooldown.
+- `VillageProtection` (config `chikyu.protect_villages`, default true): inside the Leaf's wall (r 190), its gate and
+  both toriis nobody breaks/places blocks, uses buckets, flint, fire charges, bone meal or tool modifications;
+  explosions spare the blocks, fire is put out the next tick, mobs can't grief. Doors, buttons, seats still work.
+  Operators in creative bypass it. Jutsu that set blocks directly are not caught yet.
 - Still to do: the other four villages, the story engine (quests, dialogue, tracker) that the start leads into.
 
 ### Keys (defaults)

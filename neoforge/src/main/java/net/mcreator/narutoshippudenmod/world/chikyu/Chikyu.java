@@ -20,14 +20,13 @@ import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.storage.LevelData;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.ChatFormatting;
 
@@ -88,7 +87,6 @@ public final class Chikyu {
 
 	// ---------------------------------------------------------------- the story's start
 	private static final String STARTED = "naruto_shippuden:chikyu_started";
-	private static final String TORII_COOLDOWN = "naruto_shippuden:torii_cooldown";
 
 	@SubscribeEvent
 	public static void onLogin(PlayerEvent.PlayerLoggedInEvent event) {
@@ -160,35 +158,26 @@ public final class Chikyu {
 		overworldTorii(event.getServer().overworld());
 	}
 
-	/** True when the player stands in the passage of the torii whose middle is at base. */
-	private static boolean inTorii(ServerPlayer player, BlockPos base) {
-		AABB passage = new AABB(base.getX() - 2, base.getY(), base.getZ(), base.getX() + 3, base.getY() + 6, base.getZ() + 1);
-		return player.getBoundingBox().intersects(passage);
+	/** Where a torii's light takes whatever steps into it: the Leaf's torii to the overworld's, and that one back. */
+	public static TeleportTransition toriiDestination(ServerLevel level, Entity entity) {
+		var after = TeleportTransition.PLAY_PORTAL_SOUND.then(TeleportTransition.PLACE_PORTAL_TICKET);
+		if (level.dimension() == CHIKYU) {
+			ServerLevel overworld = level.getServer().overworld();
+			BlockPos t = overworldTorii(overworld);
+			return new TeleportTransition(overworld, new Vec3(t.getX() + 0.5, t.getY(), t.getZ() + 3.5), Vec3.ZERO, 0f, entity.getXRot(),
+					after.then(Chikyu::giveReturnScroll));
+		}
+		ServerLevel chikyu = level.getServer().getLevel(CHIKYU);
+		if (chikyu == null)
+			return null;
+		return new TeleportTransition(chikyu, LeafVillage.TORII_ARRIVAL, Vec3.ZERO, 180f, entity.getXRot(), after);
 	}
 
-	@SubscribeEvent
-	public static void onPlayerTick(PlayerTickEvent.Post event) {
-		if (!(event.getEntity() instanceof ServerPlayer player) || player.isSpectator() || player.isPassenger())
-			return;
-		long now = player.level().getGameTime();
-		if (player.getPersistentData().getLongOr(TORII_COOLDOWN, 0) > now)
-			return;
-		ServerLevel overworld = player.level().getServer().overworld();
-		if (player.level().dimension() == CHIKYU && inTorii(player, LeafVillage.TORII)) {
-			BlockPos t = overworldTorii(overworld);
-			player.getPersistentData().putLong(TORII_COOLDOWN, overworld.getGameTime() + 40);
-			player.teleport(new TeleportTransition(overworld, new Vec3(t.getX() + 0.5, t.getY(), t.getZ() + 3.5), Vec3.ZERO, 0f, 0f,
-					TeleportTransition.PLAY_PORTAL_SOUND));
-			// the way home from wherever they wander
-			if (!player.getInventory().contains(new ItemStack(ChikyuContent.RETURN_SCROLL))) {
-				player.getInventory().placeItemBackInInventory(new ItemStack(ChikyuContent.RETURN_SCROLL), net.minecraft.util.Prediction.SERVER_ONLY);
-				player.sendSystemMessage(Component.translatable("item.naruto_shippuden.leaf_return_scroll.given").withStyle(ChatFormatting.GREEN));
-			}
-		} else if (player.level() == overworld && overworldTorii != null && inTorii(player, overworldTorii)) {
-			ServerLevel chikyu = player.level().getServer().getLevel(CHIKYU);
-			if (chikyu == null)
-				return;
-			backToTheLeaf(player);
+	/** The way home from wherever they wander in the overworld. */
+	private static void giveReturnScroll(Entity entity) {
+		if (entity instanceof ServerPlayer player && !player.getInventory().contains(new ItemStack(ChikyuContent.RETURN_SCROLL))) {
+			player.getInventory().placeItemBackInInventory(new ItemStack(ChikyuContent.RETURN_SCROLL), net.minecraft.util.Prediction.SERVER_ONLY);
+			player.sendSystemMessage(Component.translatable("item.naruto_shippuden.leaf_return_scroll.given").withStyle(ChatFormatting.GREEN));
 		}
 	}
 
@@ -197,7 +186,6 @@ public final class Chikyu {
 		ServerLevel chikyu = player.level().getServer().getLevel(CHIKYU);
 		if (chikyu == null)
 			return;
-		player.getPersistentData().putLong(TORII_COOLDOWN, chikyu.getGameTime() + 40);
 		player.teleport(new TeleportTransition(chikyu, LeafVillage.TORII_ARRIVAL, Vec3.ZERO, 180f, 0f, TeleportTransition.PLAY_PORTAL_SOUND));
 	}
 
