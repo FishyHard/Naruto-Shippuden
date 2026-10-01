@@ -62,15 +62,21 @@ public final class LeafVillage {
 	/** Where a player arrives: on the street before the Academy yard's gate, looking at the Academy. */
 	public static final Vec3 ARRIVAL = new Vec3(116.5 + OX, ChikyuChunkGenerator.SURFACE + 1, 168.5 + OZ);
 
-	// the village's flat ground, in world coordinates: the round wall's circle with room round it, the mountains' box
-	// to the north, and the river's valley through and out of it
+	// the village's flat ground, in world coordinates: the round wall's circle with room round it, and the river's valley
+	// through and out of it (the mountains rise over it, from ChikyuChunkGenerator)
 	static final double FLAT_RADIUS = 250;
-	static final double FLAT_X1 = -75 + OX, FLAT_X2 = 475 + OX, FLAT_Z1 = -75 + OZ, FLAT_Z2 = 232 + OZ;
-	private static final int[][] RIVER = {{470, 120}, {395, 160}, {360, 215}, {345, 270}, {318, 318}, {270, 342}, {200, 350},
-			{140, 345}, {100, 330}, {70, 322}, {40, 345}, {5, 380}, {-40, 420}};
+	/** The river's middle line in village coordinates: the village's own stretch (as leaf_ring.RIVER), carried on
+	 * north-east and south-west through the wild land to a lake at each end. */
+	private static final int[][] RIVER = {{790, -20}, {700, 0}, {620, 40}, {550, 85},
+			{470, 120}, {395, 160}, {360, 215}, {345, 270}, {318, 318}, {270, 342}, {200, 350},
+			{140, 345}, {100, 330}, {70, 322}, {40, 345}, {5, 380}, {-40, 420},
+			{-110, 465}, {-200, 500}, {-300, 545}};
+	private static final int[][] END_LAKES = {{790, -20, 30}, {-300, 545, 30}};
+	/** Half the river's width, as leaf_ring.RIVER_W. */
+	public static final double RIVER_W = 4.0;
 
-	/** How far (x, z) in world coordinates is from the river's middle line. */
-	static double riverDistance(double x, double z) {
+	/** How far (x, z) in world coordinates is from the river's middle line (the end lakes count as river). */
+	public static double riverDistance(double x, double z) {
 		double best = Double.MAX_VALUE;
 		for (int i = 0; i + 1 < RIVER.length; i++) {
 			double ax = RIVER[i][0] + OX, az = RIVER[i][1] + OZ, bx = RIVER[i + 1][0] + OX, bz = RIVER[i + 1][1] + OZ;
@@ -78,7 +84,35 @@ public final class LeafVillage {
 			double t = Math.max(0, Math.min(1, ((x - ax) * dx + (z - az) * dz) / (dx * dx + dz * dz)));
 			best = Math.min(best, Math.hypot(x - ax - t * dx, z - az - t * dz));
 		}
+		for (int[] l : END_LAKES)
+			best = Math.min(best, Math.max(0, Math.hypot(x - l[0] - OX, z - l[1] - OZ) - l[2] + RIVER_W));
 		return best;
+	}
+
+	// ---------------------------------------------------------------- the torii to the overworld
+	/** The torii outside the great gate: its middle at ground level, its passage running north-south. */
+	public static final BlockPos TORII = new BlockPos(0, ChikyuChunkGenerator.SURFACE + 1, 222);
+	/** Where a player comes back from the overworld: between the gate and the torii, facing the gate. */
+	public static final Vec3 TORII_ARRIVAL = new Vec3(0.5, ChikyuChunkGenerator.SURFACE + 1, 216.5);
+
+	/** A red torii, as (dx, dy, dz, state) from the middle of its passage at ground level. */
+	public static List<Object[]> torii() {
+		List<Object[]> out = new ArrayList<>();
+		BlockState post = Blocks.STRIPPED_MANGROVE_WOOD.defaultBlockState();
+		BlockState beam = Blocks.STRIPPED_MANGROVE_LOG.defaultBlockState().setValue(net.minecraft.world.level.block.RotatedPillarBlock.AXIS, net.minecraft.core.Direction.Axis.X);
+		for (int sx : new int[]{-3, 3}) {
+			out.add(new Object[]{sx, 0, 0, Blocks.POLISHED_BLACKSTONE.defaultBlockState()});
+			for (int y = 1; y <= 5; y++)
+				out.add(new Object[]{sx, y, 0, post});
+		}
+		for (int x = -2; x <= 2; x++)
+			out.add(new Object[]{x, 4, 0, Blocks.MANGROVE_PLANKS.defaultBlockState()});
+		out.add(new Object[]{0, 5, 0, Blocks.DARK_OAK_PLANKS.defaultBlockState()});
+		for (int x = -5; x <= 5; x++) {
+			out.add(new Object[]{x, 6, 0, beam});
+			out.add(new Object[]{x, 7, 0, Blocks.POLISHED_BLACKSTONE_SLAB.defaultBlockState()});
+		}
+		return out;
 	}
 
 	/** One world chunk's share of the village: blocks in placing order, packed x | z << 4 | (y - minY) << 8. */
@@ -197,6 +231,8 @@ public final class LeafVillage {
 		for (JsonElement el : layout.getAsJsonArray("pieces")) {
 			JsonObject piece = el.getAsJsonObject();
 			String name = piece.get("piece").getAsString();
+			if (name.startsWith("leaf/mountain_"))
+				continue;                                   // the generator makes the mountains, and carries them on
 			CompoundTag tpl = templates.computeIfAbsent(name, n -> {
 				try (InputStream in = server.getResourceManager().open(Identifier.fromNamespaceAndPath("naruto_shippuden", "structure/" + n + ".nbt"))) {
 					return NbtIo.readCompressed(in, NbtAccounter.unlimitedHeap());
@@ -240,6 +276,12 @@ public final class LeafVillage {
 				e.getCompound("nbt").ifPresent(nbt -> at(map, blockPos.getX(), blockPos.getZ()).entities.add(new EntityPlan(pos, blockPos, nbt, rotation)));
 			}
 		}
+		// the path out of the gate to the torii, and the torii
+		for (int x = -2; x <= 2; x++)
+			for (int z = 199; z <= TORII.getZ() + 3; z++)
+				add(map, x, ChikyuChunkGenerator.SURFACE, z, path, null);
+		for (Object[] t : torii())
+			add(map, TORII.getX() + (int) t[0], TORII.getY() + (int) t[1], TORII.getZ() + (int) t[2], (BlockState) t[3], null);
 		LOGGER.info("Leaf village: {} blocks in {} chunks, sorted in {} ms", count, map.size(), System.currentTimeMillis() - start);
 		return map;
 	}

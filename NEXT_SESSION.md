@@ -334,15 +334,24 @@ Nature Releases, Kekkei Genkai, DNA, Clans, Dojutsu, Shinobi Weapons, Headbands,
 ### Chikyū (the story's dimension), `world/chikyu/`
 - `dimension/chikyu.json` (overworld dimension type, biome `chikyu_forest` = vanilla forest without lava, springs, caves)
   on `ChikyuChunkGenerator` (`naruto_shippuden:chikyu`): one fixed map, whatever the seed. Flat grass at y 64 round
-  the world centre (circle r 250, the mountains' box, the river's valley), wooded hills past it. No monsters spawn
-  inside the village; no vanilla features or chunk animals there.
-- `LeafVillage` reads `village/leaf.json` and the `structure/leaf/*.nbt` templates once (about 0.8 s, 1.5M blocks in
-  868 chunks), sorts every block into the world chunk it lands in, and `applyBiomeDecoration` sets each chunk's share.
-  Streets first, then the pieces in the file's order (as the flat preview). Village (0, 0) = world (-200, -215).
-  After `gen.py --village`, a new world (or chunks not yet generated) gets the new village.
-- `/naruto chikyu [players]` (op) goes to the street before the Academy; `/naruto chikyu leave` back to the overworld.
-- Still to do: story start sending new players there, the gate to the overworld, no portals/shortcuts, the river
-  beyond the village, the other four villages, procedural mountains.
+  the world centre (circle r 250) and along the river's valley; wooded hills past it.
+- The mountains are the generator's, not templates: `mountain()` is leaf_ring.mountain()'s height formula block for
+  block (build.py's `_hash` ported bit for bit), without the template's edge fade, so the range runs on north, wraps a
+  little round the outside of the wall, slopes down into the river's valley and sinks into the hills past r 420..650.
+  `LeafVillage` skips the `mountain_*` pieces (they stay in leaf.json for the flat preview).
+- The river runs on from the village both ways (`LeafVillage.RIVER`, a lake at each end), water carved by the generator.
+- No monsters spawn inside the village; no vanilla features or chunk animals there (woods do grow on chunks that are
+  all mountain top).
+- `LeafVillage` reads `village/leaf.json` and the `structure/leaf/*.nbt` templates once (about 0.7 s, 1.5M blocks in
+  ~870 chunks), sorts every block into the world chunk it lands in, and `applyBiomeDecoration` sets each chunk's share.
+  Streets first, then the pieces in the file's order (as the flat preview), then the path out of the gate and the
+  torii. Village (0, 0) = world (-200, -215). After `gen.py --village`, chunks not yet generated get the new village.
+- `Chikyu`: a player's first join (persistent `chikyu_started`, skipped in the dev client unless `-PdevOnly=chikyu`)
+  sends them to the street before the Academy and sets their respawn there (forced). The red torii outside the great
+  gate (world 0, 65, 222) leads to a torii built 6 blocks north of the overworld spawn (found again by its blackstone
+  foot, rebuilt on server start if gone), and that one back. Nether portals don't light in Chikyū; nothing travels from
+  it to the Nether or the End. `/naruto chikyu [players]`, `/naruto chikyu leave [players]` for operators.
+- Still to do: the other four villages, the story engine (quests, dialogue, tracker) that the start leads into.
 
 ### Keys (defaults)
 

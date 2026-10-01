@@ -16,14 +16,31 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.server.ServerStoppedEvent;
+import net.neoforged.neoforge.event.server.ServerStartedEvent;
+import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.GlobalPos;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.storage.LevelData;
+import net.minecraft.world.phys.AABB;
 
 import java.util.Collection;
 import java.util.List;
 
 /**
  * Chikyū, the story's world: the dimension is data (dimension/chikyu.json, biome chikyu_forest) on the
- * {@link ChikyuChunkGenerator}. Until the story's start takes players there, operators travel with
- * {@code /naruto chikyu [players]} (to the Leaf's Academy) and {@code /naruto chikyu leave [players]} (back to the overworld).
+ * {@link ChikyuChunkGenerator}.
+ * <ul>
+ * <li>A player's first join puts them at the Leaf's Academy, and they respawn there (until they sleep in a bed).</li>
+ * <li>The red torii outside the Leaf's great gate leads to a torii by the overworld's spawn, and that one back.</li>
+ * <li>No other way in or out: nether portals do not light in Chikyū, and nothing travels from it to the Nether or the End.</li>
+ * <li>Operators: {@code /naruto chikyu [players]} (to the Academy), {@code /naruto chikyu leave [players]} (to the overworld).</li>
+ * </ul>
  */
 @EventBusSubscriber(modid = "naruto_shippuden")
 public final class Chikyu {
@@ -63,5 +80,110 @@ public final class Chikyu {
 	@SubscribeEvent
 	public static void onServerStopped(ServerStoppedEvent event) {
 		LeafVillage.forget();
+		overworldTorii = null;
+	}
+
+	// ---------------------------------------------------------------- the story's start
+	private static final String STARTED = "naruto_shippuden:chikyu_started";
+	private static final String TORII_COOLDOWN = "naruto_shippuden:torii_cooldown";
+
+	@SubscribeEvent
+	public static void onLogin(PlayerEvent.PlayerLoggedInEvent event) {
+		if (!(event.getEntity() instanceof ServerPlayer player) || player.getPersistentData().getBooleanOr(STARTED, false))
+			return;
+		// the dev client's tests run in their own worlds and places; -PdevOnly=chikyu tests this start
+		if (Boolean.getBoolean("naruto.devtest") && !System.getProperty("naruto.devtest.only", "").equals("chikyu"))
+			return;
+		player.getPersistentData().putBoolean(STARTED, true);
+		travel(player);
+		player.setRespawnPosition(new ServerPlayer.RespawnConfig(
+				new LevelData.RespawnData(GlobalPos.of(CHIKYU, BlockPos.containing(LeafVillage.ARRIVAL)), 180f, 0f), true), false);
+	}
+
+	/** The player's own marks survive death. */
+	@SubscribeEvent
+	public static void onClone(PlayerEvent.Clone event) {
+		for (String key : new String[]{STARTED})
+			if (event.getOriginal().getPersistentData().contains(key))
+				event.getEntity().getPersistentData().putBoolean(key, event.getOriginal().getPersistentData().getBooleanOr(key, false));
+	}
+
+	// ---------------------------------------------------------------- the toriis
+	private static volatile BlockPos overworldTorii;
+
+	/** The overworld's torii, a few blocks north of the world spawn, standing on the ground; built if it is not there. */
+	private static BlockPos overworldTorii(ServerLevel overworld) {
+		BlockPos t = overworldTorii;
+		if (t != null)
+			return t;
+		BlockPos spawn = overworld.getRespawnData().pos();
+		int x = spawn.getX(), z = spawn.getZ() - 6;
+		// already built: find its black foot under the west post
+		for (int y = overworld.getMaxY(); y > overworld.getMinY(); y--)
+			if (overworld.getBlockState(new BlockPos(x - 3, y, z)).is(Blocks.POLISHED_BLACKSTONE)
+					&& overworld.getBlockState(new BlockPos(x - 3, y + 1, z)).is(Blocks.STRIPPED_MANGROVE_WOOD))
+				return overworldTorii = new BlockPos(x, y, z);
+		int y = Integer.MIN_VALUE;
+		for (int dx = -3; dx <= 3; dx += 3)
+			y = Math.max(y, overworld.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x + dx, z));
+		BlockPos base = new BlockPos(x, y, z);
+		for (Object[] b : LeafVillage.torii())
+			overworld.setBlock(base.offset((int) b[0], (int) b[1], (int) b[2]), (BlockState) b[3], 3);
+		// the posts stand on the ground, and the passage is clear
+		for (int dx = -3; dx <= 3; dx += 3)
+			for (int dy = -1; dy > -12 && !overworld.getBlockState(base.offset(dx, dy, 0)).isSolid(); dy--)
+				overworld.setBlock(base.offset(dx, dy, 0), Blocks.STRIPPED_MANGROVE_WOOD.defaultBlockState(), 3);
+		for (int dx = -2; dx <= 2; dx++)
+			for (int dy = 0; dy < 4; dy++)
+				for (int dz = -3; dz <= 3; dz++)
+					if (!overworld.getBlockState(base.offset(dx, dy, dz)).isAir())
+						overworld.setBlock(base.offset(dx, dy, dz), Blocks.AIR.defaultBlockState(), 3);
+		return overworldTorii = base;
+	}
+
+	@SubscribeEvent
+	public static void onServerStarted(ServerStartedEvent event) {
+		overworldTorii(event.getServer().overworld());
+	}
+
+	/** True when the player stands in the passage of the torii whose middle is at base. */
+	private static boolean inTorii(ServerPlayer player, BlockPos base) {
+		AABB passage = new AABB(base.getX() - 2, base.getY(), base.getZ(), base.getX() + 3, base.getY() + 4, base.getZ() + 1);
+		return player.getBoundingBox().intersects(passage);
+	}
+
+	@SubscribeEvent
+	public static void onPlayerTick(PlayerTickEvent.Post event) {
+		if (!(event.getEntity() instanceof ServerPlayer player) || player.isSpectator() || player.isPassenger())
+			return;
+		long now = player.level().getGameTime();
+		if (player.getPersistentData().getLongOr(TORII_COOLDOWN, 0) > now)
+			return;
+		ServerLevel overworld = player.level().getServer().overworld();
+		if (player.level().dimension() == CHIKYU && inTorii(player, LeafVillage.TORII)) {
+			BlockPos t = overworldTorii(overworld);
+			player.getPersistentData().putLong(TORII_COOLDOWN, overworld.getGameTime() + 40);
+			player.teleport(new TeleportTransition(overworld, new Vec3(t.getX() + 0.5, t.getY(), t.getZ() + 3.5), Vec3.ZERO, 0f, 0f,
+					TeleportTransition.PLAY_PORTAL_SOUND));
+		} else if (player.level() == overworld && overworldTorii != null && inTorii(player, overworldTorii)) {
+			ServerLevel chikyu = player.level().getServer().getLevel(CHIKYU);
+			if (chikyu == null)
+				return;
+			player.getPersistentData().putLong(TORII_COOLDOWN, chikyu.getGameTime() + 40);
+			player.teleport(new TeleportTransition(chikyu, LeafVillage.TORII_ARRIVAL, Vec3.ZERO, 180f, 0f, TeleportTransition.PLAY_PORTAL_SOUND));
+		}
+	}
+
+	// ---------------------------------------------------------------- no shortcuts
+	@SubscribeEvent
+	public static void onPortalSpawn(BlockEvent.PortalSpawnEvent event) {
+		if (event.getLevel() instanceof Level level && level.dimension() == CHIKYU)
+			event.setCanceled(true);
+	}
+
+	@SubscribeEvent
+	public static void onTravel(EntityTravelToDimensionEvent event) {
+		if (event.getEntity().level().dimension() == CHIKYU && (event.getDimension() == Level.NETHER || event.getDimension() == Level.END))
+			event.setCanceled(true);
 	}
 }

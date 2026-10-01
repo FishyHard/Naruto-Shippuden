@@ -74,14 +74,71 @@ public class ChikyuChunkGenerator extends ChunkGenerator {
 	/** How far (x, z) lies outside the village's flat ground, in blocks; 0 inside it. */
 	static double outside(double x, double z) {
 		double circle = Math.max(0, Math.sqrt(x * x + z * z) - LeafVillage.FLAT_RADIUS);
-		double dx = Math.max(Math.max(LeafVillage.FLAT_X1 - x, x - LeafVillage.FLAT_X2), 0);
-		double dz = Math.max(Math.max(LeafVillage.FLAT_Z1 - z, z - LeafVillage.FLAT_Z2), 0);
 		double river = Math.max(0, LeafVillage.riverDistance(x, z) - 14);
-		return Math.min(Math.min(circle, Math.sqrt(dx * dx + dz * dz)), river);
+		return Math.min(circle, river);
 	}
 
-	/** The top solid block of the column at (x, z). */
+	// ---------------------------------------------------------------- the mountains round the north
+	// As porting/structures_gen/leaf_ring.mountain(), the same heights block for block, but without its fade at the
+	// template's edges: the range runs on into the wild land, wraps a little round the outside of the wall, and sinks
+	// into the hills far from the village. Village coordinates (x east, z south from its north-west corner) inside.
+	private static final double CX = 200, CZ = 215, R = 185, MOUNTAIN_FROM = R - 12, RIDGE_Z = 60, HMAX = 84;
+	private static final int FACES_X1 = 113 + 16, FACES_X2 = 113 + 159, ROCK_Z0 = 8;
+
+	/** build.py's _hash, bit for bit (Python's big ints agree with a long's low bits, all it keeps). */
+	static double hash(long x, long y, long z, long salt) {
+		long h = (x * 73856093L) ^ (y * 19349663L) ^ (z * 83492791L) ^ (salt * 2654435761L);
+		h = (h ^ (h >> 13)) * 1274126177L;
+		return ((h ^ (h >> 16)) & 0xffffffffL) / (double) 0xffffffffL;
+	}
+
+	/** How high the mountains stand over the flat ground at world (wx, wz), and how deep in them it is (d, for the grass). */
+	private static double[] mountain(int wx, int wz) {
+		int x = wx - LeafVillage.OX, z = wz - LeafVillage.OZ;
+		if (x >= FACES_X1 && x <= FACES_X2 && z >= ROCK_Z0 && z < 120)
+			return null;                                    // the Hokage Rock's own template stands there
+		double bank = LeafVillage.riverDistance(wx + 0.5, wz + 0.5) - LeafVillage.RIVER_W;
+		if (bank <= 2)
+			return null;                                    // the river and its banks
+		double px = x + 0.5 - CX, pz = z + 0.5 - CZ;
+		double r = Math.sqrt(px * px + pz * pz);
+		double ang = Math.toDegrees(Math.atan2(pz, px));
+		ang = ang < 0 ? ang + 360 : ang;
+		boolean north = ang >= 186 && ang <= 354;
+		double w = 1;
+		if (!north) {
+			// outside the wall the range wraps a little south round it, sinking as it goes
+			double off = ang < 186 && ang > 90 ? 186 - ang : ang > 354 ? ang - 354 : ang + 6;
+			w = Math.max(0, 1 - off / 25) * Mth.clamp((r - (R + 8)) / 30, 0, 1);
+			if (w <= 0 && z >= RIDGE_Z)
+				return null;
+		}
+		double d = Math.max(w > 0 ? r - MOUNTAIN_FROM : -99, RIDGE_Z - z);
+		if (d <= 0)
+			return null;
+		double n = (hash(Math.floorDiv(x, 4), 0, Math.floorDiv(z, 4), 112) - 0.5) * 6 + (hash(Math.floorDiv(x, 9), 1, Math.floorDiv(z, 9), 113) - 0.5) * 12;
+		double h = Math.min(HMAX - 6.0, d * 3.0) + n * Math.min(1.0, d / 6);
+		h *= north || z < RIDGE_Z ? 1 : w;
+		h *= Mth.clamp((650 - r) / 230, 0, 1);              // far from the village it sinks into the hills
+		h = Math.min(h, (bank - 2) * 2.2);                 // and slopes down to the river's valley
+		return h < 1 ? null : new double[]{(int) h, d};
+	}
+
+	private static final BlockState[] ROCK = {Blocks.SANDSTONE.defaultBlockState(), Blocks.SANDSTONE.defaultBlockState(), Blocks.SANDSTONE.defaultBlockState(),
+			Blocks.SANDSTONE.defaultBlockState(), Blocks.SMOOTH_SANDSTONE.defaultBlockState(), Blocks.SMOOTH_SANDSTONE.defaultBlockState(),
+			Blocks.TERRACOTTA.defaultBlockState(), Blocks.GRANITE.defaultBlockState()};
+
+	private static BlockState rock(int x, int y, int z) {
+		return ROCK[Math.min(7, (int) (hash(x, y, z, 111) * 8))];
+	}
+
+	/** The top solid block of the column at (x, z), with or without mountains. */
 	public static int height(int x, int z) {
+		double[] m = mountain(x, z);
+		return Math.max(hillHeight(x, z), m == null ? SURFACE : SURFACE + (int) m[0]);
+	}
+
+	private static int hillHeight(int x, int z) {
 		double d = outside(x, z);
 		if (d <= 0)
 			return SURFACE;
@@ -109,9 +166,19 @@ public class ChikyuChunkGenerator extends ChunkGenerator {
 		ChunkPos cp = chunk.getPos();
 		for (int x = 0; x < 16; x++)
 			for (int z = 0; z < 16; z++) {
-				int top = height(cp.getMinBlockX() + x, cp.getMinBlockZ() + z);
+				int wx = cp.getMinBlockX() + x, wz = cp.getMinBlockZ() + z;
+				double[] m = mountain(wx, wz);
+				int hills = hillHeight(wx, wz);
+				int top = Math.max(hills, m == null ? SURFACE : SURFACE + (int) m[0]);
+				boolean rocky = m != null && SURFACE + (int) m[0] > hills;
+				// the river: two deep (three in its middle) over a gravel bed, level with the flat ground
+				double river = LeafVillage.riverDistance(wx + 0.5, wz + 0.5);
+				boolean water = top == SURFACE && river <= LeafVillage.RIVER_W;
+				int bed = river < LeafVillage.RIVER_W - 1.5 ? SURFACE - 3 : SURFACE - 2;
 				for (int y = MIN_Y; y <= top; y++) {
-					BlockState state = stateAt(y, top);
+					BlockState state = rocky && y >= SURFACE ? (y == top && m[1] > 9 ? Blocks.GRASS_BLOCK.defaultBlockState() : rock(wx, y, wz))
+							: !water || y < bed ? stateAt(y, top)
+							: y == bed ? Blocks.GRAVEL.defaultBlockState() : Blocks.WATER.defaultBlockState();
 					chunk.setBlockState(pos.set(x, y, z), state);
 					oceanFloor.update(x, y, z, state);
 					worldSurface.update(x, y, z, state);
@@ -144,8 +211,17 @@ public class ChikyuChunkGenerator extends ChunkGenerator {
 	@Override
 	public void applyBiomeDecoration(WorldGenLevel level, ChunkAccess chunk, StructureManager structureManager) {
 		LeafVillage.placeChunk(level, chunk.getPos());
-		if (!villageChunk(chunk.getPos()))
+		ChunkPos cp = chunk.getPos();
+		if (!villageChunk(cp) || allMountain(cp))
 			super.applyBiomeDecoration(level, chunk, structureManager);
+	}
+
+	/** True when the chunk is mountain all over (its corners and middle), so its woods cannot reach the village. */
+	private static boolean allMountain(ChunkPos cp) {
+		for (int[] o : new int[][]{{0, 0}, {15, 0}, {0, 15}, {15, 15}, {8, 8}})
+			if (height(cp.getMinBlockX() + o[0], cp.getMinBlockZ() + o[1]) < SURFACE + 8)
+				return false;
+		return true;
 	}
 
 	@Override
