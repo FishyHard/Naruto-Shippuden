@@ -128,7 +128,7 @@ public final class Chikyu {
 			{
 				BlockPos base = new BlockPos(x, y, z);
 				for (Object[] b : LeafVillage.torii())
-					if (b[3] == ChikyuContent.TORII_PORTAL.defaultBlockState() && overworld.getBlockState(base.offset((int) b[0], (int) b[1], (int) b[2])).isAir())
+					if (b[3] == ChikyuContent.TORII_PORTAL.defaultBlockState() && !overworld.getBlockState(base.offset((int) b[0], (int) b[1], (int) b[2])).is(ChikyuContent.TORII_PORTAL))
 						overworld.setBlock(base.offset((int) b[0], (int) b[1], (int) b[2]), (BlockState) b[3], 3);
 				return overworldTorii = base;
 			}
@@ -138,7 +138,7 @@ public final class Chikyu {
 		BlockPos base = new BlockPos(x, y, z);
 		// the passage is clear, the posts stand on the ground
 		for (int dx = -2; dx <= 2; dx++)
-			for (int dy = 0; dy < 4; dy++)
+			for (int dy = 0; dy < 6; dy++)
 				for (int dz = -3; dz <= 3; dz++)
 					if (!overworld.getBlockState(base.offset(dx, dy, dz)).isAir())
 						overworld.setBlock(base.offset(dx, dy, dz), Blocks.AIR.defaultBlockState(), 3);
@@ -157,7 +157,7 @@ public final class Chikyu {
 
 	/** True when the player stands in the passage of the torii whose middle is at base. */
 	private static boolean inTorii(ServerPlayer player, BlockPos base) {
-		AABB passage = new AABB(base.getX() - 2, base.getY(), base.getZ(), base.getX() + 3, base.getY() + 4, base.getZ() + 1);
+		AABB passage = new AABB(base.getX() - 2, base.getY(), base.getZ(), base.getX() + 3, base.getY() + 6, base.getZ() + 1);
 		return player.getBoundingBox().intersects(passage);
 	}
 

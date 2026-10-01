@@ -105,12 +105,9 @@ public final class LeafVillage {
 			for (int y = 1; y <= 5; y++)
 				out.add(new Object[]{sx, y, 0, post});
 		}
+		// the green light fills the whole opening, from the ground to the top beam, so it reads as a way through
 		for (int x = -2; x <= 2; x++)
-			out.add(new Object[]{x, 4, 0, Blocks.MANGROVE_PLANKS.defaultBlockState()});
-		out.add(new Object[]{0, 5, 0, Blocks.DARK_OAK_PLANKS.defaultBlockState()});
-		// the green light filling the passage, so it reads as a way through
-		for (int x = -2; x <= 2; x++)
-			for (int y = 0; y <= 3; y++)
+			for (int y = 0; y <= 5; y++)
 				out.add(new Object[]{x, y, 0, ChikyuContent.TORII_PORTAL.defaultBlockState()});
 		for (int x = -5; x <= 5; x++) {
 			out.add(new Object[]{x, 6, 0, beam});
