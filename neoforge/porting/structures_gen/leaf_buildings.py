@@ -160,7 +160,7 @@ def academy():
     # the doors and their porch roof
     for x in range(m - 1, m + 2):
         b.fill(x, G, fz2, x, G + 3, fz2, AIR)
-    b.door(m - 1, G, fz2, 'spruce', 'south', 'left'); b.door(m + 1, G, fz2, 'spruce', 'south', 'right')
+    b.door(m - 1, G, fz2, 'spruce', 'south', 'right'); b.door(m + 1, G, fz2, 'spruce', 'south', 'left')
     b.set(m, G, fz2, AIR); b.set(m, G + 1, fz2, AIR)
     b.fill(m - 1, G + 2, fz2, m + 1, G + 3, fz2, 'stripped_spruce_wood[axis=x]')
     for x in range(m - 4, m + 5):
@@ -560,11 +560,15 @@ def hospital():
             b.set(x, G + 4, z, slab('smooth_quartz_slab', 'top'))
         b.set(x, G + 5, z2 + 5, slab('smooth_quartz_slab'))
     for x in (m - 6, m + 6):
-        b.fill(x, G, z2 + 5, x, G + 3, z2 + 5, 'smooth_quartz')
-    for x in range(m - 3, m + 4):
-        b.fill(x, G, z2, x, G + 3, z2, AIR)
-    for x in (m - 2, m - 1, m + 1, m + 2):
-        b.door(x, G, z2, 'birch', 'south', 'left' if x < m else 'right')
+        b.fill(x, G, z2 + 5, x, G + 4, z2 + 5, 'smooth_quartz')      # up into the canopy, no gap
+    # the entrance: two pairs of double doors either side of a white post, a band of glass over them
+    for x in range(m - 2, m + 3):
+        b.fill(x, G, z2, x, G + 1, z2, AIR)
+        b.set(x, G + 2, z2, 'light_blue_stained_glass')
+    b.fill(m, G, z2, m, G + 1, z2, 'smooth_quartz')
+    for (xl, xr) in ((m - 2, m - 1), (m + 1, m + 2)):
+        b.door(xl, G, z2, 'birch', 'south', 'right')
+        b.door(xr, G, z2, 'birch', 'south', 'left')
     b.fill(m - 3, G + 2, z2, m + 3, G + 3, z2, 'light_blue_stained_glass') if False else None
     for x in range(m - 7, m + 8):
         for z in range(z2 + 1, z2 + 7):
@@ -731,17 +735,21 @@ def exam_stadium():
                 b.set(x, y, z, s)
             if ri - 0.5 <= r <= R - 4.0:
                 b.set(x, top, z, 'smooth_stone')
-    # stands: three rising rings of seats looking down into the arena, a railing at the edge, a white parapet outside
-    for k, rr in enumerate((ri + 1.5, ri + 2.5, ri + 3.5)):
-        for (x, z) in b.ring_points(c, cz, rr):
-            f = inward(c, cz, x, z)
-            for kk in range(k):
-                b.set(x, top + 1 + kk, z, 'stone_bricks')
-            b.set(x, top + 1 + k, z, stairs('stone_brick_stairs', {'north': 'south', 'south': 'north', 'east': 'west', 'west': 'east'}[f]))
-    for (x, z) in b.ring_points(c, cz, ri + 0.5):
-        b.set(x, top + 1, z, st('iron_bars', east=False, north=False, south=False, west=False, waterlogged=False))
-    for (x, z) in b.ring_points(c, cz, R - 4.2):
-        b.set(x, top + 1, z, 'calcite')
+    # stands: three rising tiers of seats looking down into the arena, every cell of the ring filled, a railing at the
+    # edge, a white parapet outside
+    for x in range(W):
+        for z in range(D):
+            r = math.hypot(x - c, z - cz)
+            if ri + 0.5 < r <= ri + 3.5:
+                k = min(2, int(r - ri - 0.5))
+                f = inward(c, cz, x, z)
+                for kk in range(k):
+                    b.set(x, top + 1 + kk, z, 'stone_bricks')
+                b.set(x, top + 1 + k, z, stairs('stone_brick_stairs', {'north': 'south', 'south': 'north', 'east': 'west', 'west': 'east'}[f]))
+            elif ri - 0.5 < r <= ri + 0.5:
+                b.set(x, top + 1, z, st('iron_bars', east=False, north=False, south=False, west=False, waterlogged=False))
+            elif R - 4.7 < r <= R - 3.7:
+                b.set(x, top + 1, z, 'calcite')
     # the arena: bushes along the walls, a few trees, worn patches in the middle
     for i in range(26):
         a = i * 2 * math.pi / 26 + 0.1
@@ -763,22 +771,31 @@ def exam_stadium():
             b.set(x + dx, G - 1, z, 'polished_andesite')
     gx, gz = c + round((R - 1) * math.cos(a)), cz + round((R - 1) * math.sin(a))
     b.fill(gx - 2, G + 4, gz + 1, gx + 2, G + 5, gz + 1, RED)
-    # stairs up through the shell to the stands, north and south, and on to the halls
-    for (lx, lz, f) in ((c, cz + R - 4, 'north'), (c + 1, cz - R + 4, 'south')):
+    # ladders up from the corridor to the stands, east and west: on the arena wall's back, through each floor
+    for (lx, f) in ((c + ri + 1, 'east'), (c - ri - 1, 'west')):
         for y in range(G, top + 1):
-            b.set(lx, y, lz, st('ladder', facing=f, waterlogged=False))
+            b.set(lx, y, cz, st('ladder', facing=f, waterlogged=False))
+        b.set(lx, top + 1, cz, AIR); b.set(lx, top + 2, cz, AIR)
     # the halls on the north rim
     hz1, hz2 = 1, cz - ri - 2
     y = top
-    # their base: a block of the shell's brick, from the ground up to the rim, where the halls stand out past the shell
+    # their base: a block of the shell's brick from the ground to the rim under the halls, filling every gap between the
+    # halls and the shell; hollow, its top a floor
+    zb = cz - 22
     for x in range(c - 41, c + 42):
-        for z in range(hz1, cz - ri + 1):
+        for z in range(hz1, zb + 1):
             r = math.hypot(x - c, z - cz)
-            if r > ri + 0.5 and b.get(x, G + 4, z) in (None, AIR) or r > R - 0.5:
-                edge = x in (c - 41, c + 41) or z == hz1
-                for yy in range(G - 1, top + 1):
-                    b.set(x, yy, z, ('calcite' if yy in (G + 8, G + 15) else 'mud_bricks' if x % 6 == 0 else SHELL) if edge else
-                          ('stone_bricks' if yy in (G - 1, top) else AIR))
+            if r <= ri + 0.5:
+                continue
+            for yy in range(G - 1, top + 1):
+                h = (yy - G) / (top - G)
+                if yy >= G and r <= R - 5.0 * max(0, h) ** 2 + 0.5:
+                    continue                                # the shell itself is there
+                edge = x in (c - 41, c + 41) or z in (hz1, zb)
+                if yy in (G - 1, top):
+                    b.set(x, yy, z, 'stone_bricks')
+                elif edge:
+                    b.set(x, yy, z, 'calcite' if yy in (G + 8, G + 15) else 'mud_bricks' if x % 6 == 0 else SHELL)
     kage_hall(b, c - 40, c - 17, hz1 + 2, hz2, y, 1)
     kage_hall(b, c - 13, c + 13, hz1, hz2, y, 2)
     kage_hall(b, c + 17, c + 40, hz1 + 2, hz2, y, 1)
@@ -787,5 +804,59 @@ def exam_stadium():
     return b
 
 
+# ---------------------------------------------------------------- Training Ground 3
+def training_ground():
+    """Team 7's training ground, where the bell test happens: a clearing ringed by forest, the three wooden posts in a
+    row, the memorial stone, a pond fed by a little spring (all of it inside the clearing), logs to sit on."""
+    S = 36
+    b = Build(S, 16, S)
+    c = S // 2
+    for x in range(S):
+        for z in range(S):
+            v = _hash(x, 0, z, 121)
+            b.set(x, G - 1, z, 'grass_block[snowy=false]' if v < 0.8 else 'coarse_dirt' if v < 0.92 else 'podzol[snowy=false]')
+            b.set(x, G - 2, z, 'dirt')
+    # the forest round the edge, leaving the clearing open toward the south (the path in)
+    for (x, z) in [(x, z) for x in range(2, S - 1, 5) for z in (2, S - 3)] + [(x, z) for z in range(7, S - 6, 5) for x in (2, S - 3)]:
+        if z == S - 3 and abs(x - c) < 5:
+            continue
+        x2, z2 = x + (z * 3) % 3 - 1, z + (x * 7) % 3 - 1
+        tree(b, x2, G, z2, height=6 + (x + z) % 3, r=3)
+    # the worn path in from the south
+    for z in range(S - 6, S):
+        for x in range(c - 1, c + 2):
+            b.set(x, G - 1, z, 'dirt_path')
+    # the three posts
+    for x in (c - 5, c, c + 5):
+        b.fill(x, G - 1, c - 2, x, G + 1, c - 2, log('stripped_oak_log'))
+        b.set(x, G + 2, c - 2, slab('oak_slab'))
+        for dx in (-1, 0, 1):
+            b.set(x + dx, G - 1, c - 1, 'coarse_dirt')
+    # the memorial stone
+    for x in range(c - 2, c + 3):
+        for y in range(G, G + 3 + (1 if abs(x - c) < 2 else 0)):
+            b.set(x, y, c + 6, 'polished_blackstone')
+    b.set(c, G + 4, c + 6, slab('polished_blackstone_slab'))
+    for x in range(c - 3, c + 4):
+        b.set(x, G - 1, c + 5, 'gravel'); b.set(x, G - 1, c + 7, 'gravel')
+    b.set(c - 3, G, c + 5, 'poppy'); b.set(c + 3, G, c + 5, 'white_tulip')
+    # the pond, round, with stones and reeds
+    px, pz = c + 9, c + 1
+    for x in range(px - 5, px + 6):
+        for z in range(pz - 4, pz + 5):
+            e = ((x - px) / 4.6) ** 2 + ((z - pz) / 3.8) ** 2
+            if e <= 1:
+                b.set(x, G - 1, z, 'water'); b.set(x, G - 2, z, 'water' if e < 0.5 else 'gravel'); b.set(x, G - 3, z, 'gravel')
+            elif e <= 1.5:
+                b.set(x, G - 1, z, 'mossy_cobblestone' if _hash(x, 1, z, 122) < 0.4 else 'gravel')
+    for (x, z) in ((px - 4, pz - 2), (px + 3, pz + 3)):
+        b.set(x, G, z, 'sugar_cane') if False else b.set(x, G, z, st('tall_grass', half='lower')) or b.set(x, G + 1, z, st('tall_grass', half='upper'))
+    # logs to sit on, a stump
+    for x in range(c - 9, c - 5):
+        b.set(x, G, c + 3, log('oak_log', 'x'))
+    b.set(c - 11, G, c - 6, log('oak_log')); b.set(c - 11, G + 1, c - 6, st('oak_pressure_plate', powered=False))
+    return b
+
+
 PIECES = {'academy': academy, 'academy_yard': academy_yard, 'ramen_shop': ramen_shop, 'hospital': hospital,
-          'exam_stadium': exam_stadium}
+          'exam_stadium': exam_stadium, 'training_ground': training_ground}

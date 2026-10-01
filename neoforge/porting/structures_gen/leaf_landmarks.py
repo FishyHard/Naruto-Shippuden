@@ -874,22 +874,39 @@ def hokage_rock(faces=('first', 'second', 'third', 'fourth')):
     return b
 
 
-def hokage_rock_five():
-    """The Hokage Rock once Tsunade is the Fifth Hokage."""
-    return hokage_rock(('first', 'second', 'third', 'fourth', 'fifth'))
+def hokage_rock_fifth():
+    """Tsunade's head alone, to place over the four-face Rock (at the same corner) when she becomes the Fifth Hokage:
+    only the blocks that differ, air where the carving cuts in. Storing this instead of a second whole Rock keeps the
+    mod small."""
+    four = hokage_rock(('first', 'second', 'third', 'fourth'))
+    five = hokage_rock(('first', 'second', 'third', 'fourth', 'fifth'))
+    b = Build(five.w, five.h, five.d)
+    for pos in set(four.blocks) | set(five.blocks):
+        s4, s5 = four.blocks.get(pos), five.blocks.get(pos)
+        if s4 != s5:
+            b.set(*pos, s5 if s5 is not None else AIR)
+    return b
 
 
-# ---------------------------------------------------------------- a water tower with 忍
 def water_tower():
-    b = Build(11, 26, 11)
-    c = 5
+    """One of the round water tanks that stand over the Leaf's roofs: a white drum with grey bands on a stone base, a low
+    grey dome, a railed walkway round the top, a ladder up the side, the Leaf's mark painted in red."""
+    b = Build(13, 28, 13)
+    c = 6
     for y in range(0, G):
-        b.disc(c, y, c, 4, 'stone_bricks')
-    b.cylinder(c, G, c, 4, G + 17, Mix(('white_concrete', 6), ('light_gray_concrete', 1), salt=21), inner=AIR)
-    for y in (G + 5, G + 11, G + 17):
-        b.ring(c, y, c, 4, 'light_gray_concrete')
-    b.disc(c, G + 18, c, 4, slab('smooth_stone_slab'))
-    b.cone(c, G + 19, c, 4, 'light_blue_terracotta' if False else 'dark_prismarine_stairs', 'dark_prismarine')
-    b.glyph(['#####', '...#.', '.#.#.', '..#..', '.#...', '#.#.#', '#..##'], c - 2, G + 8, c + 4, 'purple_concrete')
-    b.door(c, G, c + 4, 'iron', 'south')
+        b.disc(c, y, c, 4.5, 'stone_bricks')
+    b.cylinder(c, G, c, 4.5, G + 17, Mix(('white_concrete', 6), ('calcite', 2), ('light_gray_concrete', 1), salt=21), inner=AIR)
+    for y in (G, G + 6, G + 12, G + 17):
+        b.ring(c, y, c, 4.5, 'light_gray_concrete')
+    # the dome, sitting right on the drum
+    for k, r in enumerate((4.5, 3.8, 3.0, 2.0, 1.0)):
+        b.disc(c, G + 18 + k, c, r, 'smooth_stone' if k < 4 else slab('smooth_stone_slab'))
+    # the walkway and its railing
+    for (x, z) in b.ring_points(c, c, 5.5):
+        b.set(x, G + 17, z, slab('smooth_stone_slab', 'top'))
+        b.set(x, G + 18, z, st('iron_bars', east=False, north=False, south=False, west=False, waterlogged=False))
+    for y in range(G, G + 18):
+        b.set(c, y, c + 5, st('ladder', facing='south', waterlogged=False))
+    b.set(c, G + 18, c + 5, AIR)
+    b.glyph(LEAF, c - 4, G + 4, c - 5, 'red_concrete', flip=True)      # on the back (north) face, read from outside
     return b

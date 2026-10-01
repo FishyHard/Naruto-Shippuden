@@ -8,7 +8,7 @@ Templates go to data/naruto_shippuden/structure/<village>/<piece>.nbt in both re
 """
 import math, os, sys
 import json
-import leaf, leaf_landmarks, leaf_houses, leaf_buildings, leaf_layout, leaf_ring
+import leaf, leaf_landmarks, leaf_houses, leaf_buildings, leaf_layout, leaf_ring, leaf_districts
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 NEO = os.path.normpath(os.path.join(HERE, '..', '..'))
@@ -17,11 +17,12 @@ LEAF = dict(leaf.PIECES)
 for old in ('house_a', 'house_b', 'house_round'):
     del LEAF[old]
 LEAF.update(gate=leaf_landmarks.gate, hokage_tower=leaf_landmarks.hokage_tower, hokage_rock=leaf_landmarks.hokage_rock,
-            hokage_rock_five=leaf_landmarks.hokage_rock_five,
+            hokage_rock_fifth=leaf_landmarks.hokage_rock_fifth,
             water_tower=leaf_landmarks.water_tower)
 LEAF.update(leaf_houses.VARIANTS)
 LEAF.update(leaf_buildings.PIECES)
 LEAF.update(leaf_ring.PIECES)
+LEAF.update(leaf_districts.PIECES)
 LEAF.update(wall=leaf_landmarks.village_wall, wall_pipes=lambda: leaf_landmarks.village_wall(pipes=True))
 VILLAGES = {'leaf': LEAF}
 GROUND = -60          # the flat world's surface (the first air block)
@@ -29,7 +30,7 @@ EXTRA_SHOTS = {
     # name: (dx, dy, dz, look_dx, look_dy, look_dz) from the template corner: views from inside
     'leaf/gate': [('outside', 29.5, 6, 40, 29.5, 12, 9)],
     'leaf/hokage_rock': [('close', 87, 50, 175, 87, 60, 30)],
-    'leaf/hokage_rock_five': [('close', 87, 50, 175, 87, 60, 30), ('angle', 30, 45, 120, 87, 60, 30),
+    'leaf/hokage_rock_fifth': [('close', 87, 50, 175, 87, 60, 30), ('angle', 30, 45, 120, 87, 60, 30),
                               ('below', 70, 12, 95, 75, 62, 40), ('below_side', 20, 10, 90, 70, 60, 40)],
     'leaf/hokage_tower': [('roof', 48, 50, 48, 30, 41, 30), ('landing', 24, 29, 37, 33, 27, 34), ('hall', 30.5, 7, 45, 30.5, 4, 18), ('standby', 20, 6, 28.5, 48, 3, 28),
                           ('council', 30.5, 17, 41, 30.5, 13, 30), ('quarters', 24, 22, 37, 36, 19, 24),
@@ -87,6 +88,11 @@ VILLAGE_SHOTS = [  # name, camera, target (village coordinates, y from the groun
     ('river', (240, 8, 372), (200, 2, 350)),
     ('rock_join', (60, 40, 150), (113, 40, 40)),
     ('gate_join', (250, 12, 425), (169, 22, 397)),
+    ('uchiha', (299, 35, 222), (299, 0, 275)),
+    ('hyuga', (319, 35, 138), (319, 0, 180)),
+    ('springs', (232, 25, 290), (232, 0, 318)),
+    ('stands', (95, 32, 300), (95, 25, 250)),
+    ('training', (66, 20, 175), (66, 2, 145)),
     ('aerial', (450, 160, 470), (200, 0, 215)),
     ('top', (200, 250, 226), (200, 0, 215)),
 ]

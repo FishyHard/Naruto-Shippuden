@@ -21,11 +21,10 @@ STREETS = [
     (155, 230, 330, 234),                       # avenue A
     (155, 290, 312, 294),                       # avenue B
     (150, 141, 154, 328),                       # the west road
-    (78, 170, 149, 173),                        # to the Academy yard
+    (64, 170, 149, 173),                        # past the Academy yard and the training ground's path
     (260, 141, 264, 318),                       # the east road
     (232, 141, 259, 144),                       # from the plaza's corner to the hospital
     (265, 141, 320, 144),
-    (300, 235, 303, 289),                       # the Uchiha quarter's lane
     (110, 368, 290, 371),                       # south of the river, along the wall
 ]
 BRIDGES = [(MAIN[0] - 1, 342)]                  # x, z of bridges on the main street
@@ -82,14 +81,22 @@ def layout(sizes, origins):
     # the landmarks
     put('hokage_rock', ROCK_X0, ROCK_Z0)
     put('hokage_tower', CX - 30, 92)
-    put('academy', 75, 105)
-    put('academy_yard', 75, 140)
-    put('training_ground', 44, 140)
+    put('academy', 92, 104)
+    put('academy_yard', 92, 139)
+    put('training_ground', 48, 128)
     put('exam_stadium', 43, 181)
     put('hospital', 270, 110)
-    put('water_tower', 140, 120)
-    put('water_tower', 246, 120)
+    put('water_tower', 155, 118)
+    put('water_tower', 233, 118)
     put('ramen_shop', MAIN[0] - sizes['ramen_shop'][2] - 1, 262, 'counterclockwise_90')
+    # the quarters and the places between missions
+    put('hyuga_compound', 290, 150, '180')              # its gate north, onto the road past the hospital
+    put('uchiha_quarter', 268, 238, '180')              # its gate north, onto avenue A
+    put('akimichi_compound', 210, 238, '180')
+    put('bbq_restaurant', 208, 272)                     # Yakiniku Q, on avenue B
+    put('hot_springs', 212, 298, '180')
+    put('flower_shop', MAIN[0] - 14, 300, 'counterclockwise_90')
+    put('nara_forest', 100, 298)
 
     # houses along every street, facing it, wherever there is room
     k = [0]
@@ -122,4 +129,13 @@ def layout(sizes, origins):
 
     for s in STREETS:
         line(*s)
+
+    # groves in the open ground left over, so the village is not a lawn between the houses
+    g = 0
+    for gz in range(100, 400, 5):
+        for gx in range(10, 400, 5):
+            rect = (gx, gz, gx + 12, gz + 12)
+            if free(*rect, gap=1) and inside(*rect, margin=8):
+                put('grove_%d' % (g % 4), gx, gz)
+                g += 1
     return {'pieces': pieces, 'roads': roads}
