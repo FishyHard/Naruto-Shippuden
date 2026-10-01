@@ -14,7 +14,6 @@ import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.IronDef
 import net.mcreator.narutoshippudenmod.procedures.MissionAndCommandProcedures.LetterFromBrotherRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.MissionAndCommandProcedures.PillageThePostRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.MissionAndCommandProcedures.SaveTheVillageRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.MissionAndCommandProcedures.StoryModeRightclickedProcedure;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.entity.player.Player;
@@ -28,7 +27,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
-
 
 public final class MissionItems {
 	private MissionItems() {
@@ -97,7 +95,6 @@ public final class MissionItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -192,7 +189,6 @@ public final class MissionItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -238,7 +234,6 @@ public final class MissionItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -288,51 +283,4 @@ public final class MissionItems {
 		}
 	}
 
-	@NarutoShippudenModElements.ModElement.Tag
-	public static class StoryModeItem extends NarutoShippudenModElements.ModElement {
-				public static Item block;
-		static {
-			Registration.holder(Registries.ITEM, "story_mode", v -> block = (Item) v);
-		}
-
-		public StoryModeItem(NarutoShippudenModElements instance) {
-			super(instance, 356);
-		}
-
-		@Override
-		public void initElements() {
-			elements.items.add(() -> new ItemCustom());
-		}
-
-		public static class ItemCustom extends Item {
-			public ItemCustom() {
-				super(Registration.itemProps("story_mode", "CreativeModeTab").stacksTo(1).rarity(Rarity.EPIC));
-			}
-
-			@Override
-			public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
-				return ItemUseAnimation.EAT;
-			}
-
-			@Override
-			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
-				return 1F;
-			}
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				StoryModeRightclickedProcedure.executeProcedure(Stream
-						.of(new AbstractMap.SimpleEntry<>("world", world), new AbstractMap.SimpleEntry<>("x", x), new AbstractMap.SimpleEntry<>("y", y),
-								new AbstractMap.SimpleEntry<>("z", z), new AbstractMap.SimpleEntry<>("entity", entity))
-						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-		}
-	}
 }

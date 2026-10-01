@@ -14,7 +14,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-/** The Kamui and story mode dimensions are data (dimension, dimension_type and biome json); only this event is code. */
+/** The Kamui dimension is data (dimension, dimension_type and biome json); only this event is code. */
 @EventBusSubscriber(modid = "naruto_shippuden")
 public final class ModDimensions {
 	public static final ResourceKey<Level> KAMUI = ResourceKey.create(Registries.DIMENSION,

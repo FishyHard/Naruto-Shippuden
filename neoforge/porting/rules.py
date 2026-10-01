@@ -1422,6 +1422,36 @@ def shadow_clones(path, text):
     return text[:m.start()] + body + text[end:]
 
 
+# ---------------------------------------------------------------- the old story mode (removed: a new story replaces it)
+STORY_VARS = r'(?:storymode|StorymodeCooldown|StoryModeGeninFight|directionstorymode)'
+
+
+@func
+def remove_story(path, text):
+    """The old Story Mode is gone: its item and 22 steps (dead_classes.txt), the steps' branches in the Shadow Clone exam, the
+    Genin fight and Iruka's tick, the item given on first join, and every write of its variables."""
+    if not re.search(r'\b%s\b|StoryModeItem' % STORY_VARS, text):
+        return text
+    get = r'NarutoShippudenModVariables\.get\(\w+\)\.'
+    # Shadow Clone: outside the exam steps it always casts (see shadow_clones); the exam branches go
+    text = re.sub(r'if \(!\(%sstorymode == 14\)\s*&& !\(%sstorymode == 5\)\) \{' % (get, get), 'if (true) {', text)
+    text = remove_if_blocks(text, r'%sstorymode == \d+' % get)
+    text = remove_if_blocks(text, r'false')
+    # writes: { double _setval = ...; NarutoShippudenModVariables.ifPresent(e, capability -> { if (!equals(capability.storymode ...
+    rx = re.compile(r'\{\s*(?:double|String) _setval = [^;]*;\s*NarutoShippudenModVariables\.ifPresent\(\w+, capability -> \{\s*'
+                    r'if \(!java\.util\.Objects\.equals\(capability\.%s, _setval\)\)' % STORY_VARS)
+    while (m := rx.search(text)):
+        text = text[:m.start()].rstrip(' \t') + text[find_block(text, m.start()):]
+    # the Story Mode item given on first join
+    rx = re.compile(r'if \(entity instanceof Player\) \{\s*ItemStack _setstack = new ItemStack\(StoryModeItem\.block\);')
+    while (m := rx.search(text)):
+        text = text[:m.start()].rstrip(' \t') + text[find_block(text, m.start()):]
+    text = re.sub(r'if \(true\) \{\s*(net\.mcreator\.narutoshippudenmod\.core\.jutsu\.ShadowClones\.cast\(entity\);)\s*\}', r'\1', text)
+    text = re.sub(r'\n\t*double storyrandomclones = 0;', '', text)
+    # the lines the removed blocks leave empty
+    return re.sub(r'(\{|;)\n(?:[ \t]*\n)+(?=\t*\})', r'\1\n', re.sub(r'\{\n[ \t]+\n', '{\n', text))
+
+
 # ---------------------------------------------------------------- Flying Raijin (core/jutsu/FlyingRaijin)
 @func
 def flying_raijin(path, text):

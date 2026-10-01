@@ -86,7 +86,9 @@ def named_elsewhere(i, own):
     return CODE_STRINGS[i] > len(re.findall(r'"(?:naruto_shippuden:)?%s"' % i, own))
 # kept though nothing gives them now: the Otsutsuki weapons stay in the game, hidden (only /give), as the user asked
 KEEP = {'OtsutsukiAxeItem', 'OtsutsukiBatItem', 'OtsutsukiBladeItem', 'OtsutsukiChoppingSwordItem', 'OtsutsukiHammerItem', 'OtsutsukiKatanaItem',
-        'OtsutsukiSpearItem', 'OtsutsukiSwordItem'}
+        'OtsutsukiSpearItem', 'OtsutsukiSwordItem',
+        # only the old story spawned them; the new story's Academy will
+        'IrukaSenseiEntity', 'IrukaSenseiCloneEntity', 'TrainingDummyEntity'}
 for n in KEEP & names: mark(n)
 for n, t in texts.items():
     # event listeners, and things players can get (spawn eggs)

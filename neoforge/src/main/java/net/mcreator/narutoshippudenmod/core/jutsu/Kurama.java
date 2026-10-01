@@ -50,7 +50,7 @@ import java.util.EnumSet;
  */
 @net.neoforged.fml.common.EventBusSubscriber(modid = "naruto_shippuden")
 public final class Kurama {
-	/** How Kurama may come into the world: its spawn egg (by hand or dispenser) and commands. Story Mode adds it directly. */
+	/** How Kurama may come into the world: its spawn egg (by hand or dispenser) and commands. */
 	private static final java.util.Set<net.minecraft.world.entity.EntitySpawnReason> ALLOWED = java.util.EnumSet.of(
 			net.minecraft.world.entity.EntitySpawnReason.SPAWN_ITEM_USE, net.minecraft.world.entity.EntitySpawnReason.DISPENSER,
 			net.minecraft.world.entity.EntitySpawnReason.COMMAND);

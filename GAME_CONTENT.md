@@ -639,7 +639,7 @@ Passives: Samehada eats the chakra of what it hits; Kubikiribocho mends itself o
 
 **Headbands** (15): Hidden Leaf Genin Headband (blue), Hidden Leaf Genin Headband (black), Hidden Leaf Genin Headband (red), Hidden Sand Genin Headband (blue), Hidden Sand Genin Headband (black), Hidden Sand Genin Headband (red), Hidden Mist Genin Headband (blue), Hidden Mist Genin Headband (black), Hidden Mist Genin Headband (red), Hidden Cloud Genin Headband (blue), Hidden Cloud Genin Headband (black), Hidden Cloud Genin Headband (red), Hidden Stone Genin Headband (blue), Hidden Stone Genin Headband (black), Hidden Stone Genin Headband (red)
 
-**Shinobi Items** (18): Bronze Ryo, Silver Ryo, Gold Ryo, Chakra Paper, Shadow Clone Technique, Paper Bomb, Iron Stick, Sharp Iron, Kamui Stone, Ichiraku Ramen, Shogi, Shogi board, Story Mode, D-Rank Mission: Shogi Board, D-Rank Mission: Pillage The Post, D-Rank Mission: Save The Village, C-Rank Mission: Asuma's Chakra Blade, C-Rank Mission: Iron Defense
+**Shinobi Items** (17): Bronze Ryo, Silver Ryo, Gold Ryo, Chakra Paper, Shadow Clone Technique, Paper Bomb, Iron Stick, Sharp Iron, Kamui Stone, Ichiraku Ramen, Shogi, Shogi board, D-Rank Mission: Shogi Board, D-Rank Mission: Pillage The Post, D-Rank Mission: Save The Village, C-Rank Mission: Asuma's Chakra Blade, C-Rank Mission: Iron Defense
 
 **Spawn eggs** (vanilla Spawn Eggs tab): Shinobi Merchant Spawn Egg, Hidden Leaf Shinobi Spawn Egg, Hidden Sand Shinobi Spawn Egg, Hidden Mist Shinobi Spawn Egg, Hidden Cloud Shinobi Spawn Egg, Hidden Stone Shinobi Spawn Egg, Asuma Spawn Egg, Shikamaru Spawn Egg, Kurama Spawn Egg
 
@@ -695,11 +695,11 @@ Thrown kunai and shuriken, and a few old jutsu projectiles, also exist as projec
 - **Hidden Mist Shinobi**: Village shinobi (Genin, Chunin or Jonin): footwork, hand signs and their village's nature jutsu, kunai and shuriken, Body Flicker, Substitution.
 - **Hidden Sand Shinobi**: Village shinobi (Genin, Chunin or Jonin): footwork, hand signs and their village's nature jutsu, kunai and shuriken, Body Flicker, Substitution.
 - **Hidden Stone Shinobi**: Village shinobi (Genin, Chunin or Jonin): footwork, hand signs and their village's nature jutsu, kunai and shuriken, Body Flicker, Substitution.
-- **Iruka Sensei**: Academy teacher (story).
+- **Iruka Sensei**: Academy teacher (kept for the new story; nothing spawns him yet).
 - **Shikamaru**: Mission character.
-- **Training Dummy**: Takes hits for training.
+- **Training Dummy**: Takes hits for training (kept for the new story; nothing spawns it yet).
 - **Shinobi Merchant**: Trades for Ryo (see above).
-- **Kurama** (Nine-Tails: spawn egg, commands and Story Mode only, never on its own): claw swipes, tail sweeps, a roar, the Tailed Beast Ball (and a volley of small ones), a leap with a shockwave. Faster below half health.
+- **Kurama** (Nine-Tails: spawn egg and commands only, never on its own): claw swipes, tail sweeps, a roar, the Tailed Beast Ball (and a volley of small ones), a leap with a shockwave. Faster below half health.
 
 ### Summons and jutsu creatures
 
@@ -711,7 +711,7 @@ Akamaru, Crow, Earth Golem, Wood Golem; plus the shadow clones, the Nara shadows
 
 ## Blocks
 
-Mostly blocks jutsu place (they disappear again) and story blocks:
+Mostly blocks jutsu place (they disappear again) and a few old blocks:
 
 - Amaterasu (`amaterasu`)
 - Amaterasu (`amaterasu_spread`)
@@ -732,8 +732,8 @@ Status effects jutsu put on you or others: Coercion Sharingan Genjutsu, Drowning
 
 ## World
 
-- Biomes: Kamui, Story Mode Biome
-- Dimensions: Kamui Dimension, Story Mode Dimension
+- Biomes: Kamui
+- Dimensions: Kamui Dimension
 - Structures: Kamui Tower1, Kamui Tower2, Kamui Tower3, Kamui Tower4, Kamui Tower5, Kamui Tower6, Kamui Tower7, Kamui Tower8, Kamui Tower9
 
 ## Stats, ranks and progression
@@ -757,7 +757,7 @@ Status effects jutsu put on you or others: Coercion Sharingan Genjutsu, Drowning
 
 - **Chakra Control** (G): walk on water and walls, Focus (sneak and stand still) to regenerate chakra and sense, harder sprinting punches, a dash on Left Alt.
 - **Info card** (I): stats, dojutsu, missions, the Jutsu page and a mini-game.
-- Missions: D-Rank Mission: Shogi Board, D-Rank Mission: Pillage The Post, D-Rank Mission: Save The Village, C-Rank Mission: Asuma's Chakra Blade, C-Rank Mission: Iron Defense, Story Mode.
+- Missions: D-Rank Mission: Shogi Board, D-Rank Mission: Pillage The Post, D-Rank Mission: Save The Village, C-Rank Mission: Asuma's Chakra Blade, C-Rank Mission: Iron Defense.
 
 ## Settings
 

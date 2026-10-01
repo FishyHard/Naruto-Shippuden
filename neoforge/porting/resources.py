@@ -345,25 +345,6 @@ def dimensions():
         write('data/%s/worldgen/feature/%s.json' % (NS, f), {'type': '%s:%s' % (NS, f)})
         write('data/%s/worldgen/placed_feature/%s.json' % (NS, f), {'feature': '%s:%s' % (NS, f), 'placement': []})
 
-    # Story mode: overworld-shaped terrain with a single custom biome
-    over_type = json.load(open(os.path.join(mc, 'overworld_dimension_type.json')))
-    over_type['attributes']['minecraft:visual/fog_color'] = color(-8858908)
-    over_type['attributes']['minecraft:visual/sky_color'] = color(-8858908)
-    over_type['attributes'].pop('minecraft:gameplay/nether_portal_spawns_piglin', None)
-    write('data/%s/dimension_type/story_mode_dimension.json' % NS, over_type)
-    write('data/%s/dimension/story_mode_dimension.json' % NS, {
-        'type': '%s:story_mode_dimension' % NS,
-        'generator': {'type': 'minecraft:noise', 'settings': 'minecraft:overworld',
-                      'biome_source': {'type': 'minecraft:fixed', 'biome': '%s:story_mode_biome' % NS}}})
-    write('data/%s/worldgen/biome/story_mode_biome.json' % NS, {
-        'attributes': {'minecraft:gameplay/natural_mob_spawns': NO_SPAWNS,
-                       'minecraft:visual/sky_color': color(-8858908), 'minecraft:visual/fog_color': color(-8858908),
-                       'minecraft:visual/water_fog_color': color(329011)},
-        'carvers': ['minecraft:cave', 'minecraft:canyon'], 'downfall': 0.1, 'has_precipitation': True, 'temperature': 0.5,
-        'effects': {'water_color': color(-13207090), 'foliage_color': color(10387789), 'grass_color': color(-13135304)},
-        'features': [[], ['minecraft:lake_lava_underground', 'minecraft:lake_lava_surface'], [], [], [], [], [], [], [],
-                     ['minecraft:patch_grass_jungle'], []]})
-
 
 def spawns():
     for key, category, weight, lo, hi, biomes in rules.SPAWNS:

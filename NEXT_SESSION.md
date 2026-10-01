@@ -399,6 +399,7 @@ background and watch the log for `Exception|Caused by`.
 | `shinobi_ai`, `shinobi_renderer` | Village shinobi use ShinobiAI and ShinobiRenderer. |
 | `kurama_ai` | Kurama uses core/jutsu/Kurama; no per-tick Instant Health. |
 | `old_stat_attributes` | The broken `/attribute generic.*` commands are gone. |
+| `remove_story` | The old Story Mode is gone (item, its 22 steps, the Story Mode Dimension and biome, its save variables, its branches in Shadow Clone, the Genin fight and Iruka's tick). Iruka and the Training Dummy are kept in `KEEP` (`dead_code.py`) for the new story. |
 
 Apply new `@func` rules with the body-only runner under "How to change code".
 
@@ -457,7 +458,8 @@ Apply new `@func` rules with the body-only runner under "How to change code".
 
 ## Open items
 
-- Shadow Clone still runs its MCreator procedure (including the story-exam branch); it's the last entry in `JutsuTable`.
+- Shadow Clone still runs its MCreator procedure; it's the last entry in `JutsuTable`.
+- A new story mode is planned (see the roadmap discussion); the old one was removed.
 - The Susanoo itself is still the old model swap (`KeybindProcedures` reads the stage counts).
 - Otsutsuki weapons: registered, in no tab (only `/give`), switching forms with the old `OtsutsukiToolsSwitchProcedure`.
 - The Susanoo is still the old model swap.

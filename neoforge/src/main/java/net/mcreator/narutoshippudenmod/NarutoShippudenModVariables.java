@@ -170,7 +170,6 @@ public class NarutoShippudenModVariables {
 		public double speed = 0;
 		public double spusecount = 1.0;
 		public double SS_Mission = 0;
-		public double storymode = 0;
 		public double summoning = 0;
 		public double taijutsu = 0;
 		public boolean tenroreleaselogic = false;
@@ -380,10 +379,7 @@ public class NarutoShippudenModVariables {
 		public boolean WHold = false;
 		public boolean WaterWalk = false;
 		public boolean WallClimb = false;
-		public double StorymodeCooldown = 0;
-		public String directionstorymode = "\"\"";
 		public double TrainingDummyHits = 0;
-		public String StoryModeGeninFight = " ";
 		public double HeadbandSelect = 0;
 		public boolean Kagutsuchi = false;
 		public boolean AmaterasuSusano = false;
@@ -526,7 +522,6 @@ public class NarutoShippudenModVariables {
 			out.putDouble("speed", speed);
 			out.putDouble("spusecount", spusecount);
 			out.putDouble("SS_Mission", SS_Mission);
-			out.putDouble("storymode", storymode);
 			out.putDouble("summoning", summoning);
 			out.putDouble("taijutsu", taijutsu);
 			out.putBoolean("tenroreleaselogic", tenroreleaselogic);
@@ -736,10 +731,7 @@ public class NarutoShippudenModVariables {
 			out.putBoolean("WHold", WHold);
 			out.putBoolean("WaterWalk", WaterWalk);
 			out.putBoolean("WallClimb", WallClimb);
-			out.putDouble("StorymodeCooldown", StorymodeCooldown);
-			out.putString("directionstorymode", directionstorymode);
 			out.putDouble("TrainingDummyHits", TrainingDummyHits);
-			out.putString("StoryModeGeninFight", StoryModeGeninFight);
 			out.putDouble("HeadbandSelect", HeadbandSelect);
 			out.putBoolean("Kagutsuchi", Kagutsuchi);
 			out.putBoolean("AmaterasuSusano", AmaterasuSusano);
@@ -875,7 +867,6 @@ public class NarutoShippudenModVariables {
 			speed = in.getDoubleOr("speed", 0);
 			spusecount = in.getDoubleOr("spusecount", 1.0);
 			SS_Mission = in.getDoubleOr("SS_Mission", 0);
-			storymode = in.getDoubleOr("storymode", 0);
 			summoning = in.getDoubleOr("summoning", 0);
 			taijutsu = in.getDoubleOr("taijutsu", 0);
 			tenroreleaselogic = in.getBooleanOr("tenroreleaselogic", false);
@@ -1085,10 +1076,7 @@ public class NarutoShippudenModVariables {
 			WHold = in.getBooleanOr("WHold", false);
 			WaterWalk = in.getBooleanOr("WaterWalk", false);
 			WallClimb = in.getBooleanOr("WallClimb", false);
-			StorymodeCooldown = in.getDoubleOr("StorymodeCooldown", 0);
-			directionstorymode = in.getStringOr("directionstorymode", "\"\"");
 			TrainingDummyHits = in.getDoubleOr("TrainingDummyHits", 0);
-			StoryModeGeninFight = in.getStringOr("StoryModeGeninFight", " ");
 			HeadbandSelect = in.getDoubleOr("HeadbandSelect", 0);
 			Kagutsuchi = in.getBooleanOr("Kagutsuchi", false);
 			AmaterasuSusano = in.getBooleanOr("AmaterasuSusano", false);

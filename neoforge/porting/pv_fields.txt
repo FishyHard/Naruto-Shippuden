@@ -101,7 +101,6 @@ double	sp	0
 double	speed	0
 double	spusecount	1.0
 double	SS_Mission	0
-double	storymode	0
 double	summoning	0
 double	taijutsu	0
 boolean	tenroreleaselogic	false
@@ -358,10 +357,7 @@ boolean	WaterWalk	false
 boolean	WallClimb	false
 double	SusanoActive	0
 double	SusanoForms	0
-double	StorymodeCooldown	0
-String	directionstorymode	"\"\""
 double	TrainingDummyHits	0
-String	StoryModeGeninFight	" "
 double	HeadbandSelect	0
 boolean	Kagutsuchi	false
 boolean	AmaterasuSusano	false

@@ -1898,15 +1898,7 @@ public final class GuiProcedures {
 					}
 				});
 			}
-			{
-				double _setval = 22;
-				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					if (!java.util.Objects.equals(capability.storymode, _setval)) {
-						capability.storymode = _setval;
-						capability.syncPlayerVariables(entity);
-					}
-				});
-			}
+
 			if (entity instanceof Player)
 				((Player) entity).closeContainer();
 		}

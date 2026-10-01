@@ -403,6 +403,8 @@ StormDNARightClickedProcedure
 StormParticle
 StormReleaseRightclickedProcedure
 StormReleaseTechniqueRightclickedProcedure
+StoryModeItem
+StoryModeRightclickedProcedure
 SummoningButtonProcedure
 SwiftDNAImplantMobProcedure
 SwiftDNARightClickedProcedure

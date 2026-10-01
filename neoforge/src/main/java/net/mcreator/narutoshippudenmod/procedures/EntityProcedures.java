@@ -1285,116 +1285,6 @@ public final class EntityProcedures {
 			Entity entity = (Entity) dependencies.get("entity");
 			Entity sourceentity = (Entity) dependencies.get("sourceentity");
 			if (sourceentity instanceof Player) {
-				if (NarutoShippudenModVariables.get(sourceentity).storymode == 16) {
-					if (!(NarutoShippudenModVariables.get(sourceentity).StoryModeGeninFight).equals(" ")) {
-						if ((NarutoShippudenModVariables.get(sourceentity).StoryModeGeninFight).equals("Leaf")) {
-							if (entity instanceof HiddenLeafShinobiEntity.CustomEntity) {
-								{
-									double _setval = 17;
-									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										if (!java.util.Objects.equals(capability.storymode, _setval)) {
-											capability.storymode = _setval;
-											capability.syncPlayerVariables(sourceentity);
-										}
-									});
-								}
-								{
-									String _setval = "Win";
-									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
-											capability.StoryModeGeninFight = _setval;
-											capability.syncPlayerVariables(sourceentity);
-										}
-									});
-								}
-							}
-						} else if ((NarutoShippudenModVariables.get(sourceentity).StoryModeGeninFight).equals("Sand")) {
-							if (entity instanceof HiddenSandShinobiEntity.CustomEntity) {
-								{
-									double _setval = 17;
-									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										if (!java.util.Objects.equals(capability.storymode, _setval)) {
-											capability.storymode = _setval;
-											capability.syncPlayerVariables(sourceentity);
-										}
-									});
-								}
-								{
-									String _setval = "Win";
-									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
-											capability.StoryModeGeninFight = _setval;
-											capability.syncPlayerVariables(sourceentity);
-										}
-									});
-								}
-							}
-						} else if ((NarutoShippudenModVariables.get(sourceentity).StoryModeGeninFight).equals("Stone")) {
-							if (entity instanceof HiddenStoneShinobiEntity.CustomEntity) {
-								{
-									double _setval = 17;
-									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										if (!java.util.Objects.equals(capability.storymode, _setval)) {
-											capability.storymode = _setval;
-											capability.syncPlayerVariables(sourceentity);
-										}
-									});
-								}
-								{
-									String _setval = "Win";
-									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
-											capability.StoryModeGeninFight = _setval;
-											capability.syncPlayerVariables(sourceentity);
-										}
-									});
-								}
-							}
-						} else if ((NarutoShippudenModVariables.get(sourceentity).StoryModeGeninFight).equals("Cloud")) {
-							if (entity instanceof HiddenCloudShinobiEntity.CustomEntity) {
-								{
-									double _setval = 17;
-									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										if (!java.util.Objects.equals(capability.storymode, _setval)) {
-											capability.storymode = _setval;
-											capability.syncPlayerVariables(sourceentity);
-										}
-									});
-								}
-								{
-									String _setval = "Win";
-									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
-											capability.StoryModeGeninFight = _setval;
-											capability.syncPlayerVariables(sourceentity);
-										}
-									});
-								}
-							}
-						} else if ((NarutoShippudenModVariables.get(sourceentity).StoryModeGeninFight).equals("Mist")) {
-							if (entity instanceof HiddenMistShinobiEntity.CustomEntity) {
-								{
-									double _setval = 17;
-									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										if (!java.util.Objects.equals(capability.storymode, _setval)) {
-											capability.storymode = _setval;
-											capability.syncPlayerVariables(sourceentity);
-										}
-									});
-								}
-								{
-									String _setval = "Win";
-									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
-											capability.StoryModeGeninFight = _setval;
-											capability.syncPlayerVariables(sourceentity);
-										}
-									});
-								}
-							}
-						}
-					}
-				}
 			}
 			{
 				List<Entity> _entfound = world
@@ -1407,116 +1297,6 @@ public final class EntityProcedures {
 						}.compareDistOf(x, y, z)).collect(Collectors.toList());
 				for (Entity entityiterator : _entfound) {
 					if (entityiterator instanceof Player) {
-						if (NarutoShippudenModVariables.get(entityiterator).storymode == 16) {
-							if (!(NarutoShippudenModVariables.get(entityiterator).StoryModeGeninFight).equals(" ")) {
-								if ((NarutoShippudenModVariables.get(entityiterator).StoryModeGeninFight).equals("Leaf")) {
-									if (entity instanceof HiddenLeafShinobiEntity.CustomEntity) {
-										{
-											double _setval = 17;
-											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														if (!java.util.Objects.equals(capability.storymode, _setval)) {
-															capability.storymode = _setval;
-															capability.syncPlayerVariables(entityiterator);
-														}
-													});
-										}
-										{
-											String _setval = "Win";
-											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
-															capability.StoryModeGeninFight = _setval;
-															capability.syncPlayerVariables(entityiterator);
-														}
-													});
-										}
-									}
-								} else if ((NarutoShippudenModVariables.get(entityiterator).StoryModeGeninFight).equals("Sand")) {
-									if (entity instanceof HiddenSandShinobiEntity.CustomEntity) {
-										{
-											double _setval = 17;
-											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														if (!java.util.Objects.equals(capability.storymode, _setval)) {
-															capability.storymode = _setval;
-															capability.syncPlayerVariables(entityiterator);
-														}
-													});
-										}
-										{
-											String _setval = "Win";
-											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
-															capability.StoryModeGeninFight = _setval;
-															capability.syncPlayerVariables(entityiterator);
-														}
-													});
-										}
-									}
-								} else if ((NarutoShippudenModVariables.get(entityiterator).StoryModeGeninFight).equals("Stone")) {
-									if (entity instanceof HiddenStoneShinobiEntity.CustomEntity) {
-										{
-											double _setval = 17;
-											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														if (!java.util.Objects.equals(capability.storymode, _setval)) {
-															capability.storymode = _setval;
-															capability.syncPlayerVariables(entityiterator);
-														}
-													});
-										}
-										{
-											String _setval = "Win";
-											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
-															capability.StoryModeGeninFight = _setval;
-															capability.syncPlayerVariables(entityiterator);
-														}
-													});
-										}
-									}
-								} else if ((NarutoShippudenModVariables.get(entityiterator).StoryModeGeninFight).equals("Cloud")) {
-									if (entity instanceof HiddenCloudShinobiEntity.CustomEntity) {
-										{
-											double _setval = 17;
-											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														if (!java.util.Objects.equals(capability.storymode, _setval)) {
-															capability.storymode = _setval;
-															capability.syncPlayerVariables(entityiterator);
-														}
-													});
-										}
-										{
-											String _setval = "Win";
-											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
-															capability.StoryModeGeninFight = _setval;
-															capability.syncPlayerVariables(entityiterator);
-														}
-													});
-										}
-									}
-								} else if ((NarutoShippudenModVariables.get(entityiterator).StoryModeGeninFight).equals("Mist")) {
-									if (entity instanceof HiddenMistShinobiEntity.CustomEntity) {
-										{
-											double _setval = 17;
-											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														if (!java.util.Objects.equals(capability.storymode, _setval)) {
-															capability.storymode = _setval;
-															capability.syncPlayerVariables(entityiterator);
-														}
-													});
-										}
-										{
-											String _setval = "Win";
-											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
-															capability.StoryModeGeninFight = _setval;
-															capability.syncPlayerVariables(entityiterator);
-														}
-													});
-										}
-									}
-								}
-							}
-						}
 					}
 				}
 			}
@@ -1539,118 +1319,6 @@ public final class EntityProcedures {
 			Entity entity = (Entity) dependencies.get("entity");
 			Entity sourceentity = (Entity) dependencies.get("sourceentity");
 			if (entity instanceof Player) {
-				if (NarutoShippudenModVariables.get(entity).storymode == 16) {
-					if (!(NarutoShippudenModVariables.get(entity).StoryModeGeninFight).equals(" ")) {
-						if ((NarutoShippudenModVariables.get(entity).StoryModeGeninFight).equals("Leaf")) {
-							if (sourceentity instanceof HiddenLeafShinobiEntity.CustomEntity) {
-								{
-									String _setval = "Defeat";
-									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
-											capability.StoryModeGeninFight = _setval;
-											capability.syncPlayerVariables(entity);
-										}
-									});
-								}
-								{
-									double _setval = 17;
-									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										if (!java.util.Objects.equals(capability.storymode, _setval)) {
-											capability.storymode = _setval;
-											capability.syncPlayerVariables(entity);
-										}
-									});
-								}
-							}
-						} else if ((NarutoShippudenModVariables.get(entity).StoryModeGeninFight).equals("Sand")) {
-							if (sourceentity instanceof HiddenSandShinobiEntity.CustomEntity) {
-								{
-									String _setval = "Defeat";
-									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
-											capability.StoryModeGeninFight = _setval;
-											capability.syncPlayerVariables(entity);
-										}
-									});
-								}
-								{
-									double _setval = 17;
-									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										if (!java.util.Objects.equals(capability.storymode, _setval)) {
-											capability.storymode = _setval;
-											capability.syncPlayerVariables(entity);
-										}
-									});
-								}
-							}
-						} else if ((NarutoShippudenModVariables.get(entity).StoryModeGeninFight).equals("Stone")) {
-							if (sourceentity instanceof HiddenStoneShinobiEntity.CustomEntity) {
-								{
-									String _setval = "Defeat";
-									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
-											capability.StoryModeGeninFight = _setval;
-											capability.syncPlayerVariables(entity);
-										}
-									});
-								}
-								{
-									double _setval = 17;
-									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										if (!java.util.Objects.equals(capability.storymode, _setval)) {
-											capability.storymode = _setval;
-											capability.syncPlayerVariables(entity);
-										}
-									});
-								}
-							}
-						} else if ((NarutoShippudenModVariables.get(entity).StoryModeGeninFight).equals("Cloud")) {
-							if (sourceentity instanceof HiddenCloudShinobiEntity.CustomEntity) {
-								{
-									String _setval = "Defeat";
-									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
-											capability.StoryModeGeninFight = _setval;
-											capability.syncPlayerVariables(entity);
-										}
-									});
-								}
-								{
-									double _setval = 17;
-									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										if (!java.util.Objects.equals(capability.storymode, _setval)) {
-											capability.storymode = _setval;
-											capability.syncPlayerVariables(entity);
-										}
-									});
-								}
-							}
-						} else if ((NarutoShippudenModVariables.get(entity).StoryModeGeninFight).equals("Mist")) {
-							if (sourceentity instanceof HiddenMistShinobiEntity.CustomEntity) {
-								{
-									String _setval = "Defeat";
-									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
-											capability.StoryModeGeninFight = _setval;
-											capability.syncPlayerVariables(entity);
-										}
-									});
-								}
-								{
-									double _setval = 17;
-									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										if (!java.util.Objects.equals(capability.storymode, _setval)) {
-											capability.storymode = _setval;
-											capability.syncPlayerVariables(entity);
-										}
-									});
-								}
-							}
-						}
-						if (!sourceentity.level().isClientSide())
-							sourceentity.discard();
-					}
-				}
 			}
 		}
 	}
@@ -1761,16 +1429,6 @@ public final class EntityProcedures {
 						}.compareDistOf(x, y, z)).collect(Collectors.toList());
 				for (Entity entityiterator : _entfound) {
 					if (entityiterator instanceof Player) {
-						if (NarutoShippudenModVariables.get(entityiterator).storymode == 5) {
-							if (NarutoShippudenModVariables.get(entityiterator).StorymodeCooldown == 2) {
-								if (!entity.level().isClientSide())
-									entity.discard();
-							}
-						}
-						if (NarutoShippudenModVariables.get(entityiterator).storymode == 11) {
-							if (!entity.level().isClientSide())
-								entity.discard();
-						}
 					}
 				}
 			}
@@ -1984,53 +1642,7 @@ public final class EntityProcedures {
 			Entity entity = (Entity) dependencies.get("entity");
 			Entity sourceentity = (Entity) dependencies.get("sourceentity");
 			if (entity.getPersistentData().getBooleanOr("Combat", false) == false) {
-				if (NarutoShippudenModVariables.get(sourceentity).storymode == 8) {
-					if (NarutoShippudenModVariables.get(sourceentity).TrainingDummyHits <= 99) {
-						{
-							double _setval = (NarutoShippudenModVariables.get(sourceentity).TrainingDummyHits + 1);
-							NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-								if (!java.util.Objects.equals(capability.TrainingDummyHits, _setval)) {
-									capability.TrainingDummyHits = _setval;
-									capability.syncPlayerVariables(sourceentity);
-								}
-							});
-						}
-						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity)
-									.sendOverlayMessage(Component.literal(("\u00A74Damage: "
-											+ (new java.text.DecimalFormat("##.##")
-													.format(Math.round(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMaxHealth() : -1)
-															- ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1))))
-											+ " \u00A76Hits: "
-											+ new java.text.DecimalFormat("##.##")
-													.format(NarutoShippudenModVariables.get(sourceentity).TrainingDummyHits)
-											+ "/100")));
-						}
-						entity.getPersistentData().putDouble("TotalDamage",
-								(entity.getPersistentData().getDoubleOr("TotalDamage", 0)
-										+ ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMaxHealth() : -1)
-										- ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1)));
-						if (entity instanceof LivingEntity)
-							((LivingEntity) entity).setHealth((float) ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMaxHealth() : -1));
-						entity.getPersistentData().putBoolean("Hurt", (true));
-						entity.getPersistentData().putBoolean("Combat", (true));
-					} else {
-						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-							((Player) sourceentity)
-									.sendOverlayMessage(Component.literal(("\u00A74Damage: " + (new java.text.DecimalFormat("##.##")
-											.format(Math.round(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMaxHealth() : -1)
-													- ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1)))))));
-						}
-						entity.getPersistentData().putDouble("TotalDamage",
-								(entity.getPersistentData().getDoubleOr("TotalDamage", 0)
-										+ ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMaxHealth() : -1)
-										- ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1)));
-						if (entity instanceof LivingEntity)
-							((LivingEntity) entity).setHealth((float) ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMaxHealth() : -1));
-						entity.getPersistentData().putBoolean("Hurt", (true));
-						entity.getPersistentData().putBoolean("Combat", (true));
-					}
-				} else {
+				{
 					if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
 						((Player) sourceentity).sendOverlayMessage(Component.literal(("\u00A74Damage: " + (new java.text.DecimalFormat("##.##")
 								.format(Math.round(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMaxHealth() : -1)
@@ -2054,56 +1666,7 @@ public final class EntityProcedures {
 				if (((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1) < ((entity instanceof LivingEntity)
 						? ((LivingEntity) entity).getMaxHealth()
 						: -1)) {
-					if (NarutoShippudenModVariables.get(sourceentity).storymode == 8) {
-						if (NarutoShippudenModVariables.get(sourceentity).TrainingDummyHits <= 99) {
-							{
-								double _setval = (NarutoShippudenModVariables.get(sourceentity).TrainingDummyHits + 1);
-								NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-									if (!java.util.Objects.equals(capability.TrainingDummyHits, _setval)) {
-										capability.TrainingDummyHits = _setval;
-										capability.syncPlayerVariables(sourceentity);
-									}
-								});
-							}
-							if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-								((Player) sourceentity).sendOverlayMessage(
-										Component.literal(("\u00A74Damage: "
-												+ (new java.text.DecimalFormat("##.##").format(
-														Math.round(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMaxHealth() : -1)
-																- ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1))))
-												+ " \u00A76Hits: "
-												+ new java.text.DecimalFormat("##.##")
-														.format(NarutoShippudenModVariables.get(sourceentity).TrainingDummyHits)
-												+ "/100")));
-							}
-							entity.getPersistentData().putDouble("TotalDamage",
-									(entity.getPersistentData().getDoubleOr("TotalDamage", 0)
-											+ ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMaxHealth() : -1)
-											- ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1)));
-							if (entity instanceof LivingEntity)
-								((LivingEntity) entity)
-										.setHealth((float) ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMaxHealth() : -1));
-							entity.getPersistentData().putBoolean("Hurt", (true));
-							entity.getPersistentData().putBoolean("Combat", (true));
-						} else {
-							if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
-								((Player) sourceentity)
-										.sendOverlayMessage(
-												Component.literal(("\u00A74Damage: " + (new java.text.DecimalFormat("##.##").format(
-														Math.round(((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMaxHealth() : -1)
-																- ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1)))))));
-							}
-							entity.getPersistentData().putDouble("TotalDamage",
-									(entity.getPersistentData().getDoubleOr("TotalDamage", 0)
-											+ ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMaxHealth() : -1)
-											- ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getHealth() : -1)));
-							if (entity instanceof LivingEntity)
-								((LivingEntity) entity)
-										.setHealth((float) ((entity instanceof LivingEntity) ? ((LivingEntity) entity).getMaxHealth() : -1));
-							entity.getPersistentData().putBoolean("Hurt", (true));
-							entity.getPersistentData().putBoolean("Combat", (true));
-						}
-					} else {
+					{
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
 							((Player) sourceentity)
 									.sendOverlayMessage(Component.literal(("\u00A74Damage: " + (new java.text.DecimalFormat("##.##")
@@ -2199,12 +1762,6 @@ public final class EntityProcedures {
 						}.compareDistOf(x, y, z)).collect(Collectors.toList());
 				for (Entity entityiterator : _entfound) {
 					if (entityiterator instanceof Player) {
-						if (NarutoShippudenModVariables.get(entityiterator).storymode == 8) {
-							if (NarutoShippudenModVariables.get(entityiterator).TrainingDummyHits >= 100) {
-								if (!entity.level().isClientSide())
-									entity.discard();
-							}
-						}
 					}
 				}
 			}
