@@ -42,6 +42,58 @@ public final class DevTest {
 				msg -> NarutoShippudenMod.LOGGER.info("DEVTEST {}", msg.getString()));
 	}
 
+	/**
+	 * Story structures in a flat world (-PquickPlay=structtest): run/structure_preview.txt, written by porting/structures_gen/gen.py,
+	 * holds "place <template> x y z [rotation]", "cmd <command>", "wait <ticks>" and "shot <name> x y z yaw pitch" lines.
+	 */
+	private static void structureSteps(Minecraft mc) {
+		java.util.List<String> lines;
+		try {
+			lines = java.nio.file.Files.readAllLines(mc.gameDirectory.toPath().resolve("structure_preview.txt"));
+		} catch (java.io.IOException e) {
+			throw new RuntimeException(e);
+		}
+		STEPS.add(() -> {
+			mc.gui.setScreen(null);
+			mc.options.pauseOnLostFocus = false;
+			if (!mc.gui.hud.isHidden())
+				mc.gui.hud.toggle();
+			mc.options.chatVisibility().set(net.minecraft.world.entity.player.ChatVisiblity.HIDDEN);
+			command(mc, "difficulty peaceful");
+			command(mc, "gamemode spectator");
+			command(mc, "time set 6000");
+			command(mc, "weather clear");
+		});
+		for (String line : lines) {
+			String[] a = line.trim().split("\\s+");
+			if (a.length == 0 || a[0].isEmpty() || a[0].startsWith("#"))
+				continue;
+			switch (a[0]) {
+				case "place" -> {
+					// stand over the spot first, so its chunks are loaded
+					STEPS.add(() -> {
+						command(mc, "tp @s " + a[2] + " " + (Integer.parseInt(a[3]) + 40) + " " + a[4]);
+						nextDelay = 40;
+					});
+					STEPS.add(() -> {
+						command(mc, "place template naruto_shippuden:" + a[1] + " " + a[2] + " " + a[3] + " " + a[4] + (a.length > 5 ? " " + a[5] : ""));
+						NarutoShippudenMod.LOGGER.info("DEVTEST placed {}", a[1]);
+					});
+				}
+				case "cmd" -> STEPS.add(() -> command(mc, line.trim().substring(4)));
+				case "wait" -> STEPS.add(() -> nextDelay = Integer.parseInt(a[1]));
+				case "shot" -> {
+					STEPS.add(() -> {
+						command(mc, "tp @s " + a[2] + " " + a[3] + " " + a[4] + " " + a[5] + " " + a[6]);
+						nextDelay = 60;
+					});
+					STEPS.add(() -> shot(mc, "st_" + a[1]));
+				}
+				default -> NarutoShippudenMod.LOGGER.warn("DEVTEST structure preview: unknown line {}", line);
+			}
+		}
+	}
+
 	/** Wings on a sneaking player, Akamaru sitting / as the Man Beast Clone / as a fang, the eye wheel, and phasing through a wall. */
 	private static void batch5Steps(Minecraft mc) {
 		java.util.function.Consumer<Integer> form = f -> onServer(mc, p -> {
@@ -546,6 +598,11 @@ public final class DevTest {
 				}));
 				nextDelay = 420;
 			});
+			STEPS.add(mc::stop);
+			return;
+		}
+		if (System.getProperty("naruto.devtest.only", "").equals("structures")) {
+			structureSteps(mc);
 			STEPS.add(mc::stop);
 			return;
 		}
