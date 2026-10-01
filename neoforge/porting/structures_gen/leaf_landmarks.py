@@ -47,6 +47,17 @@ SHINOBI = [  # 忍, 7x8: 刃 over 心
     '#.#...#',
     '..####.',
 ]
+SHINOBI_6 = [  # 忍, 6x9, for the gate's sign
+    '######',
+    '..#..#',
+    '#.#..#',
+    '.#...#',
+    '#...##',
+    '......',
+    '...#..',
+    '#.#..#',
+    '..###.',
+]
 LEAF = [  # the Leaf's swirl, 7x8
     '..###..',
     '.#...#.',
@@ -185,17 +196,14 @@ def hokage_tower():
     b.ring(c, top, cz, 11, 'smooth_quartz')
     b.ring(c, top + 1, cz, 11, 'iron_bars[east=false,north=false,south=false,west=false,waterlogged=false]')
     b.set(c, top + 1, cz, st('lightning_rod', facing='up', powered=False, waterlogged=False))
-    for i, ang in enumerate((0.75, 2.4, 3.9, 5.5)):
-        a = ang
-        for h in range(0, 10):
-            rad = 10.2 + 0.05 * h * h
-            half = 1.8 if h < 4 else 1.2 if h < 7 else 0.5
-            for tw in range(-3, 4):
-                t = tw * half / 3
-                for tr in (-0.5, 0.0, 0.5) if h < 7 else (0.0,):
-                    x = c + round((rad + tr) * math.cos(a + t / rad))
-                    z = cz + round((rad + tr) * math.sin(a + t / rad))
-                    b.set(x, top + 1 + h, z, 'smooth_quartz')
+    # the horns: slim white curves leaning out from the rim, one block thick
+    for ang in (0.75, 2.4, 3.9, 5.5):
+        for h in range(0, 6):
+            rad = 10.0 + 0.12 * h * h
+            for tw in ((-1, 0, 1) if h < 2 else (0,)):
+                x = c + round(rad * math.cos(ang + tw * 0.09))
+                z = cz + round(rad * math.sin(ang + tw * 0.09))
+                b.set(x, top + 1 + h, z, 'smooth_quartz' if h < 5 else 'quartz_slab[type=bottom,waterlogged=false]')
     # the emblem on the top drum's front: a grey frame, a red disc, a dark 火
     pz = cz + 12
     pc = G + 31
@@ -485,6 +493,23 @@ def interior(b, c, cz):
     b.set(c - 3, G_ + 38, cz, st('spruce_trapdoor', facing='east', half='bottom', open=False, powered=False, waterlogged=False))
     # the staircase through every floor
     spiral(b, c + 5, cz + 4, G_, G_ + 33, (G_ + 10, G_ + 17, G_ + 24, G_ + 32))
+    # the quarters and the office are private: the stairs arrive in a small landing, walled off, with a door into the room
+    sx, sz = c + 5, cz + 4
+    for (fy, ceil) in ((G_ + 17, G_ + 23), (G_ + 24, G_ + 31)):
+        for dx in range(-3, 4):
+            for dz in range(-3, 4):
+                if max(abs(dx), abs(dz)) != 3:
+                    continue
+                x, z = sx + dx, sz + dz
+                if (x - c) ** 2 + (z - cz) ** 2 > 10.4 ** 2:
+                    continue
+                corner = abs(dx) == 3 and abs(dz) == 3
+                for y in range(fy + 1, ceil + 1):
+                    if b.get(x, y, z) in (None, AIR) or 'fence' in (b.get(x, y, z) or '') or 'carpet' in (b.get(x, y, z) or ''):
+                        b.set(x, y, z, 'stripped_dark_oak_log[axis=y]' if corner else
+                              ('stripped_spruce_wood[axis=y]' if y in (fy + 1, ceil) else 'white_terracotta'))
+        b.door(sx - 3, fy + 1, sz, 'spruce', facing='west')
+        b.set(sx - 4, fy + 1, sz, AIR); b.set(sx - 4, fy + 2, sz, AIR)
 
 
 LEAVES_DARK = st('dark_oak_leaves', distance=1, persistent=True, waterlogged=False)
@@ -498,28 +523,45 @@ def water_tank_small(b, x, y, z):
     b.disc(x, y + 4, z, 1.5, slab('smooth_stone_slab'))
 
 
+def noise(x, y, size, salt):
+    """Smooth value noise in 0..1: hashed corners every `size` blocks, blended."""
+    gx, gy = x / size, y / size
+    x0, y0 = math.floor(gx), math.floor(gy)
+    fx, fy = gx - x0, gy - y0
+    fx, fy = fx * fx * (3 - 2 * fx), fy * fy * (3 - 2 * fy)
+    h = lambda i, j: _hash(i, j, 0, salt)
+    top = h(x0, y0) * (1 - fx) + h(x0 + 1, y0) * fx
+    bot = h(x0, y0 + 1) * (1 - fx) + h(x0 + 1, y0 + 1) * fx
+    return top * (1 - fy) + bot * fy
+
+
+def plaster(x, y, salt=0):
+    """The gate wall's salmon plaster: soft patches of lighter and darker colour, no joints."""
+    v = 0.7 * noise(x, y, 7, 81 + salt) + 0.3 * noise(x, y, 3, 82 + salt) + (_hash(x, y, salt, 83) - 0.5) * 0.05
+    if v < 0.27:
+        return 'granite'
+    if v < 0.80:
+        return 'terracotta'
+    return 'white_terracotta' if v > 0.86 else 'smooth_red_sandstone'
+
+
 # ---------------------------------------------------------------- the great gate
 def gate():
     """The Leaf's main gate: a thick salmon wall, a light stone frame painted 忍 (leaf) 忍, a green tiled roof, the tall
     green doors swung open outward with あ and ん, pipes along the wall, and the guard booth inside."""
-    W, D = 59, 26
-    b = Build(W, 34, D)
+    W, D = 63, 26
+    b = Build(W, 40, D)
     m = W // 2
     z1, z2 = 8, 11          # the wall's thickness (north = inside, south = outside)
-    top = G + 25            # the wall's top
-    half = 7                # half the opening (15 wide)
-    oh = G + 16             # the opening's top
-    # the wall
-    b.fill(0, 0, z1, W - 1, top, z2, SALMON)
+    half = 9                # half the opening (19 wide)
+    oh = G + 18             # the opening's top
+    top = oh + 15           # the wall's top
+    # the wall: plain salmon plaster in soft patches, on a stone footing
+    for x in range(W):
+        for y in range(0, top + 1):
+            for z in range(z1, z2 + 1):
+                b.set(x, y, z, plaster(x if z == z2 else -x, y, 0 if z == z2 else 5))
     b.fill(0, 0, z1, W - 1, G - 1, z2, 'stone_bricks')
-    # masonry: big stone blocks, 3 high and 5 long, their joints in polished granite, staggered course to course
-    for y in range(G, top + 1):
-        course = (y - G) // 3
-        for x in range(W):
-            joint = (y - G) % 3 == 2 or (x + course * 3) % 6 == 0
-            if joint:
-                b.set(x, y, z2, 'polished_granite')
-                b.set(x, y, z1, 'polished_granite')
     # the roof along the wall: green tiles
     for x in range(W):
         b.set(x, top + 1, z1 - 1, stairs('mossy_stone_brick_stairs', 'south'))
@@ -536,19 +578,24 @@ def gate():
     # the opening
     b.fill(m - half, G, z1 - 1, m + half, oh - 1, z2 + 1, AIR)
     b.fill(m - half, G - 1, 0, m + half, G - 1, D - 1, Mix(('gravel', 2), ('coarse_dirt', 2), ('dirt_path', 3), salt=9))
-    # the frame: two light pillars and a lintel, standing out from the outside face, with rounded inner corners
+    # the frame: two light pillars and a sign board across the top, standing out from the outside face
     fz = z2 + 1
-    for x in list(range(m - half - 3, m - half)) + list(range(m + half + 1, m + half + 4)):
-        b.fill(x, G - 1, fz, x, oh + 7, fz, STONE_LIGHT)
-    b.fill(m - half - 3, oh, fz, m + half + 3, oh + 7, fz, 'smooth_sandstone')
-    b.fill(m - half - 3, oh + 8, fz, m + half + 3, oh + 8, fz, slab('smooth_sandstone_slab'))
-    b.set(m - half, oh - 1, fz, stairs('smooth_sandstone_stairs', 'east', top=True))
-    b.set(m + half, oh - 1, fz, stairs('smooth_sandstone_stairs', 'west', top=True))
-    # the lintel's paint: 忍 (leaf) 忍
-    b.glyph(SHINOBI, m - 12, oh, fz, RED) if False else None
-    b.glyph(SHINOBI, m - 11, oh, fz, RED)
-    b.glyph(LEAF, m - 3, oh, fz, RED)
-    b.glyph(SHINOBI, m + 5, oh, fz, RED)
+    BOARD = 'calcite'
+    pw = 4
+    for x in list(range(m - half - pw, m - half)) + list(range(m + half + 1, m + half + pw + 1)):
+        b.fill(x, G - 1, fz, x, oh - 1, fz, STONE_LIGHT)
+    b.fill(m - half - pw, oh, fz, m + half + pw, oh + 12, fz, BOARD)
+    for x in range(m - half - pw, m + half + pw + 1):
+        b.set(x, oh + 13, fz, slab('smooth_quartz_slab'))
+        b.set(x, oh - 1, fz, slab('smooth_quartz_slab', 'top')) if m - half <= x <= m + half else None
+    for x in (m - half - pw, m + half + pw):     # the board's end posts, a step proud
+        b.fill(x, oh, fz + 1, x, oh + 12, fz + 1, 'smooth_quartz')
+    b.set(m - half, oh - 2, fz, stairs('smooth_quartz_stairs', 'east', top=True))
+    b.set(m + half, oh - 2, fz, stairs('smooth_quartz_stairs', 'west', top=True))
+    # the paint: 忍 (leaf) 忍, small and spaced like the anime's sign
+    b.glyph(SHINOBI_6, m - 11, oh + 2, fz, RED)
+    b.glyph(LEAF, m - 3, oh + 3, fz, RED)
+    b.glyph(SHINOBI_6, m + 6, oh + 2, fz, RED)
     # the doors: swung open outward at 45 degrees, each away from the opening, painted あ and ん on the faces toward the road
     L = 11
     for side, glyph in ((-1, A_BIG), (1, N_BIG)):
@@ -728,14 +775,36 @@ def hokage_rock(faces=('first', 'second', 'third', 'fourth')):
             if any(k not in faces for k in heads) and out == 0:
                 # a head not carved yet: plain cliff
                 return base, plain
-            return base + out + detail * (1.0 if carved else 0.6), stones[stone_i]
+            return base + out + detail * (0.55 if carved else 0.6), stones[stone_i]
         return base, plain
 
+    # the face's depth everywhere, smoothed a little so the carving reads as sculpted planes, not pixel noise
+    raw = [[front_at(x, y) for y in range(H)] for x in range(W)]
+    def smooth(x, y):
+        tot = wt = 0.0
+        for dx in (-1, 0, 1):
+            for dy in (-1, 0, 1):
+                if 0 <= x + dx < W and 0 <= y + dy < H:
+                    k = 4 if dx == dy == 0 else 2 if dx == 0 or dy == 0 else 1
+                    tot += raw[x + dx][y + dy][0] * k
+                    wt += k
+        return tot / wt
+    # under a chin the rock steps back at most 2 blocks a row, like a neck, instead of leaving the head hanging in the air
+    fronts = {}
+    for x in range(W):
+        above = None
+        for y in range(H - 1, -1, -1):
+            if y > tops[x]:
+                continue
+            f = smooth(x, y)
+            if above is not None:
+                f = max(f, above - 2.0)
+            fronts[x, y] = above = f
     for x in range(W):
         for y in range(H):
             if y > tops[x]:
                 continue
-            f, stone = front_at(x, y)
+            f, stone = fronts[x, y], raw[x][y][1]
             front = min(D - 1, int(round(f)))
             # the face block and the few behind it (the sides of the heads show them)
             for z in range(0, front + 1):

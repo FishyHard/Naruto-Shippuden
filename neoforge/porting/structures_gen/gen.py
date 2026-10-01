@@ -25,9 +25,10 @@ EXTRA_SHOTS = {
     # name: (dx, dy, dz, look_dx, look_dy, look_dz) from the template corner: views from inside
     'leaf/gate': [('outside', 29.5, 6, 40, 29.5, 12, 9)],
     'leaf/hokage_rock': [('close', 87, 50, 175, 87, 60, 30)],
-    'leaf/hokage_rock_five': [('close', 87, 50, 175, 87, 60, 30), ('angle', 30, 45, 120, 87, 60, 30)],
-    'leaf/hokage_tower': [('hall', 30.5, 7, 45, 30.5, 4, 18), ('archives', 41, 6, 28.5, 12, 3, 28), ('standby', 20, 6, 28.5, 48, 3, 28),
-                          ('council', 30.5, 17, 41, 30.5, 13, 30), ('quarters', 37, 23, 39, 26, 20, 25),
+    'leaf/hokage_rock_five': [('close', 87, 50, 175, 87, 60, 30), ('angle', 30, 45, 120, 87, 60, 30),
+                              ('below', 70, 12, 95, 75, 62, 40), ('below_side', 20, 10, 90, 70, 60, 40)],
+    'leaf/hokage_tower': [('roof', 48, 50, 48, 30, 41, 30), ('landing', 24, 29, 37, 33, 27, 34), ('hall', 30.5, 7, 45, 30.5, 4, 18), ('standby', 20, 6, 28.5, 48, 3, 28),
+                          ('council', 30.5, 17, 41, 30.5, 13, 30), ('quarters', 24, 22, 37, 36, 19, 24),
                           ('office', 30.5, 31, 38, 30.5, 28, 24), ('street', 38, 6, 80, 30, 26, 30), ('aerial', 75, 60, 85, 30, 20, 30)],
     'leaf/academy': [('classroom', 15.5, 12.5, 15.5, 15.5, 9, 2)],
 }

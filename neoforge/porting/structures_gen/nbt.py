@@ -59,7 +59,7 @@ def _write(out, t, v):
 def write(path, root):
     out = io.BytesIO()
     out.write(b'\x0a'); _str(out, ''); _write(out, 10, root)
-    with gzip.open(path, 'wb') as f: f.write(out.getvalue())
+    with open(path, 'wb') as raw, gzip.GzipFile(filename='', fileobj=raw, mode='wb', mtime=0) as f: f.write(out.getvalue())
 
 
 def _rstr(f):
