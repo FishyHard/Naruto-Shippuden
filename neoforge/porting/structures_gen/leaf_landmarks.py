@@ -58,15 +58,16 @@ SHINOBI_6 = [  # 忍, 6x9, for the gate's sign
     '#.#..#',
     '..###.',
 ]
-LEAF = [  # the Leaf's swirl, 7x8
-    '..###..',
-    '.#...#.',
-    '#..#..#',
-    '#.#.#.#',
-    '#..##.#',
-    '.#...#.',
-    '..###..',
-    '.....##',
+LEAF = [  # the Leaf's symbol, 10x9: a spiral with the stem up to the right and the point down to the left
+    '..#####..#',
+    '.#.....##.',
+    '#..####.#.',
+    '#.#....##.',
+    '#.#..#..#.',
+    '#.#...#.#.',
+    '#..###..#.',
+    '##.....#..',
+    '#######...',
 ]
 A_BIG = [  # あ, 9x13
     '....#....',
@@ -581,7 +582,7 @@ def gate():
     # the frame: two light pillars and a sign board across the top, standing out from the outside face
     fz = z2 + 1
     BOARD = 'calcite'
-    pw = 4
+    pw = 6
     for x in list(range(m - half - pw, m - half)) + list(range(m + half + 1, m + half + pw + 1)):
         b.fill(x, G - 1, fz, x, oh - 1, fz, STONE_LIGHT)
     b.fill(m - half - pw, oh, fz, m + half + pw, oh + 12, fz, BOARD)
@@ -593,9 +594,9 @@ def gate():
     b.set(m - half, oh - 2, fz, stairs('smooth_quartz_stairs', 'east', top=True))
     b.set(m + half, oh - 2, fz, stairs('smooth_quartz_stairs', 'west', top=True))
     # the paint: 忍 (leaf) 忍, small and spaced like the anime's sign
-    b.glyph(SHINOBI_6, m - 11, oh + 2, fz, RED)
-    b.glyph(LEAF, m - 3, oh + 3, fz, RED)
-    b.glyph(SHINOBI_6, m + 6, oh + 2, fz, RED)
+    b.glyph(SHINOBI_6, m - 13, oh + 2, fz, RED)
+    b.glyph(LEAF, m - 4, oh + 2, fz, RED)
+    b.glyph(SHINOBI_6, m + 8, oh + 2, fz, RED)
     # the doors: swung open outward at 45 degrees, each away from the opening, painted あ and ん on the faces toward the road
     L = 11
     for side, glyph in ((-1, A_BIG), (1, N_BIG)):
