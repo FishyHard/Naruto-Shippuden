@@ -108,6 +108,10 @@ public final class LeafVillage {
 		for (int x = -2; x <= 2; x++)
 			out.add(new Object[]{x, 4, 0, Blocks.MANGROVE_PLANKS.defaultBlockState()});
 		out.add(new Object[]{0, 5, 0, Blocks.DARK_OAK_PLANKS.defaultBlockState()});
+		// the green light filling the passage, so it reads as a way through
+		for (int x = -2; x <= 2; x++)
+			for (int y = 0; y <= 3; y++)
+				out.add(new Object[]{x, y, 0, ChikyuContent.TORII_PORTAL.defaultBlockState()});
 		for (int x = -5; x <= 5; x++) {
 			out.add(new Object[]{x, 6, 0, beam});
 			out.add(new Object[]{x, 7, 0, Blocks.POLISHED_BLACKSTONE_SLAB.defaultBlockState()});

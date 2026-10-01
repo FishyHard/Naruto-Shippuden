@@ -28,6 +28,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.storage.LevelData;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.ChatFormatting;
 
 import java.util.Collection;
 import java.util.List;
@@ -37,7 +39,8 @@ import java.util.List;
  * {@link ChikyuChunkGenerator}.
  * <ul>
  * <li>A player's first join puts them at the Leaf's Academy, and they respawn there (until they sleep in a bed).</li>
- * <li>The red torii outside the Leaf's great gate leads to a torii by the overworld's spawn, and that one back.</li>
+ * <li>The red torii outside the Leaf's great gate leads to a torii by the overworld's spawn, and that one back. The way
+ * out gives a Leaf Return Scroll ({@link ChikyuContent}) for coming home from far away.</li>
  * <li>No other way in or out: nether portals do not light in Chikyū, and nothing travels from it to the Nether or the End.</li>
  * <li>Operators: {@code /naruto chikyu [players]} (to the Academy), {@code /naruto chikyu leave [players]} (to the overworld).</li>
  * </ul>
@@ -122,22 +125,28 @@ public final class Chikyu {
 		for (int y = overworld.getMaxY(); y > overworld.getMinY(); y--)
 			if (overworld.getBlockState(new BlockPos(x - 3, y, z)).is(Blocks.POLISHED_BLACKSTONE)
 					&& overworld.getBlockState(new BlockPos(x - 3, y + 1, z)).is(Blocks.STRIPPED_MANGROVE_WOOD))
-				return overworldTorii = new BlockPos(x, y, z);
+			{
+				BlockPos base = new BlockPos(x, y, z);
+				for (Object[] b : LeafVillage.torii())
+					if (b[3] == ChikyuContent.TORII_PORTAL.defaultBlockState() && overworld.getBlockState(base.offset((int) b[0], (int) b[1], (int) b[2])).isAir())
+						overworld.setBlock(base.offset((int) b[0], (int) b[1], (int) b[2]), (BlockState) b[3], 3);
+				return overworldTorii = base;
+			}
 		int y = Integer.MIN_VALUE;
 		for (int dx = -3; dx <= 3; dx += 3)
 			y = Math.max(y, overworld.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x + dx, z));
 		BlockPos base = new BlockPos(x, y, z);
-		for (Object[] b : LeafVillage.torii())
-			overworld.setBlock(base.offset((int) b[0], (int) b[1], (int) b[2]), (BlockState) b[3], 3);
-		// the posts stand on the ground, and the passage is clear
-		for (int dx = -3; dx <= 3; dx += 3)
-			for (int dy = -1; dy > -12 && !overworld.getBlockState(base.offset(dx, dy, 0)).isSolid(); dy--)
-				overworld.setBlock(base.offset(dx, dy, 0), Blocks.STRIPPED_MANGROVE_WOOD.defaultBlockState(), 3);
+		// the passage is clear, the posts stand on the ground
 		for (int dx = -2; dx <= 2; dx++)
 			for (int dy = 0; dy < 4; dy++)
 				for (int dz = -3; dz <= 3; dz++)
 					if (!overworld.getBlockState(base.offset(dx, dy, dz)).isAir())
 						overworld.setBlock(base.offset(dx, dy, dz), Blocks.AIR.defaultBlockState(), 3);
+		for (Object[] b : LeafVillage.torii())
+			overworld.setBlock(base.offset((int) b[0], (int) b[1], (int) b[2]), (BlockState) b[3], 3);
+		for (int dx = -3; dx <= 3; dx += 3)
+			for (int dy = -1; dy > -12 && !overworld.getBlockState(base.offset(dx, dy, 0)).isSolid(); dy--)
+				overworld.setBlock(base.offset(dx, dy, 0), Blocks.STRIPPED_MANGROVE_WOOD.defaultBlockState(), 3);
 		return overworldTorii = base;
 	}
 
@@ -165,13 +174,26 @@ public final class Chikyu {
 			player.getPersistentData().putLong(TORII_COOLDOWN, overworld.getGameTime() + 40);
 			player.teleport(new TeleportTransition(overworld, new Vec3(t.getX() + 0.5, t.getY(), t.getZ() + 3.5), Vec3.ZERO, 0f, 0f,
 					TeleportTransition.PLAY_PORTAL_SOUND));
+			// the way home from wherever they wander
+			if (!player.getInventory().contains(new ItemStack(ChikyuContent.RETURN_SCROLL))) {
+				player.getInventory().placeItemBackInInventory(new ItemStack(ChikyuContent.RETURN_SCROLL), net.minecraft.util.Prediction.SERVER_ONLY);
+				player.sendSystemMessage(Component.translatable("item.naruto_shippuden.leaf_return_scroll.given").withStyle(ChatFormatting.GREEN));
+			}
 		} else if (player.level() == overworld && overworldTorii != null && inTorii(player, overworldTorii)) {
 			ServerLevel chikyu = player.level().getServer().getLevel(CHIKYU);
 			if (chikyu == null)
 				return;
-			player.getPersistentData().putLong(TORII_COOLDOWN, chikyu.getGameTime() + 40);
-			player.teleport(new TeleportTransition(chikyu, LeafVillage.TORII_ARRIVAL, Vec3.ZERO, 180f, 0f, TeleportTransition.PLAY_PORTAL_SOUND));
+			backToTheLeaf(player);
 		}
+	}
+
+	/** Back to the Leaf, between its gate and its torii, facing the gate. */
+	public static void backToTheLeaf(ServerPlayer player) {
+		ServerLevel chikyu = player.level().getServer().getLevel(CHIKYU);
+		if (chikyu == null)
+			return;
+		player.getPersistentData().putLong(TORII_COOLDOWN, chikyu.getGameTime() + 40);
+		player.teleport(new TeleportTransition(chikyu, LeafVillage.TORII_ARRIVAL, Vec3.ZERO, 180f, 0f, TeleportTransition.PLAY_PORTAL_SOUND));
 	}
 
 	// ---------------------------------------------------------------- no shortcuts

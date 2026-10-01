@@ -87,7 +87,7 @@ public final class ModItemGroups {
 	private static List<String> shinobiItems() {
 		// two full rows: ryo, the shinobi basics and materials; then ramen, shogi and the missions by rank
 		return List.of("bronze_ryo", "silver_ryo", "gold_ryo", "chakra_paper", "shadow_clone_technique", "paper_bomb", "iron_stick", "sharp_iron", "kamui_stone",
-				"ichiraku_ramen", "shogi", "shogiboard", "shikamaru_quest_d", "pillage_the_post", "save_the_village", "asuma_quest_c", "iron_defense");
+				"leaf_return_scroll", "ichiraku_ramen", "shogi", "shogiboard", "shikamaru_quest_d", "pillage_the_post", "save_the_village", "asuma_quest_c", "iron_defense");
 	}
 
 	private static Item item(String id) {

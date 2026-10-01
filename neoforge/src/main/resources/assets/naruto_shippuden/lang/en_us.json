@@ -442,5 +442,11 @@
   "naruto_shippuden.configuration.rinnegan_minutes": "Rinnegan (minutes)",
   "naruto_shippuden.configuration.kokugan_minutes": "Kokugan (minutes)",
   "naruto_shippuden.configuration.dna": "DNA",
-  "naruto_shippuden.configuration.combine_natures": "Kekkei Genkai Need Their Natures"
+  "naruto_shippuden.configuration.combine_natures": "Kekkei Genkai Need Their Natures",
+  "block.naruto_shippuden.torii_portal": "Torii Passage",
+  "item.naruto_shippuden.leaf_return_scroll": "Leaf Return Scroll",
+  "item.naruto_shippuden.leaf_return_scroll.desc": "Read it (hold use) to return to the Hidden Leaf's gate. Overworld only.",
+  "item.naruto_shippuden.leaf_return_scroll.only_overworld": "The scroll only works in the overworld",
+  "item.naruto_shippuden.leaf_return_scroll.broken": "Your reading was broken",
+  "item.naruto_shippuden.leaf_return_scroll.given": "You received a Leaf Return Scroll: read it to come back to the Hidden Leaf from anywhere in the overworld."
 }

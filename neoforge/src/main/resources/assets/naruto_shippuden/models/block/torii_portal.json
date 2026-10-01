@@ -1,0 +1,20 @@
+{
+  "render_type": "minecraft:translucent",
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "naruto_shippuden:blocks/torii_portal",
+    "portal": "naruto_shippuden:blocks/torii_portal"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 6],
+      "to": [16, 16, 10],
+      "shade": false,
+      "light_emission": 11,
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#portal"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#portal"}
+      }
+    }
+  ]
+}

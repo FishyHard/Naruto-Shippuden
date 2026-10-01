@@ -350,7 +350,10 @@ Nature Releases, Kekkei Genkai, DNA, Clans, Dojutsu, Shinobi Weapons, Headbands,
   sends them to the street before the Academy and sets their respawn there (forced). The red torii outside the great
   gate (world 0, 65, 222) leads to a torii built 6 blocks north of the overworld spawn (found again by its blackstone
   foot, rebuilt on server start if gone), and that one back. Nether portals don't light in Chikyū; nothing travels from
-  it to the Nether or the End. `/naruto chikyu [players]`, `/naruto chikyu leave [players]` for operators.
+  it to the Nether or the End. Each torii's passage is filled with `torii_portal` (`ChikyuContent`: walk-through,
+  unbreakable, light 11, animated green texture, sparkles); the way out gives a `leaf_return_scroll` if the player has
+  none: hold use for 5 s in the overworld (a hit breaks it) to land back at the Leaf's gate, 5 min cooldown.
+  `/naruto chikyu [players]`, `/naruto chikyu leave [players]` for operators.
 - Still to do: the other four villages, the story engine (quests, dialogue, tracker) that the start leads into.
 
 ### Keys (defaults)
