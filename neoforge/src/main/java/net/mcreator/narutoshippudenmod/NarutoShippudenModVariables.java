@@ -1144,10 +1144,23 @@ public class NarutoShippudenModVariables {
 			for (ServerPlayer player : PENDING_SYNC) {
 				if (!player.hasDisconnected()) {
 					sendTo(player);
+					sendVisible(player);
 					net.mcreator.narutoshippudenmod.core.TickProfiler.syncs++;
 				}
 			}
 			PENDING_SYNC.clear();
+		}
+
+		/** A player coming into view: what they look like (eyes, Susanoo, iron sand, wings...). */
+		@SubscribeEvent
+		public static void onStartTracking(PlayerEvent.StartTracking event) {
+			if (event.getTarget() instanceof ServerPlayer seen && event.getEntity() instanceof ServerPlayer viewer)
+				PacketDistributor.sendToPlayer(viewer, new SeenPayload(seen.getId(), visible(seen)));
+		}
+
+		@SubscribeEvent
+		public static void onLogout(PlayerEvent.PlayerLoggedOutEvent event) {
+			LAST_VISIBLE.remove(event.getEntity().getUUID());
 		}
 
 		@SubscribeEvent
@@ -1175,6 +1188,59 @@ public class NarutoShippudenModVariables {
 		PacketDistributor.sendToPlayer(player, new SyncPayload(out.buildResult()));
 	}
 
+	/**
+	 * The variables other players' clients need to draw this player (the renderers read them on every player, not only their own):
+	 * eyes and the eye shapes chosen, the Mangekyou and its Susanoo, jutsu forms (iron sand, Akimichi tank and wings, Passing Fang,
+	 * Kamui phasing, the water blob...), restraint and possession. Without them another player looks unchanged.
+	 */
+	private static final Set<String> VISIBLE = Set.of("sharingan", "sharinganactivate", "SharinganKakashi", "SharinganShimura", "shimura_active",
+			"shimurareleaselogic", "byakugan", "byakuganactivate", "rinnegan", "rinneganactivate", "tenseigan", "tenseiganactivate", "ketsuryugan",
+			"ketsuryuganactivate", "isshikidojutsu", "isshikidojutsuactivate", "MangekyouSharinganActivate", "MangekyouSharinganItachi",
+			"MangekyouSharinganKakashi", "MangekyouSharinganMadara", "MangekyouSharinganObito", "MangekyouSharinganSasuke", "MangekyouSharinganShisui",
+			"mangekyousharingansusanostage", "dojutsusharingan", "dojutsums", "dojutsubyakugan", "dojutsurinnegan", "dojutsutenseigan",
+			"dojutsuketsuryugan", "dojutsuisshiki", "magnet_coat", "HumanBulletTank", "SpikedHumanBulletTank", "ButterflyMode", "ButterFlyModeColor",
+			"KamuiPhantomPhase", "PassingFang", "DanceOfTheLarch", "EightTrigramsPalmsRevolvingHeaven", "InsectJarTechnique", "deathgod", "ice_mirror",
+			"waterblob", "restrained", "possessing");
+	/** What each player's watchers were last sent, so they get a packet only when something they can see changed. */
+	private static final java.util.Map<java.util.UUID, CompoundTag> LAST_VISIBLE = new java.util.HashMap<>();
+
+	private static CompoundTag visible(ServerPlayer player) {
+		TagValueOutput out = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, player.registryAccess());
+		get(player).write(out);
+		CompoundTag all = out.buildResult(), seen = new CompoundTag();
+		for (String key : VISIBLE)
+			if (all.get(key) != null)
+				seen.put(key, all.get(key));
+		return seen;
+	}
+
+	private static void sendVisible(ServerPlayer player) {
+		CompoundTag seen = visible(player);
+		if (seen.equals(LAST_VISIBLE.put(player.getUUID(), seen)))
+			return;
+		PacketDistributor.sendToPlayersTrackingEntity(player, new SeenPayload(player.getId(), seen));
+	}
+
+	/** Another player's visible variables (see VISIBLE), for this client to draw them. */
+	public record SeenPayload(int entity, CompoundTag data) implements CustomPacketPayload {
+		public static final Type<SeenPayload> TYPE = new Type<>(Identifier.fromNamespaceAndPath(NarutoShippudenMod.MODID, "seen_player_variables"));
+		public static final StreamCodec<RegistryFriendlyByteBuf, SeenPayload> CODEC = StreamCodec.composite(ByteBufCodecs.VAR_INT, SeenPayload::entity,
+				ByteBufCodecs.COMPOUND_TAG, SeenPayload::data, SeenPayload::new);
+
+		@Override
+		public Type<SeenPayload> type() {
+			return TYPE;
+		}
+	}
+
+	private static void handleSeen(SeenPayload payload, IPayloadContext context) {
+		context.enqueueWork(() -> {
+			Player self = context.player();
+			if (self.level().getEntity(payload.entity()) instanceof Player other && other != self)
+				get(other).read(TagValueInput.create(ProblemReporter.DISCARDING, self.registryAccess(), payload.data()));
+		});
+	}
+
 	public record SyncPayload(CompoundTag data) implements CustomPacketPayload {
 		public static final Type<SyncPayload> TYPE = new Type<>(Identifier.fromNamespaceAndPath(NarutoShippudenMod.MODID, "player_variables"));
 		public static final StreamCodec<RegistryFriendlyByteBuf, SyncPayload> CODEC = StreamCodec.composite(ByteBufCodecs.COMPOUND_TAG,
@@ -1187,7 +1253,8 @@ public class NarutoShippudenModVariables {
 	}
 
 	private static void registerPayloads(RegisterPayloadHandlersEvent event) {
-		event.registrar("1").playToClient(SyncPayload.TYPE, SyncPayload.CODEC, NarutoShippudenModVariables::handleSync);
+		event.registrar("1").playToClient(SyncPayload.TYPE, SyncPayload.CODEC, NarutoShippudenModVariables::handleSync)
+				.playToClient(SeenPayload.TYPE, SeenPayload.CODEC, NarutoShippudenModVariables::handleSeen);
 	}
 
 	private static void handleSync(SyncPayload payload, IPayloadContext context) {

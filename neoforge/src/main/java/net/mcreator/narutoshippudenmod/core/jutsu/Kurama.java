@@ -48,7 +48,21 @@ import java.util.EnumSet;
  * Below half health it fights harder and faster. It heals slowly by itself (it used to heal every tick, so it could not be killed).
  * Nothing it does breaks blocks.
  */
+@net.neoforged.fml.common.EventBusSubscriber(modid = "naruto_shippuden")
 public final class Kurama {
+	/** How Kurama may come into the world: its spawn egg (by hand or dispenser) and commands. Story Mode adds it directly. */
+	private static final java.util.Set<net.minecraft.world.entity.EntitySpawnReason> ALLOWED = java.util.EnumSet.of(
+			net.minecraft.world.entity.EntitySpawnReason.SPAWN_ITEM_USE, net.minecraft.world.entity.EntitySpawnReason.DISPENSER,
+			net.minecraft.world.entity.EntitySpawnReason.COMMAND);
+
+	/** Kurama never spawns on its own (naturally, with chunks, from spawners or structures). */
+	@net.neoforged.bus.api.SubscribeEvent
+	public static void noNaturalSpawn(net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent event) {
+		if (event.getEntity() instanceof net.mcreator.narutoshippudenmod.entity.SummonEntities.KuramaEntity.CustomEntity
+				&& !ALLOWED.contains(event.getSpawnType()))
+			event.setSpawnCancelled(true);
+	}
+
 	/** Entity event: the roar animation (see client/KuramaAnimation). */
 	private static final byte ROAR = 100;
 

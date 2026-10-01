@@ -88,7 +88,7 @@ public final class ItemDescriptions {
 					});
 				add(kind.item(), hint("Right-click to implant; hit a player to implant it in them"));
 			}
-		add("undefined_dna", gray("Dropped by shinobi"), hint("Right-click to identify it"));
+		add("undefined_dna", gray("Dropped by village shinobi"), hint("Right-click to identify it"));
 		add("bronze_ryo", gray("9 craft into 1 Silver Ryo"));
 		add("silver_ryo", gray("Worth 9 Bronze Ryo"), gray("9 craft into 1 Gold Ryo"));
 		add("gold_ryo", gray("Worth 9 Silver Ryo"));

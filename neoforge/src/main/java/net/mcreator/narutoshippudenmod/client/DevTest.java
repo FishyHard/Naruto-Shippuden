@@ -273,12 +273,51 @@ public final class DevTest {
 		net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.cast(p, net.minecraft.world.InteractionHand.MAIN_HAND);
 	}
 
+	/** Against a dedicated server (not singleplayer). */
+	private static boolean multiplayer(Minecraft mc) {
+		return mc.getSingleplayerServer() == null;
+	}
+
+	/** In multiplayer, tells the watcher client (if one joined) to save a screenshot too. */
+	private static void signal(Minecraft mc, String name) {
+		if (multiplayer(mc))
+			command(mc, "narutodev shot " + name);
+	}
+
+	/** The watcher (-Dnaruto.devtest.only=watch): the screenshot the server asked for, taken on the next tick. */
+	private static @org.jspecify.annotations.Nullable String watchShot;
+
+	@SubscribeEvent
+	public static void onWatchSignal(net.neoforged.neoforge.client.event.ClientChatReceivedEvent.System event) {
+		String text = event.getMessage().getString();
+		if (!ENABLED || !System.getProperty("naruto.devtest.only", "").equals("watch") || !text.startsWith("DEVSHOT "))
+			return;
+		event.setCanceled(true);
+		watchShot = text.substring(8);
+	}
+
+	/**
+	 * Runs server code for a test step: directly on the singleplayer server, or on a dedicated server through /narutodev (which runs
+	 * the same code, core/DevServer).
+	 */
+	private static void server(Minecraft mc, String devCommand, java.util.function.Consumer<net.minecraft.server.level.ServerPlayer> task) {
+		if (mc.getSingleplayerServer() != null)
+			onServer(mc, task);
+		else
+			command(mc, "narutodev " + devCommand);
+	}
+
 	private static void onServer(Minecraft mc, java.util.function.Consumer<net.minecraft.server.level.ServerPlayer> task) {
 		var server = mc.getSingleplayerServer();
 		server.execute(() -> task.accept(server.getPlayerList().getPlayer(mc.player.getUUID())));
 	}
 
 	private static void command(Minecraft mc, String command) {
+		// against a dedicated server: as the player (an operator there)
+		if (mc.getSingleplayerServer() == null) {
+			mc.player.connection.sendCommand(command);
+			return;
+		}
 		onServer(mc, player -> player.level().getServer().getCommands().performPrefixedCommand(player.createCommandSourceStack().withPermission(
 				net.minecraft.server.permissions.LevelBasedPermissionSet.OWNER), command));
 	}
@@ -314,8 +353,18 @@ public final class DevTest {
 
 	/** Every mod screen, the cheat tabs, then NPCs and the Byakugan outline in the world; 60 ticks per step. */
 	private static void buildSteps(Minecraft mc) {
+		if (System.getProperty("naruto.devtest.only", "").equals("watch")) {
+			// a second player: screenshots when the caster's test says so (DEVSHOT in chat), stops on "done"
+			STEPS.add(() -> {
+				mc.gui.setScreen(null);
+				mc.options.pauseOnLostFocus = false;
+				NarutoShippudenMod.LOGGER.info("DEVTEST watching as {}", mc.player.getName().getString());
+			});
+			return;
+		}
 		if (System.getProperty("naruto.devtest.only", "").equals("jutsu")) {
 			jutsuSteps(mc);
+			STEPS.add(() -> signal(mc, "done"));
 			STEPS.add(mc::stop);
 			return;
 		}
@@ -646,10 +695,6 @@ public final class DevTest {
 		return net.mcreator.narutoshippudenmod.core.jutsu.Weapons.KENJUTSU.containsKey(nature);
 	}
 
-	/** Custom jutsu the jutsu test gives the player: one of each form, over the five natures. */
-	private static final String TEST_CUSTOM = String.join("\n", "Test Bullets|fire|BULLETS|1|2|3", "Test Sphere|fire|SPHERE|2|1|5",
-			"Test Rain|fire|RAIN|1|1|4", "Test Shuriken|water|SHURIKEN|1|2|3", "Test Stream|water|STREAM|2|1|3", "Test Beast|lightning|BEAST|1|1|4",
-			"Test Dragon|earth|DRAGON|2|1|5", "Test Wave|wind|WAVE|1|1|3", "Test Burst|wind|BURST|2|1|4");
 
 	private static void jutsuSteps(Minecraft mc) {
 		String[] natures = { "fire", "water", "wind", "earth", "lightning", "boil", "bone", "dust", "ice", "magnet", "smoke", "steel", "storm", "swift",
@@ -660,6 +705,16 @@ public final class DevTest {
 				"kusanagi_sasuke", "gunbai", "triple_blade_scythe", "shichiseiken", "samehada", "kubikiribocho", "hiramekarei", "kabutowari", "kiba_sword",
 				"nuibari", "shibuki" };
 		String only = System.getProperty("naruto.devtest.jutsu", "");
+		if (multiplayer(mc) && Boolean.getBoolean("naruto.devtest.watcher"))
+			// wait (up to two minutes) for the watcher to join
+			STEPS.add(() -> {
+				mc.gui.setScreen(null);
+				if (mc.getConnection().getOnlinePlayers().size() < 2 && ticks < 2400) {
+					step--;
+					nextDelay = 20;
+				} else
+					NarutoShippudenMod.LOGGER.info("DEVTEST players online: {}", mc.getConnection().getOnlinePlayers().size());
+			});
 		STEPS.add(() -> {
 			mc.gui.setScreen(null);
 			mc.options.pauseOnLostFocus = false;
@@ -678,45 +733,17 @@ public final class DevTest {
 				command(mc, "fill " + String.format(half, "~-1", "~-1") + " grass_block");
 				command(mc, "fill " + String.format(half, "~-4", "~-2") + " dirt");
 			}
-			onServer(mc, player -> NarutoShippudenModVariables.ifPresent(player, v -> {
-				v.firereleaselogic = v.waterreleaselogic = v.windreleaselogic = v.earthreleaselogic = v.lightningreleaselogic = true;
-				v.firelearn = v.waterlearn = v.windlearn = v.earthlearn = v.lightninglearn = 9;
-				v.boilreleaselogic = v.bonereleaselogic = v.dustreleaselogic = v.icereleaselogic = v.magnetreleaselogic = v.smokereleaselogic = true;
-				v.steelreleaselogic = v.stormreleaselogic = v.swiftreleaselogic = v.typhoonreleaslogic = v.woodreleaselogic = true;
-				v.boillearn = v.bonelearn = v.dustlearn = v.icelearn = v.magnetlearn = v.smokelearn = v.steellearn = v.stormlearn = v.swiftlearn = 9;
-				v.typhoonlearn = v.woodlearn = 9;
-				v.aburamereleaselogic = v.akimichireleaselogic = v.fumareleaselogic = v.hozukireleaselogic = v.hyugareleaselogic = true;
-				v.inuzukareleaselogic = v.leereleaselogic = v.narareleaselogic = v.sarutobireleaselogic = true;
-				v.uzumakireleaselogic = v.tsuchigumoreleaselogic = true;
-				v.aburamelearn = v.akimichilearn = v.fumalearn = v.hozukilearn = v.hyugalearn = v.inuzukalearn = v.leelearn = 9;
-				v.naralearn = v.sarutobilearn = v.uzumakilearn = v.tsuchigumolearn = 9;
-				v.uchihareleaselogic = v.yamanakareleaselogic = true;
-				v.uchihalearn = v.yamanakalearn = 9;
-				v.byakugan = v.ketsuryugan = v.rinnegan = v.tenseigan = true;
-				v.ketsuryuganactivate = v.rinneganactivate = v.tenseiganactivate = true;
-				v.byakuganlearn = v.ketsuryuganlearn = v.rinneganlearn = v.tenseiganlearn = 9;
-				v.mangekyousharinganshisuilearn = v.mangekyousharinganmadaralearn = 9;
-				v.taijutsu = v.summoning = 60;
-				v.sharingan = v.sharinganactivate = v.isshikidojutsu = v.isshikidojutsuactivate = v.MangekyouSharinganActivate = true;
-				v.sharinganlearn = v.isshikidojutsulearn = v.mangekyoushrainganitachiamaterasulearn = 9;
-				v.mangekyousharingankakashikamuilearn = v.mangekyousharinganobitokamuilearn = v.mangekyousharingansasukeamaterasulearn = 9;
-				v.ninjutsu = 60;
-				v.kenjutsu = 100;
-				v.custom_jutsu = TEST_CUSTOM;
-				net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.migrate(v, true);
-				v.byakuganactivate = false;
-				v.ChakraMax = 5000;
-				v.ChakraAmount = 5000;
-				v.syncPlayerVariables(player);
-			}));
+			server(mc, "setup", net.mcreator.narutoshippudenmod.core.DevServer::setup);
 			for (int i = -2; i <= 2; i++)
 				command(mc, "summon minecraft:husk ~" + i * 2 + " ~ ~16 {NoAI:1b,PersistenceRequired:1b,attributes:[{id:\"minecraft:max_health\",base:500}],Health:500f}");
+			if (multiplayer(mc))
+				command(mc, "narutodev watch");
 		});
 		for (String nature : natures) {
 			if (!only.isEmpty() && !java.util.List.of(only.split(",")).contains(nature))
 				continue;
 			NarutoShippudenModVariables.PlayerVariables withCustom = new NarutoShippudenModVariables.PlayerVariables();
-			withCustom.custom_jutsu = TEST_CUSTOM;
+			withCustom.custom_jutsu = net.mcreator.narutoshippudenmod.core.DevServer.TEST_CUSTOM;
 			int count = net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.TECHNIQUES
 					.get(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", item(nature))).jutsu(withCustom).size();
 			for (int index = 0; index < count; index++) {
@@ -728,31 +755,7 @@ public final class DevTest {
 						arena[0] = mc.player.position();
 					// transformations and dashes carry the player off: end them and go back to the arena (weapons: closer, most arts are short)
 					command(mc, String.format(java.util.Locale.ROOT, "tp @s %.2f %.2f %.2f 0 5", arena[0].x, arena[0].y, arena[0].z + (weapon(nature) ? 9 : 0)));
-					onServer(mc, player -> {
-						net.mcreator.narutoshippudenmod.core.jutsu.ClanJutsu.stop(player);
-						NarutoShippudenModVariables.ifPresent(player, v -> {
-							v.ChakraAmount = 5000;
-							// the eye this technique needs (Izanagi closes them; only one Mangekyou at a time)
-							v.sharinganactivate = v.MangekyouSharinganActivate = true;
-							v.byakuganactivate = nature.equals("byakugan");
-							v.ketsuryuganactivate = v.rinneganactivate = v.tenseiganactivate = true;
-							v.MangekyouSharinganItachi = nature.contains("itachi");
-							v.MangekyouSharinganKakashi = nature.contains("kakashi");
-							v.MangekyouSharinganObito = nature.contains("obito");
-							v.MangekyouSharinganSasuke = nature.contains("sasuke");
-							v.MangekyouSharinganShisui = nature.contains("shisui");
-							v.MangekyouSharinganMadara = nature.contains("madara");
-							v.syncPlayerVariables(player);
-						});
-						player.getCooldowns().removeCooldown(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", item(nature) + "/" + i));
-						player.removeAllEffects();
-						if (nature.equals("hiramekarei"))
-							net.mcreator.narutoshippudenmod.compat.StackTag.of(player.getMainHandItem()).putDouble("StoredChakra", 1000);
-						if (nature.equals("chakra_blade"))
-							player.setItemInHand(net.minecraft.world.InteractionHand.OFF_HAND, player.getMainHandItem().copy());
-						net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.select(player,
-								net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", item(nature)), i);
-					});
+					server(mc, "prepare " + nature + " " + i, player -> net.mcreator.narutoshippudenmod.core.DevServer.prepare(player, nature, i));
 					nextDelay = 5;
 				});
 				STEPS.add(() -> {
@@ -774,6 +777,7 @@ public final class DevTest {
 				});
 				STEPS.add(() -> {
 					shot(mc, "jutsu_" + nature + "_" + i + "_a");
+					signal(mc, "jutsu_" + nature + "_" + i + "_a");
 					command(mc, String.format(java.util.Locale.ROOT, "tp @s %.2f %.2f %.2f 0 5", home[0].x, home[0].y, home[0].z));
 					command(mc, "tick unfreeze");
 					mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
@@ -781,6 +785,7 @@ public final class DevTest {
 				});
 				STEPS.add(() -> {
 					shot(mc, "jutsu_" + nature + "_" + i + "_b");
+					signal(mc, "jutsu_" + nature + "_" + i + "_b");
 					NarutoShippudenMod.LOGGER.info("DEVTEST cast {} {}: chakra {}", nature, i, NarutoShippudenModVariables.get(mc.player).ChakraAmount);
 					nextDelay = 60;
 				});
@@ -805,12 +810,7 @@ public final class DevTest {
 					for (int step = 0; step <= 6; step++) {
 						int n = step;
 						STEPS.add(() -> {
-							onServer(mc, player -> {
-								net.minecraft.world.entity.LivingEntity husk = player.level().getEntitiesOfClass(net.minecraft.world.entity.monster.zombie.Husk.class,
-										player.getBoundingBox().inflate(30)).stream().min(java.util.Comparator.comparingDouble(h -> Math.abs(h.getX() - player.getX()))).orElse(null);
-								NarutoShippudenMod.LOGGER.info("DEVTEST nara mimic {}: caster x {} husk x {}", n, String.format("%.2f", player.getX()),
-										husk == null ? "none" : String.format("%.2f", husk.getX()));
-							});
+							server(mc, "mimic " + n, player -> net.mcreator.narutoshippudenmod.core.DevServer.mimic(player, n));
 							if (n < 6)
 								command(mc, "tp @s ~0.5 ~ ~");
 							if (n == 6)
@@ -1376,6 +1376,14 @@ public final class DevTest {
 			return;
 		Minecraft mc = Minecraft.getInstance();
 		ticks++;
+		if (watchShot != null && mc.player != null) {
+			String name = watchShot;
+			watchShot = null;
+			if (name.equals("done"))
+				mc.stop();
+			else
+				shot(mc, "watch_" + name);
+		}
 		Screen screen = mc.gui.screen();
 		if (ticks % 100 == 0 && screen != null) {
 			StringBuilder widgets = new StringBuilder();

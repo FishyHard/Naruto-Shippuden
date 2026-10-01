@@ -75,7 +75,6 @@ public final class CheatScreens {
 		@Override
 		protected void send(int id) {
 			NarutoShippudenMod.PACKET_HANDLER.sendToServer(new NarutoShippudenCheatGUIGui.ButtonPressedMessage(id, x, y, z));
-			NarutoShippudenCheatGUIGui.handleButtonAction(entity, id, x, y, z);
 		}
 
 		private Button add(String label, int bx, int by, int width, Runnable onPress) {
@@ -223,7 +222,6 @@ public final class CheatScreens {
 		@Override
 		protected void send(int id) {
 			NarutoShippudenMod.PACKET_HANDLER.sendToServer(new NarutoShippudenCheatDojutsuGUIGui.ButtonPressedMessage(id, x, y, z));
-			NarutoShippudenCheatDojutsuGUIGui.handleButtonAction(entity, id, x, y, z);
 		}
 
 		@Override
@@ -258,7 +256,6 @@ public final class CheatScreens {
 		@Override
 		protected void send(int id) {
 			NarutoShippudenMod.PACKET_HANDLER.sendToServer(new NarutoShippudenCheatKekkeiGenkaiGUIGui.ButtonPressedMessage(id, x, y, z));
-			NarutoShippudenCheatKekkeiGenkaiGUIGui.handleButtonAction(entity, id, x, y, z);
 		}
 
 		@Override
@@ -281,7 +278,6 @@ public final class CheatScreens {
 		@Override
 		protected void send(int id) {
 			NarutoShippudenMod.PACKET_HANDLER.sendToServer(new MangekyouSharinganCheatGui.ButtonPressedMessage(id, x, y, z));
-			MangekyouSharinganCheatGui.handleButtonAction(entity, id, x, y, z);
 		}
 
 		@Override
@@ -302,7 +298,6 @@ public final class CheatScreens {
 		@Override
 		protected void send(int id) {
 			NarutoShippudenMod.PACKET_HANDLER.sendToServer(new PasswordGUIDojutsuGui.ButtonPressedMessage(id, x, y, z));
-			PasswordGUIDojutsuGui.handleButtonAction(entity, id, x, y, z);
 		}
 
 		@Override

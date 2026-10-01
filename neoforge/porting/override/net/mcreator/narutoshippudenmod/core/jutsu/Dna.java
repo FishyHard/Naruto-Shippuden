@@ -36,8 +36,7 @@ import org.jspecify.annotations.Nullable;
 /**
  * DNA: how players gain natures and kekkei genkai.
  * <ul>
- * <li>Shinobi drop Undefined DNA when killed: village shinobi by rank (Genin 15%, Chunin 25%, Jonin 40%), Asuma and Shikamaru half
- * the time, Kurama three.</li>
+ * <li>Village shinobi drop Undefined DNA when killed, by rank: Genin 5%, Chunin 10%, Jonin 15%. Nothing else drops it.</li>
  * <li>Right-clicking Undefined DNA identifies it, always: a nature 80% of the time, a kekkei genkai 20%.</li>
  * <li>Right-clicking a DNA implants it in yourself; hitting a player with it implants it in them. It's a medical procedure: the
  * implanter's Medicine sets the chance (a nature 50% at Medicine 0 up to 100% at 300, a kekkei genkai 25% to 100%), and a failure
@@ -229,8 +228,8 @@ public final class Dna {
 	}
 
 	// ------------------------------------------------------------------ where DNA comes from
-	/** Out of 100: the chance a shinobi drops Undefined DNA (village shinobi by rank: Genin, Chunin, Jonin). */
-	private static final int[] VILLAGE_CHANCE = { 15, 25, 40 };
+	/** Out of 100: the chance a village shinobi drops Undefined DNA, by rank: Genin, Chunin, Jonin. */
+	private static final int[] VILLAGE_CHANCE = { 5, 10, 15 };
 
 	@SubscribeEvent
 	public static void onDrops(LivingDropsEvent event) {
@@ -238,17 +237,10 @@ public final class Dna {
 		if (!(dead.level() instanceof ServerLevel))
 			return;
 		String type = BuiltInRegistries.ENTITY_TYPE.getKey(dead.getType()).getPath();
-		int count = 0;
-		if (type.startsWith("hidden_") && type.endsWith("_shinobi"))
-			count = dead.getRandom().nextInt(100) < VILLAGE_CHANCE[ShinobiAI.rank(dead)] ? 1 : 0;
-		else if (type.equals("asuma") || type.equals("shikamaru"))
-			count = dead.getRandom().nextBoolean() ? 1 : 0;
-		else if (type.equals("kurama"))
-			count = 3;
-		for (int i = 0; i < count; i++) {
-			ItemEntity drop = new ItemEntity(dead.level(), dead.getX(), dead.getY() + 0.5, dead.getZ(), new ItemStack(item(UNDEFINED)));
-			drop.setDefaultPickUpDelay();
-			event.getDrops().add(drop);
-		}
+		if (!type.startsWith("hidden_") || !type.endsWith("_shinobi") || dead.getRandom().nextInt(100) >= VILLAGE_CHANCE[ShinobiAI.rank(dead)])
+			return;
+		ItemEntity drop = new ItemEntity(dead.level(), dead.getX(), dead.getY() + 0.5, dead.getZ(), new ItemStack(item(UNDEFINED)));
+		drop.setDefaultPickUpDelay();
+		event.getDrops().add(drop);
 	}
 }

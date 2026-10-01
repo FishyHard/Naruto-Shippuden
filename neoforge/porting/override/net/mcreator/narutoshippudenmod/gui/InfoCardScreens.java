@@ -176,7 +176,6 @@ public final class InfoCardScreens {
 		@Override
 		protected void send(int id) {
 			NarutoShippudenMod.PACKET_HANDLER.sendToServer(new InfoCardGui.ButtonPressedMessage(id, x, y, z));
-			InfoCardGui.handleButtonAction(entity, id, x, y, z);
 		}
 
 		@Override
@@ -242,7 +241,6 @@ public final class InfoCardScreens {
 		@Override
 		protected void send(int id) {
 			NarutoShippudenMod.PACKET_HANDLER.sendToServer(new InfoCardUpgradeGui.ButtonPressedMessage(id, x, y, z));
-			InfoCardUpgradeGui.handleButtonAction(entity, id, x, y, z);
 		}
 
 		@Override
@@ -323,7 +321,6 @@ public final class InfoCardScreens {
 		@Override
 		protected void send(int id) {
 			NarutoShippudenMod.PACKET_HANDLER.sendToServer(new InfoCardDojutsuGui.ButtonPressedMessage(id, x, y, z));
-			InfoCardDojutsuGui.handleButtonAction(entity, id, x, y, z);
 		}
 
 		@Override
@@ -387,7 +384,6 @@ public final class InfoCardScreens {
 		@Override
 		protected void send(int id) {
 			NarutoShippudenMod.PACKET_HANDLER.sendToServer(new InfoCardMissionsGui.ButtonPressedMessage(id, x, y, z));
-			InfoCardMissionsGui.handleButtonAction(entity, id, x, y, z);
 		}
 
 		@Override
@@ -483,7 +479,6 @@ public final class InfoCardScreens {
 		@Override
 		protected void send(int id) {
 			NarutoShippudenMod.PACKET_HANDLER.sendToServer(new InfoCardMiniGameGui.ButtonPressedMessage(id, x, y, z));
-			InfoCardMiniGameGui.handleButtonAction(entity, id, x, y, z);
 		}
 
 		@Override
@@ -520,7 +515,6 @@ public final class InfoCardScreens {
 		@Override
 		protected void send(int id) {
 			NarutoShippudenMod.PACKET_HANDLER.sendToServer(new StatSelectGui.ButtonPressedMessage(id, x, y, z));
-			StatSelectGui.handleButtonAction(entity, id, x, y, z);
 		}
 
 		@Override

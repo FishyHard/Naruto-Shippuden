@@ -33,7 +33,6 @@ public final class MiscScreens {
 		@Override
 		protected void send(int id) {
 			NarutoShippudenMod.PACKET_HANDLER.sendToServer(new GeninHeadbandSelectGui.ButtonPressedMessage(id, x, y, z));
-			GeninHeadbandSelectGui.handleButtonAction(entity, id, x, y, z);
 		}
 
 		@Override
@@ -67,7 +66,6 @@ public final class MiscScreens {
 		@Override
 		protected void send(int id) {
 			NarutoShippudenMod.PACKET_HANDLER.sendToServer(new PatreonKitGui.ButtonPressedMessage(id, x, y, z));
-			PatreonKitGui.handleButtonAction(entity, id, x, y, z);
 		}
 
 		@Override

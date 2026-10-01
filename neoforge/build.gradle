@@ -63,6 +63,9 @@ neoForge {
         server {
             server()
             programArgument '--nogui'
+            // its own folder, so a client can run (from run/) at the same time; ./gradlew runServer -PdevTest adds /narutodev
+            gameDirectory = project.file('run-server')
+            if (project.hasProperty('devTest')) systemProperty 'naruto.devtest', 'true'
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
 

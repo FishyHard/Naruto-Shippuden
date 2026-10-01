@@ -254,7 +254,7 @@ and takes the chakra and cooldown itself (unless the jutsu called `Jutsus.miss`)
 
 ### DNA (`core/jutsu/Dna`)
 
-- Shinobi drop Undefined DNA (village shinobi 15/25/40% by rank, Asuma and Shikamaru 50%, Kurama 3); other mobs never.
+- Village shinobi drop Undefined DNA (5/10/15% by rank, Genin to Jonin); nothing else does.
 - Right-click Undefined DNA: always identifies (80% a nature, 20% a kekkei genkai). Right-click a DNA: implant in yourself; hit a
   player: implant in them. The implanter's Medicine sets the chance (nature 50→100%, kekkei genkai 25→100% over Medicine 0→300);
   a failure uses the DNA up.
@@ -395,6 +395,20 @@ background and watch the log for `Exception|Caused by`.
 | `old_stat_attributes` | The broken `/attribute generic.*` commands are gone. |
 
 Apply new `@func` rules with the body-only runner under "How to change code".
+
+## Multiplayer testing
+
+- `./gradlew runServer -PdevTest` starts a dedicated server in `neoforge/run-server` (offline mode, flat world, Caster/Watcher/Dev
+  are operators; `/narutodev` is on with -PdevTest).
+- Clients join it from outside Gradle: capture a dev client's command line (`ps -o args=` while `./gradlew runClient` runs), then
+  start java with it, `--quickPlayMultiplayer localhost:25565 --username <name> --gameDir <dir>`. Two things bit: the program
+  args file splits on spaces (the game dir must not contain "Minecraft Mods"), and the game dir needs `config/fml.toml` with
+  `earlyWindowControl = false`, or the early window times out when started from a script.
+- In multiplayer the dev test sends its commands over the network and its server steps as `/narutodev` (`core/DevServer`, the same
+  code singleplayer calls directly). Mode `watch`: a second player who screenshots when the caster's test says so
+  (`/narutodev shot`), from beside the arena (`/narutodev watch`).
+- Watch for: client code reading server statics (shared in singleplayer, empty on a remote client), and common code loading
+  client classes (a dedicated server crashes on start).
 
 ## NeoForge 26.3 gotchas learned the hard way
 
