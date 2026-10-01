@@ -87,7 +87,8 @@ public final class JutsuClient {
 		}
 	}
 
-	@SubscribeEvent
+	/** Opens the jutsu scroll; core/jutsu/Jutsus cancels the click itself (the scroll isn't used up), which may come first. */
+	@SubscribeEvent(receiveCanceled = true)
 	public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
 		Release release = Jutsus.release(event.getItemStack());
 		if (release != null && event.getLevel().isClientSide())

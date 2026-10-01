@@ -422,6 +422,8 @@ public class NarutoShippudenModVariables {
 		public String learned_jutsu = "";
 		/** Whether the old learned counts (firelearn, …) were turned into learned_jutsu. */
 		public boolean learned_jutsu_migrated = false;
+		/** Restrained by a shadow that copies its caster (Shadow Imitation): crouch with them. */
+		public boolean mimic_sneak = false;
 		/** learned_jutsu parsed (not saved; see Jutsus.learnedSet). */
 		public java.util.Set<String> learnedParsed = java.util.Set.of();
 		public String learnedParsedFrom = "";
@@ -772,6 +774,7 @@ public class NarutoShippudenModVariables {
 			out.putString("weapon_arts", weapon_arts);
 			out.putString("learned_jutsu", learned_jutsu);
 			out.putBoolean("learned_jutsu_migrated", learned_jutsu_migrated);
+			out.putBoolean("mimic_sneak", mimic_sneak);
 		}
 
 		public void read(ValueInput in) {
@@ -1120,6 +1123,7 @@ public class NarutoShippudenModVariables {
 			weapon_arts = in.getStringOr("weapon_arts", "");
 			learned_jutsu = in.getStringOr("learned_jutsu", "");
 			learned_jutsu_migrated = in.getBooleanOr("learned_jutsu_migrated", false);
+			mimic_sneak = in.getBooleanOr("mimic_sneak", false);
 		}
 
 		/** Queues a sync to the owning client; sent once at the end of the current server tick. */
@@ -1200,7 +1204,7 @@ public class NarutoShippudenModVariables {
 			"mangekyousharingansusanostage", "dojutsusharingan", "dojutsums", "dojutsubyakugan", "dojutsurinnegan", "dojutsutenseigan",
 			"dojutsuketsuryugan", "dojutsuisshiki", "magnet_coat", "HumanBulletTank", "SpikedHumanBulletTank", "ButterflyMode", "ButterFlyModeColor",
 			"KamuiPhantomPhase", "PassingFang", "DanceOfTheLarch", "EightTrigramsPalmsRevolvingHeaven", "InsectJarTechnique", "deathgod", "ice_mirror",
-			"waterblob", "restrained", "possessing");
+			"waterblob", "restrained", "possessing", "mimic_sneak");
 	/** What each player's watchers were last sent, so they get a packet only when something they can see changed. */
 	private static final java.util.Map<java.util.UUID, CompoundTag> LAST_VISIBLE = new java.util.HashMap<>();
 

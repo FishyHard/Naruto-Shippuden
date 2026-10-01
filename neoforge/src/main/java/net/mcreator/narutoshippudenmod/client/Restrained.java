@@ -48,6 +48,24 @@ public final class Restrained {
 			ClientPacketDistributor.sendToServer(new NarutoActions.Action("mind", "attack", 0));
 	}
 
+	/** Caught: the mouse doesn't turn them (the server turns them with the caster, or holds their look). */
+	@SubscribeEvent
+	public static void noTurning(net.neoforged.neoforge.client.event.CalculatePlayerTurnEvent event) {
+		PlayerVariables v = vars();
+		if (v != null && v.restrained)
+			// the game cubes (sensitivity * 0.6 + 0.2): this makes it 0
+			event.setMouseSensitivity(-1 / 3.0);
+	}
+
+	/** Caught: they crouch when the one who caught them crouches (Shadow Imitation copies it), and only then. */
+	@SubscribeEvent
+	public static void crouch(net.neoforged.neoforge.client.event.MovementInputUpdateEvent event) {
+		PlayerVariables v = vars();
+		if (v == null || !v.restrained)
+			return;
+		event.getInput().keyPresses = new net.minecraft.world.entity.player.Input(false, false, false, false, false, v.mimic_sneak, false);
+	}
+
 	@SubscribeEvent
 	public static void scroll(InputEvent.MouseScrollingEvent event) {
 		PlayerVariables v = vars();
@@ -61,6 +79,11 @@ public final class Restrained {
 		PlayerVariables v = vars();
 		if (v == null || mc.level == null)
 			return;
+		if (v.restrained)
+			// caught: no step, jump, crouch or sprint of their own (the server moves them; their crouch copies the caster's, below)
+			for (KeyMapping key : new KeyMapping[] { mc.options.keyUp, mc.options.keyDown, mc.options.keyLeft, mc.options.keyRight, mc.options.keyJump,
+					mc.options.keyShift, mc.options.keySprint })
+				key.setDown(false);
 		if (v.restrained || v.possessing > 0) {
 			for (KeyMapping key : mc.options.keyHotbarSlots)
 				while (key.consumeClick()) {

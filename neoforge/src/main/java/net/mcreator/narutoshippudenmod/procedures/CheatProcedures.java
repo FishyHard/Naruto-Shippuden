@@ -329,18 +329,7 @@ public final class CheatProcedures {
 			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
 			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
 			Entity entity = (Entity) dependencies.get("entity");
-			if (new Object() {
-				public boolean checkGamemode(Entity _ent) {
-					if (_ent instanceof ServerPlayer) {
-						return ((ServerPlayer) _ent).gameMode.getGameModeForPlayer() == GameType.CREATIVE;
-					} else if (_ent instanceof Player && _ent.level().isClientSide()) {
-						PlayerInfo _npi = Minecraft.getInstance().getConnection()
-								.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().id());
-						return _npi != null && _npi.getGameMode() == GameType.CREATIVE;
-					}
-					return false;
-				}
-			}.checkGamemode(entity)) {
+			if ((entity instanceof ServerPlayer _op && net.mcreator.narutoshippudenmod.core.NarutoActions.canCheat(_op))) {
 				{
 					Entity _ent = entity;
 					if (_ent instanceof ServerPlayer) {
@@ -359,20 +348,9 @@ public final class CheatProcedures {
 						}, _buf -> _buf.writeBlockPos(_bpos));
 					}
 				}
-			} else if (!(new Object() {
-				public boolean checkGamemode(Entity _ent) {
-					if (_ent instanceof ServerPlayer) {
-						return ((ServerPlayer) _ent).gameMode.getGameModeForPlayer() == GameType.CREATIVE;
-					} else if (_ent instanceof Player && _ent.level().isClientSide()) {
-						PlayerInfo _npi = Minecraft.getInstance().getConnection()
-								.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().id());
-						return _npi != null && _npi.getGameMode() == GameType.CREATIVE;
-					}
-					return false;
-				}
-			}.checkGamemode(entity))) {
+			} else if (!((entity instanceof ServerPlayer _op && net.mcreator.narutoshippudenmod.core.NarutoActions.canCheat(_op)))) {
 				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendSystemMessage(Component.literal("To use this command you have to be in creative."));
+					((Player) entity).sendSystemMessage(Component.literal("Cheats need operator rights."));
 				}
 			}
 		}

@@ -407,6 +407,10 @@ Apply new `@func` rules with the body-only runner under "How to change code".
 - In multiplayer the dev test sends its commands over the network and its server steps as `/narutodev` (`core/DevServer`, the same
   code singleplayer calls directly). Mode `watch`: a second player who screenshots when the caster's test says so
   (`/narutodev shot`), from beside the arena (`/narutodev watch`).
+- Other players' clients get only the variables in `NarutoShippudenModVariables.VISIBLE` (sent to trackers on change and on
+  StartTracking). A renderer reading a variable of *another* player that isn't listed sees its default: add it there.
+- The procedures' player tick runs on a client only for its own player (rule `tick_only_own_player`): on other players' copies
+  it acted on numbers the client doesn't have (the Susanoo turned itself off on everyone else's screen).
 - Watch for: client code reading server statics (shared in singleplayer, empty on a remote client), and common code loading
   client classes (a dedicated server crashes on start).
 

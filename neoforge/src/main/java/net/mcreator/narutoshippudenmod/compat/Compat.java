@@ -160,4 +160,17 @@ public final class Compat {
 			event.register((EntityType) entry.type().get(), entry.placement(), entry.heightmap(), (net.minecraft.world.entity.SpawnPlacements.SpawnPredicate) entry.predicate(),
 					net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent.Operation.REPLACE);
 	}
+
+	/**
+	 * An entity's game mode, safe on a dedicated server (the old procedures asked the client's player list for it, a client-only class).
+	 * On the client only creative and spectator can be told apart; anything else reads as survival.
+	 */
+	public static boolean isGameMode(net.minecraft.world.entity.Entity entity, net.minecraft.world.level.GameType mode) {
+		if (entity instanceof net.minecraft.server.level.ServerPlayer player)
+			return player.gameMode.getGameModeForPlayer() == mode;
+		if (entity instanceof net.minecraft.world.entity.player.Player player)
+			return (player.isSpectator() ? net.minecraft.world.level.GameType.SPECTATOR
+					: player.isCreative() ? net.minecraft.world.level.GameType.CREATIVE : net.minecraft.world.level.GameType.SURVIVAL) == mode;
+		return false;
+	}
 }

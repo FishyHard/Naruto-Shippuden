@@ -164,7 +164,8 @@ public final class NarutoActions {
 
 	// ------------------------------------------------------------------ running them
 	public static boolean canCheat(ServerPlayer player) {
-		return player.gameMode.getGameModeForPlayer() == GameType.CREATIVE || player.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER);
+		// operators only, in any game mode (singleplayer: with cheats allowed)
+		return player.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER);
 	}
 
 	public static Map<String, Object> dependencies(ServerPlayer player) {
@@ -258,9 +259,11 @@ public final class NarutoActions {
 			boolean open = action.kind().equals("page") && !action.key().equals("select")
 					|| action.kind().equals("set") && action.key().equals(SP_PER_CLICK) || action.kind().equals("jutsu") || action.kind().equals("learn")
 					|| action.kind().equals("eye") || action.kind().equals("susanoo") || action.kind().equals("chakra")
-					|| action.kind().equals("custom_jutsu") || action.kind().equals("forget_jutsu") || action.kind().equals("stat");
+					|| action.kind().equals("custom_jutsu") || action.kind().equals("forget_jutsu") || action.kind().equals("stat")
+					// a Yamanaka steering a body (their look and attacks): ClanJutsu ignores it unless they are inside one
+					|| action.kind().equals("mind");
 			if (!open && !canCheat(player)) {
-				player.sendSystemMessage(Component.literal("Cheats need creative mode or operator rights."));
+				player.sendSystemMessage(Component.literal("Cheats need operator rights."));
 				return;
 			}
 			switch (action.kind()) {

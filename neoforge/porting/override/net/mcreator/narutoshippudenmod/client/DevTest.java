@@ -353,6 +353,40 @@ public final class DevTest {
 
 	/** Every mod screen, the cheat tabs, then NPCs and the Byakugan outline in the world; 60 ticks per step. */
 	private static void buildSteps(Minecraft mc) {
+		if (System.getProperty("naruto.devtest.only", "").equals("mpsusanoo")) {
+			// against the dedicated server, with the watcher: the eyes and each Susanoo stage, seen by both players
+			STEPS.add(() -> {
+				mc.gui.setScreen(null);
+				mc.options.pauseOnLostFocus = false;
+				if (mc.getConnection().getOnlinePlayers().size() < 2 && ticks < 2400) {
+					step--;
+					nextDelay = 20;
+					return;
+				}
+				command(mc, "gamemode creative");
+				command(mc, "tp @s 0 -60 0 0 0");
+				command(mc, "narutodev watch");
+			});
+			for (int stage = 0; stage <= 3; stage++) {
+				int s = stage;
+				STEPS.add(() -> {
+					command(mc, "narutodev susanoo " + s);
+					nextDelay = 40;
+				});
+				STEPS.add(() -> {
+					mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
+					nextDelay = 10;
+				});
+				STEPS.add(() -> {
+					shot(mc, "mp_susanoo_" + s);
+					signal(mc, "mp_susanoo_" + s);
+					NarutoShippudenMod.LOGGER.info("DEVTEST susanoo stage {} here: {}", s, NarutoShippudenModVariables.get(mc.player).mangekyousharingansusanostage);
+				});
+			}
+			STEPS.add(() -> signal(mc, "done"));
+			STEPS.add(mc::stop);
+			return;
+		}
 		if (System.getProperty("naruto.devtest.only", "").equals("watch")) {
 			// a second player: screenshots when the caster's test says so (DEVSHOT in chat), stops on "done"
 			STEPS.add(() -> {
@@ -1381,8 +1415,15 @@ public final class DevTest {
 			watchShot = null;
 			if (name.equals("done"))
 				mc.stop();
-			else
+			else {
 				shot(mc, "watch_" + name);
+				for (net.minecraft.world.entity.player.Player other : mc.level.players())
+					if (other != mc.player) {
+						NarutoShippudenModVariables.PlayerVariables o = NarutoShippudenModVariables.get(other);
+						NarutoShippudenMod.LOGGER.info("DEVTEST watcher sees {}: susanoo {} itachi {} ms {} sharingan {}", other.getName().getString(),
+								o.mangekyousharingansusanostage, o.MangekyouSharinganItachi, o.MangekyouSharinganActivate, o.sharinganactivate);
+					}
+			}
 		}
 		Screen screen = mc.gui.screen();
 		if (ticks % 100 == 0 && screen != null) {

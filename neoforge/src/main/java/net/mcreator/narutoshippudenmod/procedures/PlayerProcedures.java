@@ -272,31 +272,9 @@ public final class PlayerProcedures {
 			double chain = 0;
 			double chainwait = 0;
 			if (entity instanceof Player) {
-				if (new Object() {
-					public boolean checkGamemode(Entity _ent) {
-						if (_ent instanceof ServerPlayer) {
-							return ((ServerPlayer) _ent).gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
-						} else if (_ent instanceof Player && _ent.level().isClientSide()) {
-							PlayerInfo _npi = Minecraft.getInstance().getConnection()
-									.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().id());
-							return _npi != null && _npi.getGameMode() == GameType.SPECTATOR;
-						}
-						return false;
-					}
-				}.checkGamemode(entity)) {
+				if (net.mcreator.narutoshippudenmod.compat.Compat.isGameMode(entity, GameType.SPECTATOR)) {
 					entity.noPhysics = true;
-				} else if (!(new Object() {
-					public boolean checkGamemode(Entity _ent) {
-						if (_ent instanceof ServerPlayer) {
-							return ((ServerPlayer) _ent).gameMode.getGameModeForPlayer() == GameType.SPECTATOR;
-						} else if (_ent instanceof Player && _ent.level().isClientSide()) {
-							PlayerInfo _npi = Minecraft.getInstance().getConnection()
-									.getPlayerInfo(((AbstractClientPlayer) _ent).getGameProfile().id());
-							return _npi != null && _npi.getGameMode() == GameType.SPECTATOR;
-						}
-						return false;
-					}
-				}.checkGamemode(entity))) {
+				} else if (!(net.mcreator.narutoshippudenmod.compat.Compat.isGameMode(entity, GameType.SPECTATOR))) {
 					if (false) {
 						entity.noPhysics = true;
 						entity.setDeltaMovement((entity.getLookAngle().x * 0.25), (entity.getLookAngle().y * 0.25), (entity.getLookAngle().z * 0.25));
@@ -318,7 +296,7 @@ public final class PlayerProcedures {
 		private static class GlobalTrigger {
 			@SubscribeEvent
 			public static void onPlayerTick(PlayerTickEvent.Post event) {
-				if (true) {
+				if (!(event.getEntity().level().isClientSide() && !event.getEntity().isLocalInstanceAuthoritative())) {
 					Entity entity = event.getEntity();
 					Level world = entity.level();
 					double i = entity.getX();

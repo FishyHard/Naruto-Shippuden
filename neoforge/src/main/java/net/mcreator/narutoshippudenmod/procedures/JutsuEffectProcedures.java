@@ -864,7 +864,7 @@ public final class JutsuEffectProcedures {
 		private static class GlobalTrigger {
 			@SubscribeEvent
 			public static void onPlayerTick(PlayerTickEvent.Post event) {
-				if (true) {
+				if (!(event.getEntity().level().isClientSide() && !event.getEntity().isLocalInstanceAuthoritative())) {
 					Entity entity = event.getEntity();
 					Level world = entity.level();
 					double i = entity.getX();

@@ -113,6 +113,23 @@ public final class Stats {
 	public static void tick(PlayerTickEvent.Post event) {
 		if (!(event.getEntity() instanceof ServerPlayer player) || player.tickCount % 10 != 0)
 			return;
+		PlayerVariables v = apply(player);
+		// a medic's body mends itself: up to 3 health every 5 seconds at 300 Medicine
+		if (player.tickCount % 100 == 0 && v.medicine >= 20 && player.getHealth() < player.getMaxHealth() && player.getFoodData().getFoodLevel() > 6)
+			player.heal((float) (Math.min(300, v.medicine) / 100));
+	}
+
+	/** Back from death with the whole health bar the stats give (the respawned body starts at the base 20 otherwise). */
+	@SubscribeEvent
+	public static void respawn(net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerRespawnEvent event) {
+		if (event.getEntity() instanceof ServerPlayer player && !event.isEndConquered()) {
+			apply(player);
+			player.setHealth(player.getMaxHealth());
+		}
+	}
+
+	/** Puts the stats' attribute modifiers on the player (as they stand now). */
+	private static PlayerVariables apply(ServerPlayer player) {
 		PlayerVariables v = NarutoShippudenModVariables.get(player);
 		// the old commands may have left a changed base behind on old saves
 		base(player, Attributes.MAX_HEALTH, 20);
@@ -122,9 +139,7 @@ public final class Stats {
 		set(player, Attributes.ATTACK_DAMAGE, TAIJUTSU, player.getMainHandItem().isEmpty() ? fists(v) : 0, AttributeModifier.Operation.ADD_VALUE);
 		if (player.getHealth() > player.getMaxHealth())
 			player.setHealth(player.getMaxHealth());
-		// a medic's body mends itself: up to 3 health every 5 seconds at 300 Medicine
-		if (player.tickCount % 100 == 0 && v.medicine >= 20 && player.getHealth() < player.getMaxHealth() && player.getFoodData().getFoodLevel() > 6)
-			player.heal((float) (Math.min(300, v.medicine) / 100));
+		return v;
 	}
 
 	private static void base(ServerPlayer player, Holder<Attribute> attribute, double value) {

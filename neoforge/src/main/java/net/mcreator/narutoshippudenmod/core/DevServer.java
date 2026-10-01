@@ -49,6 +49,8 @@ public final class DevServer {
 				.then(Commands.literal("mimic").then(Commands.argument("step", IntegerArgumentType.integer(0))
 						.executes(c -> run(() -> mimic(c.getSource().getPlayerOrException(), IntegerArgumentType.getInteger(c, "step"))))))
 				.then(Commands.literal("watch").executes(c -> run(() -> watch(c.getSource().getPlayerOrException()))))
+				.then(Commands.literal("susanoo").then(Commands.argument("stage", IntegerArgumentType.integer(0, 4))
+						.executes(c -> run(() -> susanoo(c.getSource().getPlayerOrException(), IntegerArgumentType.getInteger(c, "stage"))))))
 				.then(Commands.literal("shot").then(Commands.argument("name", StringArgumentType.word())
 						.executes(c -> run(() -> shot(c.getSource().getPlayerOrException(), StringArgumentType.getString(c, "name")))))));
 	}
@@ -150,6 +152,18 @@ public final class DevServer {
 			other.teleportTo(caster.level(), x, y, z, Set.of(), -90, 10, true);
 			NarutoShippudenMod.LOGGER.info("DEVTEST watcher {} at {} {} {}", other.getName().getString(), (int) x, (int) y, (int) z);
 		}
+	}
+
+	/** Itachi's Mangekyou open (Sharingan and Mangekyou both active), its Susanoo learned, grown to the stage. */
+	public static void susanoo(ServerPlayer player, int stage) {
+		NarutoShippudenModVariables.ifPresent(player, v -> {
+			v.sharingan = v.sharinganactivate = v.Mangekyou_Sharingan = v.MangekyouSharinganItachi = v.MangekyouSharinganActivate = true;
+			v.mangekyoushrainganitachisusanolearn = 3;
+			v.mangekyousharingansusanostage = 0;
+			v.syncPlayerVariables(player);
+		});
+		for (int i = 0; i < stage; i++)
+			Eyes.growSusanoo(player);
 	}
 
 	public static void shot(ServerPlayer caster, String name) {

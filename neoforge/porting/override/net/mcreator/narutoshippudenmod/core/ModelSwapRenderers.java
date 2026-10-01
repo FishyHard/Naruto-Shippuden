@@ -87,6 +87,10 @@ public final class ModelSwapRenderers {
 		java.util.List<String> textures = EYES.remove(event.getRenderState());
 		if (textures == null)
 			return;
+		// the Mangekyou is the Sharingan, further: with both open only it shows (two eyes on one face fight for the same pixels, and
+		// which won depended on the camera, so players saw different eyes)
+		if (textures.stream().anyMatch(t -> t.contains("/mangekyou_sharingan/")))
+			textures.removeIf(t -> t.contains("/dojutsu/sharingan/"));
 		if (overlayModel == null)
 			overlayModel = new PlayerModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER), false);
 		// the eyes lie exactly on the skin, so they need the decal render type (depth offset) to show on top of it

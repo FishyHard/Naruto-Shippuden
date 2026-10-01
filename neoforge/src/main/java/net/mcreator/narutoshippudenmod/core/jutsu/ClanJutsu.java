@@ -1594,7 +1594,7 @@ public final class ClanJutsu {
 
 	/**
 	 * Mind Body Switch Technique: the caster's mind jumps into the creature looked at and controls it for fifteen seconds (see
-	 * {@link #takeOver}); a player's body is taken and held helpless for five.
+	 * {@link #takeOver}); a player is taken over for ten (they can do nothing; the caster moves, looks and strikes with them).
 	 */
 	private static void mindSwitch(ServerPlayer p) {
 		LivingEntity target = target(p, 16);
@@ -1602,15 +1602,15 @@ public final class ClanJutsu {
 			Jutsus.miss(p, "Look at an enemy to take over");
 			return;
 		}
-		if (target instanceof net.minecraft.world.entity.Mob mob)
-			takeOver(p, mob, 300);
+		if (target instanceof net.minecraft.world.entity.Mob || target instanceof ServerPlayer)
+			takeOver(p, target, target instanceof ServerPlayer ? 200 : 300);
 		else
 			possess(p, new ArrayList<>(List.of(target)), 100);
 	}
 
 	private static final Identifier MIND_LOCK = Identifier.fromNamespaceAndPath("naruto_shippuden", "mind_body_switch");
 	/** The creature each Yamanaka is inside (Mind Body Switch), steered by their own movement keys and look. */
-	private static final Map<UUID, net.minecraft.world.entity.Mob> PUPPETS = new HashMap<>();
+	private static final Map<UUID, LivingEntity> PUPPETS = new HashMap<>();
 	/** How to give each possessing Yamanaka their body back. */
 	private static final Map<UUID, Runnable> RETURN = new HashMap<>();
 
@@ -1632,21 +1632,27 @@ public final class ClanJutsu {
 	}
 
 	/**
-	 * The caster's mind goes into a creature and takes it over for ticks: they see through its eyes (client/Restrained moves the
-	 * camera), it walks and jumps with their movement keys and turns with their look, and it strikes whatever is in front of it
-	 * when they attack. Their own body lies limp; it ends when the time is up, when they sneak, when the creature dies, or at once if
-	 * their empty body is hurt.
+	 * The caster's mind goes into a creature (or another player) and takes it over for ticks: they see through its eyes
+	 * (client/Restrained moves the camera), it walks and jumps with their movement keys and turns with their look, and it strikes
+	 * whatever is in front of it when they attack. Their own body lies limp; it ends when the time is up, when they sneak, when the
+	 * body taken dies, or at once if their empty body is hurt. A player taken over is restrained: their client does nothing, and the
+	 * server moves them (players aren't moved by velocity, so they're placed each tick).
 	 */
-	private static void takeOver(ServerPlayer p, net.minecraft.world.entity.Mob mob, int ticks) {
+	private static void takeOver(ServerPlayer p, LivingEntity mob, int ticks) {
 		ServerLevel level = level(p);
 		float health = p.getHealth();
 		boolean[] over = { false };
 		PUPPETS.put(p.getUUID(), mob);
 		set(p, v -> v.possessing = mob.getId() + 1);
-		lock(mob, net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED, true);
+		ServerPlayer taken = mob instanceof ServerPlayer sp ? sp : null;
+		if (taken != null)
+			restrain(taken, true);
+		else
+			lock(mob, net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED, true);
 		lock(p, net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED, true);
 		lock(p, net.minecraft.world.entity.ai.attributes.Attributes.JUMP_STRENGTH, true);
-		double speed = mob.getAttributeBaseValue(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED);
+		double speed = taken != null ? 0.1 : mob.getAttributeBaseValue(net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED);
+		double[] fall = { 0 };
 		Runnable end = () -> {
 			if (over[0])
 				return;
@@ -1654,7 +1660,10 @@ public final class ClanJutsu {
 			RETURN.remove(p.getUUID());
 			PUPPETS.remove(p.getUUID(), mob);
 			set(p, v -> v.possessing = 0);
-			lock(mob, net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED, false);
+			if (taken != null)
+				restrain(taken, false);
+			else
+				lock(mob, net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED, false);
 			lock(p, net.minecraft.world.entity.ai.attributes.Attributes.MOVEMENT_SPEED, false);
 			lock(p, net.minecraft.world.entity.ai.attributes.Attributes.JUMP_STRENGTH, false);
 			mob.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 60, 0, false, false));
@@ -1678,8 +1687,10 @@ public final class ClanJutsu {
 			if (t % 3 == 0)
 				level.sendParticles(Element.MIND.trail, p.getX(), p.getEyeY() + 0.3, p.getZ(), 1, 0.2, 0.1, 0.2, 0);
 			// the creature is the caster's now
-			mob.getNavigation().stop();
-			mob.setTarget(null);
+			if (mob instanceof net.minecraft.world.entity.Mob m) {
+				m.getNavigation().stop();
+				m.setTarget(null);
+			}
 			float yaw = p.getYRot();
 			mob.setYRot(yaw);
 			mob.setYHeadRot(yaw);
@@ -1693,14 +1704,23 @@ public final class ClanJutsu {
 				x /= len;
 				z /= len;
 			}
+			if (taken != null) {
+				// a player: moved and fallen here, then placed where the server has them (with the caster's look)
+				restrain(taken, true);
+				fall[0] = in.jump() && taken.onGround() ? 0.42 : taken.onGround() ? 0 : Math.max(-3, (fall[0] - 0.08) * 0.98);
+				taken.move(net.minecraft.world.entity.MoverType.SELF, new Vec3(x * pace, fall[0], z * pace));
+				taken.teleportTo(level, taken.getX(), taken.getY(), taken.getZ(), java.util.Set.of(), yaw, p.getXRot(), false);
+				taken.fallDistance = 0;
+				return;
+			}
 			mob.move(net.minecraft.world.entity.MoverType.SELF, new Vec3(x * pace, 0, z * pace));
 			double y = mob.getDeltaMovement().y;
 			if (in.jump() && mob.onGround())
 				y = 0.45;
-			else if (mob.isNoAi())
+			else if (mob instanceof net.minecraft.world.entity.Mob m && m.isNoAi())
 				// no AI, no physics of its own: fall like anything else
 				y = mob.onGround() ? 0 : Math.max(-3, (y - 0.08) * 0.98);
-			if (mob.isNoAi())
+			if (mob instanceof net.minecraft.world.entity.Mob m && m.isNoAi())
 				mob.move(net.minecraft.world.entity.MoverType.SELF, new Vec3(0, y, 0));
 			mob.setDeltaMovement(0, y, 0);
 			mob.syncVelocity = true;
@@ -1720,7 +1740,7 @@ public final class ClanJutsu {
 
 	/** The possessed creature strikes whatever is in front of it (the caster attacked; sent by client/Restrained). */
 	public static void puppetAttack(ServerPlayer p) {
-		net.minecraft.world.entity.Mob mob = PUPPETS.get(p.getUUID());
+		LivingEntity mob = PUPPETS.get(p.getUUID());
 		if (mob == null || !mob.isAlive())
 			return;
 		ServerLevel level = level(p);
@@ -1731,8 +1751,10 @@ public final class ClanJutsu {
 		mob.swing(net.minecraft.world.InteractionHand.MAIN_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
 		if (victim == null)
 			return;
-		if (mob.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE) != null)
-			mob.doHurtTarget(level, victim);
+		if (mob instanceof ServerPlayer taken)
+			taken.attack(victim);
+		else if (mob instanceof net.minecraft.world.entity.Mob m && m.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE) != null)
+			m.doHurtTarget(level, victim);
 		else
 			victim.hurtServer(level, mob.damageSources().mobAttack(mob), 2);
 	}
@@ -1816,7 +1838,10 @@ public final class ClanJutsu {
 			RESTRAINED.put(victim.getUUID(), victim.getInventory().getSelectedSlot());
 		else
 			RESTRAINED.remove(victim.getUUID());
-		set(victim, v -> v.restrained = on);
+		set(victim, v -> {
+			v.restrained = on;
+			v.mimic_sneak = false;
+		});
 	}
 
 	public static boolean restrained(ServerPlayer p) {
@@ -2103,6 +2128,7 @@ public final class ClanJutsu {
 			lastLook[1] = pitch;
 			boolean swing = mimic && p.isSwinging() && !swinging[0];
 			swinging[0] = p.isSwinging();
+			boolean sneak = mimic && p.isShiftKeyDown();
 			for (Map.Entry<LivingEntity, Caught> entry : hold.held.entrySet()) {
 				LivingEntity e = entry.getKey();
 				Caught c = entry.getValue();
@@ -2111,7 +2137,11 @@ public final class ClanJutsu {
 				if (e instanceof ServerPlayer victim) {
 					victim.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 10, 9, false, false));
 					restrain(victim, true);
-				}
+					// their client crouches with the caster (client/Restrained)
+					if (NarutoShippudenModVariables.get(victim).mimic_sneak != sneak)
+						set(victim, v -> v.mimic_sneak = sneak);
+				} else if (mimic && (e.getPose() == net.minecraft.world.entity.Pose.STANDING || e.getPose() == net.minecraft.world.entity.Pose.CROUCHING))
+					e.setPose(sneak ? net.minecraft.world.entity.Pose.CROUCHING : net.minecraft.world.entity.Pose.STANDING);
 				if (moved) {
 					e.setPos(c.spot);
 					e.move(net.minecraft.world.entity.MoverType.SELF, step.yRot((float) -Math.toRadians(c.yawOffset)));

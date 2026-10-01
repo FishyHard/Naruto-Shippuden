@@ -1836,3 +1836,29 @@ def sync_on_change(path, text):
     return re.sub(r'ifPresent\((\w+), capability -> \{(\s*)capability\.(\w+) = _setval;\s*capability\.syncPlayerVariables\(\1\);(\s*)\}\);',
                   r'ifPresent(\1, capability -> {\2if (!java.util.Objects.equals(capability.\3, _setval)) {\2\tcapability.\3 = _setval;\2\tcapability.syncPlayerVariables(\1);\2}\4});',
                   text)
+
+
+@func
+def gamemode_check(path, text):
+    """The procedures checked a game mode with an inline object that asked the client's player list (Minecraft, PlayerInfo): client-only
+    classes in server code, which can crash a dedicated server. compat/Compat.isGameMode does it safely. The cheat menu now needs
+    operator rights rather than creative mode."""
+    rx = re.compile(r'new Object\(\) \{\s*public boolean checkGamemode\(Entity _ent\) \{.*?GameType\.(\w+);.*?return false;\s*\}\s*\}\.checkGamemode\((\w+)\)', re.S)
+    text = rx.sub(r'net.mcreator.narutoshippudenmod.compat.Compat.isGameMode(\2, GameType.\1)', text)
+    i = text.find('public static class CheatGUIProcedure ')
+    if i >= 0:
+        end = find_block(text, i)
+        cls = text[i:end].replace('net.mcreator.narutoshippudenmod.compat.Compat.isGameMode(entity, GameType.CREATIVE)',
+                                  '(entity instanceof ServerPlayer _op && net.mcreator.narutoshippudenmod.core.NarutoActions.canCheat(_op))')
+        cls = cls.replace('"To use this command you have to be in creative."', '"Cheats need operator rights."')
+        text = text[:i] + cls + text[end:]
+    return text
+
+
+@func
+def tick_only_own_player(path, text):
+    """The procedures' player tick ran on every player a client has, other players' copies too, which know none of their numbers
+    (chakra 0 there): the Susanoo, draining chakra, switched itself off on everyone else's screen. On a client it now runs for the
+    client's own player only; the server runs it for everyone."""
+    return re.sub(r'(public static void onPlayerTick\(PlayerTickEvent\.\w+ event\) \{\s*)if \(true\) \{',
+                  r'\1if (!(event.getEntity().level().isClientSide() && !event.getEntity().isLocalInstanceAuthoritative())) {', text)
