@@ -446,6 +446,62 @@ public final class DevTest {
 			STEPS.add(mc::stop);
 			return;
 		}
+		if (System.getProperty("naruto.devtest.only", "").equals("perf")) {
+			// stand still for 20 s (two DEVTEST tick lines), then with Chakra Control, the Sharingan and a clan
+			STEPS.add(() -> {
+				mc.gui.setScreen(null);
+				mc.options.pauseOnLostFocus = false;
+				command(mc, "execute in minecraft:overworld run spreadplayers 0 0 0 1 false @s");
+				nextDelay = 420;
+			});
+			STEPS.add(() -> {
+				NarutoShippudenMod.LOGGER.info("DEVTEST perf: now with chakra control, sharingan, uchiha");
+				onServer(mc, player -> NarutoShippudenModVariables.ifPresent(player, v -> {
+					v.Chakra_Control = true;
+					v.sharingan = v.sharinganactivate = v.uchihareleaselogic = true;
+					v.syncPlayerVariables(player);
+				}));
+				nextDelay = 420;
+			});
+			STEPS.add(mc::stop);
+			return;
+		}
+		if (System.getProperty("naruto.devtest.only", "").equals("headband")) {
+			STEPS.add(() -> {
+				mc.gui.setScreen(null);
+				mc.options.pauseOnLostFocus = false;
+				command(mc, "time set day");
+				command(mc, "execute in minecraft:overworld run spreadplayers 0 0 0 1 false @s");
+				command(mc, "item replace entity @s armor.head with naruto_shippuden:genin_konohagakure_helmet");
+				command(mc, "tp @s ~ ~ ~ 0 0");
+				mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
+			});
+			STEPS.add(() -> shot(mc, "headband_back"));
+			STEPS.add(() -> command(mc, "tp @s ~ ~ ~ 90 0"));
+			STEPS.add(() -> shot(mc, "headband_side"));
+			STEPS.add(() -> {
+				command(mc, "tp @s ~ ~ ~ 0 0");
+				mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
+			});
+			STEPS.add(() -> shot(mc, "headband_front"));
+			STEPS.add(() -> {
+				mc.options.setCameraType(CameraType.FIRST_PERSON);
+				command(mc, "give @s naruto_shippuden:ice_dna_release");
+				for (String id : new String[] { "ice_dna_release", "fire_dna_release", "undefined_dna" }) {
+					net.minecraft.world.item.ItemStack stack = new net.minecraft.world.item.ItemStack(
+							net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", id)));
+					NarutoShippudenMod.LOGGER.info("DEVTEST dna tooltip {}: {}", id, stack.getTooltipLines(net.minecraft.world.item.Item.TooltipContext.of(mc.level), mc.player,
+							net.minecraft.world.item.TooltipFlag.NORMAL).stream().map(c -> c.getString()).toList());
+				}
+			});
+			STEPS.add(mc::stop);
+			return;
+		}
+		if (System.getProperty("naruto.devtest.only", "").equals("dna")) {
+			dnaSteps(mc);
+			STEPS.add(mc::stop);
+			return;
+		}
 		if (System.getProperty("naruto.devtest.only", "").equals("learned")) {
 			learnedSteps(mc);
 			STEPS.add(mc::stop);
@@ -1036,6 +1092,111 @@ public final class DevTest {
 	}
 
 	/** The Shinobi Merchant's shop, and a kill made by a jutsu summon counting for the player. */
+	/** DNA: kekkei genkai needing their natures, Medicine setting the chance, identifying, shinobi drops, the config switch, tooltips. */
+	private static void dnaSteps(Minecraft mc) {
+		java.util.function.Function<String, net.mcreator.narutoshippudenmod.core.jutsu.Dna.Kind> kind = id -> java.util.stream.Stream
+				.concat(net.mcreator.narutoshippudenmod.core.jutsu.Dna.NATURES.stream(), net.mcreator.narutoshippudenmod.core.jutsu.Dna.KEKKEI_GENKAI.stream())
+				.filter(k -> k.id().equals(id)).findFirst().orElseThrow();
+		java.util.function.BiFunction<net.minecraft.server.level.ServerPlayer, String, String> implant = (player, id) -> {
+			net.mcreator.narutoshippudenmod.core.jutsu.Dna.Kind k = kind.apply(id);
+			net.minecraft.world.item.ItemStack stack = new net.minecraft.world.item.ItemStack(
+					net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", k.item())));
+			net.mcreator.narutoshippudenmod.core.jutsu.Dna.implant(player, player, stack, k);
+			return "used " + (stack.isEmpty()) + " has " + k.has().test(NarutoShippudenModVariables.get(player));
+		};
+		STEPS.add(() -> {
+			mc.gui.setScreen(null);
+			command(mc, "clear @s");
+			command(mc, "kill @e[type=!player]");
+			onServer(mc, player -> {
+				NarutoShippudenModVariables.ifPresent(player, v -> {
+					for (var k : net.mcreator.narutoshippudenmod.core.jutsu.Dna.NATURES)
+						k.set().accept(v, false);
+					for (var k : net.mcreator.narutoshippudenmod.core.jutsu.Dna.KEKKEI_GENKAI)
+						k.set().accept(v, false);
+					v.medicine = 0;
+				});
+				net.mcreator.narutoshippudenmod.core.NarutoConfig.COMBINE_NATURES.set(true);
+				NarutoShippudenMod.LOGGER.info("DEVTEST dna chance medicine 0: nature {} kekkei genkai {}",
+						net.mcreator.narutoshippudenmod.core.jutsu.Dna.chance(kind.apply("fire"), NarutoShippudenModVariables.get(player)),
+						net.mcreator.narutoshippudenmod.core.jutsu.Dna.chance(kind.apply("ice"), NarutoShippudenModVariables.get(player)));
+				NarutoShippudenMod.LOGGER.info("DEVTEST dna ice without natures: {}", implant.apply(player, "ice"));
+				NarutoShippudenModVariables.ifPresent(player, v -> v.medicine = 300);
+				NarutoShippudenMod.LOGGER.info("DEVTEST dna chance medicine 300: nature {} kekkei genkai {}",
+						net.mcreator.narutoshippudenmod.core.jutsu.Dna.chance(kind.apply("fire"), NarutoShippudenModVariables.get(player)),
+						net.mcreator.narutoshippudenmod.core.jutsu.Dna.chance(kind.apply("ice"), NarutoShippudenModVariables.get(player)));
+				NarutoShippudenMod.LOGGER.info("DEVTEST dna water: {}", implant.apply(player, "water"));
+				NarutoShippudenMod.LOGGER.info("DEVTEST dna ice with water only: {}", implant.apply(player, "ice"));
+				NarutoShippudenMod.LOGGER.info("DEVTEST dna wind: {}", implant.apply(player, "wind"));
+				NarutoShippudenMod.LOGGER.info("DEVTEST dna ice with water and wind: {}", implant.apply(player, "ice"));
+				NarutoShippudenMod.LOGGER.info("DEVTEST dna ice again: {}", implant.apply(player, "ice"));
+				net.mcreator.narutoshippudenmod.core.NarutoConfig.COMBINE_NATURES.set(false);
+				NarutoShippudenMod.LOGGER.info("DEVTEST dna dust with combining off: {}", implant.apply(player, "dust"));
+				net.mcreator.narutoshippudenmod.core.NarutoConfig.COMBINE_NATURES.set(true);
+				// failures at Medicine 0 use the DNA up
+				NarutoShippudenModVariables.ifPresent(player, v -> v.medicine = 0);
+				int got = 0, tries = 40;
+				for (int i = 0; i < tries; i++) {
+					NarutoShippudenModVariables.ifPresent(player, v -> v.lightningreleaselogic = false);
+					implant.apply(player, "lightning");
+					if (NarutoShippudenModVariables.get(player).lightningreleaselogic)
+						got++;
+				}
+				NarutoShippudenMod.LOGGER.info("DEVTEST dna lightning at medicine 0: {} of {}", got, tries);
+				// identifying
+				player.getInventory().clearContent();
+				net.minecraft.world.item.ItemStack undefined = new net.minecraft.world.item.ItemStack(
+						net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", "undefined_dna")), 100);
+				for (int i = 0; i < 100; i++)
+					net.mcreator.narutoshippudenmod.core.jutsu.Dna.identify(player, undefined);
+				int natures = 0, kekkeiGenkai = 0;
+				for (net.minecraft.world.item.ItemStack stack : player.getInventory().getNonEquipmentItems()) {
+					var k = net.mcreator.narutoshippudenmod.core.jutsu.Dna.kind(stack);
+					if (k != null) {
+						if (k.natural())
+							natures += stack.getCount();
+						else
+							kekkeiGenkai += stack.getCount();
+					}
+				}
+				NarutoShippudenMod.LOGGER.info("DEVTEST dna identify 100: natures {} kekkei genkai {} left {}", natures, kekkeiGenkai, undefined.getCount());
+				player.getInventory().clearContent();
+			});
+			// drops: twenty Jonin and twenty zombies
+			for (int i = 0; i < 20; i++) {
+				command(mc, "summon naruto_shippuden:hidden_leaf_shinobi ~" + (i % 5 * 2 - 4) + " ~ ~6 {NoAI:1b,NeoForgeData:{ShinobiRank:2}}");
+				command(mc, "summon minecraft:zombie ~" + (i % 5 * 2 - 4) + " ~ ~-6 {NoAI:1b}");
+			}
+			nextDelay = 40;
+		});
+		STEPS.add(() -> {
+			command(mc, "kill @e[type=naruto_shippuden:hidden_leaf_shinobi]");
+			command(mc, "kill @e[type=minecraft:zombie]");
+		});
+		STEPS.add(() -> onServer(mc, player -> {
+			java.util.List<net.minecraft.world.entity.item.ItemEntity> items = player.level().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,
+					player.getBoundingBox().inflate(20), e -> true);
+			long front = items.stream().filter(e -> e.getZ() > player.getZ() && net.mcreator.narutoshippudenmod.core.jutsu.Dna.undefined(e.getItem())).count();
+			long back = items.stream().filter(e -> e.getZ() < player.getZ() && net.mcreator.narutoshippudenmod.core.jutsu.Dna.undefined(e.getItem())).count();
+			NarutoShippudenMod.LOGGER.info("DEVTEST dna drops: 20 Jonin {} / 20 zombies {}", front, back);
+		}));
+		// tooltips
+		STEPS.add(() -> {
+			command(mc, "kill @e[type=item]");
+			command(mc, "give @s naruto_shippuden:ice_dna_release");
+			command(mc, "give @s naruto_shippuden:dust_dna_release");
+			command(mc, "give @s naruto_shippuden:undefined_dna");
+		});
+		STEPS.add(() -> {
+			for (String id : new String[] { "ice_dna_release", "dust_dna_release", "undefined_dna" }) {
+				net.minecraft.world.item.ItemStack stack = new net.minecraft.world.item.ItemStack(
+						net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", id)));
+				NarutoShippudenMod.LOGGER.info("DEVTEST dna tooltip {}: {}", id, stack.getTooltipLines(net.minecraft.world.item.Item.TooltipContext.of(mc.level), mc.player,
+						net.minecraft.world.item.TooltipFlag.NORMAL).stream().map(c -> c.getString()).toList());
+			}
+		});
+	}
+
 	/** Learned jutsu by id: migrating old counts, buying in order, order independence, and the Obito and Sasuke scrolls. */
 	private static void learnedSteps(Minecraft mc) {
 		java.util.function.Function<String, net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.Technique> technique = id -> net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.TECHNIQUES

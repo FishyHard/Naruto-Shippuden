@@ -129,8 +129,10 @@ public final class MissionAndCommandProcedures {
 				{
 					double _setval = (Mth.nextInt(RandomSource.create(), 1000, 1500));
 					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
-						capability.syncPlayerVariables(entity);
+						if (!java.util.Objects.equals(capability.Mangekyou_Sharingan_Technique_Use_Max, _setval)) {
+							capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
+							capability.syncPlayerVariables(entity);
+						}
 					});
 				}
 				if (entity instanceof Player && !entity.level().isClientSide()) {
@@ -1038,8 +1040,10 @@ public final class MissionAndCommandProcedures {
 						{
 							boolean _setval = (true);
 							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.MangekyouSharinganSasuke = _setval;
-								capability.syncPlayerVariables(entity);
+								if (!java.util.Objects.equals(capability.MangekyouSharinganSasuke, _setval)) {
+									capability.MangekyouSharinganSasuke = _setval;
+									capability.syncPlayerVariables(entity);
+								}
 							});
 						}
 					} else if (random == 2) {
@@ -1051,8 +1055,10 @@ public final class MissionAndCommandProcedures {
 						{
 							boolean _setval = (true);
 							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.MangekyouSharinganMadara = _setval;
-								capability.syncPlayerVariables(entity);
+								if (!java.util.Objects.equals(capability.MangekyouSharinganMadara, _setval)) {
+									capability.MangekyouSharinganMadara = _setval;
+									capability.syncPlayerVariables(entity);
+								}
 							});
 						}
 					} else if (random == 3) {
@@ -1064,8 +1070,10 @@ public final class MissionAndCommandProcedures {
 						{
 							boolean _setval = (true);
 							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.MangekyouSharinganItachi = _setval;
-								capability.syncPlayerVariables(entity);
+								if (!java.util.Objects.equals(capability.MangekyouSharinganItachi, _setval)) {
+									capability.MangekyouSharinganItachi = _setval;
+									capability.syncPlayerVariables(entity);
+								}
 							});
 						}
 					} else if (random == 4) {
@@ -1077,8 +1085,10 @@ public final class MissionAndCommandProcedures {
 						{
 							boolean _setval = (true);
 							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.MangekyouSharinganShisui = _setval;
-								capability.syncPlayerVariables(entity);
+								if (!java.util.Objects.equals(capability.MangekyouSharinganShisui, _setval)) {
+									capability.MangekyouSharinganShisui = _setval;
+									capability.syncPlayerVariables(entity);
+								}
 							});
 						}
 					} else if (random == 5) {
@@ -1090,8 +1100,10 @@ public final class MissionAndCommandProcedures {
 						{
 							boolean _setval = (true);
 							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.MangekyouSharinganObito = _setval;
-								capability.syncPlayerVariables(entity);
+								if (!java.util.Objects.equals(capability.MangekyouSharinganObito, _setval)) {
+									capability.MangekyouSharinganObito = _setval;
+									capability.syncPlayerVariables(entity);
+								}
 							});
 						}
 					}
@@ -1105,23 +1117,29 @@ public final class MissionAndCommandProcedures {
 					{
 						boolean _setval = (true);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.MangekyouSharinganKakashi = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.MangekyouSharinganKakashi, _setval)) {
+								capability.MangekyouSharinganKakashi = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				}
 				{
 					String _setval = "1x1";
 					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.dojutsums = _setval;
-						capability.syncPlayerVariables(entity);
+						if (!java.util.Objects.equals(capability.dojutsums, _setval)) {
+							capability.dojutsums = _setval;
+							capability.syncPlayerVariables(entity);
+						}
 					});
 				}
 				{
 					boolean _setval = (true);
 					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.Mangekyou_Sharingan = _setval;
-						capability.syncPlayerVariables(entity);
+						if (!java.util.Objects.equals(capability.Mangekyou_Sharingan, _setval)) {
+							capability.Mangekyou_Sharingan = _setval;
+							capability.syncPlayerVariables(entity);
+						}
 					});
 				}
 				if (entity instanceof Player) {
@@ -1473,29 +1491,37 @@ public final class MissionAndCommandProcedures {
 								{
 									double _setval = (NarutoShippudenModVariables.get(entity).LEVEL + 25);
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.LEVEL = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.LEVEL, _setval)) {
+											capability.LEVEL = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 								{
 									double _setval = (NarutoShippudenModVariables.get(entity).ninjutsu + 5);
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.ninjutsu = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.ninjutsu, _setval)) {
+											capability.ninjutsu = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 								{
 									double _setval = (NarutoShippudenModVariables.get(entity).ChakraMax + 50);
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.ChakraMax = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.ChakraMax, _setval)) {
+											capability.ChakraMax = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 								{
 									double _setval = 10;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.StorymodeCooldown = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.StorymodeCooldown, _setval)) {
+											capability.StorymodeCooldown = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 								{
@@ -1522,8 +1548,10 @@ public final class MissionAndCommandProcedures {
 						{
 							double _setval = 21;
 							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.storymode = _setval;
-								capability.syncPlayerVariables(entity);
+								if (!java.util.Objects.equals(capability.storymode, _setval)) {
+									capability.storymode = _setval;
+									capability.syncPlayerVariables(entity);
+								}
 							});
 						}
 					} else if ((entity.level().dimension()) == (Level.OVERWORLD)) {
@@ -1632,8 +1660,10 @@ public final class MissionAndCommandProcedures {
 									{
 										double _setval = 9;
 										NarutoShippudenModVariables.ifPresent(entity, capability -> {
-											capability.StorymodeCooldown = _setval;
-											capability.syncPlayerVariables(entity);
+											if (!java.util.Objects.equals(capability.StorymodeCooldown, _setval)) {
+												capability.StorymodeCooldown = _setval;
+												capability.syncPlayerVariables(entity);
+											}
 										});
 									}
 									NeoForge.EVENT_BUS.unregister(this);
@@ -1642,8 +1672,10 @@ public final class MissionAndCommandProcedures {
 							{
 								double _setval = 20;
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.storymode = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.storymode, _setval)) {
+										capability.storymode = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 						}
@@ -1769,8 +1801,10 @@ public final class MissionAndCommandProcedures {
 							{
 								double _setval = 8;
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.StorymodeCooldown = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.StorymodeCooldown, _setval)) {
+										capability.StorymodeCooldown = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 							NeoForge.EVENT_BUS.unregister(this);
@@ -1779,8 +1813,10 @@ public final class MissionAndCommandProcedures {
 					{
 						double _setval = 19;
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.storymode = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.storymode, _setval)) {
+								capability.storymode = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				} else if ((entity.level().dimension()) == (Level.OVERWORLD)) {
@@ -1819,15 +1855,19 @@ public final class MissionAndCommandProcedures {
 						{
 							String _setval = " ";
 							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.StoryModeGeninFight = _setval;
-								capability.syncPlayerVariables(entity);
+								if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+									capability.StoryModeGeninFight = _setval;
+									capability.syncPlayerVariables(entity);
+								}
 							});
 						}
 						{
 							double _setval = 18;
 							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.storymode = _setval;
-								capability.syncPlayerVariables(entity);
+								if (!java.util.Objects.equals(capability.storymode, _setval)) {
+									capability.storymode = _setval;
+									capability.syncPlayerVariables(entity);
+								}
 							});
 						}
 					} else if ((NarutoShippudenModVariables.get(entity).StoryModeGeninFight).equals("Defeat")) {
@@ -1837,8 +1877,10 @@ public final class MissionAndCommandProcedures {
 						{
 							double _setval = 16;
 							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.storymode = _setval;
-								capability.syncPlayerVariables(entity);
+								if (!java.util.Objects.equals(capability.storymode, _setval)) {
+									capability.storymode = _setval;
+									capability.syncPlayerVariables(entity);
+								}
 							});
 						}
 					}
@@ -1957,8 +1999,10 @@ public final class MissionAndCommandProcedures {
 							{
 								String _setval = "Leaf";
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.StoryModeGeninFight = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+										capability.StoryModeGeninFight = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 						} else if (randomgenin == 2) {
@@ -2047,8 +2091,10 @@ public final class MissionAndCommandProcedures {
 							{
 								String _setval = "Sand";
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.StoryModeGeninFight = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+										capability.StoryModeGeninFight = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 						} else if (randomgenin == 3) {
@@ -2137,8 +2183,10 @@ public final class MissionAndCommandProcedures {
 							{
 								String _setval = "Mist";
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.StoryModeGeninFight = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+										capability.StoryModeGeninFight = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 						} else if (randomgenin == 4) {
@@ -2227,8 +2275,10 @@ public final class MissionAndCommandProcedures {
 							{
 								String _setval = "Cloud";
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.StoryModeGeninFight = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+										capability.StoryModeGeninFight = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 						} else if (randomgenin == 5) {
@@ -2317,8 +2367,10 @@ public final class MissionAndCommandProcedures {
 							{
 								String _setval = "Stone";
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.StoryModeGeninFight = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+										capability.StoryModeGeninFight = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 						}
@@ -2410,8 +2462,10 @@ public final class MissionAndCommandProcedures {
 							{
 								String _setval = "Leaf";
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.StoryModeGeninFight = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+										capability.StoryModeGeninFight = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 						} else if (randomgenin == 2) {
@@ -2500,8 +2554,10 @@ public final class MissionAndCommandProcedures {
 							{
 								String _setval = "Sand";
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.StoryModeGeninFight = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+										capability.StoryModeGeninFight = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 						} else if (randomgenin == 3) {
@@ -2590,8 +2646,10 @@ public final class MissionAndCommandProcedures {
 							{
 								String _setval = "Mist";
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.StoryModeGeninFight = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+										capability.StoryModeGeninFight = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 						} else if (randomgenin == 4) {
@@ -2680,8 +2738,10 @@ public final class MissionAndCommandProcedures {
 							{
 								String _setval = "Cloud";
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.StoryModeGeninFight = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+										capability.StoryModeGeninFight = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 						} else if (randomgenin == 5) {
@@ -2770,8 +2830,10 @@ public final class MissionAndCommandProcedures {
 							{
 								String _setval = "Stone";
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.StoryModeGeninFight = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+										capability.StoryModeGeninFight = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 						}
@@ -2807,15 +2869,19 @@ public final class MissionAndCommandProcedures {
 					{
 						double _setval = 16;
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.storymode = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.storymode, _setval)) {
+								capability.storymode = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 					{
 						String _setval = " ";
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.StoryModeGeninFight = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+								capability.StoryModeGeninFight = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				} else if ((entity.level().dimension()) == (Level.OVERWORLD)) {
@@ -2961,8 +3027,10 @@ public final class MissionAndCommandProcedures {
 								{
 									double _setval = 7;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.StorymodeCooldown = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.StorymodeCooldown, _setval)) {
+											capability.StorymodeCooldown = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 								NeoForge.EVENT_BUS.unregister(this);
@@ -2971,8 +3039,10 @@ public final class MissionAndCommandProcedures {
 						{
 							double _setval = 14;
 							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.storymode = _setval;
-								capability.syncPlayerVariables(entity);
+								if (!java.util.Objects.equals(capability.storymode, _setval)) {
+									capability.storymode = _setval;
+									capability.syncPlayerVariables(entity);
+								}
 							});
 						}
 					} else if ((entity.level().dimension()) == (Level.OVERWORLD)) {
@@ -3066,8 +3136,10 @@ public final class MissionAndCommandProcedures {
 									{
 										double _setval = 6;
 										NarutoShippudenModVariables.ifPresent(entity, capability -> {
-											capability.StorymodeCooldown = _setval;
-											capability.syncPlayerVariables(entity);
+											if (!java.util.Objects.equals(capability.StorymodeCooldown, _setval)) {
+												capability.StorymodeCooldown = _setval;
+												capability.syncPlayerVariables(entity);
+											}
 										});
 									}
 									NeoForge.EVENT_BUS.unregister(this);
@@ -3076,8 +3148,10 @@ public final class MissionAndCommandProcedures {
 							{
 								double _setval = 13;
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.storymode = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.storymode, _setval)) {
+										capability.storymode = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 						} else if ((entity.level().dimension()) == (Level.OVERWORLD)) {
@@ -3264,8 +3338,10 @@ public final class MissionAndCommandProcedures {
 							{
 								double _setval = (NarutoShippudenModVariables.get(entity).LEVEL + 25);
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.LEVEL = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.LEVEL, _setval)) {
+										capability.LEVEL = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 							if (entity instanceof Player && !entity.level().isClientSide()) {
@@ -3274,8 +3350,10 @@ public final class MissionAndCommandProcedures {
 							{
 								double _setval = 5;
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.StorymodeCooldown = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.StorymodeCooldown, _setval)) {
+										capability.StorymodeCooldown = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 							NeoForge.EVENT_BUS.unregister(this);
@@ -3284,8 +3362,10 @@ public final class MissionAndCommandProcedures {
 					{
 						double _setval = 12;
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.storymode = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.storymode, _setval)) {
+								capability.storymode = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				} else if ((entity.level().dimension()) == (Level.OVERWORLD)) {
@@ -3327,15 +3407,19 @@ public final class MissionAndCommandProcedures {
 							{
 								double _setval = (NarutoShippudenModVariables.get(entity).LEVEL + 10);
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.LEVEL = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.LEVEL, _setval)) {
+										capability.LEVEL = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 							{
 								double _setval = (NarutoShippudenModVariables.get(entity).genjutsu + 5);
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.genjutsu = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.genjutsu, _setval)) {
+										capability.genjutsu = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 							if (entity instanceof LivingEntity) {
@@ -3347,8 +3431,10 @@ public final class MissionAndCommandProcedures {
 							{
 								double _setval = 11;
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.storymode = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.storymode, _setval)) {
+										capability.storymode = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 						} else if (randomgenjutsu <= 5) {
@@ -3502,8 +3588,10 @@ public final class MissionAndCommandProcedures {
 							{
 								double _setval = 4;
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.StorymodeCooldown = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.StorymodeCooldown, _setval)) {
+										capability.StorymodeCooldown = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 							NeoForge.EVENT_BUS.unregister(this);
@@ -3512,8 +3600,10 @@ public final class MissionAndCommandProcedures {
 					{
 						double _setval = 10;
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.storymode = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.storymode, _setval)) {
+								capability.storymode = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				} else if ((entity.level().dimension()) == (Level.OVERWORLD)) {
@@ -3548,22 +3638,28 @@ public final class MissionAndCommandProcedures {
 					{
 						double _setval = (NarutoShippudenModVariables.get(entity).LEVEL + 10);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.LEVEL = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.LEVEL, _setval)) {
+								capability.LEVEL = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 					{
 						double _setval = (NarutoShippudenModVariables.get(entity).taijutsu + 5);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.taijutsu = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.taijutsu, _setval)) {
+								capability.taijutsu = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 					{
 						double _setval = 9;
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.storymode = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.storymode, _setval)) {
+								capability.storymode = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				} else if (!(NarutoShippudenModVariables.get(entity).TrainingDummyHits >= 100)) {
@@ -3667,8 +3763,10 @@ public final class MissionAndCommandProcedures {
 						{
 							double _setval = 8;
 							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.storymode = _setval;
-								capability.syncPlayerVariables(entity);
+								if (!java.util.Objects.equals(capability.storymode, _setval)) {
+									capability.storymode = _setval;
+									capability.syncPlayerVariables(entity);
+								}
 							});
 						}
 					} else if ((entity.level().dimension()) == (Level.OVERWORLD)) {
@@ -3792,8 +3890,10 @@ public final class MissionAndCommandProcedures {
 							{
 								double _setval = 3;
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.StorymodeCooldown = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.StorymodeCooldown, _setval)) {
+										capability.StorymodeCooldown = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 							NeoForge.EVENT_BUS.unregister(this);
@@ -3802,8 +3902,10 @@ public final class MissionAndCommandProcedures {
 					{
 						double _setval = 7;
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.storymode = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.storymode, _setval)) {
+								capability.storymode = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				} else if ((entity.level().dimension()) == (Level.OVERWORLD)) {
@@ -3876,8 +3978,10 @@ public final class MissionAndCommandProcedures {
 						{
 							String _setval = "South";
 							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.directionstorymode = _setval;
-								capability.syncPlayerVariables(entity);
+								if (!java.util.Objects.equals(capability.directionstorymode, _setval)) {
+									capability.directionstorymode = _setval;
+									capability.syncPlayerVariables(entity);
+								}
 							});
 						}
 					} else if ((entity.getDirection()) == Direction.NORTH) {
@@ -3895,8 +3999,10 @@ public final class MissionAndCommandProcedures {
 						{
 							String _setval = "North";
 							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.directionstorymode = _setval;
-								capability.syncPlayerVariables(entity);
+								if (!java.util.Objects.equals(capability.directionstorymode, _setval)) {
+									capability.directionstorymode = _setval;
+									capability.syncPlayerVariables(entity);
+								}
 							});
 						}
 					} else if ((entity.getDirection()) == Direction.WEST) {
@@ -3914,8 +4020,10 @@ public final class MissionAndCommandProcedures {
 						{
 							String _setval = "West";
 							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.directionstorymode = _setval;
-								capability.syncPlayerVariables(entity);
+								if (!java.util.Objects.equals(capability.directionstorymode, _setval)) {
+									capability.directionstorymode = _setval;
+									capability.syncPlayerVariables(entity);
+								}
 							});
 						}
 					} else if ((entity.getDirection()) == Direction.EAST) {
@@ -3933,8 +4041,10 @@ public final class MissionAndCommandProcedures {
 						{
 							String _setval = "East";
 							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.directionstorymode = _setval;
-								capability.syncPlayerVariables(entity);
+								if (!java.util.Objects.equals(capability.directionstorymode, _setval)) {
+									capability.directionstorymode = _setval;
+									capability.syncPlayerVariables(entity);
+								}
 							});
 						}
 					}
@@ -4185,8 +4295,10 @@ public final class MissionAndCommandProcedures {
 							{
 								double _setval = 2;
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.StorymodeCooldown = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.StorymodeCooldown, _setval)) {
+										capability.StorymodeCooldown = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 							NeoForge.EVENT_BUS.unregister(this);
@@ -4195,8 +4307,10 @@ public final class MissionAndCommandProcedures {
 					{
 						double _setval = 5;
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.storymode = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.storymode, _setval)) {
+								capability.storymode = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				} else if ((entity.level().dimension()) == (Level.OVERWORLD)) {
@@ -4226,8 +4340,10 @@ public final class MissionAndCommandProcedures {
 						{
 							double _setval = 4;
 							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.storymode = _setval;
-								capability.syncPlayerVariables(entity);
+								if (!java.util.Objects.equals(capability.storymode, _setval)) {
+									capability.storymode = _setval;
+									capability.syncPlayerVariables(entity);
+								}
 							});
 						}
 						{
@@ -4268,15 +4384,19 @@ public final class MissionAndCommandProcedures {
 					{
 						double _setval = (NarutoShippudenModVariables.get(entity).LEVEL + 10);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.LEVEL = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.LEVEL, _setval)) {
+								capability.LEVEL = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 					{
 						double _setval = 3;
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.storymode = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.storymode, _setval)) {
+								capability.storymode = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 					if (world.isClientSide()) {
@@ -4349,8 +4469,10 @@ public final class MissionAndCommandProcedures {
 						{
 							double _setval = 2;
 							NarutoShippudenModVariables.ifPresent(entity, capability -> {
-								capability.storymode = _setval;
-								capability.syncPlayerVariables(entity);
+								if (!java.util.Objects.equals(capability.storymode, _setval)) {
+									capability.storymode = _setval;
+									capability.syncPlayerVariables(entity);
+								}
 							});
 						}
 						if (world.isClientSide()) {
@@ -4442,8 +4564,10 @@ public final class MissionAndCommandProcedures {
 							{
 								double _setval = 1;
 								NarutoShippudenModVariables.ifPresent(entity, capability -> {
-									capability.StorymodeCooldown = _setval;
-									capability.syncPlayerVariables(entity);
+									if (!java.util.Objects.equals(capability.StorymodeCooldown, _setval)) {
+										capability.StorymodeCooldown = _setval;
+										capability.syncPlayerVariables(entity);
+									}
 								});
 							}
 							NeoForge.EVENT_BUS.unregister(this);
@@ -4452,8 +4576,10 @@ public final class MissionAndCommandProcedures {
 					{
 						double _setval = 1;
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.storymode = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.storymode, _setval)) {
+								capability.storymode = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				} else if ((entity.level().dimension()) == (Level.OVERWORLD)) {

@@ -252,6 +252,33 @@ and takes the chakra and cooldown itself (unless the jutsu called `Jutsus.miss`)
   element `BIJU`), a volley of small ones, a leap with a landing shockwave. Faster below half health. Heals slowly (the old
   procedure gave Instant Health every tick). Nothing breaks blocks. Rule `kurama_ai`. Model, hitboxes and animation untouched.
 
+### DNA (`core/jutsu/Dna`)
+
+- Shinobi drop Undefined DNA (village shinobi 15/25/40% by rank, Asuma and Shikamaru 50%, Kurama 3); other mobs never.
+- Right-click Undefined DNA: always identifies (80% a nature, 20% a kekkei genkai). Right-click a DNA: implant in yourself; hit a
+  player: implant in them. The implanter's Medicine sets the chance (nature 50→100%, kekkei genkai 25→100% over Medicine 0→300);
+  a failure uses the DNA up.
+- A kekkei genkai needs its natures (`Kind.needs`), unless `combine_natures` is off in the config. Canon: Boil, Dust, Ice, Magnet,
+  Storm, Wood. Our choices: Steel (Earth+Fire), Swift (Wind+Lightning), Typhoon (Wind+Water), Smoke (Fire+Wind+Water), Bone (none).
+- Rules `dna_items` (the items lose use/hurtEnemy) and `old_dna_drop` (no 1% drop from any mob).
+
+### Config (`core/NarutoConfig`)
+
+- A NeoForge config, `config/naruto_shippuden-common.toml`, editable in game (Mods → Naruto Shippuden → Config; screen in
+  `client/ConfigScreen`, names in the lang file under `naruto_shippuden.configuration.*`). Sections clans, awakening (minutes),
+  dna. Read from memory.
+- The old `config/narutoshippuden/narutoshippudenconfig.json` is imported once on load and renamed `.old`. Rule `config_reads`
+  turned the procedures' file reads (the player tick read it every tick) into `NarutoConfig` calls; `CONFIG_KEYS` in `rules.py`
+  maps the old keys. A new old-key read makes the rule fail loudly.
+- `playerskins` in the old folder is a separate feature and stays.
+
+### Performance
+
+- Rule `sync_on_change`: the procedures' set-and-sync only syncs when the value changes. Before, the player tick copied health
+  into the variables every tick and every player got all their variables 20 times a second; now about once a second.
+- `core/TickProfiler` (dev only): `DEVTEST tick` lines with the mod's player-tick time, syncs a second and who asked for them.
+  Mode `perf`.
+
 ### Stats (`core/Stats`)
 
 - Applied as saved attribute modifiers: Medicine +6 max health per 10 (200 at 300) and healing, Speed +3.5% a point, Taijutsu
@@ -351,6 +378,8 @@ Screenshots are saved to `run/screenshots/screen_*.png`, and `DEVTEST …` lines
   page, editor and wheel), `stats` (capped upgrading and the info card), `tabs` (each creative tab).
 - `learned`: an old-style save (`firelearn = 3`) migrated, buying on, order independence, the Obito and Sasuke scrolls (names,
   prices, screenshots, the Susanoo track) and one Mangekyou at a time. Log lines `DEVTEST learned …` (`11100` = which jutsu are learned).
+- `dna` (implanting, natures needed, the config switch, Medicine, identifying, drops, tooltips), `headband` (front/back/side
+  shots of a headband), `perf` (see Performance).
 - `eyes`, `weapons`, `akimichi`, `economy`. No `-PdevOnly`: shows every GUI screen.
 
 Test code can call server code with `onServer(mc, p -> …)`. A full `jutsu` run takes about 15 minutes. Run it in the
@@ -396,6 +425,10 @@ Apply new `@func` rules with the body-only runner under "How to change code".
 - Item displays: `display.getSlot(0).set(stack)` sets the item; their position setter for interpolation is private, so move them
   by their transform. Mob persistent data is saved as `NeoForgeData`.
 - Attribute ids have no `generic.` prefix any more (`minecraft:max_health`).
+- `PartDefinition.addOrReplaceChild` keeps the replaced part's children: a model built on `HumanoidModel.createMesh` that
+  replaces "head" still has the hat cube (bigger than the head) unless it adds an empty "hat" under the new head (rule
+  `headband_hat`; it drew stray bits of texture beside the headbands).
+- `ItemDescriptions.add` adds up: several calls for one item give all their lines.
 - Image work needs Pillow: make a venv in the scratchpad (`python3 -m venv venv && ./venv/bin/pip install pillow`).
 
 ## Open items

@@ -2,6 +2,7 @@ package net.mcreator.narutoshippudenmod.client;
 
 import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables;
 import net.mcreator.narutoshippudenmod.NarutoShippudenModVariables.PlayerVariables;
+import net.mcreator.narutoshippudenmod.core.jutsu.Dna;
 import net.mcreator.narutoshippudenmod.core.jutsu.Jutsus;
 import net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.Jutsu;
 import net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.Release;
@@ -68,15 +69,26 @@ public final class ItemDescriptions {
 
 	@SafeVarargs
 	private static void add(String items, Function<PlayerVariables, Component>... lines) {
+		// several calls for one item add up
 		for (String item : items.split(" "))
-			LINES.put(item, List.of(lines));
+			LINES.computeIfAbsent(item, k -> new ArrayList<>()).addAll(List.of(lines));
 	}
 
 	static {
-		add("earth_dna fire_dna_release lightning_dna water_dna_release wind_dna", gray("70% implant chance"));
-		add("boil_dna_release bone_dna_release dust_dna_release ice_dna_release magnet_dna_release smoke_dna_release steel_dna_release"
-				+ " storm_dna_release swift_dna_release typhoon_dna_release wood_dna_release", gray("50% implant chance"));
-		add("undefined_dna", gray("50% chance to identify"));
+		// DNA (core/jutsu/Dna): the chance comes from your Medicine; a kekkei genkai lists the natures it combines
+		for (List<Dna.Kind> kinds : List.of(Dna.NATURES, Dna.KEKKEI_GENKAI))
+			for (Dna.Kind kind : kinds) {
+				add(kind.item(), v -> kind.has().test(v) ? Component.literal("You have " + kind.title()).withStyle(ChatFormatting.GREEN)
+						: Component.literal(Dna.chance(kind, v) + "% implant chance (Medicine)").withStyle(ChatFormatting.GRAY));
+				if (!kind.needs().isEmpty())
+					add(kind.item(), v -> {
+						List<Dna.Kind> missing = Dna.missing(kind, v);
+						return Component.literal("Needs " + Dna.names(kind.needs().stream().map(Dna::nature).toList()))
+								.withStyle(missing.isEmpty() ? ChatFormatting.GRAY : ChatFormatting.RED);
+					});
+				add(kind.item(), hint("Right-click to implant; hit a player to implant it in them"));
+			}
+		add("undefined_dna", gray("Dropped by shinobi"), hint("Right-click to identify it"));
 		add("bronze_ryo", gray("9 craft into 1 Silver Ryo"));
 		add("silver_ryo", gray("Worth 9 Bronze Ryo"), gray("9 craft into 1 Gold Ryo"));
 		add("gold_ryo", gray("Worth 9 Silver Ryo"));

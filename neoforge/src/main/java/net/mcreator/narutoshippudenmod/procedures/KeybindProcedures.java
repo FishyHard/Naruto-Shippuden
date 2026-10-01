@@ -107,8 +107,10 @@ public final class KeybindProcedures {
 					{
 						boolean _setval = (true);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.byakuganactivate = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.byakuganactivate, _setval)) {
+								capability.byakuganactivate = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				} else if (NarutoShippudenModVariables.get(entity).byakuganactivate == true) {
@@ -130,8 +132,10 @@ public final class KeybindProcedures {
 					{
 						boolean _setval = (false);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.byakuganactivate = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.byakuganactivate, _setval)) {
+								capability.byakuganactivate = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				}
@@ -244,8 +248,10 @@ public final class KeybindProcedures {
 					{
 						boolean _setval = (true);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.isshikidojutsuactivate = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.isshikidojutsuactivate, _setval)) {
+								capability.isshikidojutsuactivate = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 					if (world instanceof Level && !world.isClientSide()) {
@@ -267,8 +273,10 @@ public final class KeybindProcedures {
 					{
 						boolean _setval = (false);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.isshikidojutsuactivate = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.isshikidojutsuactivate, _setval)) {
+								capability.isshikidojutsuactivate = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				}
@@ -300,8 +308,10 @@ public final class KeybindProcedures {
 					{
 						boolean _setval = (true);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.ketsuryuganactivate = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.ketsuryuganactivate, _setval)) {
+								capability.ketsuryuganactivate = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				} else if (NarutoShippudenModVariables.get(entity).ketsuryuganactivate == true) {
@@ -311,8 +321,10 @@ public final class KeybindProcedures {
 					{
 						boolean _setval = (false);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.ketsuryuganactivate = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.ketsuryuganactivate, _setval)) {
+								capability.ketsuryuganactivate = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				}
@@ -373,8 +385,10 @@ public final class KeybindProcedures {
 					{
 						boolean _setval = (true);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.MangekyouSharinganActivate = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.MangekyouSharinganActivate, _setval)) {
+								capability.MangekyouSharinganActivate = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 					if (world instanceof Level && !world.isClientSide()) {
@@ -395,8 +409,10 @@ public final class KeybindProcedures {
 					{
 						boolean _setval = (false);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.MangekyouSharinganActivate = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.MangekyouSharinganActivate, _setval)) {
+								capability.MangekyouSharinganActivate = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				}
@@ -466,8 +482,10 @@ public final class KeybindProcedures {
 					{
 						boolean _setval = (true);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.rinneganactivate = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.rinneganactivate, _setval)) {
+								capability.rinneganactivate = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				} else if (NarutoShippudenModVariables.get(entity).rinneganactivate == true) {
@@ -477,8 +495,10 @@ public final class KeybindProcedures {
 					{
 						boolean _setval = (false);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.rinneganactivate = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.rinneganactivate, _setval)) {
+								capability.rinneganactivate = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				}
@@ -534,8 +554,10 @@ public final class KeybindProcedures {
 					{
 						boolean _setval = (true);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.sharinganactivate = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.sharinganactivate, _setval)) {
+								capability.sharinganactivate = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 					if (world instanceof Level && !world.isClientSide()) {
@@ -554,8 +576,10 @@ public final class KeybindProcedures {
 					{
 						boolean _setval = (false);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.sharinganactivate = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.sharinganactivate, _setval)) {
+								capability.sharinganactivate = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				}
@@ -569,8 +593,10 @@ public final class KeybindProcedures {
 					{
 						boolean _setval = (true);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.shimura_active = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.shimura_active, _setval)) {
+								capability.shimura_active = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 					if (world instanceof Level && !world.isClientSide()) {
@@ -589,8 +615,10 @@ public final class KeybindProcedures {
 					{
 						boolean _setval = (false);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.shimura_active = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.shimura_active, _setval)) {
+								capability.shimura_active = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				}
@@ -629,16 +657,20 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -647,24 +679,30 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 2;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -673,32 +711,40 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 2;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 								{
 									double _setval = 3;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -707,40 +753,50 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 2;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 								{
 									double _setval = 3;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 								{
 									double _setval = 4;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 4) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -757,16 +813,20 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -775,24 +835,30 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 2;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -801,32 +867,40 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 2;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 								{
 									double _setval = 3;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -835,40 +909,50 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 2;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 								{
 									double _setval = 3;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 								{
 									double _setval = 4;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 4) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -885,16 +969,20 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -903,24 +991,30 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 2;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -929,32 +1023,40 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 2;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 								{
 									double _setval = 3;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -963,40 +1065,50 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 2;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 								{
 									double _setval = 3;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 								{
 									double _setval = 4;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 4) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -1013,16 +1125,20 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -1031,24 +1147,30 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 2;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -1057,32 +1179,40 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 2;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 								{
 									double _setval = 3;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -1091,40 +1221,50 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 2;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 								{
 									double _setval = 3;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 								{
 									double _setval = 4;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 4) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -1141,16 +1281,20 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -1159,24 +1303,30 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 2;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -1185,32 +1335,40 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 2;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 								{
 									double _setval = 3;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -1219,40 +1377,50 @@ public final class KeybindProcedures {
 								{
 									double _setval = 1;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 1) {
 								{
 									double _setval = 2;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 2) {
 								{
 									double _setval = 3;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 3) {
 								{
 									double _setval = 4;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							} else if (NarutoShippudenModVariables.get(entity).mangekyousharingansusanostage == 4) {
 								{
 									double _setval = 0;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.mangekyousharingansusanostage = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.mangekyousharingansusanostage, _setval)) {
+											capability.mangekyousharingansusanostage = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -1340,8 +1508,10 @@ public final class KeybindProcedures {
 					{
 						boolean _setval = (true);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.tenseiganactivate = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.tenseiganactivate, _setval)) {
+								capability.tenseiganactivate = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				} else if (NarutoShippudenModVariables.get(entity).tenseiganactivate == true) {
@@ -1369,8 +1539,10 @@ public final class KeybindProcedures {
 					{
 						boolean _setval = (false);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.tenseiganactivate = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.tenseiganactivate, _setval)) {
+								capability.tenseiganactivate = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				}

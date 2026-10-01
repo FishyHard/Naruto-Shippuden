@@ -670,8 +670,10 @@ public final class EntityProcedures {
 				{
 					boolean _setval = (true);
 					NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-						capability.asumaquest = _setval;
-						capability.syncPlayerVariables(sourceentity);
+						if (!java.util.Objects.equals(capability.asumaquest, _setval)) {
+							capability.asumaquest = _setval;
+							capability.syncPlayerVariables(sourceentity);
+						}
 					});
 				}
 			} else if (NarutoShippudenModVariables.get(sourceentity).asumaquest == true) {
@@ -709,15 +711,19 @@ public final class EntityProcedures {
 						{
 							double _setval = (NarutoShippudenModVariables.get(sourceentity).C_Mission + 1);
 							NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-								capability.C_Mission = _setval;
-								capability.syncPlayerVariables(sourceentity);
+								if (!java.util.Objects.equals(capability.C_Mission, _setval)) {
+									capability.C_Mission = _setval;
+									capability.syncPlayerVariables(sourceentity);
+								}
 							});
 						}
 						{
 							boolean _setval = (false);
 							NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-								capability.asumaquest = _setval;
-								capability.syncPlayerVariables(sourceentity);
+								if (!java.util.Objects.equals(capability.asumaquest, _setval)) {
+									capability.asumaquest = _setval;
+									capability.syncPlayerVariables(sourceentity);
+								}
 							});
 						}
 					} else if (!((sourceentity instanceof Player)
@@ -834,8 +840,10 @@ public final class EntityProcedures {
 					{
 						double _setval = (NarutoShippudenModVariables.get(sourceentity).zombiekillcount + 1);
 						NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-							capability.zombiekillcount = _setval;
-							capability.syncPlayerVariables(sourceentity);
+							if (!java.util.Objects.equals(capability.zombiekillcount, _setval)) {
+								capability.zombiekillcount = _setval;
+								capability.syncPlayerVariables(sourceentity);
+							}
 						});
 					}
 				}
@@ -845,8 +853,10 @@ public final class EntityProcedures {
 					{
 						double _setval = (NarutoShippudenModVariables.get(sourceentity).pillagerkillcount + 1);
 						NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-							capability.pillagerkillcount = _setval;
-							capability.syncPlayerVariables(sourceentity);
+							if (!java.util.Objects.equals(capability.pillagerkillcount, _setval)) {
+								capability.pillagerkillcount = _setval;
+								capability.syncPlayerVariables(sourceentity);
+							}
 						});
 					}
 				}
@@ -881,8 +891,10 @@ public final class EntityProcedures {
 				{
 					boolean _setval = (true);
 					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.izanagiuse = _setval;
-						capability.syncPlayerVariables(entity);
+						if (!java.util.Objects.equals(capability.izanagiuse, _setval)) {
+							capability.izanagiuse = _setval;
+							capability.syncPlayerVariables(entity);
+						}
 					});
 				}
 			}
@@ -901,8 +913,10 @@ public final class EntityProcedures {
 							{
 								boolean _setval = (false);
 								NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-									capability.akamaru_summon = _setval;
-									capability.syncPlayerVariables(entityiterator);
+									if (!java.util.Objects.equals(capability.akamaru_summon, _setval)) {
+										capability.akamaru_summon = _setval;
+										capability.syncPlayerVariables(entityiterator);
+									}
 								});
 							}
 						}
@@ -914,23 +928,29 @@ public final class EntityProcedures {
 					{
 						boolean _setval = (false);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.deathgod = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.deathgod, _setval)) {
+								capability.deathgod = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 					{
 						boolean _setval = (true);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.deathgodcooldown = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.deathgodcooldown, _setval)) {
+								capability.deathgodcooldown = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				}
 				{
 					boolean _setval = (false);
 					NarutoShippudenModVariables.ifPresent(entity, capability -> {
-						capability.EightTrigramsPalmsRevolvingHeaven = _setval;
-						capability.syncPlayerVariables(entity);
+						if (!java.util.Objects.equals(capability.EightTrigramsPalmsRevolvingHeaven, _setval)) {
+							capability.EightTrigramsPalmsRevolvingHeaven = _setval;
+							capability.syncPlayerVariables(entity);
+						}
 					});
 				}
 			}
@@ -967,37 +987,6 @@ public final class EntityProcedures {
 									.getDamageValue() - 15));
 				}
 			}
-			NarutoShippuden = (File) new File((FMLPaths.GAMEDIR.get().toString() + "/config/narutoshippuden"),
-					File.separator + "narutoshippudenconfig.json");
-			{
-				try {
-					BufferedReader bufferedReader = new BufferedReader(new FileReader(NarutoShippuden));
-					StringBuilder jsonstringbuilder = new StringBuilder();
-					String line;
-					while ((line = bufferedReader.readLine()) != null) {
-						jsonstringbuilder.append(line);
-					}
-					bufferedReader.close();
-					mainjsonobject = new Gson().fromJson(jsonstringbuilder.toString(), com.google.gson.JsonObject.class);
-					random = (Mth.nextInt(RandomSource.create(), 1, 1000));
-					if (entity instanceof LivingEntity) {
-						if (!(entity instanceof AkamaruEntity.CustomEntity || entity instanceof CrowEntity.CustomEntity
-								|| entity instanceof EarthGolemEntity.CustomEntity || entity instanceof EarthGolemShinobiEntity.CustomEntity
-								|| entity instanceof WoodGolemEntity.CustomEntity)) {
-							if (random <= mainjsonobject.get("dna_drop").getAsDouble() * 10) {
-								if (world instanceof Level && !world.isClientSide()) {
-									ItemEntity entityToSpawn = new ItemEntity((Level) world, x, y, z, new ItemStack(UndefinedDNAItem.block));
-									entityToSpawn.setPickUpDelay((int) 10);
-									world.addFreshEntity(entityToSpawn);
-								}
-							}
-						}
-					}
-
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 	}
 
@@ -1013,8 +1002,10 @@ public final class EntityProcedures {
 			{
 				double _setval = 0;
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.gateslee = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.gateslee, _setval)) {
+						capability.gateslee = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			if ((NarutoShippudenModVariables.get(entity).rank).equals("Academy Student")) {
@@ -1142,8 +1133,10 @@ public final class EntityProcedures {
 					{
 						boolean _setval = (false);
 						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							capability.PassingFang = _setval;
-							capability.syncPlayerVariables(entity);
+							if (!java.util.Objects.equals(capability.PassingFang, _setval)) {
+								capability.PassingFang = _setval;
+								capability.syncPlayerVariables(entity);
+							}
 						});
 					}
 				}
@@ -1299,15 +1292,19 @@ public final class EntityProcedures {
 								{
 									double _setval = 17;
 									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										capability.storymode = _setval;
-										capability.syncPlayerVariables(sourceentity);
+										if (!java.util.Objects.equals(capability.storymode, _setval)) {
+											capability.storymode = _setval;
+											capability.syncPlayerVariables(sourceentity);
+										}
 									});
 								}
 								{
 									String _setval = "Win";
 									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										capability.StoryModeGeninFight = _setval;
-										capability.syncPlayerVariables(sourceentity);
+										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+											capability.StoryModeGeninFight = _setval;
+											capability.syncPlayerVariables(sourceentity);
+										}
 									});
 								}
 							}
@@ -1316,15 +1313,19 @@ public final class EntityProcedures {
 								{
 									double _setval = 17;
 									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										capability.storymode = _setval;
-										capability.syncPlayerVariables(sourceentity);
+										if (!java.util.Objects.equals(capability.storymode, _setval)) {
+											capability.storymode = _setval;
+											capability.syncPlayerVariables(sourceentity);
+										}
 									});
 								}
 								{
 									String _setval = "Win";
 									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										capability.StoryModeGeninFight = _setval;
-										capability.syncPlayerVariables(sourceentity);
+										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+											capability.StoryModeGeninFight = _setval;
+											capability.syncPlayerVariables(sourceentity);
+										}
 									});
 								}
 							}
@@ -1333,15 +1334,19 @@ public final class EntityProcedures {
 								{
 									double _setval = 17;
 									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										capability.storymode = _setval;
-										capability.syncPlayerVariables(sourceentity);
+										if (!java.util.Objects.equals(capability.storymode, _setval)) {
+											capability.storymode = _setval;
+											capability.syncPlayerVariables(sourceentity);
+										}
 									});
 								}
 								{
 									String _setval = "Win";
 									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										capability.StoryModeGeninFight = _setval;
-										capability.syncPlayerVariables(sourceentity);
+										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+											capability.StoryModeGeninFight = _setval;
+											capability.syncPlayerVariables(sourceentity);
+										}
 									});
 								}
 							}
@@ -1350,15 +1355,19 @@ public final class EntityProcedures {
 								{
 									double _setval = 17;
 									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										capability.storymode = _setval;
-										capability.syncPlayerVariables(sourceentity);
+										if (!java.util.Objects.equals(capability.storymode, _setval)) {
+											capability.storymode = _setval;
+											capability.syncPlayerVariables(sourceentity);
+										}
 									});
 								}
 								{
 									String _setval = "Win";
 									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										capability.StoryModeGeninFight = _setval;
-										capability.syncPlayerVariables(sourceentity);
+										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+											capability.StoryModeGeninFight = _setval;
+											capability.syncPlayerVariables(sourceentity);
+										}
 									});
 								}
 							}
@@ -1367,15 +1376,19 @@ public final class EntityProcedures {
 								{
 									double _setval = 17;
 									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										capability.storymode = _setval;
-										capability.syncPlayerVariables(sourceentity);
+										if (!java.util.Objects.equals(capability.storymode, _setval)) {
+											capability.storymode = _setval;
+											capability.syncPlayerVariables(sourceentity);
+										}
 									});
 								}
 								{
 									String _setval = "Win";
 									NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-										capability.StoryModeGeninFight = _setval;
-										capability.syncPlayerVariables(sourceentity);
+										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+											capability.StoryModeGeninFight = _setval;
+											capability.syncPlayerVariables(sourceentity);
+										}
 									});
 								}
 							}
@@ -1401,15 +1414,19 @@ public final class EntityProcedures {
 										{
 											double _setval = 17;
 											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														capability.storymode = _setval;
-														capability.syncPlayerVariables(entityiterator);
+														if (!java.util.Objects.equals(capability.storymode, _setval)) {
+															capability.storymode = _setval;
+															capability.syncPlayerVariables(entityiterator);
+														}
 													});
 										}
 										{
 											String _setval = "Win";
 											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														capability.StoryModeGeninFight = _setval;
-														capability.syncPlayerVariables(entityiterator);
+														if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+															capability.StoryModeGeninFight = _setval;
+															capability.syncPlayerVariables(entityiterator);
+														}
 													});
 										}
 									}
@@ -1418,15 +1435,19 @@ public final class EntityProcedures {
 										{
 											double _setval = 17;
 											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														capability.storymode = _setval;
-														capability.syncPlayerVariables(entityiterator);
+														if (!java.util.Objects.equals(capability.storymode, _setval)) {
+															capability.storymode = _setval;
+															capability.syncPlayerVariables(entityiterator);
+														}
 													});
 										}
 										{
 											String _setval = "Win";
 											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														capability.StoryModeGeninFight = _setval;
-														capability.syncPlayerVariables(entityiterator);
+														if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+															capability.StoryModeGeninFight = _setval;
+															capability.syncPlayerVariables(entityiterator);
+														}
 													});
 										}
 									}
@@ -1435,15 +1456,19 @@ public final class EntityProcedures {
 										{
 											double _setval = 17;
 											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														capability.storymode = _setval;
-														capability.syncPlayerVariables(entityiterator);
+														if (!java.util.Objects.equals(capability.storymode, _setval)) {
+															capability.storymode = _setval;
+															capability.syncPlayerVariables(entityiterator);
+														}
 													});
 										}
 										{
 											String _setval = "Win";
 											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														capability.StoryModeGeninFight = _setval;
-														capability.syncPlayerVariables(entityiterator);
+														if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+															capability.StoryModeGeninFight = _setval;
+															capability.syncPlayerVariables(entityiterator);
+														}
 													});
 										}
 									}
@@ -1452,15 +1477,19 @@ public final class EntityProcedures {
 										{
 											double _setval = 17;
 											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														capability.storymode = _setval;
-														capability.syncPlayerVariables(entityiterator);
+														if (!java.util.Objects.equals(capability.storymode, _setval)) {
+															capability.storymode = _setval;
+															capability.syncPlayerVariables(entityiterator);
+														}
 													});
 										}
 										{
 											String _setval = "Win";
 											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														capability.StoryModeGeninFight = _setval;
-														capability.syncPlayerVariables(entityiterator);
+														if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+															capability.StoryModeGeninFight = _setval;
+															capability.syncPlayerVariables(entityiterator);
+														}
 													});
 										}
 									}
@@ -1469,15 +1498,19 @@ public final class EntityProcedures {
 										{
 											double _setval = 17;
 											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														capability.storymode = _setval;
-														capability.syncPlayerVariables(entityiterator);
+														if (!java.util.Objects.equals(capability.storymode, _setval)) {
+															capability.storymode = _setval;
+															capability.syncPlayerVariables(entityiterator);
+														}
 													});
 										}
 										{
 											String _setval = "Win";
 											NarutoShippudenModVariables.ifPresent(entityiterator, capability -> {
-														capability.StoryModeGeninFight = _setval;
-														capability.syncPlayerVariables(entityiterator);
+														if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+															capability.StoryModeGeninFight = _setval;
+															capability.syncPlayerVariables(entityiterator);
+														}
 													});
 										}
 									}
@@ -1513,15 +1546,19 @@ public final class EntityProcedures {
 								{
 									String _setval = "Defeat";
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.StoryModeGeninFight = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+											capability.StoryModeGeninFight = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 								{
 									double _setval = 17;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.storymode = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.storymode, _setval)) {
+											capability.storymode = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -1530,15 +1567,19 @@ public final class EntityProcedures {
 								{
 									String _setval = "Defeat";
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.StoryModeGeninFight = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+											capability.StoryModeGeninFight = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 								{
 									double _setval = 17;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.storymode = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.storymode, _setval)) {
+											capability.storymode = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -1547,15 +1588,19 @@ public final class EntityProcedures {
 								{
 									String _setval = "Defeat";
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.StoryModeGeninFight = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+											capability.StoryModeGeninFight = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 								{
 									double _setval = 17;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.storymode = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.storymode, _setval)) {
+											capability.storymode = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -1564,15 +1609,19 @@ public final class EntityProcedures {
 								{
 									String _setval = "Defeat";
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.StoryModeGeninFight = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+											capability.StoryModeGeninFight = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 								{
 									double _setval = 17;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.storymode = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.storymode, _setval)) {
+											capability.storymode = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -1581,15 +1630,19 @@ public final class EntityProcedures {
 								{
 									String _setval = "Defeat";
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.StoryModeGeninFight = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.StoryModeGeninFight, _setval)) {
+											capability.StoryModeGeninFight = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 								{
 									double _setval = 17;
 									NarutoShippudenModVariables.ifPresent(entity, capability -> {
-										capability.storymode = _setval;
-										capability.syncPlayerVariables(entity);
+										if (!java.util.Objects.equals(capability.storymode, _setval)) {
+											capability.storymode = _setval;
+											capability.syncPlayerVariables(entity);
+										}
 									});
 								}
 							}
@@ -1849,8 +1902,10 @@ public final class EntityProcedures {
 				{
 					boolean _setval = (true);
 					NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-						capability.shikamaruquest = _setval;
-						capability.syncPlayerVariables(sourceentity);
+						if (!java.util.Objects.equals(capability.shikamaruquest, _setval)) {
+							capability.shikamaruquest = _setval;
+							capability.syncPlayerVariables(sourceentity);
+						}
 					});
 				}
 			} else if (NarutoShippudenModVariables.get(sourceentity).shikamaruquest == true) {
@@ -1879,15 +1934,19 @@ public final class EntityProcedures {
 						{
 							double _setval = (NarutoShippudenModVariables.get(sourceentity).D_Mission + 1);
 							NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-								capability.D_Mission = _setval;
-								capability.syncPlayerVariables(sourceentity);
+								if (!java.util.Objects.equals(capability.D_Mission, _setval)) {
+									capability.D_Mission = _setval;
+									capability.syncPlayerVariables(sourceentity);
+								}
 							});
 						}
 						{
 							boolean _setval = (false);
 							NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-								capability.shikamaruquest = _setval;
-								capability.syncPlayerVariables(sourceentity);
+								if (!java.util.Objects.equals(capability.shikamaruquest, _setval)) {
+									capability.shikamaruquest = _setval;
+									capability.syncPlayerVariables(sourceentity);
+								}
 							});
 						}
 					} else if (!((sourceentity instanceof Player)
@@ -1930,8 +1989,10 @@ public final class EntityProcedures {
 						{
 							double _setval = (NarutoShippudenModVariables.get(sourceentity).TrainingDummyHits + 1);
 							NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-								capability.TrainingDummyHits = _setval;
-								capability.syncPlayerVariables(sourceentity);
+								if (!java.util.Objects.equals(capability.TrainingDummyHits, _setval)) {
+									capability.TrainingDummyHits = _setval;
+									capability.syncPlayerVariables(sourceentity);
+								}
 							});
 						}
 						if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {
@@ -1998,8 +2059,10 @@ public final class EntityProcedures {
 							{
 								double _setval = (NarutoShippudenModVariables.get(sourceentity).TrainingDummyHits + 1);
 								NarutoShippudenModVariables.ifPresent(sourceentity, capability -> {
-									capability.TrainingDummyHits = _setval;
-									capability.syncPlayerVariables(sourceentity);
+									if (!java.util.Objects.equals(capability.TrainingDummyHits, _setval)) {
+										capability.TrainingDummyHits = _setval;
+										capability.syncPlayerVariables(sourceentity);
+									}
 								});
 							}
 							if (sourceentity instanceof Player && !sourceentity.level().isClientSide()) {

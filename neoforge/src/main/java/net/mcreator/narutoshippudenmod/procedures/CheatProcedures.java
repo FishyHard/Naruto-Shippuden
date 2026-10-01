@@ -44,15 +44,19 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.SharinganShimura = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.SharinganShimura, _setval)) {
+						capability.SharinganShimura = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				String _setval = "1x1";
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.dojutsusharingan = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.dojutsusharingan, _setval)) {
+						capability.dojutsusharingan = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -124,15 +128,19 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.byakugan = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.byakugan, _setval)) {
+						capability.byakugan = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				String _setval = "1x1";
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.dojutsubyakugan = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.dojutsubyakugan, _setval)) {
+						capability.dojutsubyakugan = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -150,15 +158,19 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.isshikidojutsu = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.isshikidojutsu, _setval)) {
+						capability.isshikidojutsu = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				String _setval = "1x1";
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.dojutsuisshiki = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.dojutsuisshiki, _setval)) {
+						capability.dojutsuisshiki = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -176,15 +188,19 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.ketsuryugan = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.ketsuryugan, _setval)) {
+						capability.ketsuryugan = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				String _setval = "1x1";
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.dojutsuketsuryugan = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.dojutsuketsuryugan, _setval)) {
+						capability.dojutsuketsuryugan = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -202,15 +218,19 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.rinnegan = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.rinnegan, _setval)) {
+						capability.rinnegan = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				String _setval = "1x1";
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.dojutsurinnegan = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.dojutsurinnegan, _setval)) {
+						capability.dojutsurinnegan = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -228,15 +248,19 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.sharingan = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.sharingan, _setval)) {
+						capability.sharingan = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				String _setval = "1x1";
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.dojutsusharingan = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.dojutsusharingan, _setval)) {
+						capability.dojutsusharingan = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -254,15 +278,19 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.tenseigan = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.tenseigan, _setval)) {
+						capability.tenseigan = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				String _setval = "1x1";
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.dojutsutenseigan = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.dojutsutenseigan, _setval)) {
+						capability.dojutsutenseigan = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -362,8 +390,10 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.boilreleaselogic = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.boilreleaselogic, _setval)) {
+						capability.boilreleaselogic = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -381,8 +411,10 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.bonereleaselogic = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.bonereleaselogic, _setval)) {
+						capability.bonereleaselogic = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -400,8 +432,10 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.dustreleaselogic = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.dustreleaselogic, _setval)) {
+						capability.dustreleaselogic = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -419,8 +453,10 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.icereleaselogic = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.icereleaselogic, _setval)) {
+						capability.icereleaselogic = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -438,8 +474,10 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.magnetreleaselogic = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.magnetreleaselogic, _setval)) {
+						capability.magnetreleaselogic = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -457,8 +495,10 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.smokereleaselogic = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.smokereleaselogic, _setval)) {
+						capability.smokereleaselogic = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -476,8 +516,10 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.steelreleaselogic = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.steelreleaselogic, _setval)) {
+						capability.steelreleaselogic = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -495,8 +537,10 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.stormreleaselogic = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.stormreleaselogic, _setval)) {
+						capability.stormreleaselogic = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -514,8 +558,10 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.swiftreleaselogic = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.swiftreleaselogic, _setval)) {
+						capability.swiftreleaselogic = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -533,8 +579,10 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.typhoonreleaslogic = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.typhoonreleaslogic, _setval)) {
+						capability.typhoonreleaslogic = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -552,8 +600,10 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.woodreleaselogic = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.woodreleaselogic, _setval)) {
+						capability.woodreleaselogic = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -571,29 +621,37 @@ public final class CheatProcedures {
 			{
 				double _setval = (Mth.nextInt(RandomSource.create(), 1000, 1500));
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.Mangekyou_Sharingan_Technique_Use_Max, _setval)) {
+						capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.Mangekyou_Sharingan = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.Mangekyou_Sharingan, _setval)) {
+						capability.Mangekyou_Sharingan = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.MangekyouSharinganItachi = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.MangekyouSharinganItachi, _setval)) {
+						capability.MangekyouSharinganItachi = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				String _setval = "1x1";
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.dojutsums = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.dojutsums, _setval)) {
+						capability.dojutsums = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -611,29 +669,37 @@ public final class CheatProcedures {
 			{
 				double _setval = (Mth.nextInt(RandomSource.create(), 1000, 1500));
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.Mangekyou_Sharingan_Technique_Use_Max, _setval)) {
+						capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.Mangekyou_Sharingan = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.Mangekyou_Sharingan, _setval)) {
+						capability.Mangekyou_Sharingan = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.MangekyouSharinganKakashi = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.MangekyouSharinganKakashi, _setval)) {
+						capability.MangekyouSharinganKakashi = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				String _setval = "1x1";
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.dojutsums = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.dojutsums, _setval)) {
+						capability.dojutsums = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -651,15 +717,19 @@ public final class CheatProcedures {
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.SharinganKakashi = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.SharinganKakashi, _setval)) {
+						capability.SharinganKakashi = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				String _setval = "1x1";
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.dojutsusharingan = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.dojutsusharingan, _setval)) {
+						capability.dojutsusharingan = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -677,29 +747,37 @@ public final class CheatProcedures {
 			{
 				double _setval = (Mth.nextInt(RandomSource.create(), 1000, 1500));
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.Mangekyou_Sharingan_Technique_Use_Max, _setval)) {
+						capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.Mangekyou_Sharingan = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.Mangekyou_Sharingan, _setval)) {
+						capability.Mangekyou_Sharingan = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.MangekyouSharinganMadara = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.MangekyouSharinganMadara, _setval)) {
+						capability.MangekyouSharinganMadara = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				String _setval = "1x1";
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.dojutsums = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.dojutsums, _setval)) {
+						capability.dojutsums = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -771,29 +849,37 @@ public final class CheatProcedures {
 			{
 				double _setval = (Mth.nextInt(RandomSource.create(), 1000, 1500));
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.Mangekyou_Sharingan_Technique_Use_Max, _setval)) {
+						capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.Mangekyou_Sharingan = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.Mangekyou_Sharingan, _setval)) {
+						capability.Mangekyou_Sharingan = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.MangekyouSharinganObito = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.MangekyouSharinganObito, _setval)) {
+						capability.MangekyouSharinganObito = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				String _setval = "1x1";
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.dojutsums = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.dojutsums, _setval)) {
+						capability.dojutsums = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -811,29 +897,37 @@ public final class CheatProcedures {
 			{
 				double _setval = (Mth.nextInt(RandomSource.create(), 1000, 1500));
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.Mangekyou_Sharingan_Technique_Use_Max, _setval)) {
+						capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.Mangekyou_Sharingan = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.Mangekyou_Sharingan, _setval)) {
+						capability.Mangekyou_Sharingan = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.MangekyouSharinganSasuke = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.MangekyouSharinganSasuke, _setval)) {
+						capability.MangekyouSharinganSasuke = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				String _setval = "1x1";
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.dojutsums = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.dojutsums, _setval)) {
+						capability.dojutsums = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}
@@ -851,29 +945,37 @@ public final class CheatProcedures {
 			{
 				double _setval = (Mth.nextInt(RandomSource.create(), 1000, 1500));
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.Mangekyou_Sharingan_Technique_Use_Max, _setval)) {
+						capability.Mangekyou_Sharingan_Technique_Use_Max = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.Mangekyou_Sharingan = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.Mangekyou_Sharingan, _setval)) {
+						capability.Mangekyou_Sharingan = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				boolean _setval = (true);
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.MangekyouSharinganShisui = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.MangekyouSharinganShisui, _setval)) {
+						capability.MangekyouSharinganShisui = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 			{
 				String _setval = "1x1";
 				NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.dojutsums = _setval;
-					capability.syncPlayerVariables(entity);
+					if (!java.util.Objects.equals(capability.dojutsums, _setval)) {
+						capability.dojutsums = _setval;
+						capability.syncPlayerVariables(entity);
+					}
 				});
 			}
 		}

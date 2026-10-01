@@ -1124,8 +1124,11 @@ public class NarutoShippudenModVariables {
 
 		/** Queues a sync to the owning client; sent once at the end of the current server tick. */
 		public void syncPlayerVariables(Entity entity) {
-			if (entity instanceof ServerPlayer player)
+			if (entity instanceof ServerPlayer player) {
+				if (net.mcreator.narutoshippudenmod.core.TickProfiler.ENABLED && !PENDING_SYNC.contains(player))
+					net.mcreator.narutoshippudenmod.core.TickProfiler.syncFrom(new Throwable().getStackTrace());
 				PENDING_SYNC.add(player);
+			}
 		}
 	}
 
@@ -1139,8 +1142,10 @@ public class NarutoShippudenModVariables {
 			if (PENDING_SYNC.isEmpty())
 				return;
 			for (ServerPlayer player : PENDING_SYNC) {
-				if (!player.hasDisconnected())
+				if (!player.hasDisconnected()) {
 					sendTo(player);
+					net.mcreator.narutoshippudenmod.core.TickProfiler.syncs++;
+				}
 			}
 			PENDING_SYNC.clear();
 		}

@@ -38,6 +38,7 @@ public final class ArmorModels {
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.offset(-1.9F, 12.0F, 0.0F));
 		root.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.offset(1.9F, 12.0F, 0.0F));
 		PartDefinition p1 = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -6.6F, -4.4F, 9.0F, 2.0F, 9.0F, new CubeDeformation(-0.2F)), PartPose.ZERO);
+		p1.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition p2 = p1.addOrReplaceChild("bone3", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.3F, 24.2F, 0.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition p3 = p2.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-1.7F, -5.5F, 4.2F, 1.0F, 1.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.1745F, 0.3927F, 0.0F));
 		PartDefinition p4 = p2.addOrReplaceChild("bone2", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.2159F, -0.7246F, -0.2118F));
@@ -58,6 +59,7 @@ public final class ArmorModels {
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.offset(-1.9F, 12.0F, 0.0F));
 		root.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.offset(1.9F, 12.0F, 0.0F));
 		PartDefinition p1 = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -6.6F, -4.4F, 9.0F, 2.0F, 9.0F, new CubeDeformation(-0.2F)), PartPose.ZERO);
+		p1.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition p2 = p1.addOrReplaceChild("bone3", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.3F, 24.2F, 0.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition p3 = p2.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-1.7F, -5.5F, 4.2F, 1.0F, 1.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.1745F, 0.3927F, 0.0F));
 		PartDefinition p4 = p2.addOrReplaceChild("bone2", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.2159F, -0.7246F, -0.2118F));
@@ -78,6 +80,7 @@ public final class ArmorModels {
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.offset(-1.9F, 12.0F, 0.0F));
 		root.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.offset(1.9F, 12.0F, 0.0F));
 		PartDefinition p1 = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -6.6F, -4.4F, 9.0F, 2.0F, 9.0F, new CubeDeformation(-0.2F)), PartPose.ZERO);
+		p1.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition p2 = p1.addOrReplaceChild("bone3", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.3F, 24.2F, 0.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition p3 = p2.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-1.7F, -5.5F, 4.2F, 1.0F, 1.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.1745F, 0.3927F, 0.0F));
 		PartDefinition p4 = p2.addOrReplaceChild("bone2", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.2159F, -0.7246F, -0.2118F));
@@ -98,6 +101,7 @@ public final class ArmorModels {
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.offset(-1.9F, 12.0F, 0.0F));
 		root.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.offset(1.9F, 12.0F, 0.0F));
 		PartDefinition p1 = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -6.6F, -4.4F, 9.0F, 2.0F, 9.0F, new CubeDeformation(-0.2F)), PartPose.ZERO);
+		p1.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition p2 = p1.addOrReplaceChild("bone3", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.3F, 24.2F, 0.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition p3 = p2.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-1.7F, -5.5F, 4.2F, 1.0F, 1.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.1745F, 0.3927F, 0.0F));
 		PartDefinition p4 = p2.addOrReplaceChild("bone2", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.2159F, -0.7246F, -0.2118F));
@@ -118,6 +122,7 @@ public final class ArmorModels {
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.offset(-1.9F, 12.0F, 0.0F));
 		root.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.offset(1.9F, 12.0F, 0.0F));
 		PartDefinition p1 = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -6.6F, -4.4F, 9.0F, 2.0F, 9.0F, new CubeDeformation(-0.2F)), PartPose.ZERO);
+		p1.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition p2 = p1.addOrReplaceChild("bone3", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.3F, 24.2F, 0.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition p3 = p2.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-1.7F, -5.5F, 4.2F, 1.0F, 1.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.1745F, 0.3927F, 0.0F));
 		PartDefinition p4 = p2.addOrReplaceChild("bone2", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.2159F, -0.7246F, -0.2118F));
@@ -138,6 +143,7 @@ public final class ArmorModels {
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.offset(-1.9F, 12.0F, 0.0F));
 		root.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.offset(1.9F, 12.0F, 0.0F));
 		PartDefinition p1 = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -6.6F, -4.4F, 9.0F, 2.0F, 9.0F, new CubeDeformation(-0.2F)), PartPose.ZERO);
+		p1.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition p2 = p1.addOrReplaceChild("bone3", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.3F, 24.2F, 0.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition p3 = p2.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-1.7F, -5.5F, 4.2F, 1.0F, 1.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.1745F, 0.3927F, 0.0F));
 		PartDefinition p4 = p2.addOrReplaceChild("bone2", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.2159F, -0.7246F, -0.2118F));
@@ -158,6 +164,7 @@ public final class ArmorModels {
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.offset(-1.9F, 12.0F, 0.0F));
 		root.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.offset(1.9F, 12.0F, 0.0F));
 		PartDefinition p1 = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -6.6F, -4.4F, 9.0F, 2.0F, 9.0F, new CubeDeformation(-0.2F)), PartPose.ZERO);
+		p1.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition p2 = p1.addOrReplaceChild("bone3", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.3F, 24.2F, 0.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition p3 = p2.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-1.7F, -5.5F, 4.2F, 1.0F, 1.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.1745F, 0.3927F, 0.0F));
 		PartDefinition p4 = p2.addOrReplaceChild("bone2", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.2159F, -0.7246F, -0.2118F));
@@ -178,6 +185,7 @@ public final class ArmorModels {
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.offset(-1.9F, 12.0F, 0.0F));
 		root.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.offset(1.9F, 12.0F, 0.0F));
 		PartDefinition p1 = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -6.6F, -4.4F, 9.0F, 2.0F, 9.0F, new CubeDeformation(-0.2F)), PartPose.ZERO);
+		p1.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition p2 = p1.addOrReplaceChild("bone3", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.3F, 24.2F, 0.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition p3 = p2.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-1.7F, -5.5F, 4.2F, 1.0F, 1.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.1745F, 0.3927F, 0.0F));
 		PartDefinition p4 = p2.addOrReplaceChild("bone2", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.2159F, -0.7246F, -0.2118F));
@@ -198,6 +206,7 @@ public final class ArmorModels {
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.offset(-1.9F, 12.0F, 0.0F));
 		root.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.offset(1.9F, 12.0F, 0.0F));
 		PartDefinition p1 = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -6.6F, -4.4F, 9.0F, 2.0F, 9.0F, new CubeDeformation(-0.2F)), PartPose.ZERO);
+		p1.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition p2 = p1.addOrReplaceChild("bone3", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.3F, 24.2F, 0.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition p3 = p2.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-1.7F, -5.5F, 4.2F, 1.0F, 1.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.1745F, 0.3927F, 0.0F));
 		PartDefinition p4 = p2.addOrReplaceChild("bone2", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.2159F, -0.7246F, -0.2118F));
@@ -218,6 +227,7 @@ public final class ArmorModels {
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.offset(-1.9F, 12.0F, 0.0F));
 		root.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.offset(1.9F, 12.0F, 0.0F));
 		PartDefinition p1 = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -6.6F, -4.4F, 9.0F, 2.0F, 9.0F, new CubeDeformation(-0.2F)), PartPose.ZERO);
+		p1.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition p2 = p1.addOrReplaceChild("bone3", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.3F, 24.2F, 0.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition p3 = p2.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-1.7F, -5.5F, 4.2F, 1.0F, 1.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.1745F, 0.3927F, 0.0F));
 		PartDefinition p4 = p2.addOrReplaceChild("bone2", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.2159F, -0.7246F, -0.2118F));
@@ -238,6 +248,7 @@ public final class ArmorModels {
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.offset(-1.9F, 12.0F, 0.0F));
 		root.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.offset(1.9F, 12.0F, 0.0F));
 		PartDefinition p1 = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -6.6F, -4.4F, 9.0F, 2.0F, 9.0F, new CubeDeformation(-0.2F)), PartPose.ZERO);
+		p1.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition p2 = p1.addOrReplaceChild("bone3", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.3F, 24.2F, 0.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition p3 = p2.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-1.7F, -5.5F, 4.2F, 1.0F, 1.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.1745F, 0.3927F, 0.0F));
 		PartDefinition p4 = p2.addOrReplaceChild("bone2", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.2159F, -0.7246F, -0.2118F));
@@ -258,6 +269,7 @@ public final class ArmorModels {
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.offset(-1.9F, 12.0F, 0.0F));
 		root.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.offset(1.9F, 12.0F, 0.0F));
 		PartDefinition p1 = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -6.6F, -4.4F, 9.0F, 2.0F, 9.0F, new CubeDeformation(-0.2F)), PartPose.ZERO);
+		p1.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition p2 = p1.addOrReplaceChild("bone3", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.3F, 24.2F, 0.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition p3 = p2.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-1.7F, -5.5F, 4.2F, 1.0F, 1.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.1745F, 0.3927F, 0.0F));
 		PartDefinition p4 = p2.addOrReplaceChild("bone2", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.2159F, -0.7246F, -0.2118F));
@@ -278,6 +290,7 @@ public final class ArmorModels {
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.offset(-1.9F, 12.0F, 0.0F));
 		root.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.offset(1.9F, 12.0F, 0.0F));
 		PartDefinition p1 = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -6.6F, -4.4F, 9.0F, 2.0F, 9.0F, new CubeDeformation(-0.2F)), PartPose.ZERO);
+		p1.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition p2 = p1.addOrReplaceChild("bone3", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.3F, 24.2F, 0.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition p3 = p2.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-1.7F, -5.5F, 4.2F, 1.0F, 1.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.1745F, 0.3927F, 0.0F));
 		PartDefinition p4 = p2.addOrReplaceChild("bone2", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.2159F, -0.7246F, -0.2118F));
@@ -298,6 +311,7 @@ public final class ArmorModels {
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.offset(-1.9F, 12.0F, 0.0F));
 		root.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.offset(1.9F, 12.0F, 0.0F));
 		PartDefinition p1 = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -6.6F, -4.4F, 9.0F, 2.0F, 9.0F, new CubeDeformation(-0.2F)), PartPose.ZERO);
+		p1.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition p2 = p1.addOrReplaceChild("bone3", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.3F, 24.2F, 0.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition p3 = p2.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-1.7F, -5.5F, 4.2F, 1.0F, 1.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.1745F, 0.3927F, 0.0F));
 		PartDefinition p4 = p2.addOrReplaceChild("bone2", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.2159F, -0.7246F, -0.2118F));
@@ -318,6 +332,7 @@ public final class ArmorModels {
 		root.addOrReplaceChild("right_leg", CubeListBuilder.create(), PartPose.offset(-1.9F, 12.0F, 0.0F));
 		root.addOrReplaceChild("left_leg", CubeListBuilder.create(), PartPose.offset(1.9F, 12.0F, 0.0F));
 		PartDefinition p1 = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-4.5F, -6.6F, -4.4F, 9.0F, 2.0F, 9.0F, new CubeDeformation(-0.2F)), PartPose.ZERO);
+		p1.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		PartDefinition p2 = p1.addOrReplaceChild("bone3", CubeListBuilder.create(), PartPose.offsetAndRotation(-0.3F, 24.2F, 0.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition p3 = p2.addOrReplaceChild("bone", CubeListBuilder.create().texOffs(0, 0).addBox(-1.7F, -5.5F, 4.2F, 1.0F, 1.0F, 3.0F), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.1745F, 0.3927F, 0.0F));
 		PartDefinition p4 = p2.addOrReplaceChild("bone2", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -24.0F, 0.0F, 0.2159F, -0.7246F, -0.2118F));

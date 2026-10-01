@@ -1748,3 +1748,91 @@ def unused_gui_buttons(path, text):
             body = body[:b.start()] + body[find_block(body, b.end() - 1):]
         text = text[:h] + body + text[hend:]
     return text
+
+
+# ---------------------------------------------------------------- DNA (core/jutsu/Dna)
+@func
+def dna_items(path, text):
+    """DNA items are handled by core/jutsu/Dna (identifying, implanting by Medicine, kekkei genkai needing their natures): they lose
+    their own use() and hurtEnemy(), which ran the old coin-flip procedures."""
+    if not path.replace('\\', '/').endswith('item/DnaItems.java'):
+        return text
+    for sig in ('public InteractionResult use(', 'public void hurtEnemy('):
+        while True:
+            i = text.find(sig)
+            if i < 0:
+                break
+            start = text.rfind('\n', 0, text.rfind('@Override', 0, i))
+            text = text[:start] + text[find_block(text, i):]
+    return text
+
+
+@func
+def old_dna_drop(path, text):
+    """Any creature killed had a chance (config dna_drop) to drop Undefined DNA; now shinobi drop it (core/jutsu/Dna)."""
+    if not path.replace('\\', '/').endswith('procedures/EntityProcedures.java') or '"dna_drop"' not in text:
+        return text
+    d = text.index('"dna_drop"')
+    start = text.rfind('NarutoShippuden = (File) new File(', 0, d)
+    block = text.index('{', text.index(';', start))
+    end = find_block(text, block)
+    return text[:text.rfind('\n', 0, start)] + text[end:]
+
+
+# ---------------------------------------------------------------- the config (core/NarutoConfig)
+CONFIG_KEYS = {
+    'clan_random': 'net.mcreator.narutoshippudenmod.core.NarutoConfig.randomClan()',
+    'kekkei_genkai_spawn_chance': 'net.mcreator.narutoshippudenmod.core.NarutoConfig.kekkeiGenkaiAtBirth()',
+    'sharingan_awake': 'net.mcreator.narutoshippudenmod.core.NarutoConfig.seconds(net.mcreator.narutoshippudenmod.core.NarutoConfig.SHARINGAN)',
+    'mangekyou_sharingan_awake': 'net.mcreator.narutoshippudenmod.core.NarutoConfig.seconds(net.mcreator.narutoshippudenmod.core.NarutoConfig.MANGEKYOU_SHARINGAN)',
+    'byakugan_awake': 'net.mcreator.narutoshippudenmod.core.NarutoConfig.seconds(net.mcreator.narutoshippudenmod.core.NarutoConfig.BYAKUGAN)',
+    'ketsuryugan_awake': 'net.mcreator.narutoshippudenmod.core.NarutoConfig.seconds(net.mcreator.narutoshippudenmod.core.NarutoConfig.KETSURYUGAN)',
+    'tenseigan_awake': 'net.mcreator.narutoshippudenmod.core.NarutoConfig.seconds(net.mcreator.narutoshippudenmod.core.NarutoConfig.TENSEIGAN)',
+    'rinnegan_awake': 'net.mcreator.narutoshippudenmod.core.NarutoConfig.seconds(net.mcreator.narutoshippudenmod.core.NarutoConfig.RINNEGAN)',
+    'isshiki_dojutsu_awake': 'net.mcreator.narutoshippudenmod.core.NarutoConfig.seconds(net.mcreator.narutoshippudenmod.core.NarutoConfig.KOKUGAN)',
+}
+
+
+@func
+def config_reads(path, text):
+    """The procedures read config/narutoshippuden/narutoshippudenconfig.json from disk each time (the player tick every tick), and a
+    missing key crashed them. They now read core/NarutoConfig, in memory; the procedure that wrote the old file's defaults goes."""
+    text = remove_class(text, 'NarutoshippudenconfigProcedure')
+    while True:
+        m = re.search(r'\n[ \t]*NarutoShippuden = \(File\) new File\([^;]*"narutoshippudenconfig\.json"\);\s*\{\s*try \{', text)
+        if not m:
+            break
+        outer = text.rindex('{', 0, text.index('try {', m.start()))
+        outer_end = find_block(text, outer)
+        try_open = text.index('try {', m.start()) + 4
+        try_end = find_block(text, try_open)
+        parsed = text.index('mainjsonobject = new Gson().fromJson(', try_open)
+        body = text[text.index(';', parsed) + 1:try_end - 1].rstrip()
+        text = text[:m.start()] + body + text[outer_end:]
+
+    def value(k):
+        key = k.group(1)
+        if key not in CONFIG_KEYS:
+            raise KeyError('config key without a NarutoConfig value: ' + key)
+        return CONFIG_KEYS[key]
+    return re.sub(r'mainjsonobject\s*\.get\("(\w+)"\)\s*\.getAs(?:Double|Boolean)\(\)', value, text)
+
+
+@func
+def headband_hat(path, text):
+    """A headband's model starts from the player mesh, whose head carries the hat layer (a cube a little bigger than the head); the
+    headband's head replaced the head but kept that hat, which drew stray bits of the band texture beside the head, like an
+    overlay. The hat is now empty."""
+    if not path.replace('\\', '/').endswith('client/ArmorModels.java'):
+        return text
+    return re.sub(r'(\n(\t*)PartDefinition (p\d+) = root\.addOrReplaceChild\("head", [^\n]*\);)(?!\n\t*\3\.addOrReplaceChild\("hat")',
+                  r'\1\n\2\3.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);', text)
+
+
+@func
+def sync_on_change(path, text):
+    """The procedures set a variable and sync every time, even to the value it already has: the player tick copied health into the
+    variables each tick, so every player was sent all their variables 20 times a second. A sync now happens only on a change."""
+    return re.sub(r'ifPresent\((\w+), capability -> \{(\s*)capability\.(\w+) = _setval;\s*capability\.syncPlayerVariables\(\1\);(\s*)\}\);',
+                  r'ifPresent(\1, capability -> {\2if (!java.util.Objects.equals(capability.\3, _setval)) {\2\tcapability.\3 = _setval;\2\tcapability.syncPlayerVariables(\1);\2}\4});',
+                  text)

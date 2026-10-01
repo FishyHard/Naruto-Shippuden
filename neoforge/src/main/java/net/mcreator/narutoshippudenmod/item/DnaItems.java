@@ -10,39 +10,6 @@ import java.util.Map;
 import java.util.stream.Stream;
 import net.mcreator.narutoshippudenmod.NarutoShippudenModElements;
 import net.mcreator.narutoshippudenmod.itemgroup.ModItemGroups.DNAItemGroup;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.BoilDNAImplantMobProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.BoilDNARightClickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.BoneDNAImplantMobProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.BoneDNARightClickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.DustDNAImplantMobProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.DustDNARightClickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.IceDNAImplantMobProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.IceDNARightClickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.MagnetDNAImplantMobProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.MagnetDNARightClickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.SmokeDNAImplantMobProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.SmokeDNARightClickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.SteelDNAImplantMobProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.SteelDNARightClickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.StormDNAImplantMobProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.StormDNARightClickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.SwiftDNAImplantMobProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.SwiftDNARightClickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.TyphoonDNAImplantMobProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.TyphoonDNARightClickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.UndefinedDNARightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.WoodDNAImplantMobProcedure;
-import net.mcreator.narutoshippudenmod.procedures.KekkeiGenkaiProcedures.WoodDNARightClickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.NatureReleaseProcedures.EarthDNAImplantMobProcedure;
-import net.mcreator.narutoshippudenmod.procedures.NatureReleaseProcedures.EarthDNARightClickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.NatureReleaseProcedures.FireDNAImplantMobProcedure;
-import net.mcreator.narutoshippudenmod.procedures.NatureReleaseProcedures.FireDNARightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.NatureReleaseProcedures.LightningDNAImplantMobProcedure;
-import net.mcreator.narutoshippudenmod.procedures.NatureReleaseProcedures.LightningDNARightClickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.NatureReleaseProcedures.WaterDNAImplantMobProcedure;
-import net.mcreator.narutoshippudenmod.procedures.NatureReleaseProcedures.WaterDNARightClickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.NatureReleaseProcedures.WindDNAImplantMobProcedure;
-import net.mcreator.narutoshippudenmod.procedures.NatureReleaseProcedures.WindDNARightClickedProcedure;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.entity.LivingEntity;
@@ -56,7 +23,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
-
 
 public final class DnaItems {
 	private DnaItems() {
@@ -93,33 +59,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				BoilDNARightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				BoilDNAImplantMobProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 
@@ -154,33 +93,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				BoneDNARightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				BoneDNAImplantMobProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 
@@ -215,33 +127,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				DustDNARightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				DustDNAImplantMobProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 
@@ -276,33 +161,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				EarthDNARightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				EarthDNAImplantMobProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 
@@ -337,33 +195,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				FireDNARightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				FireDNAImplantMobProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 
@@ -398,33 +229,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				IceDNARightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				IceDNAImplantMobProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 
@@ -459,33 +263,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				LightningDNARightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				LightningDNAImplantMobProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 
@@ -520,33 +297,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				MagnetDNARightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				MagnetDNAImplantMobProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 
@@ -581,33 +331,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				SmokeDNARightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				SmokeDNAImplantMobProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 
@@ -642,33 +365,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				SteelDNARightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				SteelDNAImplantMobProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 
@@ -703,33 +399,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				StormDNARightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				StormDNAImplantMobProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 
@@ -764,33 +433,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				SwiftDNARightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				SwiftDNAImplantMobProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 
@@ -825,33 +467,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				TyphoonDNARightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				TyphoonDNAImplantMobProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 
@@ -886,19 +501,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				UndefinedDNARightclickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
 		}
 	}
 
@@ -933,33 +535,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				WaterDNARightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				WaterDNAImplantMobProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 
@@ -994,33 +569,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				WindDNARightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				WindDNAImplantMobProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 
@@ -1055,33 +603,6 @@ public final class DnaItems {
 				return 1F;
 			}
 
-
-			@Override
-			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
-				InteractionResult ar = super.use(world, entity, hand);
-				ItemStack itemstack = entity.getItemInHand(hand);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-
-				WoodDNARightClickedProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
-						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return ar;
-			}
-
-			@Override
-			public void hurtEnemy(ItemStack itemstack, LivingEntity entity, LivingEntity sourceentity) {
-				super.hurtEnemy(itemstack, entity, sourceentity);
-				double x = entity.getX();
-				double y = entity.getY();
-				double z = entity.getZ();
-				Level world = entity.level();
-
-				WoodDNAImplantMobProcedure.executeProcedure(
-						Stream.of(new AbstractMap.SimpleEntry<>("entity", entity), new AbstractMap.SimpleEntry<>("sourceentity", sourceentity))
-								.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
-				return;
-			}
 		}
 	}
 }

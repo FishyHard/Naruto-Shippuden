@@ -5,6 +5,7 @@ NeoForge 26.3 port, version 3.0.0. Generated from the mod's code on 2026-10-01, 
 ## Contents
 
 - [How jutsu work](#how-jutsu-work)
+- [DNA](#dna)
 - [Nature releases](#nature-releases)
 - [Kekkei genkai](#kekkei-genkai)
 - [Clans](#clans)
@@ -19,6 +20,7 @@ NeoForge 26.3 port, version 3.0.0. Generated from the mod's code on 2026-10-01, 
 - [Effects](#effects)
 - [World](#world)
 - [Stats, ranks and progression](#stats-ranks-and-progression)
+- [Settings](#settings)
 - [Controls](#controls)
 
 ## How jutsu work
@@ -36,6 +38,32 @@ NeoForge 26.3 port, version 3.0.0. Generated from the mod's code on 2026-10-01, 
 | B | 20 | 22 | 180 | 14s |
 | A | 32 | 35 | 300 | 24s |
 | S | 50 | 50 | 500 | 45s |
+
+## DNA
+
+How you gain natures and kekkei genkai.
+
+- **Undefined DNA** drops from shinobi: village shinobi 15% (Genin), 25% (Chunin), 40% (Jonin); Asuma and Shikamaru 50%; Kurama always drops 3. Other mobs never drop it.
+- **Right-click Undefined DNA** to identify it. It always works: 80% a nature DNA, 20% a kekkei genkai DNA.
+- **Right-click a DNA** to implant it in yourself, or **hit a player** with it to implant it in them. Implanting is a medical procedure: the implanter's **Medicine** sets the chance. A nature goes from 50% at Medicine 0 to 100% at 300, a kekkei genkai from 25% to 100%. A failure uses up the DNA. The DNA's tooltip shows your chance.
+- A **kekkei genkai combines natures**: you need them before its DNA can be implanted. This can be turned off in the settings.
+- Success unlocks the release and gives its scroll. Two DNA can be crafted back into one Undefined DNA.
+
+| Kekkei genkai | Needs |
+|---|---|
+| Boil Release | Fire + Water |
+| Bone Release | no natures |
+| Dust Release | Earth + Wind + Fire |
+| Ice Release | Water + Wind |
+| Magnet Release | Wind + Earth |
+| Smoke Release | Fire + Wind + Water |
+| Steel Release | Earth + Fire |
+| Storm Release | Lightning + Water |
+| Swift Release | Wind + Lightning |
+| Typhoon Release | Wind + Water |
+| Wood Release | Earth + Water |
+
+Boil, Dust, Ice, Magnet, Storm and Wood follow the Naruto wiki. The wiki gives none for Steel and Swift, says Typhoon includes Wind, Smoke is from the fan wiki, and Bone (the Kaguya clan's Shikotsumyaku) isn't made of natures.
 
 ## Nature releases
 
@@ -691,7 +719,7 @@ Mostly blocks jutsu place (they disappear again) and story blocks:
 - Dust Release (`dust_block_view`)
 - Dust Release (`dust_block_view_2`)
 - Dust Release (`dust_block_view_3`)
-- Waterwall (`earth_wall`)
+- Earth Wall (`earth_wall`)
 - Kamui Stone (`kamui_stone`)
 - Kamui Void (`kamui_void`)
 - Shadow (`nara_shadow`)
@@ -730,6 +758,20 @@ Status effects jutsu put on you or others: Coercion Sharingan Genjutsu, Drowning
 - **Chakra Control** (G): walk on water and walls, Focus (sneak and stand still) to regenerate chakra and sense, harder sprinting punches, a dash on Left Alt.
 - **Info card** (I): stats, dojutsu, missions, the Jutsu page and a mini-game.
 - Missions: D-Rank Mission: Shogi Board, D-Rank Mission: Pillage The Post, D-Rank Mission: Save The Village, C-Rank Mission: Asuma's Chakra Blade, C-Rank Mission: Iron Defense, Story Mode.
+
+## Settings
+
+In game: **Mods → Naruto Shippuden → Config**, or the file `config/naruto_shippuden-common.toml`.
+
+| Setting | Default | What it does |
+|---|---|---|
+| `random_clan` | false | true: new players roll a random clan and nature (Clan Paper, Chakra Paper); false: they choose a clan on a screen |
+| `kekkei_genkai_at_birth_percent` | 1 | Chance a new player is born with a random kekkei genkai |
+| `sharingan_minutes / mangekyou_sharingan_minutes` | 30 / 90 | Minutes of play before an Uchiha awakens them |
+| `byakugan_minutes` | 40 | Hyuga |
+| `ketsuryugan_minutes` | 33.3 | Chinoike |
+| `tenseigan_minutes / rinnegan_minutes / kokugan_minutes` | 120 / 180 / 150 | Otsutsuki paths |
+| `combine_natures` | true | Kekkei genkai DNA needs the natures it combines |
 
 ## Controls
 

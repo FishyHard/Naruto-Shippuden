@@ -42,6 +42,9 @@ public class NarutoShippudenMod {
 		if (FMLEnvironment.getDist().isClient())
 			modBus.addListener(this::clientLoad);
 		NeoForge.EVENT_BUS.addListener(this::serverLoad);
+		container.registerConfig(net.neoforged.fml.config.ModConfig.Type.COMMON, net.mcreator.narutoshippudenmod.core.NarutoConfig.SPEC);
+		if (FMLEnvironment.getDist().isClient())
+			net.mcreator.narutoshippudenmod.client.ConfigScreen.register(container);
 	}
 
 	private void registerAll(RegisterEvent event) {
