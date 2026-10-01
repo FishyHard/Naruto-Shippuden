@@ -468,24 +468,26 @@ public final class DojutsuJutsu {
 				return;
 			}
 			if (level.dimension().identifier().getPath().equals("kamui_dimension")) {
-				// already inside: Kamui throws them back out
-				Compat.runCommand(target, "/execute in minecraft:overworld run tp ~ 100 ~");
+				// already inside: Kamui throws them back out, to where they were taken from (or, never taken, to where the caster came from)
+				net.minecraft.nbt.CompoundTag back = target.getPersistentData().getCompoundOrEmpty(KAMUI_RETURN);
+				goBack(target, back.isEmpty() ? p.getPersistentData().getCompoundOrEmpty(KAMUI_RETURN) : back);
 				return;
 			}
+			// where to bring them back to (the Kamui dimension's coordinates have nothing to do with the world's)
+			target.getPersistentData().put(KAMUI_RETURN, returnPoint(target));
 			if (target instanceof ServerPlayer victim) {
-				net.minecraft.nbt.CompoundTag back = returnPoint(victim);
 				Compat.runCommand(victim, "/execute in naruto_shippuden:kamui_dimension run tp @s ~ 71 ~");
 				victim.sendOverlayMessage(Component.literal("You were taken into the Kamui dimension"));
 				net.mcreator.narutoshippudenmod.core.NarutoActions.later(victim, 300, them -> {
 					if (them.level().dimension().identifier().getPath().equals("kamui_dimension"))
-						goBack(them, back);
+						goBack(them, them.getPersistentData().getCompoundOrEmpty(KAMUI_RETURN));
 				});
 			} else
 				Compat.runCommand(target, "/execute in naruto_shippuden:kamui_dimension run tp ~ 71 ~");
 		});
 	}
 
-	private static net.minecraft.nbt.CompoundTag returnPoint(ServerPlayer p) {
+	private static net.minecraft.nbt.CompoundTag returnPoint(net.minecraft.world.entity.Entity p) {
 		net.minecraft.nbt.CompoundTag back = new net.minecraft.nbt.CompoundTag();
 		back.putString("dimension", p.level().dimension().identifier().toString());
 		back.putDouble("x", p.getX());
@@ -494,7 +496,14 @@ public final class DojutsuJutsu {
 		return back;
 	}
 
-	private static void goBack(ServerPlayer p, net.minecraft.nbt.CompoundTag back) {
+	/** Back to a saved point; with none, to the world's spawn (never to the Kamui dimension's coordinates in the overworld). */
+	private static void goBack(net.minecraft.world.entity.Entity p, net.minecraft.nbt.CompoundTag back) {
+		p.getPersistentData().remove(KAMUI_RETURN);
+		if (back.isEmpty()) {
+			net.minecraft.core.BlockPos spawn = p.level().getServer().overworld().getRespawnData().pos();
+			Compat.runCommand(p, String.format(java.util.Locale.ROOT, "/execute in minecraft:overworld run spreadplayers %d %d 0 1 false @s", spawn.getX(), spawn.getZ()));
+			return;
+		}
 		String dimension = back.getStringOr("dimension", "minecraft:overworld");
 		Compat.runCommand(p, String.format(java.util.Locale.ROOT, "/execute in %s run tp @s %.2f %.2f %.2f", dimension, back.getDoubleOr("x", p.getX()),
 				back.getDoubleOr("y", 100), back.getDoubleOr("z", p.getZ())));
