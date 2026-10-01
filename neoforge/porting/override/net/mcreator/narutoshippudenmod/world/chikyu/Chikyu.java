@@ -114,6 +114,11 @@ public final class Chikyu {
 	// ---------------------------------------------------------------- the toriis
 	private static volatile BlockPos overworldTorii;
 
+	/** The overworld's torii's middle, once this server has found or built it; null before. */
+	public static BlockPos overworldToriiIfKnown() {
+		return overworldTorii;
+	}
+
 	/** The overworld's torii, a few blocks north of the world spawn, standing on the ground; built if it is not there. */
 	private static BlockPos overworldTorii(ServerLevel overworld) {
 		BlockPos t = overworldTorii;

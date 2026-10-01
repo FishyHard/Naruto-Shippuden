@@ -354,6 +354,11 @@ Nature Releases, Kekkei Genkai, DNA, Clans, Dojutsu, Shinobi Weapons, Headbands,
   unbreakable, light 11, animated green texture, sparkles); the way out gives a `leaf_return_scroll` if the player has
   none: hold use for 5 s in the overworld (a hit breaks it) to land back at the Leaf's gate, 5 min cooldown.
   `/naruto chikyu [players]`, `/naruto chikyu leave [players]` for operators.
+- `VillageProtection` (config `chikyu.protect_villages`, default true): inside the Leaf's wall (r 190 round the world
+  centre), its gate and both toriis nobody breaks/places blocks, uses buckets, flint, fire charges, bone meal or tool
+  modifications (stripping, tilling); explosions spare the blocks, fire is put out the next tick (NeighborNotifyEvent),
+  mobs can't grief. Doors, buttons, seats still work. Operators in creative bypass it. Jutsu that set blocks directly
+  are not caught yet.
 - Still to do: the other four villages, the story engine (quests, dialogue, tracker) that the start leads into.
 
 ### Keys (defaults)

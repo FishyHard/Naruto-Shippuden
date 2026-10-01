@@ -38,6 +38,7 @@ public final class NarutoConfig {
 	public static final ModConfigSpec.DoubleValue KOKUGAN;
 
 	public static final ModConfigSpec.BooleanValue COMBINE_NATURES;
+	public static final ModConfigSpec.BooleanValue PROTECT_VILLAGES;
 
 	static {
 		ModConfigSpec.Builder b = new ModConfigSpec.Builder();
@@ -61,6 +62,12 @@ public final class NarutoConfig {
 		b.comment("DNA: shinobi drop it; right-click to identify, then to implant").push("dna");
 		COMBINE_NATURES = b.comment("true: a kekkei genkai needs the natures it combines (Ice: Water and Wind, Wood: Earth and Water...).",
 				"false: any kekkei genkai DNA can be implanted.").define("combine_natures", true);
+		b.pop();
+
+		b.comment("Chikyu, the story's world").push("chikyu");
+		PROTECT_VILLAGES = b.comment("true: nobody can break or place blocks inside the hidden villages' walls or at the toriis, and explosions,",
+				"fire and mobs do them no harm (doors, buttons and seats still work; operators in creative mode can still build).",
+				"false: the villages are open to build in, like the wild land.").define("protect_villages", true);
 		b.pop();
 		SPEC = b.build();
 	}
