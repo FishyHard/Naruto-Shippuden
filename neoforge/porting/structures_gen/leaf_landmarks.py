@@ -845,7 +845,9 @@ def hokage_rock(faces=('first', 'second', 'third', 'fourth')):
         t = tops[x]
         for z in range(0, int(ZC) - 2):
             b.set(x, t, z, 'grass_block[snowy=false]')
-    # the talus at the cliff's foot: crags of rock, falling toward the village
+    # the talus at the cliff's foot: crags of rock falling toward the village, giving way to grass along a ragged edge,
+    # with trees and bushes growing on its lower slopes
+    soil = []
     for x in range(W):
         for z in range(ZC, D):
             h = Y0 + 2 - (z - ZC) * 0.42
@@ -855,16 +857,39 @@ def hokage_rock(faces=('first', 'second', 'third', 'fourth')):
             h += (c3 - 0.5) * 6 + (_cell(x + 1, z + 2, 5, 52) - 0.5) * 4
             if c3 > 0.94:
                 h += 6
-            for y in range(max(0, int(h) - 4), int(h) + 1):
+            # how rocky the ground is here: rock near the cliff, grass toward the village, a noisy line between
+            rocky = 1.2 - (z - ZC) / (D - ZC) * 1.6 - (1 - min(1.0, edge / 18)) * 0.8 \
+                + (_cell(x, z, 4, 53) - 0.5) * 0.7 + (_cell(x, z, 9, 54) - 0.5) * 0.5
+            top = int(h)
+            if rocky < 0 or top < G:
+                # soil: the ground's own level, grass and earth
+                v = _hash(x, 0, z, 64)
+                b.set(x, G - 1, z, 'grass_block[snowy=false]' if v < 0.7 + rocky * 0.5 else
+                      ('coarse_dirt' if v < 0.88 else 'podzol[snowy=false]'))
+                b.set(x, G - 2, z, 'dirt')
+                if rocky < -0.05:
+                    soil.append((x, z))
+                continue
+            for y in range(max(0, top - 4), top + 1):
                 if (x, y, z) not in b.blocks:
                     v = _hash(x, y // 3, z, 62)
                     b.set(x, y, z, 'terracotta' if v < 0.1 else plain)
-            if h > 2 and _hash(x, 0, z, 63) < 0.15:
-                b.set(x, int(h) + 1, z, 'short_grass') if (x, int(h) + 1, z) not in b.blocks else None
-    for x in range(W):
-        for z in range(ZC, D):
-            for y in range(0, 2):
-                b.set(x, y, z, b.get(x, y, z) or plain)
+            # where the rock is low, grass creeps over it
+            if rocky < 0.35 and _hash(x, 1, z, 65) < 0.6 - rocky:
+                b.set(x, top, z, 'grass_block[snowy=false]')
+                if _hash(x, 2, z, 66) < 0.2:
+                    b.set(x, top + 1, z, 'short_grass') if (x, top + 1, z) not in b.blocks else None
+            elif h > 2 and _hash(x, 0, z, 63) < 0.08:
+                b.set(x, top + 1, z, 'short_grass') if (x, top + 1, z) not in b.blocks else None
+    # trees and bushes on the soil and the low rock near it
+    for (x, z) in soil:
+        v = _hash(x, 3, z, 67)
+        if v < 0.025:
+            kind = ['oak', 'birch', 'dark_oak'][int(_hash(x, 4, z, 68) * 3)]
+            tree(b, x, G, z, height=4 + int(_hash(x, 5, z, 69) * 3), r=2 + int(_hash(x, 6, z, 70) * 2), trunk=kind + '_log',
+                 leaves=st(kind + '_leaves', distance=1, persistent=True, waterlogged=False))
+        elif v < 0.05 and (x, G, z) not in b.blocks:
+            b.set(x, G, z, st('azalea_leaves', distance=1, persistent=True, waterlogged=False))
     # trees along the top
     for tx in range(6, W - 6, 8):
         tz = 6 + (tx * 7) % 14

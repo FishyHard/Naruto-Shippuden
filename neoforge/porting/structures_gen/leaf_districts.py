@@ -484,8 +484,11 @@ def hot_springs():
         b.fill(19, G, z, 20, G + 3, z, 'bamboo_block[axis=y]')
     for x in range(0, W):
         b.fill(x, G, 0, x, G + 3, 0, 'bamboo_block[axis=y]')
-    for z in range(0, D - 13):
+    for z in range(0, D - 12):
         b.fill(0, G, z, 0, G + 3, z, 'bamboo_block[axis=y]'); b.fill(W - 1, G, z, W - 1, G + 3, z, 'bamboo_block[axis=y]')
+    # and in to the bathhouse's sides, so the baths are closed all round
+    for x in list(range(0, 6)) + list(range(34, W)):
+        b.fill(x, G, D - 12, x, G + 3, D - 12, 'bamboo_block[axis=y]')
     for (x, z) in ((3, 3), (16, 18), (23, 18), (36, 3)):
         stone_lantern(b, x, z)
     tree(b, 4, G, 20, height=5, r=3, trunk='cherry_log', leaves=st('cherry_leaves', distance=1, persistent=True, waterlogged=False))

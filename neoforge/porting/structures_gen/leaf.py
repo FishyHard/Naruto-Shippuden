@@ -150,6 +150,11 @@ def wall_banner(b, x, y, z, facing, color='white'):
 def tree(b, x, y, z, height=6, r=3, trunk='oak_log', leaves=LEAVES):
     """A tree, if it has room: nothing but air or leaves where its trunk and crown would go (so trees never grow into
     buildings). Returns whether it was planted."""
+    # the crown must fit inside the piece, or it would be cut flat at the piece's edge: shrink it, or skip the tree
+    while r >= 2 and not (r <= x < b.w - r and r <= z < b.d - r):
+        r -= 1
+    if not (r <= x < b.w - r and r <= z < b.d - r) or y + height + 3 > b.h:
+        return False
     for yy in range(y, y + height + 3):
         rr = 0 if yy < y + height - 2 else r + 1
         for dx in range(-rr, rr + 1):

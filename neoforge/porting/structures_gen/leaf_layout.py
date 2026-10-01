@@ -22,7 +22,8 @@ STREETS = [
     (155, 290, 264, 294),                       # avenue B, to the east road
     (150, 141, 154, 328),                       # the west road
     (64, 170, 149, 173),                        # past the Academy yard
-    (65, 164, 67, 169),                         # up to Training Ground 3
+    (73, 164, 75, 169),                         # up to Training Ground 3
+    (115, 165, 117, 169),                       # from the yard's street gate to the road
     (260, 141, 264, 318),                       # the east road
     (232, 141, 259, 144),                       # from the plaza's corner to the hospital
     (265, 141, 320, 144),
@@ -85,8 +86,8 @@ def layout(sizes, origins):
     put('hokage_rock', ROCK_X0, ROCK_Z0)
     put('hokage_tower', CX - 30, 92)
     put('academy', 92, 104)
-    put('academy_yard', 92, 139)
-    put('training_ground', 48, 128)
+    put('academy_yard', 92, 104 + 34)                  # straight onto the Academy's front, no gap
+    put('training_ground', 56, 128)                     # its east path meets the yard's west gap
     put('exam_stadium', 43, 181)
     put('hospital', 270, 110)
     put('water_tower', 155, 118)

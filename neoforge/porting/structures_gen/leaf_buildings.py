@@ -161,7 +161,7 @@ def academy():
     for x in range(m - 1, m + 2):
         b.fill(x, G, fz2, x, G + 3, fz2, AIR)
     b.door(m - 1, G, fz2, 'spruce', 'south', 'right'); b.door(m + 1, G, fz2, 'spruce', 'south', 'left')
-    b.set(m, G, fz2, AIR); b.set(m, G + 1, fz2, AIR)
+    b.fill(m, G, fz2, m, G + 1, fz2, log('stripped_dark_oak_log'))      # a post between the pair
     b.fill(m - 1, G + 2, fz2, m + 1, G + 3, fz2, 'stripped_spruce_wood[axis=x]')
     for x in range(m - 4, m + 5):
         b.set(x, G + 4, fz2 + 1, stairs(GREEN_ST, 'north'))
@@ -299,7 +299,22 @@ def academy():
     for (x, z) in ((x1 + 12, z1 + 3), (x2 - 15, z2 - 3)):
         b.set(x, rt, z, 'smooth_stone'); b.set(x, rt + 1, z, st('iron_trapdoor', facing='north', half='bottom', open=False,
                                                                     powered=False, waterlogged=False))
-    # trees and lamps by the door
+    # the start of the yard: it begins right at the building. Yard earth in front, a low wall with a fence on each side
+    # running from the building's corners to the yard proper (the academy_yard piece, placed directly south), and a
+    # paved path from the doors straight through to the yard's street gate
+    for x in range(W):
+        for z in range(z2 + 1, D):
+            if b.get(x, G - 1, z) in (None, AIR):           # the stone apron before the doors stays stone
+                b.set(x, G - 1, z, yard_ground(x, z))
+                b.set(x, G - 2, z, 'dirt')
+    for z in range(z2 + 1, D):
+        for x in (0, W - 1):
+            b.set(x, G, z, 'stone_bricks'); b.set(x, G + 1, z, FENCE)
+    for x in list(range(0, x1)) + list(range(x2 + 1, W)):
+        b.set(x, G, z2 + 1, 'stone_bricks'); b.set(x, G + 1, z2 + 1, FENCE)
+    for z in range(fz2 + 1, D):
+        for x in range(m - 1, m + 2):
+            b.set(x, G - 1, z, 'polished_andesite' if x == m else 'stone_bricks')
     for x in (m - 9, m + 9):
         b.set(x, G - 1, z2 + 4, 'grass_block[snowy=false]')
         tree(b, x, G, z2 + 4, height=5, r=2)
@@ -308,32 +323,45 @@ def academy():
     return b
 
 
+def yard_ground(x, z):
+    v = _hash(x, 0, z, 91)
+    return 'coarse_dirt' if v < 0.25 else 'dirt_path' if v < 0.75 else 'gravel' if v < 0.85 else 'packed_mud'
+
+
 # ---------------------------------------------------------------- the Academy yard
 def academy_yard():
-    """The yard before the Academy: the swing on the big tree, the row of wooden posts, the throwing targets, a sparring
-    ring, benches, all inside a low wall with a gap toward the street."""
+    """The Academy's training yard, joined straight onto the building (the Academy piece sits directly north and its own
+    front is the yard's first rows). The paved path runs down the middle from the doors to the street gate in the south
+    wall; west of it the swing tree, the wooden posts and a straw dummy; east of it the sparring ring and the throwing
+    targets; benches along the south wall; a gap in the west wall leads to Training Ground 3."""
     W, D = 49, 27
     b = Build(W, 18, D)
-    # the ground: packed earth with grass at the edges
+    m = W // 2
     for x in range(W):
         for z in range(D):
-            edge = x < 3 or x > W - 4 or z > D - 4
-            v = _hash(x, 0, z, 91)
-            b.set(x, G - 1, z, 'grass_block[snowy=false]' if edge else
-                  ('coarse_dirt' if v < 0.25 else 'dirt_path' if v < 0.75 else 'gravel' if v < 0.85 else 'packed_mud'))
+            b.set(x, G - 1, z, yard_ground(x, z))
             b.set(x, G - 2, z, 'dirt')
-    # the low wall with a fence on it, open in the middle of the south side
+    # the walls: both sides and the south, the street gate in the middle of the south, the gap west to Training Ground 3
     for x in range(W):
-        for z in (D - 1,):
-            if abs(x - W // 2) > 3:
-                b.set(x, G, z, 'stone_bricks'); b.set(x, G + 1, z, FENCE)
+        if abs(x - m) > 3:
+            b.set(x, G, D - 1, 'stone_bricks'); b.set(x, G + 1, D - 1, FENCE)
     for z in range(D):
         for x in (0, W - 1):
+            if x == 0 and 5 <= z <= 9:
+                continue
             b.set(x, G, z, 'stone_bricks'); b.set(x, G + 1, z, FENCE)
-    for x in (W // 2 - 4, W // 2 + 4):
-        b.fill(x, G, D - 1, x, G + 2, D - 1, 'stone_bricks'); b.set(x, G + 3, D - 1, st('lantern', hanging=False, waterlogged=False))
-    # the swing tree: a broad oak, a branch out to the east, the seat on two ropes
-    tx, tz = 7, 8
+    for x in (m - 4, m + 4):
+        b.fill(x, G, D - 1, x, G + 2, D - 1, 'stone_bricks')
+        b.set(x, G + 3, D - 1, st('lantern', hanging=False, waterlogged=False))
+    # the paved path down the middle, and the path off it to the west gap
+    for z in range(D):
+        for x in range(m - 1, m + 2):
+            b.set(x, G - 1, z, 'polished_andesite' if x == m else 'stone_bricks')
+    for x in range(0, m - 1):
+        for z in range(7, 10):
+            b.set(x, G - 1, z, 'dirt_path')
+    # west: the swing tree, a branch out east, the seat on two chains
+    tx, tz = 6, 15
     for y in range(G, G + 8):
         b.set(tx, y, tz, log('oak_log'))
         if y < G + 3:
@@ -346,47 +374,41 @@ def academy_yard():
         rr = 5 - abs(dy)
         for dx in range(-rr - 1, rr + 2):
             for dz in range(-rr, rr + 1):
-                if dx * dx * 0.7 + dz * dz <= rr * rr and (tx + 1 + dx, G + 9 + dy, tz + dz) not in b.blocks:
-                    b.set(tx + 1 + dx, G + 9 + dy, tz + dz, LEAVES)
+                p = (tx + 1 + dx, G + 9 + dy, tz + dz)
+                if dx * dx * 0.7 + dz * dz <= rr * rr and p not in b.blocks and 0 <= p[0] < W and 0 <= p[2] < D:
+                    b.set(*p, LEAVES)
     for y in range(G + 2, G + 6):
-        b.set(tx + 5, y, tz, st('iron_chain', axis='y', waterlogged=False)) if False else None
-        b.set(tx + 5, y, tz - 1, FENCE if False else st('iron_chain', axis='y', waterlogged=False))
+        b.set(tx + 5, y, tz - 1, st('iron_chain', axis='y', waterlogged=False))
         b.set(tx + 5, y, tz + 1, st('iron_chain', axis='y', waterlogged=False))
     for z in (tz - 1, tz, tz + 1):
         b.set(tx + 5, G + 1, z, slab('oak_slab', 'top'))
-    # the wooden posts, in a row along the north
-    for i, x in enumerate(range(20, 33, 3)):
-        b.fill(x, G - 1, 3, x, G + 1 + (i % 2), 3, log('stripped_oak_log'))
-        b.set(x, G + 2 + (i % 2), 3, slab('oak_slab'))
-    # throwing targets on the east, and the marks to throw from
-    for z in range(4, 18, 3):
-        b.set(W - 3, G, z, 'hay_block[axis=y]'); b.set(W - 3, G + 1, z, st('target', power=0))
-        b.set(W - 14, G - 1, z, 'smooth_stone')
-    # the sparring ring
-    cx, cz = 24, 15
+    # west: the wooden posts in a row, a straw dummy
+    for i, x in enumerate(range(4, m - 3, 3)):
+        b.fill(x, G - 1, 2, x, G + 1 + (i % 2), 2, log('stripped_oak_log'))
+        b.set(x, G + 2 + (i % 2), 2, slab('oak_slab'))
+    b.set(17, G, 13, log('stripped_oak_log')); b.set(17, G + 1, 13, 'hay_block[axis=y]')
+    b.set(16, G + 1, 13, FENCE); b.set(18, G + 1, 13, FENCE)
+    # east: the sparring ring
+    cx, cz = 36, 9
     for dx in range(-7, 8):
         for dz in range(-5, 6):
             e = (dx / 7.4) ** 2 + (dz / 5.4) ** 2
             if e <= 1:
                 b.set(cx + dx, G - 1, cz + dz, 'sand' if e < 0.78 else 'smooth_sandstone')
-    for (dx, dz) in ((-7, 0), (7, 0)):
-        b.set(cx + dx, G, cz + dz, 'smooth_sandstone_slab[type=bottom,waterlogged=false]')
-    # benches under the tree and along the wall, straw dummies
-    for x in range(3, 8):
-        b.set(x, G, D - 4, stairs('spruce_stairs', 'south'))
-    for x in range(36, 41):
-        b.set(x, G, D - 4, stairs('spruce_stairs', 'south'))
-    for x in (14, 34):
-        b.set(x, G, 12, log('stripped_oak_log')); b.set(x, G + 1, 12, 'hay_block[axis=y]')
-        b.set(x - 1, G + 1, 12, st('spruce_fence', waterlogged=False)); b.set(x + 1, G + 1, 12, st('spruce_fence', waterlogged=False))
-        b.set(x, G + 2, 12, 'carved_pumpkin[facing=south]') if False else None
-    # bushes and flowers along the walls
-    for (x, z) in ((2, 20), (2, 14), (W - 3, 22), (16, D - 3), (32, D - 3), (W - 6, 2), (40, 3)):
-        b.set(x, G, z, AZALEA); b.set(x, G + 1, z, AZALEA) if (x + z) % 2 else None
-    for (x, z) in ((3, 3), (12, 22), (30, 23), (44, 24), (18, 2)):
+    # east: throwing targets on the east wall, the marks to throw from
+    for z in range(16, D - 4, 3):
+        b.set(W - 3, G, z, 'hay_block[axis=y]'); b.set(W - 3, G + 1, z, st('target', power=0))
+        b.set(W - 13, G - 1, z, 'smooth_stone')
+    b.set(30, G, 21, log('stripped_oak_log')); b.set(30, G + 1, 21, 'hay_block[axis=y]')
+    # benches along the south wall, bushes and flowers by the walls, lamps beside the path
+    for x in list(range(3, 9)) + list(range(W - 9, W - 3)):
+        b.set(x, G, D - 3, stairs('spruce_stairs', 'south'))
+    for (x, z) in ((2, 22), (W - 3, 3), (13, D - 3), (35, D - 3)):
+        b.set(x, G, z, AZALEA)
+    for (x, z) in ((3, 4), (20, 22), (28, 24), (44, 23)):
         b.set(x, G, z, 'poppy' if (x + z) % 2 else 'dandelion')
-    tree(b, W - 5, G, D - 5, height=6, r=3)
-    lamp_post(b, 17, G, 8); lamp_post(b, 33, G, 8)
+    for z in (4, 13, 22):
+        lamp_post(b, m - 3, G, z); lamp_post(b, m + 3, G, z)
     return b
 
 
@@ -817,14 +839,17 @@ def training_ground():
             b.set(x, G - 1, z, 'grass_block[snowy=false]' if v < 0.8 else 'coarse_dirt' if v < 0.92 else 'podzol[snowy=false]')
             b.set(x, G - 2, z, 'dirt')
     # the forest round the edge, leaving the clearing open toward the south (the path in)
-    for (x, z) in [(x, z) for x in range(2, S - 1, 5) for z in (2, S - 3)] + [(x, z) for z in range(7, S - 6, 5) for x in (2, S - 3)]:
-        if z == S - 3 and abs(x - c) < 5:
+    for (x, z) in [(x, z) for x in range(4, S - 3, 5) for z in (4, S - 5)] + [(x, z) for z in range(9, S - 8, 5) for x in (4,)]:
+        if z == S - 5 and abs(x - c) < 5:
             continue
         x2, z2 = x + (z * 3) % 3 - 1, z + (x * 7) % 3 - 1
         tree(b, x2, G, z2, height=6 + (x + z) % 3, r=3)
-    # the worn path in from the south
+    # the worn paths: in from the south, and out the open east side to the Academy yard
     for z in range(S - 6, S):
         for x in range(c - 1, c + 2):
+            b.set(x, G - 1, z, 'dirt_path')
+    for x in range(c + 6, S):
+        for z in range(c - 1, c + 2):
             b.set(x, G - 1, z, 'dirt_path')
     # the three posts
     for x in (c - 5, c, c + 5):
