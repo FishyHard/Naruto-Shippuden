@@ -93,12 +93,12 @@ def trad_house(b, x1, z1, w, d, facing='south', storeys=1, seed=0, big=False):
         y = G + 4 * s_ + 1
         for x in range(x1 + 1, x2):
             if (x - x1) % 3 != 0:
-                b.set(x, y, front, 'white_stained_glass_pane'); b.set(x, y + 1, front, 'white_stained_glass_pane')
+                b.set(x, y, front, 'white_stained_glass'); b.set(x, y + 1, front, 'white_stained_glass')
                 if (x - x1) % 3 == 1:
-                    b.set(x, y, back, 'white_stained_glass_pane')
+                    b.set(x, y, back, 'white_stained_glass')
         for z in range(z1 + 1, z2):
             if (z - z1) % 3 == 1:
-                b.set(x1, y, z, 'white_stained_glass_pane'); b.set(x2, y, z, 'white_stained_glass_pane')
+                b.set(x1, y, z, 'white_stained_glass'); b.set(x2, y, z, 'white_stained_glass')
     mx = x1 + w // 2
     b.door(mx, G, front, 'spruce', facing, 'left')
     b.set(mx, G + 2, front, PLASTER) if (mx - x1) % 3 else None
@@ -165,9 +165,11 @@ def compound_wall(b, x1, z1, x2, z2, gate_w=5, crest=None, crest_every=14, h=4):
     if crest:
         ch, cw = len(crest), len(crest[0])
         # a white board in front of the beam carries the crest
-        by = G + gh + 3
+        by = G + gh + 2
         b.fill(gm - cw // 2 - 1, by, z2, gm + cw // 2 + 1, by + ch + 1, z2, 'white_concrete')
+        b.fill(gm - cw // 2 - 2, by + ch + 2, z2, gm + cw // 2 + 2, by + ch + 2, z2, slab(TILE_SLAB))
         paint(b, crest, gm - cw // 2, by + 1, z2 + 1)
+        paint(b, crest, gm - cw // 2, by + 1, z2 - 1, flip=True)          # and on the inside face
         # and along the outside of the wall, painted on the plaster
         for x in list(range(x1 + 6, gm - gate_w, crest_every)) + list(range(gm + gate_w + 4, x2 - cw, crest_every)):
             if ch <= h + 1:
@@ -251,7 +253,7 @@ def naka_shrine(b, x1, z1):
         for z in range(z1, z2 + 1):
             b.set(x1, y, z, log(TIMBER)); b.set(x2, y, z, log(TIMBER))
     b.fill(x1, G + 5, z1, x2, G + 5, z2, 'dark_oak_planks')
-    b.gable(x1, z1, x2, z2, G + 5, TILE, slab(TILE_SLAB), axis='x', over=2, eave=TILE)
+    b.gable(x1, z1, x2, z2, G + 5, TILE, slab(TILE_SLAB), axis='x', over=2, eave=TILE, gable_wall='dark_oak_planks')
     b.set((x1 + x2) // 2, G + 1, z1 + 1, st('decorated_pot', cracked=False, facing='south', waterlogged=False))
     b.set((x1 + x2) // 2, G + 3, z2, st('bell', attachment='ceiling', facing='south', powered=False))
     m = (x1 + x2) // 2
@@ -424,7 +426,7 @@ def bbq_restaurant():
     for x in (x1 + 1, x1 + 3, x2 - 3, x2 - 1):
         b.banner(x, G + 7, z2 + 1, 'south', 'red', [('circle', 'white'), ('border', 'black')])
     b.fill(x1, G + 9, z1, x2, G + 9, z2, 'dark_oak_planks')
-    b.gable(x1, z1, x2, z2, G + 9, TILE, slab(TILE_SLAB), axis='x', over=1, eave=TILE)
+    b.gable(x1, z1, x2, z2, G + 9, TILE, slab(TILE_SLAB), axis='x', over=1, eave=TILE, gable_wall=WOOD)
     # booths: a table with a grill in the middle, cushioned benches either side
     for y0 in (G, G + 5):
         for x in (x1 + 3, x1 + 8, x1 + 12):
@@ -452,6 +454,12 @@ def hot_springs():
     b = Build(W, 20, D)
     ground(b, 0, 0, W - 1, D - 1, 139, grass=0.85)
     trad_house(b, 6, D - 13, 28, 9, 'south', seed=6, big=True)
+    # doors out the back of the bathhouse to each pool, stepping stones down to the water
+    for x in (11, 28):
+        b.door(x, G, D - 13, 'spruce', 'north', 'left')
+        for z in range(D - 15, 17, -1):
+            b.set(x, G - 1, z, 'smooth_stone')
+            b.set(x, G, z, AIR)
     # the two entrances' noren
     for x in (14, 25):
         b.door(x, G, D - 5, 'spruce', 'south', 'left')

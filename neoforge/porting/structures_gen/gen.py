@@ -8,7 +8,7 @@ Templates go to data/naruto_shippuden/structure/<village>/<piece>.nbt in both re
 """
 import math, os, sys
 import json
-import leaf, leaf_landmarks, leaf_houses, leaf_buildings, leaf_layout, leaf_ring, leaf_districts
+import leaf, leaf_landmarks, leaf_houses, leaf_buildings, leaf_layout, leaf_ring, leaf_districts, leaf_decor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 NEO = os.path.normpath(os.path.join(HERE, '..', '..'))
@@ -111,6 +111,13 @@ def village():
             b.save(os.path.join(tree, 'data/naruto_shippuden/structure/leaf/%s.nbt' % name))
         sizes[name] = (b.w, b.h, b.d)
     lay = leaf_layout.layout(sizes, origins)
+    # the greenery and lamps, made to fit round everything the layout placed
+    d = leaf_decor.decor(lay)
+    for tree in TREES:
+        d.save(os.path.join(tree, 'data/naruto_shippuden/structure/leaf/decor.nbt'))
+    sizes['decor'] = (d.w, d.h, d.d)
+    lay['pieces'].append({'piece': 'leaf/decor', 'x': d.origin[0], 'z': d.origin[1], 'rotation': 'none'})
+    lay.pop('taken', None)
     for tree in TREES:
         path = os.path.join(tree, 'data/naruto_shippuden/village/leaf.json')
         os.makedirs(os.path.dirname(path), exist_ok=True)

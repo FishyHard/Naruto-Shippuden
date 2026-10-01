@@ -148,6 +148,15 @@ def wall_banner(b, x, y, z, facing, color='white'):
 
 
 def tree(b, x, y, z, height=6, r=3, trunk='oak_log', leaves=LEAVES):
+    """A tree, if it has room: nothing but air or leaves where its trunk and crown would go (so trees never grow into
+    buildings). Returns whether it was planted."""
+    for yy in range(y, y + height + 3):
+        rr = 0 if yy < y + height - 2 else r + 1
+        for dx in range(-rr, rr + 1):
+            for dz in range(-rr, rr + 1):
+                s_ = b.blocks.get((x + dx, yy, z + dz))
+                if s_ is not None and s_ != AIR and 'leaves' not in s_:
+                    return False
     for i in range(height):
         b.set(x, y + i, z, log(trunk))
     top = y + height
@@ -158,6 +167,7 @@ def tree(b, x, y, z, height=6, r=3, trunk='oak_log', leaves=LEAVES):
                 if dx * dx + dz * dz <= rr * rr + 1 and (x + dx, top + dy, z + dz) not in b.blocks:
                     b.set(x + dx, top + dy, z + dz, leaves)
     b.set(x, top + 2, z, leaves)
+    return True
 
 
 def lamp_post(b, x, y, z, h=3):

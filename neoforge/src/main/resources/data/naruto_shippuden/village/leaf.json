@@ -223,56 +223,50 @@
    "rotation": "clockwise_90"
   },
   {
-   "piece": "leaf/house_flat_tall",
-   "x": 170,
+   "piece": "leaf/shop_blue",
+   "x": 171,
+   "z": 186,
+   "rotation": "180"
+  },
+  {
+   "piece": "leaf/shop_blue",
+   "x": 238,
    "z": 186,
    "rotation": "180"
   },
   {
    "piece": "leaf/house_flat_tall",
-   "x": 235,
+   "x": 252,
    "z": 186,
    "rotation": "180"
   },
   {
-   "piece": "leaf/house_brown_tiered",
-   "x": 251,
-   "z": 188,
-   "rotation": "180"
-  },
-  {
-   "piece": "leaf/house_orange_hip",
+   "piece": "leaf/house_blue_tiered",
    "x": 158,
    "z": 212,
    "rotation": "none"
   },
   {
-   "piece": "leaf/house_orange_hip",
-   "x": 225,
+   "piece": "leaf/house_flat_wide",
+   "x": 224,
    "z": 212,
-   "rotation": "none"
-  },
-  {
-   "piece": "leaf/house_green_dome",
-   "x": 241,
-   "z": 212,
-   "rotation": "none"
-  },
-  {
-   "piece": "leaf/house_red_gable",
-   "x": 266,
-   "z": 214,
    "rotation": "none"
   },
   {
    "piece": "leaf/house_flat_wide",
-   "x": 284,
+   "x": 268,
    "z": 212,
    "rotation": "none"
   },
   {
    "piece": "leaf/house_blue_tiered",
-   "x": 304,
+   "x": 288,
+   "z": 212,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/shop_orange",
+   "x": 306,
    "z": 212,
    "rotation": "none"
   },
@@ -295,50 +289,62 @@
    "rotation": "none"
   },
   {
-   "piece": "leaf/shop_blue",
+   "piece": "leaf/house_brown_tiered",
    "x": 172,
-   "z": 312,
+   "z": 314,
    "rotation": "180"
   },
   {
-   "piece": "leaf/shop_blue",
+   "piece": "leaf/house_flat_wide",
    "x": 172,
    "z": 189,
    "rotation": "clockwise_90"
   },
   {
-   "piece": "leaf/shop_blue",
-   "x": 242,
-   "z": 206,
+   "piece": "leaf/house_brown_tiered",
+   "x": 174,
+   "z": 254,
+   "rotation": "clockwise_90"
+  },
+  {
+   "piece": "leaf/house_brown_tiered",
+   "x": 240,
+   "z": 203,
    "rotation": "counterclockwise_90"
   },
   {
-   "piece": "leaf/house_flat_wide",
-   "x": 282,
+   "piece": "leaf/house_red_gable",
+   "x": 244,
+   "z": 221,
+   "rotation": "counterclockwise_90"
+  },
+  {
+   "piece": "leaf/house_brown_tiered",
+   "x": 284,
    "z": 147,
    "rotation": "clockwise_90"
   },
   {
-   "piece": "leaf/house_blue_tiered",
-   "x": 282,
-   "z": 167,
-   "rotation": "clockwise_90"
-  },
-  {
-   "piece": "leaf/shop_orange",
-   "x": 282,
-   "z": 185,
+   "piece": "leaf/house_red_gable",
+   "x": 280,
+   "z": 163,
    "rotation": "clockwise_90"
   },
   {
    "piece": "leaf/house_flat_wide",
+   "x": 282,
+   "z": 181,
+   "rotation": "clockwise_90"
+  },
+  {
+   "piece": "leaf/house_brown_tiered",
    "x": 113,
-   "z": 350,
+   "z": 348,
    "rotation": "none"
   },
   {
    "piece": "leaf/house_red_gable",
-   "x": 262,
+   "x": 264,
    "z": 352,
    "rotation": "none"
   },
@@ -410,50 +416,50 @@
   },
   {
    "piece": "leaf/grove_3",
-   "x": 160,
-   "z": 255,
-   "rotation": "none"
-  },
-  {
-   "piece": "leaf/grove_0",
    "x": 355,
    "z": 260,
    "rotation": "none"
   },
   {
-   "piece": "leaf/grove_1",
+   "piece": "leaf/grove_0",
    "x": 270,
    "z": 310,
    "rotation": "none"
   },
   {
-   "piece": "leaf/grove_2",
+   "piece": "leaf/grove_1",
    "x": 160,
-   "z": 315,
+   "z": 320,
    "rotation": "none"
   },
   {
-   "piece": "leaf/grove_3",
+   "piece": "leaf/grove_2",
    "x": 255,
    "z": 320,
    "rotation": "none"
   },
   {
-   "piece": "leaf/grove_0",
+   "piece": "leaf/grove_3",
    "x": 310,
    "z": 330,
    "rotation": "none"
   },
   {
-   "piece": "leaf/grove_1",
+   "piece": "leaf/grove_0",
    "x": 90,
    "z": 340,
    "rotation": "none"
   },
   {
-   "piece": "leaf/grove_2",
+   "piece": "leaf/grove_1",
    "x": 290,
    "z": 340,
+   "rotation": "none"
+  },
+  {
+   "piece": "leaf/decor",
+   "x": 15,
+   "z": 96,
    "rotation": "none"
   }
  ],
@@ -466,7 +472,7 @@
    "path"
   ],
   [
-   140,
+   142,
    156,
    260,
    168,
@@ -482,7 +488,7 @@
   [
    155,
    290,
-   312,
+   264,
    294,
    "path"
   ],
@@ -498,6 +504,13 @@
    170,
    149,
    173,
+   "path"
+  ],
+  [
+   65,
+   164,
+   67,
+   169,
    "path"
   ],
   [

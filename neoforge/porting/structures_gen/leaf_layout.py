@@ -17,11 +17,12 @@ MAIN = (CX - 3, CX + 3)                # the main street's x range, the bridge's
 # streets: x1, z1, x2, z2. Each ends on another street, the plaza or a building's door.
 STREETS = [
     (MAIN[0], 169, MAIN[1], GATE_Z + 6),        # the main street, from the plaza to the gate
-    (140, 156, 260, 168),                       # the plaza before the residence
+    (142, 156, 260, 168),                       # the plaza before the residence
     (155, 230, 330, 234),                       # avenue A
-    (155, 290, 312, 294),                       # avenue B
+    (155, 290, 264, 294),                       # avenue B, to the east road
     (150, 141, 154, 328),                       # the west road
-    (64, 170, 149, 173),                        # past the Academy yard and the training ground's path
+    (64, 170, 149, 173),                        # past the Academy yard
+    (65, 164, 67, 169),                         # up to Training Ground 3
     (260, 141, 264, 318),                       # the east road
     (232, 141, 259, 144),                       # from the plaza's corner to the hospital
     (265, 141, 320, 144),
@@ -31,7 +32,7 @@ BRIDGES = [(MAIN[0] - 1, 342)]                  # x, z of bridges on the main st
 
 
 def layout(sizes, origins):
-    pieces, roads, taken = [], [], []
+    pieces, roads, taken, problems, crossed = [], [], [], [], []
 
     def free(x1, z1, x2, z2, gap=1):
         for (a1, b1, a2, b2) in taken:
@@ -61,6 +62,8 @@ def layout(sizes, origins):
         pieces.append({'piece': 'leaf/' + name, 'x': ox, 'z': oz, 'rotation': rot})
         if block:
             taken.append((x0, z0, x0 + fw - 1, z0 + fd - 1))
+            if name in ('gate', 'bridge'):
+                crossed.append(taken[-1])            # streets are meant to pass through these
 
     def own(name):
         ox, oz = origins[name]
@@ -130,6 +133,21 @@ def layout(sizes, origins):
     for s in STREETS:
         line(*s)
 
+    # checks: a street must not run into a building, and buildings must not overlap one another
+    street_rects = [tuple(s_) for s_ in STREETS]
+    blocks = [r for r in taken if r not in street_rects]
+    passable = [r for r in blocks if r in crossed]
+    def hits(a, b2):
+        return not (a[2] < b2[0] or a[0] > b2[2] or a[3] < b2[1] or a[1] > b2[3])
+    for s_ in street_rects:
+        for r in blocks:
+            if hits(s_, r) and r not in passable:
+                problems.append('street %s runs into %s' % (s_, r))
+    for i, r in enumerate(blocks):
+        for r2 in blocks[i + 1:]:
+            if hits(r, r2):
+                problems.append('%s overlaps %s' % (r, r2))
+
     # groves in the open ground left over, so the village is not a lawn between the houses
     g = 0
     for gz in range(100, 400, 5):
@@ -138,4 +156,6 @@ def layout(sizes, origins):
             if free(*rect, gap=1) and inside(*rect, margin=8):
                 put('grove_%d' % (g % 4), gx, gz)
                 g += 1
-    return {'pieces': pieces, 'roads': roads}
+    for p_ in problems:
+        print('LAYOUT:', p_)
+    return {'pieces': pieces, 'roads': roads, 'taken': taken}
