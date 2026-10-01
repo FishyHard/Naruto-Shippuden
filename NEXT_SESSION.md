@@ -162,6 +162,8 @@ for p in glob.glob('../src/main/java/**/*.java', recursive=True):
   - The link is a Bezier curve that sways; its pieces move by an interpolated display transform (`slide`), not by position.
     When someone caught dies, their pieces are removed at once.
   - Shadow Imitation Field holds its catch still while the caster walks. Sneak + right-click lets go.
+  - A caught player can't turn, step or crouch on their own; with mimic they crouch when the caster does (synced `mimic_sneak`,
+    read by client/Restrained; caught mobs get the crouching pose).
 - **Restraint** (`ClanJutsu.restrain`, synced variable `restrained`): a player caught in a shadow, possessed, or in Izanami's
   loop can do nothing. The server cancels item use, block and entity clicks, attacks and jutsu, and pins the hotbar slot;
   `client/Restrained` cancels swings, scrolling, hotbar keys, drop, off-hand swap and all of the mod's keys.
@@ -172,6 +174,10 @@ for p in glob.glob('../src/main/java/**/*.java', recursive=True):
     camera is another entity). The server moves the creature with `move()` from `getLastClientInput()`. Attacks come in as
     the "mind" action. The caster's body is limp; sneak, damage to the body, or the time ends it.
   - Mind Clone Switch puppets only go for the caster's other enemies, never each other.
+  - On a player, Mind Body Switch takes them over too (10 s): they're restrained (client/Restrained stops their keys and mouse),
+    and the server moves them with the caster's input and look and places them each tick; the caster's attacks are theirs.
+- **Kamui:** everything it takes into the Kamui dimension gets its departure point saved (`KAMUI_RETURN` in persistent data);
+  the timer and Kamui thrown from inside both send it back there.
 - **Uchiha:** Manipulating Windmill Triple Blades, Uchiha Return, Uchiha Flame Formation, Great Fire Destruction.
 - **Uzumaki:** Four Symbols Seal locks a player's jutsu for 20 s (`ClanJutsu.sealed`).
 - **Hozuki:** Hydrification makes the body liquid for 10 s (non-jutsu damage is cancelled, jutsu do half).
@@ -451,8 +457,6 @@ Apply new `@func` rules with the body-only runner under "How to change code".
 
 ## Open items
 
-- Mind Body Switch control (camera, keys, look) can't be checked by the automated test: it was fixed from the user's report and
-  is waiting on their feedback.
 - Shadow Clone still runs its MCreator procedure (including the story-exam branch); it's the last entry in `JutsuTable`.
 - The Susanoo itself is still the old model swap (`KeybindProcedures` reads the stage counts).
 - Otsutsuki weapons: registered, in no tab (only `/give`), switching forms with the old `OtsutsukiToolsSwitchProcedure`.

@@ -43,7 +43,7 @@ NeoForge 26.3 port, version 3.0.0. Generated from the mod's code on 2026-10-01, 
 
 How you gain natures and kekkei genkai.
 
-- **Undefined DNA** drops from shinobi: village shinobi 15% (Genin), 25% (Chunin), 40% (Jonin); Asuma and Shikamaru 50%; Kurama always drops 3. Other mobs never drop it.
+- **Undefined DNA** drops from village shinobi: 5% (Genin), 10% (Chunin), 15% (Jonin). Nothing else drops it.
 - **Right-click Undefined DNA** to identify it. It always works: 80% a nature DNA, 20% a kekkei genkai DNA.
 - **Right-click a DNA** to implant it in yourself, or **hit a player** with it to implant it in them. Implanting is a medical procedure: the implanter's **Medicine** sets the chance. A nature goes from 50% at Medicine 0 to 100% at 300, a kekkei genkai from 25% to 100%. A failure uses up the DNA. The DNA's tooltip shows your chance.
 - A **kekkei genkai combines natures**: you need them before its DNA can be implanted. This can be turned off in the settings.
@@ -360,7 +360,7 @@ The Clan Paper rolls a clan; the clan scroll sells its jutsu. The Chinoike clan 
 | Jutsu | Rank | JP | Chakra | Needs | What it does |
 |---|---|---|---|---|---|
 | Mind Body Transmission Technique | D | 6 | 50 | 5 Ninjutsu | Mind Body Transmission Technique: the caster's mind reaches out to everything alive nearby; for fifteen seconds all of it glows. |
-| Mind Body Switch Technique | C | 12 | 100 | 12 Ninjutsu | Mind Body Switch Technique: the caster's mind jumps into the creature looked at and controls it for fifteen seconds (see #takeOver); a player's body is taken and held helpless for five. |
+| Mind Body Switch Technique | C | 12 | 100 | 12 Ninjutsu | Mind Body Switch Technique: the caster's mind jumps into the creature looked at and controls it for fifteen seconds; a player is taken over for ten (they can do nothing; the caster moves, looks and strikes with them). |
 | Mind Body Disturbance Technique | B | 20 | 180 | 22 Ninjutsu | Mind Body Disturbance Technique: the enemy's nerves are thrown into confusion for six seconds: they stagger and lash out blindly. |
 | Mind Body Transmission Formation | A | 32 | 300 | 35 Ninjutsu | Mind Body Transmission Formation: the caster links the minds of every ally nearby for thirty seconds: they move and strike as one (faster and stronger), and every enemy around is laid bare. |
 | Mind Clone Switch Technique | S | 50 | 500 | 50 Ninjutsu | Mind Clone Switch Technique: the caster's mind splits into up to five enemies in front and takes them all over for ten seconds. |
@@ -470,7 +470,7 @@ Six Mangekyou, one kept at a time (a new one replaces the old). Their jutsu need
 |---|---|---|---|---|---|
 | Kamui Self-Teleportation | B | 20 | 180 | 22 Ninjutsu | Kamui to the caster's own dimension, or back to where they left from. |
 | Kamui Short-Range | A | 32 | 300 | 35 Ninjutsu | Kamui: space twists round the one looked at and swallows them into the Kamui dimension. Players come back after fifteen seconds; bosses are too big to take and are torn at instead. |
-| Kamui Phantom Phasing | A | 32 | 300 | 35 Ninjutsu | Five seconds partly in the Kamui dimension: attacks and projectiles pass through, enemies lose track of the caster, and the caster walks through walls (see #phaseThroughWalls). |
+| Kamui Phantom Phasing | A | 32 | 300 | 35 Ninjutsu | Five seconds partly in the Kamui dimension: attacks and projectiles pass through, enemies lose track of the caster, and the caster walks through walls. |
 
 ### Sasuke's Mangekyou
 
@@ -699,7 +699,7 @@ Thrown kunai and shuriken, and a few old jutsu projectiles, also exist as projec
 - **Shikamaru**: Mission character.
 - **Training Dummy**: Takes hits for training.
 - **Shinobi Merchant**: Trades for Ryo (see above).
-- **Kurama** (Nine-Tails, spawn egg): claw swipes, tail sweeps, a roar, the Tailed Beast Ball (and a volley of small ones), a leap with a shockwave. Faster below half health.
+- **Kurama** (Nine-Tails: spawn egg, commands and Story Mode only, never on its own): claw swipes, tail sweeps, a roar, the Tailed Beast Ball (and a volley of small ones), a leap with a shockwave. Faster below half health.
 
 ### Summons and jutsu creatures
 
