@@ -384,23 +384,24 @@ def hair(s, base, front, side, back, hat_front=None, hat_side=None, hat_back=Non
     head to the front (8); back: rows per column of the back. The hat layer carries the hair's volume over all of it (hat_front,
     hat_side, hat_back the same way; None: nothing there), a shade lighter, while the head layer under it is the shadow
     side. cape: rows the hair falls below the head down the back (on the body's outer layer)."""
+    # dark hair needs bigger steps for its noise to show (black hair shines blue-grey where the light catches it)
+    amp = 1.25 + max(0.0, 0.4 - max(base[:3]) / 255) * 2.5
+
     def strand(face, x, y, depth, layer, y0=0):
-        # one-pixel strands, light and mid in turn, a soft gap every few: low contrast, as painted hair is
-        k = (x + salt + (1 if face in ('left', 'back') else 0)) % (width + 1)
-        t = 0.32 if k % 2 == 0 else 0.0
-        if k == width:
-            t = -0.25
+        # noisy, as the good hand-drawn hair is: every pixel one of five tones, loosely in strands (a column leans light or
+        # dark), lighter up top where the light falls, darker in the depths and at the tips
+        fk = sum(map(ord, face))
+        col = _h(x, layer, salt + fk) - 0.5                           # the strand's lean
+        n = _h(x, y + y0, salt + fk + 31 * layer)                       # the pixel's own
+        t = ((-0.6, -0.3, 0.0, 0.3, 0.6)[min(4, int(n * 5))] * 0.8 + col * 0.55) * amp
         yy = y + y0
-        if yy == 0:
-            t -= 0.2                                                    # the roots, in the crown's shadow
-        elif shine and 1 <= yy <= 3 and face != 'back':
-            t += (0.35, 0.5, 0.28)[yy - 1] * (1.0 if k % 2 == 0 else 0.5)   # the sheen band, brightest on the light strands
-        elif yy >= 4:
-            t -= 0.06 * (yy - 3)                                        # deeper down, a little darker
+        if shine and 1 <= yy <= 2 and face != 'back':
+            t += 0.3
+        t += 0.25 - 0.09 * yy
+        if y >= depth - 1:
+            t -= 0.2
         if layer == 0:
-            t = t * 0.5 - 0.45                                          # the hair under the volume: a flat shadow
-        else:
-            t += 0.05
+            t = t * 0.6 - 0.55                                          # the hair under the volume, seen through its gaps
         t += LIGHT[face] * 0.35
         return tone(base, t)
 
@@ -411,27 +412,28 @@ def hair(s, base, front, side, back, hat_front=None, hat_side=None, hat_back=Non
                 return None if depths is None else [d + (1 if 0 < d < 8 and _h(x, sum(map(ord, face)), salt + 77) < 0.3 else 0)
                                                     for x, d in enumerate(depths)]
             fr, sd, bk = longer(fr, 'front') if fr is not None and max(fr) < 8 else fr, longer(sd, 'side'), longer(bk, 'back')
+        gap = (lambda f, x, y: layer == 1 and y > 0 and _h(x, y, salt + sum(map(ord, f)) + 555) < 0.12)
         if fr is not None:
-            s.paint(part, lambda f, x, y, w, h: strand(f, x, y, fr[x], layer) if f == 'front' and y < fr[x] else None)
+            s.paint(part, lambda f, x, y, w, h: strand(f, x, y, fr[x], layer) if f == 'front' and y < fr[x] and not gap(f, x, y) else None)
         if sd is not None:
             # the right face's columns run back to front; the left face's front to back
-            s.paint(part, lambda f, x, y, w, h: strand(f, x, y, sd[x], layer) if f == 'right' and y < sd[x] else None)
-            s.paint(part, lambda f, x, y, w, h: strand(f, x, y, sd[7 - x], layer) if f == 'left' and y < sd[7 - x] else None)
+            s.paint(part, lambda f, x, y, w, h: strand(f, x, y, sd[x], layer) if f == 'right' and y < sd[x] and not gap(f, x, y) else None)
+            s.paint(part, lambda f, x, y, w, h: strand(f, x, y, sd[7 - x], layer) if f == 'left' and y < sd[7 - x] and not gap(f, x, y) else None)
         if bk is not None:
-            s.paint(part, lambda f, x, y, w, h: strand(f, x, y, bk[x], layer) if f == 'back' and y < bk[x] else None)
+            s.paint(part, lambda f, x, y, w, h: strand(f, x, y, bk[x], layer) if f == 'back' and y < bk[x] and not gap(f, x, y) else None)
 
     def top(f, x, y, w, h, layer):
-        """The crown: strands from the front to the back, lit from above, the parting a touch darker."""
+        """The crown: as noisy, lit from above."""
         if f != 'top':
             return None
-        k = (x + salt) % (width + 1)
-        t = 0.3 if k % 2 == 0 else 0.12
-        if k == width:
-            t = -0.05
-        t += 0.25 - 0.04 * abs(y - 3)
+        n = _h(x, y, salt + 900 + layer)
+        t = ((-0.5, -0.25, 0.05, 0.35, 0.65)[min(4, int(n * 5))] * 0.8 + (_h(x, 0, salt + 901) - 0.5) * 0.4) * amp + 0.4
         if layer == 0:
-            t = t * 0.5 - 0.35
+            t = t * 0.6 - 0.45
         return tone(base, t)
+    # the outer layer covers all the hair under it (and may hang further): its noise and volume over the whole head
+    cover = lambda over, under: None if over is None else [max(o, u) for o, u in zip(over, under)]
+    hat_front, hat_side, hat_back = cover(hat_front, front), cover(hat_side, side), cover(hat_back, back)
     draw('head', front, side, back, 0)
     s.paint('head', lambda f, x, y, w, h: top(f, x, y, w, h, 0))
     if crown and (hat_front is not None or hat_side is not None or hat_back is not None):

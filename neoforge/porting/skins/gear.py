@@ -59,66 +59,61 @@ def material(base, salt, rough=0.5, grad=0.6, edge=0.25):
 
 WHITE, RED, STRAW, CLOTH = rgb('#F2F0E8'), rgb('#C02A28'), rgb('#C8A870'), rgb('#ECEAE2')
 # the boxes, as client/StoryGearClient builds them: texture offset (u, v) and size (w, h, d)
-BRIM = (0, 0, 16, 1, 16)
-TIER1 = (0, 17, 13, 3, 13)
-TIER2 = (0, 33, 10, 2, 10)
-TIER3 = (0, 45, 7, 1, 7)
-TIP = (28, 45, 4, 1, 4)
-KNOB = (44, 45, 2, 1, 2)
-VEIL = (0, 53, 10, 6, 1)
-FIRE = ['#.#.#', '.###.', '#...#']      # 火, in three rows
+# the cone, a pixel narrower each step up: (width, texture offset), from the brim to the top; then the tip and the cloth
+CONE = [(16, (0, 0)), (14, (64, 0)), (12, (0, 17)), (10, (48, 17)), (8, (88, 17)), (6, (0, 30))]
+TIP = (24, 30, 4, 1, 4)
+KNOB = (40, 30, 2, 1, 2)
+VEIL = (48, 30, 10, 7, 1)
+# 火 in white on the red front panel, one row per step from the top step down to the step above the brim
+FIRE = ['..#..', '#.#.#', '..#..', '.#.#.', '#...#']
 
 
 def hokage_hat():
-    im = Image.new('RGBA', (64, 64), CLEAR)
+    """A white woven cone, a pixel narrower each step: the red panel down its front narrowing to the top with the kanji
+    for fire in white across the steps, a red rim round the brim, woven straw under it, the red tip, the cloth at the back."""
+    im = Image.new('RGBA', (128, 64), CLEAR)
+    steps = len(CONE)
+    for i, (w, (u, v)) in enumerate(CONE):
+        box = (u, v, w, 1, w)
+        row = steps - 1 - i                         # the glyph's row on this step's front (the top step is row 0)
+        panel = 1 + (i * 3) // 2                     # the red panel's half-width here: wide at the brim, narrow at the top
 
-    def brim(face, x, y, w, h):
-        if face == 'bottom':
-            # the woven straw under the brim: a lattice, darker toward the middle (the head's shadow)
-            d = max(abs(x - 7.5), abs(y - 7.5))
-            t = -0.6 + 0.08 * d + (-0.3 if (x + y) % 3 == 0 else 0.1 if (x - y) % 3 == 0 else 0)
-            return tone(STRAW, t)
-        if face in SIDES:
-            return tone(RED, LIGHT[face] + 0.15 - (0.25 if x in (0, w - 1) else 0))
-        # the top: white, the weave's spokes running out from the middle, the red rim round the edge
-        if x in (0, w - 1) or y in (0, h - 1):
-            return tone(RED, 0.7)
-        t = 1.0 - 0.04 * max(abs(x - 7.5), abs(y - 7.5))
-        if x in (4, 11) or y in (4, 11):
-            t -= 0.25
-        return tone(WHITE, t + (_h(x, y, 3) - 0.5) * 0.25)
-    paint_box(im, BRIM, brim)
-
-    def cone(colour, salt, trim=None):
-        mat = material(colour, salt, rough=0.35, grad=0.5)
-
-        def fn(face, x, y, w, h):
+        def fn(face, x, y, fw, fh, w=w, i=i, row=row, panel=panel):
             if face == 'bottom':
-                return tone(colour, -1.0)
+                if i == 0:
+                    d = max(abs(x - 7.5), abs(y - 7.5))
+                    return tone(STRAW, -0.7 + 0.07 * d + (-0.3 if (x + y) % 3 == 0 else 0.1 if (x - y) % 3 == 0 else 0))
+                return tone(WHITE, -1.2)
+            weave = (-0.22 if (x + y) % 4 == 0 else 0.12 if (x - y) % 4 == 0 else 0) + (_h(x, y, 7 + i) - 0.5) * 0.25
             if face == 'top':
-                return tone(colour, 1.0 - 0.05 * max(abs(x - (w - 1) / 2), abs(y - (h - 1) / 2)) + (_h(x, y, salt) - 0.5) * 0.2)
-            c = mat(face, x, y, w, h)
-            if trim is not None and y == h - 1:
-                c = tone(trim, LIGHT[face] - 0.1)
-            return c
-        return fn
-    paint_box(im, TIER1, cone(WHITE, 5, trim=RED))
-    # the kanji on the front of the first tier
-    for r, row in enumerate(FIRE):
-        for c, ch in enumerate(row):
-            if ch == '#':
-                px(im, TIER1, 'front', 4 + c, r, tone(RED, 0.15 if r == 0 else -0.1))
-    paint_box(im, TIER2, cone(WHITE, 7, trim=RED))
-    paint_box(im, TIER3, cone(RED, 9))
-    paint_box(im, TIP, cone(RED, 11))
-    paint_box(im, KNOB, cone(tone(RED, -0.4), 13))
+                # only the ring the next step up leaves bare shows; the front of it belongs to the panel
+                c = w / 2 - 0.5
+                front_band = y >= c and abs(x - c) <= panel
+                if i == 0 and (x in (0, fw - 1) or y in (0, fw - 1)):
+                    return tone(RED, 0.65)
+                return tone(RED if front_band and i > 0 else WHITE, 0.95 - 0.04 * i + weave)
+            t = LIGHT[face] + 0.15 + weave - (0.2 if x in (0, fw - 1) else 0)
+            if i == 0:
+                return tone(RED, LIGHT[face] + 0.15 - (0.2 if x in (0, fw - 1) else 0))   # the brim's red rim
+            if face == 'front':
+                c = (fw - 1) / 2
+                if abs(x - c) <= panel:
+                    g = FIRE[row] if 0 <= row < len(FIRE) else '.....'
+                    gx = int(x - (c - 2))
+                    if 0 <= gx < 5 and g[gx] == '#':
+                        return tone(WHITE, 0.25)
+                    return tone(RED, 0.15 + weave * 0.6)
+            return tone(WHITE, t)
+        paint_box(im, box, fn)
+    red = material(RED, 11, rough=0.3, grad=0.3)
+    paint_box(im, TIP, lambda f, x, y, w, h: tone(RED, 0.6) if f == 'top' else red(f, x, y, w, h))
+    paint_box(im, KNOB, lambda f, x, y, w, h: tone(RED, 0.2 if f == 'top' else -0.4))
 
     def veil(face, x, y, w, h):
         if face in ('top', 'bottom'):
             return tone(CLOTH, -0.4)
-        t = LIGHT[face] + 0.5 * (0.5 - y / 5) + (-0.35 if x % 3 == 2 else 0.1 if x % 3 == 0 else 0)   # its folds
-        c = tone(CLOTH, t)
-        return tone(RED, LIGHT[face]) if y == h - 1 else c
+        t = LIGHT[face] + 0.45 * (0.5 - y / 6) + (-0.35 if x % 3 == 2 else 0.1 if x % 3 == 0 else 0) + (_h(x, y, 5) - 0.5) * 0.2
+        return tone(RED, LIGHT[face]) if y == h - 1 else tone(CLOTH, t)
     paint_box(im, VEIL, veil)
     return im
 
@@ -273,7 +268,7 @@ if __name__ == '__main__':
     save(vest_icon(), 'item/jonin_vest.png')
     if len(sys.argv) > 1:
         sheet = Image.new('RGBA', (1024 + 300, 512), (40, 42, 50, 255))
-        sheet.alpha_composite(hat.resize((512, 512), Image.NEAREST), (0, 0))
+        sheet.alpha_composite(hat.resize((512, 256), Image.NEAREST), (0, 0))
         sheet.alpha_composite(vest.resize((512, 256), Image.NEAREST), (520, 0))
         sheet.alpha_composite(hat_icon().resize((192, 192), Image.NEAREST), (540, 290))
         sheet.alpha_composite(vest_icon().resize((192, 192), Image.NEAREST), (760, 290))

@@ -50,20 +50,22 @@ public final class StoryGearClient {
 		return root;
 	}
 
-	/** A broad brim at the brow, then a cone in steps to the tip; the cloth down the back of the neck. */
+	/** A broad brim at the brow, then a cone a pixel narrower each step to the tip; the cloth down the back of the neck. */
 	static LayerDefinition hatLayer() {
 		MeshDefinition mesh = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F);
 		PartDefinition root = empty(mesh);
-		root.addOrReplaceChild("head", CubeListBuilder.create()
-				.texOffs(0, 0).addBox(-8.0F, -8.5F, -8.0F, 16, 1, 16)         // the brim
-				.texOffs(0, 17).addBox(-6.5F, -11.5F, -6.5F, 13, 3, 13)      // the first tier, the kanji on its front
-				.texOffs(0, 33).addBox(-5.0F, -13.5F, -5.0F, 10, 2, 10)      // the red tiers above
-				.texOffs(0, 45).addBox(-3.5F, -14.5F, -3.5F, 7, 1, 7)
-				.texOffs(28, 45).addBox(-2.0F, -15.5F, -2.0F, 4, 1, 4)       // the tip
-				.texOffs(44, 45).addBox(-1.0F, -16.5F, -1.0F, 2, 1, 2)
-				.texOffs(0, 53).addBox(-5.0F, -7.5F, 4.4F, 10, 6, 1),        // the cloth at the back of the neck
-				PartPose.ZERO).addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
-		return LayerDefinition.create(mesh, 64, 64);
+		// the cone: a step a pixel narrower each pixel up from the brim at the brow (texture: porting/skins/gear.py CONE)
+		int[][] cone = { { 16, 0, 0 }, { 14, 64, 0 }, { 12, 0, 17 }, { 10, 48, 17 }, { 8, 88, 17 }, { 6, 0, 30 } };
+		CubeListBuilder hat = CubeListBuilder.create();
+		for (int i = 0; i < cone.length; i++) {
+			float half = cone[i][0] / 2.0F;
+			hat.texOffs(cone[i][1], cone[i][2]).addBox(-half, -8.5F - i, -half, cone[i][0], 1, cone[i][0]);
+		}
+		hat.texOffs(24, 30).addBox(-2.0F, -8.5F - cone.length, -2.0F, 4, 1, 4)            // the tip
+				.texOffs(40, 30).addBox(-1.0F, -9.5F - cone.length, -1.0F, 2, 1, 2)
+				.texOffs(48, 30).addBox(-5.0F, -7.5F, 4.4F, 10, 7, 1);                      // the cloth at the back of the neck
+		root.addOrReplaceChild("head", hat, PartPose.ZERO).addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
+		return LayerDefinition.create(mesh, 128, 64);
 	}
 
 	/** The padded body over the shirt, the thick collar round the neck, four scroll pockets standing out of the chest. */
