@@ -9,7 +9,7 @@
     {
       "type": "talk",
       "npc": "hiruzen",
-      "text": "Answer the Hokage's summons at his residence",
+      "text": "Answer the Hokage's summons in his office, at the top of the residence",
       "dialogue": [
         {
           "speaker": "hiruzen",
@@ -173,7 +173,7 @@
     {
       "type": "talk",
       "npc": "hiruzen",
-      "text": "Report to the Hokage",
+      "text": "Report to the Hokage in his office",
       "dialogue": [
         {
           "speaker": "hiruzen",

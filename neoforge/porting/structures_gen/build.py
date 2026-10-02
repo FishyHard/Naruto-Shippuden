@@ -327,6 +327,43 @@ class Build:
             props.setdefault('waterlogged', 'false')
             out[(x, y, z)] = '%s[%s]' % (name, ','.join('%s=%s' % kv for kv in sorted(props.items())))
         self.blocks.update(out)
+        self.stair_shapes()
+
+    def stair_shapes(self):
+        """Stairs beside stairs turned across them join into corners, as vanilla's StairBlock.getStairsShape works them out
+        when they are placed by hand (a template keeps the shape it was saved with)."""
+        step = {'north': (0, -1), 'south': (0, 1), 'west': (-1, 0), 'east': (1, 0)}
+        axis = {'north': 'z', 'south': 'z', 'west': 'x', 'east': 'x'}
+
+        def stair(x, y, z):
+            s = self.blocks.get((x, y, z))
+            if not s or '_stairs' not in s.split('[')[0]:
+                return None
+            return self.parse(s)[1]
+
+        def can_take(props, x, y, z, side):
+            dx, dz = step[side]
+            n = stair(x + dx, y, z + dz)
+            return n is None or n.get('facing') != props['facing'] or n.get('half') != props['half']
+
+        out = {}
+        for (x, y, z), s in self.blocks.items():
+            name, props = self.parse(s)
+            if not name.endswith('_stairs') or 'facing' not in props:
+                continue
+            f, shape = props['facing'], 'straight'
+            dx, dz = step[f]
+            front = stair(x + dx, y, z + dz)
+            back = stair(x - dx, y, z - dz)
+            if front and front.get('half') == props.get('half') and axis[front['facing']] != axis[f] \
+                    and can_take(props, x, y, z, OPP[front['facing']]):
+                shape = 'outer_left' if front['facing'] == LEFT[f] else 'outer_right'
+            elif back and back.get('half') == props.get('half') and axis[back['facing']] != axis[f] \
+                    and can_take(props, x, y, z, back['facing']):
+                shape = 'inner_left' if back['facing'] == LEFT[f] else 'inner_right'
+            props['shape'] = shape
+            out[(x, y, z)] = '%s[%s]' % (name, ','.join('%s=%s' % kv for kv in sorted(props.items())))
+        self.blocks.update(out)
 
     def save(self, path):
         self.connect()
@@ -364,15 +401,24 @@ def angle_of(cx, cz, x, z):
     return (math.atan2(z - cz, x - cx) + 2 * math.pi) % (2 * math.pi)
 
 
+WOODS = ('oak', 'spruce', 'birch', 'jungle', 'acacia', 'dark_oak', 'mangrove', 'cherry', 'bamboo', 'crimson', 'warped', 'pale_oak')
+
+
 def skirt(b, cx, y, cz, r_out, layers, stair_at, eave=None, fill=None):
     """A sloped ring roof round a drum (the Hokage tower's tiers): `layers` rings of stairs facing the middle, from radius
     r_out at height y, one in and one up each layer. stair_at(x, z, k) names the stair block of each spot."""
     for k in range(layers):
         rr = r_out - k
         for (x, z) in b.ring_points(cx, cz, rr):
-            b.set(x, y + k, z, stairs(stair_at(x, z, k), inward(cx, cz, x, z)))
-            if fill and k + 1 < layers:
-                pass
+            name = stair_at(x, z, k)
+            b.set(x, y + k, z, stairs(name, inward(cx, cz, x, z)))
+            # solid under the raised rows: where a row stands two above its neighbour (round a ring the radii don't
+            # step evenly) the gap under it would show as a hole in the roof
+            base = name[:-len('_stairs')]
+            base = base + '_planks' if base in WOODS else base
+            for yy in range(y, y + k):
+                if b.get(x, yy, z) in (None, AIR):
+                    b.set(x, yy, z, base)
     if eave:
         for (x, z) in b.ring_points(cx, cz, r_out):
             if b.get(x, y - 1, z) in (None, AIR):

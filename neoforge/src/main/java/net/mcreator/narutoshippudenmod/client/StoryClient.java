@@ -277,6 +277,9 @@ public final class StoryClient {
 				living.walkAnimationSpeed = 0;
 				if (living instanceof HumanoidRenderState humanoid) {
 					humanoid.isCrouching = false;
+					humanoid.isPassenger = false;
+					if (humanoid instanceof NpcState npc)
+						npc.seated = false;
 					// framed as standing too: lying or crouching shrinks the box the framing is measured from
 					living.boundingBoxHeight = 1.8F;
 				}
@@ -506,6 +509,8 @@ public final class StoryClient {
 		String model = "legacy";
 		/** A dojutsu over the face (the mod's eye textures, as players' eyes are drawn), or null. */
 		Identifier eyes;
+		/** Sitting on a chair: drawn in the riding pose, lowered so the hips rest on the seat. */
+		boolean seated;
 	}
 
 	/** Drawn as a player: the old 64x32 skins (legacy), 64x64 player skins, or slim-armed ones; a mark over the name. Not with
@@ -549,6 +554,9 @@ public final class StoryClient {
 			state.texture = npc.skin().isEmpty() ? Identifier.parse("naruto_shippuden:textures/entities/iruka_sensei.png") : Identifier.parse(npc.skin());
 			state.model = npc.model();
 			state.eyes = npc.eyes().isEmpty() ? null : Identifier.tryParse(npc.eyes());
+			state.seated = npc.getPose() == net.minecraft.world.entity.Pose.SITTING;
+			if (state.seated)
+				state.isPassenger = true;
 		}
 
 		@Override
@@ -558,6 +566,14 @@ public final class StoryClient {
 				case "slim" -> slim;
 				default -> legacy;
 			};
+			if (state.seated) {
+				// his feet are at the chair block's floor; the seat (a stair's step) is half a block up, his hips 3/4
+				poseStack.pushPose();
+				poseStack.translate(0, -0.25, 0);
+				super.submit(state, poseStack, collector, camera);
+				poseStack.popPose();
+				return;
+			}
 			super.submit(state, poseStack, collector, camera);
 		}
 

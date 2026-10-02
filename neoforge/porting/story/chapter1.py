@@ -33,8 +33,9 @@ CHARACTERS = {
     # gone from the Academy once the class has passed (that night he shows what he is)
     'mizuki': dict(name='Mizuki', skin=skin('mizuki'), model='player', equipment=SENSEI, home=[-79, G, -74], yaw=0, until='chapter1/03_graduation',
                    idle=["Iruka is too soft on that Naruto.", "Study hard. The exam is closer than you think."]),
-    # the Hokage's hat is real armour (story/StoryGear), over his uniform
-    'hiruzen': dict(name='Hiruzen Sarutobi', skin=skin('hiruzen'), model='player', home=[0, G, -56], yaw=0,
+    # the Hokage's hat is real armour (story/StoryGear), over his uniform; he sits at his desk in the office at the top of the
+    # residence (its fourth floor: up the spiral stairs), facing the door
+    'hiruzen': dict(name='Hiruzen Sarutobi', skin=skin('hiruzen'), model='player', home=[0, G + 25, -99], yaw=0, pose='sit',
                     equipment={'head': 'naruto_shippuden:hokage_hat'},
                     idle=["Every one of you is a leaf of this village.", "Ah, the Academy's newest. How are your lessons?"]),
     'naruto': dict(name='Naruto Uzumaki', skin=skin('naruto'), model='player', home=[-99, G, -60], yaw=-90,
@@ -59,6 +60,10 @@ CHARACTERS = {
                  idle=["Akamaru says you smell like a rookie!", "Wanna go a round? I'll go easy. Maybe."]),
     'shino': dict(name='Shino Aburame', skin=skin('shino'), model='player', home=[-64, G, -65], yaw=90, **GRADUATES,
                   idle=["...", "The insects tell me rain is coming. Why? Because they always know."]),
+    # Ichiraku's cook, behind his counter on the main street, facing the stools and the street
+    'teuchi': dict(name='Teuchi', skin=skin('teuchi'), model='player', home=[-12, G, 57], yaw=-90,
+                   idle=["Welcome! One miso pork, coming right up!", "Naruto's my best customer. Don't tell him I said so.",
+                         "The secret's in the broth. No, I won't tell you what's in it."]),
     # the player's squad: original characters, at Training Ground 3 once Chapter 1's last night is over
     'tatsumi': dict(name='Tatsumi Kurogane', skin=skin('tatsumi'), model='player', equipment=SENSEI, home=[-126, G, -76], yaw=0, after='chapter1/04_scroll_of_seals',
                     idle=["Teamwork first. Talent second.", "Don't look at my scar, look at my hands. That's where the jutsu starts."]),
@@ -200,7 +205,7 @@ QUESTS = {
     Q + '04_scroll_of_seals': dict(
         title='The Scroll of Seals', chapter=1, after=[Q + '03_graduation'], start='auto',
         steps=[
-            talk('hiruzen', 'Answer the Hokage\'s summons at his residence', time='night', dialogue=[
+            talk('hiruzen', 'Answer the Hokage\'s summons in his office, at the top of the residence', time='night', dialogue=[
                 say('hiruzen', "You're one of the new genin, aren't you? I'm sorry to call on you on your first night as a shinobi."),
                 say('hiruzen', "Naruto has taken the Scroll of Seals, a scroll of forbidden techniques. Everyone is searching for him."),
                 say('hiruzen', "Check the training ground west of the Academy. And be careful."),
@@ -228,7 +233,7 @@ QUESTS = {
             ], effects=[dict(type='clones', character='naruto', around='mizuki', count=28, seconds=7),
                         dict(type='smoke', character='mizuki', delay=150), dict(type='pose', character='mizuki', pose='lie', delay=150),
                         dict(type='pose', character='iruka', pose='stand', delay=170)]),
-            talk('hiruzen', 'Report to the Hokage', [
+            talk('hiruzen', 'Report to the Hokage in his office', [
                 say('hiruzen', "The scroll is safe, and Naruto is a genin. You did well tonight, standing beside your classmates."),
                 say('hiruzen', "Rest now. Tomorrow you'll be placed in your squad."),
             ]),

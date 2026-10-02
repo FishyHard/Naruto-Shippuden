@@ -1,0 +1,16 @@
+{
+  "name": "Teuchi",
+  "skin": "naruto_shippuden:textures/entities/story/teuchi.png",
+  "model": "player",
+  "home": [
+    -12,
+    65,
+    57
+  ],
+  "yaw": -90,
+  "idle": [
+    "Welcome! One miso pork, coming right up!",
+    "Naruto's my best customer. Don't tell him I said so.",
+    "The secret's in the broth. No, I won't tell you what's in it."
+  ]
+}

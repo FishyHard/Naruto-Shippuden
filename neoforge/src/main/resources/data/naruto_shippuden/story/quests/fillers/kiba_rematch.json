@@ -1,0 +1,44 @@
+{
+  "title": "Filler: Rematch with Kiba",
+  "chapter": 1,
+  "after": [
+    "chapter1/02_kunai_taijutsu"
+  ],
+  "start": "kiba",
+  "offer": [
+    {
+      "speaker": "kiba",
+      "text": "Hey, rookie! Akamaru's been growling at me all day. He says last time didn't count."
+    },
+    {
+      "speaker": "kiba",
+      "text": "Rematch. Right now. No holding back this time!"
+    }
+  ],
+  "steps": [
+    {
+      "type": "spar",
+      "npc": "kiba",
+      "hits": 8,
+      "damage": 2,
+      "rank": 1,
+      "throws": false,
+      "substitution": true,
+      "text": "Spar with Kiba again"
+    },
+    {
+      "type": "talk",
+      "npc": "kiba",
+      "text": "Talk to Kiba",
+      "dialogue": [
+        {
+          "speaker": "kiba",
+          "text": "Gah! Again?! ...Fine. You're good. Akamaru likes you, anyway. Don't let it go to your head."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 15
+  }
+}

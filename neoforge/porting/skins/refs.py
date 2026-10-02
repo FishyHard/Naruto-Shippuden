@@ -303,4 +303,5 @@ def iruka():
 
 REF_CHARACTERS = {'naruto': naruto, 'naruto_genin': naruto_genin, 'sasuke': sasuke, 'sakura': sakura,
                   'shikamaru_kid': shikamaru, 'ino': lambda: load('ino'), 'choji': choji, 'hinata': hinata, 'kiba': kiba,
-                  'shino': shino, 'iruka': iruka, 'yui': yui, 'mizuki': mizuki}
+                  'shino': shino, 'iruka': iruka, 'yui': yui, 'mizuki': mizuki,
+                  'teuchi': lambda: load('teuchi')}   # Ichiraku's cook: the reference as it is

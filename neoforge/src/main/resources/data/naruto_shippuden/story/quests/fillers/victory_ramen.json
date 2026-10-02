@@ -1,0 +1,120 @@
+{
+  "title": "Filler: A Bowl to Celebrate",
+  "chapter": 1,
+  "after": [
+    "chapter1/04_scroll_of_seals"
+  ],
+  "start": "naruto",
+  "offer": [
+    {
+      "speaker": "naruto",
+      "text": "Look, look! A real headband! Iruka-sensei's taking me to Ichiraku to celebrate!"
+    },
+    {
+      "speaker": "naruto",
+      "text": "You helped that night, so you're coming too. Come on!"
+    }
+  ],
+  "steps": [
+    {
+      "type": "goto",
+      "pos": [
+        -8,
+        65,
+        57
+      ],
+      "radius": 4,
+      "text": "Celebrate at Ichiraku Ramen with Naruto and Iruka-sensei",
+      "time": "evening",
+      "spawn": [
+        {
+          "character": "iruka",
+          "pos": [
+            -10,
+            65.6,
+            54
+          ],
+          "yaw": 90,
+          "steps": 3,
+          "pose": "sit"
+        },
+        {
+          "character": "naruto",
+          "pos": [
+            -10,
+            65.6,
+            56
+          ],
+          "yaw": 90,
+          "steps": 3,
+          "pose": "sit"
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "iruka",
+      "text": "Sit down with Iruka-sensei",
+      "dialogue": [
+        {
+          "speaker": "iruka",
+          "text": "Ow... careful with the back, Naruto. Mizuki's shuriken still remember me."
+        },
+        {
+          "speaker": "naruto",
+          "text": "Sorry, sensei! ...Hey. Thanks. For everything."
+        },
+        {
+          "speaker": "iruka",
+          "text": "Eat, before it gets cold. Both of you. You earned it."
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "naruto",
+      "text": "Talk to Naruto",
+      "dialogue": [
+        {
+          "speaker": "naruto",
+          "text": "Someday, I'll be Hokage, and everybody in the village will know my name. Even the ones who glared at me."
+        },
+        {
+          "speaker": "naruto",
+          "text": "You'll see it too, right?",
+          "choices": [
+            {
+              "text": "I'll be right there, Lord Seventh.",
+              "flag": "believe_naruto",
+              "lines": [
+                {
+                  "speaker": "naruto",
+                  "text": "Lord Seventh... Heh. It sounds awesome!"
+                }
+              ]
+            },
+            {
+              "text": "Only if you beat me first.",
+              "flag": "rival_naruto",
+              "lines": [
+                {
+                  "speaker": "naruto",
+                  "text": "Ha! You're on! A rival, believe it!"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 15,
+    "items": [
+      {
+        "id": "naruto_shippuden:ichiraku_ramen",
+        "count": 2
+      }
+    ]
+  }
+}

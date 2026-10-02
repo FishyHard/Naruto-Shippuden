@@ -1,0 +1,128 @@
+{
+  "title": "Filler: Ramen with Iruka-sensei",
+  "chapter": 1,
+  "after": [
+    "chapter1/01_first_day"
+  ],
+  "start": "iruka",
+  "offer": [
+    {
+      "speaker": "iruka",
+      "text": "Naruto has been pestering me for ramen all week. I'm taking him to Ichiraku this evening."
+    },
+    {
+      "speaker": "iruka",
+      "text": "Come along, you're new here: it's the best ramen in the Leaf. On the main street, south of the plaza. My treat."
+    }
+  ],
+  "steps": [
+    {
+      "type": "goto",
+      "pos": [
+        -8,
+        65,
+        57
+      ],
+      "radius": 4,
+      "text": "Meet Iruka-sensei and Naruto at Ichiraku Ramen",
+      "time": "evening",
+      "spawn": [
+        {
+          "character": "iruka",
+          "pos": [
+            -10,
+            65.6,
+            54
+          ],
+          "yaw": 90,
+          "steps": 3,
+          "pose": "sit"
+        },
+        {
+          "character": "naruto",
+          "pos": [
+            -10,
+            65.6,
+            56
+          ],
+          "yaw": 90,
+          "steps": 3,
+          "pose": "sit"
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "naruto",
+      "text": "Sit down with Naruto",
+      "dialogue": [
+        {
+          "speaker": "naruto",
+          "text": "Hey, you came! Sit, sit! Old man, one more miso pork ramen!"
+        },
+        {
+          "speaker": "teuchi",
+          "text": "Coming right up! Any friend of Naruto's eats well at Ichiraku."
+        },
+        {
+          "speaker": "naruto",
+          "text": "This is the best place in the whole village. I've eaten here like a thousand times. Believe it!",
+          "choices": [
+            {
+              "text": "A thousand? Is that all you eat?",
+              "flag": "ramen_tease",
+              "lines": [
+                {
+                  "speaker": "naruto",
+                  "text": "Ramen is a complete meal! ...Mostly."
+                }
+              ]
+            },
+            {
+              "text": "Then I'll have what you're having.",
+              "flag": "ramen_same",
+              "lines": [
+                {
+                  "speaker": "naruto",
+                  "text": "Heh heh! You've got good taste!"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "speaker": "naruto",
+          "text": "Iruka-sensei, can I have seconds? And thirds?"
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "iruka",
+      "text": "Talk to Iruka-sensei",
+      "dialogue": [
+        {
+          "speaker": "iruka",
+          "text": "One bowl, Naruto. I'm a teacher, not a bank."
+        },
+        {
+          "speaker": "iruka",
+          "text": "...He's alone most nights, you know. It's good he has someone his age to eat with. Thank you for coming."
+        },
+        {
+          "speaker": "iruka",
+          "text": "Here, take a bowl home with you. Rest well: lessons start early."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 10,
+    "items": [
+      {
+        "id": "naruto_shippuden:ichiraku_ramen",
+        "count": 2
+      }
+    ]
+  }
+}

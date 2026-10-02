@@ -4,10 +4,11 @@
   "model": "player",
   "home": [
     0,
-    65,
-    -56
+    90,
+    -99
   ],
   "yaw": 0,
+  "pose": "sit",
   "equipment": {
     "head": "naruto_shippuden:hokage_hat"
   },

@@ -431,11 +431,18 @@ public class StoryNpc extends NarutoShippudenModElements.ModElement {
 		}
 
 		public void setStoryPose(String pose) {
+			boolean wasSeated = getPose() == net.minecraft.world.entity.Pose.SITTING;
 			setPose(switch (pose) {
 				case "crouch" -> net.minecraft.world.entity.Pose.CROUCHING;
 				case "lie" -> net.minecraft.world.entity.Pose.SLEEPING;
+				case "sit" -> net.minecraft.world.entity.Pose.SITTING;
 				default -> net.minecraft.world.entity.Pose.STANDING;
 			});
+			// seated on a chair (a stair), inside its block: held there, not dropped onto it
+			if (wasSeated || "sit".equals(pose))
+				setNoGravity("sit".equals(pose));
+			if ("sit".equals(pose))
+				setDeltaMovement(net.minecraft.world.phys.Vec3.ZERO);
 		}
 
 		@Override
@@ -607,7 +614,7 @@ public class StoryNpc extends NarutoShippudenModElements.ModElement {
 			output.putString("StorySkin", skin());
 			output.putString("StoryModel", model());
 			output.putString("StoryEyes", eyes());
-			output.putString("StoryPose", getPose() == net.minecraft.world.entity.Pose.CROUCHING ? "crouch" : getPose() == net.minecraft.world.entity.Pose.SLEEPING ? "lie" : "");
+			output.putString("StoryPose", getPose() == net.minecraft.world.entity.Pose.CROUCHING ? "crouch" : getPose() == net.minecraft.world.entity.Pose.SLEEPING ? "lie" : getPose() == net.minecraft.world.entity.Pose.SITTING ? "sit" : "");
 			if (route != null) {
 				// the walk goes on after the chunk is saved and loaded again
 				StringBuilder points = new StringBuilder();

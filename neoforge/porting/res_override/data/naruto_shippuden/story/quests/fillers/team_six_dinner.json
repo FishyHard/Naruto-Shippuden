@@ -1,0 +1,135 @@
+{
+  "title": "Filler: Ren Makes Dinner",
+  "chapter": 2,
+  "after": [
+    "chapter2/01_chakra_control"
+  ],
+  "start": "ren",
+  "offer": [
+    {
+      "speaker": "ren",
+      "text": "So, uh... Last one up the cliff makes dinner. That's me. The thing is, I can't cook."
+    },
+    {
+      "speaker": "ren",
+      "text": "Sensei says Ichiraku counts, as long as I'm paying. Come on, before I change my mind!"
+    }
+  ],
+  "steps": [
+    {
+      "type": "goto",
+      "pos": [
+        -8,
+        65,
+        57
+      ],
+      "radius": 4,
+      "text": "Have dinner with Team Six at Ichiraku Ramen",
+      "time": "evening",
+      "spawn": [
+        {
+          "character": "tatsumi",
+          "pos": [
+            -10,
+            65.6,
+            54
+          ],
+          "yaw": 90,
+          "steps": 3,
+          "pose": "sit"
+        },
+        {
+          "character": "yui",
+          "pos": [
+            -10,
+            65.6,
+            56
+          ],
+          "yaw": 90,
+          "steps": 3,
+          "pose": "sit"
+        },
+        {
+          "character": "ren",
+          "pos": [
+            -10,
+            65.6,
+            58
+          ],
+          "yaw": 90,
+          "steps": 3,
+          "pose": "sit"
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "ren",
+      "text": "Sit down with Ren",
+      "dialogue": [
+        {
+          "speaker": "ren",
+          "text": "Order whatever you want! ...Within reason. Within, like, a small bowl of reason."
+        },
+        {
+          "speaker": "teuchi",
+          "text": "Four bowls? Ha! The big spender of Team Six!"
+        },
+        {
+          "speaker": "yui",
+          "text": "Ren, you've counted your coins three times."
+        },
+        {
+          "speaker": "ren",
+          "text": "Four! I'm being careful!"
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "tatsumi",
+      "text": "Talk to Tatsumi-sensei",
+      "dialogue": [
+        {
+          "speaker": "tatsumi",
+          "text": "A team that eats together trusts each other with their backs. That's the real lesson tonight."
+        },
+        {
+          "speaker": "tatsumi",
+          "text": "...And I'll pay. Ren, put your wallet away before you cry into the broth.",
+          "choices": [
+            {
+              "text": "Thank you, sensei!",
+              "flag": "thanked_tatsumi",
+              "lines": [
+                {
+                  "speaker": "tatsumi",
+                  "text": "Thank me by not falling off the cliff tomorrow."
+                }
+              ]
+            },
+            {
+              "text": "Ren, you're off the hook.",
+              "flag": "saved_ren",
+              "lines": [
+                {
+                  "speaker": "ren",
+                  "text": "I owe you one! ...A small one!"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 15,
+    "items": [
+      {
+        "id": "naruto_shippuden:ichiraku_ramen",
+        "count": 2
+      }
+    ]
+  }
+}

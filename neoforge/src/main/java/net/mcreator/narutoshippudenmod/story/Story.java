@@ -89,9 +89,9 @@ import java.util.TreeMap;
  *  "rank": 0-2, "throws": bool, "substitution": bool}          (rank: how fast and hard; throws kunai; dodges by Substitution)
  * {"type": "event", "event": name}                            something code reports with {@link #event}
  * </pre>
- * Any step may also bring "spawn": [{"character", "pos", "yaw", "steps"}]: scene characters for this player only, standing
- * there from this step for "steps" steps (1 by default), then gone; and "effects": [{"type": "clones", "character", "around",
- * "count", "seconds"} | {"type": "pose", "character", "pose": "crouch"|"lie"|"stand"} | {"type": "smoke", "character"} |
+ * Any step may also bring "spawn": [{"character", "pos", "yaw", "steps", "pose"}]: scene characters for this player only, standing
+ * (or sitting: "pose": "sit", the feet half a block under the seat) there from this step for "steps" steps (1 by default), then gone; and "effects": [{"type": "clones", "character", "around",
+ * "count", "seconds"} | {"type": "pose", "character", "pose": "crouch"|"lie"|"sit"|"stand"} | {"type": "smoke", "character"} |
  * {"type": "walk", "character", "points": [[x, z], ...], "speed", "loop", "slip"}], played on the player's scene characters as
  * the step starts ("walk": along the ground, up walls and over water, as a teammate showing a lesson; "delay" in ticks).
  * A sparring partner waits until the player comes within a few blocks, and stops when they go off. A choice may carry "commands" (run as the player when it is chosen).
@@ -112,7 +112,7 @@ public final class Story {
 	 * headband, once the class has passed), "eyes" a dojutsu drawn over its face (the mod's own eye textures).
 	 */
 	public record Character(String id, String name, Identifier skin, String model, BlockPos home, float yaw, List<String> idle, String after,
-			Map<String, String> equipment, String until, Map<String, String> graduate, String graduateAfter, String eyes, String graduateSkin) {
+			Map<String, String> equipment, String until, Map<String, String> graduate, String graduateAfter, String eyes, String graduateSkin, String pose) {
 	}
 
 	public record Quest(String id, String title, int chapter, List<String> after, String start, JsonArray offer, List<JsonObject> steps,
@@ -154,7 +154,7 @@ public final class Story {
 						Identifier.parse(str(o, "skin", "naruto_shippuden:textures/entities/iruka_sensei.png")), str(o, "model", "legacy"),
 						home == null ? null : new BlockPos(home.get(0).getAsInt(), home.get(1).getAsInt(), home.get(2).getAsInt()),
 						o.has("yaw") ? o.get("yaw").getAsFloat() : 0, idle, str(o, "after", ""), equipment(o, "equipment"), str(o, "until", ""),
-						equipment(o, "graduate"), str(o, "graduate_after", ""), str(o, "eyes", ""), str(o, "graduate_skin", "")));
+						equipment(o, "graduate"), str(o, "graduate_after", ""), str(o, "eyes", ""), str(o, "graduate_skin", ""), str(o, "pose", "")));
 			}
 			Map<String, Quest> qs = new TreeMap<>();
 			for (var e : read(manager, "story/quests").entrySet()) {
@@ -347,6 +347,8 @@ public final class Story {
 			npc.snapTo(x, y, z, yaw, 0);
 			npc.setYHeadRot(yaw);
 			npc.setYBodyRot(yaw);
+			if (o.has("pose"))
+				npc.setStoryPose(str(o, "pose", "stand"));
 			// its walk from the step's effects, given now: the place may be far off, in chunks not loaded yet
 			if (step.has("effects"))
 				for (JsonElement fx : step.getAsJsonArray("effects")) {
@@ -1066,7 +1068,9 @@ public final class Story {
 			if (e instanceof StoryNpc.Npc npc && npc.isScene() && npc.sceneOver(server))
 				npc.discard();
 		for (Character c : characters.values()) {
-			if (c.home() == null || !level.isLoaded(c.home()) || level.getNearestPlayer(c.home().getX(), c.home().getY(), c.home().getZ(), 96, false) == null)
+			// any player near, whatever their game mode (a spectator looking round sees the village as it is)
+			if (c.home() == null || !level.isLoaded(c.home())
+					|| level.players().stream().noneMatch(p -> p.distanceToSqr(c.home().getX() + 0.5, c.home().getY(), c.home().getZ() + 0.5) < 96 * 96))
 				continue;
 			List<StoryNpc.Npc> found = level.getEntities(StoryNpc.entity, new net.minecraft.world.phys.AABB(c.home()).inflate(64),
 					n -> n.character().equals(c.id()) && !n.isScene());
@@ -1075,6 +1079,8 @@ public final class Story {
 				if (npc != null) {
 					npc.applyCharacter(c);
 					npc.snapTo(c.home().getX() + 0.5, c.home().getY(), c.home().getZ() + 0.5, c.yaw(), 0);
+					if (!c.pose().isEmpty())
+						npc.setStoryPose(c.pose());
 					npc.setYHeadRot(c.yaw());
 					npc.setYBodyRot(c.yaw());
 					level.addFreshEntity(npc);
@@ -1084,8 +1090,14 @@ public final class Story {
 					found.get(i).discard();
 				StoryNpc.Npc npc = found.getFirst();
 				npc.applyCharacter(c);
-				if (!npc.isSparring() && npc.distanceToSqr(c.home().getX() + 0.5, c.home().getY(), c.home().getZ() + 0.5) > 4 * 4)
+				// one who sits (the Hokage at his desk) stays in his seat, facing the way he should
+				boolean seated = !c.pose().isEmpty();
+				if (seated && !npc.isScene())
+					npc.setStoryPose(c.pose());
+				if (!npc.isSparring() && npc.distanceToSqr(c.home().getX() + 0.5, c.home().getY(), c.home().getZ() + 0.5) > (seated ? 0.1 : 4 * 4)) {
 					npc.snapTo(c.home().getX() + 0.5, c.home().getY(), c.home().getZ() + 0.5, c.yaw(), 0);
+					npc.setYBodyRot(c.yaw());
+				}
 			}
 		}
 	}

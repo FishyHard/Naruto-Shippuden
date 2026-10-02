@@ -229,8 +229,12 @@ def hokage_tower():
     b.fill(c - 3, G, dz + 1, c - 3, G + 4, dz + 1, 'smooth_quartz')
     b.fill(c + 3, G, dz + 1, c + 3, G + 4, dz + 1, 'smooth_quartz')
     b.fill(c - 2, G, dz, c + 2, G + 3, dz, 'spruce_planks')
-    b.door(c - 1, G, dz, 'spruce', 'south', 'left'); b.door(c + 1, G, dz, 'spruce', 'south', 'right')
-    b.set(c, G, dz, AIR); b.set(c, G + 1, dz, AIR)
+    # a wide way in: the two doors swung open against the posts, hinged on the outside, the middle clear
+    b.fill(c - 1, G, dz, c + 1, G + 2, dz, AIR)
+    for x, hinge in ((c - 1, 'right'), (c + 1, 'left')):
+        b.set(x, G, dz, st('spruce_door', facing='south', half='lower', hinge=hinge, open=True, powered=False))
+        b.set(x, G + 1, dz, st('spruce_door', facing='south', half='upper', hinge=hinge, open=True, powered=False))
+    b.fill(c - 2, G - 1, dz - 1, c + 2, G - 1, dz + 1, 'polished_andesite')
     for x in range(c - 4, c + 5):
         b.set(x, G + 5, dz + 1, stairs('acacia_stairs', 'north'))
         b.set(x, G + 5, dz + 2, stairs('acacia_stairs', 'north')) if abs(x - c) >= 4 else None
@@ -275,7 +279,8 @@ def spiral(b, cx, cz, y1, y2, floors):
     """A spiral staircase round a stone column from y1 up to y2; each floor in `floors` gets a hole round it, railed but for
     the side the stairs arrive on."""
     ring = [(1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1), (0, -1), (1, -1)]
-    facing = ['south', 'south', 'west', 'west', 'north', 'north', 'east', 'east']
+    # each step faces the next one round, a block up
+    facing = ['south', 'west', 'west', 'north', 'north', 'east', 'east', 'south']
     for y in range(y1, y2 + 1):
         b.set(cx, y, cz, 'polished_andesite' if y % 4 else 'chiseled_stone_bricks')
     for fy in floors:
@@ -290,17 +295,13 @@ def spiral(b, cx, cz, y1, y2, floors):
         for h in range(1, 4):
             if b.get(cx + dx, y + h, cz + dz) not in (None,) and (y + h) in floors:
                 b.set(cx + dx, y + h, cz + dz, AIR)
-    for fy in floors:
-        arrive = ring[(fy - y1) % 8]
-        for dx in range(-2, 3):
-            for dz in range(-2, 3):
-                if max(abs(dx), abs(dz)) == 2:
-                    near = (max(-1, min(1, dx)), max(-1, min(1, dz)))
-                    if near == arrive or (abs(dx) == 2 and abs(dz) == 2):
-                        continue
-                    if b.get(cx + dx, fy + 1, cz + dz) in (None, AIR):
-                        b.set(cx + dx, fy + 1, cz + dz, st('dark_oak_fence', waterlogged=False))
-
+    # headroom: nothing over a step for three blocks (a beam or a floor in the way would stop the climb)
+    for i in range(y2 - y1):
+        dx, dz = ring[i % 8]
+        for h in (1, 2, 3):
+            s = b.get(cx + dx, y1 + i + h, cz + dz) or ''
+            if '_stairs' not in s:
+                b.set(cx + dx, y1 + i + h, cz + dz, AIR)
 
 def lining(b, cx, cz, r, y1, y2, wood='stripped_spruce_wood[axis=y]', band='spruce_planks'):
     """Wood panelling on the inside of a drum, leaving the windows clear."""
@@ -361,7 +362,7 @@ def interior(b, c, cz):
     # benches for the teams waiting, on both sides
     for side in (-1, 1):
         for row in range(3):
-            z = cz + 2 + row * 3
+            z = cz + 7 + row * 3            # clear of the spiral stairs (c+5, cz+4)
             for k in range(4):
                 b.set(c + side * (5 + k), y0, z, stairs('spruce_stairs', 'south'))
         # potted plants and lamps along the wall
@@ -418,13 +419,14 @@ def interior(b, c, cz):
     b.disc(c, y1 - 1, cz, 13, 'dark_oak_planks')
     lining(b, c, cz, 13, y1, y1 + 1)
     b.disc(c, y1 + 6, cz, 13, 'spruce_planks')        # a ceiling: the floor above
-    b.ring(c, y1, cz, 5, slab('dark_oak_slab', 'top'))
-    b.ring(c, y1, cz, 4, slab('dark_oak_slab', 'top'))
-    for (x, z) in b.ring_points(c, cz, 6):
+    # the round table and its ring of seats, small enough to keep clear of the stairwell (c+5, cz+4)
+    b.ring(c, y1, cz, 3, slab('dark_oak_slab', 'top'))
+    b.ring(c, y1, cz, 2, slab('dark_oak_slab', 'top'))
+    for (x, z) in b.ring_points(c, cz, 4):
         seat(x, y1, z, OPP[inward(c, cz, x, z)])
     b.set(c, y1, cz, st('cartography_table'))
     b.set(c, y1 + 1, cz, st('white_carpet'))
-    for (x, z) in ((c - 3, cz), (c + 3, cz), (c, cz - 3), (c, cz + 3)):
+    for (x, z) in ((c - 2, cz), (c + 2, cz), (c, cz - 2), (c, cz + 2)):
         b.set(x, y1 + 1, z, st('candle', candles=1, lit=False, waterlogged=False))
     for (x, z) in b.ring_points(c, cz, 12):
         if z < cz - 8 and b.get(x, y1 + 3, z) in (None, AIR) and x % 3 == 0:
@@ -443,12 +445,14 @@ def interior(b, c, cz):
     b.set(c - 6, y2, cz - 8, st('chest', facing='south', type='single', waterlogged=False))
     b.set(c - 5, y2, cz - 8, 'bookshelf'); b.set(c - 4, y2, cz - 8, 'bookshelf')
     # a low tea table with cushions
-    b.set(c + 4, y2, cz + 2, slab('bamboo_slab'))
-    b.set(c + 4, y2 + 1, cz + 2, 'flower_pot')
-    for (x, z) in ((c + 3, cz + 2), (c + 5, cz + 2), (c + 4, cz + 1), (c + 4, cz + 3)):
-        b.set(x, y2, z, st('red_carpet'))
+    b.set(c - 3, y2, cz + 4, slab('bamboo_slab'))
+    b.set(c - 3, y2 + 1, cz + 4, 'flower_pot')
+    for dx in (-1, 0, 1):
+        for dz in (-1, 0, 1):
+            if dx or dz:
+                b.set(c - 3 + dx, y2, cz + 4 + dz, st('red_carpet'))
     b.set(c + 8, y2, cz - 6, 'potted_bamboo'); b.set(c - 9, y2, cz + 5, 'potted_azalea_bush')
-    b.set(c + 7, y2, cz + 7, st('decorated_pot', cracked=False, facing='north', waterlogged=False))
+    b.set(c - 6, y2, cz + 9, st('decorated_pot', cracked=False, facing='north', waterlogged=False))
     for (x, z) in ((c, cz - 6), (c + 5, cz + 5), (c - 5, cz + 5)):
         lamp(x, y2 + 5, z)
 
@@ -466,22 +470,37 @@ def interior(b, c, cz):
     seat(c, y3, cz - 6, 'south')
     b.set(c - 2, y3 + 1, cz - 5, st('white_carpet')); b.set(c - 1, y3 + 1, cz - 5, st('white_carpet'))
     b.set(c + 2, y3 + 1, cz - 5, 'potted_bamboo'); b.set(c + 1, y3 + 1, cz - 5, st('candle', candles=3, lit=False, waterlogged=False))
+    # the window behind the desk, through the drum's wall: the Hokage Rock in view
+    # the window behind the desk, through the drum's wall up to the ceiling: the Hokage Rock in view. In each column the
+    # outermost block of the wall is glass, the ones inside it cleared, so the panes run on without gaps
+    wall = [(x, z) for (x, z) in b.ring_points(c, cz, 11) + b.ring_points(c, cz, 10) if abs(x - c) <= 4 and z < cz]
     for x in range(c - 4, c + 5):
-        for y in (y3 + 1, y3 + 2, y3 + 3, y3 + 4):
-            b.set(x, y, cz - 10, 'glass_pane')
+        zs = sorted(z for (xx, z) in wall if xx == x)
+        for i, z in enumerate(zs):
+            for y in range(y3 + 1, y3 + 7):
+                b.set(x, y, z, 'glass_pane' if i == 0 else AIR)
+        # where the outermost pane steps back from its neighbour's, a pane fills the corner between them
+    for x in range(c - 4, c + 5):
+        z0 = min(z for (xx, z) in wall if xx == x)
+        for nx in (x - 1, x + 1):
+            if c - 4 <= nx <= c + 4:
+                zn = min(z for (xx, z) in wall if xx == nx)
+                for z in range(z0 + 1, zn + 1) if zn > z0 else ():
+                    for y in range(y3 + 1, y3 + 7):
+                        b.set(x, y, z, 'glass_pane')
     # bookcases and the old Hokage banners along the walls
     for (x, z) in b.ring_points(c, cz, 9):
         if abs(x - c) >= 6 and z < cz + 3:
             for y in range(y3, y3 + 3):
                 if b.get(x, y, z) in (None, AIR):
                     b.set(x, y, z, 'bookshelf')
-    for (x, z) in ((c - 7, cz + 4), (c + 7, cz + 4)):
+    for (x, z) in ((c - 10, cz), (c + 10, cz)):
         b.set(x, y3 + 3, z, st('white_wall_banner', facing='east' if x < c else 'west'))
     # guest seats and a low table before the desk
     for x in (c - 2, c + 2):
         seat(x, y3, cz, 'north')
     b.set(c, y3, cz + 2, slab('dark_oak_slab')); b.set(c, y3 + 1, cz + 2, 'flower_pot')
-    for (x, z) in ((c, cz - 2), (c - 6, cz + 4), (c + 6, cz + 4)):
+    for (x, z) in ((c, cz - 2), (c - 6, cz + 4), (c + 6, cz - 1)):
         chain(x, y3 + 6, z); lamp(x, y3 + 5, z)
     b.disc(c, y3 + 7, cz, 10, 'spruce_planks')          # the top storey's floor
 
