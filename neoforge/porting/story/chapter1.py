@@ -32,7 +32,9 @@ CHARACTERS = {
     # gone from the Academy once the class has passed (that night he shows what he is)
     'mizuki': dict(name='Mizuki', skin=skin('mizuki'), model='player', equipment=HEADBAND, home=[-79, G, -74], yaw=0, until='chapter1/03_graduation',
                    idle=["Iruka is too soft on that Naruto.", "Study hard. The exam is closer than you think."]),
+    # the Hokage's hat and the jonin vest are real armour (story/StoryGear), over his uniform
     'hiruzen': dict(name='Hiruzen Sarutobi', skin=skin('hiruzen'), model='player', home=[0, G, -56], yaw=0,
+                    equipment={'head': 'naruto_shippuden:hokage_hat', 'chest': 'naruto_shippuden:jonin_vest'},
                     idle=["Every one of you is a leaf of this village.", "Ah, the Academy's newest. How are your lessons?"]),
     'naruto': dict(name='Naruto Uzumaki', skin=skin('naruto'), model='player', home=[-99, G, -60], yaw=-90,
                    graduate=HEADBAND, graduate_skin=skin('naruto_genin'), graduate_after='chapter1/04_scroll_of_seals',

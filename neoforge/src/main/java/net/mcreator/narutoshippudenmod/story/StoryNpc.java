@@ -348,6 +348,7 @@ public class StoryNpc extends NarutoShippudenModElements.ModElement {
 		/** A clone in a scene: it rushes the target, striking, and vanishes in smoke after its time. */
 		public void rush(Entity target, int ticks) {
 			rushAt = target.getUUID();
+			entityData.set(NAME, "");                       // no name over a clone, and it is no one to talk to
 			rushDelay = 10 + getRandom().nextInt(50);
 			lifeLeft = ticks + rushDelay;
 		}
@@ -514,7 +515,8 @@ public class StoryNpc extends NarutoShippudenModElements.ModElement {
 
 		@Override
 		public InteractionResult mobInteract(Player player, InteractionHand hand) {
-			if (hand != InteractionHand.MAIN_HAND || sparWith != null)
+			// a clone in a scene is only smoke and fists: nothing to say
+			if (hand != InteractionHand.MAIN_HAND || sparWith != null || lifeLeft >= 0)
 				return InteractionResult.PASS;
 			if (player instanceof ServerPlayer serverPlayer)
 				Story.talk(serverPlayer, this);

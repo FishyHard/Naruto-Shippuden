@@ -35,6 +35,7 @@ public class NarutoShippudenMod {
 		net.mcreator.narutoshippudenmod.world.structure.KamuiTowerStructures.register();
 		net.mcreator.narutoshippudenmod.world.chikyu.ChikyuChunkGenerator.register();
 		net.mcreator.narutoshippudenmod.world.chikyu.ChikyuContent.register();
+		net.mcreator.narutoshippudenmod.story.StoryGear.register();
 		net.mcreator.narutoshippudenmod.world.chikyu.ChikyuBiomeSource.register();
 		net.mcreator.narutoshippudenmod.core.jutsu.JutsuItems.register();
 		net.mcreator.narutoshippudenmod.itemgroup.ModItemGroups.register();

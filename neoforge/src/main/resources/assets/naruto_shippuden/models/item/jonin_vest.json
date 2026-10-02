@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "naruto_shippuden:item/jonin_vest"
+  }
+}

@@ -81,6 +81,8 @@ public final class ModItemGroups {
 		for (String village : new String[] { "konohagakure", "sunagakure", "kirigakure", "kumogakure", "iwagakure" })
 			for (String colour : new String[] { "", "_black", "_red" })
 				ids.add("genin_" + village + colour + "_helmet");
+		// the story's gear
+		ids.addAll(List.of("hokage_hat", "jonin_vest"));
 		return ids;
 	}
 

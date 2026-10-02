@@ -8,6 +8,10 @@
     -56
   ],
   "yaw": 0,
+  "equipment": {
+    "head": "naruto_shippuden:hokage_hat",
+    "chest": "naruto_shippuden:jonin_vest"
+  },
   "idle": [
     "Every one of you is a leaf of this village.",
     "Ah, the Academy's newest. How are your lessons?"
