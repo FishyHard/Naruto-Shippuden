@@ -6,6 +6,8 @@ import os
 
 from PIL import Image
 
+import heads
+import skins
 from skins import Skin, rgb, tone
 
 REFS = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'refs')
@@ -103,28 +105,36 @@ def greyish(c):
 def naruto_genin():
     """Without his goggles now: the headband is the real item."""
     s = load('naruto')
-    strip_band(s, 2)
+    heads.naruto(s, goggles=False)
     return s
 
 
 def naruto():
-    """At the Academy: the headband's cloth is the goggles' green strap and its plate their lenses."""
+    """At the Academy, his goggles on his forehead."""
     s = load('naruto')
-    strap, lens, frame = rgb('#3E7A40'), rgb('#86CCEA'), rgb('#3A3E48')
-    recolour(s, HEAD_X, (10, 11), lambda c: shade_as(c, strap, 50) if bluish(c) else None)
-    for x in FRONT:
-        for y in (10, 11):
-            c = s.im.getpixel((x, y))
-            if greyish(c) or _lum(c) > 90 and not bluish(c):
-                s.im.putpixel((x, y), shade_as(c, lens, 180) if _lum(c) > 150 else frame)
-    # the plate's rim and the knot at the back on the hat layer go
-    recolour(s, HAT_X, range(8, 16), lambda c: (0, 0, 0, 0) if bluish(c) or greyish(c) else None)
+    heads.naruto(s, goggles=True)
     return s
 
 
 def sasuke():
     s = load('sasuke')
     strip_band(s, 2)
+    heads.sasuke(s)
+    return s
+
+
+def sakura():
+    s = load('sakura')
+    heads.sakura(s)
+    return s
+
+
+def mizuki():
+    """skins.py's Mizuki, his face drawn afresh under the hair of heads.py."""
+    s = skins.mizuki()
+    skins.head(s)
+    skins.eyes(s, rgb('#3A3A48'), brows=tone(rgb('#B0C6D8'), -1.2))
+    heads.mizuki(s, load('hinata'))
     return s
 
 
@@ -210,15 +220,11 @@ def yui():
 
 
 def iruka():
-    """In his navy shirt, for the real jonin vest and headband to go over: the vest's body, shoulder straps and the collar
-    on the hat layer, and the headband, painted out."""
+    """In his navy shirt, for the real jonin vest and headband to go over (the vest and headband painted out), his hair
+    tied up in its ponytail."""
     s = load('iruka')
     strip_band(s, 2)
-    for x in HAT_X:
-        for y in range(12, 16):
-            c = s.im.getpixel((x, y))
-            if c[3] and c[1] > c[2] + 6 and c[1] >= c[0]:
-                s.im.putpixel((x, y), (0, 0, 0, 0))
+    heads.iruka(s)                   # the hat layer afresh (the vest's collar was on it, under his chin)
     navy = rgb('#30334B')
     from skins import torso, ring
     torso(s, navy, salt=47)
@@ -234,6 +240,6 @@ def iruka():
     return s
 
 
-REF_CHARACTERS = {'naruto': naruto, 'naruto_genin': naruto_genin, 'sasuke': sasuke, 'sakura': lambda: load('sakura'),
+REF_CHARACTERS = {'naruto': naruto, 'naruto_genin': naruto_genin, 'sasuke': sasuke, 'sakura': sakura,
                   'shikamaru_kid': shikamaru, 'ino': lambda: load('ino'), 'choji': choji, 'hinata': hinata, 'kiba': kiba,
-                  'shino': shino, 'iruka': iruka, 'yui': yui}
+                  'shino': shino, 'iruka': iruka, 'yui': yui, 'mizuki': mizuki}

@@ -856,10 +856,10 @@ def mizuki():
 
 
 def hiruzen():
-    """The Third Hokage: the white Hokage's coat over his dark grey uniform, a grey goatee and the lines of age. He wears
-    the real Hokage's hat (story/StoryGear)."""
+    """The Third Hokage in the Hokage's robes (the red robe, the white haori over it), a grey goatee and the lines of age.
+    He wears the real Hokage's hat (story/StoryGear)."""
     s = Skin()
-    old, grey, shirt = rgb('#E6BA92'), rgb('#9A9A9A'), rgb('#2E3240')
+    old, grey = rgb('#E6BA92'), rgb('#9A9A9A')
     head(s, old)
     eyes(s, EYE_DARK, brows=tone(grey, 0))
     s.px('head', 'front', 1, 6, tone(old, -0.5)); s.px('head', 'front', 6, 6, tone(old, -0.5))   # the lines of age
@@ -868,45 +868,43 @@ def hiruzen():
     s.px('head', 'front', 3, 6, grey); s.px('head', 'front', 4, 6, tone(grey, -0.2))
     hair(s, grey, front=[2, 1, 0, 0, 0, 0, 1, 2], side=[5, 5, 5, 4, 4, 3, 3, 2], back=[5, 5, 5, 5, 5, 5, 5, 5],
          hat_side=[4, 4, 4, 3, 3, 2, 2, 1], hat_back=[5, 5, 5, 5, 5, 5, 5, 5], salt=59, style='smooth')
-    torso(s, shirt)
-    fold(s, 'body', 'front', [(2, 5), (5, 6)], shirt, 0.5)
-    sleeves(s, shirt, old, rows=11, cuff=shirt)
-    swirl_patch(s)
-    for a in ('rarm', 'larm'):
-        ring(s, a, [10], shirt, -0.4)
-    trousers(s, shirt, rows=12)
-    for l in ('rleg', 'lleg'):
-        bandage(s, l, range(7, 10))
-    holster(s, 'rleg')
-    sandals(s, skin=old, wrap=False)
-    hokage_coat(s)
+    hokage_robe(s, old)
+    sandals(s, skin=old, wrap=False, high=1)
     return s
 
 
-def hokage_coat(s, white=rgb('#F2F0EA'), red=rgb('#B8322E')):
-    """The Hokage's white haori over the uniform (outer layers): open down the front, wide sleeves to the elbow, the skirt to
-    the knees split in front, flames of red round its hem and cuffs, and the kanji for fire on the back."""
+def hokage_robe(s, skin, robe=rgb('#B4304E'), white=rgb('#F2F0EA')):
+    """The Hokage's robes: the long red robe to the ankles, crossed white at the throat, and over it the white haori, open
+    down the front, its sleeves to the wrists and its skirt to the knees, split in front; the kanji for fire on its back."""
+    torso(s, robe, salt=79)
+    for x, y in ((3, 0), (4, 0), (3, 1)):
+        s.px('body', 'front', x, y, tone(white, -0.2 if y else 0))   # the undershirt's white crossed at the throat
+    s.px('body', 'front', 4, 1, tone(robe, -0.6))
+    sleeves(s, robe, skin, rows=11, cuff=robe)
+    for l in ('rleg', 'lleg'):
+        cloth(s, l, robe, rows=(0, 11), salt=83, grad=0.7)
+        ring(s, l, [10], robe, -0.6)                               # the robe's hem at the ankle
     cloth(s, 'jacket', white, salt=73, rough=0.35, ao_top=0.3)
     for y in range(12):
-        for x in (3, 4):
-            s.px('jacket', 'front', x, y, CLEAR)                       # open down the front
-        s.px('jacket', 'front', 2, y, tone(white, -0.5)); s.px('jacket', 'front', 5, y, tone(white, -0.7))
-    for a in ('rsleeve', 'lsleeve'):
-        cloth(s, a, white, rows=(0, 7), salt=75, rough=0.35)
-        ring(s, a, [6], red, -0.1)
-        s.paint(a, lambda f, x, y, w, h: tone(red, LIGHT[f] + 0.2) if f in SIDES and y == 5 and x % 2 == 0 else None)
-    for leg, inner_x in (('rpants', 3), ('lpants', 0)):
-        cloth(s, leg, white, rows=(0, 7), salt=77, rough=0.35, grad=0.6)
-        ring(s, leg, [6], red, -0.2)
-        s.paint(leg, lambda f, x, y, w, h: tone(red, LIGHT[f] + 0.2) if f in SIDES and y == 5 and (x + 1) % 2 == 0 else
-                (tone(red, LIGHT[f] - 0.2) if f in SIDES and y == 4 and x % 4 == 1 else None))   # the flames
-        for y in range(7):
-            s.px(leg, 'front', inner_x, y, CLEAR)                     # the skirt split in front
+        for x in (2, 3, 4, 5):
+            s.px('jacket', 'front', x, y, CLEAR)                  # open down the front
+        s.px('jacket', 'front', 1, y, tone(white, -0.35)); s.px('jacket', 'front', 6, y, tone(white, -0.6))
+    for a, inner in (('rsleeve', 'left'), ('lsleeve', 'right')):
+        cloth(s, a, white, rows=(0, 10), salt=75, rough=0.35, inner=inner)
+        ring(s, a, [9], white, -0.7)                               # the cuff's shade
+    for leg, outer_x, inner in (('rpants', 0, 'left'), ('lpants', 3, 'right')):
+        cloth(s, leg, white, rows=(0, 8), salt=77, rough=0.35, grad=0.6)
+        ring(s, leg, [7], white, -0.8)                             # the haori's hem
+        for y in range(8):
+            for x in range(4):
+                if x != outer_x:
+                    s.px(leg, 'front', x, y, CLEAR)               # split in front: the robe shows between
+                s.px(leg, inner, x, y, CLEAR)
     fire = ["..#..", "#.#.#", "..#..", ".#.#.", "#...#"]
     for y, row in enumerate(fire):
         for x, ch in enumerate(row):
             if ch == '#':
-                s.px('jacket', 'back', 2 + x - 1, 2 + y, tone(red, 0.1 - y * 0.1))
+                s.px('jacket', 'back', 1 + x, 2 + y, tone(rgb('#B8322E'), 0.1 - y * 0.1))
 
 
 def tatsumi():
