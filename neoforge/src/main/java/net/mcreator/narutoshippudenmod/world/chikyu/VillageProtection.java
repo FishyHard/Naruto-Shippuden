@@ -31,7 +31,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 /**
  * The hidden villages are not for building in (config chikyu.protect_villages): inside the Leaf's wall (and its gate)
  * and at both toriis nobody breaks or places blocks, empties or fills buckets, lights fires, strips or tills; explosions
- * leave the blocks standing, fire goes out as soon as it catches, and mobs cannot grief. Doors, buttons, seats and the
+ * leave the blocks standing, fire goes out as soon as it catches, and mobs cannot grief. Small plants (flowers, grass, ferns,
+ * mushrooms) can be picked, and grow back a couple of minutes later. Doors, buttons, seats and the
  * like still work. Operators in creative mode can still build, to mend things on a server.
  */
 @EventBusSubscriber(modid = "naruto_shippuden")
@@ -40,6 +41,19 @@ public final class VillageProtection {
 	}
 
 	private static final Queue<Fire> FIRES = new ConcurrentLinkedQueue<>();
+
+	/** A plant picked in the village, and the game time it grows back at. */
+	private record Regrow(net.minecraft.resources.ResourceKey<Level> level, BlockPos pos, net.minecraft.world.level.block.state.BlockState state, long at) {
+	}
+
+	private static final Queue<Regrow> REGROW = new ConcurrentLinkedQueue<>();
+	private static final int REGROW_TICKS = 20 * 120;
+
+	/** The village's small plants: anyone may pick them (a quest may want flowers); they grow back. */
+	private static boolean pickable(net.minecraft.world.level.block.state.BlockState state) {
+		return state.is(net.minecraft.tags.BlockTags.SMALL_FLOWERS) || state.is(Blocks.SHORT_GRASS) || state.is(Blocks.FERN)
+				|| state.is(Blocks.RED_MUSHROOM) || state.is(Blocks.BROWN_MUSHROOM);
+	}
 
 	private VillageProtection() {
 	}
@@ -71,7 +85,12 @@ public final class VillageProtection {
 
 	@SubscribeEvent
 	public static void onBreak(BreakBlockEvent event) {
-		if (isProtected(event.getLevel(), event.getPos()) && !builder(event.getPlayer()))
+		if (!isProtected(event.getLevel(), event.getPos()) || builder(event.getPlayer()))
+			return;
+		var state = event.getLevel().getBlockState(event.getPos());
+		if (pickable(state) && event.getLevel() instanceof Level level)
+			REGROW.add(new Regrow(level.dimension(), event.getPos().immutable(), state, level.getGameTime() + REGROW_TICKS));
+		else
 			event.setCanceled(true);
 	}
 
@@ -132,6 +151,17 @@ public final class VillageProtection {
 
 	@SubscribeEvent
 	public static void onLevelTick(LevelTickEvent.Post event) {
+		if (!REGROW.isEmpty() && event.getLevel() instanceof ServerLevel here && here.getGameTime() % 20 == 0)
+			REGROW.removeIf(r -> {
+				if (r.level() != here.dimension() || here.getGameTime() < r.at())
+					return false;
+				// back where it was, if nothing has taken the spot (and the chunk is there to grow in)
+				if (!here.isLoaded(r.pos()))
+					return false;
+				if (here.getBlockState(r.pos()).isAir() && r.state().canSurvive(here, r.pos()))
+					here.setBlock(r.pos(), r.state(), 3);
+				return true;
+			});
 		if (FIRES.isEmpty() || !(event.getLevel() instanceof ServerLevel level) || level.dimension() != Chikyu.CHIKYU && level.dimension() != Level.OVERWORLD)
 			return;
 		FIRES.removeIf(f -> {
