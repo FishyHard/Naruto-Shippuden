@@ -93,6 +93,11 @@ public final class DevTest {
 						mc.gui.hud.toggle();
 					mc.options.chatVisibility().set(net.minecraft.world.entity.player.ChatVisiblity.FULL);
 					command(mc, "gamemode creative");
+					// operator rights for whoever tests in this world (singleplayer has no /op)
+					onServer(mc, p -> {
+						p.level().getServer().getPlayerList().op(p.nameAndId());
+						p.level().getServer().getPlayerList().sendPlayerPermissionLevel(p);
+					});
 					command(mc, "tp @s " + a[1] + " " + a[2] + " " + a[3] + " " + a[4] + " " + a[5]);
 					NarutoShippudenMod.LOGGER.info("DEVTEST staying open");
 				});

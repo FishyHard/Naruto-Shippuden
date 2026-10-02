@@ -193,6 +193,7 @@ public final class StoryClient {
 	/** One conversation: lines one after another, choices as buttons; the result goes to the server at the end. */
 	static class DialogueScreen extends Screen {
 		private static final Identifier PANEL = Identifier.fromNamespaceAndPath("naruto_shippuden", "panel");
+		private static final Identifier INSET = Identifier.fromNamespaceAndPath("naruto_shippuden", "inset");
 		private static final int TEXT = 0xFF404040, MUTED = 0xFF707070, CHARS_PER_SECOND = 45;
 		private final CompoundTag context;
 		private final Deque<JsonObject> queue = new ArrayDeque<>();
@@ -234,6 +235,43 @@ public final class StoryClient {
 
 		private int panelTop() {
 			return height - 78;
+		}
+
+		/** Who speaks this line, to show them beside it: the player, or the nearest story character of that id. */
+		private net.minecraft.world.entity.LivingEntity speaker() {
+			if (line == null || minecraft == null || minecraft.player == null)
+				return null;
+			String who = line.has("speaker") ? line.get("speaker").getAsString() : "";
+			if (who.equals("player"))
+				return minecraft.player;
+			StoryNpc.Npc best = null;
+			for (StoryNpc.Npc npc : minecraft.level.getEntitiesOfClass(StoryNpc.Npc.class, minecraft.player.getBoundingBox().inflate(32), n -> n.character().equals(who)))
+				if (best == null || npc.distanceToSqr(minecraft.player) < best.distanceToSqr(minecraft.player))
+					best = npc;
+			return best;
+		}
+
+		/** The speaker in a little window at the panel's left, as the inventory shows the player (turned a little toward the text). */
+		private void portrait(GuiGraphicsExtractor graphics, net.minecraft.world.entity.LivingEntity entity, int x0, int y0, int x1, int y1) {
+			graphics.blitSprite(RenderPipelines.GUI_TEXTURED, INSET, x0, y0, x1 - x0, y1 - y0);
+			graphics.fill(x0 + 1, y0 + 1, x1 - 1, y1 - 1, 0xFF8B8B8B);
+			var renderer = minecraft.getEntityRenderDispatcher().getRenderer(entity);
+			var state = renderer.createRenderState(entity, 1.0F);
+			state.shadowPieces.clear();
+			state.outlineColor = 0;
+			state.nameTag = null;
+			float turn = -0.5F;
+			if (state instanceof net.minecraft.client.renderer.entity.state.LivingEntityRenderState living) {
+				living.bodyRot = 180.0F + turn * 20.0F;
+				living.yRot = turn * 20.0F;
+				living.xRot = 0;
+				living.boundingBoxWidth = living.boundingBoxWidth / living.scale;
+				living.boundingBoxHeight = living.boundingBoxHeight / living.scale;
+				living.scale = 1.0F;
+			}
+			org.joml.Quaternionf rotation = new org.joml.Quaternionf().rotateZ((float) Math.PI);
+			// framed from the chest up: big, and lowered so the head sits in the window
+			graphics.entity(state, 38, new org.joml.Vector3f(0.0F, state.boundingBoxHeight / 2.0F - 0.55F, 0.0F), rotation, null, x0 + 1, y0 + 1, x1 - 1, y1 - 1);
 		}
 
 		@Override
@@ -339,12 +377,18 @@ public final class StoryClient {
 				return;
 			int w = panelWidth(), x = (width - w) / 2, y = panelTop(), h = 70;
 			graphics.blitSprite(RenderPipelines.GUI_TEXTURED, PANEL, x, y, w, h);
+			net.minecraft.world.entity.LivingEntity who = speaker();
+			int tx = x + 8;
+			if (who != null) {
+				portrait(graphics, who, x + 6, y + 6, x + 52, y + h - 6);
+				tx = x + 58;
+			}
 			String name = line.has("name") ? line.get("name").getAsString() : "";
-			graphics.text(font, name, x + 8, y + 6, TEXT, false);
+			graphics.text(font, name, tx, y + 6, TEXT, false);
 			String shown = text().substring(0, shownChars());
-			List<FormattedCharSequence> wrapped = font.split(Component.literal(shown), w - 16);
+			List<FormattedCharSequence> wrapped = font.split(Component.literal(shown), x + w - 8 - tx);
 			for (int i = 0; i < wrapped.size() && i < 4; i++)
-				graphics.text(font, wrapped.get(i), x + 8, y + 20 + i * 10, TEXT, false);
+				graphics.text(font, wrapped.get(i), tx, y + 20 + i * 10, TEXT, false);
 			if (!typing() && !line.has("choices") && (System.currentTimeMillis() / 400) % 2 == 0)
 				graphics.text(font, "▼", x + w - 14, y + h - 12, MUTED, false);
 		}
@@ -463,6 +507,10 @@ public final class StoryClient {
 			this.wide = new HumanoidModel(context.bakeLayer(ModelLayers.PLAYER));
 			this.slim = new HumanoidModel(context.bakeLayer(ModelLayers.PLAYER_SLIM));
 			this.addLayer(new net.minecraft.client.renderer.entity.layers.ItemInHandLayer<>(this));
+			// what they wear (the forehead protector is the real headband item, not painted on the skin)
+			this.addLayer(new net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer<>(this,
+					net.minecraft.client.renderer.entity.ArmorModelSet.bake(ModelLayers.PLAYER_ARMOR, context.getModelSet(), HumanoidModel::new),
+					context.getEquipmentRenderer()));
 		}
 
 		@Override

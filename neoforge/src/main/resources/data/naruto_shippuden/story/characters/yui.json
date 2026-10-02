@@ -1,0 +1,16 @@
+{
+  "name": "Yui Hoshino",
+  "skin": "naruto_shippuden:textures/entities/story/yui.png",
+  "model": "slim",
+  "home": [
+    -123,
+    65,
+    -67
+  ],
+  "yaw": 180,
+  "after": "chapter1/04_scroll_of_seals",
+  "idle": [
+    "If you get hurt, come to me. I've been studying medical ninjutsu.",
+    "Ren's loud, but he means well."
+  ]
+}

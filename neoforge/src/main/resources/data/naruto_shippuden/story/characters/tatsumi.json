@@ -1,0 +1,19 @@
+{
+  "name": "Tatsumi Kurogane",
+  "skin": "naruto_shippuden:textures/entities/story/tatsumi.png",
+  "model": "player",
+  "equipment": {
+    "head": "naruto_shippuden:genin_konohagakure_helmet"
+  },
+  "home": [
+    -126,
+    65,
+    -76
+  ],
+  "yaw": 0,
+  "after": "chapter1/04_scroll_of_seals",
+  "idle": [
+    "Teamwork first. Talent second.",
+    "Don't look at my scar, look at my hands. That's where the jutsu starts."
+  ]
+}

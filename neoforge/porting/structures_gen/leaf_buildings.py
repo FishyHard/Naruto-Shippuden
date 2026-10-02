@@ -206,8 +206,8 @@ def academy():
             b.fill(x, fy, z1 + 1, x, fy + 4, cw, 'white_terracotta')
             b.fill(x, fy, z1 + 1, x, fy, cw, 'stripped_spruce_wood[axis=z]')
         b.fill(s1 + 1, fy, cw, s2 - 1, fy + 3, cw, AIR)          # the stair hall opens on the corridor
-        # doors into the rooms
-        for dx in (x1 + 4, s1 - 3, s2 + 3, x2 - 4):
+        # doors into the rooms, at the ends of each room, clear of the classrooms' rising rows of desks
+        for dx in (x1 + 2, s1 - 2, s2 + 2, x2 - 2):
             b.door(dx, fy, cw, 'spruce', 'south', 'left')
         # corridor: lamps, plants, a bench
         for x in range(x1 + 4, x2 - 2, 6):

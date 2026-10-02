@@ -13,6 +13,12 @@ NEO = os.path.normpath(os.path.join(HERE, '..', '..'))
 TREES = [os.path.join(NEO, 'src/main/resources'), os.path.join(NEO, 'porting/res_override')]
 
 
+def _h(x, y, salt):
+    v = (x * 73856093) ^ (y * 19349663) ^ (salt * 83492791)
+    v = (v ^ (v >> 13)) * 1274126177
+    return ((v ^ (v >> 16)) & 0xffffffff) / 0xffffffff
+
+
 def rgb(h):
     h = h.lstrip('#')
     return (int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16), 255)
@@ -58,16 +64,30 @@ class Skin:
                     if c is not None:
                         self.im.putpixel((x0 + x, y0 + y), c)
 
-    def fill(self, part, colour, rows=None, only=None):
-        """A flat colour (rows = (from, to) of the side faces; tops and bottoms with the first/last row), lit from above."""
+    def fill(self, part, colour, rows=None, only=None, folds=True):
+        """A colour lit from above, as vanilla's skins are: tops lighter, sides and the bottom row of each band darker,
+        the outer columns of the front a touch darker, and a few soft folds (rows = (from, to) of the side faces)."""
+        salt = sum(map(ord, part))
         def fn(face, x, y, w, h):
             if face == 'top':
                 return shade(colour, 1.08) if rows is None or rows[0] == 0 else None
             if face == 'bottom':
-                return shade(colour, 0.8) if rows is None or rows[1] >= h else None
+                return shade(colour, 0.78) if rows is None or rows[1] >= h else None
             if rows is not None and not rows[0] <= y < rows[1]:
                 return None
-            return shade(colour, 0.92) if face in ('left', 'right') else colour
+            f = 0.88 if face in ('left', 'right') else 1.0
+            if folds and h >= 8:
+                f *= 1.08 - 0.2 * y / (h - 1)                # lit from above: light at the top, darker toward the hem
+            end = rows[1] if rows else h
+            if y == end - 1 and end - (rows[0] if rows else 0) > 2:
+                f *= 0.9                                     # the hem
+            if face in ('front', 'back') and (x == 0 or x == w - 1):
+                f *= 0.96
+            if folds and h >= 8 and _h(x, y, salt) < 0.09:
+                f *= 0.92                                    # a fold
+            if folds and h >= 8 and y < 2 and _h(x, y, salt + 7) < 0.15:
+                f *= 1.05                                    # light on the shoulders
+            return shade(colour, f)
         self.paint(part, fn, only)
 
     def px(self, part, face, x, y, colour):
@@ -84,37 +104,72 @@ class Skin:
 
 # ---------------------------------------------------------------- the pieces every character is made of
 
-def face(s, skin, eye, hair, fringe, side=3, back=6, whiskers=None, marks=None, glasses=None, pale_eyes=False):
-    """Head: skin, hair over the top, down the sides (side rows) and back (back rows), a fringe (per front column, how many
-    rows of hair), eyes on row 4, a darker mouth on row 6."""
-    s.fill('head', skin)
-    s.paint('head', lambda f, x, y, w, h: shade(hair, 1.05) if f == 'top' else None)
-    s.paint('head', lambda f, x, y, w, h: hair if f in ('left', 'right') and y < side else None)
-    s.paint('head', lambda f, x, y, w, h: hair if f == 'back' and y < back else None)
-    s.paint('head', lambda f, x, y, w, h: hair if f == 'front' and y < fringe[x] else None)
-    # volume: the hat layer carries the hair's top and its upper sides, a little proud of the head
-    s.paint('hat', lambda f, x, y, w, h: (shade(hair, 1.1) if f == 'top' else hair)
-            if f == 'top' or (f in ('left', 'right', 'back') and y < 2) else None)
-    white = rgb('#F4F4F4')
+def face(s, skin, eye, hair, fringe, side=3, back=6, whiskers=None, marks=None, glasses=None, pale_eyes=False, brows=True,
+         spikes=None, lashes=False):
+    """The head, in the manner of the good Naruto skins: hair in three tones (light streaks, base, dark ends) over the top,
+    down the sides (side rows) and back (back rows); a fringe (rows per front column) with a jagged dark edge; on the hat
+    layer the hair stands out round the head (spikes: rows per hat column hanging down the front, for spiky hair); eyes two
+    pixels tall (white outside, the iris inside with a light top), eyebrows, a soft chin; no mouth, as anime faces."""
+    s.fill('head', skin, folds=False)
+    light, dark, deep = shade(hair, 1.18), shade(hair, 0.8), shade(hair, 0.65)
+
+    def strand(x, y, salt, depth):
+        v = _h(x, 0, salt)
+        c = light if v < 0.22 else hair if v < 0.7 else dark
+        if y >= depth - 1:
+            c = deep if v < 0.5 else dark                  # the ends of the hair are its darkest
+        elif y == 0 and v < 0.5:
+            c = light
+        return c
+
+    s.paint('head', lambda f, x, y, w, h: (light if (x * 2 + y) % 5 == 0 else hair if (x + y) % 3 else dark) if f == 'top' else None)
+    s.paint('head', lambda f, x, y, w, h: strand(x, y, 11, side) if f in ('left', 'right') and y < side else None)
+    s.paint('head', lambda f, x, y, w, h: strand(x, y, 12, back) if f == 'back' and y < back else None)
+    s.paint('head', lambda f, x, y, w, h: strand(x, y, 13, fringe[x]) if f == 'front' and y < fringe[x] else None)
+    # the fringe's shadow on the skin below it
+    for x in range(8):
+        if 0 < fringe[x] < 8:
+            s.px('head', 'front', x, fringe[x], shade(skin, 0.88))
+    for f in ('left', 'right'):
+        if side <= 5:
+            s.px('head', f, 3, 5, shade(skin, 0.84)); s.px('head', f, 4, 5, shade(skin, 0.84))
+    # the hat layer: the hair's volume round the head, spikes hanging over the front if any
+    hat_side = max(1, min(side, 3))
+    s.paint('hat', lambda f, x, y, w, h: (light if (x * 3 + y) % 4 == 0 else hair if (x + 2 * y) % 3 else dark) if f == 'top' else None)
+    s.paint('hat', lambda f, x, y, w, h: strand(x, y, 21, hat_side) if f in ('left', 'right', 'back') and y < hat_side else None)
+    if spikes:
+        s.paint('hat', lambda f, x, y, w, h: strand(x, y, 23, spikes[x]) if f == 'front' and y < spikes[x] else None)
+    white = rgb('#F6F6F6')
+    if brows:
+        for x in (1, 2, 5, 6):
+            if fringe[x] <= 3 and not (spikes and spikes[x] > 3):
+                s.px('head', 'front', x, 3, deep)
     if pale_eyes:
-        for x in (1, 6):
-            s.px('head', 'front', x, 4, rgb('#F4F4F4'))
-        for x in (2, 5):
-            s.px('head', 'front', x, 4, rgb('#C2B8E0'))
-    else:
-        s.px('head', 'front', 1, 4, white); s.px('head', 'front', 2, 4, eye)
-        s.px('head', 'front', 5, 4, eye); s.px('head', 'front', 6, 4, white)
-    s.px('head', 'front', 3, 6, shade(skin, 0.78)); s.px('head', 'front', 4, 6, shade(skin, 0.78))
+        # the Byakugan at rest: pale lavender, no pupils, a faint ring
+        for x, outer in ((1, True), (2, False), (5, False), (6, True)):
+            s.px('head', 'front', x, 4, rgb('#ECE8F6') if not outer else rgb('#F8F8FC'))
+            s.px('head', 'front', x, 5, rgb('#D6CEEA') if not outer else rgb('#E8E4F2'))
+    elif eye is not None:
+        for x, outer in ((1, True), (2, False), (5, False), (6, True)):
+            if outer:
+                s.px('head', 'front', x, 4, white); s.px('head', 'front', x, 5, shade(white, 0.92))
+            else:
+                s.px('head', 'front', x, 4, shade(eye, 1.3)); s.px('head', 'front', x, 5, eye)
+        if lashes:
+            s.px('head', 'front', 0, 4, deep); s.px('head', 'front', 7, 4, deep)
+    for x in range(1, 7):
+        s.px('head', 'front', x, 7, shade(skin, 0.94))
     if whiskers:
-        for (x, y) in ((0, 5), (1, 5), (6, 5), (7, 5)):
+        for (x, y) in ((0, 6), (1, 6), (6, 6), (7, 6)):
             s.px('head', 'front', x, y, whiskers)
     if marks:
         for (x, y, c) in marks:
             s.px('head', 'front', x, y, c)
     if glasses:
         for x in range(1, 7):
-            s.px('head', 'front', x, 4, glasses)
+            s.px('head', 'front', x, 4, glasses); s.px('head', 'front', x, 5, glasses)
         s.px('head', 'front', 0, 4, shade(glasses, 1.3)); s.px('head', 'front', 7, 4, shade(glasses, 1.3))
+        s.px('head', 'front', 2, 4, shade(glasses, 1.8)); s.px('head', 'front', 5, 4, shade(glasses, 1.8))
 
 
 def headband(s, cloth=rgb('#2B3A6B'), metal=rgb('#B8BEC6'), row=2):
@@ -146,7 +201,7 @@ def torso(s, colour, collar=None, zip=None, belt=None, trim=None):
 def arms(s, sleeve, skin, sleeve_rows=12, cuff=None, warmer=None):
     """Sleeves down to sleeve_rows, then bare arm; a cuff on the last sleeve row; warmers (bandages) on the forearm."""
     for a in ('rarm', 'larm'):
-        s.fill(a, skin)
+        s.fill(a, skin, folds=False)
         s.fill(a, sleeve, rows=(0, sleeve_rows))
         if cuff and sleeve_rows < 12:
             s.paint(a, lambda f, x, y, w, h: cuff if f not in ('top', 'bottom') and y == sleeve_rows - 1 else None)
@@ -154,11 +209,17 @@ def arms(s, sleeve, skin, sleeve_rows=12, cuff=None, warmer=None):
             s.paint(a, lambda f, x, y, w, h: (warmer if y % 2 else shade(warmer, 0.9)) if f not in ('top', 'bottom') and 6 <= y < 11 else None)
 
 
-def legs(s, pants, shoe, skin=None, pants_rows=12, shoe_rows=2, wrap=None):
+def legs(s, pants, shoe, skin=None, pants_rows=12, shoe_rows=2, wrap=None, toes=None):
+    """Trousers down to pants_rows, bare leg below if skin, and the shinobi sandals: shoe_rows of shoe with the toes
+    showing at the front (toes: their colour, the skin by default)."""
+    toe = toes or skin or SKIN
     for l in ('rleg', 'lleg'):
-        s.fill(l, skin or pants)
+        s.fill(l, skin or pants, folds=False)
         s.fill(l, pants, rows=(0, pants_rows))
-        s.fill(l, shoe, rows=(12 - shoe_rows, 12))
+        s.fill(l, shoe, rows=(12 - shoe_rows, 12), folds=False)
+        # open toes, and the sandal's strap above them
+        s.paint(l, lambda f, x, y, w, h: shade(toe, 0.95) if f == 'front' and y == 11 and x in (1, 2) else None)
+        s.paint(l, lambda f, x, y, w, h: shade(shoe, 0.8) if f in ('front', 'left', 'right', 'back') and y == 12 - shoe_rows - 1 and skin else None)
         if wrap:
             s.paint(l, lambda f, x, y, w, h: wrap if f not in ('top', 'bottom') and y in wrap_rows(pants_rows) else None)
 
@@ -175,7 +236,8 @@ EYE_DARK = rgb('#2A2A33')
 
 def naruto():
     s = Skin()
-    face(s, SKIN, rgb('#2E6FD6'), rgb('#F5C332'), fringe=[3, 3, 2, 2, 3, 2, 3, 3], side=4, back=8, whiskers=rgb('#9A6E50'))
+    face(s, SKIN, rgb('#2E6FD6'), rgb('#F5C332'), fringe=[3, 3, 2, 2, 3, 2, 3, 3], side=4, back=8, whiskers=rgb('#9A6E50'),
+         spikes=[3, 1, 2, 1, 2, 1, 2, 3])
     # spikes of hair stand out on the hat layer, and the green goggles of his Academy days on his forehead
     s.paint('hat', lambda f, x, y, w, h: rgb('#F5C332') if (f == 'top' and (x + y) % 3 == 0) or (f in ('left', 'right', 'back') and y == 0 and x % 2 == 0) else None)
     s.paint('hat', lambda f, x, y, w, h: rgb('#4D8C4A') if f in ('left', 'right', 'back') and y == 2 else None)
@@ -195,8 +257,8 @@ def naruto():
 def sasuke():
     s = Skin()
     hair = rgb('#1C1E2A')
-    face(s, SKIN, EYE_DARK, hair, fringe=[5, 3, 2, 2, 2, 2, 3, 5], side=6, back=8)
-    s.paint('hat', lambda f, x, y, w, h: hair if f == 'back' and y < 4 and x % 2 == 1 else None)   # the spikes at the back
+    face(s, SKIN, EYE_DARK, hair, fringe=[5, 3, 2, 2, 2, 2, 3, 5], side=6, back=8, spikes=[6, 3, 1, 0, 0, 1, 3, 6])
+    s.paint('hat', lambda f, x, y, w, h: shade(hair, 0.8) if f == 'back' and y < 5 and x % 2 == 1 else None)   # the spikes at the back
     navy = rgb('#1F2B57')
     torso(s, navy, collar=navy)
     s.paint('body', lambda f, x, y, w, h: shade(navy, 1.25) if y == 0 and f not in ('top', 'bottom') else None)
@@ -214,7 +276,7 @@ def sasuke():
 def sakura():
     s = Skin(slim=True)
     hair = rgb('#F2A1B9')
-    face(s, SKIN, rgb('#3E9A5A'), hair, fringe=[7, 3, 2, 2, 2, 2, 3, 7], side=8, back=8)
+    face(s, SKIN, rgb('#3E9A5A'), hair, fringe=[7, 3, 2, 2, 2, 2, 3, 7], side=8, back=8, lashes=True, spikes=[7, 2, 1, 0, 0, 1, 2, 7])
     s.paint('hat', lambda f, x, y, w, h: hair if f in ('left', 'right', 'back') and y >= 6 else None)
     # the red ribbon Ino gave her, tied round her head
     s.paint('hat', lambda f, x, y, w, h: rgb('#C42A2A') if f in ('front', 'left', 'right', 'back') and y == 1 else None)
@@ -249,7 +311,7 @@ def shikamaru():
 def ino():
     s = Skin(slim=True)
     hair = rgb('#F2E6A6')
-    face(s, SKIN, rgb('#5DA9D6'), hair, fringe=[6, 5, 3, 2, 2, 2, 2, 6], side=8, back=8)
+    face(s, SKIN, rgb('#5DA9D6'), hair, fringe=[6, 5, 3, 2, 2, 2, 2, 6], side=8, back=8, lashes=True, spikes=[6, 5, 4, 1, 0, 0, 1, 2])
     s.paint('hat', lambda f, x, y, w, h: hair if f == 'back' and x in (3, 4) else None)    # the long ponytail
     purple = rgb('#7B3C8F')
     torso(s, purple, collar=purple, belt=rgb('#E8E8E8'))
@@ -264,7 +326,7 @@ def choji():
     s = Skin()
     hair = rgb('#7A4A26')
     face(s, SKIN, EYE_DARK, hair, fringe=[3, 3, 2, 2, 2, 2, 3, 3], side=5, back=7,
-         marks=[(0, 5, rgb('#C44A4A')), (7, 5, rgb('#C44A4A'))])
+         marks=[(0, 6, rgb('#C44A4A')), (7, 6, rgb('#C44A4A')), (1, 6, rgb('#D46A6A')), (6, 6, rgb('#D46A6A'))])
     s.paint('hat', lambda f, x, y, w, h: hair if f == 'top' and (x + y) % 2 == 0 else None)
     green = rgb('#3E7C3C')
     torso(s, green, collar=rgb('#F2F2F2'))
@@ -278,7 +340,7 @@ def choji():
 def hinata():
     s = Skin(slim=True)
     hair = rgb('#2C2C52')
-    face(s, SKIN, None, hair, fringe=[8, 3, 3, 3, 3, 3, 3, 8], side=8, back=8, pale_eyes=True)
+    face(s, SKIN, None, hair, fringe=[8, 3, 3, 3, 3, 3, 3, 8], side=8, back=8, pale_eyes=True, lashes=True, spikes=[8, 3, 2, 2, 2, 2, 3, 8])
     cream, trim = rgb('#D9CFE4'), rgb('#7B5A9B')
     torso(s, cream, collar=trim, zip=trim)
     arms(s, cream, SKIN, sleeve_rows=11, cuff=trim)
@@ -289,8 +351,8 @@ def hinata():
 def kiba():
     s = Skin()
     hair = rgb('#5A3A22')
-    face(s, SKIN, EYE_DARK, hair, fringe=[3, 3, 2, 3, 2, 3, 3, 3], side=5, back=7,
-         marks=[(1, 5, rgb('#C42A2A')), (6, 5, rgb('#C42A2A')), (1, 6, rgb('#C42A2A')), (6, 6, rgb('#C42A2A'))])
+    face(s, SKIN, EYE_DARK, hair, fringe=[3, 3, 2, 3, 2, 3, 3, 3], side=5, back=7, spikes=[2, 1, 2, 1, 1, 2, 1, 2],
+         marks=[(1, 6, rgb('#C42A2A')), (6, 6, rgb('#C42A2A')), (1, 7, rgb('#C42A2A')), (6, 7, rgb('#C42A2A'))])
     grey, fur = rgb('#7C7C80'), rgb('#E8E4DC')
     torso(s, grey, collar=fur, zip=rgb('#5A5A5E'))
     s.paint('jacket', lambda f, x, y, w, h: fur if f in ('back',) and y < 3 else None)   # the fur-lined hood down his back
@@ -317,7 +379,6 @@ def mizuki():
     hair = rgb('#AFC6D8')
     face(s, SKIN, EYE_DARK, hair, fringe=[5, 3, 2, 2, 2, 2, 3, 5], side=8, back=8)
     s.paint('hat', lambda f, x, y, w, h: hair if f == 'back' and y >= 5 else None)
-    headband(s)
     navy, vest = rgb('#28304A'), rgb('#5E7050')
     torso(s, vest, collar=vest, zip=shade(vest, 0.8))
     s.paint('body', lambda f, x, y, w, h: shade(vest, 0.85) if f == 'front' and y in (4, 7) and x not in (3, 4) else None)   # the vest's pockets
@@ -351,8 +412,54 @@ def hiruzen():
     return s
 
 
+def tatsumi():
+    """The player's jonin sensei (an original character): dark grey spiky hair, a scar over one eye, the flak vest."""
+    s = Skin()
+    hair = rgb('#3C3F48')
+    face(s, SKIN, EYE_DARK, hair, fringe=[4, 3, 2, 2, 2, 2, 3, 4], side=6, back=8,
+         marks=[(5, 3, rgb('#B07A6A')), (5, 5, rgb('#B07A6A'))])
+    s.paint('hat', lambda f, x, y, w, h: hair if f == 'top' and (x + 2 * y) % 3 == 0 else None)
+    navy, vest = rgb('#28304A'), rgb('#5E7050')
+    torso(s, vest, collar=vest, zip=shade(vest, 0.8))
+    s.paint('body', lambda f, x, y, w, h: shade(vest, 0.85) if f == 'front' and y in (4, 7) and x not in (3, 4) else None)
+    arms(s, navy, SKIN, sleeve_rows=11)
+    for a in ('rarm', 'larm'):
+        s.fill(a, rgb('#B03030'), rows=(1, 2))
+    legs(s, navy, rgb('#2B3A6B'), pants_rows=10)
+    return s
+
+
+def ren():
+    """A squadmate (original): messy brown hair, a red scarf, a sand-coloured jacket (he wears the real headband item)."""
+    s = Skin()
+    hair = rgb('#6A4426')
+    face(s, SKIN, rgb('#3A6A3A'), hair, fringe=[3, 4, 2, 3, 2, 3, 4, 3], side=5, back=7, spikes=[2, 3, 1, 2, 1, 2, 3, 2])
+    jacket, scarf = rgb('#C8B48A'), rgb('#B82E2E')
+    torso(s, jacket, collar=scarf, zip=shade(jacket, 0.8))
+    s.paint('body', lambda f, x, y, w, h: scarf if f not in ('top', 'bottom') and y < 2 else None)
+    s.paint('jacket', lambda f, x, y, w, h: scarf if f == 'front' and x in (5, 6) and 2 <= y < 6 else None)   # the scarf's end
+    arms(s, jacket, SKIN, sleeve_rows=10, cuff=shade(jacket, 0.8))
+    legs(s, rgb('#3A3E4A'), rgb('#2B3A6B'), skin=SKIN, pants_rows=10)
+    return s
+
+
+def yui():
+    """A squadmate (original): a black bob, the headband round her neck, a white and teal medic's top."""
+    s = Skin(slim=True)
+    hair = rgb('#1E1E26')
+    face(s, SKIN, rgb('#4A5AA8'), hair, fringe=[6, 3, 2, 2, 2, 2, 3, 6], side=7, back=7, lashes=True, spikes=[6, 3, 2, 1, 1, 2, 3, 6])
+    white, teal = rgb('#EEF2F0'), rgb('#3A9A8E')
+    torso(s, white, collar=rgb('#2B3A6B'), trim=teal)
+    s.paint('body', lambda f, x, y, w, h: rgb('#B8BEC6') if f == 'front' and y == 0 and 2 <= x <= 5 else None)   # the plate at her neck
+    s.paint('body', lambda f, x, y, w, h: teal if f not in ('top', 'bottom') and y in (9, 10) else None)
+    arms(s, white, SKIN, sleeve_rows=4, warmer=teal)
+    legs(s, rgb('#2E3A48'), rgb('#2B3A6B'), skin=SKIN, pants_rows=9)
+    return s
+
+
 CHARACTERS = {'naruto': naruto, 'sasuke': sasuke, 'sakura': sakura, 'shikamaru_kid': shikamaru, 'ino': ino, 'choji': choji,
-              'hinata': hinata, 'kiba': kiba, 'shino': shino, 'mizuki': mizuki, 'hiruzen': hiruzen}
+              'hinata': hinata, 'kiba': kiba, 'shino': shino, 'mizuki': mizuki, 'hiruzen': hiruzen,
+              'tatsumi': tatsumi, 'ren': ren, 'yui': yui}
 
 
 def front_view(s):

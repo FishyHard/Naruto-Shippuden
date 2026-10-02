@@ -1,0 +1,46 @@
+{
+  "title": "Training: Chakra Nature",
+  "chapter": 2,
+  "after": [
+    "chapter2/03_body_flicker"
+  ],
+  "start": "tatsumi",
+  "offer": [
+    {
+      "speaker": "tatsumi",
+      "text": "Every shinobi's chakra leans toward a nature: fire, wind, lightning, earth or water."
+    },
+    {
+      "speaker": "tatsumi",
+      "text": "This Chakra Paper reacts to it. Channel your chakra into it."
+    }
+  ],
+  "steps": [
+    {
+      "type": "event",
+      "event": "chakra_paper",
+      "text": "Channel chakra into the Chakra Paper (use it)",
+      "on_start": [
+        "execute unless items entity @s container.* naruto_shippuden:chakra_paper run give @s naruto_shippuden:chakra_paper"
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "tatsumi",
+      "text": "Tell Tatsumi-sensei what happened",
+      "dialogue": [
+        {
+          "speaker": "tatsumi",
+          "text": "So that's your nature. Learn it well: one day your strongest jutsu will be born from it."
+        },
+        {
+          "speaker": "tatsumi",
+          "text": "Training's done for now. Tomorrow we go to the mission desk. Our first mission as Team Six."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 25
+  }
+}

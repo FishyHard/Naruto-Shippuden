@@ -63,7 +63,9 @@ import java.util.TreeMap;
 /**
  * The story's quest engine. Quests and characters are data:
  * <pre>
- * data/&lt;ns&gt;/story/characters/&lt;id&gt;.json  {"name", "skin", "model": "legacy"|"player"|"slim", "home": [x, y, z], "yaw", "idle": [lines]}
+ * data/&lt;ns&gt;/story/characters/&lt;id&gt;.json  {"name", "skin", "model": "legacy"|"player"|"slim", "home": [x, y, z], "yaw", "idle": [lines],
+ *                                          "after": quest id (the character is there only for players who have done it),
+ *                                          "equipment": {"head": item id, "mainhand": item id, ...} (the headband is worn, not painted)}
  * data/&lt;ns&gt;/story/quests/&lt;id&gt;.json      {"title", "chapter", "after": [quest ids], "start": "auto" | character id,
  *                                          "offer": [lines], "steps": [steps], "rewards": {"items": [{"id", "count"}], "xp" (shinobi XP), "vanilla_xp", "commands"}}
  * </pre>
@@ -77,11 +79,14 @@ import java.util.TreeMap;
  * {"type": "hit", "entity": id, "count": n}                    land n hits on them (training dummies, sparring)
  * {"type": "collect", "item": id, "count": n, "take": bool}   have n in the inventory (taken when "take")
  * {"type": "wait", "seconds": s}                               let time pass
- * {"type": "spar", "npc": id, "hits": n, "damage": d}         spar with that character until landing n hits (it hits back)
+ * {"type": "spar", "npc": id, "hits": n, "damage": d,         spar with that character until landing n hits; it fights back
+ *  "rank": 0-2, "throws": bool, "substitution": bool}          (rank: how fast and hard; throws kunai; dodges by Substitution)
  * {"type": "event", "event": name}                            something code reports with {@link #event}
  * </pre>
  * Any step may also bring "spawn": [{"character", "pos", "yaw", "steps"}]: scene characters for this player only, standing
- * there from this step for "steps" steps (1 by default), then gone.
+ * there from this step for "steps" steps (1 by default), then gone; and "effects": [{"type": "clones", "character", "around",
+ * "count", "seconds"} | {"type": "pose", "character", "pose": "crouch"|"lie"|"stand"} | {"type": "smoke", "character"}], played
+ * on the player's scene characters as the step starts. A choice may carry "commands" (run as the player when it is chosen).
  * A dialogue line is {"speaker": character id | "player", "text", "choices": [{"text", "flag", "lines": [lines]}]}: the
  * dialogue screen shows them in turn, a choice shows its own lines next and sets its flag on the player.
  *
@@ -93,7 +98,8 @@ public final class Story {
 	private static final Logger LOGGER = LogUtils.getLogger();
 	public static final String KEY = "naruto_shippuden:story";
 
-	public record Character(String id, String name, Identifier skin, String model, BlockPos home, float yaw, List<String> idle) {
+	public record Character(String id, String name, Identifier skin, String model, BlockPos home, float yaw, List<String> idle, String after,
+			Map<String, String> equipment) {
 	}
 
 	public record Quest(String id, String title, int chapter, List<String> after, String start, JsonArray offer, List<JsonObject> steps,
@@ -134,7 +140,7 @@ public final class Story {
 				chars.put(e.getKey(), new Character(e.getKey(), str(o, "name", e.getKey()),
 						Identifier.parse(str(o, "skin", "naruto_shippuden:textures/entities/iruka_sensei.png")), str(o, "model", "legacy"),
 						home == null ? null : new BlockPos(home.get(0).getAsInt(), home.get(1).getAsInt(), home.get(2).getAsInt()),
-						o.has("yaw") ? o.get("yaw").getAsFloat() : 0, idle));
+						o.has("yaw") ? o.get("yaw").getAsFloat() : 0, idle, str(o, "after", ""), equipment(o)));
 			}
 			Map<String, Quest> qs = new TreeMap<>();
 			for (var e : read(manager, "story/quests").entrySet()) {
@@ -172,6 +178,15 @@ public final class Story {
 			}
 			return out;
 		}
+	}
+
+	/** "equipment": {"head": item id, "mainhand": item id, ...}: what the character wears and holds. */
+	private static Map<String, String> equipment(JsonObject o) {
+		Map<String, String> out = new LinkedHashMap<>();
+		if (o.has("equipment"))
+			for (var e : o.getAsJsonObject("equipment").entrySet())
+				out.put(e.getKey(), e.getValue().getAsString());
+		return out;
 	}
 
 	static String str(JsonObject o, String key, String fallback) {
@@ -295,6 +310,125 @@ public final class Story {
 		}
 	}
 
+	/** A step's effects on the player's scene: clones rushing someone, a pose, a puff of smoke. */
+	private static void effects(ServerPlayer player, Quest quest, JsonObject step) {
+		if (!step.has("effects") || !(player.level() instanceof ServerLevel level))
+			return;
+		int at = stepIndex(player, quest.id());
+		for (JsonElement e : step.getAsJsonArray("effects")) {
+			JsonObject o = e.getAsJsonObject();
+			int delay = o.has("delay") ? o.get("delay").getAsInt() : 0;
+			if (delay > 0) {
+				JsonObject now = o.deepCopy();
+				now.remove("delay");
+				JsonObject single = new JsonObject();
+				JsonArray list = new JsonArray();
+				list.add(now);
+				single.add("effects", list);
+				LATER.add(new Later(level.getServer().getTickCount() + delay, player.getUUID(), quest.id(), at, single));
+				continue;
+			}
+			StoryNpc.Npc who = findNpc(player, str(o, "character", ""), 48);
+			switch (str(o, "type", "")) {
+				case "pose" -> {
+					if (who != null)
+						who.setStoryPose(str(o, "pose", "stand"));
+				}
+				case "smoke" -> {
+					if (who != null)
+						StoryNpc.Npc.puff(level, who);
+				}
+				case "clones" -> {
+					Character c = characters.get(str(o, "character", ""));
+					StoryNpc.Npc target = findNpc(player, str(o, "around", ""), 48);
+					if (c == null || target == null)
+						break;
+					int count = o.has("count") ? o.get("count").getAsInt() : 12, ticks = (o.has("seconds") ? o.get("seconds").getAsInt() : 8) * 20;
+					for (int i = 0; i < count; i++) {
+						StoryNpc.Npc clone = StoryNpc.entity.create(level, EntitySpawnReason.EVENT);
+						if (clone == null)
+							continue;
+						double a = i * 2 * Math.PI / count, r = 5 + level.getRandom().nextDouble() * 4;
+						double x = target.getX() + Math.cos(a) * r, z = target.getZ() + Math.sin(a) * r;
+						int y = level.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, (int) Math.floor(x), (int) Math.floor(z));
+						clone.applyCharacter(c);
+						clone.setScene(player.getUUID(), quest.id(), at, at + 1);
+						clone.snapTo(x, y, z, 0, 0);
+						clone.rush(target, ticks + level.getRandom().nextInt(30));
+						level.addFreshEntity(clone);
+						StoryNpc.Npc.puff(level, clone);
+					}
+					level.playSound(null, target.blockPosition(), SoundEvents.PUFFER_FISH_BLOW_OUT, SoundSource.NEUTRAL, 1.5F, 0.8F);
+				}
+				default -> {
+				}
+			}
+		}
+	}
+
+	private record Later(long tick, java.util.UUID player, String quest, int step, JsonObject effects) {
+	}
+
+	/** Effects with a "delay" (in ticks), played then if the player is still on that step. */
+	private static final List<Later> LATER = new java.util.concurrent.CopyOnWriteArrayList<>();
+
+	private static void playLater(MinecraftServer server) {
+		for (Later l : LATER) {
+			if (l.tick() > server.getTickCount())
+				continue;
+			LATER.remove(l);
+			ServerPlayer p = server.getPlayerList().getPlayer(l.player());
+			Quest q = quests.get(l.quest());
+			if (p != null && q != null && stepIndex(p, q.id()) == l.step())
+				effects(p, q, l.effects());
+		}
+	}
+
+	// ---------------------------------------------------------------- whose scene is where
+
+	/** For each player, how many scene figures of each character they have (they don't see that character's usual figure). */
+	private static final java.util.Map<java.util.UUID, java.util.Map<String, Integer>> SCENES = new java.util.concurrent.ConcurrentHashMap<>();
+
+	/** Whether the player sees this character's usual figure: not while they have a scene figure of it, nor before its "after" quest. */
+	public static boolean seesUsual(ServerPlayer player, String character) {
+		if (hasScene(player.getUUID(), character))
+			return false;
+		Character c = characters.get(character);
+		return c == null || c.after().isEmpty() || isDone(player, c.after());
+	}
+
+	public static boolean hasScene(java.util.UUID player, String character) {
+		java.util.Map<String, Integer> m = SCENES.get(player);
+		return m != null && m.getOrDefault(character, 0) > 0;
+	}
+
+	public static void sceneAdded(ServerLevel level, java.util.UUID player, String character) {
+		boolean was = hasScene(player, character);
+		SCENES.computeIfAbsent(player, k -> new java.util.concurrent.ConcurrentHashMap<>()).merge(character, 1, Integer::sum);
+		if (!was)
+			retrack(level, character);
+	}
+
+	public static void sceneRemoved(ServerLevel level, java.util.UUID player, String character) {
+		java.util.Map<String, Integer> m = SCENES.get(player);
+		if (m == null)
+			return;
+		m.computeIfPresent(character, (k, v) -> v <= 1 ? null : v - 1);
+		if (!hasScene(player, character))
+			retrack(level, character);
+	}
+
+	/** Who sees the character's usual figure is decided when it starts being tracked: track it afresh so the change shows now. */
+	private static void retrack(ServerLevel level, String character) {
+		if (level.getServer() == null || !level.getServer().isSameThread())
+			return;
+		for (Entity e : level.getAllEntities())
+			if (e instanceof StoryNpc.Npc npc && !npc.isScene() && npc.character().equals(character)) {
+				level.getChunkSource().removeEntity(npc);
+				level.getChunkSource().addEntity(npc);
+			}
+	}
+
 	/** The Chakra Paper was used (StuffItems, by the rule chakra_paper_story). */
 	public static void chakraPaperUsed(Entity entity) {
 		if (entity instanceof ServerPlayer player)
@@ -322,6 +456,7 @@ public final class Story {
 		if (step.has("on_start"))
 			step.getAsJsonArray("on_start").forEach(c -> Compat.runCommand(player, c.getAsString()));
 		spawnScene(player, quest, step);
+		effects(player, quest, step);
 		check(player, quest, step);
 	}
 
@@ -360,6 +495,11 @@ public final class Story {
 		if (r.has("commands"))
 			r.getAsJsonArray("commands").forEach(c -> Compat.runCommand(player, c.getAsString()));
 		announce(player, Component.literal("Quest complete").withStyle(ChatFormatting.GREEN), quest.title(), SoundEvents.UI_TOAST_CHALLENGE_COMPLETE);
+		// characters who wait for this quest appear now
+		if (player.level() instanceof ServerLevel level)
+			for (Character c : characters.values())
+				if (c.after().equals(quest.id()))
+					retrack(level, c.id());
 		autoStart(player);
 		sync(player);
 	}
@@ -420,7 +560,9 @@ public final class Story {
 				if (!going) {
 					StoryNpc.Npc npc = findNpc(player, who, 24);
 					if (npc != null && !npc.isSparring())
-						npc.spar(player, step.has("hits") ? step.get("hits").getAsInt() : 5, step.has("damage") ? step.get("damage").getAsDouble() : 2);
+						npc.spar(player, step.has("hits") ? step.get("hits").getAsInt() : 5, step.has("damage") ? step.get("damage").getAsDouble() : 2,
+								step.has("rank") ? step.get("rank").getAsInt() : 0, step.has("throws") && step.get("throws").getAsBoolean(),
+								step.has("substitution") && step.get("substitution").getAsBoolean());
 				}
 			}
 			case "wait" -> {
@@ -512,7 +654,14 @@ public final class Story {
 	/** A player talks to a story character: their quest's dialogue, a new quest, or a passing word. */
 	public static void talk(ServerPlayer player, StoryNpc.Npc npc) {
 		String who = npc.character();
-		for (Quest q : quests.values()) {
+		// the quest the tracker shows first, then the others
+		List<Quest> order = new ArrayList<>(quests.values());
+		Quest focus = quests.get(state(player).getStringOr("focus", ""));
+		if (focus != null) {
+			order.remove(focus);
+			order.addFirst(focus);
+		}
+		for (Quest q : order) {
 			JsonObject step = step(player, q);
 			if (step != null && str(step, "type", "").equals("talk") && str(step, "npc", "").equals(who)) {
 				openDialogue(player, npc, q.id(), "step", step.has("dialogue") ? step.getAsJsonArray("dialogue") : new JsonArray());
@@ -568,9 +717,25 @@ public final class Story {
 		Entity e = player.level().getEntity(result.getIntOr("npc", -1));
 		if (!(e instanceof StoryNpc.Npc npc) || npc.distanceToSqr(player) > 12 * 12)
 			return;
-		CompoundTag flags = section(state(player), "flags");
-		result.getListOrEmpty("flags").forEach(f -> f.asString().ifPresent(name -> flags.putInt(name, flags.getIntOr(name, 0) + 1)));
 		Quest q = quests.get(result.getStringOr("quest", ""));
+		// only the choices this very dialogue offers count (and run their commands)
+		JsonArray dialogue = null;
+		if (q != null && result.getStringOr("kind", "").equals("offer"))
+			dialogue = q.offer();
+		else if (q != null && step(player, q) instanceof JsonObject st && st.has("dialogue"))
+			dialogue = st.getAsJsonArray("dialogue");
+		java.util.Map<String, JsonObject> offered = new java.util.HashMap<>();
+		if (dialogue != null)
+			choices(dialogue, offered);
+		CompoundTag flags = section(state(player), "flags");
+		result.getListOrEmpty("flags").forEach(f -> f.asString().ifPresent(name -> {
+			JsonObject choice = offered.get(name);
+			if (choice == null)
+				return;
+			flags.putInt(name, flags.getIntOr(name, 0) + 1);
+			if (choice.has("commands"))
+				choice.getAsJsonArray("commands").forEach(c -> Compat.runCommand(player, c.getAsString()));
+		}));
 		if (q == null)
 			return;
 		switch (result.getStringOr("kind", "")) {
@@ -584,6 +749,22 @@ public final class Story {
 					advance(player, q);
 			}
 			default -> {
+			}
+		}
+	}
+
+	/** Every choice with a flag in these lines (and in the lines the choices lead to), by flag. */
+	private static void choices(JsonArray lines, java.util.Map<String, JsonObject> out) {
+		for (JsonElement e : lines) {
+			JsonObject line = e.getAsJsonObject();
+			if (!line.has("choices"))
+				continue;
+			for (JsonElement c : line.getAsJsonArray("choices")) {
+				JsonObject choice = c.getAsJsonObject();
+				if (choice.has("flag"))
+					out.put(choice.get("flag").getAsString(), choice);
+				if (choice.has("lines"))
+					choices(choice.getAsJsonArray("lines"), out);
 			}
 		}
 	}
@@ -731,6 +912,8 @@ public final class Story {
 	@SubscribeEvent
 	public static void onServerTick(ServerTickEvent.Post event) {
 		MinecraftServer server = event.getServer();
+		if (!LATER.isEmpty())
+			playLater(server);
 		if (server.getTickCount() % 40 != 0 || characters.isEmpty())
 			return;
 		ServerLevel level = server.getLevel(Chikyu.CHIKYU);

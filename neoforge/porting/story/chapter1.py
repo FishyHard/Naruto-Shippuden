@@ -1,4 +1,5 @@
 """Chapter 1, the Academy: the characters (story/characters) and the quests (story/quests/chapter1/...), written as data.
+(Chakra control, walking on walls and water, the dash and the Chakra Paper are Chapter 2's, taught by the player's sensei.)
 Run `python3 chapter1.py` to write them into both resource trees. The quest format is in story/Story.java's javadoc.
 
 The player is a classmate in Naruto's graduation year: Iruka's lessons in the Academy yard (chakra control, walking up
@@ -21,7 +22,7 @@ CHARACTERS = {
     'iruka': dict(name='Iruka Umino', skin='naruto_shippuden:textures/entities/iruka_sensei.png', model='legacy', home=[-84, G, -73], yaw=0,
                   idle=["Don't be late for class.", "A shinobi's tools are only as good as their training.",
                         "Naruto! ...Oh, it's you. Sorry. Have you seen him?"]),
-    'mizuki': dict(name='Mizuki', skin=skin('mizuki'), model='player', home=[-79, G, -74], yaw=0,
+    'mizuki': dict(name='Mizuki', skin=skin('mizuki'), model='player', equipment={'head': 'naruto_shippuden:genin_konohagakure_helmet'}, home=[-79, G, -74], yaw=0,
                    idle=["Iruka is too soft on that Naruto.", "Study hard. The exam is closer than you think."]),
     'hiruzen': dict(name='Hiruzen Sarutobi', skin=skin('hiruzen'), model='player', home=[0, G, -56], yaw=0,
                     idle=["Every one of you is a leaf of this village.", "Ah, the Academy's newest. How are your lessons?"]),
@@ -44,6 +45,13 @@ CHARACTERS = {
                  idle=["Akamaru says you smell like a rookie!", "Wanna go a round? I'll go easy. Maybe."]),
     'shino': dict(name='Shino Aburame', skin=skin('shino'), model='player', home=[-64, G, -65], yaw=90,
                   idle=["...", "The insects tell me rain is coming. Why? Because they always know."]),
+    # the player's squad: original characters, at Training Ground 3 once Chapter 1's last night is over
+    'tatsumi': dict(name='Tatsumi Kurogane', skin=skin('tatsumi'), model='player', equipment={'head': 'naruto_shippuden:genin_konohagakure_helmet'}, home=[-126, G, -76], yaw=0, after='chapter1/04_scroll_of_seals',
+                    idle=["Teamwork first. Talent second.", "Don't look at my scar, look at my hands. That's where the jutsu starts."]),
+    'ren': dict(name='Ren Sakuragi', skin=skin('ren'), model='player', equipment={'head': 'naruto_shippuden:genin_konohagakure_helmet'}, home=[-129, G, -67], yaw=180, after='chapter1/04_scroll_of_seals',
+                idle=["Our first real mission's coming. I can feel it!", "Race you to the stumps!"]),
+    'yui': dict(name='Yui Hoshino', skin=skin('yui'), model='slim', home=[-123, G, -67], yaw=180, after='chapter1/04_scroll_of_seals',
+                idle=["If you get hurt, come to me. I've been studying medical ninjutsu.", "Ren's loud, but he means well."]),
 }
 
 
@@ -69,7 +77,9 @@ def talk(npc, text, dialogue, **more):
 
 Q = 'chapter1/'
 EXAM_ROOM = [-70, G, -100]
-TRAINING_GROUND = [-121, G, -72]
+TRAINING_GROUND = [-120, G, -74]
+HEADBANDS = [('Blue', 'naruto_shippuden:genin_konohagakure_helmet'), ('Black', 'naruto_shippuden:genin_konohagakure_black_helmet'),
+             ('Red', 'naruto_shippuden:genin_konohagakure_red_helmet')]
 
 QUESTS = {
     Q + '01_first_day': dict(
@@ -105,46 +115,13 @@ QUESTS = {
                 say('choji', "*crunch* Hi! You can have one chip. Just one. ...Okay, maybe not."),
             ]),
             talk('iruka', 'Report back to Iruka', [
-                say('iruka', "Lively bunch, aren't they? Good. Lessons begin now, starting with the most important thing a shinobi has: chakra."),
+                say('iruka', "Lively bunch, aren't they? Good. Lessons begin now, starting with the tools every shinobi carries."),
             ]),
         ],
         rewards={'xp': 10}),
 
-    Q + '02_chakra_control': dict(
-        title='Lesson: Chakra Control', chapter=1, after=[Q + '01_first_day'], start='iruka',
-        offer=[
-            say('iruka', "Chakra is the energy of your body and your spirit, mixed together. Every jutsu starts with it."),
-            say('iruka', "Focus it now. Feel it gathering. (Press G for Chakra Control.)"),
-        ],
-        steps=[
-            dict(type='event', event='chakra_control', text='Focus your chakra (Chakra Control, G)'),
-            talk('iruka', 'Show Iruka', [
-                say('iruka', "Good, I can feel it from here! Now hold that chakra in the soles of your feet... and walk up the Academy's wall to the roof."),
-                say('iruka', "Too little and you fall. Too much and you're blasted off. Keep it steady!"),
-            ]),
-            dict(type='goto', pos=[-84, 83, -99], radius=10, min_y=82, text='Walk up the Academy wall to its roof'),
-            talk('iruka', 'Come back down to Iruka', [
-                say('iruka', "You made it to the top on your first try? Even Sasuke needed two! Well done."),
-            ]),
-        ],
-        rewards={'xp': 15}),
-
-    Q + '03_water_walking': dict(
-        title='Lesson: Walking on Water', chapter=1, after=[Q + '02_chakra_control'], start='iruka',
-        offer=[
-            say('iruka', "Water is harder than walls. It moves, so your chakra has to move with it."),
-            say('iruka', "Go to the lake south-west of the Academy and stand in the middle of it. On top of it, I mean!"),
-        ],
-        steps=[
-            dict(type='goto', pos=[-134, G, 91], radius=4, min_y=64.9, text='Stand on the water in the middle of the lake'),
-            talk('iruka', 'Report back to Iruka', [
-                say('iruka', "Dry feet? Excellent. Naruto fell in four times today... don't tell him I told you."),
-            ]),
-        ],
-        rewards={'xp': 15}),
-
-    Q + '04_shinobi_tools': dict(
-        title='Lesson: Kunai and Taijutsu', chapter=1, after=[Q + '03_water_walking'], start='iruka',
+    Q + '02_kunai_taijutsu': dict(
+        title='Lesson: Kunai and Taijutsu', chapter=1, after=[Q + '01_first_day'], start='iruka',
         offer=[
             say('iruka', "A shinobi without tools is a shinobi in trouble. Here are some kunai."),
             say('iruka', "Throw them at the training dummy by the targets. Aim for the chest!"),
@@ -158,7 +135,7 @@ QUESTS = {
                 say('iruka', "Nice throws! Now, taijutsu. Kiba's been itching for a match all morning."),
                 say('kiba', "Finally! Akamaru and I are gonna wipe the floor with you, rookie!"),
             ]),
-            dict(type='spar', npc='kiba', hits=6, damage=2, text='Spar with Kiba'),
+            dict(type='spar', npc='kiba', hits=6, damage=2, rank=0, text='Spar with Kiba'),
             talk('kiba', 'Talk to Kiba', [
                 say('kiba', "Tch... not bad. Akamaru says you got lucky. ...Rematch later!"),
             ]),
@@ -168,23 +145,8 @@ QUESTS = {
         ],
         rewards={'xp': 20}),
 
-    Q + '05_chakra_paper': dict(
-        title='Lesson: Chakra Nature', chapter=1, after=[Q + '04_shinobi_tools'], start='iruka',
-        offer=[
-            say('iruka', "Every shinobi's chakra leans toward a nature: fire, wind, lightning, earth or water."),
-            say('iruka', "This Chakra Paper reacts to it. Channel your chakra into it and we'll see what you are."),
-        ],
-        steps=[
-            dict(type='event', event='chakra_paper', text='Channel chakra into the Chakra Paper (use it)',
-                 on_start=['execute unless items entity @s container.* naruto_shippuden:chakra_paper run give @s naruto_shippuden:chakra_paper']),
-            talk('iruka', 'Tell Iruka what happened', [
-                say('iruka', "So that's your nature! Learn it well; one day your strongest jutsu will be born from it."),
-            ]),
-        ],
-        rewards={'xp': 15}),
-
-    Q + '06_graduation': dict(
-        title='The Graduation Exam', chapter=1, after=[Q + '05_chakra_paper'], start='iruka',
+    Q + '03_graduation': dict(
+        title='The Graduation Exam', chapter=1, after=[Q + '02_kunai_taijutsu'], start='iruka',
         offer=[
             say('iruka', "This is it: the graduation exam. Come to the exam room on the Academy's ground floor. Mizuki and I will be your examiners."),
         ],
@@ -200,12 +162,15 @@ QUESTS = {
             talk('iruka', 'Talk to Iruka', [
                 say('iruka', "Clean, solid clones. Second part: a spar. Sasuke is waiting for you in the yard."),
             ]),
-            dict(type='spar', npc='sasuke', hits=8, damage=3, text='Spar with Sasuke in the yard'),
+            dict(type='spar', npc='sasuke', hits=8, damage=3, rank=1, throws=True, substitution=True, text='Spar with Sasuke in the yard'),
             talk('sasuke', 'Talk to Sasuke', [
                 say('sasuke', "...You're stronger than you look. Next time, I won't hold back."),
             ]),
             talk('iruka', 'Return to Iruka', [
-                say('iruka', "Congratulations. You pass! Here: your forehead protector. From today, you are a shinobi of the Hidden Leaf."),
+                say('iruka', "Congratulations. You pass! From today, you are a shinobi of the Hidden Leaf."),
+                say('iruka', "Here: your forehead protector. Which cloth would you like?",
+                    [choice(colour, 'headband_' + colour.lower(), [say('iruka', "Wear it with pride.")],
+                            ) | {'commands': ['give @s %s' % item, 'naruto rank genin @s']} for colour, item in HEADBANDS]),
                 say('iruka', "...Naruto failed again, though. Go and see him if you can. He's by the swing."),
             ]),
             talk('naruto', 'Find Naruto at the swing', [
@@ -216,10 +181,10 @@ QUESTS = {
                 ]),
             ]),
         ],
-        rewards={'xp': 50, 'items': [{'id': 'naruto_shippuden:genin_konohagakure_helmet', 'count': 1}], 'commands': ['naruto rank genin @s']}),
+        rewards={'xp': 50}),
 
-    Q + '07_scroll_of_seals': dict(
-        title='The Scroll of Seals', chapter=1, after=[Q + '06_graduation'], start='auto',
+    Q + '04_scroll_of_seals': dict(
+        title='The Scroll of Seals', chapter=1, after=[Q + '03_graduation'], start='auto',
         steps=[
             talk('hiruzen', 'Answer the Hokage\'s summons at his residence', [
                 say('hiruzen', "You're one of the new genin, aren't you? I'm sorry to call on you on your first night as a shinobi."),
@@ -227,8 +192,9 @@ QUESTS = {
                 say('hiruzen', "Check the training ground west of the Academy. And be careful."),
             ]),
             dict(type='goto', pos=TRAINING_GROUND, radius=9, text='Search Training Ground 3, west of the Academy',
-                 spawn=[dict(character='iruka', pos=[-126, G, -75], yaw=0, steps=5), dict(character='naruto', pos=[-124, G, -78], yaw=0, steps=5),
-                        dict(character='mizuki', pos=[-121, G, -66], yaw=180, steps=5)]),
+                 spawn=[dict(character='iruka', pos=[-126, G, -75], yaw=-90, steps=5), dict(character='naruto', pos=[-128, G, -77], yaw=-90, steps=5),
+                        dict(character='mizuki', pos=[-117, G, -75], yaw=90, steps=5)],
+                 effects=[dict(type='pose', character='iruka', pose='crouch')]),
             talk('iruka', 'Talk to the wounded Iruka', [
                 say('iruka', "You... get out of here! Mizuki's the one who tricked Naruto. He wants the scroll for himself!"),
             ]),
@@ -239,13 +205,15 @@ QUESTS = {
                     choice("Naruto is my classmate. I won't let you.", 'loyal'),
                 ]),
             ]),
-            dict(type='spar', npc='mizuki', hits=10, damage=3, text='Fight Mizuki'),
+            dict(type='spar', npc='mizuki', hits=10, damage=3, rank=2, throws=True, substitution=True, text='Fight Mizuki'),
             talk('naruto', 'Talk to Naruto', [
-                say('naruto', "Lay one finger on Iruka-sensei and I'll kill you! Multi Shadow Clone Jutsu!"),
+                say('naruto', "Lay one finger on Iruka-sensei and I'll take you down! Multi Shadow Clone Jutsu!"),
                 say('mizuki', "Wh-what?! Hundreds of them...?!"),
                 say('naruto', "Heh heh... I guess I got a little carried away. You okay?"),
                 say('iruka', "Naruto, come here. Close your eyes... There. Congratulations. You graduate too."),
-            ]),
+            ], effects=[dict(type='clones', character='naruto', around='mizuki', count=28, seconds=7),
+                        dict(type='smoke', character='mizuki', delay=150), dict(type='pose', character='mizuki', pose='lie', delay=150),
+                        dict(type='pose', character='iruka', pose='stand', delay=170)]),
             talk('hiruzen', 'Report to the Hokage', [
                 say('hiruzen', "The scroll is safe, and Naruto is a genin. You did well tonight, standing beside your classmates."),
                 say('hiruzen', "Rest now. Tomorrow you'll be placed in your squad."),
@@ -253,14 +221,21 @@ QUESTS = {
         ],
         rewards={'xp': 60}),
 
-    Q + '08_team_assignment': dict(
-        title='Team Assignment', chapter=1, after=[Q + '07_scroll_of_seals'], start='iruka',
+    Q + '05_team_assignment': dict(
+        title='Team Assignment', chapter=1, after=[Q + '04_scroll_of_seals'], start='iruka',
         offer=[
             say('iruka', "Good morning, genin! Today you'll be split into three-person squads, each led by a jonin."),
-            say('iruka', "Your squad and your sensei will meet you here soon. I'm proud of every one of you."),
             say('naruto', "Team Seven! With Sakura-chan! ...And Sasuke. Ugh."),
+            say('iruka', "And you: Team Six, with Ren Sakuragi and Yui Hoshino, under jonin Tatsumi Kurogane. He's waiting for you at Training Ground 3."),
         ],
-        steps=[],
+        steps=[
+            talk('tatsumi', 'Meet your sensei at Training Ground 3', [
+                say('tatsumi', "So you're the third one. I'm Tatsumi Kurogane, your sensei. That loud one is Ren, and that's Yui."),
+                say('ren', "Hey! Finally, a full team!"),
+                say('yui', "Nice to meet you. Let's do our best."),
+                say('tatsumi', "Graduating the Academy only means you can learn. From tomorrow, I teach you what a real shinobi does."),
+            ]),
+        ],
         rewards={'xp': 30}),
 }
 
@@ -279,9 +254,12 @@ if __name__ == '__main__':
         write('characters/' + cid, c)
     for qid, q in QUESTS.items():
         write('quests/' + qid, q)
-    # the engine's test quest is replaced by Chapter 1
+    # quests that are gone (the engine's test, the first draft's lessons now in Chapter 2)
     for t in TREES:
-        p = os.path.join(t, 'data/naruto_shippuden/story/quests/engine_test.json')
-        if os.path.exists(p):
-            os.remove(p)
+        d = os.path.join(t, 'data/naruto_shippuden/story/quests')
+        for old in ('engine_test', 'chapter1/02_chakra_control', 'chapter1/03_water_walking', 'chapter1/04_shinobi_tools',
+                    'chapter1/05_chakra_paper', 'chapter1/06_graduation', 'chapter1/07_scroll_of_seals', 'chapter1/08_team_assignment'):
+            p = os.path.join(d, old + '.json')
+            if os.path.exists(p):
+                os.remove(p)
     print(len(CHARACTERS), 'characters,', len(QUESTS), 'quests')

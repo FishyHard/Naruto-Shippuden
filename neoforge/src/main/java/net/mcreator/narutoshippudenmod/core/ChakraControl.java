@@ -104,6 +104,7 @@ public final class ChakraControl {
 		double speed = (keys & UP) != 0 ? 0.9 : 1.7;
 		player.setDeltaMovement(dir.x * speed, up, dir.z * speed);
 		player.syncVelocity = true;
+		net.mcreator.narutoshippudenmod.story.Story.event(player, "dash");
 		player.fallDistance = 0;
 
 		ServerLevel level = (ServerLevel) player.level();

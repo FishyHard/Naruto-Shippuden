@@ -1,0 +1,73 @@
+{
+  "title": "Training: Chakra Control",
+  "chapter": 2,
+  "after": [
+    "chapter1/05_team_assignment"
+  ],
+  "start": "tatsumi",
+  "offer": [
+    {
+      "speaker": "tatsumi",
+      "text": "Before I send you on missions, you need to control your chakra, not just have it."
+    },
+    {
+      "speaker": "tatsumi",
+      "text": "Gather it. Feel it. (Press G for Chakra Control.)"
+    }
+  ],
+  "steps": [
+    {
+      "type": "event",
+      "event": "chakra_control",
+      "text": "Focus your chakra (Chakra Control, G)"
+    },
+    {
+      "type": "talk",
+      "npc": "tatsumi",
+      "text": "Show Tatsumi-sensei",
+      "dialogue": [
+        {
+          "speaker": "tatsumi",
+          "text": "Good. Now keep that chakra in the soles of your feet, and walk straight up the cliff north of here."
+        },
+        {
+          "speaker": "ren",
+          "text": "Up the CLIFF? Without hands?"
+        },
+        {
+          "speaker": "tatsumi",
+          "text": "Too little and you slip. Too much and you're blasted off. Steady. Last one to the top makes dinner."
+        }
+      ]
+    },
+    {
+      "type": "goto",
+      "pos": [
+        -126,
+        100,
+        -178
+      ],
+      "radius": 28,
+      "min_y": 100,
+      "text": "Walk up the cliff north of the training ground"
+    },
+    {
+      "type": "talk",
+      "npc": "tatsumi",
+      "text": "Come back down to Tatsumi-sensei",
+      "dialogue": [
+        {
+          "speaker": "tatsumi",
+          "text": "Not bad. Ren's still halfway up, and Yui made it first. Ren makes dinner."
+        },
+        {
+          "speaker": "yui",
+          "text": "It's all about balance. You did well too!"
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 20
+  }
+}

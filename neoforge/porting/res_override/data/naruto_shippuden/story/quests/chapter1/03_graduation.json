@@ -2,7 +2,7 @@
   "title": "The Graduation Exam",
   "chapter": 1,
   "after": [
-    "chapter1/05_chakra_paper"
+    "chapter1/02_kunai_taijutsu"
   ],
   "start": "iruka",
   "offer": [
@@ -83,6 +83,9 @@
       "npc": "sasuke",
       "hits": 8,
       "damage": 3,
+      "rank": 1,
+      "throws": true,
+      "substitution": true,
       "text": "Spar with Sasuke in the yard"
     },
     {
@@ -103,7 +106,55 @@
       "dialogue": [
         {
           "speaker": "iruka",
-          "text": "Congratulations. You pass! Here: your forehead protector. From today, you are a shinobi of the Hidden Leaf."
+          "text": "Congratulations. You pass! From today, you are a shinobi of the Hidden Leaf."
+        },
+        {
+          "speaker": "iruka",
+          "text": "Here: your forehead protector. Which cloth would you like?",
+          "choices": [
+            {
+              "text": "Blue",
+              "flag": "headband_blue",
+              "lines": [
+                {
+                  "speaker": "iruka",
+                  "text": "Wear it with pride."
+                }
+              ],
+              "commands": [
+                "give @s naruto_shippuden:genin_konohagakure_helmet",
+                "naruto rank genin @s"
+              ]
+            },
+            {
+              "text": "Black",
+              "flag": "headband_black",
+              "lines": [
+                {
+                  "speaker": "iruka",
+                  "text": "Wear it with pride."
+                }
+              ],
+              "commands": [
+                "give @s naruto_shippuden:genin_konohagakure_black_helmet",
+                "naruto rank genin @s"
+              ]
+            },
+            {
+              "text": "Red",
+              "flag": "headband_red",
+              "lines": [
+                {
+                  "speaker": "iruka",
+                  "text": "Wear it with pride."
+                }
+              ],
+              "commands": [
+                "give @s naruto_shippuden:genin_konohagakure_red_helmet",
+                "naruto rank genin @s"
+              ]
+            }
+          ]
         },
         {
           "speaker": "iruka",
@@ -150,15 +201,6 @@
     }
   ],
   "rewards": {
-    "xp": 50,
-    "items": [
-      {
-        "id": "naruto_shippuden:genin_konohagakure_helmet",
-        "count": 1
-      }
-    ],
-    "commands": [
-      "naruto rank genin @s"
-    ]
+    "xp": 50
   }
 }

@@ -2,7 +2,7 @@
   "title": "The Scroll of Seals",
   "chapter": 1,
   "after": [
-    "chapter1/06_graduation"
+    "chapter1/03_graduation"
   ],
   "start": "auto",
   "steps": [
@@ -28,9 +28,9 @@
     {
       "type": "goto",
       "pos": [
-        -121,
+        -120,
         65,
-        -72
+        -74
       ],
       "radius": 9,
       "text": "Search Training Ground 3, west of the Academy",
@@ -42,28 +42,35 @@
             65,
             -75
           ],
-          "yaw": 0,
+          "yaw": -90,
           "steps": 5
         },
         {
           "character": "naruto",
           "pos": [
-            -124,
+            -128,
             65,
-            -78
+            -77
           ],
-          "yaw": 0,
+          "yaw": -90,
           "steps": 5
         },
         {
           "character": "mizuki",
           "pos": [
-            -121,
+            -117,
             65,
-            -66
+            -75
           ],
-          "yaw": 180,
+          "yaw": 90,
           "steps": 5
+        }
+      ],
+      "effects": [
+        {
+          "type": "pose",
+          "character": "iruka",
+          "pose": "crouch"
         }
       ]
     },
@@ -108,6 +115,9 @@
       "npc": "mizuki",
       "hits": 10,
       "damage": 3,
+      "rank": 2,
+      "throws": true,
+      "substitution": true,
       "text": "Fight Mizuki"
     },
     {
@@ -117,7 +127,7 @@
       "dialogue": [
         {
           "speaker": "naruto",
-          "text": "Lay one finger on Iruka-sensei and I'll kill you! Multi Shadow Clone Jutsu!"
+          "text": "Lay one finger on Iruka-sensei and I'll take you down! Multi Shadow Clone Jutsu!"
         },
         {
           "speaker": "mizuki",
@@ -130,6 +140,32 @@
         {
           "speaker": "iruka",
           "text": "Naruto, come here. Close your eyes... There. Congratulations. You graduate too."
+        }
+      ],
+      "effects": [
+        {
+          "type": "clones",
+          "character": "naruto",
+          "around": "mizuki",
+          "count": 28,
+          "seconds": 7
+        },
+        {
+          "type": "smoke",
+          "character": "mizuki",
+          "delay": 150
+        },
+        {
+          "type": "pose",
+          "character": "mizuki",
+          "pose": "lie",
+          "delay": 150
+        },
+        {
+          "type": "pose",
+          "character": "iruka",
+          "pose": "stand",
+          "delay": 170
         }
       ]
     },

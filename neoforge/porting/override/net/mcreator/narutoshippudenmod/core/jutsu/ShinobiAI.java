@@ -455,7 +455,7 @@ public final class ShinobiAI {
 	}
 
 	/** A kunai or shuriken (Jonin throw three shuriken in a fan). */
-	private static void throwWeapon(Mob mob, LivingEntity target, int rank) {
+	public static void throwWeapon(Mob mob, LivingEntity target, int rank) {
 		ServerLevel level = (ServerLevel) mob.level();
 		face(mob, target, mob.distanceTo(target));
 		Weapons.swing(mob);

@@ -1,0 +1,64 @@
+{
+  "title": "Training: The Dash",
+  "chapter": 2,
+  "after": [
+    "chapter2/02_water_walking"
+  ],
+  "start": "tatsumi",
+  "offer": [
+    {
+      "speaker": "tatsumi",
+      "text": "Speed decides most fights before the first blow. Push your chakra out in one burst and move."
+    },
+    {
+      "speaker": "tatsumi",
+      "text": "With Chakra Control on, dash. (Left Alt, with a direction.)"
+    }
+  ],
+  "steps": [
+    {
+      "type": "event",
+      "event": "dash",
+      "text": "Dash with Chakra Control on (Left Alt)"
+    },
+    {
+      "type": "talk",
+      "npc": "tatsumi",
+      "text": "Show Tatsumi-sensei",
+      "dialogue": [
+        {
+          "speaker": "tatsumi",
+          "text": "There it is. Now try that against someone who dashes back."
+        },
+        {
+          "speaker": "ren",
+          "text": "Me! Pick me! I'll show you a real dash!"
+        }
+      ]
+    },
+    {
+      "type": "spar",
+      "npc": "ren",
+      "hits": 8,
+      "damage": 2,
+      "rank": 1,
+      "throws": true,
+      "substitution": false,
+      "text": "Spar with Ren"
+    },
+    {
+      "type": "talk",
+      "npc": "ren",
+      "text": "Talk to Ren",
+      "dialogue": [
+        {
+          "speaker": "ren",
+          "text": "Whoa... You're fast! Okay, okay, you win this one. Next one's mine!"
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 25
+  }
+}

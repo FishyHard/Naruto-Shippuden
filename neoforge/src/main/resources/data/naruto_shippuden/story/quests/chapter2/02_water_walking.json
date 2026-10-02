@@ -1,0 +1,45 @@
+{
+  "title": "Training: Walking on Water",
+  "chapter": 2,
+  "after": [
+    "chapter2/01_chakra_control"
+  ],
+  "start": "tatsumi",
+  "offer": [
+    {
+      "speaker": "tatsumi",
+      "text": "A cliff stands still. Water doesn't. Your chakra has to move with it."
+    },
+    {
+      "speaker": "tatsumi",
+      "text": "Go to the lake south-west of the Academy and stand in the middle of it. On it, not in it."
+    }
+  ],
+  "steps": [
+    {
+      "type": "goto",
+      "pos": [
+        -134,
+        65,
+        91
+      ],
+      "radius": 4,
+      "min_y": 64.9,
+      "text": "Stand on the water in the middle of the lake"
+    },
+    {
+      "type": "talk",
+      "npc": "tatsumi",
+      "text": "Report back to Tatsumi-sensei",
+      "dialogue": [
+        {
+          "speaker": "tatsumi",
+          "text": "Dry feet. Good. Ren fell in twice. Don't tell him I said so."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 20
+  }
+}

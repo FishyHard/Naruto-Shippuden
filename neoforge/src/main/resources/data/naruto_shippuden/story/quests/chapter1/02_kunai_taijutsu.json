@@ -2,7 +2,7 @@
   "title": "Lesson: Kunai and Taijutsu",
   "chapter": 1,
   "after": [
-    "chapter1/03_water_walking"
+    "chapter1/01_first_day"
   ],
   "start": "iruka",
   "offer": [
@@ -46,6 +46,7 @@
       "npc": "kiba",
       "hits": 6,
       "damage": 2,
+      "rank": 0,
       "text": "Spar with Kiba"
     },
     {

@@ -390,6 +390,18 @@ Nature Releases, Kekkei Genkai, DNA, Clans, Dojutsu, Shinobi Weapons, Headbands,
 - Chapter 1 is `porting/story/chapter1.py` (writes characters + quests/chapter1/*.json into both trees); skins are
   `porting/skins/skins.py` (writes textures/entities/story/*.png, 64x64, drawn as code). NPC renderer extends
   MobRenderer (HumanoidMobRenderer's AgeableMobRenderer resets the model in submit).
+- Chapter 1 = Academy only (first day, kunai + taijutsu spar with Kiba, graduation: Clone + spar with Sasuke + headband
+  colour choice that gives the item and the Genin rank, the Scroll of Seals with Naruto's clones, team assignment to Team
+  Six). Chapter 2 (`porting/story/chapter2.py`) starts with the squad's sensei Tatsumi teaching chakra control (cliff
+  climb), water walking, the dash (event "dash" from ChakraControl.dash) and the Chakra Paper. Squad: Tatsumi, Ren, Yui
+  (original characters, character "after" = chapter1/04 so they appear only then).
+- Visibility: `StoryNpc.broadcastToPlayer` (scene figures only for their player; the usual figure hidden from a player
+  who has a scene figure of it or hasn't done its "after" quest; `Story.retrack` re-tracks so changes show at once).
+- Spars use `StoryNpc.SparCombat` (footwork, strikes, kunai/shuriken via ShinobiAI.throwWeapon, Body Flicker,
+  Substitution with a log); step effects: clones (rush a target, vanish in smoke), pose crouch/lie, smoke, with delays.
+- Dialogue shows the speaker (portrait, like the inventory's player). Choices can carry server-side "commands".
+- Characters can wear real items ("equipment": head = headband). Template generator `build.py` connects fences, panes,
+  bars and walls (`Build.connect`) before saving.
 - Still to do for Chapter 1: the Chakra Paper choose-a-release menu when random_clan=false, a Substitution jutsu.
 
 ### Keys (defaults)

@@ -262,7 +262,74 @@ class Build:
         if bad:
             raise ValueError('unknown blocks: %s' % bad)
 
+    # ------------------------------------------------------------------ connections
+    # A template is placed during world generation, where blocks never update their neighbours: fences, panes, bars and
+    # walls keep whatever connections they were saved with. connect() works them out from the neighbours inside the
+    # template, as vanilla would when they are placed by hand.
+    NOT_SOLID = ('air', 'slab', 'stairs', 'fence', 'pane', 'iron_bars', '_wall', 'door', 'torch', 'lantern', 'flower', 'sapling',
+                 'carpet', 'sign', 'banner', 'button', 'lever', 'pressure_plate', 'rail', 'grass', 'fern', 'vine', 'ladder', 'chain',
+                 'candle', 'pot', 'rod', 'water', 'lava', 'snow', 'bed', 'bell', 'campfire', 'cauldron', 'anvil', 'lectern', 'cake',
+                 'dandelion', 'poppy', 'tulip', 'orchid', 'allium', 'bluet', 'daisy', 'cornflower', 'lily', 'bush', 'roots', 'head',
+                 'skull', 'scaffolding', 'cobweb', 'tripwire', 'string', 'hopper', 'brewing', 'grindstone', 'stonecutter', 'azalea',
+                 'mushroom', 'dripleaf', 'pickle', 'kelp', 'seagrass', 'coral', 'petals', 'leaf_litter', 'frame', 'end_rod', 'bamboo')
+
+    @staticmethod
+    def parse(state):
+        name, _, rest = state.partition('[')
+        props = dict(p.split('=') for p in rest[:-1].split(',')) if rest else {}
+        return name, props
+
+    @staticmethod
+    def kind(name):
+        if name.endswith('_fence') and not name.endswith('fence_gate'):
+            return 'nether_fence' if name.startswith('nether_brick') else 'fence'
+        if name.endswith('_pane') or name == 'iron_bars':
+            return 'pane'
+        if name.endswith('_wall') and not any(k in name for k in ('torch', 'sign', 'banner', 'head', 'skull', 'fan')):
+            return 'wall'
+        return None
+
+    def solid(self, name):
+        return not any(k in name for k in self.NOT_SOLID) and name not in ('glass',) or name.endswith('glass')
+
+    def connect(self):
+        sides = {'north': (0, -1), 'south': (0, 1), 'west': (-1, 0), 'east': (1, 0)}
+        out = {}
+        for (x, y, z), state in self.blocks.items():
+            name, props = self.parse(state)
+            k = self.kind(name)
+            if k is None:
+                continue
+            links = {}
+            for side, (dx, dz) in sides.items():
+                other = self.blocks.get((x + dx, y, z + dz))
+                on = False
+                if other:
+                    oname, _ = self.parse(other)
+                    ok = self.kind(oname)
+                    if k in ('fence', 'nether_fence'):
+                        on = ok == k or oname.endswith('fence_gate') or self.solid(oname)
+                    elif k == 'pane':
+                        on = ok in ('pane', 'wall') or self.solid(oname)
+                    else:
+                        on = ok in ('wall', 'pane') or oname.endswith('fence_gate') or self.solid(oname)
+                links[side] = on
+            if k == 'wall':
+                above = self.blocks.get((x, y + 1, z))
+                for side, on in links.items():
+                    props[side] = 'none' if not on else 'low'
+                straight = (links['north'] and links['south'] and not links['east'] and not links['west']) or \
+                           (links['east'] and links['west'] and not links['north'] and not links['south'])
+                props['up'] = 'false' if straight and not (above and self.parse(above)[0] != 'air') else 'true'
+            else:
+                for side, on in links.items():
+                    props[side] = 'true' if on else 'false'
+            props.setdefault('waterlogged', 'false')
+            out[(x, y, z)] = '%s[%s]' % (name, ','.join('%s=%s' % kv for kv in sorted(props.items())))
+        self.blocks.update(out)
+
     def save(self, path):
+        self.connect()
         self.check()
         palette, index = [], {}
         blocks = []

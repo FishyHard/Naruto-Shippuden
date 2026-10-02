@@ -1,0 +1,50 @@
+{
+  "title": "Team Assignment",
+  "chapter": 1,
+  "after": [
+    "chapter1/04_scroll_of_seals"
+  ],
+  "start": "iruka",
+  "offer": [
+    {
+      "speaker": "iruka",
+      "text": "Good morning, genin! Today you'll be split into three-person squads, each led by a jonin."
+    },
+    {
+      "speaker": "naruto",
+      "text": "Team Seven! With Sakura-chan! ...And Sasuke. Ugh."
+    },
+    {
+      "speaker": "iruka",
+      "text": "And you: Team Six, with Ren Sakuragi and Yui Hoshino, under jonin Tatsumi Kurogane. He's waiting for you at Training Ground 3."
+    }
+  ],
+  "steps": [
+    {
+      "type": "talk",
+      "npc": "tatsumi",
+      "text": "Meet your sensei at Training Ground 3",
+      "dialogue": [
+        {
+          "speaker": "tatsumi",
+          "text": "So you're the third one. I'm Tatsumi Kurogane, your sensei. That loud one is Ren, and that's Yui."
+        },
+        {
+          "speaker": "ren",
+          "text": "Hey! Finally, a full team!"
+        },
+        {
+          "speaker": "yui",
+          "text": "Nice to meet you. Let's do our best."
+        },
+        {
+          "speaker": "tatsumi",
+          "text": "Graduating the Academy only means you can learn. From tomorrow, I teach you what a real shinobi does."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 30
+  }
+}
