@@ -56,7 +56,8 @@
     {
       "type": "wait",
       "seconds": 20,
-      "text": "Lie back and watch the clouds"
+      "text": "Lie back and watch the clouds",
+      "bar": "Watching the clouds"
     },
     {
       "type": "talk",

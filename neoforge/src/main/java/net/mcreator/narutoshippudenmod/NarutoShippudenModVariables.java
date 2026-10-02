@@ -92,6 +92,8 @@ public class NarutoShippudenModVariables {
 		public double earthlearn = 0;
 		public boolean earthreleaselogic = false;
 		public double Eyes_Height = 1.0;
+		/** The dojutsu drawn this many skin pixels lower (negative: higher), to sit on the skin's own eyes. */
+		public double Eyes_Offset = 0.0;
 		public double fire_release = 0;
 		public double firelearn = 0;
 		public boolean firereleaselogic = false;
@@ -444,6 +446,7 @@ public class NarutoShippudenModVariables {
 			out.putDouble("earthlearn", earthlearn);
 			out.putBoolean("earthreleaselogic", earthreleaselogic);
 			out.putDouble("Eyes_Height", Eyes_Height);
+			out.putDouble("Eyes_Offset", Eyes_Offset);
 			out.putDouble("fire_release", fire_release);
 			out.putDouble("firelearn", firelearn);
 			out.putBoolean("firereleaselogic", firereleaselogic);
@@ -789,6 +792,7 @@ public class NarutoShippudenModVariables {
 			earthlearn = in.getDoubleOr("earthlearn", 0);
 			earthreleaselogic = in.getBooleanOr("earthreleaselogic", false);
 			Eyes_Height = in.getDoubleOr("Eyes_Height", 1.0);
+			Eyes_Offset = in.getDoubleOr("Eyes_Offset", 0.0);
 			fire_release = in.getDoubleOr("fire_release", 0);
 			firelearn = in.getDoubleOr("firelearn", 0);
 			firereleaselogic = in.getBooleanOr("firereleaselogic", false);
@@ -1189,7 +1193,7 @@ public class NarutoShippudenModVariables {
 			"shimurareleaselogic", "byakugan", "byakuganactivate", "rinnegan", "rinneganactivate", "tenseigan", "tenseiganactivate", "ketsuryugan",
 			"ketsuryuganactivate", "isshikidojutsu", "isshikidojutsuactivate", "MangekyouSharinganActivate", "MangekyouSharinganItachi",
 			"MangekyouSharinganKakashi", "MangekyouSharinganMadara", "MangekyouSharinganObito", "MangekyouSharinganSasuke", "MangekyouSharinganShisui",
-			"mangekyousharingansusanostage", "dojutsusharingan", "dojutsums", "dojutsubyakugan", "dojutsurinnegan", "dojutsutenseigan",
+			"mangekyousharingansusanostage", "Eyes_Offset", "dojutsusharingan", "dojutsums", "dojutsubyakugan", "dojutsurinnegan", "dojutsutenseigan",
 			"dojutsuketsuryugan", "dojutsuisshiki", "magnet_coat", "HumanBulletTank", "SpikedHumanBulletTank", "ButterflyMode", "ButterFlyModeColor",
 			"KamuiPhantomPhase", "PassingFang", "DanceOfTheLarch", "EightTrigramsPalmsRevolvingHeaven", "InsectJarTechnique", "deathgod", "ice_mirror",
 			"waterblob", "restrained", "possessing", "mimic_sneak");

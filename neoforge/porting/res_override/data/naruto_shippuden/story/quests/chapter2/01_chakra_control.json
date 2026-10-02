@@ -56,6 +56,8 @@
       ],
       "radius": 28,
       "min_y": 100,
+      "seconds": 3,
+      "bar": "Catch your breath at the top",
       "text": "Walk up the cliff north of the training ground",
       "spawn": [
         {

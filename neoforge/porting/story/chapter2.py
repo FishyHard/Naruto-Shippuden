@@ -30,7 +30,8 @@ QUESTS = {
                 say('tatsumi', "Too little and you slip. Too much and you're blasted off. Steady. Last one to the top makes dinner."),
             ]),
             # Yui walks straight up the cliff; Ren goes too, and keeps slipping off
-            dict(type='goto', pos=[-126, 100, -178], radius=28, min_y=100, text='Walk up the cliff north of the training ground',
+            dict(type='goto', pos=[-126, 100, -178], radius=28, min_y=100, seconds=3, bar='Catch your breath at the top',
+                 text='Walk up the cliff north of the training ground',
                  spawn=team(),
                  effects=[dict(type='walk', character='yui', points=[[-123, -90], [-124, -186]], speed=0.24),
                           dict(type='walk', character='ren', points=[[-129, -90], [-128, -186]], speed=0.21, slip=0.9)]),
@@ -49,7 +50,8 @@ QUESTS = {
         ],
         steps=[
             # the two of them already out on the water, circling; Ren goes under now and then
-            dict(type='goto', pos=[-134, G, 91], radius=4, min_y=64.9, text='Stand on the water in the middle of the lake', time='evening',
+            dict(type='goto', pos=[-134, G, 91], radius=4, min_y=64.9, seconds=5, bar='Keep your chakra steady on the water',
+                 text='Stand on the water in the middle of the lake', time='evening',
                  spawn=team(at=((LAKE[0] + 4, LAKE[1]), (LAKE[0] - 4, LAKE[1]))),
                  effects=[dict(type='walk', character='yui', speed=0.07, loop=True,
                                points=[[LAKE[0] - 4, LAKE[1] - 4], [LAKE[0] + 4, LAKE[1] - 4], [LAKE[0] + 4, LAKE[1] + 4], [LAKE[0] - 4, LAKE[1] + 4]]),

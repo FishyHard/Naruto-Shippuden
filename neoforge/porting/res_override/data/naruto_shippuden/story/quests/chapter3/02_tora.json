@@ -1,0 +1,197 @@
+{
+  "title": "D-Rank: The Lost Cat Tora",
+  "chapter": 3,
+  "after": [
+    "chapter3/01_firewood"
+  ],
+  "start": "tatsumi",
+  "when": "day",
+  "offer": [
+    {
+      "speaker": "tatsumi",
+      "text": "Back to the desk. Another D-rank. Try to look excited, Ren."
+    }
+  ],
+  "steps": [
+    {
+      "type": "goto",
+      "pos": [
+        0,
+        65,
+        -96
+      ],
+      "radius": 4,
+      "text": "Go to the mission desk",
+      "spawn": [
+        {
+          "character": "hiruzen",
+          "pos": [
+            -3,
+            65,
+            -100
+          ],
+          "yaw": 0,
+          "steps": 2,
+          "pose": "sit"
+        },
+        {
+          "character": "iruka",
+          "pos": [
+            3,
+            65,
+            -100
+          ],
+          "yaw": 0,
+          "steps": 2,
+          "pose": "sit"
+        },
+        {
+          "character": "ren",
+          "pos": [
+            -2,
+            65,
+            -95
+          ],
+          "yaw": 180,
+          "steps": 2
+        },
+        {
+          "character": "yui",
+          "pos": [
+            2,
+            65,
+            -95
+          ],
+          "yaw": 180,
+          "steps": 2
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "iruka",
+      "text": "Receive your mission",
+      "dialogue": [
+        {
+          "speaker": "iruka",
+          "text": "Tora, the Daimyo's wife's cat, has run away. Again. A ribbon on her left ear."
+        },
+        {
+          "speaker": "iruka",
+          "text": "She always hides in the same places: the trees by the training ground, behind Ichiraku, and the plaza."
+        },
+        {
+          "speaker": "yui",
+          "text": "The same cat... how many times has this happened?"
+        },
+        {
+          "speaker": "hiruzen",
+          "text": "This month? Four."
+        }
+      ]
+    },
+    {
+      "type": "spots",
+      "points": [
+        [
+          -117,
+          65,
+          -80
+        ],
+        [
+          -14,
+          65,
+          52
+        ],
+        [
+          3,
+          65,
+          -48
+        ]
+      ],
+      "seconds": 2,
+      "radius": 2.5,
+      "colours": [
+        "#5E8C32",
+        "#8A6A3E",
+        "#A0C060"
+      ],
+      "bar": "Searching",
+      "text": "Search Tora's hiding places: the training ground trees, behind Ichiraku, the plaza"
+    },
+    {
+      "type": "goto",
+      "pos": [
+        0,
+        65,
+        -96
+      ],
+      "radius": 4,
+      "text": "Bring Tora back to the mission desk",
+      "spawn": [
+        {
+          "character": "hiruzen",
+          "pos": [
+            -3,
+            65,
+            -100
+          ],
+          "yaw": 0,
+          "steps": 2,
+          "pose": "sit"
+        },
+        {
+          "character": "iruka",
+          "pos": [
+            3,
+            65,
+            -100
+          ],
+          "yaw": 0,
+          "steps": 2,
+          "pose": "sit"
+        },
+        {
+          "character": "ren",
+          "pos": [
+            -2,
+            65,
+            -95
+          ],
+          "yaw": 180,
+          "steps": 2
+        },
+        {
+          "character": "yui",
+          "pos": [
+            2,
+            65,
+            -95
+          ],
+          "yaw": 180,
+          "steps": 2
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "hiruzen",
+      "text": "Report to the Hokage",
+      "dialogue": [
+        {
+          "speaker": "hiruzen",
+          "text": "Ah, Tora. And from your scratches, she didn't come quietly."
+        },
+        {
+          "speaker": "iruka",
+          "text": "The Daimyo's wife will be grateful. Mission complete, Team Six."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 25,
+    "ryo": 18,
+    "mission": "D"
+  }
+}

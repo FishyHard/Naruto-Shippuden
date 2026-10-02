@@ -1,0 +1,124 @@
+{
+  "title": "C-Rank: Missing-nin on the Road",
+  "chapter": 3,
+  "after": [
+    "chapter3/02_tora"
+  ],
+  "start": "tatsumi",
+  "when": "day",
+  "offer": [
+    {
+      "speaker": "tatsumi",
+      "text": "A merchant was attacked on the trade road outside the great gate. Missing-nin, from the Mist."
+    },
+    {
+      "speaker": "tatsumi",
+      "text": "This one's a C-rank. It's real, so stay close and watch each other's backs."
+    },
+    {
+      "speaker": "ren",
+      "text": "FINALLY!"
+    }
+  ],
+  "steps": [
+    {
+      "type": "goto",
+      "pos": [
+        0,
+        65,
+        208
+      ],
+      "radius": 10,
+      "text": "Go out through the great gate to the trade road",
+      "spawn": [
+        {
+          "character": "tatsumi",
+          "pos": [
+            3,
+            65,
+            206
+          ],
+          "yaw": 0,
+          "steps": 3
+        },
+        {
+          "character": "ren",
+          "pos": [
+            -3,
+            65,
+            206
+          ],
+          "yaw": 0,
+          "steps": 3
+        },
+        {
+          "character": "yui",
+          "pos": [
+            0,
+            65,
+            204
+          ],
+          "yaw": 0,
+          "steps": 3
+        }
+      ]
+    },
+    {
+      "type": "kill",
+      "entity": "naruto_shippuden:hidden_mist_shinobi",
+      "count": 3,
+      "text": "Defeat the missing-nin",
+      "on_start": [
+        "execute at @s run summon naruto_shippuden:hidden_mist_shinobi ~8 ~1 ~10 {Tags:[\"missing_nin\"]}",
+        "execute at @s run summon naruto_shippuden:hidden_mist_shinobi ~-8 ~1 ~11 {Tags:[\"missing_nin\"]}",
+        "execute at @s run summon naruto_shippuden:hidden_mist_shinobi ~0 ~1 ~14 {Tags:[\"missing_nin\"]}"
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "tatsumi",
+      "text": "Talk to Tatsumi-sensei",
+      "dialogue": [
+        {
+          "speaker": "tatsumi",
+          "text": "Good. You kept your heads, and nobody ran. That's a C-rank done, Team Six."
+        },
+        {
+          "speaker": "yui",
+          "text": "Is everyone hurt? Let me look."
+        },
+        {
+          "speaker": "ren",
+          "text": "Did you see that? Did you SEE that?!",
+          "choices": [
+            {
+              "text": "We did it together.",
+              "flag": "team_c_rank",
+              "lines": [
+                {
+                  "speaker": "tatsumi",
+                  "text": "Remember that feeling. That's a team."
+                }
+              ]
+            },
+            {
+              "text": "You almost tripped, Ren.",
+              "flag": "tease_ren",
+              "lines": [
+                {
+                  "speaker": "ren",
+                  "text": "I did NOT! ...Okay, a little."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 60,
+    "ryo": 81,
+    "mission": "C"
+  }
+}

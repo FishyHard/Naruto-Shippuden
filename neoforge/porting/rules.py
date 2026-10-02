@@ -1973,3 +1973,51 @@ def ramen_no_regeneration(path, text):
         return text
     return text.replace('\t\t\tif (entity instanceof LivingEntity)\n\t\t\t\t((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.REGENERATION, (int) 100, (int) 2, (true), (true)));\n',
                         '', 1)
+
+
+@func
+def clan_choice_after_arrival(path, text):
+    """A new player's clan choice (the StatSelect screen, or the Clan Paper with random_clan) comes two seconds after they
+    log in: the story's first login moves them to Chikyū (world/chikyu/Chikyu.onLogin), and the change of dimension closed
+    the screen opened before it, so new players never got to choose."""
+    if not path.replace('\\', '/').endswith('procedures/PlayerProcedures.java'):
+        return text
+    i = text.find('class PlayerJoinTheWorldProcedure')
+    if i < 0:
+        return text
+    a = text.find('\t\t\t\tEntity entity = event.getEntity();', i)
+    b = text.find('executeProcedure(dependencies);', a) + len('executeProcedure(dependencies);')
+    if a < 0 or b < a:
+        return text
+    new = ('\t\t\t\tif (!(event.getEntity() instanceof net.minecraft.server.level.ServerPlayer joined))\n\t\t\t\t\treturn;\n'
+           '\t\t\t\tnet.mcreator.narutoshippudenmod.core.NarutoActions.later(joined, 40, entity -> {\n'
+           '\t\t\t\t\tMap<String, Object> dependencies = new HashMap<>();\n'
+           '\t\t\t\t\tdependencies.put("x", entity.getX());\n'
+           '\t\t\t\t\tdependencies.put("y", entity.getY());\n'
+           '\t\t\t\t\tdependencies.put("z", entity.getZ());\n'
+           '\t\t\t\t\tdependencies.put("world", entity.level());\n'
+           '\t\t\t\t\tdependencies.put("entity", entity);\n'
+           '\t\t\t\t\tdependencies.put("event", event);\n'
+           '\t\t\t\t\texecuteProcedure(dependencies);\n'
+           '\t\t\t\t});')
+    return text[:a] + new + text[b:]
+
+
+@func
+def dojutsu_position_buttons(path, text):
+    """The Info Card's Dojutsu page moves the eyes up (button 10) or down (11) the face a skin pixel at a time
+    (PlayerVariables.Eyes_Offset, -3..3), for skins whose own eyes aren't on the row the dojutsu textures use."""
+    if not path.replace('\\', '/').endswith('gui/InfoCardGuis.java'):
+        return text
+    i = text.find('class InfoCardDojutsuGui ')
+    j = text.find('\t\t\tif (buttonID == 7) {', i)
+    if i < 0 or j < 0 or 'Eyes_Offset' in text:
+        return text
+    add = ('\t\t\tif (buttonID == 10 || buttonID == 11) {\n'
+           '\t\t\t\tdouble step = buttonID == 10 ? -1 : 1;\n'
+           '\t\t\t\tnet.mcreator.narutoshippudenmod.NarutoShippudenModVariables.ifPresent(entity, capability -> {\n'
+           '\t\t\t\t\tcapability.Eyes_Offset = Math.max(-3, Math.min(3, capability.Eyes_Offset + step));\n'
+           '\t\t\t\t\tcapability.syncPlayerVariables(entity);\n'
+           '\t\t\t\t});\n'
+           '\t\t\t}\n')
+    return text[:j] + add + text[j:]

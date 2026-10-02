@@ -25,6 +25,8 @@
       ],
       "radius": 4,
       "min_y": 64.9,
+      "seconds": 5,
+      "bar": "Keep your chakra steady on the water",
       "text": "Stand on the water in the middle of the lake",
       "time": "evening",
       "spawn": [

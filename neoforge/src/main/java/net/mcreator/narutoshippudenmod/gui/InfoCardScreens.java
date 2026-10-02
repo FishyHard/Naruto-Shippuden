@@ -336,6 +336,9 @@ public final class InfoCardScreens {
 				button(">", ids[row][1], 272, 84 + row * 34, 20);
 			}
 			button("Select", 7, 8, 134, 132).setTooltip(Tooltip.create(Component.literal("Use this dojutsu and eye shape")));
+			// where the eyes sit on the face: up or down a skin pixel at a time, for skins whose eyes aren't on the usual row
+			button("^", 10, 8, 158, 20).setTooltip(Tooltip.create(Component.literal("Move the dojutsu up a pixel")));
+			button("v", 11, 120, 158, 20).setTooltip(Tooltip.create(Component.literal("Move the dojutsu down a pixel")));
 		}
 
 		@Override
@@ -363,6 +366,8 @@ public final class InfoCardScreens {
 			}
 			text(graphics, "Pupil Height", 148, 108);
 			textCentered(graphics, number(vars.Pupils_Height), 220, 124, TEXT);
+			int offset = (int) vars.Eyes_Offset;
+			textCentered(graphics, "Position " + (offset == 0 ? "0" : offset > 0 ? offset + " down" : -offset + " up"), 74, 164, TEXT);
 			text(graphics, "Eye Height", 148, 142);
 			textCentered(graphics, number(vars.Eyes_Height), 220, 158, TEXT);
 		}
@@ -373,9 +378,10 @@ public final class InfoCardScreens {
 		record Rank(String letter, int color, ToDoubleFunction<PlayerVariables> count) {
 		}
 
-		static final Rank[] RANKS = {new Rank("D", 0xFFFFFFFF, v -> v.D_Mission), new Rank("C", 0xFF5555FF, v -> v.C_Mission),
-				new Rank("B", 0xFF55FF55, v -> v.B_Mission), new Rank("A", 0xFFFF5555, v -> v.A_Mission), new Rank("S", 0xFFFFAA00, v -> v.S_Mission),
-				new Rank("SS", 0xFFFFFF55, v -> v.SS_Mission)};
+		// each rank in its mission scroll's ink (textures/items/mission_rank_*, porting/skins/rank_icons.py)
+		static final Rank[] RANKS = {new Rank("D", 0xFF5C4630, v -> v.D_Mission), new Rank("C", 0xFF3A8A3E, v -> v.C_Mission),
+				new Rank("B", 0xFF2E66C8, v -> v.B_Mission), new Rank("A", 0xFFCC2E2E, v -> v.A_Mission), new Rank("S", 0xFFB07812, v -> v.S_Mission),
+				new Rank("SS", 0xFF8A3ACC, v -> v.SS_Mission)};
 
 		public InfoCardMissionsGuiWindow(InfoCardMissionsGui.GuiContainerMod container, Inventory inventory, Component text) {
 			super(container, inventory, Component.literal("Quests"), 300, 168, container.entity, container.x, container.y, container.z);
@@ -394,8 +400,12 @@ public final class InfoCardScreens {
 
 		@Override
 		protected void background(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
-			for (int i = 0; i < RANKS.length; i++)
+			for (int i = 0; i < RANKS.length; i++) {
 				inset(graphics, 8, 40 + i * 20, 18, 18);
+				// the rank's own mission scroll in its slot
+				net.minecraft.resources.Identifier icon = net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", "textures/items/mission_rank_" + RANKS[i].letter().toLowerCase() + ".png");
+				graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, icon, leftPos + 9, topPos + 41 + i * 20, 0, 0, 16, 16, 16, 16);
+			}
 		}
 
 		@Override
@@ -407,8 +417,7 @@ public final class InfoCardScreens {
 				int ry = 40 + i * 20;
 				double count = rank.count().applyAsDouble(vars);
 				total += count;
-				graphics.text(font, rank.letter(), 17 - font.width(rank.letter()) / 2, ry + 5, rank.color(), true);
-				text(graphics, rank.letter() + "-Rank missions", 32, ry + 5);
+				graphics.text(font, rank.letter() + "-Rank missions", 32, ry + 5, rank.color(), false);
 				textRight(graphics, number(count), 144, ry + 5);
 			}
 			text(graphics, "Missions done", 160, 45);

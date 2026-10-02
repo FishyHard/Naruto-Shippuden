@@ -1,0 +1,87 @@
+{
+  "title": "Filler: Sakura's Quiz",
+  "chapter": 1,
+  "after": [
+    "chapter1/01_first_day"
+  ],
+  "start": "sakura",
+  "later": "Study session later! You look busy. Don't think you're getting out of it, though.",
+  "offer": [
+    {
+      "speaker": "sakura",
+      "text": "Hey, new kid! The exam isn't just throwing kunai, you know. There's theory. Lots of it."
+    },
+    {
+      "speaker": "sakura",
+      "text": "Let's see if you've been listening to Iruka-sensei. Quiz time!"
+    }
+  ],
+  "steps": [
+    {
+      "type": "talk",
+      "npc": "sakura",
+      "text": "Answer Sakura's questions",
+      "dialogue": [
+        {
+          "speaker": "sakura",
+          "text": "Question one: which three jutsu does the graduation exam test?",
+          "choices": [
+            {
+              "text": "Clone, Transformation and Substitution.",
+              "flag": "quiz1_right",
+              "lines": [
+                {
+                  "speaker": "sakura",
+                  "text": "Correct! See, you HAVE been listening."
+                }
+              ]
+            },
+            {
+              "text": "Fire, Water and Wind.",
+              "flag": "quiz1_wrong",
+              "lines": [
+                {
+                  "speaker": "sakura",
+                  "text": "Those are chakra natures! Wrong exam, years too early."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "speaker": "sakura",
+          "text": "Question two: what is chakra made of?",
+          "choices": [
+            {
+              "text": "Physical energy and spiritual energy.",
+              "flag": "quiz2_right",
+              "lines": [
+                {
+                  "speaker": "sakura",
+                  "text": "Perfect! Moulded together, in balance."
+                }
+              ]
+            },
+            {
+              "text": "Ramen.",
+              "flag": "quiz2_wrong",
+              "lines": [
+                {
+                  "speaker": "sakura",
+                  "text": "...Have you been spending time with Naruto?"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "speaker": "sakura",
+          "text": "Not bad! Sasuke would've got them all, of course. ...Don't tell him I said that."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 10
+  }
+}

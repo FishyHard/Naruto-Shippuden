@@ -1,0 +1,69 @@
+{
+  "title": "Filler: Shino's Beetles",
+  "chapter": 1,
+  "after": [
+    "chapter1/02_kunai_taijutsu"
+  ],
+  "start": "shino",
+  "when": "day",
+  "later": "...Not now. You are busy. I can tell. Why? Your footsteps are hurried.",
+  "offer": [
+    {
+      "speaker": "shino",
+      "text": "A rare beetle has been seen in the trees by the training ground. Three of them, in three trees."
+    },
+    {
+      "speaker": "shino",
+      "text": "Would you watch for them with me? Why ask you? Because insects hide from me when I am too eager."
+    }
+  ],
+  "steps": [
+    {
+      "type": "spots",
+      "points": [
+        [
+          -104,
+          65,
+          -80
+        ],
+        [
+          -112,
+          65,
+          -86
+        ],
+        [
+          -96,
+          65,
+          -84
+        ]
+      ],
+      "seconds": 3,
+      "radius": 2.5,
+      "colours": [
+        "#2E8A6E",
+        "#6EC8A0",
+        "#1E5A48"
+      ],
+      "bar": "Waiting for the beetle to come out",
+      "text": "Watch for the beetles in the trees by the training ground"
+    },
+    {
+      "type": "talk",
+      "npc": "shino",
+      "text": "Talk to Shino",
+      "dialogue": [
+        {
+          "speaker": "shino",
+          "text": "...All three. You were patient. Most people aren't."
+        },
+        {
+          "speaker": "shino",
+          "text": "Am I smiling? No. Why would you think that?"
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 15
+  }
+}

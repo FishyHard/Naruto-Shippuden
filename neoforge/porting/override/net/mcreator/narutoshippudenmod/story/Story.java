@@ -73,6 +73,7 @@ import java.util.TreeMap;
  *                                          Hokage at his desk), "shop": {"line", "offers"} (a shopkeeper: see StoryShop)}
  * data/&lt;ns&gt;/story/quests/&lt;id&gt;.json      {"title", "chapter", "after": [quest ids], "start": "auto" | character id,
  *                                          "offer": [lines], "steps": [steps], "rewards": {"items": [{"id", "count"}], "xp" (shinobi XP), "vanilla_xp", "commands",
+ *                                          "ryo" (Bronze Ryo's worth, in coins), "mission": "D".."SS" (counted on the Info Card),
  *                                          "time" (the time of day it moves on to)}, "when": "morning"|"day"|"evening"|"night"
  *                                          (only offered then), "later": the character's line while it's held back}
  * </pre>
@@ -83,8 +84,9 @@ import java.util.TreeMap;
  * ("morning", "day", "evening", "night": the time of day the step happens at; time moves on to it):
  * <pre>
  * {"type": "talk", "npc": id, "dialogue": [lines]}            talk to that character
- * {"type": "goto", "pos": [x, y, z], "radius": r, "min_y": y} go there (in Chikyū, or "dimension"); min_y: and be at least
- *                                                              that high (standing on water, up a wall)
+ * {"type": "goto", "pos": [x, y, z], "radius": r, "min_y": y, go there (in Chikyū, or "dimension"); min_y: and be at least
+ *  "seconds": s, "bar": text}                                  that high (standing on water, up a wall); seconds: and stay
+ *                                                              there that long, a bar over the hotbar showing it
  * {"type": "kill", "entity": id, "count": n}                   defeat n of them
  * {"type": "hit", "entity": id, "count": n}                    land n hits on them (training dummies, sparring)
  * {"type": "collect", "item": id, "count": n, "take": bool}   have n in the inventory (taken when "take")
@@ -751,6 +753,25 @@ public final class Story {
 		}
 		if (r.has("vanilla_xp"))
 			player.giveExperiencePoints(r.get("vanilla_xp").getAsInt());
+		if (r.has("ryo"))
+			net.mcreator.narutoshippudenmod.economy.Ryo.give(player, r.get("ryo").getAsInt());
+		if (r.has("mission")) {
+			// a mission done counts on the Info Card's Missions page, by its rank
+			String rank = r.get("mission").getAsString();
+			net.mcreator.narutoshippudenmod.NarutoShippudenModVariables.ifPresent(player, v -> {
+				switch (rank) {
+					case "D" -> v.D_Mission++;
+					case "C" -> v.C_Mission++;
+					case "B" -> v.B_Mission++;
+					case "A" -> v.A_Mission++;
+					case "S" -> v.S_Mission++;
+					case "SS" -> v.SS_Mission++;
+					default -> {
+					}
+				}
+				v.syncPlayerVariables(player);
+			});
+		}
 		if (r.has("commands"))
 			r.getAsJsonArray("commands").forEach(c -> Compat.runCommand(player, c.getAsString()));
 		if (r.has("time"))
@@ -786,6 +807,14 @@ public final class Story {
 		}
 	}
 
+	/** A step's time so far, as a bar over the hotbar: how long still to watch, stand or scrub. */
+	private static void bar(ServerPlayer player, String what, int ticks, int need) {
+		int bars = Math.min(10, ticks * 10 / Math.max(1, need));
+		player.sendOverlayMessage(Component.literal(what + "  ").withStyle(ChatFormatting.WHITE)
+				.append(Component.literal("|".repeat(bars)).withStyle(ChatFormatting.AQUA))
+				.append(Component.literal("|".repeat(10 - bars)).withStyle(ChatFormatting.DARK_GRAY)));
+	}
+
 	/** Checks a step that completes by itself (being somewhere, having items, time); advances it when done. */
 	private static void check(ServerPlayer player, Quest quest, JsonObject step) {
 		switch (str(step, "type", "")) {
@@ -796,8 +825,19 @@ public final class Story {
 				double dx = player.getX() - pos.get(0).getAsDouble() - 0.5, dz = player.getZ() - pos.get(2).getAsDouble() - 0.5;
 				double dy = step.has("min_y") ? 0 : player.getY() - pos.get(1).getAsDouble();
 				if (player.level().dimension().identifier().toString().equals(dim) && dx * dx + dy * dy + dz * dz <= r * r
-						&& (!step.has("min_y") || player.getY() >= step.get("min_y").getAsDouble()))
+						&& (!step.has("min_y") || player.getY() >= step.get("min_y").getAsDouble())) {
+					// "seconds": stay there that long (standing on the lake, at the top of the cliff); the time kept if
+					// the player slips off and comes back
+					if (step.has("seconds")) {
+						CompoundTag p = progress(player, quest);
+						int t = p.getIntOr("timer", 0) + 10, need = step.get("seconds").getAsInt() * 20;
+						p.putInt("timer", t);
+						bar(player, str(step, "bar", "Hold your place"), t, need);
+						if (t < need)
+							return;
+					}
 					advance(player, quest);
+				}
 			}
 			case "collect" -> {
 				Item item = BuiltInRegistries.ITEM.getValue(Identifier.parse(step.get("item").getAsString()));
@@ -835,7 +875,14 @@ public final class Story {
 				int done = p.getIntOr("found", 0), timer;
 				double r = step.has("radius") ? step.get("radius").getAsDouble() : 2.5;
 				int need = (step.has("seconds") ? step.get("seconds").getAsInt() : 3) * 20;
+				// paint by default; a step may give its own colours ("colours": ["#RRGGBB", ...]: leaves stirring where a cat hides)
 				int[] colours = {0xE8402A, 0x2A7DE8, 0xF2D32A, 0x3CC84A, 0xE85AC8, 0xF28A2A};
+				if (step.has("colours")) {
+					JsonArray cs = step.getAsJsonArray("colours");
+					colours = new int[cs.size()];
+					for (int i = 0; i < cs.size(); i++)
+						colours[i] = Integer.parseInt(cs.get(i).getAsString().substring(1), 16);
+				}
 				ServerLevel level = (ServerLevel) player.level();
 				int here = -1;
 				for (int i = 0; i < points.size(); i++) {
@@ -861,10 +908,7 @@ public final class Story {
 				JsonArray pt = points.get(here).getAsJsonArray();
 				double x = pt.get(0).getAsDouble() + 0.5, y = pt.get(1).getAsDouble() + 0.5, z = pt.get(2).getAsDouble() + 0.5;
 				level.sendParticles(player, net.minecraft.core.particles.ParticleTypes.SPLASH, true, true, x, y, z, 8, 0.4, 0.3, 0.4, 0.1);
-				int bars = Math.min(10, timer * 10 / need);
-				player.sendOverlayMessage(Component.literal("Scrubbing the paint off  ").withStyle(ChatFormatting.WHITE)
-						.append(Component.literal("|".repeat(bars)).withStyle(ChatFormatting.AQUA))
-						.append(Component.literal("|".repeat(10 - bars)).withStyle(ChatFormatting.DARK_GRAY)));
+				bar(player, str(step, "bar", "Scrubbing the paint off"), timer, need);
 				if (timer < need)
 					return;
 				done |= 1 << here;
@@ -881,6 +925,7 @@ public final class Story {
 				CompoundTag p = progress(player, quest);
 				int t = p.getIntOr("timer", 0) + 10;
 				p.putInt("timer", t);
+				bar(player, str(step, "bar", objective(step)), t, (step.has("seconds") ? step.get("seconds").getAsInt() : 5) * 20);
 				if (t >= (step.has("seconds") ? step.get("seconds").getAsInt() : 5) * 20)
 					advance(player, quest);
 			}

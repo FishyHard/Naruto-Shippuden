@@ -391,4 +391,4 @@ String	genjutsueffect	"\"\""
 double	samehadamode	0
 ItemStack	gunbaicopy	ItemStack.EMPTY
 double	LevelStatMaxChange	100.0
-double	inuzuka_mode	0
+double	inuzuka_mode	0double	Eyes_Offset	0.0

@@ -145,7 +145,7 @@ QUESTS = {
         steps=[
             dict(type='goto', pos=CLOUDS, radius=5, text='Find Shikamaru and Choji at the edge of Training Ground 3', time='day',
                  spawn=[ground('shikamaru', -117, -78, 90, pose='lie', steps=3), ground('choji', -114, -76, 90, steps=3)]),
-            dict(type='wait', seconds=20, text='Lie back and watch the clouds'),
+            dict(type='wait', seconds=20, text='Lie back and watch the clouds', bar='Watching the clouds'),
             talk('shikamaru', 'Talk to Shikamaru', [
                 say('shikamaru', "See that one? Looks like a deer. And that one... like Iruka-sensei when he's yelling."),
                 say('choji', "*crunch* That one looks like a rice ball. ...I'm hungry."),
@@ -232,6 +232,62 @@ QUESTS = {
                     choice("Thanks, Choji!", 'choji_friend', [say('choji', "Heh heh! Friends share. ...Just not the last piece.")]),
                     choice("You keep it.", 'choji_generous', [say('choji', "Really?! You're the best!")]),
                 ]),
+            ]),
+        ],
+        rewards={'xp': 15}),
+
+    Q + 'sakura_quiz': dict(
+        title="Filler: Sakura's Quiz", chapter=1, after=['chapter1/01_first_day'], start='sakura',
+        later="Study session later! You look busy. Don't think you're getting out of it, though.",
+        offer=[
+            say('sakura', "Hey, new kid! The exam isn't just throwing kunai, you know. There's theory. Lots of it."),
+            say('sakura', "Let's see if you've been listening to Iruka-sensei. Quiz time!"),
+        ],
+        steps=[
+            talk('sakura', "Answer Sakura's questions", [
+                say('sakura', "Question one: which three jutsu does the graduation exam test?", [
+                    choice("Clone, Transformation and Substitution.", 'quiz1_right', [say('sakura', "Correct! See, you HAVE been listening.")]),
+                    choice("Fire, Water and Wind.", 'quiz1_wrong', [say('sakura', "Those are chakra natures! Wrong exam, years too early.")]),
+                ]),
+                say('sakura', "Question two: what is chakra made of?", [
+                    choice("Physical energy and spiritual energy.", 'quiz2_right', [say('sakura', "Perfect! Moulded together, in balance.")]),
+                    choice("Ramen.", 'quiz2_wrong', [say('sakura', "...Have you been spending time with Naruto?")]),
+                ]),
+                say('sakura', "Not bad! Sasuke would've got them all, of course. ...Don't tell him I said that."),
+            ]),
+        ],
+        rewards={'xp': 10}),
+
+    Q + 'shino_beetles': dict(
+        title="Filler: Shino's Beetles", chapter=1, after=['chapter1/02_kunai_taijutsu'], start='shino', when='day',
+        later="...Not now. You are busy. I can tell. Why? Your footsteps are hurried.",
+        offer=[
+            say('shino', "A rare beetle has been seen in the trees by the training ground. Three of them, in three trees."),
+            say('shino', "Would you watch for them with me? Why ask you? Because insects hide from me when I am too eager."),
+        ],
+        steps=[
+            dict(type='spots', points=[[-104, G, -80], [-112, G, -86], [-96, G, -84]], seconds=3, radius=2.5,
+                 colours=['#2E8A6E', '#6EC8A0', '#1E5A48'], bar='Waiting for the beetle to come out',
+                 text='Watch for the beetles in the trees by the training ground'),
+            talk('shino', 'Talk to Shino', [
+                say('shino', "...All three. You were patient. Most people aren't."),
+                say('shino', "Am I smiling? No. Why would you think that?"),
+            ]),
+        ],
+        rewards={'xp': 15}),
+
+    Q + 'hinata_training': dict(
+        title="Filler: Hinata's Gentle Fist", chapter=1, after=['chapter1/03_graduation'], start='hinata',
+        later="I-it can wait... You look busy. Maybe later?",
+        offer=[
+            say('hinata', "U-um... could you train with me? Father says my Gentle Fist is too soft..."),
+            say('hinata', "Please don't hold back. I want to get stronger."),
+        ],
+        steps=[
+            dict(type='spar', npc='hinata', hits=6, damage=2, rank=1, throws=False, substitution=False, text='Spar with Hinata'),
+            talk('hinata', 'Talk to Hinata', [
+                say('hinata', "Thank you... I hit harder when I stopped being afraid of hurting you."),
+                say('hinata', "I'll keep getting stronger. Like... like Naruto does."),
             ]),
         ],
         rewards={'xp': 15}),

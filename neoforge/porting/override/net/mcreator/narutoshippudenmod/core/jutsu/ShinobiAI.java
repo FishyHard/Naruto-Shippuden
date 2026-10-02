@@ -227,6 +227,9 @@ public final class ShinobiAI {
 		goals.addGoal(7, new RandomLookAroundGoal(mob));
 		targets.addGoal(1, new HurtByTargetGoal(mob).setAlertOthers());
 		targets.addGoal(2, new Defend(mob));
+		// missing-nin (summoned with the tag "missing_nin", as a story mission's enemies) hunt players on sight
+		targets.addGoal(2, new NearestAttackableTargetGoal<>(mob, Player.class, 10, true, false,
+				(target, level) -> mob.entityTags().contains("missing_nin")));
 		targets.addGoal(3, new NearestAttackableTargetGoal<>(mob, Monster.class, 10, true, false,
 				(target, level) -> !(target instanceof Creeper) && village != null));
 	}

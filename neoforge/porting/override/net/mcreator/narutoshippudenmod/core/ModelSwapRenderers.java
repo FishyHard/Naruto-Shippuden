@@ -94,8 +94,12 @@ public final class ModelSwapRenderers {
 		if (overlayModel == null)
 			overlayModel = new PlayerModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER), false);
 		// the eyes lie exactly on the skin, so they need the decal render type (depth offset) to show on top of it
+		// the eyes moved up or down the face by whole skin pixels (Info Card > Dojutsu > Position), to sit on a skin whose own
+		// eyes are higher or lower than the dojutsu textures'
+		LivingEntity entity = entity(event);
+		float offset = entity == null ? 0 : (float) net.mcreator.narutoshippudenmod.NarutoShippudenModVariables.get(entity).Eyes_Offset;
 		for (String texture : textures)
-			draw(event, overlayModel, RenderTypes.entityCutoutZOffset(Identifier.parse(texture)), 0.9375F);
+			draw(event, overlayModel, RenderTypes.entityCutoutZOffset(Identifier.parse(texture)), 0.9375F, offset);
 	}
 
 	/**
@@ -137,6 +141,12 @@ public final class ModelSwapRenderers {
 
 	/** Same transforms LivingEntityRenderer applies before drawing its own model. */
 	private static void draw(RenderLivingEvent<?, ?, ?> event, EntityModel model, net.minecraft.client.renderer.rendertype.RenderType renderType, float modelScale) {
+		draw(event, model, renderType, modelScale, 0);
+	}
+
+	/** As above, the model's head moved headOffset skin pixels down (the eyes on it). */
+	private static void draw(RenderLivingEvent<?, ?, ?> event, EntityModel model, net.minecraft.client.renderer.rendertype.RenderType renderType, float modelScale,
+			float headOffset) {
 		LivingEntityRenderState state = event.getRenderState();
 		PoseStack pose = event.getPoseStack();
 		pose.pushPose();
@@ -146,6 +156,8 @@ public final class ModelSwapRenderers {
 		pose.scale(modelScale, modelScale, modelScale);
 		pose.translate(0.0F, -1.501F, 0.0F);
 		model.setupAnim(state);
+		if (headOffset != 0 && model instanceof net.minecraft.client.model.HumanoidModel<?> humanoid)
+			humanoid.head.y += headOffset;
 		event.getSubmitNodeCollector().submitModel(model, state, pose, renderType, state.lightCoords,
 				LivingEntityRenderer.getOverlayCoords(state, 0.0F), state.outlineColor);
 		pose.popPose();

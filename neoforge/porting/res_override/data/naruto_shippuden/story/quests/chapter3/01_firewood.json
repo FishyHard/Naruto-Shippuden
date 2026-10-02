@@ -1,0 +1,147 @@
+{
+  "title": "D-Rank: Firewood for Ichiraku",
+  "chapter": 3,
+  "after": [
+    "chapter2/04_chakra_nature"
+  ],
+  "start": "tatsumi",
+  "when": "day",
+  "offer": [
+    {
+      "speaker": "tatsumi",
+      "text": "Team Six, today's the day. The mission desk is on the ground floor of the Hokage residence."
+    },
+    {
+      "speaker": "tatsumi",
+      "text": "Let's see what the Hokage has for us. And Ren: no, it won't be bandits."
+    }
+  ],
+  "steps": [
+    {
+      "type": "goto",
+      "pos": [
+        0,
+        65,
+        -96
+      ],
+      "radius": 4,
+      "text": "Go to the mission desk in the Hokage residence",
+      "spawn": [
+        {
+          "character": "hiruzen",
+          "pos": [
+            -3,
+            65,
+            -100
+          ],
+          "yaw": 0,
+          "steps": 2,
+          "pose": "sit"
+        },
+        {
+          "character": "iruka",
+          "pos": [
+            3,
+            65,
+            -100
+          ],
+          "yaw": 0,
+          "steps": 2,
+          "pose": "sit"
+        },
+        {
+          "character": "ren",
+          "pos": [
+            -2,
+            65,
+            -95
+          ],
+          "yaw": 180,
+          "steps": 2
+        },
+        {
+          "character": "yui",
+          "pos": [
+            2,
+            65,
+            -95
+          ],
+          "yaw": 180,
+          "steps": 2
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "hiruzen",
+      "text": "Receive your mission",
+      "dialogue": [
+        {
+          "speaker": "hiruzen",
+          "text": "Team Six. Your first mission as shinobi of the Leaf: a D-rank."
+        },
+        {
+          "speaker": "iruka",
+          "text": "Ichiraku Ramen is short of firewood. Sixteen sticks of it, cut outside the village walls."
+        },
+        {
+          "speaker": "ren",
+          "text": "Firewood?! I wanted to fight missing-nin!"
+        },
+        {
+          "speaker": "hiruzen",
+          "text": "Every shinobi starts here, Ren. Even the Fourth Hokage carried firewood."
+        }
+      ]
+    },
+    {
+      "type": "collect",
+      "item": "minecraft:stick",
+      "count": 16,
+      "text": "Gather firewood: 16 sticks (cut wood outside the walls)"
+    },
+    {
+      "type": "goto",
+      "pos": [
+        -8,
+        65,
+        57
+      ],
+      "radius": 4,
+      "text": "Bring the firewood to Ichiraku Ramen"
+    },
+    {
+      "type": "collect",
+      "item": "minecraft:stick",
+      "count": 16,
+      "take": true,
+      "text": "Hand the firewood to Teuchi"
+    },
+    {
+      "type": "talk",
+      "npc": "teuchi",
+      "text": "Talk to Teuchi",
+      "dialogue": [
+        {
+          "speaker": "teuchi",
+          "text": "Firewood! And split nice and even. Tell the old Hokage thanks."
+        },
+        {
+          "speaker": "teuchi",
+          "text": "Here, a bowl on the house. A shinobi's first pay should come with ramen."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 25,
+    "ryo": 18,
+    "mission": "D",
+    "items": [
+      {
+        "id": "naruto_shippuden:ichiraku_ramen",
+        "count": 1
+      }
+    ]
+  }
+}

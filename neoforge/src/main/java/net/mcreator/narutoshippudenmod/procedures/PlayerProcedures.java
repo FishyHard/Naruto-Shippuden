@@ -2758,15 +2758,18 @@ public final class PlayerProcedures {
 		private static class GlobalTrigger {
 			@SubscribeEvent
 			public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-				Entity entity = event.getEntity();
-				Map<String, Object> dependencies = new HashMap<>();
-				dependencies.put("x", entity.getX());
-				dependencies.put("y", entity.getY());
-				dependencies.put("z", entity.getZ());
-				dependencies.put("world", entity.level());
-				dependencies.put("entity", entity);
-				dependencies.put("event", event);
-				executeProcedure(dependencies);
+				if (!(event.getEntity() instanceof net.minecraft.server.level.ServerPlayer joined))
+					return;
+				net.mcreator.narutoshippudenmod.core.NarutoActions.later(joined, 40, entity -> {
+					Map<String, Object> dependencies = new HashMap<>();
+					dependencies.put("x", entity.getX());
+					dependencies.put("y", entity.getY());
+					dependencies.put("z", entity.getZ());
+					dependencies.put("world", entity.level());
+					dependencies.put("entity", entity);
+					dependencies.put("event", event);
+					executeProcedure(dependencies);
+				});
 			}
 		}
 

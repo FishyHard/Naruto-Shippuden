@@ -239,6 +239,13 @@ public final class InfoCardGuis {
 				EyesHeightButtonMinusProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,
 						(_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 			}
+			if (buttonID == 10 || buttonID == 11) {
+				double step = buttonID == 10 ? -1 : 1;
+				net.mcreator.narutoshippudenmod.NarutoShippudenModVariables.ifPresent(entity, capability -> {
+					capability.Eyes_Offset = Math.max(-3, Math.min(3, capability.Eyes_Offset + step));
+					capability.syncPlayerVariables(entity);
+				});
+			}
 			if (buttonID == 7) {
 
 				SelectDojutsuInfoProcedure.executeProcedure(Stream.of(new AbstractMap.SimpleEntry<>("entity", entity)).collect(HashMap::new,

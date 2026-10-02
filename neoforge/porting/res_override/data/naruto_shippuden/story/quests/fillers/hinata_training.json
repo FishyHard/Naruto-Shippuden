@@ -1,0 +1,49 @@
+{
+  "title": "Filler: Hinata's Gentle Fist",
+  "chapter": 1,
+  "after": [
+    "chapter1/03_graduation"
+  ],
+  "start": "hinata",
+  "later": "I-it can wait... You look busy. Maybe later?",
+  "offer": [
+    {
+      "speaker": "hinata",
+      "text": "U-um... could you train with me? Father says my Gentle Fist is too soft..."
+    },
+    {
+      "speaker": "hinata",
+      "text": "Please don't hold back. I want to get stronger."
+    }
+  ],
+  "steps": [
+    {
+      "type": "spar",
+      "npc": "hinata",
+      "hits": 6,
+      "damage": 2,
+      "rank": 1,
+      "throws": false,
+      "substitution": false,
+      "text": "Spar with Hinata"
+    },
+    {
+      "type": "talk",
+      "npc": "hinata",
+      "text": "Talk to Hinata",
+      "dialogue": [
+        {
+          "speaker": "hinata",
+          "text": "Thank you... I hit harder when I stopped being afraid of hurting you."
+        },
+        {
+          "speaker": "hinata",
+          "text": "I'll keep getting stronger. Like... like Naruto does."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 15
+  }
+}
