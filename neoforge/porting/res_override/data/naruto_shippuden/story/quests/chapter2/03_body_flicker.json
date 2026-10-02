@@ -5,6 +5,7 @@
     "chapter2/02_water_walking"
   ],
   "start": "tatsumi",
+  "when": "day",
   "offer": [
     {
       "speaker": "tatsumi",

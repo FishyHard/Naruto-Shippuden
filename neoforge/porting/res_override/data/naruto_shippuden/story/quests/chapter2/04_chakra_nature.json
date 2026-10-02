@@ -5,6 +5,7 @@
     "chapter2/03_body_flicker"
   ],
   "start": "tatsumi",
+  "when": "day",
   "offer": [
     {
       "speaker": "tatsumi",

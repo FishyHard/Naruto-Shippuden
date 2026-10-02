@@ -555,6 +555,12 @@ public final class StoryClient {
 			state.model = npc.model();
 			state.eyes = npc.eyes().isEmpty() ? null : Identifier.tryParse(npc.eyes());
 			state.seated = npc.getPose() == net.minecraft.world.entity.Pose.SITTING;
+			if (state.seated) {
+				// seated, the body keeps facing the way the seat does (its yaw), only the head turns to look round
+				float seat = npc.getYRot();
+				state.yRot = net.minecraft.util.Mth.clamp(net.minecraft.util.Mth.wrapDegrees(state.bodyRot + state.yRot - seat), -70.0F, 70.0F);
+				state.bodyRot = seat;
+			}
 			if (npc.getPose() == net.minecraft.world.entity.Pose.SWIMMING) {
 				// lying down (StoryNpc holds it as SWIMMING for its box): drawn as a sleeper on the ground, no bed
 				state.pose = net.minecraft.world.entity.Pose.SLEEPING;

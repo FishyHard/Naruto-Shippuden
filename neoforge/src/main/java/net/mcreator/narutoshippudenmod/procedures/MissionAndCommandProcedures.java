@@ -81,8 +81,6 @@ public final class MissionAndCommandProcedures {
 				return;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-			if (entity instanceof LivingEntity)
-				((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.REGENERATION, (int) 100, (int) 2, (true), (true)));
 		}
 	}
 

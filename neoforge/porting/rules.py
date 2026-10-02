@@ -1964,3 +1964,12 @@ def weapon_damage_untagged(path, text):
                       % (key, key, value), 'if (StackTag.of(itemstack).contains("%s"))\n\t\t\t\t\tStackTag.of(itemstack).remove("%s");' % (key, key), text)
         text = text.replace('SharpLevel = (StackTag.of(itemstack).getDoubleOr("%s", 0));' % key, 'SharpLevel = %d;' % value)
     return text
+
+
+@func
+def ramen_no_regeneration(path, text):
+    """Ichiraku ramen is a meal (15 food), no longer a potion: eating it gave Regeneration III for 5 seconds."""
+    if not path.replace('\\', '/').endswith('procedures/MissionAndCommandProcedures.java'):
+        return text
+    return text.replace('\t\t\tif (entity instanceof LivingEntity)\n\t\t\t\t((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.REGENERATION, (int) 100, (int) 2, (true), (true)));\n',
+                        '', 1)

@@ -37,7 +37,7 @@ def ground(character, x, z, yaw, pose='sit', steps=2):
 
 def stool(character, z, steps=2):
     """Someone sitting at Ichiraku's counter: on the stool at z, facing the counter."""
-    return dict(character=character, pos=[-10, G + 0.6, z], yaw=90, steps=steps, pose='sit')
+    return dict(character=character, pos=[-10, G + 0.8, z], yaw=90, steps=steps, pose='sit')
 
 
 QUESTS = {
@@ -136,7 +136,7 @@ QUESTS = {
 
     # ---------------------------------------------------------------- Chapter 1: the Academy
     Q + 'cloud_watching': dict(
-        title='Filler: Cloud Watching', chapter=1, after=['chapter1/01_first_day'], start='shikamaru',
+        title='Filler: Cloud Watching', chapter=1, after=['chapter1/01_first_day'], start='shikamaru', when='day',
         later="Clouds'll still be there later. Go do your thing first... what a drag.",
         offer=[
             say('shikamaru', "Iruka-sensei's lecture is about to start. Which means it's the perfect time to be somewhere else."),

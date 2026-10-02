@@ -5,6 +5,7 @@
     "chapter1/05_team_assignment"
   ],
   "start": "tatsumi",
+  "when": "day",
   "offer": [
     {
       "speaker": "tatsumi",

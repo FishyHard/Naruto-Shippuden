@@ -5,6 +5,7 @@
     "chapter1/01_first_day"
   ],
   "start": "shikamaru",
+  "when": "day",
   "later": "Clouds'll still be there later. Go do your thing first... what a drag.",
   "offer": [
     {

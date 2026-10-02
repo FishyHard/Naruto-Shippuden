@@ -69,10 +69,12 @@ import java.util.TreeMap;
  *                                          "equipment": {"head": item id, "mainhand": item id, ...} (the headband is worn, not painted),
  *                                          "graduate": {equipment}, "graduate_skin": texture, "graduate_after": quest id (what it
  *                                          wears, and looks like, once that is done: Naruto's goggles give way to the headband),
- *                                          "eyes": texture (a dojutsu over its face)}
+ *                                          "eyes": texture (a dojutsu over its face), "pose": "sit" (at home: seated, as the
+ *                                          Hokage at his desk), "shop": {"line", "offers"} (a shopkeeper: see StoryShop)}
  * data/&lt;ns&gt;/story/quests/&lt;id&gt;.json      {"title", "chapter", "after": [quest ids], "start": "auto" | character id,
  *                                          "offer": [lines], "steps": [steps], "rewards": {"items": [{"id", "count"}], "xp" (shinobi XP), "vanilla_xp", "commands",
- *                                          "time" (the time of day it moves on to)}}
+ *                                          "time" (the time of day it moves on to)}, "when": "morning"|"day"|"evening"|"night"
+ *                                          (only offered then), "later": the character's line while it's held back}
  * </pre>
  * A quest starts by itself ("auto") or when its character is talked to, once every quest in "after" is done. A filler
  * ("fillers/..." quests, side stories) is only offered while no main-story quest is going: till then its character says its
@@ -116,11 +118,11 @@ public final class Story {
 	 * headband, once the class has passed), "eyes" a dojutsu drawn over its face (the mod's own eye textures).
 	 */
 	public record Character(String id, String name, Identifier skin, String model, BlockPos home, float yaw, List<String> idle, String after,
-			Map<String, String> equipment, String until, Map<String, String> graduate, String graduateAfter, String eyes, String graduateSkin, String pose) {
+			Map<String, String> equipment, String until, Map<String, String> graduate, String graduateAfter, String eyes, String graduateSkin, String pose, JsonObject shop) {
 	}
 
 	public record Quest(String id, String title, int chapter, List<String> after, String start, JsonArray offer, List<JsonObject> steps,
-			JsonObject rewards, String later) {
+			JsonObject rewards, String later, String when) {
 	}
 
 	private static volatile Map<String, Character> characters = Map.of();
@@ -158,7 +160,8 @@ public final class Story {
 						Identifier.parse(str(o, "skin", "naruto_shippuden:textures/entities/iruka_sensei.png")), str(o, "model", "legacy"),
 						home == null ? null : new BlockPos(home.get(0).getAsInt(), home.get(1).getAsInt(), home.get(2).getAsInt()),
 						o.has("yaw") ? o.get("yaw").getAsFloat() : 0, idle, str(o, "after", ""), equipment(o, "equipment"), str(o, "until", ""),
-						equipment(o, "graduate"), str(o, "graduate_after", ""), str(o, "eyes", ""), str(o, "graduate_skin", ""), str(o, "pose", "")));
+						equipment(o, "graduate"), str(o, "graduate_after", ""), str(o, "eyes", ""), str(o, "graduate_skin", ""), str(o, "pose", ""),
+						o.has("shop") ? o.getAsJsonObject("shop") : null));
 			}
 			Map<String, Quest> qs = new TreeMap<>();
 			for (var e : read(manager, "story/quests").entrySet()) {
@@ -170,7 +173,7 @@ public final class Story {
 				o.getAsJsonArray("steps").forEach(s -> steps.add(s.getAsJsonObject()));
 				qs.put(e.getKey(), new Quest(e.getKey(), str(o, "title", e.getKey()), o.has("chapter") ? o.get("chapter").getAsInt() : 0, after,
 						str(o, "start", "auto"), o.has("offer") ? o.getAsJsonArray("offer") : new JsonArray(), steps,
-						o.has("rewards") ? o.getAsJsonObject("rewards") : new JsonObject(), str(o, "later", "")));
+						o.has("rewards") ? o.getAsJsonObject("rewards") : new JsonObject(), str(o, "later", ""), str(o, "when", "")));
 			}
 			return new Object[]{chars, qs};
 		}
@@ -277,7 +280,39 @@ public final class Story {
 	/** Startable, and not held back: a filler waits for the main story's quest in progress, and while a filler is going
 	 * no character offers anything else (one side story at a time, finished before the story goes on). */
 	private static boolean offerable(ServerPlayer player, Quest quest) {
-		return startable(player, quest) && !onFiller(player) && !(isFiller(quest) && onMainQuest(player));
+		return startable(player, quest) && held(player, quest) == null;
+	}
+
+	/** Why a startable quest isn't offered now: "busy" (a filler going, or a filler while the main story's quest is),
+	 * "time" (its "when" isn't now: the morning's team assignment isn't given at night), or null. */
+	private static @org.jspecify.annotations.Nullable String held(ServerPlayer player, Quest quest) {
+		if (onFiller(player) || isFiller(quest) && onMainQuest(player))
+			return "busy";
+		if (!quest.when().isEmpty() && !isTime(player, quest.when()))
+			return "time";
+		return null;
+	}
+
+	/** Whether it is that time of day now: "morning", "day", "evening" or "night". */
+	private static boolean isTime(ServerPlayer player, String when) {
+		int now = (int) Math.floorMod(player.level().getDefaultClockTime(), 24000L);
+		return switch (when) {
+			case "morning" -> now < 4000 || now >= 23000;
+			case "day" -> now < 12000;
+			case "evening" -> now >= 11000 && now < 14000;
+			case "night" -> now >= 13000 && now < 23000;
+			default -> true;
+		};
+	}
+
+	private static String comeBack(String when) {
+		return switch (when) {
+			case "morning" -> "Not now. Come back in the morning.";
+			case "day" -> "It's too late for that now. Come back tomorrow, during the day.";
+			case "evening" -> "Not yet. Come back this evening.";
+			case "night" -> "Come back tonight.";
+			default -> "Come back later.";
+		};
 	}
 
 	/** The current step of an active quest, or null. */
@@ -952,22 +987,50 @@ public final class Story {
 				return;
 			} else if (later == null && q.start().equals(who) && startable(player, q))
 				later = q;
-		// a side story they'd offer, but the player has the main story to see to first
+		// a quest they'd offer, but not now: the player has another to see to first, or it isn't the time for it
 		if (later != null) {
 			JsonArray lines = new JsonArray();
 			JsonObject line = new JsonObject();
 			line.addProperty("speaker", who);
-			line.addProperty("text", later.later().isEmpty() ? "You look busy. Come back once you've finished what you're doing, and we'll talk." : later.later());
+			boolean time = "time".equals(held(player, later));
+			line.addProperty("text", time ? comeBack(later.when())
+					: later.later().isEmpty() ? "You look busy. Come back once you've finished what you're doing, and we'll talk." : later.later());
+			if (time) {
+				// the player may let the time pass (as a step's "time" does), then ask again
+				JsonArray choices = new JsonArray();
+				JsonObject wait = new JsonObject();
+				wait.addProperty("text", "(Wait until " + (later.when().equals("day") ? "the day" : later.when()) + ")");
+				wait.addProperty("flag", "wait");
+				choices.add(wait);
+				JsonObject ok = new JsonObject();
+				ok.addProperty("text", "All right.");
+				ok.addProperty("flag", "wait_no");
+				choices.add(ok);
+				line.add("choices", choices);
+			}
 			lines.add(line);
-			openDialogue(player, npc, "", "idle", lines);
+			openDialogue(player, npc, time ? later.id() : "", time ? "wait" : "idle", lines);
 			return;
 		}
 		Character c = characters.get(who);
-		if (c != null && !c.idle().isEmpty()) {
+		if (c != null && (!c.idle().isEmpty() || c.shop() != null)) {
 			JsonArray lines = new JsonArray();
 			JsonObject line = new JsonObject();
 			line.addProperty("speaker", who);
-			line.addProperty("text", c.idle().get(player.getRandom().nextInt(c.idle().size())));
+			line.addProperty("text", c.idle().isEmpty() ? "What'll it be?" : c.idle().get(player.getRandom().nextInt(c.idle().size())));
+			if (c.shop() != null) {
+				// a shopkeeper: the player can ask to buy (the trading screen opens when the dialogue closes)
+				JsonArray choices = new JsonArray();
+				JsonObject buy = new JsonObject();
+				buy.addProperty("text", str(c.shop(), "line", "Let me see what you have."));
+				buy.addProperty("flag", "shop");
+				choices.add(buy);
+				JsonObject no = new JsonObject();
+				no.addProperty("text", "Not now.");
+				no.addProperty("flag", "shop_no");
+				choices.add(no);
+				line.add("choices", choices);
+			}
 			lines.add(line);
 			openDialogue(player, npc, "", "idle", lines);
 		}
@@ -1025,12 +1088,19 @@ public final class Story {
 			if (choice.has("commands"))
 				choice.getAsJsonArray("commands").forEach(c -> Compat.runCommand(player, c.getAsString()));
 		}));
+		if (q == null && result.getStringOr("kind", "").equals("idle") && characters.get(npc.character()) instanceof Character c && c.shop() != null
+				&& result.getListOrEmpty("flags").stream().anyMatch(f -> f.asString().orElse("").equals("shop")))
+			StoryShop.open(player, npc, c);
 		if (q == null)
 			return;
 		switch (result.getStringOr("kind", "")) {
 			case "offer" -> {
 				if (q.start().equals(npc.character()) && offerable(player, q))
 					start(player, q);
+			}
+			case "wait" -> {
+				if (result.getListOrEmpty("flags").stream().anyMatch(f -> f.asString().orElse("").equals("wait")))
+					timeOfDay(player, q.when());
 			}
 			case "step" -> {
 				JsonObject step = step(player, q);

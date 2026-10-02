@@ -12,5 +12,34 @@
     "Welcome! One miso pork, coming right up!",
     "Naruto's my best customer. Don't tell him I said so.",
     "The secret's in the broth. No, I won't tell you what's in it."
-  ]
+  ],
+  "shop": {
+    "line": "Old man, one more miso pork ramen!",
+    "offers": [
+      {
+        "wants": [
+          {
+            "id": "naruto_shippuden:bronze_ryo",
+            "count": 4
+          }
+        ],
+        "gives": {
+          "id": "naruto_shippuden:ichiraku_ramen",
+          "count": 1
+        }
+      },
+      {
+        "wants": [
+          {
+            "id": "naruto_shippuden:silver_ryo",
+            "count": 2
+          }
+        ],
+        "gives": {
+          "id": "naruto_shippuden:ichiraku_ramen",
+          "count": 5
+        }
+      }
+    ]
+  }
 }
