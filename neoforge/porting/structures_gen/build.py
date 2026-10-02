@@ -328,6 +328,21 @@ class Build:
             out[(x, y, z)] = '%s[%s]' % (name, ','.join('%s=%s' % kv for kv in sorted(props.items())))
         self.blocks.update(out)
         self.stair_shapes()
+        self.raise_slabs()
+
+    SITS_ON = ('flower_pot', 'potted_', 'candle', 'decorated_pot', 'lantern', 'skull', 'head', 'pressure_plate')
+
+    def raise_slabs(self):
+        """A pot, candle or lantern standing on a bottom slab would float half a block over it (blocks above stand on the
+        block's full top): the slab goes to the top half, a table top they rest on."""
+        for (x, y, z), s in list(self.blocks.items()):
+            name, props = self.parse(s)
+            if not name.endswith('_slab') or props.get('type') != 'bottom':
+                continue
+            above = (self.blocks.get((x, y + 1, z)) or '').split('[')[0]
+            if any(k in above for k in self.SITS_ON) and 'wall' not in above:
+                props['type'] = 'top'
+                self.blocks[(x, y, z)] = '%s[%s]' % (name, ','.join('%s=%s' % kv for kv in sorted(props.items())))
 
     def stair_shapes(self):
         """Stairs beside stairs turned across them join into corners, as vanilla's StairBlock.getStairsShape works them out

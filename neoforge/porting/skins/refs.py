@@ -298,6 +298,9 @@ def iruka():
         return c[1] > c[2] + 6 and c[1] >= c[0] and _lum(c) < 150
     for xs, ys in ((range(40, 56), range(16, 32)), (range(32, 48), range(48, 64)), (range(40, 56), range(32, 48)), (range(48, 64), range(48, 64))):
         recolour(s, xs, ys, lambda c: shade_as(c, navy, 110) if greenish(c) else None)
+    # his eyes drawn clean, as Sasuke's: the whites outside, two rows tall, dark brown pupils in, a shade darker below
+    heads.grid(s, 'head', 'front', [".", ".", ".", ".", ".WPssPW.", ".wpsspw."],
+               {'W': rgb('#F6F6F8'), 'w': rgb('#D8D8E2'), 'P': rgb('#1E1610'), 'p': rgb('#3A2A20'), 's': rgb('#F2B692')})
     return s
 
 
