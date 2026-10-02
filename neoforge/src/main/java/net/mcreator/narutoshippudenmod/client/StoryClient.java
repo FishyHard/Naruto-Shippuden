@@ -566,6 +566,16 @@ public final class StoryClient {
 				case "slim" -> slim;
 				default -> legacy;
 			};
+			if (state.hasPose(net.minecraft.world.entity.Pose.SLEEPING) && state.bedOrientation == null) {
+				// lying on the ground (no bed): vanilla lays the body out from the feet; centred on the position instead,
+				// where the hitbox is. The head points along (-cos, sin) of the body's turn
+				double b = Math.toRadians(state.bodyRot);
+				poseStack.pushPose();
+				poseStack.translate(0.9 * Math.cos(b), 0, -0.9 * Math.sin(b));
+				super.submit(state, poseStack, collector, camera);
+				poseStack.popPose();
+				return;
+			}
 			if (state.seated) {
 				// his feet are at the chair block's floor; the seat (a stair's step) is half a block up, his hips 3/4
 				poseStack.pushPose();

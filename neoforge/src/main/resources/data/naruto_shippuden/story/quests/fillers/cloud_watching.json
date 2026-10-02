@@ -22,7 +22,7 @@
       "pos": [
         -116,
         65,
-        -82
+        -78
       ],
       "radius": 5,
       "text": "Find Shikamaru and Choji at the edge of Training Ground 3",
@@ -33,7 +33,7 @@
           "pos": [
             -117,
             65,
-            -82
+            -78
           ],
           "yaw": 90,
           "steps": 3,
@@ -42,11 +42,11 @@
         {
           "character": "choji",
           "pos": [
-            -115,
+            -114,
             64.5,
-            -84
+            -76
           ],
-          "yaw": 0,
+          "yaw": 90,
           "steps": 3,
           "pose": "sit"
         }

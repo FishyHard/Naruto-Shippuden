@@ -5,7 +5,8 @@ Run `python3 fillers.py` to write them into both resource trees.
 
 Ichiraku's stools, in Chikyū (the shop on the main street, its counter facing east onto the street): x -10, z 54, 56, 58,
 60, the cushions on top; who sits there faces west, to the counter. Yakiniku Q's first booth (the barbecue place on
-avenue B): its benches at z 60 (facing south, to the grill) and z 62 (facing north), x 12 and 13, the table between."""
+avenue B): its floor cushions at z 60 (facing south, to the grill) and z 62 (facing north), x 11..13, the low table
+between."""
 from chapter1 import G, say, choice, talk, write
 
 Q = 'fillers/'
@@ -13,17 +14,20 @@ RAMEN = 'naruto_shippuden:ichiraku_ramen'
 ICHIRAKU = [-8, G, 57]                 # in front of the counter, on the street side
 
 
-YAKINIKU = [14, G, 65]                 # inside Yakiniku Q's door
+YAKINIKU = [17, G, 66]                 # inside Yakiniku Q's door
 FLOWER_SHOP = [-3, G, 91]              # before the Yamanaka flower shop's open front
-HOSPITAL = [82, G, -86]                # before the hospital's doors
-CLOUDS = [-116, G, -82]                # the grass at the edge of Training Ground 3
+HOSPITAL = [83, G, -87]                # the hospital's waiting room (its benches face north)
+CLOUDS = [-116, G, -78]                # open grass at the edge of Training Ground 3 (clear of the trees)
+ROCK_FOOT = [0, G, -131]               # flat ground before the Hokage Rock, below its talus
+# the splashes of Naruto's paint on the four faces, on the air just in front of each face (porting/structures_gen/world.py)
+PAINT = [[-53, 128, -159], [-27, 110, -162], [-21, 120, -158], [-3, 126, -162], [5, 112, -164], [21, 100, -157]]
 TRAINING_DUMMY = ('execute unless entity @e[type=naruto_shippuden:training_dummy,x=-68,y=65,z=-58,distance=..3] run '
                   'summon naruto_shippuden:training_dummy -68 65 -58')
 
 
 def booth(character, x, north, steps=2):
-    """Someone sitting in Yakiniku Q's booth, on the bench north (facing south) or south of the grill."""
-    return dict(character=character, pos=[x, G + 0.1, 60 if north else 62], yaw=0 if north else 180, steps=steps, pose='sit')
+    """Someone sitting on a floor cushion at Yakiniku Q's first grill table, north of it (facing south) or south."""
+    return dict(character=character, pos=[x, G - 0.4, 60 if north else 62], yaw=0 if north else 180, steps=steps, pose='sit')
 
 
 def ground(character, x, z, yaw, pose='sit', steps=2):
@@ -140,7 +144,7 @@ QUESTS = {
         ],
         steps=[
             dict(type='goto', pos=CLOUDS, radius=5, text='Find Shikamaru and Choji at the edge of Training Ground 3', time='day',
-                 spawn=[ground('shikamaru', -117, -82, 90, pose='lie', steps=3), ground('choji', -115, -84, 0, steps=3)]),
+                 spawn=[ground('shikamaru', -117, -78, 90, pose='lie', steps=3), ground('choji', -114, -76, 90, steps=3)]),
             dict(type='wait', seconds=20, text='Lie back and watch the clouds'),
             talk('shikamaru', 'Talk to Shikamaru', [
                 say('shikamaru', "See that one? Looks like a deer. And that one... like Iruka-sensei when he's yelling."),
@@ -238,13 +242,13 @@ QUESTS = {
         later="Shh! I can't talk now, you're busy anyway! ...Don't tell Iruka-sensei where I am!",
         offer=[
             say('naruto', "Heh heh... So, uh, I might've painted the Hokage faces again. And Iruka-sensei says I gotta wash it all off."),
-            say('naruto', "You can walk up walls now, right? Help me scrub! It's a long way up!"),
+            say('naruto', "You can walk up walls now, right? Help me scrub! Six big splashes, all over the faces. Stand on each one and scrub!"),
         ],
         steps=[
-            dict(type='goto', pos=[0, 130, -162], radius=24, min_y=118, text='Climb onto the Hokage faces (walk up the Rock)'),
-            dict(type='wait', seconds=30, text='Scrub the paint off the faces'),
-            dict(type='goto', pos=[0, G, -150], radius=12, text='Come back down to the foot of the Rock',
-                 spawn=[dict(character='naruto', pos=[-2, G, -148], yaw=180, steps=2), dict(character='iruka', pos=[2, G, -148], yaw=180, steps=2)]),
+            dict(type='spots', points=PAINT, seconds=3, radius=2.2,
+                 text='Scrub the paint off the Hokage faces: walk up the Rock and stand at each splash'),
+            dict(type='goto', pos=ROCK_FOOT, radius=6, text='Come back down to the foot of the Rock',
+                 spawn=[dict(character='naruto', pos=[-2, G, -130], yaw=180, steps=2), dict(character='iruka', pos=[2, G, -130], yaw=180, steps=2)]),
             talk('iruka', 'Talk to Iruka-sensei', [
                 say('iruka', "Spotless. Naruto, you could learn something from your friend here."),
                 say('naruto', "Yeah, yeah... Hey, it looked way better with the moustaches."),
@@ -261,8 +265,9 @@ QUESTS = {
             say('yui', "I've got him as far as the hospital, but he won't go in. Can you meet us at the doors? He listens to you."),
         ],
         steps=[
-            dict(type='goto', pos=HOSPITAL, radius=5, text='Meet Yui and Ren at the hospital', time='day',
-                 spawn=[dict(character='yui', pos=[81, G, -86], yaw=180, steps=3), ground('ren', 83, -86, 180, steps=3)]),
+            dict(type='goto', pos=HOSPITAL, radius=5, text="Meet Yui and Ren in the hospital's waiting room", time='day',
+                 spawn=[dict(character='yui', pos=[81, G, -87], yaw=0, steps=3),
+                        dict(character='ren', pos=[81, G, -86], yaw=180, steps=3, pose='sit')]),
             talk('ren', 'Talk to Ren', [
                 say('ren', "It's just a scratch! A ninja doesn't go to the hospital for a scratch!"),
                 say('yui', "It's swollen, Ren. Sit still."),

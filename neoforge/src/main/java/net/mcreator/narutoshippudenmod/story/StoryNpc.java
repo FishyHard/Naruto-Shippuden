@@ -589,6 +589,12 @@ public class StoryNpc extends NarutoShippudenModElements.ModElement {
 		}
 
 		@Override
+		public float getPickRadius() {
+			// lying down, the body is a 0.2 block box at its middle (vanilla's sleeper): the whole length of it can be clicked
+			return getPose() == net.minecraft.world.entity.Pose.SLEEPING ? 1.0F : super.getPickRadius();
+		}
+
+		@Override
 		public boolean isPushable() {
 			return sparWith != null;
 		}

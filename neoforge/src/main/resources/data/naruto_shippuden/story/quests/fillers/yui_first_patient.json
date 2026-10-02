@@ -20,12 +20,12 @@
     {
       "type": "goto",
       "pos": [
-        82,
+        83,
         65,
-        -86
+        -87
       ],
       "radius": 5,
-      "text": "Meet Yui and Ren at the hospital",
+      "text": "Meet Yui and Ren in the hospital's waiting room",
       "time": "day",
       "spawn": [
         {
@@ -33,16 +33,16 @@
           "pos": [
             81,
             65,
-            -86
+            -87
           ],
-          "yaw": 180,
+          "yaw": 0,
           "steps": 3
         },
         {
           "character": "ren",
           "pos": [
-            83,
-            64.5,
+            81,
+            65,
             -86
           ],
           "yaw": 180,

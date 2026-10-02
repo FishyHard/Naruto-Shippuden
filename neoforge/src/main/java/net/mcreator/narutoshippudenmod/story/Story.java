@@ -87,6 +87,8 @@ import java.util.TreeMap;
  * {"type": "hit", "entity": id, "count": n}                    land n hits on them (training dummies, sparring)
  * {"type": "collect", "item": id, "count": n, "take": bool}   have n in the inventory (taken when "take")
  * {"type": "wait", "seconds": s}                               let time pass
+ * {"type": "spots", "points": [[x, y, z], ...], "seconds": s, stand at each marked spot (coloured dust shows them, to this
+ *  "radius": r}                                                player only) for s seconds: scrubbing paint off the Rock
  * {"type": "spar", "npc": id, "hits": n, "damage": d,         spar with that character until landing n hits; it fights back
  *  "rank": 0-2, "throws": bool, "substitution": bool}          (rank: how fast and hard; throws kunai; dodges by Substitution)
  * {"type": "event", "event": name}                            something code reports with {@link #event}
@@ -264,9 +266,18 @@ public final class Story {
 		return false;
 	}
 
-	/** Startable, and not a filler held back by a main-story quest in progress. */
+	/** Whether the player has a filler going, not yet finished and rewarded (nothing else is offered meanwhile). */
+	private static boolean onFiller(ServerPlayer player) {
+		for (String id : section(state(player), "active").keySet())
+			if (id.startsWith("fillers/"))
+				return true;
+		return false;
+	}
+
+	/** Startable, and not held back: a filler waits for the main story's quest in progress, and while a filler is going
+	 * no character offers anything else (one side story at a time, finished before the story goes on). */
 	private static boolean offerable(ServerPlayer player, Quest quest) {
-		return startable(player, quest) && !(isFiller(quest) && onMainQuest(player));
+		return startable(player, quest) && !onFiller(player) && !(isFiller(quest) && onMainQuest(player));
 	}
 
 	/** The current step of an active quest, or null. */
@@ -567,6 +578,59 @@ public final class Story {
 			}
 	}
 
+	/** Every quest that needs this one done first, and the ones that need those (this one included). */
+	private static java.util.Set<String> after(String id) {
+		java.util.Set<String> out = new java.util.LinkedHashSet<>(List.of(id));
+		boolean grew = true;
+		while (grew) {
+			grew = false;
+			for (Quest q : quests.values())
+				if (!out.contains(q.id()) && q.after().stream().anyMatch(out::contains))
+					grew |= out.add(q.id());
+		}
+		return out;
+	}
+
+	/** Back to just before a quest: it and everything after it forgotten (and started again if it starts by itself). */
+	private static void rewind(ServerPlayer player, Quest quest) {
+		for (String id : after(quest.id())) {
+			section(state(player), "active").remove(id);
+			section(state(player), "done").remove(id);
+		}
+		state(player).remove("focus");
+		settle(player);
+	}
+
+	/** On to just after a quest: it and every quest before it done. */
+	private static void finish(ServerPlayer player, Quest quest) {
+		java.util.Deque<Quest> todo = new java.util.ArrayDeque<>(List.of(quest));
+		while (!todo.isEmpty()) {
+			Quest q = todo.pop();
+			if (isDone(player, q.id()))
+				continue;
+			section(state(player), "active").remove(q.id());
+			section(state(player), "done").putBoolean(q.id(), true);
+			for (String a : q.after())
+				if (quests.get(a) instanceof Quest before)
+					todo.push(before);
+		}
+		if (quest.id().equals(state(player).getStringOr("focus", "")))
+			state(player).remove("focus");
+		settle(player);
+	}
+
+	/** After the story was moved by a command: the quests that start by themselves start, and the characters show as they now should. */
+	private static void settle(ServerPlayer player) {
+		autoStart(player);
+		sync(player);
+		ServerLevel level = (ServerLevel) player.level();
+		for (Entity e : level.getAllEntities())
+			if (e instanceof StoryNpc.Npc npc && !npc.isScene()) {
+				level.getChunkSource().removeEntity(npc);
+				level.getChunkSource().addEntity(npc);
+			}
+	}
+
 	/** The Chakra Paper was used (StuffItems, by the rule chakra_paper_story). */
 	public static void chakraPaperUsed(Entity entity) {
 		if (entity instanceof ServerPlayer player)
@@ -727,6 +791,56 @@ public final class Story {
 								step.has("rank") ? step.get("rank").getAsInt() : 0, step.has("throws") && step.get("throws").getAsBoolean(),
 								step.has("substitution") && step.get("substitution").getAsBoolean());
 				}
+			}
+			case "spots" -> {
+				// marked spots to stand on a while each (paint to scrub off the Hokage faces): shown in coloured dust to
+				// this player, each one gone once they've stood at it for the step's seconds
+				JsonArray points = step.getAsJsonArray("points");
+				CompoundTag p = progress(player, quest);
+				int done = p.getIntOr("found", 0), at = p.getIntOr("at", -1), timer = p.getIntOr("timer", 0);
+				double r = step.has("radius") ? step.get("radius").getAsDouble() : 1.8;
+				int need = (step.has("seconds") ? step.get("seconds").getAsInt() : 3) * 20;
+				int[] colours = {0xE8402A, 0x2A7DE8, 0xF2D32A, 0x3CC84A, 0xE85AC8, 0xF28A2A};
+				ServerLevel level = (ServerLevel) player.level();
+				int here = -1;
+				for (int i = 0; i < points.size(); i++) {
+					if ((done & (1 << i)) != 0)
+						continue;
+					JsonArray pt = points.get(i).getAsJsonArray();
+					double x = pt.get(0).getAsDouble() + 0.5, y = pt.get(1).getAsDouble() + 0.5, z = pt.get(2).getAsDouble() + 0.5;
+					// a splash of paint: big dabs of its colour, a glint to catch the eye from far off
+					level.sendParticles(player, new net.minecraft.core.particles.DustParticleOptions(colours[i % colours.length], 3.0F), true, true,
+							x, y, z, 14, 0.6, 0.6, 0.6, 0);
+					level.sendParticles(player, net.minecraft.core.particles.ParticleTypes.END_ROD, true, true, x, y + 0.8, z, 1, 0.2, 0.3, 0.2, 0.01);
+					if (player.distanceToSqr(x, y, z) <= r * r)
+						here = i;
+				}
+				if (player.tickCount % 40 == 0)
+					sync(player);                      // the tracker follows the nearest splash still to do
+				if (here < 0) {
+					p.putInt("at", -1);
+					p.putInt("timer", 0);
+					return;
+				}
+				timer = here == at ? timer + 10 : 10;
+				p.putInt("at", here);
+				p.putInt("timer", timer);
+				JsonArray pt = points.get(here).getAsJsonArray();
+				double x = pt.get(0).getAsDouble() + 0.5, y = pt.get(1).getAsDouble() + 0.5, z = pt.get(2).getAsDouble() + 0.5;
+				level.sendParticles(player, net.minecraft.core.particles.ParticleTypes.SPLASH, true, true, x, y, z, 8, 0.4, 0.3, 0.4, 0.1);
+				if (timer < need)
+					return;
+				done |= 1 << here;
+				p.putInt("found", done);
+				p.putInt("at", -1);
+				p.putInt("timer", 0);
+				p.putInt("count", Integer.bitCount(done));
+				level.sendParticles(player, net.minecraft.core.particles.ParticleTypes.CLOUD, true, true, x, y, z, 12, 0.4, 0.4, 0.4, 0.02);
+				level.playSound(null, player.blockPosition(), SoundEvents.BUCKET_EMPTY, SoundSource.PLAYERS, 0.8F, 1.2F);
+				if (Integer.bitCount(done) >= points.size())
+					advance(player, quest);
+				else
+					sync(player);
 			}
 			case "wait" -> {
 				CompoundTag p = progress(player, quest);
@@ -960,7 +1074,9 @@ public final class Story {
 			out.putString("objective", objective(step));
 			int count = progress(player, q).getIntOr("count", 0);
 			String type = str(step, "type", "");
-			if (type.equals("kill") || type.equals("hit") || type.equals("collect"))
+			if (type.equals("spots"))
+				out.putString("progress", count + "/" + step.getAsJsonArray("points").size());
+			else if (type.equals("kill") || type.equals("hit") || type.equals("collect"))
 				out.putString("progress", count + "/" + (step.has("count") ? step.get("count").getAsInt() : 1));
 			else if (type.equals("spar"))
 				out.putString("progress", count + "/" + (step.has("hits") ? step.get("hits").getAsInt() : 5));
@@ -969,6 +1085,19 @@ public final class Story {
 			if (type.equals("goto")) {
 				pos = step.getAsJsonArray("pos");
 				dim = str(step, "dimension", dim);
+			} else if (type.equals("spots")) {
+				// the nearest spot still to do
+				int done = progress(player, q).getIntOr("found", 0);
+				double best = Double.MAX_VALUE;
+				JsonArray points = step.getAsJsonArray("points");
+				for (int i = 0; i < points.size(); i++) {
+					JsonArray pt = points.get(i).getAsJsonArray();
+					double d = player.distanceToSqr(pt.get(0).getAsDouble(), pt.get(1).getAsDouble(), pt.get(2).getAsDouble());
+					if ((done & (1 << i)) == 0 && d < best) {
+						best = d;
+						pos = pt;
+					}
+				}
 			} else if (type.equals("talk") || type.equals("spar")) {
 				// the character's own scene figure if the step placed one, else where they live
 				StoryNpc.Npc npc = findNpc(player, str(step, "npc", ""), 160);
@@ -1145,6 +1274,33 @@ public final class Story {
 							Quest q = quests.get(StringArgumentType.getString(c, "quest"));
 							if (q != null)
 								start(p, q);
+						}))))
+				.then(Commands.literal("list").executes(c -> forPlayers(c.getSource(), List.of(c.getSource().getPlayerOrException()), p -> {
+					// every quest, with where this player is in it
+					for (Quest q : quests.values()) {
+						JsonObject step = step(p, q);
+						String status = isDone(p, q.id()) ? "done" : isActive(p, q.id())
+								? "step " + (stepIndex(p, q.id()) + 1) + "/" + q.steps().size() + (step != null ? ": " + objective(step) : "")
+								: startable(p, q) ? (q.start().equals("auto") ? "ready" : "offered by " + q.start()) : "locked";
+						ChatFormatting colour = isDone(p, q.id()) ? ChatFormatting.DARK_GREEN : isActive(p, q.id()) ? ChatFormatting.YELLOW
+								: startable(p, q) ? ChatFormatting.AQUA : ChatFormatting.GRAY;
+						p.sendSystemMessage(Component.literal(q.id()).withStyle(colour)
+								.append(Component.literal("  " + q.title() + "  (" + status + ")").withStyle(ChatFormatting.GRAY)));
+					}
+				})))
+				.then(Commands.literal("rewind").then(Commands.argument("quest", StringArgumentType.greedyString())
+						.suggests((c, b) -> SharedSuggestionProvider.suggest(quests.keySet(), b))
+						.executes(c -> forPlayers(c.getSource(), List.of(c.getSource().getPlayerOrException()), p -> {
+							Quest q = quests.get(StringArgumentType.getString(c, "quest"));
+							if (q != null)
+								rewind(p, q);
+						}))))
+				.then(Commands.literal("finish").then(Commands.argument("quest", StringArgumentType.greedyString())
+						.suggests((c, b) -> SharedSuggestionProvider.suggest(quests.keySet(), b))
+						.executes(c -> forPlayers(c.getSource(), List.of(c.getSource().getPlayerOrException()), p -> {
+							Quest q = quests.get(StringArgumentType.getString(c, "quest"));
+							if (q != null)
+								finish(p, q);
 						}))))
 				.then(Commands.literal("skip").executes(c -> forPlayers(c.getSource(), List.of(c.getSource().getPlayerOrException()), p -> {
 					String focus = state(p).getStringOr("focus", "");

@@ -13,34 +13,56 @@
     },
     {
       "speaker": "naruto",
-      "text": "You can walk up walls now, right? Help me scrub! It's a long way up!"
+      "text": "You can walk up walls now, right? Help me scrub! Six big splashes, all over the faces. Stand on each one and scrub!"
     }
   ],
   "steps": [
     {
-      "type": "goto",
-      "pos": [
-        0,
-        130,
-        -162
+      "type": "spots",
+      "points": [
+        [
+          -53,
+          128,
+          -159
+        ],
+        [
+          -27,
+          110,
+          -162
+        ],
+        [
+          -21,
+          120,
+          -158
+        ],
+        [
+          -3,
+          126,
+          -162
+        ],
+        [
+          5,
+          112,
+          -164
+        ],
+        [
+          21,
+          100,
+          -157
+        ]
       ],
-      "radius": 24,
-      "min_y": 118,
-      "text": "Climb onto the Hokage faces (walk up the Rock)"
-    },
-    {
-      "type": "wait",
-      "seconds": 30,
-      "text": "Scrub the paint off the faces"
+      "seconds": 3,
+      "radius": 2.2,
+      "text": "Scrub the paint off the Hokage faces: walk up the Rock and stand at each splash"
     },
     {
       "type": "goto",
       "pos": [
         0,
         65,
-        -150
+        -131
       ],
-      "radius": 12,
+      "radius": 6,
       "text": "Come back down to the foot of the Rock",
       "spawn": [
         {
@@ -48,7 +70,7 @@
           "pos": [
             -2,
             65,
-            -148
+            -130
           ],
           "yaw": 180,
           "steps": 2
@@ -58,7 +80,7 @@
           "pos": [
             2,
             65,
-            -148
+            -130
           ],
           "yaw": 180,
           "steps": 2

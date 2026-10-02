@@ -399,54 +399,139 @@ def nara_forest():
 
 # ---------------------------------------------------------------- Yakiniku Q
 def bbq_restaurant():
-    """Yakiniku Q, the barbecue restaurant where Team 10 eats: two storeys of dark wood and red, a red awning and banners,
-    booths inside each with a grill in the middle of the table and cushioned benches."""
+    """Yakiniku Q, the barbecue restaurant where Team 10 eats, after the anime: a pale plaster two-storey shop, a corrugated
+    orange metal pent roof over the ground floor and a hipped one on top, a balcony rail under the upper windows, white
+    noren painted 焼肉Q over the entrance, red gas cylinders by the door, a brown drainpipe and a lit sign on the corner.
+    Inside, low grill tables with floor cushions (light blue and grey) as in a yakiniku house, the kitchen counter at the
+    back, and stairs up the east wall to a private dining room upstairs.
+
+    Scenes sit at the first ground-floor table: its cushions at template x 3..5, z 3 (facing south) and z 5 (facing north),
+    its grill table between at z 4."""
     W, D = 17, 15
-    b = Build(W, 18, D)
+    b = Build(W, 20, D)
     x1, z1, x2, z2 = 1, 1, 15, 11
+    PLASTER = Mix(('white_terracotta', 6), ('calcite', 1), ('smooth_sandstone', 1), salt=141)
+    BASE = 'mangrove_planks'                     # the reddish-brown boarding along the foot of the walls
+    METAL, METAL_SLAB, METAL_FULL = 'waxed_cut_copper_stairs', 'waxed_cut_copper_slab', 'waxed_cut_copper'
+    TRIM = 'stripped_dark_oak_wood[axis=y]'
     b.fill(x1, 0, z1, x2, G - 1, z2, 'stone_bricks')
-    WOOD = Mix(('dark_oak_planks', 3), ('spruce_planks', 1), salt=138)
-    b.box(x1, G, z1, x2, G + 8, z2, WOOD)
-    b.fill(x1 + 1, G, z1 + 1, x2 - 1, G + 7, z2 - 1, AIR)
-    b.fill(x1 + 1, G - 1, z1 + 1, x2 - 1, G - 1, z2 - 1, 'polished_blackstone_bricks')
-    b.fill(x1 + 1, G + 4, z1 + 1, x2 - 1, G + 4, z2 - 1, 'dark_oak_planks')
+    # ---- the walls: two storeys of plaster on a brown base, the floors between
+    for y in range(G, G + 10):
+        for x in range(x1, x2 + 1):
+            for z in range(z1, z2 + 1):
+                if x in (x1, x2) or z in (z1, z2):
+                    b.set(x, y, z, BASE if y == G else PLASTER)
+                else:
+                    b.set(x, y, z, AIR)
+    for (x, z) in ((x1, z1), (x2, z1), (x1, z2), (x2, z2)):
+        b.fill(x, G, z, x, G + 9, z, TRIM)
+    b.fill(x1 + 1, G - 1, z1 + 1, x2 - 1, G - 1, z2 - 1, 'spruce_planks')
+    b.fill(x1 + 1, G + 5, z1 + 1, x2 - 1, G + 5, z2 - 1, 'bamboo_mosaic')           # the upstairs floor, tatami-like
     for x in range(x1, x2 + 1):
-        b.set(x, G + 4, z2, 'red_terracotta'); b.set(x, G + 8, z2, 'red_terracotta')
-    for x in range(x1 + 1, x2):
-        if x % 3:
-            b.set(x, G + 1, z2, 'glass_pane'); b.set(x, G + 2, z2, 'glass_pane')
-            b.set(x, G + 6, z2, 'glass_pane')
-    m = (x1 + x2) // 2
-    b.fill(m - 1, G, z2, m + 1, G + 2, z2, AIR)
-    b.door(m - 1, G, z2, 'dark_oak', 'south', 'right'); b.door(m + 1, G, z2, 'dark_oak', 'south', 'left')
-    b.set(m, G, z2, AIR); b.set(m, G + 1, z2, AIR)
+        b.set(x, G + 5, z2, TRIM.replace('axis=y', 'axis=x'))
+    # ---- the front (south): the entrance with the noren, a display window, the gas cylinders
+    for x in (8, 9, 10):
+        for y in (G, G + 1, G + 2):
+            b.set(x, y, z2, AIR)
+    # the two doors swung open against the posts, the middle clear (hinged on the outside)
+    for x, hinge in ((8, 'right'), (10, 'left')):
+        b.set(x, G, z2, st('warped_door', facing='south', half='lower', hinge=hinge, open=True, powered=False))
+        b.set(x, G + 1, z2, st('warped_door', facing='south', half='upper', hinge=hinge, open=True, powered=False))
+    b.fill(7, G, z2, 7, G + 3, z2, TRIM); b.fill(11, G, z2, 11, G + 3, z2, TRIM)
+    b.fill(8, G + 3, z2, 10, G + 3, z2, 'stripped_dark_oak_wood[axis=x]')          # the noren rail
+    for i, pats in enumerate(YAKINIKU_NOREN):
+        b.banner(8 + i, G + 3, z2 + 1, 'south', 'white', pats)
+    b.fill(8, G - 1, z2, 10, G - 1, z2 + 1, 'polished_andesite')
+    for x in range(3, 6):                                                           # the display window
+        b.set(x, G + 1, z2, 'glass_pane'); b.set(x, G + 2, z2, 'glass_pane')
+    for x in range(12, 15):
+        b.set(x, G + 1, z2, 'glass_pane') if x != 12 else None
+    for x in (13, 14):                                                              # the gas cylinders
+        b.set(x, G, z2 + 1, 'red_concrete'); b.set(x, G + 1, z2 + 1, 'red_concrete')
+        b.set(x, G + 2, z2 + 1, st('iron_chain', axis='y', waterlogged=False)) if x == 13 else None
+    # the pent roof over the ground floor, corrugated metal, its edge trimmed in brown
     for x in range(x1 - 1, x2 + 2):
-        b.set(x, G + 3, z2 + 1, stairs('mangrove_stairs', 'north'))
-        b.set(x, G + 8, z2 + 1, stairs('mangrove_stairs', 'north'))
-    for x in (x1 + 1, x1 + 3, x2 - 3, x2 - 1):
-        b.banner(x, G + 7, z2 + 1, 'south', 'red', [('circle', 'white'), ('border', 'black')])
-    b.fill(x1, G + 9, z1, x2, G + 9, z2, 'dark_oak_planks')
-    b.gable(x1, z1, x2, z2, G + 9, TILE, slab(TILE_SLAB), axis='x', over=1, eave=TILE, gable_wall=WOOD)
-    # booths: a table with a grill in the middle, cushioned benches either side
-    for y0 in (G, G + 5):
-        for x in (x1 + 3, x1 + 8, x1 + 12):
-            if y0 == G and abs(x - m) < 2:
-                continue
-            for z in (z1 + 3, z1 + 7):
-                b.set(x, y0, z, 'polished_blackstone'); b.set(x + 1, y0, z, 'polished_blackstone')
-                b.set(x, y0 + 1, z, st('iron_trapdoor', facing='north', half='bottom', open=False, powered=False, waterlogged=False))
-                for zz in (z - 1, z + 1):
-                    for xx in (x, x + 1):
-                        b.set(xx, y0, zz, slab('dark_oak_slab'))
-                        b.cushion(xx, y0, zz, 'red')
-        b.set(m, y0 + 3, z1 + 5, st('lantern', hanging=True, waterlogged=False))
-    for i in range(4):
-        b.set(x2 - 1, G + i, z1 + 1 + i, stairs('spruce_stairs', 'south'))
-        b.set(x2 - 1, G + 4, z1 + 1 + i, AIR)
+        b.set(x, G + 5, z2 + 1, stairs(METAL, 'north'))
+        b.set(x, G + 4, z2 + 2, stairs(METAL, 'north'))
+        b.set(x, G + 3, z2 + 2, stairs('dark_oak_stairs', 'north', top=True)) if b.get(x, G + 3, z2 + 2) is None else None
+    # the upper storey's two windows, the balcony rail before them standing on the pent roof
+    for x0 in (3, 9):
+        for x in range(x0, x0 + 3):
+            b.set(x, G + 7, z2, 'glass_pane'); b.set(x, G + 8, z2, 'glass_pane')
+    for x in range(2, 14):
+        b.set(x, G + 6, z2 + 1, st('iron_bars', east=False, north=False, south=False, west=False, waterlogged=False))
+    # the drainpipe down the front, the lit sign on the east corner
+    for y in range(G, G + 10):
+        b.set(6, y, z2 + 1, st('mangrove_fence', waterlogged=False)) if b.get(6, y, z2 + 1) is None else None
+    for y in range(G + 6, G + 10):
+        b.set(x2 + 1, y, z2, 'ochre_froglight' if y % 2 else 'dark_oak_planks')
+    # side windows
+    for z in (4, 7):
+        for x in (x1, x2):
+            b.set(x, G + 2, z, 'glass_pane'); b.set(x, G + 7, z, 'glass_pane'); b.set(x, G + 8, z, 'glass_pane')
+    # ---- the roof: hipped, corrugated metal, a flat top with a brown rim
+    b.fill(x1, G + 10, z1, x2, G + 10, z2, 'spruce_planks')
+    b.hip(x1, z1, x2, z2, G + 11, METAL, METAL_FULL, over=1, layers=3)
+    for x in range(x1 - 1, x2 + 2):
+        for z in (z1 - 1, z2 + 1):
+            b.set(x, G + 10, z, stairs('dark_oak_stairs', 'south' if z == z1 - 1 else 'north', top=True))
+    for z in range(z1, z2 + 1):
+        b.set(x1 - 1, G + 10, z, stairs('dark_oak_stairs', 'east', top=True))
+        b.set(x2 + 1, G + 10, z, stairs('dark_oak_stairs', 'west', top=True))
+
+    # ---- inside, ground floor: two low grill tables with floor cushions on the west, the aisle from the door
+    def grill_table(x0, x1_, z, colours, y=G):
+        """A low table along x (bottom slabs) with a grill in the middle and cushions on the floor either side."""
+        for x in range(x0, x1_ + 1):
+            b.set(x, y, z, slab('dark_oak_slab'))
+        mid = (x0 + x1_) // 2
+        b.set(mid, y, z, slab('polished_blackstone_slab'))
+        if x1_ - x0 >= 4:
+            b.set(mid + 2, y, z, slab('polished_blackstone_slab')); b.set(mid - 2, y, z, slab('polished_blackstone_slab'))
+        for i, x in enumerate(range(x0, x1_ + 1)):
+            for zz in (z - 1, z + 1):
+                b.cushion(x, y, zz, colours[(i + zz) % len(colours)])
+    grill_table(3, 5, 4, ('light_blue', 'gray'))
+    grill_table(3, 5, 8, ('gray', 'light_blue'))
+    # the kitchen counter at the back, the grills' charcoal and the drinks
+    for x in range(8, 13):
+        b.set(x, G, z1 + 1, 'stripped_spruce_wood[axis=x]')
+        b.set(x, G + 1, z1 + 1, slab('smooth_quartz_slab'))
+    b.set(8, G + 2, z1 + 1, 'flower_pot')
+    b.set(13, G, z1 + 1, st('smoker', facing='south', lit=True))
+    b.set(13, G + 1, z1 + 1, st('barrel', facing='up', open=False))
+    for x in range(8, 13):
+        b.set(x, G + 3, z1 + 1, slab('spruce_slab', 'top'))
+    # the stairs up the east wall, two wide, arriving at the upstairs floor's north end; the floor open over them
+    for i in range(5):
+        for x in (13, 14):
+            b.set(x, G + i, 9 - i, stairs('spruce_stairs', 'north'))
+            for yy in range(G, G + i):
+                b.set(x, yy, 9 - i, 'spruce_planks')
+    for x in (13, 14):
+        for z in range(5, 10):
+            b.set(x, G + 5, z, AIR)
+    # lights
+    for (x, z) in ((4, 6), (9, 6), (9, 3)):
+        b.lantern(x, G + 4, z, hanging=True)
+
+    # ---- upstairs: the private room, a long table with two grills (Team 10's) and a smaller one
+    y2 = G + 6
+    grill_table(4, 8, 6, ('light_blue', 'gray'), y=y2)
+    grill_table(9, 11, 9, ('gray', 'light_blue'), y=y2)
+    b.set(2, y2, 2, 'potted_bamboo'); b.set(11, y2, 2, st('chest', facing='south', type='single', waterlogged=False))
+    for (x, z) in ((6, 4), (6, 8), (10, 4)):
+        b.lantern(x, G + 9, z, hanging=True)
     return b
 
 
-# ---------------------------------------------------------------- the hot springs
+YAKINIKU_NOREN = [  # 焼 肉 Q in red on white, as banner marks
+    [('stripe_center', 'red'), ('cross', 'red'), ('stripe_bottom', 'red')],
+    [('border', 'red'), ('cross', 'red')],
+    [('circle', 'red'), ('diagonal_right', 'white'), ('stripe_downright', 'red')],
+]
+
+
 def hot_springs():
     """The hot springs: a bathhouse with a red and a blue noren over its two entrances, behind it two outdoor pools edged
     with rocks and divided by a bamboo fence, stone lanterns, trees."""
