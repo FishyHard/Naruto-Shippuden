@@ -1,6 +1,7 @@
 """Fillers: side stories between the chapters' quests, as the anime has them. Nothing in the main story waits on them; a
-character offers one once the quest it follows is done (their ids sort after the chapters', so a character with a chapter
-quest to give offers that first). Run `python3 fillers.py` to write them into both resource trees.
+character offers one once the quest it follows is done, and only while no chapter quest is in progress (till then they say
+its "later" line). Their ids sort after the chapters', so a character with a chapter quest to give offers that first.
+Run `python3 fillers.py` to write them into both resource trees.
 
 Ichiraku's stools, in Chikyū (the shop on the main street, its counter facing east onto the street): x -10, z 54, 56, 58,
 60, the cushions on top; who sits there faces west, to the counter."""
@@ -19,6 +20,7 @@ def stool(character, z, steps=2):
 QUESTS = {
     Q + 'ramen_with_iruka': dict(
         title='Filler: Ramen with Iruka-sensei', chapter=1, after=['chapter1/01_first_day'], start='iruka',
+        later="Ramen tonight? Maybe, once you've finished what you're working on. Duty first!",
         offer=[
             say('iruka', "Naruto has been pestering me for ramen all week. I'm taking him to Ichiraku this evening."),
             say('iruka', "Come along, you're new here: it's the best ramen in the Leaf. On the main street, south of the plaza. My treat."),
@@ -45,6 +47,7 @@ QUESTS = {
 
     Q + 'kiba_rematch': dict(
         title='Filler: Rematch with Kiba', chapter=1, after=['chapter1/02_kunai_taijutsu'], start='kiba',
+        later="Rematch later, rookie. You've got something going on. Akamaru can smell it.",
         offer=[
             say('kiba', "Hey, rookie! Akamaru's been growling at me all day. He says last time didn't count."),
             say('kiba', "Rematch. Right now. No holding back this time!"),
@@ -59,6 +62,7 @@ QUESTS = {
 
     Q + 'victory_ramen': dict(
         title='Filler: A Bowl to Celebrate', chapter=1, after=['chapter1/04_scroll_of_seals'], start='naruto',
+        later="Ramen! ...After you're done with your thing. Then we're celebrating, believe it!",
         offer=[
             say('naruto', "Look, look! A real headband! Iruka-sensei's taking me to Ichiraku to celebrate!"),
             say('naruto', "You helped that night, so you're coming too. Come on!"),
@@ -83,6 +87,7 @@ QUESTS = {
 
     Q + 'team_six_dinner': dict(
         title='Filler: Ren Makes Dinner', chapter=2, after=['chapter2/01_chakra_control'], start='ren',
+        later="Dinner's on me... later. Finish what you're doing first, and don't let sensei catch you slacking!",
         offer=[
             say('ren', "So, uh... Last one up the cliff makes dinner. That's me. The thing is, I can't cook."),
             say('ren', "Sensei says Ichiraku counts, as long as I'm paying. Come on, before I change my mind!"),

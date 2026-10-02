@@ -74,7 +74,9 @@ import java.util.TreeMap;
  *                                          "offer": [lines], "steps": [steps], "rewards": {"items": [{"id", "count"}], "xp" (shinobi XP), "vanilla_xp", "commands",
  *                                          "time" (the time of day it moves on to)}}
  * </pre>
- * A quest starts by itself ("auto") or when its character is talked to, once every quest in "after" is done. Steps, done one
+ * A quest starts by itself ("auto") or when its character is talked to, once every quest in "after" is done. A filler
+ * ("fillers/..." quests, side stories) is only offered while no main-story quest is going: till then its character says its
+ * "later" line (or a general "come back later"). Steps, done one
  * after another, each with an optional "text" (the tracker's objective), "on_start" (commands run as the player) and "time"
  * ("morning", "day", "evening", "night": the time of day the step happens at; time moves on to it):
  * <pre>
@@ -116,7 +118,7 @@ public final class Story {
 	}
 
 	public record Quest(String id, String title, int chapter, List<String> after, String start, JsonArray offer, List<JsonObject> steps,
-			JsonObject rewards) {
+			JsonObject rewards, String later) {
 	}
 
 	private static volatile Map<String, Character> characters = Map.of();
@@ -166,7 +168,7 @@ public final class Story {
 				o.getAsJsonArray("steps").forEach(s -> steps.add(s.getAsJsonObject()));
 				qs.put(e.getKey(), new Quest(e.getKey(), str(o, "title", e.getKey()), o.has("chapter") ? o.get("chapter").getAsInt() : 0, after,
 						str(o, "start", "auto"), o.has("offer") ? o.getAsJsonArray("offer") : new JsonArray(), steps,
-						o.has("rewards") ? o.getAsJsonObject("rewards") : new JsonObject()));
+						o.has("rewards") ? o.getAsJsonObject("rewards") : new JsonObject(), str(o, "later", "")));
 			}
 			return new Object[]{chars, qs};
 		}
@@ -247,6 +249,24 @@ public final class Story {
 			if (!isDone(player, a))
 				return false;
 		return true;
+	}
+
+	/** A filler (a side story, "fillers/...") waits while the player is in the middle of the main story. */
+	public static boolean isFiller(Quest quest) {
+		return quest.id().startsWith("fillers/");
+	}
+
+	/** Whether the player has a main-story quest going (a filler can't be started meanwhile). */
+	private static boolean onMainQuest(ServerPlayer player) {
+		for (String id : section(state(player), "active").keySet())
+			if (!id.startsWith("fillers/"))
+				return true;
+		return false;
+	}
+
+	/** Startable, and not a filler held back by a main-story quest in progress. */
+	private static boolean offerable(ServerPlayer player, Quest quest) {
+		return startable(player, quest) && !(isFiller(quest) && onMainQuest(player));
 	}
 
 	/** The current step of an active quest, or null. */
@@ -811,11 +831,23 @@ public final class Story {
 				return;
 			}
 		}
+		Quest later = null;
 		for (Quest q : quests.values())
-			if (q.start().equals(who) && startable(player, q)) {
+			if (q.start().equals(who) && offerable(player, q)) {
 				openDialogue(player, npc, q.id(), "offer", q.offer());
 				return;
-			}
+			} else if (later == null && q.start().equals(who) && startable(player, q))
+				later = q;
+		// a side story they'd offer, but the player has the main story to see to first
+		if (later != null) {
+			JsonArray lines = new JsonArray();
+			JsonObject line = new JsonObject();
+			line.addProperty("speaker", who);
+			line.addProperty("text", later.later().isEmpty() ? "You look busy. Come back once you've finished what you're doing, and we'll talk." : later.later());
+			lines.add(line);
+			openDialogue(player, npc, "", "idle", lines);
+			return;
+		}
 		Character c = characters.get(who);
 		if (c != null && !c.idle().isEmpty()) {
 			JsonArray lines = new JsonArray();
@@ -883,7 +915,7 @@ public final class Story {
 			return;
 		switch (result.getStringOr("kind", "")) {
 			case "offer" -> {
-				if (q.start().equals(npc.character()) && startable(player, q))
+				if (q.start().equals(npc.character()) && offerable(player, q))
 					start(player, q);
 			}
 			case "step" -> {
@@ -961,7 +993,7 @@ public final class Story {
 			JsonObject s = step(player, quest);
 			if (s != null && str(s, "type", "").equals("talk"))
 				marks.putString(str(s, "npc", ""), "?");
-			else if (!quest.start().equals("auto") && startable(player, quest) && !marks.contains(quest.start()))
+			else if (!quest.start().equals("auto") && offerable(player, quest) && !marks.contains(quest.start()))
 				marks.putString(quest.start(), "!");
 		}
 		out.put("marks", marks);
