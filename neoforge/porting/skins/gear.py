@@ -270,8 +270,7 @@ if __name__ == '__main__':
     save(hat, 'entity/equipment/humanoid/hokage_hat.png')
     save(vest, 'entities/jonin_vest.png')
     save(vest, 'entity/equipment/humanoid/jonin_vest.png')
-    save(hat_icon(), 'item/hokage_hat.png')
-    save(vest_icon(), 'item/jonin_vest.png')
+    # the inventory icons are the original mod's own (textures/item/hokage_hat.png, jonin_vest.png), not drawn here
     if len(sys.argv) > 1:
         sheet = Image.new('RGBA', (1024 + 300, 512), (40, 42, 50, 255))
         sheet.alpha_composite(hat.resize((512, 256), Image.NEAREST), (0, 0))
