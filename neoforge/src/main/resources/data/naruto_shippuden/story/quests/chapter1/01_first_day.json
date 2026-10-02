@@ -1,0 +1,152 @@
+{
+  "title": "First Day at the Academy",
+  "chapter": 1,
+  "start": "auto",
+  "steps": [
+    {
+      "type": "talk",
+      "npc": "iruka",
+      "text": "Talk to Iruka in the Academy yard",
+      "dialogue": [
+        {
+          "speaker": "iruka",
+          "text": "Ah, there you are! You must be our new student. Welcome to the Hidden Leaf Academy. I'm Iruka Umino, your instructor."
+        },
+        {
+          "speaker": "iruka",
+          "text": "The graduation exam is only weeks away, so we'll have to work hard. Any questions before we start?",
+          "choices": [
+            {
+              "text": "Nice to meet you, Iruka-sensei!",
+              "flag": "polite",
+              "lines": [
+                {
+                  "speaker": "iruka",
+                  "text": "Ha, polite too! You'll fit right in."
+                }
+              ]
+            },
+            {
+              "text": "When do I learn the cool jutsu?",
+              "flag": "eager",
+              "lines": [
+                {
+                  "speaker": "iruka",
+                  "text": "Ha! You sound just like Naruto. First things first."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "speaker": "iruka",
+          "text": "Go and meet your classmates in the yard first. You'll be training beside them every day."
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "naruto",
+      "text": "Meet Naruto by the swing",
+      "dialogue": [
+        {
+          "speaker": "naruto",
+          "text": "Hey! You're the new kid, right? I'm Naruto Uzumaki, and I'm gonna be Hokage someday!"
+        },
+        {
+          "speaker": "naruto",
+          "text": "So everybody's gotta respect me! ...Starting with you. Believe it!",
+          "choices": [
+            {
+              "text": "Hokage? That's a big dream.",
+              "flag": "kind",
+              "lines": [
+                {
+                  "speaker": "naruto",
+                  "text": "Heh heh! Biggest dream in the whole village!"
+                }
+              ]
+            },
+            {
+              "text": "You? Hokage?",
+              "flag": "tease",
+              "lines": [
+                {
+                  "speaker": "naruto",
+                  "text": "Hey! Just you wait, I'll show everybody!"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "sasuke",
+      "text": "Meet Sasuke",
+      "dialogue": [
+        {
+          "speaker": "sasuke",
+          "text": "..."
+        },
+        {
+          "speaker": "player",
+          "text": "Hi, I'm new here."
+        },
+        {
+          "speaker": "sasuke",
+          "text": "I'm not here to make friends. Don't slow me down."
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "sakura",
+      "text": "Meet Sakura and Ino",
+      "dialogue": [
+        {
+          "speaker": "sakura",
+          "text": "Oh, hi! I'm Sakura. Have you met Sasuke yet? Isn't he amazing?"
+        },
+        {
+          "speaker": "ino",
+          "text": "Back off, Forehead, nobody asked you! I'm Ino. Sasuke sits next to ME, by the way."
+        },
+        {
+          "speaker": "sakura",
+          "text": "In your dreams, Ino-pig!"
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "shikamaru",
+      "text": "Meet Shikamaru and Choji",
+      "dialogue": [
+        {
+          "speaker": "shikamaru",
+          "text": "New kid, huh? I'm Shikamaru. This is Choji. Don't expect much from me... what a drag."
+        },
+        {
+          "speaker": "choji",
+          "text": "*crunch* Hi! You can have one chip. Just one. ...Okay, maybe not."
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "iruka",
+      "text": "Report back to Iruka",
+      "dialogue": [
+        {
+          "speaker": "iruka",
+          "text": "Lively bunch, aren't they? Good. Lessons begin now, starting with the most important thing a shinobi has: chakra."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 10
+  }
+}

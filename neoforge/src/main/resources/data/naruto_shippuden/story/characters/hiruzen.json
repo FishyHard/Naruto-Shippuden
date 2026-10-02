@@ -1,0 +1,15 @@
+{
+  "name": "Hiruzen Sarutobi",
+  "skin": "naruto_shippuden:textures/entities/story/hiruzen.png",
+  "model": "player",
+  "home": [
+    0,
+    65,
+    -56
+  ],
+  "yaw": 0,
+  "idle": [
+    "Every one of you is a leaf of this village.",
+    "Ah, the Academy's newest. How are your lessons?"
+  ]
+}

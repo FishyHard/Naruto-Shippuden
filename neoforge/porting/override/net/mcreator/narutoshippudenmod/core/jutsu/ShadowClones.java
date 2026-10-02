@@ -57,6 +57,7 @@ public final class ShadowClones {
 			vars.ChakraAmount -= count * CHAKRA_EACH;
 			vars.syncPlayerVariables(p);
 		});
+		net.mcreator.narutoshippudenmod.story.Story.event(p, "shadow_clone");
 		for (int i = 0; i < count; i++) {
 			double a = (i + 0.5) * 2 * Math.PI / count + Math.toRadians(p.getYRot()), r = count > 3 ? 2.2 : 1.6;
 			Vec3 at = p.position().add(Math.cos(a) * r, 0, Math.sin(a) * r);

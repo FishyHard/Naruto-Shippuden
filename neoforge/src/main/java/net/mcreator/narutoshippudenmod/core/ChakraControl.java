@@ -63,6 +63,8 @@ public final class ChakraControl {
 		set(player, v -> v.Chakra_Control = on);
 		player.setNoGravity(false);
 		player.sendOverlayMessage(Component.literal(on ? "Chakra Control on" : "Chakra Control off"));
+		if (on)
+			net.mcreator.narutoshippudenmod.story.Story.event(player, "chakra_control");
 		player.level().playSound(null, player.getX(), player.getY(), player.getZ(), on ? SoundEvents.BEACON_ACTIVATE : SoundEvents.BEACON_DEACTIVATE,
 				SoundSource.PLAYERS, 0.35F, 1.8F);
 	}

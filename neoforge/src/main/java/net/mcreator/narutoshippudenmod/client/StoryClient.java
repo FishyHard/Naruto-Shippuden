@@ -451,8 +451,9 @@ public final class StoryClient {
 	}
 
 	/** Drawn as a player: the old 64x32 skins (legacy), 64x64 player skins, or slim-armed ones; a mark over the name. Not with
-	 * vanilla's AvatarRenderState: 26.3 sends any of those to the player renderer, which draws the player's own skin. */
-	static class NpcRenderer extends HumanoidMobRenderer<StoryNpc.Npc, NpcState, HumanoidModel<NpcState>> {
+	 * vanilla's AvatarRenderState (26.3 sends any of those to the player renderer, which draws the player's own skin), and
+	 * not a HumanoidMobRenderer (its AgeableMobRenderer sets its own model in submit, undoing the choice of model). */
+	static class NpcRenderer extends net.minecraft.client.renderer.entity.MobRenderer<StoryNpc.Npc, NpcState, HumanoidModel<NpcState>> {
 		private final HumanoidModel<NpcState> legacy, wide, slim;
 
 		@SuppressWarnings({"unchecked", "rawtypes"})
@@ -461,6 +462,7 @@ public final class StoryClient {
 			this.legacy = this.model;
 			this.wide = new HumanoidModel(context.bakeLayer(ModelLayers.PLAYER));
 			this.slim = new HumanoidModel(context.bakeLayer(ModelLayers.PLAYER_SLIM));
+			this.addLayer(new net.minecraft.client.renderer.entity.layers.ItemInHandLayer<>(this));
 		}
 
 		@Override
@@ -471,6 +473,7 @@ public final class StoryClient {
 		@Override
 		public void extractRenderState(StoryNpc.Npc npc, NpcState state, float partialTicks) {
 			super.extractRenderState(npc, state, partialTicks);
+			HumanoidMobRenderer.extractHumanoidRenderState(npc, state, partialTicks, this.itemModelResolver);
 			state.texture = npc.skin().isEmpty() ? Identifier.parse("naruto_shippuden:textures/entities/iruka_sensei.png") : Identifier.parse(npc.skin());
 			state.model = npc.model();
 		}

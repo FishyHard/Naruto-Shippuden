@@ -1,0 +1,164 @@
+{
+  "title": "The Graduation Exam",
+  "chapter": 1,
+  "after": [
+    "chapter1/05_chakra_paper"
+  ],
+  "start": "iruka",
+  "offer": [
+    {
+      "speaker": "iruka",
+      "text": "This is it: the graduation exam. Come to the exam room on the Academy's ground floor. Mizuki and I will be your examiners."
+    }
+  ],
+  "steps": [
+    {
+      "type": "goto",
+      "pos": [
+        -70,
+        65,
+        -100
+      ],
+      "radius": 4,
+      "text": "Go to the exam room in the Academy",
+      "spawn": [
+        {
+          "character": "iruka",
+          "pos": [
+            -70,
+            65,
+            -105
+          ],
+          "yaw": 0,
+          "steps": 4
+        },
+        {
+          "character": "mizuki",
+          "pos": [
+            -73,
+            65,
+            -105
+          ],
+          "yaw": 0,
+          "steps": 4
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "iruka",
+      "text": "Talk to Iruka",
+      "dialogue": [
+        {
+          "speaker": "iruka",
+          "text": "First part: the Clone Technique. Show us clones of yourself."
+        },
+        {
+          "speaker": "mizuki",
+          "text": "Relax. Just like we practised."
+        }
+      ]
+    },
+    {
+      "type": "event",
+      "event": "shadow_clone",
+      "text": "Perform the Clone Technique (use the scroll)",
+      "on_start": [
+        "execute unless items entity @s container.* naruto_shippuden:shadow_clone_technique run give @s naruto_shippuden:shadow_clone_technique"
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "iruka",
+      "text": "Talk to Iruka",
+      "dialogue": [
+        {
+          "speaker": "iruka",
+          "text": "Clean, solid clones. Second part: a spar. Sasuke is waiting for you in the yard."
+        }
+      ]
+    },
+    {
+      "type": "spar",
+      "npc": "sasuke",
+      "hits": 8,
+      "damage": 3,
+      "text": "Spar with Sasuke in the yard"
+    },
+    {
+      "type": "talk",
+      "npc": "sasuke",
+      "text": "Talk to Sasuke",
+      "dialogue": [
+        {
+          "speaker": "sasuke",
+          "text": "...You're stronger than you look. Next time, I won't hold back."
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "iruka",
+      "text": "Return to Iruka",
+      "dialogue": [
+        {
+          "speaker": "iruka",
+          "text": "Congratulations. You pass! Here: your forehead protector. From today, you are a shinobi of the Hidden Leaf."
+        },
+        {
+          "speaker": "iruka",
+          "text": "...Naruto failed again, though. Go and see him if you can. He's by the swing."
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "naruto",
+      "text": "Find Naruto at the swing",
+      "dialogue": [
+        {
+          "speaker": "naruto",
+          "text": "...Hey. Congrats on passing. Everybody passed. Everybody but me."
+        },
+        {
+          "speaker": "naruto",
+          "text": "Mizuki-sensei said there's a secret way to pass... Never mind. See ya.",
+          "choices": [
+            {
+              "text": "Don't give up, Naruto.",
+              "flag": "cheered_naruto",
+              "lines": [
+                {
+                  "speaker": "naruto",
+                  "text": "...Yeah. I never give up. That's my ninja way!"
+                }
+              ]
+            },
+            {
+              "text": "A secret way? That sounds strange.",
+              "flag": "suspicious",
+              "lines": [
+                {
+                  "speaker": "naruto",
+                  "text": "Huh? It's fine! Mizuki-sensei's nice!"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 50,
+    "items": [
+      {
+        "id": "naruto_shippuden:genin_konohagakure_helmet",
+        "count": 1
+      }
+    ],
+    "commands": [
+      "naruto rank genin @s"
+    ]
+  }
+}

@@ -2,10 +2,14 @@
   "name": "Iruka Umino",
   "skin": "naruto_shippuden:textures/entities/iruka_sensei.png",
   "model": "legacy",
-  "home": [-84, 65, -73],
+  "home": [
+    -84,
+    65,
+    -73
+  ],
   "yaw": 0,
   "idle": [
-    "Don't be late for class tomorrow.",
+    "Don't be late for class.",
     "A shinobi's tools are only as good as their training.",
     "Naruto! ...Oh, it's you. Sorry. Have you seen him?"
   ]

@@ -1,0 +1,15 @@
+{
+  "name": "Ino Yamanaka",
+  "skin": "naruto_shippuden:textures/entities/story/ino.png",
+  "model": "slim",
+  "home": [
+    -90,
+    65,
+    -67
+  ],
+  "yaw": 90,
+  "idle": [
+    "Back off, Forehead! ...Oh, you're not Sakura.",
+    "My family runs the flower shop. Come by sometime!"
+  ]
+}

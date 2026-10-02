@@ -71,13 +71,17 @@ import java.util.TreeMap;
  * after another, each with an optional "text" (the tracker's objective) and "on_start" (commands run as the player):
  * <pre>
  * {"type": "talk", "npc": id, "dialogue": [lines]}            talk to that character
- * {"type": "goto", "pos": [x, y, z], "radius": r}             go there (in Chikyū, or "dimension")
+ * {"type": "goto", "pos": [x, y, z], "radius": r, "min_y": y} go there (in Chikyū, or "dimension"); min_y: and be at least
+ *                                                              that high (standing on water, up a wall)
  * {"type": "kill", "entity": id, "count": n}                   defeat n of them
  * {"type": "hit", "entity": id, "count": n}                    land n hits on them (training dummies, sparring)
  * {"type": "collect", "item": id, "count": n, "take": bool}   have n in the inventory (taken when "take")
  * {"type": "wait", "seconds": s}                               let time pass
+ * {"type": "spar", "npc": id, "hits": n, "damage": d}         spar with that character until landing n hits (it hits back)
  * {"type": "event", "event": name}                            something code reports with {@link #event}
  * </pre>
+ * Any step may also bring "spawn": [{"character", "pos", "yaw", "steps"}]: scene characters for this player only, standing
+ * there from this step for "steps" steps (1 by default), then gone.
  * A dialogue line is {"speaker": character id | "player", "text", "choices": [{"text", "flag", "lines": [lines]}]}: the
  * dialogue screen shows them in turn, a choice shows its own lines next and sets its flag on the player.
  *
@@ -229,6 +233,74 @@ public final class Story {
 		return section(section(state(player), "active"), quest.id());
 	}
 
+	/** The index of the quest's current step for the player, or -1 when it is not active. */
+	public static int stepIndex(ServerPlayer player, String quest) {
+		return section(state(player), "active").getCompound(quest).map(t -> t.getIntOr("step", 0)).orElse(-1);
+	}
+
+	/** A sparring partner took a hit: the tracker's count. */
+	public static void sparProgress(ServerPlayer player, StoryNpc.Npc npc, int hits, int of) {
+		for (Quest q : quests.values()) {
+			JsonObject step = step(player, q);
+			if (step != null && str(step, "type", "").equals("spar") && str(step, "npc", "").equals(npc.character())) {
+				progress(player, q).putInt("count", hits);
+				sync(player);
+			}
+		}
+	}
+
+	/** The player landed the last hit of a spar. */
+	public static void sparWon(ServerPlayer player, StoryNpc.Npc npc) {
+		for (Quest q : new ArrayList<>(quests.values())) {
+			JsonObject step = step(player, q);
+			if (step != null && str(step, "type", "").equals("spar") && str(step, "npc", "").equals(npc.character()))
+				advance(player, q);
+		}
+	}
+
+	/** The story character of that id nearest the player: their own scene character first, else anyone's. */
+	private static StoryNpc.Npc findNpc(ServerPlayer player, String character, double range) {
+		List<StoryNpc.Npc> near = player.level().getEntities(StoryNpc.entity, player.getBoundingBox().inflate(range), n -> n.character().equals(character));
+		near.sort(java.util.Comparator.comparingDouble((StoryNpc.Npc n) -> n.isScene() && n.sceneFor(player.getUUID()) ? 0 : 1)
+				.thenComparingDouble(n -> n.distanceToSqr(player)));
+		return near.isEmpty() ? null : near.getFirst();
+	}
+
+	/** Places a step's scene characters for this player. */
+	private static void spawnScene(ServerPlayer player, Quest quest, JsonObject step) {
+		if (!step.has("spawn") || !(player.level() instanceof ServerLevel level))
+			return;
+		int at = stepIndex(player, quest.id());
+		for (JsonElement e : step.getAsJsonArray("spawn")) {
+			JsonObject o = e.getAsJsonObject();
+			Character c = characters.get(str(o, "character", ""));
+			if (c == null)
+				continue;
+			JsonArray pos = o.getAsJsonArray("pos");
+			double x = pos.get(0).getAsDouble() + 0.5, y = pos.get(1).getAsDouble(), z = pos.get(2).getAsDouble() + 0.5;
+			boolean there = !level.getEntities(StoryNpc.entity, new net.minecraft.world.phys.AABB(x - 8, y - 4, z - 8, x + 8, y + 4, z + 8),
+					n -> n.isScene() && n.sceneFor(player.getUUID()) && n.character().equals(c.id())).isEmpty();
+			if (there)
+				continue;
+			StoryNpc.Npc npc = StoryNpc.entity.create(level, EntitySpawnReason.EVENT);
+			if (npc == null)
+				continue;
+			float yaw = o.has("yaw") ? o.get("yaw").getAsFloat() : 0;
+			npc.applyCharacter(c);
+			npc.setScene(player.getUUID(), quest.id(), at, at + (o.has("steps") ? o.get("steps").getAsInt() : 1));
+			npc.snapTo(x, y, z, yaw, 0);
+			npc.setYHeadRot(yaw);
+			npc.setYBodyRot(yaw);
+			level.addFreshEntity(npc);
+		}
+	}
+
+	/** The Chakra Paper was used (StuffItems, by the rule chakra_paper_story). */
+	public static void chakraPaperUsed(Entity entity) {
+		if (entity instanceof ServerPlayer player)
+			event(player, "chakra_paper");
+	}
+
 	/** Starts a quest for the player (or restarts it), and its first step. */
 	public static void start(ServerPlayer player, Quest quest) {
 		CompoundTag p = new CompoundTag();
@@ -249,6 +321,7 @@ public final class Story {
 		}
 		if (step.has("on_start"))
 			step.getAsJsonArray("on_start").forEach(c -> Compat.runCommand(player, c.getAsString()));
+		spawnScene(player, quest, step);
 		check(player, quest, step);
 	}
 
@@ -319,8 +392,10 @@ public final class Story {
 				JsonArray pos = step.getAsJsonArray("pos");
 				double r = step.has("radius") ? step.get("radius").getAsDouble() : 4;
 				String dim = str(step, "dimension", Chikyu.CHIKYU.identifier().toString());
-				if (player.level().dimension().identifier().toString().equals(dim)
-						&& player.distanceToSqr(pos.get(0).getAsDouble() + 0.5, pos.get(1).getAsDouble(), pos.get(2).getAsDouble() + 0.5) <= r * r)
+				double dx = player.getX() - pos.get(0).getAsDouble() - 0.5, dz = player.getZ() - pos.get(2).getAsDouble() - 0.5;
+				double dy = step.has("min_y") ? 0 : player.getY() - pos.get(1).getAsDouble();
+				if (player.level().dimension().identifier().toString().equals(dim) && dx * dx + dy * dy + dz * dz <= r * r
+						&& (!step.has("min_y") || player.getY() >= step.get("min_y").getAsDouble()))
 					advance(player, quest);
 			}
 			case "collect" -> {
@@ -336,6 +411,16 @@ public final class Story {
 					if (step.has("take") && step.get("take").getAsBoolean())
 						player.getInventory().clearOrCountMatchingItems(s -> s.is(item), false, need, player.inventoryMenu.getCraftSlots());
 					advance(player, quest);
+				}
+			}
+			case "spar" -> {
+				// a partner already at it with this player, or the nearest one starts
+				String who = str(step, "npc", "");
+				boolean going = !player.level().getEntities(StoryNpc.entity, player.getBoundingBox().inflate(32), n -> n.isSparringWith(player)).isEmpty();
+				if (!going) {
+					StoryNpc.Npc npc = findNpc(player, who, 24);
+					if (npc != null && !npc.isSparring())
+						npc.spar(player, step.has("hits") ? step.get("hits").getAsInt() : 5, step.has("damage") ? step.get("damage").getAsDouble() : 2);
 				}
 			}
 			case "wait" -> {
@@ -521,16 +606,24 @@ public final class Story {
 			String type = str(step, "type", "");
 			if (type.equals("kill") || type.equals("hit") || type.equals("collect"))
 				out.putString("progress", count + "/" + (step.has("count") ? step.get("count").getAsInt() : 1));
+			else if (type.equals("spar"))
+				out.putString("progress", count + "/" + (step.has("hits") ? step.get("hits").getAsInt() : 5));
 			JsonArray pos = null;
 			String dim = Chikyu.CHIKYU.identifier().toString();
 			if (type.equals("goto")) {
 				pos = step.getAsJsonArray("pos");
 				dim = str(step, "dimension", dim);
-			} else if (type.equals("talk") && characters.get(str(step, "npc", "")) instanceof Character c && c.home() != null) {
-				pos = new JsonArray();
-				pos.add(c.home().getX());
-				pos.add(c.home().getY());
-				pos.add(c.home().getZ());
+			} else if (type.equals("talk") || type.equals("spar")) {
+				// the character's own scene figure if the step placed one, else where they live
+				StoryNpc.Npc npc = findNpc(player, str(step, "npc", ""), 160);
+				BlockPos at = npc != null && npc.isScene() ? npc.blockPosition()
+						: characters.get(str(step, "npc", "")) instanceof Character c && c.home() != null ? c.home() : npc != null ? npc.blockPosition() : null;
+				if (at != null) {
+					pos = new JsonArray();
+					pos.add(at.getX());
+					pos.add(at.getY());
+					pos.add(at.getZ());
+				}
 			}
 			if (pos != null) {
 				out.putDouble("tx", pos.get(0).getAsDouble() + 0.5);
@@ -559,6 +652,7 @@ public final class Story {
 			case "goto" -> "Go to the marked place";
 			case "kill" -> "Defeat " + str(step, "entity", "them");
 			case "hit" -> "Hit " + str(step, "entity", "it");
+			case "spar" -> "Spar with " + (characters.get(str(step, "npc", "")) instanceof Character c ? c.name() : "your partner");
 			case "collect" -> "Gather " + str(step, "item", "it");
 			case "wait" -> "Wait";
 			default -> "Carry on";
@@ -642,10 +736,15 @@ public final class Story {
 		ServerLevel level = server.getLevel(Chikyu.CHIKYU);
 		if (level == null || level.players().isEmpty())
 			return;
+		// scene characters whose player has moved on (or left) go
+		for (Entity e : level.getAllEntities())
+			if (e instanceof StoryNpc.Npc npc && npc.isScene() && npc.sceneOver(server))
+				npc.discard();
 		for (Character c : characters.values()) {
 			if (c.home() == null || !level.isLoaded(c.home()) || level.getNearestPlayer(c.home().getX(), c.home().getY(), c.home().getZ(), 96, false) == null)
 				continue;
-			List<StoryNpc.Npc> found = level.getEntities(StoryNpc.entity, new net.minecraft.world.phys.AABB(c.home()).inflate(64), n -> n.character().equals(c.id()));
+			List<StoryNpc.Npc> found = level.getEntities(StoryNpc.entity, new net.minecraft.world.phys.AABB(c.home()).inflate(64),
+					n -> n.character().equals(c.id()) && !n.isScene());
 			if (found.isEmpty()) {
 				StoryNpc.Npc npc = StoryNpc.entity.create(level, EntitySpawnReason.EVENT);
 				if (npc != null) {
@@ -660,7 +759,7 @@ public final class Story {
 					found.get(i).discard();
 				StoryNpc.Npc npc = found.getFirst();
 				npc.applyCharacter(c);
-				if (npc.distanceToSqr(c.home().getX() + 0.5, c.home().getY(), c.home().getZ() + 0.5) > 4 * 4)
+				if (!npc.isSparring() && npc.distanceToSqr(c.home().getX() + 0.5, c.home().getY(), c.home().getZ() + 0.5) > 4 * 4)
 					npc.snapTo(c.home().getX() + 0.5, c.home().getY(), c.home().getZ() + 0.5, c.yaw(), 0);
 			}
 		}
@@ -671,7 +770,7 @@ public final class Story {
 	@SubscribeEvent
 	public static void registerCommands(RegisterCommandsEvent event) {
 		event.getDispatcher().register(Commands.literal("naruto").then(Commands.literal("story").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
-				.then(Commands.literal("start").then(Commands.argument("quest", StringArgumentType.word())
+				.then(Commands.literal("start").then(Commands.argument("quest", StringArgumentType.greedyString())
 						.suggests((c, b) -> SharedSuggestionProvider.suggest(quests.keySet(), b))
 						.executes(c -> forPlayers(c.getSource(), List.of(c.getSource().getPlayerOrException()), p -> {
 							Quest q = quests.get(StringArgumentType.getString(c, "quest"));

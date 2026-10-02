@@ -1,0 +1,77 @@
+{
+  "title": "Lesson: Kunai and Taijutsu",
+  "chapter": 1,
+  "after": [
+    "chapter1/03_water_walking"
+  ],
+  "start": "iruka",
+  "offer": [
+    {
+      "speaker": "iruka",
+      "text": "A shinobi without tools is a shinobi in trouble. Here are some kunai."
+    },
+    {
+      "speaker": "iruka",
+      "text": "Throw them at the training dummy by the targets. Aim for the chest!"
+    }
+  ],
+  "steps": [
+    {
+      "type": "hit",
+      "entity": "naruto_shippuden:training_dummy",
+      "count": 5,
+      "text": "Hit the training dummy with kunai",
+      "on_start": [
+        "give @s naruto_shippuden:kunai 16",
+        "execute unless entity @e[type=naruto_shippuden:training_dummy,x=-68,y=65,z=-58,distance=..3] run summon naruto_shippuden:training_dummy -68 65 -58"
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "iruka",
+      "text": "Show Iruka",
+      "dialogue": [
+        {
+          "speaker": "iruka",
+          "text": "Nice throws! Now, taijutsu. Kiba's been itching for a match all morning."
+        },
+        {
+          "speaker": "kiba",
+          "text": "Finally! Akamaru and I are gonna wipe the floor with you, rookie!"
+        }
+      ]
+    },
+    {
+      "type": "spar",
+      "npc": "kiba",
+      "hits": 6,
+      "damage": 2,
+      "text": "Spar with Kiba"
+    },
+    {
+      "type": "talk",
+      "npc": "kiba",
+      "text": "Talk to Kiba",
+      "dialogue": [
+        {
+          "speaker": "kiba",
+          "text": "Tch... not bad. Akamaru says you got lucky. ...Rematch later!"
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "iruka",
+      "text": "Report back to Iruka",
+      "dialogue": [
+        {
+          "speaker": "iruka",
+          "text": "A fine match. Remember: a real fight isn't won with strength alone, but with what you see coming."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 20
+  }
+}

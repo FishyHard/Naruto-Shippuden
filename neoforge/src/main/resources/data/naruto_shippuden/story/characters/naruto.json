@@ -1,0 +1,16 @@
+{
+  "name": "Naruto Uzumaki",
+  "skin": "naruto_shippuden:textures/entities/story/naruto.png",
+  "model": "player",
+  "home": [
+    -99,
+    65,
+    -60
+  ],
+  "yaw": -90,
+  "idle": [
+    "I'm gonna be Hokage someday, believe it!",
+    "Ramen after class? ...You're paying, right?",
+    "Sasuke thinks he's so cool. Hmph!"
+  ]
+}

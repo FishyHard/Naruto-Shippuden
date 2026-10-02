@@ -1,0 +1,15 @@
+{
+  "name": "Shikamaru Nara",
+  "skin": "naruto_shippuden:textures/entities/story/shikamaru_kid.png",
+  "model": "player",
+  "home": [
+    -72,
+    65,
+    -69
+  ],
+  "yaw": 90,
+  "idle": [
+    "What a drag...",
+    "I'd rather be watching the clouds."
+  ]
+}

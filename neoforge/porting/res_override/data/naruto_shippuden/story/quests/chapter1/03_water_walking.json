@@ -1,0 +1,45 @@
+{
+  "title": "Lesson: Walking on Water",
+  "chapter": 1,
+  "after": [
+    "chapter1/02_chakra_control"
+  ],
+  "start": "iruka",
+  "offer": [
+    {
+      "speaker": "iruka",
+      "text": "Water is harder than walls. It moves, so your chakra has to move with it."
+    },
+    {
+      "speaker": "iruka",
+      "text": "Go to the lake south-west of the Academy and stand in the middle of it. On top of it, I mean!"
+    }
+  ],
+  "steps": [
+    {
+      "type": "goto",
+      "pos": [
+        -134,
+        65,
+        91
+      ],
+      "radius": 4,
+      "min_y": 64.9,
+      "text": "Stand on the water in the middle of the lake"
+    },
+    {
+      "type": "talk",
+      "npc": "iruka",
+      "text": "Report back to Iruka",
+      "dialogue": [
+        {
+          "speaker": "iruka",
+          "text": "Dry feet? Excellent. Naruto fell in four times today... don't tell him I told you."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 15
+  }
+}

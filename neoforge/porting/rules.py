@@ -1913,3 +1913,22 @@ def training_dummy(path, text):
             cls = cls.replace('Compat.sound("entity.generic.death")', 'net.minecraft.sounds.SoundEvents.ARMOR_STAND_BREAK')
             text = text[:i] + cls + text[end:]
     return text
+
+
+@func
+def chakra_paper_story(path, text):
+    """Using the Chakra Paper tells the story (the Academy's Chakra Paper lesson waits for it)."""
+    if not path.replace('\\', '/').endswith('item/StuffItems.java'):
+        return text
+    return text.replace('ChakraPaperRightclickedProcedure.executeProcedure(',
+                        'net.mcreator.narutoshippudenmod.story.Story.chakraPaperUsed(entity);\n\t\t\t\tChakraPaperRightclickedProcedure.executeProcedure(', 1)
+
+
+@func
+def chakra_paper_in_lesson(path, text):
+    """New players no longer get the Chakra Paper with their starting kit: Iruka hands it out in the Academy's Chakra
+    Nature lesson (story/quests/chapter1/05_chakra_paper), where using it moves the story on."""
+    if not path.replace('\\', '/').endswith('procedures/PlayerProcedures.java'):
+        return text
+    return re.sub(r'\n(\t*)if \(entity instanceof Player\) \{\s*ItemStack _setstack = new ItemStack\(ChakraPaperItem\.block\);\s*'
+                  r'_setstack\.setCount\(\(int\) 1\);\s*Compat\.giveItemToPlayer\(\(\(Player\) entity\), _setstack\);\s*\}', '', text, count=1)

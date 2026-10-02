@@ -382,7 +382,15 @@ Nature Releases, Kekkei Genkai, DNA, Clans, Dojutsu, Shinobi Weapons, Headbands,
   `hud on|off`, `dialog next`, `dialog choose N`.
 - Training dummy: `client/TrainingDummyClient` (vanilla-style model, wobbles when hit, no red flash; rule `training_dummy`
   swaps the renderer and gives it armor stand sounds), `core/TrainingDummyEffects` (straw particles).
-- `story/quests/engine_test.json` (Iruka's "First Day at the Academy") is a placeholder until Chapter 1.
+- More step features: `spar` (StoryNpc fights one player for real, only their hits land, a lost round restarts),
+  `spawn` (scene characters for one player's steps, removed by the keeper once the quest moves past), goto `min_y`.
+  Hooks: `Story.event` from Chakra Control on ("chakra_control"), Shadow Clone cast ("shadow_clone"), Chakra Paper
+  use ("chakra_paper", rule `chakra_paper_story`). The Chakra Paper is no longer in the first-join kit (rule
+  `chakra_paper_in_lesson`): Iruka gives it in lesson 5.
+- Chapter 1 is `porting/story/chapter1.py` (writes characters + quests/chapter1/*.json into both trees); skins are
+  `porting/skins/skins.py` (writes textures/entities/story/*.png, 64x64, drawn as code). NPC renderer extends
+  MobRenderer (HumanoidMobRenderer's AgeableMobRenderer resets the model in submit).
+- Still to do for Chapter 1: the Chakra Paper choose-a-release menu when random_clan=false, a Substitution jutsu.
 
 ### Keys (defaults)
 

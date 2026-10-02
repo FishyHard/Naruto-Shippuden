@@ -1,0 +1,15 @@
+{
+  "name": "Hinata Hyuga",
+  "skin": "naruto_shippuden:textures/entities/story/hinata.png",
+  "model": "slim",
+  "home": [
+    -104,
+    65,
+    -57
+  ],
+  "yaw": -90,
+  "idle": [
+    "O-oh! I wasn't watching Naruto... I mean...",
+    "G-good luck with your training."
+  ]
+}

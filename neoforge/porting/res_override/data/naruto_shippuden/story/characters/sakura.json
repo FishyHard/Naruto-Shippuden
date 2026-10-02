@@ -1,0 +1,15 @@
+{
+  "name": "Sakura Haruno",
+  "skin": "naruto_shippuden:textures/entities/story/sakura.png",
+  "model": "slim",
+  "home": [
+    -91,
+    65,
+    -69
+  ],
+  "yaw": 90,
+  "idle": [
+    "Sasuke is SO cool, isn't he?",
+    "I'm top of the class in theory, you know!"
+  ]
+}

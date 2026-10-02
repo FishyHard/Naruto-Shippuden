@@ -1,0 +1,15 @@
+{
+  "name": "Kiba Inuzuka",
+  "skin": "naruto_shippuden:textures/entities/story/kiba.png",
+  "model": "player",
+  "home": [
+    -75,
+    65,
+    -59
+  ],
+  "yaw": 90,
+  "idle": [
+    "Akamaru says you smell like a rookie!",
+    "Wanna go a round? I'll go easy. Maybe."
+  ]
+}

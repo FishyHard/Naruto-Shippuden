@@ -2829,11 +2829,6 @@ public final class PlayerProcedures {
 							}
 						} else if (net.mcreator.narutoshippudenmod.core.NarutoConfig.randomClan() == true) {
 							if (entity instanceof Player) {
-								ItemStack _setstack = new ItemStack(ChakraPaperItem.block);
-								_setstack.setCount((int) 1);
-								Compat.giveItemToPlayer(((Player) entity), _setstack);
-							}
-							if (entity instanceof Player) {
 								ItemStack _setstack = new ItemStack(ClanPaperItem.block);
 								_setstack.setCount((int) 1);
 								Compat.giveItemToPlayer(((Player) entity), _setstack);

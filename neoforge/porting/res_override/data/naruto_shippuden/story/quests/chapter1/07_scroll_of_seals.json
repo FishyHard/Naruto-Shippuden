@@ -1,0 +1,155 @@
+{
+  "title": "The Scroll of Seals",
+  "chapter": 1,
+  "after": [
+    "chapter1/06_graduation"
+  ],
+  "start": "auto",
+  "steps": [
+    {
+      "type": "talk",
+      "npc": "hiruzen",
+      "text": "Answer the Hokage's summons at his residence",
+      "dialogue": [
+        {
+          "speaker": "hiruzen",
+          "text": "You're one of the new genin, aren't you? I'm sorry to call on you on your first night as a shinobi."
+        },
+        {
+          "speaker": "hiruzen",
+          "text": "Naruto has taken the Scroll of Seals, a scroll of forbidden techniques. Everyone is searching for him."
+        },
+        {
+          "speaker": "hiruzen",
+          "text": "Check the training ground west of the Academy. And be careful."
+        }
+      ]
+    },
+    {
+      "type": "goto",
+      "pos": [
+        -121,
+        65,
+        -72
+      ],
+      "radius": 9,
+      "text": "Search Training Ground 3, west of the Academy",
+      "spawn": [
+        {
+          "character": "iruka",
+          "pos": [
+            -126,
+            65,
+            -75
+          ],
+          "yaw": 0,
+          "steps": 5
+        },
+        {
+          "character": "naruto",
+          "pos": [
+            -124,
+            65,
+            -78
+          ],
+          "yaw": 0,
+          "steps": 5
+        },
+        {
+          "character": "mizuki",
+          "pos": [
+            -121,
+            65,
+            -66
+          ],
+          "yaw": 180,
+          "steps": 5
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "iruka",
+      "text": "Talk to the wounded Iruka",
+      "dialogue": [
+        {
+          "speaker": "iruka",
+          "text": "You... get out of here! Mizuki's the one who tricked Naruto. He wants the scroll for himself!"
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "mizuki",
+      "text": "Face Mizuki",
+      "dialogue": [
+        {
+          "speaker": "mizuki",
+          "text": "Oh? One of the little genin. Do you know why the whole village hates Naruto? Shall I tell you?"
+        },
+        {
+          "speaker": "mizuki",
+          "text": "No? Then you can fall here with Iruka.",
+          "choices": [
+            {
+              "text": "Leave them alone!",
+              "flag": "brave"
+            },
+            {
+              "text": "Naruto is my classmate. I won't let you.",
+              "flag": "loyal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "spar",
+      "npc": "mizuki",
+      "hits": 10,
+      "damage": 3,
+      "text": "Fight Mizuki"
+    },
+    {
+      "type": "talk",
+      "npc": "naruto",
+      "text": "Talk to Naruto",
+      "dialogue": [
+        {
+          "speaker": "naruto",
+          "text": "Lay one finger on Iruka-sensei and I'll kill you! Multi Shadow Clone Jutsu!"
+        },
+        {
+          "speaker": "mizuki",
+          "text": "Wh-what?! Hundreds of them...?!"
+        },
+        {
+          "speaker": "naruto",
+          "text": "Heh heh... I guess I got a little carried away. You okay?"
+        },
+        {
+          "speaker": "iruka",
+          "text": "Naruto, come here. Close your eyes... There. Congratulations. You graduate too."
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "hiruzen",
+      "text": "Report to the Hokage",
+      "dialogue": [
+        {
+          "speaker": "hiruzen",
+          "text": "The scroll is safe, and Naruto is a genin. You did well tonight, standing beside your classmates."
+        },
+        {
+          "speaker": "hiruzen",
+          "text": "Rest now. Tomorrow you'll be placed in your squad."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 60
+  }
+}
