@@ -50,32 +50,33 @@ public final class StoryGearClient {
 		return root;
 	}
 
-	/** The hat's roof: each of its four sides is strips a pixel thick, narrowing toward the top (so the sides meet as triangles),
-	 * all at one slope; shared with porting/skins/gear.py, which paints them (strip k of side s at texture row (s * 5 + k) * 3). */
-	static final int[] STRIP_WIDTHS = { 18, 14, 10, 6, 2 };
+	/** The hat's roof: each of its four sides is strips a pixel thick and a pixel long, two narrower each step up (so the
+	 * sides meet as smooth triangles), all at one slope; shared with porting/skins/gear.py, which paints strip k of side s at
+	 * texture (s % 2 * 40, s / 2 * 18 + k * 2). */
+	static final int STRIPS = 9;
 	static final float SLOPE = 0.48F, HALF = 9.0F, BROW = -8.4F;
 
 	/**
 	 * The Hokage's hat as in the anime: a low, broad pyramid of red over a white rim, the white triangle on its front with
-	 * the kanji, and the white cloth hanging from under it over the sides and back of the head (the face stays open).
+	 * the kanji, and the white cloth hanging from the brim's edge, clear of the face, over the sides and back of the head.
 	 */
 	static LayerDefinition hatLayer() {
 		MeshDefinition mesh = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F);
 		PartDefinition root = empty(mesh);
 		PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create()
-				.texOffs(44, 0).addBox(-HALF, BROW, -HALF, 18, 1, 18)                  // the white rim
-				.texOffs(44, 19).addBox(-4.9F, BROW + 0.6F, -3.2F, 1, 10, 9)           // the cloth over the sides of the head
-				.texOffs(44, 19).mirror().addBox(3.9F, BROW + 0.6F, -3.2F, 1, 10, 9).mirror(false)
-				.texOffs(64, 19).addBox(-4.9F, BROW + 0.6F, 4.6F, 10, 10, 1),          // and down the back
+				.texOffs(0, 36).addBox(-HALF, BROW, -HALF, 18, 1, 18)                   // the white rim
+				.texOffs(80, 0).addBox(-6.6F, BROW + 0.8F, -3.6F, 1, 11, 10)           // the cloth, out from the sides of the head
+				.texOffs(80, 0).mirror().addBox(5.6F, BROW + 0.8F, -3.6F, 1, 11, 10).mirror(false)
+				.texOffs(80, 21).addBox(-6.0F, BROW + 0.8F, 6.2F, 12, 11, 1),          // and down the back
 				PartPose.ZERO);
 		head.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		// the roof's four sides: front, left, back, right (turned a quarter each), sloping up from the rim's edge
 		float[][] sides = { { 0, -HALF, 0 }, { -HALF, 0, (float) Math.PI / 2 }, { 0, HALF, (float) Math.PI }, { HALF, 0, (float) -Math.PI / 2 } };
 		for (int side = 0; side < 4; side++)
-			for (int k = 0; k < STRIP_WIDTHS.length; k++) {
-				int w = STRIP_WIDTHS[k];
-				head.addOrReplaceChild("roof_" + side + "_" + k, CubeListBuilder.create().texOffs(0, (side * 5 + k) * 3)
-						.addBox(-w / 2.0F, -1.0F, 2 * k, w, 1, 2), PartPose.offsetAndRotation(sides[side][0], BROW, sides[side][1], SLOPE, sides[side][2], 0));
+			for (int k = 0; k < STRIPS; k++) {
+				int w = 18 - 2 * k;
+				head.addOrReplaceChild("roof_" + side + "_" + k, CubeListBuilder.create().texOffs(side % 2 * 40, side / 2 * 18 + k * 2)
+						.addBox(-w / 2.0F, -1.0F, k, w, 1, 1), PartPose.offsetAndRotation(sides[side][0], BROW, sides[side][1], SLOPE, sides[side][2], 0));
 			}
 		return LayerDefinition.create(mesh, 128, 64);
 	}

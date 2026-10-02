@@ -59,13 +59,13 @@ def material(base, salt, rough=0.5, grad=0.6, edge=0.25):
 
 WHITE, RED, STRAW, CLOTH = rgb('#F2F0E8'), rgb('#C02A28'), rgb('#C8A870'), rgb('#ECEAE2')
 # the boxes, as client/StoryGearClient builds them: texture offset (u, v) and size (w, h, d)
-# the roof (client/StoryGearClient): four sides, each five strips narrowing to the top, strip k of side s a box (w, 1, 2)
-# at texture row (s * 5 + k) * 3; the rim (18, 1, 18) at (44, 0); the cloth's sides (1, 10, 9) at (44, 19), its back
-# (10, 10, 1) at (64, 19)
-STRIP_WIDTHS = [18, 14, 10, 6, 2]
-RIM = (44, 0, 18, 1, 18)
-CLOTH_SIDE = (44, 19, 1, 10, 9)
-CLOTH_BACK = (64, 19, 10, 10, 1)
+# the roof (client/StoryGearClient): four sides, each nine strips (w, 1, 1), w = 18 - 2k, strip k of side s at texture
+# (s % 2 * 40, s // 2 * 18 + k * 2); the rim (18, 1, 18) at (0, 36); the cloth's sides (1, 11, 10) at (80, 0), its back
+# (12, 11, 1) at (80, 21)
+STRIPS = 9
+RIM = (0, 36, 18, 1, 18)
+CLOTH_SIDE = (80, 0, 1, 11, 10)
+CLOTH_BACK = (80, 21, 12, 11, 1)
 HAT_RED, INK = rgb('#9C3034'), rgb('#4A1A1E')
 # 火 in red on the white triangle, by rows up the slope from the rim (row 0 at the rim)
 FIRE = {6: '..#..', 5: '#.#.#', 4: '..#..', 3: '..#..', 2: '.#.#.', 1: '#...#'}
@@ -76,12 +76,13 @@ def hokage_hat():
     it, the white rim, the white cloth hanging over the sides and back of the head."""
     im = Image.new('RGBA', (128, 64), CLEAR)
     for side in range(4):
-        for k, w in enumerate(STRIP_WIDTHS):
-            box = (0, (side * 5 + k) * 3, w, 1, 2)
+        for k in range(STRIPS):
+            w = 18 - 2 * k
+            box = (side % 2 * 40, side // 2 * 18 + k * 2, w, 1, 1)
 
             def fn(face, x, y, fw, fh, side=side, k=k, w=w):
                 cx = x - (w - 1) / 2
-                gy = 2 * k + (1 - y) if face == 'top' else 2 * k        # rows up the slope from the rim
+                gy = k                                                  # rows up the slope from the rim
                 cloth = (_h(x, y + 7 * k, 41 + side) - 0.5) * 0.35 + (-0.12 if (x + gy) % 3 == 0 else 0)
                 lit = (0.55, 0.15, -0.1, 0.25)[side]                    # the front and the left catch the light
                 if face == 'top':
@@ -95,7 +96,7 @@ def hokage_hat():
                             return tone(WHITE, 0.7 + cloth * 0.5 - 0.03 * gy)
                         if abs(cx) < half + 1:
                             return tone(INK, 0.1)                       # the ink line round the triangle
-                    return tone(HAT_RED, lit + 0.12 * gy * 0.15 + cloth)
+                    return tone(HAT_RED, lit + 0.02 * gy + cloth)
                 if face == 'front':                                     # the strip's edge, seen at the rim
                     return tone(HAT_RED, lit - 0.5)
                 return tone(HAT_RED, lit - 0.8)
@@ -113,7 +114,7 @@ def hokage_hat():
         # the white cloth: soft vertical folds, darker deep under the brim and toward its hem
         if face in ('top', 'bottom'):
             return tone(CLOTH, -0.6)
-        t = LIGHT[face] * 0.6 + 0.35 - 0.06 * y + (-0.3 if x % 3 == 2 else 0.12 if x % 3 == 0 else 0) + (_h(x, y, 9) - 0.5) * 0.18
+        t = LIGHT[face] * 0.6 + 0.35 - 0.05 * y + (-0.3 if x % 3 == 2 else 0.12 if x % 3 == 0 else 0) + (_h(x, y, 9) - 0.5) * 0.18
         if y == 0:
             t -= 0.5                                                    # the brim's shadow
         return tone(CLOTH, t)
