@@ -65,9 +65,9 @@ public final class StoryGearClient {
 		PartDefinition root = empty(mesh);
 		PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create()
 				.texOffs(0, 36).addBox(-HALF, BROW, -HALF, 18, 1, 18)                   // the white rim
-				.texOffs(80, 0).addBox(-6.6F, BROW + 0.8F, -3.6F, 1, 11, 10)           // the cloth, out from the sides of the head
-				.texOffs(80, 0).mirror().addBox(5.6F, BROW + 0.8F, -3.6F, 1, 11, 10).mirror(false)
-				.texOffs(80, 21).addBox(-6.0F, BROW + 0.8F, 6.2F, 12, 11, 1),          // and down the back
+				.texOffs(80, 0).addBox(-6.6F, BROW + 0.8F, -3.6F, 1, 7, 10)           // the cloth, out from the sides of the head
+				.texOffs(80, 0).mirror().addBox(5.6F, BROW + 0.8F, -3.6F, 1, 7, 10).mirror(false)
+				.texOffs(80, 21).addBox(-6.0F, BROW + 0.8F, 6.2F, 12, 7, 1),           // and down the back, to the jaw: clear of the shoulders
 				PartPose.ZERO);
 		head.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.ZERO);
 		// the roof's four sides: front, left, back, right (turned a quarter each), sloping up from the rim's edge

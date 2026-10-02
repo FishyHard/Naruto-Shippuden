@@ -60,12 +60,12 @@ def material(base, salt, rough=0.5, grad=0.6, edge=0.25):
 WHITE, RED, STRAW, CLOTH = rgb('#F2F0E8'), rgb('#C02A28'), rgb('#C8A870'), rgb('#ECEAE2')
 # the boxes, as client/StoryGearClient builds them: texture offset (u, v) and size (w, h, d)
 # the roof (client/StoryGearClient): four sides, each nine strips (w, 1, 1), w = 18 - 2k, strip k of side s at texture
-# (s % 2 * 40, s // 2 * 18 + k * 2); the rim (18, 1, 18) at (0, 36); the cloth's sides (1, 11, 10) at (80, 0), its back
-# (12, 11, 1) at (80, 21)
+# (s % 2 * 40, s // 2 * 18 + k * 2); the rim (18, 1, 18) at (0, 36); the cloth's sides (1, 7, 10) at (80, 0), its back
+# (12, 7, 1) at (80, 21): down to the jaw, clear of the shoulders
 STRIPS = 9
 RIM = (0, 36, 18, 1, 18)
-CLOTH_SIDE = (80, 0, 1, 11, 10)
-CLOTH_BACK = (80, 21, 12, 11, 1)
+CLOTH_SIDE = (80, 0, 1, 7, 10)
+CLOTH_BACK = (80, 21, 12, 7, 1)
 HAT_RED, INK = rgb('#9C3034'), rgb('#4A1A1E')
 # 火 in red on the white triangle, by rows up the slope from the rim (row 0 at the rim)
 FIRE = {6: '..#..', 5: '#.#.#', 4: '..#..', 3: '..#..', 2: '.#.#.', 1: '#...#'}
