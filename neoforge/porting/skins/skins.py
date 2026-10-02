@@ -385,19 +385,32 @@ def hair(s, base, front, side, back, hat_front=None, hat_side=None, hat_back=Non
     hat_side, hat_back the same way; None: nothing there), a shade lighter, while the head layer under it is the shadow
     side. cape: rows the hair falls below the head down the back (on the body's outer layer)."""
     def strand(face, x, y, depth, layer, y0=0):
-        k = (x + salt + (1 if face in ('left', 'back') else 0)) % width
-        t = (0.3, 0.05, -0.15, 0.0)[k] if k < width - 1 else -0.55        # the strand, and the dark line between strands
+        # one-pixel strands, light and mid in turn, a soft gap every few: low contrast, as painted hair is
+        k = (x + salt + (1 if face in ('left', 'back') else 0)) % (width + 1)
+        t = 0.32 if k % 2 == 0 else 0.0
+        if k == width:
+            t = -0.25
         yy = y + y0
-        span = max(1, depth + y0 - 1)
-        t += 0.55 - 1.0 * yy / span                                     # roots light, tips dark
-        if shine and yy in (1, 2) and k < width - 1 and face != 'back':
-            t += 0.45 if yy == 1 else 0.2                              # the sheen
-        if y == depth - 1 and depth > 1:
-            t -= 0.25                                                   # the tip
-        t += LIGHT[face] * 0.4 + (0.12 if layer else -0.25)
+        if yy == 0:
+            t -= 0.2                                                    # the roots, in the crown's shadow
+        elif shine and 1 <= yy <= 3 and face != 'back':
+            t += (0.35, 0.5, 0.28)[yy - 1] * (1.0 if k % 2 == 0 else 0.5)   # the sheen band, brightest on the light strands
+        elif yy >= 4:
+            t -= 0.06 * (yy - 3)                                        # deeper down, a little darker
+        if layer == 0:
+            t = t * 0.5 - 0.45                                          # the hair under the volume: a flat shadow
+        else:
+            t += 0.05
+        t += LIGHT[face] * 0.35
         return tone(base, t)
 
     def draw(part, fr, sd, bk, layer):
+        if layer == 1:
+            # on the outer layer a strand here and there hangs a pixel longer: an uneven, natural edge
+            def longer(depths, face):
+                return None if depths is None else [d + (1 if 0 < d < 8 and _h(x, sum(map(ord, face)), salt + 77) < 0.3 else 0)
+                                                    for x, d in enumerate(depths)]
+            fr, sd, bk = longer(fr, 'front') if fr is not None and max(fr) < 8 else fr, longer(sd, 'side'), longer(bk, 'back')
         if fr is not None:
             s.paint(part, lambda f, x, y, w, h: strand(f, x, y, fr[x], layer) if f == 'front' and y < fr[x] else None)
         if sd is not None:
@@ -408,14 +421,16 @@ def hair(s, base, front, side, back, hat_front=None, hat_side=None, hat_back=Non
             s.paint(part, lambda f, x, y, w, h: strand(f, x, y, bk[x], layer) if f == 'back' and y < bk[x] else None)
 
     def top(f, x, y, w, h, layer):
-        """The crown: strands running from the front to the back, lit."""
+        """The crown: strands from the front to the back, lit from above, the parting a touch darker."""
         if f != 'top':
             return None
-        k = (x + salt) % width
-        t = (0.4, 0.1, -0.1, 0.05)[k] if k < width - 1 else -0.45
-        t += 0.5 - 0.1 * y + (0.1 if layer else -0.25)
-        if y in (2, 3) and k < width - 1:
-            t += 0.25                                                   # the crown's sheen
+        k = (x + salt) % (width + 1)
+        t = 0.3 if k % 2 == 0 else 0.12
+        if k == width:
+            t = -0.05
+        t += 0.25 - 0.04 * abs(y - 3)
+        if layer == 0:
+            t = t * 0.5 - 0.35
         return tone(base, t)
     draw('head', front, side, back, 0)
     s.paint('head', lambda f, x, y, w, h: top(f, x, y, w, h, 0))
