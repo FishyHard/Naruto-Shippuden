@@ -1361,12 +1361,12 @@ public final class NpcEntities {
 
 			@Override
 			public net.minecraft.sounds.SoundEvent getHurtSound(DamageSource ds) {
-				return Compat.sound("entity.generic.hurt");
+				return net.minecraft.sounds.SoundEvents.ARMOR_STAND_HIT;
 			}
 
 			@Override
 			public net.minecraft.sounds.SoundEvent getDeathSound() {
-				return Compat.sound("entity.generic.death");
+				return net.minecraft.sounds.SoundEvents.ARMOR_STAND_BREAK;
 			}
 
 			@Override

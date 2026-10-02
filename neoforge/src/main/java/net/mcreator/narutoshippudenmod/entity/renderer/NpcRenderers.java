@@ -518,11 +518,11 @@ public final class NpcRenderers {
 
 	public static class TrainingDummyRenderer {
 		public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-			ModRenderers.mob(event, TrainingDummyEntity.entity, ModelTrainingDummy.LAYER, ModelTrainingDummy::new, 0.3F, Identifier.parse("naruto_shippuden:textures/entities/training_dummy.png"));
+			net.mcreator.narutoshippudenmod.client.TrainingDummyClient.register(event);
 		}
 
 		public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-			event.registerLayerDefinition(ModelTrainingDummy.LAYER, ModelTrainingDummy::createBodyLayer);
+			net.mcreator.narutoshippudenmod.client.TrainingDummyClient.registerLayer(event);
 		}
 
 		public static class ModelTrainingDummy extends EntityModel<EntityRenderState> {

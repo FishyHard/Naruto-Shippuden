@@ -366,26 +366,17 @@ public final class StoryClient {
 				TrackerConfig.CORNER.set(TrackerConfig.CORNERS[(i + 1) % TrackerConfig.CORNERS.length]);
 				save();
 			}).bounds(cx - 100, y, 200, 20).build());
-			addRenderableWidget(Button.builder(Component.literal("Size -"), b -> scale(-0.05)).bounds(cx - 100, y + 24, 98, 20).build());
-			addRenderableWidget(Button.builder(Component.literal("Size +"), b -> scale(0.05)).bounds(cx + 2, y + 24, 98, 20).build());
-			addRenderableWidget(Button.builder(Component.literal("Closer to the edge"), b -> offset(-4)).bounds(cx - 100, y + 48, 98, 20).build());
-			addRenderableWidget(Button.builder(Component.literal("Further in"), b -> offset(4)).bounds(cx + 2, y + 48, 98, 20).build());
+			addRenderableWidget(new Slider(cx - 100, y + 24, 200, "Size", 0.5, 1.5, TrackerConfig.SCALE.get(), v -> Math.round(v * 100) + "%",
+					v -> TrackerConfig.SCALE.set(Math.round(v * 20) / 20.0)));
+			addRenderableWidget(new Slider(cx - 100, y + 48, 200, "Margin", 0, 100, TrackerConfig.OFFSET_X.get(), v -> (int) Math.round(v) + "px", v -> {
+				TrackerConfig.OFFSET_X.set((int) Math.round(v));
+				TrackerConfig.OFFSET_Y.set((int) Math.round(v));
+			}));
 			addRenderableWidget(Button.builder(Component.literal(TrackerConfig.HIDDEN.get() ? "Show tracker" : "Hide tracker"), b -> {
 				TrackerConfig.HIDDEN.set(!TrackerConfig.HIDDEN.get());
 				save();
 			}).bounds(cx - 100, y + 72, 200, 20).build());
 			addRenderableWidget(Button.builder(Component.literal("Done"), b -> onClose()).bounds(cx - 100, y + 100, 200, 20).build());
-		}
-
-		private void scale(double d) {
-			TrackerConfig.SCALE.set(Mth.clamp(Math.round((TrackerConfig.SCALE.get() + d) * 100) / 100.0, 0.5, 1.5));
-			save();
-		}
-
-		private void offset(int d) {
-			TrackerConfig.OFFSET_X.set(Mth.clamp(TrackerConfig.OFFSET_X.get() + d, 0, 400));
-			TrackerConfig.OFFSET_Y.set(Mth.clamp(TrackerConfig.OFFSET_Y.get() + d, 0, 400));
-			save();
 		}
 
 		private void save() {
@@ -394,8 +385,47 @@ public final class StoryClient {
 		}
 
 		@Override
+		public void onClose() {
+			TrackerConfig.SPEC.save();
+			super.onClose();
+		}
+
+		@Override
 		public boolean isPauseScreen() {
 			return false;
+		}
+
+		/** A vanilla slider (as the FOV one) over a range, showing "Name: value". */
+		private static class Slider extends net.minecraft.client.gui.components.AbstractSliderButton {
+			private final String name;
+			private final double min, max;
+			private final java.util.function.DoubleFunction<String> label;
+			private final java.util.function.DoubleConsumer apply;
+
+			Slider(int x, int y, int w, String name, double min, double max, double current, java.util.function.DoubleFunction<String> label,
+					java.util.function.DoubleConsumer apply) {
+				super(x, y, w, 20, Component.empty(), (Mth.clamp(current, min, max) - min) / (max - min));
+				this.name = name;
+				this.min = min;
+				this.max = max;
+				this.label = label;
+				this.apply = apply;
+				updateMessage();
+			}
+
+			private double actual() {
+				return min + value * (max - min);
+			}
+
+			@Override
+			protected void updateMessage() {
+				setMessage(Component.literal(name + ": " + label.apply(actual())));
+			}
+
+			@Override
+			protected void applyValue() {
+				apply.accept(actual());
+			}
 		}
 
 		@Override

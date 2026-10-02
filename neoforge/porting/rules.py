@@ -1892,3 +1892,24 @@ def tick_only_own_player(path, text):
     client's own player only; the server runs it for everyone."""
     return re.sub(r'(public static void onPlayerTick\(PlayerTickEvent\.\w+ event\) \{\s*)if \(true\) \{',
                   r'\1if (!(event.getEntity().level().isClientSide() && !event.getEntity().isLocalInstanceAuthoritative())) {', text)
+
+
+@func
+def training_dummy(path, text):
+    """The training dummy is drawn by client/TrainingDummyClient (a vanilla-style straw dummy on a plank base that rocks when
+    hit, no red flash) and sounds like the armor stand it is kin to, not like a hurt mob."""
+    p = path.replace('\\', '/')
+    if p.endswith('entity/renderer/NpcRenderers.java'):
+        text = text.replace('ModRenderers.mob(event, TrainingDummyEntity.entity, ModelTrainingDummy.LAYER, ModelTrainingDummy::new, 0.3F, '
+                            'Identifier.parse("naruto_shippuden:textures/entities/training_dummy.png"));',
+                            'net.mcreator.narutoshippudenmod.client.TrainingDummyClient.register(event);')
+        text = text.replace('event.registerLayerDefinition(ModelTrainingDummy.LAYER, ModelTrainingDummy::createBodyLayer);',
+                            'net.mcreator.narutoshippudenmod.client.TrainingDummyClient.registerLayer(event);')
+    elif p.endswith('entity/NpcEntities.java'):
+        i = text.find('public static class TrainingDummyEntity ')
+        if i >= 0:
+            end = find_block(text, i)
+            cls = text[i:end].replace('Compat.sound("entity.generic.hurt")', 'net.minecraft.sounds.SoundEvents.ARMOR_STAND_HIT')
+            cls = cls.replace('Compat.sound("entity.generic.death")', 'net.minecraft.sounds.SoundEvents.ARMOR_STAND_BREAK')
+            text = text[:i] + cls + text[end:]
+    return text

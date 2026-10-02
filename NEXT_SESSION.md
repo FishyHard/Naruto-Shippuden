@@ -369,17 +369,19 @@ Nature Releases, Kekkei Genkai, DNA, Clans, Dojutsu, Shinobi Weapons, Headbands,
 ### The story's quest engine, `story/` and `client/StoryClient`
 - Data: `data/naruto_shippuden/story/characters/<id>.json` (name, skin, model legacy|player|slim, home [x,y,z] in
   Chikyū, yaw, idle lines) and `story/quests/<id>.json` (title, chapter, after, start auto|character, offer lines,
-  steps, rewards). Step types: talk, goto, kill, collect, wait, event (`Story.event(player, name)` from code). Lines:
+  steps, rewards: items, xp = shinobi XP, vanilla_xp, commands). Step types: talk, goto, kill, hit, collect, wait, event (`Story.event(player, name)` from code). Lines:
   speaker (character id or "player"), text, choices [{text, flag, lines}]. Full format in `Story`'s javadoc.
 - Progress in the player's persistent data `naruto_shippuden:story` (done, active {step,count,timer}, flags, focus),
   copied on death. `Story.onServerTick` keeps each character with a home standing there (`StoryNpc`, entity
   `story_npc`, name/skin/model synced from its file, unhurtable, unpushable, looks at players).
 - Client: dialogue screen (vanilla panel, typewriter text, choice buttons; click/space/enter/E), tracker top right
-  (J hides, K settings: corner, size, offset; `TrackerConfig` = naruto_shippuden-client.toml), toasts for new/complete
+  (J hides, K settings: corner, size and margin sliders; `TrackerConfig` = naruto_shippuden-client.toml), toasts for new/complete
   quests, "!"/"?" before a character's name. NPC renderer must NOT use AvatarRenderState (26.3 sends those to the
   player renderer, which draws Steve).
 - Commands (op): `/naruto story start <quest> | skip | talk | event <name> | reset [players]`. DevTest plan lines
   `hud on|off`, `dialog next`, `dialog choose N`.
+- Training dummy: `client/TrainingDummyClient` (vanilla-style model, wobbles when hit, no red flash; rule `training_dummy`
+  swaps the renderer and gives it armor stand sounds), `core/TrainingDummyEffects` (straw particles).
 - `story/quests/engine_test.json` (Iruka's "First Day at the Academy") is a placeholder until Chapter 1.
 
 ### Keys (defaults)

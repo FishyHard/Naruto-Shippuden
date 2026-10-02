@@ -65,7 +65,7 @@ import java.util.TreeMap;
  * <pre>
  * data/&lt;ns&gt;/story/characters/&lt;id&gt;.json  {"name", "skin", "model": "legacy"|"player"|"slim", "home": [x, y, z], "yaw", "idle": [lines]}
  * data/&lt;ns&gt;/story/quests/&lt;id&gt;.json      {"title", "chapter", "after": [quest ids], "start": "auto" | character id,
- *                                          "offer": [lines], "steps": [steps], "rewards": {"items": [{"id", "count"}], "xp", "commands"}}
+ *                                          "offer": [lines], "steps": [steps], "rewards": {"items": [{"id", "count"}], "xp" (shinobi XP), "vanilla_xp", "commands"}}
  * </pre>
  * A quest starts by itself ("auto") or when its character is talked to, once every quest in "after" is done. Steps, done one
  * after another, each with an optional "text" (the tracker's objective) and "on_start" (commands run as the player):
@@ -73,6 +73,7 @@ import java.util.TreeMap;
  * {"type": "talk", "npc": id, "dialogue": [lines]}            talk to that character
  * {"type": "goto", "pos": [x, y, z], "radius": r}             go there (in Chikyū, or "dimension")
  * {"type": "kill", "entity": id, "count": n}                   defeat n of them
+ * {"type": "hit", "entity": id, "count": n}                    land n hits on them (training dummies, sparring)
  * {"type": "collect", "item": id, "count": n, "take": bool}   have n in the inventory (taken when "take")
  * {"type": "wait", "seconds": s}                               let time pass
  * {"type": "event", "event": name}                            something code reports with {@link #event}
@@ -275,8 +276,14 @@ public final class Story {
 				player.getInventory().placeItemBackInInventory(new ItemStack(item, i.has("count") ? i.get("count").getAsInt() : 1),
 						net.minecraft.util.Prediction.SERVER_ONLY);
 			}
-		if (r.has("xp"))
-			player.giveExperiencePoints(r.get("xp").getAsInt());
+		if (r.has("xp")) {
+			// the shinobi XP of the mod's levels (the info card), not vanilla's
+			int xp = r.get("xp").getAsInt();
+			net.mcreator.narutoshippudenmod.core.Progression.addXp(player, xp);
+			player.sendOverlayMessage(Component.literal("+" + xp + " XP").withStyle(ChatFormatting.GREEN));
+		}
+		if (r.has("vanilla_xp"))
+			player.giveExperiencePoints(r.get("vanilla_xp").getAsInt());
 		if (r.has("commands"))
 			r.getAsJsonArray("commands").forEach(c -> Compat.runCommand(player, c.getAsString()));
 		announce(player, Component.literal("Quest complete").withStyle(ChatFormatting.GREEN), quest.title(), SoundEvents.UI_TOAST_CHALLENGE_COMPLETE);
@@ -360,12 +367,24 @@ public final class Story {
 
 	@SubscribeEvent
 	public static void onKill(LivingDeathEvent event) {
-		if (!(event.getSource().getEntity() instanceof ServerPlayer player))
+		if (event.getSource().getEntity() instanceof ServerPlayer player)
+			counted(player, "kill", event.getEntity());
+	}
+
+	@SubscribeEvent
+	public static void onHit(net.neoforged.neoforge.event.entity.living.LivingDamageEvent.Post event) {
+		if (event.getSource().getEntity() instanceof ServerPlayer player && event.getEntity() != player)
+			counted(player, "hit", event.getEntity());
+	}
+
+	/** One more for the steps of that type that count this kind of entity. */
+	private static void counted(ServerPlayer player, String kind, Entity target) {
+		if (quests.isEmpty())
 			return;
-		String type = BuiltInRegistries.ENTITY_TYPE.getKey(event.getEntity().getType()).toString();
+		String type = BuiltInRegistries.ENTITY_TYPE.getKey(target.getType()).toString();
 		for (Quest q : new ArrayList<>(quests.values())) {
 			JsonObject step = step(player, q);
-			if (step == null || !str(step, "type", "").equals("kill") || !str(step, "entity", "").equals(type))
+			if (step == null || !str(step, "type", "").equals(kind) || !str(step, "entity", "").equals(type))
 				continue;
 			CompoundTag p = progress(player, q);
 			int n = p.getIntOr("count", 0) + 1;
@@ -500,7 +519,7 @@ public final class Story {
 			out.putString("objective", objective(step));
 			int count = progress(player, q).getIntOr("count", 0);
 			String type = str(step, "type", "");
-			if (type.equals("kill") || type.equals("collect"))
+			if (type.equals("kill") || type.equals("hit") || type.equals("collect"))
 				out.putString("progress", count + "/" + (step.has("count") ? step.get("count").getAsInt() : 1));
 			JsonArray pos = null;
 			String dim = Chikyu.CHIKYU.identifier().toString();
@@ -539,6 +558,7 @@ public final class Story {
 			case "talk" -> "Talk to " + (characters.get(str(step, "npc", "")) instanceof Character c ? c.name() : str(step, "npc", "someone"));
 			case "goto" -> "Go to the marked place";
 			case "kill" -> "Defeat " + str(step, "entity", "them");
+			case "hit" -> "Hit " + str(step, "entity", "it");
 			case "collect" -> "Gather " + str(step, "item", "it");
 			case "wait" -> "Wait";
 			default -> "Carry on";
