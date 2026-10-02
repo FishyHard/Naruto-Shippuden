@@ -68,6 +68,16 @@
           ],
           "yaw": 180,
           "steps": 2
+        },
+        {
+          "character": "tatsumi",
+          "pos": [
+            0,
+            65,
+            -93
+          ],
+          "yaw": 180,
+          "steps": 2
         }
       ]
     },

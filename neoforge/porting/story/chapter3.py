@@ -15,11 +15,12 @@ STICKS = 'minecraft:stick'
 
 
 def at_desk(steps=2):
-    """The Hokage and Iruka seated at the mission desk, Ren and Yui waiting before it."""
+    """The Hokage and Iruka seated at the mission desk, the team waiting before it: Ren and Yui, their sensei behind them."""
     return [dict(character='hiruzen', pos=[-3, G, -100], yaw=0, steps=steps, pose='sit'),
             dict(character='iruka', pos=[3, G, -100], yaw=0, steps=steps, pose='sit'),
             dict(character='ren', pos=[-2, G, -95], yaw=180, steps=steps),
-            dict(character='yui', pos=[2, G, -95], yaw=180, steps=steps)]
+            dict(character='yui', pos=[2, G, -95], yaw=180, steps=steps),
+            dict(character='tatsumi', pos=[0, G, -93], yaw=180, steps=steps)]
 
 
 QUESTS = {
