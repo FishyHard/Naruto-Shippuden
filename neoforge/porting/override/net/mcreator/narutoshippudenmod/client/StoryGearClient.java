@@ -30,9 +30,9 @@ import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsE
 @EventBusSubscriber(modid = "naruto_shippuden", value = Dist.CLIENT)
 public final class StoryGearClient {
 	private static final ModelLayerLocation HAT = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "hokage_hat"), "main");
-	private static final Identifier HAT_TEXTURE = Identifier.parse("naruto_shippuden:textures/entities/hokage_hat.png");
+	private static final Identifier HAT_TEXTURE = Identifier.parse("naruto_shippuden:textures/entities/hokage_hat_old.png");
 	private static final ModelLayerLocation VEST = new ModelLayerLocation(Identifier.fromNamespaceAndPath("naruto_shippuden", "jonin_vest"), "main");
-	private static final Identifier VEST_TEXTURE = Identifier.parse("naruto_shippuden:textures/entities/jonin_vest.png");
+	private static final Identifier VEST_TEXTURE = Identifier.parse("naruto_shippuden:textures/entities/jonin_jacket_old.png");
 	private static HumanoidModel<?> hat, vest;
 
 	private StoryGearClient() {
@@ -97,8 +97,9 @@ public final class StoryGearClient {
 
 	@SubscribeEvent
 	public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-		event.registerLayerDefinition(HAT, StoryGearClient::hatLayer);
-		event.registerLayerDefinition(VEST, StoryGearClient::vestLayer);
+		// the original mod's own models (client/OldGearModels)
+		event.registerLayerDefinition(HAT, OldGearModels::hokageHat);
+		event.registerLayerDefinition(VEST, OldGearModels::joninJacket);
 	}
 
 	@SubscribeEvent
