@@ -1,0 +1,120 @@
+{
+  "title": "Filler: Yui's First Patient",
+  "chapter": 2,
+  "after": [
+    "chapter2/02_water_walking"
+  ],
+  "start": "yui",
+  "later": "Ren's ankle can wait a little... finish what you're doing, then come and help me.",
+  "offer": [
+    {
+      "speaker": "yui",
+      "text": "Ren fell in the lake one too many times and twisted his ankle. He says it's fine. It's not fine."
+    },
+    {
+      "speaker": "yui",
+      "text": "I've got him as far as the hospital, but he won't go in. Can you meet us at the doors? He listens to you."
+    }
+  ],
+  "steps": [
+    {
+      "type": "goto",
+      "pos": [
+        82,
+        65,
+        -86
+      ],
+      "radius": 5,
+      "text": "Meet Yui and Ren at the hospital",
+      "time": "day",
+      "spawn": [
+        {
+          "character": "yui",
+          "pos": [
+            81,
+            65,
+            -86
+          ],
+          "yaw": 180,
+          "steps": 3
+        },
+        {
+          "character": "ren",
+          "pos": [
+            83,
+            64.5,
+            -86
+          ],
+          "yaw": 180,
+          "steps": 3,
+          "pose": "sit"
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "ren",
+      "text": "Talk to Ren",
+      "dialogue": [
+        {
+          "speaker": "ren",
+          "text": "It's just a scratch! A ninja doesn't go to the hospital for a scratch!"
+        },
+        {
+          "speaker": "yui",
+          "text": "It's swollen, Ren. Sit still."
+        },
+        {
+          "speaker": "ren",
+          "text": "...Fine. But if they give me a shot, I'm leaving.",
+          "choices": [
+            {
+              "text": "Even Tatsumi-sensei gets patched up.",
+              "flag": "ren_patched",
+              "lines": [
+                {
+                  "speaker": "ren",
+                  "text": "...Really? Okay. Okay, fine."
+                }
+              ]
+            },
+            {
+              "text": "I'll race you once it's healed.",
+              "flag": "ren_race",
+              "lines": [
+                {
+                  "speaker": "ren",
+                  "text": "You're ON. Yui, fix it fast!"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "yui",
+      "text": "Talk to Yui",
+      "dialogue": [
+        {
+          "speaker": "yui",
+          "text": "Thank you. Medical ninjutsu can only do so much... the patient has to let you help."
+        },
+        {
+          "speaker": "yui",
+          "text": "Here. I made extra. If you're ever hurt, eat this."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 20,
+    "items": [
+      {
+        "id": "minecraft:golden_apple",
+        "count": 1
+      }
+    ]
+  }
+}

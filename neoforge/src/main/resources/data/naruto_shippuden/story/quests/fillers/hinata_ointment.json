@@ -1,0 +1,68 @@
+{
+  "title": "Filler: Hinata's Ointment",
+  "chapter": 1,
+  "after": [
+    "chapter1/02_kunai_taijutsu"
+  ],
+  "start": "hinata",
+  "later": "I-it's nothing... You're busy. M-maybe later...",
+  "offer": [
+    {
+      "speaker": "hinata",
+      "text": "U-um... Naruto got hurt in training again. I made this ointment, but... I can't just give it to him..."
+    },
+    {
+      "speaker": "hinata",
+      "text": "Could you... give it to him? Please don't say it's from me!"
+    }
+  ],
+  "steps": [
+    {
+      "type": "talk",
+      "npc": "naruto",
+      "text": "Give Hinata's ointment to Naruto",
+      "dialogue": [
+        {
+          "speaker": "naruto",
+          "text": "Ointment? For me? Whoa, thanks! ...Wait, who made it? This smells way too nice to be yours.",
+          "choices": [
+            {
+              "text": "A secret admirer.",
+              "flag": "ointment_secret",
+              "lines": [
+                {
+                  "speaker": "naruto",
+                  "text": "A secret what? Heh, whatever, it works great!"
+                }
+              ]
+            },
+            {
+              "text": "It's from Hinata.",
+              "flag": "ointment_told",
+              "lines": [
+                {
+                  "speaker": "naruto",
+                  "text": "Hinata? Huh. She's kinda weird... but nice! Tell her thanks!"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "hinata",
+      "text": "Tell Hinata how it went",
+      "dialogue": [
+        {
+          "speaker": "hinata",
+          "text": "H-he used it? He's okay? ...Thank you. Really."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 10
+  }
+}

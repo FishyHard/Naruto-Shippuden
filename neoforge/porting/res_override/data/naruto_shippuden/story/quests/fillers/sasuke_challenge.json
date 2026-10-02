@@ -1,0 +1,49 @@
+{
+  "title": "Filler: Sasuke's Challenge",
+  "chapter": 1,
+  "after": [
+    "chapter1/02_kunai_taijutsu"
+  ],
+  "start": "sasuke",
+  "later": "...Later. You've got other things to do.",
+  "offer": [
+    {
+      "speaker": "sasuke",
+      "text": "You. Your kunai throws were sloppy, but you hit the target. Let's see if it was luck."
+    },
+    {
+      "speaker": "sasuke",
+      "text": "Ten hits on the dummy. I did it in under a minute."
+    }
+  ],
+  "steps": [
+    {
+      "type": "hit",
+      "entity": "naruto_shippuden:training_dummy",
+      "count": 10,
+      "text": "Land 10 kunai hits on the training dummy",
+      "on_start": [
+        "give @s naruto_shippuden:kunai 16",
+        "execute unless entity @e[type=naruto_shippuden:training_dummy,x=-68,y=65,z=-58,distance=..3] run summon naruto_shippuden:training_dummy -68 65 -58"
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "sasuke",
+      "text": "Talk to Sasuke",
+      "dialogue": [
+        {
+          "speaker": "sasuke",
+          "text": "...Not bad. Still slower than me."
+        },
+        {
+          "speaker": "sasuke",
+          "text": "Keep training. I'll need someone worth beating."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 15
+  }
+}

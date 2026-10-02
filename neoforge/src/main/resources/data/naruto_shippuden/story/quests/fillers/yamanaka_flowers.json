@@ -1,0 +1,87 @@
+{
+  "title": "Filler: Flowers for the Yamanaka Shop",
+  "chapter": 1,
+  "after": [
+    "chapter1/01_first_day"
+  ],
+  "start": "ino",
+  "later": "I'd ask you a favour, but you look busy. Come find me when you're free!",
+  "offer": [
+    {
+      "speaker": "ino",
+      "text": "Hey, new kid! My family's flower shop is short on stock and Dad's out. Help me out?"
+    },
+    {
+      "speaker": "ino",
+      "text": "Pick me some poppies and dandelions from around the village and bring them to the shop. It's on the main street, east of here."
+    }
+  ],
+  "steps": [
+    {
+      "type": "collect",
+      "item": "minecraft:poppy",
+      "count": 3,
+      "text": "Pick 3 poppies"
+    },
+    {
+      "type": "collect",
+      "item": "minecraft:dandelion",
+      "count": 3,
+      "text": "Pick 3 dandelions"
+    },
+    {
+      "type": "goto",
+      "pos": [
+        -3,
+        65,
+        91
+      ],
+      "radius": 4,
+      "text": "Bring the flowers to the Yamanaka flower shop",
+      "spawn": [
+        {
+          "character": "ino",
+          "pos": [
+            -4,
+            65,
+            90
+          ],
+          "yaw": -90,
+          "steps": 2
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "ino",
+      "text": "Talk to Ino",
+      "dialogue": [
+        {
+          "speaker": "ino",
+          "text": "Perfect! Poppies mean remembrance, dandelions mean happiness. Every flower says something, you know."
+        },
+        {
+          "speaker": "ino",
+          "text": "Don't tell Sakura I needed help. Here, for your trouble."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 15,
+    "commands": [
+      "clear @s minecraft:poppy 3",
+      "clear @s minecraft:dandelion 3"
+    ],
+    "items": [
+      {
+        "id": "minecraft:flower_pot",
+        "count": 1
+      },
+      {
+        "id": "minecraft:cornflower",
+        "count": 1
+      }
+    ]
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "title": "Filler: Paint on the Hokage Rock",
+  "chapter": 2,
+  "after": [
+    "chapter2/01_chakra_control"
+  ],
+  "start": "naruto",
+  "later": "Shh! I can't talk now, you're busy anyway! ...Don't tell Iruka-sensei where I am!",
+  "offer": [
+    {
+      "speaker": "naruto",
+      "text": "Heh heh... So, uh, I might've painted the Hokage faces again. And Iruka-sensei says I gotta wash it all off."
+    },
+    {
+      "speaker": "naruto",
+      "text": "You can walk up walls now, right? Help me scrub! It's a long way up!"
+    }
+  ],
+  "steps": [
+    {
+      "type": "goto",
+      "pos": [
+        0,
+        130,
+        -162
+      ],
+      "radius": 24,
+      "min_y": 118,
+      "text": "Climb onto the Hokage faces (walk up the Rock)"
+    },
+    {
+      "type": "wait",
+      "seconds": 30,
+      "text": "Scrub the paint off the faces"
+    },
+    {
+      "type": "goto",
+      "pos": [
+        0,
+        65,
+        -150
+      ],
+      "radius": 12,
+      "text": "Come back down to the foot of the Rock",
+      "spawn": [
+        {
+          "character": "naruto",
+          "pos": [
+            -2,
+            65,
+            -148
+          ],
+          "yaw": 180,
+          "steps": 2
+        },
+        {
+          "character": "iruka",
+          "pos": [
+            2,
+            65,
+            -148
+          ],
+          "yaw": 180,
+          "steps": 2
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "iruka",
+      "text": "Talk to Iruka-sensei",
+      "dialogue": [
+        {
+          "speaker": "iruka",
+          "text": "Spotless. Naruto, you could learn something from your friend here."
+        },
+        {
+          "speaker": "naruto",
+          "text": "Yeah, yeah... Hey, it looked way better with the moustaches."
+        },
+        {
+          "speaker": "iruka",
+          "text": "Ramen's on me. Both of you. Just... no more paint."
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 20,
+    "items": [
+      {
+        "id": "naruto_shippuden:ichiraku_ramen",
+        "count": 1
+      }
+    ]
+  }
+}

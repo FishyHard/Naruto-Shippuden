@@ -1,0 +1,105 @@
+{
+  "title": "Filler: Cloud Watching",
+  "chapter": 1,
+  "after": [
+    "chapter1/01_first_day"
+  ],
+  "start": "shikamaru",
+  "later": "Clouds'll still be there later. Go do your thing first... what a drag.",
+  "offer": [
+    {
+      "speaker": "shikamaru",
+      "text": "Iruka-sensei's lecture is about to start. Which means it's the perfect time to be somewhere else."
+    },
+    {
+      "speaker": "shikamaru",
+      "text": "Choji and I watch the clouds at the edge of Training Ground 3. Come if you want. Or don't. Too troublesome to argue."
+    }
+  ],
+  "steps": [
+    {
+      "type": "goto",
+      "pos": [
+        -116,
+        65,
+        -82
+      ],
+      "radius": 5,
+      "text": "Find Shikamaru and Choji at the edge of Training Ground 3",
+      "time": "day",
+      "spawn": [
+        {
+          "character": "shikamaru",
+          "pos": [
+            -117,
+            65,
+            -82
+          ],
+          "yaw": 90,
+          "steps": 3,
+          "pose": "lie"
+        },
+        {
+          "character": "choji",
+          "pos": [
+            -115,
+            64.5,
+            -84
+          ],
+          "yaw": 0,
+          "steps": 3,
+          "pose": "sit"
+        }
+      ]
+    },
+    {
+      "type": "wait",
+      "seconds": 20,
+      "text": "Lie back and watch the clouds"
+    },
+    {
+      "type": "talk",
+      "npc": "shikamaru",
+      "text": "Talk to Shikamaru",
+      "dialogue": [
+        {
+          "speaker": "shikamaru",
+          "text": "See that one? Looks like a deer. And that one... like Iruka-sensei when he's yelling."
+        },
+        {
+          "speaker": "choji",
+          "text": "*crunch* That one looks like a rice ball. ...I'm hungry."
+        },
+        {
+          "speaker": "shikamaru",
+          "text": "Clouds don't have to be anywhere. Sometimes I envy them.",
+          "choices": [
+            {
+              "text": "Must be nice.",
+              "flag": "clouds_nice",
+              "lines": [
+                {
+                  "speaker": "shikamaru",
+                  "text": "Heh. You get it. Not many do."
+                }
+              ]
+            },
+            {
+              "text": "We'll get in trouble for skipping.",
+              "flag": "clouds_worried",
+              "lines": [
+                {
+                  "speaker": "shikamaru",
+                  "text": "Yeah. Worth it, though."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 10
+  }
+}

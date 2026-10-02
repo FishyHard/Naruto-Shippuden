@@ -1,0 +1,111 @@
+{
+  "title": "Filler: Barbecue at Yakiniku Q",
+  "chapter": 1,
+  "after": [
+    "chapter1/03_graduation"
+  ],
+  "start": "choji",
+  "later": "Barbecue after you're done! I'll save you a spot. ...Maybe not the meat, though.",
+  "offer": [
+    {
+      "speaker": "choji",
+      "text": "We passed! You know what that means? BARBECUE! Yakiniku Q, on avenue B. Shikamaru and Ino are coming!"
+    }
+  ],
+  "steps": [
+    {
+      "type": "goto",
+      "pos": [
+        14,
+        65,
+        65
+      ],
+      "radius": 4,
+      "text": "Join Choji, Shikamaru and Ino at Yakiniku Q",
+      "time": "evening",
+      "spawn": [
+        {
+          "character": "choji",
+          "pos": [
+            12,
+            65.1,
+            60
+          ],
+          "yaw": 0,
+          "steps": 3,
+          "pose": "sit"
+        },
+        {
+          "character": "shikamaru",
+          "pos": [
+            13,
+            65.1,
+            60
+          ],
+          "yaw": 0,
+          "steps": 3,
+          "pose": "sit"
+        },
+        {
+          "character": "ino",
+          "pos": [
+            12,
+            65.1,
+            62
+          ],
+          "yaw": 180,
+          "steps": 3,
+          "pose": "sit"
+        }
+      ]
+    },
+    {
+      "type": "talk",
+      "npc": "choji",
+      "text": "Sit down with Choji",
+      "dialogue": [
+        {
+          "speaker": "choji",
+          "text": "Sit, sit! The meat's almost ready. That piece is mine. And that one. And-"
+        },
+        {
+          "speaker": "ino",
+          "text": "Choji! Let other people eat!"
+        },
+        {
+          "speaker": "shikamaru",
+          "text": "Let him be. Arguing with Choji over meat is too troublesome."
+        },
+        {
+          "speaker": "choji",
+          "text": "Here, you can have this one. Because we're friends now.",
+          "choices": [
+            {
+              "text": "Thanks, Choji!",
+              "flag": "choji_friend",
+              "lines": [
+                {
+                  "speaker": "choji",
+                  "text": "Heh heh! Friends share. ...Just not the last piece."
+                }
+              ]
+            },
+            {
+              "text": "You keep it.",
+              "flag": "choji_generous",
+              "lines": [
+                {
+                  "speaker": "choji",
+                  "text": "Really?! You're the best!"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "xp": 15
+  }
+}
