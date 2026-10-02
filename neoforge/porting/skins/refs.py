@@ -198,7 +198,7 @@ def shino():
     pal.update({'W': rgb('#F0F0F0'), 'I': rgb('#3A2A22'), 'F': rgb('#0A0A0E'), 'L': rgb('#1C1C24'), 'l': rgb('#4A4A5C')})
     # his own eyes on the head, the round dark glasses over them standing out on the hat layer
     heads.grid(s, 'head', 'front', [".", ".", ".", "HKKKKKKH", "HWIkkIWH", "kkkKKkkk", "CCCCCCCC", "DDDDDDDD"], pal)
-    heads.grid(s, 'hat', 'front', ["_", "_", "_", "_lLFFlL_", "FLL__LLF", "_FF__FF_"], pal)
+    heads.grid(s, 'hat', 'front', ["_", "_", "_", "FlLFFlLF", "_LL__LL_", "_"], pal)
     heads.grid(s, 'hat', 'right', [".", ".", ".", ".....FFF"], pal)
     heads.grid(s, 'hat', 'left', [".", ".", ".", "FFF....."], pal)
     # the collar, standing out round his jaw on the hat layer
