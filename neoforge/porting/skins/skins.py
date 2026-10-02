@@ -387,7 +387,7 @@ def bright(c, t):
 
 
 def hair(s, base, front, side, back, hat_front=None, hat_side=None, hat_back=None, salt=1, shine=True, crown=True, cape=0,
-         width=3):
+         width=3, style='spiky'):
     """Hair the way the good Naruto skins paint it. The head layer is the hair itself: calm and smooth, its own colour in a
     soft gradient (brightest at the crown, a little darker toward the ends and the sides), hardly any noise. The hat layer is
     mostly empty: sparse little strokes of hair, one or two pixels, mostly running down, in tones close to the hair's, that
@@ -396,6 +396,8 @@ def hair(s, base, front, side, back, hat_front=None, hat_side=None, hat_back=Non
     back; hat_front, hat_side, hat_back: how far down the strokes reach (None: none there). cape: rows the hair falls below the
     head down the back (on the body's outer layer)."""
     lift = 1.5 if max(base[:3]) < 90 else 1.0
+    if style == 'smooth':
+        return smooth_hair(s, base, front, side, back, hat_front, hat_side, hat_back, salt, crown, cape, lift)
 
     def body(face, x, y, depth, y0=0):
         yy = y + y0
@@ -463,6 +465,54 @@ def hair(s, base, front, side, back, hat_front=None, hat_side=None, hat_back=Non
     if cape:
         # the hair falling down the back, below the head
         s.paint('jacket', lambda f, x, y, w, h: body('back', x, y, cape, y0=8) if f == 'back' and y < cape - (1 if x in (0, 7) else 0) else None)
+
+
+def smooth_hair(s, base, front, side, back, hat_front, hat_side, hat_back, salt, crown, cape, lift):
+    """Smooth hair (long, straight or tied back: Sakura, Ino, Hinata, Shikamaru): calm and even, softly lighter at the top
+    and darker toward the ends, with one band of shine running round the head (a row of light dashes, as the good skins
+    have it); the hat layer is the same hair a little fuller over all of it, with its own band of shine, and only here and
+    there a lock hangs a pixel lower. No scattered strokes: that is spiky hair's."""
+    def tone_at(face, x, y, depth, layer, y0=0):
+        yy = y + y0
+        t = 0.2 - 0.07 * yy + LIGHT[face] * 0.25 + (0.08 if layer else -0.1)
+        if yy == 2 and face != 'top':
+            t += 0.42 if (x + layer + salt) % 2 == 0 else 0.15          # the band of shine, in dashes
+        elif yy == 3 and face != 'top' and (x + salt) % 4 == 1:
+            t += 0.15
+        if y >= depth - 1 and depth > 2:
+            t -= 0.18
+        if (x + salt) % 5 == 0 and yy > 3:
+            t -= 0.08                                                   # a faint parting between the locks
+        return bright(base, t * lift)
+
+    def draw(part, fr, sd, bk, layer):
+        if fr is not None:
+            s.paint(part, lambda f, x, y, w, h: tone_at(f, x, y, fr[x], layer) if f == 'front' and y < fr[x] else None)
+        if sd is not None:
+            s.paint(part, lambda f, x, y, w, h: tone_at(f, x, y, sd[x], layer) if f == 'right' and y < sd[x] else None)
+            s.paint(part, lambda f, x, y, w, h: tone_at(f, x, y, sd[7 - x], layer) if f == 'left' and y < sd[7 - x] else None)
+        if bk is not None:
+            s.paint(part, lambda f, x, y, w, h: tone_at(f, x, y, bk[x], layer) if f == 'back' and y < bk[x] else None)
+
+    def crown_fn(f, x, y, w, h, layer):
+        if f != 'top':
+            return None
+        t = 0.45 - 0.04 * (abs(x - 3.5) + abs(y - 3.5)) + (0.08 if layer else -0.1)
+        if (x + y + salt) % 6 == 0:
+            t += 0.15
+        return bright(base, t * lift)
+
+    def hang(depths, fk):
+        return None if depths is None else [min(8, d + (1 if 0 < d < 8 and _h(x, fk, salt + 77) < 0.25 else 0)) for x, d in enumerate(depths)]
+    draw('head', front, side, back, 0)
+    s.paint('head', lambda f, x, y, w, h: crown_fn(f, x, y, w, h, 0))
+    if crown and (hat_front is not None or hat_side is not None or hat_back is not None):
+        s.paint('hat', lambda f, x, y, w, h: crown_fn(f, x, y, w, h, 1))
+    cover = lambda over, under: None if over is None else [max(o, u) for o, u in zip(over, under)]
+    draw('hat', hang(cover(hat_front, front), 1) if hat_front is not None and max(hat_front) < 8 else cover(hat_front, front),
+         hang(cover(hat_side, side), 2), hang(cover(hat_back, back), 3), 1)
+    if cape:
+        s.paint('jacket', lambda f, x, y, w, h: tone_at('back', x, y, cape, 1, y0=8) if f == 'back' and y < cape - (1 if x in (0, 7) else 0) else None)
 
 
 def headband_painted(s, part='hat', row=2, cloth_c=rgb('#24305A'), metal=rgb('#C2C8D0')):
@@ -566,7 +616,7 @@ def sakura():
     eyes(s, rgb('#3FA060'), lashes=tone(pink, -2), brows=tone(pink, -0.8))
     blush(s)
     hair(s, pink, front=[8, 3, 2, 2, 1, 2, 3, 8], side=[8, 8, 8, 8, 8, 8, 8, 8], back=[8, 8, 8, 8, 8, 8, 8, 8],
-         hat_front=[8, 2, 1, 0, 0, 1, 2, 8], hat_side=[8, 8, 8, 8, 8, 7, 8, 8], hat_back=[8, 8, 8, 8, 8, 8, 8, 8], salt=17, cape=3)
+         hat_front=[8, 2, 1, 0, 0, 1, 2, 8], hat_side=[8, 8, 8, 8, 8, 7, 8, 8], hat_back=[8, 8, 8, 8, 8, 8, 8, 8], salt=17, style='smooth', cape=3)
     # the ribbon round her head
     s.paint('hat', lambda f, x, y, w, h: tone(red, LIGHT[f] * 0.5 + 0.3) if f in SIDES and y == 1 and not (f == 'front' and x in (0, 7)) else None)
     s.px('hat', 'right', 2, 2, tone(red, -0.4)); s.px('hat', 'right', 3, 2, tone(red, -0.2))
@@ -600,7 +650,7 @@ def shikamaru():
     eyes(s, EYE_DARK, brows=tone(hair_c, 0))
     s.px('head', 'front', 1, 4, tone(SKIN, -0.4)); s.px('head', 'front', 6, 4, tone(SKIN, -0.4))   # half-lidded, bored
     hair(s, hair_c, front=[3, 2, 1, 1, 1, 1, 2, 3], side=[5, 5, 4, 4, 3, 3, 3, 3], back=[5, 5, 5, 5, 5, 5, 5, 5],
-         hat_front=[1, 0, 0, 0, 0, 0, 0, 1], hat_side=[4, 4, 3, 3, 2, 2, 2, 2], hat_back=[4, 4, 5, 6, 6, 5, 4, 4], salt=23)
+         hat_front=[1, 0, 0, 0, 0, 0, 0, 1], hat_side=[4, 4, 3, 3, 2, 2, 2, 2], hat_back=[4, 4, 5, 6, 6, 5, 4, 4], salt=23, style='smooth')
     for (x, y) in ((3, 0), (4, 0), (2, 1), (3, 1), (4, 1), (5, 1), (3, 2), (4, 2)):
         s.px('hat', 'top', x, y, tone(hair_c, 0.6 if (x + y) % 2 else 0.1))   # the ponytail, up on top
     for x in (3, 4):
@@ -626,7 +676,7 @@ def ino():
     eyes(s, rgb('#58A8D8'), lashes=tone(blonde, -2.2), brows=tone(blonde, -1))
     blush(s)
     hair(s, blonde, front=[7, 6, 6, 2, 1, 1, 2, 5], side=[8, 8, 7, 6, 6, 6, 7, 7], back=[8, 8, 8, 8, 8, 8, 8, 8],
-         hat_front=[7, 6, 6, 3, 0, 0, 1, 4], hat_side=[7, 6, 5, 4, 4, 4, 5, 6], hat_back=[7, 7, 8, 8, 8, 8, 7, 7], salt=29)
+         hat_front=[7, 6, 6, 3, 0, 0, 1, 4], hat_side=[7, 6, 5, 4, 4, 4, 5, 6], hat_back=[7, 7, 8, 8, 8, 8, 7, 7], salt=29, style='smooth')
     torso(s, purple)
     for y in range(0, 9):                                    # the ponytail down her back
         for x in (3, 4):
@@ -680,7 +730,7 @@ def hinata():
     eyes(s, None, pale=True, lashes=tone(hair_c, -0.5), brows=tone(hair_c, 0.2))
     blush(s)
     hair(s, hair_c, front=[8, 3, 3, 3, 3, 3, 3, 8], side=[6, 6, 6, 6, 6, 7, 8, 8], back=[6, 6, 6, 6, 6, 6, 6, 6],
-         hat_front=[8, 2, 2, 2, 2, 2, 2, 8], hat_side=[6, 6, 5, 5, 5, 6, 8, 8], hat_back=[6, 6, 6, 6, 6, 6, 6, 6], salt=37)
+         hat_front=[8, 2, 2, 2, 2, 2, 2, 8], hat_side=[6, 6, 5, 5, 5, 6, 8, 8], hat_back=[6, 6, 6, 6, 6, 6, 6, 6], salt=37, style='smooth')
     torso(s, coat)
     cloth(s, 'jacket', coat, salt=12, rough=0.3)
     s.paint('jacket', lambda f, x, y, w, h: CLEAR if f in ('top', 'bottom') else None)
@@ -783,7 +833,7 @@ def iruka():
     for x in range(1, 7):
         s.px('head', 'front', x, 6, tone(rgb('#C88870'), 0 if x in (3, 4) else -0.2))   # the scar
     hair(s, hair_c, front=[3, 2, 1, 1, 1, 1, 2, 3], side=[5, 5, 4, 4, 3, 3, 3, 3], back=[5, 5, 5, 5, 5, 5, 5, 5],
-         hat_front=[1, 0, 0, 0, 0, 0, 0, 1], hat_side=[4, 4, 3, 3, 2, 2, 2, 2], hat_back=[4, 4, 5, 5, 5, 5, 4, 4], salt=47)
+         hat_front=[1, 0, 0, 0, 0, 0, 0, 1], hat_side=[4, 4, 3, 3, 2, 2, 2, 2], hat_back=[4, 4, 5, 5, 5, 5, 4, 4], salt=47, style='smooth')
     for (x, y) in ((3, 0), (4, 0), (3, 1), (4, 1), (2, 1), (5, 1)):
         s.px('hat', 'top', x, y, tone(hair_c, 0.5 if (x + y) % 2 else 0))   # the ponytail, up at the back
     for x in (3, 4):
@@ -799,7 +849,7 @@ def mizuki():
     head(s)
     eyes(s, rgb('#3A3A48'), brows=tone(hair_c, -1.2))
     hair(s, hair_c, front=[6, 3, 2, 2, 2, 2, 3, 6], side=[8, 8, 8, 8, 8, 8, 7, 7], back=[8, 8, 8, 8, 8, 8, 8, 8],
-         hat_front=[6, 2, 1, 1, 1, 1, 2, 6], hat_side=[8, 8, 8, 7, 6, 5, 5, 6], hat_back=[8, 8, 8, 8, 8, 8, 8, 8], salt=53, cape=2)
+         hat_front=[6, 2, 1, 1, 1, 1, 2, 6], hat_side=[8, 8, 8, 7, 6, 5, 5, 6], hat_back=[8, 8, 8, 8, 8, 8, 8, 8], salt=53, style='smooth', cape=2)
     chunin(s, SKIN)
     return s
 
@@ -816,7 +866,7 @@ def hiruzen():
         s.px('head', 'front', x, 7, tone(grey, 0.1 if x in (3, 4) else -0.2))   # the goatee
     s.px('head', 'front', 3, 6, grey); s.px('head', 'front', 4, 6, tone(grey, -0.2))
     hair(s, grey, front=[2, 1, 0, 0, 0, 0, 1, 2], side=[5, 5, 5, 4, 4, 3, 3, 2], back=[5, 5, 5, 5, 5, 5, 5, 5],
-         hat_side=[4, 4, 4, 3, 3, 2, 2, 1], hat_back=[5, 5, 5, 5, 5, 5, 5, 5], salt=59)
+         hat_side=[4, 4, 4, 3, 3, 2, 2, 1], hat_back=[5, 5, 5, 5, 5, 5, 5, 5], salt=59, style='smooth')
     torso(s, shirt)
     fold(s, 'body', 'front', [(2, 5), (5, 6)], shirt, 0.5)
     sleeves(s, shirt, old, rows=11, cuff=shirt)
@@ -877,7 +927,7 @@ def yui():
     eyes(s, rgb('#4A5AB0'), lashes=tone(hair_c, 0), brows=tone(hair_c, 0.3))
     blush(s)
     hair(s, hair_c, front=[7, 3, 2, 2, 2, 2, 3, 7], side=[7, 7, 7, 7, 7, 7, 7, 7], back=[7, 7, 7, 7, 7, 7, 7, 7],
-         hat_front=[7, 3, 2, 1, 1, 2, 3, 7], hat_side=[7, 7, 6, 6, 6, 6, 7, 7], hat_back=[7, 7, 7, 7, 7, 7, 7, 7], salt=71)
+         hat_front=[7, 3, 2, 1, 1, 2, 3, 7], hat_side=[7, 7, 6, 6, 6, 6, 7, 7], hat_back=[7, 7, 7, 7, 7, 7, 7, 7], salt=71, style='smooth')
     torso(s, white)
     headband_painted(s, part='jacket', row=0)                  # her headband, round her neck
     s.paint('body', lambda f, x, y, w, h: tone(teal, LIGHT[f] + 0.1) if f in ('front', 'back') and x in (0, w - 1) and y >= 2 else None)
