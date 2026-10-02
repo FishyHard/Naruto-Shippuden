@@ -221,6 +221,12 @@ def crest(jacket):
     parts, im = jacket[0], jacket[4]
     u, v, (x, y, z, w, h, d), _, _ = parts['Body']['boxes'][0]  # the jacket's body
     bu, bv = u + 2 * int(d) + int(w), v + int(d)                 # its back face
+    green = RAMPS['green']['ramp']
+    for i in range(int(w)):                                      # the old swirl's red under it goes first
+        for j in range(int(h)):
+            c = im.getpixel((int(bu) + i, int(bv) + j))
+            if c[3] and c[0] > c[1] + 40:
+                im.putpixel((int(bu) + i, int(bv) + j), green[3 - (1 if (i + j) % 5 == 0 else 0)] + (255,))
     for j, row in enumerate(CREST):
         for i, ch in enumerate(row):
             if ch != '.':

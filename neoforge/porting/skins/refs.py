@@ -120,6 +120,8 @@ def sasuke():
     s = load('sasuke')
     strip_band(s, 2)
     heads.sasuke(s)
+    for x in (35, 36):               # the Uchiha fan on his back rounded at the top
+        s.im.putpixel((x, 21), (0x6B, 0x22, 0x22, 255))
     return s
 
 

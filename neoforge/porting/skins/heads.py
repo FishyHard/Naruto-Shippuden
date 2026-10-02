@@ -53,9 +53,10 @@ def repaint(s, is_hair, r, salt=0):
 
 
 def locks(s, face, lengths, r, start=0, salt=0):
-    """Locks of hair standing out on the hat layer: lock x runs down from row `start` for lengths[x] rows, lit at its root,
-    shaded at its tip."""
+    """Locks of hair standing out on the hat layer, gaps between them where the hair under shows: lock x runs down from
+    row `start` (or the start given with it, as (start, length)) for its length, lit at its root, shaded at its tip."""
     for x, n in enumerate(lengths):
+        y0, n = (n if isinstance(n, tuple) else (start, n))
         for i in range(n):
             if i == 0:
                 k = 3 + (1 if (x + salt) % 3 == 0 else 0)
@@ -63,15 +64,32 @@ def locks(s, face, lengths, r, start=0, salt=0):
                 k = 1 if n > 2 else 2
             else:
                 k = 2 + (1 if (x + salt) % 4 == 1 else 0) - (1 if i >= 4 else 0)
-            s.px('hat', face, x, start + i, r[max(0, min(4, k))])
+            s.px('hat', face, x, y0 + i, r[max(0, min(4, k))])
 
 
 def crown(s, r, salt=0, rows=range(8)):
-    """The hat layer's top: the crown's hair, lit, with strands running back."""
+    """The hat layer's top, filled: the crown's hair, lit, with strands running back (for smooth hair)."""
     for x in range(8):
         for y in rows:
             k = 3 + (1 if (x + salt) % 4 == 1 and y % 3 != 2 else 0) - (1 if (x + y + salt) % 6 == 0 else 0)
             s.px('hat', 'top', x, y, r[k])
+
+
+def whorl(s, r, centre=(3.5, 3.0), strands=8, turn=0.2, width=0.5):
+    """The hat layer's top for spiky hair: locks radiating from the crown with the hair under showing between them, so it
+    reads as hair and not as a helmet; each lock lit at the crown, shaded toward its tip."""
+    import math
+    cx, cy = centre
+    step = 2 * math.pi / strands
+    for x in range(8):
+        for y in range(8):
+            dx, dy = x - cx, y - cy
+            rad = math.hypot(dx, dy)
+            a = math.atan2(dy, dx) - turn
+            off = abs((a + step / 2) % step - step / 2) * rad   # how far off the nearest lock's line
+            if rad < 1.1 or off < width + 0.12 * rad:
+                k = 3 if rad < 2.4 else 2 if rad < 3.6 else 1
+                s.px('hat', 'top', x, y, r[k])
 
 
 # ---------------------------------------------------------------- Naruto
@@ -97,12 +115,12 @@ def naruto(s, goggles):
             s.px('head', 'front', x, y, r[2])
     repaint(s, naruto_yellow, r, salt=3)
     clear(s, 'hat')
-    crown(s, r, salt=1)
-    locks(s, 'right', [5, 3, 6, 4, 5, 3, 4, 2], r)
-    locks(s, 'left', [2, 4, 3, 5, 4, 6, 3, 5], r, salt=2)
-    locks(s, 'back', [4, 6, 3, 5, 6, 3, 6, 4], r, salt=1)
+    whorl(s, r, centre=(3.5, 2.5), strands=9)
+    locks(s, 'right', [5, 0, (1, 5), 3, 0, (1, 4), 0, 2], r)
+    locks(s, 'left', [2, 0, (1, 4), 0, 3, (1, 5), 0, 5], r, salt=2)
+    locks(s, 'back', [4, 0, (1, 5), 3, 0, (1, 6), 0, 4], r, salt=1)
     if goggles:
-        locks(s, 'front', [2, 0, 0, 1, 1, 0, 0, 2], r, salt=1)
+        locks(s, 'front', [2, 0, 0, 1, 0, 0, 0, 2], r, salt=1)
         pal = {'F': rgb('#2E3732'), 'f': rgb('#46524A'), 'L': rgb('#A6DCF2'), 'G': rgb('#F2FBFF'), 'M': rgb('#5FA8CE'),
                'T': rgb('#3E5E48'), 't': rgb('#56785E')}
         lenses = ["........", "........", "FGLffGLF", "FLMffLMF"]
@@ -111,7 +129,7 @@ def naruto(s, goggles):
         for face in ('right', 'left', 'back'):
             grid(s, 'hat', face, ["........", "........", "tttttttt", "TTTTTTTT"], pal)
     else:
-        locks(s, 'front', [3, 2, 1, 2, 2, 1, 2, 3], r, salt=1)
+        locks(s, 'front', [3, 0, 2, 0, (0, 2), 0, 0, 3], r, salt=1)
 
 
 # ---------------------------------------------------------------- Sasuke
@@ -132,11 +150,11 @@ def sasuke(s):
     grid(s, 'head', 'front', ["blhllhlb", "bsblbsbb", "bsKkksKb", "bsKkkKsb"], pal)
     repaint(s, sasuke_dark, r, salt=5)
     clear(s, 'hat')
-    crown(s, r, salt=2)
-    grid(s, 'hat', 'front', ["l_h__h_l", "bs__s_sb", "s___s__s", "s______s", "s______s", "s______s", "d______d", "________"], pal)
-    locks(s, 'right', [6, 7, 5, 6, 5, 4, 6, 7], r, salt=1)
-    locks(s, 'left', [7, 6, 4, 5, 6, 5, 7, 6], r, salt=3)
-    locks(s, 'back', [6, 5, 7, 6, 6, 7, 5, 6], r, salt=2)
+    whorl(s, r, centre=(3.5, 2.0), strands=8, turn=0.5)
+    grid(s, 'hat', 'front', ["l______l", "bs__s__b", "s___s__s", "s______s", "s______s", "s______s", "d______d", "________"], pal)
+    locks(s, 'right', [6, 0, (1, 5), 0, 5, 0, (1, 5), 7], r, salt=1)
+    locks(s, 'left', [7, (1, 5), 0, 5, 0, (1, 5), 0, 6], r, salt=3)
+    locks(s, 'back', [6, 0, (1, 6), 0, 6, (1, 5), 0, 6], r, salt=2)
 
 
 # ---------------------------------------------------------------- Iruka
