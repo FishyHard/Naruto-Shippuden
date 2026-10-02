@@ -150,11 +150,9 @@ def sasuke():
     for x in range(32, 64):          # the collar ring painted round the bottom of the head: his shirt has its own
         if bluish(s.im.getpixel((x, 15))):
             s.im.putpixel((x, 15), (0, 0, 0, 0))
-    for x in list(range(8, 16)) + list(range(40, 48)):   # his eyes black, not the Sharingan's red
-        for y in range(8, 16):
-            c = s.im.getpixel((x, y))
-            if c[3] and c[0] > c[1] + 30 and c[0] > c[2] + 20:
-                s.im.putpixel((x, y), (0x10, 0x10, 0x16, 255) if _lum(c) < 60 else (0x2C, 0x2C, 0x38, 255))
+    # his eyes black, not the Sharingan's red, drawn clean: the whites outside, the pupils in, a shade darker below
+    heads.grid(s, 'head', 'front', [".", ".", ".", ".HHHHHH.", ".WPssPW.", ".wpsspw.", "s......s"],
+               {'W': rgb('#F6F6F8'), 'w': rgb('#D8D8E2'), 'P': rgb('#101016'), 'p': rgb('#2C2C38'), 's': rgb('#FFCBB9'), 'H': rgb('#0C0C0E')})
     for x in (35, 36):               # the Uchiha fan on his back rounded at the top
         s.im.putpixel((x, 21), (0x6B, 0x22, 0x22, 255))
     return s
@@ -197,7 +195,12 @@ def shino():
     coat = rgb('#6D8066')            # his coat's green
     pal = {'h': hair[2], 'H': hair[1], 'k': tan, 'K': tone(tan, -0.6), 'G': rgb('#0E0E12'), 'g': rgb('#3C3C4C'),
            'c': tone(coat, 0.5), 'C': coat, 'D': tone(coat, -0.6)}
-    heads.grid(s, 'head', 'front', [".", ".", ".", "HKKKKKKH", "HgGkkgGH", "kkkKKkkk", "CCCCCCCC", "DDDDDDDD"], pal)
+    pal.update({'W': rgb('#F0F0F0'), 'I': rgb('#3A2A22'), 'F': rgb('#0A0A0E'), 'L': rgb('#1C1C24'), 'l': rgb('#4A4A5C')})
+    # his own eyes on the head, the round dark glasses over them standing out on the hat layer
+    heads.grid(s, 'head', 'front', [".", ".", ".", "HKKKKKKH", "HWIkkIWH", "kkkKKkkk", "CCCCCCCC", "DDDDDDDD"], pal)
+    heads.grid(s, 'hat', 'front', ["_", "_", "_", "_lLFFlL_", "FLL__LLF", "_FF__FF_"], pal)
+    heads.grid(s, 'hat', 'right', [".", ".", ".", ".....FFF"], pal)
+    heads.grid(s, 'hat', 'left', [".", ".", ".", "FFF....."], pal)
     # the collar, standing out round his jaw on the hat layer
     for face in ('front', 'right', 'left', 'back'):
         heads.grid(s, 'hat', face, [".", ".", ".", ".", ".", ".", "cccccccc", "CCCCCCCC"], pal)
