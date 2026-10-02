@@ -141,6 +141,10 @@ public class StoryNpc extends NarutoShippudenModElements.ModElement {
 			return entityData.get(SKIN);
 		}
 
+		public void setSkin(String skin) {
+			entityData.set(SKIN, skin);
+		}
+
 		public String model() {
 			return entityData.get(MODEL);
 		}
@@ -158,8 +162,11 @@ public class StoryNpc extends NarutoShippudenModElements.ModElement {
 		public void startSeenByPlayer(ServerPlayer player) {
 			super.startSeenByPlayer(player);
 			Story.Character c = Story.characters().get(character());
-			if (c == null || c.graduate().isEmpty() || isScene())
+			if (c == null || c.graduate().isEmpty() && c.graduateSkin().isEmpty() || isScene())
 				return;
+			if (!c.graduateSkin().isEmpty())
+				player.connection.send(new net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket(getId(),
+						java.util.List.of(SynchedEntityData.DataValue.create(SKIN, Story.skinFor(player, c)))));
 			java.util.List<com.mojang.datafixers.util.Pair<net.minecraft.world.entity.EquipmentSlot, net.minecraft.world.item.ItemStack>> slots = new java.util.ArrayList<>();
 			java.util.Map<String, String> outfit = Story.equipmentFor(player, c);
 			for (net.minecraft.world.entity.EquipmentSlot slot : net.minecraft.world.entity.EquipmentSlot.values()) {

@@ -35,7 +35,7 @@ CHARACTERS = {
     'hiruzen': dict(name='Hiruzen Sarutobi', skin=skin('hiruzen'), model='player', home=[0, G, -56], yaw=0,
                     idle=["Every one of you is a leaf of this village.", "Ah, the Academy's newest. How are your lessons?"]),
     'naruto': dict(name='Naruto Uzumaki', skin=skin('naruto'), model='player', home=[-99, G, -60], yaw=-90,
-                   graduate=HEADBAND, graduate_after='chapter1/04_scroll_of_seals',
+                   graduate=HEADBAND, graduate_skin=skin('naruto_genin'), graduate_after='chapter1/04_scroll_of_seals',
                    idle=["I'm gonna be Hokage someday, believe it!", "Ramen after class? ...You're paying, right?",
                          "Sasuke thinks he's so cool. Hmph!"]),
     'sasuke': dict(name='Sasuke Uchiha', skin=skin('sasuke'), model='player', home=[-94, G, -68], yaw=-90, **GRADUATES,

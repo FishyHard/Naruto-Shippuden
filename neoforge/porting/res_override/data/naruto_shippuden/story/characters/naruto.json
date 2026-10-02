@@ -11,6 +11,7 @@
   "graduate": {
     "head": "naruto_shippuden:genin_konohagakure_helmet"
   },
+  "graduate_skin": "naruto_shippuden:textures/entities/story/naruto_genin.png",
   "graduate_after": "chapter1/04_scroll_of_seals",
   "idle": [
     "I'm gonna be Hokage someday, believe it!",

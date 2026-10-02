@@ -67,7 +67,8 @@ import java.util.TreeMap;
  *                                          "after": quest id (the character is there only for players who have done it),
  *                                          "until": quest id (and gone once they have done that one),
  *                                          "equipment": {"head": item id, "mainhand": item id, ...} (the headband is worn, not painted),
- *                                          "graduate": {equipment}, "graduate_after": quest id (what it wears once that is done),
+ *                                          "graduate": {equipment}, "graduate_skin": texture, "graduate_after": quest id (what it
+ *                                          wears, and looks like, once that is done: Naruto's goggles give way to the headband),
  *                                          "eyes": texture (a dojutsu over its face)}
  * data/&lt;ns&gt;/story/quests/&lt;id&gt;.json      {"title", "chapter", "after": [quest ids], "start": "auto" | character id,
  *                                          "offer": [lines], "steps": [steps], "rewards": {"items": [{"id", "count"}], "xp" (shinobi XP), "vanilla_xp", "commands",
@@ -111,7 +112,7 @@ public final class Story {
 	 * headband, once the class has passed), "eyes" a dojutsu drawn over its face (the mod's own eye textures).
 	 */
 	public record Character(String id, String name, Identifier skin, String model, BlockPos home, float yaw, List<String> idle, String after,
-			Map<String, String> equipment, String until, Map<String, String> graduate, String graduateAfter, String eyes) {
+			Map<String, String> equipment, String until, Map<String, String> graduate, String graduateAfter, String eyes, String graduateSkin) {
 	}
 
 	public record Quest(String id, String title, int chapter, List<String> after, String start, JsonArray offer, List<JsonObject> steps,
@@ -153,7 +154,7 @@ public final class Story {
 						Identifier.parse(str(o, "skin", "naruto_shippuden:textures/entities/iruka_sensei.png")), str(o, "model", "legacy"),
 						home == null ? null : new BlockPos(home.get(0).getAsInt(), home.get(1).getAsInt(), home.get(2).getAsInt()),
 						o.has("yaw") ? o.get("yaw").getAsFloat() : 0, idle, str(o, "after", ""), equipment(o, "equipment"), str(o, "until", ""),
-						equipment(o, "graduate"), str(o, "graduate_after", ""), str(o, "eyes", "")));
+						equipment(o, "graduate"), str(o, "graduate_after", ""), str(o, "eyes", ""), str(o, "graduate_skin", "")));
 			}
 			Map<String, Quest> qs = new TreeMap<>();
 			for (var e : read(manager, "story/quests").entrySet()) {
@@ -341,6 +342,7 @@ public final class Story {
 				continue;
 			float yaw = o.has("yaw") ? o.get("yaw").getAsFloat() : 0;
 			npc.applyCharacter(c, equipmentFor(player, c));
+			npc.setSkin(skinFor(player, c));
 			npc.setScene(player.getUUID(), quest.id(), at, at + (o.has("steps") ? o.get("steps").getAsInt() : 1));
 			npc.snapTo(x, y, z, yaw, 0);
 			npc.setYHeadRot(yaw);
@@ -453,7 +455,16 @@ public final class Story {
 
 	/** What the character wears for this player: its "graduate" outfit once they have done the quest it waits for. */
 	public static Map<String, String> equipmentFor(ServerPlayer player, Character c) {
-		return !c.graduate().isEmpty() && !c.graduateAfter().isEmpty() && isDone(player, c.graduateAfter()) ? c.graduate() : c.equipment();
+		return !c.graduate().isEmpty() && graduated(player, c) ? c.graduate() : c.equipment();
+	}
+
+	/** The character's skin for this player: its "graduate_skin" once they have done the quest it waits for. */
+	public static String skinFor(ServerPlayer player, Character c) {
+		return !c.graduateSkin().isEmpty() && graduated(player, c) ? c.graduateSkin() : c.skin().toString();
+	}
+
+	private static boolean graduated(ServerPlayer player, Character c) {
+		return !c.graduateAfter().isEmpty() && isDone(player, c.graduateAfter());
 	}
 
 	// ---------------------------------------------------------------- what the player has learned

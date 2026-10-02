@@ -32,8 +32,8 @@ QUESTS = {
             # Yui walks straight up the cliff; Ren goes too, and keeps slipping off
             dict(type='goto', pos=[-126, 100, -178], radius=28, min_y=100, text='Walk up the cliff north of the training ground',
                  spawn=team(),
-                 effects=[dict(type='walk', character='yui', points=[[-123, -90], [-124, -186]], speed=0.13),
-                          dict(type='walk', character='ren', points=[[-129, -90], [-128, -186]], speed=0.11, slip=0.9)]),
+                 effects=[dict(type='walk', character='yui', points=[[-123, -90], [-124, -186]], speed=0.24),
+                          dict(type='walk', character='ren', points=[[-129, -90], [-128, -186]], speed=0.21, slip=0.9)]),
             talk('tatsumi', 'Come back down to Tatsumi-sensei', [
                 say('tatsumi', "Not bad. Ren's still halfway up, and Yui made it first. Ren makes dinner."),
                 say('yui', "It's all about balance. You did well too!"),
