@@ -1,5 +1,5 @@
 """Hair and headgear drawn by hand over the reference skins (refs.py), where the reference's own wasn't what the story needs:
-Naruto's spiky hair and his Academy goggles, Sasuke's bangs and spiky back, Iruka's ponytail, Sakura's long hair, Mizuki's.
+Naruto's Academy goggles, Iruka's ponytail, Sakura's long hair, Mizuki's.
 
 Each hairstyle is on a ramp of five shades (darkest first, the darker the more saturated, as vanilla's), and drawn as the
 reference skins draw hair: the base layer keeps the reference's shape of the hair, repainted in strands (columns a step
@@ -75,86 +75,18 @@ def crown(s, r, salt=0, rows=range(8)):
             s.px('hat', 'top', x, y, r[k])
 
 
-def whorl(s, r, centre=(3.5, 3.0), strands=8, turn=0.2, width=0.5):
-    """The hat layer's top for spiky hair: locks radiating from the crown with the hair under showing between them, so it
-    reads as hair and not as a helmet; each lock lit at the crown, shaded toward its tip."""
-    import math
-    cx, cy = centre
-    step = 2 * math.pi / strands
-    for x in range(8):
-        for y in range(8):
-            dx, dy = x - cx, y - cy
-            rad = math.hypot(dx, dy)
-            a = math.atan2(dy, dx) - turn
-            off = abs((a + step / 2) % step - step / 2) * rad   # how far off the nearest lock's line
-            if rad < 1.1 or off < width + 0.12 * rad:
-                k = 3 if rad < 2.4 else 2 if rad < 3.6 else 1
-                s.px('hat', 'top', x, y, r[k])
-
-
 # ---------------------------------------------------------------- Naruto
 
-NARUTO_HAIR = ramp('#B4661A', '#DC8C1E', '#F2B630', '#FAD24A', '#FFEC8C')
-
-
-def naruto_yellow(c):
-    return c[0] > 200 and c[1] > 140 and c[2] < 135
-
-
-def naruto(s, goggles):
-    """Naruto's yellow hair in spikes every way, and at the Academy his goggles on his forehead: two round lenses in dark
-    frames, the strap round his head over the hair."""
-    r = NARUTO_HAIR
-    # under the old headband: hair (it was the band's two rows)
+def naruto_goggles(s):
+    """His Academy goggles on his forehead: two round lenses in dark frames, standing out on the hat layer, the strap
+    round his head over the hair."""
+    pal = {'F': rgb('#2E3732'), 'f': rgb('#46524A'), 'L': rgb('#A6DCF2'), 'G': rgb('#F2FBFF'), 'M': rgb('#5FA8CE'),
+           'T': rgb('#3E5E48'), 't': rgb('#56785E')}
+    lenses = ["........", "........", "FGLffGLF", "FLMffLMF"]
+    grid(s, 'head', 'front', lenses, pal)
+    grid(s, 'hat', 'front', ["........", ".FF..FF.", "FGLffGLF", "FLMffLMF", ".FF..FF."], pal)
     for face in ('right', 'left', 'back'):
-        for x in range(8):
-            for y in (2, 3):
-                s.px('head', face, x, y, r[2])
-    for x in range(8):
-        for y in (2, 3):
-            s.px('head', 'front', x, y, r[2])
-    repaint(s, naruto_yellow, r, salt=3)
-    clear(s, 'hat')
-    whorl(s, r, centre=(3.5, 2.5), strands=9)
-    locks(s, 'right', [5, 0, (1, 5), 3, 0, (1, 4), 0, 2], r)
-    locks(s, 'left', [2, 0, (1, 4), 0, 3, (1, 5), 0, 5], r, salt=2)
-    locks(s, 'back', [4, 0, (1, 5), 3, 0, (1, 6), 0, 4], r, salt=1)
-    if goggles:
-        locks(s, 'front', [2, 0, 0, 1, 0, 0, 0, 2], r, salt=1)
-        pal = {'F': rgb('#2E3732'), 'f': rgb('#46524A'), 'L': rgb('#A6DCF2'), 'G': rgb('#F2FBFF'), 'M': rgb('#5FA8CE'),
-               'T': rgb('#3E5E48'), 't': rgb('#56785E')}
-        lenses = ["........", "........", "FGLffGLF", "FLMffLMF"]
-        grid(s, 'head', 'front', lenses, pal)
-        grid(s, 'hat', 'front', ["........", ".FF..FF.", "FGLffGLF", "FLMffLMF", ".FF..FF."], pal)
-        for face in ('right', 'left', 'back'):
-            grid(s, 'hat', face, ["........", "........", "tttttttt", "TTTTTTTT"], pal)
-    else:
-        locks(s, 'front', [3, 0, 2, 0, (0, 2), 0, 0, 3], r, salt=1)
-
-
-# ---------------------------------------------------------------- Sasuke
-
-SASUKE_HAIR = ramp('#0C0E16', '#171B29', '#222A40', '#33405F', '#4B5B85')
-
-
-def sasuke_dark(c):
-    return lum(c) < 75 and not c[0] > c[2] + 20
-
-
-def sasuke(s):
-    """Sasuke's blue-black hair: the long bangs either side of his face to his chin, a lock over his brow, his forehead
-    clear (for the headband), the spiky back; no collar painted on the head."""
-    r = SASUKE_HAIR
-    k, K = rgb('#FFD3C0'), rgb('#E8B09C')
-    pal = {'d': r[0], 's': r[1], 'b': r[2], 'l': r[3], 'h': r[4], 'k': k, 'K': K}
-    grid(s, 'head', 'front', ["blhllhlb", "bsblbsbb", "bsKkksKb", "bsKkkKsb"], pal)
-    repaint(s, sasuke_dark, r, salt=5)
-    clear(s, 'hat')
-    whorl(s, r, centre=(3.5, 2.0), strands=8, turn=0.5)
-    grid(s, 'hat', 'front', ["l______l", "bs__s__b", "s___s__s", "s______s", "s______s", "s______s", "d______d", "________"], pal)
-    locks(s, 'right', [6, 0, (1, 5), 0, 5, 0, (1, 5), 7], r, salt=1)
-    locks(s, 'left', [7, (1, 5), 0, 5, 0, (1, 5), 0, 6], r, salt=3)
-    locks(s, 'back', [6, 0, (1, 6), 0, 6, (1, 5), 0, 6], r, salt=2)
+        grid(s, 'hat', face, ["........", "........", "tttttttt", "TTTTTTTT"], pal)
 
 
 # ---------------------------------------------------------------- Iruka

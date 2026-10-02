@@ -103,23 +103,26 @@ def greyish(c):
 # ---------------------------------------------------------------- the characters
 
 def naruto_genin():
-    """Without his goggles now: the headband is the real item."""
+    """The reference's hair, without the headband (it is the real item)."""
     s = load('naruto')
-    heads.naruto(s, goggles=False)
+    strip_band(s, 2)
     return s
 
 
 def naruto():
-    """At the Academy, his goggles on his forehead."""
+    """At the Academy, his goggles on his forehead where the headband was."""
     s = load('naruto')
-    heads.naruto(s, goggles=True)
+    strip_band(s, 2)
+    heads.naruto_goggles(s)
     return s
 
 
 def sasuke():
     s = load('sasuke')
     strip_band(s, 2)
-    heads.sasuke(s)
+    for x in range(32, 64):          # the collar ring painted round the bottom of the head: his shirt has its own
+        if bluish(s.im.getpixel((x, 15))):
+            s.im.putpixel((x, 15), (0, 0, 0, 0))
     for x in (35, 36):               # the Uchiha fan on his back rounded at the top
         s.im.putpixel((x, 21), (0x6B, 0x22, 0x22, 255))
     return s
