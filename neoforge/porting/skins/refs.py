@@ -100,6 +100,33 @@ def greyish(c):
     return max(c[:3]) - min(c[:3]) < 18 and _lum(c) > 90
 
 
+def hair_from(s, donor, is_hair, colour, skin, skin_lum, keep_front_rows=0, hat_rest=True):
+    """`donor`'s hair (the pixels is_hair picks, on the head and its hat layer) put on `s`, each through colour(c): where
+    the donor has hair this skin gets it; where the donor has skin, this skin keeps its own, or, where its own was hair,
+    the donor's skin in this skin's tone (skin, shaded as the donor's is against skin_lum). The hat layer is the donor's.
+    keep_front_rows: the face's rows from that one down are this skin's own, whatever the donor has there; hat_rest:
+    whether what else the donor's hat layer has (a hair tie) comes too."""
+    for part in ('head', 'hat'):
+        for face, (x0, y0, w, h) in s.faces(part).items():
+            for y in range(h):
+                for x in range(w):
+                    p = (x0 + x, y0 + y)
+                    d, own = donor.im.getpixel(p), s.im.getpixel(p)
+                    if part == 'head' and face == 'front' and keep_front_rows and y >= keep_front_rows:
+                        continue
+                    if d[3] and is_hair(d):
+                        s.im.putpixel(p, colour(d))
+                    elif part == 'hat':
+                        s.im.putpixel(p, d if hat_rest and d[3] and not is_hair(d) else (0, 0, 0, 0))
+                    elif d[3] and (own[0] < 150 or not own[3]):
+                        s.im.putpixel(p, shade_as(d, skin, skin_lum))
+
+
+def on_ramp(r, lo, hi, shift=0):
+    """A colour mapped by its lightness, from lo to hi, onto the five shades of r."""
+    return lambda c: r[max(0, min(4, round((_lum(c) - lo) / max(1, hi - lo) * 4) + shift))]
+
+
 # ---------------------------------------------------------------- the characters
 
 def naruto_genin():
@@ -123,6 +150,11 @@ def sasuke():
     for x in range(32, 64):          # the collar ring painted round the bottom of the head: his shirt has its own
         if bluish(s.im.getpixel((x, 15))):
             s.im.putpixel((x, 15), (0, 0, 0, 0))
+    for x in list(range(8, 16)) + list(range(40, 48)):   # his eyes black, not the Sharingan's red
+        for y in range(8, 16):
+            c = s.im.getpixel((x, y))
+            if c[3] and c[0] > c[1] + 30 and c[0] > c[2] + 20:
+                s.im.putpixel((x, y), (0x10, 0x10, 0x16, 255) if _lum(c) < 60 else (0x2C, 0x2C, 0x38, 255))
     for x in (35, 36):               # the Uchiha fan on his back rounded at the top
         s.im.putpixel((x, 21), (0x6B, 0x22, 0x22, 255))
     return s
@@ -150,8 +182,27 @@ def kiba():
 
 
 def shino():
+    """Shino as at the Academy: his hood down, spiky dark brown hair (the Naruto reference's, in his colour), small round
+    dark glasses, and his coat's high collar up over his mouth."""
     s = load('shino')
     strip_band(s, 1)
+    for x in range(32, 64):          # the hood off
+        for y in range(0, 16):
+            s.im.putpixel((x, y), (0, 0, 0, 0))
+    naruto = load('naruto')
+    strip_band(naruto, 2)
+    hair = heads.ramp('#1C1410', '#2C201A', '#3C2C24', '#503C30', '#664E3E')
+    tan = rgb('#DBB79B')
+    hair_from(s, naruto, lambda c: c[0] > 200 and c[1] > 140 and c[2] < 135, on_ramp(hair, 168, 214, 0), tan, 190, keep_front_rows=3, hat_rest=False)
+    coat = rgb('#6D8066')            # his coat's green
+    pal = {'h': hair[2], 'H': hair[1], 'k': tan, 'K': tone(tan, -0.6), 'G': rgb('#0E0E12'), 'g': rgb('#3C3C4C'),
+           'c': tone(coat, 0.5), 'C': coat, 'D': tone(coat, -0.6)}
+    heads.grid(s, 'head', 'front', [".", ".", ".", "HKKKKKKH", "HgGkkgGH", "kkkKKkkk", "CCCCCCCC", "DDDDDDDD"], pal)
+    # the collar, standing out round his jaw on the hat layer
+    for face in ('front', 'right', 'left', 'back'):
+        heads.grid(s, 'hat', face, [".", ".", ".", ".", ".", ".", "cccccccc", "CCCCCCCC"], pal)
+    for face in ('right', 'left', 'back'):
+        heads.grid(s, 'head', face, [".", ".", ".", ".", ".", ".", "CCCCCCCC", "DDDDDDDD"], pal)
     return s
 
 
@@ -229,7 +280,9 @@ def iruka():
     tied up in its ponytail."""
     s = load('iruka')
     strip_band(s, 2)
-    heads.iruka(s)                   # the hat layer afresh (the vest's collar was on it, under his chin)
+    # his hair tied up as Shikamaru's is (the Shikamaru reference's hair, in his brown); the hat layer is Shikamaru's,
+    # so the vest's collar that was on it, under his chin, goes too
+    hair_from(s, load('shikamaru'), lambda c: _lum(c) < 60, on_ramp(heads.IRUKA_HAIR, 0, 48, 1), rgb('#F2B692'), 205)
     navy = rgb('#30334B')
     from skins import torso, ring
     torso(s, navy, salt=47)
