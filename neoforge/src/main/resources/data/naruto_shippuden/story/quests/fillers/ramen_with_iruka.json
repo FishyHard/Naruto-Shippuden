@@ -4,16 +4,16 @@
   "after": [
     "chapter1/01_first_day"
   ],
-  "start": "iruka",
-  "later": "Ramen tonight? Maybe, once you've finished what you're working on. Duty first!",
+  "start": "naruto",
+  "later": "Ramen tonight? Maybe, once you've finished what Iruka-sensei gave you. Then we eat, believe it!",
   "offer": [
     {
-      "speaker": "iruka",
-      "text": "Naruto has been pestering me for ramen all week. I'm taking him to Ichiraku this evening."
+      "speaker": "naruto",
+      "text": "Hey, new kid! Iruka-sensei's taking me to Ichiraku tonight. Best ramen in the whole village!"
     },
     {
-      "speaker": "iruka",
-      "text": "Come along, you're new here: it's the best ramen in the Leaf. On the main street, south of the plaza. My treat."
+      "speaker": "naruto",
+      "text": "You should come too! It's on the main street, south of the plaza. Iruka-sensei's paying! ...Probably."
     }
   ],
   "steps": [

@@ -19,11 +19,11 @@ def stool(character, z, steps=2):
 
 QUESTS = {
     Q + 'ramen_with_iruka': dict(
-        title='Filler: Ramen with Iruka-sensei', chapter=1, after=['chapter1/01_first_day'], start='iruka',
-        later="Ramen tonight? Maybe, once you've finished what you're working on. Duty first!",
+        title='Filler: Ramen with Iruka-sensei', chapter=1, after=['chapter1/01_first_day'], start='naruto',
+        later="Ramen tonight? Maybe, once you've finished what Iruka-sensei gave you. Then we eat, believe it!",
         offer=[
-            say('iruka', "Naruto has been pestering me for ramen all week. I'm taking him to Ichiraku this evening."),
-            say('iruka', "Come along, you're new here: it's the best ramen in the Leaf. On the main street, south of the plaza. My treat."),
+            say('naruto', "Hey, new kid! Iruka-sensei's taking me to Ichiraku tonight. Best ramen in the whole village!"),
+            say('naruto', "You should come too! It's on the main street, south of the plaza. Iruka-sensei's paying! ...Probably."),
         ],
         steps=[
             dict(type='goto', pos=ICHIRAKU, radius=4, text='Meet Iruka-sensei and Naruto at Ichiraku Ramen', time='evening',
