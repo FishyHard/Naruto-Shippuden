@@ -1,0 +1,24 @@
+{
+  "title": "First Day at the Academy",
+  "chapter": 1,
+  "start": "iruka",
+  "offer": [
+    {"speaker": "iruka", "text": "You must be the new student. Welcome to the Hidden Leaf Academy! I'm Iruka, your instructor."},
+    {"speaker": "iruka", "text": "Before class starts, let's see what you can do. Ready?",
+     "choices": [
+       {"text": "Ready, sensei!", "flag": "eager", "lines": [{"speaker": "iruka", "text": "That's the spirit!"}]},
+       {"text": "...I think so.", "flag": "shy", "lines": [{"speaker": "iruka", "text": "Don't worry. Everyone starts somewhere."}]}
+     ]}
+  ],
+  "steps": [
+    {"type": "goto", "pos": [-70, 65, -64], "radius": 4, "text": "Go to the targets in the training yard"},
+    {"type": "kill", "entity": "naruto_shippuden:training_dummy", "count": 1, "text": "Knock down the training dummy",
+     "on_start": ["summon naruto_shippuden:training_dummy -70 65 -60"]},
+    {"type": "talk", "npc": "iruka", "text": "Report back to Iruka",
+     "dialogue": [
+       {"speaker": "iruka", "text": "Not bad at all! Keep that up and you'll graduate in no time."},
+       {"speaker": "player", "text": "Thank you, Iruka-sensei."}
+     ]}
+  ],
+  "rewards": {"items": [{"id": "minecraft:bread", "count": 3}], "xp": 20}
+}

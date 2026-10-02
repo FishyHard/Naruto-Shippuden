@@ -46,6 +46,7 @@ public class NarutoShippudenMod {
 			modBus.addListener(this::clientLoad);
 		NeoForge.EVENT_BUS.addListener(this::serverLoad);
 		container.registerConfig(net.neoforged.fml.config.ModConfig.Type.COMMON, net.mcreator.narutoshippudenmod.core.NarutoConfig.SPEC);
+		container.registerConfig(net.neoforged.fml.config.ModConfig.Type.CLIENT, net.mcreator.narutoshippudenmod.story.TrackerConfig.SPEC);
 		if (FMLEnvironment.getDist().isClient())
 			net.mcreator.narutoshippudenmod.client.ConfigScreen.register(container);
 	}

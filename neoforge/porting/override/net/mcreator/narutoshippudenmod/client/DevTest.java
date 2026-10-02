@@ -97,6 +97,20 @@ public final class DevTest {
 					NarutoShippudenMod.LOGGER.info("DEVTEST staying open");
 				});
 				case "wait" -> STEPS.add(() -> nextDelay = Integer.parseInt(a[1]));
+				case "hud" -> STEPS.add(() -> {
+					// "hud on": the HUD back for shots of the tracker; "hud off": hidden again
+					if (mc.gui.hud.isHidden() == a[1].equals("on"))
+						mc.gui.hud.toggle();
+				});
+				case "dialog" -> STEPS.add(() -> {
+					if (mc.gui.screen() instanceof StoryClient.DialogueScreen dialogue) {
+						if (a[1].equals("choose"))
+							dialogue.devChoose(Integer.parseInt(a[2]));
+						else
+							dialogue.devNext();
+					} else
+						NarutoShippudenMod.LOGGER.warn("DEVTEST dialog: no dialogue open");
+				});
 				case "shot" -> {
 					STEPS.add(() -> {
 						command(mc, "tp @s " + a[2] + " " + a[3] + " " + a[4] + " " + a[5] + " " + a[6]);

@@ -448,5 +448,8 @@
   "item.naruto_shippuden.leaf_return_scroll.desc": "Read it (hold use) to return to the Hidden Leaf's gate. Overworld only.",
   "item.naruto_shippuden.leaf_return_scroll.only_overworld": "The scroll only works in the overworld",
   "item.naruto_shippuden.leaf_return_scroll.broken": "Your reading was broken",
-  "item.naruto_shippuden.leaf_return_scroll.given": "You received a Leaf Return Scroll: read it to come back to the Hidden Leaf from anywhere in the overworld."
+  "item.naruto_shippuden.leaf_return_scroll.given": "You received a Leaf Return Scroll: read it to come back to the Hidden Leaf from anywhere in the overworld.",
+  "key.naruto_shippuden.quest_tracker": "Show/Hide Quest Tracker",
+  "key.naruto_shippuden.quest_tracker_settings": "Quest Tracker Settings",
+  "entity.naruto_shippuden.story_npc": "Story Character"
 }
