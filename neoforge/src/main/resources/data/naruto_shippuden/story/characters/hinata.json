@@ -1,13 +1,17 @@
 {
   "name": "Hinata Hyuga",
   "skin": "naruto_shippuden:textures/entities/story/hinata.png",
-  "model": "slim",
+  "model": "player",
   "home": [
     -104,
     65,
     -57
   ],
   "yaw": -90,
+  "graduate": {
+    "head": "naruto_shippuden:genin_konohagakure_helmet"
+  },
+  "graduate_after": "chapter1/03_graduation",
   "eyes": "naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x2_pupils_1x2_not_active.png",
   "idle": [
     "O-oh! I wasn't watching Naruto... I mean...",

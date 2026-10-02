@@ -531,6 +531,20 @@ public final class Story {
 			}
 	}
 
+	/** Forgets the player's story and starts it over; every figure is tracked afresh, so what they wear (the headbands
+	 * the class have once passed) and who is there is as at the start for them now, not when they were last seen. */
+	private static void reset(ServerPlayer player) {
+		player.getPersistentData().remove(KEY);
+		autoStart(player);
+		sync(player);
+		ServerLevel level = (ServerLevel) player.level();
+		for (Entity e : level.getAllEntities())
+			if (e instanceof StoryNpc.Npc npc && !npc.isScene()) {
+				level.getChunkSource().removeEntity(npc);
+				level.getChunkSource().addEntity(npc);
+			}
+	}
+
 	/** The Chakra Paper was used (StuffItems, by the rule chakra_paper_story). */
 	public static void chakraPaperUsed(Entity entity) {
 		if (entity instanceof ServerPlayer player)
@@ -1103,15 +1117,7 @@ public final class Story {
 				})))
 				.then(Commands.literal("event").then(Commands.argument("name", StringArgumentType.word())
 						.executes(c -> forPlayers(c.getSource(), List.of(c.getSource().getPlayerOrException()), p -> event(p, StringArgumentType.getString(c, "name"))))))
-				.then(Commands.literal("reset").executes(c -> forPlayers(c.getSource(), List.of(c.getSource().getPlayerOrException()), p -> {
-					p.getPersistentData().remove(KEY);
-					autoStart(p);
-					sync(p);
-				})).then(Commands.argument("players", EntityArgument.players()).executes(c -> forPlayers(c.getSource(), EntityArgument.getPlayers(c, "players"), p -> {
-					p.getPersistentData().remove(KEY);
-					autoStart(p);
-					sync(p);
-				}))))));
+				.then(Commands.literal("reset").executes(c -> forPlayers(c.getSource(), List.of(c.getSource().getPlayerOrException()), Story::reset)).then(Commands.argument("players", EntityArgument.players()).executes(c -> forPlayers(c.getSource(), EntityArgument.getPlayers(c, "players"), Story::reset))))));
 	}
 
 	private static int forPlayers(CommandSourceStack source, Collection<ServerPlayer> players, java.util.function.Consumer<ServerPlayer> action) {

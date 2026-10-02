@@ -22,8 +22,7 @@ HEADBAND = {'head': 'naruto_shippuden:genin_konohagakure_helmet'}
 # the Academy's teachers and the player's sensei: the headband and the real jonin vest (story/StoryGear) over the uniform
 SENSEI = dict(HEADBAND, chest='naruto_shippuden:jonin_vest')
 # the class wear their headbands once they have passed (for the players who saw them pass); Naruto's comes from Iruka on the
-# night of the Scroll of Seals. Ino (at her waist), Shikamaru (on his arm) and Hinata (round her neck) wear theirs where
-# Minecraft has no slot for it, so theirs is painted on or left out.
+# night of the Scroll of Seals. No skin has one painted on: they are only ever the real item, on the head.
 GRADUATES = dict(graduate=HEADBAND, graduate_after='chapter1/03_graduation')
 
 
@@ -46,14 +45,14 @@ CHARACTERS = {
                    idle=["...", "Don't get in my way.", "Hmph."]),
     'sakura': dict(name='Sakura Haruno', skin=skin('sakura'), model='slim', home=[-91, G, -69], yaw=90, **GRADUATES,
                    idle=["Sasuke is SO cool, isn't he?", "I'm top of the class in theory, you know!"]),
-    'ino': dict(name='Ino Yamanaka', skin=skin('ino'), model='slim', home=[-90, G, -67], yaw=90,
+    'ino': dict(name='Ino Yamanaka', skin=skin('ino'), model='slim', home=[-90, G, -67], yaw=90, **GRADUATES,
                 idle=["Back off, Forehead! ...Oh, you're not Sakura.", "My family runs the flower shop. Come by sometime!"]),
-    'shikamaru': dict(name='Shikamaru Nara', skin=skin('shikamaru_kid'), model='player', home=[-72, G, -69], yaw=90,
+    'shikamaru': dict(name='Shikamaru Nara', skin=skin('shikamaru_kid'), model='player', home=[-72, G, -69], yaw=90, **GRADUATES,
                       idle=["What a drag...", "I'd rather be watching the clouds."]),
     'choji': dict(name='Choji Akimichi', skin=skin('choji'), model='player', home=[-71, G, -67], yaw=90, **GRADUATES,
                   idle=["*crunch* Want a chip? ...Just one.", "Shikamaru's smarter than he looks."]),
     # her resting Byakugan, drawn as players' eyes are (the mod's dojutsu textures)
-    'hinata': dict(name='Hinata Hyuga', skin=skin('hinata'), model='slim', home=[-104, G, -57], yaw=-90,
+    'hinata': dict(name='Hinata Hyuga', skin=skin('hinata'), model='player', home=[-104, G, -57], yaw=-90, **GRADUATES,
                    eyes='naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x2_pupils_1x2_not_active.png',
                    idle=["O-oh! I wasn't watching Naruto... I mean...", "G-good luck with your training."]),
     'kiba': dict(name='Kiba Inuzuka', skin=skin('kiba'), model='player', home=[-75, G, -59], yaw=90, **GRADUATES,
@@ -65,7 +64,7 @@ CHARACTERS = {
                     idle=["Teamwork first. Talent second.", "Don't look at my scar, look at my hands. That's where the jutsu starts."]),
     'ren': dict(name='Ren Sakuragi', skin=skin('ren'), model='player', equipment=HEADBAND, home=[-129, G, -67], yaw=180, after='chapter1/04_scroll_of_seals',
                 idle=["Our first real mission's coming. I can feel it!", "Race you to the stumps!"]),
-    'yui': dict(name='Yui Hoshino', skin=skin('yui'), model='slim', home=[-123, G, -67], yaw=180, after='chapter1/04_scroll_of_seals',
+    'yui': dict(name='Yui Hoshino', skin=skin('yui'), model='slim', equipment=HEADBAND, home=[-123, G, -67], yaw=180, after='chapter1/04_scroll_of_seals',
                 idle=["If you get hurt, come to me. I've been studying medical ninjutsu.", "Ren's loud, but he means well."]),
 }
 

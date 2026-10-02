@@ -856,8 +856,8 @@ def mizuki():
 
 
 def hiruzen():
-    """The Third Hokage, in his shinobi uniform: the dark grey shirt and trousers with the swirl patches, a grey goatee and
-    the lines of age. He wears the real Hokage's hat over it (story/StoryGear)."""
+    """The Third Hokage: the white Hokage's coat over his dark grey uniform, a grey goatee and the lines of age. He wears
+    the real Hokage's hat (story/StoryGear)."""
     s = Skin()
     old, grey, shirt = rgb('#E6BA92'), rgb('#9A9A9A'), rgb('#2E3240')
     head(s, old)
@@ -879,7 +879,34 @@ def hiruzen():
         bandage(s, l, range(7, 10))
     holster(s, 'rleg')
     sandals(s, skin=old, wrap=False)
+    hokage_coat(s)
     return s
+
+
+def hokage_coat(s, white=rgb('#F2F0EA'), red=rgb('#B8322E')):
+    """The Hokage's white haori over the uniform (outer layers): open down the front, wide sleeves to the elbow, the skirt to
+    the knees split in front, flames of red round its hem and cuffs, and the kanji for fire on the back."""
+    cloth(s, 'jacket', white, salt=73, rough=0.35, ao_top=0.3)
+    for y in range(12):
+        for x in (3, 4):
+            s.px('jacket', 'front', x, y, CLEAR)                       # open down the front
+        s.px('jacket', 'front', 2, y, tone(white, -0.5)); s.px('jacket', 'front', 5, y, tone(white, -0.7))
+    for a in ('rsleeve', 'lsleeve'):
+        cloth(s, a, white, rows=(0, 7), salt=75, rough=0.35)
+        ring(s, a, [6], red, -0.1)
+        s.paint(a, lambda f, x, y, w, h: tone(red, LIGHT[f] + 0.2) if f in SIDES and y == 5 and x % 2 == 0 else None)
+    for leg, inner_x in (('rpants', 3), ('lpants', 0)):
+        cloth(s, leg, white, rows=(0, 7), salt=77, rough=0.35, grad=0.6)
+        ring(s, leg, [6], red, -0.2)
+        s.paint(leg, lambda f, x, y, w, h: tone(red, LIGHT[f] + 0.2) if f in SIDES and y == 5 and (x + 1) % 2 == 0 else
+                (tone(red, LIGHT[f] - 0.2) if f in SIDES and y == 4 and x % 4 == 1 else None))   # the flames
+        for y in range(7):
+            s.px(leg, 'front', inner_x, y, CLEAR)                     # the skirt split in front
+    fire = ["..#..", "#.#.#", "..#..", ".#.#.", "#...#"]
+    for y, row in enumerate(fire):
+        for x, ch in enumerate(row):
+            if ch == '#':
+                s.px('jacket', 'back', 2 + x - 1, 2 + y, tone(red, 0.1 - y * 0.1))
 
 
 def tatsumi():
@@ -922,7 +949,7 @@ def ren():
 
 
 def yui():
-    """A squadmate (original): a black bob, the headband round her neck, a white and teal medic's top."""
+    """A squadmate (original): a black bob, a white and teal medic's top (she wears the real headband item)."""
     s = Skin(slim=True)
     hair_c, white, teal = rgb('#1E1E28'), rgb('#EEF2F0'), rgb('#3A9A8E')
     head(s)
@@ -931,7 +958,6 @@ def yui():
     hair(s, hair_c, front=[7, 3, 2, 2, 2, 2, 3, 7], side=[7, 7, 7, 7, 7, 7, 7, 7], back=[7, 7, 7, 7, 7, 7, 7, 7],
          hat_front=[7, 3, 2, 1, 1, 2, 3, 7], hat_side=[7, 7, 6, 6, 6, 6, 7, 7], hat_back=[7, 7, 7, 7, 7, 7, 7, 7], salt=71, style='smooth')
     torso(s, white)
-    headband_painted(s, part='jacket', row=0)                  # her headband, round her neck
     s.paint('body', lambda f, x, y, w, h: tone(teal, LIGHT[f] + 0.1) if f in ('front', 'back') and x in (0, w - 1) and y >= 2 else None)
     ring(s, 'body', [8, 9], teal)
     fold(s, 'body', 'front', [(2, 5), (5, 6)], white, 0.5)

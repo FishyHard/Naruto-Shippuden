@@ -1,6 +1,6 @@
 """The story's skins taken from the hand-made reference skins in refs/ (picked by the user as the quality to aim for), with
-what the story needs changed: no headband painted on the forehead before graduation (those graduates are given the real
-headband item, story/chapter1.py; Shikamaru's on his arm and Hinata's round her neck stay painted), Naruto's goggles at the Academy, and no vest painted on Iruka, who wears the real jonin vest item.
+what the story needs changed: no headband and no vest painted on anyone (the NPCs wear the real headband and jonin vest
+items, story/chapter1.py), and Naruto's goggles at the Academy.
 skins.py writes these with the rest; a 64x32 skin is brought to 64x64 first."""
 import os
 
@@ -55,7 +55,6 @@ def strip_band(s, top):
     the hat layer (its plate, the knot at the back) are cleared."""
     im = s.im
     y0, y1 = 8 + top, 9 + top
-    band = {im.getpixel((x, y)) for x in HEAD_X for y in (y0, y1)}
     for x in HEAD_X:
         above, above2 = im.getpixel((x, y0 - 1)), im.getpixel((x, max(8, y0 - 2)))
         im.putpixel((x, y0), above)
@@ -66,10 +65,11 @@ def strip_band(s, top):
             im.putpixel((x, y1), above2)
         if x not in FRONT and bluish(im.getpixel((x, y1 + 1))):     # where the band sits a row lower round the back
             im.putpixel((x, y1 + 1), im.getpixel((x, y1)))
+    # on the hat layer only the band's own pixels go (its cloth and knot, the plate's rim on the front), not the hair's
     for x in HAT_X:
-        for y in range(8, 16):
+        for y in range(8 if x >= 56 else y0 - 1, y1 + (5 if x >= 56 else 3)):   # the knot, over all the back's top
             c = im.getpixel((x, y))
-            if c in band or c[3] and bluish(c) and y0 - 1 <= y <= y1 + 1:
+            if c[3] and (bluish(c) or greyish(c) and x in range(40, 48)):
                 im.putpixel((x, y), (0, 0, 0, 0))
 
 
@@ -90,7 +90,8 @@ def shade_as(c, base, ref_lum):
 
 
 def bluish(c):
-    return c[2] > c[0] + 25 and c[2] > c[1] and _lum(c) < 120
+    """The headbands' navy cloth (and dark blue hair, which only stripping a band's rows ever looks at)."""
+    return c[2] > c[0] + 15 and c[2] > c[1] + 10 and _lum(c) < 120
 
 
 def greyish(c):
@@ -100,7 +101,10 @@ def greyish(c):
 # ---------------------------------------------------------------- the characters
 
 def naruto_genin():
-    return load('naruto')
+    """Without his goggles now: the headband is the real item."""
+    s = load('naruto')
+    strip_band(s, 2)
+    return s
 
 
 def naruto():
@@ -137,16 +141,84 @@ def shino():
 
 
 def choji():
-    """His bandana stays (it is his own), without the plate on it."""
+    """Without his headband bandana: the band and its plate painted out, and the cloth over his crown given back to his
+    hair (each blue pixel takes the nearest hair beside it in its row)."""
     s = load('choji')
-    cloth_c = s.im.getpixel((9, 10))
-    recolour(s, FRONT, (10, 11), lambda c: shade_as(c, cloth_c, 170) if greyish(c) else None)
+    strip_band(s, 2)
+    im = s.im
+    for y in range(0, 16):
+        for x in range(0, 32):
+            if im.getpixel((x, y))[3] and bluish(im.getpixel((x, y))):
+                face = x // 8 * 8
+                near = [im.getpixel((xx, y)) for xx in sorted(range(face, face + 8), key=lambda xx: abs(xx - x))
+                        if im.getpixel((xx, y))[3] and not bluish(im.getpixel((xx, y)))]
+                if not near and y + 1 < 16:
+                    near = [im.getpixel((x, y + 1))]
+                if near:
+                    im.putpixel((x, y), near[0])
+        for x in range(32, 64):
+            if im.getpixel((x, y))[3] and bluish(im.getpixel((x, y))):
+                im.putpixel((x, y), (0, 0, 0, 0))
+    return s
+
+
+def hinata():
+    """Without the headband round her neck."""
+    s = load('hinata')
+    for x in range(16, 40):
+        for y in (20, 21, 22):
+            if bluish(s.im.getpixel((x, y))):
+                s.im.putpixel((x, y), s.im.getpixel((x, 23)))
+        for y in (36, 37, 38):
+            if bluish(s.im.getpixel((x, y))):
+                s.im.putpixel((x, y), (0, 0, 0, 0))
+    return s
+
+
+def shikamaru():
+    """Without the headband on his arm."""
+    s = load('shikamaru')
+    for x in range(48, 64):          # the sleeve layer: the band's pixels go, the shirt under them shows
+        for y in range(48, 64):
+            if bluish(s.im.getpixel((x, y))):
+                s.im.putpixel((x, y), (0, 0, 0, 0))
+    for x in range(32, 48):          # the arm itself: the shirt carried over the band
+        for y in range(52, 64):
+            if bluish(s.im.getpixel((x, y))):
+                up, down = s.im.getpixel((x, y - 1)), s.im.getpixel((x, min(63, y + 2)))
+                s.im.putpixel((x, y), up if not bluish(up) else down)
+    return s
+
+
+def yui():
+    """Our own squadmate, on Hinata's head (the reference's dark hair, cut to the jaw) with her own blue eyes; her body is
+    skins.py's."""
+    import skins
+    s = skins.yui()
+    h = load('hinata')
+    for x in range(0, 64):
+        for y in range(0, 16):
+            s.im.putpixel((x, y), h.im.getpixel((x, y)))
+    iris, white = rgb('#4A5AB0'), rgb('#F4F4F4')
+    for x, y in ((9, 13), (14, 13), (9, 14), (14, 14)):
+        s.im.putpixel((x, y), white)
+    for x, y in ((10, 13), (13, 13)):
+        s.im.putpixel((x, y), tone(iris, 0.4))
+    for x, y in ((10, 14), (13, 14)):
+        s.im.putpixel((x, y), tone(iris, -0.4))
     return s
 
 
 def iruka():
-    """In his navy shirt, for the real jonin vest to go over: the vest's body and shoulder straps painted out."""
+    """In his navy shirt, for the real jonin vest and headband to go over: the vest's body, shoulder straps and the collar
+    on the hat layer, and the headband, painted out."""
     s = load('iruka')
+    strip_band(s, 2)
+    for x in HAT_X:
+        for y in range(12, 16):
+            c = s.im.getpixel((x, y))
+            if c[3] and c[1] > c[2] + 6 and c[1] >= c[0]:
+                s.im.putpixel((x, y), (0, 0, 0, 0))
     navy = rgb('#30334B')
     from skins import torso, ring
     torso(s, navy, salt=47)
@@ -163,5 +235,5 @@ def iruka():
 
 
 REF_CHARACTERS = {'naruto': naruto, 'naruto_genin': naruto_genin, 'sasuke': sasuke, 'sakura': lambda: load('sakura'),
-                  'shikamaru_kid': lambda: load('shikamaru'), 'ino': lambda: load('ino'), 'choji': choji, 'hinata': lambda: load('hinata'), 'kiba': kiba,
-                  'shino': shino, 'iruka': iruka}
+                  'shikamaru_kid': shikamaru, 'ino': lambda: load('ino'), 'choji': choji, 'hinata': hinata, 'kiba': kiba,
+                  'shino': shino, 'iruka': iruka, 'yui': yui}

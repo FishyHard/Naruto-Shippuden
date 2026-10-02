@@ -8,6 +8,10 @@
     -69
   ],
   "yaw": 90,
+  "graduate": {
+    "head": "naruto_shippuden:genin_konohagakure_helmet"
+  },
+  "graduate_after": "chapter1/03_graduation",
   "idle": [
     "What a drag...",
     "I'd rather be watching the clouds."

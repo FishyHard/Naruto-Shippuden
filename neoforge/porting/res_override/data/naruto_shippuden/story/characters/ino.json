@@ -8,6 +8,10 @@
     -67
   ],
   "yaw": 90,
+  "graduate": {
+    "head": "naruto_shippuden:genin_konohagakure_helmet"
+  },
+  "graduate_after": "chapter1/03_graduation",
   "idle": [
     "Back off, Forehead! ...Oh, you're not Sakura.",
     "My family runs the flower shop. Come by sometime!"

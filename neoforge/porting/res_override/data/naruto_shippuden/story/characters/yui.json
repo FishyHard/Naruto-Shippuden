@@ -2,6 +2,9 @@
   "name": "Yui Hoshino",
   "skin": "naruto_shippuden:textures/entities/story/yui.png",
   "model": "slim",
+  "equipment": {
+    "head": "naruto_shippuden:genin_konohagakure_helmet"
+  },
   "home": [
     -123,
     65,
