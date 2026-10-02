@@ -1,63 +1,28 @@
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-    }
-}
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
+// Forwards to the NeoForge 26.3 port in neoforge/ (an included build): `./gradlew build` builds it and copies the jar to
+// build/libs here too, `./gradlew runClient` starts the dev client. See settings.gradle.
+def port = gradle.includedBuild('neoforge')
 
-version = '2.7.0'
-group = 'net.mcreator.narutoshippudenmod'
-archivesBaseName = 'naruto_shippuden'
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(8)
-
-minecraft {
-    mappings channel: 'snapshot', version: '20201028-1.16.3'
-
-    runs {
-        client {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-
-            jvmArgs = [
-                    "--add-exports=java.base/sun.security.util=ALL-UNNAMED",
-                    "--add-opens=java.base/java.util.jar=ALL-UNNAMED"
-            ]
-
-            mods {
-                naruto_shippuden {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-
-            jvmArgs = [
-                    "--add-exports=java.base/sun.security.util=ALL-UNNAMED",
-                    "--add-opens=java.base/java.util.jar=ALL-UNNAMED"
-            ]
-
-            mods {
-                naruto_shippuden {
-                    source sourceSets.main
-                }
-            }
-        }
-    }
+tasks.register('copyJar', Sync) {
+    dependsOn port.task(':build')
+    from 'neoforge/build/libs'
+    into layout.buildDirectory.dir('libs')
 }
 
-dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.5-36.2.26'
+tasks.register('build') {
+    group = 'build'
+    description = 'Builds the NeoForge 26.3 mod jar (neoforge/build/libs, copied to build/libs).'
+    dependsOn 'copyJar'
+}
+
+tasks.register('clean', Delete) {
+    group = 'build'
+    dependsOn port.task(':clean')
+    delete layout.buildDirectory
+}
+
+['jar', 'compileJava', 'runClient', 'runServer'].each { name ->
+    tasks.register(name) {
+        group = 'port'
+        dependsOn port.task(':' + name)
+    }
 }

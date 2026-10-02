@@ -64,6 +64,23 @@
 #
 ##############################################################################
 
+# ---- Naruto Shippuden port: Gradle and the build need Java 25. When JAVA_HOME (or the java on the PATH) is older, use
+# a JDK 25 or newer from ~/.jdks, /Library/Java/JavaVirtualMachines or /usr/lib/jvm, so `./gradlew build` just works.
+naruto_java_ok() {
+    "$1" -version 2>&1 | head -n 1 | grep -Eq 'version "(2[5-9]|[3-9][0-9])'
+}
+if [ -n "$JAVA_HOME" ] && [ -x "$JAVA_HOME/bin/java" ]; then naruto_java="$JAVA_HOME/bin/java"; else naruto_java=java; fi
+if ! naruto_java_ok "$naruto_java"; then
+    for naruto_jdk in "$HOME"/.jdks/*/Contents/Home "$HOME"/.jdks/* /Library/Java/JavaVirtualMachines/*/Contents/Home /usr/lib/jvm/*; do
+        if [ -x "$naruto_jdk/bin/java" ] && naruto_java_ok "$naruto_jdk/bin/java"; then
+            JAVA_HOME=$naruto_jdk
+            export JAVA_HOME
+            break
+        fi
+    done
+fi
+# ----
+
 # Attempt to set APP_HOME
 
 # Resolve links: $0 may be a link

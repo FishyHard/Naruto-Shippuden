@@ -1,0 +1,4 @@
+// The mod is the NeoForge 26.3 port in neoforge/: this root only forwards to it, so `./gradlew build` here builds the
+// port. (The original Forge 1.16.5 sources stay in src/ for the porting scripts; their old build is legacy/.)
+rootProject.name = 'naruto_shippuden_workspace'
+includeBuild('neoforge')
