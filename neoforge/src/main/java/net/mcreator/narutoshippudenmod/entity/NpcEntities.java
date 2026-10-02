@@ -1411,6 +1411,20 @@ public final class NpcEntities {
 						.collect(HashMap::new, (_m, _e) -> _m.put(_e.getKey(), _e.getValue()), Map::putAll));
 			}
 
+			// it stands on its post: no punch, jutsu push or knockback slides it (it only rocks, client side)
+			@Override
+			public void knockback(double strength, double x, double z, DamageSource source, float damage, boolean fromEffect) {
+			}
+
+			@Override
+			public void push(double x, double y, double z) {
+			}
+
+			@Override
+			public void setDeltaMovement(net.minecraft.world.phys.Vec3 motion) {
+				super.setDeltaMovement(new net.minecraft.world.phys.Vec3(0, Math.min(motion.y, 0), 0));
+			}
+
 			@Override
 			public boolean isPushable() {
 				return false;

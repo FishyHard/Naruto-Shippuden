@@ -8,6 +8,10 @@
     -65
   ],
   "yaw": 90,
+  "graduate": {
+    "head": "naruto_shippuden:genin_konohagakure_helmet"
+  },
+  "graduate_after": "chapter1/03_graduation",
   "idle": [
     "...",
     "The insects tell me rain is coming. Why? Because they always know."

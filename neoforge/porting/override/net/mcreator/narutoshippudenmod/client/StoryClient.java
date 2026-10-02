@@ -78,6 +78,8 @@ public final class StoryClient {
 
 	public static void onSync(CompoundTag tag) {
 		data = tag;
+		// what the player has learned: walls and water are walked on by the client (core/ChakraControl)
+		Story.clientSkills = tag.getIntOr("skills", -1);
 	}
 
 	public static void onDialogue(CompoundTag tag) {
@@ -268,10 +270,20 @@ public final class StoryClient {
 				living.boundingBoxWidth = living.boundingBoxWidth / living.scale;
 				living.boundingBoxHeight = living.boundingBoxHeight / living.scale;
 				living.scale = 1.0F;
+				// standing up, whatever the scene has them doing (Mizuki lying beaten, Iruka kneeling)
+				living.pose = net.minecraft.world.entity.Pose.STANDING;
+				living.bedOrientation = null;
+				living.walkAnimationPos = 0;
+				living.walkAnimationSpeed = 0;
+				if (living instanceof HumanoidRenderState humanoid) {
+					humanoid.isCrouching = false;
+					// framed as standing too: lying or crouching shrinks the box the framing is measured from
+					living.boundingBoxHeight = 1.8F;
+				}
 			}
 			org.joml.Quaternionf rotation = new org.joml.Quaternionf().rotateZ((float) Math.PI);
-			// framed from the chest up: big, and lowered so the head sits in the window
-			graphics.entity(state, 38, new org.joml.Vector3f(0.0F, state.boundingBoxHeight / 2.0F - 0.55F, 0.0F), rotation, null, x0 + 1, y0 + 1, x1 - 1, y1 - 1);
+			// framed from the chest up: big, the head and shoulders in the window
+			graphics.entity(state, 38, new org.joml.Vector3f(0.0F, state.boundingBoxHeight / 2.0F + 0.45F, 0.0F), rotation, null, x0 + 1, y0 + 1, x1 - 1, y1 - 1);
 		}
 
 		@Override
@@ -492,6 +504,8 @@ public final class StoryClient {
 	public static class NpcState extends HumanoidRenderState {
 		Identifier texture;
 		String model = "legacy";
+		/** A dojutsu over the face (the mod's eye textures, as players' eyes are drawn), or null. */
+		Identifier eyes;
 	}
 
 	/** Drawn as a player: the old 64x32 skins (legacy), 64x64 player skins, or slim-armed ones; a mark over the name. Not with
@@ -511,6 +525,16 @@ public final class StoryClient {
 			this.addLayer(new net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer<>(this,
 					net.minecraft.client.renderer.entity.ArmorModelSet.bake(ModelLayers.PLAYER_ARMOR, context.getModelSet(), HumanoidModel::new),
 					context.getEquipmentRenderer()));
+			// a dojutsu over the eyes, on the skin and under the headband
+			this.addLayer(new net.minecraft.client.renderer.entity.layers.RenderLayer<>(this) {
+				@Override
+				public void submit(PoseStack pose, SubmitNodeCollector collector, int light, NpcState state, float yRot, float xRot) {
+					if (state.eyes != null && !state.isInvisible)
+						collector.order(1).submitModel(getParentModel(), state, pose,
+								net.minecraft.client.renderer.rendertype.RenderTypes.entityCutoutZOffset(state.eyes), light,
+								net.minecraft.client.renderer.entity.LivingEntityRenderer.getOverlayCoords(state, 0.0F), state.outlineColor);
+				}
+			});
 		}
 
 		@Override
@@ -524,6 +548,7 @@ public final class StoryClient {
 			HumanoidMobRenderer.extractHumanoidRenderState(npc, state, partialTicks, this.itemModelResolver);
 			state.texture = npc.skin().isEmpty() ? Identifier.parse("naruto_shippuden:textures/entities/iruka_sensei.png") : Identifier.parse(npc.skin());
 			state.model = npc.model();
+			state.eyes = npc.eyes().isEmpty() ? null : Identifier.tryParse(npc.eyes());
 		}
 
 		@Override

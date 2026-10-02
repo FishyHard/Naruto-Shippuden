@@ -264,6 +264,10 @@ def hokage_tower():
         water_tank_small(b, tx, G, tz)
 
     interior(b, c, cz)
+    # the way in stays open: nothing the interior put just inside the front doors
+    for x in range(c - 2, c + 3):
+        for y in (G, G + 1, G + 2):
+            b.set(x, y, dz - 1, AIR)
     return b
 
 
@@ -511,6 +515,8 @@ def interior(b, c, cz):
                               ('stripped_spruce_wood[axis=y]' if y in (fy + 1, ceil) else 'white_terracotta'))
         b.door(sx - 3, fy + 1, sz, 'spruce', facing='west')
         b.set(sx - 4, fy + 1, sz, AIR); b.set(sx - 4, fy + 2, sz, AIR)
+        # and the stairwell's railing opens at the door, on the landing side
+        b.set(sx - 2, fy + 1, sz, AIR); b.set(sx - 2, fy + 2, sz, AIR)
 
 
 LEAVES_DARK = st('dark_oak_leaves', distance=1, persistent=True, waterlogged=False)

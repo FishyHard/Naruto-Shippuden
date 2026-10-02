@@ -65,12 +65,17 @@ import java.util.TreeMap;
  * <pre>
  * data/&lt;ns&gt;/story/characters/&lt;id&gt;.json  {"name", "skin", "model": "legacy"|"player"|"slim", "home": [x, y, z], "yaw", "idle": [lines],
  *                                          "after": quest id (the character is there only for players who have done it),
- *                                          "equipment": {"head": item id, "mainhand": item id, ...} (the headband is worn, not painted)}
+ *                                          "until": quest id (and gone once they have done that one),
+ *                                          "equipment": {"head": item id, "mainhand": item id, ...} (the headband is worn, not painted),
+ *                                          "graduate": {equipment}, "graduate_after": quest id (what it wears once that is done),
+ *                                          "eyes": texture (a dojutsu over its face)}
  * data/&lt;ns&gt;/story/quests/&lt;id&gt;.json      {"title", "chapter", "after": [quest ids], "start": "auto" | character id,
- *                                          "offer": [lines], "steps": [steps], "rewards": {"items": [{"id", "count"}], "xp" (shinobi XP), "vanilla_xp", "commands"}}
+ *                                          "offer": [lines], "steps": [steps], "rewards": {"items": [{"id", "count"}], "xp" (shinobi XP), "vanilla_xp", "commands",
+ *                                          "time" (the time of day it moves on to)}}
  * </pre>
  * A quest starts by itself ("auto") or when its character is talked to, once every quest in "after" is done. Steps, done one
- * after another, each with an optional "text" (the tracker's objective) and "on_start" (commands run as the player):
+ * after another, each with an optional "text" (the tracker's objective), "on_start" (commands run as the player) and "time"
+ * ("morning", "day", "evening", "night": the time of day the step happens at; time moves on to it):
  * <pre>
  * {"type": "talk", "npc": id, "dialogue": [lines]}            talk to that character
  * {"type": "goto", "pos": [x, y, z], "radius": r, "min_y": y} go there (in Chikyū, or "dimension"); min_y: and be at least
@@ -85,8 +90,10 @@ import java.util.TreeMap;
  * </pre>
  * Any step may also bring "spawn": [{"character", "pos", "yaw", "steps"}]: scene characters for this player only, standing
  * there from this step for "steps" steps (1 by default), then gone; and "effects": [{"type": "clones", "character", "around",
- * "count", "seconds"} | {"type": "pose", "character", "pose": "crouch"|"lie"|"stand"} | {"type": "smoke", "character"}], played
- * on the player's scene characters as the step starts. A choice may carry "commands" (run as the player when it is chosen).
+ * "count", "seconds"} | {"type": "pose", "character", "pose": "crouch"|"lie"|"stand"} | {"type": "smoke", "character"} |
+ * {"type": "walk", "character", "points": [[x, z], ...], "speed", "loop", "slip"}], played on the player's scene characters as
+ * the step starts ("walk": along the ground, up walls and over water, as a teammate showing a lesson; "delay" in ticks).
+ * A sparring partner waits until the player comes within a few blocks, and stops when they go off. A choice may carry "commands" (run as the player when it is chosen).
  * A dialogue line is {"speaker": character id | "player", "text", "choices": [{"text", "flag", "lines": [lines]}]}: the
  * dialogue screen shows them in turn, a choice shows its own lines next and sets its flag on the player.
  *
@@ -98,8 +105,13 @@ public final class Story {
 	private static final Logger LOGGER = LogUtils.getLogger();
 	public static final String KEY = "naruto_shippuden:story";
 
+	/**
+	 * A story character: "after" and "until" are the quests between which its usual figure is there for a player (Mizuki is
+	 * gone once he has shown what he is), "graduate" what it wears for players who have done the "graduate_after" quest (the
+	 * headband, once the class has passed), "eyes" a dojutsu drawn over its face (the mod's own eye textures).
+	 */
 	public record Character(String id, String name, Identifier skin, String model, BlockPos home, float yaw, List<String> idle, String after,
-			Map<String, String> equipment) {
+			Map<String, String> equipment, String until, Map<String, String> graduate, String graduateAfter, String eyes) {
 	}
 
 	public record Quest(String id, String title, int chapter, List<String> after, String start, JsonArray offer, List<JsonObject> steps,
@@ -140,7 +152,8 @@ public final class Story {
 				chars.put(e.getKey(), new Character(e.getKey(), str(o, "name", e.getKey()),
 						Identifier.parse(str(o, "skin", "naruto_shippuden:textures/entities/iruka_sensei.png")), str(o, "model", "legacy"),
 						home == null ? null : new BlockPos(home.get(0).getAsInt(), home.get(1).getAsInt(), home.get(2).getAsInt()),
-						o.has("yaw") ? o.get("yaw").getAsFloat() : 0, idle, str(o, "after", ""), equipment(o)));
+						o.has("yaw") ? o.get("yaw").getAsFloat() : 0, idle, str(o, "after", ""), equipment(o, "equipment"), str(o, "until", ""),
+						equipment(o, "graduate"), str(o, "graduate_after", ""), str(o, "eyes", "")));
 			}
 			Map<String, Quest> qs = new TreeMap<>();
 			for (var e : read(manager, "story/quests").entrySet()) {
@@ -181,10 +194,10 @@ public final class Story {
 	}
 
 	/** "equipment": {"head": item id, "mainhand": item id, ...}: what the character wears and holds. */
-	private static Map<String, String> equipment(JsonObject o) {
+	private static Map<String, String> equipment(JsonObject o, String key) {
 		Map<String, String> out = new LinkedHashMap<>();
-		if (o.has("equipment"))
-			for (var e : o.getAsJsonObject("equipment").entrySet())
+		if (o.has(key))
+			for (var e : o.getAsJsonObject(key).entrySet())
 				out.put(e.getKey(), e.getValue().getAsString());
 		return out;
 	}
@@ -281,6 +294,32 @@ public final class Story {
 		return near.isEmpty() ? null : near.getFirst();
 	}
 
+	/** {"points": [[x, z], ...], "speed": blocks a tick, "loop", "slip": chance}: over the ground, up walls, on water. */
+	private static void walk(StoryNpc.Npc npc, JsonObject o) {
+		if (!o.has("points"))
+			return;
+		List<net.minecraft.world.phys.Vec3> points = new ArrayList<>();
+		for (JsonElement pt : o.getAsJsonArray("points"))
+			points.add(new net.minecraft.world.phys.Vec3(pt.getAsJsonArray().get(0).getAsDouble() + 0.5, 0, pt.getAsJsonArray().get(1).getAsDouble() + 0.5));
+		npc.walk(points, o.has("speed") ? o.get("speed").getAsDouble() : 0.12, o.has("loop") && o.get("loop").getAsBoolean(),
+				o.has("slip") ? o.get("slip").getAsFloat() : 0);
+	}
+
+	private static StoryNpc.Npc sceneNpc(ServerLevel level, ServerPlayer player, String character) {
+		List<? extends StoryNpc.Npc> mine = level.getEntities(StoryNpc.entity, n -> n.isScene() && n.sceneFor(player.getUUID()) && n.character().equals(character));
+		return mine.isEmpty() ? null : mine.getFirst();
+	}
+
+	/** Whether the player's quest is at a spar with this character now (a partner stops when it isn't: skipped, or done). */
+	public static boolean sparringNow(ServerPlayer player, String character) {
+		for (Quest q : quests.values()) {
+			JsonObject step = step(player, q);
+			if (step != null && str(step, "type", "").equals("spar") && str(step, "npc", "").equals(character))
+				return true;
+		}
+		return false;
+	}
+
 	/** Places a step's scene characters for this player. */
 	private static void spawnScene(ServerPlayer player, Quest quest, JsonObject step) {
 		if (!step.has("spawn") || !(player.level() instanceof ServerLevel level))
@@ -301,11 +340,18 @@ public final class Story {
 			if (npc == null)
 				continue;
 			float yaw = o.has("yaw") ? o.get("yaw").getAsFloat() : 0;
-			npc.applyCharacter(c);
+			npc.applyCharacter(c, equipmentFor(player, c));
 			npc.setScene(player.getUUID(), quest.id(), at, at + (o.has("steps") ? o.get("steps").getAsInt() : 1));
 			npc.snapTo(x, y, z, yaw, 0);
 			npc.setYHeadRot(yaw);
 			npc.setYBodyRot(yaw);
+			// its walk from the step's effects, given now: the place may be far off, in chunks not loaded yet
+			if (step.has("effects"))
+				for (JsonElement fx : step.getAsJsonArray("effects")) {
+					JsonObject f = fx.getAsJsonObject();
+					if (str(f, "type", "").equals("walk") && str(f, "character", "").equals(c.id()) && !f.has("delay"))
+						walk(npc, f);
+				}
 			level.addFreshEntity(npc);
 		}
 	}
@@ -328,7 +374,10 @@ public final class Story {
 				LATER.add(new Later(level.getServer().getTickCount() + delay, player.getUUID(), quest.id(), at, single));
 				continue;
 			}
-			StoryNpc.Npc who = findNpc(player, str(o, "character", ""), 48);
+			// the player's own scene figure wherever it stands (a lesson may start far from where it is shown), else the nearest
+			StoryNpc.Npc who = sceneNpc(level, player, str(o, "character", ""));
+			if (who == null)
+				who = findNpc(player, str(o, "character", ""), 48);
 			switch (str(o, "type", "")) {
 				case "pose" -> {
 					if (who != null)
@@ -337,6 +386,11 @@ public final class Story {
 				case "smoke" -> {
 					if (who != null)
 						StoryNpc.Npc.puff(level, who);
+				}
+				case "walk" -> {
+					// given to the scene figure as it was placed (spawnScene); here only for one placed earlier, or delayed
+					if (who != null && who.isScene() && !who.walking())
+						walk(who, o);
 				}
 				case "clones" -> {
 					Character c = characters.get(str(o, "character", ""));
@@ -394,7 +448,44 @@ public final class Story {
 		if (hasScene(player.getUUID(), character))
 			return false;
 		Character c = characters.get(character);
-		return c == null || c.after().isEmpty() || isDone(player, c.after());
+		return c == null || (c.after().isEmpty() || isDone(player, c.after())) && (c.until().isEmpty() || !isDone(player, c.until()));
+	}
+
+	/** What the character wears for this player: its "graduate" outfit once they have done the quest it waits for. */
+	public static Map<String, String> equipmentFor(ServerPlayer player, Character c) {
+		return !c.graduate().isEmpty() && !c.graduateAfter().isEmpty() && isDone(player, c.graduateAfter()) ? c.graduate() : c.equipment();
+	}
+
+	// ---------------------------------------------------------------- what the player has learned
+
+	/** Skills the story teaches (Chakra Control, then walls, water and the dash): the quest, and the step from which it is known. */
+	private record Lesson(int bit, String quest, int step) {
+	}
+
+	private static final Map<String, Lesson> LESSONS = Map.of(
+			"chakra_control", new Lesson(1, "chapter2/01_chakra_control", 0),
+			"walls", new Lesson(2, "chapter2/01_chakra_control", 2),
+			"water", new Lesson(4, "chapter2/02_water_walking", 0),
+			"dash", new Lesson(8, "chapter2/03_body_flicker", 0));
+
+	/** What the client was told it knows (the client moves the player on walls and water itself); everything until told. */
+	public static volatile int clientSkills = -1;
+
+	private static int skills(ServerPlayer player) {
+		int bits = 0;
+		for (Lesson l : LESSONS.values())
+			if (!quests.containsKey(l.quest()) || isDone(player, l.quest()) || stepIndex(player, l.quest()) >= l.step())
+				bits |= l.bit();
+		return bits;
+	}
+
+	/** Whether the player has learned this skill in the story (creative players know everything). */
+	public static boolean knows(net.minecraft.world.entity.player.Player player, String skill) {
+		Lesson l = LESSONS.get(skill);
+		if (l == null || player.isCreative())
+			return true;
+		int bits = player instanceof ServerPlayer sp ? skills(sp) : clientSkills;
+		return (bits & l.bit()) != 0;
 	}
 
 	public static boolean hasScene(java.util.UUID player, String character) {
@@ -455,9 +546,31 @@ public final class Story {
 		}
 		if (step.has("on_start"))
 			step.getAsJsonArray("on_start").forEach(c -> Compat.runCommand(player, c.getAsString()));
+		if (step.has("time"))
+			timeOfDay(player, str(step, "time", ""));
 		spawnScene(player, quest, step);
 		effects(player, quest, step);
 		check(player, quest, step);
+	}
+
+	/**
+	 * A step set at a time of day ("morning", "day", "evening", "night"): if it is not that time, time moves on to it (never
+	 * back), as a story skips to the next scene.
+	 */
+	private static void timeOfDay(ServerPlayer player, String when) {
+		int[] window = switch (when) {
+			case "morning" -> new int[]{0, 3000, 500};
+			case "day" -> new int[]{1000, 11000, 3000};
+			case "evening" -> new int[]{11000, 13000, 11600};
+			case "night" -> new int[]{13500, 22500, 16000};
+			default -> null;
+		};
+		if (window == null)
+			return;
+		int now = (int) Math.floorMod(player.level().getDefaultClockTime(), 24000L);
+		if (now >= window[0] && now < window[1])
+			return;
+		Compat.runCommand(player, "time add " + Math.floorMod(window[2] - now, 24000));
 	}
 
 	/** On to the quest's next step (or its end). */
@@ -494,11 +607,13 @@ public final class Story {
 			player.giveExperiencePoints(r.get("vanilla_xp").getAsInt());
 		if (r.has("commands"))
 			r.getAsJsonArray("commands").forEach(c -> Compat.runCommand(player, c.getAsString()));
+		if (r.has("time"))
+			timeOfDay(player, r.get("time").getAsString());
 		announce(player, Component.literal("Quest complete").withStyle(ChatFormatting.GREEN), quest.title(), SoundEvents.UI_TOAST_CHALLENGE_COMPLETE);
 		// characters who wait for this quest appear now
 		if (player.level() instanceof ServerLevel level)
 			for (Character c : characters.values())
-				if (c.after().equals(quest.id()))
+				if (c.after().equals(quest.id()) || c.until().equals(quest.id()) || c.graduateAfter().equals(quest.id()))
 					retrack(level, c.id());
 		autoStart(player);
 		sync(player);
@@ -558,8 +673,9 @@ public final class Story {
 				String who = str(step, "npc", "");
 				boolean going = !player.level().getEntities(StoryNpc.entity, player.getBoundingBox().inflate(32), n -> n.isSparringWith(player)).isEmpty();
 				if (!going) {
+					// the partner waits where it is until the player comes over
 					StoryNpc.Npc npc = findNpc(player, who, 24);
-					if (npc != null && !npc.isSparring())
+					if (npc != null && !npc.isSparring() && npc.distanceToSqr(player) < 7 * 7 && npc.getY() - player.getY() < 3)
 						npc.spar(player, step.has("hits") ? step.get("hits").getAsInt() : 5, step.has("damage") ? step.get("damage").getAsDouble() : 2,
 								step.has("rank") ? step.get("rank").getAsInt() : 0, step.has("throws") && step.get("throws").getAsBoolean(),
 								step.has("substitution") && step.get("substitution").getAsBoolean());
@@ -822,6 +938,7 @@ public final class Story {
 				marks.putString(quest.start(), "!");
 		}
 		out.put("marks", marks);
+		out.putInt("skills", skills(player));
 		PacketDistributor.sendToPlayer(player, new Sync(out));
 	}
 

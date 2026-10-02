@@ -8,6 +8,10 @@
     -59
   ],
   "yaw": 90,
+  "graduate": {
+    "head": "naruto_shippuden:genin_konohagakure_helmet"
+  },
+  "graduate_after": "chapter1/03_graduation",
   "idle": [
     "Akamaru says you smell like a rookie!",
     "Wanna go a round? I'll go easy. Maybe."

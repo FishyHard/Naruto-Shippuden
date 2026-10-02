@@ -6,22 +6,34 @@ from chapter1 import G, say, choice, talk, write
 
 Q = 'chapter2/'
 AFTER_CH1 = 'chapter1/05_team_assignment'
+LAKE = (-134, 91)
+
+
+def team(steps=1, at=((-129, -67), (-123, -67))):
+    """Ren and Yui, there for this player's lesson (their usual figures step aside meanwhile)."""
+    return [dict(character='ren', pos=[at[0][0], G, at[0][1]], yaw=180, steps=steps),
+            dict(character='yui', pos=[at[1][0], G, at[1][1]], yaw=180, steps=steps)]
 
 QUESTS = {
     Q + '01_chakra_control': dict(
         title='Training: Chakra Control', chapter=2, after=[AFTER_CH1], start='tatsumi',
         offer=[
             say('tatsumi', "Before I send you on missions, you need to control your chakra, not just have it."),
-            say('tatsumi', "Gather it. Feel it. (Press G for Chakra Control.)"),
+            say('tatsumi', "Gather it. Feel it. Then stand still and let it settle. (G for Chakra Control, then hold Sneak to focus.)"),
         ],
         steps=[
-            dict(type='event', event='chakra_control', text='Focus your chakra (Chakra Control, G)'),
+            dict(type='event', event='chakra_control', text='Turn on Chakra Control (G)', time='day'),
+            dict(type='event', event='focus', text='Hold Sneak and stand still to focus your chakra'),
             talk('tatsumi', 'Show Tatsumi-sensei', [
                 say('tatsumi', "Good. Now keep that chakra in the soles of your feet, and walk straight up the cliff north of here."),
                 say('ren', "Up the CLIFF? Without hands?"),
                 say('tatsumi', "Too little and you slip. Too much and you're blasted off. Steady. Last one to the top makes dinner."),
             ]),
-            dict(type='goto', pos=[-126, 100, -178], radius=28, min_y=100, text='Walk up the cliff north of the training ground'),
+            # Yui walks straight up the cliff; Ren goes too, and keeps slipping off
+            dict(type='goto', pos=[-126, 100, -178], radius=28, min_y=100, text='Walk up the cliff north of the training ground',
+                 spawn=team(),
+                 effects=[dict(type='walk', character='yui', points=[[-123, -90], [-124, -186]], speed=0.13),
+                          dict(type='walk', character='ren', points=[[-129, -90], [-128, -186]], speed=0.11, slip=0.9)]),
             talk('tatsumi', 'Come back down to Tatsumi-sensei', [
                 say('tatsumi', "Not bad. Ren's still halfway up, and Yui made it first. Ren makes dinner."),
                 say('yui', "It's all about balance. You did well too!"),
@@ -36,7 +48,13 @@ QUESTS = {
             say('tatsumi', "Go to the lake south-west of the Academy and stand in the middle of it. On it, not in it."),
         ],
         steps=[
-            dict(type='goto', pos=[-134, G, 91], radius=4, min_y=64.9, text='Stand on the water in the middle of the lake'),
+            # the two of them already out on the water, circling; Ren goes under now and then
+            dict(type='goto', pos=[-134, G, 91], radius=4, min_y=64.9, text='Stand on the water in the middle of the lake', time='evening',
+                 spawn=team(at=((LAKE[0] + 4, LAKE[1]), (LAKE[0] - 4, LAKE[1]))),
+                 effects=[dict(type='walk', character='yui', speed=0.07, loop=True,
+                               points=[[LAKE[0] - 4, LAKE[1] - 4], [LAKE[0] + 4, LAKE[1] - 4], [LAKE[0] + 4, LAKE[1] + 4], [LAKE[0] - 4, LAKE[1] + 4]]),
+                          dict(type='walk', character='ren', speed=0.08, loop=True, slip=0.3,
+                               points=[[LAKE[0] + 3, LAKE[1] + 3], [LAKE[0] - 3, LAKE[1] + 3], [LAKE[0] - 3, LAKE[1] - 3], [LAKE[0] + 3, LAKE[1] - 3]])]),
             talk('tatsumi', 'Report back to Tatsumi-sensei', [
                 say('tatsumi', "Dry feet. Good. Ren fell in twice. Don't tell him I said so."),
             ]),
@@ -50,7 +68,7 @@ QUESTS = {
             say('tatsumi', "With Chakra Control on, dash. (Left Alt, with a direction.)"),
         ],
         steps=[
-            dict(type='event', event='dash', text='Dash with Chakra Control on (Left Alt)'),
+            dict(type='event', event='dash', text='Dash with Chakra Control on (Left Alt)', time='day'),
             talk('tatsumi', 'Show Tatsumi-sensei', [
                 say('tatsumi', "There it is. Now try that against someone who dashes back."),
                 say('ren', "Me! Pick me! I'll show you a real dash!"),

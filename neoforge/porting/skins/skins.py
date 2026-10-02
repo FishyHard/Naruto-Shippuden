@@ -389,6 +389,31 @@ def mizuki():
     return s
 
 
+def iruka():
+    """Iruka-sensei: dark brown hair tied up in a short ponytail, the scar across the bridge of his nose, the chunin's flak
+    vest over navy, the red swirl patches on his sleeves (he wears the real headband item)."""
+    s = Skin()
+    hair = rgb('#3A2A1E')
+    tan = rgb('#E2B088')
+    scar = rgb('#C68A70')
+    face(s, tan, EYE_DARK, hair, fringe=[3, 2, 1, 1, 1, 1, 2, 3], side=4, back=5,
+         marks=[(1, 6, scar), (2, 6, scar), (3, 6, shade(scar, 0.9)), (4, 6, shade(scar, 0.9)), (5, 6, scar), (6, 6, scar)])
+    # the ponytail: up at the back of the head, sticking out on the hat layer
+    light, dark = shade(hair, 1.2), shade(hair, 0.75)
+    for (x, y, c) in ((3, 0, hair), (4, 0, light), (3, 1, dark), (4, 1, hair), (2, 1, hair), (5, 1, dark)):
+        s.px('hat', 'back', x, y, c)
+    s.paint('hat', lambda f, x, y, w, h: (hair if (x + y) % 2 else dark) if f == 'top' and 2 <= x <= 5 and y >= 5 else None)
+    navy, vest = rgb('#28304A'), rgb('#5E7050')
+    torso(s, vest, collar=vest, zip=shade(vest, 0.8))
+    s.paint('body', lambda f, x, y, w, h: shade(vest, 0.85) if f == 'front' and y in (4, 7) and x not in (3, 4) else None)   # the vest's pockets
+    s.paint('body', lambda f, x, y, w, h: navy if f in ('left', 'right') and y < 9 else None)    # the shirt under the vest's sides
+    arms(s, navy, tan, sleeve_rows=11)
+    for a in ('rarm', 'larm'):
+        s.fill(a, rgb('#B03030'), rows=(1, 2))      # the red swirl patches
+    legs(s, navy, rgb('#2B3A6B'), pants_rows=10, wrap=rgb('#E8E8E8'))
+    return s
+
+
 def hiruzen():
     s = Skin()
     skin_old = rgb('#E8BC94')
@@ -458,7 +483,7 @@ def yui():
 
 
 CHARACTERS = {'naruto': naruto, 'sasuke': sasuke, 'sakura': sakura, 'shikamaru_kid': shikamaru, 'ino': ino, 'choji': choji,
-              'hinata': hinata, 'kiba': kiba, 'shino': shino, 'mizuki': mizuki, 'hiruzen': hiruzen,
+              'hinata': hinata, 'kiba': kiba, 'shino': shino, 'iruka': iruka, 'mizuki': mizuki, 'hiruzen': hiruzen,
               'tatsumi': tatsumi, 'ren': ren, 'yui': yui}
 
 

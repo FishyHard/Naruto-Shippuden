@@ -1911,6 +1911,24 @@ def training_dummy(path, text):
             end = find_block(text, i)
             cls = text[i:end].replace('Compat.sound("entity.generic.hurt")', 'net.minecraft.sounds.SoundEvents.ARMOR_STAND_HIT')
             cls = cls.replace('Compat.sound("entity.generic.death")', 'net.minecraft.sounds.SoundEvents.ARMOR_STAND_BREAK')
+            # it stands on its post: no punch, jutsu push or knockback slides it (it only rocks, client side)
+            if 'stands on its post' not in cls:
+                cls = cls.replace('\t\t\t@Override\n\t\t\tpublic boolean isPushable() {', '''\t\t\t// it stands on its post: no punch, jutsu push or knockback slides it (it only rocks, client side)
+\t\t\t@Override
+\t\t\tpublic void knockback(double strength, double x, double z, DamageSource source, float damage, boolean fromEffect) {
+\t\t\t}
+
+\t\t\t@Override
+\t\t\tpublic void push(double x, double y, double z) {
+\t\t\t}
+
+\t\t\t@Override
+\t\t\tpublic void setDeltaMovement(net.minecraft.world.phys.Vec3 motion) {
+\t\t\t\tsuper.setDeltaMovement(new net.minecraft.world.phys.Vec3(0, Math.min(motion.y, 0), 0));
+\t\t\t}
+
+\t\t\t@Override
+\t\t\tpublic boolean isPushable() {''', 1)
             text = text[:i] + cls + text[end:]
     return text
 
@@ -1932,3 +1950,17 @@ def chakra_paper_in_lesson(path, text):
         return text
     return re.sub(r'\n(\t*)if \(entity instanceof Player\) \{\s*ItemStack _setstack = new ItemStack\(ChakraPaperItem\.block\);\s*'
                   r'_setstack\.setCount\(\(int\) 1\);\s*Compat\.giveItemToPlayer\(\(\(Player\) entity\), _setstack\);\s*\}', '', text, count=1)
+
+
+@func
+def weapon_damage_untagged(path, text):
+    """A kunai's (shuriken's, Fuma shuriken's) melee damage is the weapon's own, not written onto the stack by its first swing:
+    a thrown kunai that lands drops a plain kunai, which then stacked apart from the swung ones and hit for nothing. Stacks
+    swung before keep stacking too: the old mark is wiped on their next swing."""
+    if not path.replace('\\', '/').endswith('procedures/WeaponProcedures.java'):
+        return text
+    for key, value in (('KunaiDamage', 5), ('ShurikenDamage', 3), ('FuumaShurikenDamage', 7), ('ToroiFuumaShurikenDamage', 9)):
+        text = re.sub(r'if \(StackTag\.of\(itemstack\)\.getDoubleOr\("%s", 0\) == 0\) \{\s*StackTag\.of\(itemstack\)\.putDouble\("%s", %d\);\s*\}'
+                      % (key, key, value), 'if (StackTag.of(itemstack).contains("%s"))\n\t\t\t\t\tStackTag.of(itemstack).remove("%s");' % (key, key), text)
+        text = text.replace('SharpLevel = (StackTag.of(itemstack).getDoubleOr("%s", 0));' % key, 'SharpLevel = %d;' % value)
+    return text

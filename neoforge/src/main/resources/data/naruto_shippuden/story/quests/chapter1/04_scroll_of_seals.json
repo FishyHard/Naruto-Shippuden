@@ -23,7 +23,8 @@
           "speaker": "hiruzen",
           "text": "Check the training ground west of the Academy. And be careful."
         }
-      ]
+      ],
+      "time": "night"
     },
     {
       "type": "goto",
@@ -43,7 +44,7 @@
             -75
           ],
           "yaw": -90,
-          "steps": 5
+          "steps": 6
         },
         {
           "character": "naruto",
@@ -53,7 +54,7 @@
             -77
           ],
           "yaw": -90,
-          "steps": 5
+          "steps": 6
         },
         {
           "character": "mizuki",
@@ -63,7 +64,7 @@
             -75
           ],
           "yaw": 90,
-          "steps": 5
+          "steps": 6
         }
       ],
       "effects": [
@@ -186,6 +187,7 @@
     }
   ],
   "rewards": {
-    "xp": 60
+    "xp": 60,
+    "time": "morning"
   }
 }

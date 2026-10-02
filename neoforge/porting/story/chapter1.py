@@ -18,37 +18,48 @@ def skin(name):
     return 'naruto_shippuden:textures/entities/story/%s.png' % name
 
 
+HEADBAND = {'head': 'naruto_shippuden:genin_konohagakure_helmet'}
+# the class wear their headbands once they have passed (for the players who saw them pass); Naruto's comes from Iruka on the
+# night of the Scroll of Seals. Ino (at her waist), Shikamaru (on his arm) and Hinata (round her neck) wear theirs where
+# Minecraft has no slot for it, so theirs is painted on or left out.
+GRADUATES = dict(graduate=HEADBAND, graduate_after='chapter1/03_graduation')
+
+
 CHARACTERS = {
-    'iruka': dict(name='Iruka Umino', skin='naruto_shippuden:textures/entities/iruka_sensei.png', model='legacy', home=[-84, G, -73], yaw=0,
+    'iruka': dict(name='Iruka Umino', skin=skin('iruka'), model='player', equipment=HEADBAND, home=[-84, G, -73], yaw=0,
                   idle=["Don't be late for class.", "A shinobi's tools are only as good as their training.",
                         "Naruto! ...Oh, it's you. Sorry. Have you seen him?"]),
-    'mizuki': dict(name='Mizuki', skin=skin('mizuki'), model='player', equipment={'head': 'naruto_shippuden:genin_konohagakure_helmet'}, home=[-79, G, -74], yaw=0,
+    # gone from the Academy once the class has passed (that night he shows what he is)
+    'mizuki': dict(name='Mizuki', skin=skin('mizuki'), model='player', equipment=HEADBAND, home=[-79, G, -74], yaw=0, until='chapter1/03_graduation',
                    idle=["Iruka is too soft on that Naruto.", "Study hard. The exam is closer than you think."]),
     'hiruzen': dict(name='Hiruzen Sarutobi', skin=skin('hiruzen'), model='player', home=[0, G, -56], yaw=0,
                     idle=["Every one of you is a leaf of this village.", "Ah, the Academy's newest. How are your lessons?"]),
     'naruto': dict(name='Naruto Uzumaki', skin=skin('naruto'), model='player', home=[-99, G, -60], yaw=-90,
+                   graduate=HEADBAND, graduate_after='chapter1/04_scroll_of_seals',
                    idle=["I'm gonna be Hokage someday, believe it!", "Ramen after class? ...You're paying, right?",
                          "Sasuke thinks he's so cool. Hmph!"]),
-    'sasuke': dict(name='Sasuke Uchiha', skin=skin('sasuke'), model='player', home=[-94, G, -68], yaw=-90,
+    'sasuke': dict(name='Sasuke Uchiha', skin=skin('sasuke'), model='player', home=[-94, G, -68], yaw=-90, **GRADUATES,
                    idle=["...", "Don't get in my way.", "Hmph."]),
-    'sakura': dict(name='Sakura Haruno', skin=skin('sakura'), model='slim', home=[-91, G, -69], yaw=90,
+    'sakura': dict(name='Sakura Haruno', skin=skin('sakura'), model='slim', home=[-91, G, -69], yaw=90, **GRADUATES,
                    idle=["Sasuke is SO cool, isn't he?", "I'm top of the class in theory, you know!"]),
     'ino': dict(name='Ino Yamanaka', skin=skin('ino'), model='slim', home=[-90, G, -67], yaw=90,
                 idle=["Back off, Forehead! ...Oh, you're not Sakura.", "My family runs the flower shop. Come by sometime!"]),
     'shikamaru': dict(name='Shikamaru Nara', skin=skin('shikamaru_kid'), model='player', home=[-72, G, -69], yaw=90,
                       idle=["What a drag...", "I'd rather be watching the clouds."]),
-    'choji': dict(name='Choji Akimichi', skin=skin('choji'), model='player', home=[-71, G, -67], yaw=90,
+    'choji': dict(name='Choji Akimichi', skin=skin('choji'), model='player', home=[-71, G, -67], yaw=90, **GRADUATES,
                   idle=["*crunch* Want a chip? ...Just one.", "Shikamaru's smarter than he looks."]),
+    # her resting Byakugan, drawn as players' eyes are (the mod's dojutsu textures)
     'hinata': dict(name='Hinata Hyuga', skin=skin('hinata'), model='slim', home=[-104, G, -57], yaw=-90,
+                   eyes='naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x2_pupils_1x2_not_active.png',
                    idle=["O-oh! I wasn't watching Naruto... I mean...", "G-good luck with your training."]),
-    'kiba': dict(name='Kiba Inuzuka', skin=skin('kiba'), model='player', home=[-75, G, -59], yaw=90,
+    'kiba': dict(name='Kiba Inuzuka', skin=skin('kiba'), model='player', home=[-75, G, -59], yaw=90, **GRADUATES,
                  idle=["Akamaru says you smell like a rookie!", "Wanna go a round? I'll go easy. Maybe."]),
-    'shino': dict(name='Shino Aburame', skin=skin('shino'), model='player', home=[-64, G, -65], yaw=90,
+    'shino': dict(name='Shino Aburame', skin=skin('shino'), model='player', home=[-64, G, -65], yaw=90, **GRADUATES,
                   idle=["...", "The insects tell me rain is coming. Why? Because they always know."]),
     # the player's squad: original characters, at Training Ground 3 once Chapter 1's last night is over
-    'tatsumi': dict(name='Tatsumi Kurogane', skin=skin('tatsumi'), model='player', equipment={'head': 'naruto_shippuden:genin_konohagakure_helmet'}, home=[-126, G, -76], yaw=0, after='chapter1/04_scroll_of_seals',
+    'tatsumi': dict(name='Tatsumi Kurogane', skin=skin('tatsumi'), model='player', equipment=HEADBAND, home=[-126, G, -76], yaw=0, after='chapter1/04_scroll_of_seals',
                     idle=["Teamwork first. Talent second.", "Don't look at my scar, look at my hands. That's where the jutsu starts."]),
-    'ren': dict(name='Ren Sakuragi', skin=skin('ren'), model='player', equipment={'head': 'naruto_shippuden:genin_konohagakure_helmet'}, home=[-129, G, -67], yaw=180, after='chapter1/04_scroll_of_seals',
+    'ren': dict(name='Ren Sakuragi', skin=skin('ren'), model='player', equipment=HEADBAND, home=[-129, G, -67], yaw=180, after='chapter1/04_scroll_of_seals',
                 idle=["Our first real mission's coming. I can feel it!", "Race you to the stumps!"]),
     'yui': dict(name='Yui Hoshino', skin=skin('yui'), model='slim', home=[-123, G, -67], yaw=180, after='chapter1/04_scroll_of_seals',
                 idle=["If you get hurt, come to me. I've been studying medical ninjutsu.", "Ren's loud, but he means well."]),
@@ -85,7 +96,7 @@ QUESTS = {
     Q + '01_first_day': dict(
         title='First Day at the Academy', chapter=1, start='auto',
         steps=[
-            talk('iruka', 'Talk to Iruka in the Academy yard', [
+            talk('iruka', 'Talk to Iruka in the Academy yard', time='morning', dialogue=[
                 say('iruka', "Ah, there you are! You must be our new student. Welcome to the Hidden Leaf Academy. I'm Iruka Umino, your instructor."),
                 say('iruka', "The graduation exam is only weeks away, so we'll have to work hard. Any questions before we start?", [
                     choice("Nice to meet you, Iruka-sensei!", 'polite', [say('iruka', "Ha, polite too! You'll fit right in.")]),
@@ -127,7 +138,7 @@ QUESTS = {
             say('iruka', "Throw them at the training dummy by the targets. Aim for the chest!"),
         ],
         steps=[
-            dict(type='hit', entity='naruto_shippuden:training_dummy', count=5, text='Hit the training dummy with kunai',
+            dict(type='hit', entity='naruto_shippuden:training_dummy', count=5, text='Hit the training dummy with kunai', time='day',
                  on_start=['give @s naruto_shippuden:kunai 16',
                            'execute unless entity @e[type=naruto_shippuden:training_dummy,x=-68,y=65,z=-58,distance=..3] run '
                            'summon naruto_shippuden:training_dummy -68 65 -58']),
@@ -151,7 +162,7 @@ QUESTS = {
             say('iruka', "This is it: the graduation exam. Come to the exam room on the Academy's ground floor. Mizuki and I will be your examiners."),
         ],
         steps=[
-            dict(type='goto', pos=EXAM_ROOM, radius=4, text='Go to the exam room in the Academy',
+            dict(type='goto', pos=EXAM_ROOM, radius=4, text='Go to the exam room in the Academy', time='morning',
                  spawn=[dict(character='iruka', pos=[-70, G, -105], yaw=0, steps=4), dict(character='mizuki', pos=[-73, G, -105], yaw=0, steps=4)]),
             talk('iruka', 'Talk to Iruka', [
                 say('iruka', "First part: the Clone Technique. Show us clones of yourself."),
@@ -173,7 +184,7 @@ QUESTS = {
                             ) | {'commands': ['give @s %s' % item, 'naruto rank genin @s']} for colour, item in HEADBANDS]),
                 say('iruka', "...Naruto failed again, though. Go and see him if you can. He's by the swing."),
             ]),
-            talk('naruto', 'Find Naruto at the swing', [
+            talk('naruto', 'Find Naruto at the swing', time='evening', dialogue=[
                 say('naruto', "...Hey. Congrats on passing. Everybody passed. Everybody but me."),
                 say('naruto', "Mizuki-sensei said there's a secret way to pass... Never mind. See ya.", [
                     choice("Don't give up, Naruto.", 'cheered_naruto', [say('naruto', "...Yeah. I never give up. That's my ninja way!")]),
@@ -186,14 +197,14 @@ QUESTS = {
     Q + '04_scroll_of_seals': dict(
         title='The Scroll of Seals', chapter=1, after=[Q + '03_graduation'], start='auto',
         steps=[
-            talk('hiruzen', 'Answer the Hokage\'s summons at his residence', [
+            talk('hiruzen', 'Answer the Hokage\'s summons at his residence', time='night', dialogue=[
                 say('hiruzen', "You're one of the new genin, aren't you? I'm sorry to call on you on your first night as a shinobi."),
                 say('hiruzen', "Naruto has taken the Scroll of Seals, a scroll of forbidden techniques. Everyone is searching for him."),
                 say('hiruzen', "Check the training ground west of the Academy. And be careful."),
             ]),
             dict(type='goto', pos=TRAINING_GROUND, radius=9, text='Search Training Ground 3, west of the Academy',
-                 spawn=[dict(character='iruka', pos=[-126, G, -75], yaw=-90, steps=5), dict(character='naruto', pos=[-128, G, -77], yaw=-90, steps=5),
-                        dict(character='mizuki', pos=[-117, G, -75], yaw=90, steps=5)],
+                 spawn=[dict(character='iruka', pos=[-126, G, -75], yaw=-90, steps=6), dict(character='naruto', pos=[-128, G, -77], yaw=-90, steps=6),
+                        dict(character='mizuki', pos=[-117, G, -75], yaw=90, steps=6)],
                  effects=[dict(type='pose', character='iruka', pose='crouch')]),
             talk('iruka', 'Talk to the wounded Iruka', [
                 say('iruka', "You... get out of here! Mizuki's the one who tricked Naruto. He wants the scroll for himself!"),
@@ -219,7 +230,8 @@ QUESTS = {
                 say('hiruzen', "Rest now. Tomorrow you'll be placed in your squad."),
             ]),
         ],
-        rewards={'xp': 60}),
+        # the night is over: the team assignments are in the morning
+        rewards={'xp': 60, 'time': 'morning'}),
 
     Q + '05_team_assignment': dict(
         title='Team Assignment', chapter=1, after=[Q + '04_scroll_of_seals'], start='iruka',

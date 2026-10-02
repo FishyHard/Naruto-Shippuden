@@ -8,6 +8,10 @@
     -67
   ],
   "yaw": 90,
+  "graduate": {
+    "head": "naruto_shippuden:genin_konohagakure_helmet"
+  },
+  "graduate_after": "chapter1/03_graduation",
   "idle": [
     "*crunch* Want a chip? ...Just one.",
     "Shikamaru's smarter than he looks."

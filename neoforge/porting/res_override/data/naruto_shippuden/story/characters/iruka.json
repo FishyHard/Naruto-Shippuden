@@ -1,7 +1,10 @@
 {
   "name": "Iruka Umino",
-  "skin": "naruto_shippuden:textures/entities/iruka_sensei.png",
-  "model": "legacy",
+  "skin": "naruto_shippuden:textures/entities/story/iruka.png",
+  "model": "player",
+  "equipment": {
+    "head": "naruto_shippuden:genin_konohagakure_helmet"
+  },
   "home": [
     -84,
     65,

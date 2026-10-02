@@ -29,7 +29,8 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
  * (sneak to sink) and walk up walls and trees (walk into them to climb, sneak to cling, let go to slide down); the Dash key is a
  * Body Flicker in the direction being walked (up while jumping, once more in the air); sprinting punches carry chakra-enhanced
  * strength; and standing still while sneaking focuses: chakra comes back faster and the chakra of everything near is sensed.
- * Standing on water or clinging to a wall slowly uses chakra; with none left, Chakra Control lets go.
+ * Standing on water or clinging to a wall slowly uses chakra; with none left, Chakra Control lets go. Each is learned in the story
+ * first (Story.knows): Chakra Control and focusing, then walls, water and the dash, as the squad's sensei teaches them.
  */
 @EventBusSubscriber(modid = "naruto_shippuden")
 public final class ChakraControl {
@@ -56,6 +57,10 @@ public final class ChakraControl {
 
 	public static void toggle(ServerPlayer player) {
 		boolean on = !vars(player).Chakra_Control;
+		if (on && !net.mcreator.narutoshippudenmod.story.Story.knows(player, "chakra_control")) {
+			player.sendOverlayMessage(Component.literal("You haven't learned Chakra Control yet"));
+			return;
+		}
 		if (on && vars(player).ChakraAmount < HOLD_COST) {
 			player.sendOverlayMessage(Component.literal("Not enough chakra"));
 			return;
@@ -74,6 +79,10 @@ public final class ChakraControl {
 		PlayerVariables v = vars(player);
 		if (player.isSpectator() || player.isPassenger())
 			return;
+		if (!net.mcreator.narutoshippudenmod.story.Story.knows(player, "dash")) {
+			player.sendOverlayMessage(Component.literal("You haven't learned to dash yet"));
+			return;
+		}
 		if (!v.Chakra_Control) {
 			player.sendOverlayMessage(Component.literal("Turn on Chakra Control to dash"));
 			return;
@@ -155,7 +164,8 @@ public final class ChakraControl {
 			player.getPersistentData().remove(FOCUS);
 			return;
 		}
-		boolean water = onWater(player), wall = onWall(player);
+		boolean water = onWater(player) && net.mcreator.narutoshippudenmod.story.Story.knows(player, "water"),
+				wall = onWall(player) && net.mcreator.narutoshippudenmod.story.Story.knows(player, "walls");
 		if (player.level().isClientSide()) {
 			if (player.isLocalPlayer())
 				move(player, water, wall);
@@ -221,8 +231,10 @@ public final class ChakraControl {
 		if (held < FOCUS_AFTER)
 			return;
 		ServerLevel level = (ServerLevel) player.level();
-		if (held == FOCUS_AFTER)
+		if (held == FOCUS_AFTER) {
 			player.sendOverlayMessage(Component.literal("Focusing chakra"));
+			net.mcreator.narutoshippudenmod.story.Story.event(player, "focus");
+		}
 		if (held % 20 == 0) {
 			PlayerVariables v = vars(player);
 			double regained = Math.max(1, v.ChakraMax * 0.02);

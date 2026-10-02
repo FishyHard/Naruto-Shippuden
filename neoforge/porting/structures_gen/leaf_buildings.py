@@ -214,9 +214,8 @@ def academy():
             lamp(b, x, fy + 4, z2 - 2)
         for x in (x1 + 1, x2 - 1):
             b.set(x, fy, z2 - 2, 'potted_bamboo')
-        for x in range(x1 + 8, x1 + 12):
-            b.set(x, fy, cw + 1, stairs('spruce_stairs', 'north'))
-        for x in range(x2 - 11, x2 - 7):
+        # benches against the wall between each room's two doors (never in front of a door)
+        for x in list(range(x1 + 5, x1 + 9)) + list(range(x2 - 8, x2 - 4)):
             b.set(x, fy, cw + 1, stairs('spruce_stairs', 'north'))
     # the stairs: two flights, west then east, with railings round the holes
     for fy, sx in ((F[0], m - 4), (F[1], m + 3)):

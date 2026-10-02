@@ -531,21 +531,17 @@ public final class WeaponProcedures {
 			ItemStack itemstack = (ItemStack) dependencies.get("itemstack");
 			if (itemstack.getItem() == KunaiItem.block || itemstack.getItem() == ExplosiveKunaiItem.block
 					|| itemstack.getItem() == PoisonKunaiItem.block) {
-				if (StackTag.of(itemstack).getDoubleOr("KunaiDamage", 0) == 0) {
-					StackTag.of(itemstack).putDouble("KunaiDamage", 5);
-				}
+				if (StackTag.of(itemstack).contains("KunaiDamage"))
+					StackTag.of(itemstack).remove("KunaiDamage");
 			} else if (itemstack.getItem() == ShurikenItem.block) {
-				if (StackTag.of(itemstack).getDoubleOr("ShurikenDamage", 0) == 0) {
-					StackTag.of(itemstack).putDouble("ShurikenDamage", 3);
-				}
+				if (StackTag.of(itemstack).contains("ShurikenDamage"))
+					StackTag.of(itemstack).remove("ShurikenDamage");
 			} else if (itemstack.getItem() == FumaShurikenItem.block) {
-				if (StackTag.of(itemstack).getDoubleOr("FuumaShurikenDamage", 0) == 0) {
-					StackTag.of(itemstack).putDouble("FuumaShurikenDamage", 7);
-				}
+				if (StackTag.of(itemstack).contains("FuumaShurikenDamage"))
+					StackTag.of(itemstack).remove("FuumaShurikenDamage");
 			} else if (itemstack.getItem() == ToroiUniqueFumaShurikenItem.block) {
-				if (StackTag.of(itemstack).getDoubleOr("ToroiFuumaShurikenDamage", 0) == 0) {
-					StackTag.of(itemstack).putDouble("ToroiFuumaShurikenDamage", 9);
-				}
+				if (StackTag.of(itemstack).contains("ToroiFuumaShurikenDamage"))
+					StackTag.of(itemstack).remove("ToroiFuumaShurikenDamage");
 			}
 		}
 	}
@@ -698,7 +694,7 @@ public final class WeaponProcedures {
 					|| itemstack.getItem() == PoisonKunaiItem.block) {
 				if (dependencies.get("event") instanceof ItemAttributeModifierEvent) {
 					ItemAttributeModifierEvent _event = (ItemAttributeModifierEvent) dependencies.get("event");
-					SharpLevel = (StackTag.of(itemstack).getDoubleOr("KunaiDamage", 0));
+					SharpLevel = 5;
 					modify = new AttributeModifier(Identifier.fromNamespaceAndPath("naruto_shippuden", "kunai_damage"), SharpLevel, AttributeModifier.Operation.ADD_VALUE);
 					_event.addModifier(Attributes.ATTACK_DAMAGE, modify, net.minecraft.world.entity.EquipmentSlotGroup.MAINHAND);
 				}
@@ -706,7 +702,7 @@ public final class WeaponProcedures {
 			if (itemstack.getItem() == ShurikenItem.block) {
 				if (dependencies.get("event") instanceof ItemAttributeModifierEvent) {
 					ItemAttributeModifierEvent _event = (ItemAttributeModifierEvent) dependencies.get("event");
-					SharpLevel = (StackTag.of(itemstack).getDoubleOr("ShurikenDamage", 0));
+					SharpLevel = 3;
 					modify = new AttributeModifier(Identifier.fromNamespaceAndPath("naruto_shippuden", "shuriken_damage"), SharpLevel, AttributeModifier.Operation.ADD_VALUE);
 					_event.addModifier(Attributes.ATTACK_DAMAGE, modify, net.minecraft.world.entity.EquipmentSlotGroup.MAINHAND);
 				}
@@ -714,7 +710,7 @@ public final class WeaponProcedures {
 			if (itemstack.getItem() == FumaShurikenItem.block) {
 				if (dependencies.get("event") instanceof ItemAttributeModifierEvent) {
 					ItemAttributeModifierEvent _event = (ItemAttributeModifierEvent) dependencies.get("event");
-					SharpLevel = (StackTag.of(itemstack).getDoubleOr("FuumaShurikenDamage", 0));
+					SharpLevel = 7;
 					modify = new AttributeModifier(Identifier.fromNamespaceAndPath("naruto_shippuden", "fuuma_shuriken_damage"), SharpLevel, AttributeModifier.Operation.ADD_VALUE);
 					_event.addModifier(Attributes.ATTACK_DAMAGE, modify, net.minecraft.world.entity.EquipmentSlotGroup.MAINHAND);
 				}
@@ -722,7 +718,7 @@ public final class WeaponProcedures {
 			if (itemstack.getItem() == ToroiUniqueFumaShurikenItem.block) {
 				if (dependencies.get("event") instanceof ItemAttributeModifierEvent) {
 					ItemAttributeModifierEvent _event = (ItemAttributeModifierEvent) dependencies.get("event");
-					SharpLevel = (StackTag.of(itemstack).getDoubleOr("ToroiFuumaShurikenDamage", 0));
+					SharpLevel = 9;
 					modify = new AttributeModifier(Identifier.fromNamespaceAndPath("naruto_shippuden", "toroi_fuuma_shuriken_damage"), SharpLevel, AttributeModifier.Operation.ADD_VALUE);
 					_event.addModifier(Attributes.ATTACK_DAMAGE, modify, net.minecraft.world.entity.EquipmentSlotGroup.MAINHAND);
 				}

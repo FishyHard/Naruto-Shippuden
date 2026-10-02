@@ -42,7 +42,8 @@
           "speaker": "iruka",
           "text": "Go and meet your classmates in the yard first. You'll be training beside them every day."
         }
-      ]
+      ],
+      "time": "morning"
     },
     {
       "type": "talk",

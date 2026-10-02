@@ -21,6 +21,7 @@
       "entity": "naruto_shippuden:training_dummy",
       "count": 5,
       "text": "Hit the training dummy with kunai",
+      "time": "day",
       "on_start": [
         "give @s naruto_shippuden:kunai 16",
         "execute unless entity @e[type=naruto_shippuden:training_dummy,x=-68,y=65,z=-58,distance=..3] run summon naruto_shippuden:training_dummy -68 65 -58"

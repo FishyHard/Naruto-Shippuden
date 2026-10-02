@@ -25,7 +25,81 @@
       ],
       "radius": 4,
       "min_y": 64.9,
-      "text": "Stand on the water in the middle of the lake"
+      "text": "Stand on the water in the middle of the lake",
+      "time": "evening",
+      "spawn": [
+        {
+          "character": "ren",
+          "pos": [
+            -130,
+            65,
+            91
+          ],
+          "yaw": 180,
+          "steps": 1
+        },
+        {
+          "character": "yui",
+          "pos": [
+            -138,
+            65,
+            91
+          ],
+          "yaw": 180,
+          "steps": 1
+        }
+      ],
+      "effects": [
+        {
+          "type": "walk",
+          "character": "yui",
+          "speed": 0.07,
+          "loop": true,
+          "points": [
+            [
+              -138,
+              87
+            ],
+            [
+              -130,
+              87
+            ],
+            [
+              -130,
+              95
+            ],
+            [
+              -138,
+              95
+            ]
+          ]
+        },
+        {
+          "type": "walk",
+          "character": "ren",
+          "speed": 0.08,
+          "loop": true,
+          "slip": 0.3,
+          "points": [
+            [
+              -131,
+              94
+            ],
+            [
+              -137,
+              94
+            ],
+            [
+              -137,
+              88
+            ],
+            [
+              -131,
+              88
+            ]
+          ]
+        }
+      ]
     },
     {
       "type": "talk",

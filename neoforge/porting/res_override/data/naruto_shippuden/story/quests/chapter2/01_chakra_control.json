@@ -12,14 +12,20 @@
     },
     {
       "speaker": "tatsumi",
-      "text": "Gather it. Feel it. (Press G for Chakra Control.)"
+      "text": "Gather it. Feel it. Then stand still and let it settle. (G for Chakra Control, then hold Sneak to focus.)"
     }
   ],
   "steps": [
     {
       "type": "event",
       "event": "chakra_control",
-      "text": "Focus your chakra (Chakra Control, G)"
+      "text": "Turn on Chakra Control (G)",
+      "time": "day"
+    },
+    {
+      "type": "event",
+      "event": "focus",
+      "text": "Hold Sneak and stand still to focus your chakra"
     },
     {
       "type": "talk",
@@ -49,7 +55,62 @@
       ],
       "radius": 28,
       "min_y": 100,
-      "text": "Walk up the cliff north of the training ground"
+      "text": "Walk up the cliff north of the training ground",
+      "spawn": [
+        {
+          "character": "ren",
+          "pos": [
+            -129,
+            65,
+            -67
+          ],
+          "yaw": 180,
+          "steps": 1
+        },
+        {
+          "character": "yui",
+          "pos": [
+            -123,
+            65,
+            -67
+          ],
+          "yaw": 180,
+          "steps": 1
+        }
+      ],
+      "effects": [
+        {
+          "type": "walk",
+          "character": "yui",
+          "points": [
+            [
+              -123,
+              -90
+            ],
+            [
+              -124,
+              -186
+            ]
+          ],
+          "speed": 0.13
+        },
+        {
+          "type": "walk",
+          "character": "ren",
+          "points": [
+            [
+              -129,
+              -90
+            ],
+            [
+              -128,
+              -186
+            ]
+          ],
+          "speed": 0.11,
+          "slip": 0.9
+        }
+      ]
     },
     {
       "type": "talk",

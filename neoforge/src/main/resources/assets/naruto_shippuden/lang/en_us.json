@@ -407,6 +407,8 @@
   "death.attack.naruto_shippuden.jutsu": "%1$s was struck down by a jutsu",
   "death.attack.naruto_shippuden.jutsu.player": "%1$s was struck down by %2$s's jutsu",
   "death.attack.naruto_shippuden.jutsu.item": "%1$s was struck down by %2$s's jutsu",
+  "death.attack.naruto_shippuden.spar": "%1$s lost a spar badly",
+  "death.attack.naruto_shippuden.spar.player": "%1$s lost a spar with %2$s",
   "entity.naruto_shippuden.jutsu_projectile": "Jutsu",
   "key.category.naruto_shippuden.keys": "Naruto Shippuden",
   "key.naruto_shippuden.dojutsu": "Dojutsu (tap / hold for wheel)",

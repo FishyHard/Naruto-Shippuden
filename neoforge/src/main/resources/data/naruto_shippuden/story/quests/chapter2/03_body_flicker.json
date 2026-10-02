@@ -19,7 +19,8 @@
     {
       "type": "event",
       "event": "dash",
-      "text": "Dash with Chakra Control on (Left Alt)"
+      "text": "Dash with Chakra Control on (Left Alt)",
+      "time": "day"
     },
     {
       "type": "talk",
