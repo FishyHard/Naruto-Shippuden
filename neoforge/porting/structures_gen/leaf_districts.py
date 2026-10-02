@@ -511,6 +511,8 @@ def bbq_restaurant():
     for x in (13, 14):
         for z in range(5, 10):
             b.set(x, G + 5, z, AIR)
+        b.set(x, G + 5, 4, stairs('spruce_stairs', 'north'))           # the last step, in the upstairs floor
+        b.fill(x, G, 4, x, G + 4, 4, 'spruce_planks')
     # lights
     for (x, z) in ((4, 6), (9, 6), (9, 3)):
         b.lantern(x, G + 4, z, hanging=True)

@@ -434,7 +434,9 @@ public class StoryNpc extends NarutoShippudenModElements.ModElement {
 			boolean wasSeated = getPose() == net.minecraft.world.entity.Pose.SITTING;
 			setPose(switch (pose) {
 				case "crouch" -> net.minecraft.world.entity.Pose.CROUCHING;
-				case "lie" -> net.minecraft.world.entity.Pose.SLEEPING;
+				// lying down is drawn as vanilla's sleeper (StoryClient), but held as SWIMMING: a sleeper's box is a fixed
+				// 0.2 blocks (LivingEntity.getDimensions), this one is the length of the body, to click on
+				case "lie" -> net.minecraft.world.entity.Pose.SWIMMING;
 				case "sit" -> net.minecraft.world.entity.Pose.SITTING;
 				default -> net.minecraft.world.entity.Pose.STANDING;
 			});
@@ -589,9 +591,10 @@ public class StoryNpc extends NarutoShippudenModElements.ModElement {
 		}
 
 		@Override
-		public float getPickRadius() {
-			// lying down, the body is a 0.2 block box at its middle (vanilla's sleeper): the whole length of it can be clicked
-			return getPose() == net.minecraft.world.entity.Pose.SLEEPING ? 1.0F : super.getPickRadius();
+		protected net.minecraft.world.entity.EntityDimensions getDefaultDimensions(net.minecraft.world.entity.Pose pose) {
+			// lying down: a flat box as long as the body, whichever way it lies
+			return pose == net.minecraft.world.entity.Pose.SWIMMING ? net.minecraft.world.entity.EntityDimensions.scalable(1.8F, 0.5F)
+					: super.getDefaultDimensions(pose);
 		}
 
 		@Override
@@ -620,7 +623,7 @@ public class StoryNpc extends NarutoShippudenModElements.ModElement {
 			output.putString("StorySkin", skin());
 			output.putString("StoryModel", model());
 			output.putString("StoryEyes", eyes());
-			output.putString("StoryPose", getPose() == net.minecraft.world.entity.Pose.CROUCHING ? "crouch" : getPose() == net.minecraft.world.entity.Pose.SLEEPING ? "lie" : getPose() == net.minecraft.world.entity.Pose.SITTING ? "sit" : "");
+			output.putString("StoryPose", getPose() == net.minecraft.world.entity.Pose.CROUCHING ? "crouch" : getPose() == net.minecraft.world.entity.Pose.SWIMMING ? "lie" : getPose() == net.minecraft.world.entity.Pose.SITTING ? "sit" : "");
 			if (route != null) {
 				// the walk goes on after the chunk is saved and loaded again
 				StringBuilder points = new StringBuilder();

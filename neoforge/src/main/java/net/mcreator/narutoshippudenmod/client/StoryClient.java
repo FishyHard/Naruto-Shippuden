@@ -555,6 +555,12 @@ public final class StoryClient {
 			state.model = npc.model();
 			state.eyes = npc.eyes().isEmpty() ? null : Identifier.tryParse(npc.eyes());
 			state.seated = npc.getPose() == net.minecraft.world.entity.Pose.SITTING;
+			if (npc.getPose() == net.minecraft.world.entity.Pose.SWIMMING) {
+				// lying down (StoryNpc holds it as SWIMMING for its box): drawn as a sleeper on the ground, no bed
+				state.pose = net.minecraft.world.entity.Pose.SLEEPING;
+				state.bedOrientation = null;
+				state.swimAmount = 0;
+			}
 			if (state.seated)
 				state.isPassenger = true;
 		}

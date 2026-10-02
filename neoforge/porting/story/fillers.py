@@ -27,12 +27,12 @@ TRAINING_DUMMY = ('execute unless entity @e[type=naruto_shippuden:training_dummy
 
 def booth(character, x, north, steps=2):
     """Someone sitting on a floor cushion at Yakiniku Q's first grill table, north of it (facing south) or south."""
-    return dict(character=character, pos=[x, G - 0.4, 60 if north else 62], yaw=0 if north else 180, steps=steps, pose='sit')
+    return dict(character=character, pos=[x, G - 0.2, 60 if north else 62], yaw=0 if north else 180, steps=steps, pose='sit')
 
 
 def ground(character, x, z, yaw, pose='sit', steps=2):
     """Someone sitting (or lying) on the grass."""
-    return dict(character=character, pos=[x, G - 0.5 if pose == 'sit' else G, z], yaw=yaw, steps=steps, pose=pose)
+    return dict(character=character, pos=[x, G - 0.35 if pose == 'sit' else G, z], yaw=yaw, steps=steps, pose=pose)
 
 
 def stool(character, z, steps=2):
