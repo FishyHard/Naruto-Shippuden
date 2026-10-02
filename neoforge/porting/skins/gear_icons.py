@@ -29,9 +29,11 @@ HAT = [
 ]
 VEST = [
     "................",
-    "...ooovvvvooO...",
-    "..ohlOPPPPOnvO..",
-    "..olhlOPPOlnvO..",
+    ".....oooooO.....",
+    "....ohhllnnO....",
+    "...olhOvvOnvO...",
+    "..olGOhvvnOGvO..",
+    "..olGlOhnOGnvO..",
     "..olGGlOOGGnvO..",
     "..olGGGznGGnvO..",
     "..olPPPZnPPPvO..",
@@ -39,8 +41,6 @@ VEST = [
     "..olPPPZnPPPvO..",
     "..olPpPznPpPvO..",
     "..olPPPZnPPPvO..",
-    "..oGGlGznGnvvO..",
-    "..OnGnnZnnvvvO..",
     "..OvnvvzvvvvvO..",
     "..XXXXXXXXXXXX..",
     "................",
