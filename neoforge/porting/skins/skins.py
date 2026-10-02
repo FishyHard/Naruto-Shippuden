@@ -808,10 +808,11 @@ def shino():
 
 
 def chunin(s, skin):
-    """The Leaf's chunin and jonin uniform: the vest over the navy shirt with the swirl patches, navy trousers wrapped at the
-    shins, the holster."""
+    """The Leaf's chunin and jonin uniform under the vest (the real jonin vest item goes over it, story/chapter1.py): the
+    navy shirt with the swirl patches, navy trousers wrapped at the shins, the holster."""
     navy = rgb('#26304E')
-    flak_vest(s, shirt=navy)
+    torso(s, navy)
+    ring(s, 'body', [0], navy, -0.5)
     sleeves(s, navy, skin, rows=11, cuff=navy)
     swirl_patch(s)
     for a in ('rarm', 'larm'):
@@ -843,7 +844,7 @@ def iruka():
 
 
 def mizuki():
-    """Mizuki: long pale blue-grey hair to his shoulders, the chunin's vest."""
+    """Mizuki: long pale blue-grey hair to his shoulders, the chunin's uniform (the real jonin vest item goes over it)."""
     s = Skin()
     hair_c = rgb('#B0C6D8')
     head(s)
@@ -856,7 +857,7 @@ def mizuki():
 
 def hiruzen():
     """The Third Hokage, in his shinobi uniform: the dark grey shirt and trousers with the swirl patches, a grey goatee and
-    the lines of age. He wears the real Hokage's hat and jonin vest over it (story/StoryGear)."""
+    the lines of age. He wears the real Hokage's hat over it (story/StoryGear)."""
     s = Skin()
     old, grey, shirt = rgb('#E6BA92'), rgb('#9A9A9A'), rgb('#2E3240')
     head(s, old)
@@ -882,7 +883,8 @@ def hiruzen():
 
 
 def tatsumi():
-    """The player's jonin sensei (an original character): dark grey spiky hair, a scar over his left eye, the jonin's vest."""
+    """The player's jonin sensei (an original character): dark grey spiky hair, a scar over his left eye, the jonin's uniform (the real vest
+    item goes over it)."""
     s = Skin()
     hair_c = rgb('#3E424C')
     head(s)
@@ -970,6 +972,8 @@ def view(s, back=False):
 
 
 if __name__ == '__main__':
+    from refs import REF_CHARACTERS
+    CHARACTERS.update(REF_CHARACTERS)
     out = sys.argv[1] if len(sys.argv) > 1 else None
     n = len(CHARACTERS)
     sheet = Image.new('RGBA', (n * 176, 300), (190, 190, 190, 255))

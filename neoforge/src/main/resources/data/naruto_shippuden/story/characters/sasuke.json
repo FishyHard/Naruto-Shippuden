@@ -1,7 +1,7 @@
 {
   "name": "Sasuke Uchiha",
   "skin": "naruto_shippuden:textures/entities/story/sasuke.png",
-  "model": "player",
+  "model": "slim",
   "home": [
     -94,
     65,

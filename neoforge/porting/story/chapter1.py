@@ -19,6 +19,8 @@ def skin(name):
 
 
 HEADBAND = {'head': 'naruto_shippuden:genin_konohagakure_helmet'}
+# the Academy's teachers and the player's sensei: the headband and the real jonin vest (story/StoryGear) over the uniform
+SENSEI = dict(HEADBAND, chest='naruto_shippuden:jonin_vest')
 # the class wear their headbands once they have passed (for the players who saw them pass); Naruto's comes from Iruka on the
 # night of the Scroll of Seals. Ino (at her waist), Shikamaru (on his arm) and Hinata (round her neck) wear theirs where
 # Minecraft has no slot for it, so theirs is painted on or left out.
@@ -26,21 +28,21 @@ GRADUATES = dict(graduate=HEADBAND, graduate_after='chapter1/03_graduation')
 
 
 CHARACTERS = {
-    'iruka': dict(name='Iruka Umino', skin=skin('iruka'), model='player', equipment=HEADBAND, home=[-84, G, -73], yaw=0,
+    'iruka': dict(name='Iruka Umino', skin=skin('iruka'), model='player', equipment=SENSEI, home=[-84, G, -73], yaw=0,
                   idle=["Don't be late for class.", "A shinobi's tools are only as good as their training.",
                         "Naruto! ...Oh, it's you. Sorry. Have you seen him?"]),
     # gone from the Academy once the class has passed (that night he shows what he is)
-    'mizuki': dict(name='Mizuki', skin=skin('mizuki'), model='player', equipment=HEADBAND, home=[-79, G, -74], yaw=0, until='chapter1/03_graduation',
+    'mizuki': dict(name='Mizuki', skin=skin('mizuki'), model='player', equipment=SENSEI, home=[-79, G, -74], yaw=0, until='chapter1/03_graduation',
                    idle=["Iruka is too soft on that Naruto.", "Study hard. The exam is closer than you think."]),
-    # the Hokage's hat and the jonin vest are real armour (story/StoryGear), over his uniform
+    # the Hokage's hat is real armour (story/StoryGear), over his uniform
     'hiruzen': dict(name='Hiruzen Sarutobi', skin=skin('hiruzen'), model='player', home=[0, G, -56], yaw=0,
-                    equipment={'head': 'naruto_shippuden:hokage_hat', 'chest': 'naruto_shippuden:jonin_vest'},
+                    equipment={'head': 'naruto_shippuden:hokage_hat'},
                     idle=["Every one of you is a leaf of this village.", "Ah, the Academy's newest. How are your lessons?"]),
     'naruto': dict(name='Naruto Uzumaki', skin=skin('naruto'), model='player', home=[-99, G, -60], yaw=-90,
                    graduate=HEADBAND, graduate_skin=skin('naruto_genin'), graduate_after='chapter1/04_scroll_of_seals',
                    idle=["I'm gonna be Hokage someday, believe it!", "Ramen after class? ...You're paying, right?",
                          "Sasuke thinks he's so cool. Hmph!"]),
-    'sasuke': dict(name='Sasuke Uchiha', skin=skin('sasuke'), model='player', home=[-94, G, -68], yaw=-90, **GRADUATES,
+    'sasuke': dict(name='Sasuke Uchiha', skin=skin('sasuke'), model='slim', home=[-94, G, -68], yaw=-90, **GRADUATES,
                    idle=["...", "Don't get in my way.", "Hmph."]),
     'sakura': dict(name='Sakura Haruno', skin=skin('sakura'), model='slim', home=[-91, G, -69], yaw=90, **GRADUATES,
                    idle=["Sasuke is SO cool, isn't he?", "I'm top of the class in theory, you know!"]),
@@ -59,7 +61,7 @@ CHARACTERS = {
     'shino': dict(name='Shino Aburame', skin=skin('shino'), model='player', home=[-64, G, -65], yaw=90, **GRADUATES,
                   idle=["...", "The insects tell me rain is coming. Why? Because they always know."]),
     # the player's squad: original characters, at Training Ground 3 once Chapter 1's last night is over
-    'tatsumi': dict(name='Tatsumi Kurogane', skin=skin('tatsumi'), model='player', equipment=HEADBAND, home=[-126, G, -76], yaw=0, after='chapter1/04_scroll_of_seals',
+    'tatsumi': dict(name='Tatsumi Kurogane', skin=skin('tatsumi'), model='player', equipment=SENSEI, home=[-126, G, -76], yaw=0, after='chapter1/04_scroll_of_seals',
                     idle=["Teamwork first. Talent second.", "Don't look at my scar, look at my hands. That's where the jutsu starts."]),
     'ren': dict(name='Ren Sakuragi', skin=skin('ren'), model='player', equipment=HEADBAND, home=[-129, G, -67], yaw=180, after='chapter1/04_scroll_of_seals',
                 idle=["Our first real mission's coming. I can feel it!", "Race you to the stumps!"]),

@@ -3,7 +3,8 @@
   "skin": "naruto_shippuden:textures/entities/story/mizuki.png",
   "model": "player",
   "equipment": {
-    "head": "naruto_shippuden:genin_konohagakure_helmet"
+    "head": "naruto_shippuden:genin_konohagakure_helmet",
+    "chest": "naruto_shippuden:jonin_vest"
   },
   "home": [
     -79,
