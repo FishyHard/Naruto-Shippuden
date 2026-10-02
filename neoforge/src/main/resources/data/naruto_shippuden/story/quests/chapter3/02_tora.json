@@ -6,6 +6,7 @@
   ],
   "start": "tatsumi",
   "when": "day",
+  "level": 10,
   "offer": [
     {
       "speaker": "tatsumi",
@@ -130,6 +131,15 @@
       "text": "Search Tora's hiding places: the training ground trees, behind Ichiraku, the plaza"
     },
     {
+      "type": "near",
+      "tag": "story_tora",
+      "radius": 1.8,
+      "text": "Tora's in the plaza! Catch her",
+      "on_start": [
+        "summon minecraft:cat 3 65 -48 {CustomName:'Tora',PersistenceRequired:1b,variant:'minecraft:red',Tags:['story_tora']}"
+      ]
+    },
+    {
       "type": "goto",
       "pos": [
         0,
@@ -191,7 +201,8 @@
           "yaw": 180,
           "steps": 2
         }
-      ]
+      ],
+      "remove": "story_tora"
     },
     {
       "type": "talk",
@@ -201,6 +212,10 @@
         {
           "speaker": "hiruzen",
           "text": "Ah, Tora. And from your scratches, she didn't come quietly."
+        },
+        {
+          "speaker": "ren",
+          "text": "She bit me. Twice. Who names a cat 'Tiger' anyway?!"
         },
         {
           "speaker": "iruka",

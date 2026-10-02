@@ -6,6 +6,7 @@
   ],
   "start": "tatsumi",
   "when": "day",
+  "level": 8,
   "offer": [
     {
       "speaker": "tatsumi",

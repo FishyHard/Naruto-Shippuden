@@ -312,10 +312,12 @@ public final class InfoCardScreens {
 
 	// ------------------------------------------------------------------ dojutsu appearance
 	public static class InfoCardDojutsuGuiWindow extends ModScreen<InfoCardDojutsuGui.GuiContainerMod> {
-		static final int EYE_X = 26, EYE_Y = 68;
+		// the preview on the left (16 preview pixels to a skin pixel), the settings as a column of rows on the right: a label,
+		// then < value > under it
+		static final int EYE_X = 26, EYE_Y = 104, ROW_X = 148, ROW_W = 144, ROW_H = 34, ROW_Y = 44;
 
 		public InfoCardDojutsuGuiWindow(InfoCardDojutsuGui.GuiContainerMod container, Inventory inventory, Component text) {
-			super(container, inventory, Component.literal("Dojutsu"), 300, 180, container.entity, container.x, container.y, container.z);
+			super(container, inventory, Component.literal("Dojutsu"), 300, 218, container.entity, container.x, container.y, container.z);
 		}
 
 		@Override
@@ -323,53 +325,56 @@ public final class InfoCardScreens {
 			NarutoShippudenMod.PACKET_HANDLER.sendToServer(new InfoCardDojutsuGui.ButtonPressedMessage(id, x, y, z));
 		}
 
+		private void row(int row, int less, int more, @org.jspecify.annotations.Nullable Predicate<Map<String, Object>> shownIf) {
+			int by = ROW_Y + row * ROW_H + 10;
+			button("<", less, ROW_X, by, 20, 20, shownIf);
+			button(">", more, ROW_X + ROW_W - 20, by, 20, 20, shownIf);
+		}
+
 		@Override
 		protected void init() {
 			super.init();
 			pageTabs("dojutsu");
-			Predicate<Map<String, Object>> variants = GuiDisplayProcedures.DisplayMinus2SelectProcedure::executeProcedure;
-			button("<", 8, 148, 50, 20, 20, variants);
-			button(">", 9, 272, 50, 20, 20, variants);
-			int[][] ids = {{1, 2}, {3, 4}, {5, 6}};
-			for (int row = 0; row < 3; row++) {
-				button("<", ids[row][0], 148, 84 + row * 34, 20);
-				button(">", ids[row][1], 272, 84 + row * 34, 20);
-			}
-			button("Select", 7, 8, 134, 132).setTooltip(Tooltip.create(Component.literal("Use this dojutsu and eye shape")));
-			// where the eyes sit on the face: up or down a skin pixel at a time, for skins whose eyes aren't on the usual row
-			button("^", 10, 8, 158, 20).setTooltip(Tooltip.create(Component.literal("Move the dojutsu up a pixel")));
-			button("v", 11, 120, 158, 20).setTooltip(Tooltip.create(Component.literal("Move the dojutsu down a pixel")));
+			row(0, 1, 2, null);
+			row(1, 8, 9, GuiDisplayProcedures.DisplayMinus2SelectProcedure::executeProcedure);
+			row(2, 3, 4, null);
+			row(3, 5, 6, null);
+			row(4, 10, 11, null);
+			button("Select", 7, 8, 190, 132).setTooltip(Tooltip.create(Component.literal("Use this dojutsu and eye shape")));
 		}
 
 		@Override
 		protected void background(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
-			darkInset(graphics, 8, 40, 132, 88);
+			darkInset(graphics, 8, 44, 132, 140);
+			// the eyes moved as they will sit on the face (Position), kept inside the preview
+			int shift = Math.max(-2, Math.min(2, (int) vars().Eyes_Offset)) * 16;
 			for (Eye eye : EYES)
 				if (is(eye.shown()))
-					texture(graphics, eye.texture(), EYE_X + eye.dx(), EYE_Y + eye.dy(), eye.width(), eye.height());
+					texture(graphics, eye.texture(), EYE_X + eye.dx(), EYE_Y + eye.dy() + shift, eye.width(), eye.height());
+		}
+
+		private void value(GuiGraphicsExtractor graphics, int row, String label, String value) {
+			int ry = ROW_Y + row * ROW_H;
+			graphics.text(font, label, ROW_X, ry, MUTED, false);
+			textCentered(graphics, value, ROW_X + ROW_W / 2, ry + 16, TEXT);
 		}
 
 		@Override
 		protected void labels(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
 			PlayerVariables vars = vars();
-			if (is(GuiDisplayProcedures.DisplayMinus2SelectProcedure::executeProcedure)) {
-				text(graphics, "Variant", 148, 40);
-				textCentered(graphics, vars.DojutsuSelect2, 220, 56, TEXT);
-			}
-			text(graphics, "Dojutsu", 148, 74);
-			String line2 = vars.DojutsuSelect3 == null ? "" : vars.DojutsuSelect3.trim();
-			if (line2.isEmpty()) {
-				textCentered(graphics, vars.DojutsuSelectResize, 220, 90, TEXT);
-			} else {
-				textCentered(graphics, vars.DojutsuSelectResize, 220, 85, TEXT);
-				textCentered(graphics, line2, 220, 94, TEXT);
-			}
-			text(graphics, "Pupil Height", 148, 108);
-			textCentered(graphics, number(vars.Pupils_Height), 220, 124, TEXT);
+			String name = vars.DojutsuSelectResize == null ? "" : vars.DojutsuSelectResize.trim();
+			String more = vars.DojutsuSelect3 == null ? "" : vars.DojutsuSelect3.trim();
+			String full = more.isEmpty() ? name : name + " " + more;
+			// a long name shortened to fit between the arrows
+			while (font.width(full) > ROW_W - 46 && full.length() > 4)
+				full = full.substring(0, full.length() - 2);
+			value(graphics, 0, "Dojutsu", full);
+			if (is(GuiDisplayProcedures.DisplayMinus2SelectProcedure::executeProcedure))
+				value(graphics, 1, "Variant", vars.DojutsuSelect2);
+			value(graphics, 2, "Pupil height", number(vars.Pupils_Height) + " px");
+			value(graphics, 3, "Eye height", number(vars.Eyes_Height) + " px");
 			int offset = (int) vars.Eyes_Offset;
-			textCentered(graphics, "Position " + (offset == 0 ? "0" : offset > 0 ? offset + " down" : -offset + " up"), 74, 164, TEXT);
-			text(graphics, "Eye Height", 148, 142);
-			textCentered(graphics, number(vars.Eyes_Height), 220, 158, TEXT);
+			value(graphics, 4, "Position on the face", offset == 0 ? "Usual" : Math.abs(offset) + " px " + (offset > 0 ? "lower" : "higher"));
 		}
 	}
 
@@ -517,8 +522,10 @@ public final class InfoCardScreens {
 
 	// ------------------------------------------------------------------ first join: clan, village and nature
 	public static class StatSelectGuiWindow extends ModScreen<StatSelectGui.GuiContainerMod> {
+		// a new player chooses their clan, nothing else: their nature comes from the story's Chakra Paper lesson and their
+		// village is the Leaf (porting/rules.py clan_only_selection)
 		public StatSelectGuiWindow(StatSelectGui.GuiContainerMod container, Inventory inventory, Component text) {
-			super(container, inventory, Component.literal("Choose Your Path"), 176, 166, container.entity, container.x, container.y, container.z);
+			super(container, inventory, Component.literal("Choose Your Clan"), 176, 116, container.entity, container.x, container.y, container.z);
 		}
 
 		@Override
@@ -529,38 +536,24 @@ public final class InfoCardScreens {
 		@Override
 		protected void init() {
 			super.init();
-			int[][] ids = {{0, 1}, {2, 3}, {5, 6}};
-			for (int row = 0; row < 3; row++) {
-				button("<", ids[row][0], 88, 26 + row * 40, 20);
-				button(">", ids[row][1], 148, 26 + row * 40, 20);
-			}
-			button("Select", 4, 48, 138, 80);
-		}
-
-		private ModScreen.Icon[] row(int row) {
-			return row == 0 ? Icons.SELECT_CLANS : row == 1 ? Icons.SELECT_VILLAGES : Icons.SELECT_NATURES;
+			button("<", 0, 40, 30, 20);
+			button(">", 1, 116, 30, 20);
+			button("Select", 4, 38, 88, 100);
 		}
 
 		@Override
 		protected void background(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
-			for (int row = 0; row < 3; row++) {
-				int ry = 18 + row * 40;
-				inset(graphics, 110, ry, 36, 36);
-				ModScreen.Icon icon = first(row(row));
-				if (icon != null)
-					texture(graphics, icon.texture(), 112, ry + 2, 32, 32);
-			}
+			inset(graphics, 70, 22, 36, 36);
+			ModScreen.Icon icon = first(Icons.SELECT_CLANS);
+			if (icon != null)
+				texture(graphics, icon.texture(), 72, 24, 32, 32);
 		}
 
 		@Override
 		protected void labels(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
-			String[] names = {"Clan", "Village", "Nature"};
-			for (int row = 0; row < 3; row++) {
-				int ry = 18 + row * 40;
-				ModScreen.Icon icon = first(row(row));
-				text(graphics, names[row], 8, ry + 8);
-				graphics.text(font, icon == null ? "-" : icon.name(), 8, ry + 19, MUTED, false);
-			}
+			ModScreen.Icon icon = first(Icons.SELECT_CLANS);
+			textCentered(graphics, icon == null ? "-" : icon.name(), 88, 64, TEXT);
+			textCentered(graphics, "Your bloodline and its jutsu", 88, 75, MUTED);
 		}
 	}
 }

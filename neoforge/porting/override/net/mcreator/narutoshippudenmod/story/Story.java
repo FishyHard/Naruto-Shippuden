@@ -75,7 +75,8 @@ import java.util.TreeMap;
  *                                          "offer": [lines], "steps": [steps], "rewards": {"items": [{"id", "count"}], "xp" (shinobi XP), "vanilla_xp", "commands",
  *                                          "ryo" (Bronze Ryo's worth, in coins), "mission": "D".."SS" (counted on the Info Card),
  *                                          "time" (the time of day it moves on to)}, "when": "morning"|"day"|"evening"|"night"
- *                                          (only offered then), "later": the character's line while it's held back}
+ *                                          (only offered then), "level": the shinobi level it needs, "later": the character's line
+ *                                          while it's held back}
  * </pre>
  * A quest starts by itself ("auto") or when its character is talked to, once every quest in "after" is done. A filler
  * ("fillers/..." quests, side stories) is only offered while no main-story quest is going: till then its character says its
@@ -87,10 +88,13 @@ import java.util.TreeMap;
  * {"type": "goto", "pos": [x, y, z], "radius": r, "min_y": y, go there (in Chikyū, or "dimension"); min_y: and be at least
  *  "seconds": s, "bar": text}                                  that high (standing on water, up a wall); seconds: and stay
  *                                                              there that long, a bar over the hotbar showing it
- * {"type": "kill", "entity": id, "count": n}                   defeat n of them
+ * {"type": "kill", "entity": id, "count": n, "enemies": {...},  defeat n of them (enemies: the story keeps them there, see
+ *  "allies": [characters]}                                     enemies(); allies: teammates fighting beside the player)
  * {"type": "hit", "entity": id, "count": n}                    land n hits on them (training dummies, sparring)
  * {"type": "collect", "item": id, "count": n, "take": bool}   have n in the inventory (taken when "take")
  * {"type": "wait", "seconds": s}                               let time pass
+ * {"type": "near", "tag": tag, "radius": r}                    reach an entity with that tag (put there by on_start: Tora)
+ * any step's "remove": tag                                     entities with that tag near the player are gone as it starts
  * {"type": "spots", "points": [[x, y, z], ...], "seconds": s, stand at each marked spot (coloured dust shows them, to this
  *  "radius": r}                                                player only) for s seconds: scrubbing paint off the Rock
  * {"type": "spar", "npc": id, "hits": n, "damage": d,         spar with that character until landing n hits; it fights back
@@ -124,7 +128,7 @@ public final class Story {
 	}
 
 	public record Quest(String id, String title, int chapter, List<String> after, String start, JsonArray offer, List<JsonObject> steps,
-			JsonObject rewards, String later, String when) {
+			JsonObject rewards, String later, String when, int level) {
 	}
 
 	private static volatile Map<String, Character> characters = Map.of();
@@ -175,7 +179,8 @@ public final class Story {
 				o.getAsJsonArray("steps").forEach(s -> steps.add(s.getAsJsonObject()));
 				qs.put(e.getKey(), new Quest(e.getKey(), str(o, "title", e.getKey()), o.has("chapter") ? o.get("chapter").getAsInt() : 0, after,
 						str(o, "start", "auto"), o.has("offer") ? o.getAsJsonArray("offer") : new JsonArray(), steps,
-						o.has("rewards") ? o.getAsJsonObject("rewards") : new JsonObject(), str(o, "later", ""), str(o, "when", "")));
+						o.has("rewards") ? o.getAsJsonObject("rewards") : new JsonObject(), str(o, "later", ""), str(o, "when", ""),
+						o.has("level") ? o.get("level").getAsInt() : 0));
 			}
 			return new Object[]{chars, qs};
 		}
@@ -290,6 +295,8 @@ public final class Story {
 	private static @org.jspecify.annotations.Nullable String held(ServerPlayer player, Quest quest) {
 		if (onFiller(player) || isFiller(quest) && onMainQuest(player))
 			return "busy";
+		if (quest.level() > (int) net.mcreator.narutoshippudenmod.NarutoShippudenModVariables.get(player).LEVELSTAT)
+			return "level";
 		if (!quest.when().isEmpty() && !isTime(player, quest.when()))
 			return "time";
 		return null;
@@ -692,6 +699,10 @@ public final class Story {
 			complete(player, quest);
 			return;
 		}
+		if (step.has("remove") && player.level() instanceof ServerLevel level)
+			// what an earlier step put in the world, gone now (the cat the player has caught and carries)
+			for (Entity x : level.getEntities((Entity) null, player.getBoundingBox().inflate(96), x -> x.entityTags().contains(str(step, "remove", ""))))
+				x.discard();
 		if (step.has("on_start"))
 			step.getAsJsonArray("on_start").forEach(c -> Compat.runCommand(player, c.getAsString()));
 		if (step.has("time"))
@@ -807,6 +818,63 @@ public final class Story {
 		}
 	}
 
+	/**
+	 * A kill step's enemies, kept by the story: "enemies": {"around": [x, y, z], "radius": r, "tags": [...]} has the engine put
+	 * as many as are still to be defeated round that place whenever the player is near it, persistent and marked as this
+	 * player's (so dying, leaving or a despawn can't leave the quest without them). "allies": [characters] are the player's
+	 * scene teammates, who fight them alongside (blows for show: the player's to defeat).
+	 */
+	private static void enemies(ServerPlayer player, Quest quest, JsonObject step) {
+		JsonObject e = step.getAsJsonObject("enemies");
+		JsonArray at = e.getAsJsonArray("around");
+		double ax = at.get(0).getAsDouble() + 0.5, ay = at.get(1).getAsDouble(), az = at.get(2).getAsDouble() + 0.5;
+		if (!(player.level() instanceof ServerLevel level) || player.distanceToSqr(ax, ay, az) > 48 * 48)
+			return;
+		String own = "se_" + player.getUUID().toString().substring(0, 8);
+		net.minecraft.world.entity.EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.getValue(Identifier.parse(str(step, "entity", "")));
+		List<Entity> alive = level.getEntities((Entity) null, new net.minecraft.world.phys.AABB(ax - 48, ay - 24, az - 48, ax + 48, ay + 24, az + 48),
+				x -> x.getType() == type && x.entityTags().contains(own) && x.isAlive());
+		CompoundTag p = progress(player, quest);
+		int need = (step.has("count") ? step.get("count").getAsInt() : 1) - p.getIntOr("count", 0);
+		long now = level.getGameTime();
+		if (alive.size() < need && now - p.getLongOr("spawned", -1000L) >= 60) {
+			p.putLong("spawned", now);
+			double r = e.has("radius") ? e.get("radius").getAsDouble() : 8;
+			for (int i = alive.size(); i < need; i++) {
+				double ang = player.getRandom().nextDouble() * Math.PI * 2, d = r * (0.6 + 0.4 * player.getRandom().nextDouble());
+				int x = (int) Math.floor(ax + Math.cos(ang) * d), z = (int) Math.floor(az + Math.sin(ang) * d);
+				int y = level.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
+				Entity enemy = type.create(level, EntitySpawnReason.EVENT);
+				if (enemy == null)
+					continue;
+				enemy.snapTo(x + 0.5, y, z + 0.5, player.getRandom().nextFloat() * 360, 0);
+				enemy.addTag(own);
+				if (e.has("tags"))
+					e.getAsJsonArray("tags").forEach(tag -> enemy.addTag(tag.getAsString()));
+				if (enemy instanceof net.minecraft.world.entity.Mob mob) {
+					mob.setPersistenceRequired();
+					mob.setTarget(player);
+					// how tough this mission's enemies are: "health", "damage" (genin facing missing-nin, not Kage)
+					if (e.has("health") && mob.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH) != null) {
+						mob.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).setBaseValue(e.get("health").getAsDouble());
+						mob.setHealth(mob.getMaxHealth());
+					}
+					if (e.has("damage") && mob.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE) != null)
+						mob.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE).setBaseValue(e.get("damage").getAsDouble());
+				}
+				level.addFreshEntity(enemy);
+				level.sendParticles(net.minecraft.core.particles.ParticleTypes.POOF, x + 0.5, y + 1, z + 0.5, 10, 0.3, 0.6, 0.3, 0.02);
+				alive.add(enemy);
+			}
+		}
+		if (step.has("allies") && !alive.isEmpty())
+			for (JsonElement a : step.getAsJsonArray("allies")) {
+				StoryNpc.Npc ally = sceneNpc(level, player, a.getAsString());
+				if (ally != null && !ally.isFighting())
+					ally.fight(alive.stream().min(java.util.Comparator.comparingDouble(ally::distanceToSqr)).orElse(null));
+			}
+	}
+
 	/** A step's time so far, as a bar over the hotbar: how long still to watch, stand or scrub. */
 	private static void bar(ServerPlayer player, String what, int ticks, int need) {
 		int bars = Math.min(10, ticks * 10 / Math.max(1, need));
@@ -866,6 +934,16 @@ public final class Story {
 								step.has("rank") ? step.get("rank").getAsInt() : 0, step.has("throws") && step.get("throws").getAsBoolean(),
 								step.has("substitution") && step.get("substitution").getAsBoolean());
 				}
+			}
+			case "near" -> {
+				// reach something the step put in the world (Tora the cat): an entity carrying the step's tag
+				double r = step.has("radius") ? step.get("radius").getAsDouble() : 2;
+				if (!player.level().getEntities((Entity) null, player.getBoundingBox().inflate(r), x -> x.entityTags().contains(str(step, "tag", ""))).isEmpty())
+					advance(player, quest);
+			}
+			case "kill" -> {
+				if (step.has("enemies"))
+					enemies(player, quest, step);
 			}
 			case "spots" -> {
 				// marked spots to stand on a while each (paint to scrub off the Hokage faces): shown in coloured dust to
@@ -1038,7 +1116,9 @@ public final class Story {
 			JsonObject line = new JsonObject();
 			line.addProperty("speaker", who);
 			boolean time = "time".equals(held(player, later));
+			String why = held(player, later);
 			line.addProperty("text", time ? comeBack(later.when())
+					: "level".equals(why) ? "You're not ready for this yet. Train a little more, then come back. (Level " + later.level() + ")"
 					: later.later().isEmpty() ? "You look busy. Come back once you've finished what you're doing, and we'll talk." : later.later());
 			if (time) {
 				// the player may let the time pass (as a step's "time" does), then ask again
@@ -1200,6 +1280,14 @@ public final class Story {
 			if (type.equals("goto")) {
 				pos = step.getAsJsonArray("pos");
 				dim = str(step, "dimension", dim);
+			} else if (type.equals("near") && player.level() instanceof ServerLevel level) {
+				List<Entity> found = level.getEntities((Entity) null, player.getBoundingBox().inflate(160), x -> x.entityTags().contains(str(step, "tag", "")));
+				if (!found.isEmpty()) {
+					pos = new JsonArray();
+					pos.add(found.getFirst().getBlockX());
+					pos.add(found.getFirst().getBlockY());
+					pos.add(found.getFirst().getBlockZ());
+				}
 			} else if (type.equals("spots")) {
 				// the nearest spot still to do
 				int done = progress(player, q).getIntOr("found", 0);

@@ -6,6 +6,7 @@
   ],
   "start": "tatsumi",
   "when": "day",
+  "level": 11,
   "offer": [
     {
       "speaker": "tatsumi",
@@ -68,10 +69,23 @@
       "entity": "naruto_shippuden:hidden_mist_shinobi",
       "count": 3,
       "text": "Defeat the missing-nin",
-      "on_start": [
-        "execute at @s run summon naruto_shippuden:hidden_mist_shinobi ~8 ~1 ~10 {Tags:[\"missing_nin\"]}",
-        "execute at @s run summon naruto_shippuden:hidden_mist_shinobi ~-8 ~1 ~11 {Tags:[\"missing_nin\"]}",
-        "execute at @s run summon naruto_shippuden:hidden_mist_shinobi ~0 ~1 ~14 {Tags:[\"missing_nin\"]}"
+      "enemies": {
+        "around": [
+          0,
+          65,
+          214
+        ],
+        "radius": 9,
+        "tags": [
+          "missing_nin"
+        ],
+        "health": 26,
+        "damage": 3
+      },
+      "allies": [
+        "tatsumi",
+        "ren",
+        "yui"
       ]
     },
     {

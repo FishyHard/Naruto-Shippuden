@@ -6,6 +6,7 @@
   ],
   "start": "iruka",
   "when": "day",
+  "level": 1,
   "offer": [
     {
       "speaker": "iruka",

@@ -38,6 +38,9 @@ public final class ModelSwapRenderers {
 	public static final ContextKey<LivingEntity> ENTITY = new ContextKey<>(Identifier.fromNamespaceAndPath("naruto_shippuden", "entity"));
 	private static final Map<ModelLayerLocation, EntityModel> MODELS = new HashMap<>();
 	private static PlayerModel overlayModel;
+	/** The eye overlay with its head moved down by n skin pixels (n = -3..3): the head's starting pose is moved, so the
+	 * model's own reset before it is drawn keeps it there. */
+	private static final Map<Integer, PlayerModel> SHIFTED = new HashMap<>();
 
 	private ModelSwapRenderers() {
 	}
@@ -98,8 +101,14 @@ public final class ModelSwapRenderers {
 		// eyes are higher or lower than the dojutsu textures'
 		LivingEntity entity = entity(event);
 		float offset = entity == null ? 0 : (float) net.mcreator.narutoshippudenmod.NarutoShippudenModVariables.get(entity).Eyes_Offset;
+		int shift = Math.round(offset);
+		PlayerModel model = shift == 0 ? overlayModel : SHIFTED.computeIfAbsent(shift, n -> {
+			PlayerModel m = new PlayerModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER), false);
+			m.head.setInitialPose(m.head.getInitialPose().translated(0, n, 0));
+			return m;
+		});
 		for (String texture : textures)
-			draw(event, overlayModel, RenderTypes.entityCutoutZOffset(Identifier.parse(texture)), 0.9375F, offset);
+			draw(event, model, RenderTypes.entityCutoutZOffset(Identifier.parse(texture)), 0.9375F);
 	}
 
 	/**
@@ -141,12 +150,6 @@ public final class ModelSwapRenderers {
 
 	/** Same transforms LivingEntityRenderer applies before drawing its own model. */
 	private static void draw(RenderLivingEvent<?, ?, ?> event, EntityModel model, net.minecraft.client.renderer.rendertype.RenderType renderType, float modelScale) {
-		draw(event, model, renderType, modelScale, 0);
-	}
-
-	/** As above, the model's head moved headOffset skin pixels down (the eyes on it). */
-	private static void draw(RenderLivingEvent<?, ?, ?> event, EntityModel model, net.minecraft.client.renderer.rendertype.RenderType renderType, float modelScale,
-			float headOffset) {
 		LivingEntityRenderState state = event.getRenderState();
 		PoseStack pose = event.getPoseStack();
 		pose.pushPose();
@@ -156,8 +159,6 @@ public final class ModelSwapRenderers {
 		pose.scale(modelScale, modelScale, modelScale);
 		pose.translate(0.0F, -1.501F, 0.0F);
 		model.setupAnim(state);
-		if (headOffset != 0 && model instanceof net.minecraft.client.model.HumanoidModel<?> humanoid)
-			humanoid.head.y += headOffset;
 		event.getSubmitNodeCollector().submitModel(model, state, pose, renderType, state.lightCoords,
 				LivingEntityRenderer.getOverlayCoords(state, 0.0F), state.outlineColor);
 		pose.popPose();

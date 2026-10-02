@@ -145,7 +145,7 @@ QUESTS = {
         rewards={'xp': 10}),
 
     Q + '02_kunai_taijutsu': dict(
-        title='Lesson: Kunai and Taijutsu', chapter=1, after=[Q + '01_first_day'], start='iruka', when='day',
+        title='Lesson: Kunai and Taijutsu', chapter=1, after=[Q + '01_first_day'], start='iruka', when='day', level=1,
         offer=[
             say('iruka', "A shinobi without tools is a shinobi in trouble. Here are some kunai."),
             say('iruka', "Throw them at the training dummy by the targets. Aim for the chest!"),
@@ -170,7 +170,7 @@ QUESTS = {
         rewards={'xp': 20}),
 
     Q + '03_graduation': dict(
-        title='The Graduation Exam', chapter=1, after=[Q + '02_kunai_taijutsu'], start='iruka', when='day',
+        title='The Graduation Exam', chapter=1, after=[Q + '02_kunai_taijutsu'], start='iruka', when='day', level=3,
         offer=[
             say('iruka', "This is it: the graduation exam. Come to the exam room on the Academy's ground floor. Mizuki and I will be your examiners."),
         ],
@@ -247,7 +247,7 @@ QUESTS = {
         rewards={'xp': 60, 'time': 'morning'}),
 
     Q + '05_team_assignment': dict(
-        title='Team Assignment', chapter=1, after=[Q + '04_scroll_of_seals'], start='iruka', when='morning',
+        title='Team Assignment', chapter=1, after=[Q + '04_scroll_of_seals'], start='iruka', when='morning', level=5,
         offer=[
             say('iruka', "Good morning, genin! Today you'll be split into three-person squads, each led by a jonin."),
             say('naruto', "Team Seven! With Sakura-chan! ...And Sasuke. Ugh."),

@@ -85,6 +85,9 @@ public class StoryNpc extends NarutoShippudenModElements.ModElement {
 		private boolean sparThrows, sparSubstitution;
 		// a clone in a scene: whom it rushes, and how long it lasts before it vanishes in smoke
 		private UUID rushAt;
+		/** An enemy this teammate fights beside the player in a mission (blows for show: the player's to defeat). */
+		private UUID fightTarget;
+		private int fightCooldown;
 		private int lifeLeft = -1, rushDelay;
 		// a walk along points over the ground, up walls and over water (teammates showing the lesson): where, how fast, and
 		// whether it slips (falls off the wall, sinks in the water) now and then
@@ -430,6 +433,37 @@ public class StoryNpc extends NarutoShippudenModElements.ModElement {
 			setPos(nx, ground >= y ? ground : Math.max(ground, y - 0.5), nz);
 		}
 
+		/** Fights this enemy beside the player: closes in and trades blows that knock it about but don't wound it. */
+		public void fight(Entity enemy) {
+			fightTarget = enemy == null ? null : enemy.getUUID();
+		}
+
+		public boolean isFighting() {
+			return fightTarget != null && level() instanceof ServerLevel level && level.getEntity(fightTarget) instanceof net.minecraft.world.entity.LivingEntity e && e.isAlive();
+		}
+
+		private boolean fighting(ServerLevel level) {
+			if (!(level.getEntity(fightTarget) instanceof net.minecraft.world.entity.LivingEntity enemy) || !enemy.isAlive() || distanceToSqr(enemy) > 40 * 40) {
+				fightTarget = null;
+				getNavigation().stop();
+				return false;
+			}
+			getLookControl().setLookAt(enemy, 30, 30);
+			if (distanceToSqr(enemy) > 2.4 * 2.4) {
+				if (tickCount % 10 == 0)
+					getNavigation().moveTo(enemy, 1.25);
+			} else if (--fightCooldown <= 0) {
+				fightCooldown = 12 + getRandom().nextInt(12);
+				swing(InteractionHand.MAIN_HAND, net.minecraft.world.item.component.SwingAnimation.DEFAULT, true);
+				net.minecraft.world.phys.Vec3 away = enemy.position().subtract(position()).multiply(1, 0, 1).normalize().scale(0.35);
+				enemy.push(away.x, 0.12, away.z);
+				level.sendParticles(net.minecraft.core.particles.ParticleTypes.CRIT, enemy.getX(), enemy.getY() + 1, enemy.getZ(), 4, 0.3, 0.3, 0.3, 0.1);
+				level.playSound(null, enemy.blockPosition(), net.minecraft.sounds.SoundEvents.PLAYER_ATTACK_STRONG, net.minecraft.sounds.SoundSource.NEUTRAL, 0.5F,
+						0.9F + getRandom().nextFloat() * 0.3F);
+			}
+			return true;
+		}
+
 		public void setStoryPose(String pose) {
 			boolean wasSeated = getPose() == net.minecraft.world.entity.Pose.SITTING;
 			setPose(switch (pose) {
@@ -474,6 +508,8 @@ public class StoryNpc extends NarutoShippudenModElements.ModElement {
 				}
 				return;
 			}
+			if (fightTarget != null && level() instanceof ServerLevel level && fighting(level))
+				return;
 			if (route != null && level() instanceof ServerLevel level) {
 				followRoute(level);
 				return;

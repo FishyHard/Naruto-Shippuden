@@ -16,7 +16,7 @@ def team(steps=1, at=((-129, -67), (-123, -67))):
 
 QUESTS = {
     Q + '01_chakra_control': dict(
-        title='Training: Chakra Control', chapter=2, after=[AFTER_CH1], start='tatsumi', when='day',
+        title='Training: Chakra Control', chapter=2, after=[AFTER_CH1], start='tatsumi', when='day', level=6,
         offer=[
             say('tatsumi', "Before I send you on missions, you need to control your chakra, not just have it."),
             say('tatsumi', "Gather it. Feel it. Then stand still and let it settle. (G for Chakra Control, then hold Sneak to focus.)"),
@@ -43,7 +43,7 @@ QUESTS = {
         rewards={'xp': 20}),
 
     Q + '02_water_walking': dict(
-        title='Training: Walking on Water', chapter=2, after=[Q + '01_chakra_control'], start='tatsumi',
+        title='Training: Walking on Water', chapter=2, after=[Q + '01_chakra_control'], start='tatsumi', level=7,
         offer=[
             say('tatsumi', "A cliff stands still. Water doesn't. Your chakra has to move with it."),
             say('tatsumi', "Go to the lake south-west of the Academy and stand in the middle of it. On it, not in it."),
@@ -64,7 +64,7 @@ QUESTS = {
         rewards={'xp': 20}),
 
     Q + '03_body_flicker': dict(
-        title='Training: The Dash', chapter=2, after=[Q + '02_water_walking'], start='tatsumi', when='day',
+        title='Training: The Dash', chapter=2, after=[Q + '02_water_walking'], start='tatsumi', when='day', level=7,
         offer=[
             say('tatsumi', "Speed decides most fights before the first blow. Push your chakra out in one burst and move."),
             say('tatsumi', "With Chakra Control on, dash. (Left Alt, with a direction.)"),
@@ -83,7 +83,7 @@ QUESTS = {
         rewards={'xp': 25}),
 
     Q + '04_chakra_nature': dict(
-        title='Training: Chakra Nature', chapter=2, after=[Q + '03_body_flicker'], start='tatsumi', when='day',
+        title='Training: Chakra Nature', chapter=2, after=[Q + '03_body_flicker'], start='tatsumi', when='day', level=8,
         offer=[
             say('tatsumi', "Every shinobi's chakra leans toward a nature: fire, wind, lightning, earth or water."),
             say('tatsumi', "This Chakra Paper reacts to it. Channel your chakra into it."),

@@ -2021,3 +2021,22 @@ def dojutsu_position_buttons(path, text):
            '\t\t\t\t});\n'
            '\t\t\t}\n')
     return text[:j] + add + text[j:]
+
+
+@func
+def clan_only_selection(path, text):
+    """The new player's selection screen chooses only the clan: their nature comes from the story's Chakra Paper lesson
+    (chapter2/04_chakra_nature) and they are of the Hidden Leaf, the story's village. Select no longer hands out the chosen
+    nature's release, and always sets the Leaf."""
+    if not path.replace('\\', '/').endswith('procedures/GuiProcedures.java'):
+        return text
+    i = text.find('class ButtonSelectPressProcedure')
+    if i < 0:
+        return text
+    a = text.find('\t\t\tif (NarutoShippudenModVariables.get(entity).selectnaturerelease == 0) {', i)
+    b = text.find('\t\t\tif (NarutoShippudenModVariables.get(entity).selectvillage == 0) {', i)
+    if a < 0 or b < a:
+        return text
+    text = text[:a] + text[b:]
+    b = text.find('\t\t\tif (NarutoShippudenModVariables.get(entity).selectvillage == 0) {', i)
+    return text[:b] + '\t\t\tif (true) { // the story\'s village\n' + text[b + len('\t\t\tif (NarutoShippudenModVariables.get(entity).selectvillage == 0) {\n'):]
