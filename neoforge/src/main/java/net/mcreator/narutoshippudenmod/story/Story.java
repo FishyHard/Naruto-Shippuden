@@ -832,8 +832,8 @@ public final class Story {
 				// this player, each one gone once they've stood at it for the step's seconds
 				JsonArray points = step.getAsJsonArray("points");
 				CompoundTag p = progress(player, quest);
-				int done = p.getIntOr("found", 0), at = p.getIntOr("at", -1), timer = p.getIntOr("timer", 0);
-				double r = step.has("radius") ? step.get("radius").getAsDouble() : 1.8;
+				int done = p.getIntOr("found", 0), timer;
+				double r = step.has("radius") ? step.get("radius").getAsDouble() : 2.5;
 				int need = (step.has("seconds") ? step.get("seconds").getAsInt() : 3) * 20;
 				int[] colours = {0xE8402A, 0x2A7DE8, 0xF2D32A, 0x3CC84A, 0xE85AC8, 0xF28A2A};
 				ServerLevel level = (ServerLevel) player.level();
@@ -852,23 +852,23 @@ public final class Story {
 				}
 				if (player.tickCount % 40 == 0)
 					sync(player);                      // the tracker follows the nearest splash still to do
-				if (here < 0) {
-					p.putInt("at", -1);
-					p.putInt("timer", 0);
+				if (here < 0)
 					return;
-				}
-				timer = here == at ? timer + 10 : 10;
-				p.putInt("at", here);
-				p.putInt("timer", timer);
+				// each splash keeps what's been scrubbed off it, so moving about (climbing on, slipping off) loses nothing
+				String key = "scrub" + here;
+				timer = p.getIntOr(key, 0) + 10;
+				p.putInt(key, timer);
 				JsonArray pt = points.get(here).getAsJsonArray();
 				double x = pt.get(0).getAsDouble() + 0.5, y = pt.get(1).getAsDouble() + 0.5, z = pt.get(2).getAsDouble() + 0.5;
 				level.sendParticles(player, net.minecraft.core.particles.ParticleTypes.SPLASH, true, true, x, y, z, 8, 0.4, 0.3, 0.4, 0.1);
+				int bars = Math.min(10, timer * 10 / need);
+				player.sendOverlayMessage(Component.literal("Scrubbing the paint off  ").withStyle(ChatFormatting.WHITE)
+						.append(Component.literal("|".repeat(bars)).withStyle(ChatFormatting.AQUA))
+						.append(Component.literal("|".repeat(10 - bars)).withStyle(ChatFormatting.DARK_GRAY)));
 				if (timer < need)
 					return;
 				done |= 1 << here;
 				p.putInt("found", done);
-				p.putInt("at", -1);
-				p.putInt("timer", 0);
 				p.putInt("count", Integer.bitCount(done));
 				level.sendParticles(player, net.minecraft.core.particles.ParticleTypes.CLOUD, true, true, x, y, z, 12, 0.4, 0.4, 0.4, 0.02);
 				level.playSound(null, player.blockPosition(), SoundEvents.BUCKET_EMPTY, SoundSource.PLAYERS, 0.8F, 1.2F);

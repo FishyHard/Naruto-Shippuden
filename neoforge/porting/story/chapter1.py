@@ -52,9 +52,10 @@ CHARACTERS = {
                       idle=["What a drag...", "I'd rather be watching the clouds."]),
     'choji': dict(name='Choji Akimichi', skin=skin('choji'), model='player', home=[-71, G, -67], yaw=90, **GRADUATES,
                   idle=["*crunch* Want a chip? ...Just one.", "Shikamaru's smarter than he looks."]),
-    # her resting Byakugan, drawn as players' eyes are (the mod's dojutsu textures)
+    # her resting Byakugan, drawn as players' eyes are (the mod's dojutsu texture, moved down a pixel to where her skin's eyes
+    # are: entities/story/hinata_byakugan.png)
     'hinata': dict(name='Hinata Hyuga', skin=skin('hinata'), model='player', home=[-104, G, -57], yaw=-90, **GRADUATES,
-                   eyes='naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x2_pupils_1x2_not_active.png',
+                   eyes='naruto_shippuden:textures/entities/story/hinata_byakugan.png',
                    idle=["O-oh! I wasn't watching Naruto... I mean...", "G-good luck with your training."]),
     'kiba': dict(name='Kiba Inuzuka', skin=skin('kiba'), model='player', home=[-75, G, -59], yaw=90, **GRADUATES,
                  idle=["Akamaru says you smell like a rookie!", "Wanna go a round? I'll go easy. Maybe."]),

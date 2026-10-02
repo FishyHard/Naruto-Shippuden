@@ -20,7 +20,7 @@ HOSPITAL = [83, G, -87]                # the hospital's waiting room (its benche
 CLOUDS = [-116, G, -78]                # open grass at the edge of Training Ground 3 (clear of the trees)
 ROCK_FOOT = [0, G, -131]               # flat ground before the Hokage Rock, below its talus
 # the splashes of Naruto's paint on the four faces, on the air just in front of each face (porting/structures_gen/world.py)
-PAINT = [[-53, 128, -159], [-27, 110, -162], [-21, 120, -158], [-3, 126, -162], [5, 112, -164], [21, 100, -157]]
+PAINT = [[-53, 128, -159], [-27, 110, -162], [-21, 120, -158], [-1, 123, -161], [4, 115, -163], [21, 100, -157]]
 TRAINING_DUMMY = ('execute unless entity @e[type=naruto_shippuden:training_dummy,x=-68,y=65,z=-58,distance=..3] run '
                   'summon naruto_shippuden:training_dummy -68 65 -58')
 
@@ -245,7 +245,7 @@ QUESTS = {
             say('naruto', "You can walk up walls now, right? Help me scrub! Six big splashes, all over the faces. Stand on each one and scrub!"),
         ],
         steps=[
-            dict(type='spots', points=PAINT, seconds=3, radius=2.2,
+            dict(type='spots', points=PAINT, seconds=3, radius=2.5,
                  text='Scrub the paint off the Hokage faces: walk up the Rock and stand at each splash'),
             dict(type='goto', pos=ROCK_FOOT, radius=6, text='Come back down to the foot of the Rock',
                  spawn=[dict(character='naruto', pos=[-2, G, -130], yaw=180, steps=2), dict(character='iruka', pos=[2, G, -130], yaw=180, steps=2)]),

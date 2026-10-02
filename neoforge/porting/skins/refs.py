@@ -133,6 +133,9 @@ def naruto_genin():
     """The reference's hair, without the headband (it is the real item)."""
     s = load('naruto')
     strip_band(s, 2)
+    # the band's place over the brow filled with hair left yellow blocks above his eyes: his forehead there, under the
+    # headband item, the fringe still over its top row
+    heads.grid(s, 'head', 'front', [".", ".", ".", ".", ".ssssss."], {'s': rgb('#EBB9B1')})
     return s
 
 
@@ -150,8 +153,10 @@ def sasuke():
     for x in range(32, 64):          # the collar ring painted round the bottom of the head: his shirt has its own
         if bluish(s.im.getpixel((x, 15))):
             s.im.putpixel((x, 15), (0, 0, 0, 0))
+    # his forehead showing under the fringe (it was all hair down to the eyes): a pointed lock over it, long bangs down the sides
+    heads.grid(s, 'head', 'front', [".", ".", "HHddHdHH", "HdssssdH"], {'H': rgb('#0E0E0F'), 's': rgb('#FFCBB9'), 'd': rgb('#F0B8A6')})
     # his eyes black, not the Sharingan's red, drawn clean: the whites outside, the pupils in, a shade darker below
-    heads.grid(s, 'head', 'front', [".", ".", ".", ".HHHHHH.", ".WPssPW.", ".wpsspw.", "s......s"],
+    heads.grid(s, 'head', 'front', [".", ".", ".", ".", ".WPssPW.", ".wpsspw.", "s......s"],
                {'W': rgb('#F6F6F8'), 'w': rgb('#D8D8E2'), 'P': rgb('#101016'), 'p': rgb('#2C2C38'), 's': rgb('#FFCBB9'), 'H': rgb('#0C0C0E')})
     for x in (35, 36):               # the Uchiha fan on his back rounded at the top
         s.im.putpixel((x, 21), (0x6B, 0x22, 0x22, 255))

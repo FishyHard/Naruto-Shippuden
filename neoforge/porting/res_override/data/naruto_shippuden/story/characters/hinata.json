@@ -12,7 +12,7 @@
     "head": "naruto_shippuden:genin_konohagakure_helmet"
   },
   "graduate_after": "chapter1/03_graduation",
-  "eyes": "naruto_shippuden:textures/dojutsu/byakugan/byakugan_2x2_pupils_1x2_not_active.png",
+  "eyes": "naruto_shippuden:textures/entities/story/hinata_byakugan.png",
   "idle": [
     "O-oh! I wasn't watching Naruto... I mean...",
     "G-good luck with your training."
