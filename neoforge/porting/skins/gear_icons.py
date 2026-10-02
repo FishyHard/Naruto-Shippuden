@@ -28,22 +28,22 @@ HAT = [
     "...qq......qq...",
 ]
 VEST = [
-    "....ooo..ooO....",
-    "...ohlO..olnO...",
-    "..ohlGnOOlGnvO..",
-    "..olGlGznGGnvO..",
+    "................",
+    "...ooovvvvooO...",
+    "..ohlOPPPPOnvO..",
+    "..olhlOPPOlnvO..",
+    "..olGGlOOGGnvO..",
+    "..olGGGznGGnvO..",
     "..olPPPZnPPPvO..",
     "..olPpPznPpPvO..",
     "..olPPPZnPPPvO..",
     "..olPpPznPpPvO..",
     "..olPPPZnPPPvO..",
-    "..olGGlznGGnvO..",
-    "..olGGGZnGGnvO..",
     "..oGGlGznGnvvO..",
-    "..OGGnGZnnGvvO..",
-    "..OnGnnznnvvvO..",
-    "..OvnvvZvvvvvO..",
+    "..OnGnnZnnvvvO..",
+    "..OvnvvzvvvvvO..",
     "..XXXXXXXXXXXX..",
+    "................",
 ]
 COLOURS = {
     # the hat's red, its white cloth and the shadow under it
