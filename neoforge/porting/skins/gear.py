@@ -59,84 +59,89 @@ def material(base, salt, rough=0.5, grad=0.6, edge=0.25):
 
 WHITE, RED, STRAW, CLOTH = rgb('#F2F0E8'), rgb('#C02A28'), rgb('#C8A870'), rgb('#ECEAE2')
 # the boxes, as client/StoryGearClient builds them: texture offset (u, v) and size (w, h, d)
-# the cone, a pixel narrower each step up: (width, texture offset), from the brim to the top; then the tip and the cloth
-CONE = [(16, (0, 0)), (14, (64, 0)), (12, (0, 17)), (10, (48, 17)), (8, (88, 17)), (6, (0, 30))]
-TIP = (24, 30, 4, 1, 4)
-KNOB = (40, 30, 2, 1, 2)
-VEIL = (48, 30, 10, 7, 1)
-# 火 in white on the red front panel, one row per step from the top step down to the step above the brim
-FIRE = ['..#..', '#.#.#', '..#..', '.#.#.', '#...#']
+# the roof (client/StoryGearClient): four sides, each five strips narrowing to the top, strip k of side s a box (w, 1, 2)
+# at texture row (s * 5 + k) * 3; the rim (18, 1, 18) at (44, 0); the cloth's sides (1, 10, 9) at (44, 19), its back
+# (10, 10, 1) at (64, 19)
+STRIP_WIDTHS = [18, 14, 10, 6, 2]
+RIM = (44, 0, 18, 1, 18)
+CLOTH_SIDE = (44, 19, 1, 10, 9)
+CLOTH_BACK = (64, 19, 10, 10, 1)
+HAT_RED, INK = rgb('#9C3034'), rgb('#4A1A1E')
+# 火 in red on the white triangle, by rows up the slope from the rim (row 0 at the rim)
+FIRE = {6: '..#..', 5: '#.#.#', 4: '..#..', 3: '..#..', 2: '.#.#.', 1: '#...#'}
 
 
 def hokage_hat():
-    """A white woven cone, a pixel narrower each step: the red panel down its front narrowing to the top with the kanji
-    for fire in white across the steps, a red rim round the brim, woven straw under it, the red tip, the cloth at the back."""
+    """The Hokage's hat: the low red pyramid, the white triangle on its front with the kanji in red and an ink line round
+    it, the white rim, the white cloth hanging over the sides and back of the head."""
     im = Image.new('RGBA', (128, 64), CLEAR)
-    steps = len(CONE)
-    for i, (w, (u, v)) in enumerate(CONE):
-        box = (u, v, w, 1, w)
-        row = steps - 1 - i                         # the glyph's row on this step's front (the top step is row 0)
-        panel = 1 + (i * 3) // 2                     # the red panel's half-width here: wide at the brim, narrow at the top
+    for side in range(4):
+        for k, w in enumerate(STRIP_WIDTHS):
+            box = (0, (side * 5 + k) * 3, w, 1, 2)
 
-        def fn(face, x, y, fw, fh, w=w, i=i, row=row, panel=panel):
-            if face == 'bottom':
-                if i == 0:
-                    d = max(abs(x - 7.5), abs(y - 7.5))
-                    return tone(STRAW, -0.7 + 0.07 * d + (-0.3 if (x + y) % 3 == 0 else 0.1 if (x - y) % 3 == 0 else 0))
-                return tone(WHITE, -1.2)
-            weave = (-0.22 if (x + y) % 4 == 0 else 0.12 if (x - y) % 4 == 0 else 0) + (_h(x, y, 7 + i) - 0.5) * 0.25
-            if face == 'top':
-                # only the ring the next step up leaves bare shows; the front of it belongs to the panel
-                c = w / 2 - 0.5
-                front_band = y >= c and abs(x - c) <= panel
-                if i == 0 and (x in (0, fw - 1) or y in (0, fw - 1)):
-                    return tone(RED, 0.65)
-                return tone(RED if front_band and i > 0 else WHITE, 0.95 - 0.04 * i + weave)
-            t = LIGHT[face] + 0.15 + weave - (0.2 if x in (0, fw - 1) else 0)
-            if i == 0:
-                return tone(RED, LIGHT[face] + 0.15 - (0.2 if x in (0, fw - 1) else 0))   # the brim's red rim
-            if face == 'front':
-                c = (fw - 1) / 2
-                if abs(x - c) <= panel:
-                    g = FIRE[row] if 0 <= row < len(FIRE) else '.....'
-                    gx = int(x - (c - 2))
-                    if 0 <= gx < 5 and g[gx] == '#':
-                        return tone(WHITE, 0.25)
-                    return tone(RED, 0.15 + weave * 0.6)
-            return tone(WHITE, t)
-        paint_box(im, box, fn)
-    red = material(RED, 11, rough=0.3, grad=0.3)
-    paint_box(im, TIP, lambda f, x, y, w, h: tone(RED, 0.6) if f == 'top' else red(f, x, y, w, h))
-    paint_box(im, KNOB, lambda f, x, y, w, h: tone(RED, 0.2 if f == 'top' else -0.4))
+            def fn(face, x, y, fw, fh, side=side, k=k, w=w):
+                cx = x - (w - 1) / 2
+                gy = 2 * k + (1 - y) if face == 'top' else 2 * k        # rows up the slope from the rim
+                cloth = (_h(x, y + 7 * k, 41 + side) - 0.5) * 0.35 + (-0.12 if (x + gy) % 3 == 0 else 0)
+                lit = (0.55, 0.15, -0.1, 0.25)[side]                    # the front and the left catch the light
+                if face == 'top':
+                    if side == 0:
+                        half = 4.5 - 0.42 * gy
+                        if abs(cx) < half:
+                            row = FIRE.get(gy)
+                            gx = int(round(cx + 2))
+                            if row and 0 <= gx < 5 and row[gx] == '#':
+                                return tone(HAT_RED, 0.15 + cloth * 0.5)
+                            return tone(WHITE, 0.7 + cloth * 0.5 - 0.03 * gy)
+                        if abs(cx) < half + 1:
+                            return tone(INK, 0.1)                       # the ink line round the triangle
+                    return tone(HAT_RED, lit + 0.12 * gy * 0.15 + cloth)
+                if face == 'front':                                     # the strip's edge, seen at the rim
+                    return tone(HAT_RED, lit - 0.5)
+                return tone(HAT_RED, lit - 0.8)
+            paint_box(im, box, fn)
 
-    def veil(face, x, y, w, h):
+    def rim(face, x, y, w, h):
+        if face == 'top':
+            return tone(WHITE, 0.6)
+        if face == 'bottom':
+            return tone(WHITE, -0.9 + 0.04 * max(abs(x - 8.5), abs(y - 8.5)))
+        return tone(WHITE, LIGHT[face] * 0.5 + 0.35 + (_h(x, y, 3) - 0.5) * 0.15)
+    paint_box(im, RIM, rim)
+
+    def drape(face, x, y, w, h):
+        # the white cloth: soft vertical folds, darker deep under the brim and toward its hem
         if face in ('top', 'bottom'):
-            return tone(CLOTH, -0.4)
-        t = LIGHT[face] + 0.45 * (0.5 - y / 6) + (-0.35 if x % 3 == 2 else 0.1 if x % 3 == 0 else 0) + (_h(x, y, 5) - 0.5) * 0.2
-        return tone(RED, LIGHT[face]) if y == h - 1 else tone(CLOTH, t)
-    paint_box(im, VEIL, veil)
+            return tone(CLOTH, -0.6)
+        t = LIGHT[face] * 0.6 + 0.35 - 0.06 * y + (-0.3 if x % 3 == 2 else 0.12 if x % 3 == 0 else 0) + (_h(x, y, 9) - 0.5) * 0.18
+        if y == 0:
+            t -= 0.5                                                    # the brim's shadow
+        return tone(CLOTH, t)
+    paint_box(im, CLOTH_SIDE, drape)
+    paint_box(im, CLOTH_BACK, drape)
     return im
 
 
 def hat_icon():
+    """The hat from the front: the red pyramid with the white triangle and the kanji, the rim, the cloth hanging under it."""
     im = Image.new('RGBA', (16, 16), CLEAR)
     rows = [
-        '.......kk.......',
-        '......rrrr......',
+        '.......rr.......',
         '.....rrrrrr.....',
-        '....wwwwwwww....',
-        '...wwRwRwRwww...',
-        '...wwwRRRwwww...',
-        '...wwRwwwRwww...',
-        '...RRRRRRRRRR...',
-        'rrrrrrrrrrrrrrrr',
-        '.ssssssssssssss.',
+        '...rrrrkkrrrr...',
+        '.rrrrrkwwkrrrrr.',
+        'rrrrrkwRwwkrrrrr',
+        'wwwwwwwwwwwwwwww',
+        '..cc........cc..',
+        '..cc........cc..',
+        '..cc........cc..',
+        '..cc........cc..',
     ]
     for y, row in enumerate(rows):
         for x, ch in enumerate(row):
-            lit = 0.35 if x < 7 else -0.05
-            c = {'w': tone(WHITE, lit + 0.2 - 0.05 * y), 'R': tone(RED, lit), 'r': tone(RED, lit + 0.1 - 0.05 * y),
-                 'k': tone(RED, -0.6), 's': tone(STRAW, -0.7 + (0.2 if x % 2 else 0))}.get(ch)
+            lit = 0.3 if x < 7 else 0.0
+            c = {'r': tone(HAT_RED, lit + 0.1 * y), 'k': tone(INK, 0), 'w': tone(WHITE, 0.4 if y > 4 else 0.6), 'R': tone(HAT_RED, 0.2),
+                 'c': tone(CLOTH, lit - 0.1 * (y - 6))}.get(ch)
             if c:
                 im.putpixel((x, y + 3), c)
     return outline(im)
