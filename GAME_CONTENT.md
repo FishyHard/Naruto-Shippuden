@@ -639,7 +639,7 @@ Passives: Samehada eats the chakra of what it hits; Kubikiribocho mends itself o
 
 **Headbands** (15): Hidden Leaf Genin Headband (blue), Hidden Leaf Genin Headband (black), Hidden Leaf Genin Headband (red), Hidden Sand Genin Headband (blue), Hidden Sand Genin Headband (black), Hidden Sand Genin Headband (red), Hidden Mist Genin Headband (blue), Hidden Mist Genin Headband (black), Hidden Mist Genin Headband (red), Hidden Cloud Genin Headband (blue), Hidden Cloud Genin Headband (black), Hidden Cloud Genin Headband (red), Hidden Stone Genin Headband (blue), Hidden Stone Genin Headband (black), Hidden Stone Genin Headband (red)
 
-**Shinobi Items** (17): Bronze Ryo, Silver Ryo, Gold Ryo, Chakra Paper, Shadow Clone Technique, Paper Bomb, Iron Stick, Sharp Iron, Kamui Stone, Ichiraku Ramen, Shogi, Shogi board, D-Rank Mission: Shogi Board, D-Rank Mission: Pillage The Post, D-Rank Mission: Save The Village, C-Rank Mission: Asuma's Chakra Blade, C-Rank Mission: Iron Defense
+**Shinobi Items** (17): Bronze Ryo, Silver Ryo, Gold Ryo, Chakra Paper, Shadow Clone Technique, Paper Bomb, Iron Stick, Iron Blade, Kamui Stone, Ichiraku Ramen, Shogi, Shogi board, D-Rank Mission: Shogi Board, D-Rank Mission: Pillage The Post, D-Rank Mission: Save The Village, C-Rank Mission: Asuma's Chakra Blade, C-Rank Mission: Iron Defense
 
 **Spawn eggs** (vanilla Spawn Eggs tab): Shinobi Merchant Spawn Egg, Hidden Leaf Shinobi Spawn Egg, Hidden Sand Shinobi Spawn Egg, Hidden Mist Shinobi Spawn Egg, Hidden Cloud Shinobi Spawn Egg, Hidden Stone Shinobi Spawn Egg, Asuma Spawn Egg, Shikamaru Spawn Egg, Kurama Spawn Egg
 
@@ -666,7 +666,7 @@ Money is Ryo: 9 Bronze = 1 Silver, 9 Silver = 1 Gold. The Shinobi Merchant spawn
 | Shinobi Merchant | 2 Bronze Ryo | 4 Iron Stick |
 | Shinobi Merchant | 4 Bronze Ryo | 4 Kunai |
 | Shinobi Merchant | Silver Ryo | 4 Poison Kunai |
-| Shinobi Merchant | 3 Bronze Ryo | 2 Sharp Iron |
+| Shinobi Merchant | 3 Bronze Ryo | 2 Iron Blade |
 | Shinobi Merchant | 4 Bronze Ryo | 8 Shuriken |
 | Shinobi Merchant | 3 Silver Ryo | Katana |
 | Shinobi Merchant | Silver Ryo + 4 Bronze Ryo | Tanto |

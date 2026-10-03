@@ -1,9 +1,12 @@
 # Next task
 
-The MCreator clean-up task (Obito's and Sasuke's scrolls, learned jutsu by id, dead code) is done; see `NEXT_SESSION.md`.
-Wait for the user's feedback on that jar. Candidates they may ask for next:
+The latest round is done and pushed (`b306a6a`): dojutsu position -1..+1, shadow clone kills count for quests, vanilla-style
+icons for the papers, resets, DNA (all 16 natures), Iron Stick, Iron Blade (was Sharp Iron), kunai, shuriken and the 15
+Genin headbands. Story Mode is at Chapter 3 (see `NEXT_SESSION.md`, "Story, later work"). Wait for the user's feedback.
 
-- Remake the Susanoo itself (still the old model swap; its stages are now bought on the engine).
+Candidates they may ask for next:
+
+- Story: Chapter 4 (the Chunin Exams), more fillers, the other villages.
+- More item icons in the same style (`porting/skins/*_icons.py`).
+- Remake the Susanoo itself (still the old model swap).
 - Move Shadow Clone off its MCreator procedure (the last `JutsuTable` entry).
-- More dead code: the tool stops at whole member classes. Live procedures still hold dead branches (on variables nothing sets
-  any more); those need rules one by one.

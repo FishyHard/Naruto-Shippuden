@@ -322,6 +322,11 @@ Nature Releases, Kekkei Genkai, DNA, Clans, Dojutsu, Shinobi Weapons, Headbands,
 - `ModelSwapRenderers`: model swaps (Susanoo, Passing Fang and others) drawn with the player's full body rotation.
 - `EntityScale` scales entities (it replaced Pehkui); `Progression` handles XP and levels.
 
+### Dojutsu position
+- Info Card > Dojutsu > Position moves the eyes 1 px up or down (`Eyes_Offset`, -1..1, synced in VISIBLE).
+  `ModelSwapRenderers.shiftedEyes(n)` bakes a player model whose head/hat boxes sit n px lower (moving the pivot swings
+  the eyes off the face). Rule `dojutsu_position_buttons` (buttons 10/11).
+
 ### Client (`client/`)
 
 - `EyeKeys` (all the keys, in their own "Naruto Shippuden" Controls category), `JutsuClient` (the jutsu wheel and scroll),
@@ -356,15 +361,16 @@ Nature Releases, Kekkei Genkai, DNA, Clans, Dojutsu, Shinobi Weapons, Headbands,
   Chikyū; nothing travels from it to the Nether or the End. `/naruto chikyu [players]`, `/naruto chikyu leave`.
 - The toriis: the Leaf's outside the great gate (world 0, 65, 222) and one built 6 blocks north of the overworld spawn
   (found again by its blackstone foot, rebuilt or relit on server start). `ChikyuContent.ToriiPortalBlock` is a vanilla
-  `Portal` like the nether portal: the same delay game rules, the swirl, trigger/travel/ambient sounds, cooldown, and
-  items and mobs pass too; `client/ToriiOverlay` wraps the camera overlays so the swirl is drawn with the torii's green
+  `Portal` like the nether portal: the same delay game rules, the swirl, trigger/travel/ambient sounds and cooldown, but only
+  players pass (story NPCs, mobs and items don't); `client/ToriiOverlay` wraps the camera overlays so the swirl is drawn with the torii's green
   texture instead of vanilla's purple. The way out gives a `leaf_return_scroll` if the player has none: hold use for
   5 s in the overworld (a hit breaks it) to land back at the gate, 5 min cooldown.
 - `VillageProtection` (config `chikyu.protect_villages`, default true): inside the Leaf's wall (r 190), its gate and
   both toriis nobody breaks/places blocks, uses buckets, flint, fire charges, bone meal or tool modifications;
   explosions spare the blocks, fire is put out the next tick, mobs can't grief. Doors, buttons, seats still work.
   Operators in creative bypass it. Jutsu that set blocks directly are not caught yet.
-- Still to do: the other four villages, the story engine (quests, dialogue, tracker) that the start leads into.
+- Pickable plants inside the protected area regrow 2 minutes after they're picked.
+- Still to do: the other four villages.
 
 ### The story's quest engine, `story/` and `client/StoryClient`
 - Data: `data/naruto_shippuden/story/characters/<id>.json` (name, skin, model legacy|player|slim, home [x,y,z] in
@@ -402,7 +408,31 @@ Nature Releases, Kekkei Genkai, DNA, Clans, Dojutsu, Shinobi Weapons, Headbands,
 - Dialogue shows the speaker (portrait, like the inventory's player). Choices can carry server-side "commands".
 - Characters can wear real items ("equipment": head = headband). Template generator `build.py` connects fences, panes,
   bars and walls (`Build.connect`) before saving.
-- Still to do for Chapter 1: the Chakra Paper choose-a-release menu when random_clan=false, a Substitution jutsu.
+- Still to do for Chapter 1: a Substitution jutsu.
+
+### Story, later work (Chapters 2-3, fillers, rules)
+- **Data** (`porting/story/`): `chapter1.py`, `chapter2.py`, `chapter3.py`, `fillers.py`; each writes its JSON into both
+  resource trees (`python3 chapterN.py`). Positions use `G` (ground y); world = village layout + (-200, -215).
+- **Chapter 3** (Team Six's first missions, mission desk on the Hokage residence's ground floor, Hiruzen, Iruka and the
+  sensei Tatsumi seated there): `01_firewood` (D, lvl 9), `02_tora` (D, lvl 10: search spots, then catch the real cat
+  Tora tagged `story_tora`), `03_missing_nin` (C, lvl 11: a real fight on the trade road past the great gate).
+- **Quest fields**: `when` (morning/day/evening/night; the quest is offered only then), `level` (shinobi level needed,
+  kept low), `later` (what the giver says when the quest is held back). One filler at a time, no filler while a main
+  quest is active or a filler is unclaimed (`Story.held()` gives "busy" / "level" / "time").
+- **Step fields**: `spots` (points + seconds + radius + colours + bar: stand at each to search, with a timer bar),
+  `near` (an entity tag within a radius), `remove` (tag to remove), `goto`/`wait` with `seconds` and `bar` (the cliff,
+  lake and cloud timers), `kill` with `enemies` {around, radius, tags, health, damage} (persistent tagged spawns the
+  story keeps there) and `allies` (scene characters who each take an enemy and trade real blows: teammates never fall
+  below 2 hearts, they leave the enemies a few hearts for the player), `respawn` (dying during the step brings the
+  player back there). Kills by the player's shadow clones or tamed pets count (`OwnableEntity` owner).
+- **Characters**: `pose` (sit/lie; seats from stairs at block y, render -0.25), `shop` (opens the vanilla trading
+  screen through `StoryShop`, e.g. Teuchi's ramen), `companion` {summon, offset} (Kiba's Akamaru, the mod's mob, which
+  joins Kiba's spar). Usual figures are hidden while the player's current step has a scene copy of them (`inScene()`).
+- **Fillers** (`fillers.py`, 14): Ichiraku with Iruka or the sensei, Shikamaru under the tree, Yakiniku Q, the Hokage
+  Rock paint wash (particles with timers), and others.
+- **Commands**: `/naruto story list | rewind | finish | settle` besides start/skip/talk/event/reset.
+- **New player screen**: chooses only the clan (rule `clan_only_selection`; the nature comes from the Chakra Paper
+  lesson, the village is always the Leaf), opened 40 ticks after arriving (`clan_choice_after_arrival`).
 
 ### Keys (defaults)
 
@@ -529,12 +559,20 @@ Apply new `@func` rules with the body-only runner under "How to change code".
   replaces "head" still has the hat cube (bigger than the head) unless it adds an empty "hat" under the new head (rule
   `headband_hat`; it drew stray bits of texture beside the headbands).
 - `ItemDescriptions.add` adds up: several calls for one item give all their lines.
+- Item icons are drawn as code at 16x16 after u/SirIkaros' guide (shape, darker saturated outline, lighter top
+  outline and darker bottom one, light from the top left, dirty pixels; mid-tone bases, the user found bright ones too
+  bright): `porting/skins/rank_icons.py` (mission scrolls), `food_icons.py` (ramen), `tool_icons.py` (Iron Stick, Iron
+  Blade = `sharp_iron`, kunai, poison/explosive kunai, shuriken, Clan/Chakra Paper and resets, DNA and its 16 nature
+  vials: caps in the nature's colour), `band_icons.py` (the 15 Genin headbands: plate front-on, the village symbol
+  engraved with a lit lip). Each writes into both trees (`src/main/resources` and `porting/res_override`).
 - Image work needs Pillow: make a venv in the scratchpad (`python3 -m venv venv && ./venv/bin/pip install pillow`).
 
 ## Open items
 
 - Shadow Clone still runs its MCreator procedure; it's the last entry in `JutsuTable`.
-- A new story mode is planned (see the roadmap discussion); the old one was removed.
+- Story: Chapter 4 onward (the Chunin Exams), the other four villages.
+- Removed: `/infonarutoshippuden`, `/patreon`, the Patreon Kit, Password and old Headband screens (dead_classes.txt).
+  `TrainingDummyRenderer` must stay (it registers the real renderer; removing it crashed the game).
 - The Susanoo itself is still the old model swap (`KeybindProcedures` reads the stage counts).
 - Otsutsuki weapons: registered, in no tab (only `/give`), switching forms with the old `OtsutsukiToolsSwitchProcedure`.
 - The Susanoo is still the old model swap.
