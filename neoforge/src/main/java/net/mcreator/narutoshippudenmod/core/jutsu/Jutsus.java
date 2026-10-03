@@ -43,8 +43,7 @@ import org.jspecify.annotations.Nullable;
  * <li>Learning: right-clicking a release opens the jutsu scroll (client); Learn buys the next tier with the original
  * procedure.</li>
  * </ul>
- * Each jutsu class registers its own techniques and scrolls (priced by {@link engine.JutsuRank}); {@link JutsuTable} keeps the few
- * still cast by an MCreator procedure.
+ * Each jutsu class registers its own techniques and scrolls (priced by {@link engine.JutsuRank}).
  */
 @EventBusSubscriber(modid = "naruto_shippuden")
 public final class Jutsus {
@@ -199,7 +198,7 @@ public final class Jutsus {
 		}
 	}
 
-	// ------------------------------------------------------------------ table builders (used by JutsuTable)
+	// ------------------------------------------------------------------ table builders (used by ShadowClones and FlyingRaijin)
 	record JutsuSpec(String name, ToDoubleFunction<PlayerVariables> learned, double tier, @Nullable String statName, ToDoubleFunction<PlayerVariables> stat,
 			double statMin, double chakra, int[] cooldowns) {
 	}
@@ -307,7 +306,7 @@ public final class Jutsus {
 	static java.util.function.BiFunction<Technique, PlayerVariables, List<Jutsu>> EXTRA = (technique, variables) -> List.of();
 
 	static {
-		JutsuTable.register();
+		ShadowClones.register();
 		NatureJutsu.register();
 		KekkeiGenkaiJutsu.register();
 		ClanJutsu.register();

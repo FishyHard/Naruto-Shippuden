@@ -22,12 +22,20 @@ import java.util.List;
  * The Shadow Clone Technique: real clones that look like their maker (skin, armour, what they hold), fight at their side and
  * vanish in a puff of smoke when hit hard or after a minute. How many can be kept at once grows with Ninjutsu (one at the start,
  * up to eight: the Multiple Shadow Clone Technique), and each costs its share of chakra. Casting while sneaking releases them all (Jutsus sends sneak + right-click to release).
+ * The engine checks the Ninjutsu, one clone's chakra and the cooldown; the cast takes the chakra of every clone it makes.
  */
 public final class ShadowClones {
 	private static final double CHAKRA_EACH = 25;
 	private static final int LIFE = 1200;
 
 	private ShadowClones() {
+	}
+
+	static void register() {
+		Jutsus.technique("shadow_clone_technique", v -> 0, (v, i) -> {}, null, deps -> cast((Entity) deps.get("entity")),
+				Jutsus.jutsu("Shadow Clone Technique", v -> 1, 1, "Ninjutsu", v -> v.ninjutsu, 5, CHAKRA_EACH, 25, 25, 25, 25, 25));
+		Jutsus.TECHNIQUES.get(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", "shadow_clone_technique")).onSneak =
+				ShadowClones::release;
 	}
 
 	public static int limit(PlayerVariables v) {
@@ -46,11 +54,11 @@ public final class ShadowClones {
 		PlayerVariables v = NarutoShippudenModVariables.get(p);
 		int room = limit(v) - clones.size(), afford = (int) Math.floor(v.ChakraAmount / CHAKRA_EACH), count = Math.min(room, afford);
 		if (room <= 0) {
-			p.sendOverlayMessage(Component.literal("You can't keep more than " + limit(v) + " clones"));
+			Jutsus.miss(p, "You can't keep more than " + limit(v) + " clones");
 			return;
 		}
 		if (count <= 0) {
-			p.sendOverlayMessage(Component.literal("Not enough chakra"));
+			Jutsus.miss(p, "Not enough chakra");
 			return;
 		}
 		NarutoShippudenModVariables.ifPresent(p, vars -> {

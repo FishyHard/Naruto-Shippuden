@@ -2612,67 +2612,6 @@ public final class ClanProcedures {
 		}
 	}
 
-	public static class ShadowCloneTechniqueRightclickedProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("world") == null) {
-				if (!dependencies.containsKey("world"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure ShadowCloneTechniqueRightclicked!");
-				return;
-			}
-			if (dependencies.get("x") == null) {
-				if (!dependencies.containsKey("x"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency x for procedure ShadowCloneTechniqueRightclicked!");
-				return;
-			}
-			if (dependencies.get("y") == null) {
-				if (!dependencies.containsKey("y"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency y for procedure ShadowCloneTechniqueRightclicked!");
-				return;
-			}
-			if (dependencies.get("z") == null) {
-				if (!dependencies.containsKey("z"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency z for procedure ShadowCloneTechniqueRightclicked!");
-				return;
-			}
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure ShadowCloneTechniqueRightclicked!");
-				return;
-			}
-			LevelAccessor world = (LevelAccessor) dependencies.get("world");
-			double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
-			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
-			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
-			Entity entity = (Entity) dependencies.get("entity");
-			double clonecount = 0;
-			if (NarutoShippudenModVariables.get(entity).ninjutsu >= 5) {
-				if (NarutoShippudenModVariables.get(entity).ChakraAmount >= 30) {
-					net.mcreator.narutoshippudenmod.core.jutsu.ShadowClones.cast(entity);
-					{
-						double _setval = (NarutoShippudenModVariables.get(entity).ChakraAmount - 30);
-						NarutoShippudenModVariables.ifPresent(entity, capability -> {
-							if (!java.util.Objects.equals(capability.ChakraAmount, _setval)) {
-								capability.ChakraAmount = _setval;
-								capability.syncPlayerVariables(entity);
-							}
-						});
-					}
-					if (entity instanceof Player)
-						((Player) entity).getCooldowns().addCooldown(new ItemStack(ShadowCloneTechniqueItem.block), (int) 25);
-				} else if (NarutoShippudenModVariables.get(entity).ChakraAmount <= 29) {
-					if (entity instanceof Player && !entity.level().isClientSide()) {
-						((Player) entity).sendOverlayMessage(Component.literal("Not enough chakra"));
-					}
-				}
-			} else if (NarutoShippudenModVariables.get(entity).ninjutsu <= 4) {
-				if (entity instanceof Player && !entity.level().isClientSide()) {
-					((Player) entity).sendOverlayMessage(Component.literal("Not enough Ninjutsu"));
-				}
-			}
-		}
-	}
-
 	public static class ShadowImitationEntityOnEntityTickUpdateProcedure {
 
 		public static void executeProcedure(Map<String, Object> dependencies) {

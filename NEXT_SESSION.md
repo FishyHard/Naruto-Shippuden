@@ -100,8 +100,8 @@ for p in glob.glob('../src/main/java/**/*.java', recursive=True):
 4. **New items** (technique items the old mod never had) are registered in `core/jutsu/JutsuItems` with
    `Registration.add`, called from the mod constructor. Give them an `items/*.json`, a `models/item/*.json` and a lang entry in
    both resource trees.
-5. `JutsuTable.java` now only holds `shadow_clone_technique` (still cast by its MCreator procedure). Every other technique and
-   scroll is registered by the jutsu classes.
+5. Every technique and scroll is registered by the jutsu classes (`JutsuTable` is gone; Shadow Clone registers in
+   `ShadowClones.register`).
 
 ### Porting rules added recently
 
@@ -195,8 +195,9 @@ for p in glob.glob('../src/main/java/**/*.java', recursive=True):
   `…susanolearn` variables, which the Susanoo key reads. Only one Mangekyou is kept per player (`Eyes.oneMangekyou`).
 - `FlyingRaijin` is a technique with a wheel on the Flying Raijin Kunai (ids say `flying_thunder_god_kunai`): Throw Marked
   Kunai, Write Formula, Marking Strike, Flying Raijin, Level Two, Release Formulas.
-- `ShadowClones`: the clone limit grows with Ninjutsu (1 + Ninjutsu/15, at most 8); 25 chakra and 60 s each; clones render with
-  their owner's skin. The Aburame Insect Clone reuses the clone entity.
+- `ShadowClones`: registers its own technique (no MCreator procedure). The clone limit grows with Ninjutsu (1 + Ninjutsu/15,
+  at most 8); needs 5 Ninjutsu; 25 chakra and 60 s each (the cast takes 25 per clone made, nothing more); at the limit it's a
+  miss (no cooldown); clones render with their owner's skin. The Aburame Insect Clone reuses the clone entity.
 - `ThrownWeapons`: thrown shuriken and kunai arrows become `JutsuProjectile`s. Flying Raijin kunai stay arrows.
 
 ### Custom jutsu (`core/jutsu/CustomJutsu`, `gui/JutsuCreationScreens`)
@@ -491,6 +492,7 @@ Screenshots are saved to `run/screenshots/screen_*.png`, and `DEVTEST …` lines
   prices, screenshots, the Susanoo track) and one Mangekyou at a time. Log lines `DEVTEST learned …` (`11100` = which jutsu are learned).
 - `dna` (implanting, natures needed, the config switch, Medicine, identifying, drops, tooltips), `headband` (front/back/side
   shots of a headband), `perf` (see Performance).
+- `clones` (Shadow Clone through its item: Ninjutsu, chakra per clone, limit, cooldown, release; `DEVTEST clones …` lines).
 - `eyes`, `weapons`, `akimichi`, `economy`. No `-PdevOnly`: shows every GUI screen.
 
 Test code can call server code with `onServer(mc, p -> …)`. A full `jutsu` run takes about 15 minutes. Run it in the
@@ -569,7 +571,6 @@ Apply new `@func` rules with the body-only runner under "How to change code".
 
 ## Open items
 
-- Shadow Clone still runs its MCreator procedure; it's the last entry in `JutsuTable`.
 - Story: Chapter 4 onward (the Chunin Exams), the other four villages.
 - Removed: `/infonarutoshippuden`, `/patreon`, the Patreon Kit, Password and old Headband screens (dead_classes.txt).
   `TrainingDummyRenderer` must stay (it registers the real renderer; removing it crashed the game).

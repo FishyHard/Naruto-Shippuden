@@ -1405,7 +1405,8 @@ def drunken_fist_item(path, text):
 # ---------------------------------------------------------------- shadow clones (core/jutsu/ShadowClones, client/jutsu/ShadowCloneRenderer)
 @func
 def shadow_clones(path, text):
-    """The Shadow Clone Technique casts core/jutsu/ShadowClones (outside the story mode's exam), and clones wear their maker's skin."""
+    """The Shadow Clone Technique casts core/jutsu/ShadowClones (outside the story mode's exam), and clones wear their maker's skin.
+    ShadowClones now registers the technique itself, so the procedure is dead (dead_classes.txt) and only the renderer part still acts."""
     p = path.replace('\\\\', '/')
     if p.endswith('ModClient.java'):
         return re.sub(r'\n\t*JutsuRenderers\.ShadowCloneRenderer\.registerRenderers\(event\);', '', text)

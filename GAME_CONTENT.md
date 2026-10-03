@@ -496,7 +496,7 @@ Needs Shurikenjutsu 25 (Level Two: 35). Always learned once you have the kunai.
 
 ### Shadow Clone Technique
 
-An item of its own. Each cast makes a clone that fights with you for 60 s (25 chakra). The clone limit grows with Ninjutsu: 1 + Ninjutsu/15, at most 8. Sneak + right-click releases them. Clones use your skin.
+An item of its own (needs 5 Ninjutsu). Each cast fills up to your clone limit, as far as your chakra goes: 25 chakra per clone, each fights with you for 60 s. The limit grows with Ninjutsu: 1 + Ninjutsu/15, at most 8. At the limit a cast costs nothing. Sneak + right-click releases them. Clones use your skin.
 
 ## Custom jutsu
 

@@ -487,6 +487,54 @@ public final class DevTest {
 			STEPS.add(mc::stop);
 			return;
 		}
+		if (System.getProperty("naruto.devtest.only", "").equals("clones")) {
+			// the Shadow Clone Technique cast through its item: Ninjutsu, chakra per clone, the limit, the cooldown, release
+			STEPS.add(() -> {
+				setupFight(mc);
+				command(mc, "kill @e[type=naruto_shippuden:shadow_clone]");
+				onServer(mc, p -> {
+					NarutoShippudenModVariables.ifPresent(p, v -> {
+						v.ninjutsu = 3;
+						v.ChakraAmount = 100;
+						v.syncPlayerVariables(p);
+					});
+					p.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND,
+							new net.minecraft.world.item.ItemStack(net.mcreator.narutoshippudenmod.item.TechniqueItems.ShadowCloneTechniqueItem.block));
+				});
+				nextDelay = 20;
+			});
+			java.util.function.BiConsumer<String, java.util.function.Consumer<NarutoShippudenModVariables.PlayerVariables>> cast = (label, set) -> STEPS.add(() -> onServer(mc, p -> {
+				NarutoShippudenModVariables.ifPresent(p, v -> {
+					set.accept(v);
+					v.syncPlayerVariables(p);
+				});
+				p.getCooldowns().removeCooldown(net.minecraft.resources.Identifier.fromNamespaceAndPath("naruto_shippuden", "shadow_clone_technique/0"));
+				double before = NarutoShippudenModVariables.get(p).ChakraAmount;
+				net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.cast(p, net.minecraft.world.InteractionHand.MAIN_HAND);
+				NarutoShippudenMod.LOGGER.info("DEVTEST clones {}: clones {} chakra {} -> {} cooldown {}", label,
+						net.mcreator.narutoshippudenmod.core.jutsu.ShadowClones.clonesOf(p).size(), before, NarutoShippudenModVariables.get(p).ChakraAmount,
+						p.getCooldowns().isOnCooldown(p.getMainHandItem()));
+			}));
+			cast.accept("low_ninjutsu", v -> {});
+			cast.accept("one", v -> v.ninjutsu = 5);
+			cast.accept("full", v -> {});
+			cast.accept("multi", v -> {
+				v.ninjutsu = 60;
+				v.ChakraAmount = 60;
+			});
+			cast.accept("no_chakra", v -> v.ChakraAmount = 10);
+			cast.accept("more", v -> v.ChakraAmount = 500);
+			STEPS.add(() -> mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT));
+			STEPS.add(() -> shot(mc, "clones_cast"));
+			STEPS.add(() -> onServer(mc, p -> {
+				p.setShiftKeyDown(true);
+				net.mcreator.narutoshippudenmod.core.jutsu.Jutsus.cast(p, net.minecraft.world.InteractionHand.MAIN_HAND);
+				p.setShiftKeyDown(false);
+				NarutoShippudenMod.LOGGER.info("DEVTEST clones release: clones {}", net.mcreator.narutoshippudenmod.core.jutsu.ShadowClones.clonesOf(p).size());
+			}));
+			STEPS.add(mc::stop);
+			return;
+		}
 		if (System.getProperty("naruto.devtest.only", "").equals("models")) {
 			modelSteps(mc);
 			STEPS.add(mc::stop);

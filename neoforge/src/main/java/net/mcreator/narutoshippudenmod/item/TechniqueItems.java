@@ -12,7 +12,6 @@ import java.util.stream.Stream;
 import net.mcreator.narutoshippudenmod.NarutoShippudenModElements;
 import net.mcreator.narutoshippudenmod.itemgroup.ModItemGroups.TechniquesItemGroup;
 import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.NaraReleaseTechniqueRightclickedProcedure;
-import net.mcreator.narutoshippudenmod.procedures.ClanProcedures.ShadowCloneTechniqueRightclickedProcedure;
 import net.mcreator.narutoshippudenmod.procedures.DojutsuProcedures.MangekyouSharinganItachiReleaseTechniqueEntitySwingsItemProcedure;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.TooltipFlag;
@@ -28,7 +27,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
-
 
 public final class TechniqueItems {
 	private TechniqueItems() {
@@ -64,7 +62,6 @@ public final class TechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -113,7 +110,6 @@ public final class TechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -174,7 +170,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -189,7 +184,6 @@ public final class TechniqueItems {
 			}
 		}
 	}
-
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class HozukiReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
@@ -221,7 +215,6 @@ public final class TechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -268,7 +261,6 @@ public final class TechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -319,7 +311,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -368,7 +359,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -398,8 +388,6 @@ public final class TechniqueItems {
 			}
 		}
 	}
-
-
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class LeeReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
@@ -431,7 +419,6 @@ public final class TechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -491,7 +478,6 @@ public final class TechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -553,7 +539,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -599,7 +584,6 @@ public final class TechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -648,7 +632,6 @@ public final class TechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -743,7 +726,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -797,7 +779,6 @@ public final class TechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -863,7 +844,6 @@ public final class TechniqueItems {
 				return 1F;
 			}
 
-
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
 				InteractionResult ar = super.use(world, entity, hand);
@@ -880,7 +860,6 @@ public final class TechniqueItems {
 			}
 		}
 	}
-
 
 	@NarutoShippudenModElements.ModElement.Tag
 	public static class TsuchigumoReleaseTechniqueItem extends NarutoShippudenModElements.ModElement {
@@ -912,7 +891,6 @@ public final class TechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {
@@ -961,7 +939,6 @@ public final class TechniqueItems {
 			public float getDestroySpeed(ItemStack par1ItemStack, BlockState par2Block) {
 				return 1F;
 			}
-
 
 			@Override
 			public InteractionResult use(Level world, Player entity, InteractionHand hand) {

@@ -88,7 +88,8 @@ def named_elsewhere(i, own):
 KEEP = {'OtsutsukiAxeItem', 'OtsutsukiBatItem', 'OtsutsukiBladeItem', 'OtsutsukiChoppingSwordItem', 'OtsutsukiHammerItem', 'OtsutsukiKatanaItem',
         'OtsutsukiSpearItem', 'OtsutsukiSwordItem',
         # only the old story spawned them; the new story's Academy will
-        'IrukaSenseiEntity', 'IrukaSenseiCloneEntity', 'TrainingDummyEntity'}
+        'IrukaSenseiEntity', 'IrukaSenseiCloneEntity', 'TrainingDummyEntity',
+        'TrainingDummyRenderer'}  # registers the real renderer (client/TrainingDummyClient); removing it crashed the game
 for n in KEEP & names: mark(n)
 for n, t in texts.items():
     # event listeners, and things players can get (spawn eggs)
