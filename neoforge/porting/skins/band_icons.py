@@ -37,14 +37,15 @@ CLOTH = {
     'red': ('#D4504A', '#AC302E', '#82222A', '#561218', '#3A0A10'),
     'black': ('#565666', '#3A3A48', '#2A2A35', '#16161D', '#0C0C11'),
 }
-# each symbol engraved across the plate's face (x 3..12, y 6..10), centred, '#' a groove
+# each symbol engraved across the plate's face (x 3..12, from y 6; the Leaf's point reaches y 11), centred, '#' a groove
 SYMBOLS = {
     # the Leaf: a spiral, its outer arm running out to the leaf's point at the lower left
-    'leaf': ["..######.",
-             ".#......#",
-             ".#.###..#",
-             "##.#..##.",
-             "#..####.."],
+    'leaf': ["...####..",
+             "..#....#.",
+             ".#..##..#",
+             ".#.#..#.#",
+             "##..##..#",
+             "#......#."],
     # the Sand: the hourglass between two bars, pinched at its neck
     'sand': ["#######",
              ".#...#.",

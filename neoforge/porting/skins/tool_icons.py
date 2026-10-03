@@ -250,6 +250,31 @@ DNA_ROWS = [
 DNA = {'k': '#A04430', 'C': '#D8806A', 'c': '#B85E48', 'K': '#6E2A1C', 'g': '#6A7688', 'G': '#C8D2DC', 'w': '#B4C2D0',
        'R': '#C02424', 'r': '#8A1414', 'H': '#E8B4AC', 'd': '#4A0A0E', 'q': '#3E4656'}
 
+# the released natures' DNA: the same vial, its cap the nature's colour (the old icons' seal), so they tell apart in a row
+DNA_SEALS = {
+    'fire': '#E0402C', 'water': '#3A86E0', 'wind': '#4CC884', 'earth': '#9A6434', 'lightning': '#F0CC34',
+    'wood': '#5C8A2C', 'ice': '#8EDCEA', 'boil': '#F2A8BC', 'bone': '#E4DECC', 'dust': '#C49C6A',
+    'magnet': '#9238CC', 'smoke': '#86868E', 'steel': '#5A6170', 'storm': '#33334A',
+    'swift': '#F0A01C', 'typhoon': '#6AACAA',
+}
+
+
+def shade(h, k):
+    """h lightened (k > 0, toward white, losing saturation) or darkened (k < 0, keeping it)."""
+    r, g, b = (int(h[i:i + 2], 16) for i in (1, 3, 5))
+    if k > 0:
+        r, g, b = (int(c + (255 - c) * k) for c in (r, g, b))
+    else:
+        r, g, b = (int(c * (1 + k)) for c in (r, g, b))
+    return '#%02X%02X%02X' % (r, g, b)
+
+
+def dna(seal):
+    """The DNA vial with its cap in a nature's colour: lit top, base, the outline darker and the band under it darker still."""
+    colours = dict(DNA)
+    colours.update({'C': shade(seal, 0.3), 'c': seal, 'k': shade(seal, -0.4), 'K': shade(seal, -0.6)})
+    return draw(DNA_ROWS, colours)
+
 
 def icons():
     return {
@@ -264,6 +289,7 @@ def icons():
         'clan_reseter': paper(QUESTION + STRIKE),
         'chakra_nature_reseter': paper(NATURES + STRIKE),
         'dna': draw(DNA_ROWS, DNA),
+        **{'dna_' + k: dna(c) for k, c in DNA_SEALS.items()},
     }
 
 
