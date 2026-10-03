@@ -72,6 +72,11 @@ import org.jspecify.annotations.Nullable;
  * </ul>
  * They are peaceful until attacked; they call their comrades, defend players of their own village, fight monsters, and never hit
  * their own with their jutsu.
+ * <p>
+ * Each is one of six {@link Style}s, read from its UUID (so the client, which knows the UUID, draws the matching look without any
+ * sync; client/ShinobiRenderer): balanced, taijutsu, marksman, ninjutsu, kenjutsu or medical ninja. The style changes its stats,
+ * weapon, the range it keeps, how often it throws, strikes or weaves signs, and gives it its own moves (a leap and a heavy kick,
+ * a fan of shuriken, explosive tags and a jump back, quicker signs, a dash and a parry, healing).
  */
 @EventBusSubscriber(modid = "naruto_shippuden")
 public final class ShinobiAI {
@@ -144,6 +149,40 @@ public final class ShinobiAI {
 		return null;
 	}
 
+	/** How a shinobi fights. The n-th look of each village (textures/entities/shinobi/&lt;village&gt;_n.png) fights in the n-th style. */
+	public enum Style {
+		BALANCED(""), TAIJUTSU(" (Taijutsu)"), MARKSMAN(" (Marksman)"), NINJUTSU(" (Ninjutsu)"), KENJUTSU(" (Swordsman)"), MEDIC(" (Medical Ninja)");
+
+		final String label;
+
+		Style(String label) {
+			this.label = label;
+		}
+	}
+
+	/** Which of its village's six looks and styles a shinobi has: from its UUID, which server and client both know. */
+	public static int variant(Entity entity) {
+		java.util.UUID id = entity.getUUID();
+		long h = id.getMostSignificantBits() ^ id.getLeastSignificantBits();
+		return (int) Math.floorMod(h ^ (h >>> 32), (long) Style.values().length);
+	}
+
+	public static Style style(Entity entity) {
+		return Style.values()[variant(entity)];
+	}
+
+	/** Client: the shinobi's skin, its village's and its variant's. */
+	public static @Nullable Identifier texture(Entity entity) {
+		Village village = village(entity);
+		return village == null ? null
+				: Identifier.fromNamespaceAndPath("naruto_shippuden", "textures/entities/shinobi/" + village.name().toLowerCase(java.util.Locale.ROOT) + "_" + variant(entity) + ".png");
+	}
+
+	private static void dev(Entity mob, String what) {
+		if (Boolean.getBoolean("naruto.devtest"))
+			net.mcreator.narutoshippudenmod.NarutoShippudenMod.LOGGER.info("DEVTEST style {} {}: {}", mob.getName().getString(), style(mob), what);
+	}
+
 	static int rank(Entity mob) {
 		return Mth.clamp(mob.getPersistentData().getIntOr("ShinobiRank", 0), 0, 2);
 	}
@@ -157,6 +196,8 @@ public final class ShinobiAI {
 	}
 
 	private static void spend(Entity mob, double amount) {
+		if (amount >= 100)
+			dev(mob, "spends " + (int) amount + " of " + (int) chakra(mob));
 		mob.getPersistentData().putDouble("ChakraAmount", Math.max(0, chakra(mob) - amount));
 	}
 
@@ -193,21 +234,81 @@ public final class ShinobiAI {
 		Village village = village(mob);
 		if (village == null)
 			return;
+		Style style = style(mob);
 		mob.getPersistentData().putInt("ShinobiRank", rank);
 		mob.getPersistentData().putBoolean("ShinobiReady", true);
-		mob.getPersistentData().putFloat("JutsuPower", new float[] { 0.8F, 1.0F, 1.3F }[rank]);
-		base(mob, Attributes.MAX_HEALTH, new double[] { 40, 60, 90 }[rank]);
-		base(mob, Attributes.ATTACK_DAMAGE, new double[] { 3, 4, 6 }[rank]);
-		base(mob, Attributes.MOVEMENT_SPEED, new double[] { 0.3, 0.32, 0.34 }[rank]);
+		mob.getPersistentData().putFloat("JutsuPower", new float[] { 0.8F, 1.0F, 1.3F }[rank] * (style == Style.NINJUTSU ? 1.15F : 1));
+		// health, strike, speed and chakra, scaled by the style: brawlers are tough and quick, ninjutsu users carry more chakra
+		double health = switch (style) {
+			case TAIJUTSU -> 1.25;
+			case KENJUTSU -> 1.1;
+			case MARKSMAN, NINJUTSU -> 0.9;
+			default -> 1;
+		}, attack = switch (style) {
+			case TAIJUTSU -> 2;
+			case KENJUTSU -> 3;
+			case NINJUTSU, MEDIC -> -1;
+			default -> 0;
+		}, speed = switch (style) {
+			case TAIJUTSU -> 0.04;
+			case MARKSMAN, KENJUTSU -> 0.02;
+			default -> 0;
+		}, chakraScale = switch (style) {
+			case NINJUTSU -> 1.5;
+			case MEDIC -> 1.25;
+			case TAIJUTSU -> 0.6;
+			case KENJUTSU -> 0.8;
+			default -> 1;
+		};
+		base(mob, Attributes.MAX_HEALTH, new double[] { 40, 60, 90 }[rank] * health);
+		base(mob, Attributes.ATTACK_DAMAGE, new double[] { 3, 4, 6 }[rank] + attack);
+		base(mob, Attributes.MOVEMENT_SPEED, new double[] { 0.3, 0.32, 0.34 }[rank] + speed);
 		base(mob, Attributes.FOLLOW_RANGE, 32);
 		mob.setHealth(mob.getMaxHealth());
-		double chakra = new double[] { 600, 1100, 1800 }[rank] + mob.getRandom().nextInt(200);
+		double chakra = (new double[] { 600, 1100, 1800 }[rank] + mob.getRandom().nextInt(200)) * chakraScale;
 		mob.getPersistentData().putDouble("ChakraMax", chakra);
 		mob.getPersistentData().putDouble("ChakraAmount", chakra);
-		mob.setCustomName(Component.literal(village.title + " " + RANKS[rank]));
+		mob.setCustomName(Component.literal(village.title + " " + RANKS[rank] + style.label));
 		mob.setCustomNameVisible(false);
-		String weapon = rank == 2 && mob.getRandom().nextBoolean() ? "tanto" : "kunai";
-		mob.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("naruto_shippuden", weapon))));
+		// brawlers fight bare-handed, swordsmen with a tanto, the rest with a kunai (some Jonin with a tanto)
+		String weapon = switch (style) {
+			case TAIJUTSU -> null;
+			case KENJUTSU -> "tanto";
+			case BALANCED -> rank == 2 && mob.getRandom().nextBoolean() ? "tanto" : "kunai";
+			default -> "kunai";
+		};
+		mob.setItemSlot(EquipmentSlot.MAINHAND, weapon == null ? ItemStack.EMPTY
+				: new ItemStack(BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("naruto_shippuden", weapon))));
+		dress(mob);
+	}
+
+	/** Each variant's forehead protector (the genin headband item): its cloth's colour, "" = blue. */
+	private static final Map<Village, String[]> BANDS = Map.of(
+			Village.LEAF, new String[] { "", "_red", "", "", "_black", "" },
+			Village.SAND, new String[] { "", "_black", "_black", "_red", "_black", "" },
+			Village.MIST, new String[] { "_black", "", "_black", "_black", "_red", "" },
+			Village.CLOUD, new String[] { "_black", "_black", "", "_red", "_black", "" },
+			Village.STONE, new String[] { "", "_black", "_red", "_black", "_black", "" });
+	private static final Map<Village, String> HIDDEN = Map.of(Village.LEAF, "konohagakure", Village.SAND, "sunagakure", Village.MIST, "kirigakure",
+			Village.CLOUD, "kumogakure", Village.STONE, "iwagakure");
+
+	/**
+	 * What a shinobi wears as real armour (nothing of it is painted on the skins, porting/skins/shinobi.py): its village's
+	 * forehead protector, and for the Leaf's Chunin and Jonin who fight in the uniform, the jonin vest. Never dropped.
+	 */
+	static void dress(Mob mob) {
+		Village village = village(mob);
+		if (village == null)
+			return;
+		Style style = style(mob);
+		mob.setItemSlot(EquipmentSlot.HEAD, new ItemStack(BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("naruto_shippuden",
+				"genin_" + HIDDEN.get(village) + BANDS.get(village)[style.ordinal()] + "_helmet"))));
+		boolean vest = village == Village.LEAF && rank(mob) >= 1 && (style == Style.BALANCED || style == Style.MARKSMAN || style == Style.NINJUTSU);
+		mob.setItemSlot(EquipmentSlot.CHEST, vest ? new ItemStack(BuiltInRegistries.ITEM.getValue(Identifier.fromNamespaceAndPath("naruto_shippuden", "jonin_vest")))
+				: ItemStack.EMPTY);
+		mob.setDropChance(EquipmentSlot.HEAD, 0);
+		mob.setDropChance(EquipmentSlot.CHEST, 0);
+		mob.getPersistentData().putBoolean("ShinobiDressed", true);
 	}
 
 	private static void base(Mob mob, net.minecraft.core.Holder<net.minecraft.world.entity.ai.attributes.Attribute> attribute, double value) {
@@ -277,7 +378,7 @@ public final class ShinobiAI {
 	static final class Combat extends Goal {
 		private final PathfinderMob mob;
 		private final Map<Move, Long> cooldowns = new HashMap<>();
-		private int melee, thrown, jutsu = 40, flicker = 100, strafe, retreat, rooted;
+		private int melee, thrown, jutsu = 40, flicker = 100, strafe, retreat, rooted, special = 40, hits;
 		private boolean left, back;
 		private @Nullable Move casting;
 		private int castLeft;
@@ -318,6 +419,7 @@ public final class ShinobiAI {
 				return;
 			ServerLevel level = (ServerLevel) mob.level();
 			Village village = village(mob);
+			Style style = style(mob);
 			int rank = rank(mob);
 			double distance = mob.distanceTo(target);
 			boolean sees = mob.getSensing().hasLineOfSight(target);
@@ -326,6 +428,7 @@ public final class ShinobiAI {
 			thrown--;
 			jutsu--;
 			flicker--;
+			special--;
 
 			// weaving signs: rooted in place, chakra gathering at the hands, then the jutsu
 			if (castLeft > 0) {
@@ -370,14 +473,32 @@ public final class ShinobiAI {
 				return;
 			}
 
+			// a medic treats the badly hurt first, itself or a comrade
+			if (style == Style.MEDIC && heal(mob, level)) {
+				rooted = 10;
+				return;
+			}
+			// the style's own move
+			if (special <= 0 && sees && mob.onGround() && styleMove(level, target, style, rank, distance))
+				return;
+
 			// jutsu
 			if (jutsu <= 0 && sees) {
 				Move move = pick(village, rank, distance, level.getGameTime());
 				if (move != null) {
 					casting = move;
 					castLeft = new int[] { 16, 12, 8 }[rank];
+					if (style == Style.NINJUTSU)
+						castLeft = castLeft * 2 / 3;                  // quicker hands
 					cooldowns.put(move, level.getGameTime() + move.cooldown());
-					jutsu = new int[] { 70, 50, 35 }[rank] + mob.getRandom().nextInt(30);
+					jutsu = (int) ((new int[] { 70, 50, 35 }[rank] + mob.getRandom().nextInt(30)) * switch (style) {
+						case NINJUTSU -> 0.55;
+						case MEDIC -> 1.2;
+						case MARKSMAN -> 1.5;
+						case KENJUTSU -> 2.0;
+						case TAIJUTSU -> 2.5;
+						default -> 1.0;
+					});
 					level.broadcastEntityEvent(mob, SIGNS);
 					sound(level, mob.position(), SoundEvents.ARMOR_EQUIP_LEATHER.value(), 1, 1.6F);
 					return;
@@ -397,21 +518,38 @@ public final class ShinobiAI {
 					return;
 				}
 			}
-			// kunai and shuriken
-			if (thrown <= 0 && sees && distance > 4 && distance < 18) {
-				throwWeapon(mob, target, rank);
-				thrown = 30 + mob.getRandom().nextInt(30) - rank * 5;
+			// kunai and shuriken: the marksman throws often and from far, the close fighters only at an enemy out of reach
+			boolean close = style == Style.TAIJUTSU || style == Style.KENJUTSU;
+			if (thrown <= 0 && sees && distance > (style == Style.MARKSMAN ? 2 : close ? 8 : 4) && distance < (style == Style.MARKSMAN ? 26 : 18)) {
+				if (style == Style.MARKSMAN)
+					volley(mob, target, rank);
+				else
+					throwWeapon(mob, target, rank);
+				thrown = (int) ((30 + mob.getRandom().nextInt(30) - rank * 5) * (style == Style.MARKSMAN ? 0.5 : close ? 2 : 1));
 			}
 			// up close: strike
-			if (distance < 2.8 && melee <= 0 && sees) {
-				Weapons.swing(mob);
-				mob.doHurtTarget(level, target);
-				melee = 20 - rank * 3;
+			double reach = style == Style.KENJUTSU ? 3.3 : 2.8;
+			if (distance < reach && melee <= 0 && sees) {
+				strike(level, target, style, rank);
+				melee = (int) ((20 - rank * 3) * switch (style) {
+					case TAIJUTSU -> 0.6;
+					case KENJUTSU -> 0.8;
+					case NINJUTSU, MARKSMAN -> 1.4;
+					default -> 1.0;
+				});
 			}
 
-			// footwork: keep to the village's range, circling the enemy
-			double preferred = chakra(mob) < 120 ? 2 : village.range;
-			if (!sees || distance > preferred + 3) {
+			// footwork: keep to the style's range (the village's for the balanced), circling the enemy
+			double preferred = switch (style) {
+				case TAIJUTSU, KENJUTSU -> 1.8;
+				case MARKSMAN -> 12;
+				case NINJUTSU -> village.range + 4;
+				case MEDIC -> village.range + 2;
+				default -> village.range;
+			};
+			if (chakra(mob) < 120 && style != Style.MARKSMAN)
+				preferred = Math.min(preferred, 2);
+			if (!sees || distance > preferred + (preferred < 3 ? 0.8 : 3)) {
 				mob.getNavigation().moveTo(target, 1.2 + rank * 0.05);
 			} else {
 				mob.getNavigation().stop();
@@ -427,6 +565,111 @@ public final class ShinobiAI {
 			}
 		}
 
+		/** A blow up close: a brawler's third blow is a kick that sends the enemy flying, a swordsman's cuts all round, a medic's
+		 * chakra scalpel weakens. */
+		private void strike(ServerLevel level, LivingEntity target, Style style, int rank) {
+			Weapons.swing(mob);
+			mob.doHurtTarget(level, target);
+			hits++;
+			Vec3 away = target.position().subtract(mob.position()).multiply(1, 0, 1).normalize();
+			switch (style) {
+				case TAIJUTSU -> {
+					if (hits % 3 == 0) {
+						dev(mob, "kick");
+						// the Leaf Hurricane's kind of kick
+						target.push(away.x * (1.1 + rank * 0.2), 0.45, away.z * (1.1 + rank * 0.2));
+						target.syncVelocity = true;
+						Techniques.damage(mob, target, 2 + rank * 2, Element.WIND);
+						level.sendParticles(ParticleTypes.SWEEP_ATTACK, target.getX(), target.getY() + 1, target.getZ(), 1, 0, 0, 0, 0);
+						sound(level, target.position(), SoundEvents.PLAYER_ATTACK_KNOCKBACK, 1, 0.8F);
+					}
+				}
+				case KENJUTSU -> {
+					// the cut carries on to whoever else stands in front
+					for (LivingEntity other : Techniques.cone(mob, 3.3, 70))
+						if (other != target)
+							Techniques.damage(mob, other, 2 + rank * 2, Element.STEEL);
+					level.sendParticles(ParticleTypes.SWEEP_ATTACK, target.getX(), target.getY() + 1, target.getZ(), 1, 0, 0, 0, 0);
+					sound(level, target.position(), SoundEvents.PLAYER_ATTACK_SWEEP, 1, 1.2F);
+				}
+				case MEDIC -> {
+					if (hits % 2 == 0) {
+						dev(mob, "scalpel");
+						target.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.WEAKNESS, 80 + rank * 40, rank == 2 ? 1 : 0));
+						target.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.SLOWNESS, 60, 0));
+						level.sendParticles(new net.minecraft.core.particles.DustParticleOptions(0x7CFFB0, 1.0F), target.getX(), target.getY() + 1, target.getZ(), 10, 0.3,
+								0.4, 0.3, 0);
+					}
+				}
+				default -> {
+				}
+			}
+		}
+
+		/** The style's own move, when its time has come: true if it did one. */
+		private boolean styleMove(ServerLevel level, LivingEntity target, Style style, int rank, double distance) {
+			Vec3 to = target.position().subtract(mob.position()).multiply(1, 0, 1).normalize();
+			switch (style) {
+				case TAIJUTSU -> {
+					// a leap straight at the enemy, landing in reach
+					if (distance < 4 || distance > 11)
+						return false;
+					mob.setDeltaMovement(to.x * (0.5 + distance * 0.07), 0.48, to.z * (0.5 + distance * 0.07));
+					melee = 0;
+					special = 70 - rank * 10;
+					dev(mob, "leap");
+					sound(level, mob.position(), SoundEvents.BREEZE_JUMP, 1, 1.2F);
+					level.sendParticles(ParticleTypes.CLOUD, mob.getX(), mob.getY() + 0.1, mob.getZ(), 6, 0.3, 0, 0.3, 0.02);
+					return true;
+				}
+				case KENJUTSU -> {
+					// a dash in with the blade, cutting on arrival
+					if (distance < 4 || distance > 10)
+						return false;
+					face(mob, target, 0);
+					mob.setDeltaMovement(to.x * 1.5, 0.12, to.z * 1.5);
+					melee = 0;
+					special = 90 - rank * 15;
+					dev(mob, "dash");
+					sound(level, mob.position(), SoundEvents.PLAYER_ATTACK_SWEEP, 1, 1.6F);
+					Techniques.line(level, ParticleTypes.CRIT, mob.position().add(0, 1, 0), target.position().add(0, 1, 0), 0.6);
+					return true;
+				}
+				case MARKSMAN -> {
+					// pressed close: a jump back, a volley as it lands
+					if (distance > 4)
+						return false;
+					mob.setDeltaMovement(-to.x * 1.0, 0.45, -to.z * 1.0);
+					thrown = 6;
+					special = 60 - rank * 10;
+					dev(mob, "jump back");
+					sound(level, mob.position(), SoundEvents.BREEZE_JUMP, 1, 1.5F);
+					return true;
+				}
+				case NINJUTSU -> {
+					// pressed close: Body Flicker away to its range
+					if (distance > 3 || chakra(mob) < 40)
+						return false;
+					Vec3 away = mob.position().subtract(target.position()).multiply(1, 0, 1).normalize().scale(9).add(mob.position());
+					BlockPos ground = NatureJutsu.ground(level, away.x, mob.getY(), away.z);
+					if (!level.getBlockState(ground).isAir() || !level.getBlockState(ground.above()).isAir())
+						return false;
+					puff(level, mob.position().add(0, 1, 0), Element.SMOKE, 0.8F);
+					mob.teleportTo(ground.getX() + 0.5, ground.getY(), ground.getZ() + 0.5);
+					puff(level, mob.position().add(0, 1, 0), Element.SMOKE, 0.6F);
+					sound(level, mob.position(), SoundEvents.BREEZE_JUMP, 1, 1.6F);
+					spend(mob, 40);
+					jutsu = Math.min(jutsu, 6);
+					dev(mob, "flicker away");
+					special = 120 - rank * 20;
+					return true;
+				}
+				default -> {
+					return false;
+				}
+			}
+		}
+
 		/** The jutsu to use now: one it knows, can pay for, isn't cooling down and suits the distance (a wall when pressed close). */
 		private @Nullable Move pick(Village village, int rank, double distance, long time) {
 			List<Move> usable = new ArrayList<>();
@@ -439,6 +682,8 @@ public final class ShinobiAI {
 			}
 			if (usable.isEmpty())
 				return null;
+			if (style(mob) == Style.NINJUTSU)
+				usable.sort((a, b) -> Integer.compare(b.rank(), a.rank()));
 			// the strongest known move is the likeliest
 			usable.sort((a, b) -> Integer.compare(b.rank(), a.rank()));
 			return mob.getRandom().nextInt(3) == 0 ? usable.get(mob.getRandom().nextInt(usable.size())) : usable.getFirst();
@@ -475,12 +720,82 @@ public final class ShinobiAI {
 		sound(level, mob.getEyePosition(), SoundEvents.TRIDENT_THROW.value(), 0.8F, 1.6F);
 	}
 
+	/**
+	 * The marksman's throw: a fan of shuriken (three, five for a Jonin) or a kunai, which from a Chunin up may carry an explosive
+	 * tag that bursts where it lands (nothing breaks).
+	 */
+	static void volley(Mob mob, LivingEntity target, int rank) {
+		ServerLevel level = (ServerLevel) mob.level();
+		float roll = mob.getRandom().nextFloat();
+		if (rank >= 1 && roll < 0.3F) {
+			face(mob, target, mob.distanceTo(target));
+			Weapons.swing(mob);
+			JutsuProjectile kunai = Techniques.shoot(mob, Element.STEEL, Shape.KUNAI, 0.5F, Techniques.turned(mob, 0, -3).scale(1.4), 3 + rank);
+			kunai.gravity = 0.02F;
+			kunai.life = 40;
+			float blast = 4 + rank * 2;
+			dev(mob, "explosive tag");
+			kunai.onImpact = p -> {
+				Techniques.burst(level, p.position(), 2.5F, blast, 0.7F, Element.FIRE, p);
+				level.sendParticles(ParticleTypes.EXPLOSION, p.getX(), p.getY(), p.getZ(), 1, 0, 0, 0, 0);
+			};
+			sound(level, mob.getEyePosition(), SoundEvents.TRIDENT_THROW.value(), 0.8F, 1.4F);
+			return;
+		}
+		if (roll < 0.65F) {
+			face(mob, target, mob.distanceTo(target));
+			Weapons.swing(mob);
+			int count = rank == 2 ? 5 : 3;
+			dev(mob, "fan of " + count);
+			for (int i = 0; i < count; i++) {
+				JutsuProjectile shuriken = Techniques.shoot(mob, Element.STEEL, Shape.SHURIKEN, 0.45F,
+						Techniques.turned(mob, (i - (count - 1) / 2F) * 5, -2).scale(1.6), 2 + rank);
+				shuriken.gravity = 0.02F;
+				shuriken.life = 34;
+				shuriken.knockback = 0.15F;
+			}
+			sound(level, mob.getEyePosition(), SoundEvents.TRIDENT_THROW.value(), 0.8F, 1.7F);
+			return;
+		}
+		throwWeapon(mob, target, rank);
+	}
+
+	/**
+	 * A medic's Mystical Palm: the most hurt of itself, its comrades and the players of its village within reach (below half health)
+	 * is healed, at a chakra cost, every few seconds. In a fight and out of one.
+	 */
+	static boolean heal(PathfinderMob mob, ServerLevel level) {
+		long time = level.getGameTime();
+		if (mob.getPersistentData().getLongOr("HealReady", 0) > time || chakra(mob) < 60)
+			return false;
+		Village village = village(mob);
+		LivingEntity patient = null;
+		for (LivingEntity e : level.getEntitiesOfClass(LivingEntity.class, mob.getBoundingBox().inflate(10),
+				e -> e.isAlive() && (e == mob || village(e) == village || villager(village, e)) && e.getHealth() < e.getMaxHealth() * 0.5F))
+			if (patient == null || e.getHealth() / e.getMaxHealth() < patient.getHealth() / patient.getMaxHealth())
+				patient = e;
+		if (patient == null)
+			return false;
+		int rank = rank(mob);
+		dev(mob, "heals " + patient.getName().getString() + " at " + (int) patient.getHealth());
+		patient.heal(6 + 4 * rank);
+		spend(mob, 60);
+		mob.getPersistentData().putLong("HealReady", time + new int[] { 200, 160, 120 }[rank]);
+		level.broadcastEntityEvent(mob, SIGNS);
+		face(mob, patient, 0);
+		if (patient != mob)
+			Techniques.line(level, new net.minecraft.core.particles.DustParticleOptions(0x7CFFB0, 1.0F), mob.position().add(0, 1.2, 0),
+					patient.position().add(0, 1, 0), 0.4);
+		level.sendParticles(ParticleTypes.HAPPY_VILLAGER, patient.getX(), patient.getY() + 1, patient.getZ(), 12, 0.4, 0.6, 0.4, 0);
+		sound(level, patient.position(), SoundEvents.AMETHYST_BLOCK_CHIME, 1, 1.2F);
+		return true;
+	}
+
 	// ------------------------------------------------------------------ every tick
 	/** Replaces the MCreator tick procedure (timed jutsu): chakra comes back, faster out of a fight. */
 	public static void tick(PathfinderMob mob) {
 		if (mob.level().isClientSide() || village(mob) == null)
 			return;
-		double max = maxChakra(mob);
 		// summoned with a rank but without spawning ({NeoForgeData:{ShinobiRank:2}}), or from an old save: set it up now
 		if (!mob.getPersistentData().getBooleanOr("ShinobiReady", false) && mob.tickCount > 1) {
 			if (mob.getPersistentData().contains("ShinobiRank"))
@@ -488,7 +803,20 @@ public final class ShinobiAI {
 			else
 				spawned(mob);
 		}
+		// (read after the setup: read before, the new chakra was capped at the old maximum of none)
+		double max = maxChakra(mob);
 		mob.getPersistentData().putDouble("ChakraAmount", Math.min(max, chakra(mob) + (mob.getTarget() == null ? 2 : 0.4)));
+		// shinobi from before they wore their protectors
+		if (mob.getPersistentData().getBooleanOr("ShinobiReady", false) && !mob.getPersistentData().getBooleanOr("ShinobiDressed", false))
+			dress(mob);
+		if (mob.getTarget() == null && mob.tickCount % 20 == 0 && mob.level() instanceof ServerLevel level) {
+			Style style = style(mob);
+			// out of a fight a medic looks after whoever is hurt; a brawler trains, punching the air where it stands
+			if (style == Style.MEDIC)
+				heal(mob, level);
+			else if (style == Style.TAIJUTSU && mob.getNavigation().isDone() && mob.getRandom().nextInt(6) == 0)
+				Techniques.channel(mob, 18, 6, i -> Weapons.swing(mob));
+		}
 	}
 
 	// ------------------------------------------------------------------ Substitution Jutsu
@@ -506,6 +834,25 @@ public final class ShinobiAI {
 			return;
 		int rank = rank(mob);
 		long time = level.getGameTime();
+		// a swordsman turns a blow aimed at it from the front aside with its blade
+		if (style(mob) == Style.KENJUTSU && source.getDirectEntity() == attacker && mob.distanceTo(attacker) < 4.5
+				&& mob.getPersistentData().getLongOr("ParryReady", 0) <= time && mob.getRandom().nextFloat() < new float[] { 0.25F, 0.35F, 0.45F }[rank]) {
+			Vec3 facing = Vec3.directionFromRotation(0, mob.getYRot());
+			Vec3 toward = attacker.position().subtract(mob.position()).multiply(1, 0, 1).normalize();
+			if (facing.dot(toward) > 0.3) {
+				event.setCanceled(true);
+				dev(mob, "parry");
+				mob.getPersistentData().putLong("ParryReady", time + 40);
+				Weapons.swing(mob);
+				attacker.push(toward.x * 0.6, 0.15, toward.z * 0.6);
+				attacker.syncVelocity = true;
+				level.sendParticles(ParticleTypes.CRIT, mob.getX() + toward.x, mob.getY() + 1.3, mob.getZ() + toward.z, 10, 0.2, 0.2, 0.2, 0.2);
+				sound(level, mob.position(), SoundEvents.ANVIL_LAND, 0.5F, 1.8F);
+				if (attacker instanceof LivingEntity living && mob.getTarget() == null)
+					mob.setTarget(living);
+				return;
+			}
+		}
 		if (mob.getPersistentData().getLongOr("SubstitutionReady", 0) > time || mob.getRandom().nextFloat() > new float[] { 0.35F, 0.5F, 0.7F }[rank]
 				|| chakra(mob) < 30)
 			return;

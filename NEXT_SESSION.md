@@ -251,7 +251,17 @@ and takes the chakra and cooldown itself (unless the jutsu called `Jutsus.miss`)
   melee, Body Flicker, retreat when low. Substitution (a real log for 2 s) in a damage event.
 - Targets: whoever hurt them (comrades are alerted), whatever hurts or is hit by a player of their village, monsters.
   `Techniques.ALLIES` keeps their jutsu off their own side.
-- Rules `shinobi_ai` and `shinobi_renderer`. The renderer wraps their own model (pose on top of its walk) and draws the held item.
+- Rules `shinobi_ai` and `shinobi_renderer`. `ShinobiRenderer` draws them on the player's model (the generated model is no longer
+  used) with the armour layer and the held item, and the sign-weaving pose.
+- **Six looks and styles per village** (`ShinobiAI.Style`): BALANCED, TAIJUTSU, MARKSMAN, NINJUTSU, KENJUTSU, MEDIC. The variant is
+  read from the UUID (`ShinobiAI.variant`), so the client picks the skin with no sync: `textures/entities/shinobi/<village>_<n>.png`,
+  drawn as code by `porting/skins/shinobi.py` (the story skins' painter). Summon a given look with `{UUID:[I;k,0,k,n]}` (variant n).
+  Style changes stats, weapon, range, throw/strike/jutsu rates, and adds moves (`Combat.styleMove`, `strike`, `volley`, `heal`,
+  the parry in `substitution`). `ShinobiAI.dress` puts on the village's genin headband (`BANDS`: colour per look) and, for Leaf
+  Chunin/Jonin of the balanced, marksman and ninjutsu looks, the `jonin_vest`; drop chance 0. **Nothing that is an item is painted on
+  the skins**, and none may look like a canon character (the user rejected Lee, Kakashi and Zabuza look-alikes).
+- Dev mode `styles`: the 30 looks lined up (front and back), then each style against a balanced shinobi (`DEVTEST style …` lines).
+- Fixed: `ShinobiAI.tick` read the chakra maximum before setting up a summoned shinobi, so it started with 1 chakra.
 
 ### Kurama (`core/jutsu/Kurama`)
 
@@ -361,7 +371,9 @@ Nature Releases, Kekkei Genkai, DNA, Clans, Dojutsu, Shinobi Weapons, Headbands,
   sends them to the street before the Academy and sets their respawn there (forced). Nether portals don't light in
   Chikyū; nothing travels from it to the Nether or the End. `/naruto chikyu [players]`, `/naruto chikyu leave`.
 - The toriis: the Leaf's outside the great gate (world 0, 65, 222) and one built 6 blocks north of the overworld spawn
-  (found again by its blackstone foot, rebuilt or relit on server start). `ChikyuContent.ToriiPortalBlock` is a vanilla
+  (found again by its blackstone foot, rebuilt or relit on server start). `Chikyu.buildTorii` sets it at the median ground height
+  and `level` clears above, fills below and lays a stone brick plaza (the marker: stone bricks under its middle; an older torii
+  without it is levelled on the next start). Dev mode `torii` builds one on a hillside. `ChikyuContent.ToriiPortalBlock` is a vanilla
   `Portal` like the nether portal: the same delay game rules, the swirl, trigger/travel/ambient sounds and cooldown, but only
   players pass (story NPCs, mobs and items don't); `client/ToriiOverlay` wraps the camera overlays so the swirl is drawn with the torii's green
   texture instead of vanilla's purple. The way out gives a `leaf_return_scroll` if the player has none: hold use for

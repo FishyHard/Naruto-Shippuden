@@ -690,11 +690,18 @@ Thrown kunai and shuriken, and a few old jutsu projectiles, also exist as projec
 
 - **Asuma**: Mission character.
 - **Earth Golem**: An earth golem summoned by Hidden Stone shinobi.
-- **Hidden Cloud Shinobi**: Village shinobi (Genin, Chunin or Jonin): footwork, hand signs and their village's nature jutsu, kunai and shuriken, Body Flicker, Substitution.
-- **Hidden Leaf Shinobi**: Village shinobi (Genin, Chunin or Jonin): footwork, hand signs and their village's nature jutsu, kunai and shuriken, Body Flicker, Substitution.
-- **Hidden Mist Shinobi**: Village shinobi (Genin, Chunin or Jonin): footwork, hand signs and their village's nature jutsu, kunai and shuriken, Body Flicker, Substitution.
-- **Hidden Sand Shinobi**: Village shinobi (Genin, Chunin or Jonin): footwork, hand signs and their village's nature jutsu, kunai and shuriken, Body Flicker, Substitution.
-- **Hidden Stone Shinobi**: Village shinobi (Genin, Chunin or Jonin): footwork, hand signs and their village's nature jutsu, kunai and shuriken, Body Flicker, Substitution.
+- **Hidden Leaf / Sand / Mist / Cloud / Stone Shinobi**: Village shinobi (Genin, Chunin or Jonin): footwork, hand signs and their village's nature jutsu, kunai and shuriken, Body Flicker, Substitution. Each village has six looks (64x64 skins), and each look fights its own way:
+
+| Look | Style | What it does |
+|---|---|---|
+| 1 | Balanced | The village's range, its jutsu, kunai and shuriken. |
+| 2 | Taijutsu | Bare-handed, tough and quick: leaps at the enemy, every third blow is a kick that sends them flying; few jutsu. |
+| 3 | Marksman | Keeps 12 blocks away: fans of 3 shuriken (5 for a Jonin), explosive-tag kunai (Chunin and up, nothing breaks), jumps back when pressed. |
+| 4 | Ninjutsu | 1.5x chakra, stronger and quicker jutsu, nearly twice as often; Body Flickers away when cornered. |
+| 5 | Swordsman | Always a tanto: dashes in to cut, the cut hits everyone in front, parries blows from the front (25/35/45%). |
+| 6 | Medical Ninja | Heals the most hurt of itself, its comrades and players of its village (below half health), in a fight or not; its blows weaken and slow. |
+
+  They wear their village's forehead protector (the genin headband item, blue, black or red by look) and the Leaf's Chunin and Jonin in the uniform wear the jonin vest. Neither is ever dropped.
 - **Iruka Sensei**: Academy teacher (kept for the new story; nothing spawns him yet).
 - **Shikamaru**: Mission character.
 - **Training Dummy**: Takes hits for training (kept for the new story; nothing spawns it yet).

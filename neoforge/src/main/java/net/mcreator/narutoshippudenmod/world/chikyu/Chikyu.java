@@ -130,27 +130,54 @@ public final class Chikyu {
 					&& overworld.getBlockState(new BlockPos(x - 3, y + 1, z)).is(Blocks.STRIPPED_MANGROVE_WOOD))
 			{
 				BlockPos base = new BlockPos(x, y, z);
+				// one built before it levelled its ground (on a slope, half in a hill): level it now
+				if (!overworld.getBlockState(base.below()).is(Blocks.STONE_BRICKS))
+					level(overworld, base);
 				for (Object[] b : LeafVillage.torii())
 					if (b[3] == ChikyuContent.TORII_PORTAL.defaultBlockState() && !overworld.getBlockState(base.offset((int) b[0], (int) b[1], (int) b[2])).is(ChikyuContent.TORII_PORTAL))
 						overworld.setBlock(base.offset((int) b[0], (int) b[1], (int) b[2]), (BlockState) b[3], 3);
 				return overworldTorii = base;
 			}
-		int y = Integer.MIN_VALUE;
-		for (int dx = -3; dx <= 3; dx += 3)
-			y = Math.max(y, overworld.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x + dx, z));
-		BlockPos base = new BlockPos(x, y, z);
-		// the passage is clear, the posts stand on the ground
-		for (int dx = -2; dx <= 2; dx++)
-			for (int dy = 0; dy < 6; dy++)
-				for (int dz = -3; dz <= 3; dz++)
+		return overworldTorii = buildTorii(overworld, x, z);
+	}
+
+	/** Builds a torii centred on x, z, at the ground's middle height round it (the median, so a slope is cut as much as it is
+	 * filled), on levelled ground. Returns its base. */
+	public static BlockPos buildTorii(ServerLevel overworld, int x, int z) {
+		int[] heights = new int[11 * 7];
+		int i = 0;
+		for (int dx = -5; dx <= 5; dx++)
+			for (int dz = -3; dz <= 3; dz++)
+				heights[i++] = overworld.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x + dx, z + dz);
+		java.util.Arrays.sort(heights);
+		BlockPos base = new BlockPos(x, heights[heights.length / 2], z);
+		level(overworld, base);
+		return base;
+	}
+
+	/**
+	 * Builds the overworld's torii on level ground: everything above its ground is cleared (trees, a hill's side, whatever
+	 * stood there), a stone brick plaza is laid under and round it with a grass border, and the ground under that is filled
+	 * in down to what is solid, so on a slope it stands on a terrace instead of half in the hill. Then the torii itself.
+	 */
+	private static void level(ServerLevel overworld, BlockPos base) {
+		for (int dx = -7; dx <= 7; dx++)
+			for (int dz = -5; dz <= 5; dz++) {
+				boolean plaza = Math.abs(dx) <= 5 && Math.abs(dz) <= 3;
+				for (int dy = 0; dy <= 10; dy++)
 					if (!overworld.getBlockState(base.offset(dx, dy, dz)).isAir())
 						overworld.setBlock(base.offset(dx, dy, dz), Blocks.AIR.defaultBlockState(), 3);
+				// a few cracked and mossy bricks, as old paving has
+				long h = (dx * 73856093L) ^ (dz * 19349663L) ^ base.asLong();
+				int r = (int) Math.floorMod(h ^ (h >>> 17), 10L);
+				BlockState top = !plaza ? Blocks.GRASS_BLOCK.defaultBlockState()
+						: r == 0 ? Blocks.CRACKED_STONE_BRICKS.defaultBlockState() : r == 1 ? Blocks.MOSSY_STONE_BRICKS.defaultBlockState() : Blocks.STONE_BRICKS.defaultBlockState();
+				overworld.setBlock(base.offset(dx, -1, dz), top, 3);
+				for (int dy = -2; dy > -16 && !overworld.getBlockState(base.offset(dx, dy, dz)).isSolid(); dy--)
+					overworld.setBlock(base.offset(dx, dy, dz), (plaza ? Blocks.STONE_BRICKS : Blocks.DIRT).defaultBlockState(), 3);
+			}
 		for (Object[] b : LeafVillage.torii())
 			overworld.setBlock(base.offset((int) b[0], (int) b[1], (int) b[2]), (BlockState) b[3], 3);
-		for (int dx = -3; dx <= 3; dx += 3)
-			for (int dy = -1; dy > -12 && !overworld.getBlockState(base.offset(dx, dy, 0)).isSolid(); dy--)
-				overworld.setBlock(base.offset(dx, dy, 0), Blocks.STRIPPED_MANGROVE_WOOD.defaultBlockState(), 3);
-		return overworldTorii = base;
 	}
 
 	@SubscribeEvent

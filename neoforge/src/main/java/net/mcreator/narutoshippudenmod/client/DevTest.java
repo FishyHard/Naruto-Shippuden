@@ -535,6 +535,47 @@ public final class DevTest {
 			STEPS.add(mc::stop);
 			return;
 		}
+		if (System.getProperty("naruto.devtest.only", "").equals("styles")) {
+			styleSteps(mc);
+			STEPS.add(mc::stop);
+			return;
+		}
+		if (System.getProperty("naruto.devtest.only", "").equals("torii")) {
+			// the overworld's torii on a hillside with a tree: built level, on a terrace, not half in the hill
+			int[] at = new int[3];
+			STEPS.add(() -> {
+				setupFight(mc);
+				arena(mc, 24, -8, 40);
+				nextDelay = 40;
+			});
+			STEPS.add(() -> onServer(mc, p -> {
+				at[0] = p.getBlockX();
+				at[1] = p.getBlockY();
+				at[2] = p.getBlockZ() + 16;
+				var level = (net.minecraft.server.level.ServerLevel) p.level();
+				// a hill rising to the west, one step a column, and a tree on it
+				for (int dx = -12; dx <= 12; dx++)
+					for (int dz = -9; dz <= 9; dz++) {
+						int top = Math.max(0, Math.min(8, (-dx + 4) / 2));
+						for (int dy = 0; dy < top; dy++)
+							level.setBlock(new net.minecraft.core.BlockPos(at[0] + dx, at[1] + dy, at[2] + dz),
+									(dy == top - 1 ? net.minecraft.world.level.block.Blocks.GRASS_BLOCK : net.minecraft.world.level.block.Blocks.DIRT).defaultBlockState(), 3);
+					}
+				for (int dy = 0; dy < 6; dy++)
+					level.setBlock(new net.minecraft.core.BlockPos(at[0] - 4, at[1] + 4 + dy, at[2] + 1), net.minecraft.world.level.block.Blocks.JUNGLE_LOG.defaultBlockState(), 3);
+			}));
+			STEPS.add(() -> command(mc, "tp @s " + (at[0] + 0.5) + " " + (at[1] + 6) + " " + (at[2] - 14.5) + " 0 15"));
+			STEPS.add(() -> shot(mc, "torii_hill"));
+			STEPS.add(() -> onServer(mc, p -> {
+				var base = net.mcreator.narutoshippudenmod.world.chikyu.Chikyu.buildTorii((net.minecraft.server.level.ServerLevel) p.level(), at[0], at[2]);
+				NarutoShippudenMod.LOGGER.info("DEVTEST torii base {} (ground {})", base, at[1]);
+			}));
+			STEPS.add(() -> shot(mc, "torii_front"));
+			STEPS.add(() -> command(mc, "tp @s " + (at[0] + 13.5) + " " + (at[1] + 7) + " " + (at[2] + 0.5) + " 90 20"));
+			STEPS.add(() -> shot(mc, "torii_side"));
+			STEPS.add(mc::stop);
+			return;
+		}
 		if (System.getProperty("naruto.devtest.only", "").equals("models")) {
 			modelSteps(mc);
 			STEPS.add(mc::stop);
@@ -1066,6 +1107,82 @@ public final class DevTest {
 					if (n == 10)
 						command(mc, "damage @e[type=naruto_shippuden:hidden_" + village + "_shinobi,limit=1] 6 minecraft:player_attack by @s");
 					nextDelay = n == 10 ? 2 : 16;
+				});
+			}
+		}
+	}
+
+	/**
+	 * The shinobi's six looks and styles: each village's six lined up (front and back), then each style against a balanced
+	 * shinobi of another village (a UUID of [I;k,0,k,n] gives variant n).
+	 */
+	private static void styleSteps(Minecraft mc) {
+		String[] villages = { "leaf", "sand", "mist", "cloud", "stone" };
+		int[] base = new int[3];
+		STEPS.add(() -> {
+			setupFight(mc);
+			arena(mc, 24, -8, 40);
+			nextDelay = 40;
+		});
+		// every scene starts from the arena's floor (each one moves the camera)
+		STEPS.add(() -> onServer(mc, p -> {
+			base[0] = p.getBlockX();
+			base[1] = p.getBlockY();
+			base[2] = p.getBlockZ();
+		}));
+		for (int v = 0; v < villages.length; v++) {
+			int k = v + 1;
+			String village = villages[v];
+			STEPS.add(() -> {
+				command(mc, "kill @e[type=!player]");
+				command(mc, "tp @s " + base[0] + ".5 " + base[1] + " " + base[2] + ".5 0 0");
+				for (int n = 0; n < 6; n++)
+					command(mc, "summon naruto_shippuden:hidden_" + village + "_shinobi ~" + (n * 1.4 - 3.5) + " ~ ~4 {NoAI:1b,Rotation:[180f,0f],UUID:[I;" + k + ",0," + k + "," + n + "]}");
+				command(mc, "tp @s ~ ~0.6 ~ facing ~ ~1.4 ~4");
+				nextDelay = 30;
+			});
+			STEPS.add(() -> {
+				shot(mc, "styles_" + village + "_front");
+				onServer(mc, p -> p.level().getEntitiesOfClass(net.minecraft.world.entity.PathfinderMob.class, p.getBoundingBox().inflate(10),
+						e -> e.getPersistentData().contains("ShinobiRank")).forEach(e -> NarutoShippudenMod.LOGGER.info("DEVTEST styles {} variant {}: {} holds {}",
+								village, net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.variant(e), e.getName().getString(), e.getMainHandItem())));
+				command(mc, "execute as @e[type=naruto_shippuden:hidden_" + village + "_shinobi] at @s run tp @s ~ ~ ~ 0 0");
+				nextDelay = 4;
+			});
+			STEPS.add(() -> shot(mc, "styles_" + village + "_back"));
+		}
+		String[] styles = { "balanced", "taijutsu", "marksman", "ninjutsu", "kenjutsu", "medic" };
+		for (int n = 0; n < 6; n++) {
+			int variant = n;
+			String village = villages[n % 5], foe = villages[(n + 2) % 5];
+			STEPS.add(() -> {
+				command(mc, "kill @e[type=!player]");
+				command(mc, "tp @s " + base[0] + ".5 " + base[1] + " " + base[2] + ".5 0 0");
+				command(mc, "summon naruto_shippuden:hidden_" + village + "_shinobi ~ ~ ~8 {UUID:[I;7,0,7," + variant + "],NeoForgeData:{ShinobiRank:1}}");
+				command(mc, "summon naruto_shippuden:hidden_" + foe + "_shinobi ~ ~ ~20 {UUID:[I;" + (20 + variant) + ",0," + (20 + variant) + ",0],NeoForgeData:{ShinobiRank:1}}");
+				command(mc, "tp @s ~-13 ~4 ~13 facing ~ ~1 ~14");
+				nextDelay = 20;
+			});
+			for (int shot = 0; shot < 16; shot++) {
+				int i = shot;
+				STEPS.add(() -> {
+					onServer(mc, p -> {
+						var all = p.level().getEntitiesOfClass(net.minecraft.world.entity.PathfinderMob.class, p.getBoundingBox().inflate(48),
+								e -> e.getPersistentData().contains("ShinobiRank"));
+						if (all.size() == 2) {
+							all.get(0).setTarget(all.get(1));
+							all.get(1).setTarget(all.get(0));
+						}
+						// the medic needs someone hurt: its foe's blows do that, and halfway it is wounded
+						if (i == 8)
+							all.stream().filter(e -> net.mcreator.narutoshippudenmod.core.jutsu.ShinobiAI.variant(e) == variant && e.getUUID().getMostSignificantBits() >> 32 == 7)
+									.forEach(e -> e.setHealth(e.getMaxHealth() * 0.3F));
+						all.forEach(e -> NarutoShippudenMod.LOGGER.info("DEVTEST styles fight {} {}: {} hp {} chakra {}", styles[variant], i, e.getName().getString(),
+								(int) e.getHealth(), (int) e.getPersistentData().getDoubleOr("ChakraAmount", 0)));
+					});
+					if (i % 4 == 2)
+						shot(mc, "styles_fight_" + styles[variant] + "_" + i);
+					nextDelay = 20;
 				});
 			}
 		}
