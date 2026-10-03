@@ -130,6 +130,16 @@ public final class Chikyu {
 					&& overworld.getBlockState(new BlockPos(x - 3, y + 1, z)).is(Blocks.STRIPPED_MANGROVE_WOOD))
 			{
 				BlockPos base = new BlockPos(x, y, z);
+				// one built underground (its ground measured in chunks not yet loaded, which read as the world's bottom): taken
+				// down and built again on the surface
+				// (the ground just outside its plaza on all four sides well above its foot: on a hillside one side is lower)
+				int around = Math.min(Math.min(surface(overworld, x - 8, z), surface(overworld, x + 8, z)),
+						Math.min(surface(overworld, x, z - 6), surface(overworld, x, z + 6)));
+				if (y < around - 4) {
+					for (Object[] b : LeafVillage.torii())
+						overworld.setBlock(base.offset((int) b[0], (int) b[1], (int) b[2]), Blocks.AIR.defaultBlockState(), 3);
+					break;
+				}
 				// one built before it levelled its ground (on a slope, half in a hill): level it now
 				if (!overworld.getBlockState(base.below()).is(Blocks.STONE_BRICKS))
 					level(overworld, base);
@@ -148,11 +158,18 @@ public final class Chikyu {
 		int i = 0;
 		for (int dx = -5; dx <= 5; dx++)
 			for (int dz = -3; dz <= 3; dz++)
-				heights[i++] = overworld.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x + dx, z + dz);
+				heights[i++] = surface(overworld, x + dx, z + dz);
 		java.util.Arrays.sort(heights);
 		BlockPos base = new BlockPos(x, heights[heights.length / 2], z);
 		level(overworld, base);
 		return base;
+	}
+
+	/** The first free block above the ground (trees aside), with its chunk loaded first: an unloaded chunk's heightmap reads as
+	 * the bottom of the world, which once put the torii in a deep cave. */
+	private static int surface(ServerLevel level, int x, int z) {
+		level.getChunk(x >> 4, z >> 4);
+		return level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, x, z);
 	}
 
 	/**
