@@ -1562,8 +1562,20 @@ public final class Story {
 				mob.setTarget((ServerPlayer) level.getPlayerByUUID(partner));
 			} else if (mob.getTarget() instanceof net.minecraft.world.entity.player.Player)
 				mob.setTarget(null);
+			// at rest it stays at its character's feet: walks back if it has strayed, then sits (no strolling off)
+			double far = mob.distanceToSqr(x, y, z);
+			boolean rest = !sparring && mob.getTarget() == null;
+			if (mob instanceof net.minecraft.world.entity.TamableAnimal pet2) {
+				boolean sit = rest && far < 1.5 * 1.5;
+				if (pet2.isOrderedToSit() != sit) {
+					pet2.setOrderedToSit(sit);
+					pet2.setInSittingPose(sit);
+				}
+			}
+			if (rest && far >= 1.5 * 1.5 && mob.getNavigation().isDone())
+				mob.getNavigation().moveTo(x, y, z, 0.8);
 		}
-		if (pet.distanceToSqr(x, y, z) > (sparring ? 14 * 14 : 6 * 6))
+		if (pet.distanceToSqr(x, y, z) > (sparring ? 20 * 20 : 16 * 16))
 			pet.teleportTo(x, y, z);
 	}
 
