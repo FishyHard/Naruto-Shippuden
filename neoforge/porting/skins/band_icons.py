@@ -1,7 +1,7 @@
 """The Genin headbands' inventory icons (five villages x blue, red, black cloth), at vanilla's 16x16 after u/SirIkaros' guide
 (see rank_icons.py). The old 64x64 icons shrank their symbols to a smudge in the slot, so here the metal plate fills the icon
-front-on and the village's symbol is engraved across most of it, big and dark against the polished plate with a lit lip
-under each groove, so the five read apart at a glance: the Leaf's spiral, the Sand's hourglass, the Mist's slashes, the
+front-on and the village's symbol is drawn across most of it, big and dark against the polished plate, so the five read
+apart at a glance: the Leaf's spiral, the Sand's hourglass, the Mist's slashes, the
 Cloud's cloud, the Stone's peaks. The cloth shows round the plate, its knot's tails at the top right.
 `python3 band_icons.py [preview.png]`."""
 import os
@@ -30,40 +30,55 @@ BAND = [
 ]
 # the plate: its outline (lighter along the top, darkest along the bottom), the lit rim, the polished face, its shade
 PLATE = {'T': '#5C6678', 'O': '#353B4C', 'Q': '#1C2030', 'h': '#BCC4CE', 'p': '#9AA2B0', 'm': '#7C8494'}
-GROOVE, LIP = '#262B3A', '#B4BCC8'
+GROOVE = '#262B3A'
 CLOTH = {
     # light, base, shade, outline (dark, saturated), the ring's inside
     'blue': ('#4C70D4', '#2E4EB4', '#213A8E', '#121C58', '#0E1640'),
     'red': ('#D4504A', '#AC302E', '#82222A', '#561218', '#3A0A10'),
     'black': ('#565666', '#3A3A48', '#2A2A35', '#16161D', '#0C0C11'),
 }
-# each symbol in the plate's face (x 3..12, y 6..10), '#' a groove
+# each symbol drawn across the plate's face (x 3..12, y 5..11), '#' its ink
 SYMBOLS = {
-    'leaf': ["..#####..",
-             ".#.....#.",
-             ".#.###.#.",
-             "##.#...#.",
-             "#..#####."],
-    'sand': [".#######.",
-             "..#...#..",
-             "...#.#...",
-             "..#...#..",
-             ".#######."],
-    'mist': ["....#..#.",
-             "...#..#..",
-             "..#..#..#",
-             ".#..#..#.",
-             "#..#..#.."],
-    'cloud': ["..##.##..",
-              ".#..#..#.",
-              "#.......#",
-              "#.......#",
-              ".#######."],
-    'stone': ["...#.....",
-              "..#.#.#..",
-              ".#...#.#.",
-              "#.......#",
-              "#########"],
+    # the Leaf: a spiral, its outer arm running out to the leaf's point at the lower left
+    'leaf': ["...#####..",
+             "..#.....#.",
+             ".#..###..#",
+             ".#.#..#..#",
+             ".#..##...#",
+             "##......#.",
+             "#.######.."],
+    # the Sand: the hourglass between two bars
+    'sand': ["#########.",
+             ".#.....#..",
+             "..#...#...",
+             "...#.#....",
+             "..#...#...",
+             ".#.....#..",
+             "#########."],
+    # the Mist: four slashes falling to the left, the outer two shorter
+    'mist': ["..#..#..#.",
+             "..#..#..#.",
+             ".#..#..#..",
+             ".#..#..#..",
+             ".#..#..#..",
+             "#..#..#...",
+             "#..#..#..."],
+    # the Cloud: billows over a flat base
+    'cloud': ["...###....",
+              "..#...##..",
+              ".#......#.",
+              "#........#",
+              "#........#",
+              ".########.",
+              ".........."],
+    # the Stone: two rocky peaks, the taller in front
+    'stone': ["....#.....",
+              "...#.#....",
+              "..#...#.#.",
+              "..#....#.#",
+              ".#.......#",
+              "#........#",
+              "##########"],
 }
 
 
@@ -85,15 +100,10 @@ def band(village, colour):
     # dirt: the cloth's shades let into each other, a scuff on the plate
     for (x, y, c) in ((0, 6, base), (15, 7, shade), (5, 13, base), (10, 13, out), (7, 5, PLATE['p'])):
         im.putpixel((x, y), hexc(c))
-    sym = SYMBOLS[village]
-    x0 = 3 + (10 - len(sym[0])) // 2
-    grooves = {(x0 + dx, 6 + dy) for dy, row in enumerate(sym) for dx, v in enumerate(row) if v == '#'}
-    for x, y in grooves:
-        im.putpixel((x, y), hexc(GROOVE))
-    # the groove's lower lip catches the light, where the plate's face shows below it
-    for x, y in grooves:
-        if (x, y + 1) not in grooves and 3 <= x <= 12 and y + 1 <= 10:
-            im.putpixel((x, y + 1), hexc(LIP))
+    for dy, row in enumerate(SYMBOLS[village]):
+        for dx, v in enumerate(row):
+            if v == '#':
+                im.putpixel((3 + dx, 5 + dy), hexc(GROOVE))
     return im
 
 
