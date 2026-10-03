@@ -124,30 +124,34 @@ public final class Chikyu {
 			return t;
 		BlockPos spawn = overworld.getRespawnData().pos();
 		int x = spawn.getX(), z = spawn.getZ() - 6;
-		// already built: find its black foot under the west post
-		for (int y = overworld.getMaxY(); y > overworld.getMinY(); y--)
-			if (overworld.getBlockState(new BlockPos(x - 3, y, z)).is(Blocks.POLISHED_BLACKSTONE)
-					&& overworld.getBlockState(new BlockPos(x - 3, y + 1, z)).is(Blocks.STRIPPED_MANGROVE_WOOD))
-			{
-				BlockPos base = new BlockPos(x, y, z);
-				// one built underground (its ground measured in chunks not yet loaded, which read as the world's bottom): taken
-				// down and built again on the surface
-				// (the ground just outside its plaza on all four sides well above its foot: on a hillside one side is lower)
-				int around = Math.min(Math.min(surface(overworld, x - 8, z), surface(overworld, x + 8, z)),
-						Math.min(surface(overworld, x, z - 6), surface(overworld, x, z + 6)));
-				if (y < around - 4) {
-					for (Object[] b : LeafVillage.torii())
-						overworld.setBlock(base.offset((int) b[0], (int) b[1], (int) b[2]), Blocks.AIR.defaultBlockState(), 3);
-					break;
-				}
-				// one built before it levelled its ground (on a slope, half in a hill): level it now
-				if (!overworld.getBlockState(base.below()).is(Blocks.STONE_BRICKS))
-					level(overworld, base);
-				for (Object[] b : LeafVillage.torii())
-					if (b[3] == ChikyuContent.TORII_PORTAL.defaultBlockState() && !overworld.getBlockState(base.offset((int) b[0], (int) b[1], (int) b[2])).is(ChikyuContent.TORII_PORTAL))
-						overworld.setBlock(base.offset((int) b[0], (int) b[1], (int) b[2]), (BlockState) b[3], 3);
-				return overworldTorii = base;
+		// already built: find its black foot under the west post. Every one there is looked at: the first on the surface is kept,
+		// any built underground (its ground measured in chunks not yet loaded, which read as the world's bottom) is taken down
+		// (the ground just outside its plaza on all four sides well above its foot: on a hillside one side is lower)
+		int around = Math.min(Math.min(surface(overworld, x - 8, z), surface(overworld, x + 8, z)),
+				Math.min(surface(overworld, x, z - 6), surface(overworld, x, z + 6)));
+		BlockPos kept = null;
+		for (int y = overworld.getMaxY(); y >= overworld.getMinY(); y--) {
+			if (!overworld.getBlockState(new BlockPos(x - 3, y, z)).is(Blocks.POLISHED_BLACKSTONE)
+					|| !overworld.getBlockState(new BlockPos(x - 3, y + 1, z)).is(Blocks.STRIPPED_MANGROVE_WOOD))
+				continue;
+			BlockPos base = new BlockPos(x, y, z);
+			if (kept == null && y >= around - 4) {
+				kept = base;
+				continue;
 			}
+			net.mcreator.narutoshippudenmod.NarutoShippudenMod.LOGGER.info("Took down an overworld torii built underground at {} (ground at {})", base, around);
+			for (Object[] b : LeafVillage.torii())
+				overworld.setBlock(base.offset((int) b[0], (int) b[1], (int) b[2]), Blocks.AIR.defaultBlockState(), 3);
+		}
+		if (kept != null) {
+			// one built before it levelled its ground (on a slope, half in a hill): level it now
+			if (!overworld.getBlockState(kept.below()).is(Blocks.STONE_BRICKS))
+				level(overworld, kept);
+			for (Object[] b : LeafVillage.torii())
+				if (b[3] == ChikyuContent.TORII_PORTAL.defaultBlockState() && !overworld.getBlockState(kept.offset((int) b[0], (int) b[1], (int) b[2])).is(ChikyuContent.TORII_PORTAL))
+					overworld.setBlock(kept.offset((int) b[0], (int) b[1], (int) b[2]), (BlockState) b[3], 3);
+			return overworldTorii = kept;
+		}
 		return overworldTorii = buildTorii(overworld, x, z);
 	}
 

@@ -576,6 +576,53 @@ public final class DevTest {
 			STEPS.add(mc::stop);
 			return;
 		}
+		if (System.getProperty("naruto.devtest.only", "").equals("toriicheck")) {
+			// a copy of a played world: the overworld's torii where the server put it, and the shinobi's looks before it
+			int[] t = new int[3];
+			STEPS.add(() -> {
+				mc.gui.setScreen(null);
+				mc.options.pauseOnLostFocus = false;
+				onServer(mc, p -> {
+					var base = net.mcreator.narutoshippudenmod.world.chikyu.Chikyu.overworldToriiIfKnown();
+					var ow = p.level().getServer().overworld();
+					t[0] = base.getX();
+					t[1] = base.getY();
+					t[2] = base.getZ();
+					NarutoShippudenMod.LOGGER.info("DEVTEST toriicheck torii {} ground there {} below {}", base,
+							ow.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, t[0] - 8, t[2]), ow.getBlockState(base.below()));
+				});
+				command(mc, "gamemode creative");
+				command(mc, "time set day");
+				nextDelay = 20;
+			});
+			STEPS.add(() -> {
+				command(mc, "execute in minecraft:overworld run tp @s " + (t[0] + 0.5) + " " + (t[1] + 3) + " " + (t[2] - 13.5) + " 0 12");
+				nextDelay = 80;
+			});
+			STEPS.add(() -> shot(mc, "toriicheck_front"));
+			STEPS.add(() -> {
+				command(mc, "execute in minecraft:overworld run tp @s " + (t[0] + 14.5) + " " + (t[1] + 5) + " " + (t[2] + 0.5) + " 90 15");
+				nextDelay = 40;
+			});
+			STEPS.add(() -> shot(mc, "toriicheck_side"));
+			String[] villages = { "leaf", "sand", "mist", "cloud", "stone" };
+			for (int v = 0; v < villages.length; v++) {
+				int k = 30 + v;
+				String village = villages[v];
+				STEPS.add(() -> {
+					command(mc, "execute in minecraft:overworld run kill @e[tag=toriicheck]");
+					command(mc, "execute in minecraft:overworld run tp @s " + (t[0] + 0.5) + " " + (t[1] + 1) + " " + (t[2] - 7.5) + " 0 8");
+					for (int n = 0; n < 6; n++)
+						command(mc, "execute in minecraft:overworld run summon naruto_shippuden:hidden_" + village + "_shinobi " + (t[0] + n * 1.2 - 2.5) + " " + t[1] + " "
+								+ (t[2] - 4.5) + " {NoAI:1b,Tags:[toriicheck],Rotation:[180f,0f],UUID:[I;" + k + ",0," + k + "," + n + "]}");
+					nextDelay = 40;
+				});
+				STEPS.add(() -> shot(mc, "toriicheck_" + village));
+			}
+			STEPS.add(() -> command(mc, "execute in minecraft:overworld run kill @e[tag=toriicheck]"));
+			STEPS.add(mc::stop);
+			return;
+		}
 		if (System.getProperty("naruto.devtest.only", "").equals("models")) {
 			modelSteps(mc);
 			STEPS.add(mc::stop);

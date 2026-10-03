@@ -373,7 +373,10 @@ Nature Releases, Kekkei Genkai, DNA, Clans, Dojutsu, Shinobi Weapons, Headbands,
 - The toriis: the Leaf's outside the great gate (world 0, 65, 222) and one built 6 blocks north of the overworld spawn
   (found again by its blackstone foot, rebuilt or relit on server start). `Chikyu.buildTorii` sets it at the median ground height
   and `level` clears above, fills below and lays a stone brick plaza (the marker: stone bricks under its middle; an older torii
-  without it is levelled on the next start). Dev mode `torii` builds one on a hillside. `ChikyuContent.ToriiPortalBlock` is a vanilla
+  without it is levelled on the next start). Its ground is measured with the chunks loaded (unloaded ones read as the world's
+  bottom: one world got a torii at y -64); on start every torii foot in its column is checked down to the bottom and any built
+  underground is taken down. Dev mode `torii` builds one on a hillside; `toriicheck` (run on a copy of a played world) shows
+  where it stands and the shinobi before it. `ChikyuContent.ToriiPortalBlock` is a vanilla
   `Portal` like the nether portal: the same delay game rules, the swirl, trigger/travel/ambient sounds and cooldown, but only
   players pass (story NPCs, mobs and items don't); `client/ToriiOverlay` wraps the camera overlays so the swirl is drawn with the torii's green
   texture instead of vanilla's purple. The way out gives a `leaf_return_scroll` if the player has none: hold use for
