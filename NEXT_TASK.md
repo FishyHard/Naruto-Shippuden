@@ -9,4 +9,5 @@ Candidates they may ask for next:
 - Vest items for the other villages (Sand, Mist, Cloud, Stone wear none: only the Leaf's jonin vest exists).
 - Story: Chapter 4 (the Chunin Exams), more fillers, the other villages.
 - More item icons in the same style (`porting/skins/*_icons.py`).
-- Remake the Susanoo itself (still the old model swap).
+- Susanoo: all five owners remade (Sasuke first, then Shisui, Itachi, Madara, Obito). Next for it: the other owners'
+  weapons/specials, weapon aim (Sasuke stage 3 arrow misses; stage 5 shot from height), Madara's Armoured hand sign.

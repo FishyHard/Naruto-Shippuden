@@ -72,7 +72,7 @@ public final class Eyes {
 	public static void closeAll(ServerPlayer player) {
 		// the Mangekyou (and its Susanoo) close before the Sharingan under them
 		if (NarutoShippudenModVariables.get(player).mangekyousharingansusanostage > 0)
-			setStage(player, 0);
+			Susanoo.setStage(player, 0);
 		for (Eye eye : List.of(MANGEKYOU, SHARINGAN))
 			if (eye.active().test(NarutoShippudenModVariables.get(player)))
 				toggle(player, eye);
@@ -162,51 +162,14 @@ public final class Eyes {
 		player.sendOverlayMessage(Component.literal("Your Mangekyou Sharingan is now " + keep.name() + "'s"));
 	}
 
-	// ------------------------------------------------------------------ susanoo
-	private static final String[] STAGES = { "", "Ribcage", "Skeleton", "Armoured", "Complete" };
-
-	/** How many Susanoo stages the player has bought, for their Mangekyou. */
-	private static int maxStage(PlayerVariables v) {
-		ToDoubleFunction<PlayerVariables> learned = v.MangekyouSharinganItachi ? x -> x.mangekyoushrainganitachisusanolearn
-				: v.MangekyouSharinganSasuke ? x -> x.mangekyousharingansasukesusanolearn
-				: v.MangekyouSharinganMadara ? x -> x.mangekyousharinganmadarasusanolearn
-				: v.MangekyouSharinganObito ? x -> x.mangekyousharinganobitosusanolearn
-				: v.MangekyouSharinganShisui ? x -> x.mangekyousharinganshisuisusanolearn : x -> 0;
-		return (int) Math.min(4, learned.applyAsDouble(v));
-	}
-
-	private static void setStage(ServerPlayer player, int stage) {
-		NarutoShippudenModVariables.ifPresent(player, v -> {
-			v.mangekyousharingansusanostage = stage;
-			v.syncPlayerVariables(player);
-		});
-	}
-
+	// ------------------------------------------------------------------ susanoo (core/Susanoo)
 	/** Susanoo key held: one stage more (up to what the player has learned). */
 	public static void growSusanoo(ServerPlayer player) {
-		PlayerVariables v = NarutoShippudenModVariables.get(player);
-		if (!v.MangekyouSharinganActivate) {
-			player.sendOverlayMessage(Component.literal("Activate the Mangekyou Sharingan first"));
-			return;
-		}
-		int max = maxStage(v), stage = (int) v.mangekyousharingansusanostage;
-		if (max == 0) {
-			player.sendOverlayMessage(Component.literal("Learn the Susanoo from your Mangekyou scroll"));
-			return;
-		}
-		if (stage >= max)
-			return;
-		setStage(player, stage + 1);
-		player.sendOverlayMessage(Component.literal("Susanoo: " + STAGES[stage + 1]));
-		player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 1,
-				0.5F + stage * 0.15F);
+		Susanoo.grow(player);
 	}
 
 	/** Susanoo key tapped while it is out. */
 	public static void dismissSusanoo(ServerPlayer player) {
-		if (NarutoShippudenModVariables.get(player).mangekyousharingansusanostage <= 0)
-			return;
-		setStage(player, 0);
-		player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BEACON_DEACTIVATE, SoundSource.PLAYERS, 1, 0.8F);
+		Susanoo.dismiss(player);
 	}
 }

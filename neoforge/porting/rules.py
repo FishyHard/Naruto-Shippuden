@@ -1423,6 +1423,43 @@ def shadow_clones(path, text):
     return text[:m.start()] + body + text[end:]
 
 
+# ---------------------------------------------------------------- the old Susanoo (core/Susanoo, client/SusanooRenderer)
+@func
+def old_susanoo(path, text):
+    """The Susanoo is core/Susanoo now: the player tick's old stage block (a drain of 1-4 chakra every tick and Resistance by
+    stage, with and without the Amaterasu Susanoo) and the old model swaps by stage are gone. Burning whoever strikes the
+    Amaterasu Susanoo stays."""
+    if not path.replace('\\', '/').endswith('PlayerProcedures.java'):
+        return text
+    v = r'NarutoShippudenModVariables\.get\(entity\)\.'
+    # the tick block: `if (AmaterasuSusano == true) { if (stage == 1) ...} else if (AmaterasuSusano == false) {...}`
+    m = re.search(r'if \(%sAmaterasuSusano == true\) \{\s*if \(%smangekyousharingansusanostage == 1\)' % (v, v), text)
+    if m:
+        end = find_block(text, text.index('{', m.start()))
+        tail = re.match(r'\s*else if \(%sAmaterasuSusano == false\) \{' % v, text[end:])
+        if tail:
+            end = find_block(text, end + tail.end() - 1)
+        text = text[:m.start()] + text[end:]
+    # the model swaps: each `if (stage == n) {...}` whose block draws a textures/susano model
+    rx = re.compile(r'(\}\s*else\s+)?if \(%smangekyousharingansusanostage == \d\) \{' % v)
+    pos = 0
+    while True:
+        m = rx.search(text, pos)
+        if not m:
+            return text
+        end = find_block(text, m.end() - 1)
+        if 'textures/susano/' not in text[m.end():end]:
+            pos = m.end()
+            continue
+        rest = text[end:]
+        if m.group(1):
+            text = text[:m.start()] + '}' + rest
+        else:
+            tail = re.match(r'\s*else\s+(if \(|\{)', rest)
+            text = text[:m.start()] + (tail.group(1) + rest[tail.end():] if tail else rest)
+        pos = m.start()
+
+
 # ---------------------------------------------------------------- the old story mode (removed: a new story replaces it)
 STORY_VARS = r'(?:storymode|StorymodeCooldown|StoryModeGeninFight|directionstorymode)'
 

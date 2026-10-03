@@ -1,0 +1,3235 @@
+{
+ "meta": {
+  "format_version": "4.10",
+  "model_format": "modded_entity",
+  "box_uv": true
+ },
+ "name": "ribcage",
+ "resolution": {
+  "width": 256,
+  "height": 256
+ },
+ "elements": [
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0000",
+   "from": [
+    0.0703,
+    3.5,
+    13.5626
+   ],
+   "to": [
+    3.7722,
+    8.5,
+    15.1626
+   ],
+   "origin": [
+    1.9213,
+    6,
+    14.3626
+   ],
+   "rotation": [
+    0.0,
+    8.1818,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0001",
+   "from": [
+    3.7571,
+    3.5,
+    12.48
+   ],
+   "to": [
+    7.4591,
+    8.5,
+    14.08
+   ],
+   "origin": [
+    5.6081,
+    6,
+    13.28
+   ],
+   "rotation": [
+    0.0,
+    24.5455,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0002",
+   "from": [
+    6.9896,
+    3.5,
+    10.4026
+   ],
+   "to": [
+    10.6916,
+    8.5,
+    12.0026
+   ],
+   "origin": [
+    8.8406,
+    6,
+    11.2026
+   ],
+   "rotation": [
+    0.0,
+    40.9091,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0003",
+   "from": [
+    9.5059,
+    3.5,
+    7.4987
+   ],
+   "to": [
+    13.2079,
+    8.5,
+    9.0987
+   ],
+   "origin": [
+    11.3569,
+    6,
+    8.2987
+   ],
+   "rotation": [
+    0.0,
+    57.2727,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0004",
+   "from": [
+    11.1022,
+    3.5,
+    4.0034
+   ],
+   "to": [
+    14.8041,
+    8.5,
+    5.6034
+   ],
+   "origin": [
+    12.9532,
+    6,
+    4.8034
+   ],
+   "rotation": [
+    0.0,
+    73.6364,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0005",
+   "from": [
+    11.649,
+    3.5,
+    0.2
+   ],
+   "to": [
+    15.351,
+    8.5,
+    1.8
+   ],
+   "origin": [
+    13.5,
+    6,
+    1.0
+   ],
+   "rotation": [
+    0.0,
+    90.0,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0006",
+   "from": [
+    11.1022,
+    3.5,
+    -3.6034
+   ],
+   "to": [
+    14.8041,
+    8.5,
+    -2.0034
+   ],
+   "origin": [
+    12.9532,
+    6,
+    -2.8034
+   ],
+   "rotation": [
+    180.0,
+    73.6364,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0007",
+   "from": [
+    9.5059,
+    3.5,
+    -7.0987
+   ],
+   "to": [
+    13.2079,
+    8.5,
+    -5.4987
+   ],
+   "origin": [
+    11.3569,
+    6,
+    -6.2987
+   ],
+   "rotation": [
+    180.0,
+    57.2727,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0008",
+   "from": [
+    6.9896,
+    3.5,
+    -10.0026
+   ],
+   "to": [
+    10.6916,
+    8.5,
+    -8.4026
+   ],
+   "origin": [
+    8.8406,
+    6,
+    -9.2026
+   ],
+   "rotation": [
+    180.0,
+    40.9091,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0009",
+   "from": [
+    -10.6916,
+    3.5,
+    -10.0026
+   ],
+   "to": [
+    -6.9896,
+    8.5,
+    -8.4026
+   ],
+   "origin": [
+    -8.8406,
+    6,
+    -9.2026
+   ],
+   "rotation": [
+    180.0,
+    -40.9091,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0010",
+   "from": [
+    -13.2079,
+    3.5,
+    -7.0987
+   ],
+   "to": [
+    -9.5059,
+    8.5,
+    -5.4987
+   ],
+   "origin": [
+    -11.3569,
+    6,
+    -6.2987
+   ],
+   "rotation": [
+    180.0,
+    -57.2727,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0011",
+   "from": [
+    -14.8041,
+    3.5,
+    -3.6034
+   ],
+   "to": [
+    -11.1022,
+    8.5,
+    -2.0034
+   ],
+   "origin": [
+    -12.9532,
+    6,
+    -2.8034
+   ],
+   "rotation": [
+    180.0,
+    -73.6364,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0012",
+   "from": [
+    -15.351,
+    3.5,
+    0.2
+   ],
+   "to": [
+    -11.649,
+    8.5,
+    1.8
+   ],
+   "origin": [
+    -13.5,
+    6,
+    1.0
+   ],
+   "rotation": [
+    0.0,
+    -90.0,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0013",
+   "from": [
+    -14.8041,
+    3.5,
+    4.0034
+   ],
+   "to": [
+    -11.1022,
+    8.5,
+    5.6034
+   ],
+   "origin": [
+    -12.9532,
+    6,
+    4.8034
+   ],
+   "rotation": [
+    0.0,
+    -73.6364,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0014",
+   "from": [
+    -13.2079,
+    3.5,
+    7.4987
+   ],
+   "to": [
+    -9.5059,
+    8.5,
+    9.0987
+   ],
+   "origin": [
+    -11.3569,
+    6,
+    8.2987
+   ],
+   "rotation": [
+    0.0,
+    -57.2727,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0015",
+   "from": [
+    -10.6916,
+    3.5,
+    10.4026
+   ],
+   "to": [
+    -6.9896,
+    8.5,
+    12.0026
+   ],
+   "origin": [
+    -8.8406,
+    6,
+    11.2026
+   ],
+   "rotation": [
+    0.0,
+    -40.9091,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0016",
+   "from": [
+    -7.4591,
+    3.5,
+    12.48
+   ],
+   "to": [
+    -3.7571,
+    8.5,
+    14.08
+   ],
+   "origin": [
+    -5.6081,
+    6,
+    13.28
+   ],
+   "rotation": [
+    0.0,
+    -24.5455,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0017",
+   "from": [
+    -3.7722,
+    3.5,
+    13.5626
+   ],
+   "to": [
+    -0.0703,
+    8.5,
+    15.1626
+   ],
+   "origin": [
+    -1.9213,
+    6,
+    14.3626
+   ],
+   "rotation": [
+    0.0,
+    -8.1818,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0018",
+   "from": [
+    0.0659,
+    11.5,
+    16.5321
+   ],
+   "to": [
+    4.6305,
+    16.5,
+    18.1321
+   ],
+   "origin": [
+    2.3482,
+    14,
+    17.3321
+   ],
+   "rotation": [
+    0.0,
+    8.1818,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0019",
+   "from": [
+    4.572,
+    11.5,
+    15.2089
+   ],
+   "to": [
+    9.1367,
+    16.5,
+    16.8089
+   ],
+   "origin": [
+    6.8543,
+    14,
+    16.0089
+   ],
+   "rotation": [
+    0.0,
+    24.5455,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0020",
+   "from": [
+    8.5229,
+    11.5,
+    12.6699
+   ],
+   "to": [
+    13.0875,
+    16.5,
+    14.2699
+   ],
+   "origin": [
+    10.8052,
+    14,
+    13.4699
+   ],
+   "rotation": [
+    0.0,
+    40.9091,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0021",
+   "from": [
+    11.5984,
+    11.5,
+    9.1206
+   ],
+   "to": [
+    16.163,
+    16.5,
+    10.7206
+   ],
+   "origin": [
+    13.8807,
+    14,
+    9.9206
+   ],
+   "rotation": [
+    0.0,
+    57.2727,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0022",
+   "from": [
+    13.5493,
+    11.5,
+    4.8486
+   ],
+   "to": [
+    18.114,
+    16.5,
+    6.4486
+   ],
+   "origin": [
+    15.8316,
+    14,
+    5.6486
+   ],
+   "rotation": [
+    0.0,
+    73.6364,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0023",
+   "from": [
+    14.2177,
+    11.5,
+    0.2
+   ],
+   "to": [
+    18.7823,
+    16.5,
+    1.8
+   ],
+   "origin": [
+    16.5,
+    14,
+    1.0
+   ],
+   "rotation": [
+    0.0,
+    90.0,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0024",
+   "from": [
+    13.5493,
+    11.5,
+    -4.4486
+   ],
+   "to": [
+    18.114,
+    16.5,
+    -2.8486
+   ],
+   "origin": [
+    15.8316,
+    14,
+    -3.6486
+   ],
+   "rotation": [
+    180.0,
+    73.6364,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0025",
+   "from": [
+    11.5984,
+    11.5,
+    -8.7206
+   ],
+   "to": [
+    16.163,
+    16.5,
+    -7.1206
+   ],
+   "origin": [
+    13.8807,
+    14,
+    -7.9206
+   ],
+   "rotation": [
+    180.0,
+    57.2727,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0026",
+   "from": [
+    8.5229,
+    11.5,
+    -12.2699
+   ],
+   "to": [
+    13.0875,
+    16.5,
+    -10.6699
+   ],
+   "origin": [
+    10.8052,
+    14,
+    -11.4699
+   ],
+   "rotation": [
+    180.0,
+    40.9091,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0027",
+   "from": [
+    -13.0875,
+    11.5,
+    -12.2699
+   ],
+   "to": [
+    -8.5229,
+    16.5,
+    -10.6699
+   ],
+   "origin": [
+    -10.8052,
+    14,
+    -11.4699
+   ],
+   "rotation": [
+    180.0,
+    -40.9091,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0028",
+   "from": [
+    -16.163,
+    11.5,
+    -8.7206
+   ],
+   "to": [
+    -11.5984,
+    16.5,
+    -7.1206
+   ],
+   "origin": [
+    -13.8807,
+    14,
+    -7.9206
+   ],
+   "rotation": [
+    180.0,
+    -57.2727,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0029",
+   "from": [
+    -18.114,
+    11.5,
+    -4.4486
+   ],
+   "to": [
+    -13.5493,
+    16.5,
+    -2.8486
+   ],
+   "origin": [
+    -15.8316,
+    14,
+    -3.6486
+   ],
+   "rotation": [
+    180.0,
+    -73.6364,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0030",
+   "from": [
+    -18.7823,
+    11.5,
+    0.2
+   ],
+   "to": [
+    -14.2177,
+    16.5,
+    1.8
+   ],
+   "origin": [
+    -16.5,
+    14,
+    1.0
+   ],
+   "rotation": [
+    0.0,
+    -90.0,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0031",
+   "from": [
+    -18.114,
+    11.5,
+    4.8486
+   ],
+   "to": [
+    -13.5493,
+    16.5,
+    6.4486
+   ],
+   "origin": [
+    -15.8316,
+    14,
+    5.6486
+   ],
+   "rotation": [
+    0.0,
+    -73.6364,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0032",
+   "from": [
+    -16.163,
+    11.5,
+    9.1206
+   ],
+   "to": [
+    -11.5984,
+    16.5,
+    10.7206
+   ],
+   "origin": [
+    -13.8807,
+    14,
+    9.9206
+   ],
+   "rotation": [
+    0.0,
+    -57.2727,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0033",
+   "from": [
+    -13.0875,
+    11.5,
+    12.6699
+   ],
+   "to": [
+    -8.5229,
+    16.5,
+    14.2699
+   ],
+   "origin": [
+    -10.8052,
+    14,
+    13.4699
+   ],
+   "rotation": [
+    0.0,
+    -40.9091,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0034",
+   "from": [
+    -9.1367,
+    11.5,
+    15.2089
+   ],
+   "to": [
+    -4.572,
+    16.5,
+    16.8089
+   ],
+   "origin": [
+    -6.8543,
+    14,
+    16.0089
+   ],
+   "rotation": [
+    0.0,
+    -24.5455,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0035",
+   "from": [
+    -4.6305,
+    11.5,
+    16.5321
+   ],
+   "to": [
+    -0.0659,
+    16.5,
+    18.1321
+   ],
+   "origin": [
+    -2.3482,
+    14,
+    17.3321
+   ],
+   "rotation": [
+    0.0,
+    -8.1818,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0036",
+   "from": [
+    0.0637,
+    19.5,
+    18.0168
+   ],
+   "to": [
+    5.0597,
+    24.5,
+    19.6168
+   ],
+   "origin": [
+    2.5617,
+    22,
+    18.8168
+   ],
+   "rotation": [
+    0.0,
+    8.1818,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0037",
+   "from": [
+    4.9795,
+    19.5,
+    16.5734
+   ],
+   "to": [
+    9.9755,
+    24.5,
+    18.1734
+   ],
+   "origin": [
+    7.4775,
+    22,
+    17.3734
+   ],
+   "rotation": [
+    0.0,
+    24.5455,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0038",
+   "from": [
+    9.2895,
+    19.5,
+    13.8035
+   ],
+   "to": [
+    14.2855,
+    24.5,
+    15.4035
+   ],
+   "origin": [
+    11.7875,
+    22,
+    14.6035
+   ],
+   "rotation": [
+    0.0,
+    40.9091,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0039",
+   "from": [
+    12.6446,
+    19.5,
+    9.9315
+   ],
+   "to": [
+    17.6406,
+    24.5,
+    11.5315
+   ],
+   "origin": [
+    15.1426,
+    22,
+    10.7315
+   ],
+   "rotation": [
+    0.0,
+    57.2727,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0040",
+   "from": [
+    14.7729,
+    19.5,
+    5.2712
+   ],
+   "to": [
+    19.7689,
+    24.5,
+    6.8712
+   ],
+   "origin": [
+    17.2709,
+    22,
+    6.0712
+   ],
+   "rotation": [
+    0.0,
+    73.6364,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0041",
+   "from": [
+    15.502,
+    19.5,
+    0.2
+   ],
+   "to": [
+    20.498,
+    24.5,
+    1.8
+   ],
+   "origin": [
+    18.0,
+    22,
+    1.0
+   ],
+   "rotation": [
+    0.0,
+    90.0,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0042",
+   "from": [
+    14.7729,
+    19.5,
+    -4.8712
+   ],
+   "to": [
+    19.7689,
+    24.5,
+    -3.2712
+   ],
+   "origin": [
+    17.2709,
+    22,
+    -4.0712
+   ],
+   "rotation": [
+    180.0,
+    73.6364,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0043",
+   "from": [
+    12.6446,
+    19.5,
+    -9.5315
+   ],
+   "to": [
+    17.6406,
+    24.5,
+    -7.9315
+   ],
+   "origin": [
+    15.1426,
+    22,
+    -8.7315
+   ],
+   "rotation": [
+    180.0,
+    57.2727,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0044",
+   "from": [
+    9.2895,
+    19.5,
+    -13.4035
+   ],
+   "to": [
+    14.2855,
+    24.5,
+    -11.8035
+   ],
+   "origin": [
+    11.7875,
+    22,
+    -12.6035
+   ],
+   "rotation": [
+    180.0,
+    40.9091,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0045",
+   "from": [
+    -14.2855,
+    19.5,
+    -13.4035
+   ],
+   "to": [
+    -9.2895,
+    24.5,
+    -11.8035
+   ],
+   "origin": [
+    -11.7875,
+    22,
+    -12.6035
+   ],
+   "rotation": [
+    180.0,
+    -40.9091,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0046",
+   "from": [
+    -17.6406,
+    19.5,
+    -9.5315
+   ],
+   "to": [
+    -12.6446,
+    24.5,
+    -7.9315
+   ],
+   "origin": [
+    -15.1426,
+    22,
+    -8.7315
+   ],
+   "rotation": [
+    180.0,
+    -57.2727,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0047",
+   "from": [
+    -19.7689,
+    19.5,
+    -4.8712
+   ],
+   "to": [
+    -14.7729,
+    24.5,
+    -3.2712
+   ],
+   "origin": [
+    -17.2709,
+    22,
+    -4.0712
+   ],
+   "rotation": [
+    180.0,
+    -73.6364,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0048",
+   "from": [
+    -20.498,
+    19.5,
+    0.2
+   ],
+   "to": [
+    -15.502,
+    24.5,
+    1.8
+   ],
+   "origin": [
+    -18.0,
+    22,
+    1.0
+   ],
+   "rotation": [
+    0.0,
+    -90.0,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0049",
+   "from": [
+    -19.7689,
+    19.5,
+    5.2712
+   ],
+   "to": [
+    -14.7729,
+    24.5,
+    6.8712
+   ],
+   "origin": [
+    -17.2709,
+    22,
+    6.0712
+   ],
+   "rotation": [
+    0.0,
+    -73.6364,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0050",
+   "from": [
+    -17.6406,
+    19.5,
+    9.9315
+   ],
+   "to": [
+    -12.6446,
+    24.5,
+    11.5315
+   ],
+   "origin": [
+    -15.1426,
+    22,
+    10.7315
+   ],
+   "rotation": [
+    0.0,
+    -57.2727,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0051",
+   "from": [
+    -14.2855,
+    19.5,
+    13.8035
+   ],
+   "to": [
+    -9.2895,
+    24.5,
+    15.4035
+   ],
+   "origin": [
+    -11.7875,
+    22,
+    14.6035
+   ],
+   "rotation": [
+    0.0,
+    -40.9091,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0052",
+   "from": [
+    -9.9755,
+    19.5,
+    16.5734
+   ],
+   "to": [
+    -4.9795,
+    24.5,
+    18.1734
+   ],
+   "origin": [
+    -7.4775,
+    22,
+    17.3734
+   ],
+   "rotation": [
+    0.0,
+    -24.5455,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0053",
+   "from": [
+    -5.0597,
+    19.5,
+    18.0168
+   ],
+   "to": [
+    -0.0637,
+    24.5,
+    19.6168
+   ],
+   "origin": [
+    -2.5617,
+    22,
+    18.8168
+   ],
+   "rotation": [
+    0.0,
+    -8.1818,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0054",
+   "from": [
+    0.0644,
+    27.5,
+    17.5219
+   ],
+   "to": [
+    4.9166,
+    32.5,
+    19.1219
+   ],
+   "origin": [
+    2.4905,
+    30,
+    18.3219
+   ],
+   "rotation": [
+    0.0,
+    8.1818,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0055",
+   "from": [
+    4.8437,
+    27.5,
+    16.1186
+   ],
+   "to": [
+    9.6959,
+    32.5,
+    17.7186
+   ],
+   "origin": [
+    7.2698,
+    30,
+    16.9186
+   ],
+   "rotation": [
+    0.0,
+    24.5455,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0056",
+   "from": [
+    9.034,
+    27.5,
+    13.4256
+   ],
+   "to": [
+    13.8862,
+    32.5,
+    15.0256
+   ],
+   "origin": [
+    11.4601,
+    30,
+    14.2256
+   ],
+   "rotation": [
+    0.0,
+    40.9091,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0057",
+   "from": [
+    12.2958,
+    27.5,
+    9.6612
+   ],
+   "to": [
+    17.148,
+    32.5,
+    11.2612
+   ],
+   "origin": [
+    14.7219,
+    30,
+    10.4612
+   ],
+   "rotation": [
+    0.0,
+    57.2727,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0058",
+   "from": [
+    14.365,
+    27.5,
+    5.1303
+   ],
+   "to": [
+    19.2172,
+    32.5,
+    6.7303
+   ],
+   "origin": [
+    16.7911,
+    30,
+    5.9303
+   ],
+   "rotation": [
+    0.0,
+    73.6364,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0059",
+   "from": [
+    15.0739,
+    27.5,
+    0.2
+   ],
+   "to": [
+    19.9261,
+    32.5,
+    1.8
+   ],
+   "origin": [
+    17.5,
+    30,
+    1.0
+   ],
+   "rotation": [
+    0.0,
+    90.0,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0060",
+   "from": [
+    14.365,
+    27.5,
+    -4.7303
+   ],
+   "to": [
+    19.2172,
+    32.5,
+    -3.1303
+   ],
+   "origin": [
+    16.7911,
+    30,
+    -3.9303
+   ],
+   "rotation": [
+    180.0,
+    73.6364,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0061",
+   "from": [
+    12.2958,
+    27.5,
+    -9.2612
+   ],
+   "to": [
+    17.148,
+    32.5,
+    -7.6612
+   ],
+   "origin": [
+    14.7219,
+    30,
+    -8.4612
+   ],
+   "rotation": [
+    180.0,
+    57.2727,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0062",
+   "from": [
+    9.034,
+    27.5,
+    -13.0256
+   ],
+   "to": [
+    13.8862,
+    32.5,
+    -11.4256
+   ],
+   "origin": [
+    11.4601,
+    30,
+    -12.2256
+   ],
+   "rotation": [
+    180.0,
+    40.9091,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0063",
+   "from": [
+    -13.8862,
+    27.5,
+    -13.0256
+   ],
+   "to": [
+    -9.034,
+    32.5,
+    -11.4256
+   ],
+   "origin": [
+    -11.4601,
+    30,
+    -12.2256
+   ],
+   "rotation": [
+    180.0,
+    -40.9091,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0064",
+   "from": [
+    -17.148,
+    27.5,
+    -9.2612
+   ],
+   "to": [
+    -12.2958,
+    32.5,
+    -7.6612
+   ],
+   "origin": [
+    -14.7219,
+    30,
+    -8.4612
+   ],
+   "rotation": [
+    180.0,
+    -57.2727,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0065",
+   "from": [
+    -19.2172,
+    27.5,
+    -4.7303
+   ],
+   "to": [
+    -14.365,
+    32.5,
+    -3.1303
+   ],
+   "origin": [
+    -16.7911,
+    30,
+    -3.9303
+   ],
+   "rotation": [
+    180.0,
+    -73.6364,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0066",
+   "from": [
+    -19.9261,
+    27.5,
+    0.2
+   ],
+   "to": [
+    -15.0739,
+    32.5,
+    1.8
+   ],
+   "origin": [
+    -17.5,
+    30,
+    1.0
+   ],
+   "rotation": [
+    0.0,
+    -90.0,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0067",
+   "from": [
+    -19.2172,
+    27.5,
+    5.1303
+   ],
+   "to": [
+    -14.365,
+    32.5,
+    6.7303
+   ],
+   "origin": [
+    -16.7911,
+    30,
+    5.9303
+   ],
+   "rotation": [
+    0.0,
+    -73.6364,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0068",
+   "from": [
+    -17.148,
+    27.5,
+    9.6612
+   ],
+   "to": [
+    -12.2958,
+    32.5,
+    11.2612
+   ],
+   "origin": [
+    -14.7219,
+    30,
+    10.4612
+   ],
+   "rotation": [
+    0.0,
+    -57.2727,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0069",
+   "from": [
+    -13.8862,
+    27.5,
+    13.4256
+   ],
+   "to": [
+    -9.034,
+    32.5,
+    15.0256
+   ],
+   "origin": [
+    -11.4601,
+    30,
+    14.2256
+   ],
+   "rotation": [
+    0.0,
+    -40.9091,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0070",
+   "from": [
+    -9.6959,
+    27.5,
+    16.1186
+   ],
+   "to": [
+    -4.8437,
+    32.5,
+    17.7186
+   ],
+   "origin": [
+    -7.2698,
+    30,
+    16.9186
+   ],
+   "rotation": [
+    0.0,
+    -24.5455,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0071",
+   "from": [
+    -4.9166,
+    27.5,
+    17.5219
+   ],
+   "to": [
+    -0.0644,
+    32.5,
+    19.1219
+   ],
+   "origin": [
+    -2.4905,
+    30,
+    18.3219
+   ],
+   "rotation": [
+    0.0,
+    -8.1818,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0072",
+   "from": [
+    0.0673,
+    35.5,
+    15.5422
+   ],
+   "to": [
+    4.3444,
+    40.5,
+    17.1422
+   ],
+   "origin": [
+    2.2059,
+    38,
+    16.3422
+   ],
+   "rotation": [
+    0.0,
+    8.1818,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0073",
+   "from": [
+    4.3004,
+    35.5,
+    14.2993
+   ],
+   "to": [
+    8.5775,
+    40.5,
+    15.8993
+   ],
+   "origin": [
+    6.4389,
+    38,
+    15.0993
+   ],
+   "rotation": [
+    0.0,
+    24.5455,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0074",
+   "from": [
+    8.0118,
+    35.5,
+    11.9141
+   ],
+   "to": [
+    12.2889,
+    40.5,
+    13.5141
+   ],
+   "origin": [
+    10.1503,
+    38,
+    12.7141
+   ],
+   "rotation": [
+    0.0,
+    40.9091,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0075",
+   "from": [
+    10.9009,
+    35.5,
+    8.5799
+   ],
+   "to": [
+    15.178,
+    40.5,
+    10.1799
+   ],
+   "origin": [
+    13.0394,
+    38,
+    9.3799
+   ],
+   "rotation": [
+    0.0,
+    57.2727,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0076",
+   "from": [
+    12.7336,
+    35.5,
+    4.5669
+   ],
+   "to": [
+    17.0107,
+    40.5,
+    6.1669
+   ],
+   "origin": [
+    14.8721,
+    38,
+    5.3669
+   ],
+   "rotation": [
+    0.0,
+    73.6364,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0077",
+   "from": [
+    13.3615,
+    35.5,
+    0.2
+   ],
+   "to": [
+    17.6385,
+    40.5,
+    1.8
+   ],
+   "origin": [
+    15.5,
+    38,
+    1.0
+   ],
+   "rotation": [
+    0.0,
+    90.0,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0078",
+   "from": [
+    12.7336,
+    35.5,
+    -4.1669
+   ],
+   "to": [
+    17.0107,
+    40.5,
+    -2.5669
+   ],
+   "origin": [
+    14.8721,
+    38,
+    -3.3669
+   ],
+   "rotation": [
+    180.0,
+    73.6364,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0079",
+   "from": [
+    10.9009,
+    35.5,
+    -8.1799
+   ],
+   "to": [
+    15.178,
+    40.5,
+    -6.5799
+   ],
+   "origin": [
+    13.0394,
+    38,
+    -7.3799
+   ],
+   "rotation": [
+    180.0,
+    57.2727,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0080",
+   "from": [
+    8.0118,
+    35.5,
+    -11.5141
+   ],
+   "to": [
+    12.2889,
+    40.5,
+    -9.9141
+   ],
+   "origin": [
+    10.1503,
+    38,
+    -10.7141
+   ],
+   "rotation": [
+    180.0,
+    40.9091,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0081",
+   "from": [
+    -12.2889,
+    35.5,
+    -11.5141
+   ],
+   "to": [
+    -8.0118,
+    40.5,
+    -9.9141
+   ],
+   "origin": [
+    -10.1503,
+    38,
+    -10.7141
+   ],
+   "rotation": [
+    180.0,
+    -40.9091,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0082",
+   "from": [
+    -15.178,
+    35.5,
+    -8.1799
+   ],
+   "to": [
+    -10.9009,
+    40.5,
+    -6.5799
+   ],
+   "origin": [
+    -13.0394,
+    38,
+    -7.3799
+   ],
+   "rotation": [
+    180.0,
+    -57.2727,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0083",
+   "from": [
+    -17.0107,
+    35.5,
+    -4.1669
+   ],
+   "to": [
+    -12.7336,
+    40.5,
+    -2.5669
+   ],
+   "origin": [
+    -14.8721,
+    38,
+    -3.3669
+   ],
+   "rotation": [
+    180.0,
+    -73.6364,
+    180.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0084",
+   "from": [
+    -17.6385,
+    35.5,
+    0.2
+   ],
+   "to": [
+    -13.3615,
+    40.5,
+    1.8
+   ],
+   "origin": [
+    -15.5,
+    38,
+    1.0
+   ],
+   "rotation": [
+    0.0,
+    -90.0,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0085",
+   "from": [
+    -17.0107,
+    35.5,
+    4.5669
+   ],
+   "to": [
+    -12.7336,
+    40.5,
+    6.1669
+   ],
+   "origin": [
+    -14.8721,
+    38,
+    5.3669
+   ],
+   "rotation": [
+    0.0,
+    -73.6364,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0086",
+   "from": [
+    -15.178,
+    35.5,
+    8.5799
+   ],
+   "to": [
+    -10.9009,
+    40.5,
+    10.1799
+   ],
+   "origin": [
+    -13.0394,
+    38,
+    9.3799
+   ],
+   "rotation": [
+    0.0,
+    -57.2727,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0087",
+   "from": [
+    -12.2889,
+    35.5,
+    11.9141
+   ],
+   "to": [
+    -8.0118,
+    40.5,
+    13.5141
+   ],
+   "origin": [
+    -10.1503,
+    38,
+    12.7141
+   ],
+   "rotation": [
+    0.0,
+    -40.9091,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0088",
+   "from": [
+    -8.5775,
+    35.5,
+    14.2993
+   ],
+   "to": [
+    -4.3004,
+    40.5,
+    15.8993
+   ],
+   "origin": [
+    -6.4389,
+    38,
+    15.0993
+   ],
+   "rotation": [
+    0.0,
+    -24.5455,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "band",
+   "type": "cube",
+   "uuid": "c0089",
+   "from": [
+    -4.3444,
+    35.5,
+    15.5422
+   ],
+   "to": [
+    -0.0673,
+    40.5,
+    17.1422
+   ],
+   "origin": [
+    -2.2059,
+    38,
+    16.3422
+   ],
+   "rotation": [
+    0.0,
+    -8.1818,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_ring": 1
+  },
+  {
+   "name": "spine",
+   "type": "cube",
+   "uuid": "c0090",
+   "from": [
+    -2.5,
+    3.5,
+    15.5
+   ],
+   "to": [
+    2.5,
+    4.75,
+    19.5
+   ],
+   "origin": [
+    0.0,
+    4.125,
+    17.5
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_column": 1
+  },
+  {
+   "name": "spine",
+   "type": "cube",
+   "uuid": "c0091",
+   "from": [
+    -2.5,
+    4.75,
+    15.5
+   ],
+   "to": [
+    2.5,
+    8.0,
+    19.5
+   ],
+   "origin": [
+    0.0,
+    6.375,
+    17.5
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_column": 1
+  },
+  {
+   "name": "spine",
+   "type": "cube",
+   "uuid": "c0092",
+   "from": [
+    -2.5,
+    8.0,
+    17.0
+   ],
+   "to": [
+    2.5,
+    12.0,
+    21.0
+   ],
+   "origin": [
+    0.0,
+    10.0,
+    19.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_column": 1
+  },
+  {
+   "name": "spine",
+   "type": "cube",
+   "uuid": "c0093",
+   "from": [
+    -2.5,
+    12.0,
+    18.5
+   ],
+   "to": [
+    2.5,
+    18.0,
+    22.5
+   ],
+   "origin": [
+    0.0,
+    15.0,
+    20.5
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_column": 1
+  },
+  {
+   "name": "spine",
+   "type": "cube",
+   "uuid": "c0094",
+   "from": [
+    -2.5,
+    18.0,
+    20.0
+   ],
+   "to": [
+    2.5,
+    26.0,
+    24.0
+   ],
+   "origin": [
+    0.0,
+    22.0,
+    22.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_column": 1
+  },
+  {
+   "name": "spine",
+   "type": "cube",
+   "uuid": "c0095",
+   "from": [
+    -2.5,
+    26.0,
+    19.5
+   ],
+   "to": [
+    2.5,
+    34.0,
+    23.5
+   ],
+   "origin": [
+    0.0,
+    30.0,
+    21.5
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_column": 1
+  },
+  {
+   "name": "spine",
+   "type": "cube",
+   "uuid": "c0096",
+   "from": [
+    -2.5,
+    34.0,
+    17.5
+   ],
+   "to": [
+    2.5,
+    38.0,
+    21.5
+   ],
+   "origin": [
+    0.0,
+    36.0,
+    19.5
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "inflate": 0,
+   "autouv": 0,
+   "box_uv": true,
+   "faces": {},
+   "susanoo_mat": "band",
+   "susanoo_column": 1
+  }
+ ],
+ "outliner": [
+  {
+   "name": "body",
+   "origin": [
+    0,
+    0,
+    1
+   ],
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "uuid": "g-body",
+   "export": true,
+   "isOpen": true,
+   "visibility": true,
+   "children": [
+    "c0090",
+    "c0091",
+    "c0092",
+    "c0093",
+    "c0094",
+    "c0095",
+    "c0096",
+    {
+     "name": "ring0",
+     "origin": [
+      0,
+      6,
+      1
+     ],
+     "rotation": [
+      0,
+      0,
+      0
+     ],
+     "uuid": "g-ring0",
+     "export": true,
+     "isOpen": true,
+     "visibility": true,
+     "children": [
+      "c0000",
+      "c0001",
+      "c0002",
+      "c0003",
+      "c0004",
+      "c0005",
+      "c0006",
+      "c0007",
+      "c0008",
+      "c0009",
+      "c0010",
+      "c0011",
+      "c0012",
+      "c0013",
+      "c0014",
+      "c0015",
+      "c0016",
+      "c0017"
+     ]
+    },
+    {
+     "name": "ring1",
+     "origin": [
+      0,
+      14,
+      1
+     ],
+     "rotation": [
+      0,
+      0,
+      0
+     ],
+     "uuid": "g-ring1",
+     "export": true,
+     "isOpen": true,
+     "visibility": true,
+     "children": [
+      "c0018",
+      "c0019",
+      "c0020",
+      "c0021",
+      "c0022",
+      "c0023",
+      "c0024",
+      "c0025",
+      "c0026",
+      "c0027",
+      "c0028",
+      "c0029",
+      "c0030",
+      "c0031",
+      "c0032",
+      "c0033",
+      "c0034",
+      "c0035"
+     ]
+    },
+    {
+     "name": "ring2",
+     "origin": [
+      0,
+      22,
+      1
+     ],
+     "rotation": [
+      0,
+      0,
+      0
+     ],
+     "uuid": "g-ring2",
+     "export": true,
+     "isOpen": true,
+     "visibility": true,
+     "children": [
+      "c0036",
+      "c0037",
+      "c0038",
+      "c0039",
+      "c0040",
+      "c0041",
+      "c0042",
+      "c0043",
+      "c0044",
+      "c0045",
+      "c0046",
+      "c0047",
+      "c0048",
+      "c0049",
+      "c0050",
+      "c0051",
+      "c0052",
+      "c0053"
+     ]
+    },
+    {
+     "name": "ring3",
+     "origin": [
+      0,
+      30,
+      1
+     ],
+     "rotation": [
+      0,
+      0,
+      0
+     ],
+     "uuid": "g-ring3",
+     "export": true,
+     "isOpen": true,
+     "visibility": true,
+     "children": [
+      "c0054",
+      "c0055",
+      "c0056",
+      "c0057",
+      "c0058",
+      "c0059",
+      "c0060",
+      "c0061",
+      "c0062",
+      "c0063",
+      "c0064",
+      "c0065",
+      "c0066",
+      "c0067",
+      "c0068",
+      "c0069",
+      "c0070",
+      "c0071"
+     ]
+    },
+    {
+     "name": "ring4",
+     "origin": [
+      0,
+      38,
+      1
+     ],
+     "rotation": [
+      0,
+      0,
+      0
+     ],
+     "uuid": "g-ring4",
+     "export": true,
+     "isOpen": true,
+     "visibility": true,
+     "children": [
+      "c0072",
+      "c0073",
+      "c0074",
+      "c0075",
+      "c0076",
+      "c0077",
+      "c0078",
+      "c0079",
+      "c0080",
+      "c0081",
+      "c0082",
+      "c0083",
+      "c0084",
+      "c0085",
+      "c0086",
+      "c0087",
+      "c0088",
+      "c0089"
+     ]
+    }
+   ]
+  }
+ ],
+ "textures": []
+}

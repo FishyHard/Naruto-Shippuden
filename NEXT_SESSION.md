@@ -450,7 +450,32 @@ Nature Releases, Kekkei Genkai, DNA, Clans, Dojutsu, Shinobi Weapons, Headbands,
 - **New player screen**: chooses only the clan (rule `clan_only_selection`; the nature comes from the Chakra Paper
   lesson, the village is always the Leaf), opened 40 ticks after arriving (`clan_choice_after_arrival`).
 
-### Keys (defaults)
+
+### Susanoo remake (in progress, NOT committed yet)
+- **Sasuke is done and approved** (2026-10-04). Pipeline: `porting/skins/sasuke_rig.py` bakes the user's bbmodels
+  (`porting/susanoo_src/*.bbmodel`) into rigged files `porting/susanoo_src/sasuke/*.bbmodel` (named parts, joint pivots, z-fight
+  fix, mirror-exact halves, materials, new Ribcage of bands, Skeleton band ribs + new skull, Humanoid one-piece torso + new head,
+  Armoured spiral shield + black Amaterasu, eyes). `porting/skins/susanoo_convert.py` converts + paints; painting is **one module
+  per stage**, `porting/skins/susanoo_paint/stage{1..5}_*.py` (user: each texture its own approach). Repaint only the stage being
+  fixed: `python3 susanoo_convert.py --only=3` (or `--only=5,5_float,5_fly`).
+- Texture alignment: Java builds boxes at whole-pixel UV size + per-axis CubeDeformation (`SusanooModels.box`); the painter rounds
+  the same way. Style "D" glow (dark rim, bright middle) is the approved look.
+- User inside: JSON "seat" (Humanoid/Armoured torso middle, Complete **head**); the renderer translates by it.
+- Complete movement remade on the client, `client/SusanooFlight.java`: stand at `Susanoo.HOVER` (12.5, head height) walking,
+  jump = elytra glide (forward = wing thrust, jump = lift), sneak / near ground = land. Server hover removed; mayfly kept. Legs
+  still when floating/flying. All Complete poses use the standing model's scale.
+- DevTest `-PdevOnly=susanoo -PdevJutsu=sasuke -PdevAngles` (low/high/side shots + flight check).
+- **The other owners are done** (2026-10-04, each approved by the user): `porting/skins/owner_rig.py` builds them into
+  `porting/susanoo_src/<owner>/` and `common/skeleton` (Sasuke's Skeleton without horns, shared). Shisui's Humanoid is code
+  (flame base, knobbed belly, spiral sword); Itachi's too (tengu head, sash, Totsuka gourd, Yata Mirror); Madara's and Obito's
+  Humanoids are Sasuke's with a new head, Madara's arms doubled to the back (two-faced, Ryomen Sukuna) with kris. Every
+  Armoured is Sasuke's without Amaterasu/shield plus the owner's weapon (Itachi keeps the shield as the Yata Mirror); every
+  Complete is Sasuke's plus the owner's blade/shuriken/emblem. `python3 owner_rig.py --owner=x` then
+  `python3 susanoo_convert.py --owner=x`. Owner Humanoids sit the user by the torso rows only (`seat_tag`).
+- References: the user wants me to find them myself (naruto.fandom API, `action=parse&page=Susanoo`, File imageinfo urls).
+- Then: other owners' weapons/specials, weapon aim (Sasuke stage 3 arrow misses; stage 5 shot from height), build jar, update
+  GAME_CONTENT/NEXT_TASK, commit, push origin + copy, send jar + changelog.
+\n### Keys (defaults)
 
 | Key | What it does |
 |---|---|

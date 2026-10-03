@@ -137,7 +137,7 @@ public final class DojutsuJutsu {
 		mangekyouScroll("itachi", v -> v.mangekyoushrainganitachiamaterasulearn, (v, i) -> v.mangekyoushrainganitachiamaterasulearn = i,
 				new JutsuRank[] { JutsuRank.A, JutsuRank.S },
 				susanoo(v -> v.mangekyoushrainganitachisusanorelease, (v, i) -> v.mangekyoushrainganitachisusanorelease = i,
-						v -> v.mangekyoushrainganitachisusanolearn, (v, i) -> v.mangekyoushrainganitachisusanolearn = i, 3));
+						v -> v.mangekyoushrainganitachisusanolearn, (v, i) -> v.mangekyoushrainganitachisusanolearn = i, 5));
 		mangekyou("mangekyou_sharingan_kakashi_release_technique", "Kakashi", v -> v.MangekyouSharinganKakashi, v -> v.mangekyousharingankakashitechnique,
 				(v, i) -> v.mangekyousharingankakashitechnique = i, v -> v.mangekyousharingankakashikamuilearn,
 				new Def("Kamui Long-Range", JutsuRank.A, p -> kamui(p, 30, 30)),
@@ -151,7 +151,7 @@ public final class DojutsuJutsu {
 		mangekyouScroll("shisui", v -> v.mangekyousharinganshisuilearn, (v, i) -> v.mangekyousharinganshisuilearn = i,
 				new JutsuRank[] { JutsuRank.S },
 				susanoo(v -> v.mangekyousharinganshisuisusanorelease, (v, i) -> v.mangekyousharinganshisuisusanorelease = i,
-						v -> v.mangekyousharinganshisuisusanolearn, (v, i) -> v.mangekyousharinganshisuisusanolearn = i, 4));
+						v -> v.mangekyousharinganshisuisusanolearn, (v, i) -> v.mangekyousharinganshisuisusanolearn = i, 5));
 		mangekyou("mangekyou_sharingan_madara_release_technique", "Madara", v -> v.MangekyouSharinganMadara, v -> v.mangekyousharinganmadaratechnique,
 				(v, i) -> v.mangekyousharinganmadaratechnique = i, v -> v.mangekyousharinganmadaralearn,
 				new Def("Genjutsu: Sharingan", JutsuRank.A, DojutsuJutsu::madaraGenjutsu),
@@ -159,7 +159,7 @@ public final class DojutsuJutsu {
 		mangekyouScroll("madara", v -> v.mangekyousharinganmadaralearn, (v, i) -> v.mangekyousharinganmadaralearn = i,
 				new JutsuRank[] { JutsuRank.A, JutsuRank.S },
 				susanoo(v -> v.mangekyousharinganmadarasusanorelease, (v, i) -> v.mangekyousharinganmadarasusanorelease = i,
-						v -> v.mangekyousharinganmadarasusanolearn, (v, i) -> v.mangekyousharinganmadarasusanolearn = i, 4));
+						v -> v.mangekyousharinganmadarasusanolearn, (v, i) -> v.mangekyousharinganmadarasusanolearn = i, 5));
 		mangekyou("mangekyou_sharingan_obito_release_technique", "Obito", v -> v.MangekyouSharinganObito, v -> v.mangekyousharinganobitokamuitechnique,
 				(v, i) -> v.mangekyousharinganobitokamuitechnique = i, v -> v.mangekyousharinganobitokamuilearn,
 				new Def("Kamui Self-Teleportation", JutsuRank.B, DojutsuJutsu::kamuiTeleport),
@@ -178,13 +178,13 @@ public final class DojutsuJutsu {
 					v.mangekyousharinganobitokamuirelease = i;
 				}, new JutsuRank[] { JutsuRank.B, JutsuRank.A, JutsuRank.A },
 				susanoo(v -> v.mangekyousharinganobitosusanorelease, (v, i) -> v.mangekyousharinganobitosusanorelease = i,
-						v -> v.mangekyousharinganobitosusanolearn, (v, i) -> v.mangekyousharinganobitosusanolearn = i, 3));
+						v -> v.mangekyousharinganobitosusanolearn, (v, i) -> v.mangekyousharinganobitosusanolearn = i, 5));
 		mangekyouScroll("sasuke", v -> v.mangekyousharingansasukeamaterasulearn, (v, i) -> {
 					v.mangekyousharingansasukeamaterasulearn = i;
 					v.mangekyousharingansasukeamaterasurelease = i;
 				}, new JutsuRank[] { JutsuRank.A, JutsuRank.A, JutsuRank.S, JutsuRank.S },
 				susanoo(v -> v.mangekyousharingansasukesusanorelease, (v, i) -> v.mangekyousharingansasukesusanorelease = i,
-						v -> v.mangekyousharingansasukesusanolearn, (v, i) -> v.mangekyousharingansasukesusanolearn = i, 4));
+						v -> v.mangekyousharingansasukesusanolearn, (v, i) -> v.mangekyousharingansasukesusanolearn = i, 5));
 	}
 
 	private static void requires(String item, Predicate<PlayerVariables> requirement, String message) {
@@ -787,9 +787,9 @@ public final class DojutsuJutsu {
 		}, susanoo == null ? new Jutsus.Track[] { jutsu } : new Jutsus.Track[] { jutsu, susanoo.track() });
 	}
 
-	/** The Susanoo stages in order, and the rank that prices each (the scrolls sell the first three or all four). */
-	private static final String[] SUSANOO_STAGES = { "Ribcage", "Skeleton", "Armoured", "Complete" };
-	private static final JutsuRank[] SUSANOO_RANKS = { JutsuRank.C, JutsuRank.B, JutsuRank.A, JutsuRank.S };
+	/** The Susanoo stages in order (core/Susanoo), and the rank that prices each; every Mangekyou scroll sells all five. */
+	private static final String[] SUSANOO_STAGES = { "Ribcage", "Skeleton", "Humanoid", "Armoured", "Complete" };
+	private static final JutsuRank[] SUSANOO_RANKS = { JutsuRank.C, JutsuRank.B, JutsuRank.A, JutsuRank.A, JutsuRank.S };
 
 	/**
 	 * A scroll's Susanoo stages. They are counted in the eye's old stage variables (the bought count and the stage the Susanoo key

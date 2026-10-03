@@ -623,6 +623,11 @@ public final class DevTest {
 			STEPS.add(mc::stop);
 			return;
 		}
+		if (System.getProperty("naruto.devtest.only", "").equals("susanoo")) {
+			susanooSteps(mc);
+			STEPS.add(mc::stop);
+			return;
+		}
 		if (System.getProperty("naruto.devtest.only", "").equals("models")) {
 			modelSteps(mc);
 			STEPS.add(mc::stop);
@@ -1235,6 +1240,160 @@ public final class DevTest {
 		}
 	}
 
+	/**
+	 * The Susanoo (core/Susanoo, client/SusanooRenderer): each owner's five stages grown one after another, seen from the front
+	 * and from behind; then Sasuke's arm and weapons against a husk (DEVTEST susanoo lines).
+	 */
+	private static void susanooSteps(Minecraft mc) {
+		String only = System.getProperty("naruto.devtest.jutsu", "");
+		String[] owners = { "sasuke", "itachi", "shisui", "madara", "obito" };
+		STEPS.add(() -> {
+			setupFight(mc);
+			arena(mc, 40, -40, 40);
+			command(mc, "gamemode survival");
+			command(mc, "effect give @s minecraft:resistance infinite 4 true");
+			nextDelay = 40;
+		});
+		for (String owner : owners) {
+			if (!only.isEmpty() && !only.contains(owner))
+				continue;
+			STEPS.add(() -> onServer(mc, p -> {
+				net.mcreator.narutoshippudenmod.core.Susanoo.dismiss(p);
+				NarutoShippudenModVariables.ifPresent(p, v -> {
+					v.MangekyouSharinganSasuke = owner.equals("sasuke");
+					v.MangekyouSharinganItachi = owner.equals("itachi");
+					v.MangekyouSharinganShisui = owner.equals("shisui");
+					v.MangekyouSharinganMadara = owner.equals("madara");
+					v.MangekyouSharinganObito = owner.equals("obito");
+					v.MangekyouSharinganActivate = true;
+					v.sharingan = true;
+					v.mangekyousharingansasukesusanolearn = v.mangekyoushrainganitachisusanolearn = v.mangekyousharinganshisuisusanolearn = 5;
+					v.mangekyousharinganmadarasusanolearn = v.mangekyousharinganobitosusanolearn = 5;
+					v.ChakraAmount = 50000;
+					v.syncPlayerVariables(p);
+				});
+				p.getAbilities().flying = false;
+				p.onUpdateAbilities();
+				p.teleportTo(p.getX(), p.level().getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING, p.getBlockX(), p.getBlockZ()), p.getZ());
+			}));
+			for (int stage = 1; stage <= 5; stage++) {
+				int n = stage;
+				STEPS.add(() -> {
+					onServer(mc, net.mcreator.narutoshippudenmod.core.Susanoo::grow);
+					mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
+					nextDelay = n == 5 ? 40 : 24;
+				});
+				STEPS.add(() -> {
+					shot(mc, "susanoo_" + owner + "_" + n);
+					onServer(mc, p -> NarutoShippudenMod.LOGGER.info("DEVTEST susanoo {} stage {}: chakra {} flying {}", owner,
+							net.mcreator.narutoshippudenmod.core.Susanoo.stage(p), (int) NarutoShippudenModVariables.get(p).ChakraAmount, p.getAbilities().flying));
+					mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
+					nextDelay = 4;
+				});
+				STEPS.add(() -> shot(mc, "susanoo_" + owner + "_" + n + "_back"));
+				if (System.getProperty("naruto.devtest.angles") != null) {
+					// more angles (-PdevAngles): from below, from above, three-quarter front, then back to level
+					String[][] views = { { "low", "BACK", "0", "-65" }, { "high", "BACK", "0", "70" }, { "side", "FRONT", "45", "10" } };
+					for (String[] v : views) {
+						STEPS.add(() -> {
+							mc.options.setCameraType(v[1].equals("BACK") ? CameraType.THIRD_PERSON_BACK : CameraType.THIRD_PERSON_FRONT);
+							mc.player.setYRot(mc.player.yBodyRot + Float.parseFloat(v[2]));
+							mc.player.setYHeadRot(mc.player.yBodyRot + Float.parseFloat(v[2]));
+							mc.player.setXRot(Float.parseFloat(v[3]));
+							nextDelay = 6;
+						});
+						STEPS.add(() -> shot(mc, "susanoo_" + owner + "_" + n + "_" + v[0]));
+					}
+					STEPS.add(() -> {
+						mc.player.setYRot(mc.player.yBodyRot);
+						mc.player.setYHeadRot(mc.player.yBodyRot);
+						mc.player.setXRot(0);
+						nextDelay = 2;
+					});
+				}
+			}
+			if (!owner.equals("sasuke"))
+				continue;
+			// the Complete one's flight (client/SusanooFlight): standing height, take off, fly forward, land
+			STEPS.add(() -> {
+				mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
+				NarutoShippudenMod.LOGGER.info("DEVTEST susanoo flight standing: gap {} mode {} onGround {}", String.format("%.2f", SusanooFlight.gap(mc.player)),
+						SusanooFlight.mode, mc.player.onGround());
+				mc.options.keyJump.setDown(true);
+				nextDelay = 3;
+			});
+			STEPS.add(() -> {
+				mc.options.keyJump.setDown(false);
+				mc.player.setXRot(-10);
+				mc.options.keyUp.setDown(true);
+				nextDelay = 50;
+			});
+			STEPS.add(() -> {
+				NarutoShippudenMod.LOGGER.info("DEVTEST susanoo flight flying: gap {} mode {} speed {}", String.format("%.2f", SusanooFlight.gap(mc.player)),
+						SusanooFlight.mode, String.format("%.2f", mc.player.getDeltaMovement().length()));
+				shot(mc, "susanoo_flight");
+				mc.options.keyUp.setDown(false);
+				mc.options.keyShift.setDown(true);
+				nextDelay = 70;
+			});
+			STEPS.add(() -> {
+				mc.options.keyShift.setDown(false);
+				mc.player.setXRot(0);
+				NarutoShippudenMod.LOGGER.info("DEVTEST susanoo flight landed: gap {} mode {}", String.format("%.2f", SusanooFlight.gap(mc.player)), SusanooFlight.mode);
+				shot(mc, "susanoo_landed");
+				nextDelay = 4;
+			});
+			// the arm and the weapons against a husk in front
+			for (int stage = 3; stage <= 5; stage++) {
+				int n = stage;
+				STEPS.add(() -> {
+					command(mc, "kill @e[type=minecraft:husk]");
+					onServer(mc, p -> {
+						NarutoShippudenModVariables.ifPresent(p, v -> {
+							v.mangekyousharingansusanostage = n;
+							v.syncPlayerVariables(p);
+						});
+						p.setYRot(0);
+						p.setXRot(0);
+					});
+					command(mc, "tp @s ~ ~ ~ 0 0");
+					command(mc, "summon minecraft:husk ^ ^ ^6 {NoAI:1b,PersistenceRequired:1b,attributes:[{id:\"minecraft:max_health\",base:1000}],Health:1000f}");
+					mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
+					nextDelay = 20;
+				});
+				STEPS.add(() -> {
+					onServer(mc, p -> {
+						var husk = p.level().getEntitiesOfClass(net.minecraft.world.entity.monster.zombie.Husk.class, p.getBoundingBox().inflate(30)).stream().findFirst()
+								.orElse(null);
+						float before = husk == null ? -1 : husk.getHealth();
+						net.mcreator.narutoshippudenmod.core.Susanoo.strike(p);
+						NarutoShippudenMod.LOGGER.info("DEVTEST susanoo strike stage {}: husk {} -> {}", n, before, husk == null ? -1 : husk.getHealth());
+					});
+					nextDelay = 4;
+				});
+				STEPS.add(() -> {
+					shot(mc, "susanoo_strike_" + n);
+					onServer(mc, p -> {
+						p.getPersistentData().putLong("SusanooSpecialReady", 0);
+						net.mcreator.narutoshippudenmod.core.Susanoo.special(p);
+					});
+					nextDelay = n == 5 ? 34 : 6;
+				});
+				STEPS.add(() -> {
+					shot(mc, "susanoo_special_" + n);
+					nextDelay = 30;
+				});
+				STEPS.add(() -> onServer(mc, p -> {
+					var husk = p.level().getEntitiesOfClass(net.minecraft.world.entity.monster.zombie.Husk.class, p.getBoundingBox().inflate(40)).stream().findFirst()
+							.orElse(null);
+					NarutoShippudenMod.LOGGER.info("DEVTEST susanoo special stage {}: husk {}", n, husk == null ? "gone" : husk.getHealth());
+				}));
+			}
+			STEPS.add(() -> command(mc, "kill @e[type=!player]"));
+		}
+		STEPS.add(() -> onServer(mc, net.mcreator.narutoshippudenmod.core.Susanoo::dismiss));
+	}
+
 	/** Kurama against a training husk, seen from the side: claws, tails, roar, Tailed Beast Balls, the leap. */
 	private static void kuramaSteps(Minecraft mc) {
 		STEPS.add(() -> {
@@ -1420,8 +1579,13 @@ public final class DevTest {
 			command(mc, "fill ~-12 ~ ~-4 ~12 ~12 ~16 air");
 			String[] ids = System.getProperty("naruto.devtest.models", "kirin,projectile_great_fire_dragon,projectile_great_fireball,projectile_lightning_ball,projectile_rasenshuriken")
 					.split(",");
+			// the old Susanoo are big: wider apart and further off
+			boolean big = String.join(",", ids).contains("susano");
+			if (big)
+				command(mc, "fill ~-30 ~ ~-4 ~30 ~20 ~40 air");
 			for (int i = 0; i < ids.length; i++)
-				command(mc, "summon naruto_shippuden:" + ids[i] + " ~" + (i - ids.length / 2) * 3 + " ~1.5 ~8 {NoAI:1b,NoGravity:1b,Motion:[0d,0d,0d],Rotation:[180f,0f]}");
+				command(mc, "summon naruto_shippuden:" + ids[i] + " ~" + (i - ids.length / 2) * (big ? 9 : 3) + " ~" + (big ? 0 : 1.5) + " ~" + (big ? 22 : 8)
+						+ " {NoAI:1b,NoGravity:1b,Motion:[0d,0d,0d],Rotation:[180f,0f]}");
 			// thrown weapons vanish once they stop: hold everything still
 			command(mc, "tick freeze");
 		});

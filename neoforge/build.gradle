@@ -54,6 +54,7 @@ neoForge {
             if (project.hasProperty('devScreens')) systemProperty 'naruto.devtest.screens', 'true'
             if (project.hasProperty('devOnly')) systemProperty 'naruto.devtest.only', project.property('devOnly')
             if (project.hasProperty('devJutsu')) systemProperty 'naruto.devtest.jutsu', project.property('devJutsu')
+            if (project.hasProperty('devAngles')) systemProperty 'naruto.devtest.angles', 'true'
             if (project.hasProperty('devModels')) systemProperty 'naruto.devtest.models', project.property('devModels')
             if (project.hasProperty('quickPlay')) programArguments.addAll '--quickPlaySingleplayer', project.property('quickPlay')
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.

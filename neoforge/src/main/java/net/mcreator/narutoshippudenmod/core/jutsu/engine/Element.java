@@ -82,6 +82,17 @@ public enum Element {
 	/** Tailed beast chakra: the Tailed Beast Ball's black core in a violet haze, Kurama's red-orange cloak. */
 	BIJU(0xFF1A0F2A, 0xFF9A6BFF, true, new DustParticleOptions(0x24103A, 1.6F), ParticleTypes.REVERSE_PORTAL, SoundEvents.WARDEN_SONIC_CHARGE,
 			SoundEvents.GENERIC_EXPLODE.value()),
+	/** The Susanoo's chakra, each Uchiha's own colour: Sasuke's violet, Itachi's red, Shisui's green, Madara's blue, Obito's white. */
+	SUSANOO(0xFF9A5CFF, 0xFFF0E4FF, true, new DustParticleOptions(0x9A5CFF, 1.4F), ParticleTypes.REVERSE_PORTAL, SoundEvents.WARDEN_SONIC_CHARGE,
+			SoundEvents.WARDEN_SONIC_BOOM),
+	SUSANOO_RED(0xFFFF5A3A, 0xFFFFE0D2, true, new DustParticleOptions(0xFF5A3A, 1.4F), ParticleTypes.FLAME, SoundEvents.WARDEN_SONIC_CHARGE,
+			SoundEvents.WARDEN_SONIC_BOOM),
+	SUSANOO_GREEN(0xFF4AE07A, 0xFFE2FFEA, true, new DustParticleOptions(0x4AE07A, 1.4F), ParticleTypes.HAPPY_VILLAGER, SoundEvents.WARDEN_SONIC_CHARGE,
+			SoundEvents.WARDEN_SONIC_BOOM),
+	SUSANOO_BLUE(0xFF4A7CFF, 0xFFE0EAFF, true, new DustParticleOptions(0x4A7CFF, 1.4F), ParticleTypes.SOUL_FIRE_FLAME, SoundEvents.WARDEN_SONIC_CHARGE,
+			SoundEvents.WARDEN_SONIC_BOOM),
+	SUSANOO_WHITE(0xFFC8CCDA, 0xFFFFFFFF, true, new DustParticleOptions(0xD0D4E2, 1.4F), ParticleTypes.END_ROD, SoundEvents.WARDEN_SONIC_CHARGE,
+			SoundEvents.WARDEN_SONIC_BOOM),
 	KURAMA(0xFFFF5A1A, 0xFFFFD27A, true, new DustParticleOptions(0xFF5A1A, 1.4F), ParticleTypes.FLAME, SoundEvents.RAVAGER_ROAR, SoundEvents.RAVAGER_ATTACK);
 
 

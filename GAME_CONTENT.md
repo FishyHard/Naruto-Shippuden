@@ -714,7 +714,19 @@ Akamaru, Crow, Earth Golem, Wood Golem; plus the shadow clones, the Nara shadows
 
 ### Susanoo forms
 
-14 forms: the ribcage, then a skeleton, humanoid and armoured form for each Mangekyou (Itachi, Sasuke, Madara, Obito, Shisui).
+Five stages, each drawn as its own model and texture per owner (Sasuke purple, Itachi orange-red, Shisui green, Madara blue,
+Obito pale blue), see-through and glowing:
+
+- **Ribcage**: bands of chakra round the user, a spine behind (the same for every owner).
+- **Skeleton**: band ribs, arms and a skull (Sasuke's has horns, the others' none).
+- **Humanoid**: Sasuke a bow and arrow; Shisui a broad body rising from flame with a belly of knobbed plates and a spiral sword;
+  Itachi a robed tengu with a sash, the Totsuka Sword's gourd and the Yata Mirror; Madara two-faced and four-armed with a tall
+  horn and two kris; Obito a scarred face with a forehead protector and two Kamui shuriken.
+- **Armoured**: Sasuke a spiral shield and Amaterasu in his palm; Shisui the spiral sword; Itachi the Totsuka Sword and the Yata
+  Mirror; Madara a long katana; Obito a Kamui shuriken.
+- **Complete**: a winged giant 18 blocks tall that the user rides in its head. It walks, and with jump takes off and flies like
+  an elytra (forward beats the wings, jump lifts, sneak lands). Each owner's holds their own blade (Shisui spiral, Itachi
+  Totsuka, Madara and Sasuke a katana) and Obito's a Kamui shuriken too.
 
 ## Blocks
 

@@ -301,10 +301,12 @@ public final class NarutoActions {
 						Eyes.select(player, action.key());
 				}
 				case "susanoo" -> {
-					if (action.key().equals("grow"))
-						Eyes.growSusanoo(player);
-					else
-						Eyes.dismissSusanoo(player);
+					switch (action.key()) {
+						case "grow" -> Eyes.growSusanoo(player);
+						case "strike" -> Susanoo.strike(player);
+						case "special" -> Susanoo.special(player);
+						default -> Eyes.dismissSusanoo(player);
+					}
 				}
 				case "mind" -> {
 					if (action.key().equals("attack"))
