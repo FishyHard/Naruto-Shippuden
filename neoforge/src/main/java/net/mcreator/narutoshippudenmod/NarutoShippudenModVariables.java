@@ -92,7 +92,7 @@ public class NarutoShippudenModVariables {
 		public double earthlearn = 0;
 		public boolean earthreleaselogic = false;
 		public double Eyes_Height = 1.0;
-		/** The dojutsu drawn this many skin pixels lower (negative: higher), to sit on the skin's own eyes. */
+		/** The dojutsu drawn this many skin pixels lower (0..2), to sit on the skin's own eyes. */
 		public double Eyes_Offset = 0.0;
 		public double fire_release = 0;
 		public double firelearn = 0;

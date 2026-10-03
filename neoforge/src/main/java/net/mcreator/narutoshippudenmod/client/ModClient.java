@@ -157,9 +157,6 @@ public final class ModClient {
 		event.register(NarutoShippudenCheatDojutsuGUIGui.containerType, NarutoShippudenCheatDojutsuGUIGuiWindow::new);
 		event.register(NarutoShippudenCheatGUIGui.containerType, NarutoShippudenCheatGUIGuiWindow::new);
 		event.register(NarutoShippudenCheatKekkeiGenkaiGUIGui.containerType, NarutoShippudenCheatKekkeiGenkaiGUIGuiWindow::new);
-		event.register(PasswordGUIDojutsuGui.containerType, PasswordGUIDojutsuGuiWindow::new);
-		event.register(GeninHeadbandSelectGui.containerType, GeninHeadbandSelectGuiWindow::new);
-		event.register(PatreonKitGui.containerType, PatreonKitGuiWindow::new);
 	}
 
 	@SubscribeEvent

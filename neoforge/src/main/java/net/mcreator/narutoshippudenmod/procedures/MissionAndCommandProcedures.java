@@ -20,8 +20,6 @@ import net.mcreator.narutoshippudenmod.entity.NpcEntities.IrukaSenseiCloneEntity
 import net.mcreator.narutoshippudenmod.entity.NpcEntities.IrukaSenseiEntity;
 import net.mcreator.narutoshippudenmod.entity.NpcEntities.TrainingDummyEntity;
 import net.mcreator.narutoshippudenmod.entity.SummonEntities.KuramaEntity;
-import net.mcreator.narutoshippudenmod.gui.MiscGuis.GeninHeadbandSelectGui;
-import net.mcreator.narutoshippudenmod.gui.MiscGuis.PatreonKitGui;
 import net.mcreator.narutoshippudenmod.item.DojutsuItems.MangekyouSharinganItachiReleaseItem;
 import net.mcreator.narutoshippudenmod.item.DojutsuItems.MangekyouSharinganKakashiReleaseItem;
 import net.mcreator.narutoshippudenmod.item.DojutsuItems.MangekyouSharinganMadaraReleaseItem;
@@ -81,27 +79,6 @@ public final class MissionAndCommandProcedures {
 				return;
 			}
 			Entity entity = (Entity) dependencies.get("entity");
-		}
-	}
-
-	public static class InfonarutoshippudenCommandExecutedProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure InfonarutoshippudenCommandExecuted!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (entity instanceof Player && !entity.level().isClientSide()) {
-				((Player) entity).sendSystemMessage(Component.literal("Discord: https://discord.gg/2qryWaUegZ"));
-			}
-			if (entity instanceof Player && !entity.level().isClientSide()) {
-				((Player) entity).sendSystemMessage(Component.literal("Patreon: https://www.patreon.com/fishyhard/membership"));
-			}
-			if (entity instanceof Player && !entity.level().isClientSide()) {
-				((Player) entity).sendSystemMessage(Component.literal("Youtube: https://www.youtube.com/watch?v=FTRlQqubWB4&t"));
-			}
 		}
 	}
 
@@ -1143,75 +1120,6 @@ public final class MissionAndCommandProcedures {
 					ItemStack _stktoremove = new ItemStack(LetterFromBrotherItem.block);
 					((Player) entity).getInventory().clearOrCountMatchingItems(p -> _stktoremove.getItem() == p.getItem(), false, (int) 1,
 							((Player) entity).inventoryMenu.getCraftSlots());
-				}
-			}
-		}
-	}
-
-	public static class PatreonKitClaimProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure PatreonKitClaim!");
-				return;
-			}
-			Entity entity = (Entity) dependencies.get("entity");
-			if (entity instanceof Player && !entity.level().isClientSide()) {
-				((Player) entity).sendSystemMessage(Component.literal(
-						"There are no Patrons with this feature yet. You can get that feature here: https://www.patreon.com/fishyhard/membership"));
-			}
-		}
-	}
-
-	public static class PatreonKitCommandCommandExecutedProcedure {
-
-		public static void executeProcedure(Map<String, Object> dependencies) {
-			if (dependencies.get("world") == null) {
-				if (!dependencies.containsKey("world"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency world for procedure PatreonKitCommandCommandExecuted!");
-				return;
-			}
-			if (dependencies.get("x") == null) {
-				if (!dependencies.containsKey("x"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency x for procedure PatreonKitCommandCommandExecuted!");
-				return;
-			}
-			if (dependencies.get("y") == null) {
-				if (!dependencies.containsKey("y"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency y for procedure PatreonKitCommandCommandExecuted!");
-				return;
-			}
-			if (dependencies.get("z") == null) {
-				if (!dependencies.containsKey("z"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency z for procedure PatreonKitCommandCommandExecuted!");
-				return;
-			}
-			if (dependencies.get("entity") == null) {
-				if (!dependencies.containsKey("entity"))
-					NarutoShippudenMod.LOGGER.warn("Failed to load dependency entity for procedure PatreonKitCommandCommandExecuted!");
-				return;
-			}
-			LevelAccessor world = (LevelAccessor) dependencies.get("world");
-			double x = dependencies.get("x") instanceof Integer ? (int) dependencies.get("x") : (double) dependencies.get("x");
-			double y = dependencies.get("y") instanceof Integer ? (int) dependencies.get("y") : (double) dependencies.get("y");
-			double z = dependencies.get("z") instanceof Integer ? (int) dependencies.get("z") : (double) dependencies.get("z");
-			Entity entity = (Entity) dependencies.get("entity");
-			{
-				Entity _ent = entity;
-				if (_ent instanceof ServerPlayer) {
-					BlockPos _bpos = BlockPos.containing(x, y, z);
-					((ServerPlayer) _ent).openMenu(new MenuProvider() {
-						@Override
-						public Component getDisplayName() {
-							return Component.literal("PatreonKit");
-						}
-
-						@Override
-						public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-							return new PatreonKitGui.GuiContainerMod(id, inventory, new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(_bpos));
-						}
-					}, _buf -> _buf.writeBlockPos(_bpos));
 				}
 			}
 		}

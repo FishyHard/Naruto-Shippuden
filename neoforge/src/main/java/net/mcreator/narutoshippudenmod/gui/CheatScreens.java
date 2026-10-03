@@ -5,7 +5,6 @@ import net.mcreator.narutoshippudenmod.gui.CheatGuis.MangekyouSharinganCheatGui;
 import net.mcreator.narutoshippudenmod.gui.CheatGuis.NarutoShippudenCheatDojutsuGUIGui;
 import net.mcreator.narutoshippudenmod.gui.CheatGuis.NarutoShippudenCheatGUIGui;
 import net.mcreator.narutoshippudenmod.gui.CheatGuis.NarutoShippudenCheatKekkeiGenkaiGUIGui;
-import net.mcreator.narutoshippudenmod.gui.CheatGuis.PasswordGUIDojutsuGui;
 import net.mcreator.narutoshippudenmod.procedures.GuiDisplayProcedures;
 import net.mcreator.narutoshippudenmod.core.NarutoActions;
 
@@ -290,21 +289,4 @@ public final class CheatScreens {
 		}
 	}
 
-	public static class PasswordGUIDojutsuGuiWindow extends ModScreen<PasswordGUIDojutsuGui.GuiContainerMod> {
-		public PasswordGUIDojutsuGuiWindow(PasswordGUIDojutsuGui.GuiContainerMod container, Inventory inventory, Component text) {
-			super(container, inventory, Component.literal("Enter Password"), 176, 72, container.entity, container.x, container.y, container.z);
-		}
-
-		@Override
-		protected void send(int id) {
-			NarutoShippudenMod.PACKET_HANDLER.sendToServer(new PasswordGUIDojutsuGui.ButtonPressedMessage(id, x, y, z));
-		}
-
-		@Override
-		protected void init() {
-			super.init();
-			setInitialFocus(textField("Password", 8, 18, 160, PasswordGUIDojutsuGui.guistate));
-			button("Login", 0, 48, 44, 80);
-		}
-	}
 }

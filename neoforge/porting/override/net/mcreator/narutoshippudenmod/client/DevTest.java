@@ -28,7 +28,6 @@ public final class DevTest {
 	private static final String[] MENUS = {"InfoCardGuis$InfoCardGui", "InfoCardGuis$InfoCardDojutsuGui", "InfoCardGuis$InfoCardMiniGameGui",
 			"InfoCardGuis$InfoCardMissionsGui", "InfoCardGuis$InfoCardUpgradeGui", "InfoCardGuis$StatSelectGui", "CheatGuis$MangekyouSharinganCheatGui",
 			"CheatGuis$NarutoShippudenCheatDojutsuGUIGui", "CheatGuis$NarutoShippudenCheatGUIGui", "CheatGuis$NarutoShippudenCheatKekkeiGenkaiGUIGui",
-			"CheatGuis$PasswordGUIDojutsuGui", "MiscGuis$GeninHeadbandSelectGui", "MiscGuis$PatreonKitGui",
 			"JutsuCreationGuis$CreateJutsuGUIGui"};
 	private static final java.util.List<Runnable> STEPS = new java.util.ArrayList<>();
 	private static int step;

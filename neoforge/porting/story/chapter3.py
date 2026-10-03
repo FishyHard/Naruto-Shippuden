@@ -90,7 +90,7 @@ QUESTS = {
             # Academy spar but not a match for a jonin; the team fights them alongside the player
             dict(type='kill', entity='naruto_shippuden:hidden_mist_shinobi', count=3, text='Defeat the missing-nin',
                  enemies=dict(around=[0, G, 214], radius=9, tags=['missing_nin'], health=26, damage=3),
-                 allies=['tatsumi', 'ren', 'yui']),
+                 allies=['tatsumi', 'ren', 'yui'], respawn=[0, G, 205]),
             talk('tatsumi', 'Talk to Tatsumi-sensei', [
                 say('tatsumi', "Good. You kept your heads, and nobody ran. That's a C-rank done, Team Six."),
                 say('yui', "Is everyone hurt? Let me look."),

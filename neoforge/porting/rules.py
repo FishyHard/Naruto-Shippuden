@@ -2006,7 +2006,7 @@ def clan_choice_after_arrival(path, text):
 @func
 def dojutsu_position_buttons(path, text):
     """The Info Card's Dojutsu page moves the eyes up (button 10) or down (11) the face a skin pixel at a time
-    (PlayerVariables.Eyes_Offset, -3..3), for skins whose own eyes aren't on the row the dojutsu textures use."""
+    (PlayerVariables.Eyes_Offset, 0..2: lower only, as far as stays on the face), for skins whose own eyes aren't on the row the dojutsu textures use."""
     if not path.replace('\\', '/').endswith('gui/InfoCardGuis.java'):
         return text
     i = text.find('class InfoCardDojutsuGui ')
@@ -2016,7 +2016,7 @@ def dojutsu_position_buttons(path, text):
     add = ('\t\t\tif (buttonID == 10 || buttonID == 11) {\n'
            '\t\t\t\tdouble step = buttonID == 10 ? -1 : 1;\n'
            '\t\t\t\tnet.mcreator.narutoshippudenmod.NarutoShippudenModVariables.ifPresent(entity, capability -> {\n'
-           '\t\t\t\t\tcapability.Eyes_Offset = Math.max(-3, Math.min(3, capability.Eyes_Offset + step));\n'
+           '\t\t\t\t\tcapability.Eyes_Offset = Math.max(0, Math.min(2, capability.Eyes_Offset + step));\n'
            '\t\t\t\t\tcapability.syncPlayerVariables(entity);\n'
            '\t\t\t\t});\n'
            '\t\t\t}\n')
@@ -2040,3 +2040,16 @@ def clan_only_selection(path, text):
     text = text[:a] + text[b:]
     b = text.find('\t\t\tif (NarutoShippudenModVariables.get(entity).selectvillage == 0) {', i)
     return text[:b] + '\t\t\tif (true) { // the story\'s village\n' + text[b + len('\t\t\tif (NarutoShippudenModVariables.get(entity).selectvillage == 0) {\n'):]
+
+
+@func
+def drop_info_patreon_commands(path, text):
+    """/infonarutoshippuden (the old links message) and /Patreon (the Patreon kit screen) are gone, and with them what only
+    they reached (dead_code.py)."""
+    if not path.replace('\\', '/').endswith('command/ModCommands.java'):
+        return text
+    for name in ('InfonarutoshippudenCommand', 'PatreonKitCommandCommand'):
+        m = re.search(r'\n\t(?:@[\w.]+(?:\([^)]*\))?\s*)*public static class %s\b' % name, text)
+        if m:
+            text = text[:m.start()] + text[find_block(text, m.end()):]
+    return re.sub(r'\nimport [\w.]*\.(?:InfonarutoshippudenCommandExecutedProcedure|PatreonKitCommandCommandExecutedProcedure);', '', text)

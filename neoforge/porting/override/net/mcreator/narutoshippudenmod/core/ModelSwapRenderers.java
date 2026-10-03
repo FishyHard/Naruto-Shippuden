@@ -101,7 +101,8 @@ public final class ModelSwapRenderers {
 		// eyes are higher or lower than the dojutsu textures'
 		LivingEntity entity = entity(event);
 		float offset = entity == null ? 0 : (float) net.mcreator.narutoshippudenmod.NarutoShippudenModVariables.get(entity).Eyes_Offset;
-		int shift = Math.round(offset);
+		// lower only, and no more than two pixels: further, or upward, the eyes leave the face's eye rows
+		int shift = Math.max(0, Math.min(2, Math.round(offset)));
 		PlayerModel model = shift == 0 ? overlayModel : SHIFTED.computeIfAbsent(shift, ModelSwapRenderers::shiftedEyes);
 		for (String texture : textures)
 			draw(event, model, RenderTypes.entityCutoutZOffset(Identifier.parse(texture)), 0.9375F);

@@ -54,10 +54,6 @@ public final class NarutoCommand {
 		LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal("naruto");
 		root.then(Commands.literal("cheat").executes(c -> page(c, "cheat")));
 		root.then(Commands.literal("info").executes(c -> page(c, "info")));
-		root.then(Commands.literal("patreon").executes(c -> {
-			MissionAndCommandProcedures.PatreonKitCommandCommandExecutedProcedure.executeProcedure(NarutoActions.dependencies(c.getSource().getPlayerOrException()));
-			return 1;
-		}));
 
 		root.then(Commands.literal("get").requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
 				.then(Commands.argument("value", StringArgumentType.word()).suggests((c, b) -> SharedSuggestionProvider.suggest(NarutoActions.VALUES.keySet(), b))

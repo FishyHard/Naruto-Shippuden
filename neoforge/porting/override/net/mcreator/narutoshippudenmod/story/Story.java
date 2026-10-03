@@ -95,6 +95,7 @@ import java.util.TreeMap;
  * {"type": "wait", "seconds": s}                               let time pass
  * {"type": "near", "tag": tag, "radius": r}                    reach an entity with that tag (put there by on_start: Tora)
  * any step's "remove": tag                                     entities with that tag near the player are gone as it starts
+ * any step's "respawn": [x, y, z]                              where the player comes back if they die during it
  * {"type": "spots", "points": [[x, y, z], ...], "seconds": s, stand at each marked spot (coloured dust shows them, to this
  *  "radius": r}                                                player only) for s seconds: scrubbing paint off the Rock
  * {"type": "spar", "npc": id, "hits": n, "damage": d,         spar with that character until landing n hits; it fights back
@@ -524,6 +525,8 @@ public final class Story {
 
 	/** Whether the player sees this character's usual figure: not while they have a scene figure of it, nor before its "after" quest. */
 	public static boolean seesUsual(ServerPlayer player, String character) {
+		if (inScene(player, character))
+			return false;
 		Character c = characters.get(character);
 		return c == null || (c.after().isEmpty() || isDone(player, c.after())) && (c.until().isEmpty() || !isDone(player, c.until()));
 	}
@@ -572,6 +575,29 @@ public final class Story {
 			return true;
 		int bits = player instanceof ServerPlayer sp ? skills(sp) : clientSkills;
 		return (bits & l.bit()) != 0;
+	}
+
+	/** Whether the player's quests have this character in a scene at their current step (a step's "spawn" lasts its
+	 * "steps"): the usual figure stands aside meanwhile, however far off the scene is, and comes back when it's over. */
+	public static boolean inScene(ServerPlayer player, String character) {
+		for (String id : section(state(player), "active").keySet()) {
+			Quest q = quests.get(id);
+			if (q == null)
+				continue;
+			int at = stepIndex(player, id);
+			for (int j = 0; j <= at && j < q.steps().size(); j++) {
+				JsonObject s = q.steps().get(j);
+				if (!s.has("spawn"))
+					continue;
+				for (JsonElement e : s.getAsJsonArray("spawn")) {
+					JsonObject o = e.getAsJsonObject();
+					int n = o.has("steps") ? o.get("steps").getAsInt() : 1;
+					if (str(o, "character", "").equals(character) && at < j + n)
+						return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public static boolean hasScene(java.util.UUID player, String character) {
@@ -1090,6 +1116,24 @@ public final class Story {
 			sync(player);
 	}
 
+	/** Fallen in a fight a quest step is about ("respawn": [x, y, z], the missing-nin on the road): back up at its edge,
+	 * not at the village's arrival, so the fight is still there to finish. */
+	@SubscribeEvent
+	public static void respawnAtFight(PlayerEvent.PlayerRespawnEvent event) {
+		if (!(event.getEntity() instanceof ServerPlayer player) || event.isEndConquered())
+			return;
+		for (String id : section(state(player), "active").keySet()) {
+			Quest q = quests.get(id);
+			JsonObject s = q == null ? null : step(player, q);
+			if (s != null && s.has("respawn")) {
+				JsonArray p = s.getAsJsonArray("respawn");
+				Compat.runCommand(player, "execute in " + Chikyu.CHIKYU.identifier() + " run tp @s " + (p.get(0).getAsDouble() + 0.5) + " "
+						+ p.get(1).getAsDouble() + " " + (p.get(2).getAsDouble() + 0.5));
+				return;
+			}
+		}
+	}
+
 	/** The story goes on after death. */
 	@SubscribeEvent
 	public static void onClone(PlayerEvent.Clone event) {
@@ -1475,7 +1519,7 @@ public final class Story {
 					npc.setYBodyRot(c.yaw());
 				}
 				if (c.companion() != null)
-					companion(level, c);
+					companion(level, c, npc);
 			}
 		}
 	}
@@ -1484,7 +1528,7 @@ public final class Story {
 	 * A character's animal ("companion": {"summon": the summon command's entity and NBT, "offset": [dx, dz]}): Akamaru at
 	 * Kiba's feet. Kept there: put back beside its character when it has wandered off, summoned again if gone.
 	 */
-	private static void companion(ServerLevel level, Character c) {
+	private static void companion(ServerLevel level, Character c, StoryNpc.Npc owner) {
 		String tag = "companion_" + c.id();
 		JsonArray off = c.companion().has("offset") ? c.companion().getAsJsonArray("offset") : null;
 		double x = c.home().getX() + 0.5 + (off == null ? 1 : off.get(0).getAsDouble()), y = c.home().getY(),
@@ -1500,8 +1544,23 @@ public final class Story {
 			nbt = nbt.substring(0, nbt.length() - 1) + (nbt.length() > 2 ? "," : "") + "Tags:[\"" + tag + "\"],PersistenceRequired:1b}";
 			level.getServer().getCommands().performPrefixedCommand(level.getServer().createCommandSourceStack().withSuppressedOutput().withLevel(level)
 					.withPermission(net.minecraft.server.permissions.PermissionSet.ALL_PERMISSIONS), "summon " + type + " " + x + " " + y + " " + z + " " + nbt);
-		} else if (pets.getFirst().distanceToSqr(x, y, z) > 6 * 6)
-			pets.getFirst().teleportTo(x, y, z);
+			return;
+		}
+		Entity pet = pets.getFirst();
+		// sparring with its character, it joins in (Kiba and Akamaru together), biting lightly; calm again after
+		java.util.UUID partner = owner.sparPartner();
+		boolean sparring = partner != null && level.getPlayerByUUID(partner) instanceof ServerPlayer;
+		if (pet instanceof net.minecraft.world.entity.Mob mob) {
+			if (sparring) {
+				var attack = mob.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE);
+				if (attack != null)
+					attack.setBaseValue(2);
+				mob.setTarget((ServerPlayer) level.getPlayerByUUID(partner));
+			} else if (mob.getTarget() instanceof net.minecraft.world.entity.player.Player)
+				mob.setTarget(null);
+		}
+		if (pet.distanceToSqr(x, y, z) > (sparring ? 14 * 14 : 6 * 6))
+			pet.teleportTo(x, y, z);
 	}
 
 	// ---------------------------------------------------------------- commands for testing and mending

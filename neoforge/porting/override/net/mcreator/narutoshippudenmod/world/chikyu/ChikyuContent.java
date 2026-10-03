@@ -87,7 +87,8 @@ public final class ChikyuContent {
 
 		@Override
 		protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier effects, boolean precise) {
-			if (entity.canUsePortal(false))
+			// the toriis carry players only: story characters, missing-nin and wandering mobs stay on their side
+			if (entity instanceof Player && entity.canUsePortal(false))
 				entity.setAsInsidePortal(this, pos);
 		}
 
