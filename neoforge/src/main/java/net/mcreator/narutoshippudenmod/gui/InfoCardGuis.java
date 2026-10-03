@@ -242,7 +242,7 @@ public final class InfoCardGuis {
 			if (buttonID == 10 || buttonID == 11) {
 				double step = buttonID == 10 ? -1 : 1;
 				net.mcreator.narutoshippudenmod.NarutoShippudenModVariables.ifPresent(entity, capability -> {
-					capability.Eyes_Offset = Math.max(0, Math.min(2, capability.Eyes_Offset + step));
+					capability.Eyes_Offset = Math.max(-1, Math.min(1, capability.Eyes_Offset + step));
 					capability.syncPlayerVariables(entity);
 				});
 			}

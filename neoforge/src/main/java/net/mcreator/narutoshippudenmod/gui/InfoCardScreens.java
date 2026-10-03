@@ -347,7 +347,7 @@ public final class InfoCardScreens {
 		protected void background(GuiGraphicsExtractor graphics, int mouseX, int mouseY) {
 			darkInset(graphics, 8, 44, 132, 140);
 			// the eyes moved as they will sit on the face (Position), kept inside the preview
-			int shift = Math.max(0, Math.min(2, (int) vars().Eyes_Offset)) * 16;
+			int shift = Math.max(-1, Math.min(1, (int) vars().Eyes_Offset)) * 16;
 			for (Eye eye : EYES)
 				if (is(eye.shown()))
 					texture(graphics, eye.texture(), EYE_X + eye.dx(), EYE_Y + eye.dy() + shift, eye.width(), eye.height());
@@ -373,8 +373,8 @@ public final class InfoCardScreens {
 				value(graphics, 1, "Variant", vars.DojutsuSelect2);
 			value(graphics, 2, "Pupil height", number(vars.Pupils_Height) + " px");
 			value(graphics, 3, "Eye height", number(vars.Eyes_Height) + " px");
-			int offset = Math.max(0, Math.min(2, (int) vars.Eyes_Offset));
-			value(graphics, 4, "Position on the face", offset == 0 ? "Usual" : offset + " px lower");
+			int offset = Math.max(-1, Math.min(1, (int) vars.Eyes_Offset));
+			value(graphics, 4, "Position on the face", offset == 0 ? "Usual" : offset > 0 ? "1 px lower" : "1 px higher");
 		}
 	}
 

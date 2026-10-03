@@ -1067,7 +1067,11 @@ public final class Story {
 
 	@SubscribeEvent
 	public static void onKill(LivingDeathEvent event) {
-		if (event.getSource().getEntity() instanceof ServerPlayer player)
+		// the player's own kills, and those of what fights for them (their shadow clones, a tamed companion)
+		net.minecraft.world.entity.Entity killer = event.getSource().getEntity();
+		if (killer instanceof net.minecraft.world.entity.OwnableEntity pet && pet.getOwner() instanceof ServerPlayer owner)
+			killer = owner;
+		if (killer instanceof ServerPlayer player)
 			counted(player, "kill", event.getEntity());
 	}
 
