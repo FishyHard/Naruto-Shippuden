@@ -38,8 +38,8 @@ public final class ModelSwapRenderers {
 	public static final ContextKey<LivingEntity> ENTITY = new ContextKey<>(Identifier.fromNamespaceAndPath("naruto_shippuden", "entity"));
 	private static final Map<ModelLayerLocation, EntityModel> MODELS = new HashMap<>();
 	private static PlayerModel overlayModel;
-	/** The eye overlay with its head moved down by n skin pixels (n = -3..3): the head's starting pose is moved, so the
-	 * model's own reset before it is drawn keeps it there. */
+	/** The eye overlay with its head's boxes moved down by n skin pixels (n = -3..3), its pivot at the neck as ever, so the
+	 * eyes turn and nod with the head (moving the pivot instead swung them off the face as the head turned). */
 	private static final Map<Integer, PlayerModel> SHIFTED = new HashMap<>();
 
 	private ModelSwapRenderers() {
@@ -102,11 +102,7 @@ public final class ModelSwapRenderers {
 		LivingEntity entity = entity(event);
 		float offset = entity == null ? 0 : (float) net.mcreator.narutoshippudenmod.NarutoShippudenModVariables.get(entity).Eyes_Offset;
 		int shift = Math.round(offset);
-		PlayerModel model = shift == 0 ? overlayModel : SHIFTED.computeIfAbsent(shift, n -> {
-			PlayerModel m = new PlayerModel(Minecraft.getInstance().getEntityModels().bakeLayer(ModelLayers.PLAYER), false);
-			m.head.setInitialPose(m.head.getInitialPose().translated(0, n, 0));
-			return m;
-		});
+		PlayerModel model = shift == 0 ? overlayModel : SHIFTED.computeIfAbsent(shift, ModelSwapRenderers::shiftedEyes);
 		for (String texture : textures)
 			draw(event, model, RenderTypes.entityCutoutZOffset(Identifier.parse(texture)), 0.9375F);
 	}
@@ -125,6 +121,17 @@ public final class ModelSwapRenderers {
 				return;
 		}
 		EYES.computeIfAbsent(state, s -> new java.util.ArrayList<>()).add(texture);
+	}
+
+	private static PlayerModel shiftedEyes(int n) {
+		net.minecraft.client.model.geom.builders.CubeDeformation none = net.minecraft.client.model.geom.builders.CubeDeformation.NONE;
+		net.minecraft.client.model.geom.builders.MeshDefinition mesh = PlayerModel.createMesh(none, false);
+		net.minecraft.client.model.geom.builders.PartDefinition head = mesh.getRoot().addOrReplaceChild("head",
+				net.minecraft.client.model.geom.builders.CubeListBuilder.create().texOffs(0, 0).addBox(-4.0F, -8.0F + n, -4.0F, 8.0F, 8.0F, 8.0F, none),
+				net.minecraft.client.model.geom.PartPose.ZERO);
+		head.addOrReplaceChild("hat", net.minecraft.client.model.geom.builders.CubeListBuilder.create().texOffs(32, 0)
+				.addBox(-4.0F, -8.0F + n, -4.0F, 8.0F, 8.0F, 8.0F, none.extend(0.5F)), net.minecraft.client.model.geom.PartPose.ZERO);
+		return new PlayerModel(net.minecraft.client.model.geom.builders.LayerDefinition.create(mesh, 64, 64).bakeRoot(), false);
 	}
 
 	/**

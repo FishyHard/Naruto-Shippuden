@@ -61,7 +61,7 @@ QUESTS = {
                 say('yui', "The same cat... how many times has this happened?"),
                 say('hiruzen', "This month? Four."),
             ]),
-            dict(type='spots', points=[[-117, G, -80], [-14, G, 52], [3, G, -48]], seconds=2, radius=2.5,
+            dict(type='spots', points=[[-117, G, -80], [-19, G, 55], [3, G, -48]], seconds=2, radius=2.5,
                  colours=['#5E8C32', '#8A6A3E', '#A0C060'], bar='Searching',
                  text="Search Tora's hiding places: the training ground trees, behind Ichiraku, the plaza"),
             dict(type='near', tag='story_tora', radius=1.8, text="Tora's in the plaza! Catch her",

@@ -57,7 +57,9 @@ CHARACTERS = {
     'hinata': dict(name='Hinata Hyuga', skin=skin('hinata'), model='player', home=[-104, G, -57], yaw=-90, **GRADUATES,
                    eyes='naruto_shippuden:textures/entities/story/hinata_byakugan.png',
                    idle=["O-oh! I wasn't watching Naruto... I mean...", "G-good luck with your training."]),
+    # Akamaru at his feet: the mod's own Akamaru, untamed (he only bites back, and can't be hurt), kept beside him by the story
     'kiba': dict(name='Kiba Inuzuka', skin=skin('kiba'), model='player', home=[-75, G, -59], yaw=90, **GRADUATES,
+                 companion=dict(summon='naruto_shippuden:akamaru{Invulnerable:1b,CustomName:"Akamaru"}', offset=[1, 1]),
                  idle=["Akamaru says you smell like a rookie!", "Wanna go a round? I'll go easy. Maybe."]),
     'shino': dict(name='Shino Aburame', skin=skin('shino'), model='player', home=[-64, G, -65], yaw=90, **GRADUATES,
                   idle=["...", "The insects tell me rain is coming. Why? Because they always know."]),

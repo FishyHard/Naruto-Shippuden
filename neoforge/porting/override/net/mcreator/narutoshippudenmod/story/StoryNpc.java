@@ -438,6 +438,10 @@ public class StoryNpc extends NarutoShippudenModElements.ModElement {
 			fightTarget = enemy == null ? null : enemy.getUUID();
 		}
 
+		public boolean isFightingWith(Entity enemy) {
+			return enemy != null && enemy.getUUID().equals(fightTarget) && isFighting();
+		}
+
 		public boolean isFighting() {
 			return fightTarget != null && level() instanceof ServerLevel level && level.getEntity(fightTarget) instanceof net.minecraft.world.entity.LivingEntity e && e.isAlive();
 		}
@@ -570,6 +574,13 @@ public class StoryNpc extends NarutoShippudenModElements.ModElement {
 
 		@Override
 		public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
+			// a mission's enemies strike the team too: they flinch, but come to no harm (the player's teammates don't fall)
+			if (source.getEntity() != null && source.getEntity().entityTags().contains("missing_nin")) {
+				net.minecraft.world.phys.Vec3 away = position().subtract(source.getEntity().position()).multiply(1, 0, 1).normalize().scale(0.3);
+				push(away.x, 0.1, away.z);
+				level.playSound(null, blockPosition(), net.minecraft.sounds.SoundEvents.PLAYER_HURT, net.minecraft.sounds.SoundSource.NEUTRAL, 0.6F, 1.0F);
+				return false;
+			}
 			// only a sparring partner's hits land, and they never wear it down: they count
 			ServerPlayer by = hitBy(source.getEntity());
 			if (by == null || sparPause > 0)
@@ -609,6 +620,11 @@ public class StoryNpc extends NarutoShippudenModElements.ModElement {
 		public boolean broadcastToPlayer(ServerPlayer player) {
 			if (sceneOwner != null)
 				return sceneOwner.equals(player.getUUID());
+			// the player's own scene figure of this character, close by, stands in for this one; one far off (on a mission
+			// outside the gate) leaves the usual figure where it is
+			if (level() instanceof ServerLevel level && !level.getEntities(entity, getBoundingBox().inflate(96),
+					n -> n.isScene() && n.sceneFor(player.getUUID()) && n.character().equals(character())).isEmpty())
+				return false;
 			return Story.seesUsual(player, character()) && super.broadcastToPlayer(player);
 		}
 

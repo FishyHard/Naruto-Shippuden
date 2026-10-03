@@ -124,7 +124,7 @@ public final class Story {
 	 * headband, once the class has passed), "eyes" a dojutsu drawn over its face (the mod's own eye textures).
 	 */
 	public record Character(String id, String name, Identifier skin, String model, BlockPos home, float yaw, List<String> idle, String after,
-			Map<String, String> equipment, String until, Map<String, String> graduate, String graduateAfter, String eyes, String graduateSkin, String pose, JsonObject shop) {
+			Map<String, String> equipment, String until, Map<String, String> graduate, String graduateAfter, String eyes, String graduateSkin, String pose, JsonObject shop, JsonObject companion) {
 	}
 
 	public record Quest(String id, String title, int chapter, List<String> after, String start, JsonArray offer, List<JsonObject> steps,
@@ -167,7 +167,7 @@ public final class Story {
 						home == null ? null : new BlockPos(home.get(0).getAsInt(), home.get(1).getAsInt(), home.get(2).getAsInt()),
 						o.has("yaw") ? o.get("yaw").getAsFloat() : 0, idle, str(o, "after", ""), equipment(o, "equipment"), str(o, "until", ""),
 						equipment(o, "graduate"), str(o, "graduate_after", ""), str(o, "eyes", ""), str(o, "graduate_skin", ""), str(o, "pose", ""),
-						o.has("shop") ? o.getAsJsonObject("shop") : null));
+						o.has("shop") ? o.getAsJsonObject("shop") : null, o.has("companion") ? o.getAsJsonObject("companion") : null));
 			}
 			Map<String, Quest> qs = new TreeMap<>();
 			for (var e : read(manager, "story/quests").entrySet()) {
@@ -524,8 +524,6 @@ public final class Story {
 
 	/** Whether the player sees this character's usual figure: not while they have a scene figure of it, nor before its "after" quest. */
 	public static boolean seesUsual(ServerPlayer player, String character) {
-		if (hasScene(player.getUUID(), character))
-			return false;
 		Character c = characters.get(character);
 		return c == null || (c.after().isEmpty() || isDone(player, c.after())) && (c.until().isEmpty() || !isDone(player, c.until()));
 	}
@@ -867,12 +865,26 @@ public final class Story {
 				alive.add(enemy);
 			}
 		}
-		if (step.has("allies") && !alive.isEmpty())
-			for (JsonElement a : step.getAsJsonArray("allies")) {
-				StoryNpc.Npc ally = sceneNpc(level, player, a.getAsString());
-				if (ally != null && !ally.isFighting())
-					ally.fight(alive.stream().min(java.util.Comparator.comparingDouble(ally::distanceToSqr)).orElse(null));
-			}
+		if (!step.has("allies") || alive.isEmpty())
+			return;
+		// the team splits up: each teammate takes an enemy of their own, and the enemies go for the team as much as for the
+		// player (the first stays on the player, the others on a teammate each)
+		alive.sort(java.util.Comparator.comparingInt(Entity::getId));
+		List<StoryNpc.Npc> allies = new ArrayList<>();
+		for (JsonElement a : step.getAsJsonArray("allies")) {
+			StoryNpc.Npc ally = sceneNpc(level, player, a.getAsString());
+			if (ally != null)
+				allies.add(ally);
+		}
+		for (int k = 0; k < allies.size(); k++) {
+			StoryNpc.Npc ally = allies.get(k);
+			Entity mine = alive.get(k % alive.size());
+			if (!ally.isFightingWith(mine))
+				ally.fight(mine);
+		}
+		for (int i = 1; i < alive.size() && !allies.isEmpty(); i++)
+			if (alive.get(i) instanceof net.minecraft.world.entity.Mob mob && !(mob.getTarget() instanceof StoryNpc.Npc))
+				mob.setTarget(allies.get((i - 1) % allies.size()));
 	}
 
 	/** A step's time so far, as a bar over the hotbar: how long still to watch, stand or scrub. */
@@ -1462,8 +1474,34 @@ public final class Story {
 					npc.snapTo(c.home().getX() + 0.5, c.home().getY(), c.home().getZ() + 0.5, c.yaw(), 0);
 					npc.setYBodyRot(c.yaw());
 				}
+				if (c.companion() != null)
+					companion(level, c);
 			}
 		}
+	}
+
+	/**
+	 * A character's animal ("companion": {"summon": the summon command's entity and NBT, "offset": [dx, dz]}): Akamaru at
+	 * Kiba's feet. Kept there: put back beside its character when it has wandered off, summoned again if gone.
+	 */
+	private static void companion(ServerLevel level, Character c) {
+		String tag = "companion_" + c.id();
+		JsonArray off = c.companion().has("offset") ? c.companion().getAsJsonArray("offset") : null;
+		double x = c.home().getX() + 0.5 + (off == null ? 1 : off.get(0).getAsDouble()), y = c.home().getY(),
+				z = c.home().getZ() + 0.5 + (off == null ? 0 : off.get(1).getAsDouble());
+		List<Entity> pets = level.getEntities((Entity) null, new net.minecraft.world.phys.AABB(c.home()).inflate(64), e -> e.entityTags().contains(tag));
+		for (int i = 1; i < pets.size(); i++)
+			pets.get(i).discard();
+		if (pets.isEmpty()) {
+			String summon = str(c.companion(), "summon", "");
+			int brace = summon.indexOf('{');
+			String type = brace < 0 ? summon : summon.substring(0, brace).trim();
+			String nbt = brace < 0 ? "{}" : summon.substring(brace);
+			nbt = nbt.substring(0, nbt.length() - 1) + (nbt.length() > 2 ? "," : "") + "Tags:[\"" + tag + "\"],PersistenceRequired:1b}";
+			level.getServer().getCommands().performPrefixedCommand(level.getServer().createCommandSourceStack().withSuppressedOutput().withLevel(level)
+					.withPermission(net.minecraft.server.permissions.PermissionSet.ALL_PERMISSIONS), "summon " + type + " " + x + " " + y + " " + z + " " + nbt);
+		} else if (pets.getFirst().distanceToSqr(x, y, z) > 6 * 6)
+			pets.getFirst().teleportTo(x, y, z);
 	}
 
 	// ---------------------------------------------------------------- commands for testing and mending
